@@ -14,13 +14,27 @@ def main(argv=None):
     run.add_argument("--task", required=True)
     run.add_argument("--solver", required=True)
     run.add_argument("--output", required=True)
+    benchmark = sub.add_parser("tmc-cshape", help="Run the single source-numeric HF-2 C-shape code benchmark")
+    benchmark.add_argument("--output", required=True)
+    benchmark.add_argument("--source-setup", help="Optional ordinary NPZ containing source-exported targets")
+    benchmark.add_argument("--time-limit", type=float, default=1200.0)
     args = parser.parse_args(argv)
     if args.command == "inspect":
         result = inspect_geometry(args.geometry)
         success = result["readability"]["status"] == "pass"
-    else:
+    elif args.command == "evaluate":
         result = evaluate(args.geometry, args.task, args.solver, args.output)
         success = result["numerics"]["status"] == "success"
+    else:
+        import os
+        os.environ['JAX_ENABLE_X64'] = 'true'
+        os.environ['JAX_PLATFORMS'] = 'cpu'
+        from .tmc_benchmark import run_cshape, validate_source_setup
+        targets = None
+        if args.source_setup:
+            targets = validate_source_setup(args.source_setup)
+        result = run_cshape(args.output, source_targets=targets,time_limit_seconds=args.time_limit)
+        success = result['status'] == 'success'
     print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
     return 0 if success else 2
 

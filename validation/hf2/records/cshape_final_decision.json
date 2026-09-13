@@ -1,0 +1,88 @@
+{
+  "schema_version": "hf2-final-cshape-decision-1.0",
+  "hf2_stage_status": "partially_complete",
+  "strict_independent_benchmark_status": "not_pass",
+  "source_path_agreement_status": "pass",
+  "common_original_targets": 100,
+  "both_paths_reached_lambda": 1.0,
+  "all_frozen_response_parity_metrics_pass_at_all_targets": true,
+  "maximum_path_errors": {
+    "U": 7.952517282240572e-10,
+    "loaded_displacements": 1.8595953991681814e-10,
+    "support_reaction": 2.7043697659983484e-10,
+    "solid_material_energy": 3.4982026329929415e-10,
+    "medium_material_energy": 3.4759386237729056e-09,
+    "J_field": 1.4157919973915227e-09,
+    "minimum_J_absolute": 7.211861819539367e-10
+  },
+  "independent_equilibrium_failures": [
+    {
+      "side": "python",
+      "target_index": 73,
+      "load_multiplier": 0.73,
+      "stored_relative_free_residual": 9.88577641116578e-09,
+      "independent_decimal50_relative_free_residual": "1.0644451244453017962990671996431552143250482362491E-8",
+      "tolerance": 1e-08,
+      "status": "fail",
+      "maximum_C_condition_number": 118020573.86338218
+    },
+    {
+      "side": "matlab",
+      "target_index": 76,
+      "load_multiplier": 0.76,
+      "stored_relative_free_residual": 8.36266944569734e-09,
+      "independent_decimal50_relative_free_residual": "1.0751389985092068319385480049074872611201534474645E-8",
+      "tolerance": 1e-08,
+      "status": "fail",
+      "maximum_C_condition_number": 144710715.36477736
+    },
+    {
+      "side": "matlab",
+      "target_index": 99,
+      "load_multiplier": 0.99,
+      "stored_relative_free_residual": 9.518438375705431e-09,
+      "independent_decimal50_relative_free_residual": "1.0444352730863547868628697499049713085272474430112E-8",
+      "tolerance": 1e-08,
+      "status": "fail",
+      "maximum_C_condition_number": 427628423.9816502
+    }
+  ],
+  "interpretation": "The logarithmic Neo-Hookean weak material force P=F*S and P=mu*F+(lambda*log(J)-mu)*F^(-T) are mathematically equivalent for J>0. Fixed-state high-precision evaluation confirms three residual failures; ill-conditioned C and cancellation in det(C) explain why source-style binary64 stopping values can pass. Explanation does not change the failed decisions.",
+  "regularization_scope": "Unchanged nonconservative HuHu weak residual including exp(-5J); no substitute total potential or conservative regularization energy claim.",
+  "decision": "Stop under the frozen HF-2 acceptance condition. No tolerance, material, load or production kernel change and no additional full solve is authorized by this diagnostic conclusion.",
+  "scope": "Source-numeric uploaded-code benchmark only; physical contact accuracy and mesh convergence remain unvalidated.",
+  "validation_spec_history": "comparison_001 retains its exact transient spec with a formula-only clarification. Root restored the original frozen specification bytes; thresholds and the originally documented balance formula were not changed.",
+  "evidence": [
+    {
+      "path": "hf2_results/cshape_comparison_001/summary.json",
+      "sha256": "fc0d73fa372c867051ed33facf2739cacf4afb84edd41d276f26288a97a99777"
+    },
+    {
+      "path": "hf2_results/residual_sensitivity_001/summary.json",
+      "sha256": "e6884c74d7d0253ecc87e3fd1c4f630b2277c45e8463648c16d77f16cdc08872"
+    },
+    {
+      "path": "hf_repo/validation/hf2/validation_spec.json",
+      "sha256": "5e09dc712a1d1f1eec2adcf9ce230eeeae023c065791815527f8e46c03ca4971"
+    },
+    {
+      "path": "hf2_results/cshape_comparison_001/validation_spec_used.json",
+      "sha256": "5dfac16148a729fde2a54d65d6c7d201489d316cd4b57b2f8923c27335579433"
+    },
+    {
+      "path": "hf2_results/residual_sensitivity_001/summary_before_provenance.json",
+      "sha256": "ed870004e41835a9be0da99a4373f4c74142f49cb1a0b219857f465df58d88d2"
+    }
+  ],
+  "provenance_reconciliation": {
+    "initial_decision_record": "hf2_results/cshape_final_decision_initial.json",
+    "initial_decision_sha256": "ead52546f4d47fa47a3b92cf2c17f6e1f26d171cdbea094f24038dadb8454594",
+    "summary_sha256_recorded_before_provenance_enrichment": "ed870004e41835a9be0da99a4373f4c74142f49cb1a0b219857f465df58d88d2",
+    "current_summary_sha256": "e6884c74d7d0253ecc87e3fd1c4f630b2277c45e8463648c16d77f16cdc08872",
+    "change": "Summary author added source_zip_sha256, provenance_note and four inputs_sha256 entries, with PowerShell JSON reserialization, after the initial verdict was written.",
+    "verified_unchanged": "All three case identities, stored residuals, exact Decimal50 residual strings and maximum C condition numbers match the earlier verdict. No path or raw array changed in this metadata reconciliation.",
+    "recovered_original_summary": "hf2_results/residual_sensitivity_001/summary_before_provenance.json",
+    "recovery": "Removing the added provenance fields and restoring the original Python JSON formatting with Windows CRLF exactly reproduces the old SHA-256. Original numerical fields are preserved.",
+    "scientific_verdict_changed": false
+  }
+}
