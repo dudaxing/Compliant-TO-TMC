@@ -13,8 +13,15 @@ import numpy as np
 from .data import canonical_hash
 from .evaluation import implementation_hash
 from .tmc import rectangular_model, NewtonSettings, solve_path, TMCError
+from .tmc_kernel import KERNEL_VERSION
 
 SOURCE_HASH = "58f203ff1dba3c64c64d5fa2de12d4bdd3a711be69ee83a4ddd3335680e3eb08"
+SOLVER_PROFILE = "hf2_precision_v2"
+
+
+def cshape_settings(time_limit_seconds=1200.0):
+    """Benchmark-specific precision margin; generic Newton defaults are unchanged."""
+    return NewtonSettings(tolerance=1e-9, time_limit_seconds=time_limit_seconds)
 
 
 def cshape_preset():
@@ -43,7 +50,7 @@ def cshape_preset():
 
 
 def _scalar_record(record):
-    return {key: value for key, value in record.items() if key not in {"u", "J", "support_reaction"}}
+    return {key: value for key, value in record.items() if key not in {"u", "J", "support_reaction", "internal_force"}}
 
 
 def validate_source_setup(path):
@@ -96,13 +103,18 @@ def run_cshape(output_directory, *, source_targets=None, time_limit_seconds=1200
             raise TMCError("source targets do not match the frozen 100-step preset")
         targets = received.copy()
         config["targets_origin"] = "source_exported_exact_values"
-    settings = NewtonSettings(time_limit_seconds=time_limit_seconds)
+    settings = cshape_settings(time_limit_seconds)
     config["targets"] = targets.tolist()
     config["solver"] = asdict(settings)
+    config.update(solver_profile=SOLVER_PROFILE, kernel_version=KERNEL_VERSION,
+                  internal_newton_tolerance=settings.tolerance, external_free_residual_tolerance=1e-8,
+                  independent_verification="separate offline evidence; not inferred from production success")
     (output/'config.json').write_text(json.dumps(config,indent=2,allow_nan=False),encoding='utf-8')
     np.savez_compressed(output/'model.npz', coordinates=model.coordinates, connectivity=model.connectivity,
                         solid=model.solid, factors=np.where(model.solid,1.0,1e-6), fixed_dofs=model.fixed_dofs,
-                        F0=force, loaded_nodes=loaded_nodes, targets=targets)
+                        F0=force, loaded_nodes=loaded_nodes, targets=targets,
+                        lam=model.lam,mu=model.mu,kr=np.array(model.kr),
+                        hx=np.array(model.hx),hy=np.array(model.hy),thickness=np.array(model.thickness),**model.ops)
     progress_path = output/'accepted_steps.jsonl'
     step_directory = output/'steps'
     step_directory.mkdir()
@@ -114,6 +126,7 @@ def run_cshape(output_directory, *, source_targets=None, time_limit_seconds=1200
         name = f'step_{count:04d}.npz'
         np.savez_compressed(step_directory/name, u=record['u'], J=record['J'],
                             support_reaction=record['support_reaction'],
+                            internal_force=record['internal_force'],
                             load_multiplier=np.array(record['lambda']))
         brief = _scalar_record(record)
         brief['arrays_file'] = 'steps/' + name
@@ -131,6 +144,7 @@ def run_cshape(output_directory, *, source_targets=None, time_limit_seconds=1200
               "U":np.array([r['u'] for r in accepted]).reshape(-1,model.ndof),
               "J":np.array([r['J'] for r in accepted]).reshape(-1,model.ne,9),
               "support_reaction":np.array([r['support_reaction'] for r in accepted]).reshape(-1,model.ndof),
+              "internal_force":np.array([r['internal_force'] for r in accepted]).reshape(-1,model.ndof),
               "solid_material_energy":np.array([r['solid_material_energy'] for r in accepted]),
               "medium_material_energy":np.array([r['medium_material_energy'] for r in accepted]),
               "relative_residual":np.array([r['relative_residual'] for r in accepted]),
@@ -208,7 +222,9 @@ def plot_benchmark(model,force,loaded_nodes,path,output):
     axes[0].plot(path['lambda'],mean_uy,color='#226b88');axes[0].set_ylabel('mean loaded-node uy (source length)')
     axes[1].plot(path['lambda'],path['minimum_J'],color='#226b88');axes[1].set_ylabel('minimum J across full domain')
     axes[2].semilogy(path['lambda'],np.maximum(path['relative_residual'],1e-18),color='#226b88')
-    axes[2].axhline(1e-8,color='#c96632',ls='--');axes[2].set_ylabel('relative free-force residual')
+    axes[2].axhline(1e-8,color='#c96632',ls='--',label='external threshold 1e-8')
+    axes[2].axhline(1e-9,color='#668657',ls=':',label='internal stopping 1e-9')
+    axes[2].set_ylabel('relative free-force residual');axes[2].legend(fontsize=7)
     for ax in axes:
         ax.set_xlabel('load multiplier');ax.grid(alpha=.2)
     fig.suptitle('Accepted states only; source numeric code benchmark')

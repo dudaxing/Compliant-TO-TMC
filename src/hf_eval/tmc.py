@@ -179,8 +179,9 @@ def _check_support(model):
 def solve_path(model: TMCModel, F0, targets, settings=None, on_accept: Callable | None = None):
     """Bounded safeguarded Newton path, always starting from undeformed U=0.
 
-    Only equilibrated states enter accepted_steps. Trial failure does not overwrite
-    the last accepted state. Returned target_metrics is None unless all targets pass.
+    Only states passing the selected production residual criterion enter
+    accepted_steps. Independent precision verification is a separate check.
+    Trial failure preserves the last accepted state; incomplete targets return null metrics.
     """
     settings = NewtonSettings() if settings is None else settings
     if not isinstance(settings, NewtonSettings):
@@ -193,7 +194,7 @@ def solve_path(model: TMCModel, F0, targets, settings=None, on_accept: Callable 
         raise TMCError("targets must be nonnegative, finite and strictly increasing")
     started = perf_counter()
     state_u, state_lambda = np.zeros(model.ndof), 0.0
-    accepted, trials, failures = [], [], []
+    accepted, trials, failures, linear_solves = [], [], [], []
     times = {"kernel_and_transfer": 0.0, "assembly": 0.0, "sparse_solve": 0.0,
              "all_assembly_attempts_wall": 0.0, "callback": 0.0,
              "first_kernel_including_compile": None, "kernel_calls": 0, "successful_kernel_calls": 0,
@@ -243,7 +244,7 @@ def solve_path(model: TMCModel, F0, targets, settings=None, on_accept: Callable 
                 "medium_material_energy": medium_energy,
                 "global_force_balance": (reaction.reshape(-1, 2).sum(axis=0) + external.reshape(-1, 2).sum(axis=0)).tolist(),
                 "fixed_displacement_max": float(np.max(np.abs(u[model.fixed_dofs]), initial=0)),
-                "support_reaction": reaction, "J": values["J"].copy()}
+                "support_reaction": reaction, "internal_force": internal.copy(), "J": values["J"].copy()}
 
     def newton(start_u, target):
         candidate = start_u.copy()
@@ -260,12 +261,20 @@ def solve_path(model: TMCModel, F0, targets, settings=None, on_accept: Callable 
             r = (internal - target * load)[model.free]
             begin_solve = perf_counter()
             try:
-                step = splu(K[model.free][:, model.free]).solve(-r)
+                free_matrix = K[model.free][:, model.free]
+                step = splu(free_matrix).solve(-r)
             except RuntimeError as error:
                 raise TMCError(str(error), code="singular_tangent") from error
             times["sparse_solve"] += perf_counter() - begin_solve
             if not np.all(np.isfinite(step)):
                 raise TMCError("Newton solution is nonfinite", code="nonfinite")
+            linear_error = float(np.linalg.norm(free_matrix @ step + r))
+            rhs_norm = float(np.linalg.norm(r))
+            backward_scale = float(np.linalg.norm(free_matrix.data)*np.linalg.norm(step)+rhs_norm)
+            linear_solves.append({"target_lambda": float(target), "newton_check": iteration,
+                                  "relative_linear_residual": linear_error/max(rhs_norm,np.finfo(float).tiny),
+                                  "normwise_backward_error": linear_error/max(backward_scale,np.finfo(float).tiny),
+                                  "matrix_norm": "Frobenius", "vector_norm": "Euclidean"})
             phi = 0.5 * float(r @ r)
             accepted_trial = False
             for backtrack in range(settings.max_backtracks + 1):
@@ -348,6 +357,7 @@ def solve_path(model: TMCModel, F0, targets, settings=None, on_accept: Callable 
             "target_lambda": float(levels[-1]), "reached_lambda": state_lambda, "u": state_u.copy(),
             "target_metrics": accepted[-1] if failure is None else None, "failure": failure,
             "accepted_steps": accepted, "trials": trials, "failed_attempts": failures,
+            "linear_solve_diagnostics": linear_solves,
             "maximum_bisection_depth": max_depth_used, "timing_seconds": times,
             "units_mode": "source_numeric", "reference_state": "undeformed",
             "scope": "specified code benchmark; not independent contact-accuracy validation"}

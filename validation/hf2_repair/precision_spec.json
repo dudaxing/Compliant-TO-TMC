@@ -1,0 +1,263 @@
+{
+  "schema_version": "hf2-precision-repair-1.0",
+  "frozen_date": "2026-09-13",
+  "authorization": "User requested reviewed diagnosis and execution before HF3; conditional single corrected path after local gates",
+  "implementation_version": "0.2.1",
+  "kernel_version": "p26_q1_direct_piola_huhu_v2",
+  "solver_profile": "hf2_precision_v2",
+  "internal_newton_tolerance": 1e-09,
+  "external_residual_tolerance": 1e-08,
+  "case_ids": [
+    "python_073",
+    "matlab_076",
+    "matlab_099"
+  ],
+  "direction_ids": [
+    "canonical_sin_free_normalized_sqrt_hxhy",
+    "canonical_cos_free_normalized_sqrt_hxhy"
+  ],
+  "direction_definition": "one-based DOF radians; fixed DOFs zero; Euclidean norm then scale sqrt(hx*hy); stored binary64 arrays are authoritative",
+  "fd_multipliers": [
+    1,
+    0.1,
+    0.01,
+    0.001,
+    0.0001
+  ],
+  "fd_base_step": ".99*min(1, min_q J0/(8*abs(a)), min_q sqrt(J0/(8*abs(b)))); ignore zero denominators; a=cof(F):dF,b=det(dF); Decimal50 ideal inputs",
+  "positive_J_ratio": 0.5,
+  "precision": 50,
+  "reference_precision_check": 80,
+  "reference_precision_tolerance": 1e-30,
+  "directional_tolerance": 1e-08,
+  "residual_force_budget": 1e-09,
+  "component_force_tolerance": 1e-08,
+  "component_denominator": "max(norm(HP component),1e-8*norm(load_multiplier*F0))",
+  "force_budget_applies_to": [
+    "full",
+    "free"
+  ],
+  "fd_double_best_tolerance": 1e-06,
+  "fd_decimal_best_tolerance": 1e-08,
+  "fd_early_reduction": 20,
+  "fd_early_applies_above": 1e-09,
+  "force_scale": "Euclidean norm of exact binary64 multiplier times exact binary64 F0, formed in reference precision",
+  "input_contract": "Decimal.from_float on saved actual primitive grad/hessian/weights/lam/mu/kr/u/direction; no promotion of precomputed binary64 F,J,or element forces as full reference",
+  "path_validation": {
+    "high_precision_digits": 50,
+    "crosscheck_precision_digits": 80,
+    "crosscheck_indices": [
+      0,
+      49,
+      99
+    ],
+    "crosscheck_force_tolerance": "1e-30",
+    "external_residual_tolerance": 1e-08,
+    "evaluation_error_tolerance": 1e-09,
+    "expected_original_targets": 100,
+    "include_all_new_accepted_substeps": true,
+    "old_paths_scope": "All 100 original Python and all 100 original MATLAB states; report actual failures without hardcoding the old failure count",
+    "closure": "New complete path, all new high-precision validity and force-budget gates, original seven response-parity gates; old reference failures retained separately"
+  },
+  "original_cshape_tolerances": {
+    "domain": [
+      100.0,
+      50.0
+    ],
+    "cells": [
+      62,
+      30
+    ],
+    "solid_cells": 828,
+    "medium_cells": 1032,
+    "thickness_factor": 1.0,
+    "force_total_y": -3.0,
+    "targets_count": 100,
+    "target": 1.0,
+    "U_and_loaded_nodes_relative_tolerance": 1e-05,
+    "displacement_floor": "1e-6*Lx",
+    "reaction_relative_tolerance": 0.0001,
+    "reaction_floor": "1e-8*3*lambda",
+    "region_material_energy_relative_tolerance": 0.0001,
+    "region_material_energy_floor": "1e-8*E*factor*thickness*N_region*hx*hy",
+    "J_field_relative_tolerance": 1e-05,
+    "J_floor": "1e-8*sqrt(9*ne)",
+    "min_J_absolute_tolerance": 1e-06,
+    "free_residual_tolerance": 1e-08,
+    "fixed_displacement_tolerance": "1e-12*Lx",
+    "global_force_balance_tolerance": 1e-06
+  },
+  "original_validation_spec": {
+    "schema_version": "hf2-validation-spec-1.0",
+    "frozen_date": "2026-09-13",
+    "purpose": "Predefined implementation/source-code agreement, not physical contact validation",
+    "units_mode": "source_numeric",
+    "vector_norm": "Euclidean",
+    "matrix_tensor_norm": "Frobenius_all_components",
+    "material": {
+      "E": 100.0,
+      "nu": 0.3,
+      "alpha": 1e-06,
+      "factors": [
+        1.0,
+        1e-06
+      ]
+    },
+    "local_sizes": [
+      [
+        2.0,
+        1.0
+      ],
+      [
+        0.6,
+        3.1
+      ]
+    ],
+    "local_origin": [
+      0.0,
+      0.0
+    ],
+    "local_corner_order": "BL_BR_TR_TL",
+    "local_regularization_Lx": "hx",
+    "nonaffine_fields": [
+      {
+        "ux_x_y_xy": [
+          -0.15,
+          0.0,
+          0.08
+        ],
+        "uy_x_y_xy": [
+          0.04,
+          -0.2,
+          0.06
+        ]
+      },
+      {
+        "ux_x_y_xy": [
+          0.07,
+          -0.04,
+          0.03
+        ],
+        "uy_x_y_xy": [
+          0.02,
+          0.05,
+          -0.02
+        ]
+      },
+      {
+        "ux_x_y_xy": [
+          -0.25,
+          0.0,
+          0.05
+        ],
+        "uy_x_y_xy": [
+          0.06,
+          -0.3,
+          0.03
+        ]
+      }
+    ],
+    "directions": [
+      "sin(one_based_DOF_index_radians)_normalized",
+      "cos(one_based_DOF_index_radians)_normalized"
+    ],
+    "fd_steps": [
+      0.01,
+      0.001,
+      0.0001,
+      1e-05,
+      1e-06
+    ],
+    "fd_direction_length": "sqrt(hx*hy)",
+    "fd_min_J": 0.4,
+    "fd_best_relative_tolerance": 1e-06,
+    "fd_early_reduction_required": 20.0,
+    "fd_early_reduction_applies_above": 1e-09,
+    "small_meshes_nx_ny": [
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        3,
+        3
+      ]
+    ],
+    "small_mesh_domain": [
+      2.0,
+      1.0
+    ],
+    "small_mesh_field_index": 0,
+    "small_mesh_factors": "canonical_xfast_bottomup_index_even_1_odd_1e-6",
+    "operator_tolerance": 1e-12,
+    "affine_rigid_tolerance": 1e-10,
+    "initial_linear_tangent_tolerance": 1e-10,
+    "matlab_operator_J_tolerance": 1e-11,
+    "matlab_residual_tangent_tolerance": 1e-09,
+    "source_zip_sha256": "58f203ff1dba3c64c64d5fa2de12d4bdd3a711be69ee83a4ddd3335680e3eb08",
+    "cshape": {
+      "domain": [
+        100.0,
+        50.0
+      ],
+      "cells": [
+        62,
+        30
+      ],
+      "solid_cells": 828,
+      "medium_cells": 1032,
+      "thickness_factor": 1.0,
+      "force_total_y": -3.0,
+      "targets_count": 100,
+      "target": 1.0,
+      "U_and_loaded_nodes_relative_tolerance": 1e-05,
+      "displacement_floor": "1e-6*Lx",
+      "reaction_relative_tolerance": 0.0001,
+      "reaction_floor": "1e-8*3*lambda",
+      "region_material_energy_relative_tolerance": 0.0001,
+      "region_material_energy_floor": "1e-8*E*factor*thickness*N_region*hx*hy",
+      "J_field_relative_tolerance": 1e-05,
+      "J_floor": "1e-8*sqrt(9*ne)",
+      "min_J_absolute_tolerance": 1e-06,
+      "free_residual_tolerance": 1e-08,
+      "fixed_displacement_tolerance": "1e-12*Lx",
+      "global_force_balance_tolerance": 1e-06
+    },
+    "solver": {
+      "max_newton_checks": 25,
+      "armijo_c": 0.0001,
+      "max_backtracks": 12,
+      "max_bisections": 4,
+      "minimum_increment": 0.000625,
+      "armijo_formula": "phi_trial <= (1-2*c*step_factor)*phi_current; phi=.5*norm(r_free)^2"
+    },
+    "resource_limits": {
+      "total_numerical_seconds": 3600,
+      "small_cumulative_seconds": 1200,
+      "small_process_seconds": 300,
+      "compile_smoke_seconds": 600,
+      "cshape_each_seconds": 1200,
+      "sampled_process_tree_rss_soft_limit_bytes": 4294967296
+    }
+  },
+  "original_validation_spec_sha256": "5e09dc712a1d1f1eec2adcf9ce230eeeae023c065791815527f8e46c03ca4971",
+  "resource_limits": {
+    "total_numerical_seconds": 3000,
+    "small_cumulative_seconds": 1200,
+    "small_process_seconds": 300,
+    "corrected_python_path_attempts": 1,
+    "corrected_python_path_seconds": 1200,
+    "postprocess_cumulative_seconds": 600,
+    "sampled_process_tree_rss_soft_limit_bytes": 4294967296,
+    "installation_counted_separately": true
+  },
+  "scope": "Close numerical expression and equilibrium accuracy of the specified discrete source-numeric benchmark; no HF3 or physical contact validation"
+}

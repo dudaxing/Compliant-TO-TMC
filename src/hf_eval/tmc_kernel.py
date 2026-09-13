@@ -12,6 +12,8 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
+KERNEL_VERSION = "p26_q1_direct_piola_huhu_v2"
+
 
 class KernelError(ValueError):
     """A kernel input or numerical validity failure."""
@@ -138,22 +140,24 @@ def _residual_with_aux(u, grad, hessian, weights, lam, mu, kr):
     nodal_u = u.reshape(4, 2)
     F = jnp.eye(2, dtype=u.dtype) + jnp.einsum("ai,qaj->qij", nodal_u, grad)
     J = F[:, 0, 0]*F[:, 1, 1] - F[:, 0, 1]*F[:, 1, 0]
-    C = jnp.einsum("qki,qkj->qij", F, F)
-    det_C = C[:, 0, 0]*C[:, 1, 1] - C[:, 0, 1]**2
-    inv_C = jnp.stack((
-        jnp.stack((C[:, 1, 1], -C[:, 0, 1]), axis=-1),
-        jnp.stack((-C[:, 1, 0], C[:, 0, 0]), axis=-1),
-    ), axis=-2) / det_C[:, None, None]
+    inverse_transpose = jnp.stack((
+        jnp.stack((F[:, 1, 1], -F[:, 1, 0]), axis=-1),
+        jnp.stack((-F[:, 0, 1], F[:, 0, 0]), axis=-1),
+    ), axis=-2) / J[:, None, None]
     log_J = jnp.log(J)
-    S = lam*log_J[:, None, None]*inv_C + mu*(jnp.eye(2, dtype=u.dtype)-inv_C)
-    P = jnp.einsum("qij,qjk->qik", F, S)
-    # P : Grad(delta u) is identical to the source B1.T @ [S11,S22,S12].
+    coefficient = lam*log_J-mu
+    # Equivalent source weak form, without the ill-conditioned det(F.T @ F).
+    P = mu*F + coefficient[:, None, None]*inverse_transpose
+    # Second Piola stress is auxiliary; it does not feed the material force.
+    inverse_C = jnp.einsum("qki,qkj->qij", inverse_transpose, inverse_transpose)
+    S = mu*jnp.eye(2, dtype=u.dtype) + coefficient[:, None, None]*inverse_C
     material = jnp.einsum("q,qaj,qij->ai", weights, grad, P).reshape(8)
     Hu = jnp.einsum("ai,ajk->ijk", nodal_u, hessian)
     hessian_force = jnp.einsum("ajk,ijk->ai", hessian, Hu).reshape(8)
     regularization = kr*jnp.sum(weights*jnp.exp(-5*J))*hessian_force
     residual = material + regularization
-    energy_density = 0.5*(lam*log_J**2 + mu*(C[:, 0, 0]+C[:, 1, 1]-2-2*log_J))
+    trace_C = jnp.sum(F*F, axis=(-1, -2))
+    energy_density = 0.5*(lam*log_J**2 + mu*(trace_C-2-2*log_J))
     return residual, {
         "residual": residual,
         "material_residual": material,
