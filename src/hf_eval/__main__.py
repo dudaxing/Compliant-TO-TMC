@@ -5,7 +5,7 @@ from .evaluation import evaluate, inspect_geometry
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="HF-1 independent solid linear diagnostics")
+    parser = argparse.ArgumentParser(description="Independent HF linear and project displacement evaluation")
     sub = parser.add_subparsers(dest="command", required=True)
     inspect = sub.add_parser("inspect", help="Validate geometry and report qualification measurements")
     inspect.add_argument("geometry")
@@ -23,6 +23,9 @@ def main(argv=None):
         result = inspect_geometry(args.geometry)
         success = result["readability"]["status"] == "pass"
     elif args.command == "evaluate":
+        import os
+        os.environ['JAX_ENABLE_X64'] = 'true'
+        os.environ['JAX_PLATFORMS'] = 'cpu'
         result = evaluate(args.geometry, args.task, args.solver, args.output)
         success = result["numerics"]["status"] == "success"
     else:

@@ -12,7 +12,7 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
-KERNEL_VERSION = "p26_q1_direct_piola_huhu_v2"
+KERNEL_VERSION = "p26_q1_incremental_piola_huhu_v3"
 
 
 class KernelError(ValueError):
@@ -138,26 +138,46 @@ def _coefficient(value, name, count):
 def _residual_with_aux(u, grad, hessian, weights, lam, mu, kr):
     """Pure differentiable weak residual; validated inputs only."""
     nodal_u = u.reshape(4, 2)
-    F = jnp.eye(2, dtype=u.dtype) + jnp.einsum("ai,qaj->qij", nodal_u, grad)
-    J = F[:, 0, 0]*F[:, 1, 1] - F[:, 0, 1]*F[:, 1, 0]
+    G = jnp.einsum("ai,qaj->qij", nodal_u, grad)
+    F = jnp.eye(2, dtype=u.dtype) + G
+    direct_J = F[:, 0, 0]*F[:, 1, 1] - F[:, 0, 1]*F[:, 1, 0]
+    near_identity = jnp.max(jnp.abs(G), axis=(-1, -2)) <= 0.01
+    delta = G[:, 0, 0]+G[:, 1, 1]+G[:, 0, 0]*G[:, 1, 1]-G[:, 0, 1]*G[:, 1, 0]
+    safe_delta = jnp.where(near_identity, delta, 0.0)
+    J = jnp.where(near_identity, 1.0+safe_delta, direct_J)
     inverse_transpose = jnp.stack((
         jnp.stack((F[:, 1, 1], -F[:, 1, 0]), axis=-1),
         jnp.stack((-F[:, 0, 1], F[:, 0, 0]), axis=-1),
     ), axis=-2) / J[:, None, None]
-    log_J = jnp.log(J)
+    log_J = jnp.where(near_identity, jnp.log1p(safe_delta), jnp.log(J))
     coefficient = lam*log_J-mu
     # Equivalent source weak form, without the ill-conditioned det(F.T @ F).
-    P = mu*F + coefficient[:, None, None]*inverse_transpose
+    direct_P = mu*F + coefficient[:, None, None]*inverse_transpose
+    # (F F.T-I) F^-T = F-F^-T, formed from the displacement gradient.
+    G_near = jnp.where(near_identity[:, None, None], G, 0.0)
+    T_near = jnp.where(near_identity[:, None, None], inverse_transpose, jnp.eye(2, dtype=u.dtype))
+    log_near = jnp.log1p(safe_delta)
+    B = G_near+jnp.swapaxes(G_near, -1, -2)+jnp.einsum("qik,qjk->qij", G_near, G_near)
+    incremental_P = mu*jnp.einsum("qik,qkj->qij", B, T_near) + lam*log_near[:, None, None]*T_near
+    P = jnp.where(near_identity[:, None, None], incremental_P, direct_P)
     # Second Piola stress is auxiliary; it does not feed the material force.
     inverse_C = jnp.einsum("qki,qkj->qij", inverse_transpose, inverse_transpose)
-    S = mu*jnp.eye(2, dtype=u.dtype) + coefficient[:, None, None]*inverse_C
+    direct_S = mu*jnp.eye(2, dtype=u.dtype) + coefficient[:, None, None]*inverse_C
+    S = jnp.where(near_identity[:, None, None], jnp.einsum("qki,qkj->qij", T_near, incremental_P), direct_S)
     material = jnp.einsum("q,qaj,qij->ai", weights, grad, P).reshape(8)
     Hu = jnp.einsum("ai,ajk->ijk", nodal_u, hessian)
     hessian_force = jnp.einsum("ajk,ijk->ai", hessian, Hu).reshape(8)
     regularization = kr*jnp.sum(weights*jnp.exp(-5*J))*hessian_force
     residual = material + regularization
     trace_C = jnp.sum(F*F, axis=(-1, -2))
-    energy_density = 0.5*(lam*log_J**2 + mu*(trace_C-2-2*log_J))
+    direct_energy = 0.5*(lam*log_J**2 + mu*(trace_C-2-2*log_J))
+    remainder = jnp.zeros_like(safe_delta)
+    for power in range(14, 1, -1):
+        remainder = remainder*safe_delta + (-1.0)**power/power
+    remainder = safe_delta**2*remainder  # delta-log(1+delta), stable near zero.
+    shear_deviator = (G_near[:, 0, 0]-G_near[:, 1, 1])**2+(G_near[:, 0, 1]+G_near[:, 1, 0])**2
+    incremental_energy = 0.5*(lam*log_near**2+mu*(shear_deviator+2*remainder))
+    energy_density = jnp.where(near_identity, incremental_energy, direct_energy)
     return residual, {
         "residual": residual,
         "material_residual": material,

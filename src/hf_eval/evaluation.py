@@ -69,6 +69,15 @@ def evaluate(geometry_file, task_config, solver_config, output_directory=None):
     Failure is represented by null target metrics and a stage/reason, never by
     a zero-valued performance result. A populated output directory is not reused.
     """
+    # Dispatch before allocating output: the project wrapper owns atomic files.
+    # Preserve the existing structured HF-1 error path for unreadable configs.
+    try:
+        declared_task = _config(task_config)
+    except (ValueError, OSError, TypeError):
+        declared_task = {}
+    if declared_task.get("schema_version") == "hf-project-task-1.0":
+        from .project_evaluation import evaluate_project
+        return evaluate_project(geometry_file, declared_task, solver_config, output_directory)
     start = time.perf_counter()
     output = None
     if output_directory is not None:

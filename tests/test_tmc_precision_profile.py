@@ -13,7 +13,7 @@ def test_precision_profile_preserves_generic_tolerance_and_budget():
     assert profile.time_limit_seconds == 123
     assert profile.max_checks == 25 and profile.max_backtracks == 12
     assert SOLVER_PROFILE == 'hf2_precision_v2'
-    assert KERNEL_VERSION == 'p26_q1_direct_piola_huhu_v2'
+    assert KERNEL_VERSION == 'p26_q1_incremental_piola_huhu_v3'
 
 
 def test_stored_internal_force_defines_the_recorded_residual_and_is_isolated():

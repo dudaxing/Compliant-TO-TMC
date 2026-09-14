@@ -1,8 +1,10 @@
-# Independent HF evaluator — HF-1 / HF-2
+# Independent HF evaluator — HF-1 / HF-2 / HF-3
 
 This standalone Python package provides immutable geometry input, the HF-1 **solid-only small-strain linear diagnostic**, and the HF-2 **finite-deformation Q1 third-medium source-code benchmark**. The latter is one uploaded C-shape configuration, in explicitly labeled source numeric units. It is not a validation of contact accuracy or a research performance ranking; geometry generation and topology optimization are outside this package.
 
-Version **0.2.1** repairs the material-force arithmetic and uses an explicit 1e-9 internal stopping margin for the C-shape benchmark. Its corrected 100-target path passed independent high-precision equilibrium under the unchanged external 1e-8 threshold. See [repair validation](docs/HF2_REPAIR_VALIDATION.md) and the release evidence for the combined verification verdict. The original 0.2.0 run remains [partially complete](docs/HF2_VALIDATION.md), with its failed states preserved. HF-3 has not been run.
+Version **0.3.0** adds explicit project mapping and average-displacement control for the native inverter/gripper pilot tasks, plus stable near-zero material arithmetic. See [HF3 implementation](docs/HF3_IMPLEMENTATION.md) and [HF3 validation](docs/HF3_VALIDATION.md) for the recorded evidence and its limits. Readability, research qualification, numerical completion and functionality remain distinct.
+
+The historical **0.2.1** C-shape path passed independent high-precision equilibrium at all 100 targets under the unchanged external 1e-8 threshold. See [repair validation](docs/HF2_REPAIR_VALIDATION.md). That full-path evidence remains tied to version 0.2.1; version 0.3.0 separately reruns the original small and fixed strong-state regressions. The original 0.2.0 run remains [partially complete](docs/HF2_VALIDATION.md), with its failed states preserved.
 
 Runtime: Python 3.13, NumPy, SciPy, Matplotlib, JAX and jaxlib. All exact runtime versions and hashes are in `requirements.lock`. No LF source, LF environment, MATLAB process, exporter, or external source path is required. MATLAB and LF-specific preparation scripts are maintained outside this repository.
 
