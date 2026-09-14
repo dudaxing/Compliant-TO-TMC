@@ -1,5 +1,5 @@
 """Independent HF interfaces, linear diagnostics and versioned TMC code benchmark."""
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 def evaluate(geometry_file, task_config, solver_config, output_directory=None):
     """Evaluate one immutable geometry under an explicit diagnostic task."""

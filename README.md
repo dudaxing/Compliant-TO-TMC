@@ -1,4 +1,8 @@
-# Independent HF evaluator — HF-1 / HF-2 / HF-3
+# Independent HF evaluator — HF-1 through HF-4-A/B
+
+Version **0.4.0** adds a synthetic two-block normal-contact task, affine prescribed-displacement control, work-conjugate boundary forces and independent reference/audit tools. HF-4-A is implemented; HF-4-B is **partial (3 of 4 paths)**. The fine mesh with gamma=1e-7 stalls at the frozen internal tolerance because tiny free-node updates are lost in the current absolute binary64 displacement representation. It retains null target metrics. See [HF4 implementation](docs/HF4_IMPLEMENTATION.md); this version does not certify general two-dimensional contact or cylinder gripping.
+
+The synthetic task uses `hf_eval.normal_contact.build_normal_contact` and `hf_eval.prescribed.solve_prescribed_path`. `scripts/run_hf4_normal.py` writes its explicit task/model/state evidence. It is separate from the geometry-file `evaluate` dispatcher below. Failed paths and accepted substeps remain inspectable; tolerances are not relaxed for this pilot.
 
 This standalone Python package provides immutable geometry input, the HF-1 **solid-only small-strain linear diagnostic**, and the HF-2 **finite-deformation Q1 third-medium source-code benchmark**. The latter is one uploaded C-shape configuration, in explicitly labeled source numeric units. It is not a validation of contact accuracy or a research performance ranking; geometry generation and topology optimization are outside this package.
 
