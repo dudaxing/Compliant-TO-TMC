@@ -1,8 +1,16 @@
 # Independent HF evaluator — HF-1 through HF-4-A/B
 
-Version **0.4.0** adds a synthetic two-block normal-contact task, affine prescribed-displacement control, work-conjugate boundary forces and independent reference/audit tools. HF-4-A is implemented; HF-4-B is **partial (3 of 4 paths)**. The fine mesh with gamma=1e-7 stalls at the frozen internal tolerance because tiny free-node updates are lost in the current absolute binary64 displacement representation. It retains null target metrics. See [HF4 implementation](docs/HF4_IMPLEMENTATION.md); this version does not certify general two-dimensional contact or cylinder gripping.
+Version **0.5.0** adds explicit two-component displacement storage and prescribed-motion evaluation. The physical state is the exact sum of the saved binary64 `u_lift` and `u_fluctuation` arrays; `u_display` is a rounded plotting view. Four frozen uniform normal-contact combinations have passed their production, independent precision and reference audits with the original material parameters and thresholds. See [split-state implementation](docs/HF4_SPLIT_IMPLEMENTATION.md). General nonuniform contact, cylinder gripping and real mechanism performance remain outside this validation.
 
-The synthetic task uses `hf_eval.normal_contact.build_normal_contact` and `hf_eval.prescribed.solve_prescribed_path`. `scripts/run_hf4_normal.py` writes its explicit task/model/state evidence. It is separate from the geometry-file `evaluate` dispatcher below. Failed paths and accepted substeps remain inspectable; tolerances are not relaxed for this pilot.
+Use `hf_eval.split_state.SplitDisplacement`, `hf_eval.split_kernel.assemble_split`, and `hf_eval.split_prescribed.solve_split_prescribed_path` for this explicit state interface. The synthetic geometry still comes from `hf_eval.normal_contact.build_normal_contact`. For ordinary NPZ/JSON evidence, run:
+
+```powershell
+python scripts/run_hf4_split_normal.py --spec configs/hf4/validation_spec.json --gamma-index 1 --mesh-index 1 --output ../new-split-result
+```
+
+The split interface has no automatic conversion of the geometry-file `evaluate` dispatcher below. Each state, reaction and gap must use the declared representation. The independent audit is `scripts/audit_hf4_split_normal.py`; a run-specific frozen source manifest binds its evidence. Reuse no output directory from a prior run.
+
+Historical **0.4.0** added the normal-contact task and U-only affine prescribed-motion interface, with **3 of 4 paths** completing. The fine gamma=1e-7 case stalled because free-node updates were lost in the absolute binary64 state. Its failed path, null target metrics and [original implementation](docs/HF4_IMPLEMENTATION.md) remain historical evidence. The old `solve_prescribed_path` and U-only kernel retain their original semantics; the split interface is explicit.
 
 This standalone Python package provides immutable geometry input, the HF-1 **solid-only small-strain linear diagnostic**, and the HF-2 **finite-deformation Q1 third-medium source-code benchmark**. The latter is one uploaded C-shape configuration, in explicitly labeled source numeric units. It is not a validation of contact accuracy or a research performance ranking; geometry generation and topology optimization are outside this package.
 
