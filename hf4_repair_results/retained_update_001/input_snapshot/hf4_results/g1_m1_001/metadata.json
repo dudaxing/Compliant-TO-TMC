@@ -1,0 +1,321 @@
+{
+  "schema_version": "hf4-normal-evidence-1.0",
+  "created_utc": "2026-09-14T01:22:50.253407+00:00",
+  "task": {
+    "schema_version": "hf-normal-contact-task-1.0",
+    "units": {
+      "length": "mm",
+      "force": "N",
+      "stress": "MPa",
+      "energy": "N mm"
+    },
+    "geometry": {
+      "width_mm": 1.0,
+      "lower_height_mm": 1.0,
+      "upper_height_mm": 1.0,
+      "gap_mm": 0.25,
+      "thickness_mm": 1.0
+    },
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain"
+    },
+    "gamma": 1e-07,
+    "regularization": {
+      "alpha": 1e-06,
+      "length_mm": 1.0
+    },
+    "mesh_size_mm": 0.0625,
+    "targets_mm": [
+      0.0,
+      0.125,
+      0.21875,
+      0.25,
+      0.28125,
+      0.375
+    ],
+    "constraints": {
+      "ux": "all_zero",
+      "top_uy": "zero",
+      "bottom_uy": "d"
+    }
+  },
+  "task_sha256": "168e6cdbab512ee7c03b287320592f256ac93a6cb89f520395e6ab1088ee96d6",
+  "geometry_id": "de01afc62cda99a5150167e1f5dabcf69130541c8b25eaec2347b07f1f9c7509",
+  "mesh_id": "d169c698ca36d2c149b9050990d93a07a2b0c76496984a9c0d8991bec6cfcf4c",
+  "spec": {
+    "schema_version": "hf4-normal-validation-1.0",
+    "status": "frozen_before_numerical_execution",
+    "scope": "HF4-A and HF4-B uniform normal contact; no cylinder or candidate qualification",
+    "baseline_commit": "7609efbc0e12215c90c03d16e5247e9a9e41b6b5",
+    "geometry": {
+      "width_mm": 1.0,
+      "lower_height_mm": 1.0,
+      "upper_height_mm": 1.0,
+      "gap_mm": 0.25,
+      "thickness_mm": 1.0
+    },
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain"
+    },
+    "gammas": [
+      1e-06,
+      1e-07
+    ],
+    "mesh_sizes_mm": [
+      0.125,
+      0.0625
+    ],
+    "regularization": {
+      "alpha": 1e-06,
+      "length_mm": 1.0
+    },
+    "targets_mm": [
+      0.0,
+      0.125,
+      0.21875,
+      0.25,
+      0.28125,
+      0.375
+    ],
+    "solver": {
+      "tolerance": 1e-09,
+      "constraint_tolerance": 1e-10,
+      "displacement_scale_floor": 1e-06,
+      "force_scale_floor_factor": 1e-08,
+      "max_checks": 35,
+      "armijo_c": 0.0001,
+      "max_backtracks": 16,
+      "max_bisections": 8,
+      "minimum_increment": 1e-05,
+      "time_limit_seconds": 120.0
+    },
+    "numerical_criteria": {
+      "hp_relative_residual": "1e-8",
+      "force_evaluation_relative_budget": "1e-9",
+      "hp_relative_constraint": "1e-10",
+      "relative_global_balance": "1e-6",
+      "precision_crosscheck_relative": "1e-30",
+      "reference_force_absolute_over_EA": "1e-10",
+      "reference_force_relative": "1e-7",
+      "reference_gap_absolute_over_g0": "1e-9",
+      "reference_displacement_absolute_over_total_height": "1e-9",
+      "side_force_consistency_absolute_over_EA": "1e-10",
+      "side_force_consistency_relative": "1e-7",
+      "uniform_HuHu_force_absolute_over_EA": "1e-10",
+      "reference_equation_relative": "1e-35"
+    },
+    "model_criteria": {
+      "scope": "prospective diagnostic allowance for this synthetic task only",
+      "preclosure_max_d_mm": 0.21875,
+      "preclosure_force_over_EA": "1e-4",
+      "preclosure_gap_error_over_g0": "1e-3",
+      "closure_force_over_EA": "2e-3",
+      "closure_gap_over_g0": "1e-2",
+      "postclosure_min_d_mm": 0.28125,
+      "postclosure_force_relative_hard": "1e-2",
+      "postclosure_gap_over_g0": "1e-2"
+    },
+    "precision_digits": 50,
+    "crosscheck_precision_digits": 80,
+    "hp_states": "all accepted states including bisections and zero",
+    "hp_crosscheck_states": "last original target of each of the four paths",
+    "force_scale": "max(norm(fint_free),norm(fint_fixed),1e-8*E*t*max(abs(d),1e-6))",
+    "force_convention": "bottom constraint-on-model +y positive; top constraint-on-model +y negative; model-on-platen is the opposite; no factor two",
+    "resource_limits": {
+      "total_seconds": 1800,
+      "small_process_seconds": 300,
+      "memory_soft_limit_bytes": 4294967296,
+      "category_seconds": {
+        "preflight": 120,
+        "tests": 360,
+        "paths": 480,
+        "hp": 600,
+        "isolated": 180,
+        "plots": 60
+      }
+    },
+    "stop_policy": "Failure of reference, implementation, HP, positive J or resources stops dependent work. Model mismatch is reported separately. No threshold or parameter change to obtain PASS. Preserve failures and record any subsequent correction before retry."
+  },
+  "spec_sha256": "002cd49edae3066d7283f5f98d1281e9c57a22c7bb33cd8be353674906d69067",
+  "source_files": {
+    "src/hf_eval/__init__.py": "9e281d8f5dc8599566bee1e0e89e04bf15b4ea07a92641f1928e9d43813bc294",
+    "src/hf_eval/__main__.py": "45c4a88934fa2189f796a55f5a3a1430cc47e35b52f31f7ce728ab4a3acbd724",
+    "src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+    "src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "src/hf_eval/evaluation.py": "dd7ccede098d47bab00f5e9a296139ca84710e286c64173edb8080d660da776f",
+    "src/hf_eval/linear.py": "5a976bafe1952124d9ac00dc6691c8ec4ce22d0a0fc371fdf41d42a28f823e81",
+    "src/hf_eval/normal_contact.py": "1591d2a64ddd074ebe5b9e2e34ca9a6a99b4a0ee7d95a522a8dccc56939ece95",
+    "src/hf_eval/plotting.py": "d31200c726d579903698c20d77dae4e16d35f08eb38be395733bc947edc57b70",
+    "src/hf_eval/prescribed.py": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+    "src/hf_eval/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+    "src/hf_eval/project_evaluation.py": "4d3e4c617862bd93ce3f9af0881e02137590167584a1587244bab98e3e1d2d4b",
+    "src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+    "src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+    "src/hf_eval/tmc_benchmark.py": "b8c7ba9e30800a94fb2c2270b80afbd73a5eb88469eaed3eee4c8cedc22700db",
+    "src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+    "scripts/audit_hf3_states.py": "898f74bdd815fce4d0c1baf92d45f9b93037d1b66734c30ecf20515fe7d98b4a",
+    "scripts/audit_hf4_normal.py": "521b54720b76edbd6be13f084c3cb69581549ca30c3df6f517bfb3d8e620008b",
+    "scripts/compare_cshape.py": "f0d9aa64b03c40ba5aaa5ea291e2d685c8bd754de975b20f45dd98a3588071eb",
+    "scripts/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+    "scripts/hf3_precision_reference.py": "81316c76c0687c3853a003d77498a25aa71ed2025e650aeca16b165660491261",
+    "scripts/hf4_common.py": "69b5005ce62eb77de8599f316b69ecce44f4efc843e89bd411b130f7b92dacb3",
+    "scripts/hf4_input_audit.py": "fc9467760b7fe7bf73c065a0067dd218fc15baad4545f4536f92ff55d35dbadc",
+    "scripts/hf4_normal_reference.py": "5fd770d24d1d52b953029e2c8e98fe5a4b45524f945f6f07add6ebffe8eb04c5",
+    "scripts/hf4_precision_reference.py": "8578e485ce5f02fc8d9b0d93ba440f92de82a367c0c73fcec3aaf48253ca22e4",
+    "scripts/plot_hf3_evidence.py": "a99002f7042f657409d50835a5eac5456264ca7a8c758d0513a2413aee6872da",
+    "scripts/plot_hf4_normal.py": "40d75abd15e5a86b9d3946318e2a530fc00ed7ab9e4dd19bc233cdf3d5e20d94",
+    "scripts/preflight_hf4_reference.py": "9837e2b3b6e2b505e4b0fa49973375da320d900e275137148c599aea91521c80",
+    "scripts/probe_hf3_near_zero.py": "ef186fb361f6eabff6ce37699ea09c016fa0b2178eb2457fbf553e01f2484462",
+    "scripts/resume_hf2_repaired_path.py": "2ae204eb5fb94ac632f1fbf21a513f44b61e569381ccf0c6334febafb49d928e",
+    "scripts/run_hf2_isolated.py": "40eeb06966d7f08b917dbab608a266bf27337efdab823c7f518b45e0ec77d85c",
+    "scripts/run_hf2_repair_isolated.py": "3482f81d04461a0e4b9b3975dbe33d03c1438bf8e59a2e4f9c96671f618b4ec8",
+    "scripts/run_hf3_bridge.py": "8487ec52262c56de1b97b91c3702aeefbf5eb122d61f377850c764d338d26b4f",
+    "scripts/run_hf3_isolated.py": "efbacd0e87cfe6b7beca687cca0997535c61f6959b7d38e02767d2a1fb48b396",
+    "scripts/run_hf3_path.py": "76bc6372dd2dc2302e158974c653de044147924e4b0ae86e9fd3062af4d4c078",
+    "scripts/run_hf4_isolated.py": "939fd85dec43d3c938ddd14d3758fb2b623a797374f7329bace6b05b3fe51f8f",
+    "scripts/run_hf4_normal.py": "ff5c2d2bbf35aad7c611cfdeff72075b1709b7ad5670f07bcfbf0da2b459b16e",
+    "scripts/run_isolated.py": "8030c52e5b7ec3770fb41abc488363a49d158abd7042249f1cd75994f6fe5624",
+    "scripts/validate_hf2.py": "35e7ba6ecbd32f75ebd73f4169148720c2f07563f00207e3c5946a51489b4f32",
+    "scripts/validate_hf2_precision.py": "795516b2cc22bc5a6e1f3f08bf461f310d0867df0239fc9b025ad2815a069916",
+    "scripts/validate_hf2_repaired_path.py": "72392861066756ad875ef4b555fe5bba4f63098f6d85b9d8f0e791d13e5267ae"
+  },
+  "reference_inputs": {
+    "lam_s": 0.5769230769230769,
+    "mu_s": 0.3846153846153846,
+    "lam_v": 5.769230769230768e-08,
+    "mu_v": 3.8461538461538455e-08,
+    "width": 1.0,
+    "H1": 1.0,
+    "H2": 1.0,
+    "gap": 0.25,
+    "thickness": 1.0
+  },
+  "regions": {
+    "bottom_nodes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "top_nodes": [
+      612,
+      613,
+      614,
+      615,
+      616,
+      617,
+      618,
+      619,
+      620,
+      621,
+      622,
+      623,
+      624,
+      625,
+      626,
+      627,
+      628
+    ],
+    "lower_interface_nodes": [
+      272,
+      273,
+      274,
+      275,
+      276,
+      277,
+      278,
+      279,
+      280,
+      281,
+      282,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288
+    ],
+    "upper_interface_nodes": [
+      340,
+      341,
+      342,
+      343,
+      344,
+      345,
+      346,
+      347,
+      348,
+      349,
+      350,
+      351,
+      352,
+      353,
+      354,
+      355,
+      356
+    ],
+    "interface_weights": [
+      0.03125,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.03125
+    ],
+    "body_labels": {
+      "0": "third_medium",
+      "1": "lower_elastic",
+      "2": "upper_elastic"
+    },
+    "reference_normal": [
+      0,
+      1
+    ],
+    "all_ux_zero": true,
+    "full_model": true,
+    "force_multiplier": 1
+  },
+  "settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 35,
+    "armijo_c": 0.0001,
+    "max_backtracks": 16,
+    "max_bisections": 8,
+    "minimum_increment": 1e-05,
+    "time_limit_seconds": 120.0
+  },
+  "gamma_index": 1,
+  "mesh_index": 1,
+  "force_scale_per_length": 1.0
+}

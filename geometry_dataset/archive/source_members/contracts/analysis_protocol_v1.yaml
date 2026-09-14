@@ -1,0 +1,53 @@
+schema_version: "1.0"
+status: active_m0
+purpose: deterministic_AuTO_reference_capture
+
+reference:
+  repository: UW-ERSL/AuTO
+  commit: ba3c0c5dfc9acb7daff802aaf0bb41105296ad98
+  notebook: compliantMechanism.ipynb
+  notebook_cells: [2, 3, 4, 5, 6, 7, 8, 9]
+  case: inverter_40x20
+  environment: WSL2_Ubuntu_22_04_Python_3_11_x64
+  jax_enable_x64: true
+
+array_convention:
+  shape_order: [nely, nelx]
+  row_axis: y
+  column_axis: x
+  row_zero: bottom
+  origin: bottom_left
+  flat_index: x_times_nely_plus_y
+  display_flip_is_not_storage_flip: true
+
+optimization_capture:
+  initial_density: 1.0
+  objective_stage: pre_mma_update
+  volume_fraction_stage: post_mma_update
+  final_state_is_re_evaluated: true
+  upstream_plot_backend: non_interactive
+
+fixed_density_snapshots:
+  cases:
+    - name: solid
+      recipe: constant
+      value: 1.0
+    - name: uniform_vf
+      recipe: constant
+      value_from: verification_reference.case.parameters.volume_fraction_limit
+    - name: random_seed0
+      recipe: numpy_generator_random
+      bit_generator: PCG64
+      seed: 0
+      distribution: uniform_closed_open_0_1
+  required_values: [x, u, u_in, u_out, J, vf]
+  optional_values: [g, gTd]
+
+semantic_guards:
+  require_clean_upstream: true
+  require_exact_commit: true
+  objective_must_equal_exported_u_out: true
+  no_governing_equation_changes: true
+  no_boundary_condition_changes: true
+  no_parameter_changes: true
+  no_optimizer_changes: true

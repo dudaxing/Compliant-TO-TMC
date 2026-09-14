@@ -1,0 +1,1583 @@
+{
+  "candidate_generation": {
+    "admission": "every per-run rule in `rules` (feasible, hard_checks, output_sign, emin_sensitivity, tail_stationary)",
+    "diagnostics_attached_to_every_candidate": [
+      "emin_probe_q_free_mm",
+      "beta_floor",
+      "M_nd",
+      "tau_in",
+      "tau_out",
+      "cross_mesh"
+    ],
+    "grid": {
+      "gripper": {
+        "k_hat_in": [
+          0.001,
+          0.01,
+          0.1,
+          1.0,
+          10.0
+        ],
+        "k_hat_out": [
+          1.0,
+          10.0
+        ]
+      },
+      "inverter": {
+        "k_hat_in": [
+          0.001,
+          0.01,
+          0.1,
+          1.0,
+          10.0
+        ],
+        "k_hat_out": [
+          0.1,
+          1.0,
+          10.0
+        ]
+      }
+    },
+    "initial_fields": {
+      "gripper": {
+        "kin_1e+00__kout_1e+00": {
+          "multi_start": true,
+          "within_cell_L1_max": 0.1004180067329419
+        },
+        "kin_1e-01__kout_1e-01": {
+          "multi_start": true,
+          "within_cell_L1_max": 0.2513696039040437
+        },
+        "kin_1e-02__kout_1e-02": {
+          "multi_start": true,
+          "within_cell_L1_max": 0.20153332786879496
+        }
+      },
+      "inverter": {
+        "kin_1e+00__kout_1e+00": {
+          "multi_start": false,
+          "within_cell_L1_max": 0.024676469374186435
+        },
+        "kin_1e-01__kout_1e-01": {
+          "multi_start": true,
+          "within_cell_L1_max": 0.17939450466063853
+        },
+        "kin_1e-02__kout_1e-02": {
+          "multi_start": true,
+          "within_cell_L1_max": 0.47421597657119846
+        }
+      }
+    },
+    "meshes": {
+      "reporting": "the refinement mesh (port quantities drift <= 2% under nested copy, R_SE/eps_hat up to 16%)",
+      "screening": "the sweep mesh"
+    },
+    "ranking": "comparison_profile descriptors only; q_source is never ranked across springs"
+  },
+  "candidate_pool": {
+    "representatives": 36,
+    "total": 44,
+    "within_shrunk_interval": 34
+  },
+  "cases": {
+    "gripper": {
+      "axis_in": [
+        {
+          "cells": 2,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 0.001,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": false,
+          "tau_in_useful_range": true,
+          "tau_max": 0.0900511418983505,
+          "tau_median": 0.088539324686375,
+          "tau_min": 0.0870275074743995
+        },
+        {
+          "cells": 2,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 0.01,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 0.46789961301857874,
+          "tau_median": 0.457950771154735,
+          "tau_min": 0.4480019292908912
+        },
+        {
+          "cells": 2,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 0.1,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 1.0984589649766032,
+          "tau_median": 1.0944458365373475,
+          "tau_min": 1.0904327080980918
+        },
+        {
+          "cells": 2,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 1.0,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 3.828126574491629,
+          "tau_median": 3.8022635080089713,
+          "tau_min": 3.7764004415263135
+        },
+        {
+          "cells": 2,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 10.0,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": false,
+          "tau_in_useful_range": true,
+          "tau_max": 29.765504946765024,
+          "tau_median": 29.514144366787182,
+          "tau_min": 29.26278378680934
+        }
+      ],
+      "axis_out": [
+        {
+          "cells": 5,
+          "failed_cells": [
+            "kin_1e-03__kout_1e-03",
+            "kin_1e-02__kout_1e-03",
+            "kin_1e-01__kout_1e-03",
+            "kin_1e+00__kout_1e-03",
+            "kin_1e+01__kout_1e-03"
+          ],
+          "in_kept_set": false,
+          "k_hat": 0.001,
+          "kept": false,
+          "reliable_fraction": 0.0,
+          "tau_in_transition_core": false,
+          "tau_in_useful_range": false,
+          "tau_max": 0.030763915483431756,
+          "tau_median": 0.02764710285521445,
+          "tau_min": 0.024959459177027285
+        },
+        {
+          "cells": 5,
+          "failed_cells": [
+            "kin_1e-03__kout_1e-02",
+            "kin_1e-02__kout_1e-02",
+            "kin_1e-01__kout_1e-02",
+            "kin_1e+00__kout_1e-02",
+            "kin_1e+01__kout_1e-02"
+          ],
+          "in_kept_set": false,
+          "k_hat": 0.01,
+          "kept": false,
+          "reliable_fraction": 0.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 0.2371124536789775,
+          "tau_median": 0.20237653345438408,
+          "tau_min": 0.19217298461959198
+        },
+        {
+          "cells": 5,
+          "failed_cells": [
+            "kin_1e-03__kout_1e-01",
+            "kin_1e+00__kout_1e-01",
+            "kin_1e+01__kout_1e-01"
+          ],
+          "in_kept_set": false,
+          "k_hat": 0.1,
+          "kept": false,
+          "reliable_fraction": 0.4,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 0.9681057067404735,
+          "tau_median": 0.9280354197734975,
+          "tau_min": 0.8727961482177115
+        },
+        {
+          "cells": 5,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 1.0,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 5.478478459991967,
+          "tau_median": 4.953091614978001,
+          "tau_min": 4.838677665318639
+        },
+        {
+          "cells": 5,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 10.0,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": false,
+          "tau_in_useful_range": true,
+          "tau_max": 49.38523457633695,
+          "tau_median": 43.553049143972565,
+          "tau_min": 41.02730690039153
+        }
+      ],
+      "axis_tables_over_full_grid": {
+        "in": [
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e-03__kout_1e-03",
+              "kin_1e-03__kout_1e-02",
+              "kin_1e-03__kout_1e-01"
+            ],
+            "in_kept_set": true,
+            "k_hat": 0.001,
+            "kept": false,
+            "reliable_fraction": 0.4,
+            "tau_in_transition_core": false,
+            "tau_in_useful_range": true,
+            "tau_max": 0.10257773366724453,
+            "tau_median": 0.09619058665584018,
+            "tau_min": 0.0870275074743995
+          },
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e-02__kout_1e-03",
+              "kin_1e-02__kout_1e-02"
+            ],
+            "in_kept_set": true,
+            "k_hat": 0.01,
+            "kept": true,
+            "reliable_fraction": 0.6,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 0.47873048140701474,
+            "tau_median": 0.4480019292908912,
+            "tau_min": 0.38659111572729626
+          },
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e-01__kout_1e-03",
+              "kin_1e-01__kout_1e-02"
+            ],
+            "in_kept_set": true,
+            "k_hat": 0.1,
+            "kept": true,
+            "reliable_fraction": 0.6,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 1.220061922682106,
+            "tau_median": 1.0984589649766032,
+            "tau_min": 1.0883175869108537
+          },
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e+00__kout_1e-03",
+              "kin_1e+00__kout_1e-02",
+              "kin_1e+00__kout_1e-01"
+            ],
+            "in_kept_set": true,
+            "k_hat": 1.0,
+            "kept": false,
+            "reliable_fraction": 0.4,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 3.9854768470197786,
+            "tau_median": 3.828126574491629,
+            "tau_min": 3.7764004415263135
+          },
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e+01__kout_1e-03",
+              "kin_1e+01__kout_1e-02",
+              "kin_1e+01__kout_1e-01"
+            ],
+            "in_kept_set": true,
+            "k_hat": 10.0,
+            "kept": false,
+            "reliable_fraction": 0.4,
+            "tau_in_transition_core": false,
+            "tau_in_useful_range": true,
+            "tau_max": 29.765504946765024,
+            "tau_median": 26.84215826948888,
+            "tau_min": 25.899594180981012
+          }
+        ],
+        "out": [
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e-03__kout_1e-03",
+              "kin_1e-02__kout_1e-03",
+              "kin_1e-01__kout_1e-03",
+              "kin_1e+00__kout_1e-03",
+              "kin_1e+01__kout_1e-03"
+            ],
+            "in_kept_set": true,
+            "k_hat": 0.001,
+            "kept": false,
+            "reliable_fraction": 0.0,
+            "tau_in_transition_core": false,
+            "tau_in_useful_range": false,
+            "tau_max": 0.030763915483431756,
+            "tau_median": 0.02764710285521445,
+            "tau_min": 0.024959459177027285
+          },
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e-03__kout_1e-02",
+              "kin_1e-02__kout_1e-02",
+              "kin_1e-01__kout_1e-02",
+              "kin_1e+00__kout_1e-02",
+              "kin_1e+01__kout_1e-02"
+            ],
+            "in_kept_set": true,
+            "k_hat": 0.01,
+            "kept": false,
+            "reliable_fraction": 0.0,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 0.2371124536789775,
+            "tau_median": 0.20237653345438408,
+            "tau_min": 0.19217298461959198
+          },
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e-03__kout_1e-01",
+              "kin_1e+00__kout_1e-01",
+              "kin_1e+01__kout_1e-01"
+            ],
+            "in_kept_set": true,
+            "k_hat": 0.1,
+            "kept": false,
+            "reliable_fraction": 0.4,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 0.9681057067404735,
+            "tau_median": 0.9280354197734975,
+            "tau_min": 0.8727961482177115
+          },
+          {
+            "cells": 5,
+            "failed_cells": [],
+            "in_kept_set": true,
+            "k_hat": 1.0,
+            "kept": true,
+            "reliable_fraction": 1.0,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 5.478478459991967,
+            "tau_median": 4.953091614978001,
+            "tau_min": 4.838677665318639
+          },
+          {
+            "cells": 5,
+            "failed_cells": [],
+            "in_kept_set": true,
+            "k_hat": 10.0,
+            "kept": true,
+            "reliable_fraction": 1.0,
+            "tau_in_transition_core": false,
+            "tau_in_useful_range": true,
+            "tau_max": 49.38523457633695,
+            "tau_median": 43.553049143972565,
+            "tau_min": 41.02730690039153
+          }
+        ]
+      },
+      "boundaries": {
+        "in": {
+          "hard": {
+            "decades_already_beyond_base_grid": 0.0,
+            "descriptor_change_over_last_decade_median": {
+              "C_out_mm_per_N": 0.18949788035964343,
+              "R_SE": 0.1689943092952001,
+              "neighbour_k_hat": 1.0,
+              "q_free_mm": 0.07928927176147527
+            },
+            "extension_needed": false,
+            "k_hat": 10.0,
+            "loading_relative_to_limit": 0.03277168738470151,
+            "note": "grid end; extension decided by the tau rule",
+            "tau_median": 29.514144366787182,
+            "touches_grid_end": true
+          },
+          "soft": {
+            "decades_already_beyond_base_grid": 0.0,
+            "descriptor_change_over_last_decade_median": {
+              "C_out_mm_per_N": 0.08724211546719363,
+              "R_SE": 0.2658378668302821,
+              "neighbour_k_hat": 0.01,
+              "q_free_mm": 0.40084882931153554
+            },
+            "extension_needed": false,
+            "k_hat": 0.001,
+            "loading_relative_to_limit": 0.08133773643123508,
+            "note": "grid end; extension decided by the tau rule",
+            "tau_median": 0.088539324686375,
+            "touches_grid_end": true
+          }
+        },
+        "out": {
+          "hard": {
+            "decades_already_beyond_base_grid": 0.0,
+            "descriptor_change_over_last_decade_median": {
+              "C_out_mm_per_N": 0.10055517765154154,
+              "R_SE": 0.06485621172872269,
+              "neighbour_k_hat": 1.0,
+              "q_free_mm": 0.11327321281963709
+            },
+            "extension_needed": false,
+            "k_hat": 10.0,
+            "loading_relative_to_limit": 0.022445152895563078,
+            "note": "grid end; extension decided by the tau rule",
+            "tau_median": 43.553049143972565,
+            "touches_grid_end": true
+          },
+          "soft": {
+            "decades_already_beyond_base_grid": 0.0,
+            "descriptor_change_over_last_decade_median": {
+              "C_out_mm_per_N": 0.1117969386815647,
+              "R_SE": 0.06935426673647371,
+              "neighbour_k_hat": 10.0,
+              "q_free_mm": 0.12774308215028252
+            },
+            "extension_needed": false,
+            "k_hat": 1.0,
+            "loading_relative_to_limit": 0.8320200553467049,
+            "note": "kept end lies inside the grid; the outer values were rejected, so no extension",
+            "tau_median": 4.953091614978001,
+            "touches_grid_end": false
+          }
+        }
+      },
+      "case_record": {
+        "case": "gripper",
+        "contract_fingerprint": "f8765b9846b887ff28a4a55120d0af2e980258640da3bb9aa2acc00f33ea7009",
+        "contract_id": "benchmark_v1.1",
+        "design_area_mm2": 2960.0,
+        "domain_mm": [
+          80.0,
+          40.0
+        ],
+        "element_mm": [
+          1.0,
+          1.0
+        ],
+        "exclusion_segments_mm": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              8.0
+            ]
+          ],
+          [
+            [
+              0.0,
+              38.0
+            ],
+            [
+              0.0,
+              40.0
+            ]
+          ],
+          [
+            [
+              80.0,
+              28.0
+            ],
+            [
+              80.0,
+              30.0
+            ]
+          ]
+        ],
+        "fixed_dof_count": 99,
+        "fixed_segment_mm": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            8.0
+          ]
+        ],
+        "formulation": "plane_strain",
+        "mask_counts": {
+          "design": 2960,
+          "passive_solid": 40,
+          "passive_void": 200
+        },
+        "mask_sha256": "aebaa71b0a8a4db3dc00c31a54f9a6250ea068859e8024de242370ca22ed4884",
+        "mesh": [
+          80,
+          40
+        ],
+        "nu": 0.3,
+        "output_sign_convention": "q = b_output.T @ u is positive when the output port moves along the contract output direction; gripper: the lower jaw port (x=80 mm, y in [28,30] mm) moving toward the symmetry axis (+y) is closing",
+        "passive_solid_area_mm2": 40.0,
+        "passive_void_area_mm2": 200.0,
+        "ports": {
+          "input": {
+            "coordinates_mm": [
+              [
+                0.0,
+                38.0
+              ],
+              [
+                0.0,
+                39.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ],
+            "direction": [
+              1.0,
+              0.0
+            ],
+            "node_ids": [
+              3078,
+              3159,
+              3240
+            ],
+            "weights": [
+              0.25,
+              0.5,
+              0.25
+            ]
+          },
+          "output": {
+            "coordinates_mm": [
+              [
+                80.0,
+                28.0
+              ],
+              [
+                80.0,
+                29.0
+              ],
+              [
+                80.0,
+                30.0
+              ]
+            ],
+            "direction": [
+              0.0,
+              1.0
+            ],
+            "node_ids": [
+              2348,
+              2429,
+              2510
+            ],
+            "weights": [
+              0.25,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        "schema": "dmftd.mechanism_case.v1",
+        "symmetry_policy": "full_midline",
+        "symmetry_uy_node_count": 81,
+        "thickness_mm": 20.0,
+        "units": {
+          "energy": "N_mm",
+          "force": "N",
+          "length": "mm",
+          "spring_stiffness": "N_per_mm",
+          "stress": "MPa"
+        }
+      },
+      "comparison_profile": {
+        "E_scale_MPa": 1.0,
+        "Emin_MPa": 0.001,
+        "curve_output_spring_hats": [
+          0.1,
+          1.0,
+          10.0
+        ],
+        "force_N_per_half": 1.0,
+        "formulation": "plane_strain",
+        "input_spring_N_per_mm": 1.4604287860303493,
+        "k_ref_N_per_mm": 1.4604287860303493,
+        "nu": 0.3,
+        "penal": 3.0,
+        "primary_output_spring_N_per_mm": 0.0,
+        "role": "gripper_common_measurement_v1",
+        "thickness_mm": 20.0
+      },
+      "distinct_designs_by_mesh": {
+        "160x80": 5,
+        "80x40": 12
+      },
+      "elapsed_seconds": 13.655523460999916,
+      "emin_sensitivity_down_range": [
+        0.082558604547603,
+        1.0119152343794604
+      ],
+      "generation_conditions_fixed": {
+        "J_scale_rule": "abs_J_initial_v1",
+        "beta": 4.0,
+        "eta": 0.5,
+        "filter_radius_mm": 3.0,
+        "initial_design": "uniform",
+        "input_force_N": 1.0,
+        "penal": 3.0,
+        "updates": 200,
+        "volume_fraction_limit": 0.35
+      },
+      "grid": {
+        "base_grid": {
+          "k_hat_in": [
+            0.001,
+            0.01,
+            0.1,
+            1.0,
+            10.0
+          ],
+          "k_hat_out": [
+            0.001,
+            0.01,
+            0.1,
+            1.0,
+            10.0
+          ]
+        },
+        "k_hat_in": [
+          0.001,
+          0.01,
+          0.1,
+          1.0,
+          10.0
+        ],
+        "k_hat_out": [
+          0.001,
+          0.01,
+          0.1,
+          1.0,
+          10.0
+        ]
+      },
+      "interval_k_hat_in": {
+        "contiguous": true,
+        "diagnostic_only_values": [],
+        "interval": [
+          0.001,
+          10.0
+        ],
+        "kept_values": [
+          0.001,
+          0.01,
+          0.1,
+          1.0,
+          10.0
+        ],
+        "transition_core_values": [
+          0.01,
+          0.1,
+          1.0
+        ]
+      },
+      "interval_k_hat_out": {
+        "contiguous": true,
+        "diagnostic_only_values": [
+          0.001,
+          0.01,
+          0.1
+        ],
+        "interval": [
+          1.0,
+          10.0
+        ],
+        "kept_values": [
+          1.0,
+          10.0
+        ],
+        "transition_core_values": [
+          1.0
+        ]
+      },
+      "k_ref_N_per_mm": 1.4604287860303493,
+      "k_ref_source": "reference_stiffness(case) on 80x40, policy full_midline",
+      "mesh": [
+        80,
+        40
+      ],
+      "multi_start_cells": {
+        "kin_1e+00__kout_1e+00": {
+          "multi_start": true,
+          "within_cell_L1_max": 0.1004180067329419
+        },
+        "kin_1e-01__kout_1e-01": {
+          "multi_start": true,
+          "within_cell_L1_max": 0.2513696039040437
+        },
+        "kin_1e-02__kout_1e-02": {
+          "multi_start": true,
+          "within_cell_L1_max": 0.20153332786879496
+        }
+      },
+      "refinement_commits": [
+        "e24337100a03a0dde740714651915c9ffd11e8aa"
+      ],
+      "refinements": [
+        "research/refine_gripper_160x80_v1"
+      ],
+      "rejections_by_rule": {
+        "emin_sensitivity": 16
+      },
+      "runs_admitted": 18,
+      "runs_total": 34,
+      "shrink_log": [
+        {
+          "axis": "out",
+          "failed_cells": [
+            "kin_1e-03__kout_1e-03",
+            "kin_1e-02__kout_1e-03",
+            "kin_1e-01__kout_1e-03",
+            "kin_1e+00__kout_1e-03",
+            "kin_1e+01__kout_1e-03"
+          ],
+          "k_hat": 0.001,
+          "pass": 1,
+          "reliable_fraction": 0.0,
+          "tau_in_useful_range": false,
+          "tau_median": 0.02764710285521445
+        },
+        {
+          "axis": "out",
+          "failed_cells": [
+            "kin_1e-03__kout_1e-02",
+            "kin_1e-02__kout_1e-02",
+            "kin_1e-01__kout_1e-02",
+            "kin_1e+00__kout_1e-02",
+            "kin_1e+01__kout_1e-02"
+          ],
+          "k_hat": 0.01,
+          "pass": 2,
+          "reliable_fraction": 0.0,
+          "tau_in_useful_range": true,
+          "tau_median": 0.20237653345438408
+        },
+        {
+          "axis": "out",
+          "failed_cells": [
+            "kin_1e-03__kout_1e-01",
+            "kin_1e+00__kout_1e-01",
+            "kin_1e+01__kout_1e-01"
+          ],
+          "k_hat": 0.1,
+          "pass": 3,
+          "reliable_fraction": 0.4,
+          "tau_in_useful_range": true,
+          "tau_median": 0.9280354197734975
+        }
+      ],
+      "sweep_commits": [
+        "31e99af7fa4dbfcd6f9066b6f7ccdb26cc502fd3"
+      ],
+      "sweeps": [
+        "research/spring_sweep_gripper_80x40_v1"
+      ],
+      "symmetry_policy": "full_midline"
+    },
+    "inverter": {
+      "axis_in": [
+        {
+          "cells": 3,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 0.001,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 0.11489172986472665,
+          "tau_median": 0.10381807748275101,
+          "tau_min": 0.10089604520997211
+        },
+        {
+          "cells": 3,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 0.01,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 0.5388332954405214,
+          "tau_median": 0.4958081545062741,
+          "tau_min": 0.4860669810265991
+        },
+        {
+          "cells": 3,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 0.1,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 1.2771710796679587,
+          "tau_median": 1.2620072750140172,
+          "tau_min": 1.2379214242329377
+        },
+        {
+          "cells": 3,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 1.0,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 7.449007185665508,
+          "tau_median": 7.218888745903876,
+          "tau_min": 7.0684317967246715
+        },
+        {
+          "cells": 3,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 10.0,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": false,
+          "tau_in_useful_range": true,
+          "tau_max": 66.40372550070082,
+          "tau_median": 64.99935858053577,
+          "tau_min": 62.49707117959654
+        }
+      ],
+      "axis_out": [
+        {
+          "cells": 5,
+          "failed_cells": [
+            "kin_1e-03__kout_1e-03",
+            "kin_1e-02__kout_1e-03",
+            "kin_1e-01__kout_1e-03",
+            "kin_1e+00__kout_1e-03",
+            "kin_1e+01__kout_1e-03"
+          ],
+          "in_kept_set": false,
+          "k_hat": 0.001,
+          "kept": false,
+          "reliable_fraction": 0.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 0.12119833247967018,
+          "tau_median": 0.12017618211306111,
+          "tau_min": 0.11458720295300484
+        },
+        {
+          "cells": 5,
+          "failed_cells": [
+            "kin_1e-03__kout_1e-02",
+            "kin_1e+00__kout_1e-02",
+            "kin_1e+01__kout_1e-02"
+          ],
+          "in_kept_set": false,
+          "k_hat": 0.01,
+          "kept": false,
+          "reliable_fraction": 0.4,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 0.6465716106723367,
+          "tau_median": 0.5632706939199885,
+          "tau_min": 0.5306388441469593
+        },
+        {
+          "cells": 5,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 0.1,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 1.7518585332704815,
+          "tau_median": 1.5658049189735008,
+          "tau_min": 1.4351925029045158
+        },
+        {
+          "cells": 5,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 1.0,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": true,
+          "tau_in_useful_range": true,
+          "tau_max": 7.047850421321021,
+          "tau_median": 6.257062254494621,
+          "tau_min": 5.926474287941832
+        },
+        {
+          "cells": 5,
+          "failed_cells": [],
+          "in_kept_set": true,
+          "k_hat": 10.0,
+          "kept": true,
+          "reliable_fraction": 1.0,
+          "tau_in_transition_core": false,
+          "tau_in_useful_range": true,
+          "tau_max": 56.08175526927613,
+          "tau_median": 52.353236402644086,
+          "tau_min": 47.52197044535933
+        }
+      ],
+      "axis_tables_over_full_grid": {
+        "in": [
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e-03__kout_1e-03",
+              "kin_1e-03__kout_1e-02"
+            ],
+            "in_kept_set": true,
+            "k_hat": 0.001,
+            "kept": true,
+            "reliable_fraction": 0.6,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 0.12178749747979038,
+            "tau_median": 0.11489172986472665,
+            "tau_min": 0.10089604520997211
+          },
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e-02__kout_1e-03"
+            ],
+            "in_kept_set": true,
+            "k_hat": 0.01,
+            "kept": true,
+            "reliable_fraction": 0.8,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 0.5975270134568307,
+            "tau_median": 0.5332929316534778,
+            "tau_min": 0.4860669810265991
+          },
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e-01__kout_1e-03"
+            ],
+            "in_kept_set": true,
+            "k_hat": 0.1,
+            "kept": true,
+            "reliable_fraction": 0.8,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 1.5480377259186522,
+            "tau_median": 1.2771710796679587,
+            "tau_min": 1.2379214242329377
+          },
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e+00__kout_1e-03",
+              "kin_1e+00__kout_1e-02"
+            ],
+            "in_kept_set": true,
+            "k_hat": 1.0,
+            "kept": true,
+            "reliable_fraction": 0.6,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 7.7364962575505825,
+            "tau_median": 7.218888745903876,
+            "tau_min": 6.8738862652156145
+          },
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e+01__kout_1e-03",
+              "kin_1e+01__kout_1e-02"
+            ],
+            "in_kept_set": true,
+            "k_hat": 10.0,
+            "kept": true,
+            "reliable_fraction": 0.6,
+            "tau_in_transition_core": false,
+            "tau_in_useful_range": true,
+            "tau_max": 66.40372550070082,
+            "tau_median": 64.99935858053577,
+            "tau_min": 59.25349699501707
+          }
+        ],
+        "out": [
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e-03__kout_1e-03",
+              "kin_1e-02__kout_1e-03",
+              "kin_1e-01__kout_1e-03",
+              "kin_1e+00__kout_1e-03",
+              "kin_1e+01__kout_1e-03"
+            ],
+            "in_kept_set": true,
+            "k_hat": 0.001,
+            "kept": false,
+            "reliable_fraction": 0.0,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 0.12119833247967018,
+            "tau_median": 0.12017618211306111,
+            "tau_min": 0.11458720295300484
+          },
+          {
+            "cells": 5,
+            "failed_cells": [
+              "kin_1e-03__kout_1e-02",
+              "kin_1e+00__kout_1e-02",
+              "kin_1e+01__kout_1e-02"
+            ],
+            "in_kept_set": true,
+            "k_hat": 0.01,
+            "kept": false,
+            "reliable_fraction": 0.4,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 0.6465716106723367,
+            "tau_median": 0.5632706939199885,
+            "tau_min": 0.5306388441469593
+          },
+          {
+            "cells": 5,
+            "failed_cells": [],
+            "in_kept_set": true,
+            "k_hat": 0.1,
+            "kept": true,
+            "reliable_fraction": 1.0,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 1.7518585332704815,
+            "tau_median": 1.5658049189735008,
+            "tau_min": 1.4351925029045158
+          },
+          {
+            "cells": 5,
+            "failed_cells": [],
+            "in_kept_set": true,
+            "k_hat": 1.0,
+            "kept": true,
+            "reliable_fraction": 1.0,
+            "tau_in_transition_core": true,
+            "tau_in_useful_range": true,
+            "tau_max": 7.047850421321021,
+            "tau_median": 6.257062254494621,
+            "tau_min": 5.926474287941832
+          },
+          {
+            "cells": 5,
+            "failed_cells": [],
+            "in_kept_set": true,
+            "k_hat": 10.0,
+            "kept": true,
+            "reliable_fraction": 1.0,
+            "tau_in_transition_core": false,
+            "tau_in_useful_range": true,
+            "tau_max": 56.08175526927613,
+            "tau_median": 52.353236402644086,
+            "tau_min": 47.52197044535933
+          }
+        ]
+      },
+      "boundaries": {
+        "in": {
+          "hard": {
+            "decades_already_beyond_base_grid": 0.0,
+            "descriptor_change_over_last_decade_median": {
+              "C_out_mm_per_N": 0.10482609994482717,
+              "R_SE": 0.15533760822916576,
+              "neighbour_k_hat": 1.0,
+              "q_free_mm": 0.07448504139445444
+            },
+            "extension_needed": false,
+            "k_hat": 10.0,
+            "loading_relative_to_limit": 0.015151662402593644,
+            "note": "grid end; extension decided by the tau rule",
+            "tau_median": 64.99935858053577,
+            "touches_grid_end": true
+          },
+          "soft": {
+            "decades_already_beyond_base_grid": 0.0,
+            "descriptor_change_over_last_decade_median": {
+              "C_out_mm_per_N": 0.1213474229886331,
+              "R_SE": 0.1159591890207321,
+              "neighbour_k_hat": 0.01,
+              "q_free_mm": 0.39120391990544257
+            },
+            "extension_needed": false,
+            "k_hat": 0.001,
+            "loading_relative_to_limit": 0.09405361227595345,
+            "note": "grid end; extension decided by the tau rule",
+            "tau_median": 0.10381807748275101,
+            "touches_grid_end": true
+          }
+        },
+        "out": {
+          "hard": {
+            "decades_already_beyond_base_grid": 0.0,
+            "descriptor_change_over_last_decade_median": {
+              "C_out_mm_per_N": 0.17775075327282852,
+              "R_SE": 0.029157868710557144,
+              "neighbour_k_hat": 1.0,
+              "q_free_mm": 0.16803537667646007
+            },
+            "extension_needed": false,
+            "k_hat": 10.0,
+            "loading_relative_to_limit": 0.018743005437444126,
+            "note": "grid end; extension decided by the tau rule",
+            "tau_median": 52.353236402644086,
+            "touches_grid_end": true
+          },
+          "soft": {
+            "decades_already_beyond_base_grid": 0.0,
+            "descriptor_change_over_last_decade_median": {
+              "C_out_mm_per_N": 0.9718109383930253,
+              "R_SE": 0.08887825188031284,
+              "neighbour_k_hat": 1.0,
+              "q_free_mm": 0.81920846814694
+            },
+            "extension_needed": false,
+            "k_hat": 0.1,
+            "loading_relative_to_limit": 0.610258756382746,
+            "note": "kept end lies inside the grid; the outer values were rejected, so no extension",
+            "tau_median": 1.5658049189735008,
+            "touches_grid_end": false
+          }
+        }
+      },
+      "case_record": {
+        "case": "inverter",
+        "contract_fingerprint": "f8765b9846b887ff28a4a55120d0af2e980258640da3bb9aa2acc00f33ea7009",
+        "contract_id": "benchmark_v1.1",
+        "design_area_mm2": 3200.0,
+        "domain_mm": [
+          80.0,
+          40.0
+        ],
+        "element_mm": [
+          1.0,
+          1.0
+        ],
+        "exclusion_segments_mm": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              8.0
+            ]
+          ],
+          [
+            [
+              0.0,
+              38.0
+            ],
+            [
+              0.0,
+              40.0
+            ]
+          ],
+          [
+            [
+              80.0,
+              38.0
+            ],
+            [
+              80.0,
+              40.0
+            ]
+          ]
+        ],
+        "fixed_dof_count": 99,
+        "fixed_segment_mm": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            8.0
+          ]
+        ],
+        "formulation": "plane_strain",
+        "mask_counts": {
+          "design": 3200,
+          "passive_solid": 0,
+          "passive_void": 0
+        },
+        "mask_sha256": "88dd816d7a58485dd9d427fe8401f76db9b0c27a8af99d487a03ff07a8d1a91a",
+        "mesh": [
+          80,
+          40
+        ],
+        "nu": 0.3,
+        "output_sign_convention": "q = b_output.T @ u is positive when the output port moves along the contract output direction; gripper: the lower jaw port (x=80 mm, y in [28,30] mm) moving toward the symmetry axis (+y) is closing",
+        "passive_solid_area_mm2": 0.0,
+        "passive_void_area_mm2": 0.0,
+        "ports": {
+          "input": {
+            "coordinates_mm": [
+              [
+                0.0,
+                38.0
+              ],
+              [
+                0.0,
+                39.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ],
+            "direction": [
+              1.0,
+              0.0
+            ],
+            "node_ids": [
+              3078,
+              3159,
+              3240
+            ],
+            "weights": [
+              0.25,
+              0.5,
+              0.25
+            ]
+          },
+          "output": {
+            "coordinates_mm": [
+              [
+                80.0,
+                38.0
+              ],
+              [
+                80.0,
+                39.0
+              ],
+              [
+                80.0,
+                40.0
+              ]
+            ],
+            "direction": [
+              -1.0,
+              0.0
+            ],
+            "node_ids": [
+              3158,
+              3239,
+              3320
+            ],
+            "weights": [
+              0.25,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        "schema": "dmftd.mechanism_case.v1",
+        "symmetry_policy": "contract_segment",
+        "symmetry_uy_node_count": 81,
+        "thickness_mm": 20.0,
+        "units": {
+          "energy": "N_mm",
+          "force": "N",
+          "length": "mm",
+          "spring_stiffness": "N_per_mm",
+          "stress": "MPa"
+        }
+      },
+      "comparison_profile": {
+        "E_scale_MPa": 1.0,
+        "Emin_MPa": 0.001,
+        "domain_mm": [
+          80.0,
+          40.0
+        ],
+        "fine_mesh": [
+          320,
+          160
+        ],
+        "fine_state": "new_equilibrium_solve_on_copied_density_never_resize_old_strain_or_u",
+        "force_N_per_half": 1.0,
+        "formulation": "plane_strain",
+        "input_spring_N_per_mm": 3.266266928859044,
+        "integration": "full_2x2_Gauss",
+        "k_ref_N_per_mm": 3.266266928859044,
+        "main_mesh": [
+          160,
+          80
+        ],
+        "nested_copy": "repeat_each_source_cell_by_integer_y_and_x_factors_conserving_piecewise_constant_density",
+        "nu": 0.3,
+        "penal": 3.0,
+        "physical_density": "float64_yx_C_order_origin_bottom_left_no_new_filter_projection_mask_or_clipping",
+        "physical_port_width_mm": 2.0,
+        "ports_and_fixed_dofs": "inherited_project_inverter_v1_geometry_and_normalized_tributary_weights",
+        "primary_output_spring_N_per_mm": 0.0,
+        "production_nulls": "unchanged_no_fallback_from_measurement_profile",
+        "role": "M4_common_profile_applied_on_the_sweep_mesh",
+        "source_p2_policy": "consume_physical_density_under_common_p3_without_claiming_same_source_J",
+        "source_profile": "preserve_source_mesh_material_beta_p_load_springs_masks_hashes_separately",
+        "thickness_mm": 20.0
+      },
+      "distinct_designs_by_mesh": {
+        "160x80": 6,
+        "80x40": 13
+      },
+      "elapsed_seconds": 17.505360927000083,
+      "emin_sensitivity_down_range": [
+        0.05805364856426887,
+        0.690640690461447
+      ],
+      "generation_conditions_fixed": {
+        "J_scale_rule": "abs_J_initial_v1",
+        "beta": 4.0,
+        "eta": 0.5,
+        "filter_radius_mm": 3.0,
+        "initial_design": "uniform",
+        "input_force_N": 1.0,
+        "penal": 3.0,
+        "updates": 200,
+        "volume_fraction_limit": 0.35
+      },
+      "grid": {
+        "base_grid": {
+          "k_hat_in": [
+            0.001,
+            0.01,
+            0.1,
+            1.0,
+            10.0
+          ],
+          "k_hat_out": [
+            0.001,
+            0.01,
+            0.1,
+            1.0,
+            10.0
+          ]
+        },
+        "k_hat_in": [
+          0.001,
+          0.01,
+          0.1,
+          1.0,
+          10.0
+        ],
+        "k_hat_out": [
+          0.001,
+          0.01,
+          0.1,
+          1.0,
+          10.0
+        ]
+      },
+      "interval_k_hat_in": {
+        "contiguous": true,
+        "diagnostic_only_values": [],
+        "interval": [
+          0.001,
+          10.0
+        ],
+        "kept_values": [
+          0.001,
+          0.01,
+          0.1,
+          1.0,
+          10.0
+        ],
+        "transition_core_values": [
+          0.001,
+          0.01,
+          0.1,
+          1.0
+        ]
+      },
+      "interval_k_hat_out": {
+        "contiguous": true,
+        "diagnostic_only_values": [
+          0.001,
+          0.01
+        ],
+        "interval": [
+          0.1,
+          10.0
+        ],
+        "kept_values": [
+          0.1,
+          1.0,
+          10.0
+        ],
+        "transition_core_values": [
+          0.1,
+          1.0
+        ]
+      },
+      "k_ref_N_per_mm": 3.266266928859044,
+      "k_ref_source": "contracts/m1_outputs_v1.yaml (frozen on the 160x80 production mesh)",
+      "mesh": [
+        80,
+        40
+      ],
+      "multi_start_cells": {
+        "kin_1e+00__kout_1e+00": {
+          "multi_start": false,
+          "within_cell_L1_max": 0.024676469374186435
+        },
+        "kin_1e-01__kout_1e-01": {
+          "multi_start": true,
+          "within_cell_L1_max": 0.17939450466063853
+        },
+        "kin_1e-02__kout_1e-02": {
+          "multi_start": true,
+          "within_cell_L1_max": 0.47421597657119846
+        }
+      },
+      "refinement_commits": [
+        "e24337100a03a0dde740714651915c9ffd11e8aa"
+      ],
+      "refinements": [
+        "research/refine_inverter_160x80_v1"
+      ],
+      "rejections_by_rule": {
+        "emin_sensitivity": 8
+      },
+      "runs_admitted": 26,
+      "runs_total": 34,
+      "shrink_log": [
+        {
+          "axis": "out",
+          "failed_cells": [
+            "kin_1e-03__kout_1e-03",
+            "kin_1e-02__kout_1e-03",
+            "kin_1e-01__kout_1e-03",
+            "kin_1e+00__kout_1e-03",
+            "kin_1e+01__kout_1e-03"
+          ],
+          "k_hat": 0.001,
+          "pass": 1,
+          "reliable_fraction": 0.0,
+          "tau_in_useful_range": true,
+          "tau_median": 0.12017618211306111
+        },
+        {
+          "axis": "out",
+          "failed_cells": [
+            "kin_1e-03__kout_1e-02",
+            "kin_1e+00__kout_1e-02",
+            "kin_1e+01__kout_1e-02"
+          ],
+          "k_hat": 0.01,
+          "pass": 2,
+          "reliable_fraction": 0.4,
+          "tau_in_useful_range": true,
+          "tau_median": 0.5632706939199885
+        }
+      ],
+      "sweep_commits": [
+        "31e99af7fa4dbfcd6f9066b6f7ccdb26cc502fd3"
+      ],
+      "sweeps": [
+        "research/spring_sweep_inverter_80x40_v1"
+      ],
+      "symmetry_policy": "contract_segment"
+    }
+  },
+  "provenance": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "argv": [
+      "/mnt/d/Coding/Diversity TO/Diversity-TO-Compliant-O/.venv/bin/python",
+      "scripts/l3_interval_policy.py",
+      "--output",
+      "tmp/l3_interval_policy_v1",
+      "--study",
+      "inverter",
+      "sweep=research/spring_sweep_inverter_80x40_v1",
+      "refine=research/refine_inverter_160x80_v1",
+      "--study",
+      "gripper",
+      "sweep=research/spring_sweep_gripper_80x40_v1",
+      "refine=research/refine_gripper_160x80_v1"
+    ],
+    "code_commit": "c4a4f3468a017e86d9912d6d39bcd255dbf21e71",
+    "finished_at_utc": "2026-09-07T10:16:10+00:00",
+    "jax": "0.4.30",
+    "jax_x64": true,
+    "numpy": "1.26.4",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.11.13",
+    "scipy": "1.12.0",
+    "started_at_utc": "2026-09-07T10:15:31+00:00"
+  },
+  "rules": {
+    "axis_kept": "a grid value is kept when its median tau lies in tau_useful_range and at least reliable_fraction_min of its cells (over the kept values of the other axis) pass every per-run rule",
+    "beta_floor_and_M_nd": "reported per run, not gates: the Emin probe is the direct floor test and M_nd is uniform across the grids",
+    "boundary_rule": "extend one decade (at most one) only if the kept interval touches the grid and the median tau at that end is above boundary_tau_soft_max (soft end) or below boundary_tau_hard_min (hard end)",
+    "boundary_tau_hard_min": 5.0,
+    "boundary_tau_soft_max": 0.2,
+    "duplicate_L1_max": 0.05,
+    "duplicate_definition": "mean |rho - rho'| over the design domain, same case and mesh; a run joins the first group whose representative is within the threshold",
+    "emin_probe_MPa": [
+      0.0001,
+      0.001,
+      0.01
+    ],
+    "emin_sensitivity_definition": "|q_free(Emin=1e-4) / q_free(Emin=1e-3) - 1| under the comparison profile (Emin=1e-2 is reported only)",
+    "emin_sensitivity_max": 0.2,
+    "emin_sensitivity_rationale": "the loosest gate the sealed M4 two-mesh qualification uses (eps_hat 20%); at 5% no recorded design passes, so the floor itself limits reliability",
+    "feasibility": "source_result.feasible (design-domain volume within the limit)",
+    "grid_shrink": "greedy joint shrink: drop the single least reliable axis value, recompute both axes over the remaining grid, repeat until every remaining value is kept (the axes are coupled: a soft output row fails for every input value)",
+    "hard_checks": "all measure_case hard checks pass under the comparison profile",
+    "multi_start_cells": "cells whose refinement shows a within-cell L1 above duplicate_L1_max get several initial fields; others the uniform start only",
+    "output_sign": "q_source > 0 and q_free > 0 along the contract output direction",
+    "ranking": "comparison_profile descriptors only; q_source is never ranked across springs",
+    "reliable_fraction_min": 0.6,
+    "tail_definition": "|J_pre[last] - J_pre[last-10]| / |J_pre[last]| over the fixed budget (a stationarity indicator, not convergence)",
+    "tail_relative_J_change_max": 0.01,
+    "tau_transition_core": [
+      0.1,
+      10.0
+    ],
+    "tau_useful_range": [
+      0.05,
+      100.0
+    ],
+    "tau_useful_rationale": "tau = k * C_final: below 0.05 the source loading is within 5% of the free limit, above 100 within 1% of the blocked limit"
+  },
+  "schema": "dmftd.candidate_policy.v1",
+  "version": "candidate_policy_v1"
+}

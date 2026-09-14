@@ -1,0 +1,207 @@
+schema_version: '1.0'
+contract_id: m4_measurement_contract_v1
+milestone: M4
+status: frozen_definition_pending_delegated_activation
+scope: finite_fixed_physical_density_common_measurement_battery
+activation_requires: independent_contract_PASS_then_delegated_publication
+scientific_definition_gate: resolved_by_user_submitted_decisions
+authorization:
+  decision: {path: authorizations/M4_definition_decision_v1/M4_definition_decision_v1.md, sha256: efa84daf72f22d492f3d704a9cbc0326074b9ac1ac97d2a20571c112709230b5}
+  addendum: {path: authorizations/M4_definition_decision_v1/M4_definition_decision_addendum_v2.md, sha256: 48126da558e3de8aa0497bb56dc200b17f403d95a9644d83f5e7bf9b37e520e9}
+  adopted_proposal: {path: docs/M4_definition_gate_v2.md, sha256: 8ade03f046f409efaa05557ca14bc9a1b9bc0e04a1e0245ee9d996b05faa950a}
+  supplement: {path: authorizations/M4_definition_decision_v1/supplement_checks.json, sha256: e27028685d26017b08fc0048cc4327d845c4bf413a8f620281c7b3bd9c7e573e}
+  supplement_role: external_review_explanation_not_current_M4_numeric_oracle
+accepted_inputs:
+  registry: {path: contracts/contract_registry_v6.yaml, sha256: a778d39adc4f68518887a142bebcb652f78b8043548cac6628282411198034a2}
+  M1: {path: contracts/m1_outputs_v1.yaml, sha256: 56fda49b56d3d88bb956df975a474e28a24dc09ca90caad70732c387e1763cea}
+  M2: {path: contracts/m2_outputs_v1.yaml, sha256: e6aef07a4b9fe793f916808d91da0c79fda93ba122039ce9ed65cdf8831fa667}
+  M3: {path: contracts/m3_outputs_v1.yaml, sha256: 8ff74253ddd0a5a295db7ee3957e7f46bd8eceab5992bec08f96d40f3b89aa22}
+  M3_review: {path: milestones/M3/reviews/closure_v1/manifest_v1.json, sha256: 888b36a1bfe16da10c15b9acca1ca0f21a833d4e6ed2711cb6431f568c30fa35}
+  M3_handoff: accepted_immutable_no_repeat_of_old_optimization_or_closure_acceptance
+  fixtures: milestones/M4/fixture_sources_v1.json
+common_profile:
+  role: M4_local_measurement_profile_not_production_defaults
+  domain_mm: [80.0, 40.0]
+  main_mesh: [160, 80]
+  fine_mesh: [320, 160]
+  formulation: plane_strain
+  integration: full_2x2_Gauss
+  nu: 0.3
+  thickness_mm: 20.0
+  E_scale_MPa: 1.0
+  Emin_MPa: 0.001
+  penal: 3.0
+  force_N_per_half: 1.0
+  k_ref_N_per_mm: 3.266266928859044
+  input_spring_N_per_mm: 3.266266928859044
+  primary_output_spring_N_per_mm: 0.0
+  physical_port_width_mm: 2.0
+  ports_and_fixed_dofs: inherited_project_inverter_v1_geometry_and_normalized_tributary_weights
+  source_profile: preserve_source_mesh_material_beta_p_load_springs_masks_hashes_separately
+  source_p2_policy: consume_physical_density_under_common_p3_without_claiming_same_source_J
+  physical_density: float64_yx_C_order_origin_bottom_left_no_new_filter_projection_mask_or_clipping
+  nested_copy: repeat_each_source_cell_by_integer_y_and_x_factors_conserving_piecewise_constant_density
+  fine_state: new_equilibrium_solve_on_copied_density_never_resize_old_strain_or_u
+  production_nulls: unchanged_no_fallback_from_measurement_profile
+mechanics:
+  material: E_e=Emin+(Escale-Emin)*rho_e**p
+  unit_element: Ke0_has_E1_and_thickness_exactly_once
+  K0: Kstruct+kin*bin*bin.T_on_free_dofs
+  f: F*bin
+  u_free: solve(K0,f)
+  w: solve(K0,bout)
+  C_out: bout.T*w
+  C_in: bin.T*solve(K0,bin)
+  cross_reciprocity: bin.T*w_equals_bout.T*solve(K0,bin)
+  q_free: bout.T*u_free
+  q_in: bin.T*u_free
+  k_ref_policy: inherited_solid_without_either_ground_spring_never_redefined_by_K0_or_mesh
+  k_hat_grid: [0.0, 0.1, 1.0, 10.0]
+  q_curve: q_free/(1+k*C_out)
+  u_curve: u_free-w*(k*q_free/(1+k*C_out))
+  signed_block_force: -q_free/C_out
+  force_displacement: q(Fout)=q_free+C_out*Fout_where_Fout_is_force_on_structure_along_bout
+  independent_direct: assemble_K0_plus_k_bout_boutT_and_new_sparse_solve_for_nonzero_k
+  independent_block: '[K0 bout; bout.T 0]*[u_block;lambda]=[f;0]; F_block=-lambda'
+  block_constraint: average_port_only_not_all_output_nodes_or_large_spring
+  energy_balance: sum(U_total)+0.5*kin*q_in**2+0.5*k*q_out**2=0.5*f.T*u
+  reactions: constrained_entries_of_full_residual_with_all_spring_forces_and_block_external_force
+R_SE:
+  algorithm_id: R_SE_top01_material_raw_v1
+  state: common_K0_u_free
+  U_total: 0.5*E_e*u_e.T*Ke0*u_e
+  U_floor: 0.5*Emin*u_e.T*Ke0*u_e
+  U_mat: 0.5*(Escale-Emin)*rho_e**p*u_e.T*Ke0*u_e
+  beta_floor: sum(U_floor)/sum(U_total)
+  area_weight: a_e=rho_e*element_area
+  intensity: s_e=U_mat_e/a_e_for_a_e_positive
+  domain: all_half_model_elements_including_passive_solid_no_smoothing_or_exclusion
+  canonical_id: iy*nelx+ix
+  sorting: lexicographic_ascending_on_minus_s_and_canonical_id_no_near_tie_merging
+  selection: sequential_take_min_of_element_area_and_remaining_0p01_total_material_area
+  fractional_last: allowed_and_saved
+  result: sum(s_e*taken_area_e)/sum(U_mat)
+  no_extra_density_multiplier: true
+  valid_interval: [0.01, 1.0]
+  undefined: distinct_zero_material_area_and_zero_material_increment_energy_reasons
+  zero_area: skip_division_and_sort_require_Umat_zero
+geometry:
+  weight: rho_e*element_area
+  domain: all_half_model_elements_including_passive_solid
+  outputs: [cx_over_L, cy_over_H, mu_xx_over_L2, mu_yy_over_H2, mu_xy_over_LH]
+  centroid: weighted_element_centers
+  mu_xx: sum(w*((xc-cx)**2+hx**2/12))/sum(w)
+  mu_yy: sum(w*((yc-cy)**2+hy**2/12))/sum(w)
+  mu_xy: sum(w*(xc-cx)*(yc-cy))/sum(w)
+  uniform_rectangle: [0.5, 0.5, 0.08333333333333333, 0.08333333333333333, 0.0]
+  zero_mass: undefined_with_reason
+  grayness: 4*sum(A*rho*(1-rho))/sum(A)
+  volumes: retain_source_design_mask_volume_and_full_domain_volume_separately
+strain:
+  algorithm_id: eps_hat_principal_r2_interior_v1
+  state: common_K0_u_free
+  tensor: Q4_2x2_Gauss_small_strain_engineering_shear_divided_by_2_plane_strain_ezz0
+  GP_scalar: max_absolute_eigenvalue_of_3D_strain_tensor
+  element_scalar: integration_weighted_mean_of_GP_scalar_not_scalar_of_mean_tensor
+  observation: rho>=0.5
+  exclusion: element_center_distance_to_fixed_segment_or_either_port_le_2mm
+  S: observation_and_not_exclusion
+  smoothing: cone_max_0_2mm_minus_center_distance_geometric_area_weights_source_and_target_both_S_truncate_and_renormalize_no_nearest_extension
+  diagnostic: L*max_smoothed_element_scalar_in_S/abs(q_in)
+  raw_GP_peak: max_GP_scalar_over_all_observation_elements_no_boundary_exclusion
+  raw_peak_location: canonical_element_id_GP_id_and_physical_GP_coordinates
+  undefined: distinct_empty_observation_empty_S_and_zero_qin_reasons
+  scope_limit: diagnostic_not_safety_bound_not_HF_prediction_not_stable_ranking_when_unqualified
+finite_matrix:
+  equilibrium_pairs_160_and_320: [solid, deterministic_frame, auto_final, m3_coarse_p2, connector_L20_t2, connector_L2_t2]
+  single_160_handoff_case: m3_final_160_p3
+  prescribed_displacement_pair: controlled_bending_Q4
+  direct_curves_and_augmented_block: all_seven_160_equilibrium_cases
+  fine_cases: primary_K0_fields_and_RSE_strain_qualification_only
+  connector_geometry: solid_if_x_le_40_minus_gap_over2_or_x_ge_40_plus_gap_over2_or_19_le_y_le_21_else_rho0
+  connector_gaps_mm: [20.0, 2.0]
+  connector_in_plane_thickness_mm: 2.0
+  monotonicity_or_peak_in_connector_gate: forbidden
+  region_statistics: optional_explanatory_only_not_candidate_metric
+analytic_checks:
+  uniform_s: rho_values_1_0p35_0p01_Umat_equals_positive_c_times_material_area_RSE_equals_0p01
+  conservative_measure_subdivision: split_a_and_Umat_by_same_positive_fractions_RSE_invariant
+  same_displacement_reintegration: unit_square_ux=x*y_uy0_rho1_E1_nu0_t1_meshes1_2_4_totalU0p25_RSE0p01_0p0175_0p023125
+  distinction: reintegration_is_not_conservative_measure_copy_or_new_equilibrium
+  affine_and_pure_shear: exact_GP_tensor_principal_and_scalar_average_oracles
+  controlled_bending_Q4:
+    prescribed_nodal_field: ux=1mm-kappa*x*(y-H/2);uy=0.5*kappa*x**2
+    kappa_per_mm: 0.001
+    domain_mm: [80.0, 40.0]
+    density: uniform_1
+    Q4_interpolant_exact_strain: exx=-kappa*(y-H/2);eyy=0;engineering_gamma=kappa*(element_center_x-x)
+    principal_oracle: lambda_pm=0.5*(exx_plusminus_sqrt(exx**2+engineering_gamma**2));lambda_z=0
+    purpose: exact_analytic_oracle_for_Q4_interpolation_of_continuum_pure_bending_nodal_field
+    exemption: prescribed_field_not_equilibrium_no_port_work_balance_or_Thevenin_gate
+  smoothing: constant_preservation_independent_dense_cone_oracle_and_source_target_mask_leakage_negative_controls
+  amplitude: scale_u_by_positive_and_negative_2_preserve_normalized_strain_and_RSE
+  geometry: exact_uniform_rectangle_and_conservative_subdivision
+  invalid_inputs: shape_nonfinite_density_bounds_negative_energy_zero_mass_zero_energy_zero_qin_empty_masks
+tolerances:
+  status: new_numeric_choices_fixed_before_execution_under_user_delegation_pending_contract_review
+  float_type: float64
+  analytic_abs: 1.0e-12
+  analytic_relative: 1.0e-10
+  array_equivalence: abs_error_le_1e-12_plus_1e-10_times_abs_reference
+  density_copy: exact_array_equality_and_no_transform_call
+  geometry_normalized_abs: 1.0e-12
+  selected_area_abs_mm2: 64*float64_eps*max(total_material_area_mm2,1)
+  RSE_range_abs: 1.0e-12
+  zero_mass_or_energy: exact_zero_no_undefined_bypass_for_registered_positive_cases
+  energy_nonnegative: reject_negative_raw_energy_no_silent_clipping
+  zero_a_requires_Umat: exact_zero
+  split_energy_relative: 1.0e-12
+  split_energy_absolute_Nmm: 1.0e-14
+  equilibrium_energy_relative: 1.0e-10
+  free_residual: norm(Ku-f)_free/max(norm(f_free),1)<=1e-11
+  source: M2_state_gate_and_M1_SG003_SM_Thevenin_with_new_explicit_absolute_branches
+  direct_SM_and_Thevenin_relative: 1.0e-10
+  reciprocity_relative: 1.0e-10
+  dimensioned_comparison_near_zero: 1.0e-8
+  dimensioned_comparison_absolute: 1.0e-12
+  dimensioned_comparison_rule: if_abs_reference_le_near_zero_use_absolute_else_relative_in_declared_mm_N_or_mm_per_N_units
+  block_average_abs_mm: 1.0e-10
+  block_force_residual: norm(K0*u+b*lambda-f)/max(norm(f),1)<=1e-11
+  C_in_and_C_out: finite_strictly_positive
+  grid_RSE:
+    error: abs(z160-z320)/abs(z320)
+    maximum: 0.05
+    enforcement: hard_for_all_registered_equilibrium_pairs
+    near_zero: if_abs_z320_le_1e-12_require_abs_difference_le_1e-12_and_record_branch
+    expected_registered_domain: defined_positive_RSE_at_least_0p01
+  grid_strain:
+    error: abs(z160-z320)/abs(z320)
+    maximum: 0.20
+    enforcement: field_qualification_only_not_overall_closure_veto_if_correct_implementation
+    near_zero: if_abs_z320_le_1e-12_require_abs_difference_le_1e-12_and_record_branch
+    unqualified: retain_values_locations_drift_mark_grid_sensitive_no_stable_ranking_elimination_or_HF_use
+    raw_GP_peak: no_20percent_gate
+  grid_threshold_provenance: user_engineering_choice_after_seen_external_preflight_not_blind_validation
+  all_implementation_correctness: hard_including_diagnostics
+artifacts:
+  applicability: per_case_arrays_and_port_curves_apply_to_equilibrium_cases_only_prescribed_bending_saves_rho_u_strain_and_analytic_errors_without_w_or_Cout_or_external_work
+  per_case_arrays: [measurement_rho_physical, u_free, w, U_total, U_floor, U_mat, element_principal_scalar, smoothed_interior_scalar, observation_mask, exclusion_mask, S_mask, selected_material_area]
+  per_case_metadata: [source_reference_hash_key, source_profile, common_profile, mesh, units, numbering, ports, fixed_dofs, raw_GP_peak_and_location, scalar_metrics, undefined_reasons, fractional_last_element, solver_counts, input_hashes]
+  intermediate_state_reconstruction: u_curve_from_u_free_and_w_then_recompute_nonlinear_energy_and_strain_no_scalar_interpolation
+  curves: direct_and_formula_scalar_and_vector_errors_and_signed_block_result
+  evidence: real_commands_stdout_stderr_exit_codes_code_commit_environment_hashes_manifest_tests_and_failure_records
+  figures: [physical_density_maps, signed_port_curves_direct_vs_formula, original_value_measurement_table, U_total_U_floor_U_mat_ledger_and_spatial_maps, exact_moments_and_centroid_plot, observation_exclusion_S_masks_and_true_GP_peak_locations, RSE_and_strain_two_mesh_qualification_table]
+  independent_review: actual_contract_bytes_tests_sources_numeric_recomputation_arrays_and_opened_figures_then_closure_PASS
+allowed_modifications_after_publication:
+  runtime: [src/dmftd/measurement_fields.py, src/dmftd/port_battery.py]
+  scripts: [scripts/run_m4.py, scripts/close_m4.py, scripts/m4_support.py, scripts/publish_m4_contract.py]
+  tests: [tests/test_m4_fields.py, tests/test_m4_battery.py]
+  evidence: milestones/M4_new_paths_only
+  governance: M4_contract_outputs_and_append_only_registry_successor_under_reviewed_publication
+  shared_FEM: reuse_without_changes
+forbidden:
+  - modify_sealed_M0_M1_M2_M3_or_third_party
+  - rerun_optimization_or_reapply_filter_projection
+  - retune_metric_threshold_or_fixture_after_results
+  - production_parameter_freeze_or_M5_M6_HF_or_candidate_database
+stop: close_M4_after_independent_review_and_stop

@@ -1,0 +1,554 @@
+schema_version: '1.0'
+contract_id: m3_outputs_v1
+milestone: M3
+scope: finite_low_fidelity_optimization_wiring_and_same_state_physical_density_handoff
+activation_requires: independent_M3_closure_PASS_and_delegated_closure_in_successor_registry;
+  this file alone grants no activation
+input_contract:
+  path: contracts/m3_optimization_contract_v1.yaml
+  file_sha256: 4292e644a666bb2ccba4611a8b01716937f9cb63d3310ef25af07a380ba0130e
+  canonical_fingerprint: 69e2cfe4384365da4c7ea074fba4d3c31ea36ac136678ebe56a8e6c1a8448b7e
+inherited_M2_outputs:
+  path: contracts/m2_outputs_v1.yaml
+  file_sha256: e6aef07a4b9fe793f916808d91da0c79fda93ba122039ce9ed65cdf8831fa667
+closure_candidate_code_commit: 90a18458fc7d28f99a36fb5a267cf7d8eb9efb1d
+canonical_C_execution_commit: 533e82294cee9dd57e26e6e30d5435ff7070644b
+current_regression_code_commit: 4f53092106e1358bb32f96314c842fd0c16958b0
+API:
+  auto_entry: dmftd.optimization.AutoEvaluator(profile=auto_validation)
+  project_entry: dmftd.optimization.ProjectEvaluator(problem,transform,profile=project_validation,explicit_material_and_input_force)
+  optimizer_entry: dmftd.optimization.run_optimization
+  MMA_entry: dmftd.mma_adapter.FrozenMMA
+  same_MMA_library_limit: wiring and behavior reconciled; no independent MMA algorithm
+    validation
+mathematics:
+  scientific_objective: J=-bout.T@u=-q in signed mm, no abs or clipping
+  project_design_chain: unchanged M2 double mask, physical filter, projection, SIMP
+    and full transpose VJP
+  project_MMA_only_scale_mm: 0.0037803699859865966
+  project_scaled_inputs: J_MMA=J/J_scale and dJ_MMA=complete_dJ/J_scale; no extra
+    sensitivity filter
+  project_constraint: v_design/0.35-1; compact design-mask gradient
+  volume_design: sum(rho_physical[Md])/count(Md)
+  volume_total: mean(rho_physical)
+  auto_definition: exact frozen A001/A002 physics, shifted material and historical
+    sensitivity filter
+  termination: fixed 200 updates; 201 states and final reanalysis; max_iterations
+    does not imply convergence
+handoff:
+  density_array_convention: float64 (nely,nelx), bottom-left origin, y up, x right,
+    C order x-fast
+  displacement_array_convention: float64 (2*(nelx+1)*(nely+1),); node=iy*(nelx+1)+ix,
+    dof=2*node+(0 for ux,1 for uy), physical x-right/y-up, mm
+  element_moduli_array_convention: float64 (nely,nelx) in MPa, same element order
+    as physical density
+  mask_array_convention: bool (nely,nelx), disjoint design/passive-solid/passive-void
+    partition
+  compact_index_convention: int64 (n_design,), flatnonzero(design_mask.ravel(C));
+    final raw passive placeholders remain zero
+  grid_selection: use each case source_profile nelx/nely and bound density_shape at
+    the same 80x40 mm domain; inherited M1 production_mesh is a reference baseline,
+    never a command to resize a 40x20 field
+  final_state_index: 200
+  keys:
+    raw_design_x: final__raw_design_x
+    rho_initial: final__rho_initial
+    rho_filtered: final__rho_filtered
+    rho_projected: final__rho_projected
+    rho_physical: final__rho_physical
+    u: final__u
+    element_moduli: final__element_moduli
+    compact_indices: compact_indices_C
+    design_mask: design_mask
+    passive_solid_mask: passive_solid_mask
+    passive_void_mask: passive_void_mask
+  physical_density_processing: M4 physical-density consumer must apply zero new filtering
+    or projection
+  raw_design_processing: raw x alone requires its bound source full density chain,
+    once logically; recomputation count is not chain composition
+  source_profile_vs_battery: source scalars use each saved p/beta/load/springs; a
+    common M4 battery requires its own reviewed profile and cannot compare p2 source
+    J directly with a p3 battery J
+  scientific_units:
+  - mm
+  - N
+  - MPa
+  cases:
+  - case_id: project_40x20_beta1_penal2_khat1
+    source_profile:
+      E_scale_MPa: 1.0
+      Emin_MPa: 0.001
+      J_scale_mm: 0.0037803699859865966
+      beta: 1.0
+      eta: 0.5
+      filter_radius_mm: 3.0
+      formulation: plane_strain
+      height_mm: 40.0
+      input_force_N_per_half: 1.0
+      input_spring_N_per_mm: 3.266266928859044
+      k_ref_N_per_mm: 3.266266928859044
+      length_mm: 80.0
+      name: project_40x20_beta1_penal2_khat1
+      nelx: 40
+      nely: 20
+      nu: 0.3
+      output_spring_N_per_mm: 3.266266928859044
+      output_spring_hat: 1.0
+      penal: 2.0
+      port_width_mm: 2.0
+      role: local_M3_validation_only_no_production_freeze
+      thickness_mm: 20.0
+      variable_order: compact design mask in yx C order
+      volume_fraction_limit: 0.35
+    arrays:
+      path: milestones/M3/C/project_40x20_beta1_penal2_khat1/arrays_v1.npz
+      sha256: a97fe983e32c8812a06d83808407c48edda2b90f269d103e0c07e839860f7c94
+    profile:
+      path: milestones/M3/C/project_40x20_beta1_penal2_khat1/profile.json
+      sha256: 587e6a8a06a94163b239ce2ca3bdad2c340ee6c95f86359929243ec8bcafddce
+    result:
+      path: milestones/M3/C/project_40x20_beta1_penal2_khat1/run_result.json
+      sha256: 43f77ac8e9ad5d1126ff9aa48977ec3e24842fb1f635cc30726d97f3ddde0257
+    density_shape:
+    - 20
+    - 40
+    displacement_shape:
+    - 1722
+    final_same_state:
+      J: -0.030289815969769485
+      J_mma: -8.012394575676561
+      LU_count: 1
+      adjoint_residual: 2.5808321667007e-14
+      constraint: -1.680403594050972e-08
+      q: 0.030289815969769485
+      state_residual: 2.3223544230279208e-14
+      u_in: 0.26576191826187956
+      v_design: 0.3499999941185874
+      v_total: 0.3499999941185874
+    updates: 200
+    analysis_count: 201
+    state_residual_max: 2.6290208695773152e-14
+    adjoint_residual_max: 2.80364989633701e-14
+    final_constraint_excess: 0
+    converged: false
+    stop_reason: max_iterations
+  - case_id: project_40x20_beta1_penal3_khat1
+    source_profile:
+      E_scale_MPa: 1.0
+      Emin_MPa: 0.001
+      J_scale_mm: 0.0037803699859865966
+      beta: 1.0
+      eta: 0.5
+      filter_radius_mm: 3.0
+      formulation: plane_strain
+      height_mm: 40.0
+      input_force_N_per_half: 1.0
+      input_spring_N_per_mm: 3.266266928859044
+      k_ref_N_per_mm: 3.266266928859044
+      length_mm: 80.0
+      name: project_40x20_beta1_penal3_khat1
+      nelx: 40
+      nely: 20
+      nu: 0.3
+      output_spring_N_per_mm: 3.266266928859044
+      output_spring_hat: 1.0
+      penal: 3.0
+      port_width_mm: 2.0
+      role: local_M3_validation_only_no_production_freeze
+      thickness_mm: 20.0
+      variable_order: compact design mask in yx C order
+      volume_fraction_limit: 0.35
+    arrays:
+      path: milestones/M3/C/project_40x20_beta1_penal3_khat1/arrays_v1.npz
+      sha256: 551eab6e7d103a52bb7da0ef2e06a94b3b9337a5e379fae924f5db84268e2fec
+    profile:
+      path: milestones/M3/C/project_40x20_beta1_penal3_khat1/profile.json
+      sha256: c989f6eefe87c51146bdd90d141da5d80e9fedf39d6bd29ac8ecb71945027144
+    result:
+      path: milestones/M3/C/project_40x20_beta1_penal3_khat1/run_result.json
+      sha256: 29033ec866ba850fc0c394c583227fb4adcaae729a5e6ac3d10943484d502586
+    density_shape:
+    - 20
+    - 40
+    displacement_shape:
+    - 1722
+    final_same_state:
+      J: -0.028896407002667317
+      J_mma: -7.643803942413844
+      LU_count: 1
+      adjoint_residual: 2.2386510682170507e-14
+      constraint: -1.4905745970850148e-08
+      q: 0.028896407002667317
+      state_residual: 2.1582224504426107e-14
+      u_in: 0.26821738191373273
+      v_design: 0.3499999947829889
+      v_total: 0.3499999947829889
+    updates: 200
+    analysis_count: 201
+    state_residual_max: 2.444648755053584e-14
+    adjoint_residual_max: 2.8205750171974516e-14
+    final_constraint_excess: 0
+    converged: false
+    stop_reason: max_iterations
+  - case_id: project_40x20_beta4_penal2_khat1
+    source_profile:
+      E_scale_MPa: 1.0
+      Emin_MPa: 0.001
+      J_scale_mm: 0.0037803699859865966
+      beta: 4.0
+      eta: 0.5
+      filter_radius_mm: 3.0
+      formulation: plane_strain
+      height_mm: 40.0
+      input_force_N_per_half: 1.0
+      input_spring_N_per_mm: 3.266266928859044
+      k_ref_N_per_mm: 3.266266928859044
+      length_mm: 80.0
+      name: project_40x20_beta4_penal2_khat1
+      nelx: 40
+      nely: 20
+      nu: 0.3
+      output_spring_N_per_mm: 3.266266928859044
+      output_spring_hat: 1.0
+      penal: 2.0
+      port_width_mm: 2.0
+      role: local_M3_validation_only_no_production_freeze
+      thickness_mm: 20.0
+      variable_order: compact design mask in yx C order
+      volume_fraction_limit: 0.35
+    arrays:
+      path: milestones/M3/C/project_40x20_beta4_penal2_khat1/arrays_v1.npz
+      sha256: d950a41c69c8a0c678539a034dff29ecf10055b11d64936651a7692d5712211b
+    profile:
+      path: milestones/M3/C/project_40x20_beta4_penal2_khat1/profile.json
+      sha256: 464f5b1b6b79b3c9bfa33a3701840ed5a4180748e9e6c4c99de0349ad95e7b65
+    result:
+      path: milestones/M3/C/project_40x20_beta4_penal2_khat1/run_result.json
+      sha256: 2b86c5c6df7505a107c2de555520609526307cc1fe70ef0e4f59023384a95149
+    density_shape:
+    - 20
+    - 40
+    displacement_shape:
+    - 1722
+    final_same_state:
+      J: -0.032614174995762066
+      J_mma: -8.627244189499736
+      LU_count: 1
+      adjoint_residual: 2.4477981553670522e-14
+      constraint: -4.7389252522123115e-09
+      q: 0.032614174995762066
+      state_residual: 2.484001029312671e-14
+      u_in: 0.2655301916708256
+      v_design: 0.34999999834137613
+      v_total: 0.34999999834137613
+    updates: 200
+    analysis_count: 201
+    state_residual_max: 2.86876917978891e-14
+    adjoint_residual_max: 3.0449164329856645e-14
+    final_constraint_excess: 0
+    converged: false
+    stop_reason: max_iterations
+  - case_id: project_40x20_beta4_penal3_khat1
+    source_profile:
+      E_scale_MPa: 1.0
+      Emin_MPa: 0.001
+      J_scale_mm: 0.0037803699859865966
+      beta: 4.0
+      eta: 0.5
+      filter_radius_mm: 3.0
+      formulation: plane_strain
+      height_mm: 40.0
+      input_force_N_per_half: 1.0
+      input_spring_N_per_mm: 3.266266928859044
+      k_ref_N_per_mm: 3.266266928859044
+      length_mm: 80.0
+      name: project_40x20_beta4_penal3_khat1
+      nelx: 40
+      nely: 20
+      nu: 0.3
+      output_spring_N_per_mm: 3.266266928859044
+      output_spring_hat: 1.0
+      penal: 3.0
+      port_width_mm: 2.0
+      role: local_M3_validation_only_no_production_freeze
+      thickness_mm: 20.0
+      variable_order: compact design mask in yx C order
+      volume_fraction_limit: 0.35
+    arrays:
+      path: milestones/M3/C/project_40x20_beta4_penal3_khat1/arrays_v1.npz
+      sha256: 4a7c3347d077660b92eed3a0f49da97abc3f6fff33620f7d81df91d0f5cdb242
+    profile:
+      path: milestones/M3/C/project_40x20_beta4_penal3_khat1/profile.json
+      sha256: a33f2f202e25ef01a7f8940b6b51afea7867298f74d0a836987d0707ec1d655e
+    result:
+      path: milestones/M3/C/project_40x20_beta4_penal3_khat1/run_result.json
+      sha256: 71a4583774a81b7de5f41983e0c6db0c8f088ce1508b4547129b80157c6478ca
+    density_shape:
+    - 20
+    - 40
+    displacement_shape:
+    - 1722
+    final_same_state:
+      J: -0.031636470550501256
+      J_mma: -8.368617534202755
+      LU_count: 1
+      adjoint_residual: 2.6869149819361876e-14
+      constraint: -1.4446769669440584e-08
+      q: 0.031636470550501256
+      state_residual: 2.4619615577413966e-14
+      u_in: 0.26692601299135593
+      v_design: 0.3499999949436306
+      v_total: 0.3499999949436306
+    updates: 200
+    analysis_count: 201
+    state_residual_max: 2.8108031203532924e-14
+    adjoint_residual_max: 3.0325602661984895e-14
+    final_constraint_excess: 0
+    converged: false
+    stop_reason: max_iterations
+  - case_id: project_40x20_beta8_penal2_khat1
+    source_profile:
+      E_scale_MPa: 1.0
+      Emin_MPa: 0.001
+      J_scale_mm: 0.0037803699859865966
+      beta: 8.0
+      eta: 0.5
+      filter_radius_mm: 3.0
+      formulation: plane_strain
+      height_mm: 40.0
+      input_force_N_per_half: 1.0
+      input_spring_N_per_mm: 3.266266928859044
+      k_ref_N_per_mm: 3.266266928859044
+      length_mm: 80.0
+      name: project_40x20_beta8_penal2_khat1
+      nelx: 40
+      nely: 20
+      nu: 0.3
+      output_spring_N_per_mm: 3.266266928859044
+      output_spring_hat: 1.0
+      penal: 2.0
+      port_width_mm: 2.0
+      role: local_M3_validation_only_no_production_freeze
+      thickness_mm: 20.0
+      variable_order: compact design mask in yx C order
+      volume_fraction_limit: 0.35
+    arrays:
+      path: milestones/M3/C/project_40x20_beta8_penal2_khat1/arrays_v1.npz
+      sha256: 190fce305ba6295004841df86697943502dbf1a1713335c1ef0b89f265e8c757
+    profile:
+      path: milestones/M3/C/project_40x20_beta8_penal2_khat1/profile.json
+      sha256: fd4d02aa838c148c3f8a51cf8aa17529615054e7b36b44af7dded9c79adccfb2
+    result:
+      path: milestones/M3/C/project_40x20_beta8_penal2_khat1/run_result.json
+      sha256: d18dfb64f837a2b942c68a401031eaf3979ee00fdae9a8e3a12a5958fa5b1639
+    density_shape:
+    - 20
+    - 40
+    displacement_shape:
+    - 1722
+    final_same_state:
+      J: -0.033925213393923626
+      J_mma: -8.974045799665257
+      LU_count: 1
+      adjoint_residual: 2.4925471244757635e-14
+      constraint: 3.9700827070277e-09
+      q: 0.033925213393923626
+      state_residual: 2.4947947021610183e-14
+      u_in: 0.2639988392453827
+      v_design: 0.3500000013895289
+      v_total: 0.3500000013895289
+    updates: 200
+    analysis_count: 201
+    state_residual_max: 3.037904143674018e-14
+    adjoint_residual_max: 3.124706831642184e-14
+    final_constraint_excess: 1.3895289363574648e-09
+    converged: false
+    stop_reason: max_iterations
+  - case_id: project_40x20_beta8_penal3_khat1
+    source_profile:
+      E_scale_MPa: 1.0
+      Emin_MPa: 0.001
+      J_scale_mm: 0.0037803699859865966
+      beta: 8.0
+      eta: 0.5
+      filter_radius_mm: 3.0
+      formulation: plane_strain
+      height_mm: 40.0
+      input_force_N_per_half: 1.0
+      input_spring_N_per_mm: 3.266266928859044
+      k_ref_N_per_mm: 3.266266928859044
+      length_mm: 80.0
+      name: project_40x20_beta8_penal3_khat1
+      nelx: 40
+      nely: 20
+      nu: 0.3
+      output_spring_N_per_mm: 3.266266928859044
+      output_spring_hat: 1.0
+      penal: 3.0
+      port_width_mm: 2.0
+      role: local_M3_validation_only_no_production_freeze
+      thickness_mm: 20.0
+      variable_order: compact design mask in yx C order
+      volume_fraction_limit: 0.35
+    arrays:
+      path: milestones/M3/C/project_40x20_beta8_penal3_khat1/arrays_v1.npz
+      sha256: bdeecc75f4881baa75c950d9d36b17b8991bd38b342c71a9ab8a45658c587f14
+    profile:
+      path: milestones/M3/C/project_40x20_beta8_penal3_khat1/profile.json
+      sha256: c1642d7cd9a8338925ef8e7239a534fed335942691cfa7a29a41c1189b69d6bb
+    result:
+      path: milestones/M3/C/project_40x20_beta8_penal3_khat1/run_result.json
+      sha256: d51dc58adc4e65de1742022d3a1c7282a10ccb19ffeee27adfbf390e02bc357f
+    density_shape:
+    - 20
+    - 40
+    displacement_shape:
+    - 1722
+    final_same_state:
+      J: -0.03034638466317201
+      J_mma: -8.027358373826535
+      LU_count: 1
+      adjoint_residual: 2.5661785928887744e-14
+      constraint: -1.8321703376678045e-08
+      q: 0.03034638466317201
+      state_residual: 2.5819439967421686e-14
+      u_in: 0.2597674530230719
+      v_design: 0.3499999935874038
+      v_total: 0.3499999935874038
+    updates: 200
+    analysis_count: 201
+    state_residual_max: 3.006097063731199e-14
+    adjoint_residual_max: 2.9673472824727124e-14
+    final_constraint_excess: 0
+    converged: false
+    stop_reason: max_iterations
+  - case_id: project_160x80_beta4_penal3_khat1
+    source_profile:
+      E_scale_MPa: 1.0
+      Emin_MPa: 0.001
+      J_scale_mm: 0.0037803699859865966
+      beta: 4.0
+      eta: 0.5
+      filter_radius_mm: 3.0
+      formulation: plane_strain
+      height_mm: 40.0
+      input_force_N_per_half: 1.0
+      input_spring_N_per_mm: 3.266266928859044
+      k_ref_N_per_mm: 3.266266928859044
+      length_mm: 80.0
+      name: project_160x80_beta4_penal3_khat1
+      nelx: 160
+      nely: 80
+      nu: 0.3
+      output_spring_N_per_mm: 3.266266928859044
+      output_spring_hat: 1.0
+      penal: 3.0
+      port_width_mm: 2.0
+      role: local_M3_validation_only_no_production_freeze
+      thickness_mm: 20.0
+      variable_order: compact design mask in yx C order
+      volume_fraction_limit: 0.35
+    arrays:
+      path: milestones/M3/C/project_160x80_beta4_penal3_khat1/arrays_v1.npz
+      sha256: 5418510905fdbdc54c15169b6d1c02e24e5e9a96afda6c178eff9a2226361233
+    profile:
+      path: milestones/M3/C/project_160x80_beta4_penal3_khat1/profile.json
+      sha256: e44a3dd3cc0f6907e321b1abacc331d186d7b94255216cdf0f7fb13202adece4
+    result:
+      path: milestones/M3/C/project_160x80_beta4_penal3_khat1/run_result.json
+      sha256: 7aec88d464469df1b21807dfd5ef44ec2e951173d3e0eb84172dc2f6c5f1b6b2
+    density_shape:
+    - 80
+    - 160
+    displacement_shape:
+    - 26082
+    final_same_state:
+      J: -0.03175583777092838
+      J_mma: -8.400193073335062
+      LU_count: 1
+      adjoint_residual: 1.2224409519442394e-13
+      constraint: -1.4226349035473262e-06
+      q: 0.03175583777092838
+      state_residual: 1.4130152892438112e-13
+      u_in: 0.2697549885369629
+      v_design: 0.34999950207778374
+      v_total: 0.34999950207778374
+    updates: 200
+    analysis_count: 201
+    state_residual_max: 1.5044107808150678e-13
+    adjoint_residual_max: 1.2877175763430084e-13
+    final_constraint_excess: 0
+    converged: false
+    stop_reason: max_iterations
+project_profile:
+  inherited_FEM_profile: project_inverter_v1
+  formulation: plane_strain
+  nu: 0.3
+  length_mm: 80.0
+  half_height_mm: 40.0
+  thickness_mm: 20.0
+  production_mesh:
+  - 160
+  - 80
+  integration: full_2x2_gauss
+  physical_port_width_mm: 2.0
+  E_scale_MPa: 1.0
+  C_ref_mm_per_N: 0.3061599133752718
+  k_ref_N_per_mm: 3.266266928859044
+  material: E=Emin+(Escale-Emin)*rho_physical**p
+validation_parameters_only:
+  role: local_M3_validation_not_production_defaults
+  inherited_M2:
+    role: M2_validation_fixture_only_never_production_defaults
+    input_total_force_N_per_half: 1.0
+    input_spring_hat: 1.0
+    input_spring_N_per_mm_per_half: 3.266266928859044
+    output_spring_hat_primary: 1.0
+    output_spring_hat_diagnostics:
+    - 0.1
+    - 10.0
+    Emin_over_Escale: 0.001
+    penal: 3.0
+    filter_radius_mm: 3.0
+    projection_eta: 0.5
+    projection_beta: 4.0
+    local_projection_betas:
+    - 1.0
+    - 4.0
+    - 8.0
+    mirror_rule: 两个半模型各1N，各有独立镜像秩一弹簧；不合并为跨端口弹簧
+  fixed_matrix: 40x20 beta={1,4,8} x p={2,3}; 160x80 beta4 p3
+  volume_fraction_limit: 0.35
+production_unfrozen:
+  input_total_force_N_per_half: null
+  input_spring_hat: null
+  input_spring_N_per_mm_per_half: null
+  filter_length_physical_mm: null
+  physical_min_feature_mm: null
+  volume_fraction: null
+  candidate_generation_policy: null
+  policy: 生产入口遇空值须拒绝，不从verification_parameters回退；M2不实现候选生成
+evidence_manifests:
+  milestones/M3/entry_execution_v1/manifest_v1.json: e6cc2e1199fe7bf7c40bc5868d3b5e732ac7de8de389d04f580dd692f3fe77c1
+  milestones/M3/entry_review_v1/manifest_v1.json: 664a92ceffe58fbf1717addb9517b7d74d3272be6875ba867d15babd8e865426
+  milestones/M3/contract_review_v1/manifest_v1.json: 06d3fd772fcbd45c72fdbadedd25780ff9743ae30082af867b0bab0a5a6c0334
+  milestones/M3/resign_v1/manifest_v1.json: 79ac7e73dfcf2b9eb21ade8b83290c719afec7869f205288d941bd9e61a25867
+  milestones/M3/A/manifest_v1.json: 0442744d4804b848b447ac75aa470ca47bacd0790bdce28b0cb6be3d13bf3abe
+  milestones/M3/reference/manifest_v1.json: d733f96e3580d559209d63f1a0ed969b8c36d422064c24e4eff30a741e68b7ba
+  milestones/M3/B/manifest_v1.json: 1e2a7f8dbf9bd9acb91e8e8a8a8ef2f0688794ffa4232fa3398e9a98dd35c302
+  milestones/M3/reviews/B/manifest_v1.json: 66a44181a380eec198b4e5411f42809062fafc1c83f083b286b915f8fc42de9f
+  milestones/M3/visual_addendum_v1/manifest_v1.json: 5691f8b8149da16dbf71ec57cb1b09c76503ddd7b06833db346892e0fe1d2573
+  milestones/M3/development_gate_fix_v1/manifest_v1.json: 53c2ab7f88b4f724827ae570e1c2eedb03bedfc42414658aec077a3b3d35d239
+  milestones/M3/reviews/C_entry_guard_v1/manifest_v1.json: 06708e9408c0867e0ea6b63270cee0f6903ba6526671dc72c5d66266c2ec453c
+  milestones/M3/C/manifest_v1.json: 9de6b974ad5eb62ff8c81354060aa57530608ce8a6608ca9a88bec462ce95a08
+  milestones/M3/closure_checks_v1/manifest_v1.json: 2ebaea360d0bb44b6dfa8a3b07286654aab409204c04f65d34e78c7e22d80485
+M4_requires: accepted M3 closure, resolved user scientific definitions and independently
+  reviewed M4 contract
+non_goals:
+- production_parameter_freeze
+- geometry_qualification
+- candidate_generation
+- diversity_claims
+- HF
+- M5
+- public_release

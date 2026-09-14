@@ -1,0 +1,21 @@
+................................................F....................... [ 92%]
+......                                                                   [100%]
+================================== FAILURES ===================================
+_______ test_height_split_does_not_change_same_material_series_response _______
+
+    def test_height_split_does_not_change_same_material_series_response():
+        a = evaluate(**parameters(H1=0.5, H2=1.5))
+        b = evaluate(**parameters(H1=1.25, H2=0.75))
+        assert a["finite_gamma"] == b["finite_gamma"]
+>       assert a["hard_contact"] == b["hard_contact"]
+E       AssertionError: assert {'force_N': '...mm': '0', ...} == {'force_N': '...mm': '0', ...}
+E         
+E         Omitting 10 identical items, use -vv to show
+E         Differing items:
+E         {'solid_shortening_mm': '0.0312500'} != {'solid_shortening_mm': '0.03125000'}
+E         Use -v to get more diff
+
+tests\test_hf4_normal_reference.py:112: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_hf4_normal_reference.py::test_height_split_does_not_change_same_material_series_response
+1 failed, 77 passed in 2.85s

@@ -1,0 +1,44 @@
+{
+  "schema_version": "hf-task-1.0",
+  "task_id": "hf1_inverter_linear_interface_smoke_v1_hf3_unit_reference",
+  "case_family": "inverter",
+  "purpose": "linear_interface_smoke_only",
+  "parameter_origin": "authorized_pilot_not_research_task",
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain"
+  },
+  "input": {
+    "tag": "input",
+    "displacement_mm": 1.0
+  },
+  "output": {
+    "tag": "output",
+    "spring_N_per_mm": 0.0
+  },
+  "constraints": [
+    {
+      "tag": "support",
+      "components": [
+        0,
+        1
+      ]
+    },
+    {
+      "tag": "symmetry",
+      "components": [
+        1
+      ]
+    }
+  ],
+  "support_selection": "solid_incident_nodes_only",
+  "input_auxiliary_spring_N_per_mm": 0.0,
+  "workpiece": null,
+  "third_medium": null,
+  "qualification_criteria": {
+    "max_design_volume_fraction": null,
+    "min_feature_mm": null
+  },
+  "reference_state": "undeformed"
+}

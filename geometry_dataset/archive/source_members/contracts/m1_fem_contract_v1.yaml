@@ -1,0 +1,186 @@
+schema_version: "1.0"
+contract_id: m1_fem_contract_v1
+milestone: M1
+title: Q4 内核与端口物理合同
+language: zh-CN
+status: active
+signed_at_utc: "2026-09-04T11:43:31Z"
+signed_from_transition_commit: 63155bfcf589ecc187c0be84f1ad1aced5825d8e
+
+depends_on:
+  m0_implementation:
+    commit: b7be0f8ff1d8639ea24b48117ee5179310bd722e
+    tree: 9e60b7ad4a233b358c9c8f58f5a353463d4da369
+  m0_closed_evidence:
+    decision_record:
+      path: milestones/M0/decision_record.yaml
+      sha256: 888a87ee3e6fb21bb7e489fba926d7833849a7f23751b83802ef386f242f752f
+    implementation_manifest:
+      path: milestones/M0/artifacts_manifest.json
+      sha256: 5c9d300abadb9c3647e01ce67a50f8a5d7381c7a136bc0c2c498a78d115d16cc
+    report_manifest:
+      path: milestones/M0/report_assets_manifest.json
+      sha256: 7fd43839b3191d223c5201eb33484d2b2f9aafcf7061f6a243b64c012cf787ea
+    benchmark_contract:
+      path: contracts/benchmark_v1.yaml
+      canonical_fingerprint: 42877d24b4f4be386d0fdac83d51df96d69e76c57ee10686af6d1289a8248483
+      file_sha256: 1a09b18154bfa5b5e5d691921a4fbe560574a638dcfd828fc25f6723c543cf14
+  transition_addenda:
+    commit: 63155bfcf589ecc187c0be84f1ad1aced5825d8e
+    manifest:
+      path: milestones/M0/addenda/addenda_manifest_v1.json
+      sha256: 0bf370beeb674951bd5534ce1e44b4447e83a8f2918d3a86b4c79e72ab5d79d9
+    A001_semantics:
+      path: milestones/M0/addenda/A001_auto_reference_semantics_v1.yaml
+      sha256: 7ecc58ae13adff9b6bad0337e8e695cc60450d1bd811a93c4f292e76814b39aa
+    A001_metrics:
+      path: milestones/M0/addenda/A001_reproduction_metrics_v1.json
+      sha256: 635973b0766852cf1c3d73d2da2770b5468550c4aad221088eb9b24eef05127a
+    A002_metadata:
+      path: milestones/M0/addenda/A002_auto_gradient_reference_v1.json
+      sha256: 7f6fcc1e0cce7bd7d863131f9ea54340b4403b9372e43f719a86d36db35886ae
+    A002_arrays:
+      path: milestones/M0/addenda/A002_auto_gradient_reference_v1.npz
+      sha256: 968d8421ded36847ce407d7036c609619e52029722934e6ffa7bcb33df361509
+    A003_qualification:
+      path: milestones/M0/addenda/A003_notebook_embedded_output_qualification_v1.md
+      sha256: e2b705f41cb4ad5616e6ee8711876443b9ee0f494852caaf19c261c4956a54ce
+
+scope:
+  overall_goal: 纯 NumPy/SciPy Q4 内核、约束求解、端口物理、反力与半全模型验证
+  milestone_closure_authorized: false
+  currently_authorized_subgate: solid
+  currently_authorized_microgates: [q4, d11, edof, assembly, auto_bc_springs, solid_solve]
+  authorization_stops_after_solid_result: true
+
+units:
+  length: arbitrary_consistent_for_auto_compat
+  force: arbitrary_consistent_for_auto_compat
+  stiffness: force_per_length
+  project_production_units_inherited_from_benchmark: {length: mm, force: N, stress: MPa}
+
+q4:
+  api: "ke_q4(E, nu, hx, hy, t, formulation)"
+  geometry_arguments_must_remain_separate: [hx, hy]
+  canonical_local_node_order: [BL, BR, TR, TL]
+  dof_order_per_node: [ux, uy]
+  integration: full_2x2_gauss
+  stiffness_includes_physical_thickness: true
+  post_assembly_symmetrization_forbidden: true
+  implemented_formulations_required: [plane_stress, plane_strain]
+
+numbering_D11:
+  project:
+    axis_y: upward
+    node_id: "n_P(ix,iy)=iy*(nelx+1)+ix"
+    element_id: "e_P(ix,iy)=iy*nelx+ix"
+    storage: y_major_x_fast
+  auto:
+    axis_y: downward
+    node_id: "n_A(ix,iy)=ix*(nely+1)+iy"
+    element_id: "e_A(ix,iy)=iy+ix*nely"
+    storage: x_major_y_fast
+  index_pairing: "n_A(ix,iy) maps to n_P(ix,iy); equal integer iy represents a physical y reflection"
+  component_transform: [[1.0, 0.0], [0.0, -1.0]]
+  forward:
+    displacement: "u_P=T*u_A"
+    force: "f_P=T*f_A"
+    stiffness: "K_P=T*K_A*T^T"
+  inverse:
+    displacement: "u_A=T^T*u_P"
+    force: "f_A=T^T*f_P"
+  required_invariants:
+    - node_and_dof_bijection
+    - exact_vector_roundtrip
+    - "T^T*T=I"
+    - "f_P^T*u_P=f_A^T*u_A"
+
+direction_vectors:
+  normalization_policy: reject_non_unit_do_not_renormalize
+  norm: euclidean
+  absolute_tolerance: 1.0e-12
+  inverter_input: [1.0, 0.0]
+  inverter_output: [-1.0, 0.0]
+
+formulation_profiles:
+  auto_compat_v1:
+    purpose: verification_against_frozen_AuTO
+    status: frozen
+    formulation: plane_stress
+    q4_reference: top88_analytic_unit_square
+    thickness: 1.0
+    load: single_input_x_dof_force
+    springs: two_diagonal_point_springs
+    material_interpolation: "Emin+(Emax-Emin)*(rho+0.01)^penal"
+    project_output_direction: [-1.0, 0.0]
+    metric_relation: "q_project=-J_auto"
+  project_production:
+    purpose: low_fidelity_candidate_generation
+    status: provisional
+    initial_candidate: standard_plane_strain
+    decision_due_at: M1_closure
+    candidates:
+      - standard_plane_strain
+      - selective_reduced_integration
+      - b_bar
+      - mixed_u_p
+      - moderate_nu_surrogate
+    minimum_implemented_now: [plane_stress, standard_plane_strain]
+
+solid_subgate:
+  state: solid
+  density: 1.0
+  mesh: {nelx: 40, nely: 20, hx: 1.0, hy: 1.0, thickness: 1.0}
+  material: {Emax: 1.0, Emin: 0.001, nu: 0.3, penal: 3.0, density_shift: 0.01}
+  effective_E: 1.0302706990000001
+  auto_dofs: {ndof: 1722, fixed_count: 45, free_count: 1677, input_x: 40, output_x: 1720}
+  project_dofs_after_D11: {input_x: 1640, output_x: 1720}
+  frozen_reference:
+    displacement: reference/auto_inverter_40x20/snapshots/solid/u.npy
+    u_in_x: 4.678865334489868
+    u_out_x: 1.0019820252752838
+    J_auto: 1.0019820252752838
+    q_project: -1.0019820252752838
+  six_microgates:
+    - q4
+    - d11
+    - edof
+    - assembly
+    - auto_bc_springs
+    - solid_solve
+  acceptance:
+    q4_top88_relative_frobenius_max: 1.0e-12
+    q4_exact_rigid_body_mode_count: 3
+    dense_sparse_relative_frobenius_max: 1.0e-10
+    displacement_relative_l2_max: 1.0e-9
+    free_dof_residual_relative_max: 1.0e-11
+    u_in_abs_error_max: 5.0e-10
+    u_out_abs_error_max: 5.0e-10
+    J_auto_abs_error_max: 5.0e-10
+
+blocked_until_separate_authorization:
+  density_states: [uniform_vf, random_seed0, final]
+  m1_work:
+    - finite_width_project_ports
+    - multi_node_rank_one_springs
+    - reactions_and_moment_balance
+    - half_full_model
+    - port_convergence
+    - locking_experiment
+    - production_formulation_freeze
+  later_milestones:
+    - density_filtering
+    - projection
+    - production_SIMP_chain
+    - adjoint
+    - MMA_or_candidate_generation
+    - high_fidelity_evaluation
+
+solid_pass_does_not_prove:
+  - nonuniform_density_element_mapping
+  - project_finite_width_port_physics
+  - multi_node_rank_one_spring
+  - reactions_or_global_moment_balance
+  - half_full_model_scaling
+  - plane_strain_locking_behavior
+  - filters_projection_adjoint_or_optimizer

@@ -1,0 +1,1329 @@
+{
+  "schema_version": "hf-project-result-1.0",
+  "evaluation_id": "9997cdfa-2f61-4448-8910-cc090774b6d0",
+  "created_at_utc": "2026-09-14T00:05:33.651322+00:00",
+  "scope": "HF-3 modeled-half average-displacement production path; independent precision validation is separate",
+  "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+  "geometry_descriptor_sha256": "a7a2f12f16ee54099ecf4d3747ce38f4c7bf49732a73fce4074cd79b2ded6b02",
+  "geometry_file_sha256": "1aad84d50119d5d3c4d2b75c782d6b5d1466895e7df7b4496fde1e61adb7355f",
+  "task_id": "hf3_gripper_pilot_v1_bridge_d_1e-03",
+  "task_sha256": "8baa3e14a6d98d1243071eb43cb54982e6c7db8dadc6cbcc0f8cb7bf39842a87",
+  "solver_id": "hf3_bridge_gripper_d_1e-03",
+  "solver_sha256": "12f47a7407f8c0af145d25f628a9d1406417246405cf301d76564c51fa063fa3",
+  "implementation": {
+    "package_version": "0.3.0",
+    "source_sha256": "9104789cb567681bbbe17b9f145e127be17cfa6113b045972aace0ccf1c99a01",
+    "kernel_version": "p26_q1_incremental_piola_huhu_v3",
+    "python": "3.13.6",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "jax": "0.11.0",
+      "jaxlib": "0.11.0",
+      "matplotlib": "3.10.9"
+    }
+  },
+  "readability": {
+    "status": "pass"
+  },
+  "qualification": {
+    "status": "pending",
+    "measurements": {
+      "solid_cells": 1086,
+      "design_cells": 2960,
+      "design_solid_cells": 1046,
+      "passive_solid_cells": 40,
+      "passive_void_cells": 200,
+      "solid_area_mm2": 1086.0,
+      "solid_volume_mm3": 21720.0,
+      "design_area_mm2": 2960.0,
+      "design_solid_area_mm2": 1046.0,
+      "design_volume_fraction": 0.3533783783783784,
+      "envelope_volume_fraction": 0.339375,
+      "components_4": 1,
+      "components_8": 1,
+      "local_diagonal_only_patterns": 0,
+      "diagonal_pattern_lower_left_cells_yx": [],
+      "min_feature_mm": null,
+      "common_support_port_component_ids_4": [
+        1
+      ]
+    },
+    "criteria": {
+      "max_design_volume_fraction": null,
+      "min_feature_mm": null
+    },
+    "checks": {
+      "shared_edge_connectivity": {
+        "status": "pass",
+        "components": 1,
+        "requirement": "one shared-edge-connected mechanism body; separate workpieces are not part of solid"
+      },
+      "support_attachment": {
+        "status": "pass",
+        "requirement": "at least two attached distinct nodes for interface smoke only"
+      },
+      "input_attachment": {
+        "status": "pass",
+        "requirement": "all original weighted port nodes attached to solid"
+      },
+      "output_attachment": {
+        "status": "pass",
+        "requirement": "all original weighted port nodes attached to solid"
+      },
+      "port_support_component_link": {
+        "status": "pass"
+      },
+      "design_volume_fraction": {
+        "status": "pending",
+        "value": 0.3533783783783784,
+        "maximum": null
+      },
+      "min_feature": {
+        "status": "pending",
+        "minimum_mm": null,
+        "reason": "No validated minimum-feature measurement in HF-1; connectivity is not manufacturing qualification"
+      }
+    },
+    "regions": {
+      "support": {
+        "selected_node_count": 9,
+        "attached_node_count": 3,
+        "selected_nodes": [
+          0,
+          81,
+          162,
+          243,
+          324,
+          405,
+          486,
+          567,
+          648
+        ],
+        "attached_nodes": [
+          486,
+          567,
+          648
+        ],
+        "component_ids_4": [
+          1
+        ]
+      },
+      "input": {
+        "selected_node_count": 3,
+        "attached_node_count": 3,
+        "selected_nodes": [
+          3078,
+          3159,
+          3240
+        ],
+        "attached_nodes": [
+          3078,
+          3159,
+          3240
+        ],
+        "component_ids_4": [
+          1
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ]
+      },
+      "output": {
+        "selected_node_count": 3,
+        "attached_node_count": 3,
+        "selected_nodes": [
+          2348,
+          2429,
+          2510
+        ],
+        "attached_nodes": [
+          2348,
+          2429,
+          2510
+        ],
+        "component_ids_4": [
+          1
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ]
+      }
+    }
+  },
+  "numerics": {
+    "status": "not_run",
+    "target_reached": false,
+    "failure_stage": null,
+    "reason": null
+  },
+  "functionality": {
+    "status": "not_evaluated",
+    "reason": "No research functionality thresholds frozen for this pilot"
+  },
+  "independent_precision": {
+    "status": "not_evaluated",
+    "reason": "Production completion does not replace independent high-precision acceptance"
+  },
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "metrics_at_target": null,
+  "target_metrics": null,
+  "last_accepted_state": null,
+  "path": {
+    "kind": "average_displacement",
+    "model_file": "model.npz",
+    "arrays_file": null,
+    "state_index_file": "steps/index.json",
+    "accepted_step_count": 0,
+    "original_targets_reached": 0,
+    "accepted_steps": [],
+    "targets_mm": [
+      0.001
+    ]
+  },
+  "signs": {
+    "R_input": "actuator generalized force ON modeled structure",
+    "spring_force": "-k_out*b_out*(b_out.T*u) ON modeled structure",
+    "force_energy_extent": "modeled lower half; no implicit factor of two",
+    "reference_directions": "fixed normalized reference-arclength port weights"
+  },
+  "model_extent": {
+    "kind": "lower_half",
+    "symmetry_axis": {
+      "normal": [
+        0.0,
+        1.0
+      ],
+      "offset_mm": 40.0
+    }
+  },
+  "task_config": {
+    "schema_version": "hf-project-task-1.0",
+    "task_id": "hf3_gripper_pilot_v1_bridge_d_1e-03",
+    "case_family": "gripper",
+    "purpose": "hf3_small_displacement_bridge",
+    "parameter_origin": "authorized_pilot_not_research_task",
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain"
+    },
+    "input": {
+      "tag": "input",
+      "control": "average_displacement",
+      "target_mm": 0.001
+    },
+    "output": {
+      "tag": "output",
+      "spring_N_per_mm": 0.0
+    },
+    "constraints": [
+      {
+        "tag": "support",
+        "components": [
+          0,
+          1
+        ]
+      },
+      {
+        "tag": "symmetry",
+        "components": [
+          1
+        ]
+      }
+    ],
+    "support_selection": "solid_incident_nodes_only",
+    "input_auxiliary_spring_N_per_mm": 0.0,
+    "workpiece": null,
+    "third_medium": {
+      "gamma": 1e-06
+    },
+    "qualification_criteria": {
+      "max_design_volume_fraction": null,
+      "min_feature_mm": null
+    },
+    "reference_state": "undeformed",
+    "units": {
+      "length": "mm",
+      "force": "N",
+      "stress": "MPa",
+      "energy": "N mm"
+    },
+    "regularization": {
+      "alpha": 1e-06,
+      "length_mm": 80.0
+    },
+    "background_symmetry": {
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ]
+    },
+    "diagnostic_variant": "none"
+  },
+  "solver_config": {
+    "schema_version": "hf-project-solver-1.0",
+    "solver_id": "hf3_bridge_gripper_d_1e-03",
+    "analysis": "tmc_average_displacement",
+    "targets_mm": [
+      0.001
+    ],
+    "settings": {
+      "tolerance": 1e-09,
+      "constraint_tolerance": 1e-10,
+      "displacement_scale_floor": 1e-06,
+      "force_scale_floor_factor": 1e-08,
+      "max_checks": 25,
+      "max_backtracks": 12,
+      "max_bisections": 4,
+      "armijo_c": 0.0001,
+      "minimum_increment": 6.25e-05,
+      "time_limit_seconds": 294.1707233999623
+    }
+  },
+  "effective_settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 25,
+    "armijo_c": 0.0001,
+    "max_backtracks": 12,
+    "max_bisections": 4,
+    "minimum_increment": 6.25e-05,
+    "time_limit_seconds": 294.1707233999623
+  },
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain",
+    "lambda_s_MPa": 0.5769230769230769,
+    "mu_s_MPa": 0.3846153846153846,
+    "kappa_s_MPa": 0.8333333333333333,
+    "thickness_mm": 20.0,
+    "third_medium_gamma": 1e-06,
+    "alpha": 1e-06,
+    "regularization_length_mm": 80.0,
+    "kr_MPa_mm2": 0.008615384615384613,
+    "kr_material_factor_applied": false
+  },
+  "regions": {
+    "support": {
+      "tag": "support",
+      "points_mm": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          8.0
+        ]
+      ],
+      "components": [
+        0,
+        1
+      ],
+      "selection": "solid_incident_nodes_only",
+      "selected_nodes": [
+        0,
+        81,
+        162,
+        243,
+        324,
+        405,
+        486,
+        567,
+        648
+      ],
+      "attached_nodes": [
+        486,
+        567,
+        648
+      ],
+      "excluded_unattached_nodes": [
+        0,
+        81,
+        162,
+        243,
+        324,
+        405
+      ],
+      "dofs": [
+        972,
+        973,
+        1134,
+        1135,
+        1296,
+        1297
+      ]
+    },
+    "entity_symmetry": {
+      "tag": "symmetry",
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          60.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ],
+      "selection": "solid_incident_nodes_only",
+      "selected_nodes": [
+        3240,
+        3241,
+        3242,
+        3243,
+        3244,
+        3245,
+        3246,
+        3247,
+        3248,
+        3249,
+        3250,
+        3251,
+        3252,
+        3253,
+        3254,
+        3255,
+        3256,
+        3257,
+        3258,
+        3259,
+        3260,
+        3261,
+        3262,
+        3263,
+        3264,
+        3265,
+        3266,
+        3267,
+        3268,
+        3269,
+        3270,
+        3271,
+        3272,
+        3273,
+        3274,
+        3275,
+        3276,
+        3277,
+        3278,
+        3279,
+        3280,
+        3281,
+        3282,
+        3283,
+        3284,
+        3285,
+        3286,
+        3287,
+        3288,
+        3289,
+        3290,
+        3291,
+        3292,
+        3293,
+        3294,
+        3295,
+        3296,
+        3297,
+        3298,
+        3299,
+        3300
+      ],
+      "attached_nodes": [
+        3240,
+        3241,
+        3242,
+        3243,
+        3244,
+        3245,
+        3293,
+        3294,
+        3295,
+        3296,
+        3297,
+        3298,
+        3299,
+        3300
+      ],
+      "excluded_unattached_nodes": [
+        3246,
+        3247,
+        3248,
+        3249,
+        3250,
+        3251,
+        3252,
+        3253,
+        3254,
+        3255,
+        3256,
+        3257,
+        3258,
+        3259,
+        3260,
+        3261,
+        3262,
+        3263,
+        3264,
+        3265,
+        3266,
+        3267,
+        3268,
+        3269,
+        3270,
+        3271,
+        3272,
+        3273,
+        3274,
+        3275,
+        3276,
+        3277,
+        3278,
+        3279,
+        3280,
+        3281,
+        3282,
+        3283,
+        3284,
+        3285,
+        3286,
+        3287,
+        3288,
+        3289,
+        3290,
+        3291,
+        3292
+      ],
+      "dofs": [
+        6481,
+        6483,
+        6485,
+        6487,
+        6489,
+        6491,
+        6587,
+        6589,
+        6591,
+        6593,
+        6595,
+        6597,
+        6599,
+        6601
+      ]
+    },
+    "background_symmetry": {
+      "declared_points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ],
+      "selection": "all_full_domain_nodes_on_segment",
+      "selected_nodes": [
+        3240,
+        3241,
+        3242,
+        3243,
+        3244,
+        3245,
+        3246,
+        3247,
+        3248,
+        3249,
+        3250,
+        3251,
+        3252,
+        3253,
+        3254,
+        3255,
+        3256,
+        3257,
+        3258,
+        3259,
+        3260,
+        3261,
+        3262,
+        3263,
+        3264,
+        3265,
+        3266,
+        3267,
+        3268,
+        3269,
+        3270,
+        3271,
+        3272,
+        3273,
+        3274,
+        3275,
+        3276,
+        3277,
+        3278,
+        3279,
+        3280,
+        3281,
+        3282,
+        3283,
+        3284,
+        3285,
+        3286,
+        3287,
+        3288,
+        3289,
+        3290,
+        3291,
+        3292,
+        3293,
+        3294,
+        3295,
+        3296,
+        3297,
+        3298,
+        3299,
+        3300,
+        3301,
+        3302,
+        3303,
+        3304,
+        3305,
+        3306,
+        3307,
+        3308,
+        3309,
+        3310,
+        3311,
+        3312,
+        3313,
+        3314,
+        3315,
+        3316,
+        3317,
+        3318,
+        3319,
+        3320
+      ],
+      "solid_incident_nodes": [
+        3240,
+        3241,
+        3242,
+        3243,
+        3244,
+        3245,
+        3293,
+        3294,
+        3295,
+        3296,
+        3297,
+        3298,
+        3299,
+        3300
+      ],
+      "medium_only_nodes": [
+        3246,
+        3247,
+        3248,
+        3249,
+        3250,
+        3251,
+        3252,
+        3253,
+        3254,
+        3255,
+        3256,
+        3257,
+        3258,
+        3259,
+        3260,
+        3261,
+        3262,
+        3263,
+        3264,
+        3265,
+        3266,
+        3267,
+        3268,
+        3269,
+        3270,
+        3271,
+        3272,
+        3273,
+        3274,
+        3275,
+        3276,
+        3277,
+        3278,
+        3279,
+        3280,
+        3281,
+        3282,
+        3283,
+        3284,
+        3285,
+        3286,
+        3287,
+        3288,
+        3289,
+        3290,
+        3291,
+        3292,
+        3301,
+        3302,
+        3303,
+        3304,
+        3305,
+        3306,
+        3307,
+        3308,
+        3309,
+        3310,
+        3311,
+        3312,
+        3313,
+        3314,
+        3315,
+        3316,
+        3317,
+        3318,
+        3319,
+        3320
+      ],
+      "dofs": [
+        6481,
+        6483,
+        6485,
+        6487,
+        6489,
+        6491,
+        6493,
+        6495,
+        6497,
+        6499,
+        6501,
+        6503,
+        6505,
+        6507,
+        6509,
+        6511,
+        6513,
+        6515,
+        6517,
+        6519,
+        6521,
+        6523,
+        6525,
+        6527,
+        6529,
+        6531,
+        6533,
+        6535,
+        6537,
+        6539,
+        6541,
+        6543,
+        6545,
+        6547,
+        6549,
+        6551,
+        6553,
+        6555,
+        6557,
+        6559,
+        6561,
+        6563,
+        6565,
+        6567,
+        6569,
+        6571,
+        6573,
+        6575,
+        6577,
+        6579,
+        6581,
+        6583,
+        6585,
+        6587,
+        6589,
+        6591,
+        6593,
+        6595,
+        6597,
+        6599,
+        6601,
+        6603,
+        6605,
+        6607,
+        6609,
+        6611,
+        6613,
+        6615,
+        6617,
+        6619,
+        6621,
+        6623,
+        6625,
+        6627,
+        6629,
+        6631,
+        6633,
+        6635,
+        6637,
+        6639,
+        6641
+      ],
+      "diagnostic_variant": "none"
+    },
+    "units": {
+      "length": "mm",
+      "force": "N",
+      "stress": "MPa",
+      "energy": "N mm"
+    },
+    "ports": {
+      "input": {
+        "tag": "input",
+        "points_mm": [
+          [
+            0.0,
+            38.0
+          ],
+          [
+            0.0,
+            40.0
+          ]
+        ],
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "nodes": [
+          3078,
+          3159,
+          3240
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ],
+        "averaging": "normalized_reference_arclength_trapezoid",
+        "nonzero_dofs": [
+          6156,
+          6318,
+          6480
+        ]
+      },
+      "output": {
+        "tag": "output",
+        "points_mm": [
+          [
+            80.0,
+            28.0
+          ],
+          [
+            80.0,
+            30.0
+          ]
+        ],
+        "direction": [
+          0.0,
+          1.0
+        ],
+        "nodes": [
+          2348,
+          2429,
+          2510
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ],
+        "averaging": "normalized_reference_arclength_trapezoid",
+        "nonzero_dofs": [
+          4697,
+          4859,
+          5021
+        ]
+      }
+    },
+    "intersections": {
+      "support__entity_symmetry": [],
+      "support__background_symmetry": [],
+      "entity_symmetry__background_symmetry": [
+        6481,
+        6483,
+        6485,
+        6487,
+        6489,
+        6491,
+        6587,
+        6589,
+        6591,
+        6593,
+        6595,
+        6597,
+        6599,
+        6601
+      ]
+    },
+    "fixed_dof_sources": {
+      "972": [
+        "support"
+      ],
+      "973": [
+        "support"
+      ],
+      "1134": [
+        "support"
+      ],
+      "1135": [
+        "support"
+      ],
+      "1296": [
+        "support"
+      ],
+      "1297": [
+        "support"
+      ],
+      "6481": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6483": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6485": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6487": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6489": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6491": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6493": [
+        "background_symmetry"
+      ],
+      "6495": [
+        "background_symmetry"
+      ],
+      "6497": [
+        "background_symmetry"
+      ],
+      "6499": [
+        "background_symmetry"
+      ],
+      "6501": [
+        "background_symmetry"
+      ],
+      "6503": [
+        "background_symmetry"
+      ],
+      "6505": [
+        "background_symmetry"
+      ],
+      "6507": [
+        "background_symmetry"
+      ],
+      "6509": [
+        "background_symmetry"
+      ],
+      "6511": [
+        "background_symmetry"
+      ],
+      "6513": [
+        "background_symmetry"
+      ],
+      "6515": [
+        "background_symmetry"
+      ],
+      "6517": [
+        "background_symmetry"
+      ],
+      "6519": [
+        "background_symmetry"
+      ],
+      "6521": [
+        "background_symmetry"
+      ],
+      "6523": [
+        "background_symmetry"
+      ],
+      "6525": [
+        "background_symmetry"
+      ],
+      "6527": [
+        "background_symmetry"
+      ],
+      "6529": [
+        "background_symmetry"
+      ],
+      "6531": [
+        "background_symmetry"
+      ],
+      "6533": [
+        "background_symmetry"
+      ],
+      "6535": [
+        "background_symmetry"
+      ],
+      "6537": [
+        "background_symmetry"
+      ],
+      "6539": [
+        "background_symmetry"
+      ],
+      "6541": [
+        "background_symmetry"
+      ],
+      "6543": [
+        "background_symmetry"
+      ],
+      "6545": [
+        "background_symmetry"
+      ],
+      "6547": [
+        "background_symmetry"
+      ],
+      "6549": [
+        "background_symmetry"
+      ],
+      "6551": [
+        "background_symmetry"
+      ],
+      "6553": [
+        "background_symmetry"
+      ],
+      "6555": [
+        "background_symmetry"
+      ],
+      "6557": [
+        "background_symmetry"
+      ],
+      "6559": [
+        "background_symmetry"
+      ],
+      "6561": [
+        "background_symmetry"
+      ],
+      "6563": [
+        "background_symmetry"
+      ],
+      "6565": [
+        "background_symmetry"
+      ],
+      "6567": [
+        "background_symmetry"
+      ],
+      "6569": [
+        "background_symmetry"
+      ],
+      "6571": [
+        "background_symmetry"
+      ],
+      "6573": [
+        "background_symmetry"
+      ],
+      "6575": [
+        "background_symmetry"
+      ],
+      "6577": [
+        "background_symmetry"
+      ],
+      "6579": [
+        "background_symmetry"
+      ],
+      "6581": [
+        "background_symmetry"
+      ],
+      "6583": [
+        "background_symmetry"
+      ],
+      "6585": [
+        "background_symmetry"
+      ],
+      "6587": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6589": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6591": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6593": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6595": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6597": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6599": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6601": [
+        "entity_symmetry",
+        "background_symmetry"
+      ],
+      "6603": [
+        "background_symmetry"
+      ],
+      "6605": [
+        "background_symmetry"
+      ],
+      "6607": [
+        "background_symmetry"
+      ],
+      "6609": [
+        "background_symmetry"
+      ],
+      "6611": [
+        "background_symmetry"
+      ],
+      "6613": [
+        "background_symmetry"
+      ],
+      "6615": [
+        "background_symmetry"
+      ],
+      "6617": [
+        "background_symmetry"
+      ],
+      "6619": [
+        "background_symmetry"
+      ],
+      "6621": [
+        "background_symmetry"
+      ],
+      "6623": [
+        "background_symmetry"
+      ],
+      "6625": [
+        "background_symmetry"
+      ],
+      "6627": [
+        "background_symmetry"
+      ],
+      "6629": [
+        "background_symmetry"
+      ],
+      "6631": [
+        "background_symmetry"
+      ],
+      "6633": [
+        "background_symmetry"
+      ],
+      "6635": [
+        "background_symmetry"
+      ],
+      "6637": [
+        "background_symmetry"
+      ],
+      "6639": [
+        "background_symmetry"
+      ],
+      "6641": [
+        "background_symmetry"
+      ]
+    },
+    "fixed_dofs": [
+      972,
+      973,
+      1134,
+      1135,
+      1296,
+      1297,
+      6481,
+      6483,
+      6485,
+      6487,
+      6489,
+      6491,
+      6493,
+      6495,
+      6497,
+      6499,
+      6501,
+      6503,
+      6505,
+      6507,
+      6509,
+      6511,
+      6513,
+      6515,
+      6517,
+      6519,
+      6521,
+      6523,
+      6525,
+      6527,
+      6529,
+      6531,
+      6533,
+      6535,
+      6537,
+      6539,
+      6541,
+      6543,
+      6545,
+      6547,
+      6549,
+      6551,
+      6553,
+      6555,
+      6557,
+      6559,
+      6561,
+      6563,
+      6565,
+      6567,
+      6569,
+      6571,
+      6573,
+      6575,
+      6577,
+      6579,
+      6581,
+      6583,
+      6585,
+      6587,
+      6589,
+      6591,
+      6593,
+      6595,
+      6597,
+      6599,
+      6601,
+      6603,
+      6605,
+      6607,
+      6609,
+      6611,
+      6613,
+      6615,
+      6617,
+      6619,
+      6621,
+      6623,
+      6625,
+      6627,
+      6629,
+      6631,
+      6633,
+      6635,
+      6637,
+      6639,
+      6641
+    ],
+    "solid_constraint_dofs": [
+      972,
+      973,
+      1134,
+      1135,
+      1296,
+      1297,
+      6481,
+      6483,
+      6485,
+      6487,
+      6489,
+      6491,
+      6587,
+      6589,
+      6591,
+      6593,
+      6595,
+      6597,
+      6599,
+      6601
+    ],
+    "counts": {
+      "cells": 3200,
+      "nodes": 3321,
+      "dofs": 6642,
+      "solid_cells": 1086,
+      "medium_cells": 2114,
+      "solid_incident_nodes": 1337,
+      "fixed_dofs": 87
+    },
+    "background_variant_scope": "main_pilot",
+    "source_full_midline_history": {
+      "policy": "full_midline",
+      "points_mm": [
+        [
+          0,
+          40
+        ],
+        [
+          80,
+          40
+        ]
+      ],
+      "role": "inert provenance; runtime background constraints come only from this task"
+    },
+    "reaction_accounting": "Use merged fixed DOFs once; intersecting tags do not define separate contact forces",
+    "force_energy_extent": "modeled lower half; no automatic doubling"
+  },
+  "force_scale_per_length_N_per_mm": 20.0
+}

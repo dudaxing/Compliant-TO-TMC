@@ -1,0 +1,36 @@
+schema_version: "1.0"
+status: active_m0_structure_only
+
+separation_of_roles:
+  AuTO_reference:
+    purpose: numerical_verification_oracle_for_later_M3
+    is_project_low_fidelity_task: false
+    is_high_fidelity_truth: false
+  project_evaluator:
+    purpose: common_high_fidelity_task_structure
+    values_frozen_in_m0: false
+
+high_fidelity_task:
+  version: null
+  actuation:
+    type: displacement_control
+    value_mm: null
+  input_spring: none
+  target_output_spring_N_per_mm: null
+  material_model: null
+  geometric_nonlinearity: true
+  primary_metric: signed_port_averaged_output_displacement_along_target_direction
+  feasibility:
+    convergence_required: true
+    required_output_direction: true
+    maximum_strain: null
+
+failure_record:
+  required_fields: [status, failure_stage, failure_code, solver_message]
+  failures_consume_budget: true
+  silently_drop_failures: false
+
+freeze_policy:
+  null_means_not_yet_frozen: true
+  fill_from_future_closure_evidence_only: true
+  target_freeze_milestone: M6_or_earlier_as_resigned

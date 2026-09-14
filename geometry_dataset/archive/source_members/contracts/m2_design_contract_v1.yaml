@@ -1,0 +1,204 @@
+schema_version: '1.0'
+contract_id: m2_design_contract_v1
+milestone: M2
+language: zh-CN
+scope: 给定设计，返回带符号端口输出、最小化目标、两种物理体积及完整设计梯度
+authorization:
+  basis: current_user_request_through_M2
+  user_request_text_normalized: '当前M1已经实施完成，请重新全面仔细阅读并深度理解。然后按照：深度解读内容 推进，直到完成M2'
+  referenced_conversation_id: 6a9b6b38-48a8-83ee-8a45-da841a0d8605
+  interpretation: 本轮明确要求完成M2，作为本轮实施范围授权；不冒充用户逐版本签名或过去的逐段批准
+  execution_prerequisites: [E001_pass_and_independent_review, hard_inputs_verified, independent_contract_review]
+  stage_transitions: 按A0、A、B、C顺序；A0通过前禁止设计链；B后和关闭前须独立代理复核；失败停止定位，门槛不后改
+  M3_authorized: false
+hard_inputs:
+  benchmark: contracts/benchmark_v1.1.yaml
+  M1_outputs: contracts/m1_outputs_v1.yaml
+  material_semantics: milestones/M0/addenda/A001_auto_reference_semantics_v1.yaml
+  gradient_metadata: milestones/M0/addenda/A002_auto_gradient_reference_v1.json
+  gradient_arrays: milestones/M0/addenda/A002_auto_gradient_reference_v1.npz
+  hashes_and_code_baseline: milestones/M2/input_record_v1.json
+  E001: milestones/M1/errata/E001/manifest_v1.json
+profiles:
+  project_design_v1:
+    inherited_FEM_profile: project_inverter_v1
+    formulation: plane_strain
+    nu: 0.30
+    length_mm: 80.0
+    half_height_mm: 40.0
+    thickness_mm: 20.0
+    production_mesh: [160, 80]
+    integration: full_2x2_gauss
+    physical_port_width_mm: 2.0
+    E_scale_MPa: 1.0
+    C_ref_mm_per_N: 0.3061599133752718
+    k_ref_N_per_mm: 3.266266928859044
+    material: 'E=Emin+(Escale-Emin)*rho_physical**p'
+  auto_raw_gradient_v1:
+    inherited_FEM_profile: auto_compat_v1
+    states: [solid, uniform_vf, random_seed0]
+    formulation: plane_stress
+    mesh: [40, 20]
+    material: 'E=0.001+0.999*(rho+0.01)**3'
+    geometry_units: original_AuTO_unit_grid_and_unit_thickness
+    input_force: 1.0
+    input_point_spring: 0.1
+    output_point_spring: 0.1
+    raw_density_only: true
+    objective: 'J_auto=u_project[output_x_dof]=-q_project'
+    oracle: dJ_raw_yx
+    excluded_oracle: dJ_to_mma
+    historical_solid_FD: preserve_original_one_sided_1e-5_qualification_not_retested_against_new_central_threshold
+verification_parameters:
+  role: M2_validation_fixture_only_never_production_defaults
+  input_total_force_N_per_half: 1.0
+  input_spring_hat: 1.0
+  input_spring_N_per_mm_per_half: 3.266266928859044
+  output_spring_hat_primary: 1.0
+  output_spring_hat_diagnostics: [0.1, 10.0]
+  Emin_over_Escale: 0.001
+  penal: 3.0
+  filter_radius_mm: 3.0
+  projection_eta: 0.5
+  projection_beta: 4.0
+  local_projection_betas: [1.0, 4.0, 8.0]
+  mirror_rule: 两个半模型各1N，各有独立镜像秩一弹簧；不合并为跨端口弹簧
+production_unfrozen:
+  input_total_force_N_per_half: null
+  input_spring_hat: null
+  input_spring_N_per_mm_per_half: null
+  filter_length_physical_mm: null
+  physical_min_feature_mm: null
+  volume_fraction: null
+  candidate_generation_policy: null
+  policy: 生产入口遇空值须拒绝，不从verification_parameters回退；M2不实现候选生成
+mathematics:
+  storage: bottom_left_origin_y_major_x_fast_shape_nely_nelx_float64
+  mask_partition: Md+Ms+Mv=1_disjoint_binary
+  initial_mask: 'rho0=Md*x+Ms'
+  filter_weight: 'H[e,j]=max(0,r-distance(physical_element_centers[e],physical_element_centers[j]))'
+  filter_boundary: only_in_domain_neighbors_row_normalized_no_padding_no_wrap
+  filter_operator: 'F=diag(1/H.sum(axis=1))*H; rho_filtered=F*rho0'
+  projection: '(tanh(beta*eta)+tanh(beta*(rho_filtered-eta)))/(tanh(beta*eta)+tanh(beta*(1-eta)))'
+  final_mask: 'rho_physical=Md*rho_projected+Ms'
+  volume_design: 'sum(Md*rho_physical)/sum(Md)'
+  volume_total: 'sum(rho_physical)/ne'
+  state: '(Kstruct+kin*bin*bin.T+kout*bout*bout.T)ff*uf=F_in*bin_f'
+  signed_output: 'q=bout.T*u'
+  minimize_objective: 'J=-q; no_abs_no_clipping'
+  adjoint: 'Kff.T*lambda_f=(dJ/du)_f; homogeneous constrained entries'
+  local_density_gradient: 'a=dJ_drho_direct-Eprime*einsum(lambda_e,Ke_unit,u_e)'
+  design_gradient: 'Md*F.T*(Pprime*Md*a)'
+  constant_during_analysis: [ports, force, kin, kout, k_ref, geometry, nu, thickness]
+  backend: SciPy_state_and_transpose_adjoint_same_LU_once_per_design_JAX_x64_transform_VJP
+  no_postassembly_symmetrization: true
+  mixed_validation_only: 'J_test=J/(1 mm)+0.1*v_design; not_scientific_objective'
+stages:
+  A0:
+    task: 显式runtime_benchmark_v1_1视图，仅将已冻结新宽度字段转为旧几何消费者字段，输入不变
+    checks: [inverter_masks_equal, gripper_masks_equal, coordinates_equal, fixed_dofs_equal, port_vectors_equal, solid_no_springs_Cref]
+    width_identity: '2 mm=0.025*80 mm=0.05*40 mm'
+    reference_fixture: contracts/benchmark_v1.yaml
+    first_and_blocking: true
+  A:
+    task: 物理密度过滤、tanh投影、双掩膜、SIMP、两种体积、JAX VJP与显式解析链
+    checks: [constant_filter, rectangular_physical_distances, nonsymmetric_filter_transpose, projection_endpoints_and_derivative, SIMP_endpoints_and_derivative, two_volumes, passive_placeholder_invariance, exact_passive_design_gradient_zero]
+  B:
+    task: 一次LU复用状态与转置伴随、局部敏感度、同材料M1对账、A002三态完整原始梯度及固定方向积
+    independent_review_required: true
+  C:
+    task: 完整链方向差分、160x80生产尺寸集成、原证据核验与关闭
+    objectives: [J, v_design, v_total, J_test]
+    independent_closure_review_required: true
+fixtures:
+  transform_8x6:
+    mesh: [8, 6]
+    hx_mm: 1.25
+    hy_mm: 0.75
+    passive_solid_yx: [[0, 0], [0, 1], [1, 0]]
+    passive_void_yx: [[4, 6], [4, 7], [5, 7]]
+    betas: [1.0, 4.0, 8.0]
+    FD_outputs: [v_design, v_total]
+    no_state_equation: true
+  independent_FE_6x4:
+    mesh: [6, 4]
+    hx_mm: 1.25
+    hy_mm: 0.75
+    thickness_mm: 2.0
+    nu: 0.30
+    formulation: plane_strain
+    fixed: both_dofs_all_x0_nodes
+    input: bottom_right_node_direction_down_force_1
+    output: top_right_node_direction_down
+    input_spring_N_per_mm: 0.7
+    output_spring_N_per_mm: 0.9
+    passive_solid_yx: [[0, 0], [1, 0]]
+    passive_void_yx: [[2, 4], [3, 4]]
+    beta: 4.0
+    local_sensitivity_check:
+      scope: all_24_elements_at_preregistered_base_field
+      scalar_fixed_u_lambda: '-lambda_e.T*(E_e*Ke_unit)*u_e'
+      central_E_step: 1.0e-6
+      denominator: 'max(abs(analytic),abs(FD),1)'
+      u_lambda: fixed_base_state_and_adjoint_no_resolve
+  project_40x20:
+    mesh: [40, 20]
+    output_spring_hats: [0.1, 1.0, 10.0]
+    beta: 4.0
+  project_160x80:
+    mesh: [160, 80]
+    output_spring_hats: [1.0]
+    beta: 4.0
+finite_difference:
+  preregistered_before_M2_implementation: true
+  fixture_output_scope: transform_8x6_only_two_volumes_at_each_beta_FE_and_project_fixtures_all_four_objectives
+  base_field: 'x[iy,ix]=0.45+0.10*sin(2*pi*(ix+0.5)/nelx)*cos(pi*(iy+0.5)/nely)'
+  direction_normalization: L_infinity_1_after_mask_to_design_only
+  directions:
+    uniform: 'ones(nely,nelx)*Md'
+    smooth: '(0.3+sin(pi*(ix+0.5)/nelx)*cos(2*pi*(iy+0.5)/nely))*Md'
+    random: 'numpy.random.default_rng(2026090501).uniform(-1,1,(nely,nelx))*Md'
+  epsilon_schedule: [0.01, 0.003, 0.001, 0.0003, 0.0001, 0.00003, 0.00001, 0.000003, 0.000001]
+  perturbation: centered_actual_x_plus_minus_epsilon_d_no_clipping_all_inside_0_1
+  scales: {J: 1.0, v_design: 1.0, v_total: 1.0, J_test: 1.0}
+  error: 'abs(FD-adjoint)/max(abs(FD),abs(adjoint)) after division by fixed output scale'
+  near_zero: 'if max(abs(FD),abs(adjoint))<=1e-8 use absolute error<=1e-10'
+  acceptance: at_least_two_adjacent_scheduled_steps_pass_for_every_direction_and_objective
+  retain_all_steps_directions_failures: true
+  Taylor_remainder: 'abs(f(x+eps*d)-f(x)-eps*g_dot_d); diagnostic_only_no_new_hard_threshold'
+thresholds:
+  A0_Cref_relative_max: 1.0e-10
+  local_values_absolute_max: 1.0e-12
+  VJP_analytic_relative_max: 1.0e-10
+  passive_density_exact: true
+  passive_x_gradient_exact_zero: true
+  M1_same_material_u_relative_max: 1.0e-10
+  state_free_residual_max: 1.0e-11
+  adjoint_free_residual_max: 1.0e-11
+  residual_denominator: 'max(norm(rhs_free),1)'
+  A002_full_gradient_relative_L2_max: 1.0e-8
+  A002_fixed_direction_relative_max: 1.0e-8
+  local_element_sensitivity_relative_max: 1.0e-8
+  FD_relative_max: 1.0e-6
+  LU_factorizations_per_design: 1
+negative_controls:
+  - replace_filter_transpose_with_forward_detected_on_nonsymmetric_boundary_fixture
+  - omit_initial_mask_detected_by_passive_placeholder_invariance
+  - omit_final_mask_detected_by_passive_physical_density
+  - wrong_adjoint_sign_detected_by_A002
+  - omit_AuTO_density_shift_detected_by_A002
+  - substitute_dJ_to_mma_detected_on_nonuniform_A002_state
+deliverables:
+  - runtime_adapter_and_pure_transform_module
+  - state_adjoint_and_integrated_design_analysis_API
+  - preregistered_tests_and_append_only_reproducible_runners
+  - stage_results_and_full_precision_arrays_and_all_FD_rows
+  - Chinese_stage_and_closure_reports_with_figures
+  - code_commit_environment_fingerprints_input_hashes_manifests_review_records
+visualizations:
+  A: input_filtered_projected_physical_fields_and_passive_design_gradient
+  B: state_adjoint_local_sensitivity_fields_A002_scatter_and_error_maps
+  C: full_design_gradients_all_step_FD_curves_Taylor_remainders
+  display: bottom_left_origin_y_up_x_right_units_legends_explicit
+failure_policy: 首先定位适配、掩膜、过滤转置、符号、材料律、D11、直接密度项；不删失败不调门槛，只有原M1同输入出错才考虑重开
+non_goals: [MMA, optimizer_iterations, candidate_pool, diversity_algorithms, contact, high_fidelity, GPU_solver, matrix_free, general_callback_framework, production_load_freeze, M3]

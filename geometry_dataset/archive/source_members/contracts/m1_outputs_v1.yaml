@@ -1,0 +1,144 @@
+schema_version: "1.0"
+contract_id: m1_outputs_v1
+milestone: M1
+language: zh-CN
+status: frozen_pending_SG006_closure
+source_authorization:
+  path: milestones/M1/authorizations/SG006_M1_closure_v1.yaml
+  sha256: a70f69ef75b73f94eeed8d3af40d85ce78d79414e540e64d8527fa06b5a4e21a
+
+evidence_chain:
+  solid:
+    result: milestones/M1/solid_gate/solid_result_v1.json
+    manifest_sha256: 6165a5a9649dcd6fa7a77625721f30100e2395647210241fdf1bcefeeec16f8a
+  density_states:
+    result: milestones/M1/density_states_gate/density_states_result_v1.json
+    manifest_sha256: 15f16b954b66fef94e71fc5d241859dfb002bd70228d8b51571e47e397a968a2
+  project_ports:
+    result: milestones/M1/project_ports_gate/project_ports_result_v1.json
+    manifest_sha256: 00e76ca42a2b8c00c6dcc6aa93417d8478bed5e8001c9375a52bd6c982888218
+  mechanics:
+    result: milestones/M1/mechanics_gate/mechanics_result_v1.json
+    manifest_sha256: 9093685d121e65e532db79022276b1e629f8be94e6229fd416ec24751b03181c
+  experiments:
+    result: milestones/M1/experiments_gate/experiments_result_v1.json
+    result_sha256: e20fd576e1775d6db682693c333ec0f3266f00012461f348b0ecf90709f0cf19
+    manifest_sha256: bf027640d4534b882e0a0eebf13833ad3a4070428dfb37e2d443e8864c85fefd
+
+kernel:
+  api: "ke_q4(E,nu,hx,hy,t,formulation)"
+  local_node_order: [BL, BR, TR, TL]
+  dof_order_per_node: [ux, uy]
+  integration: full_2x2_gauss
+  thickness_included_exactly_once: true
+  post_assembly_symmetrization: forbidden
+  formulations: [plane_stress, plane_strain]
+  assembly: sparse_COO_to_CSC
+  solver: scipy_splu
+  homogeneous_Dirichlet: reduced_free_free_system
+  reaction_residual: "r=(K_struct+K_spring)u-f_applied"
+
+numbering:
+  project_node_id: "iy*(nelx+1)+ix"
+  project_element_id: "iy*nelx+ix"
+  project_storage: y_major_x_fast
+  auto_node_id: "ix*(nely+1)+iy"
+  auto_element_id: "iy+ix*nely"
+  auto_storage: x_major_y_fast
+  auto_to_project_component_transform: [[1.0, 0.0], [0.0, -1.0]]
+
+auto_compat_v1:
+  role: verification_only
+  formulation: plane_stress
+  material_interpolation: "Emin+(Emax-Emin)*(rho+0.01)^penal"
+  verified_states: [solid, uniform_vf, random_seed0, final]
+  maximum_full_field_relative_L2_error: 4.981600530220604e-13
+  metric_mapping: "q_project=-J_AuTO"
+
+project_ports:
+  physical_width_mm: 2.0
+  quadrature: trapezoidal_tributary_length
+  weights_sum_to_one: true
+  total_force: "f=F*b"
+  averaged_displacement: "q=b^T*u"
+  work_conjugacy: "f^T*u=F*q"
+  ground_spring: "K_s=k*b*b^T"
+  spring_energy: "0.5*k*q^2"
+  directions_must_be_unit_vectors: true
+  non_unit_policy: reject_without_normalization
+
+reaction_and_symmetry:
+  support_reaction: constrained_entries_of_full_residual
+  ground_spring_force_on_structure: "-K_s*u"
+  global_balance: "f_applied+f_spring+R_support=0"
+  half_to_full_displacement_parity: {ux: even, uy: odd}
+  full_model_loads: two_mirrored_half_model_loads
+  full_model_springs: two_independent_mirrored_rank_one_springs
+  full_model_energy_multiplier: 2.0
+
+production_configuration:
+  profile: project_inverter_v1
+  mesh: {nelx: 160, nely: 80}
+  length_mm: 80.0
+  half_height_mm: 40.0
+  thickness_mm: 20.0
+  E_scale_MPa: 1.0
+  formulation: plane_strain
+  integration: full_2x2_gauss
+  nu_LF: 0.30
+  validated_contract_range: [0.0, 0.35]
+  validated_range_note: 仅nu=0.30为正式生产点；0至0.35是允许范围，不声称逐点实验
+  physical_port_width_mm: 2.0
+  port_width_ratio_to_length: 0.025
+  port_width_ratio_to_half_height: 0.05
+  selected_by_priority_rule: 1
+
+reference_stiffness:
+  definition: inverse_solid_output_port_self_compliance_without_ground_springs
+  source_case_id: solid__plane_strain__nu030__160x80
+  C_ref_mm_per_N: 0.3061599133752718
+  k_ref_N_per_mm: 3.266266928859044
+  fine_320x160_C_ref_mm_per_N: 0.3073073121459784
+  selected_vs_fine_relative: 0.00373371776510653
+  Richardson:
+    valid: true
+    p_coarse: 1.44299132682095
+    p_fine: 1.46040875872956
+    relative_error_at_160: 0.00585252821386596
+  reported_conservative_relative_discretization_uncertainty: 0.005852528213865961
+  excluded_definitions:
+    - collocated_point_self_compliance
+    - input_operating_compliance_with_spring
+    - output_operating_compliance_with_input_or_output_spring
+
+qualification:
+  project_matrix_case_count: 48
+  manufactured_case_count: 12
+  primary_port_direct_change_160_to_320: 0.00373371776510653
+  deterministic_frame_direct_change_160_to_320: 0.004361071476707915
+  point_log_slope: 0.0593205998044239
+  point_log_R_squared: 0.999955850236036
+  manufactured_nu_0_30:
+    L2_error_n64: 0.0012980760977937
+    fine_L2_order: 1.99789022418922
+    fine_energy_order: 0.99885703203822
+    maximum_free_residual_relative: 9.485474537075119e-14
+  near_incompressible_cases: diagnostic_only_no_hard_threshold
+
+deferred_outside_M1:
+  low_fidelity_total_force_N: null
+  low_fidelity_input_spring_hat: null
+  low_fidelity_input_spring_N_per_mm: null
+  density_filter: not_started
+  projection: not_started
+  production_SIMP_chain: not_started
+  adjoint: not_started
+  optimizer: not_started
+  high_fidelity: not_started
+  M2_authorized: false
+
+license_governance:
+  status: unresolved
+  third_party_notices_required_before_public_release: true
+  scientific_M1_closure_blocker: false
+  public_release_blocker: true

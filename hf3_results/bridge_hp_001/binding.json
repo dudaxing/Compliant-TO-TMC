@@ -1,0 +1,1148 @@
+{
+  "binding": {
+    "schema_version": "hf3-saved-state-audit-1.0",
+    "spec_sha256": "44eb35fef2e6988bf66c3935b76559531e40f0f567bd5438fe7db2afb7bd583e",
+    "implementation_sha256": {
+      "audit_hf3_states.py": "898f74bdd815fce4d0c1baf92d45f9b93037d1b66734c30ecf20515fe7d98b4a",
+      "hf3_precision_reference.py": "81316c76c0687c3853a003d77498a25aa71ed2025e650aeca16b165660491261",
+      "hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55"
+    },
+    "cross80": true,
+    "runs": [
+      {
+        "run_key": "run_001",
+        "evaluation_id": "5868af19-4789-4ba8-b748-05c742c71582",
+        "geometry_id": "2e2bb3466ade06f920dfbb92577ccbe46106acec430837bac8e1a30b8083527a",
+        "geometry_descriptor_sha256": "e914ff1209f842c355c144fb5fda6e0c09bc2f7987b082942ae61f44cb2a2ea6",
+        "task_sha256": "cc86bb0e34d2b0e8be9cee0e50a7ce37b307b5a73a9979435113ade6d3820edc",
+        "solver_sha256": "72d0a5bb68ba07f8ad71fe64c5280d792cc7f71862dee4f8ad6fcf7455070797",
+        "implementation": {
+          "package_version": "0.3.0",
+          "source_sha256": "9104789cb567681bbbe17b9f145e127be17cfa6113b045972aace0ccf1c99a01",
+          "kernel_version": "p26_q1_incremental_piola_huhu_v3",
+          "python": "3.13.6",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "dependencies": {
+            "numpy": "2.4.6",
+            "scipy": "1.17.1",
+            "jax": "0.11.0",
+            "jaxlib": "0.11.0",
+            "matplotlib": "3.10.9"
+          }
+        },
+        "input_files": {
+          "model.npz": "1f63a9033e7c8c67c34e175c0614f75f497538b8fc20e9f5b02f67cb895361bd",
+          "metadata.json": "67e8e236959c3c07a345c16c35843f1bb469c622495d6bf88b05fcf405e680c7",
+          "result.json": "fb12221cff9ac5828b6e3c912ae6c4fe284ce19afe6096b97aa009a93a250025",
+          "steps/index.json": "4a23d25c441315cef42e3042f252962f848746d9d7343004d588d390bf73ad30",
+          "steps/step_0001.json": "b18850fc220dc3815816308fdeb15e1c7f5a5fbe252b04ade0d339eac6a4b4fa",
+          "steps/step_0001.npz": "fa218e78e5e7a945f6ba21ecd9d17788b52485029d07059cee8978d783a8a360"
+        },
+        "states": [
+          {
+            "state_index": 0,
+            "d_mm": 0.001,
+            "R_input": 0.00016987267293045477,
+            "is_original_target": true,
+            "original_target_displacement": 0.001,
+            "scalar_file": "steps/step_0001.json",
+            "arrays_file": "steps/step_0001.npz",
+            "scalar_sha256": "b18850fc220dc3815816308fdeb15e1c7f5a5fbe252b04ade0d339eac6a4b4fa",
+            "arrays_sha256": "fa218e78e5e7a945f6ba21ecd9d17788b52485029d07059cee8978d783a8a360"
+          }
+        ],
+        "original_production_numerics": {
+          "status": "success",
+          "target_reached": true,
+          "target_input_mm": 0.001,
+          "reached_input_mm": 0.001,
+          "failure_stage": null,
+          "reason": null,
+          "failure": null
+        },
+        "production_original_targets_complete": true,
+        "qualification": {
+          "status": "pending",
+          "measurements": {
+            "solid_cells": 1128,
+            "design_cells": 3200,
+            "design_solid_cells": 1128,
+            "passive_solid_cells": 0,
+            "passive_void_cells": 0,
+            "solid_area_mm2": 1128.0,
+            "solid_volume_mm3": 22560.0,
+            "design_area_mm2": 3200.0,
+            "design_solid_area_mm2": 1128.0,
+            "design_volume_fraction": 0.3525,
+            "envelope_volume_fraction": 0.3525,
+            "components_4": 1,
+            "components_8": 1,
+            "local_diagonal_only_patterns": 0,
+            "diagonal_pattern_lower_left_cells_yx": [],
+            "min_feature_mm": null,
+            "common_support_port_component_ids_4": [
+              1
+            ]
+          },
+          "criteria": {
+            "max_design_volume_fraction": null,
+            "min_feature_mm": null
+          },
+          "checks": {
+            "shared_edge_connectivity": {
+              "status": "pass",
+              "components": 1,
+              "requirement": "one shared-edge-connected mechanism body; separate workpieces are not part of solid"
+            },
+            "support_attachment": {
+              "status": "pass",
+              "requirement": "at least two attached distinct nodes for interface smoke only"
+            },
+            "input_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "output_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "port_support_component_link": {
+              "status": "pass"
+            },
+            "design_volume_fraction": {
+              "status": "pending",
+              "value": 0.3525,
+              "maximum": null
+            },
+            "min_feature": {
+              "status": "pending",
+              "minimum_mm": null,
+              "reason": "No validated minimum-feature measurement in HF-1; connectivity is not manufacturing qualification"
+            }
+          },
+          "regions": {
+            "support": {
+              "selected_node_count": 9,
+              "attached_node_count": 4,
+              "selected_nodes": [
+                0,
+                81,
+                162,
+                243,
+                324,
+                405,
+                486,
+                567,
+                648
+              ],
+              "attached_nodes": [
+                405,
+                486,
+                567,
+                648
+              ],
+              "component_ids_4": [
+                1
+              ]
+            },
+            "input": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "attached_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            },
+            "output": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                3158,
+                3239,
+                3320
+              ],
+              "attached_nodes": [
+                3158,
+                3239,
+                3320
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            }
+          }
+        },
+        "functionality": {
+          "status": "not_evaluated",
+          "reason": "No research functionality thresholds frozen for this pilot"
+        },
+        "E_MPa": 1.0
+      },
+      {
+        "run_key": "run_002",
+        "evaluation_id": "8e21b935-cb76-4f48-92eb-f63697c29883",
+        "geometry_id": "2e2bb3466ade06f920dfbb92577ccbe46106acec430837bac8e1a30b8083527a",
+        "geometry_descriptor_sha256": "e914ff1209f842c355c144fb5fda6e0c09bc2f7987b082942ae61f44cb2a2ea6",
+        "task_sha256": "8afbd3347b16110fb019403baeedc505df697a97864dcd9ff0dffc7b56e9825d",
+        "solver_sha256": "2b524b211f8a0dc3e3abf41d8911c3b7da4d01c100e2f661660d92a4eb7472ca",
+        "implementation": {
+          "package_version": "0.3.0",
+          "source_sha256": "9104789cb567681bbbe17b9f145e127be17cfa6113b045972aace0ccf1c99a01",
+          "kernel_version": "p26_q1_incremental_piola_huhu_v3",
+          "python": "3.13.6",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "dependencies": {
+            "numpy": "2.4.6",
+            "scipy": "1.17.1",
+            "jax": "0.11.0",
+            "jaxlib": "0.11.0",
+            "matplotlib": "3.10.9"
+          }
+        },
+        "input_files": {
+          "model.npz": "5848ff20dca9ff44f11caf815ea86a2ec464332cfd50b3ed63bb69b6ebbad8dc",
+          "metadata.json": "1de679e944d96389132854f9833ac10b241fc75384873d83c8c56f06782876e9",
+          "result.json": "c6d78e70625932f87cd9365c706bfc198b2741da329a9030757ec1eb705ec4c4",
+          "steps/index.json": "313087be11221ac8cff9922a87d5359f6c5ffef5e926529553d3015ccc606b9e",
+          "steps/step_0001.json": "de8dc68ad72d8f755ea406d32fe4f390e477641cd766040d51f71cffe470866f",
+          "steps/step_0001.npz": "287e86f3cdb398d4b406bec3e1e01821e2ed825656021733c7d69124e323b6e5"
+        },
+        "states": [
+          {
+            "state_index": 0,
+            "d_mm": 0.0001,
+            "R_input": 1.6986813713485352e-05,
+            "is_original_target": true,
+            "original_target_displacement": 0.0001,
+            "scalar_file": "steps/step_0001.json",
+            "arrays_file": "steps/step_0001.npz",
+            "scalar_sha256": "de8dc68ad72d8f755ea406d32fe4f390e477641cd766040d51f71cffe470866f",
+            "arrays_sha256": "287e86f3cdb398d4b406bec3e1e01821e2ed825656021733c7d69124e323b6e5"
+          }
+        ],
+        "original_production_numerics": {
+          "status": "success",
+          "target_reached": true,
+          "target_input_mm": 0.0001,
+          "reached_input_mm": 0.0001,
+          "failure_stage": null,
+          "reason": null,
+          "failure": null
+        },
+        "production_original_targets_complete": true,
+        "qualification": {
+          "status": "pending",
+          "measurements": {
+            "solid_cells": 1128,
+            "design_cells": 3200,
+            "design_solid_cells": 1128,
+            "passive_solid_cells": 0,
+            "passive_void_cells": 0,
+            "solid_area_mm2": 1128.0,
+            "solid_volume_mm3": 22560.0,
+            "design_area_mm2": 3200.0,
+            "design_solid_area_mm2": 1128.0,
+            "design_volume_fraction": 0.3525,
+            "envelope_volume_fraction": 0.3525,
+            "components_4": 1,
+            "components_8": 1,
+            "local_diagonal_only_patterns": 0,
+            "diagonal_pattern_lower_left_cells_yx": [],
+            "min_feature_mm": null,
+            "common_support_port_component_ids_4": [
+              1
+            ]
+          },
+          "criteria": {
+            "max_design_volume_fraction": null,
+            "min_feature_mm": null
+          },
+          "checks": {
+            "shared_edge_connectivity": {
+              "status": "pass",
+              "components": 1,
+              "requirement": "one shared-edge-connected mechanism body; separate workpieces are not part of solid"
+            },
+            "support_attachment": {
+              "status": "pass",
+              "requirement": "at least two attached distinct nodes for interface smoke only"
+            },
+            "input_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "output_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "port_support_component_link": {
+              "status": "pass"
+            },
+            "design_volume_fraction": {
+              "status": "pending",
+              "value": 0.3525,
+              "maximum": null
+            },
+            "min_feature": {
+              "status": "pending",
+              "minimum_mm": null,
+              "reason": "No validated minimum-feature measurement in HF-1; connectivity is not manufacturing qualification"
+            }
+          },
+          "regions": {
+            "support": {
+              "selected_node_count": 9,
+              "attached_node_count": 4,
+              "selected_nodes": [
+                0,
+                81,
+                162,
+                243,
+                324,
+                405,
+                486,
+                567,
+                648
+              ],
+              "attached_nodes": [
+                405,
+                486,
+                567,
+                648
+              ],
+              "component_ids_4": [
+                1
+              ]
+            },
+            "input": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "attached_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            },
+            "output": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                3158,
+                3239,
+                3320
+              ],
+              "attached_nodes": [
+                3158,
+                3239,
+                3320
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            }
+          }
+        },
+        "functionality": {
+          "status": "not_evaluated",
+          "reason": "No research functionality thresholds frozen for this pilot"
+        },
+        "E_MPa": 1.0
+      },
+      {
+        "run_key": "run_003",
+        "evaluation_id": "8a7d2665-77e2-4889-9fa3-911d35ce32e1",
+        "geometry_id": "2e2bb3466ade06f920dfbb92577ccbe46106acec430837bac8e1a30b8083527a",
+        "geometry_descriptor_sha256": "e914ff1209f842c355c144fb5fda6e0c09bc2f7987b082942ae61f44cb2a2ea6",
+        "task_sha256": "6958326507d85572bb6fec3bf9bb82f5f918949a5a3a9eb1f3605696748f50f0",
+        "solver_sha256": "ce01f86f1c05b16d28da3cf1efd9a6fc91f858c2420f89d8d034db2d5f976b38",
+        "implementation": {
+          "package_version": "0.3.0",
+          "source_sha256": "9104789cb567681bbbe17b9f145e127be17cfa6113b045972aace0ccf1c99a01",
+          "kernel_version": "p26_q1_incremental_piola_huhu_v3",
+          "python": "3.13.6",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "dependencies": {
+            "numpy": "2.4.6",
+            "scipy": "1.17.1",
+            "jax": "0.11.0",
+            "jaxlib": "0.11.0",
+            "matplotlib": "3.10.9"
+          }
+        },
+        "input_files": {
+          "model.npz": "fb835cfe2a902ddb7cb5db05579e85a6c1db96587bbe8b11b0eed511918f6ffa",
+          "metadata.json": "9c07d8fd4750b6710c05bc61159a28257c946ea2bd645b3169fbd43b80b80534",
+          "result.json": "0086bb2aecd6061235116464eec59de3dc2dc69dc46798b7f78a6b5014e43519",
+          "steps/index.json": "7f124695b7fe033266ecc8a79f676d99aac825c32e021200d1fe50bd3c7d3702",
+          "steps/step_0001.json": "2f7354c382d255b45ba6cd7609ea2d243815c8d5a4bbb2601c27782056a4fbf8",
+          "steps/step_0001.npz": "8d1ba96282e9a369dfe378cafd02c2b570e56d7f495550cf19d8c7ba7385ffdd"
+        },
+        "states": [
+          {
+            "state_index": 0,
+            "d_mm": 1e-05,
+            "R_input": 1.6986768358301053e-06,
+            "is_original_target": true,
+            "original_target_displacement": 1e-05,
+            "scalar_file": "steps/step_0001.json",
+            "arrays_file": "steps/step_0001.npz",
+            "scalar_sha256": "2f7354c382d255b45ba6cd7609ea2d243815c8d5a4bbb2601c27782056a4fbf8",
+            "arrays_sha256": "8d1ba96282e9a369dfe378cafd02c2b570e56d7f495550cf19d8c7ba7385ffdd"
+          }
+        ],
+        "original_production_numerics": {
+          "status": "success",
+          "target_reached": true,
+          "target_input_mm": 1e-05,
+          "reached_input_mm": 1e-05,
+          "failure_stage": null,
+          "reason": null,
+          "failure": null
+        },
+        "production_original_targets_complete": true,
+        "qualification": {
+          "status": "pending",
+          "measurements": {
+            "solid_cells": 1128,
+            "design_cells": 3200,
+            "design_solid_cells": 1128,
+            "passive_solid_cells": 0,
+            "passive_void_cells": 0,
+            "solid_area_mm2": 1128.0,
+            "solid_volume_mm3": 22560.0,
+            "design_area_mm2": 3200.0,
+            "design_solid_area_mm2": 1128.0,
+            "design_volume_fraction": 0.3525,
+            "envelope_volume_fraction": 0.3525,
+            "components_4": 1,
+            "components_8": 1,
+            "local_diagonal_only_patterns": 0,
+            "diagonal_pattern_lower_left_cells_yx": [],
+            "min_feature_mm": null,
+            "common_support_port_component_ids_4": [
+              1
+            ]
+          },
+          "criteria": {
+            "max_design_volume_fraction": null,
+            "min_feature_mm": null
+          },
+          "checks": {
+            "shared_edge_connectivity": {
+              "status": "pass",
+              "components": 1,
+              "requirement": "one shared-edge-connected mechanism body; separate workpieces are not part of solid"
+            },
+            "support_attachment": {
+              "status": "pass",
+              "requirement": "at least two attached distinct nodes for interface smoke only"
+            },
+            "input_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "output_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "port_support_component_link": {
+              "status": "pass"
+            },
+            "design_volume_fraction": {
+              "status": "pending",
+              "value": 0.3525,
+              "maximum": null
+            },
+            "min_feature": {
+              "status": "pending",
+              "minimum_mm": null,
+              "reason": "No validated minimum-feature measurement in HF-1; connectivity is not manufacturing qualification"
+            }
+          },
+          "regions": {
+            "support": {
+              "selected_node_count": 9,
+              "attached_node_count": 4,
+              "selected_nodes": [
+                0,
+                81,
+                162,
+                243,
+                324,
+                405,
+                486,
+                567,
+                648
+              ],
+              "attached_nodes": [
+                405,
+                486,
+                567,
+                648
+              ],
+              "component_ids_4": [
+                1
+              ]
+            },
+            "input": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "attached_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            },
+            "output": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                3158,
+                3239,
+                3320
+              ],
+              "attached_nodes": [
+                3158,
+                3239,
+                3320
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            }
+          }
+        },
+        "functionality": {
+          "status": "not_evaluated",
+          "reason": "No research functionality thresholds frozen for this pilot"
+        },
+        "E_MPa": 1.0
+      },
+      {
+        "run_key": "run_004",
+        "evaluation_id": "9997cdfa-2f61-4448-8910-cc090774b6d0",
+        "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+        "geometry_descriptor_sha256": "a7a2f12f16ee54099ecf4d3747ce38f4c7bf49732a73fce4074cd79b2ded6b02",
+        "task_sha256": "8baa3e14a6d98d1243071eb43cb54982e6c7db8dadc6cbcc0f8cb7bf39842a87",
+        "solver_sha256": "12f47a7407f8c0af145d25f628a9d1406417246405cf301d76564c51fa063fa3",
+        "implementation": {
+          "package_version": "0.3.0",
+          "source_sha256": "9104789cb567681bbbe17b9f145e127be17cfa6113b045972aace0ccf1c99a01",
+          "kernel_version": "p26_q1_incremental_piola_huhu_v3",
+          "python": "3.13.6",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "dependencies": {
+            "numpy": "2.4.6",
+            "scipy": "1.17.1",
+            "jax": "0.11.0",
+            "jaxlib": "0.11.0",
+            "matplotlib": "3.10.9"
+          }
+        },
+        "input_files": {
+          "model.npz": "23af841fc70d8c0f5006f87290fce62893f2e209ee2aa4ef61b6e1a97daaf481",
+          "metadata.json": "bd131a362543edd78ee7f70df9a7609deb1a917fdac99c8ad456c505b8526665",
+          "result.json": "e2de9ae7823f86208ce5b23f99d3a12c60a74f213e4c447c578544b6ad34fb83",
+          "steps/index.json": "96dd2c76b7fb11a4cfbbab1aa76d04b87898b812e001916708ade2f9847e2a34",
+          "steps/step_0001.json": "a5e389c26689dee298deaab1797d64a677b1024e9b8a5717feabb99fd556593e",
+          "steps/step_0001.npz": "872dd71698c6a3ce951454fcf6ac21f7926edb01a417a20d694caa5fbaa906d9"
+        },
+        "states": [
+          {
+            "state_index": 0,
+            "d_mm": 0.001,
+            "R_input": 0.00020841207364474584,
+            "is_original_target": true,
+            "original_target_displacement": 0.001,
+            "scalar_file": "steps/step_0001.json",
+            "arrays_file": "steps/step_0001.npz",
+            "scalar_sha256": "a5e389c26689dee298deaab1797d64a677b1024e9b8a5717feabb99fd556593e",
+            "arrays_sha256": "872dd71698c6a3ce951454fcf6ac21f7926edb01a417a20d694caa5fbaa906d9"
+          }
+        ],
+        "original_production_numerics": {
+          "status": "success",
+          "target_reached": true,
+          "target_input_mm": 0.001,
+          "reached_input_mm": 0.001,
+          "failure_stage": null,
+          "reason": null,
+          "failure": null
+        },
+        "production_original_targets_complete": true,
+        "qualification": {
+          "status": "pending",
+          "measurements": {
+            "solid_cells": 1086,
+            "design_cells": 2960,
+            "design_solid_cells": 1046,
+            "passive_solid_cells": 40,
+            "passive_void_cells": 200,
+            "solid_area_mm2": 1086.0,
+            "solid_volume_mm3": 21720.0,
+            "design_area_mm2": 2960.0,
+            "design_solid_area_mm2": 1046.0,
+            "design_volume_fraction": 0.3533783783783784,
+            "envelope_volume_fraction": 0.339375,
+            "components_4": 1,
+            "components_8": 1,
+            "local_diagonal_only_patterns": 0,
+            "diagonal_pattern_lower_left_cells_yx": [],
+            "min_feature_mm": null,
+            "common_support_port_component_ids_4": [
+              1
+            ]
+          },
+          "criteria": {
+            "max_design_volume_fraction": null,
+            "min_feature_mm": null
+          },
+          "checks": {
+            "shared_edge_connectivity": {
+              "status": "pass",
+              "components": 1,
+              "requirement": "one shared-edge-connected mechanism body; separate workpieces are not part of solid"
+            },
+            "support_attachment": {
+              "status": "pass",
+              "requirement": "at least two attached distinct nodes for interface smoke only"
+            },
+            "input_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "output_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "port_support_component_link": {
+              "status": "pass"
+            },
+            "design_volume_fraction": {
+              "status": "pending",
+              "value": 0.3533783783783784,
+              "maximum": null
+            },
+            "min_feature": {
+              "status": "pending",
+              "minimum_mm": null,
+              "reason": "No validated minimum-feature measurement in HF-1; connectivity is not manufacturing qualification"
+            }
+          },
+          "regions": {
+            "support": {
+              "selected_node_count": 9,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                0,
+                81,
+                162,
+                243,
+                324,
+                405,
+                486,
+                567,
+                648
+              ],
+              "attached_nodes": [
+                486,
+                567,
+                648
+              ],
+              "component_ids_4": [
+                1
+              ]
+            },
+            "input": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "attached_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            },
+            "output": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                2348,
+                2429,
+                2510
+              ],
+              "attached_nodes": [
+                2348,
+                2429,
+                2510
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            }
+          }
+        },
+        "functionality": {
+          "status": "not_evaluated",
+          "reason": "No research functionality thresholds frozen for this pilot"
+        },
+        "E_MPa": 1.0
+      },
+      {
+        "run_key": "run_005",
+        "evaluation_id": "4b3df52b-a426-496b-b360-f8863071e7e5",
+        "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+        "geometry_descriptor_sha256": "a7a2f12f16ee54099ecf4d3747ce38f4c7bf49732a73fce4074cd79b2ded6b02",
+        "task_sha256": "b9a735832945555a25537e606456ea89e7dcc2efeb1e646f43f74a7ba62f304a",
+        "solver_sha256": "d50c886db82a9f08054588a6bd4a55976b78e4b40081504a94c6a66a34697847",
+        "implementation": {
+          "package_version": "0.3.0",
+          "source_sha256": "9104789cb567681bbbe17b9f145e127be17cfa6113b045972aace0ccf1c99a01",
+          "kernel_version": "p26_q1_incremental_piola_huhu_v3",
+          "python": "3.13.6",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "dependencies": {
+            "numpy": "2.4.6",
+            "scipy": "1.17.1",
+            "jax": "0.11.0",
+            "jaxlib": "0.11.0",
+            "matplotlib": "3.10.9"
+          }
+        },
+        "input_files": {
+          "model.npz": "ff277e04fb94d07dfa83cb96573fc9ecf2e2b9c033f4f9cc8c993074ffe1f46c",
+          "metadata.json": "6625597d128d37dc889cef6cc7648dd05f53f46457189fc13a8f2007113d1bd2",
+          "result.json": "3a25b05d542821db6be9444787e0414bfc7889d39e3d6ce6d073d2721893bb67",
+          "steps/index.json": "222c5253448f5c795727bb37720768113ddb7fab54c8d825fbdabc12bebb07a8",
+          "steps/step_0001.json": "3d2844fab118b5c3c0afdf4c2ebeaefdcb9e62a755e80d33071265746c003c0b",
+          "steps/step_0001.npz": "160fbb195b5c6af515e17f50b370384adf48989134d31fbec153e6a3565d2841"
+        },
+        "states": [
+          {
+            "state_index": 0,
+            "d_mm": 0.0001,
+            "R_input": 2.084056502910515e-05,
+            "is_original_target": true,
+            "original_target_displacement": 0.0001,
+            "scalar_file": "steps/step_0001.json",
+            "arrays_file": "steps/step_0001.npz",
+            "scalar_sha256": "3d2844fab118b5c3c0afdf4c2ebeaefdcb9e62a755e80d33071265746c003c0b",
+            "arrays_sha256": "160fbb195b5c6af515e17f50b370384adf48989134d31fbec153e6a3565d2841"
+          }
+        ],
+        "original_production_numerics": {
+          "status": "success",
+          "target_reached": true,
+          "target_input_mm": 0.0001,
+          "reached_input_mm": 0.0001,
+          "failure_stage": null,
+          "reason": null,
+          "failure": null
+        },
+        "production_original_targets_complete": true,
+        "qualification": {
+          "status": "pending",
+          "measurements": {
+            "solid_cells": 1086,
+            "design_cells": 2960,
+            "design_solid_cells": 1046,
+            "passive_solid_cells": 40,
+            "passive_void_cells": 200,
+            "solid_area_mm2": 1086.0,
+            "solid_volume_mm3": 21720.0,
+            "design_area_mm2": 2960.0,
+            "design_solid_area_mm2": 1046.0,
+            "design_volume_fraction": 0.3533783783783784,
+            "envelope_volume_fraction": 0.339375,
+            "components_4": 1,
+            "components_8": 1,
+            "local_diagonal_only_patterns": 0,
+            "diagonal_pattern_lower_left_cells_yx": [],
+            "min_feature_mm": null,
+            "common_support_port_component_ids_4": [
+              1
+            ]
+          },
+          "criteria": {
+            "max_design_volume_fraction": null,
+            "min_feature_mm": null
+          },
+          "checks": {
+            "shared_edge_connectivity": {
+              "status": "pass",
+              "components": 1,
+              "requirement": "one shared-edge-connected mechanism body; separate workpieces are not part of solid"
+            },
+            "support_attachment": {
+              "status": "pass",
+              "requirement": "at least two attached distinct nodes for interface smoke only"
+            },
+            "input_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "output_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "port_support_component_link": {
+              "status": "pass"
+            },
+            "design_volume_fraction": {
+              "status": "pending",
+              "value": 0.3533783783783784,
+              "maximum": null
+            },
+            "min_feature": {
+              "status": "pending",
+              "minimum_mm": null,
+              "reason": "No validated minimum-feature measurement in HF-1; connectivity is not manufacturing qualification"
+            }
+          },
+          "regions": {
+            "support": {
+              "selected_node_count": 9,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                0,
+                81,
+                162,
+                243,
+                324,
+                405,
+                486,
+                567,
+                648
+              ],
+              "attached_nodes": [
+                486,
+                567,
+                648
+              ],
+              "component_ids_4": [
+                1
+              ]
+            },
+            "input": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "attached_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            },
+            "output": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                2348,
+                2429,
+                2510
+              ],
+              "attached_nodes": [
+                2348,
+                2429,
+                2510
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            }
+          }
+        },
+        "functionality": {
+          "status": "not_evaluated",
+          "reason": "No research functionality thresholds frozen for this pilot"
+        },
+        "E_MPa": 1.0
+      },
+      {
+        "run_key": "run_006",
+        "evaluation_id": "18d22798-3feb-4560-930b-4cd16f1d2529",
+        "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+        "geometry_descriptor_sha256": "a7a2f12f16ee54099ecf4d3747ce38f4c7bf49732a73fce4074cd79b2ded6b02",
+        "task_sha256": "dddacc1e69e704a20a749b86fa5ed117bbe04684d81f5c500ea8ec0a263e8ceb",
+        "solver_sha256": "7f6fdc7c31d238eacd5d3adf9688f83bbe5c973e6e81635b39904204d24f7b34",
+        "implementation": {
+          "package_version": "0.3.0",
+          "source_sha256": "9104789cb567681bbbe17b9f145e127be17cfa6113b045972aace0ccf1c99a01",
+          "kernel_version": "p26_q1_incremental_piola_huhu_v3",
+          "python": "3.13.6",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "dependencies": {
+            "numpy": "2.4.6",
+            "scipy": "1.17.1",
+            "jax": "0.11.0",
+            "jaxlib": "0.11.0",
+            "matplotlib": "3.10.9"
+          }
+        },
+        "input_files": {
+          "model.npz": "25c9d7886065e856ea1e8af67a88380216c8ca847fa288d6ecda30a251976b18",
+          "metadata.json": "518d9b61709be2079a1ae057c81f44ae01f9bd9a77abda49cd2a4ff40017b9e6",
+          "result.json": "d9c220d64ea8ff2b6daff1baa0223148b4c6d28f1662a1348b6ae3aee6547d8b",
+          "steps/index.json": "72e0ec7bc9a24e8815429d6ee23effef3c50aa52b2d36443a22417d199a8fbba",
+          "steps/step_0001.json": "385f7f99eaa6166ecbf9435175b6d6f08476a6bed60a78308286da424172c77e",
+          "steps/step_0001.npz": "796e0e88b248d6653c0c38d2f4dc9583ea373f5344cb6670211438df1b565c13"
+        },
+        "states": [
+          {
+            "state_index": 0,
+            "d_mm": 1e-05,
+            "R_input": 2.0840500800322777e-06,
+            "is_original_target": true,
+            "original_target_displacement": 1e-05,
+            "scalar_file": "steps/step_0001.json",
+            "arrays_file": "steps/step_0001.npz",
+            "scalar_sha256": "385f7f99eaa6166ecbf9435175b6d6f08476a6bed60a78308286da424172c77e",
+            "arrays_sha256": "796e0e88b248d6653c0c38d2f4dc9583ea373f5344cb6670211438df1b565c13"
+          }
+        ],
+        "original_production_numerics": {
+          "status": "success",
+          "target_reached": true,
+          "target_input_mm": 1e-05,
+          "reached_input_mm": 1e-05,
+          "failure_stage": null,
+          "reason": null,
+          "failure": null
+        },
+        "production_original_targets_complete": true,
+        "qualification": {
+          "status": "pending",
+          "measurements": {
+            "solid_cells": 1086,
+            "design_cells": 2960,
+            "design_solid_cells": 1046,
+            "passive_solid_cells": 40,
+            "passive_void_cells": 200,
+            "solid_area_mm2": 1086.0,
+            "solid_volume_mm3": 21720.0,
+            "design_area_mm2": 2960.0,
+            "design_solid_area_mm2": 1046.0,
+            "design_volume_fraction": 0.3533783783783784,
+            "envelope_volume_fraction": 0.339375,
+            "components_4": 1,
+            "components_8": 1,
+            "local_diagonal_only_patterns": 0,
+            "diagonal_pattern_lower_left_cells_yx": [],
+            "min_feature_mm": null,
+            "common_support_port_component_ids_4": [
+              1
+            ]
+          },
+          "criteria": {
+            "max_design_volume_fraction": null,
+            "min_feature_mm": null
+          },
+          "checks": {
+            "shared_edge_connectivity": {
+              "status": "pass",
+              "components": 1,
+              "requirement": "one shared-edge-connected mechanism body; separate workpieces are not part of solid"
+            },
+            "support_attachment": {
+              "status": "pass",
+              "requirement": "at least two attached distinct nodes for interface smoke only"
+            },
+            "input_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "output_attachment": {
+              "status": "pass",
+              "requirement": "all original weighted port nodes attached to solid"
+            },
+            "port_support_component_link": {
+              "status": "pass"
+            },
+            "design_volume_fraction": {
+              "status": "pending",
+              "value": 0.3533783783783784,
+              "maximum": null
+            },
+            "min_feature": {
+              "status": "pending",
+              "minimum_mm": null,
+              "reason": "No validated minimum-feature measurement in HF-1; connectivity is not manufacturing qualification"
+            }
+          },
+          "regions": {
+            "support": {
+              "selected_node_count": 9,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                0,
+                81,
+                162,
+                243,
+                324,
+                405,
+                486,
+                567,
+                648
+              ],
+              "attached_nodes": [
+                486,
+                567,
+                648
+              ],
+              "component_ids_4": [
+                1
+              ]
+            },
+            "input": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "attached_nodes": [
+                3078,
+                3159,
+                3240
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            },
+            "output": {
+              "selected_node_count": 3,
+              "attached_node_count": 3,
+              "selected_nodes": [
+                2348,
+                2429,
+                2510
+              ],
+              "attached_nodes": [
+                2348,
+                2429,
+                2510
+              ],
+              "component_ids_4": [
+                1
+              ],
+              "weights": [
+                0.25,
+                0.5,
+                0.25
+              ]
+            }
+          }
+        },
+        "functionality": {
+          "status": "not_evaluated",
+          "reason": "No research functionality thresholds frozen for this pilot"
+        },
+        "E_MPa": 1.0
+      }
+    ]
+  },
+  "binding_sha256": "7c75893083e38ad80eaa3dd33bc6c5003d914ac02f071954880aa14856c99627",
+  "origin_paths_record_only": [
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf3_results\\bridge_001\\inverter\\d_1e-03",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf3_results\\bridge_001\\inverter\\d_1e-04",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf3_results\\bridge_001\\inverter\\d_1e-05",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf3_results\\bridge_001\\gripper\\d_1e-03",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf3_results\\bridge_001\\gripper\\d_1e-04",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf3_results\\bridge_001\\gripper\\d_1e-05"
+  ]
+}

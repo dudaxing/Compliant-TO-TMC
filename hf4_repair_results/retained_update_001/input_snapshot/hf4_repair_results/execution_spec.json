@@ -1,0 +1,51 @@
+{
+  "schema_version": "hf4-repair-execution-1.0",
+  "status": "frozen_before_stage0",
+  "created_utc": "2026-09-14T02:40:00.741700+00:00",
+  "baseline_commit": "8db49d7a932ac8b25354773f07b8baa0c6410584",
+  "physics_spec_path": "hf_repo/configs/hf4/validation_spec.json",
+  "physics_spec_sha256": "002cd49edae3066d7283f5f98d1281e9c57a22c7bb33cd8be353674906d69067",
+  "inputs": {
+    "hf4_results/fixed_update_probe_001/fixed_correction.npz": "1114d5e2d1176a24451832cc7479cd4bdf7aee63c5effb71091f183dd03eedb4",
+    "hf4_results/fixed_update_probe_001/summary.json": "c881bca4353b8ba806d7a5cc45b4f0fec9dd5a5cf1fc6c7239bf64d8e0512767",
+    "hf4_results/fixed_state_probe_001/summary.json": "41781058ad6c5d090bdb34944bcbf7f44152eb3e8162e3aca5f7db713e2d8d9e",
+    "hf4_results/g1_m1_001/model.npz": "c4f7462403349f4d622a810dd1ca31c36b826fbc0f229cef7766096093379604",
+    "HF4_CONTENT_MANIFEST.json": "b7501c9bd350ac5cc56968aaf75ade30cb02291eec2b98d5977538db9010e3bf",
+    "docs/HF4_REPAIR_READINESS_REVIEW.md": "e39c5878c2365c352cd9dec0ac865127cfcbb5f13711e666a5c2ef16d971d466",
+    "docs/HF4_REPAIR_EXECUTION_PLAN.md": "93ee5300e050bec36214917e18025f136a6a41e5adfafb35358ff9993d051760"
+  },
+  "stage0": {
+    "alphas": [
+      1.0,
+      0.5
+    ],
+    "digits": [
+      50,
+      80
+    ],
+    "retained_residual_gate": "1e-9",
+    "cross_precision_gate": "1e-30",
+    "constraint_gate": "1e-10",
+    "at_least_one_retained_gate_pass": true,
+    "all_input_domain_precision_checks_required": true,
+    "scope": "diagnostic only; not a production accepted state"
+  },
+  "resource_limits": {
+    "total_seconds": 1800,
+    "small_process_seconds": 300,
+    "memory_soft_limit_bytes": 4294967296,
+    "category_seconds": {
+      "preflight": 120,
+      "tests": 360,
+      "g1_m1_path": 120,
+      "g1_m1_hp": 150,
+      "g0_m0_path": 120,
+      "g0_m1_path": 120,
+      "g1_m0_path": 120,
+      "other_hp": 300,
+      "isolated": 180,
+      "plots": 60
+    },
+    "unallocated_seconds": 150
+  }
+}

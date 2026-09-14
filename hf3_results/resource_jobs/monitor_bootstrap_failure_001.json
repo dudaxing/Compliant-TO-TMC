@@ -1,0 +1,21 @@
+{
+  "name": "monitor_bootstrap_failure",
+  "category": "tests",
+  "status": "failed",
+  "process_started": false,
+  "started_utc": null,
+  "timestamp_note": "Recorded retrospectively from the tool result; exact launch timestamp unavailable. Occurred after regression_a and before regression_b.",
+  "command": ["C:/Python313/python.exe", "hf3_results/run_budgeted.py", "--name", "regression_b", "--category", "tests", "--limit", "60"],
+  "command_note": "The requested pytest child was never launched because importing the monitor dependency failed.",
+  "returncode": 1,
+  "stop_reason": "monitor_bootstrap_error",
+  "wall_seconds": 4.1104776,
+  "timing_basis": "exec_command reported elapsed seconds; conservatively charged in full to the tests and total budgets",
+  "sampled_peak_tree_rss_bytes": null,
+  "memory_method": "monitor did not initialize; no mechanics process started",
+  "exception_type": "ModuleNotFoundError",
+  "message": "No module named psutil",
+  "resolution": "Use the existing independent HF development interpreter, which contains psutil. No dependency or numerical setting changed.",
+  "spec_sha256": "44eb35fef2e6988bf66c3935b76559531e40f0f567bd5438fe7db2afb7bd583e",
+  "log": "monitor_bootstrap_failure_001.log"
+}

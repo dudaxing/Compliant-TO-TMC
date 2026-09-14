@@ -1,0 +1,512 @@
+{
+  "schema_version": "hf2-residual-sensitivity-1.0",
+  "scope": "Three frozen states; no solve; no changed tolerance or path",
+  "units_mode": "source_numeric",
+  "decimal_scope": "Diagnostic exact-arithmetic approximation of fixed binary64 inputs, not an independent physical benchmark",
+  "cases": [
+    {
+      "side": "python",
+      "target_index": 73,
+      "load_multiplier": 0.73,
+      "stored_relative_free_residual": 9.88577641116578e-09,
+      "force_scale": 0.9291383104791234,
+      "force_total_y": -2.19,
+      "absolute_free_residual_tolerance": 9.291383104791235e-09,
+      "relative_free_residual_tolerance": 1e-08,
+      "conditioning": {
+        "min_J": 9.319980217536994e-05,
+        "max_cond_F": 10863.727437195013,
+        "max_cond_C": 118020573.86338218,
+        "max_cond_F_squared": 118020573.82966374,
+        "max_relative_detC_minus_J_squared": 3.87218650346082e-09,
+        "max_determinant_cancellation_factor": 35323372.59776071,
+        "determinant_worst_element": 615,
+        "determinant_worst_q": 8,
+        "determinant_worst_gamma": 1e-06,
+        "max_P_FS_minus_direct_absolute": 1.0485064654618589e-08,
+        "material_element_force_norm": 84.14373511340101,
+        "regularization_element_force_norm": 0.8355917079706263,
+        "material_global_force_norm": 8.30475812000064,
+        "regularization_global_force_norm": 0.12026868936287897
+      },
+      "decimal50": {
+        "precision_decimal_digits": 50,
+        "relative_free_residual": "1.0644451244453017962990671996431552143250482362491E-8",
+        "absolute_free_residual": "9.8901674452484795501924269341367839426218637423462E-9",
+        "force_scale": "0.92913831047912339006835324158473781835383756194901",
+        "minimum_J": "0.000093199802174164125326389135497639012549837912998",
+        "definition": "Exact binary64 input values promoted to Decimal; arithmetic, logarithm, exponential, integration and assembly at 50 decimal digits"
+      },
+      "forms": {
+        "direct_piola": {
+          "absolute_free_residual": 9.89339822013764e-09,
+          "relative_free_residual": 1.0647928417714224e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 8.303993381041774,
+          "residual_fixed_norm": 8.251848766936149
+        },
+        "source_FS": {
+          "absolute_free_residual": 9.607101466085926e-09,
+          "relative_free_residual": 1.0339796947057202e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 8.303993381041769,
+          "residual_fixed_norm": 8.251848766936146
+        },
+        "source_B1TS": {
+          "absolute_free_residual": 9.607330763817026e-09,
+          "relative_free_residual": 1.0340043732415758e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 8.303993381041769,
+          "residual_fixed_norm": 8.251848766936146
+        },
+        "FS_with_J_squared_denominator": {
+          "absolute_free_residual": 9.893435968021376e-09,
+          "relative_free_residual": 1.0647969044479163e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 8.303993381041765,
+          "residual_fixed_norm": 8.251848766936142
+        },
+        "comparison_independent_state": {
+          "absolute_free_residual": 9.893389287487488e-09,
+          "relative_free_residual": 1.0647918803806316e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 8.303993381041774,
+          "residual_fixed_norm": 8.251848766936149
+        },
+        "decimal50_direct": {
+          "absolute_free_residual": 9.890167445248474e-09,
+          "relative_free_residual": 1.0644451244453011e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 8.303993381041806,
+          "residual_fixed_norm": 8.25184876693614
+        }
+      },
+      "differences": {
+        "direct_piola_minus_direct_piola": {
+          "full_norm": 0.0,
+          "free_norm": 0.0,
+          "free_norm_over_external": 0.0,
+          "full_max_absolute": 0.0
+        },
+        "direct_piola_minus_decimal50_direct": {
+          "full_norm": 1.1271005292033453e-11,
+          "free_norm": 1.1270862814754344e-11,
+          "free_norm_over_external": 1.2130446767330434e-11,
+          "full_max_absolute": 6.457410474993927e-12
+        },
+        "source_FS_minus_direct_piola": {
+          "full_norm": 1.2861874493012018e-09,
+          "free_norm": 1.2861874488395292e-09,
+          "free_norm_over_external": 1.3842798583736023e-09,
+          "full_max_absolute": 7.173349622635605e-10
+        },
+        "source_FS_minus_decimal50_direct": {
+          "full_norm": 1.2842344235642543e-09,
+          "free_norm": 1.2842344226521382e-09,
+          "free_norm_over_external": 1.382177882633969e-09,
+          "full_max_absolute": 7.179989795844942e-10
+        },
+        "source_B1TS_minus_direct_piola": {
+          "full_norm": 1.286094761052193e-09,
+          "free_norm": 1.286094760592519e-09,
+          "free_norm_over_external": 1.384180101162039e-09,
+          "full_max_absolute": 7.173435040419562e-10
+        },
+        "source_B1TS_minus_decimal50_direct": {
+          "full_norm": 1.2841428283266869e-09,
+          "free_norm": 1.284142827413889e-09,
+          "free_norm_over_external": 1.3820793017906047e-09,
+          "full_max_absolute": 7.180075213628899e-10
+        },
+        "FS_with_J_squared_denominator_minus_direct_piola": {
+          "full_norm": 3.1943358579739586e-13,
+          "free_norm": 3.177628706652237e-13,
+          "free_norm_over_external": 3.4199738303909216e-13,
+          "full_max_absolute": 8.958458974639427e-14
+        },
+        "FS_with_J_squared_denominator_minus_decimal50_direct": {
+          "full_norm": 1.1276385712537898e-11,
+          "free_norm": 1.1276196898046563e-11,
+          "free_norm_over_external": 1.2136187659974791e-11,
+          "full_max_absolute": 6.4471964231673755e-12
+        },
+        "comparison_independent_state_minus_direct_piola": {
+          "full_norm": 8.138779637224309e-14,
+          "free_norm": 8.138779637224309e-14,
+          "free_norm_over_external": 8.759492042715827e-14,
+          "full_max_absolute": 1.9942381079829374e-14
+        },
+        "comparison_independent_state_minus_decimal50_direct": {
+          "full_norm": 1.1260000754953491e-11,
+          "free_norm": 1.1259858138427823e-11,
+          "free_norm_over_external": 1.2118602808037823e-11,
+          "full_max_absolute": 6.457410474993927e-12
+        },
+        "decimal50_direct_minus_direct_piola": {
+          "full_norm": 1.1271005292033453e-11,
+          "free_norm": 1.1270862814754344e-11,
+          "free_norm_over_external": 1.2130446767330434e-11,
+          "full_max_absolute": 6.457410474993927e-12
+        },
+        "decimal50_direct_minus_decimal50_direct": {
+          "full_norm": 0.0,
+          "free_norm": 0.0,
+          "free_norm_over_external": 0.0,
+          "full_max_absolute": 0.0
+        }
+      },
+      "raw_arrays": "python_073.npz"
+    },
+    {
+      "side": "matlab",
+      "target_index": 76,
+      "load_multiplier": 0.76,
+      "stored_relative_free_residual": 8.36266944569734e-09,
+      "force_scale": 0.9673220766631969,
+      "force_total_y": -2.28,
+      "absolute_free_residual_tolerance": 9.67322076663197e-09,
+      "relative_free_residual_tolerance": 1e-08,
+      "conditioning": {
+        "min_J": 8.411759805757729e-05,
+        "max_cond_F": 12029.576685698274,
+        "max_cond_C": 144710715.36477736,
+        "max_cond_F_squared": 144710715.23709548,
+        "max_relative_detC_minus_J_squared": 5.717882019862401e-09,
+        "max_determinant_cancellation_factor": 44731721.97252471,
+        "determinant_worst_element": 679,
+        "determinant_worst_q": 8,
+        "determinant_worst_gamma": 1e-06,
+        "max_P_FS_minus_direct_absolute": 2.7164853479974017e-08,
+        "material_element_force_norm": 86.11178827063459,
+        "regularization_element_force_norm": 0.838110094553792,
+        "material_global_force_norm": 8.520533895023982,
+        "regularization_global_force_norm": 0.12111264056334621
+      },
+      "decimal50": {
+        "precision_decimal_digits": 50,
+        "relative_free_residual": "1.0751389985092068319385480049074872611201534474645E-8",
+        "absolute_free_residual": "1.0400056887395158042303762880754484267156488598243E-8",
+        "force_scale": "0.96732207666319698888691273189254214084821893907440",
+        "minimum_J": "0.000084117598057677546323763129103509732707937141500",
+        "definition": "Exact binary64 input values promoted to Decimal; arithmetic, logarithm, exponential, integration and assembly at 50 decimal digits"
+      },
+      "forms": {
+        "direct_piola": {
+          "absolute_free_residual": 1.0398966596132554e-08,
+          "relative_free_residual": 1.0750262861780292e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 8.519781779402209,
+          "residual_fixed_norm": 8.464689573081424
+        },
+        "source_FS": {
+          "absolute_free_residual": 8.089486319930113e-09,
+          "relative_free_residual": 8.362764083535661e-09,
+          "passes_unchanged_tolerance": true,
+          "internal_force_norm": 8.519781779402214,
+          "residual_fixed_norm": 8.46468957308143
+        },
+        "source_B1TS": {
+          "absolute_free_residual": 8.089450496252424e-09,
+          "relative_free_residual": 8.362727049668087e-09,
+          "passes_unchanged_tolerance": true,
+          "internal_force_norm": 8.519781779402212,
+          "residual_fixed_norm": 8.46468957308143
+        },
+        "FS_with_J_squared_denominator": {
+          "absolute_free_residual": 1.0398965081215957e-08,
+          "relative_free_residual": 1.0750261295687018e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 8.519781779402203,
+          "residual_fixed_norm": 8.464689573081419
+        },
+        "comparison_independent_state": {
+          "absolute_free_residual": 1.0398966294147712e-08,
+          "relative_free_residual": 1.0750262549593845e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 8.519781779402209,
+          "residual_fixed_norm": 8.464689573081424
+        },
+        "stored_MATLAB_source": {
+          "absolute_free_residual": 8.089394774659816e-09,
+          "relative_free_residual": 8.362669445697339e-09,
+          "passes_unchanged_tolerance": true,
+          "internal_force_norm": 8.519781779402205,
+          "residual_fixed_norm": 8.46468957308143
+        },
+        "decimal50_direct": {
+          "absolute_free_residual": 1.0400056887395156e-08,
+          "relative_free_residual": 1.0751389985092066e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 8.519781779402178,
+          "residual_fixed_norm": 8.464689573081413
+        }
+      },
+      "differences": {
+        "direct_piola_minus_direct_piola": {
+          "full_norm": 0.0,
+          "free_norm": 0.0,
+          "free_norm_over_external": 0.0,
+          "full_max_absolute": 0.0
+        },
+        "direct_piola_minus_decimal50_direct": {
+          "full_norm": 1.26235584684201e-11,
+          "free_norm": 1.2623366062086019e-11,
+          "free_norm_over_external": 1.3049806643130335e-11,
+          "full_max_absolute": 6.528399603181003e-12
+        },
+        "source_FS_minus_direct_piola": {
+          "full_norm": 3.051878190867832e-09,
+          "free_norm": 3.051878190726811e-09,
+          "free_norm_over_external": 3.1549762631845904e-09,
+          "full_max_absolute": 2.2651658326822144e-09
+        },
+        "source_FS_minus_decimal50_direct": {
+          "full_norm": 3.0547021508761787e-09,
+          "free_norm": 3.054702150175185e-09,
+          "free_norm_over_external": 3.1578956211900597e-09,
+          "full_max_absolute": 2.265781981880786e-09
+        },
+        "source_B1TS_minus_direct_piola": {
+          "full_norm": 3.051851988764891e-09,
+          "free_norm": 3.051851988627887e-09,
+          "free_norm_over_external": 3.1549491759304523e-09,
+          "full_max_absolute": 2.2651474034136865e-09
+        },
+        "source_B1TS_minus_decimal50_direct": {
+          "full_norm": 3.054675546743209e-09,
+          "free_norm": 3.0546755460528925e-09,
+          "free_norm_over_external": 3.157868118331463e-09,
+          "full_max_absolute": 2.265763552612258e-09
+        },
+        "FS_with_J_squared_denominator_minus_direct_piola": {
+          "full_norm": 2.9925556788219247e-13,
+          "free_norm": 2.9731762274128245e-13,
+          "free_norm_over_external": 3.073615602436031e-13,
+          "full_max_absolute": 6.655179879411222e-14
+        },
+        "FS_with_J_squared_denominator_minus_decimal50_direct": {
+          "full_norm": 1.2640562760742534e-11,
+          "free_norm": 1.2640316943618959e-11,
+          "free_norm_over_external": 1.306733015669617e-11,
+          "full_max_absolute": 6.5209611089160146e-12
+        },
+        "comparison_independent_state_minus_direct_piola": {
+          "full_norm": 6.682562757215429e-14,
+          "free_norm": 6.682562757215429e-14,
+          "free_norm_over_external": 6.90831204873056e-14,
+          "full_max_absolute": 1.3905543383430086e-14
+        },
+        "comparison_independent_state_minus_decimal50_direct": {
+          "full_norm": 1.2620468225452683e-11,
+          "free_norm": 1.2620275772005344e-11,
+          "free_norm_over_external": 1.3046611957352734e-11,
+          "full_max_absolute": 6.530529843609503e-12
+        },
+        "stored_MATLAB_source_minus_direct_piola": {
+          "full_norm": 3.0514114295461594e-09,
+          "free_norm": 3.0514114294064895e-09,
+          "free_norm_over_external": 3.1544937338062354e-09,
+          "full_max_absolute": 2.264690447651395e-09
+        },
+        "stored_MATLAB_source_minus_decimal50_direct": {
+          "full_norm": 3.054221048293847e-09,
+          "free_norm": 3.0542210475947335e-09,
+          "free_norm_over_external": 3.1573982660773646e-09,
+          "full_max_absolute": 2.2653065968499664e-09
+        },
+        "decimal50_direct_minus_direct_piola": {
+          "full_norm": 1.26235584684201e-11,
+          "free_norm": 1.2623366062086019e-11,
+          "free_norm_over_external": 1.3049806643130335e-11,
+          "full_max_absolute": 6.528399603181003e-12
+        },
+        "decimal50_direct_minus_decimal50_direct": {
+          "full_norm": 0.0,
+          "free_norm": 0.0,
+          "free_norm_over_external": 0.0,
+          "full_max_absolute": 0.0
+        }
+      },
+      "raw_arrays": "matlab_076.npz"
+    },
+    {
+      "side": "matlab",
+      "target_index": 99,
+      "load_multiplier": 0.99,
+      "stored_relative_free_residual": 9.518438375705431e-09,
+      "force_scale": 1.2600642840744276,
+      "force_total_y": -2.9699999999999998,
+      "absolute_free_residual_tolerance": 1.2600642840744277e-08,
+      "relative_free_residual_tolerance": 1e-08,
+      "conditioning": {
+        "min_J": 4.921634236093597e-05,
+        "max_cond_F": 20679.17853190367,
+        "max_cond_C": 427628423.9816502,
+        "max_cond_F_squared": 427628424.7543457,
+        "max_relative_detC_minus_J_squared": 1.9372680892843548e-08,
+        "max_determinant_cancellation_factor": 175174664.8313537,
+        "determinant_worst_element": 679,
+        "determinant_worst_q": 8,
+        "determinant_worst_gamma": 1e-06,
+        "max_P_FS_minus_direct_absolute": 1.570442476707454e-07,
+        "material_element_force_norm": 100.34799533057567,
+        "regularization_element_force_norm": 0.8493671232117375,
+        "material_global_force_norm": 10.13366474978925,
+        "regularization_global_force_norm": 0.1251753562415988
+      },
+      "decimal50": {
+        "precision_decimal_digits": 50,
+        "relative_free_residual": "1.0444352730863547868628697499049713085272474430112E-8",
+        "absolute_free_residual": "1.3160555846436369573127045788886267888736663567444E-8",
+        "force_scale": "1.2600642840744276305458929278395417147464397365572",
+        "minimum_J": "0.000049216342360853158180812043507205505523530515320",
+        "definition": "Exact binary64 input values promoted to Decimal; arithmetic, logarithm, exponential, integration and assembly at 50 decimal digits"
+      },
+      "forms": {
+        "direct_piola": {
+          "absolute_free_residual": 1.3158564113306744e-08,
+          "relative_free_residual": 1.0442772070928338e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 10.133019182641846,
+          "residual_fixed_norm": 10.054367993851654
+        },
+        "source_FS": {
+          "absolute_free_residual": 1.1994720653520996e-08,
+          "relative_free_residual": 9.51913390857804e-09,
+          "passes_unchanged_tolerance": true,
+          "internal_force_norm": 10.13301918264185,
+          "residual_fixed_norm": 10.054367993851656
+        },
+        "source_B1TS": {
+          "absolute_free_residual": 1.1994687211442077e-08,
+          "relative_free_residual": 9.51910736859961e-09,
+          "passes_unchanged_tolerance": true,
+          "internal_force_norm": 10.133019182641846,
+          "residual_fixed_norm": 10.054367993851654
+        },
+        "FS_with_J_squared_denominator": {
+          "absolute_free_residual": 1.3158637067862538e-08,
+          "relative_free_residual": 1.0442829968415566e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 10.133019182641842,
+          "residual_fixed_norm": 10.054367993851647
+        },
+        "comparison_independent_state": {
+          "absolute_free_residual": 1.315857080458404e-08,
+          "relative_free_residual": 1.044277738119495e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 10.133019182641846,
+          "residual_fixed_norm": 10.054367993851654
+        },
+        "stored_MATLAB_source": {
+          "absolute_free_residual": 1.1993844237389819e-08,
+          "relative_free_residual": 9.51843837570543e-09,
+          "passes_unchanged_tolerance": true,
+          "internal_force_norm": 10.133019182641839,
+          "residual_fixed_norm": 10.054367993851656
+        },
+        "decimal50_direct": {
+          "absolute_free_residual": 1.3160555846436368e-08,
+          "relative_free_residual": 1.0444352730863547e-08,
+          "passes_unchanged_tolerance": false,
+          "internal_force_norm": 10.133019182641839,
+          "residual_fixed_norm": 10.054367993851656
+        }
+      },
+      "differences": {
+        "direct_piola_minus_direct_piola": {
+          "full_norm": 0.0,
+          "free_norm": 0.0,
+          "free_norm_over_external": 0.0,
+          "full_max_absolute": 0.0
+        },
+        "direct_piola_minus_decimal50_direct": {
+          "full_norm": 2.8061856981952777e-11,
+          "free_norm": 2.806179933754455e-11,
+          "free_norm_over_external": 2.2270133113214275e-11,
+          "full_max_absolute": 9.508380723632825e-12
+        },
+        "source_FS_minus_direct_piola": {
+          "full_norm": 1.3482680816298796e-08,
+          "free_norm": 1.3482680816269683e-08,
+          "free_norm_over_external": 1.0699994426215565e-08,
+          "full_max_absolute": 1.0788656967797294e-08
+        },
+        "source_FS_minus_decimal50_direct": {
+          "full_norm": 1.3480275477137513e-08,
+          "free_norm": 1.3480275477008014e-08,
+          "free_norm_over_external": 1.0698085524192019e-08,
+          "full_max_absolute": 1.0784386415283975e-08
+        },
+        "source_B1TS_minus_direct_piola": {
+          "full_norm": 1.3484146648967253e-08,
+          "free_norm": 1.3484146648938519e-08,
+          "free_norm_over_external": 1.0701157726126025e-08,
+          "full_max_absolute": 1.078982581059762e-08
+        },
+        "source_B1TS_minus_decimal50_direct": {
+          "full_norm": 1.3481741906384079e-08,
+          "free_norm": 1.3481741906253815e-08,
+          "free_norm_over_external": 1.0699249297552105e-08,
+          "full_max_absolute": 1.07855552580843e-08
+        },
+        "FS_with_J_squared_denominator_minus_direct_piola": {
+          "full_norm": 1.3929408600448621e-12,
+          "free_norm": 1.3923819545394086e-12,
+          "free_norm_over_external": 1.105008666730185e-12,
+          "full_max_absolute": 8.739674023545974e-13
+        },
+        "FS_with_J_squared_denominator_minus_decimal50_direct": {
+          "full_norm": 2.809881969172835e-11,
+          "free_norm": 2.8098732387654666e-11,
+          "free_norm_over_external": 2.2299443562353183e-11,
+          "full_max_absolute": 9.508491745935288e-12
+        },
+        "comparison_independent_state_minus_direct_piola": {
+          "full_norm": 7.596948672293817e-14,
+          "free_norm": 7.596948672293817e-14,
+          "free_norm_over_external": 6.029016748041636e-14,
+          "full_max_absolute": 1.3766765505351941e-14
+        },
+        "comparison_independent_state_minus_decimal50_direct": {
+          "full_norm": 2.8051938573140305e-11,
+          "free_norm": 2.8051880908350527e-11,
+          "free_norm_over_external": 2.2262261745602812e-11,
+          "full_max_absolute": 9.50288511966093e-12
+        },
+        "stored_MATLAB_source_minus_direct_piola": {
+          "full_norm": 1.3482449643862442e-08,
+          "free_norm": 1.3482449643833719e-08,
+          "free_norm_over_external": 1.06998109653883e-08,
+          "full_max_absolute": 1.078895934142907e-08
+        },
+        "stored_MATLAB_source_minus_decimal50_direct": {
+          "full_norm": 1.3480027441785476e-08,
+          "free_norm": 1.3480027441655755e-08,
+          "free_norm_over_external": 1.0697888680780619e-08,
+          "full_max_absolute": 1.078468878891575e-08
+        },
+        "decimal50_direct_minus_direct_piola": {
+          "full_norm": 2.8061856981952777e-11,
+          "free_norm": 2.806179933754455e-11,
+          "free_norm_over_external": 2.2270133113214275e-11,
+          "full_max_absolute": 9.508380723632825e-12
+        },
+        "decimal50_direct_minus_decimal50_direct": {
+          "full_norm": 0.0,
+          "free_norm": 0.0,
+          "free_norm_over_external": 0.0,
+          "full_max_absolute": 0.0
+        }
+      },
+      "raw_arrays": "matlab_099.npz"
+    }
+  ],
+  "wall_seconds": 4.112541100010276,
+  "inputs_sha256": {
+    "hf_repo\\validation\\hf2\\validation_spec.json": "5e09dc712a1d1f1eec2adcf9ce230eeeae023c065791815527f8e46c03ca4971",
+    "reference_validation\\matlab\\cshape_001\\cshape_path.npz": "95cd748aeff1edea712eec81274ce8658d3a5e54b8cc44c459c151a0924ccbc0",
+    "hf2_results\\cshape_python_001\\cshape_path.npz": "28ed0812102a6561ab726417f63399881dae7dda644372f55ebc0cf4984940e9"
+  },
+  "scientific_status": "All three independent Piola over-threshold observations retained; evaluate source-expression agreement and arithmetic sensitivity separately"
+}

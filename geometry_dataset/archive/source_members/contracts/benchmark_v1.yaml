@@ -1,0 +1,215 @@
+schema_version: "1.2-final"
+contract_status: active_m0
+
+units:
+  length: mm
+  force: N
+  stress: MPa
+  spring_stiffness: N_per_mm
+
+geometry:
+  length_mm: 80.0
+  half_height_ratio: 0.5
+  thickness_mm: 20.0
+  half_model: true
+  origin: bottom_left
+  axes:
+    x: right
+    y: up
+
+mesh:
+  nelx: 160       # provisional
+  nely: 80        # provisional
+  require_source_boundaries_on_grid: true
+
+artifact_layout:
+  shape_order: [nely, nelx]
+  row_axis: y
+  column_axis: x
+  origin: bottom_left
+  solid_value: 1.0
+  void_value: 0.0
+  density_fields:
+    - x_design
+    - rho_filtered
+    - rho_physical
+    - rho_binary
+
+half_model_scaling:
+  forces_are: per_half_model
+  spring_stiffnesses_are: per_half_model
+  reported_displacements_are: symmetry_invariant
+  full_model_force_multiplier: 2.0
+  full_model_spring_multiplier: 2.0
+
+source_reference:
+  scope: >-
+    Only geometry dimensions, fixed/symmetry boundaries, and input/output
+    locations and directions from Section 4.1.1, Figures 3 and 4, are used.
+  fixed:
+    edge: x0
+    y_ratio: [0.0, 0.1]
+    dofs: [ux, uy]
+  input_point:
+    x_ratio: 0.0
+    y_ratio: 0.5
+    direction: [1.0, 0.0]
+  inverter:
+    envelope_ratio:
+      x: [0.0, 1.0]
+      y: [0.0, 0.5]
+    symmetry:
+      edge: y_top
+      x_ratio: [0.0, 1.0]
+      dofs: [uy]
+    output_point:
+      x_ratio: 1.0
+      y_ratio: 0.5
+      direction: [-1.0, 0.0]
+  gripper:
+    envelope_ratio:
+      x: [0.0, 1.0]
+      y: [0.0, 0.5]
+    symmetry:
+      edge: y_top
+      x_ratio: [0.0, 0.75]
+      dofs: [uy]
+    passive_void:
+      x_ratio: [0.75, 1.0]
+      y_ratio: [0.375, 0.5]
+      evidence: inferred_from_figure_4
+    passive_solid:
+      x_ratio: [0.75, 1.0]
+      y_ratio: [0.35, 0.375]
+      evidence: inferred_from_figure_4
+    output_point_or_face:
+      x_ratio: 1.0
+      y_ratio: [0.35, 0.375]
+      direction: [0.0, 1.0]
+  source_interpretation:
+    passive_void_approved_by_project: true
+    passive_solid_jaw_approved_by_project: true
+
+port_regularization:
+  source_points_remain_visible_in_plots: true
+  enabled: true
+  input_width_ratio: 0.025       # provisional
+  inverter_output_width_ratio: 0.025  # provisional
+  gripper_output_face_ratio: [0.35, 0.375]
+  quadrature: trapezoidal
+  displacement_measure: work_conjugate_average
+  load_form: distributed_total_force
+  spring_form: rank_one_on_port_average
+
+finite_element:
+  type: Q4
+  stiffness_includes_thickness: true
+  formulation: plane_strain     # provisional; M1 experiment decides
+  solver: scipy_splu
+  design_transform_backend: jax_x64
+
+scientific_objects:
+  common_constraints:
+    volume_fraction: null
+    filter_length_physical_mm: null
+    physical_min_feature_mm: null
+    passive_regions_fixed: true
+    common_geometry_transfer_pipeline: true
+  low_fidelity_task:
+    physics: linear_elastic_small_deformation
+    contact: false
+    actuation_type: null        # freeze after AuTO/M3 evidence
+    actuation_value: null
+    input_spring_N_per_mm: null
+    objective: maximize_signed_port_averaged_output_displacement
+    varying_seed_fields:
+      - output_spring_stiffness
+      - start_seed
+  low_fidelity_seed:
+    output_spring_normalization: k_ref
+    output_spring_hat_grid: [0.0, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0]
+    starts_per_stiffness: 3
+  generator:
+    pilot_methods:
+      - parameter_scan
+      - multistart
+      - anchor_designs
+    future_methods:
+      - explicit_diversity
+      - wasserstein_crossover
+  high_fidelity_task:
+    version: null
+    actuation:
+      type: displacement_control
+      value_mm: null
+    input_spring: none
+    target_output_spring_N_per_mm: null
+    material_model: null
+    geometric_nonlinearity: true
+    primary_metric: signed_port_averaged_output_displacement_along_target_direction
+    feasibility:
+      convergence_required: true
+      required_output_direction: true
+      maximum_strain: null
+
+verification_reference:
+  repository: UW-ERSL/AuTO
+  commit: ba3c0c5dfc9acb7daff802aaf0bb41105296ad98
+  environment_lockfile: env/auto-wsl-py311-freeze.txt
+  case:
+    name: inverter_40x20
+    nelx: 40
+    nely: 20
+    parameters:
+      element_size: [1.0, 1.0]
+      material: {Emax: 1.0, Emin: 0.001, nu: 0.3, penal: 3.0}
+      filter: {type: sensitivity, radius_elements: 1.5}
+      input_force: 1.0
+      input_spring: 0.1
+      output_spring: 0.1
+      objective: signed_output_dof_displacement
+      volume_fraction_limit: 0.35
+      optimizer: MMA
+      max_iterations: 200
+      min_iterations: 100
+      relative_change_tolerance: 0.02
+  snapshots:
+    - solid
+    - uniform_vf
+    - random_seed0
+  allowed_changes:
+    - import_path_compatibility
+    - deprecated_api_compatibility
+    - dtype_declaration
+    - environment_compatibility
+    - read_only_export_hooks
+  forbidden_changes:
+    - governing_equations
+    - boundary_conditions
+    - physical_parameters
+    - optimizer
+    - filtering
+    - projection
+    - springs
+    - objective_definition
+
+artifact_provenance:
+  require_contract_fingerprint: true
+  require_code_commit: true
+  require_environment_fingerprint: true
+  require_evaluator_version: true
+  require_atomic_per_run_write: true
+  hdf5_merge_mode: single_process
+  failure_fields:
+    - status
+    - failure_stage
+    - failure_code
+    - solver_message
+
+failure_accounting:
+  failures_consume_high_fidelity_budget: true
+  silently_drop_failures: false
+  report_two_part_outcome: true
+  survival_metric: S_H
+  conditional_ranking_metric: rho_LH_given_valid
+  single_failure_utility: null   # must be preregistered before formal experiments if needed

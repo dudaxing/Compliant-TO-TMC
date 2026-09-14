@@ -1,0 +1,26 @@
+...............................s.................F...................... [ 24%]
+........................................................................ [ 49%]
+........................................................................ [ 74%]
+........................................................................ [ 98%]
+...                                                                      [100%]
+================================== FAILURES ===================================
+_______________ test_backtracking_failure_preserves_zero_state ________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000022278117200>
+
+    def test_backtracking_failure_preserves_zero_state(monkeypatch):
+        model, b = one_cell()
+        synthetic(monkeypatch, model, cubic=100., wrong_tangent=True)
+        settings = DisplacementSettings(max_backtracks=2, max_bisections=0)
+        result = solve_displacement_path(model, b, b, [.05], settings=settings, force_scale_per_length=20.)
+        assert result["status"] == "failed"
+        assert result["failure"]["code"] == "backtracking_failed"
+>       assert len(result["trials"]) == 3
+E       AssertionError: assert 6 == 3
+E        +  where 6 = len([{'target_displacement': 0.05, 'newton_check': 1, 'factor': 1.0, 'fixed_residual_scale': 0.265446943851309, ...}, {'ta.....}, {'target_displacement': 0.05, 'newton_check': 2, 'factor': 0.25, 'fixed_residual_scale': 0.2637506867671254, ...}])
+
+tests\test_displacement.py:196: AssertionError
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_data.py:220: Platform does not permit creating a symlink: [WinError 1314] 客户端没有所需的特权。: 'C:\\Users\\Lenovo\\AppData\\Local\\Temp\\pytest-of-Lenovo\\pytest-376\\test_descriptor_symlink_cannot0\\external\\geometry.json' -> 'C:\\Users\\Lenovo\\AppData\\Local\\Temp\\pytest-of-Lenovo\\pytest-376\\test_descriptor_symlink_cannot0\\package\\geometry.json'
+FAILED tests/test_displacement.py::test_backtracking_failure_preserves_zero_state
+1 failed, 289 passed, 1 skipped in 6.98s

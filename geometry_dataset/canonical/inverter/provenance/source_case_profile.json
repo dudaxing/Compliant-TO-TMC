@@ -1,0 +1,246 @@
+{
+  "case_record": {
+    "case": "inverter",
+    "contract_fingerprint": "f8765b9846b887ff28a4a55120d0af2e980258640da3bb9aa2acc00f33ea7009",
+    "contract_id": "benchmark_v1.1",
+    "design_area_mm2": 3200.0,
+    "domain_mm": [
+      80.0,
+      40.0
+    ],
+    "element_mm": [
+      1.0,
+      1.0
+    ],
+    "exclusion_segments_mm": [
+      [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          8.0
+        ]
+      ],
+      [
+        [
+          0.0,
+          38.0
+        ],
+        [
+          0.0,
+          40.0
+        ]
+      ],
+      [
+        [
+          80.0,
+          38.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ]
+    ],
+    "fixed_dof_count": 99,
+    "fixed_segment_mm": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        8.0
+      ]
+    ],
+    "formulation": "plane_strain",
+    "mask_counts": {
+      "design": 3200,
+      "passive_solid": 0,
+      "passive_void": 0
+    },
+    "mask_sha256": "88dd816d7a58485dd9d427fe8401f76db9b0c27a8af99d487a03ff07a8d1a91a",
+    "mesh": [
+      80,
+      40
+    ],
+    "nu": 0.3,
+    "output_sign_convention": "q = b_output.T @ u is positive when the output port moves along the contract output direction; gripper: the lower jaw port (x=80 mm, y in [28,30] mm) moving toward the symmetry axis (+y) is closing",
+    "passive_solid_area_mm2": 0.0,
+    "passive_void_area_mm2": 0.0,
+    "ports": {
+      "input": {
+        "coordinates_mm": [
+          [
+            0.0,
+            38.0
+          ],
+          [
+            0.0,
+            39.0
+          ],
+          [
+            0.0,
+            40.0
+          ]
+        ],
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "node_ids": [
+          3078,
+          3159,
+          3240
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ]
+      },
+      "output": {
+        "coordinates_mm": [
+          [
+            80.0,
+            38.0
+          ],
+          [
+            80.0,
+            39.0
+          ],
+          [
+            80.0,
+            40.0
+          ]
+        ],
+        "direction": [
+          -1.0,
+          0.0
+        ],
+        "node_ids": [
+          3158,
+          3239,
+          3320
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ]
+      }
+    },
+    "schema": "dmftd.mechanism_case.v1",
+    "symmetry_policy": "contract_segment",
+    "symmetry_uy_node_count": 81,
+    "thickness_mm": 20.0,
+    "units": {
+      "energy": "N_mm",
+      "force": "N",
+      "length": "mm",
+      "spring_stiffness": "N_per_mm",
+      "stress": "MPa"
+    }
+  },
+  "source_profile_common": {
+    "J_scale_fixed_mm": null,
+    "J_scale_rule": "abs_J_initial_v1",
+    "beta": 4.0,
+    "eta": 0.5,
+    "filter_radius_mm": 3.0,
+    "initial_design": "uniform",
+    "input_force_N": 1.0,
+    "penal": 3.0,
+    "updates": 200,
+    "volume_fraction_limit": 0.35
+  },
+  "reference": {
+    "C_ref_mm_per_N": 0.3061599133752718,
+    "k_ref_N_per_mm": 3.266266928859044,
+    "own_mesh_reference": {
+      "C_ref_mm_per_N": 0.30300242890966644,
+      "case": "inverter",
+      "definition": "inverse_of_output_port_self_compliance_of_the_all_solid_allowed_domain_without_ground_springs",
+      "k_ref_N_per_mm": 3.3003035770981497,
+      "material_rule": "design_and_passive_solid_at_E_scale; passive_void_at_Emin",
+      "mesh": [
+        80,
+        40
+      ],
+      "solid_modulus_MPa": 1.0,
+      "symmetry_policy": "contract_segment",
+      "void_modulus_MPa": 0.001
+    },
+    "source": "contracts/m1_outputs_v1.yaml (frozen on the 160x80 production mesh)"
+  },
+  "source_provenance": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "argv": [
+      "/home/dubin/dmftd-m4/.venv/bin/python",
+      "scripts/run_spring_sweep.py",
+      "--case",
+      "inverter",
+      "--output",
+      "tmp/sweep_inverter_80x40_v1",
+      "--resume",
+      "--nelx",
+      "80",
+      "--nely",
+      "40",
+      "--updates",
+      "200"
+    ],
+    "code_commit": "31e99af7fa4dbfcd6f9066b6f7ccdb26cc502fd3",
+    "finished_at_utc": "2026-09-07T08:51:43+00:00",
+    "jax": "0.4.30",
+    "jax_x64": true,
+    "numpy": "1.26.4",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.11.13",
+    "scipy": "1.12.0",
+    "started_at_utc": "2026-09-07T08:33:55+00:00"
+  },
+  "geometry_extraction_provenance": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "argv": [
+      "/mnt/d/Coding/Diversity TO/Diversity-TO-Compliant-O/.venv/bin/python",
+      "scripts/extract_geometry.py",
+      "--pool",
+      "research/l3_interval_policy_v1/candidates_v1.json",
+      "--output",
+      "tmp/geometry_extraction_v1"
+    ],
+    "code_commit": "9c31c4090e81912308c9878117cc1389ef095934",
+    "finished_at_utc": "2026-09-09T03:09:57+00:00",
+    "jax": "0.4.30",
+    "jax_x64": true,
+    "numpy": "1.26.4",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.11.13",
+    "scipy": "1.12.0",
+    "started_at_utc": "2026-09-09T03:08:29+00:00"
+  },
+  "handoff_v2_provenance": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "argv": [
+      "/mnt/d/Coding/Diversity TO/Diversity-TO-Compliant-O/.venv/bin/python",
+      "scripts/build_handoff_set.py",
+      "--output",
+      "tmp/handoff_v2",
+      "--axes",
+      "research/generation_axes_inverter_80x40_v1",
+      "research/generation_axes_gripper_80x40_v1"
+    ],
+    "code_commit": "b2f2d7782b5caefb1717a6a4a853ae64fa1dd99a",
+    "finished_at_utc": "2026-09-12T06:40:27+00:00",
+    "jax": "0.4.30",
+    "jax_x64": true,
+    "numpy": "1.26.4",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.11.13",
+    "scipy": "1.12.0",
+    "started_at_utc": "2026-09-12T06:40:08+00:00"
+  }
+}

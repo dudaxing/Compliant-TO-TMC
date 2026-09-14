@@ -1,0 +1,55 @@
+schema_version: "1.0"
+registry_id: contract_registry_v1
+language: zh-CN
+updated_at_utc: "2026-09-04T11:43:31Z"
+unique_active_milestone: M1
+
+milestones:
+  M0:
+    status: closed
+    decision: pass
+    contracts:
+      benchmark_v1:
+        path: contracts/benchmark_v1.yaml
+        canonical_fingerprint: 42877d24b4f4be386d0fdac83d51df96d69e76c57ee10686af6d1289a8248483
+        file_sha256: 1a09b18154bfa5b5e5d691921a4fbe560574a638dcfd828fc25f6723c543cf14
+      analysis_protocol_v1:
+        path: contracts/analysis_protocol_v1.yaml
+        canonical_fingerprint: 0f9eeeb3e0c02369d7db9cc74cbefd32f964114fd693be76009066ddce90010c
+        file_sha256: c09e6e15c015af293b3892ea2f943cbebc49d8d7cf549a2007d6a0a359a4d35b
+      evaluator_v1:
+        path: contracts/evaluator_v1.yaml
+        canonical_fingerprint: 01c54e9ef5f941f408b76255e17465ab1d563964024aac0961be03c209419606
+        file_sha256: 31b248ea049f1a1076c7f9e200bf6c5829f944ad012fedfdd6288c643372ab1f
+    immutable: true
+  M1:
+    status: active
+    closure_status: not_closed
+    contracts:
+      m1_fem_contract_v1:
+        path: contracts/m1_fem_contract_v1.yaml
+        canonical_fingerprint: 9441a816bc24d1cd6502badddce0885229769f6a711de9ab26124eb769c19114
+        file_sha256: 07052af54ae3202b8fe4ff00b47ffe3a1a1ec94a1654bf9bae0afcc787184c77
+      analysis_protocol_v1.1:
+        path: contracts/analysis_protocol_v1.1.yaml
+        canonical_fingerprint: d081db65706ab9f4946c1c92ae982e1c2553b4d49878d54095d937bea53b3e73
+        file_sha256: 87691b5cc50cd3fc66510490aeb2027cc055cdf864e89c578c26923cf527e81f
+
+m1_subgates_at_signing:
+  solid:
+    authorized: true
+    status: active
+    profile: auto_compat_v1
+    stop_after_result: true
+  uniform_vf: {authorized: false, status: not_started, blocked_by: separate_authorization}
+  random_seed0: {authorized: false, status: not_started, blocked_by: separate_authorization}
+  final: {authorized: false, status: not_started, blocked_by: separate_authorization}
+  project_ports: {authorized: false, status: not_started, blocked_by: separate_authorization}
+  reactions: {authorized: false, status: not_started, blocked_by: separate_authorization}
+  half_full_model: {authorized: false, status: not_started, blocked_by: separate_authorization}
+  locking_experiment: {authorized: false, status: not_started, blocked_by: separate_authorization}
+
+activation_invariant:
+  active_milestone_count: 1
+  authorized_m1_subgate_count: 1
+  authorized_m1_subgate: solid

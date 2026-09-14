@@ -1,0 +1,275 @@
+schema_version: '1.0'
+contract_id: m3_optimization_contract_v1
+milestone: M3
+status: preregistered_activation_only_by_reviewed_successor_registry
+language: zh-CN
+goal: 接通已验证的低保真分析与MMA，按真实AuTO语义对账完整优化历史，验证项目配置并输出可供M4直接消费的同状态数据
+authorization:
+  type: 用户有限委托下的代理批准
+  delegation_record: authorizations/M3_M4_delegation_v1/record.json
+  required_before_activation: [M2_entry_accepted, independent_contract_review_pass, current_input_hashes_bound, actual_publication_timestamp]
+  publisher: /root
+  no_historical_user_signatures_inferred: true
+  M4_requires_new_contract_and_review: true
+  public_push_or_release: false
+inputs:
+  current_registry: contracts/contract_registry_v4.yaml
+  effective_roadmap: milestones/M0/input_contract/roadmap_v1.2_FINAL_contract.md
+  M1_benchmark: contracts/benchmark_v1.1.yaml
+  M1_outputs: contracts/m1_outputs_v1.yaml
+  M2_contract: contracts/m2_design_contract_v1.yaml
+  M2_outputs: contracts/m2_outputs_v1.yaml
+  M2_closure: milestones/M2/closure/manifest_v1.json
+  M2_independent_review: milestones/M2/reviews/closure/manifest_v1.json
+  current_entry_execution: milestones/M3/entry_execution_v1/manifest_v1.json
+  current_entry_review: milestones/M3/entry_review_v1/manifest_v1.json
+  auto_semantics: milestones/M0/addenda/A001_auto_reference_semantics_v1.yaml
+  auto_gradient_metadata: milestones/M0/addenda/A002_auto_gradient_reference_v1.json
+  auto_gradient_arrays: milestones/M0/addenda/A002_auto_gradient_reference_v1.npz
+  reference_parameters: reference/auto_inverter_40x20/final/params.json
+  reference_history: reference/auto_inverter_40x20/final/history.json
+  reference_final: reference/auto_inverter_40x20/final/reference.npz
+  upstream_commit: ba3c0c5dfc9acb7daff802aaf0bb41105296ad98
+  upstream_source_hashes: inherit_exact_A001
+  implementation_baseline: 0dd7beeed836be9f512652818fcf9b1f04470f4a
+  input_record: milestones/M3/input_record_v1.json
+allowed_modifications:
+  new_runtime_modules: [src/dmftd/optimization.py, src/dmftd/mma_adapter.py]
+  new_scripts: scripts/run_m3_*.py_and_minimal_m3_support_helpers
+  new_tests: tests/test_m3_*.py
+  evolving_documentation: [README.md, docs/M3_optimization.md]
+  new_evidence_and_contracts: [milestones/M3, authorizations/M3_M4_delegation_v1, contracts/m3_optimization_contract_v1.yaml, contracts/m3_outputs_v1.yaml, append_only_registry_successors]
+  progress_record: milestones/M3_M4_task_status.json
+  inherited_runtime_modules: consume_M1_M2_public_APIs_without_rewriting_accepted_math
+  frozen_evidence: never_overwrite_M0_M1_M2_contracts_oracles_logs_figures_or_previous_versions
+  upstream: no_source_or_submodule_modification
+  necessary_inherited_code_correction: only_with_reproducible_contract_violation_new_version_evidence_and_independent_revalidation
+stages:
+  A:
+    goal: 固定快照的真实优化器输入对账，先于优化循环
+    auto_states: [solid, uniform_vf, random_seed0]
+    outputs: [u, u_in, q, J, v_design, v_total, constraint, raw_gradient, historical_filtered_gradient, constraint_gradient]
+    auto_oracle: M0_snapshots_plus_A002
+    project_fixtures: [independent_6x4, project_40x20_khat1, project_160x80_khat1]
+    project_base: inherit_M2_preregistered_base_design
+    project_reference: accepted_M2_arrays_and_independent_analytic_transform_pullback
+    update_diagnostic: compare_one_MMA_step_and_asymptotes_to_direct_frozen_MMA_call_with_same_inputs
+    no_optimization_history_until_pass: true
+  B:
+    goal: 完整冻结AuTO200步重放导出，再用M2稀疏分析加同MMA复现完整历史
+    iterations: 200
+    preregistered_trace_iterations: [1, 2, 3, 4, 5, 10, 25, 50, 100, 150, 200]
+    all_200_scalar_records: true
+    all_201_design_states: true
+    deep_trace: [x_pre, x_post, J_pre, vf_pre, vf_post, raw_dJ, dJ_to_mma, constraint, dconstraint, xold1, xold2, low_before, upp_before, low_after, upp_after, epoch, xmma]
+    trace_policy: sys.settrace_or_equivalent_read_only_observation_of_frozen_upstream_no_modified_equations_or_optimizer
+    new_trace_is: new_M3_reference_generation_accepted_against_existing_M0_reference_not_relabelled_as_old_oracle
+    history_comparisons: [new_upstream_trace_vs_frozen_M0, M2_based_auto_loop_vs_frozen_M0, M2_based_auto_loop_vs_new_upstream_trace]
+    compare_all_pairs_on_same_semantic_iteration: true
+    independent_review_after_B: true
+  C:
+    goal: 有限项目验证矩阵、真实完整梯度接线、同状态终值和可供M4消费的密度
+    matrix:
+      project_40x20:
+        beta: [1.0, 4.0, 8.0]
+        penal: [2.0, 3.0]
+        product: true
+      project_160x80:
+        beta: [4.0]
+        penal: [3.0]
+    total_runs: 7
+    independent_passive_compact_variable_test: inherited_M2_independent_6x4_at_fixed_design_and_one_update
+    all_iterations_saved: true
+    no_parameter_search_or_restarts: true
+    output_stiffness_scan: false
+    multistart: false
+    independent_review_before_closure: true
+mathematics:
+  scientific_objective: J=-q=-bout.T@u_signed_mm_no_abs_or_clipping
+  project_design_chain: inherit_exact_M2_double_mask_physical_filter_projection_SIMP_and_transpose_VJP
+  auto_variable_order: upstream_x_major_y_fast_order_with_explicit_D11_conversion_to_yx_arrays
+  project_variable_order: compact_design_mask_in_yx_C_order
+  project_compact_interface:
+    indices: idx=flatnonzero(Md.ravel(order=C))
+    gather: z=x_yx.ravel(order=C)[idx]
+    scatter: x_yx=zeros(nely*nelx);x_yx[idx]=z;x_yx=x_yx.reshape(nely,nelx)
+    passive_placeholders: zero_in_raw_representation_only_physical_pinning_by_M2_double_mask
+    MMA_x_old_bounds_asymptotes_objective_gradient_shape: [n_design, 1]
+    MMA_constraint_shape: [1, 1]
+    MMA_constraint_gradient_shape: [1, n_design]
+    gradient_gather: same_idx_for_full_M2_J_and_constraint_gradients
+    export_raw_design_x: float64_yx_shape_nely_nelx
+    export_compact: optional_z_requires_same_idx
+    auto_mapping: separate_x_major_y_fast_mapping_no_project_idx_reuse
+  optimizer_bounds: [0.0, 1.0]
+  passive_variables: excluded_from_MMA_compact_vector_restored_only_by_M2_transform
+  constraint: v_design/volume_fraction_limit-1<=0
+  constraint_gradient: grad_v_design/volume_fraction_limit
+  auto_constraint: mean(rho)/0.35-1
+  auto_constraint_gradient: '1/(800*0.35); not filtered'
+  auto_material: E=0.001+0.999*(rho+0.01)^3
+  auto_sensitivity_filter: H@(rho*dJ_raw/Hs/maximum(1e-3,rho))
+  auto_filter_radius: 1.5
+  auto_filter_definition: frozen_upstream_type_1_no_density_filter_or_projection
+  auto_objective_scaling: none
+  project_objective_scaling:
+    scientific_J_unchanged: true
+    optimizer_only: J_MMA=J/J_scale_and_grad_MMA=grad_J/J_scale
+    J_scale_mm: 0.0037803699859865966
+    source_field: M2_C_result_cases_project_160x80_khat1_q_absolute_value
+    source_result: milestones/M2/C/result_v1.json
+    source_result_sha256: 3a114a76b6a3ed25e8d908fb92f11d07522e2cc25dfdd01c22e3b964c6a7fc09
+    source_arrays: milestones/M2/C/arrays_v1.npz
+    same_positive_constant_all_seven_project_runs: true
+    never_recomputed_per_iteration: true
+    reason: 根据既有M2响应量级使MMA输入无量纲；不改变科学目标符号和最优点
+    trajectory_caveat: MMA固定raa0和c使有限步数值轨迹依赖尺度；不声称只换单位所以路径相同
+  project_extra_sensitivity_filter: forbidden_full_M2_gradient_already_complete
+  LU: one_state_transpose_adjoint_factorization_per_evaluated_design_inherited_M2
+optimizer:
+  library: frozen_third_party_AuTO_models_utilfuncs_MMA
+  algorithm_independence_claim: shared_MMA_library_only_wiring_behavior_reconciled
+  initial_design: all_design_variables_one
+  initial_constraint_violation: retained_and_reported_not_clipped_or_mislabelled_feasible
+  state_initialization:
+    constraints: 1
+    xold1: x_initial_column
+    xold2: x_initial_column
+    low: ones_column
+    upp: ones_column
+    first_epoch: 1_after_initial_registerMMAIter
+    a0: 1.0
+    a: 0.0
+    c: 10000.0
+    d: 0.0
+    move: 0.2
+  internal_solver_and_asymptotes: exact_frozen_MMA_source_inherit_A001_hash
+  auto_termination: historical_change_stays_1_exact_200_updates_max_iterations_not_relTol_converged
+  project_termination:
+    max_updates: 200
+    early_stopping: false
+    stop_reason: max_iterations
+    convergence_claim: none_just_finite_bounded_optimization_demonstration
+  history_alignment:
+    state_index: x_0_initial_x_k_after_k_updates
+    each_row: explicit_iteration_k_J_pre_at_x_k_minus_1_and_v_pre_v_post
+    initial_and_final_analysis: retained
+    final_metrics: all_reanalyzed_at_returned_x_200_same_state_as_saved_physical_density
+validation_parameters:
+  role: local_M3_validation_only_not_LF_production_freeze
+  volume_fraction_limit: 0.35
+  volume_source: frozen_AuTO_reference_value_reused_as_explicit_project_validation_limit
+  input_total_force_N_per_half: inherit_M2_verification_parameters
+  input_spring_hat: inherit_M2_verification_parameters
+  output_spring_hat: inherit_M2_output_spring_hat_primary
+  filter_radius_mm: inherit_M2_verification_parameters
+  eta: inherit_M2_verification_parameters
+  Emin_Escale: inherit_M2_verification_parameters
+  formulation_nu_thickness_ports: inherit_M1_production_configuration
+  production_unfrozen: inherit_all_M2_production_unfrozen_nulls_unchanged
+thresholds:
+  relative_L2_definition: norm(test-reference)/max(norm(reference),tiny_float64)
+  fixed_auto_u_relative_L2_max: 5.0e-11
+  fixed_auto_u_max_absolute_max: 5.0e-10
+  fixed_auto_J_and_port_scalar_absolute_max: 5.0e-10
+  fixed_project_u_relative_L2_max: 1.0e-10
+  fixed_project_scalar_error_max: 1.0e-10
+  fixed_project_scalar_denominator: max(abs(reference),1)
+  fixed_project_scalar_error_kind: mixed_absolute_relative_with_fixed_1_in_reported_units
+  raw_gradient_relative_L2_max: 1.0e-8
+  filtered_gradient_relative_L2_max: 1.0e-8
+  constraint_gradient_relative_L2_max: 1.0e-10
+  one_update_relative_L2_max: 1.0e-10
+  one_update_denominator: max(norm(reference_update_or_state_array),1)
+  one_update_arrays: [x_post, low_after, upp_after, xold1_after, xold2_after]
+  one_update_epoch: exact_integer_equal
+  history_objective_error_max: 0.02
+  history_objective_error: max_k(abs(J_test_pre_k-J_ref_pre_k)/max(abs(J_ref_pre_k),abs(J_ref_pre_1),1e-8))
+  final_J_relative_max: 0.02
+  final_J_error: abs(J_test_final-J_ref_final)/max(abs(J_ref_final),1e-8)
+  final_J_comparison_pairs: same_three_pairs_as_history_comparisons
+  history_volume_absolute_max: 0.001
+  final_volume_constraint_excess_max: 0.001
+  final_volume_constraint_excess: max(v_design_final-volume_fraction_limit,0)_absolute_volume_fraction_not_normalized_constraint
+  same_state_reanalysis:
+    auto: inherit_fixed_auto_u_and_scalar_thresholds_above
+    project: inherit_fixed_project_u_and_scalar_thresholds_above
+    density_and_volumes: absolute_difference_max_1e-12_against_saved_same_state_fields
+  state_and_adjoint_free_residual_max: 1.0e-11
+  residual_denominator: max(norm(rhs_free),1)_inherits_M2
+  passive_density_and_gradient: exact_M2_conditions
+  bounds_tolerance: 1.0e-12
+  project_net_objective_change: diagnostic_preserve_signed_initial_and_final_no_monotonicity_requirement
+  topology_agreement: independent_qualitative_review_same_AuTO_problem_no_project_vs_AuTO_topology_equality
+  zero_repaired_or_omitted_failed_runs: true
+threshold_origins:
+  fixed_auto_state: inherits_A001_u_relative5e-11_and_u_maxabs_J_abs5e-10
+  fixed_project_state: inherits_M2_same_material_u_relative1e-10
+  raw_derivative_and_residual: inherits_M2_A002_1e-8_and_state_residual_1e-11
+  filtered_gradient_and_constraint_gradient: new_M3_wiring_roundoff_gates_preregistered_before_implementation
+  history_2_percent: explicitly_promoted_from_roadmap_provisional_in_this_new_contract_before_execution
+  history_error_floor: predeclared_initial_reference_objective_scale_avoids_spurious_relative_blowup_at_sign_crossing_no_posthoc_floor
+  volume_1e_minus3: new_M3_history_volume_and_project_validation_constraint_tolerances_preregistered_before_implementation
+  optimizer_single_update: roundoff_comparison_of_same_library_and_identical_inputs_not_independent_algorithm_validation
+tests:
+  - fixed_auto_state_full_u_and_signed_port_scalars
+  - A002_raw_vs_filtered_gradient_not_interchangeable
+  - history_sensitivity_filter_order_and_no_volume_filter
+  - compact_passive_variables_and_scatter_mapping
+  - direct_MMA_step_state_epoch_and_asymptote_comparison
+  - project_objective_and_gradient_same_positive_constant_scaling
+  - project_gradient_not_double_filtered
+  - scientific_and_MMA_objective_units_separate
+  - pre_post_iteration_state_semantics_and_final_reanalysis
+  - mandatory_explicit_validation_profile_and_production_null_refusal
+  - all_200_updates_and_stop_reason_reported
+  - output_roundtrip_shape_dtype_origin_same_state
+  - required_contract_and_reference_hash_refusal
+independent_verification:
+  fixed_states: frozen_A001_A002_oracles_and_independent_analytic_chain
+  history: frozen_upstream_200_step_reference_and_read_only_trace_not_same_new_loop
+  predeclared_snapshots: all_trace_iterations_reanalysis_of_recorded_pre_and_post_densities_on_each_trajectory_own_states
+  one_step_replay: all_preregistered_trace_iterations_including_epoch3_plus_using_each_trajectory_own_x_pre_old1_old2_low_upp
+  trajectory_comparison_boundary: raw_gradients_compared_only_at_identical_density_and_profile_never_forced_equal_at_diverged_trajectories
+  optimizer_inputs: raw_filtered_constraint_and_state_transition_checks
+  final_auto: A001_independent_Q4_reanalysis_and_D11
+  final_project: independent_element_assembly_at_project_160x80_beta4_penal3_khat1_final_density_with_shared_SciPy_linear_algebra
+  every_project_final: mandatory_production_reanalysis_against_saved_same_state_arrays_and_two_volumes
+  project_optimizer_state_coverage: shared_single_MMA_state_transition_entry_with_AuTO_compatible_loop_otherwise_same_trace_replay_required_for_160x80_baseline
+  shared_components_disclosed: [MMA_library, numpy, scipy, frozen_inputs]
+closure_regression:
+  planned_stage_entrypoints: [scripts/run_m3_a.py, scripts/run_m3_reference.py, scripts/run_m3_b.py, scripts/run_m3_c.py]
+  current_full_suite: JAX_ENABLE_X64=True_OPENBLAS_NUM_THREADS=1_python_-m_pytest_-q
+  all_M3_stage_artifacts_and_actual_CLI_replay: required_in_new_nonexistent_output_directories
+  history_and_source_integrity: preserve_old_sealed_current_bytes_verify_evolving_source_snapshots_at_recorded_commits
+  M2_current_actual_API_regression: required_without_reclosing_M2
+visualizations:
+  - auto_objective_and_volume_history_with_explicit_pre_post_labels_and_stop_reason
+  - auto_frozen_vs_new_reference_vs_M2_based_optimization_comparison
+  - preregistered_density_snapshots_and_final_displacement_in_physical_orientation
+  - project_beta_penal_matrix_initial_final_J_and_volumes
+  - project_baseline160x80_history_density_chain_and_scaled_deformation_with_actual_scale
+artifacts:
+  storage: versioned_JSON_NPZ_logs_and_figures_reuse_existing_evidence_transaction_no_general_database
+  per_iteration_checkpoint_before_final_export: true
+  retain_raw_stdout_stderr_exit_code_actual_environment: true
+  output_handoff:
+    density_roles: [raw_design_x, rho_filtered, rho_projected, rho_physical]
+    analysis_count_and_design_transform_application_count: explicit
+    reference_frame: bottom_left_y_up_x_right_float64_yx
+    profile_and_all_material_ports_forces_springs: bound
+    final_same_state_u_J_q_v_design_v_total: true
+    M4_physical_density_consumption: no_filter_or_projection_again
+budget:
+  total_parent_active_wall_seconds: 28800
+  per_phase_formal_review_repair_rounds_max: 2
+  finite_run_matrix: one_upstream_trace_one_auto_reconciliation_seven_project_runs_plus_preregistered_reanalysis
+  no_unbounded_scan: true
+stop_conditions:
+  - M2_handoff_not_accepted
+  - input_hash_or_frozen_environment_mismatch
+  - signed_acceptance_failure_keep_evidence_then_local_diagnosis_only
+  - change_of_scientific_problem_or_frozen_threshold_required
+  - two_formal_review_repair_rounds_exhausted
+  - parent_time_budget_exhausted
+non_goals: [M4_implementation_before_M3_acceptance, M5, geometry_qualification, candidate_pool, diversity_generation, HF, contact, matrix_free, GPU, full_artifact_platform, production_parameter_freeze, public_release]

@@ -1,0 +1,189 @@
+{
+  "schema_version": "hf-geometry-1.0",
+  "case_family": "inverter",
+  "grid": {
+    "shape_yx": [
+      40,
+      80
+    ],
+    "origin_mm": [
+      0.0,
+      0.0
+    ],
+    "cell_size_mm": [
+      1.0,
+      1.0
+    ],
+    "axes": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "extent_mm": [
+      80.0,
+      40.0
+    ],
+    "array_order": "C_yx_bottom_up",
+    "value_location": "cell"
+  },
+  "thickness_mm": 20.0,
+  "model_extent": {
+    "kind": "lower_half",
+    "symmetry_axis": {
+      "normal": [
+        0.0,
+        1.0
+      ],
+      "offset_mm": 40.0
+    }
+  },
+  "region_tags": {
+    "support": {
+      "points_mm": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          8.0
+        ]
+      ],
+      "components": [
+        0,
+        1
+      ]
+    },
+    "symmetry": {
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ]
+    },
+    "input": {
+      "points_mm": [
+        [
+          0.0,
+          38.0
+        ],
+        [
+          0.0,
+          40.0
+        ]
+      ],
+      "direction": [
+        1.0,
+        0.0
+      ],
+      "averaging": "normalized_reference_arclength_trapezoid"
+    },
+    "output": {
+      "points_mm": [
+        [
+          80.0,
+          38.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "direction": [
+        -1.0,
+        0.0
+      ],
+      "averaging": "normalized_reference_arclength_trapezoid"
+    }
+  },
+  "source_record_ids": [
+    "inverter__sweep__kin_1e+01__kout_1e-01"
+  ],
+  "processing": {
+    "source_kind": "archived_LF_optimization_budget_terminal",
+    "authority_source_key": "clean",
+    "source_native_grid_preserved": true,
+    "lossless_bool_to_uint8": true,
+    "new_threshold_or_cleanup_applied": false,
+    "original_threshold": 0.5,
+    "historical_cleaning": "eight-neighbor load-path selection; opened arrays diagnostic only",
+    "historical_removed_island_cells": 0,
+    "source_symmetry_policy": "contract_segment",
+    "source_symmetry_points_mm": [
+      [
+        0,
+        40
+      ],
+      [
+        80,
+        40
+      ]
+    ],
+    "imported_entity_symmetry_points_mm": [
+      [
+        0,
+        40
+      ],
+      [
+        80,
+        40
+      ]
+    ],
+    "source_symmetry_note": "full_midline includes LF soft gap; gripper canonical tag retains entity symmetry segment x0..60 only; source void constraints are not copied",
+    "provenance_record": "provenance/source_record.json",
+    "role": "diagnostic_HF1_candidate_qualification_pending"
+  },
+  "geometry_id": "2e2bb3466ade06f920dfbb92577ccbe46106acec430837bac8e1a30b8083527a",
+  "arrays": {
+    "path": "geometry.npz",
+    "sha256": "1911362efaa5b6c5104af0cecf95310f262b129f3e0cd2a1c648cf550b756132",
+    "fields": {
+      "solid": {
+        "shape": [
+          40,
+          80
+        ],
+        "dtype": "uint8",
+        "sha256": "11315199330546b0f14d840707344a4eeda10904c6d33b3bc0f29f51ab56f6ac"
+      },
+      "design": {
+        "shape": [
+          40,
+          80
+        ],
+        "dtype": "uint8",
+        "sha256": "b44391f206168cd968bdabee69566d4926087a420750ad7977f7e8ee7d15c6b4"
+      },
+      "passive_solid": {
+        "shape": [
+          40,
+          80
+        ],
+        "dtype": "uint8",
+        "sha256": "5a312281df4bd8dfbb4d4a94ad0bf44d01bb8cfced1206b90e21b4ca0568cdb1"
+      },
+      "passive_void": {
+        "shape": [
+          40,
+          80
+        ],
+        "dtype": "uint8",
+        "sha256": "5a312281df4bd8dfbb4d4a94ad0bf44d01bb8cfced1206b90e21b4ca0568cdb1"
+      }
+    }
+  },
+  "descriptor_sha256": "e914ff1209f842c355c144fb5fda6e0c09bc2f7987b082942ae61f44cb2a2ea6"
+}

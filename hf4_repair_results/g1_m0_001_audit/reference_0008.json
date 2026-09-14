@@ -1,0 +1,88 @@
+{
+  "schema_version": "hf4-normal-reference-1.0",
+  "precision_digits": 50,
+  "inputs": {
+    "binary64_hex": {
+      "lam_s": "0x1.2762762762762p-1",
+      "mu_s": "0x1.89d89d89d89d8p-2",
+      "lam_v": "0x1.ef92b9ed9b68dp-25",
+      "mu_v": "0x1.4a61d1491245ep-25",
+      "width": "0x1.0000000000000p+0",
+      "H1": "0x1.0000000000000p+0",
+      "H2": "0x1.0000000000000p+0",
+      "gap": "0x1.0000000000000p-2",
+      "thickness": "0x1.0000000000000p+0",
+      "d": "0x1.0800000000000p-2"
+    },
+    "decimal": {
+      "lam_s": "0.5769230769230768718358604019158519804477691650390625",
+      "mu_s": "0.384615384615384581223906934610567986965179443359375",
+      "lam_v": "5.769230769230768206149310485010561766472392264404334127902984619140625E-8",
+      "mu_v": "3.84615384615384547076620699000704117764826150960288941860198974609375E-8",
+      "width": "1",
+      "H1": "1",
+      "H2": "1",
+      "gap": "0.25",
+      "thickness": "1",
+      "d": "0.2578125"
+    }
+  },
+  "units": {
+    "length": "mm",
+    "nominal_stress": "MPa",
+    "force": "N",
+    "energy": "N mm"
+  },
+  "scales": {
+    "force_N": "1.3461538461538460342836742711369879543781280517578",
+    "length_mm": "2.25",
+    "note": "reference cross-precision scales; not physical acceptance tolerances"
+  },
+  "finite_gamma": {
+    "force_N": "0.0052956890614696718046736713656206595354620604191414",
+    "force_from_medium_N": "0.0052956890614696718046736713656206595354620604191365",
+    "p_nominal_MPa": "0.0052956890614696718046736713656206595354620604191414",
+    "p_medium_MPa": "0.0052956890614696718046736713656206595354620604191365",
+    "s_s": "0.99608039031196614649533537393310198898285824715376",
+    "s_v": "0.00010687750427082803731700853518408813713402276989233",
+    "gap_mm": "0.000026719376067707009329252133796022034283505692473082",
+    "solid_shortening_mm": "0.00783921937606770700932925213379602203428350569248",
+    "length_residual_mm": "-6.9175E-51",
+    "traction_residual_MPa": "4.9102143293323239702921327E-51",
+    "normalized_length_residual": "3.0744444444444444444444444444444444444444444444444E-51",
+    "normalized_traction_residual": "3.6475877875040124161878885451361379740357779352646E-51",
+    "minimum_J": "0.00010687750427082803731700853518408813713402276989233",
+    "material_energy_solid_Nmm": "0.000020731772092832839620560784596692553744980413230020",
+    "material_energy_medium_Nmm": "6.8606739511203835548062173688385245118571720518976E-7",
+    "material_energy_total_Nmm": "0.000021417839487944877976041406333576406196166130435210",
+    "model": "finite_medium",
+    "phase": "compressed_medium",
+    "residual_basis": "exported_decimal_stretch_ratios",
+    "root": {
+      "method": "monotone_bracket_bisection",
+      "iterations": 191,
+      "solid_shortening_lower_mm": "0.0078392193760677070093292521337960220342835056924730814953956651894253331765",
+      "solid_shortening_upper_mm": "0.007839219376067707009329252133796022034283505692473081495554974380538578404",
+      "work_precision_digits": 74
+    }
+  },
+  "hard_contact": {
+    "force_N": "0.0052775732870533183418908575868348740366183057358589",
+    "p_nominal_MPa": "0.0052775732870533183418908575868348740366183057358589",
+    "s_s": "0.99609375",
+    "gap_mm": "0",
+    "solid_shortening_mm": "0.00781250",
+    "length_residual_mm": "0",
+    "complementarity_MPa_mm": "0",
+    "minimum_J_solid": "0.99609375",
+    "material_energy_solid_Nmm": "0.000020590516607363579410679567091593754206348526209219",
+    "model": "ideal_unilateral_hard_contact",
+    "phase": "compressed_contact"
+  },
+  "interpretation": {
+    "force": "positive compression; actuator on bottom specimen in +y",
+    "hard_contact": "independent unilateral law; model discrepancy is not FE error",
+    "regularization": "element-interior HuHu vanishes for affine layers",
+    "physical_validation": "not_evaluated"
+  }
+}

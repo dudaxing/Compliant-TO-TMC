@@ -1,0 +1,92 @@
+schema_version: "1.1"
+contract_id: analysis_protocol_v1.1
+milestone: M1
+language: zh-CN
+status: active
+signed_at_utc: "2026-09-04T11:43:31Z"
+relationship_to_v1:
+  old_contract_path: contracts/analysis_protocol_v1.yaml
+  old_contract_status: frozen_for_closed_M0
+  old_contract_modified: false
+  extension_scope: M1 profiles and low-fidelity actuation decision
+
+common_semantics:
+  array_shape_order: [nely, nelx]
+  project_origin: bottom_left
+  project_node_order: y_major_x_fast
+  dof_order_per_node: [ux, uy]
+  directions_must_be_unit_vectors: true
+  non_unit_direction_policy: reject
+
+profiles:
+  auto_compat_v1:
+    role: verification_only
+    status: frozen
+    source: A001_auto_reference_semantics_v1
+    formulation: plane_stress
+    actuation:
+      type: force_control
+      location: single_input_x_dof
+      total_force: 1.0
+    input_spring:
+      type: diagonal_point_spring
+      stiffness: 0.1
+    output_spring:
+      type: diagonal_point_spring
+      stiffness: 0.1
+    density_interpolation: "Emin+(Emax-Emin)*(rho+0.01)^penal"
+    objective:
+      J_auto: output_x_component
+      q_project: negative_J_auto
+  project_lf_candidate:
+    role: future_low_fidelity_candidate_generation
+    status: partially_frozen
+    provenance: project_design_decision_not_source_or_AuTO_fact
+    actuation:
+      type: force_control
+      type_status: frozen
+      total_force_N: null
+      value_status: must_freeze_before_formal_candidate_generation
+      direction: [1.0, 0.0]
+    input_spring:
+      enabled: true
+      enabled_status: frozen
+      total_stiffness_N_per_mm: null
+      value_status: must_freeze_before_formal_candidate_generation
+    invariant_across_all_candidates:
+      - actuation_type
+      - total_input_force_after_value_freeze
+      - input_spring_after_value_freeze
+    candidate_variables:
+      - output_spring_seed
+      - start_seed
+      - separately_authorized_generation_method
+    formulation:
+      initial_candidate: plane_strain
+      status: provisional
+      decision_due_at: M1_closure
+  unified_high_fidelity_task:
+    role: future_common_evaluator
+    status: not_started
+    actuation_type: displacement_control
+    actuation_type_status: retained_from_roadmap
+    value_mm: null
+    input_spring: none
+    same_task_for_all_candidates: true
+    cross_fidelity_difference:
+      low_fidelity: force_control_with_input_spring
+      high_fidelity: displacement_control_without_input_spring
+      classification: explicit_project_choice_not_error
+
+current_execution:
+  milestone: M1
+  authorized_subgate: solid
+  profile: auto_compat_v1
+  allowed_density_states: [solid]
+  forbidden_density_states: [uniform_vf, random_seed0, final]
+  stop_after_solid_result: true
+
+gradient_evidence_boundary:
+  raw_gradient: may_be_compared_to_finite_difference
+  filtered_sensitivity: optimizer_input_regression_only
+  filtered_sensitivity_is_explicit_scalar_gradient: not_asserted

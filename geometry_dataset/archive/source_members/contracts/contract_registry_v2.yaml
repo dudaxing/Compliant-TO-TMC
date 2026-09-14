@@ -1,0 +1,96 @@
+schema_version: "2.0"
+registry_id: contract_registry_v2
+language: zh-CN
+updated_at_utc: "2026-09-04T17:58:45Z"
+supersedes:
+  path: contracts/contract_registry_v1.yaml
+  file_sha256: ea925e5ca12d1a40fb43b52b00b0389115454625d362b34b69c0560203fbb25b
+
+unique_active_milestone: null
+active_milestone_count: 0
+
+milestones:
+  M0:
+    status: closed
+    decision: pass
+    immutable: true
+    decision_record:
+      path: milestones/M0/decision_record.yaml
+      file_sha256: 888a87ee3e6fb21bb7e489fba926d7833849a7f23751b83802ef386f242f752f
+    contracts:
+      benchmark_v1:
+        path: contracts/benchmark_v1.yaml
+        canonical_fingerprint: 42877d24b4f4be386d0fdac83d51df96d69e76c57ee10686af6d1289a8248483
+        file_sha256: 1a09b18154bfa5b5e5d691921a4fbe560574a638dcfd828fc25f6723c543cf14
+      analysis_protocol_v1:
+        path: contracts/analysis_protocol_v1.yaml
+        canonical_fingerprint: 0f9eeeb3e0c02369d7db9cc74cbefd32f964114fd693be76009066ddce90010c
+        file_sha256: c09e6e15c015af293b3892ea2f943cbebc49d8d7cf549a2007d6a0a359a4d35b
+      evaluator_v1:
+        path: contracts/evaluator_v1.yaml
+        canonical_fingerprint: 01c54e9ef5f941f408b76255e17465ab1d563964024aac0961be03c209419606
+        file_sha256: 31b248ea049f1a1076c7f9e200bf6c5829f944ad012fedfdd6288c643372ab1f
+
+  M1:
+    status: closed
+    closure_status: closed_pass
+    decision: pass
+    immutable: true
+    execution_status:
+      path: milestones/M1/execution_status_v6.yaml
+      file_sha256: cb252878b53f96f4f3891172bb3f0cdbe61c1903537edbd28312d742d728e3ff
+    closure:
+      decision:
+        path: milestones/M1/closure/closure_decision_v1.yaml
+        file_sha256: cea1460f5abc2269c6b048d0e8d78ad841cf48dd8d448ee783c8810ddd996804
+      artifacts_manifest:
+        path: milestones/M1/closure/artifacts_manifest_v1.json
+        file_sha256: 47fef94ae65609405a7ff8eaf3f7920ffe29fb7c49e2e1901f9a533e0acaef65
+      report:
+        path: milestones/M1/closure/closure_report_v1.md
+        file_sha256: 3f191e7ce0137e005a273883cf58930f796eb35e1da63a9767d8470412b922f8
+    contracts:
+      m1_fem_contract_v1:
+        path: contracts/m1_fem_contract_v1.yaml
+        canonical_fingerprint: 9441a816bc24d1cd6502badddce0885229769f6a711de9ab26124eb769c19114
+        file_sha256: 07052af54ae3202b8fe4ff00b47ffe3a1a1ec94a1654bf9bae0afcc787184c77
+      analysis_protocol_v1.1:
+        path: contracts/analysis_protocol_v1.1.yaml
+        canonical_fingerprint: d081db65706ab9f4946c1c92ae982e1c2553b4d49878d54095d937bea53b3e73
+        file_sha256: 87691b5cc50cd3fc66510490aeb2027cc055cdf864e89c578c26923cf527e81f
+      benchmark_v1.1:
+        path: contracts/benchmark_v1.1.yaml
+        canonical_fingerprint: f8765b9846b887ff28a4a55120d0af2e980258640da3bb9aa2acc00f33ea7009
+        file_sha256: 4d7a88b50c90888f34d63d2b5fb07b2bd19d4fcdc85c04eeb94fa71d7b8a1426
+      m1_outputs_v1:
+        path: contracts/m1_outputs_v1.yaml
+        canonical_fingerprint: 51c49294e0693325535b815cfb7d94b0064759525c93f810a8367d7d7047b91d
+        file_sha256: 56fda49b56d3d88bb956df975a474e28a24dc09ca90caad70732c387e1763cea
+    production_configuration:
+      profile: project_inverter_v1
+      mesh: {nelx: 160, nely: 80}
+      formulation: plane_strain
+      integration: full_2x2_gauss
+      nu_LF: 0.30
+      physical_port_width_mm: 2.0
+      C_ref_mm_per_N: 0.3061599133752718
+      k_ref_N_per_mm: 3.266266928859044
+      conservative_relative_discretization_uncertainty: 0.005852528213865961
+
+  M2:
+    status: not_started
+    authorized: false
+    blocked_by: formal_resign_and_explicit_authorization
+
+activation_invariant:
+  active_milestone_count: 0
+  unique_active_milestone: null
+  M1_subgates_all_passed_and_sealed: true
+  M2_authorized: false
+  M2_started: false
+
+license_governance:
+  status: unresolved
+  scientific_M1_closure_blocker: false
+  third_party_notices_required_before_public_release: true
+  public_release_blocker: true

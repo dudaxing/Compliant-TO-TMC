@@ -1,0 +1,169 @@
+schema_version: '1.0'
+contract_id: m2_outputs_v1
+milestone: M2
+language: zh-CN
+scope: given_design_analysis_and_complete_design_gradients
+input_contract:
+  path: contracts/m2_design_contract_v1.yaml
+  file_sha256: f229a32fb3d5df51eb876e4470df74d88ac4a47780537cc0690633b407cdcb72
+  canonical_fingerprint: 94b42d529253e169a0c131a7fe070cf2f1489dcc44ea9de2da195a3185d84c6c
+inherited_M1_outputs:
+  path: contracts/m1_outputs_v1.yaml
+  file_sha256: 56fda49b56d3d88bb956df975a474e28a24dc09ca90caad70732c387e1763cea
+analysis_API_commit: de73d2001009625ecf1f2db815ead48b030e4072
+verified_C_execution_commit: 90b63084f5f2f8006db84314fdcdcd1118fe2e0a
+closure_preparation_commit: 23620f33f4e9dfcbfa4b327ec072b8fe80f81650
+API:
+  entry: dmftd.analysis.evaluate_design
+  mandatory_arguments:
+  - problem
+  - transform
+  - x
+  - E_scale
+  - Emin
+  - penal
+  outputs:
+  - q
+  - J
+  - v_design
+  - v_total
+  - grad_q
+  - grad_J
+  - grad_v_design
+  - grad_v_total
+  array_convention: float64 (nely,nelx), bottom-left, C-order x-fast
+  diagnostic_namespace: validation.J_test and validation.grad_J_test only
+  physical_grid_responsibility: problem unit_ke and transform must use the same physical
+    grid and units; connectivity checked
+accepted_mathematics:
+  storage: bottom_left_origin_y_major_x_fast_shape_nely_nelx_float64
+  mask_partition: Md+Ms+Mv=1_disjoint_binary
+  initial_mask: rho0=Md*x+Ms
+  filter_weight: H[e,j]=max(0,r-distance(physical_element_centers[e],physical_element_centers[j]))
+  filter_boundary: only_in_domain_neighbors_row_normalized_no_padding_no_wrap
+  filter_operator: F=diag(1/H.sum(axis=1))*H; rho_filtered=F*rho0
+  projection: (tanh(beta*eta)+tanh(beta*(rho_filtered-eta)))/(tanh(beta*eta)+tanh(beta*(1-eta)))
+  final_mask: rho_physical=Md*rho_projected+Ms
+  volume_design: sum(Md*rho_physical)/sum(Md)
+  volume_total: sum(rho_physical)/ne
+  state: (Kstruct+kin*bin*bin.T+kout*bout*bout.T)ff*uf=F_in*bin_f
+  signed_output: q=bout.T*u
+  minimize_objective: J=-q; no_abs_no_clipping
+  adjoint: Kff.T*lambda_f=(dJ/du)_f; homogeneous constrained entries
+  local_density_gradient: a=dJ_drho_direct-Eprime*einsum(lambda_e,Ke_unit,u_e)
+  design_gradient: Md*F.T*(Pprime*Md*a)
+  constant_during_analysis:
+  - ports
+  - force
+  - kin
+  - kout
+  - k_ref
+  - geometry
+  - nu
+  - thickness
+  backend: SciPy_state_and_transpose_adjoint_same_LU_once_per_design_JAX_x64_transform_VJP
+  no_postassembly_symmetrization: true
+  mixed_validation_only: J_test=J/(1 mm)+0.1*v_design; not_scientific_objective
+project_profile:
+  inherited_FEM_profile: project_inverter_v1
+  formulation: plane_strain
+  nu: 0.3
+  length_mm: 80.0
+  half_height_mm: 40.0
+  thickness_mm: 20.0
+  production_mesh:
+  - 160
+  - 80
+  integration: full_2x2_gauss
+  physical_port_width_mm: 2.0
+  E_scale_MPa: 1.0
+  C_ref_mm_per_N: 0.3061599133752718
+  k_ref_N_per_mm: 3.266266928859044
+  material: E=Emin+(Escale-Emin)*rho_physical**p
+verification_parameters_only:
+  role: M2_validation_fixture_only_never_production_defaults
+  input_total_force_N_per_half: 1.0
+  input_spring_hat: 1.0
+  input_spring_N_per_mm_per_half: 3.266266928859044
+  output_spring_hat_primary: 1.0
+  output_spring_hat_diagnostics:
+  - 0.1
+  - 10.0
+  Emin_over_Escale: 0.001
+  penal: 3.0
+  filter_radius_mm: 3.0
+  projection_eta: 0.5
+  projection_beta: 4.0
+  local_projection_betas:
+  - 1.0
+  - 4.0
+  - 8.0
+  mirror_rule: 两个半模型各1N，各有独立镜像秩一弹簧；不合并为跨端口弹簧
+production_unfrozen:
+  input_total_force_N_per_half: null
+  input_spring_hat: null
+  input_spring_N_per_mm_per_half: null
+  filter_length_physical_mm: null
+  physical_min_feature_mm: null
+  volume_fraction: null
+  candidate_generation_policy: null
+  policy: 生产入口遇空值须拒绝，不从verification_parameters回退；M2不实现候选生成
+production_loading_policy: reject null; never fall back to verification parameters
+verified_coverage:
+  A_transform_FD_rows: 162
+  C_full_chain_FD_rows: 540
+  C_direction_objective_combinations: 60
+  C_mesh_cases:
+  - independent_6x4
+  - project_40x20_khat0.1
+  - project_40x20_khat1
+  - project_40x20_khat10
+  - project_160x80_khat1
+  A002_raw_states:
+  - solid
+  - uniform_vf
+  - random_seed0
+evidence_manifests:
+  milestones/M2/A0/manifest_v1.json: deeae3142c6e4db63066c2d328e95feebf88a3d8e5ca6ed777acdd46812d5e06
+  milestones/M2/A/manifest_v1.json: a4645c8632779f12f27f34d86c21330b69c7e0086786f2565b48faca9b40fccc
+  milestones/M2/B/manifest_v1.json: 611ef01be9045d9238f395f25fd01721d246ad1071f4f0a181d31e73c629711c
+  milestones/M2/C/manifest_v1.json: 680eb0571ecec09730518a3bb5111d1f49f88c0250b67b17138231c7d30f8bfc
+  milestones/M2/closure_checks/manifest_v1.json: 0c16cfcfc8b9963e2e17b7c008f71ca00103e6a8d730d27ec35a319c1841d2d2
+  milestones/M2/reviews/B/manifest_v1.json: 31df3db8d4e9f2709615f8bb39b9c9071916e614769f16efffb92601eb19952c
+  milestones/M2/resign_manifest_v1.json: 747324c1268e6aa518aceb6b3ebdab0ad5c59ca3f86c3343f306256a422a0405
+  milestones/M1/errata/E001/manifest_v1.json: 391e90ffb5dfef664a9efc17cd829e4075eec8332135885850b6a3111f047120
+auxiliary_evidence_sha256:
+  milestones/M2/reviews/A_development_v1.txt: 6f6c769727d2613558d4d3703ce5b506a6894b6c0407462b3e2d5632a189eeb8
+  milestones/M2/reviews/A_visual_v1.json: 20984381b1ea65d2ba867961763e8d4198a8643205412175cc26ae8f735cd8cb
+  milestones/M2/reviews/B_initial_environment_refusal_v1.txt: 379d9769dd2a8fbd953abce7485b92979c95722a64e6b421a2a64aca4699daae
+  milestones/M2/reviews/B_visual_v1.json: ef01e44096ef35e49309204f1aac150886a7285e812c6b5ce5298adb2a3b2d71
+  milestones/M2/reviews/B_x64_development_test_v2.txt: 7c80dfb7b7b078aed1a3d5463afd63f981d4024d0a6c5eabbaf58bbc9a6f81bb
+  milestones/M2/reviews/closure_publisher_review_v1.json: 69c98df2e62f02c27dff4b7cb00f90815d3e5f0b6c690b8e6235eedf23c720ce
+  milestones/M2/reviews/closure_publisher_review_v2.json: 28468d0d89960dc0c1180699a6c180a71dc29649b9319ef9773b19a68a6146ff
+  milestones/M2/reviews/closure_replay_visual_v1.json: 6e6c8911986805a95a4787c335cdd301dc5a60afe74f8e584e77a24a2b12c6fc
+  milestones/M2/reviews/C_export_failure_v1.md: b58e5f6b73e42bc02ad34dee25208eebcfddae0c53b20bfafc7fa88883099bfa
+  milestones/M2/reviews/C_rerun_console_v2.txt: 32d13bed18340976c6eac1be40e837b2123793d83d417b88d73115c9202e0553
+  milestones/M2/reviews/C_visual_v1.json: ab60701631587645327a45646840ab7cedbdfbe0a82eb7277d1f0d4088a9bfd2
+  milestones/M2/reviews/A0/m2_a0_independent_probe_result.json: 3a24c28561ff6e1a5a9200fb4082fe9882d4fbbc03b15a19eafe10cf0da715ab
+  milestones/M2/reviews/A0/m2_a0_independent_review.json: 4d71a4364b6f09f8df67c41ef076ee1ef436576efefbfce207df8a27dbfd9922
+  milestones/M2/reviews/A0/m2_a0_review_resolution_v1.json: 7c0cc3df746c6dde8b6ed6cd9adf6fd88d5d06f5b255d1242b64a1612189bb0f
+  milestones/M2/reviews/B/decision_v1.json: 3ba0915ca1f4a79aa5e2ffd37159678b6a8b1a1df0534200ac32d097929af4b6
+  milestones/M2/reviews/B/manifest_v1.json: 31df3db8d4e9f2709615f8bb39b9c9071916e614769f16efffb92601eb19952c
+  milestones/M2/reviews/B/probe_result_v1.json: 32dd37c45c31c2b2da9cb0d6fed0dad114e66422ac645ab622b345d989679911
+  milestones/M2/reviews/B/probe_v1.py: 27572e52411775bd73d5ac8429c5daa57f22917b4a4cdc53529be4c9a68a7ca5
+  milestones/M2/reviews/B/report_v1.md: 1a039e9cbd784d767d8bc7b3d0761852967b706d1fba55b6e7d8963f9c2be8a3
+  milestones/M2/reviews/B/test_report_v1.txt: 9f5b82c192c371f8dc2f2f89df0e3a72238061e0e4d1a751b5430d10a59d84d0
+M3_authorized: false
+optimizer_started: false
+deferred:
+- MMA
+- optimizer_iterations
+- candidate_pool
+- diversity_algorithms
+- contact
+- high_fidelity
+- GPU_solver
+- matrix_free
+- general_callback_framework
+- production_load_freeze
+- M3

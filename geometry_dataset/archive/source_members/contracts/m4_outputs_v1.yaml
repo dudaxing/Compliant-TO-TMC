@@ -1,0 +1,261 @@
+schema_version: '1.0'
+contract_id: m4_outputs_v1
+milestone: M4
+status: frozen_measurement_outputs
+status_semantics: Closure status and independent acceptance live in the successor
+  registry and closure decision
+prepared_at_utc: '2026-09-05T17:42:19.023493+00:00'
+approval_type: 用户有限委托下的代理批准
+publisher: /root
+measurement_contract:
+  path: contracts/m4_measurement_contract_v1.yaml
+  file_sha256: 749436a0f7254ac2b27644f2a6f5dd340d3b38e18ec033a785bb2b8462720003
+battery:
+  path: milestones/M4/battery_v2/manifest_v1.json
+  file_sha256: d757798c51560eac9494b905179d3320d9ebf4bf33da09d6d5332bc40586e7bf
+checks:
+  path: milestones/M4/closure_checks_v3/manifest_v1.json
+  file_sha256: dd9501a3ec47cb8ed6f32c8f4dd1e3d6fd29b6275379fab474cb57e5cf049f41
+common_profile:
+  role: M4_local_measurement_profile_not_production_defaults
+  domain_mm:
+  - 80.0
+  - 40.0
+  main_mesh:
+  - 160
+  - 80
+  fine_mesh:
+  - 320
+  - 160
+  formulation: plane_strain
+  integration: full_2x2_Gauss
+  nu: 0.3
+  thickness_mm: 20.0
+  E_scale_MPa: 1.0
+  Emin_MPa: 0.001
+  penal: 3.0
+  force_N_per_half: 1.0
+  k_ref_N_per_mm: 3.266266928859044
+  input_spring_N_per_mm: 3.266266928859044
+  primary_output_spring_N_per_mm: 0.0
+  physical_port_width_mm: 2.0
+  ports_and_fixed_dofs: inherited_project_inverter_v1_geometry_and_normalized_tributary_weights
+  source_profile: preserve_source_mesh_material_beta_p_load_springs_masks_hashes_separately
+  source_p2_policy: consume_physical_density_under_common_p3_without_claiming_same_source_J
+  physical_density: float64_yx_C_order_origin_bottom_left_no_new_filter_projection_mask_or_clipping
+  nested_copy: repeat_each_source_cell_by_integer_y_and_x_factors_conserving_piecewise_constant_density
+  fine_state: new_equilibrium_solve_on_copied_density_never_resize_old_strain_or_u
+  production_nulls: unchanged_no_fallback_from_measurement_profile
+algorithms:
+  R_SE: R_SE_top01_material_raw_v1
+  strain: eps_hat_principal_r2_interior_v1
+  geometry: exact_continuous_density_area_centroid_and_second_central_moments_v1
+fields:
+  equilibrium: physical density,u_free,w,total/floor/material energies,GP engineering
+    Voigt strains,GP scalar,interior scalar,all masks,selected material area
+  gauss_engineering_strain: 'array (ny,nx,4,3): [exx,eyy,gamma_xy]; tensor off-diagonal=gamma_xy/2;
+    plane strain ezz=0'
+  prescribed_bending: physical density,u_prescribed,GP analytic comparisons; no equilibrium
+    or Thevenin claim
+case_count: 15
+grid_qualification:
+- R_SE:
+    branch: relative
+    coarse: 0.3121445156212234
+    drift: 0.004790560171661392
+    fine: 0.31364706073835524
+    pass: true
+    threshold: 0.05
+  case_id: solid
+  eps_hat:
+    branch: relative
+    coarse: 3.8790235506064312
+    drift: 0.015247899008240974
+    fine: 3.939086341323676
+    pass: true
+    threshold: 0.2
+  raw_GP_peak:
+  - raw_GP_peak: 0.014166598626025526
+    raw_GP_peak_element_id: 2560
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 7.478906723632311
+    raw_GP_peak_xy_mm:
+    - 0.10566243270259354
+    - 8.105662432702594
+  - raw_GP_peak: 0.020788508267209217
+    raw_GP_peak_element_id: 10240
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 10.951593280591046
+    raw_GP_peak_xy_mm:
+    - 0.05283121635129677
+    - 8.052831216351297
+  strain_qualification: qualified
+- R_SE:
+    branch: relative
+    coarse: 0.1690097738142227
+    drift: 0.006143472518661846
+    fine: 0.17005449895522895
+    pass: true
+    threshold: 0.05
+  case_id: deterministic_frame
+  eps_hat:
+    branch: relative
+    coarse: 1.5659105534292834
+    drift: 0.0024772089331898017
+    fine: 1.569799274214683
+    pass: true
+    threshold: 0.2
+  raw_GP_peak:
+  - raw_GP_peak: 0.01994184066727614
+    raw_GP_peak_element_id: 2560
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 7.07889536087757
+    raw_GP_peak_xy_mm:
+    - 0.10566243270259354
+    - 8.105662432702594
+  - raw_GP_peak: 0.029114576773106457
+    raw_GP_peak_element_id: 10240
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 10.317174157078428
+    raw_GP_peak_xy_mm:
+    - 0.05283121635129677
+    - 8.052831216351297
+  strain_qualification: qualified
+- R_SE:
+    branch: relative
+    coarse: 0.24506668604745216
+    drift: 0.015850973302880298
+    fine: 0.24901379709729016
+    pass: true
+    threshold: 0.05
+  case_id: auto_final
+  eps_hat:
+    branch: relative
+    coarse: 0.5499304741110976
+    drift: 0.029782431283256777
+    fine: 0.5340258848908553
+    pass: true
+    threshold: 0.2
+  raw_GP_peak:
+  - raw_GP_peak: 0.0057794035757206446
+    raw_GP_peak_element_id: 2012
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 1.5772741328661009
+    raw_GP_peak_xy_mm:
+    - 46.105662432702594
+    - 6.1056624327025935
+  - raw_GP_peak: 0.007652248780745057
+    raw_GP_peak_element_id: 7864
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 2.0865160224876798
+    raw_GP_peak_xy_mm:
+    - 46.052831216351294
+    - 6.052831216351297
+  strain_qualification: qualified
+- R_SE:
+    branch: relative
+    coarse: 0.260527739153425
+    drift: 0.01727360848278463
+    fine: 0.26510709532406107
+    pass: true
+    threshold: 0.05
+  case_id: m3_coarse_p2
+  eps_hat:
+    branch: relative
+    coarse: 0.6759237498833661
+    drift: 0.023764216661316534
+    fine: 0.6602338105620431
+    pass: true
+    threshold: 0.2
+  raw_GP_peak:
+  - raw_GP_peak: 0.009281077130319067
+    raw_GP_peak_element_id: 2560
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 2.5352768242674997
+    raw_GP_peak_xy_mm:
+    - 0.10566243270259354
+    - 8.105662432702594
+  - raw_GP_peak: 0.014240095978854183
+    raw_GP_peak_element_id: 10240
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 3.88709979053172
+    raw_GP_peak_xy_mm:
+    - 0.05283121635129677
+    - 8.052831216351297
+  strain_qualification: qualified
+- R_SE:
+    branch: relative
+    coarse: 0.22687351488212112
+    drift: 0.004580867113023831
+    fine: 0.227917575005946
+    pass: true
+    threshold: 0.05
+  case_id: connector_L20_t2
+  eps_hat:
+    branch: relative
+    coarse: 2.6209832114000706
+    drift: 0.014076804952955279
+    fine: 2.6584050609287133
+    pass: true
+    threshold: 0.2
+  raw_GP_peak:
+  - raw_GP_peak: 0.01818974018182744
+    raw_GP_peak_element_id: 2560
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 8.175969587134695
+    raw_GP_peak_xy_mm:
+    - 0.10566243270259354
+    - 8.105662432702594
+  - raw_GP_peak: 0.026450483593203705
+    raw_GP_peak_element_id: 10240
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 11.86601341257809
+    raw_GP_peak_xy_mm:
+    - 0.05283121635129677
+    - 8.052831216351297
+  strain_qualification: qualified
+- R_SE:
+    branch: relative
+    coarse: 0.2846309199863518
+    drift: 0.005989486515564631
+    fine: 0.28634598540471945
+    pass: true
+    threshold: 0.05
+  case_id: connector_L2_t2
+  eps_hat:
+    branch: relative
+    coarse: 3.398856243879758
+    drift: 0.013899814847476611
+    fine: 3.4467656482125553
+    pass: true
+    threshold: 0.2
+  raw_GP_peak:
+  - raw_GP_peak: 0.015687291907602867
+    raw_GP_peak_element_id: 2560
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 7.827757393222977
+    raw_GP_peak_xy_mm:
+    - 0.10566243270259354
+    - 8.105662432702594
+  - raw_GP_peak: 0.022925551684532912
+    raw_GP_peak_element_id: 10240
+    raw_GP_peak_gp_id: 0
+    raw_GP_peak_normalized: 11.411087788649537
+    raw_GP_peak_xy_mm:
+    - 0.05283121635129677
+    - 8.052831216351297
+  strain_qualification: qualified
+production_unfrozen:
+  candidate_generation_policy: null
+  filter_length_physical_mm: null
+  input_spring_N_per_mm_per_half: null
+  input_spring_hat: null
+  input_total_force_N_per_half: null
+  physical_min_feature_mm: null
+  policy: 生产入口遇空值须拒绝，不从verification_parameters回退；M2不实现候选生成
+  volume_fraction: null
+next_milestone_authorized: false
+limitations:
+- No HF prediction or safety/ranking claim from strain
+- No topology qualification or M5
+- M4 metrics describe the common LF protocol only

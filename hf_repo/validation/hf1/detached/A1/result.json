@@ -1,0 +1,318 @@
+{
+  "schema_version": "hf-result-1.0",
+  "evaluation_id": "796051f9-de67-4b99-9269-c1c38b8ec9d2",
+  "created_at_utc": "2026-09-13T11:01:15.485917+00:00",
+  "scope": "HF-1 solid-only small-strain linear interface diagnostic; not nonlinear/contact fidelity",
+  "geometry_id": "2e2bb3466ade06f920dfbb92577ccbe46106acec430837bac8e1a30b8083527a",
+  "geometry_descriptor_sha256": "e914ff1209f842c355c144fb5fda6e0c09bc2f7987b082942ae61f44cb2a2ea6",
+  "task_id": "hf1_inverter_linear_interface_smoke_v1",
+  "task_sha256": "512d715e340f22be737ccf774e34849344b3e51fd5636b6d5c24ac9850540f6b",
+  "solver_id": "hf1_q1_solid_linear_v1",
+  "solver_sha256": "937d8325e70ba2025f1e88d85e50c91231c3d00f1046e3b3f0b1207bf71594e1",
+  "implementation": {
+    "package_version": "0.1.0",
+    "source_sha256": "4f2499dbcc571210329e47d30fa7dee066c2838a89138e853486c1072e42485f",
+    "python": "3.13.6",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "matplotlib": "3.10.9"
+    }
+  },
+  "readability": {
+    "status": "pass"
+  },
+  "qualification": {
+    "status": "pending",
+    "measurements": {
+      "solid_cells": 1128,
+      "design_cells": 3200,
+      "design_solid_cells": 1128,
+      "passive_solid_cells": 0,
+      "passive_void_cells": 0,
+      "solid_area_mm2": 1128.0,
+      "solid_volume_mm3": 22560.0,
+      "design_area_mm2": 3200.0,
+      "design_solid_area_mm2": 1128.0,
+      "design_volume_fraction": 0.3525,
+      "envelope_volume_fraction": 0.3525,
+      "components_4": 1,
+      "components_8": 1,
+      "local_diagonal_only_patterns": 0,
+      "diagonal_pattern_lower_left_cells_yx": [],
+      "min_feature_mm": null,
+      "common_support_port_component_ids_4": [
+        1
+      ]
+    },
+    "criteria": {
+      "max_design_volume_fraction": null,
+      "min_feature_mm": null
+    },
+    "checks": {
+      "shared_edge_connectivity": {
+        "status": "pass",
+        "components": 1,
+        "requirement": "one shared-edge-connected mechanism body; separate workpieces are not part of solid"
+      },
+      "support_attachment": {
+        "status": "pass",
+        "requirement": "at least two attached distinct nodes for interface smoke only"
+      },
+      "input_attachment": {
+        "status": "pass",
+        "requirement": "all original weighted port nodes attached to solid"
+      },
+      "output_attachment": {
+        "status": "pass",
+        "requirement": "all original weighted port nodes attached to solid"
+      },
+      "port_support_component_link": {
+        "status": "pass"
+      },
+      "design_volume_fraction": {
+        "status": "pending",
+        "value": 0.3525,
+        "maximum": null
+      },
+      "min_feature": {
+        "status": "pending",
+        "minimum_mm": null,
+        "reason": "No validated minimum-feature measurement in HF-1; connectivity is not manufacturing qualification"
+      }
+    },
+    "regions": {
+      "support": {
+        "selected_node_count": 9,
+        "attached_node_count": 4,
+        "selected_nodes": [
+          0,
+          81,
+          162,
+          243,
+          324,
+          405,
+          486,
+          567,
+          648
+        ],
+        "attached_nodes": [
+          405,
+          486,
+          567,
+          648
+        ],
+        "component_ids_4": [
+          1
+        ]
+      },
+      "input": {
+        "selected_node_count": 3,
+        "attached_node_count": 3,
+        "selected_nodes": [
+          3078,
+          3159,
+          3240
+        ],
+        "attached_nodes": [
+          3078,
+          3159,
+          3240
+        ],
+        "component_ids_4": [
+          1
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ]
+      },
+      "output": {
+        "selected_node_count": 3,
+        "attached_node_count": 3,
+        "selected_nodes": [
+          3158,
+          3239,
+          3320
+        ],
+        "attached_nodes": [
+          3158,
+          3239,
+          3320
+        ],
+        "component_ids_4": [
+          1
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ]
+      }
+    }
+  },
+  "numerics": {
+    "status": "success",
+    "target_reached": true,
+    "reached_input_mm": 1.0000000000000059e-06,
+    "failure_stage": null,
+    "reason": null
+  },
+  "functionality": {
+    "status": "not_assessed",
+    "reason": "No research functionality criteria frozen in HF-1"
+  },
+  "metrics_at_target": {
+    "q_in_mm": 1.0000000000000059e-06,
+    "q_out_mm": 1.6021813118562742e-06,
+    "R_in_N": 1.6963023023863184e-07,
+    "output_load_N": -0.0,
+    "strain_energy_N_mm": 8.48151151191054e-14,
+    "spring_energy_N_mm": 0.0,
+    "input_work_N_mm": 8.481511511931592e-14,
+    "energy_balance_error_N_mm": 2.105185766109001e-25,
+    "force_residual_norm_N": 3.0923425873904213e-19,
+    "force_scale_N": 1.9999999999999998e-05,
+    "force_scale_floor_N": 1.9999999999999998e-05,
+    "relative_force_residual": 1.546171293695211e-14,
+    "constraint_error_mm": 5.929230630780102e-21,
+    "analysis": "solid_linear_q1",
+    "status": "success",
+    "model_scope": "HF-1 solid-only linear interface diagnostic; no TMC or contact",
+    "units": {
+      "length": "mm",
+      "force": "N",
+      "stress": "MPa",
+      "energy": "N mm"
+    },
+    "element_count": 1128,
+    "active_node_count": 1351,
+    "n_dof": 2702,
+    "fixed_count": 21,
+    "reached_input_mm": 1.0000000000000059e-06,
+    "constraint_scale_mm": 1e-06,
+    "constraint_relative_error": 5.929230630780102e-15,
+    "integrated_strain_energy_N_mm": 8.481511512115885e-14,
+    "strain_components": [
+      "epsilon_xx",
+      "epsilon_yy",
+      "gamma_xy"
+    ],
+    "stress_components": [
+      "sigma_xx",
+      "sigma_yy",
+      "tau_xy"
+    ],
+    "quadrature_order": "eta outer, xi inner; each coordinate [-1/sqrt(3),+1/sqrt(3)]",
+    "output_force_sign": "force on structure = -k_out*q_out along output reference direction",
+    "support_reaction_sign": "force on structure at zero prescribed-displacement DOFs",
+    "timing_seconds": {
+      "assembly": 0.00401230005081743,
+      "linear_solve": 0.014392200042493641,
+      "postprocess": 0.0006321000400930643,
+      "total": 0.019474900094792247
+    }
+  },
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "signs": {
+    "R_in": "Actuator generalized force ON the structure, conjugate to positive input q",
+    "output_load": "Generalized spring force ON the structure = -k_out*q_out",
+    "displacement": "Reference-fixed port directions and normalized arclength weights",
+    "force_energy_extent": "All force and energy outputs refer to the modeled domain; no implicit doubling"
+  },
+  "path": {
+    "kind": "linear_reference_to_target",
+    "target_file": "fields.npz",
+    "note": "No nonlinear increments or contact path were computed"
+  },
+  "model_extent": {
+    "kind": "lower_half",
+    "symmetry_axis": {
+      "normal": [
+        0.0,
+        1.0
+      ],
+      "offset_mm": 40.0
+    }
+  },
+  "task_config": {
+    "schema_version": "hf-task-1.0",
+    "task_id": "hf1_inverter_linear_interface_smoke_v1",
+    "case_family": "inverter",
+    "purpose": "linear_interface_smoke_only",
+    "parameter_origin": "authorized_pilot_not_research_task",
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain"
+    },
+    "input": {
+      "tag": "input",
+      "displacement_mm": 1e-06
+    },
+    "output": {
+      "tag": "output",
+      "spring_N_per_mm": 0.0
+    },
+    "constraints": [
+      {
+        "tag": "support",
+        "components": [
+          0,
+          1
+        ]
+      },
+      {
+        "tag": "symmetry",
+        "components": [
+          1
+        ]
+      }
+    ],
+    "support_selection": "solid_incident_nodes_only",
+    "input_auxiliary_spring_N_per_mm": 0.0,
+    "workpiece": null,
+    "third_medium": null,
+    "qualification_criteria": {
+      "max_design_volume_fraction": null,
+      "min_feature_mm": null
+    },
+    "reference_state": "undeformed"
+  },
+  "solver_config": {
+    "schema_version": "hf-solver-1.0",
+    "solver_id": "hf1_q1_solid_linear_v1",
+    "analysis": "solid_linear_q1",
+    "quadrature": "gauss_2x2",
+    "dtype": "float64",
+    "linear_solver": "scipy_superlu",
+    "relative_force_tolerance": 1e-09,
+    "constraint_relative_tolerance": 1e-10,
+    "constraint_scale_floor_mm": 1e-06,
+    "time_limit_seconds": 300
+  },
+  "visualization": {
+    "status": "success",
+    "files": [
+      "geometry_layout.png",
+      "linear_deformation.png"
+    ],
+    "raw_data": "fields.npz",
+    "displacement_display_factor": 4949536.719268883,
+    "actual_input_displacement_mm": 1.0000000000000059e-06,
+    "scope": "Solid linear diagnostic, display amplification is not actual deformation",
+    "region_codes": {
+      "1": "design",
+      "2": "passive solid",
+      "3": "passive void"
+    }
+  },
+  "wall_seconds": 10.8405510999728
+}

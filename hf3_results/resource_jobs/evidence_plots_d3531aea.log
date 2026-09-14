@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\hf_repo\scripts\plot_hf3_evidence.py", line 421, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\hf_repo\scripts\plot_hf3_evidence.py", line 405, in main
+    path_reports = [full_path_figures(path, output, sources, references, i) for i, path in enumerate(paths, start=1)]
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\hf_repo\scripts\plot_hf3_evidence.py", line 342, in full_path_figures
+    axes[1, 0].set(ylabel="Material energy [N mm]", title="HuHu has no stored nonlinear potential", yscale="symlog", linthresh=1e-16)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\hf_repo\.venv-hf2-repair\Lib\site-packages\matplotlib\artist.py", line 146, in <lambda>
+    cls.set = lambda self, **kwargs: Artist.set(self, **kwargs)
+                                     ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\hf_repo\.venv-hf2-repair\Lib\site-packages\matplotlib\artist.py", line 1243, in set
+    return self._internal_update(cbook.normalize_kwargs(kwargs, self))
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\hf_repo\.venv-hf2-repair\Lib\site-packages\matplotlib\artist.py", line 1235, in _internal_update
+    return self._update_props(
+           ~~~~~~~~~~~~~~~~~~^
+        kwargs, "{cls.__name__}.set() got an unexpected keyword argument "
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "{prop_name!r}")
+        ^^^^^^^^^^^^^^^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\hf_repo\.venv-hf2-repair\Lib\site-packages\matplotlib\artist.py", line 1208, in _update_props
+    raise AttributeError(
+        errfmt.format(cls=type(self), prop_name=k),
+        name=k)
+AttributeError: Axes.set() got an unexpected keyword argument 'linthresh'
