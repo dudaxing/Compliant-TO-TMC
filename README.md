@@ -1,24 +1,33 @@
 # Compliant-TO-TMC：独立 HF 力学评估器
 
-**当前状态：0.5.0，HF4-B 四组冻结均匀法向任务已完成；下一步准备 HF4-C 非均匀二维接触验证计划。** 本仓库保存从开始至今的目标、开发说明、当前代码、数据和证据，支持在任意新目录接续，不需要原 ChatGPT 对话或原 Windows 工作目录。
+**稳定发布仍为 0.5.0 / HF4-B；2026-09-20 新增实验扩展已通过 HF4-C0 受限参照准入，HF4-C 一般接触验证仍未完成。** 本仓库保存从开始至今的目标、开发说明、当前代码、数据和证据，支持在任意新目录接续，不需要原 ChatGPT 对话或原 Windows 工作目录。稳定标签和 0.5.0 wheel 保持原样，本轮新增研究模块使用主分支源码。
 
-先读这三份文件：
+先读这些入口：
 
 1. [开发上下文](docs/DEVELOPMENT_CONTEXT.md)：整体目标、为什么分阶段、历次问题与修正、已完成工作、效果和未验证范围。
 2. [新电脑接续指南](docs/RESUME_DEVELOPMENT.md)：Python 3.13 环境、校验、读取、测试和新输出目录复验命令。
-3. [当前状态与下一步](docs/PROJECT_STATUS.md)、[需求—代码—证据对照](docs/REQUIREMENTS_TRACEABILITY.md)。
+3. [9 月 20 日研究集成报告](docs/HF4_C0_RESEARCH_INTEGRATION.md)、[本轮接续入口](research_integration_20260920/README.md)：来源审阅、取舍、新实现、实验、限制与下一步。
+4. [0.5.0 时的项目状态](docs/PROJECT_STATUS.md)、[原需求—代码—证据对照](docs/REQUIREMENTS_TRACEABILITY.md)：保留稳定阶段当时的记录。
 
 ## 目标与边界
 
 LF 生成多样化反向器/夹持器几何；HF 在共同、明确的物理任务下独立进行正向力学评价。HF 包不导入 LF、不需要 MATLAB，不包含拓扑优化更新。数据可读、几何资格、求解收敛、模型精度与机构功能分别评价。真实候选资格、一般非均匀接触、圆柱、稳定性、参数敏感性与最终排名仍待验证。
 
-当前修正使用 `u_lift` 与 `u_fluctuation` 两个数组保存权威位移，解除已观察的绝对位移更新舍入平台；`u_display` 只作显示。物理参数与验收门槛没有改变。
+0.5.0 修正使用 `u_lift` 与 `u_fluctuation` 两个数组保存权威位移，解除已观察的绝对位移更新舍入平台；`u_display` 只作显示。旧物理合同与验收门槛没有改变。以下是稳定发布的历史验收：
 
 - 四条路径均完成 6/6 原目标，52 个完整路径状态通过独立 HP；另有 2 个首目标试运行状态。
 - 两次测试去重 604 通过、1 跳过；独立安装验收 73 项通过。
 - [HF4 修正完整报告与五张图](docs/HF4_REPAIR_REPORT.md)、[机器可读验收](hf4_repair_results/acceptance_summary.json)、[实现说明](hf_repo/docs/HF4_SPLIT_IMPLEMENTATION.md)。
 
 ![新旧完整路径与原第四组失败对照](hf4_repair_results/comparison_plots_002/force_gap_comparison.png)
+
+## 2026-09-20 实验扩展：HF4-C0
+
+新增实体—矩形障碍交面积诊断、严格有效前缀，以及已闭合全接触 A0 参照任务。6 条均匀/非均匀路径、30 个接受态通过 620 项独立数值门和 30 次几何检查；独立有理数几何对照 288/288 通过，新增测试 72/72 通过。首次零接受态的 JAX 配置失败完整保留。
+
+这只验收受限的已闭合分支，没有实现一般主动集或完成 A0/TMC 同任务比较。两网格力差还包含二次底面 profile 的 Q1 边界插值差，离散平均为 `1−a·h²/2`；本轮 `kr=0`，非零 Hu 不构成 HuHu 正则项验收。完整物理合同、原始数据和下一步见[研究报告](docs/HF4_C0_RESEARCH_INTEGRATION.md)与[权威摘要](research_integration_20260920/summary_final/admission_summary.json)。
+
+![A0 力、网格敏感性与独立残差](research_integration_20260920/summary_final/a0_force_and_precision.png)
 
 ## 文件位置与历史
 
@@ -27,6 +36,7 @@ LF 生成多样化反向器/夹持器几何；HF 在共同、明确的物理任�
 | `hf_repo/` | 独立 Python 包、配置、测试、开发审计与依赖锁；[包说明](hf_repo/README.md) |
 | `geometry_dataset/` | 395 个普通几何/来源文件，包含两例规范输入；[数据索引](geometry_dataset/dataset_index.json) |
 | `docs/` | HF0 至今的计划、核查、报告、原因分析、当前状态和接续指南 |
+| `research_integration_20260920/` | LF/N19 来源审阅与取舍、本轮 7 次尝试和 6 份独立审计、最终图表与机器可读摘要；[本轮入口](research_integration_20260920/README.md) |
 | `hf1_results/`、`hf4_results/`、`hf4_repair_results/` | 主分支内完整普通证据，保留旧失败和新版结果 |
 | `hf2_results/`、`hf2_repair_results/`、`hf3_results/` | 摘要、图表、门禁、日志、测试及脚本；大数组/大 HP JSON 从 Release 恢复 |
 | `reference_validation/`、`hf0_audit/` | 已生成数值参考、资料身份、独立核查及历史过程；不是 HF 运行依赖 |
@@ -35,7 +45,7 @@ LF 生成多样化反向器/夹持器几何；HF 在共同、明确的物理任�
 
 原七次 Git 开发提交全部保留。科学基线为 `b1334bb6a83ba9a0efab7bdba7bd39722146f024`；原提交的 HF 代码位于 Git 根，新交接提交将其移至 `hf_repo/`，随后加入外层文档和证据，不改写原提交身份。
 
-阶段阅读顺序：[HF0](docs/HF0_REPORT.md) → [HF1](docs/HF1_REPORT.md) → [HF2 原版](docs/HF2_REPORT.md) → [HF2 修正](docs/HF2_REPAIR_REPORT.md) → [HF3](docs/HF3_REPORT.md) → [HF4 原版](docs/HF4_AB_REPORT.md) → [HF4 修正](docs/HF4_REPAIR_REPORT.md)。旧报告中的“部分完成/未开始”保留其当时事实，最新进度看本页和当前状态。
+阶段阅读顺序：[HF0](docs/HF0_REPORT.md) → [HF1](docs/HF1_REPORT.md) → [HF2 原版](docs/HF2_REPORT.md) → [HF2 修正](docs/HF2_REPAIR_REPORT.md) → [HF3](docs/HF3_REPORT.md) → [HF4 原版](docs/HF4_AB_REPORT.md) → [HF4 修正](docs/HF4_REPAIR_REPORT.md) → [HF4-C0 研究集成](docs/HF4_C0_RESEARCH_INTEGRATION.md)。旧报告中的“部分完成/未开始”保留其当时事实，最新进度看本页和 HF4-C0 报告。
 
 ## 快速取得与恢复
 
