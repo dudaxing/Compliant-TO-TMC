@@ -1,0 +1,21 @@
+{
+  "schema": "contact_c1_preflight_receipt_v1",
+  "date": "2026-09-20",
+  "status": "pass",
+  "command": "python -m pytest hf_repo/tests/test_split_affine.py hf_repo/tests/test_contact_c1.py hf_repo/tests/test_split_prescribed.py -q",
+  "runtime": "existing .venv-hf2-repair, Python 3.13.6, JAX 0.11.0",
+  "passed": 81,
+  "pytest_elapsed_seconds": 3.95,
+  "scope": "37 affine controller tests using independent manufactured spring systems; 35 frozen task construction and boundary contracts; 9 previous split controller regressions. No C1 FE paths or HP path audits are included.",
+  "source_sha256": {
+    "hf_repo/src/hf_eval/split_affine.py": "6ca9ef3bfccdee3fd5a3d392a7673fe4273af0790d6a63bf8969277944104dda",
+    "hf_repo/tests/test_split_affine.py": "2ca9e293d28b71ee7693dd33f55172b4e3f1fa1ed642befaa2679f09715bcb54",
+    "hf_repo/src/hf_eval/contact_c1.py": "f9c2406d673df25a801fcba275399cb84e2928074b95ce3dafc54986d22fdcc1",
+    "hf_repo/tests/test_contact_c1.py": "eea667e86c15cb324c59a0b3ed8027bc327b230094c0b209108946ed971d1510"
+  },
+  "preflight_corrections": [
+    "Omit a zero bottom_outer reaction group in solid-only models; the retained controller rejects zero measurement vectors.",
+    "Independent rational material coefficient comparison allows two binary64 ULPs from declared arithmetic. This is a construction contract check, not a changed mechanics acceptance threshold."
+  ],
+  "earlier_test_setup": "An initial agent collection attempt used .venv without JAX and ran no tests; it was replaced by the existing configured environment. No packages were installed and no FE evidence was produced by that attempt."
+}

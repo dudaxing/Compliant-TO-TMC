@@ -1,0 +1,14 @@
+{
+  "schema": "contact_c1_precision_amendment_v1",
+  "physical_protocol_sha256": "5b30bafc226cb97038ae1b0d08e745f9f7df2a049333a8019cdf03cc48fe5308",
+  "original_precision_pair": [50, 80],
+  "verification_precision_pair": [80, 120],
+  "measurement_precision": 80,
+  "relative_precision_agreement": 1e-40,
+  "changes_physics": false,
+  "changes_acceptance_thresholds": false,
+  "reason": "Independent 50-digit direct material stress evaluation loses precision at the almost-zero rigid-translation forces. Fixed-state 80/120 evaluation passes the same frozen component scale and 1e-40 gate. Increase reference arithmetic precision, never relax the gate or alter saved FE states.",
+  "diagnostic": {"path_from_project_root": "hf4_c1_results/precision_diagnostic_v1.json", "sha256": "643019ab9e391de948dfebe7bc659b6efcf3949d4ba6ae3ccd824358d9bcbe88", "material_scale_N": "2.5e-19", "relative_50_vs_80": "2.127899e-29", "relative_80_vs_120": "1.905871e-59"},
+  "execution": "Retain original 50/80 not-pass evidence. Apply the declared 80/120 pair to every state of every selected C1 path, including inserted states and phase origins. Eighty digits remains the measurement authority and is checked against 120 digits. No additional FE solve is authorized or required by this arithmetic amendment.",
+  "budget": "Existing independent-audit external budget of 1200 seconds per path remains in force; record original and supplemental audit attempts separately."
+}
