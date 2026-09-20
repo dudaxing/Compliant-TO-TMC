@@ -1,0 +1,26 @@
+{
+  "schema": "contact_c2_saved_endpoint_selection_v1",
+  "scope": "Explicit candidate states after mesh_h00625 failed its d=0.5 production-force evaluation gate. The mesh choice is its latest common original target d=0.375, not the inserted d=0.4375 state. These states have different d and must not be compared as common endpoints. This manifest is retained but is not executable by the frozen fields reader, which requires each whole run audit to pass.",
+  "execution_status": "not_executed_under_frozen_whole_run_admission",
+  "cases": [
+    {
+      "run": "hf4_c2_diagnostics/experiments/padding_2p5",
+      "state_id": "uniform_tmc:18",
+      "expected_parameter_s_mm": 0.5,
+      "run_audit_status": "pass"
+    },
+    {
+      "run": "hf4_c2_diagnostics/experiments/outer_free",
+      "state_id": "uniform_tmc:18",
+      "expected_parameter_s_mm": 0.5,
+      "run_audit_status": "pass"
+    },
+    {
+      "run": "hf4_c2_diagnostics/experiments/mesh_h00625",
+      "state_id": "uniform_tmc:18",
+      "expected_parameter_s_mm": 0.375,
+      "run_audit_status": "not_pass",
+      "selection_reason": "Latest admitted common original target before the failed final state; this is not a complete-path admission."
+    }
+  ]
+}

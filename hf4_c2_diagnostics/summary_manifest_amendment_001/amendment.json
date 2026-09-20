@@ -1,0 +1,37 @@
+{
+  "schema": "contact_c2_summary_manifest_amendment_v1",
+  "created_utc": "2026-09-20T16:27:22.273540+00:00",
+  "status": "pass",
+  "scope": "Storage manifest only: no scientific values, old source, or old output bytes changed; no FE and no scientific summary rerun.",
+  "original_manifest": "hf4_c2_diagnostics/summary_001/output_sha256.json",
+  "original_self_entry": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "actual_original_manifest_sha256": "7f530ce84a83734a60dd97c84d0aecfd38f729681cf8d2d39c082d188a55f3d6",
+  "defect": "The original main opened output_sha256.json with mode x before enumerating and hashing the directory. The new, empty file was therefore included with the SHA256 of empty bytes. That self entry is invalid; it is preserved as historical evidence.",
+  "correction": "This supplementary binding hashes the actual original manifest and every original summary output. Future r2 manifests enumerate and hash all output files before opening their own destination.",
+  "verified_original_nonself_entries": [
+    "fixed_support_mesh_observations.png",
+    "fixed_support_mesh_observations.svg",
+    "force_and_status.png",
+    "force_and_status.svg",
+    "saved_fields_and_analytic_integration.png",
+    "saved_fields_and_analytic_integration.svg",
+    "summary.json"
+  ],
+  "input_and_original_output_sha256": {
+    "hf4_c2_diagnostics/summary_001/fixed_support_mesh_observations.png": "73fe674af81763f44b3edbe9f94868b31aed73272784a2893e7f8a2736f2639d",
+    "hf4_c2_diagnostics/summary_001/fixed_support_mesh_observations.svg": "02771f795ac52e09312ca9fdfcebd62ef7561038eca8a32b6b5d08a6d526b760",
+    "hf4_c2_diagnostics/summary_001/force_and_status.png": "d3ba32fbd7bf8ec20d92ddc82e3da759e6e13f964f07ac281691b288ab1be739",
+    "hf4_c2_diagnostics/summary_001/force_and_status.svg": "76ca4d96f360083836634ff1699dc86354bafe4e3cc0a2121deed3afc668b6f1",
+    "hf4_c2_diagnostics/summary_001/output_sha256.json": "7f530ce84a83734a60dd97c84d0aecfd38f729681cf8d2d39c082d188a55f3d6",
+    "hf4_c2_diagnostics/summary_001/saved_fields_and_analytic_integration.png": "2f829119a4c9a509d3858b56026bd74037f73854367ef4517526f127c0f98c6d",
+    "hf4_c2_diagnostics/summary_001/saved_fields_and_analytic_integration.svg": "0f00170aa7345d50247d6579aa4ef52cf75575be8b303826be8b866acc98ced5",
+    "hf4_c2_diagnostics/summary_001/summary.json": "117de3b21b9348aea775c2d84b4fa882a14432f3fb7ab623bf6ee02c7a1ccd32",
+    "hf_repo/scripts/summarize_contact_c2.py": "95619c8ceb95371d3a3b031694f26d18c7b6e68a1aed4433f850109597d392a7",
+    "hf_repo/scripts/summarize_contact_c2_r2.py": "c6bacd03d9ffde3fe90d2dc66e2e902f8bcd717f6a08a9e2d583920d179cbdd4",
+    "hf_repo/tests/test_summarize_contact_c2_r2.py": "3a02cb0d95a6fd0c3ab2d7f83f65e7a11994ddea6ae9301fadc051dd1cb9343c"
+  },
+  "excluded_from_supplementary_input_map": [
+    "this amendment.json",
+    "this amendment directory's output_sha256.json"
+  ]
+}

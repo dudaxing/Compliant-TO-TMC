@@ -1,6 +1,6 @@
 # 在新电脑或任意新目录接续开发
 
-本指南覆盖 **稳定 0.5.0 / HF4-B** 与主分支 **HF4-C0/C1 实验扩展**。先读[开发上下文](DEVELOPMENT_CONTEXT.md)、[C1 最终报告](HF4_C1_FINAL_REPORT.md)、[C1 证据入口](../hf4_c1_results/README.md)和[最终摘要](../hf4_c1_results/summary_v2/summary.json)，再准备环境。[旧项目状态](PROJECT_STATUS.md)保留 0.5.0 时的事实。C0 受限参照与 C1 冻结配对任务已通过各自门禁；HF4-C 一般接触与项目整体仍未完成。TMC 净合力对账不构成其局部单边接触验收，文件搬迁和安装检查也不构成新的力学验收。
+本指南覆盖 **稳定 0.5.0 / HF4-B** 与主分支 **HF4-C0/C1/C2 实验扩展**。先读[C2 最终报告](HF4_C2_FINAL_REPORT.md)、[C2 证据入口](../hf4_c2_diagnostics/README.md)、[开发上下文](DEVELOPMENT_CONTEXT.md)、[C1 最终报告](HF4_C1_FINAL_REPORT.md)、[C1 证据入口](../hf4_c1_results/README.md)和[最终摘要](../hf4_c1_results/summary_v2/summary.json)，再准备环境。[旧项目状态](PROJECT_STATUS.md)保留 0.5.0 时的事实。C0 受限参照与 C1 冻结配对任务已通过各自门禁；HF4-C 一般接触与项目整体仍未完成。TMC 净合力对账不构成其局部单边接触验收，文件搬迁和安装检查也不构成新的力学验收。
 
 ## 1. 克隆与校验
 
@@ -56,7 +56,7 @@ python3.13 -m venv .venv-handoff
 & $hfPython -m pip install --no-deps hf_repo/dist/independent_hf_evaluator-0.5.0-py3-none-any.whl
 ```
 
-该 0.5.0 wheel 已在主分支，不需要 `fetch-evidence` 恢复；稳定标签 `hf-history-0.5.0` 和 wheel 均保持原样。**它不含新增的 C0/C1 研究模块。** 运行实验扩展应使用上述 `-e hf_repo` 源码安装和 `hf_repo/scripts/` 中的新脚本，不能把旧 wheel 称为新扩展的已安装发行包。严格“断开源码”验证还必须新建工作区以外的环境、复制普通输入、安装普通 wheel，并从外部目录运行独立脚本；editable 安装不能用于声称源码已经断开。
+该 0.5.0 wheel 已在主分支，不需要 `fetch-evidence` 恢复；稳定标签 `hf-history-0.5.0` 和 wheel 均保持原样。**它不含新增的 C0/C1/C2 研究模块。** 运行实验扩展应使用上述 `-e hf_repo` 源码安装和 `hf_repo/scripts/` 中的新脚本，不能把旧 wheel 称为新扩展的已安装发行包。严格“断开源码”验证还必须新建工作区以外的环境、复制普通输入、安装普通 wheel，并从外部目录运行独立脚本；editable 安装不能用于声称源码已经断开。
 
 ## 3. 固定运行设置，保存新机记录
 
@@ -168,6 +168,40 @@ A0 与 Aalpha 使用对应网格的 A0 均匀预载，TMC 使用对应 TMC 预�
 
 源预载必须保留匹配的 `audit.json` 和完整来源链；新审计外壳默认使用这个名称并拒绝覆盖。已有输出应换新 run 或显式使用新的 `--output-name` 保存诊断，不能改写历史结果来通过门禁。全路径、失败前缀、几何、数值及物理资格分别判断，依赖门失败即停止后续组合。
 
+### 当前 HF4-C2 的独立读回入口
+
+**C2 仅部分通过，细网格路径仍未验收。** 三次新 FE 尝试均求解至 `d=0.5 mm`，其中 padding 的 19 态/589 项检查和 outer-free 的 19 态/570 项检查完整通过。细网格路径为 `NOT_PASS`：末态 `production_vs_hp80_total_force = 1.0943792164e-11 > 1e-11`；21 态中 20 态通过，651 项检查中 650 项通过，有效前缀止于 `d=0.4375 mm`，覆盖 6/7 原目标。三次尝试合计 59 态/58 态通过，1810 项检查/1809 项通过，包含上述子范围，不能重复相加。求解到达末目标不等于独立验收通过。
+
+已停止全部后续 FE；固定失败保存场的主差已定位到强压缩背景单元的 F 浮点求和。原生产总力位级复现；保留生产 F、只提高本构/装配精度，误差仍约 `1.09438e-11`，而精确 split F 正确舍入为 binary64 后，诊断路径的误差约 `6.28152e-16`。这没有部署新 kernel、验证新一致切线或完成新路径，原细网格仍为 `not_pass`。保留失败末态、原审计及外部回执，不调松门槛或覆盖旧失败。执行前 103 项测试与 17 项汇总回归分别通过，不把早期 62/94 项预检重复相加。证据见[C2 最终报告](HF4_C2_FINAL_REPORT.md)、[分段精度诊断](../hf4_c2_diagnostics/force_precision_001/summary.json)与[C2 证据入口](../hf4_c2_diagnostics/README.md)。
+
+两条已通过新边界路径另有 206 项保存场检查和 22 项解析边积分检查通过。外底边自由场只有 44/48 条顶边满足整边材料压缩条件，远端出现保存场材料名义拉应力；不能把原四态的 144/144 全压缩推广到此任务，也不能把该名义应力直接解释为已验证真实接触压力。
+
+[独立最终复核](../hf4_c2_diagnostics/independent_final_review.json)核对 420 个来源文件、93 个存盘状态（59 新增、34 基线）、71,000 个单元和 558 次分项重算，结论为证据完整性 `pass`、力学状态 `partial`。它重用保存的 HP 本构结果，不能代替新实现的完整力与一致切线验收，也没有取消细网格唯一失败。稳定 0.5.0 标签及 wheel 不变。
+
+另保留了历史汇总清单的自引用缺陷，见[存储清单补充](../hf4_c2_diagnostics/summary_manifest_amendment_001/amendment.json)及[独立补充复核](../hf4_c2_diagnostics/summary_manifest_review.json)；科学数值和原文件未改。后续生成使用 [summarize_contact_c2_r2.py](../hf_repo/scripts/summarize_contact_c2_r2.py)，其 2 项存储测试与 103 项预检、17 项汇总测试分别计数。 该汇总脚本、原固定场精度诊断及原最终复核仍沿用完整历史来源链，缺少两份外部源码时不能在公开副本直接重跑；已保存结果可以读取，新公开数值入口只解决保存态重审，详见下述范围说明。
+
+本轮实际执行协议为 [contact_c2_v3.json](../hf_repo/configs/contact_c2_v3.json)。v1/v2 都未执行新 FE，保留其配置、预检和修订说明；不要将 v2 的 `pre_execution_review.json` 当作最终执行准入。v3 的三条路径依次是 `padding_2p5`、`outer_free`、`mesh_h00625`。各路径既要满足求解/独立审计全部门禁，也要有未超时且退出码为 0 的外部回执以及完整来源、详情哈希链。
+
+**公开数值读回与完整历史来源核验是两个入口。** 搬迁实测表明，原 `audit_contact_c2.py` 的 v3 admission 哈希链要求两份按既定出版范围排除的 MATLAB 编号源码；它们没有包含在主分支或 Release。缺少原件时，该完整审计会在 HP 求值前失败，历史源码不能伪造、静默跳过或被称为已核验。新机先用新增 [audit_contact_c2_readback.py](../hf_repo/scripts/audit_contact_c2_readback.py) 对公开数值证据复读。它限定那两条路径及精确 SHA，仍逐项核对其余 164 个 admission 输入和 33 个冻结实现，以及所有数值/控制器记录；如果外部来源存在但字节不匹配，同样失败。结果使用独立 schema 和 `numerical_pass` / `numerical_not_pass`，不替代完整来源资格，也不能传入继续执行门。详情、首次失败和新读回证据见[搬迁审计补充说明](HF4_C2_PORTABILITY_ADDENDUM.md)。 本机实际验证已复读上述两条路径共 40 个状态，科学详情 JSON 和 SHA 与原件全部一致；padding 保持通过，细网格保留唯一末态失败。新增入口有 21 项针对性测试记录，比较器有 12 项对照与反例检查，均不计作新的 FE 路径或原数值门禁。
+
+C2 审计采用 80/120 位，80 位为测量权威，协议固定原物理参数与容差。它会在输入 run 内创建 `<output-stem>_states/`（标准 `audit.json` 对应 `audit_states/`）。**即使 `--output` 指向外部目录，也会向 run 写入详情；必须先建立独立复制树，不能直接在冻结原证据上复读。** 保留复制树内 `hf_repo/`、`hf4_c1_results/`、`hf4_c2_diagnostics/` 和 `docs/` 的相对关系，C2 来源门依赖已保存 C1 证据。
+
+以下 PowerShell 示例从原克隆根建立一个尚不存在的同级副本，再从副本之外的 cwd 读取第一条保存路径。`$hfPython` 使用前面已配置的环境；命令只独立核对存盘状态，不启动生产 FE：
+
+```powershell
+$originalRoot = (Get-Location).Path
+$readbackRoot = Join-Path (Split-Path $originalRoot -Parent) 'hf-c2-readback-001'
+& $hfPython -c "import shutil,sys; shutil.copytree(sys.argv[1],sys.argv[2],ignore=shutil.ignore_patterns('.git','.venv*','__pycache__','.pytest_cache','review_runs'))" $originalRoot $readbackRoot
+Push-Location (Split-Path $readbackRoot -Parent)
+& $hfPython (Join-Path $readbackRoot 'tools/handoff.py') verify
+& $hfPython (Join-Path $readbackRoot 'hf_repo/scripts/audit_contact_c2_readback.py') --run (Join-Path $readbackRoot 'hf4_c2_diagnostics/experiments/padding_2p5') --output (Join-Path $readbackRoot 'review_runs/c2_padding_readback_001.json') --protocol (Join-Path $readbackRoot 'hf_repo/configs/contact_c2_v3.json')
+Pop-Location
+```
+
+副本、输出名和逐态详情目录均不得已经存在。公开数值入口的数值通过可返回退出码 0，但顶层状态为 `numerical_pass`；细网格应继续为 `numerical_not_pass` 并返回非零，不能当作意外中断重跑。重新审计后分别检查数值状态、历史来源未复核列表、完整目标库存、每态检查及 `input_and_helper_sha256` / `detail_output_sha256`，并与原审计逐字段比较。每态科学详情应保持相同字节；顶层 schema、范围、两项未验证来源和新增读回脚本绑定属于有意差异，时间、显示根目录与新输出路径单独记录。仅相同 `status` 不足以证明完整读回。为新机记录自己的环境和外部时间预算；同一 Windows 主机上的异目录复读只证明该环境下的搬迁/来源链可用，不是跨平台数值验收。
+
+**当前失败触发停止条件，不继续或自动重跑 FE。** 公开数值读回通过也不解除这个停止条件。只有先完成[稳定可微运动学修复计划](HF4_C2_KINEMATICS_REPAIR_PLAN.md)规定的无求解精度和一致切线核验，并另行冻结新复验计划，才考虑新的实验根；原执行接口为 `run_contact_c2_isolated.py --action solve|audit --run <new-run> --case <case> --protocol <copied-v3>`，历史次序如上。任何新的计划仍需明确自己的冻结来源、预算和停止条件；任何失败、超时、来源变化或不完整目标立即停止，不删除回执重置预算，不自动重试。每条求解外部上限 700 秒、三条累计 2100 秒；每条独立审计最多 1200 秒、累计 3600 秒。历史路径和旧失败积分观察始终保留。0.5.0 wheel 不含 C2，应使用主分支源码安装与脚本。
+
 ## 5. 哪些路径及脚本只表示历史
 
 | 对象 | 接续时的处理 |
@@ -191,6 +225,6 @@ A0 与 Aalpha 使用对应网格的 A0 均匀预载，TMC 使用对应 TMC 预�
 
 四个 TMC 末态的局部节点反力分项诊断已完成，见[数值记录](../hf4_c1_results/local_reaction_diagnostic.json)和[分项图](../hf4_c1_results/local_reaction_diagnostic.png)。四态共有 18 个负节点，按参考位置均在初始实体 x 跨度 [0,2] 之外；不能据此判断实际接触区。节点合力不是边界接触压力，负节点项本身不证明接触压力失效，正负抵消后的净合力吻合也不证明单边互补条件已成立。
 
-下一项工作是**依据保存场检查边界材料牵引、正则边界贡献及虚功平衡，再冻结外区边界与网格单因素诊断**。先追踪相关单元与积分点，区分节点离散效应和边界贡献；随后每次只改变一个边界或网格因素，保持原物理输入与验收门槛，不同时调 alpha/gamma 追求净力吻合。依据这些因果证据再确定部分接触、释放或重入参考的范围、预算和停止条件。Aalpha 仅是诊断模型，TMC−Aalpha 不是纯接触误差，两网格也不构成连续体收敛证明。
+C1 提出的保存场边界材料牵引、正则项与虚功核查已由 C2 完成相应诊断；三条有限背景/外底边/网格单因素路径已经求解，但仅两条完整独立验收通过，细网格末态力误差门失败。当前停止所有 FE。固定失败保存场已将主差定位到强压缩 F 求和；首项工作转为[稳定可微运动学修复计划（尚未执行）](HF4_C2_KINEMATICS_REPAIR_PLAN.md)：在新实现中核对稳定 F、完整材料/正则内力及一致切线，覆盖制造场和非 dyadic 输入，通过无求解核验后再冻结一次原任务补测。固定场误差下降不是新 kernel 或完整路径验收。恢复工作时先读[C2 最终报告](HF4_C2_FINAL_REPORT.md)、[公式审查](HF4_C2_FORMULATION_REVIEW.md)与[预先判读规则](HF4_C2_INTERPRETATION_RULES.md)，以最终保存证据决定后续范围。不要把负弱节点项直接解释为负接触压力，也不要把材料边积分替换成原弱式合力。继续依据因果证据定义部分接触、释放或重入参考及其预算，保持单因素比较，不同时调 alpha/gamma 追求净力吻合。Aalpha 仅是诊断模型，TMC−Aalpha 不是纯接触误差，三网格本身仍不是连续体收敛证明。
 
 本轮不关闭一般 HF4-C/D，不直接进入 HF5、LF 优化、1800 例 HF 标签计算或最终排名。每次工作继续记录总体目标、要做与已做、理由、效果、局限及代码/证据链接，保留已有失败和修正因果链。

@@ -1,0 +1,31 @@
+{
+  "schema": "contact_c2_preflight_guard_amendment_v1",
+  "created_utc": "2026-09-20T15:53:15.868648+00:00",
+  "no_c2_fe_executed": true,
+  "unused_prior_revisions": [
+    1,
+    2
+  ],
+  "prior_protocol_sha256": "174715e7c99b09cf3686e7eb86811a6460b1ac7cd6a6ca6af4d861bfb1136934",
+  "execution_protocol_sha256": "b17c8328dd1e350563b70305c0b311c8d38c9c0ef68c08b85fac5f13604d0b4d",
+  "implementation_changes": {
+    "scripts/run_contact_c2_isolated.py": {
+      "v2": "f544417e8744759fb23a61d6b82b40aac4a9a7f98b890c8eb6dfd9b597db38dd",
+      "v3": "80ddbcdfedfbd9dbd22a9cf43a291f8f6f324a8366070adfbf3f82f921c7d82b"
+    }
+  },
+  "unchanged_scientific_fields": [
+    "geometry",
+    "material",
+    "solver",
+    "audit",
+    "uniform_targets_mm",
+    "cases",
+    "run_sequence",
+    "budget",
+    "stopping"
+  ],
+  "tests": 103,
+  "admission_input_files": 166,
+  "reason": "Before any FE, enforce prior solve/audit receipt success, timeout rejection, protocol/log/audit hashes and complete input/detail revalidation at each serial transition. Physics, three cases, order, numerical thresholds and budgets unchanged."
+}

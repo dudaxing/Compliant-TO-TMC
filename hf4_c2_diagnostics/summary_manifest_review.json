@@ -1,0 +1,108 @@
+{
+  "schema": "contact_c2_summary_manifest_independent_review_v1",
+  "created_utc": "2026-09-20T16:29:11.111484+00:00",
+  "review_integrity_status": "pass",
+  "mechanical_status": "partial_unchanged",
+  "scope": "Additive storage-manifest review only. No 93-state review rerun, FE, constitutive reevaluation, scientific-summary regeneration, source edit, or overwrite of old evidence.",
+  "original_manifest_status": "invalid_self_entry_preserved; seven nonself outputs independently verified",
+  "original_review_scope_clarification": {
+    "review": "hf4_c2_diagnostics/independent_final_review.json",
+    "unchanged_sha256": "9a520332d9351e08a7e5e14000da835fa3db1ac9b9376007b105e5df9ce84c21",
+    "scientific_summary_directly_bound": true,
+    "summary_output_manifest_was_in_scope": false,
+    "self_entry_was_not_silently_skipped": true,
+    "explanation": "The prior review read summary.json and its scientific input bindings, but did not read summary_001/output_sha256.json or verify the summary plot-output inventory. Its integrity-pass applied to the enumerated checked evidence; it did not establish validity of this auxiliary manifest. This previously unstated boundary is made explicit here. The old auxiliary manifest remains invalid at its self entry."
+  },
+  "source_code_review": {
+    "old": "hf_repo/scripts/summarize_contact_c2.py:512-513 creates an empty manifest before the dict comprehension enumerates files.",
+    "new": "write_output_manifest completes enumeration and hashing before exclusive creation; verify_output_manifest rejects self entry, incorrect inventory, or changed output. Original make_summary/plots are reused; no physics or admission logic changed.",
+    "tests": "One test confirms exclusion/rejects injected self entry; one rejects changed output and preserves existing manifest bytes on attempted rewrite."
+  },
+  "checks": [
+    {
+      "name": "amendment identity",
+      "status": "pass"
+    },
+    {
+      "name": "original self entry is documented empty-file hash",
+      "status": "pass"
+    },
+    {
+      "name": "original manifest inventory preserved",
+      "status": "pass"
+    },
+    {
+      "name": "only original self entry mismatches",
+      "status": "pass"
+    },
+    {
+      "name": "seven nonself outputs match original hashes",
+      "status": "pass",
+      "count": 7
+    },
+    {
+      "name": "amendment binds exactly eight original files and three sources",
+      "status": "pass"
+    },
+    {
+      "name": "supplementary manifest excludes itself and exactly covers output",
+      "status": "pass"
+    },
+    {
+      "name": "original review did not bind summary auxiliary output manifest",
+      "status": "pass"
+    },
+    {
+      "name": "original review directly bound unchanged scientific summary",
+      "status": "pass"
+    },
+    {
+      "name": "two targeted storage tests pass",
+      "status": "pass",
+      "returncode": 0
+    },
+    {
+      "name": "all bound originals and sources unchanged after tests",
+      "status": "pass",
+      "count": 15
+    }
+  ],
+  "test_execution": {
+    "command": [
+      "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf_repo\\.venv-hf2-repair\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "tests/test_summarize_contact_c2_r2.py"
+    ],
+    "cwd": "hf_repo",
+    "returncode": 0,
+    "stdout": "..                                                                       [100%]\n2 passed in 0.71s\n",
+    "stderr": ""
+  },
+  "binding_policy": "Paths below are relative to the workspace; this supplementary receipt does not hash itself or the final report, avoiding cycles.",
+  "input_sha256": {
+    "hf4_c2_diagnostics/independent_final_review.json": "9a520332d9351e08a7e5e14000da835fa3db1ac9b9376007b105e5df9ce84c21",
+    "hf4_c2_diagnostics/review_contact_c2_final.py": "5a3b561e0205f5faea74d58427e1ffb0093bd1ccd50248b87d21895150720d91",
+    "hf4_c2_diagnostics/summary_manifest_amendment_001/amendment.json": "82f46311f7d361f14a8d9404a4924b598c68b9b6524355049f151a2fdf5b2d18",
+    "hf4_c2_diagnostics/summary_manifest_amendment_001/output_sha256.json": "2625114a2e5cbece19a4b024e929d114fa36c2f81e18ae88004d9dfe13ef55b0",
+    "hf4_c2_diagnostics/summary_001/fixed_support_mesh_observations.png": "73fe674af81763f44b3edbe9f94868b31aed73272784a2893e7f8a2736f2639d",
+    "hf4_c2_diagnostics/summary_001/fixed_support_mesh_observations.svg": "02771f795ac52e09312ca9fdfcebd62ef7561038eca8a32b6b5d08a6d526b760",
+    "hf4_c2_diagnostics/summary_001/force_and_status.png": "d3ba32fbd7bf8ec20d92ddc82e3da759e6e13f964f07ac281691b288ab1be739",
+    "hf4_c2_diagnostics/summary_001/force_and_status.svg": "76ca4d96f360083836634ff1699dc86354bafe4e3cc0a2121deed3afc668b6f1",
+    "hf4_c2_diagnostics/summary_001/saved_fields_and_analytic_integration.png": "2f829119a4c9a509d3858b56026bd74037f73854367ef4517526f127c0f98c6d",
+    "hf4_c2_diagnostics/summary_001/saved_fields_and_analytic_integration.svg": "0f00170aa7345d50247d6579aa4ef52cf75575be8b303826be8b866acc98ced5",
+    "hf4_c2_diagnostics/summary_001/summary.json": "117de3b21b9348aea775c2d84b4fa882a14432f3fb7ab623bf6ee02c7a1ccd32",
+    "hf4_c2_diagnostics/summary_001/output_sha256.json": "7f530ce84a83734a60dd97c84d0aecfd38f729681cf8d2d39c082d188a55f3d6",
+    "hf_repo/scripts/summarize_contact_c2.py": "95619c8ceb95371d3a3b031694f26d18c7b6e68a1aed4433f850109597d392a7",
+    "hf_repo/scripts/summarize_contact_c2_r2.py": "c6bacd03d9ffde3fe90d2dc66e2e902f8bcd717f6a08a9e2d583920d179cbdd4",
+    "hf_repo/tests/test_summarize_contact_c2_r2.py": "3a02cb0d95a6fd0c3ab2d7f83f65e7a11994ddea6ae9301fadc051dd1cb9343c"
+  },
+  "environment": {
+    "python": "3.13.6"
+  },
+  "conclusion": "The additive amendment correctly binds the actual old manifest and all seven scientific/plot outputs; the old manifest defect is disclosed and preserved. Original science results and mesh endpoint NOT_PASS remain unchanged."
+}

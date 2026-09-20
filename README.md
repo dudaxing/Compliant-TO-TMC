@@ -1,14 +1,15 @@
 # Compliant-TO-TMC：独立 HF 力学评估器
 
-**稳定发布仍为 0.5.0 / HF4-B；HF4-C0 受限参照与 HF4-C1 冻结配对任务已通过各自门禁，HF4-C 一般接触验证仍未完成。** C1 的 10 条选定路径、80 个状态通过 80/120 位独立数值审计及几何门禁；这不代表 TMC 局部单边接触已验证。本仓库保存从开始至今的目标、开发说明、代码、数据和证据，支持在任意新目录接续，不需要原 ChatGPT 对话或原 Windows 工作目录。稳定标签和 0.5.0 wheel 保持原样，新增研究模块使用主分支源码。
+**稳定发布仍为 0.5.0 / HF4-B；HF4-C0/C1 已通过各自门禁。HF4-C2 三条诊断路径中两条通过，细网格末态独立力误差门失败；C2 未全部验收，HF4-C 一般接触验证仍未完成。** C1 的 10 条选定路径、80 个状态通过 80/120 位独立数值审计及几何门禁；这不代表 TMC 局部单边接触已验证。本仓库保存从开始至今的目标、开发说明、代码、数据和证据，支持在任意新目录接续，不需要原 ChatGPT 对话或原 Windows 工作目录。稳定标签和 0.5.0 wheel 保持原样，新增研究模块使用主分支源码。
 
 先读这些入口：
 
 1. [开发上下文](docs/DEVELOPMENT_CONTEXT.md)：整体目标、为什么分阶段、历次问题与修正、已完成工作、效果和未验证范围。
 2. [新电脑接续指南](docs/RESUME_DEVELOPMENT.md)：Python 3.13 环境、校验、读取、测试和新输出目录复验命令。
-3. [HF4-C1 最终报告](docs/HF4_C1_FINAL_REPORT.md)、[C1 证据入口](hf4_c1_results/README.md)与[最终摘要](hf4_c1_results/summary_v2/summary.json)：当前配对结果、失败与修正、局部接触边界及下一步。
-4. [HF4-C0 研究集成报告](docs/HF4_C0_RESEARCH_INTEGRATION.md)、[C0 接续入口](research_integration_20260920/README.md)：来源审阅、取舍和受限参照验收。
-5. [0.5.0 时的项目状态](docs/PROJECT_STATUS.md)、[原需求—代码—证据对照](docs/REQUIREMENTS_TRACEABILITY.md)：保留稳定阶段当时的记录。
+3. [HF4-C2 最终报告](docs/HF4_C2_FINAL_REPORT.md)与[C2 证据入口](hf4_c2_diagnostics/README.md)：当前单因素诊断和算术归因；新的公开复读限制以[搬迁补充说明](docs/HF4_C2_PORTABILITY_ADDENDUM.md)为准。
+4. [HF4-C1 最终报告](docs/HF4_C1_FINAL_REPORT.md)、[C1 证据入口](hf4_c1_results/README.md)与[最终摘要](hf4_c1_results/summary_v2/summary.json)：当前配对结果、失败与修正、局部接触边界及下一步。
+5. [HF4-C0 研究集成报告](docs/HF4_C0_RESEARCH_INTEGRATION.md)、[C0 接续入口](research_integration_20260920/README.md)：来源审阅、取舍和受限参照验收。
+6. [0.5.0 时的项目状态](docs/PROJECT_STATUS.md)、[原需求—代码—证据对照](docs/REQUIREMENTS_TRACEABILITY.md)：保留稳定阶段当时的记录。
 
 ## 目标与边界
 
@@ -40,7 +41,29 @@ LF 生成多样化反向器/夹持器几何；HF 在共同、明确的物理任�
 
 已完成[四个 TMC 末态的局部节点反力分项诊断](hf4_c1_results/local_reaction_diagnostic.json)，并保存[分项与正负抵消图](hf4_c1_results/local_reaction_diagnostic.png)。四态的 18 个负节点均位于初始实体 x 跨度 [0,2] 之外；这是参考位置分类，不是实际接触区判定。**节点反力不等同于接触压力，负节点项不能单独证明接触压力失效；净合力吻合也不能证明局部单边接触条件成立。**
 
-下一步依据保存场检查边界材料牵引、正则边界贡献及虚功平衡，再冻结外区边界与网格的单因素诊断；之后才据因果证据定义部分接触参考，不直接进入 HF5 或候选排名。两网格只支持敏感性观察，TMC−Aalpha 还含背景介质、边界及非线性耦合差异。
+C1 结束时提出的保存场材料牵引、正则边界贡献与虚功检查，以及外区边界/网格单因素诊断，已由下面的 C2 工作承接；一般部分接触参考仍待依据因果证据定义，不直接进入 HF5 或候选排名。两网格只支持敏感性观察，TMC−Aalpha 还含背景介质、边界及非线性耦合差异。
+
+## HF4-C2：保存场解释与三条单因素诊断
+
+**C2 仅部分通过，细网格路径仍未验收。** 三次新 FE 尝试均求解至 `d=0.5 mm`，但只有扩大背景侧向 padding 至 2.5 mm 和释放外底边的两条完整路径通过独立审计，分别为 19 态/589 项和 19 态/570 项检查。`h=0.0625 mm` 细网格路径为 `NOT_PASS`：末态 `d=0.5 mm` 的 `production_vs_hp80_total_force = 1.0943792164e-11`，超过冻结门槛 `1e-11`。该路径共 21 态，20 态通过，651 项检查中 650 项通过；有效前缀止于 `d=0.4375 mm`，覆盖 6/7 原目标，不能把求解器到达末目标写成完整独立验收。
+
+三次尝试共保存 59 态，其中 58 态通过；1810 项独立检查中 1809 项通过。这些总数包含上述两条完整路径和细网格前缀，不可再次相加。已停止全部后续 FE；保留失败末态、原审计及所有回执。固定保存场的分段算术对照已定位主要误差来源，但新内核与一致切线尚未实现或验收，细网格仍为 `not_pass`。详见[最终报告](docs/HF4_C2_FINAL_REPORT.md)与[路径/有效前缀摘要](hf4_c2_diagnostics/summary_001/summary.json)。
+
+实际执行使用 [contact_c2_v3.json](hf_repo/configs/contact_c2_v3.json)。v1/v2 未执行新 FE；来源清单校验和外部继续门修订见[C2 证据入口](hf4_c2_diagnostics/README.md)及[执行门审查](docs/HF4_C2_EXECUTION_GUARD_REVIEW.md)。最终执行前测试为 103 项通过，另有 17 项汇总回归通过；两组分别报告，不能与历史重复执行的 62/94 项预检直接累加。
+
+[公式审查](docs/HF4_C2_FORMULATION_REVIEW.md)和[预先判读规则](docs/HF4_C2_INTERPRETATION_RULES.md)区分弱式节点反力、直接材料牵引、正则项与固定参考试函数的离散虚功。四个 C1 保存末态的 144 条顶边材料压缩证据与 18 个负弱节点项可以同时成立；不裁剪负项，不把材料边积分替换成原 `normal_force`。背景域、外底边约束与网格的单因素变化只能支持对应敏感性观察，三网格本身不构成连续体收敛证明。
+
+新增两条已通过边界路径的[保存场诊断](hf4_c2_diagnostics/fields_experiments_001/summary.json)和[解析边积分](hf4_c2_diagnostics/analytic_experiments_001/summary.json)分别通过 206 项与 22 项检查。扩大域有 56/56 条顶边材料压缩证据；外底边自由时只有 44/48 条满足整边压缩条件，远端出现真实的保存场材料名义拉应力。因此不能把原四态 144/144 条整边压缩推广到新边界，也不能把材料名义应力直接称为已验证接触压力。
+
+细网格固定失败态的原生产总力已位级复现。[分段精度诊断](hf4_c2_diagnostics/force_precision_001/summary.json)表明：保留生产 F，只提高后续本构/装配精度，规范化总力误差仍约 `1.09438e-11`；改用精确 split F 的正确 binary64 舍入后，同一诊断路径的误差降至约 `6.28152e-16`。主差来自强压缩背景单元的 F 浮点求和。此结果只是固定场算术归因，没有部署新 kernel、核验其一致切线或求解新路径。下一步按[稳定可微运动学修复计划（未执行）](docs/HF4_C2_KINEMATICS_REPAIR_PLAN.md)，先实现并独立验证稳定 F、完整力和一致切线，再决定新版本与补测路径；保留原门槛与所有失败证据。
+
+[独立最终复核](hf4_c2_diagnostics/independent_final_review.json)核对了 420 个来源文件、93 个存盘状态（59 个新增及 34 个基线）、71,000 个单元和 558 次分项重算，证据完整性为 `pass`，力学状态仍为 `partial`。该复核重用已保存 HP 本构结果，没有重新计算全部本构状态，也不覆盖细网格的唯一失败门。[算术归因图](hf4_c2_diagnostics/force_precision_visual_001/force_precision_attribution.png)概括固定场定位结果。
+
+另保留了历史汇总清单的自引用缺陷，见[存储清单补充](hf4_c2_diagnostics/summary_manifest_amendment_001/amendment.json)及[独立补充复核](hf4_c2_diagnostics/summary_manifest_review.json)；科学数值和原文件未改。后续生成使用 [summarize_contact_c2_r2.py](hf_repo/scripts/summarize_contact_c2_r2.py)，其 2 项存储测试与 103 项预检、17 项汇总测试分别计数。
+
+交接复核又发现并保留了一次来源门失败：冻结 v3 完整审计依赖两份未公开的 MATLAB 编号源码，仅克隆仓库无法重新验证这一完整历史来源链。公开数值重审使用新增 `audit_contact_c2_readback.py`，明确列出未重新核验的两项来源，其余代码、数值输入、控制器和逐态门槛继续严格校验；其结果不能作为新 FE 执行准入。详见[搬迁审计补充说明](docs/HF4_C2_PORTABILITY_ADDENDUM.md)与[新电脑接续指南](docs/RESUME_DEVELOPMENT.md)。旧完整审计、原失败和科学数值全部保留。 公开副本的同机异目录数值复读已完成：padding 的 19 态与细网格的 21 态，共 40 份科学详情逐字节保持一致，原通过/不通过结论不变。 部分历史汇总与固定场诊断脚本仍要求完整外部来源；新增入口不代表这些历史工具已全部解除依赖。
+
+读回必须在保持完整相对结构的**独立复制树**中进行：新旧 C2 入口都会在输入 run 内写入新的逐态详情目录，不能直接对冻结原树执行。同一主机异目录读回不等于跨平台验收。稳定 tag、附件及 0.5.0 wheel 保持原样，旧 wheel 不含 C2 模块。
 
 ## 文件位置与历史
 
@@ -51,6 +74,7 @@ LF 生成多样化反向器/夹持器几何；HF 在共同、明确的物理任�
 | `docs/` | HF0 至今的计划、核查、报告、原因分析、当前状态和接续指南 |
 | `research_integration_20260920/` | LF/N19 来源审阅与取舍、本轮 7 次尝试和 6 份独立审计、最终图表与机器可读摘要；[本轮入口](research_integration_20260920/README.md) |
 | `hf4_c1_results/` | C1 的 10 条选定路径、旧激活失败前缀、原 50/80 失败与 80/120 补充审计、诊断、测试及最终比较；[入口](hf4_c1_results/README.md) |
+| `hf4_c2_diagnostics/` | C2 保存场/解析边积分诊断、unused v1/v2 与执行 v3、全部修订/失败记录、三条路径及逐态独立审计；[入口](hf4_c2_diagnostics/README.md) |
 | `hf1_results/`、`hf4_results/`、`hf4_repair_results/` | 主分支内完整普通证据，保留旧失败和新版结果 |
 | `hf2_results/`、`hf2_repair_results/`、`hf3_results/` | 摘要、图表、门禁、日志、测试及脚本；大数组/大 HP JSON 从 Release 恢复 |
 | `reference_validation/`、`hf0_audit/` | 已生成数值参考、资料身份、独立核查及历史过程；不是 HF 运行依赖 |
@@ -59,7 +83,7 @@ LF 生成多样化反向器/夹持器几何；HF 在共同、明确的物理任�
 
 原七次 Git 开发提交全部保留。科学基线为 `b1334bb6a83ba9a0efab7bdba7bd39722146f024`；原提交的 HF 代码位于 Git 根，新交接提交将其移至 `hf_repo/`，随后加入外层文档和证据，不改写原提交身份。
 
-阶段阅读顺序：[HF0](docs/HF0_REPORT.md) → [HF1](docs/HF1_REPORT.md) → [HF2 原版](docs/HF2_REPORT.md) → [HF2 修正](docs/HF2_REPAIR_REPORT.md) → [HF3](docs/HF3_REPORT.md) → [HF4 原版](docs/HF4_AB_REPORT.md) → [HF4 修正](docs/HF4_REPAIR_REPORT.md) → [HF4-C0 研究集成](docs/HF4_C0_RESEARCH_INTEGRATION.md) → [HF4-C1](docs/HF4_C1_FINAL_REPORT.md)。旧报告中的“部分完成/未开始”保留其当时事实，最新进度看本页和 C1 最终报告。
+阶段阅读顺序：[HF0](docs/HF0_REPORT.md) → [HF1](docs/HF1_REPORT.md) → [HF2 原版](docs/HF2_REPORT.md) → [HF2 修正](docs/HF2_REPAIR_REPORT.md) → [HF3](docs/HF3_REPORT.md) → [HF4 原版](docs/HF4_AB_REPORT.md) → [HF4 修正](docs/HF4_REPAIR_REPORT.md) → [HF4-C0 研究集成](docs/HF4_C0_RESEARCH_INTEGRATION.md) → [HF4-C1](docs/HF4_C1_FINAL_REPORT.md) → [HF4-C2](docs/HF4_C2_FINAL_REPORT.md)。旧报告中的“部分完成/未开始”保留其当时事实，最新进度看本页和 C2 最终报告。
 
 ## 快速取得与恢复
 
