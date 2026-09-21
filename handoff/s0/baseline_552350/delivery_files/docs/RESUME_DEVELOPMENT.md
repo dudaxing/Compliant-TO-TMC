@@ -14,7 +14,7 @@ python tools/handoff.py verify
 
 本文除明确说明外，命令均从克隆根目录执行。`python` 应指向 Python 3.13；Windows 可先用 `py -3.13` 代替。保留仓库中的相对结构：`hf_repo/` 是独立求解器，`geometry_dataset/` 是普通几何数据，`docs/` 是项目文档，阶段结果各在自己的目录。
 
-S0 后主分支保留说明、395 个几何文件、完整 hf_repo、各阶段摘要和图。详细 C0/C1/C2、HF4 审计/探针及早期原始证据通过版本化 Release 资产按需恢复；原字节和失败状态不变。见 [S0 分层报告](HF4_C2_S0_STORAGE_REPORT.md)。需要全部原始证据时运行：
+主分支包含全部说明文档、395 个几何数据文件、各阶段摘要和图，以及当前 HF4 所需的完整证据。较大的早期原始记录通过本仓库 GitHub Release 的证据附件提供。需要追查早期原始状态或按原流程复验时运行：
 
 ```text
 python tools/handoff.py fetch-evidence
@@ -186,14 +186,14 @@ A0 与 Aalpha 使用对应网格的 A0 均匀预载，TMC 使用对应 TMC 预�
 
 C2 审计采用 80/120 位，80 位为测量权威，协议固定原物理参数与容差。它会在输入 run 内创建 `<output-stem>_states/`（标准 `audit.json` 对应 `audit_states/`）。**即使 `--output` 指向外部目录，也会向 run 写入详情；必须先建立独立复制树，不能直接在冻结原证据上复读。** 保留复制树内 `hf_repo/`、`hf4_c1_results/`、`hf4_c2_diagnostics/` 和 `docs/` 的相对关系，C2 来源门依赖已保存 C1 证据。
 
-以下 PowerShell 示例从轻量克隆根建立一个尚不存在的同级复读树，并自动恢复 C2 及其 C1 来源依赖，再从副本之外的 cwd 读取第一条保存路径。`$hfPython` 使用前面已配置的环境；命令只独立核对存盘状态，不启动生产 FE：
+以下 PowerShell 示例从原克隆根建立一个尚不存在的同级副本，再从副本之外的 cwd 读取第一条保存路径。`$hfPython` 使用前面已配置的环境；命令只独立核对存盘状态，不启动生产 FE：
 
 ```powershell
 $originalRoot = (Get-Location).Path
 $readbackRoot = Join-Path (Split-Path $originalRoot -Parent) 'hf-c2-readback-001'
-& $hfPython tools/handoff.py prepare-replay --destination $readbackRoot --asset hf4-c2-s0-c2_runs-v1.zip
+& $hfPython -c "import shutil,sys; shutil.copytree(sys.argv[1],sys.argv[2],ignore=shutil.ignore_patterns('.git','.venv*','__pycache__','.pytest_cache','review_runs'))" $originalRoot $readbackRoot
 Push-Location (Split-Path $readbackRoot -Parent)
-& $hfPython (Join-Path $readbackRoot 'tools/handoff.py') verify --asset hf4-c2-s0-c2_runs-v1.zip
+& $hfPython (Join-Path $readbackRoot 'tools/handoff.py') verify
 & $hfPython (Join-Path $readbackRoot 'hf_repo/scripts/audit_contact_c2_readback.py') --run (Join-Path $readbackRoot 'hf4_c2_diagnostics/experiments/padding_2p5') --output (Join-Path $readbackRoot 'review_runs/c2_padding_readback_001.json') --protocol (Join-Path $readbackRoot 'hf_repo/configs/contact_c2_v3.json')
 Pop-Location
 ```
@@ -225,6 +225,6 @@ Pop-Location
 
 四个 TMC 末态的局部节点反力分项诊断已完成，见[数值记录](../hf4_c1_results/local_reaction_diagnostic.json)和[分项图](../hf4_c1_results/local_reaction_diagnostic.png)。四态共有 18 个负节点，按参考位置均在初始实体 x 跨度 [0,2] 之外；不能据此判断实际接触区。节点合力不是边界接触压力，负节点项本身不证明接触压力失效，正负抵消后的净合力吻合也不证明单边互补条件已成立。
 
-C1 提出的保存场边界材料牵引、正则项与虚功核查已由 C2 完成相应诊断；三条有限背景/外底边/网格单因素路径已经求解，但仅两条完整独立验收通过，细网格末态力误差门失败。当前停止所有 FE。固定失败保存场已将主差定位到强压缩 F 求和；资料恢复按 [S0 分层报告](HF4_C2_S0_STORAGE_REPORT.md)完成后，数值首项工作仍为[稳定可微运动学修复计划（尚未执行）](HF4_C2_KINEMATICS_REPAIR_PLAN.md)：在新实现中核对稳定 F、完整材料/正则内力及一致切线，覆盖制造场和非 dyadic 输入，通过无求解核验后再冻结一次原任务补测。固定场误差下降不是新 kernel 或完整路径验收。恢复工作时先读[C2 最终报告](HF4_C2_FINAL_REPORT.md)、[公式审查](HF4_C2_FORMULATION_REVIEW.md)与[预先判读规则](HF4_C2_INTERPRETATION_RULES.md)，以最终保存证据决定后续范围。不要把负弱节点项直接解释为负接触压力，也不要把材料边积分替换成原弱式合力。继续依据因果证据定义部分接触、释放或重入参考及其预算，保持单因素比较，不同时调 alpha/gamma 追求净力吻合。Aalpha 仅是诊断模型，TMC−Aalpha 不是纯接触误差，三网格本身仍不是连续体收敛证明。
+C1 提出的保存场边界材料牵引、正则项与虚功核查已由 C2 完成相应诊断；三条有限背景/外底边/网格单因素路径已经求解，但仅两条完整独立验收通过，细网格末态力误差门失败。当前停止所有 FE。固定失败保存场已将主差定位到强压缩 F 求和；首项工作转为[稳定可微运动学修复计划（尚未执行）](HF4_C2_KINEMATICS_REPAIR_PLAN.md)：在新实现中核对稳定 F、完整材料/正则内力及一致切线，覆盖制造场和非 dyadic 输入，通过无求解核验后再冻结一次原任务补测。固定场误差下降不是新 kernel 或完整路径验收。恢复工作时先读[C2 最终报告](HF4_C2_FINAL_REPORT.md)、[公式审查](HF4_C2_FORMULATION_REVIEW.md)与[预先判读规则](HF4_C2_INTERPRETATION_RULES.md)，以最终保存证据决定后续范围。不要把负弱节点项直接解释为负接触压力，也不要把材料边积分替换成原弱式合力。继续依据因果证据定义部分接触、释放或重入参考及其预算，保持单因素比较，不同时调 alpha/gamma 追求净力吻合。Aalpha 仅是诊断模型，TMC−Aalpha 不是纯接触误差，三网格本身仍不是连续体收敛证明。
 
 本轮不关闭一般 HF4-C/D，不直接进入 HF5、LF 优化、1800 例 HF 标签计算或最终排名。每次工作继续记录总体目标、要做与已做、理由、效果、局限及代码/证据链接，保留已有失败和修正因果链。

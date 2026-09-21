@@ -1,0 +1,12 @@
+{
+  "label": "environment",
+  "argv": [
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf_repo\\.venv-hf2-repair\\Scripts\\python.exe",
+    "-B",
+    "-c",
+    "import importlib,importlib.metadata,json,platform,sys\nfrom pathlib import Path\nimport jax\nmodules={name:str(Path(importlib.import_module(name).__file__).resolve()) for name in ['hf_eval','hf_eval.contact_c2','hf_eval.split_kernel','audit_contact_c2','audit_contact_c2_readback']}\nroot=Path.cwd().resolve()\nassert all(Path(path).is_relative_to(root) for path in modules.values()), modules\nprint(json.dumps(dict(executable=sys.executable,python=sys.version,platform=platform.platform(),versions={name:importlib.metadata.version(name) for name in ['numpy','scipy','pytest','jax','jaxlib','matplotlib']},module_paths=modules,jax_x64_enabled=jax.config.x64_enabled,jax_devices=[str(x) for x in jax.devices()],sys_path=sys.path),indent=2))\n"
+  ],
+  "cwd": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_tree\\hf_repo",
+  "returncode": 0,
+  "elapsed_seconds": 6.742132663726807
+}

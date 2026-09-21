@@ -2,8 +2,6 @@
 
 **稳定发布仍为 0.5.0 / HF4-B；HF4-C0/C1 已通过各自门禁。HF4-C2 三条诊断路径中两条通过，细网格末态独立力误差门失败；C2 未全部验收，HF4-C 一般接触验证仍未完成。** C1 的 10 条选定路径、80 个状态通过 80/120 位独立数值审计及几何门禁；这不代表 TMC 局部单边接触已验证。本仓库保存从开始至今的目标、开发说明、代码、数据和证据，支持在任意新目录接续，不需要原 ChatGPT 对话或原 Windows 工作目录。稳定标签和 0.5.0 wheel 保持原样，新增研究模块使用主分支源码。
 
-S0 将详细科学记录分为轻量主树与按需恢复资产；源码、测试、几何和原失败保留。恢复、验收范围与新入口见 [S0 分层报告](docs/HF4_C2_S0_STORAGE_REPORT.md)。
-
 先读这些入口：
 
 1. [开发上下文](docs/DEVELOPMENT_CONTEXT.md)：整体目标、为什么分阶段、历次问题与修正、已完成工作、效果和未验证范围。
@@ -77,7 +75,7 @@ C1 结束时提出的保存场材料牵引、正则边界贡献与虚功检查�
 | `research_integration_20260920/` | LF/N19 来源审阅与取舍、本轮 7 次尝试和 6 份独立审计、最终图表与机器可读摘要；[本轮入口](research_integration_20260920/README.md) |
 | `hf4_c1_results/` | C1 的 10 条选定路径、旧激活失败前缀、原 50/80 失败与 80/120 补充审计、诊断、测试及最终比较；[入口](hf4_c1_results/README.md) |
 | `hf4_c2_diagnostics/` | C2 保存场/解析边积分诊断、unused v1/v2 与执行 v3、全部修订/失败记录、三条路径及逐态独立审计；[入口](hf4_c2_diagnostics/README.md) |
-| `hf1_results/`、`hf4_results/`、`hf4_repair_results/` | 主树保留摘要和图；大审计/探针详情按资产索引恢复，旧失败和新版结果均保留 |
+| `hf1_results/`、`hf4_results/`、`hf4_repair_results/` | 主分支内完整普通证据，保留旧失败和新版结果 |
 | `hf2_results/`、`hf2_repair_results/`、`hf3_results/` | 摘要、图表、门禁、日志、测试及脚本；大数组/大 HP JSON 从 Release 恢复 |
 | `reference_validation/`、`hf0_audit/` | 已生成数值参考、资料身份、独立核查及历史过程；不是 HF 运行依赖 |
 | `reference_inputs/hf_start_brief.txt` | 原用户启动任务书，作为历史背景保存 |
@@ -97,7 +95,7 @@ python tools/handoff.py verify
 
 校验仅需 Python 标准库。后续安装按照[接续指南](docs/RESUME_DEVELOPMENT.md)，不要照抄历史 `.venv`、临时目录或累计预算脚本。开发修改后清单会如实报告变化；应使用 Git 记录修改，为新数值实验另建源码冻结和输出。
 
-完整早期原始证据及原样 0.5.0 交付 ZIP 保留在 [历史 Release](https://github.com/dudaxing/Compliant-TO-TMC/releases/tag/hf-history-0.5.0)；C0/C1/C2 与历史 HF4 详细记录在 [S0 证据 Release](https://github.com/dudaxing/Compliant-TO-TMC/releases/tag/hf4-c2-s0-evidence-v1)。以下恢复全部声明资产：
+完整早期原始证据及原样 0.5.0 交付 ZIP 在 [GitHub Release](https://github.com/dudaxing/Compliant-TO-TMC/releases/tag/hf-history-0.5.0)：
 
 ```text
 python tools/handoff.py fetch-evidence
@@ -105,12 +103,3 @@ python tools/handoff.py verify --full
 ```
 
 下载会校验附件和每个成员，并拒绝覆盖不同的已有文件。原论文、原 MATLAB/LF 源包不作为公开附件；资料身份、取得方式、旧 ZIP 链接和许可核查见[来源与发布说明](docs/SOURCE_MATERIALS_AND_PUBLICATION.md)。已有源路径只作来源记录。迁移校验不等同于新平台力学验收。
-
-只准备 C2 独立复读树（自动恢复 C1 来源依赖）可运行：
-
-```text
-python tools/handoff.py prepare-replay --destination ../hf-c2-readback-001 --asset hf4-c2-s0-c2_runs-v1.zip
-python ../hf-c2-readback-001/tools/handoff.py verify --asset hf4-c2-s0-c2_runs-v1.zip
-```
-
-`verify` 默认仅检查轻量主树；`verify --full` 要求全部声明资产，缺资产不会通过。准备目录不启动力学计算。

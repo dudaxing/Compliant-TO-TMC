@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "name": "slim_verify",
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf_repo\\.venv-hf2-repair\\Scripts\\python.exe",
+        "-B",
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\slim_candidate_001\\tools\\handoff.py",
+        "verify"
+      ],
+      "returncode": 0,
+      "expected": "pass",
+      "matches_expected": true
+    },
+    {
+      "name": "slim_missing_assets",
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf_repo\\.venv-hf2-repair\\Scripts\\python.exe",
+        "-B",
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\slim_candidate_001\\tools\\handoff.py",
+        "verify",
+        "--full"
+      ],
+      "returncode": 1,
+      "expected": "reject_missing_assets",
+      "matches_expected": true
+    },
+    {
+      "name": "slim_missing_c2",
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf_repo\\.venv-hf2-repair\\Scripts\\python.exe",
+        "-B",
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\slim_candidate_001\\tools\\handoff.py",
+        "verify",
+        "--asset",
+        "hf4-c2-s0-c2_runs-v1.zip"
+      ],
+      "returncode": 1,
+      "expected": "reject_missing_assets",
+      "matches_expected": true
+    }
+  ],
+  "all_expected": true,
+  "no_mechanics": true
+}

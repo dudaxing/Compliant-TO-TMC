@@ -1,0 +1,41 @@
+{
+  "schema": "hf4-c2-s0-execution-plan-v1",
+  "user_authorized_stage": "HF4-C2-S0 recoverable evidence migration only",
+  "baseline_commit": "552350cd3202432d483b4a5aa7697afbe08db12a",
+  "baseline_manifest_sha256": "4a2e6836f160a32aa67fe9a9b6fb8a99dad72e796d71610436dd83a934d2c2d6",
+  "candidate_sha256": "30c98f5f88b30653a17f2c6507e095e2d737f8c7f4a011d0d0009fc7a736bc70",
+  "externalized_files": 1099,
+  "externalized_original_bytes": 1115101240,
+  "release_tag": "hf4-c2-s0-evidence-v1",
+  "existing_tag_preserved": "hf-history-0.5.0",
+  "workflow": [
+    "freeze exact input identity",
+    "build lossless six archives",
+    "verify two copies and all member bytes",
+    "prepare fresh independent replay with complete dependencies",
+    "same test collection, geometry reads and saved-vector readback",
+    "layered identity verification",
+    "remove only verified candidate paths from new delivery tree",
+    "publish assets and lightweight source with independent fetch verification"
+  ],
+  "scope_limits": {
+    "production_source_changes": false,
+    "protocol_changes": false,
+    "new_FE_paths": false,
+    "new_HP_constitutive_paths": false,
+    "stable_F_repair": false,
+    "Git_history_rewrite": false,
+    "remove_only_original_copy": false
+  },
+  "tests": "Existing nine C2 test files with recorded collection and environment; storage-tool synthetic regression tests; not full historical suite",
+  "mechanics_expected": {
+    "passed_states": 58,
+    "states": 59,
+    "passed_checks": 1809,
+    "checks": 1810,
+    "fine_mesh_terminal": "not_pass",
+    "fine_mesh_prefix_last_d_mm": 0.4375,
+    "fine_mesh_terminal_force_error": 1.094379216402844e-11,
+    "force_gate": 1e-11
+  }
+}

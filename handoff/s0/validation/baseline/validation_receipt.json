@@ -1,0 +1,138 @@
+{
+  "schema": "hf4-c2-s0-bounded-regression-1.0",
+  "tree": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_tree",
+  "source_tree": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC",
+  "tests": [
+    "tests/test_contact_c2.py",
+    "tests/test_contact_c2_analytic_edge.py",
+    "tests/test_contact_c2_audit.py",
+    "tests/test_contact_c2_fields.py",
+    "tests/test_contact_c2_isolated.py",
+    "tests/test_contact_c2_readback.py",
+    "tests/test_contact_c2_runner.py",
+    "tests/test_summarize_contact_c2.py",
+    "tests/test_summarize_contact_c2_r2.py"
+  ],
+  "test_file_sha256": {
+    "tests/test_contact_c2.py": "ec327a36b9dda33ae5d7fa6cd4a8472d194ef94eed816a6ed355e95ac6d4f13f",
+    "tests/test_contact_c2_analytic_edge.py": "e34dd204449db5abbb9348c1c1bb9072e48f0319737d6fa5980c6a2994d3243c",
+    "tests/test_contact_c2_audit.py": "8b5ecdb0844ba455626cd2f0d605eaa921fabb4ccebc9d8f6717f64e4e4c509a",
+    "tests/test_contact_c2_fields.py": "360fdc97ffccb5e9b42623a793c11e62baea92a9bff9d00cc13ae2178f9d5282",
+    "tests/test_contact_c2_isolated.py": "8bafc11d62b1236ad6dda472dfab22b82cab7424550cfaed1d97fa3e0090d434",
+    "tests/test_contact_c2_readback.py": "4c3a37ffe42bc303978a5016bcfa091f99df0fccd109dbef9dec58166096b7a4",
+    "tests/test_contact_c2_runner.py": "0867ba6e4e88ec1e1409d8521ea437824ca05d1b632ba8bec20287c35edb6d80",
+    "tests/test_summarize_contact_c2.py": "3013edb404b3e6e6fa2489ad81d5f015af72413a5c47bdc41014823a72089f05",
+    "tests/test_summarize_contact_c2_r2.py": "3a02cb0d95a6fd0c3ab2d7f83f65e7a11994ddea6ae9301fadc051dd1cb9343c"
+  },
+  "explicit_environment": {
+    "PYTHONPATH": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_tree\\hf_repo\\src;D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_tree\\hf_repo\\scripts",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1",
+    "JAX_PLATFORMS": "cpu",
+    "JAX_ENABLE_X64": "true",
+    "XLA_FLAGS": "--xla_cpu_multi_thread_eigen=false intra_op_parallelism_threads=1",
+    "MPLBACKEND": "Agg"
+  },
+  "commands": [
+    {
+      "label": "environment",
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf_repo\\.venv-hf2-repair\\Scripts\\python.exe",
+        "-B",
+        "-c",
+        "import importlib,importlib.metadata,json,platform,sys\nfrom pathlib import Path\nimport jax\nmodules={name:str(Path(importlib.import_module(name).__file__).resolve()) for name in ['hf_eval','hf_eval.contact_c2','hf_eval.split_kernel','audit_contact_c2','audit_contact_c2_readback']}\nroot=Path.cwd().resolve()\nassert all(Path(path).is_relative_to(root) for path in modules.values()), modules\nprint(json.dumps(dict(executable=sys.executable,python=sys.version,platform=platform.platform(),versions={name:importlib.metadata.version(name) for name in ['numpy','scipy','pytest','jax','jaxlib','matplotlib']},module_paths=modules,jax_x64_enabled=jax.config.x64_enabled,jax_devices=[str(x) for x in jax.devices()],sys_path=sys.path),indent=2))\n"
+      ],
+      "cwd": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_tree\\hf_repo",
+      "returncode": 0,
+      "elapsed_seconds": 6.742132663726807
+    },
+    {
+      "label": "collect",
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf_repo\\.venv-hf2-repair\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "--collect-only",
+        "-q",
+        "tests/test_contact_c2.py",
+        "tests/test_contact_c2_analytic_edge.py",
+        "tests/test_contact_c2_audit.py",
+        "tests/test_contact_c2_fields.py",
+        "tests/test_contact_c2_isolated.py",
+        "tests/test_contact_c2_readback.py",
+        "tests/test_contact_c2_runner.py",
+        "tests/test_summarize_contact_c2.py",
+        "tests/test_summarize_contact_c2_r2.py"
+      ],
+      "cwd": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_tree\\hf_repo",
+      "returncode": 0,
+      "elapsed_seconds": 2.8570361137390137
+    },
+    {
+      "label": "pytest",
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf_repo\\.venv-hf2-repair\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "-rs",
+        "--basetemp",
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_results\\pytest_temp",
+        "--junitxml",
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_results\\junit.xml",
+        "tests/test_contact_c2.py",
+        "tests/test_contact_c2_analytic_edge.py",
+        "tests/test_contact_c2_audit.py",
+        "tests/test_contact_c2_fields.py",
+        "tests/test_contact_c2_isolated.py",
+        "tests/test_contact_c2_readback.py",
+        "tests/test_contact_c2_runner.py",
+        "tests/test_summarize_contact_c2.py",
+        "tests/test_summarize_contact_c2_r2.py"
+      ],
+      "cwd": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_tree\\hf_repo",
+      "returncode": 0,
+      "elapsed_seconds": 32.04138112068176
+    },
+    {
+      "label": "geometry_inspect",
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\hf_repo\\.venv-hf2-repair\\Scripts\\python.exe",
+        "-B",
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_tree\\tools\\handoff.py",
+        "inspect",
+        "--output",
+        "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_results\\geometry_inspect.json"
+      ],
+      "cwd": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\c2_s0_validation\\baseline_tree",
+      "returncode": 0,
+      "elapsed_seconds": 1.9368057250976562
+    }
+  ],
+  "collected_count": 143,
+  "reported_count": 143,
+  "passed": 142,
+  "skips": [
+    {
+      "classname": "tests.test_contact_c2_readback",
+      "name": "test_present_historical_sources_are_verified_when_available",
+      "reason": "external historical source bytes are intentionally optional"
+    }
+  ],
+  "failures": [],
+  "no_new_fe_path": true,
+  "saved_state_constitutive_evaluation": false,
+  "scope": "Existing nine-file regressions include one-element manufactured Decimal and analytic quadrature checks; no production solve path or saved-state HP reevaluation."
+}
