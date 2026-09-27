@@ -11,7 +11,7 @@ S0 将详细科学记录分为轻量主树与按需恢复资产；源码、测�
 - 本阶段没有求解新路径，细网格路径在历史中仍为 `NOT_PASS`。
 - 是否冻结 v4 协议补测该路径，以及 [HF5 方案](docs/HF5_LF_V2_ADAPTER_AND_TASK_PLAN.md)（LF v2 几何接入与真实夹持任务），待所有者决定。
 - 详见 [P1／稳定 F 报告](docs/HF4_C2_P1_AND_STABLE_F_REPORT.md)。
-- 下一步（待审阅与授权，未实施、未运行）：[v4 最小实现变更清单与有界复验方案](docs/HF4_C2_V4_CHANGE_LIST_AND_RETEST_PLAN.md)。
+- v4（补偿内核复验原失败的细网格路径）：变更清单经审查后已实施并冻结为候审版本（协议 `configs/contact_c2_v4.json`，SHA-256 `8d2a4f71…`；只读启动检查通过），见 [v4 冻结报告](docs/HF4_C2_V4_FREEZE_REPORT.md)。真实求解与审计尚未授权、未运行。
 
 此前的记录（2026-09-21）：后续先完成 [P1 完整启动合同前置修复](docs/HF4_C2_CONSOLIDATED_REVIEW_20260921.md)，再推进稳定 F、完整内力与一致切线的无求解验证；冻结 v3 保留原件，当前继续停止新 FE。
 

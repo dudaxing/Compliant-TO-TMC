@@ -1,0 +1,104 @@
+{
+  "schema": "contact-c2-v4-launch-check-1",
+  "created_utc": "2026-09-27T09:12:17.250912+00:00",
+  "scope": "read-only plan_launch questions against the real frozen v4 contract and restored evidence; no directory created, no mechanics imported, nothing dispatched; not a run",
+  "protocol_sha256": "8d2a4f718e6c36cc61d9838e0df1eba9f116ad5d7b8d4bdffbfbfd512170ba6b",
+  "guard_pinned_sha256": "8d2a4f718e6c36cc61d9838e0df1eba9f116ad5d7b8d4bdffbfbfd512170ba6b",
+  "environment": {
+    "python": "3.13.6",
+    "mismatches": {}
+  },
+  "experiments_root_created": false,
+  "temporary_protocol_copies_left": [],
+  "cases": [
+    {
+      "result": "accepted",
+      "action": "solve",
+      "case_id": "mesh_h00625",
+      "timeout_seconds": 700,
+      "bound_inputs": 182,
+      "launch_identity": {
+        "scripts/contact_c2_launch_v4.py": "d927f654dc72019c518d99656e8b42903380289847ce3cff2a7dcce2e2ee1d43",
+        "scripts/run_contact_c2_v4_isolated.py": "fc2be0940006bbc00f822db1406f46a8b9d063a0d5a95a31730af52d99e1aef6",
+        "scripts/contact_c2_launch_p1.py": "4109cf054cdec42285a988e1adec161a74c5143374eba9300c3d44b60c5f9958"
+      },
+      "label": "solve mesh_h00625 into a fresh experiment root",
+      "expected": "accepted",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "audit must follow the latest successful solve",
+      "label": "audit before any solve",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "undeclared case: v4 re-tests only the frozen fine-mesh case",
+      "label": "undeclared case padding_2p5",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "experiment root must be in the workspace and outside hf_repo",
+      "label": "run directory inside hf_repo",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "file hash changed: D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\hf_repo\\configs\\contact_c2_v3.json",
+      "label": "the frozen v3 protocol passed as the v4 protocol",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "v4 protocol must be the frozen configs file",
+      "label": "byte-identical copy at another path",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "file hash changed: D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\hf_repo\\configs\\v4-edited-protocol-wfocc86l\\edited_tolerance.json",
+      "label": "edited protocol: solver tolerance x10",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "file hash changed: D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\hf_repo\\configs\\v4-edited-protocol-wfocc86l\\edited_maximum_paths.json",
+      "label": "edited protocol: one more path in the budget",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "file hash changed: D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\hf_repo\\configs\\v4-edited-protocol-wfocc86l\\edited_kernel_version.json",
+      "label": "edited protocol: kernel version renamed",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "file hash changed: D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\hf_repo\\configs\\v4-edited-protocol-wfocc86l\\edited_numpy.json",
+      "label": "edited protocol: environment numpy 2.3.5",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    }
+  ],
+  "status": "pass"
+}
