@@ -1,0 +1,40 @@
+{
+  "schema": "contact-c2-v4-postrun-guard-check-1",
+  "created_utc": "2026-09-27T10:36:44.736428+00:00",
+  "scope": "read-only plan_launch questions after the single authorised v4 solve and audit; not a run",
+  "protocol_sha256": "8d2a4f718e6c36cc61d9838e0df1eba9f116ad5d7b8d4bdffbfbfd512170ba6b",
+  "guard_pinned_sha256": "8d2a4f718e6c36cc61d9838e0df1eba9f116ad5d7b8d4bdffbfbfd512170ba6b",
+  "experiment_root_entries": [
+    "mesh_h00625_v4",
+    "mesh_h00625_v4.audit.log",
+    "mesh_h00625_v4.audit.receipt.json",
+    "mesh_h00625_v4.audit.v4-plan.json",
+    "mesh_h00625_v4.solve.log",
+    "mesh_h00625_v4.solve.receipt.json",
+    "mesh_h00625_v4.solve.v4-plan.json"
+  ],
+  "cases": [
+    {
+      "result": "rejected",
+      "message": "refusing to overwrite a subprocess receipt",
+      "label": "second solve into the used run",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "refusing to overwrite a subprocess receipt",
+      "label": "second audit of the used run",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "new path required within path cap",
+      "label": "solve into a new run name",
+      "side_effect_free": true,
+      "status": "pass"
+    }
+  ],
+  "status": "pass"
+}
