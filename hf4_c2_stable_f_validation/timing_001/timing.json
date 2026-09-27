@@ -1,0 +1,79 @@
+{
+  "schema": "contact-c2-split-kernel-timing-1",
+  "created_utc": "2026-09-27T04:23:25.718266+00:00",
+  "state": "hf4_c2_diagnostics/experiments/mesh_h00625/stages/uniform_tmc/steps/state_020.npz",
+  "elements": 1920,
+  "dofs": 4074,
+  "repeats": 5,
+  "python": "3.13.6",
+  "numpy": "2.4.6",
+  "jax": "0.11.0",
+  "threads": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "scope": "wall-time of force (and tangent) assembly on one unchanged saved state; no solve, no gate",
+  "rows": [
+    {
+      "kernel": "legacy",
+      "kernel_version": "p26_q1_split_displacement_v1",
+      "tangent": false,
+      "first_call_seconds_including_compile": 0.30618009995669127,
+      "repeated_seconds": [
+        0.01039499999023974,
+        0.009782399982213974,
+        0.008463199948891997,
+        0.008007500029634684,
+        0.00906310003483668
+      ],
+      "median_seconds": 0.00906310003483668,
+      "median_kernel_seconds": 0.008936400001402944
+    },
+    {
+      "kernel": "legacy",
+      "kernel_version": "p26_q1_split_displacement_v1",
+      "tangent": true,
+      "first_call_seconds_including_compile": 0.45299369998974726,
+      "repeated_seconds": [
+        0.017979600001126528,
+        0.0188575999927707,
+        0.01968750002561137,
+        0.021513499959837645,
+        0.023531900020316243
+      ],
+      "median_seconds": 0.01968750002561137,
+      "median_kernel_seconds": 0.021173999994061887
+    },
+    {
+      "kernel": "compensated",
+      "kernel_version": "p26_q1_split_compensated_dot2_v1",
+      "tangent": false,
+      "first_call_seconds_including_compile": 0.7988546999986283,
+      "repeated_seconds": [
+        0.08189460000721738,
+        0.0724779000156559,
+        0.06667720002587885,
+        0.07385639997664839,
+        0.06644490000326186
+      ],
+      "median_seconds": 0.0724779000156559,
+      "median_kernel_seconds": 0.06625719997100532
+    },
+    {
+      "kernel": "compensated",
+      "kernel_version": "p26_q1_split_compensated_dot2_v1",
+      "tangent": true,
+      "first_call_seconds_including_compile": 1.0748547000112012,
+      "repeated_seconds": [
+        0.10200929996790364,
+        0.11588539998047054,
+        0.10225669998908415,
+        0.08387149998452514,
+        0.07463950000237674
+      ],
+      "median_seconds": 0.10200929996790364,
+      "median_kernel_seconds": 0.07204080000519753
+    }
+  ]
+}

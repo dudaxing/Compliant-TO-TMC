@@ -1,0 +1,11 @@
+--- a/hf_repo/src/hf_eval/tmc.py
++++ b/hf_repo/src/hf_eval/tmc.py
+@@ -172,7 +172,7 @@
+     center = model.coordinates.mean(axis=0)
+     rigid[0::2, 2] = -(model.coordinates[:, 1] - center[1]) / span
+     rigid[1::2, 2] = (model.coordinates[:, 0] - center[0]) / span
+-    if np.linalg.matrix_rank(rigid[model.fixed_dofs]) < 3:
++    if len(model.fixed_dofs) < 3 or np.linalg.matrix_rank(rigid[model.fixed_dofs]) < 3:
+         raise TMCError("support does not eliminate three planar rigid modes", code="insufficient_support")
+ 
+ 
