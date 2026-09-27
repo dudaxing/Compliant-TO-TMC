@@ -501,8 +501,10 @@ def saved(args,np,evidence,reference,kernel,TMCModel,SplitDisplacement,action_fu
     for _,stage,entry,row in descriptors:
         meta=evidence.json(stage+"/metadata.json")
         require(sha(evidence.path(stage+"/model.npz"))==meta["model_sha256"],"saved model hash mismatch")
+        # Amendment 002: C1 step entries have no record file (only C2 does); bind whatever the entry declares.
         for key,hashkey in (("file","sha256"),("record_file","record_sha256")):
-            require(sha(evidence.path(stage+"/steps/"+entry[key]))==entry[hashkey],"saved state/record hash mismatch")
+            if key=="file" or key in entry:
+                require(sha(evidence.path(stage+"/steps/"+entry[key]))==entry[hashkey],"saved state/record hash mismatch")
         require(row["verification_precision_pair"]==[80,120],"wrong saved HP precision pair")
     write(args.output/"saved_input_freeze.json",dict(files=evidence.bound,
           selected=[dict(run=name,stage=stage,index=entry["index"],d=entry["d"],original_status=row["status"])
@@ -581,7 +583,8 @@ def main():
           manufactured_SF="max(norm(HP80 free),norm(HP80 fixed),1e-8*100*max(abs(0.125),1e-6))",
           saved_SF="unchanged bound HP80 audit SF; no candidate normalization",all_c2=args.all_c2,
           recompute_saved_hp=args.recompute_saved_hp,external_timeout_seconds=900,
-          amendments=["001: non-gating legacy split-kernel control on identical inputs, HP references and SF (docs/HF4_C2_STABLE_F_VALIDATION_AMENDMENT_001.md)"],
+          amendments=["001: non-gating legacy split-kernel control on identical inputs, HP references and SF (docs/HF4_C2_STABLE_F_VALIDATION_AMENDMENT_001.md)",
+                      "002: bind a step record file only when the step entry declares one (C1 entries have none)"],
           cumulative_budget_seconds=3600,command=sys.argv,python=platform.python_version()))
     results=[]
     error=None

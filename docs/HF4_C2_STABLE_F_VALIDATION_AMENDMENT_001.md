@@ -21,3 +21,7 @@
 ## 4. 执行方式
 
 与原计划相同：`tools/run_c2_bounded_validation.py` 记录命令、源码快照、环境、墙钟、退出码与输出哈希，输出目录在 `hf4_c2_stable_f_validation/` 下且每次新建；基线为只读的 `7fea2e4` 工作树并恢复 `hf4-c2-s0-c1_runs-v1`、`hf4-c2-s0-c2_runs-v1` 两个资产（`tools/handoff.py verify --asset` 均为 pass）。解释器使用本机已有、与 `hf_repo/requirements.lock` 版本完全一致的锁定环境（CPython 3.13.6、NumPy 2.4.6、SciPy 1.17.1、JAX／jaxlib 0.11.0）；新环境的安装因网络超时尚未完成，实际解释器路径与版本记入每次运行的回执。
+
+## 5. 修订 002（2026-09-27，第一次保存态尝试之后、任何保存态被计算之前）
+
+第一次保存态运行 `hf4_c2_stable_f_validation/saved_001`（2.5 s）在输入绑定阶段以 `KeyError: 'record_file'` 停止，**没有计算任何状态**（`case_count` 0；`exception.json` 原样保留）。原因是驱动假定每个步骤条目都有 `record_file`／`record_sha256`；C2 的步骤条目有，C1 的没有（C1 早于逐态记录文件）。修订只改绑定：条目声明了记录文件才核对它的哈希，状态文件本身照旧逐个核对。其余读取假设已在重跑前只用存档数据核对：八个保存态的六组 HP 键齐全，保存的 SF 与按原定义重算的 SF 在 80 位下完全相等，状态与模型数组、单元尺寸俱全。门槛、选择与 SF 不变；`saved_001` 保留为失败尝试并计入预算。
