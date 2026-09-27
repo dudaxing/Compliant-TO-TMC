@@ -1,5 +1,7 @@
 # 在新电脑或任意新目录接续开发
 
+2026-09-27 独立复核与当前续作入口见 [P1/稳定 F 复核报告](HF4_C2_INDEPENDENT_RECHECK_REPORT_20260927.md)和[可移植复算步骤](../hf4_c2_independent_recheck_20260927/README.md)。P1 已通过，保存态改善已复现，三个近转动制造场仍未通过完整力门；本轮没有新 FE。以下历史环境和恢复步骤继续适用。
+
 本指南覆盖 **稳定 0.5.0 / HF4-B** 与主分支 **HF4-C0/C1/C2 实验扩展**。先读[C2 最终报告](HF4_C2_FINAL_REPORT.md)、[C2 证据入口](../hf4_c2_diagnostics/README.md)、[开发上下文](DEVELOPMENT_CONTEXT.md)、[C1 最终报告](HF4_C1_FINAL_REPORT.md)、[C1 证据入口](../hf4_c1_results/README.md)和[最终摘要](../hf4_c1_results/summary_v2/summary.json)，再准备环境。[旧项目状态](PROJECT_STATUS.md)保留 0.5.0 时的事实。C0 受限参照与 C1 冻结配对任务已通过各自门禁；HF4-C 一般接触与项目整体仍未完成。TMC 净合力对账不构成其局部单边接触验收，文件搬迁和安装检查也不构成新的力学验收。
 
 ## 1. 克隆与校验
