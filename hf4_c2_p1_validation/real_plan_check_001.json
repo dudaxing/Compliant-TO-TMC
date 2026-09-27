@@ -1,0 +1,99 @@
+{
+  "schema": "contact-c2-p1-real-plan-check-1",
+  "created_utc": "2026-09-27T04:11:02.571639+00:00",
+  "scope": "read-only plan_launch questions against the genuine v3 contract and restored evidence; no directory created, no mechanics imported, nothing dispatched",
+  "protocol_sha256": "b17c8328dd1e350563b70305c0b311c8d38c9c0ef68c08b85fac5f13604d0b4d",
+  "p1_source_sha256": {
+    "scripts/contact_c2_launch_p1.py": "4109cf054cdec42285a988e1adec161a74c5143374eba9300c3d44b60c5f9958",
+    "scripts/run_contact_c2_p1.py": "53c26ee901e6cd5f01607c35b309b8fb9734d44ba67468d326d07d5ee8d4e5b4",
+    "scripts/run_contact_c2_p1_isolated.py": "afcd943b3b878d93170d1f7fa64df8498f62583647371af8965577a81b5e2120"
+  },
+  "fresh_root_created": false,
+  "temporary_protocol_copies_left": [],
+  "cases": [
+    {
+      "result": "accepted",
+      "case_id": "padding_2p5",
+      "action": "solve",
+      "timeout_seconds": 700,
+      "bound_inputs": 175,
+      "label": "fresh root: first frozen case padding_2p5 (solve)",
+      "expected": "accepted",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "case differs from frozen serial order",
+      "label": "fresh root: second case first (outer_free, out of the frozen serial order)",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "undeclared case; baseline is preflight only",
+      "label": "fresh root: undeclared baseline case",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "audit must follow the latest successful solve",
+      "label": "fresh root: audit without a solve",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "prior subprocess failed or timed out",
+      "label": "historical root: a fourth solve after the three frozen paths",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "refusing to overwrite a subprocess receipt",
+      "label": "historical root: repeat the audit of the failed fine-mesh path",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "experiment root must be in the workspace and outside hf_repo",
+      "label": "run directory inside hf_repo",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "file hash changed: D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\hf_repo\\configs\\p1-edited-protocol-r720317q\\edited_7.json",
+      "label": "edited protocol copy: solver tolerance (the motivating case)",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "file hash changed: D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\hf_repo\\configs\\p1-edited-protocol-r720317q\\edited_8.json",
+      "label": "edited protocol copy: budget: one more path",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    },
+    {
+      "result": "rejected",
+      "message": "file hash changed: D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\hf_repo\\configs\\p1-edited-protocol-r720317q\\edited_9.json",
+      "label": "edited protocol copy: one trailing space (bytes only)",
+      "expected": "rejected",
+      "side_effect_free": true,
+      "status": "pass"
+    }
+  ],
+  "status": "pass"
+}
