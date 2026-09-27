@@ -159,3 +159,10 @@ P1 解决的是 C2 复核发现的问题：旧 wrapper 在协议被误编辑（�
 | `hf4_c2_p1_validation/` | 上一位开发者的 P1 测试记录、本次真实合同检查回执、定稿全量测试 |
 | `docs/HF4_C2_STABLE_F_VALIDATION_AMENDMENT_001.md` | 执行前修订 001／002 |
 | `research_integration_20260920/external_reviews_20260927/` | 本次审阅输入（原字节）与身份清单 |
+
+## 8. 合并（2026-09-27）
+
+所有者转来合并审查后，本分支的已审版本 `6a40957` 以普通合并进入 `main`，合并提交为 `1729755`，保留全部分支提交；合并结果的树与 `6a40957` 相同。这次合并仅为集成：默认求解路径不变，C2 历史 `NOT_PASS` 不变，不授权新 FE，也不确认 HF5。输入与执行记录见 `research_integration_20260920/external_reviews_20260927_merge/`。
+
+审查者在 JAX／jaxlib 0.9.0.1 环境中运行时，补偿运动学的 22 项测试在编译阶段报 `No such compile option: 'xla_cpu_ftz'`；P1 的 279 项通过。候选内核需要一个接受该选项的 JAX／XLA（锁定的 0.11.0 满足）；旧版本会在编译时直接失败，没有回退，这是设计使然。
+
