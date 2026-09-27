@@ -1,0 +1,41 @@
+{
+  "schema": "main-consolidation-scientific-preservation-1",
+  "recorded_utc": "2026-09-27T11:37:06.677556+00:00",
+  "baseline_commit": "2def941ddc94823ea0686bbd63ddbafa20f4b101",
+  "status": "pass",
+  "methods": {
+    "protected_selection": "Existing blob paths in the baseline whose name starts with one of protected_prefixes; new files and all other paths are outside this byte comparison.",
+    "byte_comparison": "git ls-tree -r -z BASELINE supplies original blob IDs; git hash-object --no-filters --stdin-paths hashes actual working-tree bytes without line-ending filters. Every protected path is checked.",
+    "protocol_binding": "SHA-256 of actual v4 protocol bytes against the retained launch identity; SHA-256 of each of its 21 implementation files against implementation_sha256."
+  },
+  "protected_prefixes": [
+    "hf_repo/src/",
+    "hf_repo/configs/",
+    "geometry_dataset/",
+    "hf4_"
+  ],
+  "baseline_file_count": 3018,
+  "protected_file_count": 1782,
+  "protected_existing_file_count": 1782,
+  "protected_counts": {
+    "hf_repo/src/": 27,
+    "hf_repo/configs/": 13,
+    "geometry_dataset/": 395,
+    "hf4_": 1347
+  },
+  "protected_path_and_baseline_blob_list_sha256": "f4de5115dc370bd7ab86c2d789185562c8798aa40154c00afb9ce2fa5fd800f7",
+  "missing": [],
+  "byte_mismatch": [],
+  "v4_protocol_sha256": "8d2a4f718e6c36cc61d9838e0df1eba9f116ad5d7b8d4bdffbfbfd512170ba6b",
+  "v4_identity_protocol_matches": true,
+  "v4_bound_implementation_count": 21,
+  "v4_bound_implementation_mismatch": [],
+  "limitations": [
+    "Checks only the explicitly selected existing baseline files; does not claim every historical file or newly integrated evidence was verified.",
+    "External payload arrays absent from the baseline checkout are outside this comparison and require archive/member/restored-file verification.",
+    "Git blob comparison is byte identity, not numerical validation. No FE solve, HP evaluation, production path, or scientific admission was run.",
+    "The ordinary binding validator and new tests are development changes outside the frozen src/config identity claim."
+  ],
+  "new_fe_or_hp": false,
+  "new_production_path": false
+}

@@ -495,16 +495,62 @@ def saved_descriptors(evidence, all_c2):
     return result
 
 
+def validate_saved_record_binding(metadata, entry, *, record_sha256=None,
+                                  completion=None, file_sha256=None,
+                                  controller=None, entries=None):
+    """Check schema-specific saved-record identities without I/O or mechanics.
+
+    The caller supplies hashes computed through HistoricalEvidence.path(), so
+    this check supplements (and does not replace) the pinned file identities.
+    C1 binds the embedded accepted record; C2 binds its separate record file.
+    """
+    schema = metadata["schema"]
+    if schema == "contact_c2_stage_v1":
+        require(record_sha256 == entry["record_sha256"],
+                "saved C2 per-state record hash mismatch")
+    elif schema == "contact_c1_stage_v1":
+        for filename, key in (("result.json", "result_sha256"),
+                              ("steps/index.json", "index_sha256"),
+                              ("metadata.json", "metadata_sha256")):
+            require(file_sha256[filename] == completion[key],
+                    "saved C1 completion binding mismatch: " + filename)
+        records = controller["accepted_steps"]
+        require(completion["status"] == controller["status"] == "success"
+                and len(records) == len(entries) == completion["accepted_states"],
+                "saved C1 record inventory mismatch")
+        index = entry["index"]
+        require(type(index) is int and 0 <= index < len(records),
+                "saved C1 selected record index out of range")
+        record = records[index]
+        require(entries[index] == entry and all(record[key] == entry[key]
+                for key in ("d", "is_original_target", "original_target_displacement", "bisection_depth")),
+                "saved C1 selected embedded record differs from index")
+    else:
+        raise ValueError("unknown saved stage record schema")
+
+
 def saved(args,np,evidence,reference,kernel,TMCModel,SplitDisplacement,action_function,legacy):
     descriptors=saved_descriptors(evidence,args.all_c2)
     # Bind every selected source before the first numerical candidate evaluation.
     for _,stage,entry,row in descriptors:
         meta=evidence.json(stage+"/metadata.json")
         require(sha(evidence.path(stage+"/model.npz"))==meta["model_sha256"],"saved model hash mismatch")
-        # Amendment 002: C1 step entries have no record file (only C2 does); bind whatever the entry declares.
-        for key,hashkey in (("file","sha256"),("record_file","record_sha256")):
-            if key=="file" or key in entry:
-                require(sha(evidence.path(stage+"/steps/"+entry[key]))==entry[hashkey],"saved state/record hash mismatch")
+        require(sha(evidence.path(stage+"/steps/"+entry["file"]))==entry["sha256"],"saved state hash mismatch")
+        if meta["schema"]=="contact_c2_stage_v1":
+            validate_saved_record_binding(meta, entry,
+                record_sha256=sha(evidence.path(stage+"/steps/"+entry["record_file"])))
+        elif meta["schema"]=="contact_c1_stage_v1":
+            # Frozen C1 stores accepted records inside result.json, not in the
+            # separate gzip records introduced by C2. Bind its actual schema.
+            completion=evidence.json(stage+"/completion.json")
+            file_sha256={filename:sha(evidence.path(stage+"/"+filename)) for filename in
+                         ("result.json", "steps/index.json", "metadata.json")}
+            controller=evidence.json(stage+"/result.json")
+            entries=evidence.json(stage+"/steps/index.json")["steps"]
+            validate_saved_record_binding(meta, entry, completion=completion,
+                file_sha256=file_sha256, controller=controller, entries=entries)
+        else:
+            raise ValueError("unknown saved stage record schema")
         require(row["verification_precision_pair"]==[80,120],"wrong saved HP precision pair")
     write(args.output/"saved_input_freeze.json",dict(files=evidence.bound,
           selected=[dict(run=name,stage=stage,index=entry["index"],d=entry["d"],original_status=row["status"])
@@ -584,7 +630,8 @@ def main():
           saved_SF="unchanged bound HP80 audit SF; no candidate normalization",all_c2=args.all_c2,
           recompute_saved_hp=args.recompute_saved_hp,external_timeout_seconds=900,
           amendments=["001: non-gating legacy split-kernel control on identical inputs, HP references and SF (docs/HF4_C2_STABLE_F_VALIDATION_AMENDMENT_001.md)",
-                      "002: bind a step record file only when the step entry declares one (C1 entries have none)"],
+                      "002 (historical, superseded by 003): introduced optional step-record binding because C1 entries have no separate record file",
+                      "003: require C2 per-state record hashes; bind C1 completion/result/index/metadata and the selected embedded accepted record by stage schema"],
           cumulative_budget_seconds=3600,command=sys.argv,python=platform.python_version()))
     results=[]
     error=None
