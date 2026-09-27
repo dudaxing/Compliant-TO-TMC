@@ -160,7 +160,8 @@ def independent_module(evidence):
 
 def candidate_sources():
     paths = list((REPO / "src/hf_eval").glob("*.py"))
-    paths.extend([Path(__file__), REPO.parent / "docs/HF4_C2_P1_AND_STABLE_F_EXECUTION_PLAN.md"])
+    paths.extend([Path(__file__), REPO.parent / "docs/HF4_C2_P1_AND_STABLE_F_EXECUTION_PLAN.md",
+                  REPO.parent / "docs/HF4_C2_STABLE_F_VALIDATION_AMENDMENT_001.md"])
     return {str(p.relative_to(REPO.parent).as_posix()): sha(p) for p in sorted(paths)}
 
 
@@ -245,7 +246,7 @@ def production_model(np, fixture, metadata, TMCModel):
     return model
 
 
-def jvp_function(jax, jnp, kernel):
+def jvp_function(jax, jnp, kernel, compiler_options=None):
     def actions(L, w, grad, hess, weights, lam, mu, kr, direction):
         def residual(varied):
             fields = jax.vmap(kernel._without_tangent,
@@ -253,7 +254,8 @@ def jvp_function(jax, jnp, kernel):
                 L, varied, grad, hess, weights, lam, mu, kr)
             return tuple(fields[k] for k in ("residual", "material_residual", "regularization_residual"))
         return jax.jvp(residual, (w,), (direction,))[1]
-    return jax.jit(actions, compiler_options=kernel.COMPILER_OPTIONS)
+    options = kernel.COMPILER_OPTIONS if compiler_options is None else compiler_options
+    return jax.jit(actions, compiler_options=options) if options else jax.jit(actions)
 
 
 def evaluate_production(np, kernel, SplitDisplacement, model, L, w, v, action_function):
@@ -305,6 +307,24 @@ def comparison_checks(prod, hp80, hp120, sf):
         check(checks, "positive_candidate_J", 0 if min(prod["J"].ravel()) > 0 else 1, 0)
         check(checks, "positive_force_only_J", 0 if min(prod["force_only_J"].ravel()) > 0 else 1, 0)
     return checks
+
+
+def legacy_control(np, legacy, SplitDisplacement, model, L, w, v, hp80, hp120, sf, reference):
+    """Amendment 001: the unchanged legacy split kernel on the same inputs, same HP references, same SF.
+
+    Diagnostic only; never part of a case status. It separates failures caused by F construction (legacy
+    fails, candidate passes) from failures shared by both kernels (for example binary64 resolution limits).
+    """
+    kernel, action_function = legacy
+    try:
+        values = evaluate_production(np, kernel, SplitDisplacement, model, L, w, v, action_function)
+    except Exception as error:  # noqa: BLE001 - the legacy kernel may legitimately reject a state
+        return dict(role="legacy_control_diagnostic_not_gating", kernel_version=kernel.KERNEL_VERSION,
+                    error=dict(type=type(error).__name__, message=str(error)))
+    checks = comparison_checks(values, hp80, hp120, sf)
+    return dict(role="legacy_control_diagnostic_not_gating", kernel_version=kernel.KERNEL_VERSION,
+                status="pass" if all(c["status"] == "pass" for c in checks) else "not_pass",
+                checks=checks, kinematics=kinematic_metrics(np, values, reference))
 
 
 def kinematic_metrics(np, prod, reference):
@@ -388,7 +408,7 @@ def compiler_evidence(np, kernel, model, output):
           branches=rows))
 
 
-def manufactured(args, np, reference, kernel, TMCModel, SplitDisplacement, action_function):
+def manufactured(args, np, reference, kernel, TMCModel, SplitDisplacement, action_function, legacy):
     results = []
     for size_id, nx, ny, hx, hy in SIZES:
         fixture = make_fixture(np, nx, ny, hx, hy)
@@ -416,6 +436,7 @@ def manufactured(args, np, reference, kernel, TMCModel, SplitDisplacement, actio
                     sf=force_scale(hp[80],fixture,.125)
                 prod=evaluate_production(np,kernel,SplitDisplacement,model,L,w,v,action_function)
                 checks=comparison_checks(prod,hp[80],hp[120],sf)
+                control=legacy_control(np,legacy,SplitDisplacement,model,L,w,v,hp[80],hp[120],sf,hp[120])
                 np.savez_compressed(directory/f"production_{index}.npz",**prod)
                 write(directory/f"hp_{index}.json",{str(p):hp[p] for p in hp})
                 fd=None
@@ -435,7 +456,7 @@ def manufactured(args, np, reference, kernel, TMCModel, SplitDisplacement, actio
                         if size_id!="nondyadic_rect":
                             check(checks,"exact_dyadic_decomposition",max(map(abs,delta)),0)
                 rows.append(dict(direction=index,force_scale=sf,checks=checks,
-                                 kinematics=kinematic_metrics(np,prod,hp[120]),
+                                 kinematics=kinematic_metrics(np,prod,hp[120]),legacy_control=control,
                                  decomposition=decomposition,
                                  finite_difference_record=f"fd_{index}.json" if fd else None))
             result=dict(case=identifier, status="pass" if all(c["status"]=="pass" for r in rows for c in r["checks"]) else "not_pass",
@@ -474,7 +495,7 @@ def saved_descriptors(evidence, all_c2):
     return result
 
 
-def saved(args,np,evidence,reference,kernel,TMCModel,SplitDisplacement,action_function):
+def saved(args,np,evidence,reference,kernel,TMCModel,SplitDisplacement,action_function,legacy):
     descriptors=saved_descriptors(evidence,args.all_c2)
     # Bind every selected source before the first numerical candidate evaluation.
     for _,stage,entry,row in descriptors:
@@ -509,6 +530,7 @@ def saved(args,np,evidence,reference,kernel,TMCModel,SplitDisplacement,action_fu
                     "saved SF differs from unchanged HP80 vector definition")
         prod=evaluate_production(np,kernel,SplitDisplacement,model,L,w,v,action_function)
         checks=comparison_checks(prod,hp[80],hp[120],sf)
+        control=legacy_control(np,legacy,SplitDisplacement,model,L,w,v,hp[80],hp[120],sf,{})
         if args.recompute_saved_hp:
             recomputed={p:reference.DecimalSplitQ1Reference(fixture,precision=p).evaluate(L,w,tangent_direction=v) for p in (80,120)}
             with localcontext() as context:
@@ -525,6 +547,7 @@ def saved(args,np,evidence,reference,kernel,TMCModel,SplitDisplacement,action_fu
                     original_state_sha256=entry["sha256"],force_scale=sf,checks=checks,
                     original_checks=[c for c in row["checks"]
                                      if c["name"] in {"production_vs_hp80_"+name for name in HP_KEYS}],
+                    legacy_control=control,
                     role="candidate_fixed_state_arithmetic_not_historical_readmission")
         write(directory/"result.json",result)
         results.append(result)
@@ -558,6 +581,7 @@ def main():
           manufactured_SF="max(norm(HP80 free),norm(HP80 fixed),1e-8*100*max(abs(0.125),1e-6))",
           saved_SF="unchanged bound HP80 audit SF; no candidate normalization",all_c2=args.all_c2,
           recompute_saved_hp=args.recompute_saved_hp,external_timeout_seconds=900,
+          amendments=["001: non-gating legacy split-kernel control on identical inputs, HP references and SF (docs/HF4_C2_STABLE_F_VALIDATION_AMENDMENT_001.md)"],
           cumulative_budget_seconds=3600,command=sys.argv,python=platform.python_version()))
     results=[]
     error=None
@@ -573,20 +597,22 @@ def main():
         require(jax.default_backend()=="cpu","CPU required")
         sys.path.insert(0,str(REPO/"src"))
         from hf_eval import split_kernel_compensated as kernel
+        from hf_eval import split_kernel as legacy_kernel
         from hf_eval.tmc import TMCModel
         from hf_eval.split_state import SplitDisplacement
         require(Path(kernel.__file__).resolve().is_relative_to(REPO),"candidate import escaped source tree")
         reference=independent_module(evidence)
         action_function=jvp_function(jax,jnp,kernel)
+        legacy=(legacy_kernel,jvp_function(jax,jnp,legacy_kernel,{}))
         write(args.output/"runtime.json",dict(numpy=np.__version__,jax=jax.__version__,jaxlib=jaxlib.__version__,
               backend=jax.default_backend(),x64=jax.config.jax_enable_x64,
               kernel_file=kernel.__file__,reference_file=reference.__file__,
               compiler_options=kernel.COMPILER_OPTIONS,environment={k:os.environ[k] for k in
               ("JAX_PLATFORMS","OMP_NUM_THREADS","OPENBLAS_NUM_THREADS","MKL_NUM_THREADS")}))
         if args.phase=="manufactured":
-            results=manufactured(args,np,reference,kernel,TMCModel,SplitDisplacement,action_function)
+            results=manufactured(args,np,reference,kernel,TMCModel,SplitDisplacement,action_function,legacy)
         else:
-            results=saved(args,np,evidence,reference,kernel,TMCModel,SplitDisplacement,action_function)
+            results=saved(args,np,evidence,reference,kernel,TMCModel,SplitDisplacement,action_function,legacy)
         evidence.recheck()
         source_unchanged(source)
     except Exception as exc:
