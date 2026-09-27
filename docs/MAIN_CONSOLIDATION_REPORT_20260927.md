@@ -1,6 +1,6 @@
 # main 整合执行记录（2026-09-27）
 
-恢复与回归已通过；本提交推送后再执行六个远程分支的条件删除。删除完成后追加最终回执。
+main 已推送，六个已合入的远程分支已删除；远程仅保留 main。
 
 ## 目标、授权和工作理由
 
@@ -11,7 +11,7 @@
 ## 合并内容与取舍
 
 - 先将本地 main 快进至远程 `2def941ddc94823ea0686bbd63ddbafa20f4b101`，保留已经合入的 S0、P1、归档、后续记录及 v4。
-- 通过双亲合并接纳独立复核 `ae9eb62dd64611c5ff3e6c4a9e6c4c1ab0fbada5`。合并主体提交：`由包含本报告的双亲合并提交标识；完成回执中补入完整 SHA`。未用整目录覆盖或挑选摘要代替原提交与证据。
+- 通过双亲合并接纳独立复核 `ae9eb62dd64611c5ff3e6c4a9e6c4c1ab0fbada5`。合并主体提交：`856b6081bb7475eba79e06e36519c6510bb96682`。未用整目录覆盖或挑选摘要代替原提交与证据。
 - 保留独立算术/制造场/保存态复核、原数组和图表、来源快照及失败解释。C1/C2 来源绑定抽出纯数据校验函数，补齐 39 个合成合法/拒绝用例；不改科学计算公式。
 - 统一 README、恢复指南、当前状态和 main 开发流程，新增近旋转解释范围勘误。旧报告不改字节，三个近旋转完整力失败仍保留；不能据当前算法失败宣称所有 binary64 方法均不可能达标。
 - 追加两包外置资产索引，原 11 项资产保持。新增 tracked-only 交付清单构建工具，修复原清单落后于 main 的覆盖问题。旧 main 清单另存 `handoff/snapshots/repository_manifest_before_main_consolidation_20260927.json`。
@@ -36,10 +36,12 @@ flowchart LR
 | 两包本地核验 | 2 个 ZIP、135 个成员的 SHA/大小及留存记录绑定全部通过 | 两包均为既有产物 |
 | 发布与第二副本 | GitHub 服务器 SHA 一致；从无认证公开 URL 重新下载，两包 SHA 再次一致 | 原 11 包复用此前公开下载缓存并重新逐包哈希 |
 | 空目录完整恢复 | `D:/hf-main-restore-20260927-001` 中 13 项资产通过；1,937 个恢复文件与 1 个保存原包核验通过 | 同机异目录的交付/文件身份验收，不是跨平台力学证明 |
+| 远程交付 | 新克隆 `856b608` 的 3,452 项轻量 payload 校验通过 | 见 `public_clone_identity.json`，最终补记提交再作远端同步校验 |
+| 回归后保全 | 完整恢复树在 pytest 后再次通过 `verify --full`；270 个当前代码/测试文件与实际受测副本一致 | 见 `post_test_full_verify.json` 与 `regression_source_identity.json` |
 | 独立读取 | 新目录源码导入、inverter/gripper 两例 40×80 几何读取通过 | 明确记录 import 路径及环境，不借旧源码读取 |
-| 实际回归 | 收集 1558 项，1556 passed、2 skipped、0 failures、0 errors | 另有 25 个 subtests 通过，40 条 warnings；不是新的生产路径 |
+| 实际回归 | 收集 1558 项，1556 passed、2 skipped、0 failures、0 errors | 另有 25 个 subtests 通过，40 条 JUnit 格式兼容 warnings；不是新的生产路径 |
 
-回归命令在完整恢复树运行，`PYTHONPATH` 固定为该树 `hf_repo/src`，CPU/x64 和单线程环境记录在读取回执；Python 3.13.6，NumPy 2.4.6、SciPy 1.17.1、JAX/JAXLIB 0.11.0、pytest 9.1.1。pytest 进程墙钟为 227.337 秒。JUnit 的 1583 个 testcase 记录包含 25 个 subtests，不与 1558 项收集总数混计。
+回归命令在完整恢复树运行，`PYTHONPATH` 固定为该树 `hf_repo/src`，CPU/x64 和单线程环境记录在读取回执；Python 3.13.6，NumPy 2.4.6、SciPy 1.17.1、JAX/JAXLIB 0.11.0、pytest 9.1.1。pytest 进程墙钟为 227.337 秒。JUnit testsuite 的 `tests=1583` 汇总计数包含 25 个 subtests；实际 `<testcase>` 元素为 1,558 个，与 pytest 收集总数一致，不将两种计数混用。
 
 ```text
 python -m pytest hf_repo/tests tools hf4_c2_v4_results/test_external_payloads.py --collect-only -q
@@ -70,12 +72,12 @@ stable-F 最小依赖为 S0 C2（间接含 C1），v4 为 S0 C1；如需 v3 对�
 
 | 远程分支 | 保存的原尖端 | 处理 |
 |---|---|---|
-| `claude/archive-c2-p1-f-workspace-20260921` | `afc9d8322b06ba2a981673b033135d8aef17f2a1` | 验收后条件删除 |
-| `claude/hf4-c2-p1-stable-f` | `6a40957214c2a4121f149b429b4126eeb4767d3a` | 验收后条件删除 |
-| `claude/hf4-c2-v4-plan` | `1f3fb9c2f74aca77b79c1edbe4128e5cfbda0175` | 验收后条件删除 |
-| `claude/post-merge-records-20260927` | `754a7a23c0ae70a60b3e0b515b458bea2329c48a` | 验收后条件删除 |
-| `codex/hf4-c2-independent-recheck-20260927` | `ae9eb62dd64611c5ff3e6c4a9e6c4c1ab0fbada5` | 验收后条件删除 |
-| `codex/hf4-c2-s0` | `7fea2e44b67d0eff421219ebbcac68c506fb9d2f` | 验收后条件删除 |
+| `claude/archive-c2-p1-f-workspace-20260921` | `afc9d8322b06ba2a981673b033135d8aef17f2a1` | 已删除；提交保存在 main |
+| `claude/hf4-c2-p1-stable-f` | `6a40957214c2a4121f149b429b4126eeb4767d3a` | 已删除；提交保存在 main |
+| `claude/hf4-c2-v4-plan` | `1f3fb9c2f74aca77b79c1edbe4128e5cfbda0175` | 已删除；提交保存在 main |
+| `claude/post-merge-records-20260927` | `754a7a23c0ae70a60b3e0b515b458bea2329c48a` | 已删除；提交保存在 main |
+| `codex/hf4-c2-independent-recheck-20260927` | `ae9eb62dd64611c5ff3e6c4a9e6c4c1ab0fbada5` | 已删除；提交保存在 main |
+| `codex/hf4-c2-s0` | `7fea2e44b67d0eff421219ebbcac68c506fb9d2f` | 已删除；提交保存在 main |
 
 分支指针删除后，以上完整提交继续能从 main 历史到达。最后追加的完成报告提交也是普通 main 提交；最新发布 SHA 以 `git rev-parse origin/main` 为准，避免在被自身清单绑定的文件中制造提交哈希自引用。
 
