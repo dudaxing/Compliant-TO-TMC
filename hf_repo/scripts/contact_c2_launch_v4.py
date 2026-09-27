@@ -35,7 +35,7 @@ from contact_c2_launch_p1 import (  # noqa: E402  (P1 generic parts, reused unch
 import contact_c2_v4_contract as contract  # noqa: E402
 
 # Set exactly once, after configs/contact_c2_v4.json is frozen. While None the guard refuses every launch.
-PROTOCOL_SHA256 = None
+PROTOCOL_SHA256 = "8d2a4f718e6c36cc61d9838e0df1eba9f116ad5d7b8d4bdffbfbfd512170ba6b"
 PLAN_SCHEMA = "contact_c2_launch_plan_v4"
 RECEIPT_SCHEMA = "contact_c2_external_receipt_v4"
 IDENTITY_SCHEMA = "contact_c2_v4_launch_identity"

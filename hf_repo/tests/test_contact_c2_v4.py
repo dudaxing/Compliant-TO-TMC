@@ -379,3 +379,19 @@ def test_worker_revalidates_the_parent_plan_before_the_backend(tree, monkeypatch
     assert launch.worker(plan_file, sha(plan_file)) == 0 and called and called[0] == plan
     with pytest.raises(launch_p1.ContractError):
         launch.worker(plan_file, "5" * 64)
+
+
+# ------------------------------------------------------------------ the real frozen artifacts (read-only)
+def test_frozen_v4_protocol_guard_constant_and_identity_file_are_consistent():
+    protocol_path = ROOT / contract.PROTOCOL_PATH
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    assert launch.PROTOCOL_SHA256 == sha(protocol_path) == "8d2a4f718e6c36cc61d9838e0df1eba9f116ad5d7b8d4bdffbfbfd512170ba6b"
+    contract.validate_protocol(protocol, V3, C1)
+    assert sha(ROOT / contract.V3_PROTOCOL_PATH) == contract.V3_PROTOCOL_SHA256
+    for name, digest in protocol["implementation_sha256"].items():
+        assert sha(ROOT / name) == digest, name
+    assert not set(contract.LAUNCH_FILES) & set(protocol["implementation_sha256"])
+    identity = json.loads((ROOT / launch.IDENTITY_FILE).read_text(encoding="utf-8"))
+    assert identity["protocol_sha256"] == launch.PROTOCOL_SHA256 and identity["protocol_path"] == contract.PROTOCOL_PATH
+    assert identity["launch_files"] == {name: sha(ROOT / name) for name in contract.LAUNCH_FILES}
+    assert identity["launch_files"]["scripts/contact_c2_launch_p1.py"] == "4109cf054cdec42285a988e1adec161a74c5143374eba9300c3d44b60c5f9958"
