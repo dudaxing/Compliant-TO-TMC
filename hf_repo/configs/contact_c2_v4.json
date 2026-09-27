@@ -1,0 +1,190 @@
+{
+  "schema": "contact_c2_kernel_repair_v4",
+  "frozen_utc": "2026-09-27T09:08:22+00:00",
+  "purpose": "v4 kernel-repair re-test: the frozen v3 physics, geometry, solver controls, audit gates, observables and the 7 uniform targets for the single failed fine-mesh case (h = 0.0625 mm, padding 2.0 mm, driven outer bottom); only the evaluation kernel changes to the compensated split kernel. Question: does the fixed-state arithmetic repair also let the complete Newton/path controller pass the original acceptance?",
+  "geometry": {
+    "body_rectangle_mm": [
+      0,
+      2,
+      0,
+      1
+    ],
+    "tmc_rectangle_mm": [
+      -2,
+      4,
+      0,
+      1.25
+    ],
+    "obstacle_rectangle_mm": [
+      -4,
+      6,
+      1.25,
+      2.25
+    ],
+    "gap_mm": 0.25,
+    "thickness_mm": 1
+  },
+  "geometry_scope": "body/gap/obstacle/thickness fixed; tmc_rectangle is the baseline, overridden only by explicit case padding",
+  "material": {
+    "E_N_per_mm2": 100,
+    "nu": 0.3,
+    "alpha": 1e-06,
+    "gamma": 1e-06,
+    "Lref_mm": 2,
+    "kr_formula": "alpha*Lref^2*(E/(3*(1-2*nu))+4*(E/(2*(1+nu)))/3)",
+    "regularization_scope": "A0 zero; Aalpha all solid; TMC all elements without gamma scaling"
+  },
+  "solver": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 35,
+    "armijo_c": 0.0001,
+    "max_backtracks": 16,
+    "max_bisections": 8,
+    "minimum_increment": 1e-05,
+    "time_limit_seconds": 300.0
+  },
+  "audit": {
+    "precisions": [
+      80,
+      120
+    ],
+    "relative_residual": 1e-09,
+    "relative_constraint": 1e-10,
+    "relative_force_evaluation": 1e-11,
+    "relative_tangent_action": 1e-10,
+    "relative_precision_agreement": 1e-40,
+    "relative_force_balance": 1e-08,
+    "relative_tension_tolerance": 1e-10,
+    "gap_tolerance_mm": 1e-12,
+    "length_tolerance_mm": 1e-12,
+    "area_tolerance_mm2": 1e-14,
+    "overlap_tolerance_mm2": 1e-12,
+    "relative_component_evaluation": 1e-09,
+    "component_force_floor_relative_to_SF": 1e-12,
+    "component_tangent_floor_N_per_mm": 1e-10
+  },
+  "uniform_targets_mm": [
+    0,
+    0.125,
+    0.21875,
+    0.25,
+    0.28125,
+    0.375,
+    0.5
+  ],
+  "observables": [
+    "all signed top weak reactions and material/regularization components",
+    "negative sum/count with reference/current coordinates",
+    "net force and actual imposed-motion generalized force",
+    "body and whole-bottom means",
+    "same-reference PWL test functions",
+    "source-gated saved-field direct edge and SBP diagnostics"
+  ],
+  "saved_field_admission": {
+    "path": "../../hf4_c2_diagnostics/saved_field_admission_r3.json",
+    "sha256": "d4c8700c60d19a2b2d15462f1d9e5b45eb9318499f435cf5ddb41036df7bdfef"
+  },
+  "baseline_audits": [
+    {
+      "path": "../../hf4_c1_results/TMC_h025_uniform_r2/audit.json",
+      "sha256": "7fc116e5a5ff1ee03d902e8eba2f7c5dd597fcc7a0351e88c3f90757220f3ee5"
+    },
+    {
+      "path": "../../hf4_c1_results/TMC_h0125_uniform_r2/audit.json",
+      "sha256": "cb39f964d37f7048e5ebfddc73f3c19de077987ad9c0da76dc6bd032a02a0120"
+    }
+  ],
+  "cases": {
+    "mesh_h00625": {
+      "h_mm": 0.0625,
+      "padding_mm": 2.0,
+      "outer_bottom_policy": "driven"
+    }
+  },
+  "run_sequence": [
+    "mesh_h00625"
+  ],
+  "kernel": {
+    "module": "hf_eval.split_kernel_compensated",
+    "kernel_version": "p26_q1_split_compensated_dot2_v1",
+    "arithmetic_module": "hf_eval.compensated_kinematics",
+    "arithmetic_version": "split_affine_dot2_dekker_v1",
+    "compiler_options": {
+      "xla_cpu_enable_fast_math": false,
+      "xla_cpu_ftz": false
+    },
+    "nonzero_operand_range": [
+      3.8725919148493183e-121,
+      2.5822498780869086e+120
+    ],
+    "path_solver": "hf_eval.split_affine_compensated",
+    "path_solver_difference_from_frozen_split_affine": "exactly one line: the kernel import",
+    "production_quantities": "path solve, accepted-state force and tangent, and the material/regularization tangent actions all use this kernel; the component JVP entry is compiled with the same compiler options"
+  },
+  "environment": {
+    "python": "3.13.6",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "jax": "0.11.0",
+    "jaxlib": "0.11.0"
+  },
+  "budget": {
+    "maximum_paths": 1,
+    "solver_internal_wall_seconds": 300.0,
+    "subprocess_wall_seconds": 700,
+    "maximum_total_solve_seconds": 700,
+    "maximum_audit_seconds_per_path": 1200,
+    "maximum_total_audit_seconds": 1200
+  },
+  "stable_f_evidence": {
+    "schema": "contact-c2-stable-f-validation-summary-1",
+    "path": "../../hf4_c2_stable_f_validation/summary_001.json",
+    "sha256": "3a152d541b5e459af46fd8cecfb2a40f739f7a409d8e1b734814b7ee3c4d2554"
+  },
+  "relation_to_v3": {
+    "v3_protocol_sha256": "b17c8328dd1e350563b70305c0b311c8d38c9c0ef68c08b85fac5f13604d0b4d",
+    "v3_history": "hf4_c2_diagnostics/experiments/mesh_h00625 remains NOT_PASS",
+    "retained_sections": [
+      "geometry",
+      "geometry_scope",
+      "material",
+      "solver",
+      "audit",
+      "uniform_targets_mm",
+      "observables",
+      "saved_field_admission",
+      "baseline_audits"
+    ],
+    "changed": "evaluation kernel only: the path solver is a one-line-difference copy of split_affine and all recorded production quantities come from the compensated kernel",
+    "not_carried_over": "the other two v3 cases (both passed in v3) and the v3 execution revisions"
+  },
+  "stopping": "One solve, then one independent 80/120-digit audit, and the audit only after a successful solve. The solver's declared in-path controls remain (Armijo backtracking, at most 8 bisection levels, minimum increment, internal 300 s wall limit); 'no automatic retry' means no second path, no parameter, threshold or resource change and no audit re-run. Independent checks run in the post-solve audit, not during Newton. Any source or identity mismatch is refused before running. Failed or timed-out artifacts are preserved as they are.",
+  "storage": "Run directory hf4_c2_v4_results/experiments/mesh_h00625_v4 (outside hf_repo, separate from the v3 history). Lightweight records (metadata, results, indices, receipts, compact audit) go into Git; large lossless payloads (per-state NPZ, full controller gzip, per-state audit details) may be kept outside Git in a hash-verified archive with a manifest (relative path, bytes, SHA-256, archive location, restore method), after one original-byte restore check into an empty directory.",
+  "prefix_semantics": "A solve that fails or times out keeps every persisted accepted state and its log. Only a contiguous run of states that pass the independent audit is called a verified comparable prefix; unaudited, incomplete or unfinished parts do not count. The frozen audit requires a complete controller/completion inventory, so a hard timeout that leaves only per-state files is not certified; no resume, rescue solve or incomplete-directory audit is added. The 21 accepted states of the v3 run are a historical observation, not a v4 requirement: the 7 original targets and the control rules are.",
+  "implementation_sha256": {
+    "scripts/audit_contact_c1.py": "715c748111e255bd4d1a945e80eca4a778f54ce2fa8ac2601e761160cd14c1ce",
+    "scripts/audit_contact_c2.py": "50bcbe18d67d62ea1bce621c9bfd2c1c6247dbe2b095a965dab42c00bc47e543",
+    "scripts/audit_contact_c2_v4.py": "d47166322bb279606e962c81b6021e28ffbb706a3c95e7665f7a725a733a0079",
+    "scripts/audit_contact_reference_a0.py": "4b5062ef8e459ab36797a710f93df1cc25567ae12aff6980ca411d296cc7d07c",
+    "scripts/contact_c2_v4_contract.py": "e9a5f6802928fe3b5fe9e82fd62dde448be0d20497bd10370a562db43569bf86",
+    "scripts/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+    "scripts/hf4_common.py": "69b5005ce62eb77de8599f316b69ecce44f4efc843e89bd411b130f7b92dacb3",
+    "scripts/hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+    "scripts/run_contact_c2_v4.py": "0f8077c48813028cffa0ee532c5515821d0edf2ab0a119a570db41434b5eab42",
+    "src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "src/hf_eval/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+    "src/hf_eval/contact_c2.py": "272f5c8f9cffa84d21492ac7f136f3080eacb65eea6481aa7699c6b07b226f99",
+    "src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "src/hf_eval/prescribed.py": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+    "src/hf_eval/split_affine_compensated.py": "d62465a1536a24173a4630de5cd24720bfa1524fe8198eb5c4e1dd542d106d61",
+    "src/hf_eval/split_kernel.py": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+    "src/hf_eval/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+    "src/hf_eval/split_prescribed.py": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+    "src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+    "src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+    "src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0"
+  }
+}
