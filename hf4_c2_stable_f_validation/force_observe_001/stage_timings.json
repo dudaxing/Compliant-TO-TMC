@@ -1,0 +1,106 @@
+{
+  "schema": "hf-force-observation-stage-timings-1",
+  "rows": [
+    {
+      "stage": "source_binding",
+      "status": "pass",
+      "seconds": 0.15326399996411055,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "runtime_import_and_prepare",
+      "status": "pass",
+      "seconds": 11.642604399996344,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "kernel_import",
+      "status": "pass",
+      "seconds": 1.1649466999806464,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "input_transfer",
+      "status": "pass",
+      "seconds": 0.01465299999108538,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.trace",
+      "status": "pass",
+      "seconds": 12.590519800025504,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.export_jaxpr",
+      "status": "pass",
+      "seconds": 4.5405055999872275,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.lower",
+      "status": "pass",
+      "seconds": 5.612347599992063,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.export_stablehlo",
+      "status": "pass",
+      "seconds": 1.7121654000366107,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.compile",
+      "status": "pass",
+      "seconds": 73.79865320003591,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.export_optimized_hlo",
+      "status": "pass",
+      "seconds": 0.6046641999855638,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.call",
+      "status": "pass",
+      "seconds": 0.0010445999796502292,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.synchronize",
+      "status": "open_at_stop",
+      "seconds": 126.78810010000598,
+      "timing_basis": "upper observation interval includes cleanup/dispatch; NOT completed duration"
+    },
+    {
+      "stage": "force.transfer",
+      "status": "not_reached",
+      "seconds": null,
+      "timing_basis": "no completed saved duration"
+    },
+    {
+      "stage": "force.save_output",
+      "status": "not_reached",
+      "seconds": null,
+      "timing_basis": "no completed saved duration"
+    }
+  ],
+  "source_sha256": {
+    "results/force/summary.json": "a64f645e71852df04ed10d5de3d56bca8d3d077eee7fc39ba4d13714c4b07a91",
+    "events/F1_force.ndjson": "b1ec16b3af178d1102b6c5bebc6e634d4277bf99b8a4ff59dab362290aefdf3a"
+  },
+  "observation_cutoff_monotonic": 432772.3580648,
+  "call_to_synchronize": {
+    "status": "running",
+    "timing_basis": "force.call start marker through return of output synchronization; includes intervening event/checkpoint I/O, not pure kernel time",
+    "started_utc": "2026-09-28T08:31:41.201029+00:00",
+    "start_monotonic": 432645.5575574,
+    "call_returned": true,
+    "call_return_monotonic": 432645.5619794,
+    "call_body_seconds": 0.0010445999796502292
+  },
+  "summary_error": null,
+  "event_issues": [],
+  "scope": "F1 saved observations only; call may include work; synchronization is readiness, not pure kernel time"
+}

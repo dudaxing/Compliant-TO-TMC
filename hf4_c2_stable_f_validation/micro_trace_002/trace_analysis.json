@@ -1,0 +1,39 @@
+{
+  "schema": "hf-micro-trace-analysis-1",
+  "protocol": "F-TRACE2",
+  "run_id": "micro_trace_002",
+  "status": "observability_not_pass",
+  "predeclared_rule": {
+    "version": "f-trace1-target-1",
+    "module": "jit_reused",
+    "exact_event_names": [
+      "Execute(jit_reused)",
+      "Execute: jit_reused"
+    ],
+    "native_names_with_module_arg": [
+      "Execute",
+      "CpuExecutable::Execute",
+      "CpuExecutable::ExecuteAsyncOnStream",
+      "PjRtCpuExecutable::Execute",
+      "PjRtCpuExecutable::ExecuteWithExecutionInputs",
+      "ThunkExecutor::Execute"
+    ],
+    "exact_arg_keys": [
+      "hlo_module",
+      "hlo_module_name",
+      "module_name",
+      "program_name",
+      "executable_name"
+    ],
+    "exact_arg_values": [
+      "jit_reused"
+    ],
+    "generic_names_require_explicit_module_arg": true,
+    "application_annotations_never_internal": true,
+    "time_unit": "Chrome trace microseconds"
+  },
+  "issues": [
+    "native_export_absent_partial_or_over_acceptance_cap"
+  ],
+  "scientific_admission": false
+}

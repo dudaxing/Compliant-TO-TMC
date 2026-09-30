@@ -1,0 +1,477 @@
+{
+  "schema": "hf-force-reuse-hlo-structure-1",
+  "status": "counted",
+  "scientific_admission": false,
+  "baseline": {
+    "computations": 204,
+    "instructions": 191329,
+    "fusion": 167,
+    "conditional": 1,
+    "while_count": 0,
+    "call": 0
+  },
+  "limitation": "Static HLO is not machine code, runtime progress, speedup or full scientific admission.",
+  "sha256": "f9a31f3138b30cd7ed93989ca803cc5dfb7dc4d573488d5149d428325066c411",
+  "bytes": 28389186,
+  "computations": 163,
+  "instructions": 173544,
+  "opcodes": {
+    "parameter": 905,
+    "broadcast": 1694,
+    "convert": 8,
+    "constant": 640,
+    "fusion": 137,
+    "copy": 83,
+    "get-tuple-element": 29,
+    "tuple": 5,
+    "multiply": 9821,
+    "compare": 33976,
+    "bitcast": 1136,
+    "is-finite": 12600,
+    "abs": 12603,
+    "and": 37550,
+    "or": 8556,
+    "select": 13838,
+    "subtract": 27634,
+    "add": 11768,
+    "transpose": 18,
+    "slice": 440,
+    "not": 9,
+    "negate": 38,
+    "reduce": 23,
+    "concatenate": 8,
+    "exponential-minus-one": 1,
+    "exponential": 1,
+    "divide": 8,
+    "log-plus-one": 4,
+    "log": 2,
+    "iota": 8,
+    "conditional": 1
+  },
+  "instruction_change": -17785,
+  "structural_size": "reduced",
+  "entry": [
+    {
+      "line": 218056,
+      "name": "%args_0_.1",
+      "opcode": "parameter",
+      "expression": "f64[1,8]{1,0} parameter(0)"
+    },
+    {
+      "line": 218057,
+      "name": "%args_1_.1",
+      "opcode": "parameter",
+      "expression": "f64[1,8]{1,0} parameter(1)"
+    },
+    {
+      "line": 218058,
+      "name": "%args_2_.1",
+      "opcode": "parameter",
+      "expression": "f64[9,4,2]{2,1,0} parameter(2)"
+    },
+    {
+      "line": 218059,
+      "name": "%args_3_.1",
+      "opcode": "parameter",
+      "expression": "f64[4,2,2]{2,1,0} parameter(3)"
+    },
+    {
+      "line": 218060,
+      "name": "%args_4_.1",
+      "opcode": "parameter",
+      "expression": "f64[9]{0} parameter(4)"
+    },
+    {
+      "line": 218061,
+      "name": "%args_5_.1",
+      "opcode": "parameter",
+      "expression": "f64[1]{0} parameter(5)"
+    },
+    {
+      "line": 218062,
+      "name": "%args_6_.1",
+      "opcode": "parameter",
+      "expression": "f64[1]{0} parameter(6)"
+    },
+    {
+      "line": 218063,
+      "name": "%args_7_.1",
+      "opcode": "parameter",
+      "expression": "f64[] parameter(7)"
+    },
+    {
+      "line": 218064,
+      "name": "%constant.287",
+      "opcode": "constant",
+      "expression": "f64[] constant(2.5822498780869086e+120)"
+    },
+    {
+      "line": 218065,
+      "name": "%constant.288",
+      "opcode": "constant",
+      "expression": "f64[] constant(3.8725919148493183e-121)"
+    },
+    {
+      "line": 218066,
+      "name": "%constant.289",
+      "opcode": "constant",
+      "expression": "f64[] constant(0)"
+    },
+    {
+      "line": 218067,
+      "name": "%constant.338",
+      "opcode": "constant",
+      "expression": "f64[] constant(2.2204460492503131e-16)"
+    },
+    {
+      "line": 218068,
+      "name": "%constant.339",
+      "opcode": "constant",
+      "expression": "f64[] constant(134217729)"
+    },
+    {
+      "line": 218069,
+      "name": "%and_reduce_fusion.7",
+      "opcode": "fusion",
+      "expression": "pred[] fusion(%args_0_.1), kind=kLoop, calls=%fused_computation.115"
+    },
+    {
+      "line": 218070,
+      "name": "%and_reduce_fusion.6",
+      "opcode": "fusion",
+      "expression": "pred[] fusion(%args_1_.1), kind=kLoop, calls=%fused_computation.114"
+    },
+    {
+      "line": 218071,
+      "name": "%and_reduce_fusion.5",
+      "opcode": "fusion",
+      "expression": "pred[] fusion(%args_2_.1), kind=kLoop, calls=%fused_computation.113"
+    },
+    {
+      "line": 218072,
+      "name": "%and_reduce_fusion.4",
+      "opcode": "fusion",
+      "expression": "pred[] fusion(%args_3_.1), kind=kLoop, calls=%fused_computation.112"
+    },
+    {
+      "line": 218073,
+      "name": "%and_select_fusion.37",
+      "opcode": "fusion",
+      "expression": "f64[1,9,2,2]{3,2,1,0} fusion(%constant.338, %constant.339, %args_1_.1, %args_2_.1, %args_0_.1), kind=kLoop, calls=%fused_computation.124"
+    },
+    {
+      "line": 218074,
+      "name": "%and_select_fusion.38",
+      "opcode": "fusion",
+      "expression": "f64[1,9,2,2]{3,2,1,0} fusion(%constant.338, %constant.339, %args_1_.1, %args_2_.1, %args_0_.1), kind=kLoop, calls=%fused_computation.125"
+    },
+    {
+      "line": 218075,
+      "name": "%and_select_fusion.31",
+      "opcode": "fusion",
+      "expression": "f64[1,2,2,2]{3,2,1,0} fusion(%constant.338, %constant.339, %args_3_.1, %args_1_.1, %args_0_.1), kind=kLoop, calls=%fused_computation.118"
+    },
+    {
+      "line": 218076,
+      "name": "%and_select_fusion.32",
+      "opcode": "fusion",
+      "expression": "f64[1,2,2,2]{3,2,1,0} fusion(%constant.338, %constant.339, %args_3_.1, %args_1_.1, %args_0_.1), kind=kLoop, calls=%fused_computation.119"
+    },
+    {
+      "line": 218077,
+      "name": "%and_select_fusion.33",
+      "opcode": "fusion",
+      "expression": "f64[1,9,2,2]{3,2,1,0} fusion(%constant.338, %constant.287, %constant.288, %constant.289, %constant.339, /*index=5*/%args_1_.1, %args_2_.1, %args_0_.1), kind=kLoop, calls=%fused_computation.120"
+    },
+    {
+      "line": 218078,
+      "name": "%and_select_fusion.34",
+      "opcode": "fusion",
+      "expression": "f64[1,9,2,2]{3,2,1,0} fusion(%constant.338, %constant.287, %constant.288, %constant.289, %constant.339, /*index=5*/%args_1_.1, %args_2_.1, %args_0_.1), kind=kLoop, calls=%fused_computation.121"
+    },
+    {
+      "line": 218079,
+      "name": "%bitcast.1791",
+      "opcode": "bitcast",
+      "expression": "f64[1,9,2,2]{2,3,1,0} bitcast(%and_select_fusion.37)"
+    },
+    {
+      "line": 218080,
+      "name": "%and_select_fusion.27",
+      "opcode": "fusion",
+      "expression": "f64[1,9]{1,0} fusion(%constant.338, %constant.339, %and_select_fusion.37, %and_select_fusion.38), kind=kLoop, calls=%fused_computation.110"
+    },
+    {
+      "line": 218081,
+      "name": "%bitcast.1792",
+      "opcode": "bitcast",
+      "expression": "f64[1,9,2,2]{2,3,1,0} bitcast(%and_select_fusion.38)"
+    },
+    {
+      "line": 218082,
+      "name": "%wrapped_add.2",
+      "opcode": "fusion",
+      "expression": "f64[1,9,2,2]{3,2,1,0} fusion(%and_select_fusion.38, %and_select_fusion.37), kind=kLoop, calls=%wrapped_add_computation.2"
+    },
+    {
+      "line": 218083,
+      "name": "%and_select_fusion.28",
+      "opcode": "fusion",
+      "expression": "f64[1,9]{1,0} fusion(%constant.338, %constant.339, %and_select_fusion.37, %and_select_fusion.38), kind=kLoop, calls=%fused_computation.111"
+    },
+    {
+      "line": 218084,
+      "name": "%wrapped_add.3",
+      "opcode": "fusion",
+      "expression": "f64[1,2,2,2]{3,2,1,0} fusion(%and_select_fusion.32, %and_select_fusion.31), kind=kLoop, calls=%wrapped_add_computation.3"
+    },
+    {
+      "line": 218085,
+      "name": "%wrapped_add.1",
+      "opcode": "fusion",
+      "expression": "f64[1,9,2,2]{3,2,1,0} fusion(%and_select_fusion.34, %and_select_fusion.33), kind=kLoop, calls=%wrapped_add_computation.1"
+    },
+    {
+      "line": 218086,
+      "name": "%and_select_fusion.29",
+      "opcode": "fusion",
+      "expression": "f64[1,9]{1,0} fusion(%constant.338, %constant.339, %and_select_fusion.33, %and_select_fusion.34), kind=kLoop, calls=%fused_computation.116"
+    },
+    {
+      "line": 218087,
+      "name": "%and_select_fusion.30",
+      "opcode": "fusion",
+      "expression": "f64[1,9]{1,0} fusion(%constant.338, %constant.339, %and_select_fusion.33, %and_select_fusion.34), kind=kLoop, calls=%fused_computation.117"
+    },
+    {
+      "line": 218088,
+      "name": "%and_select_fusion.36",
+      "opcode": "fusion",
+      "expression": "f64[1,9,2,2]{3,2,1,0} fusion(%constant.338, %constant.339, %and_select_fusion.37, %bitcast.1791, %constant.287, /*index=5*/%constant.288, %bitcast.1792, %constant.289, %and_select_fusion.38), kind=kLoop, calls=%fused_computation.123"
+    },
+    {
+      "line": 218089,
+      "name": "%and_select_fusion.35",
+      "opcode": "fusion",
+      "expression": "f64[1,9,2,2]{3,2,1,0} fusion(%constant.338, %constant.339, %and_select_fusion.37, %bitcast.1791, %constant.287, /*index=5*/%constant.288, %bitcast.1792, %constant.289, %and_select_fusion.38), kind=kLoop, calls=%fused_computation.122"
+    },
+    {
+      "line": 218090,
+      "name": "%wrapped_add.5",
+      "opcode": "fusion",
+      "expression": "f64[1,9]{1,0} fusion(%and_select_fusion.28, %and_select_fusion.27), kind=kLoop, calls=%wrapped_add_computation.5"
+    },
+    {
+      "line": 218091,
+      "name": "%wrapped_add.4",
+      "opcode": "fusion",
+      "expression": "f64[1,9]{1,0} fusion(%and_select_fusion.30, %and_select_fusion.29), kind=kLoop, calls=%wrapped_add_computation.4"
+    },
+    {
+      "line": 218092,
+      "name": "%wrapped_add",
+      "opcode": "fusion",
+      "expression": "f64[1,9,2,2]{3,2,1,0} fusion(%and_select_fusion.36, %and_select_fusion.35), kind=kLoop, calls=%wrapped_add_computation"
+    },
+    {
+      "line": 218093,
+      "name": "%and_and_fusion.3",
+      "opcode": "fusion",
+      "expression": "pred[1,9]{1,0} fusion(%and_select_fusion.27, %and_select_fusion.28, %and_select_fusion.35, %and_select_fusion.36), kind=kLoop, calls=%fused_computation.107"
+    },
+    {
+      "line": 218094,
+      "name": "%reduce_and_fusion",
+      "opcode": "fusion",
+      "expression": "pred[] fusion(%and_select_fusion.27, %and_select_fusion.28, %and_select_fusion.35, %and_select_fusion.36, %and_select_fusion.29, /*index=5*/%and_select_fusion.30, %and_select_fusion.31, %and_select_fusion.32, %and_select_fusion.33, %and_select_fusion.34, /*index=10*/%and_reduce_fusion.4, %and_reduce_fusion.5, %and_reduce_fusion.7, %and_reduce_fusion.6, %and_select_fusion.37, /*index=15*/%and_select_fusion.38), kind=kLoop, calls=%fused_computation.109"
+    },
+    {
+      "line": 218095,
+      "name": "%tuple",
+      "opcode": "tuple",
+      "expression": "(pred[1,9]{1,0}) tuple(%and_and_fusion.3)"
+    },
+    {
+      "line": 218096,
+      "name": "%and_convert_fusion.1",
+      "opcode": "fusion",
+      "expression": "s32[] fusion(%args_7_.1, %args_6_.1, %args_5_.1, %args_4_.1, %reduce_and_fusion, /*index=5*/%wrapped_add.4), kind=kLoop, calls=%fused_computation.108"
+    },
+    {
+      "line": 218097,
+      "name": "%cond.10",
+      "opcode": "tuple",
+      "expression": "(f64[1,9,2,2]{3,2,1,0}, f64[1,9,2,2]{3,2,1,0}, f64[1,9]{1,0}, f64[1,9]{1,0}, pred[1,9]{1,0}, /*index=5*/f64[1,9]{1,0}, f64[1,9]{1,0}, f64[1]{0}, f64[1]{0}, f64[1,9,2,2]{3,2,1,0}, /*index=10*/f64[1,9,2,2]{3,2,1,0}, f64[9,4,2]{2,1,0}, f64[9]{0}, f64[1,2,2,2]{3,2,1,0}, f64[1,2,2,2]{3,2,1,0}, /*index=15*/f64[4,2,2]{2,1,0}, f64[], f64[1,9,2,2]{3,2,1,0}, f64[1,9,2,2]{3,2,1,0}, pred[]) tuple(%and_select_fusion.34, %and_select_fusion.33, %and_select_fusion.30, %and_select_fusion.29, %and_and_fusion.3, /*index=5*/%and_select_fusion.28, %and_select_fusion.27, %args_5_.1, %args_6_.1, %and_select_fusion.36, /*index=10*/%and_select_fusion.35, %args_2_.1, %args_4_.1, %and_select_fusion.32, %and_select_fusion.31, /*index=15*/%args_3_.1, %args_7_.1, %and_select_fusion.38, %and_select_fusion.37, %reduce_and_fusion)"
+    },
+    {
+      "line": 218098,
+      "name": "%cond.11",
+      "opcode": "conditional",
+      "expression": "(f64[1]{0}, f64[1]{0}, f64[1,8]{1,0}, f64[1,8]{1,0}, f64[1,8]{1,0}, /*index=5*/f64[1,9]{1,0}, f64[1,9,2,2]{3,2,1,0}, f64[1,9,2,2]{3,2,1,0}) conditional(%and_convert_fusion.1, %tuple, %cond.10), branch_computations={%region_15.29, %region_16.83}"
+    },
+    {
+      "line": 218099,
+      "name": "%cond.12",
+      "opcode": "get-tuple-element",
+      "expression": "f64[1]{0} get-tuple-element(%cond.11), index=0"
+    },
+    {
+      "line": 218100,
+      "name": "%cond.13",
+      "opcode": "get-tuple-element",
+      "expression": "f64[1]{0} get-tuple-element(%cond.11), index=1"
+    },
+    {
+      "line": 218101,
+      "name": "%cond.14",
+      "opcode": "get-tuple-element",
+      "expression": "f64[1,8]{1,0} get-tuple-element(%cond.11), index=2"
+    },
+    {
+      "line": 218102,
+      "name": "%cond.15",
+      "opcode": "get-tuple-element",
+      "expression": "f64[1,8]{1,0} get-tuple-element(%cond.11), index=3"
+    },
+    {
+      "line": 218103,
+      "name": "%cond.16",
+      "opcode": "get-tuple-element",
+      "expression": "f64[1,8]{1,0} get-tuple-element(%cond.11), index=4"
+    },
+    {
+      "line": 218104,
+      "name": "%cond.17",
+      "opcode": "get-tuple-element",
+      "expression": "f64[1,9]{1,0} get-tuple-element(%cond.11), index=5"
+    },
+    {
+      "line": 218105,
+      "name": "%cond.18",
+      "opcode": "get-tuple-element",
+      "expression": "f64[1,9,2,2]{3,2,1,0} get-tuple-element(%cond.11), index=6"
+    },
+    {
+      "line": 218106,
+      "name": "%cond.19",
+      "opcode": "get-tuple-element",
+      "expression": "f64[1,9,2,2]{3,2,1,0} get-tuple-element(%cond.11), index=7"
+    },
+    {
+      "line": 218107,
+      "name": "%tuple.5",
+      "opcode": "tuple",
+      "expression": "(f64[1,9,2,2]{3,2,1,0}, f64[1,9,2,2]{3,2,1,0}, f64[1,9,2,2]{3,2,1,0}, f64[1,9,2,2]{3,2,1,0}, f64[1,9,2,2]{3,2,1,0}, /*index=5*/f64[1,9,2,2]{3,2,1,0}, f64[1,9,2,2]{3,2,1,0}, f64[1,9,2,2]{3,2,1,0}, f64[1,9,2,2]{3,2,1,0}, f64[1,2,2,2]{3,2,1,0}, /*index=10*/f64[1,2,2,2]{3,2,1,0}, f64[1,2,2,2]{3,2,1,0}, f64[1,9]{1,0}, f64[1,9]{1,0}, f64[1,9]{1,0}, /*index=15*/f64[1]{0}, f64[1,9]{1,0}, f64[1,9]{1,0}, f64[1,9]{1,0}, f64[1]{0}, /*index=20*/f64[1,8]{1,0}, f64[1,8]{1,0}, f64[1,8]{1,0}, f64[1,9]{1,0}, f64[1,9,2,2]{3,2,1,0}, /*index=25*/f64[1,9,2,2]{3,2,1,0}) tuple(%wrapped_add, %and_select_fusion.36, %and_select_fusion.35, %wrapped_add.1, %and_select_fusion.34, /*index=5*/%and_select_fusion.33, %wrapped_add.2, %and_select_fusion.38, %and_select_fusion.37, %wrapped_add.3, /*index=10*/%and_select_fusion.32, %and_select_fusion.31, %wrapped_add.4, %and_select_fusion.30, %and_select_fusion.29, /*index=15*/%cond.12, %wrapped_add.5, %and_select_fusion.28, %and_select_fusion.27, %cond.13, /*index=20*/%cond.14, %cond.15, %cond.16, %cond.17, %cond.18, /*index=25*/%cond.19)"
+    }
+  ],
+  "entry_dependency": {
+    "status": "computed_values_passed_to_valid_branch",
+    "conditionals": 1,
+    "conditional_line": 218098,
+    "branch_computations": [
+      "%region_15.29",
+      "%region_16.83"
+    ],
+    "conditional_operands": [
+      "%and_convert_fusion.1",
+      "%tuple",
+      "%cond.10"
+    ],
+    "valid_pack_line": 218097,
+    "valid_pack_operands": [
+      "%and_select_fusion.34",
+      "%and_select_fusion.33",
+      "%and_select_fusion.30",
+      "%and_select_fusion.29",
+      "%and_and_fusion.3",
+      "%and_select_fusion.28",
+      "%and_select_fusion.27",
+      "%args_5_.1",
+      "%args_6_.1",
+      "%and_select_fusion.36",
+      "%and_select_fusion.35",
+      "%args_2_.1",
+      "%args_4_.1",
+      "%and_select_fusion.32",
+      "%and_select_fusion.31",
+      "%args_3_.1",
+      "%args_7_.1",
+      "%and_select_fusion.38",
+      "%and_select_fusion.37",
+      "%reduce_and_fusion"
+    ],
+    "valid_pack_producer_opcodes": [
+      "fusion",
+      "fusion",
+      "fusion",
+      "fusion",
+      "fusion",
+      "fusion",
+      "fusion",
+      "parameter",
+      "parameter",
+      "fusion",
+      "fusion",
+      "parameter",
+      "parameter",
+      "fusion",
+      "fusion",
+      "parameter",
+      "parameter",
+      "fusion",
+      "fusion",
+      "fusion"
+    ],
+    "note": "Producer kinds prove tuple data dependence, not elimination of every repeated calculation."
+  },
+  "largest_computations": [
+    {
+      "name": "%fused_computation.6",
+      "start_line": 76060,
+      "instructions": 22544,
+      "end_line": 98605
+    },
+    {
+      "name": "%fused_computation.5",
+      "start_line": 55548,
+      "instructions": 20473,
+      "end_line": 76022
+    },
+    {
+      "name": "%fused_computation.7",
+      "start_line": 98607,
+      "instructions": 20366,
+      "end_line": 118974
+    },
+    {
+      "name": "%fused_computation.8",
+      "start_line": 118976,
+      "instructions": 20329,
+      "end_line": 139306
+    },
+    {
+      "name": "%fused_computation.20",
+      "start_line": 149376,
+      "instructions": 11987,
+      "end_line": 161364
+    },
+    {
+      "name": "%fused_computation.21",
+      "start_line": 161366,
+      "instructions": 11987,
+      "end_line": 173354
+    },
+    {
+      "name": "%fused_computation.1",
+      "start_line": 45025,
+      "instructions": 3808,
+      "end_line": 48834
+    },
+    {
+      "name": "%fused_computation.32",
+      "start_line": 180829,
+      "instructions": 3804,
+      "end_line": 184634
+    }
+  ]
+}

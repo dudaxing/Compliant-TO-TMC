@@ -39,8 +39,7 @@ files, and `solvers/hf1_q1_solid_linear_v1.json`. Paths are relative to the
 data package, not hardcoded by the evaluator. See `dataset_index.json` there.
 
 Developer validation: after installing the locked runtime, install `requirements-dev.txt` in the independent HF
-environment, then run `python -m pytest`. Tests construct ordinary local fixtures
-and small ordinary numeric fixtures. They do not need the LF preparation directory, uploaded archives, or source library. Full C-shape paths are excluded from routine pytest.
+environment, then select tests appropriate to the current change. Routine tests use ordinary fixtures; full C-shape paths are excluded. The four campaign-bound modules `test_windows_owned_process.py`, `test_windows_owned_cpu.py`, `test_windows_cleanup_contract.py` and `test_s0_event_logging.py` retain closed-card identity/deadline requirements. Do not fabricate those environments for a generic suite. See [the scoped regression command](../docs/RESUME_DEVELOPMENT.md) and the archived campaign receipts. Recovery of evidence does not authorize replay of a closed experiment.
 
 The result has separate readability, geometry qualification, numerical convergence and functionality fields. Missing research criteria remain `pending`; a successful linear solve is not proof of nonlinear/contact fidelity. Output signs, reference thickness, mean-port weights and support selection are explicit. Every call starts from the undeformed state and generates a fresh evaluation ID.
 

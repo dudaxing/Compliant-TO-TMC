@@ -1,0 +1,39 @@
+--- a/src/hf_eval/split_kernel_invariants_hu.py
++++ b/src/hf_eval/split_kernel_invariants_hu.py
+@@ -25,1 +25,1 @@
+-KERNEL_VERSION = "p26_q1_split_invariants_hu_v1"
++KERNEL_VERSION = "p26_q1_split_invariants_hu_force_reuse_r1"
+@@ -86,3 +86,5 @@
+-def _response(lift, fluctuation, grad, hessian, weights, lam, mu, kr, xp):
++def _response(lift, fluctuation, grad, hessian, weights, lam, mu, kr, xp, *, _kinematics_values=None):
+     """Validated element response, sharing the NumPy/JAX operation order."""
+-    values = _kinematics(lift, fluctuation, grad, hessian, xp)
++    values = (_kinematics(lift, fluctuation, grad, hessian, xp)
++              if _kinematics_values is None else _kinematics_values)
++
+@@ -175,0 +178,17 @@
++def _kinematics_vmap_axes():
++    """Keep both all-batch support scalars unmapped; slice only field axes."""
++    return {**{name: 0 for name in PAIR_FIELDS}, "near": 0, "supported": None,
++            "pairs": {**{name: (0, 0) for name in PAIR_FIELDS},
++                      "near": 0, "supported": None}}
++
++
++def _without_tangent_reusing(values, lift, fluctuation, grad, hessian, weights, lam, mu, kr):
++    # Only the enclosing scalar guard's accepted branch calls this wrapper.
++    # Its all-batch True proves every local kinematics range check passed;
++    # the unchanged response body still checks all material intermediates.
++    return _response(lift, fluctuation, grad, hessian, weights, lam, mu, kr, jnp,
++                     _kinematics_values=values)[1]
++
++
++
++
+@@ -181,2 +200,7 @@
+     def evaluate(_):
++        if not tangent:
++            return jax.vmap(_without_tangent_reusing,
++                in_axes=(_kinematics_vmap_axes(), 0, 0, None, None, None, 0, 0, None))(
++                    kinematics, lift, fluctuation, grad, hessian, weights, lam, mu, kr)
++
+         function = _with_tangent if tangent else _without_tangent

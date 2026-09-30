@@ -1,0 +1,51 @@
+# 2026-09-30 开发与冻结证据移交
+
+用户要求提交推送并继续，后续只在 main 开发，origin 保持 `https://github.com/dudaxing/Compliant-TO-TMC.git`。交付前本地与远端基线均为 `18f1f62b50f18c4866c2e1fa83bbaebc5d13e5d7`；本次新增科学执行窗口为零。发布及异目录恢复的终态记录将在实际完成后附于本页。
+
+## 目标与开发状态
+
+整体目标是建立与 LF 解耦、可复核和可异机接续的 HF 正向力学评估器。LF/N4 负责研究层候选和统计，HF 通过普通几何文件独立输出可信的力学结果。当前工作先解决近旋转算术精度、编译/AD 合同、完整 force 同步与内部成本观测，避免把局部通过或不完整结果当作 HF 标签。
+
+从开始至今的历史入口为 [项目目标](PROJECT_STATUS.md)、[当前状态](CURRENT_STATUS.md)、[近旋转诊断](HF4_C2_NEAR_ROTATION_DIAGNOSTIC_20260928.md)、[候选算术](HF4_C2_INVARIANTS_HU_ARITHMETIC.md)、[连续执行与修正报告](HF4_C2_S0_PREPARATION_RESULT_20260928.md)。最后一份逐卡记录目标、理由、代码/输入身份、实际步骤、资源、停止原因、效果及资格限制；原报告和失败目录均保留。最新只读排查及候选下一卡见 [后续审阅](F_STREAM1_READONLY_FOLLOWUP_20260930.md)。
+
+已取得近旋转分段诊断、有限候选算术、H1/C1 局部 JIT/AD 修订、SUP2 清理合同、R1 局部结构等价及 CPU/IR/native 保存证据。F-STREAM1 唯一窗口以 `event_count_limit`／`execution_failure`／`partial` 关闭，完整 EOF／CRC／JSON 尚未验证。完整 force、完整 AD、一般接触、HF5 及最终项目目标仍未完成；默认内核未切换。文件恢复与上传不会改变这些结论。
+
+## 为什么分层交付
+
+18 个新增冻结根共有 **3,599 文件、912,107,444 bytes**。其中有必须保留的 12 个 `.pyd` 快照及超过普通 Windows 路径长度的文件；单用默认 `git add -A` 会遗漏它们。沿用仓库的版本化 Release 方式，完整冻结根无损打包，Git 保留顶层回执/映射/SVG、源码、测试、文档及统一恢复索引。原字节、历史 manifest 和失败状态不变，不把重复快照大载荷全部塞入主树。
+
+六资产发布标签为 `hf4-c2-development-evidence-20260930-v1`：
+
+| 组 | 冻结内容 |
+|---|---|
+| arithmetic | 近旋转、invariants/Hu、S0 准备、JIT/AD |
+| supervision | F-OBS、CPU、S1、PID1、CLEAN1、CPU-OBS |
+| reuse | R1 两次有限候选及完整力等待 |
+| cost-trace | 成本诊断及首次微图采集 |
+| native | PATH1 接口及 TRACE2 两原 native 文件 |
+| readers | BYTES1 与 STREAM1 有界读取/普查 |
+
+每资产包含全部原相对路径、大小和 SHA256，见 [统一索引](../handoff/evidence_assets.json)及[打包回执](../handoff/development_20260930/packaging_receipt.json)。六组按来源顺序声明依赖，首组恢复原 stable-F/C2/C1 保存输入；最后一组自动包括前五组。原十三资产不改。每个 ZIP 成员实际读回核 SHA，并再次核原文件；此过程只解压交付 ZIP，不解码里面的 native gzip，不运行力学或 HP。
+
+本次不分发原论文 PDF、教育 MATLAB 源码或旧上传 ZIP。冻结记录里的原用户/机器/路径是历史来源，保留原样；另机不需要仿造这些目录。历史外部 MATLAB 来源限制继续按[恢复说明](RESUME_DEVELOPMENT.md)明确。LF10 原上传 ZIP 也未随本次公开分发：81,618,414 bytes，SHA256 `79c44fbf2570651539137d74299714823c8046d13efd9c3bad6eb32bc389745e`。未来 HF5 需另取得该来源；已交付 grid inventory 是元数据，不能替代全部1800例原数据。当前只读排查不依赖它。
+
+## 在另一台机器接续
+
+从任意新目录克隆，Windows 开启 Git 长路径；先读当前状态。完整恢复全部历史证据使用 `fetch-evidence` 无筛选；只恢复本轮及其声明依赖可执行：
+
+```text
+git clone https://github.com/dudaxing/Compliant-TO-TMC.git my-hf-work
+cd my-hf-work
+git config core.longpaths true
+python tools/handoff.py verify
+python tools/handoff.py fetch-evidence --asset hf4-c2-development-readers-20260930-v1.zip
+python tools/handoff.py verify --asset hf4-c2-development-readers-20260930-v1.zip
+```
+
+Python 3.13 的标准库即可做文件交付校验；安装数值环境和有范围的开发回归按 [RESUME_DEVELOPMENT](RESUME_DEVELOPMENT.md)。需要独立副本用 `prepare-replay --destination <新目录> --asset hf4-c2-development-readers-20260930-v1.zip`。不要直接在冻结证据上运行会写输出的审计。
+
+原实验 runner 锁定原机路径、runtime pins、来源身份及关闭卡的期限。恢复证据用于读取与继续开发，不自动授权复跑；不修改旧 pins 来让旧卡在新路径通过。当前继续范围是已保存小 JSON、样本、源码 AST 与原归因规则的只读诊断。新的 gzip 扫描、提高事件界或 profiler 采集需先明确新卡，旧额度不续用。
+
+## 交付验收记录
+
+待记录实际提交、推送、Release 服务器哈希及公开下载/空目录恢复结果。未完成的步骤不能据本地打包回执补记成功。

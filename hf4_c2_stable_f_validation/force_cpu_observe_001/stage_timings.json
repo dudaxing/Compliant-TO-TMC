@@ -1,0 +1,106 @@
+{
+  "schema": "hf-force-cpu-stage-timings-1",
+  "rows": [
+    {
+      "stage": "source_binding",
+      "status": "pass",
+      "seconds": 1.1366944999899715,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "runtime_import_and_prepare",
+      "status": "pass",
+      "seconds": 14.918353600020055,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "kernel_import",
+      "status": "pass",
+      "seconds": 7.712276000005659,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "input_transfer",
+      "status": "pass",
+      "seconds": 0.030382099968846887,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.trace",
+      "status": "pass",
+      "seconds": 19.078830100013874,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.export_jaxpr",
+      "status": "pass",
+      "seconds": 6.4254898999934085,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.lower",
+      "status": "pass",
+      "seconds": 9.124250099994242,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.export_stablehlo",
+      "status": "pass",
+      "seconds": 1.8046232999768108,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.compile",
+      "status": "pass",
+      "seconds": 96.66986929997802,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.export_optimized_hlo",
+      "status": "pass",
+      "seconds": 0.6408687999937683,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.call",
+      "status": "pass",
+      "seconds": 0.00124299997696653,
+      "timing_basis": "complete saved record"
+    },
+    {
+      "stage": "force.synchronize",
+      "status": "open_at_stop",
+      "seconds": 81.6544802999706,
+      "timing_basis": "upper observation includes cleanup/dispatch; NOT completed duration"
+    },
+    {
+      "stage": "force.transfer",
+      "status": "not_reached",
+      "seconds": null,
+      "timing_basis": "no completed saved duration"
+    },
+    {
+      "stage": "force.save_output",
+      "status": "not_reached",
+      "seconds": null,
+      "timing_basis": "no completed saved duration"
+    }
+  ],
+  "observation_cutoff_monotonic": 456562.1306609,
+  "source_sha256": {
+    "events/P2_force.ndjson": "f9a2f9c479a70623ce5568f46670d4a1b945c39395b62e8a9884d6e450b49754",
+    "results/force/summary.json": "7bde42cd1cf9fa7895c2655cdc80be738bd9024866778d11b3232369f0db4f2b"
+  },
+  "call_to_synchronize": {
+    "status": "running",
+    "timing_basis": "force.call start marker through return of output synchronization; includes intervening event/checkpoint I/O, not pure kernel time",
+    "started_utc": "2026-09-28T15:08:56.106573+00:00",
+    "start_monotonic": 456480.4631011,
+    "call_returned": true,
+    "call_return_monotonic": 456480.4683909,
+    "call_body_seconds": 0.00124299997696653
+  },
+  "summary_error": null,
+  "event_issues": [],
+  "scope": "P2 saved observations; call/readiness are not pure kernel timings"
+}

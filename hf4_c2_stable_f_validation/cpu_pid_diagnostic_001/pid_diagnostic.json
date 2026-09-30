@@ -1,0 +1,284 @@
+{
+  "schema": "hf-cpu-supervision-pid-diagnostic-1",
+  "protocol": "F-CPU-PID1",
+  "run_id": "cpu_pid_diagnostic_001",
+  "diagnostic_focus": "pid_exists_vs_process_signal",
+  "subject": "windows_job_supervision",
+  "version": "SUP1",
+  "harness_id": "CPU-S1",
+  "source_manifest_sha256": "03a97d28d20750b4f32fb6138801670920c1e88a83219ca724dc5088f8d00967",
+  "harness_manifest_sha256": "03a97d28d20750b4f32fb6138801670920c1e88a83219ca724dc5088f8d00967",
+  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32",
+  "status": "triggered_native_success",
+  "record_count": 1,
+  "records": [
+    {
+      "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/pid_check.json",
+      "bytes": 3257,
+      "sha256": "7661aba83a2cb5b6f58c964bc6134c8e3bb0c279ca2cd4b08c6618c7156e80b3",
+      "record": {
+        "completed_monotonic": 450841.1321447,
+        "cpu_bytes": 112852,
+        "cpu_path": "cpu.ndjson",
+        "cpu_sha256": "411b1c6a7338befd7256e8994ad91d4ebda4e3e67993ca78104b9a2362e665d2",
+        "diagnostic": {
+          "calls": [
+            {
+              "api": "OpenProcess",
+              "error": null,
+              "last_error": null,
+              "parameters": {
+                "access": 1052672,
+                "inherit": false,
+                "pid": 1704
+              },
+              "query_end_monotonic": 450841.1009811,
+              "query_start_monotonic": 450841.1006254,
+              "return_value": 884
+            },
+            {
+              "api": "WaitForSingleObject",
+              "error": null,
+              "last_error": null,
+              "parameters": {
+                "timeout_milliseconds": 0
+              },
+              "query_end_monotonic": 450841.1009981,
+              "query_start_monotonic": 450841.1009881,
+              "return_value": 258
+            },
+            {
+              "api": "GetExitCodeProcess",
+              "error": null,
+              "last_error": null,
+              "parameters": {},
+              "query_end_monotonic": 450841.1010141,
+              "query_start_monotonic": 450841.1010062,
+              "return_value": 1
+            },
+            {
+              "api": "GetProcessTimes",
+              "error": null,
+              "last_error": null,
+              "parameters": {},
+              "query_end_monotonic": 450841.1010361,
+              "query_start_monotonic": 450841.101028,
+              "return_value": 1
+            },
+            {
+              "api": "CloseHandle",
+              "error": null,
+              "last_error": null,
+              "parameters": {},
+              "query_end_monotonic": 450841.1010534,
+              "query_start_monotonic": 450841.1010486,
+              "return_value": 1
+            }
+          ],
+          "close_attempted": true,
+          "close_error": null,
+          "complete": true,
+          "exit_code": 125,
+          "first_error": null,
+          "handle_acquired": true,
+          "pid": 1704,
+          "process_times": {
+            "creation_filetime": 134350760901481743,
+            "exit_filetime": 0,
+            "exit_filetime_validity": "supported_by_prior_termination_observation",
+            "historical_job_instance_binding": "unavailable",
+            "kernel_time_100ns": 0,
+            "user_time_100ns": 156250
+          },
+          "signal_state": "not_signaled",
+          "status": "not_signaled"
+        },
+        "diagnostic_focus": "pid_exists_vs_process_signal",
+        "first_error": null,
+        "first_true_pid": 1704,
+        "identity": {
+          "harness_id": "CPU-S1",
+          "harness_manifest_sha256": "03a97d28d20750b4f32fb6138801670920c1e88a83219ca724dc5088f8d00967",
+          "phase": "P1_tests",
+          "role": "busy_outer",
+          "source_manifest_sha256": "03a97d28d20750b4f32fb6138801670920c1e88a83219ca724dc5088f8d00967",
+          "source_version": "SUP1",
+          "version": "SUP1"
+        },
+        "not_evaluated": [
+          {
+            "pid": 24004,
+            "reason": "not_evaluated_after_short_circuit"
+          },
+          {
+            "pid": 54828,
+            "reason": "not_evaluated_after_short_circuit"
+          },
+          {
+            "pid": 56280,
+            "reason": "not_evaluated_after_short_circuit"
+          },
+          {
+            "pid": 56432,
+            "reason": "not_evaluated_after_short_circuit"
+          },
+          {
+            "pid": 59668,
+            "reason": "not_evaluated_after_short_circuit"
+          }
+        ],
+        "original_failure": {
+          "message": "original cleanup gate: pid_exists(1704) returned True",
+          "module": "builtins",
+          "traceback": "AssertionError: original cleanup gate: pid_exists(1704) returned True\n",
+          "type": "AssertionError"
+        },
+        "original_gate": "failed_pid_exists_true",
+        "protocol": "F-CPU-PID1",
+        "queries": [
+          {
+            "exception": null,
+            "pid": 1704,
+            "query_end_monotonic": 450841.1003794,
+            "query_start_monotonic": 450841.0993783,
+            "result": true,
+            "sequence": 1,
+            "status": "returned"
+          }
+        ],
+        "query_order": [
+          1704,
+          24004,
+          54828,
+          56280,
+          56432,
+          59668
+        ],
+        "receipt_bytes": 7502,
+        "receipt_path": "receipt.json",
+        "receipt_sha256": "0baeb40b0b99c120380152ffd197409662cd154982c56c05de0e1e2a1bc8397b",
+        "run_id": "cpu_pid_diagnostic_001",
+        "schema": "hf-cpu-pid-check-1",
+        "subject": "windows_job_supervision",
+        "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32",
+        "version": "SUP1"
+      },
+      "quality_errors": [],
+      "original_gate": "failed_pid_exists_true",
+      "first_true_pid": 1704,
+      "native_status": "not_signaled",
+      "native_complete": true
+    }
+  ],
+  "time_table": [
+    {
+      "record_path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/pid_check.json",
+      "pid": 1704,
+      "operation": "pid_exists",
+      "sequence": 1,
+      "begin_monotonic": 450841.0993783,
+      "end_monotonic": 450841.1003794,
+      "status": "returned",
+      "result": true,
+      "exception": null
+    },
+    {
+      "record_path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/pid_check.json",
+      "pid": 1704,
+      "operation": "OpenProcess",
+      "begin_monotonic": 450841.1006254,
+      "end_monotonic": 450841.1009811,
+      "status": "returned",
+      "return_value": 884,
+      "last_error": null,
+      "error": null
+    },
+    {
+      "record_path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/pid_check.json",
+      "pid": 1704,
+      "operation": "WaitForSingleObject",
+      "begin_monotonic": 450841.1009881,
+      "end_monotonic": 450841.1009981,
+      "status": "returned",
+      "return_value": 258,
+      "last_error": null,
+      "error": null
+    },
+    {
+      "record_path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/pid_check.json",
+      "pid": 1704,
+      "operation": "GetExitCodeProcess",
+      "begin_monotonic": 450841.1010062,
+      "end_monotonic": 450841.1010141,
+      "status": "returned",
+      "return_value": 1,
+      "last_error": null,
+      "error": null
+    },
+    {
+      "record_path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/pid_check.json",
+      "pid": 1704,
+      "operation": "GetProcessTimes",
+      "begin_monotonic": 450841.101028,
+      "end_monotonic": 450841.1010361,
+      "status": "returned",
+      "return_value": 1,
+      "last_error": null,
+      "error": null
+    },
+    {
+      "record_path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/pid_check.json",
+      "pid": 1704,
+      "operation": "CloseHandle",
+      "begin_monotonic": 450841.1010486,
+      "end_monotonic": 450841.1010534,
+      "status": "returned",
+      "return_value": 1,
+      "last_error": null,
+      "error": null
+    }
+  ],
+  "issues": [],
+  "parent_test_status": "execution_failure",
+  "original_test_outcomes": [
+    {
+      "nodeid": "tests/test_windows_owned_process.py::test_exit[0]",
+      "status": "passed"
+    },
+    {
+      "nodeid": "tests/test_windows_owned_process.py::test_exit[7]",
+      "status": "passed"
+    },
+    {
+      "nodeid": "tests/test_windows_owned_process.py::test_timeout",
+      "status": "passed"
+    },
+    {
+      "nodeid": "tests/test_windows_owned_process.py::test_resource_trigger",
+      "status": "passed"
+    },
+    {
+      "nodeid": "tests/test_windows_owned_process.py::test_orphan_grandchild",
+      "status": "passed"
+    },
+    {
+      "nodeid": "tests/test_windows_owned_cpu.py::test_busy_sleep_and_exited_descendant_keep_cumulative_cpu",
+      "status": "failed"
+    },
+    {
+      "nodeid": "tests/test_windows_owned_cpu.py::test_timeout_preserves_partial_samples_and_cleans_job",
+      "status": "not_executed"
+    },
+    {
+      "nodeid": "tests/test_windows_owned_cpu.py::test_observation_failure_stops_and_independent_cleanup_survives[query]",
+      "status": "not_executed"
+    },
+    {
+      "nodeid": "tests/test_windows_owned_cpu.py::test_observation_failure_stops_and_independent_cleanup_survives[write]",
+      "status": "not_executed"
+    }
+  ],
+  "interpretation": "A signaled handle is a later observation, not proof of the original pid_exists instant or historical Job identity; native success never repairs an original true",
+  "force_executed": false,
+  "scientific_admission": false
+}

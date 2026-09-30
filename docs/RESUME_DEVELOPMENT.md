@@ -1,6 +1,6 @@
 # 在新电脑或任意新目录接续开发
 
-当前主干状态先看 [CURRENT_STATUS](CURRENT_STATUS.md)与[主干开发流程](DEVELOPMENT_WORKFLOW.md)：S0、P1 已完成，稳定 F 保存态 63/63 通过、制造场 30/33 通过；v4 唯一细网格补测为 21/21 状态、651/651 检查、7/7 原目标通过。v3 原 `NOT_PASS` 保留，默认内核未切换，HF5 未实施，v4 单路径额度已耗尽。独立复核的 8 态与原 63 态重叠，不相加。本轮合并、清单与远程恢复的实际验收见[主干整合报告](MAIN_CONSOLIDATION_REPORT_20260927.md)。
+当前主干状态先看 [CURRENT_STATUS](CURRENT_STATUS.md)与[主干开发流程](DEVELOPMENT_WORKFLOW.md)。截至 2026-09-30，近旋转诊断、新算术候选、JIT/AD 与 F 系列已有冻结结果；F-STREAM1 因事件界以 partial 关闭，完整 force／AD、一般接触与 HF5 仍未完成，默认内核未切换。最新交付见[开发证据移交](DEVELOPMENT_HANDOFF_20260930.md)，科学排查见[只读后续审阅](F_STREAM1_READONLY_FOLLOWUP_20260930.md)。原 S0、v3/v4 和[主干整合报告](MAIN_CONSOLIDATION_REPORT_20260927.md)保留其历史事实；重叠状态不相加。
 
 后续只在本仓库 main 开发，origin 为 `https://github.com/dudaxing/Compliant-TO-TMC.git`。本机正式根为 `D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC`，其中 `hf_repo/` 是源码；外层旧 `Compliant-Nonlinear-TMC-O/hf_repo/` 只保留历史。其他电脑可以选任意克隆目录，不需要原盘符。
 
@@ -13,6 +13,7 @@
 ```text
 git clone https://github.com/dudaxing/Compliant-TO-TMC.git my-hf-work
 cd my-hf-work
+git config core.longpaths true
 git switch main
 python tools/handoff.py verify
 ```
@@ -111,13 +112,15 @@ POSIX shell 使用 `export JAX_ENABLE_X64=true JAX_PLATFORMS=cpu OMP_NUM_THREADS
 
 以上命令均接在 `python tools/handoff.py` 之后；每个资产分别执行一次。单元测试和普通几何读取不需要恢复这些大资产。另行检出稳定标签时，以该标签自己的历史布局和证据清单为准。
 
-先保留新环境记录，再运行开发测试；输出使用新的命名。下面假设 `review_runs/regression_001.xml` 尚不存在：
+先保留新环境记录，再按改动范围选择测试；输出使用新的命名。下面是普通回归范围，假设 `review_runs/regression_001.xml` 尚不存在：
 
 ```powershell
 Push-Location hf_repo
-& $hfPython -m pytest -q --junitxml=../review_runs/regression_001.xml
+& $hfPython -m pytest -q --ignore=tests/test_windows_owned_process.py --ignore=tests/test_windows_owned_cpu.py --ignore=tests/test_windows_cleanup_contract.py --ignore=tests/test_s0_event_logging.py --junitxml=../review_runs/regression_001.xml
 Pop-Location
 ```
+
+上面排除的四个实验监督/日志测试依赖原执行卡身份与 deadline；它们随源码及原回执保留，不应为运行通用测试伪造已关闭卡的环境或重开旧窗口。其他新增研究测试也须根据本次计算范围、来源及预算选择。文件交付验证可独立运行 `python -m unittest discover -s tools -p "test_*.py"`，不执行 FE。
 
 移交基线历史测试为一次 **592 通过、1 跳过**，另一次 **12 通过**，合计 604 个唯一通过项。新机完整执行是新的测试记录，实际通过/跳过数量应以本次输出为准。原跳过为 Windows 符号链接权限；不同平台可能不再跳过。历史 xunit2/record_property 警告及实际保留的属性已在修正报告说明。
 
@@ -253,9 +256,9 @@ Pop-Location
 
 ## 6. 恢复开发时的首项工作
 
-先按 [CURRENT_STATUS](CURRENT_STATUS.md)确认现状与本次范围，再运行与拟修改内容相称的回归。S0、P1、稳定 F 候选和 v4 唯一补测均已有成果，不再重新执行旧计划中标为“未开始”的阶段。最近的数值问题是三个保存的近旋转制造场；首先执行独立[失败分析](HF4_C2_STABLE_F_FAILURE_ANALYSIS.md)中预定的固定场分段归因，再依据结果选择算术改进，而不是先扩大真实接触任务。
+先按 [CURRENT_STATUS](CURRENT_STATUS.md)确认现状与本次范围。固定场分段诊断、算术候选、JIT/AD 修订及 F 系列都已实施并保留失败，详见[连续执行报告](HF4_C2_S0_PREPARATION_RESULT_20260928.md)；不能按旧文档中的“尚未实施”重跑。当前首项工作是读取已保存的小 JSON、128 个样本及采集包装/原归因规则，见[只读排查与下一卡](F_STREAM1_READONLY_FOLLOWUP_20260930.md)。F-STREAM1 的 400 万事件只是接纳数组前缀，完整 EOF／CRC／JSON 未通过，56 个直接模块参数计数也不构成内部执行归因。
 
-该归因及后续新候选尚未实施。应另建源码/输入冻结、明确计算范围、预算和输出，保持材料力、正则力、总力及实际残差导数各自门槛；不能以力很小为由归零，也不能把当前算法的失败推广为所有 binary64 方法不可能达标。详见[近旋转范围勘误](HF4_C2_NEAR_ROTATION_SCOPE_NOTE_20260927.md)。v4 单任务通过与制造场未全部通过同时保留，不切换默认内核、不自动进入 HF5。
+原实验 runner 保留原机 Python、运行库 pins、路径及冻结身份。异机恢复证据不等于可以直接复跑旧卡；不要修改旧脚本/manifest 以适配新盘符。先恢复相对证据树并核 SHA；重新计算、读取 native gzip 或采集 profiler 须另定新环境、身份、预算与停止合同。原材料力、正则力、总力、导数及 native 接受门保持，不切换默认内核、不自动进入 HF5。缺少出版范围内排除的外部来源时，明确未核验范围，不伪造原件。
 
 后续真实接触资格仍需围绕明确任务核查部分接触、释放/重入、模型与网格敏感性。负弱节点项不是已验证的负接触压力，材料名义应力也不是已经验证的真实接触压力；Aalpha 仅作诊断，TMC−Aalpha 不是纯接触误差。不要同时调整 alpha/gamma 追求净力吻合，也不能以三网格观察替代收敛证明。
 

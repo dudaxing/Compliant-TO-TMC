@@ -1,0 +1,565 @@
+{
+  "schema": "hf-jit-ad-failure-classification-1",
+  "baseline": {
+    "status": "declared_transpose_failure",
+    "event_sha256": "47c97313bb8334be3077d83ec09e1c7a14bb7dc8ba9fd5f76d688f597e19597c",
+    "nodeid": "tests/test_compensated_invariants.py::test_physical_jvp_and_vjp_match_closed_form_first_derivatives",
+    "error": {
+      "type": "AssertionError",
+      "module": "builtins",
+      "message": "(ValAccum(float64[]), ValAccum(float64[]))",
+      "traceback": "Traceback (most recent call last):\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\H1\\tests\\test_compensated_invariants.py\", line 185, in vjp_evaluate\n    y, pullback = jax.vjp(function, z)\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\H1\\tests\\test_compensated_invariants.py\", line 172, in function\n    ci.dd_log1p(b,jnp),ci.dd_exp(b,jnp))\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\B0\\source\\hf_repo\\src\\hf_eval\\compensated_invariants.py\", line 346, in dd_exp\n    return _jax_unary(a, \"exp\") if xp is jnp else _dd_exp_primal(a, xp)\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\B0\\source\\hf_repo\\src\\hf_eval\\compensated_invariants.py\", line 298, in _jax_unary_jvp\n    tangent = _linear_pair(coefficient, dd_value(da, jnp))\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\B0\\source\\hf_repo\\src\\hf_eval\\compensated_invariants.py\", line 259, in _linear_pair\n    _mul(coefficient[1], direction, jnp), jnp)\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\B0\\source\\hf_repo\\src\\hf_eval\\compensated_invariants.py\", line 47, in _mul\n    return _barrier(a * b, xp)\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\numpy\\array_methods.py\", line 1532, in op\n    return getattr(self.aval, f\"_{name}\")(self, *args)\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\numpy\\array_methods.py\", line 774, in _operator_mul\n    return ufuncs.multiply(self, cast(ArrayLike, other))\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\numpy\\ufunc_api.py\", line 182, in __call__\n    return call(*args)\njax._src.source_info_util.JaxStackTraceBeforeTransformation: AssertionError: (ValAccum(float64[]), ValAccum(float64[]))\n\nThe preceding stack trace is the source of the JAX operation that, once transformed by JAX, triggered the following exception.\n\n--------------------\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\runner.py\", line 361, in from_call\n    result: TResult | None = func()\n                             ~~~~^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\runner.py\", line 250, in <lambda>\n    lambda: runtest_hook(item=item, **kwds),\n            ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_hooks.py\", line 512, in __call__\n    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)\n           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_manager.py\", line 120, in _hookexec\n    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)\n           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py\", line 167, in _multicall\n    raise exception\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py\", line 139, in _multicall\n    teardown.throw(exception)\n    ~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\logging.py\", line 865, in pytest_runtest_call\n    yield\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py\", line 139, in _multicall\n    teardown.throw(exception)\n    ~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\capture.py\", line 900, in pytest_runtest_call\n    return (yield)\n            ^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py\", line 139, in _multicall\n    teardown.throw(exception)\n    ~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\skipping.py\", line 268, in pytest_runtest_call\n    return (yield)\n            ^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py\", line 121, in _multicall\n    res = hook_impl.function(*args)\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\runner.py\", line 184, in pytest_runtest_call\n    item.runtest()\n    ~~~~~~~~~~~~^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\python.py\", line 1707, in runtest\n    self.ihook.pytest_pyfunc_call(pyfuncitem=self)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_hooks.py\", line 512, in __call__\n    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)\n           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_manager.py\", line 120, in _hookexec\n    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)\n           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py\", line 167, in _multicall\n    raise exception\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py\", line 121, in _multicall\n    res = hook_impl.function(*args)\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\python.py\", line 167, in pytest_pyfunc_call\n    result = testfunction(**testargs)\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\H1\\tests\\test_compensated_invariants.py\", line 190, in test_physical_jvp_and_vjp_match_closed_form_first_derivatives\n    _,reverse_array=jax.jit(vjp_evaluate,compiler_options=ci.COMPILER_OPTIONS)(\n                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        jnp.asarray(x),jnp.asarray(cotangent))\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\traceback_util.py\", line 195, in reraise_with_filtered_traceback\n    return fun(*args, **kwargs)  # pyrefly: ignore[not-callable]\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py\", line 264, in cache_miss\n    p, args_flat = _infer_params(fun, jit_info, args, kwargs)\n                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py\", line 652, in _infer_params\n    p = _trace_for_jit(fun, ji, ctx_mesh, dbg_fn(), avals, args, kwargs)\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py\", line 554, in _trace_for_jit\n    jaxpr, out_avals = pe.trace_to_jaxpr(fun, in_type, dbg, qdd_token)\n                       ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\partial_eval.py\", line 2329, in trace_to_jaxpr\n    return trace_to_jaxpr_nocache(\n        fun,\n    ...<5 lines>...\n        requires_low=requires_low,\n    )\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\partial_eval.py\", line 2290, in trace_to_jaxpr_nocache\n    ans_pytree = fun(*args, **kwargs)\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\H1\\tests\\test_compensated_invariants.py\", line 186, in vjp_evaluate\n    return y, pullback(c)[0]\n              ~~~~~~~~^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py\", line 1947, in __call__\n    return self.fun(self.in_tree, self.out_tree, self.args_res,\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n                    self.opaque_residuals)(out_ct)\n                    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\tree_util.py\", line 498, in __call__\n    return self.fun(*args, **kw)\n           ~~~~~~~~^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py\", line 1789, in _vjp3_bwd\n    ad.backward_pass3(jaxpr, True, residuals, maybe_accums, cts_flat)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py\", line 416, in backward_pass3\n    rule(cts_in, *map(read, eqn.invars), **eqn.params)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py\", line 1135, in fancy_bilinear_transpose\n    assert isinstance(x, GradAccum) ^ isinstance(y, GradAccum), (x, y)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~\nAssertionError: (ValAccum(float64[]), ValAccum(float64[]))\n",
+      "frames": [
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\runner.py",
+          "lineno": 361,
+          "function": "from_call",
+          "module": "_pytest.runner",
+          "code_firstlineno": 340,
+          "source_line": "result: TResult | None = func()",
+          "source_sha256": "c8d7fd553c0516f7884502ee0e7954eb5a5b1542f21fcb5c4357500ed2fe1570"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\runner.py",
+          "lineno": 250,
+          "function": "<lambda>",
+          "module": "_pytest.runner",
+          "code_firstlineno": 250,
+          "source_line": "lambda: runtest_hook(item=item, **kwds),",
+          "source_sha256": "c8d7fd553c0516f7884502ee0e7954eb5a5b1542f21fcb5c4357500ed2fe1570"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_hooks.py",
+          "lineno": 512,
+          "function": "__call__",
+          "module": "pluggy._hooks",
+          "code_firstlineno": 497,
+          "source_line": "return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)",
+          "source_sha256": "13a7f79d8708e9d6c4b8ed069b2eb5a3380653fe7dfdeebd902d3c6b4e8406ea"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_manager.py",
+          "lineno": 120,
+          "function": "_hookexec",
+          "module": "pluggy._manager",
+          "code_firstlineno": 111,
+          "source_line": "return self._inner_hookexec(hook_name, methods, kwargs, firstresult)",
+          "source_sha256": "2b8229fe99048ef4f6a0e21f40fa7c0b0016a1756710d81045ccbdb651a28b4a"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py",
+          "lineno": 167,
+          "function": "_multicall",
+          "module": "pluggy._callers",
+          "code_firstlineno": 76,
+          "source_line": "raise exception",
+          "source_sha256": "804665946692615b2c676526a4d7e6602d1b755821da361b0057982afb913236"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py",
+          "lineno": 139,
+          "function": "_multicall",
+          "module": "pluggy._callers",
+          "code_firstlineno": 76,
+          "source_line": "teardown.throw(exception)",
+          "source_sha256": "804665946692615b2c676526a4d7e6602d1b755821da361b0057982afb913236"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\logging.py",
+          "lineno": 865,
+          "function": "pytest_runtest_call",
+          "module": "_pytest.logging",
+          "code_firstlineno": 860,
+          "source_line": "yield",
+          "source_sha256": "9ad4c3e583c205a97c37264bf479503e74e027cf68ba818996e923062380cac2"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py",
+          "lineno": 139,
+          "function": "_multicall",
+          "module": "pluggy._callers",
+          "code_firstlineno": 76,
+          "source_line": "teardown.throw(exception)",
+          "source_sha256": "804665946692615b2c676526a4d7e6602d1b755821da361b0057982afb913236"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\capture.py",
+          "lineno": 900,
+          "function": "pytest_runtest_call",
+          "module": "_pytest.capture",
+          "code_firstlineno": 897,
+          "source_line": "return (yield)",
+          "source_sha256": "12004dbff0ab7b34141ff53e33e616db2e857c695f64e640631f5abe30619145"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py",
+          "lineno": 139,
+          "function": "_multicall",
+          "module": "pluggy._callers",
+          "code_firstlineno": 76,
+          "source_line": "teardown.throw(exception)",
+          "source_sha256": "804665946692615b2c676526a4d7e6602d1b755821da361b0057982afb913236"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\skipping.py",
+          "lineno": 268,
+          "function": "pytest_runtest_call",
+          "module": "_pytest.skipping",
+          "code_firstlineno": 258,
+          "source_line": "return (yield)",
+          "source_sha256": "cc2102f5f8d19478f91ce77117c109348b8766ae04ebc4b8c33e5f9923e50aee"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py",
+          "lineno": 121,
+          "function": "_multicall",
+          "module": "pluggy._callers",
+          "code_firstlineno": 76,
+          "source_line": "res = hook_impl.function(*args)",
+          "source_sha256": "804665946692615b2c676526a4d7e6602d1b755821da361b0057982afb913236"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\runner.py",
+          "lineno": 184,
+          "function": "pytest_runtest_call",
+          "module": "_pytest.runner",
+          "code_firstlineno": 173,
+          "source_line": "item.runtest()",
+          "source_sha256": "c8d7fd553c0516f7884502ee0e7954eb5a5b1542f21fcb5c4357500ed2fe1570"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\python.py",
+          "lineno": 1707,
+          "function": "runtest",
+          "module": "_pytest.python",
+          "code_firstlineno": 1705,
+          "source_line": "self.ihook.pytest_pyfunc_call(pyfuncitem=self)",
+          "source_sha256": "b04488f5e46bf1ffe2e8344f81756e10b970dbfaf2f7f2f4d312becd6404df76"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_hooks.py",
+          "lineno": 512,
+          "function": "__call__",
+          "module": "pluggy._hooks",
+          "code_firstlineno": 497,
+          "source_line": "return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)",
+          "source_sha256": "13a7f79d8708e9d6c4b8ed069b2eb5a3380653fe7dfdeebd902d3c6b4e8406ea"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_manager.py",
+          "lineno": 120,
+          "function": "_hookexec",
+          "module": "pluggy._manager",
+          "code_firstlineno": 111,
+          "source_line": "return self._inner_hookexec(hook_name, methods, kwargs, firstresult)",
+          "source_sha256": "2b8229fe99048ef4f6a0e21f40fa7c0b0016a1756710d81045ccbdb651a28b4a"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py",
+          "lineno": 167,
+          "function": "_multicall",
+          "module": "pluggy._callers",
+          "code_firstlineno": 76,
+          "source_line": "raise exception",
+          "source_sha256": "804665946692615b2c676526a4d7e6602d1b755821da361b0057982afb913236"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_callers.py",
+          "lineno": 121,
+          "function": "_multicall",
+          "module": "pluggy._callers",
+          "code_firstlineno": 76,
+          "source_line": "res = hook_impl.function(*args)",
+          "source_sha256": "804665946692615b2c676526a4d7e6602d1b755821da361b0057982afb913236"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\python.py",
+          "lineno": 167,
+          "function": "pytest_pyfunc_call",
+          "module": "_pytest.python",
+          "code_firstlineno": 160,
+          "source_line": "result = testfunction(**testargs)",
+          "source_sha256": "b04488f5e46bf1ffe2e8344f81756e10b970dbfaf2f7f2f4d312becd6404df76"
+        },
+        {
+          "filename": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\H1\\tests\\test_compensated_invariants.py",
+          "lineno": 190,
+          "function": "test_physical_jvp_and_vjp_match_closed_form_first_derivatives",
+          "module": "test_compensated_invariants",
+          "code_firstlineno": 166,
+          "source_line": "_,reverse_array=jax.jit(vjp_evaluate,compiler_options=ci.COMPILER_OPTIONS)(",
+          "source_sha256": "15a81049f3fadcf0a0391f702db8444c33856f1116055d26e6ffca686821e946"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\traceback_util.py",
+          "lineno": 195,
+          "function": "reraise_with_filtered_traceback",
+          "module": "jax._src.traceback_util",
+          "code_firstlineno": 191,
+          "source_line": "return fun(*args, **kwargs)  # pyrefly: ignore[not-callable]",
+          "source_sha256": "538d0861312d43a90e6f6370e366d8cb4ff2f5445e7f6bb696b1afc4d5740b00"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py",
+          "lineno": 264,
+          "function": "cache_miss",
+          "module": "jax._src.pjit",
+          "code_firstlineno": 257,
+          "source_line": "p, args_flat = _infer_params(fun, jit_info, args, kwargs)",
+          "source_sha256": "fc0f6e9a373ddb517391631bf65245f47829cb7339fd44d90bf4939622256734"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py",
+          "lineno": 652,
+          "function": "_infer_params",
+          "module": "jax._src.pjit",
+          "code_firstlineno": 635,
+          "source_line": "p = _trace_for_jit(fun, ji, ctx_mesh, dbg_fn(), avals, args, kwargs)",
+          "source_sha256": "fc0f6e9a373ddb517391631bf65245f47829cb7339fd44d90bf4939622256734"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py",
+          "lineno": 554,
+          "function": "_trace_for_jit",
+          "module": "jax._src.pjit",
+          "code_firstlineno": 484,
+          "source_line": "jaxpr, out_avals = pe.trace_to_jaxpr(fun, in_type, dbg, qdd_token)",
+          "source_sha256": "fc0f6e9a373ddb517391631bf65245f47829cb7339fd44d90bf4939622256734"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\partial_eval.py",
+          "lineno": 2329,
+          "function": "trace_to_jaxpr",
+          "module": "jax._src.interpreters.partial_eval",
+          "code_firstlineno": 2319,
+          "source_line": "return trace_to_jaxpr_nocache(",
+          "source_sha256": "e494dab076a6cdf344f837ac81867ceac435efb982f62d1bd339f744ee61a46b"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\partial_eval.py",
+          "lineno": 2290,
+          "function": "trace_to_jaxpr_nocache",
+          "module": "jax._src.interpreters.partial_eval",
+          "code_firstlineno": 2247,
+          "source_line": "ans_pytree = fun(*args, **kwargs)",
+          "source_sha256": "e494dab076a6cdf344f837ac81867ceac435efb982f62d1bd339f744ee61a46b"
+        },
+        {
+          "filename": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\H1\\tests\\test_compensated_invariants.py",
+          "lineno": 186,
+          "function": "vjp_evaluate",
+          "module": "test_compensated_invariants",
+          "code_firstlineno": 184,
+          "source_line": "return y, pullback(c)[0]",
+          "source_sha256": "15a81049f3fadcf0a0391f702db8444c33856f1116055d26e6ffca686821e946"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py",
+          "lineno": 1947,
+          "function": "__call__",
+          "module": "jax._src.api",
+          "code_firstlineno": 1943,
+          "source_line": "return self.fun(self.in_tree, self.out_tree, self.args_res,",
+          "source_sha256": "c21207c0d6bd4983c72f2abe858f29da160b5705a2b0e12b689c260d1d953bdc"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\tree_util.py",
+          "lineno": 498,
+          "function": "__call__",
+          "module": "jax._src.tree_util",
+          "code_firstlineno": 497,
+          "source_line": "return self.fun(*args, **kw)",
+          "source_sha256": "23e217ed1bbfdebc8229a4e79c442108f1a3c4bce7d5ba6949aa671cc3d0b2c2"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py",
+          "lineno": 1789,
+          "function": "_vjp3_bwd",
+          "module": "jax._src.api",
+          "code_firstlineno": 1782,
+          "source_line": "ad.backward_pass3(jaxpr, True, residuals, maybe_accums, cts_flat)",
+          "source_sha256": "c21207c0d6bd4983c72f2abe858f29da160b5705a2b0e12b689c260d1d953bdc"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py",
+          "lineno": 416,
+          "function": "backward_pass3",
+          "module": "jax._src.interpreters.ad",
+          "code_firstlineno": 357,
+          "source_line": "rule(cts_in, *map(read, eqn.invars), **eqn.params)",
+          "source_sha256": "3e54a02d0e2f45c42e0ed0bf9489ab58b6bcf360653539a44864a211b9d601b4"
+        },
+        {
+          "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py",
+          "lineno": 1135,
+          "function": "fancy_bilinear_transpose",
+          "module": "jax._src.interpreters.ad",
+          "code_firstlineno": 1134,
+          "source_line": "assert isinstance(x, GradAccum) ^ isinstance(y, GradAccum), (x, y)",
+          "source_sha256": "3e54a02d0e2f45c42e0ed0bf9489ab58b6bcf360653539a44864a211b9d601b4"
+        }
+      ],
+      "terminal": {
+        "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py",
+        "lineno": 1135,
+        "function": "fancy_bilinear_transpose",
+        "module": "jax._src.interpreters.ad",
+        "code_firstlineno": 1134,
+        "source_line": "assert isinstance(x, GradAccum) ^ isinstance(y, GradAccum), (x, y)",
+        "source_sha256": "3e54a02d0e2f45c42e0ed0bf9489ab58b6bcf360653539a44864a211b9d601b4"
+      }
+    }
+  },
+  "controls": {
+    "status": "pass",
+    "summary_sha256": "ffff38bf83c41ab95a658f9a546d659580fc31f8733fc5bdba6320525d2a38fa",
+    "joint_failures": [
+      {
+        "mode": "eager",
+        "stage": "pullback",
+        "error": {
+          "type": "AssertionError",
+          "module": "builtins",
+          "message": "(ValAccum(float64[]), ValAccum(float64[]))",
+          "traceback": "Traceback (most recent call last):\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 335, in <module>\n    raise SystemExit(main())\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 317, in main\n    status = controls(probe, np, jax, jnp) if args.mode == \"controls\" else shared.element_probe(probe, np, jax, jnp)\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 252, in controls\n    success, vjp = probe.step(prefix+\"vjp_construct\", construct_vjp,\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 53, in step\n    value = function()\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 250, in construct_vjp\n    y, pullback = jax.vjp(raw, x)\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 230, in raw_jvp\n    derivative = coefficient*tangent\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\numpy\\array_methods.py\", line 1532, in op\n    return getattr(self.aval, f\"_{name}\")(self, *args)\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\numpy\\array_methods.py\", line 774, in _operator_mul\n    return ufuncs.multiply(self, cast(ArrayLike, other))\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\numpy\\ufunc_api.py\", line 182, in __call__\n    return call(*args)\njax._src.source_info_util.JaxStackTraceBeforeTransformation: AssertionError: (ValAccum(float64[]), ValAccum(float64[]))\n\nThe preceding stack trace is the source of the JAX operation that, once transformed by JAX, triggered the following exception.\n\n--------------------\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 53, in step\n    value = function()\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 257, in pullback_action\n    (gradient,) = vjp[1](cotangent)\n                  ~~~~~~^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py\", line 1947, in __call__\n    return self.fun(self.in_tree, self.out_tree, self.args_res,\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n                    self.opaque_residuals)(out_ct)\n                    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\tree_util.py\", line 498, in __call__\n    return self.fun(*args, **kw)\n           ~~~~~~~~^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py\", line 1789, in _vjp3_bwd\n    ad.backward_pass3(jaxpr, True, residuals, maybe_accums, cts_flat)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py\", line 416, in backward_pass3\n    rule(cts_in, *map(read, eqn.invars), **eqn.params)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py\", line 1135, in fancy_bilinear_transpose\n    assert isinstance(x, GradAccum) ^ isinstance(y, GradAccum), (x, y)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~\nAssertionError: (ValAccum(float64[]), ValAccum(float64[]))\n",
+          "frames": [
+            {
+              "filename": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py",
+              "lineno": 53,
+              "function": "step",
+              "module": "__main__",
+              "code_firstlineno": 42,
+              "source_line": "value = function()",
+              "source_sha256": "51f9d2088d31547966a6e66d5f2dc095df47854efcc1fb7f940910e33431bf99"
+            },
+            {
+              "filename": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py",
+              "lineno": 257,
+              "function": "pullback_action",
+              "module": "__main__",
+              "code_firstlineno": 256,
+              "source_line": "(gradient,) = vjp[1](cotangent)",
+              "source_sha256": "51f9d2088d31547966a6e66d5f2dc095df47854efcc1fb7f940910e33431bf99"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py",
+              "lineno": 1947,
+              "function": "__call__",
+              "module": "jax._src.api",
+              "code_firstlineno": 1943,
+              "source_line": "return self.fun(self.in_tree, self.out_tree, self.args_res,",
+              "source_sha256": "c21207c0d6bd4983c72f2abe858f29da160b5705a2b0e12b689c260d1d953bdc"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\tree_util.py",
+              "lineno": 498,
+              "function": "__call__",
+              "module": "jax._src.tree_util",
+              "code_firstlineno": 497,
+              "source_line": "return self.fun(*args, **kw)",
+              "source_sha256": "23e217ed1bbfdebc8229a4e79c442108f1a3c4bce7d5ba6949aa671cc3d0b2c2"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py",
+              "lineno": 1789,
+              "function": "_vjp3_bwd",
+              "module": "jax._src.api",
+              "code_firstlineno": 1782,
+              "source_line": "ad.backward_pass3(jaxpr, True, residuals, maybe_accums, cts_flat)",
+              "source_sha256": "c21207c0d6bd4983c72f2abe858f29da160b5705a2b0e12b689c260d1d953bdc"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py",
+              "lineno": 416,
+              "function": "backward_pass3",
+              "module": "jax._src.interpreters.ad",
+              "code_firstlineno": 357,
+              "source_line": "rule(cts_in, *map(read, eqn.invars), **eqn.params)",
+              "source_sha256": "3e54a02d0e2f45c42e0ed0bf9489ab58b6bcf360653539a44864a211b9d601b4"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py",
+              "lineno": 1135,
+              "function": "fancy_bilinear_transpose",
+              "module": "jax._src.interpreters.ad",
+              "code_firstlineno": 1134,
+              "source_line": "assert isinstance(x, GradAccum) ^ isinstance(y, GradAccum), (x, y)",
+              "source_sha256": "3e54a02d0e2f45c42e0ed0bf9489ab58b6bcf360653539a44864a211b9d601b4"
+            }
+          ],
+          "terminal": {
+            "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py",
+            "lineno": 1135,
+            "function": "fancy_bilinear_transpose",
+            "module": "jax._src.interpreters.ad",
+            "code_firstlineno": 1134,
+            "source_line": "assert isinstance(x, GradAccum) ^ isinstance(y, GradAccum), (x, y)",
+            "source_sha256": "3e54a02d0e2f45c42e0ed0bf9489ab58b6bcf360653539a44864a211b9d601b4"
+          },
+          "stage": "controls.joint.eager.pullback"
+        }
+      },
+      {
+        "mode": "strict",
+        "stage": "reverse.trace",
+        "error": {
+          "type": "AssertionError",
+          "module": "builtins",
+          "message": "(ValAccum(float64[]), ValAccum(float64[]))",
+          "traceback": "Traceback (most recent call last):\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 279, in reverse_action\n    y, pullback = jax.vjp(raw, z)\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 230, in raw_jvp\n    derivative = coefficient*tangent\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\numpy\\array_methods.py\", line 1532, in op\n    return getattr(self.aval, f\"_{name}\")(self, *args)\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\numpy\\array_methods.py\", line 774, in _operator_mul\n    return ufuncs.multiply(self, cast(ArrayLike, other))\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\numpy\\ufunc_api.py\", line 182, in __call__\n    return call(*args)\njax._src.source_info_util.JaxStackTraceBeforeTransformation: AssertionError: (ValAccum(float64[]), ValAccum(float64[]))\n\nThe preceding stack trace is the source of the JAX operation that, once transformed by JAX, triggered the following exception.\n\n--------------------\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 53, in step\n    value = function()\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 145, in <lambda>\n    success, traced = probe.step(label+\".trace\", lambda: function.trace(*arguments),\n                                                         ~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\traceback_util.py\", line 195, in reraise_with_filtered_traceback\n    return fun(*args, **kwargs)  # pyrefly: ignore[not-callable]\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py\", line 312, in jit_trace\n    p, args_flat = _infer_params(jit_func._fun, jit_func._jit_info, args, kwargs)\n                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py\", line 652, in _infer_params\n    p = _trace_for_jit(fun, ji, ctx_mesh, dbg_fn(), avals, args, kwargs)\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py\", line 554, in _trace_for_jit\n    jaxpr, out_avals = pe.trace_to_jaxpr(fun, in_type, dbg, qdd_token)\n                       ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\partial_eval.py\", line 2329, in trace_to_jaxpr\n    return trace_to_jaxpr_nocache(\n        fun,\n    ...<5 lines>...\n        requires_low=requires_low,\n    )\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\partial_eval.py\", line 2290, in trace_to_jaxpr_nocache\n    ans_pytree = fun(*args, **kwargs)\n  File \"\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py\", line 280, in reverse_action\n    return y, pullback(c)[0]\n              ~~~~~~~~^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py\", line 1947, in __call__\n    return self.fun(self.in_tree, self.out_tree, self.args_res,\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n                    self.opaque_residuals)(out_ct)\n                    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\tree_util.py\", line 498, in __call__\n    return self.fun(*args, **kw)\n           ~~~~~~~~^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py\", line 1789, in _vjp3_bwd\n    ad.backward_pass3(jaxpr, True, residuals, maybe_accums, cts_flat)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py\", line 416, in backward_pass3\n    rule(cts_in, *map(read, eqn.invars), **eqn.params)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py\", line 1135, in fancy_bilinear_transpose\n    assert isinstance(x, GradAccum) ^ isinstance(y, GradAccum), (x, y)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~\nAssertionError: (ValAccum(float64[]), ValAccum(float64[]))\n",
+          "frames": [
+            {
+              "filename": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py",
+              "lineno": 53,
+              "function": "step",
+              "module": "__main__",
+              "code_firstlineno": 42,
+              "source_line": "value = function()",
+              "source_sha256": "51f9d2088d31547966a6e66d5f2dc095df47854efcc1fb7f940910e33431bf99"
+            },
+            {
+              "filename": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py",
+              "lineno": 145,
+              "function": "<lambda>",
+              "module": "__main__",
+              "code_firstlineno": 145,
+              "source_line": "success, traced = probe.step(label+\".trace\", lambda: function.trace(*arguments),",
+              "source_sha256": "51f9d2088d31547966a6e66d5f2dc095df47854efcc1fb7f940910e33431bf99"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\traceback_util.py",
+              "lineno": 195,
+              "function": "reraise_with_filtered_traceback",
+              "module": "jax._src.traceback_util",
+              "code_firstlineno": 191,
+              "source_line": "return fun(*args, **kwargs)  # pyrefly: ignore[not-callable]",
+              "source_sha256": "538d0861312d43a90e6f6370e366d8cb4ff2f5445e7f6bb696b1afc4d5740b00"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py",
+              "lineno": 312,
+              "function": "jit_trace",
+              "module": "jax._src.pjit",
+              "code_firstlineno": 310,
+              "source_line": "p, args_flat = _infer_params(jit_func._fun, jit_func._jit_info, args, kwargs)",
+              "source_sha256": "fc0f6e9a373ddb517391631bf65245f47829cb7339fd44d90bf4939622256734"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py",
+              "lineno": 652,
+              "function": "_infer_params",
+              "module": "jax._src.pjit",
+              "code_firstlineno": 635,
+              "source_line": "p = _trace_for_jit(fun, ji, ctx_mesh, dbg_fn(), avals, args, kwargs)",
+              "source_sha256": "fc0f6e9a373ddb517391631bf65245f47829cb7339fd44d90bf4939622256734"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\pjit.py",
+              "lineno": 554,
+              "function": "_trace_for_jit",
+              "module": "jax._src.pjit",
+              "code_firstlineno": 484,
+              "source_line": "jaxpr, out_avals = pe.trace_to_jaxpr(fun, in_type, dbg, qdd_token)",
+              "source_sha256": "fc0f6e9a373ddb517391631bf65245f47829cb7339fd44d90bf4939622256734"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\partial_eval.py",
+              "lineno": 2329,
+              "function": "trace_to_jaxpr",
+              "module": "jax._src.interpreters.partial_eval",
+              "code_firstlineno": 2319,
+              "source_line": "return trace_to_jaxpr_nocache(",
+              "source_sha256": "e494dab076a6cdf344f837ac81867ceac435efb982f62d1bd339f744ee61a46b"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\partial_eval.py",
+              "lineno": 2290,
+              "function": "trace_to_jaxpr_nocache",
+              "module": "jax._src.interpreters.partial_eval",
+              "code_firstlineno": 2247,
+              "source_line": "ans_pytree = fun(*args, **kwargs)",
+              "source_sha256": "e494dab076a6cdf344f837ac81867ceac435efb982f62d1bd339f744ee61a46b"
+            },
+            {
+              "filename": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\aux\\hf_repo\\scripts\\probe_jit_ad_preparation.py",
+              "lineno": 280,
+              "function": "reverse_action",
+              "module": "__main__",
+              "code_firstlineno": 278,
+              "source_line": "return y, pullback(c)[0]",
+              "source_sha256": "51f9d2088d31547966a6e66d5f2dc095df47854efcc1fb7f940910e33431bf99"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py",
+              "lineno": 1947,
+              "function": "__call__",
+              "module": "jax._src.api",
+              "code_firstlineno": 1943,
+              "source_line": "return self.fun(self.in_tree, self.out_tree, self.args_res,",
+              "source_sha256": "c21207c0d6bd4983c72f2abe858f29da160b5705a2b0e12b689c260d1d953bdc"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\tree_util.py",
+              "lineno": 498,
+              "function": "__call__",
+              "module": "jax._src.tree_util",
+              "code_firstlineno": 497,
+              "source_line": "return self.fun(*args, **kw)",
+              "source_sha256": "23e217ed1bbfdebc8229a4e79c442108f1a3c4bce7d5ba6949aa671cc3d0b2c2"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\api.py",
+              "lineno": 1789,
+              "function": "_vjp3_bwd",
+              "module": "jax._src.api",
+              "code_firstlineno": 1782,
+              "source_line": "ad.backward_pass3(jaxpr, True, residuals, maybe_accums, cts_flat)",
+              "source_sha256": "c21207c0d6bd4983c72f2abe858f29da160b5705a2b0e12b689c260d1d953bdc"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py",
+              "lineno": 416,
+              "function": "backward_pass3",
+              "module": "jax._src.interpreters.ad",
+              "code_firstlineno": 357,
+              "source_line": "rule(cts_in, *map(read, eqn.invars), **eqn.params)",
+              "source_sha256": "3e54a02d0e2f45c42e0ed0bf9489ab58b6bcf360653539a44864a211b9d601b4"
+            },
+            {
+              "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py",
+              "lineno": 1135,
+              "function": "fancy_bilinear_transpose",
+              "module": "jax._src.interpreters.ad",
+              "code_firstlineno": 1134,
+              "source_line": "assert isinstance(x, GradAccum) ^ isinstance(y, GradAccum), (x, y)",
+              "source_sha256": "3e54a02d0e2f45c42e0ed0bf9489ab58b6bcf360653539a44864a211b9d601b4"
+            }
+          ],
+          "terminal": {
+            "filename": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\jax\\_src\\interpreters\\ad.py",
+            "lineno": 1135,
+            "function": "fancy_bilinear_transpose",
+            "module": "jax._src.interpreters.ad",
+            "code_firstlineno": 1134,
+            "source_line": "assert isinstance(x, GradAccum) ^ isinstance(y, GradAccum), (x, y)",
+            "source_sha256": "3e54a02d0e2f45c42e0ed0bf9489ab58b6bcf360653539a44864a211b9d601b4"
+          },
+          "stage": "controls.joint.strict.reverse.trace"
+        }
+      }
+    ],
+    "scientific_admission": false
+  },
+  "base_manifest_sha256": "16831ce332badba05dc07cfa8f6069d5ab5e7a1736ebde3c658542d49834ef9c",
+  "harness": {
+    "version": "H1",
+    "manifest_path": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\H1\\manifest.json",
+    "manifest_sha256": "0999cf0e0270aa08c630569a7cb7136655910370b80a6e0fc6f68382fbadf358",
+    "test_path": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\jit_ad_ready_001\\H1\\tests\\test_compensated_invariants.py",
+    "test_sha256": "15a81049f3fadcf0a0391f702db8444c33856f1116055d26e6ffca686821e946"
+  },
+  "scientific_admission": false,
+  "status": "declared_derivative_interface_defect",
+  "repair_authorized": true,
+  "repair_scope": "only derivative split barriers; freeze C1 without canonical sync"
+}

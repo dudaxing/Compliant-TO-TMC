@@ -1,0 +1,3689 @@
+{
+  "schema": "hf-cpu-supervision-lifecycle-1",
+  "protocol": "F-CPU-S1",
+  "subject": "windows_job_supervision",
+  "cases": [
+    {
+      "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0",
+      "json_records": {
+        "call_outcome.json": {
+          "receipt_path": "receipt.json",
+          "returned_monotonic": 444307.0484593,
+          "role": "busy_outer",
+          "status": "returned"
+        },
+        "descendant_call_outcome.json": {
+          "receipt_path": "descendant_receipt.json",
+          "returned_monotonic": 444306.6571169,
+          "role": "descendant",
+          "status": "returned"
+        },
+        "descendant_receipt.json": {
+          "cleanup_requested_monotonic": 444306.6532932,
+          "cleanup_verified": true,
+          "command": [
+            "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Scripts\\python.exe",
+            "-u",
+            "-B",
+            "-c",
+            "import json,os,time\nfrom pathlib import Path\nfrom datetime import datetime,timezone\n_identity={'source_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_id': 'CPU-S1', 'version': 'SUP1', 'source_version': 'SUP1', 'phase': 'P1_tests', 'role': 'descendant'}\n_role='descendant'\nif (os.environ['HF_S0_SOURCE_MANIFEST_SHA']!=_identity['source_manifest_sha256'] or os.environ['HF_HARNESS_MANIFEST_SHA']!=_identity['harness_manifest_sha256'] or os.environ['HF_HARNESS_ID']!=_identity['harness_id']): raise ValueError('child identity mismatch')\n_markers=Path('descendant_markers.ndjson').open('x',encoding='utf-8',newline='\\n')\n_seq=0\ndef mark(event,**fields):\n    global _seq\n    row=dict(schema='hf-cpu-s1-marker-1',sequence=_seq+1,utc=datetime.now(timezone.utc).isoformat(),monotonic=time.monotonic(),pid=os.getpid(),role=_role,identity=_identity,event=event,**fields)\n    _markers.write(json.dumps(row,allow_nan=False,separators=(',',':'))+'\\n')\n    _markers.flush();os.fsync(_markers.fileno());_seq+=1\n    return row\ndef save_json(name,value):\n    with Path(name).open('x',encoding='utf-8',newline='\\n') as stream:\n        json.dump(value,stream,allow_nan=False,sort_keys=True)\n        stream.write('\\n');stream.flush();os.fsync(stream.fileno())\nmark('script_enter')\nmark('busy_started')\n_work_start=time.monotonic()\nwhile time.monotonic()<_work_start+0.5: pass\n_work_end=time.monotonic()\nmark('busy_finished',actual_start_monotonic=_work_start,actual_end_monotonic=_work_end)\nmark('normal_exit')\n_markers.close()\n"
+          ],
+          "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+          "cwd": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\cpu_supervision_001\\results\\P1_tests\\synthetic-temp\\test_busy_sleep_and_exited_des0",
+          "deadline_monotonic": 444313.4990764,
+          "elapsed_seconds": 1.1549491999903694,
+          "errors": [],
+          "owned_pids": [
+            60900,
+            64268,
+            65412
+          ],
+          "ownership": "suspended child assigned to kill-on-close Windows Job",
+          "peak_tree_rss_bytes": 51875840,
+          "pid": 64268,
+          "reason": "normal_exit",
+          "returncode": 0,
+          "rss_limit_bytes": 8589934592,
+          "rss_sample_interval_seconds": 0.025,
+          "rss_scope": "supervisor plus all Job members; sampled RSS",
+          "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32",
+          "telemetry_first_error": null,
+          "telemetry_interval_seconds": 0.05,
+          "telemetry_path": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\cpu_supervision_001\\results\\P1_tests\\synthetic-temp\\test_busy_sleep_and_exited_des0\\descendant_cpu.ndjson",
+          "telemetry_status": "complete",
+          "timeout_seconds": 8.0
+        },
+        "descendant_request.json": {
+          "cleanup_reserve_seconds": 5.25,
+          "command": [
+            "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Scripts\\python.exe",
+            "-u",
+            "-B",
+            "-c",
+            "import json,os,time\nfrom pathlib import Path\nfrom datetime import datetime,timezone\n_identity={'source_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_id': 'CPU-S1', 'version': 'SUP1', 'source_version': 'SUP1', 'phase': 'P1_tests', 'role': 'descendant'}\n_role='descendant'\nif (os.environ['HF_S0_SOURCE_MANIFEST_SHA']!=_identity['source_manifest_sha256'] or os.environ['HF_HARNESS_MANIFEST_SHA']!=_identity['harness_manifest_sha256'] or os.environ['HF_HARNESS_ID']!=_identity['harness_id']): raise ValueError('child identity mismatch')\n_markers=Path('descendant_markers.ndjson').open('x',encoding='utf-8',newline='\\n')\n_seq=0\ndef mark(event,**fields):\n    global _seq\n    row=dict(schema='hf-cpu-s1-marker-1',sequence=_seq+1,utc=datetime.now(timezone.utc).isoformat(),monotonic=time.monotonic(),pid=os.getpid(),role=_role,identity=_identity,event=event,**fields)\n    _markers.write(json.dumps(row,allow_nan=False,separators=(',',':'))+'\\n')\n    _markers.flush();os.fsync(_markers.fileno());_seq+=1\n    return row\ndef save_json(name,value):\n    with Path(name).open('x',encoding='utf-8',newline='\\n') as stream:\n        json.dump(value,stream,allow_nan=False,sort_keys=True)\n        stream.write('\\n');stream.flush();os.fsync(stream.fileno())\nmark('script_enter')\nmark('busy_started')\n_work_start=time.monotonic()\nwhile time.monotonic()<_work_start+0.5: pass\n_work_end=time.monotonic()\nmark('busy_finished',actual_start_monotonic=_work_start,actual_end_monotonic=_work_end)\nmark('normal_exit')\n_markers.close()\n"
+          ],
+          "deadline_monotonic": 444313.4990764,
+          "identity": {
+            "harness_id": "CPU-S1",
+            "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+            "phase": "P1_tests",
+            "role": "descendant",
+            "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+            "source_version": "SUP1",
+            "version": "SUP1"
+          },
+          "local_active_seconds": 8.0,
+          "outer_deadline_monotonic": 444327.4170027,
+          "outer_tail_reserve_seconds": 7.0,
+          "persist_reserve_seconds": 1.0,
+          "phase_active_deadline": 444366.6082762,
+          "ready_for_launch": true,
+          "request_monotonic": 444305.4990764,
+          "role": "descendant",
+          "schema": "hf-cpu-s1-request-1",
+          "seconds": 8.0
+        },
+        "invocation_budget.json": {
+          "cleanup_reserve_seconds": 5.25,
+          "deadline_monotonic": 444327.4170027,
+          "identity": {
+            "harness_id": "CPU-S1",
+            "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+            "phase": "P1_tests",
+            "role": "busy_outer",
+            "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+            "source_version": "SUP1",
+            "version": "SUP1"
+          },
+          "local_active_seconds": 25.0,
+          "persist_reserve_seconds": 1.0,
+          "phase_active_deadline": 444366.6082762,
+          "ready_for_launch": true,
+          "remaining_at_request": 64.19127350003691,
+          "request_monotonic": 444302.4170027,
+          "required_remaining_seconds": 31.25,
+          "role": "busy_outer",
+          "schema": "hf-cpu-s1-budget-1",
+          "seconds": 25.0
+        },
+        "receipt.json": {
+          "cleanup_requested_monotonic": 444307.0460164,
+          "cleanup_verified": true,
+          "command": [
+            "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Scripts\\python.exe",
+            "-u",
+            "-B",
+            "-c",
+            "import json,os,time\nfrom pathlib import Path\nfrom datetime import datetime,timezone\n_identity={'source_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_id': 'CPU-S1', 'version': 'SUP1', 'source_version': 'SUP1', 'phase': 'P1_tests', 'role': 'busy_outer'}\n_role='busy_outer'\nif (os.environ['HF_S0_SOURCE_MANIFEST_SHA']!=_identity['source_manifest_sha256'] or os.environ['HF_HARNESS_MANIFEST_SHA']!=_identity['harness_manifest_sha256'] or os.environ['HF_HARNESS_ID']!=_identity['harness_id']): raise ValueError('child identity mismatch')\n_markers=Path('outer_markers.ndjson').open('x',encoding='utf-8',newline='\\n')\n_seq=0\ndef mark(event,**fields):\n    global _seq\n    row=dict(schema='hf-cpu-s1-marker-1',sequence=_seq+1,utc=datetime.now(timezone.utc).isoformat(),monotonic=time.monotonic(),pid=os.getpid(),role=_role,identity=_identity,event=event,**fields)\n    _markers.write(json.dumps(row,allow_nan=False,separators=(',',':'))+'\\n')\n    _markers.flush();os.fsync(_markers.fileno());_seq+=1\n    return row\ndef save_json(name,value):\n    with Path(name).open('x',encoding='utf-8',newline='\\n') as stream:\n        json.dump(value,stream,allow_nan=False,sort_keys=True)\n        stream.write('\\n');stream.flush();os.fsync(stream.fileno())\nmark('script_enter')\nimport sys\nfrom windows_owned_process import run_owned\nmark('supervisor_imported')\nmark('busy_started')\n_work_start=time.monotonic()\nwhile time.monotonic()<_work_start+0.65: pass\n_work_end=time.monotonic()\nmark('busy_finished',actual_start_monotonic=_work_start,actual_end_monotonic=_work_end)\nmark('sleep_started')\n_work_start=time.monotonic()\ntime.sleep(0.65)\n_work_end=time.monotonic()\nmark('sleep_finished',actual_start_monotonic=_work_start,actual_end_monotonic=_work_end)\n_outer_deadline=444327.4170027\n_tn=time.monotonic()\n_phase_deadline=float(os.environ['HF_CPU_S1_ACTIVE_DEADLINE'])\n_child_command=[sys.executable,'-u','-B','-c',\"import json,os,time\\nfrom pathlib import Path\\nfrom datetime import datetime,timezone\\n_identity={'source_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_id': 'CPU-S1', 'version': 'SUP1', 'source_version': 'SUP1', 'phase': 'P1_tests', 'role': 'descendant'}\\n_role='descendant'\\nif (os.environ['HF_S0_SOURCE_MANIFEST_SHA']!=_identity['source_manifest_sha256'] or os.environ['HF_HARNESS_MANIFEST_SHA']!=_identity['harness_manifest_sha256'] or os.environ['HF_HARNESS_ID']!=_identity['harness_id']): raise ValueError('child identity mismatch')\\n_markers=Path('descendant_markers.ndjson').open('x',encoding='utf-8',newline='\\\\n')\\n_seq=0\\ndef mark(event,**fields):\\n    global _seq\\n    row=dict(schema='hf-cpu-s1-marker-1',sequence=_seq+1,utc=datetime.now(timezone.utc).isoformat(),monotonic=time.monotonic(),pid=os.getpid(),role=_role,identity=_identity,event=event,**fields)\\n    _markers.write(json.dumps(row,allow_nan=False,separators=(',',':'))+'\\\\n')\\n    _markers.flush();os.fsync(_markers.fileno());_seq+=1\\n    return row\\ndef save_json(name,value):\\n    with Path(name).open('x',encoding='utf-8',newline='\\\\n') as stream:\\n        json.dump(value,stream,allow_nan=False,sort_keys=True)\\n        stream.write('\\\\n');stream.flush();os.fsync(stream.fileno())\\nmark('script_enter')\\nmark('busy_started')\\n_work_start=time.monotonic()\\nwhile time.monotonic()<_work_start+0.5: pass\\n_work_end=time.monotonic()\\nmark('busy_finished',actual_start_monotonic=_work_start,actual_end_monotonic=_work_end)\\nmark('normal_exit')\\n_markers.close()\\n\"]\n_nested_deadline=min(_tn+8.,_outer_deadline-7.)\n_child_identity={'source_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_id': 'CPU-S1', 'version': 'SUP1', 'source_version': 'SUP1', 'phase': 'P1_tests', 'role': 'descendant'}\n_request=dict(schema='hf-cpu-s1-request-1',role='descendant',identity=_child_identity,request_monotonic=_tn,phase_active_deadline=_phase_deadline,outer_deadline_monotonic=_outer_deadline,deadline_monotonic=_nested_deadline,seconds=8.,local_active_seconds=8.,cleanup_reserve_seconds=5.25,persist_reserve_seconds=1.,outer_tail_reserve_seconds=7.,command=_child_command)\n_request['ready_for_launch']=(_tn+8.<=_outer_deadline-7. and _phase_deadline-_tn>=14.25)\nsave_json('descendant_request.json',_request)\nif not _request['ready_for_launch']:\n    save_json('descendant_budget_rejection.json',dict(_request,status='insufficient_nested_budget',child_started=False))\n    raise RuntimeError('complete nested activity and cleanup budget unavailable')\nmark('descendant_requested',request_monotonic=_tn,deadline_monotonic=_nested_deadline)\ntry:\n    child=run_owned(_child_command,cwd=os.getcwd(),env=os.environ.copy(),log='descendant.log',deadline=_nested_deadline,seconds=8.,telemetry_path='descendant_cpu.ndjson',telemetry_identity=_child_identity,telemetry_interval_seconds=.05)\nexcept BaseException as error:\n    save_json('descendant_call_outcome.json',dict(role='descendant',status='raised',returned_monotonic=time.monotonic(),exception_type=type(error).__name__,message=str(error)))\n    raise\n_returned=time.monotonic()\nsave_json('descendant_receipt.json',child)\nsave_json('descendant_call_outcome.json',dict(role='descendant',status='returned',returned_monotonic=_returned,receipt_path='descendant_receipt.json'))\nmark('descendant_returned',returned_monotonic=_returned)\nif (child['reason']!='normal_exit' or child['returncode']!=0 or not child['cleanup_verified'] or child['telemetry_status']!='complete' or child['telemetry_first_error'] is not None or child['errors']):\n    raise RuntimeError('nested scenario did not complete normally; receipt preserved')\ntime.sleep(.35)\nmark('normal_exit')\n_markers.close()\n"
+          ],
+          "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+          "cwd": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\cpu_supervision_001\\results\\P1_tests\\synthetic-temp\\test_busy_sleep_and_exited_des0",
+          "deadline_monotonic": 444327.4170027,
+          "elapsed_seconds": 4.617294399999082,
+          "errors": [],
+          "owned_pids": [
+            39112,
+            45120,
+            60900,
+            61332,
+            64268,
+            65412
+          ],
+          "ownership": "suspended child assigned to kill-on-close Windows Job",
+          "peak_tree_rss_bytes": 106799104,
+          "pid": 39112,
+          "reason": "normal_exit",
+          "returncode": 0,
+          "rss_limit_bytes": 8589934592,
+          "rss_sample_interval_seconds": 0.025,
+          "rss_scope": "supervisor plus all Job members; sampled RSS",
+          "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32",
+          "telemetry_first_error": null,
+          "telemetry_interval_seconds": 0.05,
+          "telemetry_path": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\cpu_supervision_001\\results\\P1_tests\\synthetic-temp\\test_busy_sleep_and_exited_des0\\cpu.ndjson",
+          "telemetry_status": "complete",
+          "timeout_seconds": 25.0
+        },
+        "request.json": {
+          "cleanup_reserve_seconds": 5.25,
+          "command": [
+            "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Scripts\\python.exe",
+            "-u",
+            "-B",
+            "-c",
+            "import json,os,time\nfrom pathlib import Path\nfrom datetime import datetime,timezone\n_identity={'source_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_id': 'CPU-S1', 'version': 'SUP1', 'source_version': 'SUP1', 'phase': 'P1_tests', 'role': 'busy_outer'}\n_role='busy_outer'\nif (os.environ['HF_S0_SOURCE_MANIFEST_SHA']!=_identity['source_manifest_sha256'] or os.environ['HF_HARNESS_MANIFEST_SHA']!=_identity['harness_manifest_sha256'] or os.environ['HF_HARNESS_ID']!=_identity['harness_id']): raise ValueError('child identity mismatch')\n_markers=Path('outer_markers.ndjson').open('x',encoding='utf-8',newline='\\n')\n_seq=0\ndef mark(event,**fields):\n    global _seq\n    row=dict(schema='hf-cpu-s1-marker-1',sequence=_seq+1,utc=datetime.now(timezone.utc).isoformat(),monotonic=time.monotonic(),pid=os.getpid(),role=_role,identity=_identity,event=event,**fields)\n    _markers.write(json.dumps(row,allow_nan=False,separators=(',',':'))+'\\n')\n    _markers.flush();os.fsync(_markers.fileno());_seq+=1\n    return row\ndef save_json(name,value):\n    with Path(name).open('x',encoding='utf-8',newline='\\n') as stream:\n        json.dump(value,stream,allow_nan=False,sort_keys=True)\n        stream.write('\\n');stream.flush();os.fsync(stream.fileno())\nmark('script_enter')\nimport sys\nfrom windows_owned_process import run_owned\nmark('supervisor_imported')\nmark('busy_started')\n_work_start=time.monotonic()\nwhile time.monotonic()<_work_start+0.65: pass\n_work_end=time.monotonic()\nmark('busy_finished',actual_start_monotonic=_work_start,actual_end_monotonic=_work_end)\nmark('sleep_started')\n_work_start=time.monotonic()\ntime.sleep(0.65)\n_work_end=time.monotonic()\nmark('sleep_finished',actual_start_monotonic=_work_start,actual_end_monotonic=_work_end)\n_outer_deadline=444327.4170027\n_tn=time.monotonic()\n_phase_deadline=float(os.environ['HF_CPU_S1_ACTIVE_DEADLINE'])\n_child_command=[sys.executable,'-u','-B','-c',\"import json,os,time\\nfrom pathlib import Path\\nfrom datetime import datetime,timezone\\n_identity={'source_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_id': 'CPU-S1', 'version': 'SUP1', 'source_version': 'SUP1', 'phase': 'P1_tests', 'role': 'descendant'}\\n_role='descendant'\\nif (os.environ['HF_S0_SOURCE_MANIFEST_SHA']!=_identity['source_manifest_sha256'] or os.environ['HF_HARNESS_MANIFEST_SHA']!=_identity['harness_manifest_sha256'] or os.environ['HF_HARNESS_ID']!=_identity['harness_id']): raise ValueError('child identity mismatch')\\n_markers=Path('descendant_markers.ndjson').open('x',encoding='utf-8',newline='\\\\n')\\n_seq=0\\ndef mark(event,**fields):\\n    global _seq\\n    row=dict(schema='hf-cpu-s1-marker-1',sequence=_seq+1,utc=datetime.now(timezone.utc).isoformat(),monotonic=time.monotonic(),pid=os.getpid(),role=_role,identity=_identity,event=event,**fields)\\n    _markers.write(json.dumps(row,allow_nan=False,separators=(',',':'))+'\\\\n')\\n    _markers.flush();os.fsync(_markers.fileno());_seq+=1\\n    return row\\ndef save_json(name,value):\\n    with Path(name).open('x',encoding='utf-8',newline='\\\\n') as stream:\\n        json.dump(value,stream,allow_nan=False,sort_keys=True)\\n        stream.write('\\\\n');stream.flush();os.fsync(stream.fileno())\\nmark('script_enter')\\nmark('busy_started')\\n_work_start=time.monotonic()\\nwhile time.monotonic()<_work_start+0.5: pass\\n_work_end=time.monotonic()\\nmark('busy_finished',actual_start_monotonic=_work_start,actual_end_monotonic=_work_end)\\nmark('normal_exit')\\n_markers.close()\\n\"]\n_nested_deadline=min(_tn+8.,_outer_deadline-7.)\n_child_identity={'source_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_manifest_sha256': '51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919', 'harness_id': 'CPU-S1', 'version': 'SUP1', 'source_version': 'SUP1', 'phase': 'P1_tests', 'role': 'descendant'}\n_request=dict(schema='hf-cpu-s1-request-1',role='descendant',identity=_child_identity,request_monotonic=_tn,phase_active_deadline=_phase_deadline,outer_deadline_monotonic=_outer_deadline,deadline_monotonic=_nested_deadline,seconds=8.,local_active_seconds=8.,cleanup_reserve_seconds=5.25,persist_reserve_seconds=1.,outer_tail_reserve_seconds=7.,command=_child_command)\n_request['ready_for_launch']=(_tn+8.<=_outer_deadline-7. and _phase_deadline-_tn>=14.25)\nsave_json('descendant_request.json',_request)\nif not _request['ready_for_launch']:\n    save_json('descendant_budget_rejection.json',dict(_request,status='insufficient_nested_budget',child_started=False))\n    raise RuntimeError('complete nested activity and cleanup budget unavailable')\nmark('descendant_requested',request_monotonic=_tn,deadline_monotonic=_nested_deadline)\ntry:\n    child=run_owned(_child_command,cwd=os.getcwd(),env=os.environ.copy(),log='descendant.log',deadline=_nested_deadline,seconds=8.,telemetry_path='descendant_cpu.ndjson',telemetry_identity=_child_identity,telemetry_interval_seconds=.05)\nexcept BaseException as error:\n    save_json('descendant_call_outcome.json',dict(role='descendant',status='raised',returned_monotonic=time.monotonic(),exception_type=type(error).__name__,message=str(error)))\n    raise\n_returned=time.monotonic()\nsave_json('descendant_receipt.json',child)\nsave_json('descendant_call_outcome.json',dict(role='descendant',status='returned',returned_monotonic=_returned,receipt_path='descendant_receipt.json'))\nmark('descendant_returned',returned_monotonic=_returned)\nif (child['reason']!='normal_exit' or child['returncode']!=0 or not child['cleanup_verified'] or child['telemetry_status']!='complete' or child['telemetry_first_error'] is not None or child['errors']):\n    raise RuntimeError('nested scenario did not complete normally; receipt preserved')\ntime.sleep(.35)\nmark('normal_exit')\n_markers.close()\n"
+          ],
+          "command_sha256": "60a643ee28b4a166df7b57a622e7b01de7f9c623c7427cfbefedc555879ed6b5",
+          "deadline_monotonic": 444327.4170027,
+          "identity": {
+            "harness_id": "CPU-S1",
+            "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+            "phase": "P1_tests",
+            "role": "busy_outer",
+            "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+            "source_version": "SUP1",
+            "version": "SUP1"
+          },
+          "invocation_monotonic": 444302.4250136,
+          "local_active_seconds": 25.0,
+          "persist_reserve_seconds": 1.0,
+          "phase_active_deadline": 444366.6082762,
+          "ready_for_launch": true,
+          "remaining_at_request": 64.19127350003691,
+          "request_monotonic": 444302.4170027,
+          "required_remaining_seconds": 31.25,
+          "role": "busy_outer",
+          "schema": "hf-cpu-s1-request-1",
+          "seconds": 25.0
+        }
+      },
+      "streams": {
+        "cpu.ndjson": {
+          "rows": [
+            {
+              "line": 1,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 1,
+                "utc": "2026-09-28T11:45:58.486109+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "initial_before_resume",
+                "query_start_monotonic": 444302.8426018,
+                "query_end_monotonic": 444302.8426185,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 0,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.0,
+                "ActiveProcesses": 1,
+                "TotalProcesses": 1,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 2,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 2,
+                "utc": "2026-09-28T11:45:58.544327+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444302.9008248,
+                "query_end_monotonic": 444302.9008413,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 0,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.0,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 3,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 3,
+                "utc": "2026-09-28T11:45:58.600830+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444302.9573322,
+                "query_end_monotonic": 444302.9573481,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 0,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.0,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 4,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 4,
+                "utc": "2026-09-28T11:45:58.655142+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.0116508,
+                "query_end_monotonic": 444303.0116624,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 0,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.0,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 5,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 5,
+                "utc": "2026-09-28T11:45:58.708181+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.0646855,
+                "query_end_monotonic": 444303.0646996,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 0,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.0,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 6,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 6,
+                "utc": "2026-09-28T11:45:58.762037+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.1185443,
+                "query_end_monotonic": 444303.1185567,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 0,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.0,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 7,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 7,
+                "utc": "2026-09-28T11:45:58.817111+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.1736051,
+                "query_end_monotonic": 444303.1736246,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 468750,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.046875,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 8,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 8,
+                "utc": "2026-09-28T11:45:58.873333+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.2298245,
+                "query_end_monotonic": 444303.2298454,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 937500,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.09375,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 9,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 9,
+                "utc": "2026-09-28T11:45:58.928667+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.2851635,
+                "query_end_monotonic": 444303.2851822,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 1562500,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.15625,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 10,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 10,
+                "utc": "2026-09-28T11:45:58.984042+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.3405397,
+                "query_end_monotonic": 444303.3405564,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 1875000,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.1875,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 11,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 11,
+                "utc": "2026-09-28T11:45:59.039483+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.3959746,
+                "query_end_monotonic": 444303.3959988,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 2031250,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.203125,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 12,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 12,
+                "utc": "2026-09-28T11:45:59.093692+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.4501973,
+                "query_end_monotonic": 444303.4502108,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 2031250,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.203125,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 13,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 13,
+                "utc": "2026-09-28T11:45:59.148877+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.5053792,
+                "query_end_monotonic": 444303.5053941,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 2031250,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.203125,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 14,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 14,
+                "utc": "2026-09-28T11:45:59.204167+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.5606074,
+                "query_end_monotonic": 444303.560662,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 2031250,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.203125,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 15,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 15,
+                "utc": "2026-09-28T11:45:59.258644+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.6151439,
+                "query_end_monotonic": 444303.6151606,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 2031250,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.203125,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 16,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 16,
+                "utc": "2026-09-28T11:45:59.312083+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.6685856,
+                "query_end_monotonic": 444303.6686027,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 2500000,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.25,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 17,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 17,
+                "utc": "2026-09-28T11:45:59.367693+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.7242003,
+                "query_end_monotonic": 444303.7242138,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 2968750,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.296875,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 18,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 18,
+                "utc": "2026-09-28T11:45:59.422178+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.7786529,
+                "query_end_monotonic": 444303.7786823,
+                "total_user_time_100ns": 312500,
+                "total_kernel_time_100ns": 2968750,
+                "total_user_seconds": 0.03125,
+                "total_kernel_seconds": 0.296875,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 19,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 19,
+                "utc": "2026-09-28T11:45:59.477134+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.8336287,
+                "query_end_monotonic": 444303.8336497,
+                "total_user_time_100ns": 312500,
+                "total_kernel_time_100ns": 2968750,
+                "total_user_seconds": 0.03125,
+                "total_kernel_seconds": 0.296875,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 20,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 20,
+                "utc": "2026-09-28T11:45:59.532739+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.8892367,
+                "query_end_monotonic": 444303.889256,
+                "total_user_time_100ns": 312500,
+                "total_kernel_time_100ns": 2968750,
+                "total_user_seconds": 0.03125,
+                "total_kernel_seconds": 0.296875,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 21,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 21,
+                "utc": "2026-09-28T11:45:59.586552+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.9430433,
+                "query_end_monotonic": 444303.9430683,
+                "total_user_time_100ns": 312500,
+                "total_kernel_time_100ns": 3281250,
+                "total_user_seconds": 0.03125,
+                "total_kernel_seconds": 0.328125,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 22,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 22,
+                "utc": "2026-09-28T11:45:59.642868+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444303.9993628,
+                "query_end_monotonic": 444303.9993864,
+                "total_user_time_100ns": 312500,
+                "total_kernel_time_100ns": 3281250,
+                "total_user_seconds": 0.03125,
+                "total_kernel_seconds": 0.328125,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 23,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 23,
+                "utc": "2026-09-28T11:45:59.698207+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.0547012,
+                "query_end_monotonic": 444304.0547206,
+                "total_user_time_100ns": 312500,
+                "total_kernel_time_100ns": 3281250,
+                "total_user_seconds": 0.03125,
+                "total_kernel_seconds": 0.328125,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 24,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 24,
+                "utc": "2026-09-28T11:45:59.753015+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.1095218,
+                "query_end_monotonic": 444304.1095351,
+                "total_user_time_100ns": 312500,
+                "total_kernel_time_100ns": 3281250,
+                "total_user_seconds": 0.03125,
+                "total_kernel_seconds": 0.328125,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 25,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 25,
+                "utc": "2026-09-28T11:45:59.808333+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.1648274,
+                "query_end_monotonic": 444304.1648492,
+                "total_user_time_100ns": 312500,
+                "total_kernel_time_100ns": 3281250,
+                "total_user_seconds": 0.03125,
+                "total_kernel_seconds": 0.328125,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 26,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 26,
+                "utc": "2026-09-28T11:45:59.863099+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.21959,
+                "query_end_monotonic": 444304.2196147,
+                "total_user_time_100ns": 625000,
+                "total_kernel_time_100ns": 3437500,
+                "total_user_seconds": 0.0625,
+                "total_kernel_seconds": 0.34375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 27,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 27,
+                "utc": "2026-09-28T11:45:59.917936+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.2744318,
+                "query_end_monotonic": 444304.2744508,
+                "total_user_time_100ns": 937500,
+                "total_kernel_time_100ns": 3593750,
+                "total_user_seconds": 0.09375,
+                "total_kernel_seconds": 0.359375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 28,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 28,
+                "utc": "2026-09-28T11:45:59.973069+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.3295632,
+                "query_end_monotonic": 444304.3295847,
+                "total_user_time_100ns": 1562500,
+                "total_kernel_time_100ns": 3593750,
+                "total_user_seconds": 0.15625,
+                "total_kernel_seconds": 0.359375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 29,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 29,
+                "utc": "2026-09-28T11:46:00.028393+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.3848984,
+                "query_end_monotonic": 444304.3849134,
+                "total_user_time_100ns": 1875000,
+                "total_kernel_time_100ns": 3593750,
+                "total_user_seconds": 0.1875,
+                "total_kernel_seconds": 0.359375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 30,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 30,
+                "utc": "2026-09-28T11:46:00.084329+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.4408226,
+                "query_end_monotonic": 444304.4408457,
+                "total_user_time_100ns": 2500000,
+                "total_kernel_time_100ns": 3593750,
+                "total_user_seconds": 0.25,
+                "total_kernel_seconds": 0.359375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 31,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 31,
+                "utc": "2026-09-28T11:46:00.140077+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.4965673,
+                "query_end_monotonic": 444304.496592,
+                "total_user_time_100ns": 2968750,
+                "total_kernel_time_100ns": 3593750,
+                "total_user_seconds": 0.296875,
+                "total_kernel_seconds": 0.359375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 32,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 32,
+                "utc": "2026-09-28T11:46:00.194989+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.5514745,
+                "query_end_monotonic": 444304.5515042,
+                "total_user_time_100ns": 3593750,
+                "total_kernel_time_100ns": 3593750,
+                "total_user_seconds": 0.359375,
+                "total_kernel_seconds": 0.359375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 33,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 33,
+                "utc": "2026-09-28T11:46:00.248988+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.6054945,
+                "query_end_monotonic": 444304.6055082,
+                "total_user_time_100ns": 4062500,
+                "total_kernel_time_100ns": 3593750,
+                "total_user_seconds": 0.40625,
+                "total_kernel_seconds": 0.359375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 34,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 34,
+                "utc": "2026-09-28T11:46:00.305634+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.6621259,
+                "query_end_monotonic": 444304.6621512,
+                "total_user_time_100ns": 4531250,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.453125,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 35,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 35,
+                "utc": "2026-09-28T11:46:00.360317+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.7168143,
+                "query_end_monotonic": 444304.7168338,
+                "total_user_time_100ns": 5000000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.5,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 36,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 36,
+                "utc": "2026-09-28T11:46:00.415558+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.7720481,
+                "query_end_monotonic": 444304.7720596,
+                "total_user_time_100ns": 5625000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.5625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 37,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 37,
+                "utc": "2026-09-28T11:46:00.471039+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.827537,
+                "query_end_monotonic": 444304.8275575,
+                "total_user_time_100ns": 5937500,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.59375,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 38,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 38,
+                "utc": "2026-09-28T11:46:00.526676+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.8831698,
+                "query_end_monotonic": 444304.8831918,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 39,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 39,
+                "utc": "2026-09-28T11:46:00.582404+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.938909,
+                "query_end_monotonic": 444304.9389236,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 40,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 40,
+                "utc": "2026-09-28T11:46:00.639556+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444304.9960588,
+                "query_end_monotonic": 444304.9960754,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 41,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 41,
+                "utc": "2026-09-28T11:46:00.694122+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.0506313,
+                "query_end_monotonic": 444305.0506437,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 42,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 42,
+                "utc": "2026-09-28T11:46:00.749654+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.1061545,
+                "query_end_monotonic": 444305.106172,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 43,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 43,
+                "utc": "2026-09-28T11:46:00.803205+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.1596793,
+                "query_end_monotonic": 444305.1597165,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 44,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 44,
+                "utc": "2026-09-28T11:46:00.858667+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.215167,
+                "query_end_monotonic": 444305.2151859,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 45,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 45,
+                "utc": "2026-09-28T11:46:00.913625+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.2701278,
+                "query_end_monotonic": 444305.2701451,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 46,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 46,
+                "utc": "2026-09-28T11:46:00.968546+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.3250215,
+                "query_end_monotonic": 444305.3250575,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 47,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 47,
+                "utc": "2026-09-28T11:46:01.023648+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.3801383,
+                "query_end_monotonic": 444305.380165,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 48,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 48,
+                "utc": "2026-09-28T11:46:01.078036+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.4345436,
+                "query_end_monotonic": 444305.4345568,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 49,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 49,
+                "utc": "2026-09-28T11:46:01.133269+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.4897739,
+                "query_end_monotonic": 444305.4897892,
+                "total_user_time_100ns": 6250000,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 50,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 50,
+                "utc": "2026-09-28T11:46:01.188700+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.5451485,
+                "query_end_monotonic": 444305.5451989,
+                "total_user_time_100ns": 6562500,
+                "total_kernel_time_100ns": 3750000,
+                "total_user_seconds": 0.65625,
+                "total_kernel_seconds": 0.375,
+                "ActiveProcesses": 5,
+                "TotalProcesses": 5,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 51,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 51,
+                "utc": "2026-09-28T11:46:01.244752+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.6012432,
+                "query_end_monotonic": 444305.6012672,
+                "total_user_time_100ns": 6562500,
+                "total_kernel_time_100ns": 4062500,
+                "total_user_seconds": 0.65625,
+                "total_kernel_seconds": 0.40625,
+                "ActiveProcesses": 5,
+                "TotalProcesses": 5,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 52,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 52,
+                "utc": "2026-09-28T11:46:01.301250+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.6577343,
+                "query_end_monotonic": 444305.6577643,
+                "total_user_time_100ns": 6562500,
+                "total_kernel_time_100ns": 4687500,
+                "total_user_seconds": 0.65625,
+                "total_kernel_seconds": 0.46875,
+                "ActiveProcesses": 5,
+                "TotalProcesses": 5,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 53,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 53,
+                "utc": "2026-09-28T11:46:01.356235+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.7127311,
+                "query_end_monotonic": 444305.7127512,
+                "total_user_time_100ns": 6562500,
+                "total_kernel_time_100ns": 5156250,
+                "total_user_seconds": 0.65625,
+                "total_kernel_seconds": 0.515625,
+                "ActiveProcesses": 5,
+                "TotalProcesses": 5,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 54,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 54,
+                "utc": "2026-09-28T11:46:01.411556+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.7680444,
+                "query_end_monotonic": 444305.7680726,
+                "total_user_time_100ns": 6562500,
+                "total_kernel_time_100ns": 5781250,
+                "total_user_seconds": 0.65625,
+                "total_kernel_seconds": 0.578125,
+                "ActiveProcesses": 5,
+                "TotalProcesses": 5,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 55,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 55,
+                "utc": "2026-09-28T11:46:01.466554+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.8230284,
+                "query_end_monotonic": 444305.8230645,
+                "total_user_time_100ns": 6562500,
+                "total_kernel_time_100ns": 5781250,
+                "total_user_seconds": 0.65625,
+                "total_kernel_seconds": 0.578125,
+                "ActiveProcesses": 5,
+                "TotalProcesses": 5,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 56,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 56,
+                "utc": "2026-09-28T11:46:01.520933+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.8774234,
+                "query_end_monotonic": 444305.8774507,
+                "total_user_time_100ns": 6718750,
+                "total_kernel_time_100ns": 5781250,
+                "total_user_seconds": 0.671875,
+                "total_kernel_seconds": 0.578125,
+                "ActiveProcesses": 5,
+                "TotalProcesses": 5,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 57,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 57,
+                "utc": "2026-09-28T11:46:01.575963+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.932432,
+                "query_end_monotonic": 444305.9324702,
+                "total_user_time_100ns": 6718750,
+                "total_kernel_time_100ns": 5781250,
+                "total_user_seconds": 0.671875,
+                "total_kernel_seconds": 0.578125,
+                "ActiveProcesses": 5,
+                "TotalProcesses": 5,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 58,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 58,
+                "utc": "2026-09-28T11:46:01.630997+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.9874979,
+                "query_end_monotonic": 444305.9875162,
+                "total_user_time_100ns": 6718750,
+                "total_kernel_time_100ns": 5781250,
+                "total_user_seconds": 0.671875,
+                "total_kernel_seconds": 0.578125,
+                "ActiveProcesses": 5,
+                "TotalProcesses": 5,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 59,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 59,
+                "utc": "2026-09-28T11:46:01.685842+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.0423186,
+                "query_end_monotonic": 444306.0423547,
+                "total_user_time_100ns": 6718750,
+                "total_kernel_time_100ns": 5937500,
+                "total_user_seconds": 0.671875,
+                "total_kernel_seconds": 0.59375,
+                "ActiveProcesses": 6,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 60,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 60,
+                "utc": "2026-09-28T11:46:01.742166+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.0986694,
+                "query_end_monotonic": 444306.0986872,
+                "total_user_time_100ns": 6875000,
+                "total_kernel_time_100ns": 6250000,
+                "total_user_seconds": 0.6875,
+                "total_kernel_seconds": 0.625,
+                "ActiveProcesses": 6,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 61,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 61,
+                "utc": "2026-09-28T11:46:01.799363+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.1558525,
+                "query_end_monotonic": 444306.1558795,
+                "total_user_time_100ns": 7031250,
+                "total_kernel_time_100ns": 6406250,
+                "total_user_seconds": 0.703125,
+                "total_kernel_seconds": 0.640625,
+                "ActiveProcesses": 6,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 62,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 62,
+                "utc": "2026-09-28T11:46:01.855720+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.2121848,
+                "query_end_monotonic": 444306.212236,
+                "total_user_time_100ns": 7656250,
+                "total_kernel_time_100ns": 6406250,
+                "total_user_seconds": 0.765625,
+                "total_kernel_seconds": 0.640625,
+                "ActiveProcesses": 6,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 63,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 63,
+                "utc": "2026-09-28T11:46:01.910215+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.2667187,
+                "query_end_monotonic": 444306.2667356,
+                "total_user_time_100ns": 7968750,
+                "total_kernel_time_100ns": 6718750,
+                "total_user_seconds": 0.796875,
+                "total_kernel_seconds": 0.671875,
+                "ActiveProcesses": 6,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 64,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 64,
+                "utc": "2026-09-28T11:46:01.966195+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.3226835,
+                "query_end_monotonic": 444306.3227102,
+                "total_user_time_100ns": 8593750,
+                "total_kernel_time_100ns": 6718750,
+                "total_user_seconds": 0.859375,
+                "total_kernel_seconds": 0.671875,
+                "ActiveProcesses": 6,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 65,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 65,
+                "utc": "2026-09-28T11:46:02.021333+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.377835,
+                "query_end_monotonic": 444306.3778538,
+                "total_user_time_100ns": 9218750,
+                "total_kernel_time_100ns": 6875000,
+                "total_user_seconds": 0.921875,
+                "total_kernel_seconds": 0.6875,
+                "ActiveProcesses": 6,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 66,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 66,
+                "utc": "2026-09-28T11:46:02.075643+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.4321128,
+                "query_end_monotonic": 444306.4321403,
+                "total_user_time_100ns": 9687500,
+                "total_kernel_time_100ns": 6875000,
+                "total_user_seconds": 0.96875,
+                "total_kernel_seconds": 0.6875,
+                "ActiveProcesses": 6,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 67,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 67,
+                "utc": "2026-09-28T11:46:02.132477+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.4889691,
+                "query_end_monotonic": 444306.4889947,
+                "total_user_time_100ns": 10312500,
+                "total_kernel_time_100ns": 6875000,
+                "total_user_seconds": 1.03125,
+                "total_kernel_seconds": 0.6875,
+                "ActiveProcesses": 6,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 68,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 68,
+                "utc": "2026-09-28T11:46:02.188611+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.5451009,
+                "query_end_monotonic": 444306.5451276,
+                "total_user_time_100ns": 10781250,
+                "total_kernel_time_100ns": 6875000,
+                "total_user_seconds": 1.078125,
+                "total_kernel_seconds": 0.6875,
+                "ActiveProcesses": 6,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 69,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 69,
+                "utc": "2026-09-28T11:46:02.243218+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.5997104,
+                "query_end_monotonic": 444306.5997371,
+                "total_user_time_100ns": 11250000,
+                "total_kernel_time_100ns": 7031250,
+                "total_user_seconds": 1.125,
+                "total_kernel_seconds": 0.703125,
+                "ActiveProcesses": 6,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 70,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 70,
+                "utc": "2026-09-28T11:46:02.298658+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.655153,
+                "query_end_monotonic": 444306.655175,
+                "total_user_time_100ns": 11562500,
+                "total_kernel_time_100ns": 7187500,
+                "total_user_seconds": 1.15625,
+                "total_kernel_seconds": 0.71875,
+                "ActiveProcesses": 4,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 71,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 71,
+                "utc": "2026-09-28T11:46:02.354983+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.7114752,
+                "query_end_monotonic": 444306.7114994,
+                "total_user_time_100ns": 11562500,
+                "total_kernel_time_100ns": 7187500,
+                "total_user_seconds": 1.15625,
+                "total_kernel_seconds": 0.71875,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 72,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 72,
+                "utc": "2026-09-28T11:46:02.409442+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.7659512,
+                "query_end_monotonic": 444306.7659631,
+                "total_user_time_100ns": 11562500,
+                "total_kernel_time_100ns": 7187500,
+                "total_user_seconds": 1.15625,
+                "total_kernel_seconds": 0.71875,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 73,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 73,
+                "utc": "2026-09-28T11:46:02.466303+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.8227962,
+                "query_end_monotonic": 444306.8228191,
+                "total_user_time_100ns": 11562500,
+                "total_kernel_time_100ns": 7187500,
+                "total_user_seconds": 1.15625,
+                "total_kernel_seconds": 0.71875,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 74,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 74,
+                "utc": "2026-09-28T11:46:02.522324+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.8787965,
+                "query_end_monotonic": 444306.878837,
+                "total_user_time_100ns": 11562500,
+                "total_kernel_time_100ns": 7187500,
+                "total_user_seconds": 1.15625,
+                "total_kernel_seconds": 0.71875,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 75,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 75,
+                "utc": "2026-09-28T11:46:02.577553+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.9340621,
+                "query_end_monotonic": 444306.9340735,
+                "total_user_time_100ns": 11562500,
+                "total_kernel_time_100ns": 7187500,
+                "total_user_seconds": 1.15625,
+                "total_kernel_seconds": 0.71875,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 76,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 76,
+                "utc": "2026-09-28T11:46:02.633788+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.990281,
+                "query_end_monotonic": 444306.9903032,
+                "total_user_time_100ns": 11562500,
+                "total_kernel_time_100ns": 7187500,
+                "total_user_seconds": 1.15625,
+                "total_kernel_seconds": 0.71875,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 77,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 77,
+                "utc": "2026-09-28T11:46:02.689520+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "pre_cleanup",
+                "query_start_monotonic": 444307.0460189,
+                "query_end_monotonic": 444307.0460366,
+                "total_user_time_100ns": 11562500,
+                "total_kernel_time_100ns": 7500000,
+                "total_user_seconds": 1.15625,
+                "total_kernel_seconds": 0.75,
+                "ActiveProcesses": 1,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 78,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 78,
+                "utc": "2026-09-28T11:46:02.690831+00:00",
+                "pid": 50540,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "final_after_cleanup",
+                "query_start_monotonic": 444307.0473518,
+                "query_end_monotonic": 444307.0473561,
+                "total_user_time_100ns": 11562500,
+                "total_kernel_time_100ns": 7500000,
+                "total_user_seconds": 1.15625,
+                "total_kernel_seconds": 0.75,
+                "ActiveProcesses": 0,
+                "TotalProcesses": 6,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": true
+              }
+            }
+          ],
+          "issues": []
+        },
+        "descendant_cpu.ndjson": {
+          "rows": [
+            {
+              "line": 1,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 1,
+                "utc": "2026-09-28T11:46:01.167176+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "initial_before_resume",
+                "query_start_monotonic": 444305.5236826,
+                "query_end_monotonic": 444305.5236957,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 0,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.0,
+                "ActiveProcesses": 1,
+                "TotalProcesses": 1,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 2,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 2,
+                "utc": "2026-09-28T11:46:01.223006+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.5794785,
+                "query_end_monotonic": 444305.5795153,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 0,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.0,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 3,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 3,
+                "utc": "2026-09-28T11:46:01.275942+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.6324521,
+                "query_end_monotonic": 444305.6324614,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 468750,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.046875,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 4,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 4,
+                "utc": "2026-09-28T11:46:01.329203+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.6857121,
+                "query_end_monotonic": 444305.6857241,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 937500,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.09375,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 5,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 5,
+                "utc": "2026-09-28T11:46:01.383216+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.7397163,
+                "query_end_monotonic": 444305.7397331,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 1562500,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.15625,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 6,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 6,
+                "utc": "2026-09-28T11:46:01.438227+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.7947298,
+                "query_end_monotonic": 444305.7947458,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 1875000,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.1875,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 7,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 7,
+                "utc": "2026-09-28T11:46:01.492095+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.8486024,
+                "query_end_monotonic": 444305.8486163,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 1875000,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.1875,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 8,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 8,
+                "utc": "2026-09-28T11:46:01.547079+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.9035821,
+                "query_end_monotonic": 444305.9035989,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 1875000,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.1875,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 9,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 9,
+                "utc": "2026-09-28T11:46:01.603211+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444305.9597051,
+                "query_end_monotonic": 444305.959728,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 1875000,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.1875,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 10,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 10,
+                "utc": "2026-09-28T11:46:01.656972+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.0134829,
+                "query_end_monotonic": 444306.0134937,
+                "total_user_time_100ns": 0,
+                "total_kernel_time_100ns": 1875000,
+                "total_user_seconds": 0.0,
+                "total_kernel_seconds": 0.1875,
+                "ActiveProcesses": 2,
+                "TotalProcesses": 2,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 11,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 11,
+                "utc": "2026-09-28T11:46:01.711542+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.0680522,
+                "query_end_monotonic": 444306.0680637,
+                "total_user_time_100ns": 156250,
+                "total_kernel_time_100ns": 2187500,
+                "total_user_seconds": 0.015625,
+                "total_kernel_seconds": 0.21875,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 12,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 12,
+                "utc": "2026-09-28T11:46:01.766116+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.1226178,
+                "query_end_monotonic": 444306.1226355,
+                "total_user_time_100ns": 312500,
+                "total_kernel_time_100ns": 2343750,
+                "total_user_seconds": 0.03125,
+                "total_kernel_seconds": 0.234375,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 13,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 13,
+                "utc": "2026-09-28T11:46:01.825394+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.1818968,
+                "query_end_monotonic": 444306.1819156,
+                "total_user_time_100ns": 625000,
+                "total_kernel_time_100ns": 2500000,
+                "total_user_seconds": 0.0625,
+                "total_kernel_seconds": 0.25,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 14,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 14,
+                "utc": "2026-09-28T11:46:01.882241+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.2387483,
+                "query_end_monotonic": 444306.2387616,
+                "total_user_time_100ns": 1250000,
+                "total_kernel_time_100ns": 2500000,
+                "total_user_seconds": 0.125,
+                "total_kernel_seconds": 0.25,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 15,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 15,
+                "utc": "2026-09-28T11:46:01.936820+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.2933277,
+                "query_end_monotonic": 444306.293341,
+                "total_user_time_100ns": 1562500,
+                "total_kernel_time_100ns": 2656250,
+                "total_user_seconds": 0.15625,
+                "total_kernel_seconds": 0.265625,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 16,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 16,
+                "utc": "2026-09-28T11:46:01.991348+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.3478551,
+                "query_end_monotonic": 444306.3478677,
+                "total_user_time_100ns": 2187500,
+                "total_kernel_time_100ns": 2656250,
+                "total_user_seconds": 0.21875,
+                "total_kernel_seconds": 0.265625,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 17,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 17,
+                "utc": "2026-09-28T11:46:02.046534+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.4030435,
+                "query_end_monotonic": 444306.403056,
+                "total_user_time_100ns": 2656250,
+                "total_kernel_time_100ns": 2656250,
+                "total_user_seconds": 0.265625,
+                "total_kernel_seconds": 0.265625,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 18,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 18,
+                "utc": "2026-09-28T11:46:02.103226+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.4597214,
+                "query_end_monotonic": 444306.4597439,
+                "total_user_time_100ns": 3281250,
+                "total_kernel_time_100ns": 2656250,
+                "total_user_seconds": 0.328125,
+                "total_kernel_seconds": 0.265625,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 19,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 19,
+                "utc": "2026-09-28T11:46:02.158136+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.5146424,
+                "query_end_monotonic": 444306.5146565,
+                "total_user_time_100ns": 3750000,
+                "total_kernel_time_100ns": 2656250,
+                "total_user_seconds": 0.375,
+                "total_kernel_seconds": 0.265625,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 20,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 20,
+                "utc": "2026-09-28T11:46:02.212799+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.5693047,
+                "query_end_monotonic": 444306.5693203,
+                "total_user_time_100ns": 4375000,
+                "total_kernel_time_100ns": 2656250,
+                "total_user_seconds": 0.4375,
+                "total_kernel_seconds": 0.265625,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 21,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 21,
+                "utc": "2026-09-28T11:46:02.267384+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "periodic",
+                "query_start_monotonic": 444306.6238891,
+                "query_end_monotonic": 444306.6239049,
+                "total_user_time_100ns": 4687500,
+                "total_kernel_time_100ns": 2812500,
+                "total_user_seconds": 0.46875,
+                "total_kernel_seconds": 0.28125,
+                "ActiveProcesses": 3,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 22,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 22,
+                "utc": "2026-09-28T11:46:02.296825+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "pre_cleanup",
+                "query_start_monotonic": 444306.6532985,
+                "query_end_monotonic": 444306.6533325,
+                "total_user_time_100ns": 4843750,
+                "total_kernel_time_100ns": 2968750,
+                "total_user_seconds": 0.484375,
+                "total_kernel_seconds": 0.296875,
+                "ActiveProcesses": 1,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": null
+              }
+            },
+            {
+              "line": 23,
+              "record": {
+                "schema": "hf-job-cpu-telemetry-1",
+                "sequence": 23,
+                "utc": "2026-09-28T11:46:02.299405+00:00",
+                "pid": 61332,
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant",
+                  "supervisor_sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+                },
+                "lifecycle": "final_after_cleanup",
+                "query_start_monotonic": 444306.6559205,
+                "query_end_monotonic": 444306.6559259,
+                "total_user_time_100ns": 4843750,
+                "total_kernel_time_100ns": 2968750,
+                "total_user_seconds": 0.484375,
+                "total_kernel_seconds": 0.296875,
+                "ActiveProcesses": 0,
+                "TotalProcesses": 3,
+                "counter_unit": "100 ns ticks; unit is not measurement resolution",
+                "cpu_scope": "owned Windows Job including active and exited members; excludes supervisor",
+                "cleanup_verified": true
+              }
+            }
+          ],
+          "issues": []
+        },
+        "descendant_markers.ndjson": {
+          "rows": [
+            {
+              "line": 1,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 1,
+                "utc": "2026-09-28T11:46:01.767693+00:00",
+                "monotonic": 444306.1242492,
+                "pid": 65412,
+                "role": "descendant",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant"
+                },
+                "event": "script_enter"
+              }
+            },
+            {
+              "line": 2,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 2,
+                "utc": "2026-09-28T11:46:01.769677+00:00",
+                "monotonic": 444306.1262205,
+                "pid": 65412,
+                "role": "descendant",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant"
+                },
+                "event": "busy_started"
+              }
+            },
+            {
+              "line": 3,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 3,
+                "utc": "2026-09-28T11:46:02.270848+00:00",
+                "monotonic": 444306.6273993,
+                "pid": 65412,
+                "role": "descendant",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant"
+                },
+                "event": "busy_finished",
+                "actual_start_monotonic": 444306.1273589,
+                "actual_end_monotonic": 444306.6273619
+              }
+            },
+            {
+              "line": 4,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 4,
+                "utc": "2026-09-28T11:46:02.271995+00:00",
+                "monotonic": 444306.6285369,
+                "pid": 65412,
+                "role": "descendant",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "descendant"
+                },
+                "event": "normal_exit"
+              }
+            }
+          ],
+          "issues": []
+        },
+        "outer_markers.ndjson": {
+          "rows": [
+            {
+              "line": 1,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 1,
+                "utc": "2026-09-28T11:45:59.377608+00:00",
+                "monotonic": 444303.7341535,
+                "pid": 61332,
+                "role": "busy_outer",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer"
+                },
+                "event": "script_enter"
+              }
+            },
+            {
+              "line": 2,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 2,
+                "utc": "2026-09-28T11:45:59.838690+00:00",
+                "monotonic": 444304.1952315,
+                "pid": 61332,
+                "role": "busy_outer",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer"
+                },
+                "event": "supervisor_imported"
+              }
+            },
+            {
+              "line": 3,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 3,
+                "utc": "2026-09-28T11:45:59.839440+00:00",
+                "monotonic": 444304.1959794,
+                "pid": 61332,
+                "role": "busy_outer",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer"
+                },
+                "event": "busy_started"
+              }
+            },
+            {
+              "line": 4,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 4,
+                "utc": "2026-09-28T11:46:00.490064+00:00",
+                "monotonic": 444304.8466105,
+                "pid": 61332,
+                "role": "busy_outer",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer"
+                },
+                "event": "busy_finished",
+                "actual_start_monotonic": 444304.1965827,
+                "actual_end_monotonic": 444304.8465845
+              }
+            },
+            {
+              "line": 5,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 5,
+                "utc": "2026-09-28T11:46:00.490789+00:00",
+                "monotonic": 444304.8473271,
+                "pid": 61332,
+                "role": "busy_outer",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer"
+                },
+                "event": "sleep_started"
+              }
+            },
+            {
+              "line": 6,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 6,
+                "utc": "2026-09-28T11:46:01.141619+00:00",
+                "monotonic": 444305.4981669,
+                "pid": 61332,
+                "role": "busy_outer",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer"
+                },
+                "event": "sleep_finished",
+                "actual_start_monotonic": 444304.8478379,
+                "actual_end_monotonic": 444305.4981377
+              }
+            },
+            {
+              "line": 7,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 7,
+                "utc": "2026-09-28T11:46:01.144547+00:00",
+                "monotonic": 444305.5010865,
+                "pid": 61332,
+                "role": "busy_outer",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer"
+                },
+                "event": "descendant_requested",
+                "request_monotonic": 444305.4990764,
+                "deadline_monotonic": 444313.4990764
+              }
+            },
+            {
+              "line": 8,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 8,
+                "utc": "2026-09-28T11:46:02.305357+00:00",
+                "monotonic": 444306.6619121,
+                "pid": 61332,
+                "role": "busy_outer",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer"
+                },
+                "event": "descendant_returned",
+                "returned_monotonic": 444306.6571169
+              }
+            },
+            {
+              "line": 9,
+              "record": {
+                "schema": "hf-cpu-s1-marker-1",
+                "sequence": 9,
+                "utc": "2026-09-28T11:46:02.656945+00:00",
+                "monotonic": 444307.0134974,
+                "pid": 61332,
+                "role": "busy_outer",
+                "identity": {
+                  "source_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_manifest_sha256": "51c1f67cd00202804224dbda170c121dd7d1c0a0597126a3abb1bc653a05a919",
+                  "harness_id": "CPU-S1",
+                  "version": "SUP1",
+                  "source_version": "SUP1",
+                  "phase": "P1_tests",
+                  "role": "busy_outer"
+                },
+                "event": "normal_exit"
+              }
+            }
+          ],
+          "issues": []
+        }
+      },
+      "files": [
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/call_outcome.json",
+          "bytes": 115,
+          "sha256": "4ef06602ac7d209f3e1c0922d2a6d96d66073b8a4dd28dd30046f81041613e6e"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/child.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/cpu.ndjson",
+          "bytes": 72614,
+          "sha256": "a181129059de889a351610c2725d876b236dde2330347e0a279d012d9f54f496"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/descendant.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/descendant_call_outcome.json",
+          "bytes": 126,
+          "sha256": "94327a6d81907800c30f51bccaca5c2d6eaa3ba8c60208ca69d3f8b2aa3af46b"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/descendant_cpu.ndjson",
+          "bytes": 21347,
+          "sha256": "64dba72db2cbaac692eae602cf15c932e87b141fd9746146ab8dd3d2791e45fa"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/descendant_markers.ndjson",
+          "bytes": 1950,
+          "sha256": "dcb7491d47b15bb7ff36bd1c4291b28d8d3aa96b654fa13383529f99a7836cc6"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/descendant_receipt.json",
+          "bytes": 3068,
+          "sha256": "0b1ef242efa755b08789a930fcc118077a6d18dbcb1049b79ea91e2796f8acfe"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/descendant_request.json",
+          "bytes": 2500,
+          "sha256": "19ebba1cf0c20667377190e208cd658c0c415a3fad77743ae7516f2ff0f28197"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/invocation_budget.json",
+          "bytes": 704,
+          "sha256": "f120a65074186455302a42b6e0191e985dd55306360847d0dc769a45c1e2dec8"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/outer_markers.ndjson",
+          "bytes": 4500,
+          "sha256": "c9d4d2e3748df27382269905f16923ac0fcf2357b91f3db9e3b890fc34f29b76"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/receipt.json",
+          "bytes": 7497,
+          "sha256": "a05cad382e1c5ecc468368d81b58eec06c107b6d11ca3d34f71102292834f0ac"
+        },
+        {
+          "path": "results/P1_tests/synthetic-temp/test_busy_sleep_and_exited_des0/request.json",
+          "bytes": 7047,
+          "sha256": "92bc714f6b2c7b28c5637c76b1215b3201cd4681880389092014496c7e5e3dd2"
+        }
+      ],
+      "issues": []
+    }
+  ],
+  "issues": [],
+  "force_executed": false,
+  "scientific_admission": false,
+  "limitation": "Partial/missing records remain visible. Graphs do not manufacture process creation, normal exit, completed work or test acceptance."
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "hf-cpu-supervision-campaign-1",
+  "protocol": "F-CPU-CLEAN1",
+  "status": "running",
+  "run_id": "cpu_cleanup_contract_001",
+  "diagnostic_focus": "instance_termination_coverage",
+  "cleanup_contract": "not_evaluated",
+  "contract": "CPU-CLEAN1",
+  "parent_supervisor": {
+    "version": "SUP1",
+    "path": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\cpu_cleanup_contract_001\\aux\\hf_repo\\scripts\\windows_owned_process.py",
+    "sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+  },
+  "candidate_supervisor": {
+    "version": "SUP2",
+    "path": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf4_c2_stable_f_validation\\cpu_cleanup_contract_001\\aux\\hf_repo\\scripts\\windows_owned_process_sup2.py",
+    "sha256": "b5f149e1cd3d6d9b4ad392123e410b786606f120f2e078139b7bacc97f2d9499"
+  },
+  "loaded_parent_supervisor": {
+    "version": "SUP1",
+    "path": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf_repo\\scripts\\windows_owned_process.py",
+    "sha256": "9f3da2f22bec869d069278058aa8502bd5f73c4b977b01ec5daa7b26ff1aec32"
+  },
+  "started_utc": "2026-09-28T14:18:49.151142+00:00",
+  "start_monotonic": 453473.5042842,
+  "deadline_monotonic": 453653.5042842,
+  "seconds": 180.0,
+  "rss_limit_bytes": 8589934592,
+  "limits_seconds": {
+    "P0": 15.0,
+    "P1": 135.0,
+    "P2": 15.0,
+    "shared": 15.0
+  },
+  "cleanup_and_poll_guard_seconds": 5.25,
+  "final_binding_reserved_seconds": 5.0,
+  "boot_time_estimate": 1790151669.9730604,
+  "phases": [],
+  "scientific_admission": false,
+  "force_executed": false,
+  "force_call_limit": 0,
+  "new_equilibrium_paths": 0,
+  "new_hp_evaluations": 0,
+  "repo": "\\\\?\\D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC",
+  "python": "3.13.6 (tags/v3.13.6:4e66535, Aug  6 2025, 14:36:00) [MSC v.1944 64 bit (AMD64)]",
+  "card_sha256": "76b49a8fb371d7d89935661eef4500c732a2a83f9805d3a05a495c4dbff73965",
+  "evidence_worker_sha256": "2d378c64705461d58fa966528a347b6e411431402877663fd546f3fec8912f45",
+  "evidence_worker_dependency_sha256": {
+    "s0_event_log.py": "7f305d479d3f19216a7339eeb25c8c7ce24372a0f68c6492b265f90ac1b62c90"
+  },
+  "supervisor_sha256": "b5f149e1cd3d6d9b4ad392123e410b786606f120f2e078139b7bacc97f2d9499",
+  "supervisor_sha256_role": "candidate",
+  "runner_sha256": "76e0bc0c50b272bf96dfde5ff64700029dd1efff4dcba6396322c51e5591e9bd",
+  "telemetry_interval_seconds": 0.05,
+  "telemetry_scope": "synthetic Job CPU; observer CPU excluded",
+  "prior_campaign": "cpu_pid_diagnostic_001",
+  "expected_test_cases": [
+    [
+      "test_windows_cleanup_contract.py",
+      "test_active_zero_with_history_gap_fails_closed"
+    ],
+    [
+      "test_windows_cleanup_contract.py",
+      "test_capacity_exhaustion_fails_closed"
+    ],
+    [
+      "test_windows_cleanup_contract.py",
+      "test_close_failure_does_not_skip_other_handles"
+    ],
+    [
+      "test_windows_cleanup_contract.py",
+      "test_creation_time_failure_releases_opened_handle"
+    ],
+    [
+      "test_windows_cleanup_contract.py",
+      "test_duplicate_identity_does_not_inflate_coverage"
+    ],
+    [
+      "test_windows_cleanup_contract.py",
+      "test_multiple_handles_share_one_cleanup_deadline"
+    ],
+    [
+      "test_windows_cleanup_contract.py",
+      "test_open_failure_is_recorded_without_false_coverage"
+    ],
+    [
+      "test_windows_cleanup_contract.py",
+      "test_reused_pid_with_new_creation_time_is_bound"
+    ],
+    [
+      "test_windows_cleanup_contract.py",
+      "test_signaled_handle_is_released_before_accounting"
+    ],
+    [
+      "test_windows_cleanup_contract.py",
+      "test_timeout_with_exit_code_125_is_not_termination"
+    ],
+    [
+      "test_windows_cleanup_contract.py",
+      "test_wait_failure_does_not_prove_termination"
+    ],
+    [
+      "test_windows_cleanup_contract.py",
+      "test_wrong_job_cannot_fill_coverage"
+    ],
+    [
+      "test_windows_owned_cpu.py",
+      "test_busy_sleep_and_exited_descendant_keep_cumulative_cpu"
+    ],
+    [
+      "test_windows_owned_cpu.py",
+      "test_observation_failure_stops_and_independent_cleanup_survives[query]"
+    ],
+    [
+      "test_windows_owned_cpu.py",
+      "test_observation_failure_stops_and_independent_cleanup_survives[write]"
+    ],
+    [
+      "test_windows_owned_cpu.py",
+      "test_timeout_preserves_partial_samples_and_cleans_job"
+    ],
+    [
+      "test_windows_owned_process.py",
+      "test_exit[0]"
+    ],
+    [
+      "test_windows_owned_process.py",
+      "test_exit[7]"
+    ],
+    [
+      "test_windows_owned_process.py",
+      "test_orphan_grandchild"
+    ],
+    [
+      "test_windows_owned_process.py",
+      "test_resource_trigger"
+    ],
+    [
+      "test_windows_owned_process.py",
+      "test_timeout"
+    ]
+  ],
+  "subject": "windows_job_supervision",
+  "version": "SUP2",
+  "harness_id": "CPU-CLEAN1",
+  "non_seal_active_deadline": 453628.2542842,
+  "seal_active_deadline": 453643.2542842
+}
