@@ -1,6 +1,6 @@
 # 2026-09-30 开发与冻结证据移交
 
-用户要求提交推送并继续，后续只在 main 开发，origin 保持 `https://github.com/dudaxing/Compliant-TO-TMC.git`。交付前本地与远端基线均为 `18f1f62b50f18c4866c2e1fa83bbaebc5d13e5d7`；本次新增科学执行窗口为零。发布及异目录恢复的终态记录将在实际完成后附于本页。
+用户要求提交推送并继续，后续只在 main 开发，origin 保持 `https://github.com/dudaxing/Compliant-TO-TMC.git`。交付前本地与远端基线均为 `18f1f62b50f18c4866c2e1fa83bbaebc5d13e5d7`；本次新增科学执行窗口为零。发布及异目录恢复已完成，终态回执见末节。工作跨至韩国时间2026-10-01；回执采用 UTC，目录日期保留任务开始身份。
 
 ## 目标与开发状态
 
@@ -52,4 +52,19 @@ Python 3.13 的标准库即可做文件交付校验；安装数值环境和有�
 
 轻量清单 3,833 项已实际核验通过；首次 45 项移交工具测试全部通过。独立审阅逐件核对六 ZIP 与原 3,599 文件、旧十三资产及九项依赖闭包通过。Windows 普通路径读取最深379字符文件实际出现 WinError3；本次修复当前移交工具的 extended path I/O，双侧解析保持根目录边界，短路径接口保持。另加真实长路径恢复、验证及不同内容拒绝覆盖测试，移交测试 **47/47 通过**。详见[存储核验记录](../handoff/development_20260930/storage_checks.json)。历史工具及冻结根未修改。
 
-公开下载/空目录恢复正在独立新克隆中验证；本地 ZIP 与公开 API 核验不代替实际下载字节及恢复结果。完成后另附真实回执。
+长路径修复、发布回执与正式 URL 验证已在第二提交 `86c020117606f731ef69e9b7387af52dd8467b9a` 推送。实际独立克隆至 `D:/hf-restore-20260930`，先取得首提交再从网络 fast-forward 至第二提交；恢复命令使用公开 URL、无认证、无 `--from-dir`，没有使用作者本地 ZIP。
+
+首次新缓存下载已通过三个旧依赖；arithmetic 包在 229,704,832 bytes 提前结束，缺 24,031 bytes，大小/SHA 门正确拒绝解压。原 `.partial` 和[失败回执](../handoff/development_20260930/public_recovery_attempt_001.json)保留。在另一新缓存复制已验证的公开依赖和原下载前缀，以一次公开 HTTP 206 精确 Range 响应取得缺失尾部；完整 229,728,863 bytes／SHA 与统一索引及服务器 digest 相同，原失败前缀未修改。见 [Range 核验](../handoff/development_20260930/public_range_recovery_002.json)。该步骤只补交付 ZIP 的网络传输，不读取 native gzip 正文，不重开或重试科学执行卡。
+
+第二次正式恢复成功，余下五组均从公共服务器下载并逐成员核验；[恢复回执](../handoff/development_20260930/public_restore_receipt_002.json)和[复核回执](../handoff/development_20260930/public_restore_verify_002.json)均为 `pass`。实际核对 **3,836 Git 清单项和九资产 4,113 个成员**；这些是两类文件身份计数，导航文件在两者中重叠，不能相加为唯一文件或科学覆盖。本轮18根／3,599成员全部恢复，12 `.pyd`、379字符最深路径及 micro_trace_002 两原 native 文件另有[实际布局核验](../handoff/development_20260930/public_restore_layout_check.json)。未执行 FE／HP、未加载这些 `.pyd`、未解码 native gzip／XPlane，原五资格和失败结论保持。
+
+```mermaid
+flowchart LR
+  G[main：源码、报告、导航及SVG] --> R[新的克隆目录]
+  H[旧C1 / C2 / stable-F资产] --> R
+  N[新增六组完整冻结资产] --> R
+  R --> V[相对路径、大小与SHA核验通过]
+  V --> D[读取保存证据并继续开发]
+```
+
+这证明同一 Windows 主机上新克隆、不同目录的公开字节恢复可行；跨 CPU／平台的数值结论仍需新环境及有范围的新验证。F-SELECT1 具体提案已保存且已向用户请求新卡授权，尚未执行；旧卡额度不续用。最终验收文档/回执另提交至 main，Release 固定指向首交付提交，证据索引和冻结字节保持同一身份。
