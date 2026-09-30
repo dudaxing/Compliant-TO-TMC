@@ -86,6 +86,16 @@ def main():
             save();print(json.dumps({'verified':asset['name']}),flush=True)
         published=api(f"/releases/{release['id']}",'PATCH',{'draft':False,'make_latest':'false'})
         assert not published['draft']
+        # Draft uploads expose an untagged URL. Retain that observed metadata,
+        # then verify the final tag URLs after publication for actual recovery.
+        final_assets=api(f"/releases/{release['id']}/assets?per_page=100")
+        final_by_name={x['name']:x for x in final_assets}
+        assert len(final_by_name)==len(final_assets)==len(assets)
+        for asset, recorded in zip(assets, receipt['assets']):
+            final=final_by_name[asset['name']]
+            assert final['size']==asset['bytes'] and final['digest']=='sha256:'+asset['sha256']
+            assert final['browser_download_url']==asset['url']
+            recorded['published_url']=final['browser_download_url']
         receipt.update(status='published_server_hashes_match',published_at=published['published_at']);save()
         print(json.dumps({'status':receipt['status'],'url':published['html_url']}),flush=True)
     except Exception as error:

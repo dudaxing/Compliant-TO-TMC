@@ -48,4 +48,8 @@ Python 3.13 的标准库即可做文件交付校验；安装数值环境和有�
 
 ## 交付验收记录
 
-待记录实际提交、推送、Release 服务器哈希及公开下载/空目录恢复结果。未完成的步骤不能据本地打包回执补记成功。
+首提交 `ca451191814d2ed11f4b7d370fef60e4e27130b0` 已推送至 origin/main，`git ls-remote` 实测同一尖端。六资产共 314,342,318 bytes，已发布至 [本轮 Release](https://github.com/dudaxing/Compliant-TO-TMC/releases/tag/hf4-c2-development-evidence-20260930-v1)，服务器 SHA256 全匹配；另一次无认证公开 API 检查确认六个正式 tag 下载 URL、大小和 digest 与统一索引一致。见[发布回执](../handoff/development_20260930/publication_receipt_001.json)与[正式公开元数据核验](../handoff/development_20260930/published_public_metadata.json)。上传时 draft 返回的 untagged URL 保留在原回执，恢复使用统一索引及公开元数据里的正式 tag URL；后续发布器已增加发布后 URL 核对。
+
+轻量清单 3,833 项已实际核验通过；首次 45 项移交工具测试全部通过。独立审阅逐件核对六 ZIP 与原 3,599 文件、旧十三资产及九项依赖闭包通过。Windows 普通路径读取最深379字符文件实际出现 WinError3；本次修复当前移交工具的 extended path I/O，双侧解析保持根目录边界，短路径接口保持。另加真实长路径恢复、验证及不同内容拒绝覆盖测试，移交测试 **47/47 通过**。详见[存储核验记录](../handoff/development_20260930/storage_checks.json)。历史工具及冻结根未修改。
+
+公开下载/空目录恢复正在独立新克隆中验证；本地 ZIP 与公开 API 核验不代替实际下载字节及恢复结果。完成后另附真实回执。

@@ -18,6 +18,18 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 
+def extended_windows_path(path):
+    """Use native long-path I/O without changing Windows policy or file bytes."""
+    path = Path(path)
+    if os.name != 'nt':
+        return path
+    absolute = str(path.absolute())
+    if absolute.startswith('\\\\?\\'):
+        return Path(absolute)
+    if absolute.startswith('\\\\'):
+        return Path('\\\\?\\UNC\\' + absolute[2:])
+    return Path('\\\\?\\' + absolute)
+
 def read(path):
     return json.loads(path.read_text(encoding='utf-8'))
 
@@ -35,9 +47,14 @@ def safe_path(base, name):
     if rel.is_absolute() or not rel.parts or rel.as_posix() != name or '..' in rel.parts or '\\' in name or any(':' in p for p in rel.parts):
         raise ValueError(f'Invalid relative path: {name}')
     target = base.joinpath(*rel.parts)
-    if not target.resolve().is_relative_to(base.resolve()):
+    # Resolve both operands in the same namespace, including any existing
+    # symlinks. A normal-path resolve can silently miss a long-path link.
+    native_target, native_base = extended_windows_path(target), extended_windows_path(base)
+    if not native_target.resolve().is_relative_to(native_base.resolve()):
         raise ValueError(f'Path escapes selected root: {name}')
-    return target
+    # Preserve the historical short-path API (e.g. inspect's relative_to(ROOT)).
+    # mkdir needs the namespace before its 248-character directory boundary.
+    return native_target if os.name == 'nt' and len(str(target.absolute())) >= 248 else target
 
 def check_file(path, record):
     if not path.is_file() or path.stat().st_size != record['bytes'] or digest(path) != record['sha256']:

@@ -29,6 +29,8 @@ python tools/handoff.py verify --full
 
 `fetch-evidence` 按移交清单下载、校验并恢复证据；不要把任意同名 ZIP 当作对应发布附件。先用 `python tools/handoff.py --help` 查看本次移交工具的接口。依赖包并未随仓库或证据附件完整分发，安装还需要可用的 Python 包源或自备、已校验的缓存。
 
+新增2026-09-28至09-30完整冻结根的恢复入口见[最新移交](DEVELOPMENT_HANDOFF_20260930.md)。Windows 的 Git 长路径选项用于克隆；当前移交工具另以 native extended path 恢复/核验深层证据，不需修改系统 LongPathsEnabled。原 `.pyd` 仅作历史身份快照，不复制到新环境加载。
+
 稳定 F 保存输出与 v4 大载荷通过本轮后续证据 Release `hf4-c2-followup-evidence-v1` 接入统一索引；旧报告中的“只存于本机”描述保持其历史时点。只需要这两项时：
 
 ```text
