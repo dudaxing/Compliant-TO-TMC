@@ -6,6 +6,8 @@
 
 后续开发统一在本仓库的 **main** 上进行，`origin` 固定为 `https://github.com/dudaxing/Compliant-TO-TMC.git`。本机正式开发根为 `D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC`；其内部 `hf_repo/` 是源码。外层旧 `Compliant-Nonlinear-TMC-O/hf_repo/` 保留为历史工作区，不再作为并行开发或推送入口。其他机器可克隆到任意目录。
 
+2026-10-01最新功能入口：[物理/功能进度表、真实机构变形及C1十五态动画](docs/PHYSICS_AND_FUNCTION_PROGRESS_20261001.md)。旧TMC已有内力、切线与平衡；新精度候选完整force/AD及真实工件夹持仍未完成。[F-SELECT1](docs/F_SELECT1_RESULT_20261001.md)已按明确批准完成既定前缀选择，不授予全流或力学资格。后续优先实际力输出、参考比较和逐步平衡验证。
+
 ## 开始阅读
 
 1. [当前状态](docs/CURRENT_STATUS.md)：目标、已完成工作、效果、仍未通过的门和下一步范围。

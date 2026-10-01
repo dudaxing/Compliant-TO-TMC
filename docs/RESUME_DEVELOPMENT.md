@@ -1,6 +1,6 @@
 # 在新电脑或任意新目录接续开发
 
-当前主干状态先看 [CURRENT_STATUS](CURRENT_STATUS.md)与[主干开发流程](DEVELOPMENT_WORKFLOW.md)。截至 2026-09-30，近旋转诊断、新算术候选、JIT/AD 与 F 系列已有冻结结果；F-STREAM1 因事件界以 partial 关闭，完整 force／AD、一般接触与 HF5 仍未完成，默认内核未切换。最新交付见[开发证据移交](DEVELOPMENT_HANDOFF_20260930.md)，科学排查见[只读后续审阅](F_STREAM1_READONLY_FOLLOWUP_20260930.md)。原 S0、v3/v4 和[主干整合报告](MAIN_CONSOLIDATION_REPORT_20260927.md)保留其历史事实；重叠状态不相加。
+当前主干状态先看 [CURRENT_STATUS](CURRENT_STATUS.md)、[物理与功能进度及可视化](PHYSICS_AND_FUNCTION_PROGRESS_20261001.md)与[主干开发流程](DEVELOPMENT_WORKFLOW.md)。截至2026-10-01，F-SELECT1已按明确批准正常关闭，70个必需事件和4个诊断事件已保留，仅既定前缀完成；[实际结果](F_SELECT1_RESULT_20261001.md)可直接阅读。完整新候选force/AD、一般接触与HF5仍未完成，旧TMC已有内力/切线/平衡能力，默认内核未切换。前次大证据交付见[开发证据移交](DEVELOPMENT_HANDOFF_20260930.md)；原S0、v3/v4、F-STREAM1 partial及[主干整合报告](MAIN_CONSOLIDATION_REPORT_20260927.md)保留历史事实，不相加重叠覆盖。
 
 后续只在本仓库 main 开发，origin 为 `https://github.com/dudaxing/Compliant-TO-TMC.git`。本机正式根为 `D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC`，其中 `hf_repo/` 是源码；外层旧 `Compliant-Nonlinear-TMC-O/hf_repo/` 只保留历史。其他电脑可以选任意克隆目录，不需要原盘符。
 
@@ -30,6 +30,8 @@ python tools/handoff.py verify --full
 `fetch-evidence` 按移交清单下载、校验并恢复证据；不要把任意同名 ZIP 当作对应发布附件。先用 `python tools/handoff.py --help` 查看本次移交工具的接口。依赖包并未随仓库或证据附件完整分发，安装还需要可用的 Python 包源或自备、已校验的缓存。
 
 新增2026-09-28至09-30完整冻结根的恢复入口见[最新移交](DEVELOPMENT_HANDOFF_20260930.md)。Windows 的 Git 长路径选项用于克隆；当前移交工具另以 native extended path 恢复/核验深层证据，不需修改系统 LongPathsEnabled。原 `.pyd` 仅作历史身份快照，不复制到新环境加载。
+
+2026-10-01新增F-SELECT1根的31个结果/入口文件随Git，13个`aux`来源复制件由新版本化资产恢复，避免Windows Git保留名拒绝。查看图/74条选择JSON不需下载；完整来源用`python tools/handoff.py fetch-evidence --asset hf4-fselect1-prefix-select-20261001-v1.zip`，再用同资产参数`verify`核对。索引带原reader/native来源依赖；不能把缺13复制件记作完整冻结根已恢复。无需关闭`core.protectNTFS`或修改冻件。
 
 稳定 F 保存输出与 v4 大载荷通过本轮后续证据 Release `hf4-c2-followup-evidence-v1` 接入统一索引；旧报告中的“只存于本机”描述保持其历史时点。只需要这两项时：
 
@@ -258,7 +260,9 @@ Pop-Location
 
 ## 6. 恢复开发时的首项工作
 
-先按 [CURRENT_STATUS](CURRENT_STATUS.md)确认现状与本次范围。固定场分段诊断、算术候选、JIT/AD 修订及 F 系列都已实施并保留失败，详见[连续执行报告](HF4_C2_S0_PREPARATION_RESULT_20260928.md)；不能按旧文档中的“尚未实施”重跑。当前首项工作是读取已保存的小 JSON、128 个样本及采集包装/原归因规则，见[只读排查与下一卡](F_STREAM1_READONLY_FOLLOWUP_20260930.md)。F-STREAM1 的 400 万事件只是接纳数组前缀，完整 EOF／CRC／JSON 未通过，56 个直接模块参数计数也不构成内部执行归因。
+先按 [CURRENT_STATUS](CURRENT_STATUS.md)确认现状与本次范围。固定场分段诊断、算术候选、JIT/AD修订及F系列都已实施并保留失败，详见[连续执行报告](HF4_C2_S0_PREPARATION_RESULT_20260928.md)。F-SELECT1已完成定向提取，可直接读74条小JSON，[结果](F_SELECT1_RESULT_20261001.md)明确56条身份与旧规则差距；不再把“读取旧128样本”作为待办或重跑已关闭卡。完整EOF/CRC/JSON与内部成本归因仍未取得。
+
+当前优先功能步骤是新候选清晰的NumPy完整力入口：先给原unit近旋转场的八自由度材料/正则/总力，与已保存HP80/120原门参考比较并画力及误差；根据实际结果再接一个C1保存态全局组装、切线和小平衡路径，见[功能进度末节](PHYSICS_AND_FUNCTION_PROGRESS_20261001.md#可视化与最近一个功能步骤)。本轮C1十五态图和GIF是历史数组重绘，新克隆可直接查看；重绘源码带`--model/--result/--audit/--output`四参数，在任意目录显式提供相对恢复来源即可，不需原绝对工作目录。没有重新求解。Profiler是运行成本辅助，不是每个功能步骤的永久前置门。
 
 原实验 runner 保留原机 Python、运行库 pins、路径及冻结身份。异机恢复证据不等于可以直接复跑旧卡；不要修改旧脚本/manifest 以适配新盘符。先恢复相对证据树并核 SHA；重新计算、读取 native gzip 或采集 profiler 须另定新环境、身份、预算与停止合同。原材料力、正则力、总力、导数及 native 接受门保持，不切换默认内核、不自动进入 HF5。缺少出版范围内排除的外部来源时，明确未核验范围，不伪造原件。
 

@@ -1,0 +1,281 @@
+{
+  "status": "pass",
+  "new_groups": 16,
+  "groups": {
+    "endpoint": [
+      "exact_endpoint_and_uninterpreted_invalid_suffix",
+      "endpoint_minus_one",
+      "endpoint_plus_one"
+    ],
+    "utf8": [
+      "cross_block_utf8_one_byte_reads"
+    ],
+    "two_hashes": [
+      "old_sha_mismatch",
+      "returned_sha_mismatch"
+    ],
+    "request": [
+      "last_request_narrowed"
+    ],
+    "fields": [
+      "all_required_roles_conflicting_module",
+      "missing_null_and_nonscalar_types"
+    ],
+    "counts": [
+      "wrong_required_counts"
+    ],
+    "multiple_roles": [
+      "same_index_multiple_roles"
+    ],
+    "diagnostics": [
+      "diagnostic_omission_required_late",
+      "diagnostic_58_full_still_counts"
+    ],
+    "records": [
+      "retained_records_exact_128",
+      "retained_records_over_128"
+    ],
+    "field_text": [
+      "field_text_exact_4096",
+      "field_text_over_4096"
+    ],
+    "retained_text": [
+      "retained_16MiB_exact",
+      "retained_16MiB_over"
+    ],
+    "eof": [
+      "early_eof"
+    ],
+    "trailer": [
+      "bad_trailer_crc"
+    ],
+    "close": [
+      "read_io_and_secondary_close",
+      "success_prefix_close_error"
+    ],
+    "admission": [
+      "expired_deadline_no_open",
+      "insufficient_first_read_activity"
+    ],
+    "saved_interface": [
+      "saved_selection_roundtrip",
+      "saved_selection_conflict"
+    ]
+  },
+  "new_subcases": 27,
+  "fixture_plaintext_bytes": 37614,
+  "rows": [
+    {
+      "name": "exact_endpoint_and_uninterpreted_invalid_suffix",
+      "status": "pass",
+      "expected": "prefix_selection_complete",
+      "actual": "prefix_selection_complete",
+      "read_attempts": 6,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "endpoint_minus_one",
+      "status": "pass",
+      "expected": "prefix_endpoint",
+      "actual": "prefix_endpoint",
+      "read_attempts": 5,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "endpoint_plus_one",
+      "status": "pass",
+      "expected": "utf8",
+      "actual": "utf8",
+      "read_attempts": 6,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "cross_block_utf8_one_byte_reads",
+      "status": "pass",
+      "expected": "prefix_selection_complete",
+      "actual": "prefix_selection_complete",
+      "read_attempts": 101,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "old_sha_mismatch",
+      "status": "pass",
+      "expected": "source_consistency",
+      "actual": "source_consistency",
+      "read_attempts": 1,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "returned_sha_mismatch",
+      "status": "pass",
+      "expected": "source_consistency",
+      "actual": "source_consistency",
+      "read_attempts": 6,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "last_request_narrowed",
+      "status": "pass",
+      "expected": "prefix_selection_complete",
+      "actual": "prefix_selection_complete",
+      "read_attempts": 6,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "all_required_roles_conflicting_module",
+      "status": "pass",
+      "expected": "prefix_selection_complete",
+      "actual": "prefix_selection_complete",
+      "read_attempts": 21,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "wrong_required_counts",
+      "status": "pass",
+      "expected": "selection_counts",
+      "actual": "selection_counts",
+      "read_attempts": 9,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "same_index_multiple_roles",
+      "status": "pass",
+      "expected": "prefix_selection_complete",
+      "actual": "prefix_selection_complete",
+      "read_attempts": 9,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "diagnostic_omission_required_late",
+      "status": "pass",
+      "expected": "prefix_selection_complete",
+      "actual": "prefix_selection_complete",
+      "read_attempts": 18,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "diagnostic_58_full_still_counts",
+      "status": "pass",
+      "expected": "prefix_selection_complete",
+      "actual": "prefix_selection_complete",
+      "read_attempts": 249,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "retained_records_exact_128",
+      "status": "pass",
+      "expected": "prefix_selection_complete",
+      "actual": "prefix_selection_complete",
+      "read_attempts": 662,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "retained_records_over_128",
+      "status": "pass",
+      "expected": "selection_capacity",
+      "actual": "selection_capacity",
+      "read_attempts": 667,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "missing_null_and_nonscalar_types",
+      "status": "pass",
+      "expected": "prefix_selection_complete",
+      "actual": "prefix_selection_complete",
+      "read_attempts": 9,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "field_text_exact_4096",
+      "status": "pass",
+      "expected": "prefix_selection_complete",
+      "actual": "prefix_selection_complete",
+      "read_attempts": 248,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "field_text_over_4096",
+      "status": "pass",
+      "expected": "field_text_limit",
+      "actual": "field_text_limit",
+      "read_attempts": 247,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "retained_16MiB_exact",
+      "status": "pass",
+      "actual": "pass"
+    },
+    {
+      "name": "retained_16MiB_over",
+      "status": "pass",
+      "actual": "retained_text_limit"
+    },
+    {
+      "name": "early_eof",
+      "status": "pass",
+      "expected": "early_eof",
+      "actual": "early_eof",
+      "read_attempts": 6,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "bad_trailer_crc",
+      "status": "pass",
+      "expected": "container_integrity",
+      "actual": "container_integrity",
+      "read_attempts": 2,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "read_io_and_secondary_close",
+      "status": "pass",
+      "expected": "io_or_recording",
+      "actual": "io_or_recording",
+      "read_attempts": 1,
+      "secondary_error_count": 1
+    },
+    {
+      "name": "success_prefix_close_error",
+      "status": "pass",
+      "expected": "close_io",
+      "actual": "close_io",
+      "read_attempts": 6,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "expired_deadline_no_open",
+      "status": "pass",
+      "expected": "resource",
+      "actual": "resource",
+      "read_attempts": 0,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "insufficient_first_read_activity",
+      "status": "pass",
+      "expected": "resource",
+      "actual": "resource",
+      "read_attempts": 0,
+      "secondary_error_count": 0
+    },
+    {
+      "name": "saved_selection_roundtrip",
+      "status": "pass",
+      "actual": "pass"
+    },
+    {
+      "name": "saved_selection_conflict",
+      "status": "pass",
+      "actual": "ValueError"
+    }
+  ],
+  "inherited_saved_subcases": 82,
+  "inherited_execution": false,
+  "inheritance_scope": "unchanged pinned decoder/framer/count/capacity parts; changed sampling and prefix/selection are new",
+  "scientific_admission": false,
+  "force_executed": false,
+  "runtime_native_trace_observed": false,
+  "native_json_parsed": false,
+  "xplane_decoded": false
+}
