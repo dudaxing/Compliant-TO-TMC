@@ -6,6 +6,8 @@
 
 2026-09-30提交推送与18根冻结证据公开恢复记录见[本次开发移交](DEVELOPMENT_HANDOFF_20260930.md)。其后的[只读排查](F_STREAM1_READONLY_FOLLOWUP_20260930.md)保留候选卡提出时“未执行”身份；用户随后明确批准并已完成F-SELECT1，不再等待该卡批准。
 
+本轮main图/结果交付与[F-SELECT1资产](https://github.com/dudaxing/Compliant-TO-TMC/releases/tag/hf4-fselect1-evidence-20261001-v1)公开恢复已验证：31结果文件随Git，13个Windows Git拒绝的AUX来源从完整44件小资产恢复；异目录克隆与十资产依赖闭包通过，首次网络发布失败保留。见[本轮交付关账](F_SELECT1_RESULT_20261001.md#关闭后核对与交付)。
+
 **历史目标工具关账读回状态：blocked（2026-09-30），F-STREAM1唯一窗口、三路后审、实际审图及记录已完成关闭；全流普查未通过。** 用户“批准”的300秒／4GiB卡已使用，exit1／execution_failure／partial。16组82子例通过，原gzip一次读取触4,000,000事件界后关闭；真实总钟143.272178秒、采样峰86.425781MiB，三阶段原SUP1清理通过，无续读／修复／重试。完整force／AD／接触／HF5及项目目标仍未完成。详见[本轮实际结果](HF4_C2_S0_PREPARATION_RESULT_20260928.md#f-stream1实际执行结果2026-09-30)。
 
 关账状态补记：作者期本批准turn的两次工具读回为active，最后关账get_goal返回blocked且未附原因。解析后审agent确认未操作goal；root本次未调用update_goal或pause／complete。以最后真实读回为准，不推定状态变化原因，也不把已完成F-STREAM1重新解释为待批准。作者历史active保持，完整项目未完成；本卡已授权工作全部关闭。

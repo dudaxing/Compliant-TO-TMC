@@ -35,3 +35,7 @@ ledger、receipt、binding前与终端总钟分别151.2746801、151.4395867、15
 交付时真实遇到Windows Git拒绝`aux`保留名组件：`git add`及`hash-object`报告ENOENT，但普通/namespace标准库与Windows读取同175字符路径成功，`core.longpaths=true`，原冻件保持。为避免新机克隆要求关闭Git路径保护，沿用现有证据分层：31个非aux文件留在main；13个aux来源复制件由版本化资产恢复。完整44文件封入`hf4-fselect1-prefix-select-20261001-v1.zip`（216,915 bytes，SHA `917bb1f9056f2d85bf6056e0322b833c030a9422e998c6f920f441226e6d1fac`），索引仅追加新项、旧19项不变，包装成员逐件核对通过，见[包装回执](../handoff/f_select1_20261001/packaging_receipt.json)。发布与公开恢复结果以随后实际回执为准。
 
 异机可直接阅读选择件和图。完整冻结来源使用`python tools/handoff.py fetch-evidence --asset hf4-fselect1-prefix-select-20261001-v1.zip`，会恢复索引声明的原来源依赖；仅阅读无需下载整个依赖链。重新绘图时按元数据中的相对来源与SHA恢复旧C1数组，不复制旧绝对路径。原大证据按[移交指南](RESUME_DEVELOPMENT.md)恢复。任何重跑须新身份/目录/资源合同，不删除已关闭根重置额度。
+
+**公开交付已验证。** 代码/结果/图先以`273e6209e18ebaef2e9ce89d4a0836f44997f27d`推送main；[版本化资产](https://github.com/dudaxing/Compliant-TO-TMC/releases/tag/hf4-fselect1-evidence-20261001-v1)已公开、server digest与包SHA相同。首次发布URLError的[原回执](../handoff/f_select1_20261001/publication_receipt.json)保留；另一个[恢复发布回执](../handoff/f_select1_20261001/publication_receipt_002.json)记录成功，其最初untagged字段是draft实际观测，最终取published_url与正式tag。
+
+原公开异目录克隆`D:/hf-restore-20260930`已ff至273e620，普通Git检出31件成功、轻量3881件身份通过。新资产从此前不存在的缓存项经无认证公开URL实际下载，未用作者ZIP；旧九项缓存是前轮公开下载原件。本次恢复/验证十资产依赖闭包4157成员，包括新44件及13个AUX来源，实际约63.1098秒，见[公开恢复回执](../handoff/f_select1_20261001/public_restore_receipt.json)。只验证该依赖闭包，不把它称为全部二十资产或新物理验收。最终关闭文档/回执再随main提交，原科学冻结根不变。
