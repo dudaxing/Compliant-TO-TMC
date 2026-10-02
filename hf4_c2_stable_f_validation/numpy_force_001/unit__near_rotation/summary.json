@@ -1,0 +1,98 @@
+{
+  "case": "unit__near_rotation",
+  "status": "pass",
+  "kernel_version": "p26_q1_split_invariants_hu_v1",
+  "entry": "batch_response_split_numpy",
+  "nodes": 4,
+  "elements": 1,
+  "dofs": 8,
+  "comparisons": [
+    {
+      "component": "total_force",
+      "scale_N": "1.2500E-7",
+      "threshold": "1E-11",
+      "normalized_error": "2.90976623349114228337319594949407337196180044893679759094633724728220272157963394104989250257361918863449607510557137344E-24",
+      "old_stable_F_normalized_error": "7.60976728918593099361970282407777244393487860414178047942364350854543672954301749054896687353336392214708174750060337738E-8",
+      "hp80_hp120_normalized_agreement": "1.0370473294393670063224079151233041133514489336425749432487604582769388178417269247533313458204204189063667466253392748E-71",
+      "pass_gate": true
+    },
+    {
+      "component": "material_force",
+      "scale_N": "9.07979449756073702250975666265539372463414258956914424079003812833119598684786152827417258289217893381007614077668953993E-15",
+      "threshold": "1E-9",
+      "normalized_error": "2.39272341350894578039384445717901407745276826275038805208110336583375420216190118649990802580078834687079858296795659606E-17",
+      "old_stable_F_normalized_error": "1.04762383268011668940003808647676705242490395454323426766410720763697326496223043322381960024444994734936442839589173173",
+      "hp80_hp120_normalized_agreement": "1.42768557388326223969544604652932370015641446550353582202338398411610759522603620066296362601386697953521133888107942691E-64",
+      "pass_gate": true
+    },
+    {
+      "component": "regularization_force",
+      "scale_N": "1.2500E-19",
+      "threshold": "1E-9",
+      "normalized_error": "7.09890641459089343051493737052142671065505685879769074474417329443819427490234375000000000000000000000000000000000000001E-21",
+      "old_stable_F_normalized_error": "1.0113845448037389406801386034830108093614830140056469246544430979671157503128051757812500000000000000000000000000000E-19",
+      "hp80_hp120_normalized_agreement": "9.9624127355780763032548591256360878126720000000000000000E-84",
+      "pass_gate": true
+    }
+  ],
+  "min_J": 1.0,
+  "small_branch_points": 9,
+  "quadrature_points": 9,
+  "arithmetic_supported": true,
+  "decomposition_rounding_bound_pass": true,
+  "decomposition_max_abs_N": 3.944304526105059e-31,
+  "force_seconds": 0.03824039996834472,
+  "total_seconds": 0.10311269998783246,
+  "numpy_version": "2.4.6",
+  "python_version": "3.13.6 (tags/v3.13.6:4e66535, Aug  6 2025, 14:36:00) [MSC v.1944 64 bit (AMD64)]",
+  "compiled_force_executed": false,
+  "tangent_executed": false,
+  "equilibrium_solved": false,
+  "reference_regenerated": false,
+  "input_source": "hf4_c2_stable_f_validation/near_rotation_segments_001/inputs/unit__near_rotation",
+  "inputs": [
+    {
+      "name": "inputs.npz",
+      "bytes": 3658,
+      "sha256": "2ba110b878186e52996c25f4aad44cb81858be15303c21579c4f5e8ccc013448"
+    },
+    {
+      "name": "input_freeze.json",
+      "bytes": 283,
+      "sha256": "5c771bd42212bde7bf6d00c001837ba8cdda4416cedd3492da602ea7fd25c3ac"
+    },
+    {
+      "name": "hp_0.json",
+      "bytes": 47008,
+      "sha256": "af5fedf386fea8e77474363abd5798932250830f8c6d6b09b319c8d7c4f72869"
+    },
+    {
+      "name": "production_0.npz",
+      "bytes": 3805,
+      "sha256": "f9a801a22ad0f9e98f7d551de09bf5030c285ec0d18809c0435b407d535bf32c"
+    },
+    {
+      "name": "result.json",
+      "bytes": 11792,
+      "sha256": "f05123413d64a93a1535d6e6c30a67dfa799de6e0e5565d8903211c9bf14028e"
+    }
+  ],
+  "sources": [
+    {
+      "name": "split_kernel_invariants_hu.py",
+      "sha256": "1152176a530a0dfd5d0584afd740e1ab23815d65f672a26ba4d6746c48846d57"
+    },
+    {
+      "name": "compensated_invariants.py",
+      "sha256": "6a0144a92bf323951594a0d677b7558cf2a6501667f4b076dd13e2df6bba3897"
+    },
+    {
+      "name": "run_numpy_force_comparison.py",
+      "sha256": "83a6686b8b9e22f9b90f6bcc9f082d01ab186b5e70014986ed9db382f7eb3ddb"
+    },
+    {
+      "name": "compensated_kinematics.py",
+      "sha256": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36"
+    }
+  ]
+}

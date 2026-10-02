@@ -1,5 +1,7 @@
 # 在新电脑或任意新目录接续开发
 
+2026-10-02新增[NumPy完整力→组装→解析切线→C1新平衡与独立审计](NUMPY_FORCE_PROGRESS_20261002.md)。新源码、三组小测试、四保存场比较、七方向切线比较、15唯一新状态和完整新HP80/120参考、图与动画均随Git，阅读和复核这些结果不需要旧机盘符或大资产恢复。C1瘦输入的 `run_numpy_c1_force.py --saved-input` 已在另一目录复算，41数组逐位相同。新路径的 `recovery_model.npz` 及源码扩展记录补齐控制/材料输入，原作者summary与后完成audit按时点分别保留。先看本次报告再接续范围；前文F系列仍保持历史结论。
+
 当前主干状态先看 [CURRENT_STATUS](CURRENT_STATUS.md)、[物理与功能进度及可视化](PHYSICS_AND_FUNCTION_PROGRESS_20261001.md)与[主干开发流程](DEVELOPMENT_WORKFLOW.md)。截至2026-10-01，F-SELECT1已按明确批准正常关闭，70个必需事件和4个诊断事件已保留，仅既定前缀完成；[实际结果](F_SELECT1_RESULT_20261001.md)可直接阅读。完整新候选force/AD、一般接触与HF5仍未完成，旧TMC已有内力/切线/平衡能力，默认内核未切换。前次大证据交付见[开发证据移交](DEVELOPMENT_HANDOFF_20260930.md)；原S0、v3/v4、F-STREAM1 partial及[主干整合报告](MAIN_CONSOLIDATION_REPORT_20260927.md)保留历史事实，不相加重叠覆盖。
 
 后续只在本仓库 main 开发，origin 为 `https://github.com/dudaxing/Compliant-TO-TMC.git`。本机正式根为 `D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC`，其中 `hf_repo/` 是源码；外层旧 `Compliant-Nonlinear-TMC-O/hf_repo/` 只保留历史。其他电脑可以选任意克隆目录，不需要原盘符。

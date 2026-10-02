@@ -6,7 +6,7 @@
 
 后续开发统一在本仓库的 **main** 上进行，`origin` 固定为 `https://github.com/dudaxing/Compliant-TO-TMC.git`。本机正式开发根为 `D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC`；其内部 `hf_repo/` 是源码。外层旧 `Compliant-Nonlinear-TMC-O/hf_repo/` 保留为历史工作区，不再作为并行开发或推送入口。其他机器可克隆到任意目录。
 
-2026-10-01最新功能入口：[物理/功能进度表、真实机构变形及C1十五态动画](docs/PHYSICS_AND_FUNCTION_PROGRESS_20261001.md)。旧TMC已有内力、切线与平衡；新精度候选完整force/AD及真实工件夹持仍未完成。[F-SELECT1](docs/F_SELECT1_RESULT_20261001.md)已按明确批准完成既定前缀选择，不授予全流或力学资格。后续优先实际力输出、参考比较和逐步平衡验证。
+2026-10-02最新功能：[新候选NumPy完整力、组装、解析切线与平衡](docs/NUMPY_FORCE_PROGRESS_20261002.md)。三近旋转场和C1保存态三力门通过；七方向21项切线门通过；新C1接近/压紧路径的15唯一状态、336项独立HP80/120检查通过。可看[实际新路径图](functional_views/numpy_c1_20261002/numpy_path.png)及[16帧动画](functional_views/numpy_c1_20261002/numpy_path.gif)。当前为显式NumPy入口，原默认入口仍沿用；完整矩阵、compiled AD与真实工件夹持的范围尚待后续验证。整体能力见[物理/功能进度表](docs/PHYSICS_AND_FUNCTION_PROGRESS_20261001.md)。[F-SELECT1](docs/F_SELECT1_RESULT_20261001.md)的前缀结果保留原资格。
 
 ## 开始阅读
 
@@ -28,6 +28,7 @@
 | 稳定 F 候选 | 保存态 63/63 通过；制造场 30/33 通过 | [候选报告](docs/HF4_C2_P1_AND_STABLE_F_REPORT.md)、[近旋转解释勘误](docs/HF4_C2_NEAR_ROTATION_SCOPE_NOTE_20260927.md)。三个近旋转场仍未通过完整力门 |
 | 独立复核 | 28 项算术测试、33 个制造场与选定 8 态复算；增强 C1/C2 来源绑定 | [独立复核报告](docs/HF4_C2_INDEPENDENT_RECHECK_REPORT_20260927.md)。8 态与上述 63 态重叠，不能相加 |
 | HF4-C2 v4 | 原失败细网格任务单独补测，21/21 态、651/651 检查、7/7 原目标通过 | [v4 补测报告](docs/HF4_C2_V4_RETEST_REPORT.md)。单路径额度已用完，不自动授权重跑或其他任务 |
+| NumPy不变量/Hu候选 | 三近旋转场及C1保存态完整力通过；七方向21切线门通过；新C1路径15唯一状态/336检查通过 | [功能闭环](docs/NUMPY_FORCE_PROGRESS_20261002.md)。实际新态经独立HP80/120，不外推一般接触或全候选矩阵 |
 
 节点反力不等于接触压力，净合力对账不能证明局部单边条件；材料边积分也不能替换原弱式合力。三套网格只支持已有敏感性观察，不构成连续体收敛证明。完整制造场未通过与 v4 单任务通过是同时成立的两个结论。
 

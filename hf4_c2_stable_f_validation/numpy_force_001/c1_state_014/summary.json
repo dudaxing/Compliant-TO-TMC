@@ -1,0 +1,88 @@
+{
+  "status": "pass",
+  "case": "C1_TMC_h025_uniform_r2_state_014",
+  "entry": "assemble_split_numpy",
+  "elements": 120,
+  "dofs": 300,
+  "comparisons": [
+    {
+      "component": "total_force",
+      "scale_N": "34.853754375142127089993867510734558368608488544569359270468573128871766397674878",
+      "threshold": "1E-11",
+      "normalized_error": "1.48427477919004727972151217164650460081069087572846562703945406148073689583248147361244521683110784991788035730414381141E-16",
+      "old_stable_F_normalized_error": "2.54262529091180094424105747876474077969787975544084369177854966272005145240336082876604638498039952934468828996711258772E-12",
+      "hp80_hp120_agreement": "7.38825514807644128024024365370466225701210943654834089692773459328782242150088925232508543233994267984602417743007133709E-80",
+      "pass_gate": true
+    },
+    {
+      "component": "material_force",
+      "scale_N": "34.8536719743948965278292100130740715501713150001913143822288917117463418070521374821563891925524105424176437266540734085",
+      "threshold": "1E-9",
+      "normalized_error": "1.44499583515380276695088138339290845942540491336450850125736740889803612887299110740796036187232843323548109249218356452E-16",
+      "old_stable_F_normalized_error": "2.54263631159540328259655937053635472487655211268403180377900783686444478374537774883018608154890493878870373712003866585E-12",
+      "hp80_hp120_agreement": "7.43410654679925606166455801651627068586107305738866368101170538373913102978652266327821215426557923209378645142320258572E-80",
+      "pass_gate": true
+    },
+    {
+      "component": "regularization_force",
+      "scale_N": "0.00104142893150767645900026051473668046595337341065418675697955687873113295754820720149730467416971878843182699925781896644",
+      "threshold": "1E-9",
+      "normalized_error": "9.17554832500344581272522649771499034768504081251202972169115593327264015333017134708295195067979345704056824343537220723E-17",
+      "old_stable_F_normalized_error": "7.17556246741892567857126637558391823327524631841643075413150803201460866145597372327229929450571097638836152944094556862E-16",
+      "hp80_hp120_agreement": "3.23663840199405654207089096608260284842024762648665651073929235763408617563395797639354744600260961499657095228763638856E-80",
+      "pass_gate": true
+    }
+  ],
+  "force_and_assembly_seconds": 0.07223150000208989,
+  "min_J": 1.8980078546779105e-05,
+  "normal_force_N": 71.42390219811922,
+  "HP80_normal_force_N_decimal": "71.423902198119231906524544763810419716007720646674890762985208912489219136138997",
+  "normal_force_semantics": "minus full top constraint reaction, includes background medium",
+  "decomposition_rounding_bound_pass": true,
+  "inputs": [
+    {
+      "name": "model.npz",
+      "source": "hf4_c2_stable_f_validation/invariants_hu_campaign_001/version_002/data/hf4_c1_results/TMC_h025_uniform_r2/stages/uniform_tmc/model.npz",
+      "sha256": "a87f81fbb8360badd7787144595757098c147abb7e83689cff8a878f6eb441ce",
+      "bytes": 6313
+    },
+    {
+      "name": "state.npz",
+      "source": "hf4_c2_stable_f_validation/invariants_hu_campaign_001/version_002/data/hf4_c1_results/TMC_h025_uniform_r2/stages/uniform_tmc/steps/state_014.npz",
+      "sha256": "5858753d667dd5a3a8094b7d51279ab7b6f0d90677f54ee9ca22fe59d76d9baf",
+      "bytes": 22445
+    },
+    {
+      "name": "metadata.json",
+      "source": "hf4_c2_stable_f_validation/invariants_hu_campaign_001/version_002/data/hf4_c1_results/TMC_h025_uniform_r2/stages/uniform_tmc/metadata.json",
+      "sha256": "d4613f4c1d4a244a98abe3e2b18af3e9a584cf910876366d88bee374eaeb5ff8",
+      "bytes": 538
+    }
+  ],
+  "original_audit_sha256": "7fc116e5a5ff1ee03d902e8eba2f7c5dd597fcc7a0351e88c3f90757220f3ee5",
+  "equilibrium_solved": false,
+  "tangent_executed": false,
+  "reference_regenerated": false,
+  "sources": [
+    {
+      "name": "split_kernel_invariants_hu.py",
+      "sha256": "5eb3c7e1ee904fe28aab3f7f6aac94d63a6e81c355728fb37bf39b1580675d66"
+    },
+    {
+      "name": "compensated_invariants.py",
+      "sha256": "6a0144a92bf323951594a0d677b7558cf2a6501667f4b076dd13e2df6bba3897"
+    },
+    {
+      "name": "run_numpy_c1_force.py",
+      "sha256": "2e61c2eed8447800a40b0a5c61f5aaa797f776631b6cb3e6937bbd98cdecf64e"
+    },
+    {
+      "name": "run_numpy_force_comparison.py",
+      "sha256": "c9a6861b7258d961711573518dcc8de60c49fd9dd70999d67be400a73395db22"
+    },
+    {
+      "name": "compensated_kinematics.py",
+      "sha256": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "numpy_c1_recovery_supplement_v1",
+  "phase": "compression",
+  "purpose": "Post-run model/controller reconstruction for portable recovery, not new scientific evidence.",
+  "original_summary_sha256": "a9058802e954d5ca2a6d400accc80ac752e118b0f564a25f6e897bed8f1532a7",
+  "original_model_sha256": "3ebc6d3c793cfd7ea050fbccfd6e59a9389145195dccd9811ca95d0a1c7e5987",
+  "initial_state_sha256": "8b09b88f046c6588a78848b84775af873d4b9bc8bd699aadd77b75bedba7160b",
+  "factory_source_sha256": "f9c2406d673df25a801fcba275399cb84e2928074b95ce3dafc54986d22fdcc1",
+  "recovery_model_sha256": "163e5ee3a2b6d3dfb8e5f2b61699efedcfb246591b0460f180d45a5e280ce86d",
+  "reference_material_and_operator_source": "hf4_c2_stable_f_validation/numpy_force_001/c1_state_014/inputs/model.npz",
+  "reference_material_and_operator_sha256": "a87f81fbb8360badd7787144595757098c147abb7e83689cff8a878f6eb441ce",
+  "checks": {
+    "saved_geometry_flags_groups_equal": true,
+    "reference_material_and_operators_equal": true,
+    "factory_source_equals_executed_snapshot": true,
+    "controller_uses_saved_split_origin": true,
+    "all_recovery_fields_equal_verified_factory_or_saved_controller_inputs": true,
+    "npz_roundtrip_all_fields_equal": true
+  },
+  "settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 35,
+    "armijo_c": 0.0001,
+    "max_backtracks": 16,
+    "max_bisections": 8,
+    "minimum_increment": 1e-05,
+    "time_limit_seconds": 300.0
+  },
+  "force_scale_per_length_N_per_mm": 100.0,
+  "field_sources": {
+    "model": "Executed factory with saved geometry/groups and original material/operator cross-checks.",
+    "controller": "Executed factory direction/lift_shape/measurements; stored initial_state origin; saved targets and settings.",
+    "compression_base": "Factory base with fixed values replaced by stored initial lift, following the executed path runner."
+  },
+  "constitutive_evaluation_executed": false,
+  "equilibrium_executed": false,
+  "HP_executed": false
+}

@@ -1,0 +1,98 @@
+{
+  "case": "dyadic_rect__near_rotation",
+  "status": "pass",
+  "kernel_version": "p26_q1_split_invariants_hu_v1",
+  "entry": "assemble_split_numpy",
+  "nodes": 9,
+  "elements": 4,
+  "dofs": 18,
+  "comparisons": [
+    {
+      "component": "total_force",
+      "scale_N": "1.2500E-7",
+      "threshold": "1E-11",
+      "normalized_error": "7.87692407208506036357323372600313086855685880411183366612105194653744674281397892907366745734709224579837382943352656086E-25",
+      "old_stable_F_normalized_error": "1.32334221003214677674321262875808803631282334290615525971096403840848241578359584166223394574640622045652901279125887541E-8",
+      "hp80_hp120_normalized_agreement": "1.6009961891841004041237222647007720466288638046017398394586510282391177155071678251263646023726042050230240636754951768E-72",
+      "pass_gate": true
+    },
+    {
+      "component": "material_force",
+      "scale_N": "1.58064536405883616763134040404971248245738225232658618604333044923487904304273476668732789853578614103188996088071352313E-15",
+      "threshold": "1E-9",
+      "normalized_error": "5.63150363156012599580514622958349828361083953755546427627412810680604015713105460100174277015823076118605594064620843505E-17",
+      "old_stable_F_normalized_error": "1.04652050845047329694482284999884702594712026884652288318017834833535536510963800415324103561458216345007501284696011499",
+      "hp80_hp120_normalized_agreement": "1.26609376270288633381990993104752510255734030029552181638259928400762866559084555035959118240423708519483266606328590422E-64",
+      "pass_gate": true
+    },
+    {
+      "component": "regularization_force",
+      "scale_N": "1.2500E-19",
+      "threshold": "1E-9",
+      "normalized_error": "6.17298846529419715133554403451622192541002937626992115753654299775327814426002727238753309090467681586725387754880302114E-20",
+      "old_stable_F_normalized_error": "0.00322242260182280832907010501123038628125660338652230292354071773710796108874825162690913988068178094309834356561306626524",
+      "hp80_hp120_normalized_agreement": "2.39584411588932786323170202768550173209772555958414287586460535472195098808055158044643886518412317511465219048200830818E-82",
+      "pass_gate": true
+    }
+  ],
+  "min_J": 1.0,
+  "small_branch_points": 36,
+  "quadrature_points": 36,
+  "arithmetic_supported": true,
+  "decomposition_rounding_bound_pass": true,
+  "decomposition_max_abs_N": 2.465190328815662e-32,
+  "force_seconds": 0.0394224000046961,
+  "total_seconds": 0.0978272000211291,
+  "numpy_version": "2.4.6",
+  "python_version": "3.13.6 (tags/v3.13.6:4e66535, Aug  6 2025, 14:36:00) [MSC v.1944 64 bit (AMD64)]",
+  "compiled_force_executed": false,
+  "tangent_executed": false,
+  "equilibrium_solved": false,
+  "reference_regenerated": false,
+  "input_source": "hf4_c2_stable_f_validation/near_rotation_segments_001/inputs/dyadic_rect__near_rotation",
+  "inputs": [
+    {
+      "name": "inputs.npz",
+      "bytes": 3847,
+      "sha256": "48edf83d9f5ed24bb4d7a941bb260e1154c2a5f28adc2c1b71902983b37e2327"
+    },
+    {
+      "name": "input_freeze.json",
+      "bytes": 290,
+      "sha256": "6292f1fc54fefde1d031dff098a2a3fabd8a2fe3d371211a943131757952612e"
+    },
+    {
+      "name": "hp_0.json",
+      "bytes": 153832,
+      "sha256": "34003d67130bfab3714611bb1c5e8d903fd98f8d28eb34593f7f6b1539eee2ca"
+    },
+    {
+      "name": "production_0.npz",
+      "bytes": 4394,
+      "sha256": "0159615d3dc37571b9de70bd794c9a7a1d147ac81937b4acf3d7194108c453d6"
+    },
+    {
+      "name": "result.json",
+      "bytes": 12109,
+      "sha256": "10cd39ed99dde99344a47dca93086410575eaaa9f697793d1f783deb54b1b8da"
+    }
+  ],
+  "sources": [
+    {
+      "name": "split_kernel_invariants_hu.py",
+      "sha256": "5eb3c7e1ee904fe28aab3f7f6aac94d63a6e81c355728fb37bf39b1580675d66"
+    },
+    {
+      "name": "compensated_invariants.py",
+      "sha256": "6a0144a92bf323951594a0d677b7558cf2a6501667f4b076dd13e2df6bba3897"
+    },
+    {
+      "name": "run_numpy_force_comparison.py",
+      "sha256": "0bb7a608a955c8db9d34d2143118dd95b4471de8906d89922f3e3c1bb24b59e7"
+    },
+    {
+      "name": "compensated_kinematics.py",
+      "sha256": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36"
+    }
+  ]
+}
