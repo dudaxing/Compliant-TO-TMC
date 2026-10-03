@@ -1,0 +1,49 @@
+{
+  "schema_version": "cycle003-failure-view-static-review-1.0",
+  "status": "static_pass",
+  "blocking_findings": [],
+  "qualification": false,
+  "source_file": "plot_cycle003_failure.py",
+  "source_sha256": "7d3ed32134b86db27f69783fa52c75d03d70a4665ce6f152c36314154c2cb7cf",
+  "source_lines": 146,
+  "reused_saved_helper_sha256": "d256fe2b1541505cd5315f45c4a50462670a09436ceb91ecc8d01bbb25554169",
+  "actually_reviewed": [
+    "Entire failure-view source and its only imported saved helper module imports",
+    "Reused load_saved accepts success/failed; saved package SHA/fields/descriptor checks",
+    "Reused numerical_rows uses saved arrays/observations only; old render never called"
+  ],
+  "contracts": {
+    "closed_failure_only": "failed/time_limit; exactly two accepted states [0,.5], requested [0,.5,0]",
+    "loading_peak_reached": true,
+    "path_completed": false,
+    "unload_endpoint_reached": false,
+    "task_target_executed": false,
+    "force_definition": "Cached lower-body force = negative holding reaction on model; input/support arrows are external actuator/model constraint forces",
+    "units": "x/y/u in mm, force in N, J dimensionless, Hu 1/mm",
+    "geometry_scale": 1,
+    "supplementary_displacement_scale": 4,
+    "supplementary_force_arrows": false,
+    "common_force_arrow_scale": "Maximum saved input/support nodal force equals 4 display mm; small body arrow may be subpixel and numeric components are printed",
+    "diagnostic_scope": "Completed Newton base observations and saved line-search trials only, explicitly not accepted-state trajectory; exact-zero initial residual omitted from log axis with annotation",
+    "missing_return_zero": "Explicitly marked not accepted; no hysteresis curve, interpolated states or fresh reference/contact/clamp qualification",
+    "data_and_source_identity": "Protocol bindings, script/helper identity and helper loaded pins checked before/after; exclusive new output directory",
+    "stop_path": "Final script checks output.parent and stage. Root clarified launch_cycle003.py writes stop_requested.txt to fixed003 stage; matching current contract",
+    "resource": "120 second helper clock includes imports; sampled process RSS/peak_wset 8GiB; launcher is cooperative, no OS hard cap",
+    "install_requirement": "ROOT resolved from hf_repo ancestor; external author source must be installed under formal repository before the independent saved-view launch"
+  },
+  "syntax_check": "AST parse and compile(source) only; no imports executed",
+  "new_calls": {
+    "F": 0,
+    "T": 0,
+    "HP": 0,
+    "solver": 0,
+    "consumer": 0,
+    "construction": 0,
+    "tests": 0,
+    "plot": 0
+  },
+  "limitations": [
+    "No rendering performed or pixel/layout judgement made by this static review.",
+    "This static pass does not change closed production failure or grant scientific qualification."
+  ]
+}

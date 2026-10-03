@@ -1,0 +1,1881 @@
+{
+  "schema_version": "cycle003-F16-primitive-math-review-1.0",
+  "reviewed_utc": "2026-10-03T23:43:23.055893+00:00",
+  "status": "saved_primitive_mapping_completed",
+  "qualification": false,
+  "scope": "Saved primitive operands of one closed F16 diagnostic; scalar postprocessing only, no fresh mechanics/reference or cycle qualification",
+  "new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "HP": 0,
+    "consumer": 0,
+    "solver": 0,
+    "tests": 0,
+    "plot": 0
+  },
+  "pins": {
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/range_diagnostic_001/evidence/result.json": "00e6d728f4099aa3cce74ab7375b9e3645d04919383c7b9af1e4d4aa7fa2473a",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/range_diagnostic_001/evidence/first_bad_primitive.npz": "81c0bbc1f166900cd6608510681f81e9a4e001ddcde2680e478dc3d48a798185",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/range_diagnostic_001/evidence/input.npz": "47824b835a70f6eef7ab1d3712d92958040877c4451a3b06902ddb997082248e",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/range_diagnostic_001/evidence/observation.json": "294a378a1fa26afc500d82712045248a25113e3ccfb3bbaadeaa97879320b8be",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/range_diagnostic_001/evidence/source_model.npz": "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/range_diagnostic_001/evidence/trace_once.py": "b31909aa6f741a445f4ac98913391fbd3cd5d32e40fe2093d9ea82a34354ac7d",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/range003_launch.json": "bc7fa13ce35db98d37963c56235f6f8a4bf2ded524c08bc24120bd1788aa361d",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/range_diagnostic_001/protocol.json": "50e6bd065aa456033aaed8101d95e130396c7414b1953a644cb92f54d81d29dd",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/range_diagnostic_001/trace_cycle003.py": "b31909aa6f741a445f4ac98913391fbd3cd5d32e40fe2093d9ea82a34354ac7d",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "f7549b1a51f21d8598892f3d74cebfc544a24a5bc79e60b87e7734f2a6058a1c"
+  },
+  "actual_diagnostic": {
+    "status": "diagnostic_captured",
+    "force_started": 1,
+    "force_completed": 0,
+    "tangent_calls": 0,
+    "HP_calls": 0,
+    "solver_calls": 0,
+    "global_assembly_calls": 0,
+    "outer_exit_code": 0,
+    "helper_elapsed_seconds": 7.830458100012038,
+    "outer_elapsed_seconds": 8.850331900001038,
+    "helper_sampled_peak_RSS_bytes": 244527104,
+    "outer_sampled_peak_tree_RSS_bytes": 227184640,
+    "protocol_binding_count": 193,
+    "protocol_bindings_all_equal": true,
+    "helper_binding_count": 155,
+    "helper_bindings_all_equal": true,
+    "production_source_count": 63,
+    "current_and_capsule_sources_equal": true,
+    "hooks_restored": true,
+    "original_outer_exception_reproduced": {
+      "type": "KernelError",
+      "code": "unsupported_arithmetic_range",
+      "message": "NumPy response exceeded the declared compensated arithmetic support range",
+      "details": {}
+    }
+  },
+  "captured_state": {
+    "kind": "Actual rejected full Newton trial at zero target check4; not an accepted equilibrium state",
+    "force_call_ordinal": 16,
+    "state_sha256": "9dbd3c951d322e14fde9734838108af6f4237816f1e9054ad40ada8aafa764e2",
+    "input_npz_sha256": "47824b835a70f6eef7ab1d3712d92958040877c4451a3b06902ddb997082248e"
+  },
+  "primitive": {
+    "name": "_dd_product_primal",
+    "source": "compensated_invariants.py:168",
+    "DD_multiply": "compensated_invariants.py:176",
+    "term": "(i,j)=(1,0), third of four products: low of scaled product times high of inverse2^192 scale",
+    "mapping_proven_by_saved_raw_bytes": true,
+    "b_high_equals_power_minus192": true,
+    "b_low_zero": true,
+    "step": "Third/final ci.dd_mul in _scaled_mul:115, returning inner product to physical units",
+    "response_call": "remainder = add(mul(remainder, small_delta), c((-1.0)**power / power)) at _response:184",
+    "response_scope": "Auxiliary energy Horner polynomial delta-log1p(delta); not stress, residual, or matrix matmul",
+    "Horner_power": 7,
+    "Horner_power_basis": "Every original remainder_hi is exactly+1/8: previous loop update has added coefficient1/8, and current update precedes coefficient-1/7.",
+    "selectors": [
+      {
+        "function": "_scaled_mul",
+        "name": "selected",
+        "value": true
+      },
+      {
+        "function": "<lambda>",
+        "name": "small_products",
+        "value": true
+      },
+      {
+        "function": "_response",
+        "name": "small_products",
+        "value": true
+      }
+    ],
+    "all_near_true": true,
+    "tiny_products_selected": true,
+    "first_bad_is_on_selected_small_energy_path": true,
+    "not_automatic_unique_cause_claim": true
+  },
+  "range": {
+    "kind": "Isolated nonzero product high below declared OPERAND_MIN",
+    "operand_min": 3.8725919148493183e-121,
+    "operand_max": 2.5822498780869086e+120,
+    "IEEE_normal_min": 2.2250738585072014e-308,
+    "all_inputs_valid": true,
+    "all_stored_operands_finite": true,
+    "all_isolated_EFT_low_zero": true,
+    "min_abs_bad_product_high": 1.7721588408204413e-127,
+    "max_abs_bad_product_high": 3.7822041334436825e-121,
+    "all_bad_product_high_nonzero_and_below_min": true,
+    "overflow": false,
+    "IEEE_underflow": false,
+    "scalar_product_exact_check_precision": 2000,
+    "scalar_product_exact_check_Inexact": false,
+    "scalar_check_scope": "Only exact product of saved primitive operands checked against saved high; not a Decimal constitutive reference.",
+    "increasing_same_up_down_exponent_is_not_a_remedy": "The final physical-unit O(delta^2) tail is invariant to an exact temporary power-of-two scaling."
+  },
+  "locations": {
+    "bad_quadrature_points": 36,
+    "bad_distinct_cells": 26,
+    "solid_points": 29,
+    "third_medium_points": 7,
+    "mechanism_solid_cells": [
+      1050,
+      1676,
+      1756,
+      1757,
+      1839,
+      1915,
+      1998,
+      2078,
+      2157,
+      2158,
+      2159,
+      2236,
+      2238,
+      2239,
+      2317,
+      2319,
+      2398,
+      2399,
+      2492,
+      2579
+    ],
+    "third_medium_cells": [
+      104,
+      1584,
+      1891,
+      1987,
+      2425,
+      2601
+    ],
+    "fixed_workpiece_cell_intersection": [],
+    "indices": [
+      [
+        104,
+        0
+      ],
+      [
+        1050,
+        8
+      ],
+      [
+        1584,
+        6
+      ],
+      [
+        1676,
+        4
+      ],
+      [
+        1676,
+        5
+      ],
+      [
+        1756,
+        8
+      ],
+      [
+        1757,
+        2
+      ],
+      [
+        1839,
+        5
+      ],
+      [
+        1891,
+        6
+      ],
+      [
+        1915,
+        6
+      ],
+      [
+        1987,
+        5
+      ],
+      [
+        1987,
+        6
+      ],
+      [
+        1998,
+        0
+      ],
+      [
+        1998,
+        5
+      ],
+      [
+        2078,
+        5
+      ],
+      [
+        2157,
+        5
+      ],
+      [
+        2157,
+        7
+      ],
+      [
+        2158,
+        6
+      ],
+      [
+        2159,
+        0
+      ],
+      [
+        2236,
+        2
+      ],
+      [
+        2236,
+        7
+      ],
+      [
+        2238,
+        0
+      ],
+      [
+        2239,
+        0
+      ],
+      [
+        2317,
+        1
+      ],
+      [
+        2317,
+        3
+      ],
+      [
+        2319,
+        2
+      ],
+      [
+        2319,
+        4
+      ],
+      [
+        2319,
+        6
+      ],
+      [
+        2398,
+        2
+      ],
+      [
+        2399,
+        3
+      ],
+      [
+        2399,
+        4
+      ],
+      [
+        2399,
+        5
+      ],
+      [
+        2425,
+        3
+      ],
+      [
+        2492,
+        6
+      ],
+      [
+        2579,
+        5
+      ],
+      [
+        2601,
+        2
+      ]
+    ],
+    "saved_scalar_and_cell_rows": [
+      {
+        "element": 104,
+        "quadrature": 0,
+        "solid": false,
+        "material": "third_medium",
+        "nodes": [
+          105,
+          106,
+          187,
+          186
+        ],
+        "coordinates_mm": [
+          [
+            24.0,
+            1.0
+          ],
+          [
+            25.0,
+            1.0
+          ],
+          [
+            25.0,
+            2.0
+          ],
+          [
+            24.0,
+            2.0
+          ]
+        ],
+        "lame_lambda": 5.769230769230768e-07,
+        "lame_mu": 3.846153846153846e-07,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -7.855999714991939e-63,
+        "small_delta_hi": 7.070399743492746e-62,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 5.5477023124694824e-05,
+        "pre_rescale_product_lo": -3.48661982284963e-66,
+        "isolated_product_hi": -5.554505836975809e-124,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.0014343122020363806
+      },
+      {
+        "element": 1050,
+        "quadrature": 8,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          1063,
+          1064,
+          1145,
+          1144
+        ],
+        "coordinates_mm": [
+          [
+            10.0,
+            13.0
+          ],
+          [
+            11.0,
+            13.0
+          ],
+          [
+            11.0,
+            14.0
+          ],
+          [
+            10.0,
+            14.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -2.2439708090018714e-63,
+        "small_delta_hi": 2.0195737281016844e-62,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 1.584633719176054e-05,
+        "pre_rescale_product_lo": -2.8446974470329073e-67,
+        "isolated_product_hi": -4.531864492487262e-125,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.00011702406533231623
+      },
+      {
+        "element": 1584,
+        "quadrature": 6,
+        "solid": false,
+        "material": "third_medium",
+        "nodes": [
+          1603,
+          1604,
+          1685,
+          1684
+        ],
+        "coordinates_mm": [
+          [
+            64.0,
+            19.0
+          ],
+          [
+            65.0,
+            19.0
+          ],
+          [
+            65.0,
+            20.0
+          ],
+          [
+            64.0,
+            20.0
+          ]
+        ],
+        "lame_lambda": 5.769230769230768e-07,
+        "lame_mu": 3.846153846153846e-07,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.6077499658464417e-61,
+        "small_delta_hi": 1.4469749692617976e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0011353511363267899,
+        "pre_rescale_product_lo": -1.4602886005224922e-63,
+        "isolated_product_hi": -2.3263739574113113e-121,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.6007278867909918
+      },
+      {
+        "element": 1676,
+        "quadrature": 4,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          1696,
+          1697,
+          1778,
+          1777
+        ],
+        "coordinates_mm": [
+          [
+            76.0,
+            20.0
+          ],
+          [
+            77.0,
+            20.0
+          ],
+          [
+            77.0,
+            21.0
+          ],
+          [
+            76.0,
+            21.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -2.049987570001254e-61,
+        "small_delta_hi": 1.844988813001129e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0014476478099822998,
+        "pre_rescale_product_lo": -2.3741280129626016e-63,
+        "isolated_product_hi": -3.7822041334436825e-121,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.9766596162484751
+      },
+      {
+        "element": 1676,
+        "quadrature": 5,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          1696,
+          1697,
+          1778,
+          1777
+        ],
+        "coordinates_mm": [
+          [
+            76.0,
+            20.0
+          ],
+          [
+            77.0,
+            20.0
+          ],
+          [
+            77.0,
+            21.0
+          ],
+          [
+            76.0,
+            21.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -2.0215008667639747e-61,
+        "small_delta_hi": 1.8193507800875774e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0014275312423706055,
+        "pre_rescale_product_lo": -2.308604515027866e-63,
+        "isolated_product_hi": -3.6778191788947514e-121,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.9497048126326666
+      },
+      {
+        "element": 1756,
+        "quadrature": 8,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          1777,
+          1778,
+          1859,
+          1858
+        ],
+        "coordinates_mm": [
+          [
+            76.0,
+            21.0
+          ],
+          [
+            77.0,
+            21.0
+          ],
+          [
+            77.0,
+            22.0
+          ],
+          [
+            76.0,
+            22.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.807913896269351e-61,
+        "small_delta_hi": 1.627122506642416e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0012767016887664795,
+        "pre_rescale_product_lo": -1.8465333796091731e-63,
+        "isolated_product_hi": -2.9416973906914436e-121,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.7596197728481557
+      },
+      {
+        "element": 1757,
+        "quadrature": 2,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          1778,
+          1779,
+          1860,
+          1859
+        ],
+        "coordinates_mm": [
+          [
+            77.0,
+            21.0
+          ],
+          [
+            78.0,
+            21.0
+          ],
+          [
+            78.0,
+            22.0
+          ],
+          [
+            77.0,
+            22.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.7724637766851813e-61,
+        "small_delta_hi": 1.5952173990166632e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0012516677379608154,
+        "pre_rescale_product_lo": -1.77482858078482e-63,
+        "isolated_product_hi": -2.8274650556949867e-121,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.7301221295363374
+      },
+      {
+        "element": 1839,
+        "quadrature": 5,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          1861,
+          1862,
+          1943,
+          1942
+        ],
+        "coordinates_mm": [
+          [
+            79.0,
+            22.0
+          ],
+          [
+            80.0,
+            22.0
+          ],
+          [
+            80.0,
+            23.0
+          ],
+          [
+            79.0,
+            23.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.4768245502363642e-61,
+        "small_delta_hi": 1.3291420952127278e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0010428950190544128,
+        "pre_rescale_product_lo": -1.232138373967022e-63,
+        "isolated_product_hi": -1.9629096769627554e-121,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.5068723274032688
+      },
+      {
+        "element": 1891,
+        "quadrature": 6,
+        "solid": false,
+        "material": "third_medium",
+        "nodes": [
+          1914,
+          1915,
+          1996,
+          1995
+        ],
+        "coordinates_mm": [
+          [
+            51.0,
+            23.0
+          ],
+          [
+            52.0,
+            23.0
+          ],
+          [
+            52.0,
+            24.0
+          ],
+          [
+            51.0,
+            24.0
+          ]
+        ],
+        "lame_lambda": 5.769230769230768e-07,
+        "lame_mu": 3.846153846153846e-07,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.5112829105226436e-61,
+        "small_delta_hi": 1.3601546194703793e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.001067228615283966,
+        "pre_rescale_product_lo": -1.2903074943195224e-63,
+        "isolated_product_hi": -2.0555784320740138e-121,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.5308017155621201
+      },
+      {
+        "element": 1915,
+        "quadrature": 6,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          1938,
+          1939,
+          2020,
+          2019
+        ],
+        "coordinates_mm": [
+          [
+            75.0,
+            23.0
+          ],
+          [
+            76.0,
+            23.0
+          ],
+          [
+            76.0,
+            24.0
+          ],
+          [
+            75.0,
+            24.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.752712995774001e-61,
+        "small_delta_hi": 1.5774416961966008e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.001237720251083374,
+        "pre_rescale_product_lo": -1.7354946953651914e-63,
+        "isolated_product_hi": -2.764802560999566e-121,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.7139411076075501
+      },
+      {
+        "element": 1987,
+        "quadrature": 5,
+        "solid": false,
+        "material": "third_medium",
+        "nodes": [
+          2011,
+          2012,
+          2093,
+          2092
+        ],
+        "coordinates_mm": [
+          [
+            67.0,
+            24.0
+          ],
+          [
+            68.0,
+            24.0
+          ],
+          [
+            68.0,
+            25.0
+          ],
+          [
+            67.0,
+            25.0
+          ]
+        ],
+        "lame_lambda": 5.769230769230768e-07,
+        "lame_mu": 3.846153846153846e-07,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.8237925956664273e-61,
+        "small_delta_hi": 1.6414133360997846e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0012879148125648499,
+        "pre_rescale_product_lo": -1.87911159920391e-63,
+        "isolated_product_hi": -2.9935974888069157e-121,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.7730216750512934
+      },
+      {
+        "element": 1987,
+        "quadrature": 6,
+        "solid": false,
+        "material": "third_medium",
+        "nodes": [
+          2011,
+          2012,
+          2093,
+          2092
+        ],
+        "coordinates_mm": [
+          [
+            67.0,
+            24.0
+          ],
+          [
+            68.0,
+            24.0
+          ],
+          [
+            68.0,
+            25.0
+          ],
+          [
+            67.0,
+            25.0
+          ]
+        ],
+        "lame_lambda": 5.769230769230768e-07,
+        "lame_mu": 3.846153846153846e-07,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.6786686686187318e-61,
+        "small_delta_hi": 1.5108018017568585e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0011854320764541626,
+        "pre_rescale_product_lo": -1.591958148415398e-63,
+        "isolated_product_hi": -2.5361356491019667e-121,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.6548935970705416
+      },
+      {
+        "element": 1998,
+        "quadrature": 0,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2022,
+          2023,
+          2104,
+          2103
+        ],
+        "coordinates_mm": [
+          [
+            78.0,
+            24.0
+          ],
+          [
+            79.0,
+            24.0
+          ],
+          [
+            79.0,
+            25.0
+          ],
+          [
+            78.0,
+            25.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.2592388906576927e-61,
+        "small_delta_hi": 1.1333150015919235e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0008892416954040527,
+        "pre_rescale_product_lo": -8.958141808377321e-64,
+        "isolated_product_hi": -1.4271143253703349e-121,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.3685165792703628
+      },
+      {
+        "element": 1998,
+        "quadrature": 5,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2022,
+          2023,
+          2104,
+          2103
+        ],
+        "coordinates_mm": [
+          [
+            78.0,
+            24.0
+          ],
+          [
+            79.0,
+            24.0
+          ],
+          [
+            79.0,
+            25.0
+          ],
+          [
+            78.0,
+            25.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.2315751366250459e-61,
+        "small_delta_hi": 1.1084176229625413e-60,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0008697062730789185,
+        "pre_rescale_product_lo": -8.568868976726628e-64,
+        "isolated_product_hi": -1.3650995854377004e-121,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.35250282380729914
+      },
+      {
+        "element": 2078,
+        "quadrature": 5,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2103,
+          2104,
+          2185,
+          2184
+        ],
+        "coordinates_mm": [
+          [
+            78.0,
+            25.0
+          ],
+          [
+            79.0,
+            25.0
+          ],
+          [
+            79.0,
+            26.0
+          ],
+          [
+            78.0,
+            26.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.0806694638832654e-61,
+        "small_delta_hi": 9.726025174949389e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0007631406188011169,
+        "pre_rescale_product_lo": -6.597622107098772e-64,
+        "isolated_product_hi": -1.05106184115277e-121,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.2714104311178542
+      },
+      {
+        "element": 2157,
+        "quadrature": 5,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2183,
+          2184,
+          2265,
+          2264
+        ],
+        "coordinates_mm": [
+          [
+            77.0,
+            26.0
+          ],
+          [
+            78.0,
+            26.0
+          ],
+          [
+            78.0,
+            27.0
+          ],
+          [
+            77.0,
+            27.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -9.697717832436196e-62,
+        "small_delta_hi": 8.727946049192577e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0006848275661468506,
+        "pre_rescale_product_lo": -5.313011600292953e-64,
+        "isolated_product_hi": -8.464115804179589e-122,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.2185646200345622
+      },
+      {
+        "element": 2157,
+        "quadrature": 7,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2183,
+          2184,
+          2265,
+          2264
+        ],
+        "coordinates_mm": [
+          [
+            77.0,
+            26.0
+          ],
+          [
+            78.0,
+            26.0
+          ],
+          [
+            78.0,
+            27.0
+          ],
+          [
+            77.0,
+            27.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.0087669147862065e-61,
+        "small_delta_hi": 9.078902233075859e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0007123649120330811,
+        "pre_rescale_product_lo": -5.748881236108468e-64,
+        "isolated_product_hi": -9.158496195305534e-122,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.23649525683787131
+      },
+      {
+        "element": 2158,
+        "quadrature": 6,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2184,
+          2185,
+          2266,
+          2265
+        ],
+        "coordinates_mm": [
+          [
+            78.0,
+            26.0
+          ],
+          [
+            79.0,
+            26.0
+          ],
+          [
+            79.0,
+            27.0
+          ],
+          [
+            78.0,
+            27.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -1.0239176206561077e-61,
+        "small_delta_hi": 9.21525858590497e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0007230639457702637,
+        "pre_rescale_product_lo": -5.9228633194824426e-64,
+        "isolated_product_hi": -9.435665645010585e-122,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.24365246461497414
+      },
+      {
+        "element": 2159,
+        "quadrature": 0,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2185,
+          2186,
+          2267,
+          2266
+        ],
+        "coordinates_mm": [
+          [
+            79.0,
+            26.0
+          ],
+          [
+            80.0,
+            26.0
+          ],
+          [
+            80.0,
+            27.0
+          ],
+          [
+            79.0,
+            27.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -9.924767407868142e-62,
+        "small_delta_hi": 8.932290667081327e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0007008612155914307,
+        "pre_rescale_product_lo": -5.5647076399525425e-64,
+        "isolated_product_hi": -8.865090729025354e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.22891879454255104
+      },
+      {
+        "element": 2236,
+        "quadrature": 2,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2263,
+          2264,
+          2345,
+          2344
+        ],
+        "coordinates_mm": [
+          [
+            76.0,
+            27.0
+          ],
+          [
+            77.0,
+            27.0
+          ],
+          [
+            77.0,
+            28.0
+          ],
+          [
+            76.0,
+            28.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -6.669686784621683e-62,
+        "small_delta_hi": 6.0027181061595144e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0004709959030151367,
+        "pre_rescale_product_lo": -2.5131161199608105e-64,
+        "isolated_product_hi": -4.003624962446141e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.10338360071182251
+      },
+      {
+        "element": 2236,
+        "quadrature": 7,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2263,
+          2264,
+          2345,
+          2344
+        ],
+        "coordinates_mm": [
+          [
+            76.0,
+            27.0
+          ],
+          [
+            77.0,
+            27.0
+          ],
+          [
+            77.0,
+            28.0
+          ],
+          [
+            76.0,
+            28.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -7.278247170816599e-62,
+        "small_delta_hi": 6.55042245373494e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0005139708518981934,
+        "pre_rescale_product_lo": -2.9926455189681786e-64,
+        "isolated_product_hi": -4.767559369154985e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.12311029599772559
+      },
+      {
+        "element": 2238,
+        "quadrature": 0,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2265,
+          2266,
+          2347,
+          2346
+        ],
+        "coordinates_mm": [
+          [
+            78.0,
+            27.0
+          ],
+          [
+            79.0,
+            27.0
+          ],
+          [
+            79.0,
+            28.0
+          ],
+          [
+            78.0,
+            28.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.991669617384811e-62,
+        "small_delta_hi": 8.092502655646331e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0006349682807922363,
+        "pre_rescale_product_lo": -4.567539998722095e-64,
+        "isolated_product_hi": -7.276511025738101e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.18789769709110257
+      },
+      {
+        "element": 2239,
+        "quadrature": 0,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2266,
+          2267,
+          2348,
+          2347
+        ],
+        "coordinates_mm": [
+          [
+            79.0,
+            27.0
+          ],
+          [
+            80.0,
+            27.0
+          ],
+          [
+            80.0,
+            28.0
+          ],
+          [
+            79.0,
+            28.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.713132963509191e-62,
+        "small_delta_hi": 7.841819667158272e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0006152987480163574,
+        "pre_rescale_product_lo": -4.2889438429978076e-64,
+        "isolated_product_hi": -6.832681743581142e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.1764369159936905
+      },
+      {
+        "element": 2317,
+        "quadrature": 1,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2345,
+          2346,
+          2427,
+          2426
+        ],
+        "coordinates_mm": [
+          [
+            77.0,
+            28.0
+          ],
+          [
+            78.0,
+            28.0
+          ],
+          [
+            78.0,
+            29.0
+          ],
+          [
+            77.0,
+            29.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.210500910833639e-62,
+        "small_delta_hi": 7.389450819750275e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0005798041820526123,
+        "pre_rescale_product_lo": -3.808386211878501e-64,
+        "isolated_product_hi": -6.067109268612002e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.15666792169213295
+      },
+      {
+        "element": 2317,
+        "quadrature": 3,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2345,
+          2346,
+          2427,
+          2426
+        ],
+        "coordinates_mm": [
+          [
+            77.0,
+            28.0
+          ],
+          [
+            78.0,
+            28.0
+          ],
+          [
+            78.0,
+            29.0
+          ],
+          [
+            77.0,
+            29.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.335420379844524e-62,
+        "small_delta_hi": 7.501878341860071e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0005886256694793701,
+        "pre_rescale_product_lo": -3.9251539211823745e-64,
+        "isolated_product_hi": -6.253130961785468e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.16147146663731998
+      },
+      {
+        "element": 2319,
+        "quadrature": 2,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2347,
+          2348,
+          2429,
+          2428
+        ],
+        "coordinates_mm": [
+          [
+            79.0,
+            28.0
+          ],
+          [
+            80.0,
+            28.0
+          ],
+          [
+            80.0,
+            29.0
+          ],
+          [
+            79.0,
+            29.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.50549654880191e-62,
+        "small_delta_hi": 7.65494689392172e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0006006360054016113,
+        "pre_rescale_product_lo": -4.086965976823656e-64,
+        "isolated_product_hi": -6.510912438751308e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.168128028512001
+      },
+      {
+        "element": 2319,
+        "quadrature": 4,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2347,
+          2348,
+          2429,
+          2428
+        ],
+        "coordinates_mm": [
+          [
+            79.0,
+            28.0
+          ],
+          [
+            80.0,
+            28.0
+          ],
+          [
+            80.0,
+            29.0
+          ],
+          [
+            79.0,
+            29.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.565002106675338e-62,
+        "small_delta_hi": 7.708501896007805e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0006048381328582764,
+        "pre_rescale_product_lo": -4.144351905702972e-64,
+        "isolated_product_hi": -6.602333497861769e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.17048874869942665
+      },
+      {
+        "element": 2319,
+        "quadrature": 6,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2347,
+          2348,
+          2429,
+          2428
+        ],
+        "coordinates_mm": [
+          [
+            79.0,
+            28.0
+          ],
+          [
+            80.0,
+            28.0
+          ],
+          [
+            80.0,
+            29.0
+          ],
+          [
+            79.0,
+            29.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.624507664548766e-62,
+        "small_delta_hi": 7.76205689809389e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0006090402603149414,
+        "pre_rescale_product_lo": -4.2021379144839905e-64,
+        "isolated_product_hi": -6.694391921027438e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.17286592721939087
+      },
+      {
+        "element": 2398,
+        "quadrature": 2,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2427,
+          2428,
+          2509,
+          2508
+        ],
+        "coordinates_mm": [
+          [
+            78.0,
+            29.0
+          ],
+          [
+            79.0,
+            29.0
+          ],
+          [
+            79.0,
+            30.0
+          ],
+          [
+            78.0,
+            30.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.804290413868485e-62,
+        "small_delta_hi": 7.923861372481637e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0006217360496520996,
+        "pre_rescale_product_lo": -4.379155793526753e-64,
+        "isolated_product_hi": -6.976397672256286e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.18014802038669586
+      },
+      {
+        "element": 2399,
+        "quadrature": 3,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2428,
+          2429,
+          2510,
+          2509
+        ],
+        "coordinates_mm": [
+          [
+            79.0,
+            29.0
+          ],
+          [
+            80.0,
+            29.0
+          ],
+          [
+            80.0,
+            30.0
+          ],
+          [
+            79.0,
+            30.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.566690207607918e-62,
+        "small_delta_hi": 7.710021186847126e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0006049573421478271,
+        "pre_rescale_product_lo": -4.145985711198643e-64,
+        "isolated_product_hi": -6.604936300181285e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.1705559595591492
+      },
+      {
+        "element": 2399,
+        "quadrature": 4,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2428,
+          2429,
+          2510,
+          2509
+        ],
+        "coordinates_mm": [
+          [
+            79.0,
+            29.0
+          ],
+          [
+            80.0,
+            29.0
+          ],
+          [
+            80.0,
+            30.0
+          ],
+          [
+            79.0,
+            30.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.44852314232735e-62,
+        "small_delta_hi": 7.603670828094616e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0005966126918792725,
+        "pre_rescale_product_lo": -4.0323969074786e-64,
+        "isolated_product_hi": -6.423978895779673e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.16588318720459935
+      },
+      {
+        "element": 2399,
+        "quadrature": 5,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2428,
+          2429,
+          2510,
+          2509
+        ],
+        "coordinates_mm": [
+          [
+            79.0,
+            29.0
+          ],
+          [
+            80.0,
+            29.0
+          ],
+          [
+            80.0,
+            30.0
+          ],
+          [
+            79.0,
+            30.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.330356077046785e-62,
+        "small_delta_hi": 7.497320469342107e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 0.0005882680416107178,
+        "pre_rescale_product_lo": -3.920385804291403e-64,
+        "isolated_product_hi": -6.245534913335127e-122,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.16127531768547163
+      },
+      {
+        "element": 2425,
+        "quadrature": 3,
+        "solid": false,
+        "material": "third_medium",
+        "nodes": [
+          2455,
+          2456,
+          2537,
+          2536
+        ],
+        "coordinates_mm": [
+          [
+            25.0,
+            30.0
+          ],
+          [
+            26.0,
+            30.0
+          ],
+          [
+            26.0,
+            31.0
+          ],
+          [
+            25.0,
+            31.0
+          ]
+        ],
+        "lame_lambda": 5.769230769230768e-07,
+        "lame_mu": 3.846153846153846e-07,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": 3.40877693784241e-63,
+        "small_delta_hi": -3.067899244058169e-62,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": -2.4071894586086273e-05,
+        "pre_rescale_product_lo": -6.564457529217956e-67,
+        "isolated_product_hi": -1.0457784190769649e-124,
+        "isolated_product_lo": -0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.00027004611951674125
+      },
+      {
+        "element": 2492,
+        "quadrature": 6,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2523,
+          2524,
+          2605,
+          2604
+        ],
+        "coordinates_mm": [
+          [
+            12.0,
+            31.0
+          ],
+          [
+            13.0,
+            31.0
+          ],
+          [
+            13.0,
+            32.0
+          ],
+          [
+            12.0,
+            32.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": -8.094971503260228e-64,
+        "small_delta_hi": 7.285474352934206e-63,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": 5.716457962989807e-06,
+        "pre_rescale_product_lo": -3.701965144799e-68,
+        "isolated_product_hi": -5.8975707274735646e-126,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 1.5229001292027533e-05
+      },
+      {
+        "element": 2579,
+        "quadrature": 5,
+        "solid": true,
+        "material": "mechanism_solid",
+        "nodes": [
+          2611,
+          2612,
+          2693,
+          2692
+        ],
+        "coordinates_mm": [
+          [
+            19.0,
+            32.0
+          ],
+          [
+            20.0,
+            32.0
+          ],
+          [
+            20.0,
+            33.0
+          ],
+          [
+            19.0,
+            33.0
+          ]
+        ],
+        "lame_lambda": 0.5769230769230769,
+        "lame_mu": 0.3846153846153846,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": 1.4032339002067257e-64,
+        "small_delta_hi": -1.2629105101860532e-63,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": -9.909272193908691e-07,
+        "pre_rescale_product_lo": -1.1124021335094841e-69,
+        "isolated_product_hi": -1.7721588408204413e-127,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 4.576156950659222e-07
+      },
+      {
+        "element": 2601,
+        "quadrature": 2,
+        "solid": false,
+        "material": "third_medium",
+        "nodes": [
+          2633,
+          2634,
+          2715,
+          2714
+        ],
+        "coordinates_mm": [
+          [
+            41.0,
+            32.0
+          ],
+          [
+            42.0,
+            32.0
+          ],
+          [
+            42.0,
+            33.0
+          ],
+          [
+            41.0,
+            33.0
+          ]
+        ],
+        "lame_lambda": 5.769230769230768e-07,
+        "lame_mu": 3.846153846153846e-07,
+        "original_remainder_hi": 0.125,
+        "original_remainder_lo": 5.946863066552789e-62,
+        "small_delta_hi": -5.3521767598975106e-61,
+        "small_delta_lo": 0.0,
+        "pre_rescale_product_hi": -0.00041995197534561157,
+        "pre_rescale_product_lo": -1.997917513526964e-64,
+        "isolated_product_hi": -3.182866229909668e-122,
+        "isolated_product_lo": 0.0,
+        "valid_inputs": true,
+        "exact_saved_scalar_product_confirmed": true,
+        "absolute_fraction_of_operand_min": 0.08218955934151179
+      }
+    ]
+  },
+  "causal_limits": [
+    "The first root is in the selected energy Horner path. Subsequent energy evaluation retains this selected path and the response requires its material_energy pair to be supported, so the root is a causal contributor to rejection.",
+    "Final checked response fields were not saved by this primitive-only tracer; later roots or other invalid fields are not excluded. This is not proof of a unique entire-output cause.",
+    "Stress/force pairs are formed earlier in source order, but their final checked finiteness is not asserted from this archive.",
+    "The later F63/T25 tangent failure state was not captured. This F16 mapping neither diagnoses nor qualifies it.",
+    "The original F36 matmul320 qualification does not transfer to this different real trial input."
+  ],
+  "minimum_candidate": {
+    "scope": "Auxiliary Horner arithmetic organization only; not implemented or qualified here",
+    "proposal": "In the selected tiny branch hold remainder and each unchanged Horner coefficient in common E=2^192 units through the complete multiply-plus-add update; restore only after coefficient addition, or after the unchanged full Horner loop. Feed the existing scaled_square with the original-unit remainder.",
+    "algebra": "R=E*r; R_new=R*delta+E*c_p; r_new=R_new/E=r*delta+c_p.",
+    "reason": "remainder=1/8+O(delta); the low remainder times delta is O(delta^2). Current code rejects that sparse tiny word before the next order-one coefficient addition can normalize the complete DD pair. Keeping the full update scaled preserves all four terms without explicit deletion or clipping.",
+    "static_upper_bound": "For the selected tiny-native branch |delta| is far below1/64 and |r|<1; |E*r|<2^192. The existing scaled multiply adds2^192, yielding at most2^384 before multiplication, with margin to2^400. Splitter temporaries stay below2^900. This is an operation-order upper bound, not a universal lower-word support guarantee.",
+    "direct_branch": "Keep unselected NumPy operation order unchanged; no AD/JIT qualification transfers.",
+    "must_not_change": [
+      "CI source/domain/four products",
+      "Original13..2 Horner series updates/coefficients and final delta^2",
+      "Stress/residual/tangent formulas",
+      "Controller force floor/tolerance",
+      "Frozen003 failure/accepted-state qualification",
+      "No zeroing/clipping or omission of terms"
+    ]
+  },
+  "minimum_new_validation": [
+    "New isolated source snapshot and exact original captured16-field state; retain existing failed phase and trace.",
+    "One complete captured force call with every checked field, especially auxiliary energy, persisted; first error stops.",
+    "One cached-field NumPy tangent with three complete tensors and unsymmetrized assembly; this tests this input, not uncapturedT25.",
+    "Fresh independent80/120 full-element/global three-force and Jv comparison under original limits and derived scales; bind the nonaffine fixed-compatible witness/current compensated tensor consumer; no sampling or oldF36 reference reuse.",
+    "Finite auxiliary energy and independent energy diagnostic; do not silently create or relax a numerical gate when the original card has no energy-error gate.",
+    "After captured candidate success, unchanged tiny-return code test and unselected-path byte regression under a separately declared bounded run; no closed003 production retry authorized here."
+  ],
+  "postprocessing_note": "An initial external JSON write command did not parse because of a reserved keyword in a dictionary constructor, before any input read or file creation. Corrected local postprocessing spelling; no mechanics executed in either command."
+}

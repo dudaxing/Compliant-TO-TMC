@@ -1,0 +1,100 @@
+{
+  "schema_version": "hf-native-project-task-1.1",
+  "task_id": "EXPLORATORY_fixed_workpiece_gripper_coarse_square_cycle003_new_core",
+  "case_family": "gripper",
+  "purpose": "fixed_workpiece_new_core_return",
+  "parameter_origin": "Agent-selected minimal .5 mm loading-return path under user delegation; unchanged square/model and separately frozen matmul320 core",
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain"
+  },
+  "input": {
+    "tag": "input",
+    "control": "average_displacement",
+    "target_mm": 0.5
+  },
+  "output": {
+    "tag": "output",
+    "spring_N_per_mm": 0.0
+  },
+  "constraints": [
+    {
+      "tag": "support",
+      "components": [
+        0,
+        1
+      ]
+    },
+    {
+      "tag": "symmetry",
+      "components": [
+        1
+      ]
+    }
+  ],
+  "support_selection": "solid_incident_nodes_only",
+  "input_auxiliary_spring_N_per_mm": 0.0,
+  "workpiece": {
+    "kind": "fixed_rigid",
+    "shape": "square",
+    "center_mm": [
+      70.0,
+      40.0
+    ],
+    "fixed_components": [
+      0,
+      1
+    ],
+    "side_mm": 16.0
+  },
+  "third_medium": {
+    "gamma": 1e-06
+  },
+  "qualification_criteria": {
+    "max_design_volume_fraction": null,
+    "min_feature_mm": null
+  },
+  "reference_state": "undeformed",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "regularization": {
+    "alpha": 1e-06,
+    "length_mm": 80.0
+  },
+  "background_symmetry": {
+    "points_mm": [
+      [
+        0.0,
+        40.0
+      ],
+      [
+        80.0,
+        40.0
+      ]
+    ],
+    "components": [
+      1
+    ]
+  },
+  "geometry": {
+    "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+    "descriptor_sha256": "8c5c315e7328888a6ba16b28d5def1712e2ea5ddae21cfa97f99f06396e7977b"
+  },
+  "analysis_grid": {
+    "policy": "native"
+  },
+  "description": "Same coarse native half-model and fixed square; new source-qualified [0,.5,0] path, not a retry or inherited seven-state qualification.",
+  "path": {
+    "kind": "ordered_cycle",
+    "targets_mm": [
+      0.0,
+      0.5,
+      0.0
+    ]
+  }
+}

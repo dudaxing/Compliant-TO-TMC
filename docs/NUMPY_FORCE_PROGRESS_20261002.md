@@ -1,10 +1,10 @@
 # NumPy 完整力入口：功能进度与参考比较
 
-2026-10-04当前：**已完成卸载范围问题定位、隔离matmul320完整F/T及补偿切线作用入口。新的保存数据重新验收实际exit0，19200局部＋9全局原门全通过，614400局部矩阵存储贡献/三完整CSC核对通过。** 原候选reference的e0 Hu action失败永久保留；全域诊断原Hu693越门、精确保存K×v0、C布局507，支持修正乘积/求和消费端。新生产入口29行；本次3consumer调用、0新F/T/HP/solve，复用原实际完整HP80/120，而非新参考求值。见[候选与诊断全过程](../lf_data_preparation/native_workpiece_001/matmul320_candidate_001/RESULTS.md)、[新实际验收](../lf_data_preparation/native_workpiece_001/matmul320_action_requalification_001/RESULTS.md)、[实际补偿作用比较图](../lf_data_preparation/native_workpiece_001/matmul320_action_view_001/evidence/requalified_action_errors.png)。
+2026-10-04当前：**matmul320候选7fff已按原字节合入；新粗方固定半工件[0,.5,0]mm三点探索正式失败并关闭，峰值达到但卸载未完成。** 2接受态[0,.5]、R_input=.106253248N、自由+y输出=.575755712mm、minJ=.735764774。600s内部预算后实际exit1，66F/50完成、27T/26完成、1solve、0新HP。16全步范围拒绝后half收敛，随后T25范围失败回滚、二分.25遇时间门；全部来源和原27数组不变。不能称新循环或两态独立参考通过。见[整体目标、选择依据、全过程与实际结果](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/RESULTS.md)、[×1结构/力及失败时序图](../functional_views/native_workpiece_cycle003_20261004/failure_saved_001/render_001/cycle003_failure.png)。
 
-物理进度仍为旧源码下同粗方固定半工件 `[0,.1,.25,.5,.25,.1,0]`mm循环七态14次新HP通过。峰值输入力.106253248N、自由+y输出.575755712mm、最大节点位移.796706551mm、minJ=.735764774；真实底最近无符号距离1.471935964mm，**尚未夹紧**。见[完整物理结果](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/RESULTS.md)、[七帧实际×1动画](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_actual.gif)、[整体目标和持续开发记录](NUMPY_FORCE_PROGRESS_20261002.md#matmul320-action-20261004)。
+新独立保存F16诊断一次复现原异常：首坏为已选辅助能量Horner乘积的(lo,hi)回缩项，非旧矩阵乘法、非overflow；36点物理词落到2^-400下界以下。只1F开始/0完成、0T/HP/solve，diagnostic_captured不是数学资格。下一最小候选改Horner共同尺度与乘加顺序，保留原14阶系数/CI域/P/门；尚未实现，先新F16完整F/T与fresh HP核验，再新连续路径和1mm探索。不增预算重开旧失败，不裁零或借旧F36解释后期未捕获T25。
 
-live core仍保留旧31d955，matmul320隔离核心7fff未合入；新资格仅限完整捕获F36、该候选、补偿consumer和声明dyadic方向，不能转给旧七态或全部切线列。下一独立阶段按候选原字节合入、重新冻结同粗方0.5mm有序循环/全部新接受态fresh HP，然后依据实际几何/成本探索1mm。1/2/3mm未执行；压力/夹持判据、signed normal gap/包容、自由工件、H2/H3/HF5及完整AD/JIT仍待实现或资格化。仅main、origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；异目录公开恢复只验文件身份，不称数值重放。
+旧31d955七态14fresh HP及真实边距1.471935964mm保持自己的来源资格；保存F36/candidate7fff/consumer B52的19200局部＋9全局原门和原失败也保留，不能转给新循环。当前新图仅保存诊断、无新测距/夹持资格；1/2/3mm未执行。signed gap/交叉/包容、压力/有效夹持、自由工件、细/圆平衡、H2/H3/HF5及完整AD/JIT仍待实现或资格化。完整持续记录见[开发进度](NUMPY_FORCE_PROGRESS_20261002.md#native-workpiece-cycle003-20261004)。仅main、origin固定https://github.com/dudaxing/Compliant-TO-TMC.git；公开恢复只验文件身份。
 
 以下为上一阶段及更早时点的保留记录；当前状态以页首与持续报告末节为准。
 
@@ -1785,3 +1785,10 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 独立保存态查看卡实际exit0，outer2.3579347s、322bindings不变；root实际打开2600×950PNG检查。图展示原Hu693越门、新actual consumer0越门；9600行表保存。旧图对照HP120，新门对照HP80，显示floor1e-30不参与判门；0新consumer或力学。见[实际图与保存数据说明](../lf_data_preparation/native_workpiece_001/matmul320_action_view_001/RESULTS.md)。
 
 科学资料提交 `ef574c2b9b03e0dcb8d1aa3169e3beb832cfc3bf` 已推送main，随后在清洁异目录公开克隆 `D:/hf-restore-20260930` 实际fetch/fast-forward到同一提交，文件身份验证真实exit0、7687项、manifest `bf0e0dafef29a9f5bcb829252df09234bd9daa229a331a0a04f0e87f6aec78f8`。完整回执见[公开恢复证据](../handoff/native_workpiece_matmul320_20261004/public_restore_science_receipt.json)。这是文件身份恢复，无新增consumer/FE/HP/几何/查看器重放；随后回执提交的manifest会改变，不能把此hash移用到后续提交。
+
+
+<a id="native-workpiece-cycle003-20261004"></a>
+
+## 2026-10-04：新内核三点循环未完成，先定位能量下界问题
+
+整体目标、为什么合入候选并选择三点、63源/27原数组、正式失败及准确计数、F16新诊断、实际失败图和下一步见[完整记录](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/RESULTS.md)。原七态和F36分别保留各自来源资格。本轮未执行新独立HP、返零未接受、较晚T25原输入未保存；不能把诊断捕获说成通过。
