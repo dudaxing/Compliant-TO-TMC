@@ -1532,3 +1532,45 @@ main交付和干净clone file identity实际通过之后才唯一执行该CLI；
 加载—卸载需显式ordered-targets/cycle模式、保留旧load_only；现有严格递增检查及minimum bisection signed difference需改为适用于两向的abs步差，核心KKT/预测器/Armijo/门不改。按顺序保存target_index/leg，不按位移值去重或排序；元数据分别记录loading_peak/unload_endpoint/path_completed，末位移不等于峰值不能误说失败。新增工件组/语义及保存路径需要独立新identity/参考合同，不能直接套本次no-workpiece checker。
 
 下一最近阶段先实现和可视化这个明确任务的构造/测力/连续循环接口，再依据实际gap和有效加载态逐步进入约2.5mm量级探索循环并卸载回0；起步建议1、2mm及闭合附近细步只作算法选步，由新任务预算/结果约束，尚未执行。优先一个可检查的功能链，后续圆/方/多尺寸和更大行程按结果展开，不现在跑全面campaign或宣布HF5。用户已委托物理探索，不重复索要工件/行程授权；具体source、物理任务、预算及独立核查仍在下一阶段执行前明确。当前只读设计，0新增workpiece model/force/solver/HP，不修改本stage39来源。
+
+### 已交付与当前公开恢复
+
+科学代码/四态完整产物/8HP/图/记录已实际提交并推main **ea7b3b84099c355ec4cf72f9fbcdff652557e1d8**。当前交付清单由Git index重建，manifest SHAd7ad7c04e66991190d05ba7b90e885ce8976421441651c94a6f052d4f7f77f89，6594 files/6595 tracked，root file identity terminal0/pass；清单保持现有 science_baseline，不改历史freeze，仅storage_stage/previous_delivery为本阶段/66398。无非忽略未跟踪文件，.gitattributes保留所有source/evidence换行，最大新参考文件32883136B，未丢弃完整参考或改原门。
+
+独立clean clone D:/hf-restore-20260930先fetch后仅fast-forward由66398到此scienceHEAD，实际main/originexact/clean/0-0。公开[文件核验原记录](../handoff/native_fine_task_025_20261003/science_file_verify.json)已按外部原bytes保存，真实terminal0/pass，6594files；其原bytes将随最终proof保留。scope为轻量仓库file identity，不声称全外部historical evidence资产恢复。
+
+helper5dfa/contracta596/两外部新目录/独立核验pass再次实核后，唯一new public CLI wrapper1800/CLI1500/outer1860已开始。当前public尚无终端结果/产物比较或图包复现资格；没有.001重跑，没有新HP，当前没有新物理工件/卸载路径。后续结果按实际first terminal判定，不以science pass预授public pass。
+
+### 公开 CLI、图包恢复实际通过
+
+唯一新public CLI真实terminal0/pass；内部Popen真实returncode0，wrapper950.7515068000066秒，outer951.2235190999927秒，saved CLI elapsed946.4755283000413秒，production evaluation939.0339327999973秒；不同边界计时分别保留，不称重复运行。采样child tree峰2805821440B≈2.613GiB，wrapper＋tree2844807168B≈2.649GiB。实际14F/9T/1solver、0新HP/JIT/LF，四态[0,.005,.010,.025]完成；20完整payload/131数组和5规范JSON皆一致，规范JSON仅按冻结规则排除实测耗时与从属hash，未宣称whole-result JSON byte相同。
+
+新[原始replay回执](../handoff/native_fine_task_025_20261003/public_replay_receipt.json)SHA42144734d18218caf24ff9edbcaa1ff099805bf7638f3974585e462ab98fc2bf；public result SHAb3b6787e853b37283a5b13dfbedce86fbed59c304109b2e516414d0814fc36c0。decision成员表仍有PID33124/status running，但只作diagnostic；真实返回码0与完整产物分别落盘验收，未要求empty-members、未授全owned-tree/handle-release资格。旧.001的包装fail和原缺失判定字段保持，不能以这次新pass倒推旧卡的具体失败分支。
+
+唯一public saved-view真实exit0、outer5.167116199969314秒，0F/T/solver/HP；实际6文件与正式图包逐byte相同。root再次对clone main/EA/exactorigin/clean/0-0及199actual source-input-reference bindings实核。rawCLI log/result、4stateJSON、replayreceipt和两个outer launch原bytes均复制，9records；大NPZ/40HP不重复拷贝，因为formal fullpayload已在science交付且完整比较。汇总[public_recovery_verify.json](../handoff/native_fine_task_025_20261003/public_recovery_verify.json)SHA1c5d66ab1309516e62b950af0a7485b0451ae53a092b748817437780afaafffb，scope仅同机同runtime异目录ordinary CLI与saved-view恢复，不能授另一机器性能、新contact/mesh/HF5资格。两public窗口关闭，科学＋public共28F/18T/2solver/原8HP，0新的reference。
+
+root纯proof收集曾用每态文件basename state.json，exclusive copy在第二态遇已存在public_state.json停止；首态原bytes核对后改为public_state_000.json，四态按序单独保存并核SHA。此为CLI/view均成功后的文档复制错误，原receipt不改，无force/T/solver/HP/CLI/plot或formal卡重跑；透明记入proof，不能把它掩作某次正式计算fail。
+
+### 下一工件的实际静态可视化
+
+用户委托的圆/方、尺寸和较大行程已转为[工件布局图](../functional_views/workpiece_exploration_20261004/workpiece_layout.png)及[完整metadata](../functional_views/workpiece_exploration_20261004/layout_metadata.json)。独立作者仅新目录4files，原4geometry/model inputs与当前39source前后byte不变，stdlib/NumPy/Matplotlib只读几何，0Project/model construction/material assignment/force/T/solve/HP。唯一独立viewer outer2.0480573秒/120，含imports内部1.6265843秒，PNG实际2592×1980、SHA709a58a15decee4e142b3bae83be05908739a6ceb67c49272027e0edc2a92c8e；root与作者实际查看，未插值或重绘。
+
+正方形side16 center(70,40)下半512cells/561nodes/1122拟fixed uxuy，merge原fixed后1258/free24824；圆形同center r8下半406cells/455nodes/910拟fixed，merge1046/free25036。两者全部在passive_void、原机构/端口/支承node overlap0，顶部原symuy交集33只合并一次，最小raster node gap2mm；圆是cell-center规则的阶梯离散，非精确圆面。图显示y40以上仅完整工件mirror示意，不建上半网格，+x/+y箭头仅方向，未计算作用力。
+
+实际左侧机构竖壁x60也与方工件左边x62相距2mm，不能只监测下方y30→y32竖向间隙。因此下一workpiece任务必须保留工件FX/FY总量与material/Hu分量，+y夹持法向另列；单侧signed force、对称两侧压紧标量和完整装配净矢量区别保存。静态图底部小字对比度与dense节点显示限制记录在README，数值集合以metadata为准。当前仍未构造有效工件模型、未计算接触/卸载；下一功能计划沿前节明确任务执行，不需要用户重新选择已委托的尺寸。
+
+本轮恢复后验与最终main记录交付将继续，整体goal仍active。当前science main和public数据门通过，并非整个项目完成；圆/方真实夹持、连续卸载、大行程参数探索、H2/H3及HF5还有工作。
+
+### 镜像受力定义的明确修正
+
+前述“完整装配净矢量对称相消”表述过宽。实际只作y=40上下镜像；若下半工件所受力为(FX,FY)，其上半镜像为(FX,−FY)，故完整工件净矢量为(2FX,0)，并非必然零。两侧法向压紧的非负大小和可另定义2|FY|，同时保留2FY有符号量；FY为负需如实报告拉/传力方向，不能裁零冒充压紧。由于左侧也存在2mm间隙，未来必须测量FX及FY并记录此镜像关系，不能把输入R、J或整体fixed反力统称夹持力。该修正是下一物理定义的只读澄清，无新模型/求解；旧保存科学原力数组与规范不改变。
+
+### 额外 saved-only 审阅的原失败与只读定位
+
+额外独立[public_recovery_review.json](../handoff/native_fine_task_025_20261003/public_recovery_review.json)在25项predicate处停止，status fail，SHA0bac2e6e921057cbc3c5016a33e435a703c45e87a37a53ff5058c2a5a341eb5d；数组/JSON比较尚未开始，因此不能声称该补充审阅全比较通过。原report和partial bindings永久保留，未修改或重开该review、CLI、数学或HP。
+
+作者按停止后的只读定位发现其四项conjunct仅cmd[0]==outer_launch.command[0]为False：inner命令解释器路径使用Windows反斜线，outer记录使用正斜线；Windows Path.resolve之后是同一实际HF python路径。time-limit字面1500、targets字面[0,.005,.010,.025]、minimum字面6.25e-5三项全部True，实际saved_API_status success且全部计数0HP/14F/9T/1solver。此为补充审阅把等价路径字符串当运行时身份的断言错误，不是public普通CLI的实质runtime/target/资源改变，也不以修订断言重新制造这个review的pass。
+
+正式public helper预先冻结的同一runtime实际调用及20/131/5全比较仍terminal0/pass；root独立原raw读取、6图逐bytes比较和199bindings保持检查仍成立。当前完整公开恢复成功和补充review未完成这两件事分别保存，不把后者删掉、不借独立review未完成的覆盖。下一功能没有需要再求解已通过路径或新增进程框架的依据。
+
+工件物理只读审阅另确认：unique workpiece DOF组负holding-reaction和是半工件离散FX/FY及material/Hu合力；33uy与原sym交集诊断单列，总fixed平衡不重复，不机械扣掉其反力。固定全部工件节点意味着工件内部F=I/Hu=0，后续应检查workpiece内单元应力/残量0，读数来自周围medium弱式传力，不能叫接触面压力或独立mirror-cut应力。当前fine.025左壁x60/y32..40的ux约−.00952～−.00822mm，其2mm侧间隙目前增大；仅实际已保存的小位移现象，大行程仍需保留侧间隙及FX，不能预设纯+y接触。

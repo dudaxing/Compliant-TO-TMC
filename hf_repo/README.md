@@ -2,9 +2,9 @@
 
 2026-10-04当前：**新NumPy完整力、非对称CSC切线与split平均驱动平衡已接通；同一原生细夹爪原0.025mm TEST四态通过新独立参考**。12800单元／26082DOF／169fixed、五节点端口，实际[0,.005,.010,.025]／8新HP80/120／307565总检查；末态输入R=.003756278785N、自由+y输出=.023877824390mm、生产残量1.65e-12、minJ=.997535854。生产1099.22秒／14force-9tangent-1solver，无失败或二分，原task已完成；不是完整研究行程或真实夹持。见[目标、实现、物理效果、成本和接续](../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-fine-task-025-20261003)、[实际x1结构／外力与补充x40](../functional_views/native_fine_task_025_20261003/native_mean_path.png)、[四帧真实动画](../functional_views/native_fine_task_025_20261003/native_mean_path.gif)。原生细设计不同于粗设计，不称网格收敛；研究工件接触／释放重入／H2-H3／HF5标签仍待实现。
 
-此前.001的[公开包装失败](../handoff/native_fine_mean_20261003/public_recovery_failure.json)永久保留；其保存数值精确比较与wrapper fail分开。未来普通CLI包装已独立静态修订为真实returncode＋完整产物验收，成员仅作内存/诊断，不要求PID列表为空或声称全后代清理。新.025科学已通过，异目录CLI恢复尚未执行；具体1800秒wrapper／1500秒CLI／outer1860及原比较规则见[新恢复合同](../handoff/native_fine_task_025_20261003/replay_contract.json)，不借旧卡额度。
+此前.001的[公开包装失败](../handoff/native_fine_mean_20261003/public_recovery_failure.json)永久保留；其保存数值精确比较与wrapper fail分开。未来普通CLI包装已独立静态修订为真实returncode＋完整产物验收，成员仅作内存/诊断，不要求PID列表为空或声称全后代清理。新.025科学main ea7b3b8及干净异目录6594文件identity已通过；唯一[CLI＋图包恢复](../handoff/native_fine_task_025_20261003/public_recovery_verify.json)真实returncode0、20payload／131数组／5规范JSON及6图文件一致，outer951.22秒、0新HP；具体1800秒wrapper／1500秒CLI／outer1860及原比较规则见[新恢复合同](../handoff/native_fine_task_025_20261003/replay_contract.json)，不借旧卡额度。
 
-用户已明确委托Agent探索对称半工件（圆/正方形）、尺寸/位置及较大输入/卸载行程。下一最近功能是一个明确固定刚体工件、独立法向工件反力与连续加载—卸载，再据实际效果扩展工况；不会以旧“待用户定参数”阻断或把草案数值当验证。初选正方形中心(70,40)mm、side16mm，计算下半[62,78]×[32,40]，真实被动空区内且初始实体间隙2mm；当前只是静态选型，未构造/求解工件。单侧+y传力、对称双侧压紧标量和整装配净矢量分别记录。原LF数据、当前source/gates保留，下一具体预算在执行前另冻结。
+用户已明确委托Agent探索对称半工件（圆/正方形）、尺寸/位置及较大输入/卸载行程。下一最近功能是一个明确固定刚体工件、独立法向工件反力与连续加载—卸载，再据实际效果扩展工况；不会以旧“待用户定参数”阻断或把草案数值当验证。初选正方形中心(70,40)mm、side16mm，计算下半[62,78]×[32,40]，真实被动空区内且初始实体间隙2mm；已保存[圆/方几何与对称预览](../functional_views/workpiece_exploration_20261004/workpiece_layout.png)及实际几何集合；当前仅静态选型，未构造/求解工件。单侧+y传力、对称双侧压紧标量和整装配净矢量分别记录。原LF数据、当前source/gates保留，下一具体预算在执行前另冻结。
 
 以下增补保留各执行时点；当前结论和下一步以本条及报告末节为准。旧记录中的“尚未实现”和旧计划不作为当前状态。
 
