@@ -1,8 +1,8 @@
 # Compliant-TO-TMC：独立 HF 力学评估器
 
-2026-10-03当前：**NumPy完整力、非对称切线和普通文件平均驱动平衡已接通两类粗机构**。新增反向器0→.001mm两态／4新HP全模型参考通过：实际输出ux=−.00160192037mm，输入R=.000169872673N，独立残量8.73e-12。夹爪此前小步亦通过。见[目标、实现、成本、物理效果与接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-inverter-mean-20261003)、[真实x1形变／力与补充x1000](functional_views/native_inverter_mean_20261003/native_mean_path.png)及[两帧动画](functional_views/native_inverter_mean_20261003/native_mean_path.gif)。均为无工件TEST；完整行程／真实夹持／释放重入／H2-H3／HF5标签仍待完成。下一唯一功能阶段为反向器明确TEST[0,.005,.010,.025]mm，尚未执行。
+2026-10-03当前：**普通反向器原0.025mm TEST目标已由NumPy完整力、非对称CSC切线与split平均驱动平衡完成**。四态[0,.005,.010,.025]mm／8新HP80/120全模型参考通过，输入反力.00424984533N，实际输出ux=−.04009602328mm，位移放大1.604倍；生产169.12秒、14force/9tangent/1solver、无二分或失败。见[目标、实现、成本、物理效果与接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-inverter-task025-20261003)、[实际x1形变／力与补充x40](functional_views/native_inverter_task025_20261003/native_mean_path.png)及[四帧动画](functional_views/native_inverter_task025_20261003/native_mean_path.gif)。夹爪此前.001mm已通过，下一唯一功能阶段为其原.025mm TEST。完整研究行程／真实夹持／释放重入／H2-H3／HF5标签仍待完成。
 
-main b86cd1d及[实际公开恢复](handoff/native_inverter_mean_20261003/public_recovery_verify.json)通过：12数值payload／77数组和图包6文件字节相同，物理与求解诊断JSON仅排耗时及关联hash，0新HP；同机异目录范围。下一.025mm TEST尚未执行。
+本次source39、原模型23数组及几何物理保持，保存131数组和每态完整新参考；最新main交付及异目录恢复尚待本次关账，不将前阶段恢复冒称本阶段恢复。此前163db25的.001mm及[当时实际恢复](handoff/native_inverter_mean_20261003/public_recovery_verify.json)保持原身份。
 
 以下增补保留各执行时点；当前结论和下一步以本条及报告末节为准。旧记录中的“尚未实现”和旧计划不作为当前状态。
 

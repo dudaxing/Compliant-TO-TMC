@@ -1080,3 +1080,133 @@ python functional_views/native_inverter_mean_20261003/plot_native_mean_inverter_
 [实际公开恢复证明](../handoff/native_inverter_mean_20261003/public_recovery_verify.json) SHA b6935fe55112df2ce558c7feaaa2e94524e376433503d42eb948671ef964ab60：公开一次普通CLI 61.2949845秒、外层61.5714616秒，采样child-tree 721.67969MiB、wrapper＋child 757.48828MiB，在180秒／8GiB窗口内。12 payload原字节和77数组dtype/shape/Cbytes相同，2state JSON/result除原明确耗时与关联descriptor hash外全部类型/数值一致，物理/设置/4force3tangent1solver调用数/Newton/Armijo/LU诊断/资格均保留。不是整个JSON字节相同；实际CLI log、两state JSON/result及回执随证明保留，不覆盖正式输出。
 
 冻结viewer一次仅读Git保存数据 2.3021639秒，PNG／两帧GIF／CSV／脚本／helper／metadata6件字节相同，0构造／force／tangent／solver／HP。公开clone计算前后干净；输出位于clone之外。正式与公开共8force/6tangent/2solver，新HP仍原唯一4调用，本次未重跑小模型测试。此为同机同runtime异目录恢复，不称另一机器性能、一般接触或完整行程验收。原7输入／37source／原task/model/state均保持；本阶段执行窗口关账，恢复证明与本记录另提交main。下一唯一近期功能仍为上段明确反向器[0,.005,.010,.025]mm TEST，尚未开始准备或求解，完整研究任务与HF5目标仍active。
+
+
+<a id="native-inverter-task025-20261003"></a>
+## 普通反向器明确0.025mm TEST：执行前近期计划
+
+上一goal turn属于**实质进展**：main163db2508946aea2e3c9948745ff13813ee98d1d已交付普通反向器.001mm两态／4新HP／图／实际异目录恢复，补齐两类普通机构的力→组装→非对称切线→均值平衡链路。当前正式Git root已实际核对：main干净，origin为https://github.com/dudaxing/Compliant-TO-TMC.git，fetch后0/0。没有活着的数值job需要等待；旧唯一执行窗口全部关闭，整体HF目标仍active。
+
+本轮唯一详细阶段接上一报告：原构造任务的**明确TEST target .025mm，targets[0,.005,.010,.025]mm**。目的是完成普通数据任务的较长前缀，观察输入反力／反向输出／非线性Newton及J随位移的实际变化，先建立可用功能。不是一般接触/研究完整行程/工件夹持资格，不自动采用H2网格或H3定义，不生成HF5标签，不导入/安装/调用LF优化器或MPM。
+
+原80×40mm/h1、t20mm、E1MPa/nu.3、gamma/alpha1e-6、Lr80mm/kr.008615384615384613、89fixed/6553free、1128实体/2072介质、+x输入b_in权重(.25,.5,.25)、−x输出b_out权重(−.25,−.5,−.25)、k_out0/no workpiece保持。源geometry23adf44e/1911362e、prior task5d488f27、prior model23字段321a10e0绑定；新task采用既有task_id显式TEST，不添核心不支持的字段，物理input target本来是.025。zeroL、undeformed初态及v=b_in/maxabs/δR0与上一阶段一致。
+
+**实施取舍**：native_mean API/CLI、核心公式/控制器、原33source不改；新增stage native_inverter_task_025_001/的纯准备和执行薄包装。活动inverter checker/viewer泛化显式已登记stage/task目标、原物理身份和实际接受态N，直接继承冻结CoreAudit.run_state及原全部数学门，避免再复制一套检查器/绘图。旧37胶囊/旧冻结viewer/旧输出/图/任务/包装不回写；历史reader核双胶囊/参考payload，current来源只记录信息，因此新局部wrapper改进不伪造历史身份。新source39=原33＋原四inverter包装的当前版本＋新增2unique文件，静态全文/AST/compile/源闭包和实际输入先核后冻。新stage与所有新输出目录，所有每态缓存payload、真实calls和source/input/endpins保存；不借旧.001接受态作为本次新路径初值或参考。
+
+**方程、原门与控制**：free(f_int−b_in R)=0、b_in·(L+w)=d，q_out=b_out·u（physical weighted ux=−q_out），L=0；通用非对称LU/增广CSC原样，forceN、K/Jv N/mm、u mm。tolerance1e-9、constraint1e-10、scale_floor1e-6、forcefloor1e-8、maxchecks25、Armijo1e-4/backtracks12/bisections4全部原值。minimum_increment**明确仍6.25e-5mm**，不会由首目标.005自动变成.005/16。此下界和最大四次二分共同约束原算法，二分帧也全部保存与审计，不新增失败修复循环。
+
+继承全部gate：总force1e-11、材料/HuHu1e-9；局部SF_e用各自HP力norm及原物理floor，global用原方程尺度，分量自身norm/1e-12SF；Jv各自norm与1e-10 floor，总1e-10/分量1e-9；HP80/120一致1e-40；生产残量1e-9、独立1e-8、force_evaluation1e-9、mean1e-10、globalbalance1e-6、fixed8e-11mm、KKT两方向1e-10均原样。每新实际接受态HP80/120各一次全3200单元/6642DOF、精确Decimal/Inexact scatter，正常4态8次HP=25600 element-precision instances，二分时按实际2N；全部2split/17force/3tensor/总CSC/全精度raw参考及门保存。所有矩阵系数组装逐项核对，独立HP导数范围仍只有声明v方向，不冒称全部矩阵列。
+
+**执行边界**：本轮新生产一次连续300秒／采样8GiB、外层330秒；新参考一次240秒／采样8GiB、外层270秒。依据两小步约18秒/T、10.5秒/HP估计4态7–10T约130–190秒、8HP约85秒；成本估计不是保证。第三方imports、全部原有有界试探、HP、serialization/endpins包含在各自时限，第一阶段错误停止，无修复重试/force/借余钟重开。API异常返回前调用计数None，不猜0。原数学与功能测试不变，本次真实较长路径+全量新参考担任功能验证，不再跑重复小模型测试。纯准备只std/NPZ数据0physics；正式通过后新图一次仅读，外层120秒，保存态事后审核0新HP/solve。main交付及一次普通CLI公开恢复依实测成本另写范围后执行，旧复验卡不重开。
+
+图保留真实x1结构/公共N箭头标尺/attached四支承全显示和otherfixed stride3/全3200J；另补充**仅位移x40**并明确无力箭头，使末输入显示约1mm，避免较长路径沿用x1000导致错误观感。R/q_out独立轴、所有实际输入节点ux与均值、physical ux=−q_out、独立残量/forcebalance/minJ全数表、真实N帧无插值。J色为每单元积分点均值，min取全部积分点，J不是接触压力；完整x1与forceN数字是主要物理依据。
+
+完成条件：明确.025目标真正成功，全部实际接受态覆盖/原门通过，源/23model未改、cache保存0额外求值与实际attempt/completed计数相符，图与数值方向/尺度一致，新普通CLI可复现、必要数据/上下文/过程随main。若某阶段不通过保留已发生状态和失败证据，先定位具体问题，不自动更换物理任务/阈值。之后只按这轮实测结果选择夹爪对应目标或发现的阻断修复；更后路线保持粗粒度：明确普通任务→较长/细模型能力→带明确定义工件的功能→一般接触与批量研究输出。本段写入时0本轮新prepare/model/force/tangent/solver/HP/plot。
+
+
+### 纯准备实际结果
+
+prepare_inverter_task.py唯一pure执行通过，prepare_launch_receipt.json 0.5122579999733716秒；0构造／force／tangent／solver／HP。实际new task全部物理字段包括原input target .025mm与prior逐项相同，只更新现有身份／说明字段；新inventory及task_id显式标识测试范围。显式min6.25e-5mm、prod300/ref240/8GiB与outer330/270、图120保持先前计划。
+
+task.json SHA 6e737cb17f67aa79d25ea25da8018eebebb47cec1b8dcaf03e8beb2deef0958d
+direction.npz SHA 177124bd1968f9e451e59cba4d7124c393eb8fee15cc93851f570f980aada29a
+lifting.npz SHA fbfe6d9d1e77aa541991d1f0124a596d7a9574b720eb0e4ac5dbf851fcf1d465
+input_inventory.json SHA b10a445dfe1a87dbd79073b9edc4e9aaa2395425d85ea4d69909da74dadf1af8
+
+正式来源等待最终39源静态交叉冻结；本段写入时仅产生四纯输入及prepare回执，未开始新模型／力学／HP／图。
+
+
+### 正式执行前最终来源冻结
+
+root实际核old33当前字节完全相同、39来源覆盖／basename唯一、四新/修改源AST与compile、实际七输入SHA及新inventory b10a445d。各作者静态交叉核真实inventory/task和原物理、继承run_state/原门、target/budget/timer/所有接受态、viewer−x语义均无阻断。旧001冻结viewer350/0e030174保持；不重跑或重写历史数据。
+
+hf_repo/scripts/audit_native_mean_inverter.py SHA 9491d18e76d3acd15feabe61fae5f789a3df69a00151333420624a8e493fafbc
+hf_repo/scripts/plot_native_mean_inverter.py SHA a8708f4c9ca857a3a225d7fa07f52c376f9b52b980de1055a34b9a5128362e8b
+lf_data_preparation/native_inverter_task_025_001/prepare_inverter_task.py SHA 13e01f4144096bb5cb3add7150d8b350834b4236d4a1c1bab90e83a14ec43f44
+lf_data_preparation/native_inverter_task_025_001/execute_inverter_task.py SHA f9a7f80814dc3b4fa34fe42a972d3ea1dfe1c2681593b72d9a2c4443d5488f51
+
+本段写入时0本轮新model／force／tangent／solver／HP／plot；现在启动既定唯一生产300秒/8GiB/outer330，随后仅pass时新参考240/8GiB/outer270与保存读图120。source/input固定，第一阶段错误停止，无修复重试/force。
+
+
+### 实际求解、独立参考与可视化结果
+
+唯一正式生产 exit0/pass：[执行回执](../lf_data_preparation/native_inverter_task_025_001/execution_receipt.json)，169.1223799秒，outer169.4130299秒，Windows峰/采样804884480 bytes（767.59765625 MiB），300秒／8GiB内完成。四目标全部接受，14完整force／9tangent／1solver；三初预测＋五Newton修正均一般非对称LU，五Armijo试探全部factor1，无二分／失败尝试／修复重试。完整结果保存17 NPZ包／131数组（23模型＋每态27）与四状态JSON，保存0额外force/tangent；旧23模型dtype/shape/raw bytes及七输入、39source endpins保持。
+
+API评价165.7036154秒，其中内核及transfer165.1956005、CSC组装.0369986、稀疏求解.3366985秒；主要成本仍在元素切线，不由稀疏LU主导。这是当前粗3200Q1/6642DOF任务实测，不能按四倍单元直接保证细网格总耗时。
+
+| 实际平均输入 d [mm] | 输入+x驱动力 R [N] | 输出参考−x q_out [mm] | 独立HP自由相对残量 | 全域积分点最小J |
+|---|---:|---:|---:|---:|
+| 0 | 0 | 0 | 0 | 1 |
+| .005 | .0008494641904889284 | .008011202128388739 | 7.29149e-13 | .9995470060502105 |
+| .010 | .001699180585920530 | .01602640517581522 | 5.44071e-10 | .9990940881881588 |
+| .025 | .004249845332071079 | .04009602327735562 | 7.77440e-13 | .9977357913691891 |
+
+[新独立审计](../lf_data_preparation/native_inverter_task_025_001/audit/summary.json) exit0/pass，4态8新HP80/120完整3200单元／6642实际DOF；25600 element-precision instances，全部局部force/Jv 307200项各、完整204800系数组装×4，全部原门保持。77165检查包含身份；数值门另据保存后验回执计数。summary96.0028437秒、lifecycle96.0047247、terminal96.0051970、outer96.5100915秒，peak338907136 bytes（323.20703125 MiB），240秒／8GiB内。没有候选复算或新求解；继承旧run_state及原gate，独立导数仅v=b_in/maxabs、fixed lift、deltaR0方向，全CSC组装逐项检查不等于独立HP遍历所有矩阵列。
+
+| 全路径最坏归一化误差 | total | material | HuHu regularization |
+|---|---:|---:|---:|
+| 单元完整力 | 1.02298e-16 | 1.01313e-16 | 1.40388e-16 |
+| 全模型scatter力 | 1.18321e-15 | 2.19940e-16 | 1.40607e-16 |
+| 单元Jv | 8.09029e-17 | 7.65676e-17 | 2.09760e-16 |
+| 全模型scatter Jv | 6.47459e-17 | 5.32812e-17 | 1.15331e-16 |
+
+CSC总作用最坏1.04798e-16，KKT自由力方向1.05831e-16、均值方向0；全部局部HP80/120一致最坏9.34152e-74，原1e-40门保持。四状态固定位移精确0，独立残量最高5.44071e-10、均值相对误差最高4.33681e-17、外力平衡最高3.41260e-13，均低于原门。生产独立资格flags仍false；本次audit声明上述具体粗无工件TEST范围通过，不提升研究资格。
+
+末态actual output ux=−.04009602327735562mm，最大节点位移模.04073084846568401mm；solid Jmin.9994237666409495、medium Jmin.9977357913691891。输入三ux .02476668560670649／.02505026067771577／.02513279303786196mm，仅weighted .25/.5/.25均值为.025，不是节点绑等位移。输入是执行器对模型的力，free output spring0/no workpiece，不能改名夹持力。完整外力ΣFx=−1.73472e-18、ΣFy=−1.25767e-17N，按原下半模型不乘二。
+
+**物理效果与取舍**：由此前.001保存数值和本次.025实际值仅读比较，位移比q_out/d由1.60192037至1.60384093，提高约.1199%；割线输入刚度R/d由.169872673至.169993813N/mm，提高约.07131%。较长TEST仍近线性自由变形，背景J仅轻微变化，并没有展示薄介质强压缩或真实夹持。这一结果支持继续同入口接夹爪对应原TEST；不需要为本次成功改机械公式、加稳定补丁或重跑旧小模型测试。
+
+[实际图](../functional_views/native_inverter_task025_20261003/native_mean_path.png)与[四实际帧动画](../functional_views/native_inverter_task025_20261003/native_mean_path.gif)及CSV、metadata、冻结viewer/helper共6件保存。唯一仅读plot3.7094957秒，0构造／force／tangent／solver／HP。主结构位移x1，补充位移x40无力箭头；全部外力使用公共标尺最大节点力.00957719400391484N=4显示mm。J色为全3200单元九点均值，数值min用全部积分点；R和q_out各自独立轴，physical ux=−q_out、支承全四节点、otherfixed stride3明确。四点连线/四帧只对应真实接受状态，无补造连续路径。root实际查看PNG并打开；其他作者继续仅读保存态与实际四帧审阅，source39/媒体不回写。
+
+本阶段实际功能链为普通文件→明确原TEST模型→NumPy完整力/三切线与full CSC→split均值非对称增广平衡→带单位与方向的实际输出。较长原构造目标已执行；HF3原1mm完整行程、新细网格普通路径、工件/真实夹持、一般释放重入、H2/H3正式定义和HF5批量评价仍未完成。整体目标active，下一段根据本结果只详细规划最近夹爪阶段。
+
+
+
+### 下一唯一近期功能：普通夹爪原0.025mm TEST
+
+本轮反向器已达到原构造TEST而且全部新参考通过，因此下一步使用同一普通文件链路完成**粗夹爪[0,.005,.010,.025]mm**。不再扩重复的微步验证；优先得到另一类机构的实际输入力和自由钳口运动，随后依据两例成本决定细网格或原研究行程前缀。本段是执行前计划，本轮尚未创建或运行夹爪新stage。
+
+输入为现有v2_adapter_001/converted/gripper_canonical的原geometry、native_model_001/tasks/gripper_canonical.json及其23字段prior model，原目标本来.025；新task只显式TEST身份/说明。80×40mm、h1、t20、E1MPa/nu.3、gamma/alpha1e-6/Lr80、87fixed/6555free、+x输入加权均值和+y自由输出、k_out0/workpiecenull、原实体附着支承与全部背景top uy保持，不借反向器状态/参考或旧夹爪.001状态作本次初态。zero lift/origin，未变形初态；所有值以实际准备逐SHA/字段核对后冻结。
+
+实施仅新增唯一stage纯准备/执行薄包装，并扩展已有明确stage checker合同，**继承原CoreAudit.run_state和全部原数学门**；已有通用viewer已能区分inverter−x/gripper+y，复用真实N状态及共享力标尺的读法。核心native_mean/CLI/原33源、公式、默认内核、严格依赖不变，不复制整套数学审计/绘图。历史胶囊/参考/media不回写；新来源集合及unique basename在执行前依据真实依赖冻结，任何旧source identity变化均不迁入旧资格。
+
+唯一生产300秒／采样8GiB、outer330；pass后唯一新参考240秒／8GiB、outer270；pass后唯一仅读图outer120。依据本轮9T/169秒、8HP/96秒估计相似粗任务可在这些界内，不保证其Newton数相同。tol1e-9/mean1e-10、scale floors、Armijo/backtracks/maxchecks、maxbisections4和minimum_increment6.25e-5原样，包含imports、原有所有有界试探、存储/endpins；首阶段错误保存并停止，不修复重试/借余钟重开。全部实际接受态2N次新HP80/120，全元素/DOF/raw references、原force/Jv/80-120/平衡/均值/固定门；所有CSC系数组装与声明v方向验证，不称全列独立导数。
+
+完成条件为原.025目标真正到达、原模型物理/源绑定准确、全部新门通过、真实响应图/CSV及可恢复CLI/必要资料随main。图仍x1实际结构，补充位移x40明确无力箭头；input+x、output+y标注，只约束均值不绑节点，support箭头和全部J、独立R/qout轴、全部N帧、数值残量/balance/零spring明确。output+y是自由钳口运动，无工件不能称夹持力；完整行程、H2/H3、一般释放重入、批量HF标签保持未完成。新小模型测试不重复，真实第二机构较长路径+全量新参考承担功能验证。main交付与公开恢复按实际成本另冻结。
+
+更后路线保持依赖层次：两粗机构原TEST完成→现有细候选的对应能力/明确较长任务→确定工件与测力协议→最小参照和一真实夹持案例→少量同任务候选比较与必要网格/参数试验→HF5研究输出。每一步由实际结果修改下一步，HF始终独立正向评价，不实现LF优化或MPM。
+
+
+
+### 保存数据后验与实际审图关账
+
+[静态审阅](../lf_data_preparation/native_inverter_task_025_001/static_review_inverter_task.json) SHA51160d50已核实际输入、39来源闭包、原33字节和预算。正式求解/参考/图之后，[保存态核对](../lf_data_preparation/native_inverter_task_025_001/postrun_identity_review_inverter_task.json) SHA4d09f659核39 current+producer/audit双胶囊、七输入、23＋4×27=131字段、四态与调用日志、8完整HP原始payload及40参考payload、所有76932条保存数值门记录和153768次保存error/limit比较；77165是正式审计含身份总计，不把保存核对次数当新增数值门。只读取已有字符串/数组/哈希，没有重算全部Decimal门/scatter或新增model/force/tangent/solver/HP/test/plot。
+
+[实际图审](../lf_data_preparation/native_inverter_task_025_001/visual_review_inverter_task.json) SHAa5be56a1：另一作者实际查看2880×1840 PNG和全部四个原GIF帧，4×1000ms无插值；160文件SHA before/after、39双caps、40参考payload绑定、CSV全列/NPZ端口均值、forcegroup/Jrange一致。attached四支承均显示；末support合力(-.004249845332071081,-.0007477687766321631)N、otherfixed(0,+.0007477687766321499)N、input(+.004249845332071079,0)N，完整平衡相符。x1/x40/共享N标尺、外legend/两独立轴/−qout可读。保留局限：真实位移仍小、放大仅显示；邻近支反力glyph可重叠、otherfixed stride3、输入三曲线微差接近、GIF无定量色条，PNG与数表作为精确读数依据。0新physics/plot，源码/媒体未改。
+
+本阶段唯一正式生产／新参考／读图窗口关闭；没有重跑旧测试或力学公式，结果明确支持上述下一夹爪功能阶段。此后按既定main交付授权保留全部必要原数据、完整参考和过程记录，公开恢复仅按事先冻结范围一次执行；整体目标仍active。
+
+
+
+### 公开异目录恢复：执行前具体范围
+
+本节只登记恢复前计划，不记录已执行恢复。依据本次唯一正式生产169.1223799秒、四态[0,.005,.010,.025]及14完整force／9三分量tangent／1solver，当前执行卡另允许公开干净clone中**一次恢复，内部连续300秒／采样8GiB、外层330秒**；导入、来源核对、CLI全部原有试探、保存、全部payload比较、endpins及回执serialization均计入内部窗口。外层余量用于终止与收尾，不增加计算额度；这是协作计时／RSS检查，不是OS内存硬上限。0新HP／JIT／LF导入，原正式生产与参考窗口不重开；第一项错误停止，不修复重试，不覆盖已有输出，不强杀重跑。
+
+新helper [replay_public_inverter_task.py](../handoff/native_inverter_task025_20261003/replay_public_inverter_task.py) 318行，SHA feab07cc76331f0b58ccd0ffd4a09116075b7412f54a37de81d8914c9f42942f；复用冻结9cdd3f6a纯比较函数，历史8fef6235恢复脚本与核心39source原字节保持。AST／compile与实际保存schema、七正式文件pin、current／生产与audit双来源胶囊／所有输入、40完整参考payload SHA静态读取核对通过；这不增加数值门或新物理资格。helper启动前必须确认本次正式生产及独立audit／lifecycle／外层返回均pass，绑定真实inverter／89fixed／原23模型／新TESTtask／四目标／实际14-9-1调用／四态身份和原8次HP结果；缺失或身份变化即停。
+
+在完整公开clone根、同一已配置HF环境，用**clone之外且此前不存在**的新目录，例如：
+```
+python -B handoff/native_inverter_task025_20261003/replay_public_inverter_task.py --output D:/hf-native-inverter-task025-replay-20261003
+```
+helper唯一启动的普通入口仍为 solve_native_mean.py，显式传原geometry及本stage task、新output/result、`--targets 0 .005 .010 .025 --minimum-increment 6.25e-5 --time-limit 300`。其余数值选项与正式设置逐项相同，不能用默认[0,tasktarget]省略中间态，也不能由首目标.005重新计算最小增量。已有输出路径直接停止，无自动换目录再执行。
+
+恢复后核**23＋4×(2 split＋17 force＋3 tensor＋5 CSC)＝131数组**的dtype／shape／C-order bytes，以及20份模型／源快照／接受态NPZ payload原字节。所有state/result JSON只用冻结normalizers排明确实测时间及因此变化的descriptor hash；目标／材料／边界／全部物理量／14-9-1计数／Newton／Armijo／LU残量诊断／资格全部保留并递归精确比较，不称result JSON整文件字节相同。正式source39、输入、完整参考保存文件与helper依赖前后均核SHA；不重算HP门。记录生产子进程自身采样RSS及可用Windows working-set peak、child-tree和wrapper＋child-tree采样峰值、命令／日志／实际state身份和比较回执。错误时仅一次terminate已观察子树并等待、保存仍存活成员，外层330秒监督收尾；没有恢复循环。
+
+这只验证同机同runtime的公开clone异目录恢复，不能当另一机器性能、HF5／H2-H3／一般接触或完整研究行程验收。本节写入时0本次公开CLI／新force／tangent／solver／HP／test／plot；root将在提交与公开来源复核后才执行这次恢复，并另追加实际结果。
+
+
+公开CLI通过后，仅一次**冻结viewer仅读恢复**（outer120秒），明确传与原图一致的倍率：
+```
+python -B functional_views/native_inverter_task025_20261003/plot_native_mean_inverter_frozen.py --input lf_data_preparation/native_inverter_task_025_001 --output D:/hf-native-inverter-task025-public-view-20261003 --magnification 40
+```
+新输出位于clone外，检查全部6件PNG/GIF/CSV/metadata/viewer/helper字节，0新model/force/tangent/solver/HP。不使用默认1000倍率，不启动新正式参考。完整普通CLI使用上述四targets/minimum-increment300秒命令；实际日志/4stateJSON/result/恢复receipt另随证明保存，数值payload已存在正式Git，不再复制大数组包。正式和公开计算前后来源保持且clone干净；manifest建立、验证、main提交/推送及公开fast-forward都按真实终止结果顺序执行，未完成程序不能提前宣称交付通过。
