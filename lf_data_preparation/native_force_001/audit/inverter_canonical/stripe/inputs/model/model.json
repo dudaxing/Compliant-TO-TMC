@@ -1,0 +1,1207 @@
+{
+  "schema_version": "hf-native-project-model-1.0",
+  "task": {
+    "schema_version": "hf-native-project-task-1.0",
+    "task_id": "TEST_native_model_inverter_canonical",
+    "case_family": "inverter",
+    "purpose": "construction_test_only",
+    "parameter_origin": "Explicit TEST contract; old HF3 intrinsic parameters for interface comparison, not approved HF5 research task",
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain"
+    },
+    "input": {
+      "tag": "input",
+      "control": "average_displacement",
+      "target_mm": 0.025
+    },
+    "output": {
+      "tag": "output",
+      "spring_N_per_mm": 0.0
+    },
+    "constraints": [
+      {
+        "tag": "support",
+        "components": [
+          0,
+          1
+        ]
+      },
+      {
+        "tag": "symmetry",
+        "components": [
+          1
+        ]
+      }
+    ],
+    "support_selection": "solid_incident_nodes_only",
+    "input_auxiliary_spring_N_per_mm": 0.0,
+    "workpiece": null,
+    "third_medium": {
+      "gamma": 1e-06
+    },
+    "qualification_criteria": {
+      "max_design_volume_fraction": null,
+      "min_feature_mm": null
+    },
+    "reference_state": "undeformed",
+    "units": {
+      "length": "mm",
+      "force": "N",
+      "stress": "MPa",
+      "energy": "N mm"
+    },
+    "regularization": {
+      "alpha": 1e-06,
+      "length_mm": 80.0
+    },
+    "background_symmetry": {
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ]
+    },
+    "geometry": {
+      "geometry_id": "2e2bb3466ade06f920dfbb92577ccbe46106acec430837bac8e1a30b8083527a",
+      "descriptor_sha256": "31c2e8c9f8691f9f69aebeafec6b88fa3458556165bca35765402eaab1764397"
+    },
+    "analysis_grid": {
+      "policy": "native"
+    },
+    "description": "Only constructs geometry/material/constraints and Q1 reference operators; does not execute the stored target, select the study-wide analysis policy, define a workpiece or certify a response"
+  },
+  "task_sha256": "16e802af1c46904e8d6f065695209909f63a5a9f84e17bc2b3ab307bb909e262",
+  "source_geometry": {
+    "geometry_id": "2e2bb3466ade06f920dfbb92577ccbe46106acec430837bac8e1a30b8083527a",
+    "descriptor_sha256": "31c2e8c9f8691f9f69aebeafec6b88fa3458556165bca35765402eaab1764397",
+    "descriptor_file_sha256": "23adf44ea8164fb103998ab97363747540a11ef7bb589ae81aa2fde23ff57eee",
+    "arrays_sha256": "1911362efaa5b6c5104af0cecf95310f262b129f3e0cd2a1c648cf550b756132",
+    "snapshot": {
+      "descriptor": "source_geometry/geometry.json",
+      "arrays": "source_geometry/geometry.npz"
+    }
+  },
+  "grid": {
+    "shape_yx": [
+      40,
+      80
+    ],
+    "origin_mm": [
+      0.0,
+      0.0
+    ],
+    "cell_size_mm": [
+      1.0,
+      1.0
+    ],
+    "axes": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "extent_mm": [
+      80.0,
+      40.0
+    ],
+    "array_order": "C_yx_bottom_up",
+    "value_location": "cell"
+  },
+  "model_extent": {
+    "kind": "lower_half",
+    "symmetry_axis": {
+      "normal": [
+        0.0,
+        1.0
+      ],
+      "offset_mm": 40.0
+    }
+  },
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "analysis_grid_policy": "native",
+  "native_geometry_preserved": true,
+  "element_node_order": [
+    "BL",
+    "BR",
+    "TR",
+    "TL"
+  ],
+  "dof_order": "interleaved ux,uy; dof = 2*node + component",
+  "quadrature": "tensor_product_9_point_Simpson",
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain",
+    "lambda_s_MPa": 0.5769230769230769,
+    "mu_s_MPa": 0.3846153846153846,
+    "kappa_s_MPa": 0.8333333333333333,
+    "thickness_mm": 20.0,
+    "third_medium_gamma": 1e-06,
+    "alpha": 1e-06,
+    "regularization_length_mm": 80.0,
+    "kr_MPa_mm2": 0.008615384615384613,
+    "kr_material_factor_applied": false,
+    "force_scale_per_length": 20.0
+  },
+  "region_metadata": {
+    "support": {
+      "tag": "support",
+      "points_mm": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          8.0
+        ]
+      ],
+      "components": [
+        0,
+        1
+      ],
+      "selection": "solid_incident_nodes_only",
+      "selected_nodes": [
+        0,
+        81,
+        162,
+        243,
+        324,
+        405,
+        486,
+        567,
+        648
+      ],
+      "attached_nodes": [
+        405,
+        486,
+        567,
+        648
+      ],
+      "excluded_unattached_nodes": [
+        0,
+        81,
+        162,
+        243,
+        324
+      ],
+      "dofs": [
+        810,
+        811,
+        972,
+        973,
+        1134,
+        1135,
+        1296,
+        1297
+      ]
+    },
+    "entity_symmetry": {
+      "tag": "symmetry",
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ],
+      "selection": "solid_incident_nodes_only",
+      "selected_nodes": [
+        3240,
+        3241,
+        3242,
+        3243,
+        3244,
+        3245,
+        3246,
+        3247,
+        3248,
+        3249,
+        3250,
+        3251,
+        3252,
+        3253,
+        3254,
+        3255,
+        3256,
+        3257,
+        3258,
+        3259,
+        3260,
+        3261,
+        3262,
+        3263,
+        3264,
+        3265,
+        3266,
+        3267,
+        3268,
+        3269,
+        3270,
+        3271,
+        3272,
+        3273,
+        3274,
+        3275,
+        3276,
+        3277,
+        3278,
+        3279,
+        3280,
+        3281,
+        3282,
+        3283,
+        3284,
+        3285,
+        3286,
+        3287,
+        3288,
+        3289,
+        3290,
+        3291,
+        3292,
+        3293,
+        3294,
+        3295,
+        3296,
+        3297,
+        3298,
+        3299,
+        3300,
+        3301,
+        3302,
+        3303,
+        3304,
+        3305,
+        3306,
+        3307,
+        3308,
+        3309,
+        3310,
+        3311,
+        3312,
+        3313,
+        3314,
+        3315,
+        3316,
+        3317,
+        3318,
+        3319,
+        3320
+      ],
+      "attached_nodes": [
+        3240,
+        3241,
+        3242,
+        3243,
+        3244,
+        3245,
+        3246,
+        3315,
+        3316,
+        3317,
+        3318,
+        3319,
+        3320
+      ],
+      "excluded_unattached_nodes": [
+        3247,
+        3248,
+        3249,
+        3250,
+        3251,
+        3252,
+        3253,
+        3254,
+        3255,
+        3256,
+        3257,
+        3258,
+        3259,
+        3260,
+        3261,
+        3262,
+        3263,
+        3264,
+        3265,
+        3266,
+        3267,
+        3268,
+        3269,
+        3270,
+        3271,
+        3272,
+        3273,
+        3274,
+        3275,
+        3276,
+        3277,
+        3278,
+        3279,
+        3280,
+        3281,
+        3282,
+        3283,
+        3284,
+        3285,
+        3286,
+        3287,
+        3288,
+        3289,
+        3290,
+        3291,
+        3292,
+        3293,
+        3294,
+        3295,
+        3296,
+        3297,
+        3298,
+        3299,
+        3300,
+        3301,
+        3302,
+        3303,
+        3304,
+        3305,
+        3306,
+        3307,
+        3308,
+        3309,
+        3310,
+        3311,
+        3312,
+        3313,
+        3314
+      ],
+      "dofs": [
+        6481,
+        6483,
+        6485,
+        6487,
+        6489,
+        6491,
+        6493,
+        6631,
+        6633,
+        6635,
+        6637,
+        6639,
+        6641
+      ]
+    },
+    "background_symmetry": {
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ],
+      "selection": "all_full_domain_nodes_on_segment",
+      "selected_nodes": [
+        3240,
+        3241,
+        3242,
+        3243,
+        3244,
+        3245,
+        3246,
+        3247,
+        3248,
+        3249,
+        3250,
+        3251,
+        3252,
+        3253,
+        3254,
+        3255,
+        3256,
+        3257,
+        3258,
+        3259,
+        3260,
+        3261,
+        3262,
+        3263,
+        3264,
+        3265,
+        3266,
+        3267,
+        3268,
+        3269,
+        3270,
+        3271,
+        3272,
+        3273,
+        3274,
+        3275,
+        3276,
+        3277,
+        3278,
+        3279,
+        3280,
+        3281,
+        3282,
+        3283,
+        3284,
+        3285,
+        3286,
+        3287,
+        3288,
+        3289,
+        3290,
+        3291,
+        3292,
+        3293,
+        3294,
+        3295,
+        3296,
+        3297,
+        3298,
+        3299,
+        3300,
+        3301,
+        3302,
+        3303,
+        3304,
+        3305,
+        3306,
+        3307,
+        3308,
+        3309,
+        3310,
+        3311,
+        3312,
+        3313,
+        3314,
+        3315,
+        3316,
+        3317,
+        3318,
+        3319,
+        3320
+      ],
+      "solid_incident_nodes": [
+        3240,
+        3241,
+        3242,
+        3243,
+        3244,
+        3245,
+        3246,
+        3315,
+        3316,
+        3317,
+        3318,
+        3319,
+        3320
+      ],
+      "medium_only_nodes": [
+        3247,
+        3248,
+        3249,
+        3250,
+        3251,
+        3252,
+        3253,
+        3254,
+        3255,
+        3256,
+        3257,
+        3258,
+        3259,
+        3260,
+        3261,
+        3262,
+        3263,
+        3264,
+        3265,
+        3266,
+        3267,
+        3268,
+        3269,
+        3270,
+        3271,
+        3272,
+        3273,
+        3274,
+        3275,
+        3276,
+        3277,
+        3278,
+        3279,
+        3280,
+        3281,
+        3282,
+        3283,
+        3284,
+        3285,
+        3286,
+        3287,
+        3288,
+        3289,
+        3290,
+        3291,
+        3292,
+        3293,
+        3294,
+        3295,
+        3296,
+        3297,
+        3298,
+        3299,
+        3300,
+        3301,
+        3302,
+        3303,
+        3304,
+        3305,
+        3306,
+        3307,
+        3308,
+        3309,
+        3310,
+        3311,
+        3312,
+        3313,
+        3314
+      ],
+      "dofs": [
+        6481,
+        6483,
+        6485,
+        6487,
+        6489,
+        6491,
+        6493,
+        6495,
+        6497,
+        6499,
+        6501,
+        6503,
+        6505,
+        6507,
+        6509,
+        6511,
+        6513,
+        6515,
+        6517,
+        6519,
+        6521,
+        6523,
+        6525,
+        6527,
+        6529,
+        6531,
+        6533,
+        6535,
+        6537,
+        6539,
+        6541,
+        6543,
+        6545,
+        6547,
+        6549,
+        6551,
+        6553,
+        6555,
+        6557,
+        6559,
+        6561,
+        6563,
+        6565,
+        6567,
+        6569,
+        6571,
+        6573,
+        6575,
+        6577,
+        6579,
+        6581,
+        6583,
+        6585,
+        6587,
+        6589,
+        6591,
+        6593,
+        6595,
+        6597,
+        6599,
+        6601,
+        6603,
+        6605,
+        6607,
+        6609,
+        6611,
+        6613,
+        6615,
+        6617,
+        6619,
+        6621,
+        6623,
+        6625,
+        6627,
+        6629,
+        6631,
+        6633,
+        6635,
+        6637,
+        6639,
+        6641
+      ]
+    },
+    "units": {
+      "length": "mm",
+      "force": "N",
+      "stress": "MPa",
+      "energy": "N mm"
+    },
+    "ports": {
+      "input": {
+        "tag": "input",
+        "points_mm": [
+          [
+            0.0,
+            38.0
+          ],
+          [
+            0.0,
+            40.0
+          ]
+        ],
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "nodes": [
+          3078,
+          3159,
+          3240
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ],
+        "averaging": "normalized_reference_arclength_trapezoid",
+        "nonzero_dofs": [
+          6156,
+          6318,
+          6480
+        ]
+      },
+      "output": {
+        "tag": "output",
+        "points_mm": [
+          [
+            80.0,
+            38.0
+          ],
+          [
+            80.0,
+            40.0
+          ]
+        ],
+        "direction": [
+          -1.0,
+          0.0
+        ],
+        "nodes": [
+          3158,
+          3239,
+          3320
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ],
+        "averaging": "normalized_reference_arclength_trapezoid",
+        "nonzero_dofs": [
+          6316,
+          6478,
+          6640
+        ]
+      }
+    },
+    "fixed_dofs": [
+      810,
+      811,
+      972,
+      973,
+      1134,
+      1135,
+      1296,
+      1297,
+      6481,
+      6483,
+      6485,
+      6487,
+      6489,
+      6491,
+      6493,
+      6495,
+      6497,
+      6499,
+      6501,
+      6503,
+      6505,
+      6507,
+      6509,
+      6511,
+      6513,
+      6515,
+      6517,
+      6519,
+      6521,
+      6523,
+      6525,
+      6527,
+      6529,
+      6531,
+      6533,
+      6535,
+      6537,
+      6539,
+      6541,
+      6543,
+      6545,
+      6547,
+      6549,
+      6551,
+      6553,
+      6555,
+      6557,
+      6559,
+      6561,
+      6563,
+      6565,
+      6567,
+      6569,
+      6571,
+      6573,
+      6575,
+      6577,
+      6579,
+      6581,
+      6583,
+      6585,
+      6587,
+      6589,
+      6591,
+      6593,
+      6595,
+      6597,
+      6599,
+      6601,
+      6603,
+      6605,
+      6607,
+      6609,
+      6611,
+      6613,
+      6615,
+      6617,
+      6619,
+      6621,
+      6623,
+      6625,
+      6627,
+      6629,
+      6631,
+      6633,
+      6635,
+      6637,
+      6639,
+      6641
+    ],
+    "solid_constraint_dofs": [
+      810,
+      811,
+      972,
+      973,
+      1134,
+      1135,
+      1296,
+      1297,
+      6481,
+      6483,
+      6485,
+      6487,
+      6489,
+      6491,
+      6493,
+      6631,
+      6633,
+      6635,
+      6637,
+      6639,
+      6641
+    ],
+    "intersections": {
+      "support__entity_symmetry": [],
+      "support__background_symmetry": [],
+      "entity_symmetry__background_symmetry": [
+        6481,
+        6483,
+        6485,
+        6487,
+        6489,
+        6491,
+        6493,
+        6631,
+        6633,
+        6635,
+        6637,
+        6639,
+        6641
+      ]
+    },
+    "counts": {
+      "cells": 3200,
+      "nodes": 3321,
+      "dofs": 6642,
+      "solid_cells": 1128,
+      "medium_cells": 2072,
+      "solid_incident_nodes": 1351,
+      "fixed_dofs": 89,
+      "free_dofs": 6553
+    },
+    "source_background": null,
+    "source_background_role": "provenance only; applied background comes exclusively from task.background_symmetry",
+    "reaction_accounting": "Use merged fixed DOFs once; intersecting groups are not separate contact forces",
+    "force_energy_extent": "lower_half modeled geometry; no automatic doubling"
+  },
+  "qualification": {
+    "status": "pending",
+    "measurements": {
+      "solid_cells": 1128,
+      "design_cells": 3200,
+      "design_solid_cells": 1128,
+      "passive_solid_cells": 0,
+      "passive_void_cells": 0,
+      "solid_area_mm2": 1128.0,
+      "solid_volume_mm3": 22560.0,
+      "design_area_mm2": 3200.0,
+      "design_solid_area_mm2": 1128.0,
+      "design_volume_fraction": 0.3525,
+      "envelope_volume_fraction": 0.3525,
+      "components_4": 1,
+      "components_8": 1,
+      "local_diagonal_only_patterns": 0,
+      "diagonal_pattern_lower_left_cells_yx": [],
+      "min_feature_mm": null,
+      "common_support_port_component_ids_4": [
+        1
+      ]
+    },
+    "criteria": {
+      "max_design_volume_fraction": null,
+      "min_feature_mm": null
+    },
+    "checks": {
+      "shared_edge_connectivity": {
+        "status": "pass",
+        "components": 1,
+        "requirement": "one shared-edge-connected mechanism body; separate workpieces are not part of solid"
+      },
+      "support_attachment": {
+        "status": "pass",
+        "requirement": "at least two attached distinct nodes for interface smoke only"
+      },
+      "input_attachment": {
+        "status": "pass",
+        "requirement": "all original weighted port nodes attached to solid"
+      },
+      "output_attachment": {
+        "status": "pass",
+        "requirement": "all original weighted port nodes attached to solid"
+      },
+      "port_support_component_link": {
+        "status": "pass"
+      },
+      "design_volume_fraction": {
+        "status": "pending",
+        "value": 0.3525,
+        "maximum": null
+      },
+      "min_feature": {
+        "status": "pending",
+        "minimum_mm": null,
+        "reason": "No validated minimum-feature measurement in HF-1; connectivity is not manufacturing qualification"
+      }
+    },
+    "regions": {
+      "support": {
+        "selected_node_count": 9,
+        "attached_node_count": 4,
+        "selected_nodes": [
+          0,
+          81,
+          162,
+          243,
+          324,
+          405,
+          486,
+          567,
+          648
+        ],
+        "attached_nodes": [
+          405,
+          486,
+          567,
+          648
+        ],
+        "component_ids_4": [
+          1
+        ]
+      },
+      "input": {
+        "selected_node_count": 3,
+        "attached_node_count": 3,
+        "selected_nodes": [
+          3078,
+          3159,
+          3240
+        ],
+        "attached_nodes": [
+          3078,
+          3159,
+          3240
+        ],
+        "component_ids_4": [
+          1
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ]
+      },
+      "output": {
+        "selected_node_count": 3,
+        "attached_node_count": 3,
+        "selected_nodes": [
+          3158,
+          3239,
+          3320
+        ],
+        "attached_nodes": [
+          3158,
+          3239,
+          3320
+        ],
+        "component_ids_4": [
+          1
+        ],
+        "weights": [
+          0.25,
+          0.5,
+          0.25
+        ]
+      }
+    }
+  },
+  "constraints_applied": true,
+  "material_assigned": true,
+  "task_created": true,
+  "response_evaluated": false,
+  "stored_input_target_role": "task instruction only; not executed by construction",
+  "source_provenance_path_context": "Paths inside the source geometry provenance belong to the original source context; no external LF data are read",
+  "arrays": {
+    "path": "model.npz",
+    "sha256": "321a10e0d46149cee9d17caf40dd1819c810ec9498d74c8882da1e3146aab9c6",
+    "fields": {
+      "coordinates": {
+        "dtype": "float64",
+        "shape": [
+          3321,
+          2
+        ],
+        "sha256": "726f02249ba39dcb422acc792a3e8b1185b943f21b2686ed0b7d5b2ed75b0725"
+      },
+      "connectivity": {
+        "dtype": "int64",
+        "shape": [
+          3200,
+          4
+        ],
+        "sha256": "84831753bb802e5418c1fbad9473952e67a9c8e942cfe04c66145d67a05d266c"
+      },
+      "solid": {
+        "dtype": "bool",
+        "shape": [
+          3200
+        ],
+        "sha256": "11315199330546b0f14d840707344a4eeda10904c6d33b3bc0f29f51ab56f6ac"
+      },
+      "lam": {
+        "dtype": "float64",
+        "shape": [
+          3200
+        ],
+        "sha256": "1a4738542bcb28cb42a17844fa50ea522ede6c1ac9246e5be3be1556a30ab5f0"
+      },
+      "mu": {
+        "dtype": "float64",
+        "shape": [
+          3200
+        ],
+        "sha256": "49c5e4ca5b973274fc09a73d41ae9398b079899c55502f3d51e96a2db3f7bd06"
+      },
+      "gamma": {
+        "dtype": "float64",
+        "shape": [
+          3200
+        ],
+        "sha256": "66f142bdf5d2547e1baa455db63ae79d77d9c7ce5fa227e7700f34b909b53f7e"
+      },
+      "edofs": {
+        "dtype": "int64",
+        "shape": [
+          3200,
+          8
+        ],
+        "sha256": "c5115b2eb89e54c5636f8080c747cfefaca89338f254f6351675cfb5a508a8c9"
+      },
+      "fixed_dofs": {
+        "dtype": "int64",
+        "shape": [
+          89
+        ],
+        "sha256": "c6cdf405c8f73648aaf265d703634e59dde5f2003b3832c242dfadcda7e635c9"
+      },
+      "free_dofs": {
+        "dtype": "int64",
+        "shape": [
+          6553
+        ],
+        "sha256": "1d7b7549214c6148b7b733d9e8f105849e15af8f9aae305a1865d6e98d17413e"
+      },
+      "solid_nodes": {
+        "dtype": "int64",
+        "shape": [
+          1351
+        ],
+        "sha256": "93ba87c34a079828fbfec528a3ad9bc9a3fdd7cc601bdac36279f9646f8af8d2"
+      },
+      "solid_dofs": {
+        "dtype": "int64",
+        "shape": [
+          2702
+        ],
+        "sha256": "ad3d0b811c3dce474d6f1d5c787a86d57237eac91af46b19b2eb7be27e8ed0a2"
+      },
+      "b_in": {
+        "dtype": "float64",
+        "shape": [
+          6642
+        ],
+        "sha256": "b74ac1a13fc42328979c6fff6505ce1bff02280f0d040eaee6b0d86d85bf80d4"
+      },
+      "b_out": {
+        "dtype": "float64",
+        "shape": [
+          6642
+        ],
+        "sha256": "847c308b4708e1ed421d0256020925bdf6aae829af8da2dc03b48827adf5ea4c"
+      },
+      "grad": {
+        "dtype": "float64",
+        "shape": [
+          9,
+          4,
+          2
+        ],
+        "sha256": "5367cbf39b1061f4187bebb33459c669cb8213f13ab414886ff8d80307187ef5"
+      },
+      "hessian": {
+        "dtype": "float64",
+        "shape": [
+          4,
+          2,
+          2
+        ],
+        "sha256": "7159a88b63bb29c790caba857b0668308a0bd79ee9cfb28379c11cc2e95af882"
+      },
+      "weights": {
+        "dtype": "float64",
+        "shape": [
+          9
+        ],
+        "sha256": "736b2b0ee0d4710b895ed9f9116d3fa32da144acbcb6701a87edb0408b7814b9"
+      },
+      "points": {
+        "dtype": "float64",
+        "shape": [
+          9,
+          2
+        ],
+        "sha256": "bbe5390364f8bb87d822c9ce2fea03b2523330f154c95827d4559b87f4ffeaa3"
+      },
+      "kr": {
+        "dtype": "float64",
+        "shape": [],
+        "sha256": "992e1a3cebfcedb0e079143753e682376909011d13eec8e5e340d71f131de69c"
+      },
+      "hx": {
+        "dtype": "float64",
+        "shape": [],
+        "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+      },
+      "hy": {
+        "dtype": "float64",
+        "shape": [],
+        "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+      },
+      "thickness": {
+        "dtype": "float64",
+        "shape": [],
+        "sha256": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555"
+      },
+      "k_out": {
+        "dtype": "float64",
+        "shape": [],
+        "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+      },
+      "force_scale_per_length": {
+        "dtype": "float64",
+        "shape": [],
+        "sha256": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555"
+      }
+    }
+  },
+  "descriptor_sha256": "691d47e4e124def578522ada9fba322792a75835ccf652b5bd70a0e32e65e568"
+}

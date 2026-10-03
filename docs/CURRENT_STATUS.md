@@ -1,5 +1,7 @@
 # 当前目标与状态
 
+2026-10-03最新：**新普通候选的NumPy完整力入口已接通，三例六制造态经64次新HP80/120全量核对通过，3案功能测试通过**。材料/HuHu/总力均满足原门，38400单元/全部DOF覆盖，最大归一化误差8.64e-17；保存模型、原始split状态、三力/应力/J/Hu/能量和全精度参考。见[目标、实施、物理效果和接续](NUMPY_FORCE_PROGRESS_20261002.md#native-force-20261003)、[位移/J/Hu](../functional_views/native_force_20261003/native_force_fields.png)、[三类内力](../functional_views/native_force_20261003/native_force_components.png)。本步为给定位移静态内力，未执行task的.025mm目标；下一普通模型的非对称切线/小步平均驱动平衡，工件/研究H2-H3/一般接触/批量标签仍待完成。
+
 2026-10-03最新：**显式native任务模型已接通，三例23字段独立精确相同，5案构造测试通过**。材料／实体与背景实际边界／端口均值／free DOF／九点Simpson算子均保存；两粗17旧intrinsic字段相同，细26082DOF／169fixed／25913free，物理Lr保持80mm。见[目标、执行、预算和接续](NUMPY_FORCE_PROGRESS_20261002.md#native-model-construction-20261003)、[实际模型边界图](../functional_views/native_model_20261003/native_model_applied_bcs.png)、[端口方程图](../functional_views/native_model_20261003/native_model_port_equations.png)。仅构造TEST，没有执行.025mm或组装／force／HP／solver；下一步新普通模型的静态NumPy力／参考。全研究H2／H3、原完整行程／一般接触／批量标签未完成。
 
 以下历史条目按执行时点保留，旧“下一步／未实现”不覆盖本条及最新实施记录。完整行程、工件、真实夹持力、一般接触及批量HF标签仍待完成。

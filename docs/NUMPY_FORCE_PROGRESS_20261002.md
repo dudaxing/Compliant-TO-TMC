@@ -680,3 +680,76 @@ python functional_views/native_model_20261003/plot_native_project_frozen.py --in
 实际使用该公开克隆中的CLI、已保存普通HF几何和明确TEST任务，三例各构造一次至新的外部目录；12件model JSON／NPZ及source_geometry JSON／NPZ与已发布模型逐字节相同，task hash、source geometry ID及所有counts一致。恢复确实执行了三次模型构造，这是相同TEST合同的普通CLI异目录复现，不计作重新执行正式三例生产或新物理任务；没有组装、force、HP或solver。
 
 冻结查看器仅读公开保存模型重绘一次，两张PNG、冻结查看器、helpers/data.py和完整view_metadata.json **五件全部逐字节相同**。[公开恢复回执](../handoff/native_model_20261003/public_recovery_verify.json)记录真实命令、启动／运行时间、exit及每件文件SHA，所有步骤exit0、无重试；未读原LF工作目录／ZIP，也没有新的Release依赖。它证明同机另一目录用完整Git普通文件可构造同一模型并显示同一图；不证明异机运行环境、统一分析政策或新非线性资格。回执、本段说明和更新后的普通文件清单随后一并交付main。
+
+<a id="native-force-20261003"></a>
+## 新普通候选 NumPy 完整力入口（2026-10-03，执行前计划）
+
+**整体目标仍是独立HF机构正向评估**：普通LF几何→明确物理任务→材料/边界/端口→可信内力、切线和非线性平衡→接触/工件/夹持功能→研究层批量。前步完成三例显式native模型，本步响应用户优先NumPy完整力及参考对比的指示；先实现可用普通文件力入口，再根据实际结果决定切线与平衡工作。历史受限通过不能替代新候选证明。
+
+本步增加 native_force API 和 evaluate_native_force CLI：普通HF几何JSON/NPZ、明确native TEST task、NPZ中原始lift/fluctuation→完整材料/HuHu/总单元力及三类全域内力、J/Hu/F/应力/能量和可恢复源/模型/状态。直接复用既有NumPy force-only候选；不复制公式、不切换默认核、不执行JIT/切线/平衡、不定义H2全研究网格或H3工件。平均输入.025mm仍是未执行的task指令；给定位移不是解、内部节点力不是任务反力/夹持力。
+
+已纯数据准备六制造态，见 lf_data_preparation/native_force_001/input_inventory.json，基线524ffc0998f7dff578df890f45a97bc4b7c9928a。对三例各用a=2^-10mm=.0009765625mm：stripe ux=a*(ix%2)，checker ux=a*((ix+iy)%2)，uy=0、lift=0、实际fixed DOF归零。stripe分片仿射Hu=0，checker非零Hu。保留原始绝对局部位移，不减局部平移；完整局部L/w、lambda/mu及公共kr/算子原字节分组。纯数据实际类数4/7/4/6/4/7，覆盖38400单元（两粗各3200×2，细12800×2）。细例是另一设计，不能当粗细收敛对。
+
+**冻结执行范围**：正式六态各一次完整NumPy力，生产120秒/采样RSS8GiB、外层150秒超时；独立参考64次（32 raw类×HP80/120，无导数），全部类展开逐单元三力检查、在Decimal中独立scatter全部DOF，参考300秒/采样RSS8GiB、外层330秒超时。首次错误即停，不修复重试/force，不复开旧卡。源码/输入执行前固定SHA及普通副本，回执含次数、实际时间、资源、身份。预算为本新范围而非沿用已关闭卡；没有把类分组当空间采样或从小样本外推。
+
+原三力门：total 1e-11、material/HuHu 1e-9，HP80/120一致性1e-40。无外载制造态SF=max(||全域总内力||,1e-8 Et max(a,1e-6))，Et由实际模型读取（本三例20N/mm）；子力尺度=max(||该参考力||,1e-12 SF)。局部8DOF使用独立LocalSF同公式，不能由全域尺度稀释误差。保存原始成员表、每类全精度Decimal字串、全域HP字串、完整候选场及全部门统计，覆盖每个单元/DOF；不能仅用global抵消后的误差。
+
+功能测试仅新增入口有意义的少量案例；另绘三例制造位移/J/Hu和材料/HuHu/总内力，实际查看PNG。显示倍率声明，任何抽稀仅绘图；HP核对全量。若通过，main普通提交推送后公开异目录仅一次六态CLI复现（120秒/8GiB，外层150秒），对全部模型/状态/力数组精确比对，另仅读保存数据重绘，不新增HP。此为同机异目录恢复证明，不是新物理资格或跨机性能证明。记录真实效果/限制再决定下一最小切线/平衡范围，避免防御框架膨胀。
+
+执行前补充：功能入口123行、CLI40行，复用既有力公式；独立静态复核见static_review_api.json。新增三案测试在16单元临时混合材料模型上各调用一次force（零态、非零split、刚体平移），与正式六态分开计数；pytest和保存态绘图分别一次／各120秒外层上限。图只读取场，不求力；正式源码胶囊包含22件实际依赖／测试／查看器／checker，需完整Git根和现有运行库，不宣称将flat sources单独搬走便可运行。
+
+### 实际实现、结果和物理解释
+
+本步实际新增 [native_force.py](../hf_repo/src/hf_eval/native_force.py)（123行，SHA9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d）及 [evaluate_native_force.py](../hf_repo/scripts/evaluate_native_force.py)（40行，SHA2d5b4e1ec864beb8240190bf9efb0bb060ad9943fceaa13048c06dc3af1a7623）。evaluate_native_force(geometry, task, SplitDisplacement)构造明确模型后调用既有NumPy force-only一次，再分别scatter材料及HuHu内力；write_native_force保存普通模型/HF源副本、原始L/w、12项场及JSON身份。固定值兼容只测量，不静默改位移。CLI直接读普通文件，不依赖LF；输出包含真实性质和单位，不增加执行框架或新公式。顶层源snapshot路径在静态复核中改为model/source_geometry/...，模型内部仍source_geometry/...；静态发现的依赖胶囊缺件也在执行前补齐。默认内核/严格编译/依赖/旧冻结数值均未改。
+
+[正式生产回执](../lf_data_preparation/native_force_001/execution_receipt.json)六态各一次通过，内部45.4054561秒、外层46.5220949秒，采样峰值160780288bytes（153.33203125MiB），120秒/8GiB范围内，无重试。六份模型各23字段精确匹配前阶段模型，source/input身份结束再次相同。两粗力核各约2.6–2.8秒，细力核各约15.8秒；这些是完整场调用实测，不是未来Newton/切线成本保证。只有力向量组装，不生成切线矩阵或求平衡。
+
+[新独立审计](../lf_data_preparation/native_force_001/audit/summary.json)status=pass，64/64新HP calls、六例完整覆盖；内部14.8609222秒、整子进程15.4229860秒，采样峰值135561216bytes（129.28125MiB），300秒/8GiB范围内。审计不导入生产mechanics或构造/求解；单单元参考按完整raw bytes分组，每个单元与所属类8DOF三力逐一核对，HP80/120保持全精度；独立推导edofs，以3000位Decimal及Inexact trap对每个单元全部DOF求和，无新增组装舍入后才输出float供显示。921600个局部分量标量和236196个全域分量标量均覆盖；115200个单元分量向量比较＋18个全域分量向量比较通过原三力门和一致门。回执115611 checks另包含身份/范围等核对，不把它们全称物理误差门。原raw类、成员表、各类全精度、全域参考和精确验收字串随Git保存。
+
+| 比较范围 | 总力最大归一化误差 | 材料力最大误差 | HuHu力最大误差 |
+|---|---:|---:|---:|
+| 每单元独立LocalSF | 7.54148e-17 | 6.27970e-17 | 8.63754e-17 |
+| 全域独立Decimal组装 | 5.25390e-17 | 8.20586e-17 | 7.95910e-17 |
+| 原门 | 1e-11 | 1e-9 | 1e-9 |
+
+HP80/120最坏一致性9.43561e-78，保持原1e-40门；全量J/F/Hu对HP120四舍五入结果均binary64精确相同，这是本dyadic制造态的附加诊断，没有扩大验收标准。Hu正则力不是材料能量的梯度，不能用材料能量差分替代总残量检查。
+
+| checker实际量（原模型范围、无翻倍） | 反相器粗 | 夹持器粗 | 夹持器细 |
+|---|---:|---:|---:|
+| 元素／DOF | 3200／6642 | 3200／6642 | 12800／26082 |
+| 最小J | .9990234375 | .9990234375 | .998046875 |
+| 最大绝对Hu分量（1/mm） | .001953125 | .001953125 | .0078125 |
+| 最大节点材料力模（N） | .0338001330 | .0285562030 | .0337962198 |
+| 最大节点HuHu力模（N） | 1.81406986e-5 | 1.81406986e-5 | 7.25636595e-5 |
+| 最大节点总力模（N） | .0338137275 | .0285718524 | .0338505540 |
+| 材料能量（N mm） | .00620622706 | .00597514651 | .0239776460 |
+
+全部stripe的Hu及正则化力精确为零；checker确实激活两者。相同节点位移幅度在.5mm网格上产生更大梯度和二阶梯度，所以细例Hu为粗例四倍；这不是机构实际行程响应或网格收敛结果。材料力随实体/软介质系数显著变化；kr保持未按gamma缩小，制造曲率在整个域均产生正则力。该功能现在能解释内力来源，但给定位移未平衡、无工件/外载，因此这些节点内力模不是输入力、支反力或夹持力；平均输入.025mm指令仍未执行。
+
+[三案pytest](../lf_data_preparation/native_force_001/tests_launch_receipt.json)一次3passed／2.32秒，外层3.2909261秒；16单元混合模型覆盖零态/两分量非零/刚体平移、原状态不可修改、可读取保存源/两数组/场、平移虚功/独立np.add.at组装，并禁止compiled/legacy入口。临时三案另有3次force，不冒充正式6态或新HP。保存态查看器一次5.7966877秒，见[绘图回执](../lf_data_preparation/native_force_001/plot_launch_receipt.json)；0 force/HP/solver。
+
+两图为 [制造位移、J和Hu](../functional_views/native_force_20261003/native_force_fields.png)及[材料/HuHu/总节点内力](../functional_views/native_force_20261003/native_force_components.png)。实际source轮廓/全部节点标量显示；mm主图x1、ux色标micrometres、局部Q1参考灰与给定位移蓝x200；J用每单元9点最小值、Hu用绝对最大分量。力色标log且零值不填地板，箭头只按明示逻辑stride抽稀显示，共用N/显示mm尺度；数值审计全量不抽稀。root已实际看两PNG，已请求Codex面板打开但返回queued，不声称用户已看到面板。Q1小图标题黑字在密棋盘底局部对比低，是非阻断显示限制，主标题/数据/倍率完整；本轮不覆盖冻图。细例另一设计、无contact/pressure/reaction解释、无半模型翻倍均写图和metadata。
+
+### 功能位置、接续与普通文件使用
+
+本步闭合普通文件→明确模型→NumPy完整静态力及新参考；三个旧机制前缀/受限C1资格仍按其原范围独立保留。下一最小工作先把既有非对称NumPy切线接到这套普通模型，选明确方向进行全域组装/作用验证，再根据实测成本执行小步均值驱动平衡并显示实际机构变形/输入乘子/自由输出；不能从本次制造场直接授予新候选路径资格。真实工件、完整行程/一般接触、研究H2/H3决定、全部候选批量标签/排名尚未完成。切线、求解虽已有受限内存API，当前new ordinary native force CLI尚不执行它们。
+
+在任意完整克隆根和现有HF环境，以下新输出目录必须不存在（本命令计算checker内力，非执行task目标）：
+
+```text
+python hf_repo/scripts/evaluate_native_force.py --geometry lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.json --task lf_data_preparation/native_model_001/tasks/gripper_native_fine.json --state lf_data_preparation/native_force_001/states/gripper_native_fine/checker.npz --output my-native-force
+```
+
+仅读冻结保存态和审计重绘（不求力）：
+
+```text
+python functional_views/native_force_20261003/plot_native_force_frozen.py --input lf_data_preparation/native_force_001 --output my-force-view
+```
+
+正式六态、64新HP额度及三案测试/一次图均已经执行；上述命令是可复用的普通功能说明，不表示旧正式窗口重新开放。提交/公开恢复及独立事后身份/审图将在下段按真实结果补记。
+
+### 独立事后复核与审图
+
+[保存数据复核](../lf_data_preparation/native_force_001/postrun_identity_review.json)SHA70fd3f794be93c3ebab1e0b0b6dc51a271a13ce9a818a5059a5af9eb002e43a7，pass_saved_data_review：22来源及18唯一输入身份、六例23模型＋2state＋12场，32 raw类成员恰覆盖每个单元，64参考SHA/precision/原输入字节均核对；从已保存有限Decimal字串另做精确scatter/验收重放，与所有全域值及局部门相同。此为API作者对root生产及另一数学作者审计的交叉核查，构成独立数值公式的仍是原Decimal参考；不把该身份复核伪称又做了64次新HP。所有新增force/reference.evaluate/构造/求解调用0。
+
+[实际两图审查](../lf_data_preparation/native_force_001/visual_review_tests.json)SHAc86ec5734b0405f69f4cad18dcf620a0454be642d797a4d80f65cc6ed82ea8ee，status=pass：实际查看PNG并复核116件来源/显示字段及全量审计范围。记录局部caption低对比和公用标尺下HuHu箭头最大仅约.00552显示mm（亚像素）的非阻断显示限制；力的全节点log色标仍可读，未为了图像夸大物理量或重绘。root亦实际看图；没有重复正式计算/测试或重绘。所有本轮必需检查已通过，现在按此前授权提交main和执行已计划的公开异目录恢复。

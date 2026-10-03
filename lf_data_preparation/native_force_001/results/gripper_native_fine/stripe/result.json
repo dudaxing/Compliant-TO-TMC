@@ -1,0 +1,228 @@
+{
+  "schema_version": "hf-native-force-result-1.0",
+  "scope": "supplied_displacement_test_only",
+  "source_geometry": {
+    "geometry_id": "62dd40a9ed8a41a6a2deb55927982c7f409d63bfedbf96079b2ee032e816da8d",
+    "descriptor_sha256": "aa658442a28aa4a33a774767ef675bced99c19a4187dfd7177818b8629089b37",
+    "descriptor_file_sha256": "dbab7567c98e18174d198318f025184b3545c3681c060fa77d9435122bb0f32c",
+    "arrays_sha256": "92ff8918ae7502c3f8bfb99398b654ea1521549e7ff3ce0e8b24a9b4fa720d21",
+    "snapshot": {
+      "descriptor": "model/source_geometry/geometry.json",
+      "arrays": "model/source_geometry/geometry.npz"
+    }
+  },
+  "task_sha256": "e5f6ecb340f6e9f1dd570b6a7396c28a56fde52b7a8ee92738c406a474e4f9ef",
+  "state_representation": "split_displacement_v1",
+  "state_sha256": "39b4c6de275dcedb13f01005847a20b47ee90241652c713c012812229f180770",
+  "grid": {
+    "shape_yx": [
+      80,
+      160
+    ],
+    "origin_mm": [
+      0.0,
+      0.0
+    ],
+    "cell_size_mm": [
+      0.5,
+      0.5
+    ],
+    "axes": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "extent_mm": [
+      80.0,
+      40.0
+    ],
+    "array_order": "C_yx_bottom_up",
+    "value_location": "cell"
+  },
+  "model_extent": {
+    "kind": "lower_half",
+    "symmetry_axis": {
+      "normal": [
+        0.0,
+        1.0
+      ],
+      "offset_mm": 40.0
+    }
+  },
+  "analysis_grid_policy": "native",
+  "native_geometry_preserved": true,
+  "counts": {
+    "cells": 12800,
+    "nodes": 13041,
+    "dofs": 26082,
+    "solid_cells": 4358,
+    "medium_cells": 8442,
+    "solid_incident_nodes": 4881,
+    "fixed_dofs": 169,
+    "free_dofs": 25913
+  },
+  "kernel_version": "p26_q1_split_invariants_hu_v1",
+  "force_only": true,
+  "force_calls": 1,
+  "tangent_calls": 0,
+  "solver_calls": 0,
+  "equilibrium_qualified": false,
+  "task_target_executed": false,
+  "fixed_displacement_compatible": true,
+  "force_semantics": "internal weak residual at supplied displacement; not external contact reactions",
+  "force_energy_extent": "lower_half modeled geometry; no automatic doubling",
+  "total_assembly": "compensated element totals; material and regularization observations scattered separately",
+  "metrics": {
+    "min_J": 0.998046875,
+    "max_abs_Hu_per_mm": 0.0,
+    "max_abs_global_total_force_N": 0.05258434953694619,
+    "sum_material_energy_N_mm": 0.0559479864145144
+  },
+  "timing_seconds": {
+    "project_preparation": 0.043363000033423305,
+    "force_evaluation": 15.841960799996741,
+    "kernel_and_transfer": 15.84149050002452,
+    "total_assembly": 0.000374399998690933,
+    "component_scatter": 0.0004702999722212553,
+    "evaluation": 15.886313599999994
+  },
+  "model": {
+    "descriptor_path": "model/model.json",
+    "descriptor_file_sha256": "bb84034c655f4b74e5cfc478688af5c2565fa25358b4bb8e89ac3b3981883ccc",
+    "descriptor_sha256": "64db5f93f5000bc0c936cbf5f71ac36d6d011702551c2d124faa3b306b6b3527",
+    "arrays_path": "model/model.npz",
+    "arrays_sha256": "f3ad62046286023344a2aab0cea4ac7466dcb98637c12f2ff7cdc66f988144d6"
+  },
+  "state": {
+    "path": "state.npz",
+    "sha256": "28ae77c0b88ab380ad3bcae89b7bdfe511a72f57675bacad98a8f66ef3a258a1",
+    "fields": {
+      "lift": {
+        "dtype": "float64",
+        "shape": [
+          26082
+        ],
+        "sha256": "79725304cb6191f175bdbf1f26378bfeca8e1fa67715b1704026774952da267c"
+      },
+      "fluctuation": {
+        "dtype": "float64",
+        "shape": [
+          26082
+        ],
+        "sha256": "c6f91018f1f31933978f721046574ab79097ee7484d3509708c7d61ed052258d"
+      }
+    }
+  },
+  "forces": {
+    "path": "forces.npz",
+    "sha256": "2e084d1d57b40a4037c8bf17e83e7eb6352e50c3852532b16115877e586bdc95",
+    "fields": {
+      "element_total_force": {
+        "dtype": "float64",
+        "shape": [
+          12800,
+          8
+        ],
+        "sha256": "7e315b513adaa0cf378faa1e561004e26313e85defc640524b13965b32c01700"
+      },
+      "element_material_force": {
+        "dtype": "float64",
+        "shape": [
+          12800,
+          8
+        ],
+        "sha256": "7e315b513adaa0cf378faa1e561004e26313e85defc640524b13965b32c01700"
+      },
+      "element_regularization_force": {
+        "dtype": "float64",
+        "shape": [
+          12800,
+          8
+        ],
+        "sha256": "dce79b8fea025a282b35a56f716c4766ca2949f23c30630060db91814710f4f5"
+      },
+      "global_total_force": {
+        "dtype": "float64",
+        "shape": [
+          26082
+        ],
+        "sha256": "a180047148b00237583464d9d1280b12c296d191ed92f33185acaf8c83e6d765"
+      },
+      "global_material_force": {
+        "dtype": "float64",
+        "shape": [
+          26082
+        ],
+        "sha256": "a180047148b00237583464d9d1280b12c296d191ed92f33185acaf8c83e6d765"
+      },
+      "global_regularization_force": {
+        "dtype": "float64",
+        "shape": [
+          26082
+        ],
+        "sha256": "79725304cb6191f175bdbf1f26378bfeca8e1fa67715b1704026774952da267c"
+      },
+      "J": {
+        "dtype": "float64",
+        "shape": [
+          12800,
+          9
+        ],
+        "sha256": "b8da8516b3dc378c9e89c54a16de696bddcd6c4a55c1262852a1db03582a15bd"
+      },
+      "Hu": {
+        "dtype": "float64",
+        "shape": [
+          12800,
+          2,
+          2,
+          2
+        ],
+        "sha256": "dce79b8fea025a282b35a56f716c4766ca2949f23c30630060db91814710f4f5"
+      },
+      "F": {
+        "dtype": "float64",
+        "shape": [
+          12800,
+          9,
+          2,
+          2
+        ],
+        "sha256": "df2cd4647b11c3328d420b45c3e5cffd451074cef0aef2fc600375d78ff6fc91"
+      },
+      "stress_first_piola": {
+        "dtype": "float64",
+        "shape": [
+          12800,
+          9,
+          2,
+          2
+        ],
+        "sha256": "0ecf9e0de02506cafcaf9c399c30a151e7d076dc8583525be517cf8291426eed"
+      },
+      "stress_second_piola": {
+        "dtype": "float64",
+        "shape": [
+          12800,
+          9,
+          2,
+          2
+        ],
+        "sha256": "75ba4b6e6096a23857c6b409a233ec6191c04c1d62590bdff4d4d76ab6fa2a49"
+      },
+      "material_energy": {
+        "dtype": "float64",
+        "shape": [
+          12800
+        ],
+        "sha256": "a2d0dead66152dd291f79bb21c948b0ab0d1cf681409fd336bc8148096ae0ac7"
+      }
+    }
+  },
+  "descriptor_sha256": "b7edd8924dc074353fa5a2b95991c6e5f267aa08bc6fdb9e9c9297ad4eb2c15d"
+}
