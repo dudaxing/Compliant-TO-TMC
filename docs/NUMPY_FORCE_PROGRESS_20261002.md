@@ -468,7 +468,9 @@ python hf_repo/scripts/plot_split_project_path.py --input hf4_c2_stable_f_valida
 
 现在新候选已在两种实际机构上实现原普通输入→NumPy力和切线→平均端口平衡→新参考验收→实际显示；两例各111门及完整保存重放通过，仍仅各自小前缀。下一步转向**普通LF v2数据适配**，先两个规范包及一个原生细网格包，保留原生网格和全部掩膜／端口语义，以无FE转换及几何图验证；不继续重复规范小行程，也不把analysis_mesh自动当HF政策。当前正式Git尚无LF v2原包，文档所指`Diversity-TO-Compliant-O-main (10).zip`可按明确成员只读取得，81,618,414bytes／SHA79c44fbf2570651539137d74299714823c8046d13efd9c3bad6eb32bc389745e。重新读30份描述仍为23粗／7细；1800正式包本轮只抽读一例，不能称全量新验收。工件、完整行程、统一分析网格和夹持力定义仍待明确，不能套用HF5草案数值。
 
-本轮完整输入、新状态、向量／矩阵、新参考、源码和图随main保存；[执行回执](../hf4_c2_stable_f_validation/numpy_gripper_prefix_001/execution_receipt.json)区分一次生产、一次审计、一次纯绘图及只读记录提取。报告提取曾误用不存在的summary键，修正为实际per-check计数后写回执，未重跑任何数值阶段。[物理审图](../hf4_c2_stable_f_validation/numpy_gripper_prefix_001/visual_review.json)两路实际查看PNG及GIF首末帧通过，原87约束、+y均值、作用力平衡、J和倍率一致；增益范围说明保留。独立重放采用120秒subprocess上限，未超时；回执创建至写出6.684456秒仅为该内部区间，不含启动／导入／终止，未测整进程墙钟。公开克隆恢复和提交身份在交付后补记。
+本轮完整输入、新状态、向量／矩阵、新参考、源码和图随main保存；[执行回执](../hf4_c2_stable_f_validation/numpy_gripper_prefix_001/execution_receipt.json)区分一次生产、一次审计、一次纯绘图及只读记录提取。报告提取曾误用不存在的summary键，修正为实际per-check计数后写回执，未重跑任何数值阶段。[物理审图](../hf4_c2_stable_f_validation/numpy_gripper_prefix_001/visual_review.json)两路实际查看PNG及GIF首末帧通过，原87约束、+y均值、作用力平衡、J和倍率一致；增益范围说明保留。独立重放采用120秒subprocess上限，未超时；回执创建至写出6.684456秒仅为该内部区间，不含启动／导入／终止，未测整进程墙钟。
+
+科学代码／结果／图已普通推送main提交`b744d41635fd151b2153467b614684e17e166884`；另目录公开克隆仅fetch＋fast-forward至此，5027件普通文件校验通过，更新前后工作树干净。用Git保存输入和随图冻结查看器纯重画三帧，PNG、GIF、CSV、查看器源码、完整metadata五文件与作者版本逐字节相同。[公开恢复回执](../handoff/numpy_gripper_prefix_20261003/public_recovery_verify.json)保存命令／exit／SHA；没有新力、HP或求解，没有新增Release依赖。这是同机异目录恢复与显示重现，不授予异机环境运行或新的力学资格。
 
 在克隆根仅重绘本例（输出目录必须不存在）：
 
