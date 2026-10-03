@@ -1,0 +1,57 @@
+{
+  "baseline_commit": "2b16e7ce12db1a2e96b0f96e836ebdd09abe6f8a",
+  "production": {
+    "command": "python -B hf_repo/scripts/run_split_project_path.py --geometry geometry_dataset/canonical/gripper/geometry.json --task hf_repo/configs/hf3/gripper_pilot_v1.json --output hf4_c2_stable_f_validation/numpy_gripper_prefix_001/solve --time-limit 300",
+    "invocations": 1,
+    "exit_code": 0,
+    "records": 3,
+    "solver_seconds": 153.6282637999975,
+    "invocation_seconds": 154.03908089996548,
+    "peak_working_set_bytes": 768274432
+  },
+  "independent_reference": {
+    "command": "python -B hf_repo/scripts/audit_split_project_path.py --input hf4_c2_stable_f_validation/numpy_gripper_prefix_001/solve --output hf4_c2_stable_f_validation/numpy_gripper_prefix_001/audit --time-limit 300",
+    "invocations": 1,
+    "exit_code": 0,
+    "fresh_HP_evaluations": 6,
+    "fresh_HP_attempts": 6,
+    "checks_passed": 111,
+    "elapsed_summary_seconds": 144.63747720001265,
+    "elapsed_lifecycle_seconds": 144.695164499979,
+    "peak_working_set_bytes": 950128640
+  },
+  "budgets": {
+    "solve_seconds": 300,
+    "audit_seconds": 300,
+    "sampled_RSS_limit_bytes": 8589934592,
+    "policy": "Cooperative checks, not hard OS supervision"
+  },
+  "reporting_history": [
+    {
+      "result": "KeyError",
+      "key": "checks_passed",
+      "effect": "Read-only receipt extraction stopped before writing; corrected to count actual per-check pass_gate and use fresh_HP_evaluations_attempted; no force,HP,solve or gate changed."
+    }
+  ],
+  "scope": "Only canonical original HF3 gripper prefix [0,.001,.025]mm; parent1mm,general contact,workpiece,clamping force and HF5 incomplete",
+  "rendering": {
+    "invocations": 1,
+    "command_seconds": 5.5759401,
+    "exit_code": 0,
+    "directory": "functional_views/numpy_gripper_prefix_20261003",
+    "viewer_sha256": "6183a166b65cd4b9513b63e8565ee30b9ebff94191be1abc36e58c34df205074",
+    "new_force_HP_solve_calls": 0
+  },
+  "saved_replay": {
+    "command": "python -B hf4_c2_stable_f_validation/numpy_gripper_prefix_001/review_saved_evidence.py",
+    "invocations": 1,
+    "exit_code": 0,
+    "subprocess_timeout_seconds": 120,
+    "timed_out": false,
+    "checks_passed": 111,
+    "omitted": 0,
+    "receipt_creation_to_write_seconds": 6.684456,
+    "timing_scope": "Does not include Python startup/import/termination; whole process wall time was not separately measured.",
+    "new_force_HP_solve_calls": 0
+  }
+}

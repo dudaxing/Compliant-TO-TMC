@@ -1,5 +1,7 @@
 # HF5 计划草案：LF v2 几何接入、网格与任务映射、真实夹持任务（待所有者确认，未实施）
 
+2026-10-03状态更新：独立`split_displacement.py`平均端口增广入口已实现，并由显式NumPy assembler在原HF3反相器及夹持器各[0,.001,.025]mm前缀通过111项新参考及完整重放，见[当前实施记录](NUMPY_FORCE_PROGRESS_20261002.md#numpy-gripper-prefix-20261003)。这修订下面历史接口缺口；普通LF v2适配、一般网格任务模式、工件与正式HF5仍未实现。下一近期阶段只做无重采样的数据准备；本草案的统一网格、工件、5mm行程、测力与预算建议仍不是已决定任务。
+
 初稿：2026-09-27；事实勘误：2026-09-28。来源：外部功能审阅（`research_integration_20260920/external_reviews_20260927/`）指出的缺口 1、2，以及本仓库既定目标——在共同、明确的物理任务下，独立地对 LF 几何做正向力学评价。本文只是方案，确认之前不写接口代码、不做新 FE。[v4 唯一细网格补测](HF4_C2_V4_RETEST_REPORT.md)已完成：21/21 状态、651/651 检查、7/7 原目标；一次求解/一次审计额度已用完。默认内核仍未切换，HF5 仍未实施，不能把 v4 单路径资格推广为真实夹持任务资格。近期数值修复状态以 [CURRENT_STATUS](CURRENT_STATUS.md) 为准。
 
 ## 1. 现状（已核实）
@@ -56,7 +58,7 @@
 
 实现要点（方案确认后另写执行计划）：
 - 平均位移约束用拉格朗日乘子增广：b_inᵀ(u_lift + u_fluctuation) = d。
-- 现有 [displacement.py](../hf_repo/src/hf_eval/displacement.py) 已有单数组 u 的平均端口增广控制；[split_prescribed.py](../hf_repo/src/hf_eval/split_prescribed.py) 是固定自由度的 split prescribed 路径。二者不能直接视作本文所需的平均端口 split 增广系统，该系统尚未实现。
+- 现有 [displacement.py](../hf_repo/src/hf_eval/displacement.py) 为单数组平均控制；[split_prescribed.py](../hf_repo/src/hf_eval/split_prescribed.py) 为固定自由度路径。2026-10-03新增 [split_displacement.py](../hf_repo/src/hf_eval/split_displacement.py) 已实现独立split平均端口增广系统，并通过两例原HF3小前缀；它不自动授予本文工件或HF5任务资格。
 - 固定块节点与支承、对称约束一起进入固定自由度集合。
 - 拟使用 split 状态；具体内核须在任务协议中绑定来源并满足相应数值与路径准入。稳定 F 保存态或 v4 单路径通过不会自动切换 HF5 生产内核。
 - 写明方程、固定集合与一致切线，不靠接口拼接。

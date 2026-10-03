@@ -1,6 +1,6 @@
 # Compliant-TO-TMC：独立 HF 力学评估器
 
-2026-10-03当前：**新NumPy split控制已计算原反向器小行程[0,.001,.025]mm，111新HP门及111完整保存重放通过**。输入.025mm→输出−x .040096mm、输入力4.24985mN。看[实施与接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#numpy-inverter-prefix-20261003)、[实际x1／明确x100变形与力图](functional_views/numpy_inverter_prefix_20261003_display_v2/split_project_path.png)、[三帧动画](functional_views/numpy_inverter_prefix_20261003_display_v2/split_project_path.gif)。完整普通输入与新证据随Git；父1mm、真实工件和HF5尚未完成。
+2026-10-03当前：**新NumPy split平均入口已在原反相器与夹持器完成各自[0,.001,.025]mm前缀；每例111新HP门及111完整保存重放通过**。同.025mm输入，反相器输出−x .040096mm／输入4.24985mN，夹持器输出+y .028604mm／输入5.21459mN。看[实施与接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#numpy-gripper-prefix-20261003)、[夹持器实际x1／明确x100结构及力图](functional_views/numpy_gripper_prefix_20261003/split_project_path.png)、[三帧动画](functional_views/numpy_gripper_prefix_20261003/split_project_path.gif)。完整普通输入与新证据随Git；下一步普通LF v2数据适配，父1mm、真实工件和HF5仍未完成。
 
 2026-10-03当前功能：**NumPy split平均端口已实现，两条小实体路径及272项新HP检查通过**。见[实现、物理效果与恢复方法](docs/NUMPY_FORCE_PROGRESS_20261002.md#split-average-20261003)、[实际变形／力／自由输出图](functional_views/split_average_20261003/split_average_demo.png)和[动画](functional_views/split_average_20261003/split_average_demo.gif)。下一步接原HF3规范机构的小行程；此小任务不授予接触、工件或HF5资格。
 

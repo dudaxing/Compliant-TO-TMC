@@ -1,6 +1,6 @@
 # 在新电脑或任意新目录接续开发
 
-2026-10-03最新先看[原反向器NumPy split小行程及接续](NUMPY_FORCE_PROGRESS_20261002.md#numpy-inverter-prefix-20261003)：3状态／111新HP检查＋111完整保存重放通过，原普通输入、模型、向量、CSC与参考均随Git。纯绘图入口`plot_split_project_path.py`不导入力学模块，任意克隆可重画[实际图](../functional_views/numpy_inverter_prefix_20261003_display_v2/split_project_path.png)。保留首图及修正正J刻度的display_v2身份；父任务1mm、一般接触及HF5尚未完成。下一步复用驱动接原夹持器小前缀，再做普通LF v2适配。
+2026-10-03最新先看[两例NumPy split小行程及接续](NUMPY_FORCE_PROGRESS_20261002.md#numpy-gripper-prefix-20261003)：原夹持器新增3状态／111新HP检查及111完整保存重放通过，与前步反相器共用驱动／审计／查看器。普通输入、模型、向量、CSC和新参考随Git；随图冻结的`viewer_source.py`可无力学计算重画[实际夹持器图](../functional_views/numpy_gripper_prefix_20261003/split_project_path.png)。原87固定DOF、+y端口和Et20保持。下一步普通LF v2数据适配，不自动用analysis_mesh代替原生网格；父1mm、工件、一般接触及HF5尚未完成。
 
 2026-10-03最新先看[split平均端口功能与恢复命令](NUMPY_FORCE_PROGRESS_20261002.md#split-average-20261003)：显式新入口已接NumPy实际CSC增广系统，两条六单元路径／272项新HP检查通过。模型、split状态、总／增广矩阵、参考、协议与[实际图](../functional_views/split_average_20261003/split_average_demo.png)均随Git。新平均入口尚未接入旧文件dispatcher；下一步用原HF3规范机构小行程，不能将普通实体演示当作机构、接触或批量标签验收。
 

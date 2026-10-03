@@ -1,6 +1,6 @@
 # 当前目标与状态
 
-2026-10-03最新：**原HF3反向器的新NumPy split平均路径完成[0,.001,.025]mm前缀，3状态／111项新HP门及111项独立保存重放全部通过**。末态输出−x .0400960mm、增益1.60384、输入力.00424985N；原几何／材料／任务／端口保持，父1mm任务仍未完成。看[实施、效果、完整限制与恢复](NUMPY_FORCE_PROGRESS_20261002.md#numpy-inverter-prefix-20261003)、[实际x1及明确x100图](../functional_views/numpy_inverter_prefix_20261003_display_v2/split_project_path.png)和[三帧动画](../functional_views/numpy_inverter_prefix_20261003_display_v2/split_project_path.gif)。下一步复用入口支持原夹持器小前缀，然后普通LF v2适配；真实工件、一般接触与HF5继续未完成。
+2026-10-03最新：**共用NumPy split平均入口已完成原反相器及夹持器各自[0,.001,.025]mm小前缀，每例111新HP检查及111完整保存重放通过**。夹持器末态输出+y .0286037mm／输入力.00521459N，原87固定DOF及全背景对称保留；反相器结果见前节。看[完整实施、效果、限制及恢复](NUMPY_FORCE_PROGRESS_20261002.md#numpy-gripper-prefix-20261003)、[夹持器实际x1／明确x100结构及力图](../functional_views/numpy_gripper_prefix_20261003/split_project_path.png)、[三帧动画](../functional_views/numpy_gripper_prefix_20261003/split_project_path.gif)。下一步普通LF v2纯数据适配；原父1mm、一般接触、工件、夹持力及HF5继续未完成。
 
 2026-10-03最新：**split平均端口＋NumPy增广平衡已实现；六单元实体诊断的两条路径完成，8记录／272项新HP80/120检查通过**。见[目标、实现、实际效果和接续](NUMPY_FORCE_PROGRESS_20261002.md#split-average-20261003)、[实际形变／力／输出／独立节点图](../functional_views/split_average_20261003/split_average_demo.png)和[四帧动画](../functional_views/split_average_20261003/split_average_demo.gif)。平均输入为.1mm时，输出弹簧使收缩从−.0602864减至−.0416813mm，输入力从4.45438增至4.68079N。三输入节点允许不同位移，默认内核不变；小实体功能资格不等于规范机构、接触或HF5资格。下一步为原HF3规范机构的小行程NumPy split路径；文件dispatcher／LF v2适配、真实工件和一般接触仍待实现。
 
