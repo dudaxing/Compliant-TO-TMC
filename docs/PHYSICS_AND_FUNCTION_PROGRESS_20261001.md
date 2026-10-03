@@ -1,5 +1,7 @@
 # 物理与功能开发进度
 
+2026-10-03最新：**普通原生模型的三分量NumPy切线入口及完整CSC组装已接通**。粗夹持器3200单元／6642DOF保存checker态，两个方向经40次新HP80/120全量核对通过，2案功能测试通过；最坏归一化误差4.43e-14，原门未改。三完整矩阵保留fixed行列及HuHu非对称性，见[实现、数值、成本及物理解释](NUMPY_FORCE_PROGRESS_20261002.md#native-tangent-20261003)与[两方向的内力变化率图](../functional_views/native_tangent_20261003/native_tangent_directional_actions.png)。本步21.25秒为粗例给定态实测，未求平衡／未执行.025mm目标；下一步接普通文件的小步平均驱动平衡并显示真实形变、输入力和自由输出。工件／研究H2-H3／完整接触与批量标签仍待完成。
+
 2026-10-03最新：**新普通候选的NumPy完整力入口已接通，三例六制造态经64次新HP80/120全量核对通过，3案功能测试通过**。材料/HuHu/总力均满足原门，38400单元/全部DOF覆盖，最大归一化误差8.64e-17；保存模型、原始split状态、三力/应力/J/Hu/能量和全精度参考。见[目标、实施、物理效果和接续](NUMPY_FORCE_PROGRESS_20261002.md#native-force-20261003)、[位移/J/Hu](../functional_views/native_force_20261003/native_force_fields.png)、[三类内力](../functional_views/native_force_20261003/native_force_components.png)。本步为给定位移静态内力，未执行task的.025mm目标；下一普通模型的非对称切线/小步平均驱动平衡，工件/研究H2-H3/一般接触/批量标签仍待完成。
 
 2026-10-03最新：**普通LF文件→HF几何→显式原生任务模型已接通**。三例23模型字段独立精确核对、5案构造测试通过；两粗模型17旧字段相同，细.5mm／26082DOF、五节点端半权、169fixed保持。看[材料与实际边界](../functional_views/native_model_20261003/native_model_applied_bcs.png)、[均值输入与自由输出](../functional_views/native_model_20261003/native_model_port_equations.png)及[目标、依据、实施与效果](NUMPY_FORCE_PROGRESS_20261002.md#native-model-construction-20261003)。本步材料和约束已构造，保存的.025mm没有被执行；未计算新力或形变。此前NumPy函数层及两规范小前缀已受限通过；下一步新普通模型静态力／参考，完整行程、工件、一般接触及批量HF继续待实现。
@@ -27,6 +29,7 @@
 | 独立几何读取 | [data.py](../hf_repo/src/hf_eval/data.py)、[evaluate/inspect](../hf_repo/src/hf_eval/evaluation.py)；两例规范几何导出、独立安装与断开 LF 读取已通过 | 单元掩膜、尺度、厚度、支承与端口可独立读取；新增 [lf_v2.py](../hf_repo/src/hf_eval/lf_v2.py) 纯数据转换和 [native_map.py](../hf_repo/src/hf_eval/native_map.py) 原生Q1准备均已验证两个规范包与一个细网格包；全部30／1800包和一般接触任务仍未验收 |
 | 显式原生任务模型 | [native_project.py](../hf_repo/src/hf_eval/native_project.py) 与普通CLI已实现；三例23数组独立精确核对、5案构造测试通过 | 两粗规范17个旧模型intrinsic字段相同；细.5mm／五节点端半权与169fixed保持。材料、实际边界和算子已构造，保存输入目标未执行；H2／H3与正式响应资格保持待定 |
 | 普通原生模型完整内力 | [native_force.py](../hf_repo/src/hf_eval/native_force.py)／普通CLI已实现；三例六制造态64次新HP80/120全域核对及3案功能测试通过 | 12场及完整model/state保存，材料/HuHu/总单元与节点力均可读/显示；给定位移内力不是平衡/任务反力，.025mm目标未执行。下一步普通模型切线及小步均值平衡 |
+| 普通原生模型完整切线 | [native_tangent.py](../hf_repo/src/hf_eval/native_tangent.py)／普通CLI已实现；粗夹持器两方向40次新HP80/120全量核对及2案测试通过 | 三张量及full-DOF CSC保存，HuHu非对称保留；所有系数组装一致，HP物理导数范围仅两方向。给定态切线已实现，普通文件平均驱动平衡仍待接通 |
 | 实体线性诊断 | [linear.py](../hf_repo/src/hf_eval/linear.py)；反向器、夹持器两例通过 HF1 | 已得到微小输入下的位移、输入广义力与变形图；用于单位、方向、支承及线性极限检查，无工件接触 |
 | TMC 非线性与内力组装 | [tmc_kernel.py](../hf_repo/src/hf_eval/tmc_kernel.py)、[tmc.py](../hf_repo/src/hf_eval/tmc.py)；HF2 修正 C-shape 的100原目标、HF3 两条40目标机构路径已验证 | **已有实际材料力、HuHu 正则力、总内力及一致非对称 Jacobian，并能求平衡。** 显式NumPy新候选已通过96静态状态、新C1路径及两规范机构小前缀；默认内核保持原入口 |
 | 单数组平均端口控制 | [displacement.py](../hf_repo/src/hf_eval/displacement.py)、[project_evaluation.py](../hf_repo/src/hf_eval/project_evaluation.py)；HF3 两例自由输出路径通过 | 约束端口平均位移，端口节点仍能相对变形；输入乘子为驱动器作用于模型的广义力，可读出输出平均位移 |

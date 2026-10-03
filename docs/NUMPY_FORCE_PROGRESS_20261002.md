@@ -768,3 +768,78 @@ python functional_views/native_force_20261003/plot_native_force_frozen.py --inpu
 下一步先接**粗夹持器普通模型的切线入口**，使用本轮已保存checker一态；两方向vx=stripe、vy=checker，均dyadic无量纲节点形状，actual fixed DOFs置0、lift固定，扰动参数单位mm、Jv单位N/mm。首先纯数据统计完整raw L/w/材料/公共算子及局部direction类数，再冻结。新module/CLI一次复用batch_tangent_components_split_numpy生成三分量(ne,8,8)，按原COO→CSC模式完整全DOF组装并sum_duplicates，不对称化、不删fixed rows/cols、不把任务端口当逐点强制。旧force/NumPy kernel/查看器字节保持，以继续读取本阶段冻结包。
 
 三分量所有单元和全域Jv分别与新HP80/120方向参考核对；沿用原切线门total1e-10、material/Hu1e-9、80/1201e-40及max(||HP Jv||,1e-10)分母。保存局部矩阵/CSC/方向/完整成员与Decimal参考及全节点力增量图，记录非对称性。建议生产与参考各一次120秒/采样8GiB、各外层150秒，首错停止；新阶段实际成本尚未测，不能把两方向理解成只生成两列（既有实现仍生成八个局部基方向），也不能从细例15.8秒force推出细例切线预算保证。粗例通过并看实测成本后，再决定细例/小步平均平衡。此最近阶段不启动平衡、工件或标签；研究H2/H3继续待决，没有从制造态外推路径资格。
+
+<a id="native-tangent-20261003"></a>
+## 普通模型三分量切线与方向参考（2026-10-03，执行前记录）
+
+前轮是实质进展：普通完整力已实现，六态新参考和实际复现通过，main8373a9b与origin同步。整体HF功能目标/无LF优化依赖/无MPM/研究H2-H3待决保持；本轮依据该新证据接普通模型切线，用于随后增量平衡，不能把制造态本身当机构功能。此前切线核已有96静态范围受限证据，但没有这个普通文件入口；本轮新增接口/全域组装和两方向新参考，不重开旧卡。
+
+**范围及功能实现**：新 native_tangent.py/API及evaluate_native_tangent.py/CLI从geometry/task/原始split状态生成三分量全单元(ne,8,8)与full-DOF CSC；K_ij=df_i/dw_j、lift固定，单位N/mm，不对称化，不裁fixed rows/cols，不逐点强制端口。复用既有batch_tangent_components_split_numpy一次，内部完整baseforce一次＋解析tangent一次；没有JIT/solve/target执行。保留model/HF源/state/完整三张量/三CSC及语义/原字节SHA。保持现有force/kernel/测试/查看器/默认参数原字节，新模块119行/CLI40行，不复制本构/导数公式。
+
+只用粗gripper_canonical已有checker态，3200单元/6642DOF，87fixed。两方向dimensionless shape：vx_stripe=(ix%2,0)、vy_checker=(0,(ix+iy)%2)，都用actual mergedfixed清零；扰动scalar参数mm，因此Jv为N/mm。纯数据准备已生成两方向，每条10 raw类，40个新HP80/120 evaluate(...,derivative=True)；分组包含原始L/w/材料/公共kr+算子及完整局部方向字节，保留绝对值，不做平移归一化/空间抽样。输入清单位于lf_data_preparation/native_tangent_001/input_inventory.json。
+
+**原门和证明范围**：独立参考全量核对3200×2方向×3分量的8DOF局部作用、全6642DOF的element-scatter作用及CSC@v作用；total1e-10、material/Hu1e-9、HP80/1201e-40，分母各自max(||HP Jv||,1e-10 N/mm)，不借用force SF。两precision类值经3000位Decimal/Inexact trap精确scatter，再保存原始全精度及全部门。CSC组装另由conn推row/col、对全部系数核对。完整矩阵所有项保存/组装一致不等于已做全部列独立HP：参考验收只覆盖这两条方向。记录三矩阵的Frobenius非对称性及分解舍入诊断，不把应当非对称的Hu项强制对称或以材料能量代替残量导数。
+
+生产与新参考各一次连续120秒／采样8GiB，各外层150秒；包括进口、计算/组装/序列化/最终身份核对的已声明边界，首错误即停止、不修复重试/force。producer所有源码/输入冻结原SHA，独立checker仅读模型原语、通用SciPy稀疏组装及Decimal参考，不导入生产mechanics。新功能测试仅少量16单元临时模型；pytest/保存态图各一次120秒外层，与正式一态分开计数。显示两方向及三Jv，结构x1/单位明确、所有节点norm配色、明示glyph抽稀和公共尺度、caption用白底改善前步图局部低对比，图不求切线/HP。
+
+若所有门通过，依据旧授权继续main提交/推送及公开异目录单次CLI复现（120秒/采样8GiB、外层150秒），比较23模型＋2state＋3张量和所有CSC存储/文件；result除time及关联hash全字段相同，仅读保存数据重绘。正式新HP40不追加/借旧结果；当前不执行平衡、细网格切线/工件/完整行程/标签。粗例实测成本将决定下一最小范围，不能拿15.8秒fine force保证fine八基方向切线耗时。
+
+
+执行前交叉复核补充：26件源码依赖胶囊、16件实际生产导入闭包及flat basename唯一性均静态核对；root对新八脚本/模块AST及compile(source)通过，未由此构造模型或启动机制计算。checker与pure-data inventory的raw key拼接统一为common+L+w+lambda+mu+v，并严格核对SHA→成员计数完整字典。查看器静态核对保存audit字段及两方向覆盖一致；统计非对称性直接采用已绑定生产/审计量，不因换机BLAS求和尾差阻止纯查看。所有修正在首次正式执行前完成，最终API27250878、CLI8b0cb519、checker52a2b7bf、tests0fe91b64、viewerccb26bf9，旧force及依赖原字节保持。公开CLI恢复helper计时起点也在NumPy/psutil导入前。
+
+### 实际功能、成本与独立数值结果
+
+新入口已运行一次并通过。[生产回执](../lf_data_preparation/native_tangent_001/execution_receipt.json)SHA a3b92500a730a1070a846f5d369100b26a2c95d5f9df35dffa42db5e47452aee：连续21.2462008秒，外层21.8848064秒，采样RSS136.14453125MiB，全部包括导入、构造、计算、序列化与结束身份核对。API元素切线18.0140949秒，模型准备.0132375秒，CSC组装及非对称统计.0157708秒。23字段模型与前步精确相同，三张量及三CSC均完整保存；每矩阵6642×6642，存储nnz116644（包含存储零值，不等于所有值非零）。1次baseforce＋1次解析切线，0 JIT/HP/solver/LF；本次成本仅粗例这一态实测，细例/其他状态尚未测。
+
+[独立新参考](../lf_data_preparation/native_tangent_001/audit/summary.json)SHA ad3050dfb6a0de31720b0e8528e99ed44141dfaddf5e0605fb7ef077a91d3a4e：40/40 HP80/120调用完成，5.7313417秒、外层5.8514353秒，采样92.0859375MiB。两个方向各10raw类全部展开3200单元，没有空间抽样；总153600局部作用标量、39852全域scatter标量＋39852 CSC作用标量完整覆盖，19200单元向量门＋12全域门通过；19316 checks另含身份等核对，不能全称物理门。三分量614400局部矩阵系数均进入独立推导row/col的全CSC组装核对；这证明保存/组装完整，但独立HP物理导数范围仅两方向，不宣称所有矩阵列穷尽通过。3000位Decimal/Inexact trap全域scatter及全精度类参考、成员表、方向/作用/完整原门字串随Git保留。
+
+| 方向作用比较范围（两方向最坏） | 总切线 | 材料切线 | HuHu切线 |
+|---|---:|---:|---:|
+| 每个单元独立方向范数 | 6.41736e-15 | 8.96736e-17 | 2.59237e-14 |
+| 全域独立element scatter | 1.08808e-16 | 8.40491e-17 | 9.03847e-15 |
+| 全CSC@v | 2.84873e-16 | 1.10451e-16 | 4.43244e-14 |
+| 原门 | 1e-10 | 1e-9 | 1e-9 |
+
+HP80/120全量保存门的最坏一致性8.21531e-80，小于原1e-40。各分母仍独立max(||该HP Jv||,1e-10 N/mm)。全CSC总−材料−Hu分解绝对范数1.91213e-13 N/mm为分量组装舍入诊断，未增设放宽门；真正三作用分别与独立参考核对。
+
+### 物理效果及实际图
+
+[两方向及三内力变化率图](../functional_views/native_tangent_20261003/native_tangent_directional_actions.png)从保存值生成，root已实际查看。当前给定checker态仍a=2^-10mm，不是平衡态；v只是无量纲节点形状，delta s单位mm，小增量内力近似delta f=K v delta s。这张图没有施加任何delta s，不代表输入/支反力/夹持力或真实形变。几何80×40mm按x1显示，3321节点全部norm配色，72个箭头按逻辑stride7仅为显示；方向1对应3显示mm、最大作用53.8462089N/mm对应4显示mm。每列独立log色标但两行相同，不能只凭不同列颜色比较物理幅值；精确0不填人为地板。
+
+| 保存作用（最大节点模，N/mm） | vx_stripe | vy_checker |
+|---|---:|---:|
+| 材料K v | 53.8462089 | 34.6154024 |
+| HuHu K v | 4.53517466e-5 | .0185760754 |
+| 总K v | 53.8462089 | 34.6293344 |
+
+从实际公式解释：vx_stripe的Q1方向二阶梯度为零（actual fixed清零仅落在该方向原零位置），但基态Hu非零、指数exp(-5J)随方向J变化，所以HuHu导数仍很小但非零；vy_checker还直接改变二阶梯度，HuHu作用明显更大。材料与总作用主要沿实体结构显著，HuHu系数未按材料gamma缩小。此为本制造场的导数效应，不是一般接触资格。
+
+相对Frobenius非对称量||K−K.T||/||K||：材料1.55575519e-17、HuHu .00369324352、总1.71309518e-6。材料接近舍入对称，HuHu实际非对称来自其非保守弱残量导数；后续Newton必须使用原矩阵，不能改用材料能量Hessian或静默对称化。测试零态Hu=0时对称、混合split/Hu非零时保留非对称，覆盖这个物理区别。
+
+[两案功能测试](../lf_data_preparation/native_tangent_001/tests_launch_receipt.json)唯一运行2passed／1.53秒，外层2.5178383秒：16单元混合模型的完整CSC/固定行列保留/刚体平移零模、state/tensor/matrix/source无损读取，以及非零split不可修改/Hu非对称/两方向独立scatter。临时测试另有2force＋2tangent，不合并正式调用资格；0新HP。查看器一次外层2.8605623秒，0force/tangent/HP/solver；图与冻结脚本/helper/完整metadata保存。白底caption修复前步图低对比；公共箭头尺度下HuHu最大长度约.00138显示mm，箭头亚像素，HuHu大小需读全节点色标和数值，不为视觉效果放大其力学占比。
+
+### 功能位置与普通使用
+
+当前链路已有普通LF v2数据→HF原生几何→明确任务模型→完整NumPy材料/HuHu/总内力→完整三切线CSC及新方向参考。代码复用现有补偿算术/力/导数，仅新增119行API及40行CLI，不重新复制本构公式；默认内核、依赖、严格选项和旧force包保持字节。给定态接口完成，普通文件平均驱动平衡入口仍是下一步骤；已有split平均控制器在小实体/旧规范模型中的受限证据保持独立。研究H2/H3、工件、完整行程/释放重入/真正夹持指标及批量标签/最终排名仍未完成。
+
+在完整克隆根及HF环境执行（新输出目录必须不存在）：
+
+```text
+python hf_repo/scripts/evaluate_native_tangent.py --geometry lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json --task lf_data_preparation/native_model_001/tasks/gripper_canonical.json --state lf_data_preparation/native_force_001/states/gripper_canonical/checker.npz --output my-native-tangent
+```
+
+仅读已保存方向及参考重绘，不重新求切线：
+
+```text
+python functional_views/native_tangent_20261003/plot_native_tangent_frozen.py --input lf_data_preparation/native_tangent_001 --output my-tangent-view
+```
+
+以上为功能使用说明，不重开已执行关闭的一次正式生产/40新HP窗口。独立事后保存态核查、实际图审和main/公开恢复将在下段按真实结果补记；下一步按21.25秒粗切线成本制订最小普通文件平衡阶段，先产生可信机构形变/输入力/自由输出。
+
+### 独立事后保存态复核与实际审图
+
+[保存数据交叉复核](../lf_data_preparation/native_tangent_001/postrun_identity_review.json)SHA e6876139a6c89252ec5fc71e409e5b8b4c21013bac5e009ec61120a8362fc29d，pass_saved_data_review：26 current/production/audit原来源、6唯一输入、23model＋2state＋3tensor＋三CSC和40参考文件均核对；20 raw类共6400单元方向成员恰覆盖，原SHA→成员字典一致。由已保存字串以3000位Decimal/Inexact trap精确scatter、重新核对19200局部门及6全域＋6CSC门，和原门/差值/方向作用完全一致。此为API作者对root生产及独立数学作者参考的交叉核查，独立本构参考仍是原40新HP，不冒充新增参考。0新模型/force/tangent/HP.evaluate/solver/test/CLI/plot。全量HP门最坏8.21531e-80，报告采用全量最坏而非候选最坏条目所附的HP误差。
+
+只读保存方向与hessian收缩还确认vx_stripe全部二阶梯度精确零，fixed清零未改该方向；vy_checker3200单元均非零，最大绝对2mm^-2（v无量纲）。据此确认上述HuHu方向作用解释，不修改力/切线公式或门。
+
+[实际审图回执](../lf_data_preparation/native_tangent_001/visual_review_tests.json)SHA 0770a2caafe236e2aed5306681f7be800088c6a2342a8a6382ad20e7910db97a，pass：实际查看3040×1472 PNG（工具全图显示2048×992），76文件SHA和26来源绑定相同，计数/全部节点/矩阵语义及单位无阻断。明确公共箭头标尺使Hu glyph亚像素，只能按颜色/精确数值读量；没有为了观感改变数值或重绘。root也实际看图并请求面板打开，工具返回queued，不声称用户已经看到面板。唯一正式一态/40HP、两测试/一次图窗口均已完成关闭；接下来按已授权main提交/推送和计划内公开异目录一次CLI恢复。

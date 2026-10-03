@@ -1,0 +1,265 @@
+{
+  "schema_version": "hf-native-tangent-result-1.0",
+  "scope": "supplied_displacement_test_only",
+  "evaluation_mode": "three_component_tangent",
+  "source_geometry": {
+    "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+    "descriptor_sha256": "8c5c315e7328888a6ba16b28d5def1712e2ea5ddae21cfa97f99f06396e7977b",
+    "descriptor_file_sha256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+    "arrays_sha256": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+    "snapshot": {
+      "descriptor": "model/source_geometry/geometry.json",
+      "arrays": "model/source_geometry/geometry.npz"
+    }
+  },
+  "task_sha256": "e6f449ec04bf9f5fb8de32b2f29c9c442c357f254cd9f2539d59fa6e05285c05",
+  "state_representation": "split_displacement_v1",
+  "state_sha256": "31cd837b7ad9991ef3dd0f1fd09fa6d33b780f43f190ce7e2a69371a7a9b72de",
+  "grid": {
+    "shape_yx": [
+      40,
+      80
+    ],
+    "origin_mm": [
+      0.0,
+      0.0
+    ],
+    "cell_size_mm": [
+      1.0,
+      1.0
+    ],
+    "axes": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "extent_mm": [
+      80.0,
+      40.0
+    ],
+    "array_order": "C_yx_bottom_up",
+    "value_location": "cell"
+  },
+  "model_extent": {
+    "kind": "lower_half",
+    "symmetry_axis": {
+      "normal": [
+        0.0,
+        1.0
+      ],
+      "offset_mm": 40.0
+    }
+  },
+  "analysis_grid_policy": "native",
+  "native_geometry_preserved": true,
+  "counts": {
+    "cells": 3200,
+    "nodes": 3321,
+    "dofs": 6642,
+    "solid_cells": 1086,
+    "medium_cells": 2114,
+    "solid_incident_nodes": 1337,
+    "fixed_dofs": 87,
+    "free_dofs": 6555
+  },
+  "tangent_version": "p26_q1_split_numpy_shadow_jacobian_v1",
+  "backend": "numpy",
+  "matrix_units": "N/mm",
+  "linearization": "K[i,j] = df_i/dw_j with lift fixed; rows are force DOFs, columns are fluctuation DOFs",
+  "fixed_DOF_rows_columns_retained": true,
+  "matrices_symmetrized": false,
+  "matrix_statistics": {
+    "total": {
+      "shape": [
+        6642,
+        6642
+      ],
+      "nnz": 116644,
+      "relative_asymmetry": 1.7130951802337434e-06
+    },
+    "material": {
+      "shape": [
+        6642,
+        6642
+      ],
+      "nnz": 116644,
+      "relative_asymmetry": 1.555755192806899e-17
+    },
+    "regularization": {
+      "shape": [
+        6642,
+        6642
+      ],
+      "nnz": 116644,
+      "relative_asymmetry": 0.0036932435203595347
+    }
+  },
+  "relative_asymmetry_definition": "Frobenius norm(K-K.T)/norm(K); zero for a zero matrix",
+  "force_calls": 1,
+  "tangent_calls": 1,
+  "JIT_calls": 0,
+  "HP_calls": 0,
+  "solver_calls": 0,
+  "equilibrium_qualified": false,
+  "task_target_executed": false,
+  "fixed_displacement_compatible": true,
+  "force_energy_extent": "lower_half modeled geometry; no automatic doubling",
+  "timing_seconds": {
+    "project_preparation": 0.013237500039394945,
+    "element_tangents": 18.014094899990596,
+    "assembly_and_statistics": 0.015770800004247576,
+    "evaluation": 18.04310340003576
+  },
+  "model": {
+    "descriptor_path": "model/model.json",
+    "descriptor_file_sha256": "597a92b4a3de63697e875b0a733592c1b1f27e8b0ab8ed229cfb33f4649e26e2",
+    "descriptor_sha256": "cf84769978c91924cb3d7e949121ab732aaf702ce2c5c221cf7870d4f869fa15",
+    "arrays_path": "model/model.npz",
+    "arrays_sha256": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79"
+  },
+  "state": {
+    "path": "state.npz",
+    "sha256": "f13bcba017e75bd7e36f103383d5da1798eeba9dd448331f6fd2bae2d3748ccb",
+    "fields": {
+      "lift": {
+        "dtype": "float64",
+        "shape": [
+          6642
+        ],
+        "sha256": "901e4368033e17022e8c3caca0f3086f3bd21f4bc0d20807549d793535c757e8"
+      },
+      "fluctuation": {
+        "dtype": "float64",
+        "shape": [
+          6642
+        ],
+        "sha256": "9969a1e0265f497a3489a99dc5cb16f523014668e100f04a7185bf47014333fe"
+      }
+    }
+  },
+  "tangents": {
+    "path": "tangents.npz",
+    "sha256": "e871ddf6a17a64f6c449ec6213629f7ec0fcc3212e31f3ed6f1b0b42ba0c5def",
+    "fields": {
+      "total_tangent": {
+        "dtype": "float64",
+        "shape": [
+          3200,
+          8,
+          8
+        ],
+        "sha256": "3417fcb575aa1190bfaf162338dbb63017ec6e44a50268958212037ecc2d02f7"
+      },
+      "material_tangent": {
+        "dtype": "float64",
+        "shape": [
+          3200,
+          8,
+          8
+        ],
+        "sha256": "c3b2a61932ab2812462948fac0310510216ad6afd12d82ae96dbc5b9a2ee5705"
+      },
+      "regularization_tangent": {
+        "dtype": "float64",
+        "shape": [
+          3200,
+          8,
+          8
+        ],
+        "sha256": "72f50b68d807df15efb59914581be86a3b6348aab57432cdb9f75844b63a29c9"
+      }
+    }
+  },
+  "matrices": {
+    "total": {
+      "path": "total_matrix.npz",
+      "sha256": "fc732858a41575070d35c11e8907ed2910e002ab9a07b14e2c4c3cd3b596af40",
+      "format": "csc",
+      "fields": {
+        "data": {
+          "dtype": "float64",
+          "shape": [
+            116644
+          ],
+          "sha256": "1782b9f978e19e2d8490c42663e6412d5ec4ac8199f2143d25a39c7461efc3e8"
+        },
+        "indices": {
+          "dtype": "int32",
+          "shape": [
+            116644
+          ],
+          "sha256": "d0d09aaf70e0d30c71e556f921ab1b8e1acf6a71ca5ab430c2c112095afe29b0"
+        },
+        "indptr": {
+          "dtype": "int32",
+          "shape": [
+            6643
+          ],
+          "sha256": "00143e8d64fa86d08fa961cf08c0128fb71827bd471254940f72c0e847479071"
+        }
+      }
+    },
+    "material": {
+      "path": "material_matrix.npz",
+      "sha256": "6a2028d598bf3857648033e85d5889bd445bedc55107c83ba7a5b969ade05be0",
+      "format": "csc",
+      "fields": {
+        "data": {
+          "dtype": "float64",
+          "shape": [
+            116644
+          ],
+          "sha256": "f8086808e5f3042a51bf0c2e9af8aadbc5c785b030863688107222f4d01b0eaa"
+        },
+        "indices": {
+          "dtype": "int32",
+          "shape": [
+            116644
+          ],
+          "sha256": "d0d09aaf70e0d30c71e556f921ab1b8e1acf6a71ca5ab430c2c112095afe29b0"
+        },
+        "indptr": {
+          "dtype": "int32",
+          "shape": [
+            6643
+          ],
+          "sha256": "00143e8d64fa86d08fa961cf08c0128fb71827bd471254940f72c0e847479071"
+        }
+      }
+    },
+    "regularization": {
+      "path": "regularization_matrix.npz",
+      "sha256": "98634531c6968dd3df08e1df702ec14f3a8d17ceedcbe849913d63321c0e5b7f",
+      "format": "csc",
+      "fields": {
+        "data": {
+          "dtype": "float64",
+          "shape": [
+            116644
+          ],
+          "sha256": "62843f56cdccc480995ce43d860f927f8d40be965bc2df28d4542990dbcd3f6f"
+        },
+        "indices": {
+          "dtype": "int32",
+          "shape": [
+            116644
+          ],
+          "sha256": "d0d09aaf70e0d30c71e556f921ab1b8e1acf6a71ca5ab430c2c112095afe29b0"
+        },
+        "indptr": {
+          "dtype": "int32",
+          "shape": [
+            6643
+          ],
+          "sha256": "00143e8d64fa86d08fa961cf08c0128fb71827bd471254940f72c0e847479071"
+        }
+      }
+    }
+  },
+  "descriptor_sha256": "de1b0c953aa4ba7ab8c0d83d92fa71fd8c06ae27cd784c187f0684a422bfd69b"
+}

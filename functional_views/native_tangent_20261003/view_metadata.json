@@ -1,0 +1,561 @@
+{
+  "alias": "gripper_canonical",
+  "state_name": "checker",
+  "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+  "task_sha256": "e6f449ec04bf9f5fb8de32b2f29c9c442c357f254cd9f2539d59fa6e05285c05",
+  "state_sha256": "31cd837b7ad9991ef3dd0f1fd09fa6d33b780f43f190ce7e2a69371a7a9b72de",
+  "counts": {
+    "cells": 3200,
+    "nodes": 3321,
+    "dofs": 6642,
+    "solid_cells": 1086,
+    "medium_cells": 2114,
+    "solid_incident_nodes": 1337,
+    "fixed_dofs": 87,
+    "free_dofs": 6555
+  },
+  "grid": {
+    "shape_yx": [
+      40,
+      80
+    ],
+    "origin_mm": [
+      0.0,
+      0.0
+    ],
+    "cell_size_mm": [
+      1.0,
+      1.0
+    ],
+    "axes": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "extent_mm": [
+      80.0,
+      40.0
+    ],
+    "array_order": "C_yx_bottom_up",
+    "value_location": "cell"
+  },
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain",
+    "lambda_s_MPa": 0.5769230769230769,
+    "mu_s_MPa": 0.3846153846153846,
+    "kappa_s_MPa": 0.8333333333333333,
+    "thickness_mm": 20.0,
+    "third_medium_gamma": 1e-06,
+    "alpha": 1e-06,
+    "regularization_length_mm": 80.0,
+    "kr_MPa_mm2": 0.008615384615384613,
+    "kr_material_factor_applied": false,
+    "force_scale_per_length": 20.0
+  },
+  "matrix_statistics": {
+    "total": {
+      "shape": [
+        6642,
+        6642
+      ],
+      "nnz": 116644,
+      "relative_asymmetry": 1.7130951802337434e-06
+    },
+    "material": {
+      "shape": [
+        6642,
+        6642
+      ],
+      "nnz": 116644,
+      "relative_asymmetry": 1.555755192806899e-17
+    },
+    "regularization": {
+      "shape": [
+        6642,
+        6642
+      ],
+      "nnz": 116644,
+      "relative_asymmetry": 0.0036932435203595347
+    }
+  },
+  "relative_asymmetry_definition": "Frobenius norm(K-K.T)/norm(K); zero for a zero matrix",
+  "linearization": "K[i,j] = df_i/dw_j with lift fixed; rows are force DOFs, columns are fluctuation DOFs",
+  "audit": {
+    "summary_sha256": "ad3050dfb6a0de31720b0e8528e99ed44141dfaddf5e0605fb7ef077a91d3a4e",
+    "HP_calls_completed": 40,
+    "full_local_matrix_entries_assembly_checked": 614400,
+    "HP_matrix_columns_exhaustively_checked": false,
+    "full_element_and_global_direction_coverage": true,
+    "input_bindings": {
+      "lf_data_preparation/native_tangent_001/input_inventory.json": "7bbc967bbe1c07070778e05ce4b4453d7b6f0543758358a4aba823aa200515e2",
+      "lf_data_preparation/native_tangent_001/execution_receipt.json": "a3b92500a730a1070a846f5d369100b26a2c95d5f9df35dffa42db5e47452aee",
+      "hf_repo/src/hf_eval/native_tangent.py": "272508789cd801e3af7a97d862be47d58766ff4150db924717729b7eda6ddd08",
+      "lf_data_preparation/native_tangent_001/sources/native_tangent.py": "272508789cd801e3af7a97d862be47d58766ff4150db924717729b7eda6ddd08",
+      "hf_repo/scripts/evaluate_native_tangent.py": "8b0cb5194bfe64d6d7b78885c29b578c19760288c91d57eb4079eb28ab08b992",
+      "lf_data_preparation/native_tangent_001/sources/evaluate_native_tangent.py": "8b0cb5194bfe64d6d7b78885c29b578c19760288c91d57eb4079eb28ab08b992",
+      "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+      "lf_data_preparation/native_tangent_001/sources/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+      "hf_repo/src/hf_eval/native_project.py": "0d454ea37360d5785bc1de82e18f3be89ec1acdcb7bccf9aebe16a1424913813",
+      "lf_data_preparation/native_tangent_001/sources/native_project.py": "0d454ea37360d5785bc1de82e18f3be89ec1acdcb7bccf9aebe16a1424913813",
+      "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+      "lf_data_preparation/native_tangent_001/sources/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+      "hf_repo/src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+      "lf_data_preparation/native_tangent_001/sources/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+      "hf_repo/src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+      "lf_data_preparation/native_tangent_001/sources/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+      "hf_repo/src/hf_eval/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+      "lf_data_preparation/native_tangent_001/sources/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+      "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+      "lf_data_preparation/native_tangent_001/sources/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+      "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+      "lf_data_preparation/native_tangent_001/sources/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+      "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+      "lf_data_preparation/native_tangent_001/sources/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+      "hf_repo/src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+      "lf_data_preparation/native_tangent_001/sources/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": "1ea6c95b1936c9d6f3a163c0cf53713ce20526760020309daf0ee5a26ac0ca99",
+      "lf_data_preparation/native_tangent_001/sources/split_numpy_tangent.py": "1ea6c95b1936c9d6f3a163c0cf53713ce20526760020309daf0ee5a26ac0ca99",
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "4fb1314058f4ab6d8b8cb5e102cbc1fcc7960a2372b39479db5e13827f61ce4e",
+      "lf_data_preparation/native_tangent_001/sources/split_kernel_invariants_hu.py": "4fb1314058f4ab6d8b8cb5e102cbc1fcc7960a2372b39479db5e13827f61ce4e",
+      "hf_repo/src/hf_eval/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+      "lf_data_preparation/native_tangent_001/sources/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+      "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+      "lf_data_preparation/native_tangent_001/sources/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+      "hf_repo/src/hf_eval/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+      "lf_data_preparation/native_tangent_001/sources/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+      "hf_repo/scripts/audit_native_force.py": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+      "lf_data_preparation/native_tangent_001/sources/audit_native_force.py": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+      "hf_repo/scripts/hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+      "lf_data_preparation/native_tangent_001/sources/hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+      "hf_repo/scripts/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+      "lf_data_preparation/native_tangent_001/sources/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+      "hf_repo/tests/test_native_force.py": "862a40aa3e13d10bdb02cad52ba9098e0ddbc0fd9ad9958def226de90284254d",
+      "lf_data_preparation/native_tangent_001/sources/test_native_force.py": "862a40aa3e13d10bdb02cad52ba9098e0ddbc0fd9ad9958def226de90284254d",
+      "hf_repo/tests/test_native_tangent.py": "0fe91b64b6502d572d0214b213d82afa3477bbd9155093d973311b5ac2027634",
+      "lf_data_preparation/native_tangent_001/sources/test_native_tangent.py": "0fe91b64b6502d572d0214b213d82afa3477bbd9155093d973311b5ac2027634",
+      "hf_repo/scripts/audit_native_tangent.py": "52a2b7bf2b4bf93f54710ca802426aae1fdd79a938898faa8b9466cf63cb4bcb",
+      "lf_data_preparation/native_tangent_001/sources/audit_native_tangent.py": "52a2b7bf2b4bf93f54710ca802426aae1fdd79a938898faa8b9466cf63cb4bcb",
+      "hf_repo/scripts/plot_native_tangent.py": "ccb26bf9f957c80de2c248813a85d3b73aca31f6675b8110e68b5bedebb05368",
+      "lf_data_preparation/native_tangent_001/sources/plot_native_tangent.py": "ccb26bf9f957c80de2c248813a85d3b73aca31f6675b8110e68b5bedebb05368",
+      "lf_data_preparation/native_tangent_001/prepare_inputs.py": "063de34813b2df19628067cab19c10b509e405897a2b5654c8253ffd9dcf3f0c",
+      "lf_data_preparation/native_tangent_001/sources/prepare_inputs.py": "063de34813b2df19628067cab19c10b509e405897a2b5654c8253ffd9dcf3f0c",
+      "lf_data_preparation/native_tangent_001/execute_tangent.py": "1ebe94b83fb528b2f1d286dc123d9847eeab9c8313caa00d266fee6a2ccd7261",
+      "lf_data_preparation/native_tangent_001/sources/execute_tangent.py": "1ebe94b83fb528b2f1d286dc123d9847eeab9c8313caa00d266fee6a2ccd7261",
+      "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+      "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.npz": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+      "lf_data_preparation/native_model_001/tasks/gripper_canonical.json": "67d21a63898b2f31962f3e930bc2cb17e36b2813671dfa413c85c7834e6c9b63",
+      "lf_data_preparation/native_model_001/models/gripper_canonical/model.npz": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79",
+      "lf_data_preparation/native_force_001/states/gripper_canonical/checker.npz": "f13bcba017e75bd7e36f103383d5da1798eeba9dd448331f6fd2bae2d3748ccb",
+      "lf_data_preparation/native_tangent_001/directions.npz": "ae4d9d88a16638fcbd28a907be938538042052a1b8fc9863c7498ccf529b630e",
+      "lf_data_preparation/native_tangent_001/result/result.json": "aed46ccf6cfc35f1872b50bfb9fd98929c9f1172973a6d8bffdfc95ce609bdcf",
+      "lf_data_preparation/native_tangent_001/result/model/model.npz": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79",
+      "lf_data_preparation/native_tangent_001/result/model/model.json": "597a92b4a3de63697e875b0a733592c1b1f27e8b0ab8ed229cfb33f4649e26e2",
+      "lf_data_preparation/native_tangent_001/result/model/source_geometry/geometry.json": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+      "lf_data_preparation/native_tangent_001/result/model/source_geometry/geometry.npz": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+      "lf_data_preparation/native_tangent_001/result/state.npz": "f13bcba017e75bd7e36f103383d5da1798eeba9dd448331f6fd2bae2d3748ccb",
+      "lf_data_preparation/native_tangent_001/result/tangents.npz": "e871ddf6a17a64f6c449ec6213629f7ec0fcc3212e31f3ed6f1b0b42ba0c5def",
+      "lf_data_preparation/native_tangent_001/result/total_matrix.npz": "fc732858a41575070d35c11e8907ed2910e002ab9a07b14e2c4c3cd3b596af40",
+      "lf_data_preparation/native_tangent_001/result/material_matrix.npz": "6a2028d598bf3857648033e85d5889bd445bedc55107c83ba7a5b969ade05be0",
+      "lf_data_preparation/native_tangent_001/result/regularization_matrix.npz": "98634531c6968dd3df08e1df702ec14f3a8d17ceedcbe849913d63321c0e5b7f"
+    },
+    "source_bindings": {
+      "hf_repo/src/hf_eval/native_tangent.py": "272508789cd801e3af7a97d862be47d58766ff4150db924717729b7eda6ddd08",
+      "hf_repo/scripts/evaluate_native_tangent.py": "8b0cb5194bfe64d6d7b78885c29b578c19760288c91d57eb4079eb28ab08b992",
+      "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+      "hf_repo/src/hf_eval/native_project.py": "0d454ea37360d5785bc1de82e18f3be89ec1acdcb7bccf9aebe16a1424913813",
+      "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+      "hf_repo/src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+      "hf_repo/src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+      "hf_repo/src/hf_eval/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+      "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+      "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+      "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+      "hf_repo/src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": "1ea6c95b1936c9d6f3a163c0cf53713ce20526760020309daf0ee5a26ac0ca99",
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "4fb1314058f4ab6d8b8cb5e102cbc1fcc7960a2372b39479db5e13827f61ce4e",
+      "hf_repo/src/hf_eval/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+      "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+      "hf_repo/src/hf_eval/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+      "hf_repo/scripts/audit_native_force.py": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+      "hf_repo/scripts/hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+      "hf_repo/scripts/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+      "hf_repo/tests/test_native_force.py": "862a40aa3e13d10bdb02cad52ba9098e0ddbc0fd9ad9958def226de90284254d",
+      "hf_repo/tests/test_native_tangent.py": "0fe91b64b6502d572d0214b213d82afa3477bbd9155093d973311b5ac2027634",
+      "hf_repo/scripts/audit_native_tangent.py": "52a2b7bf2b4bf93f54710ca802426aae1fdd79a938898faa8b9466cf63cb4bcb",
+      "hf_repo/scripts/plot_native_tangent.py": "ccb26bf9f957c80de2c248813a85d3b73aca31f6675b8110e68b5bedebb05368",
+      "lf_data_preparation/native_tangent_001/prepare_inputs.py": "063de34813b2df19628067cab19c10b509e405897a2b5654c8253ffd9dcf3f0c",
+      "lf_data_preparation/native_tangent_001/execute_tangent.py": "1ebe94b83fb528b2f1d286dc123d9847eeab9c8313caa00d266fee6a2ccd7261"
+    }
+  },
+  "input_files_sha256": {
+    "lf_data_preparation/native_tangent_001/input_inventory.json": "7bbc967bbe1c07070778e05ce4b4453d7b6f0543758358a4aba823aa200515e2",
+    "lf_data_preparation/native_tangent_001/execution_receipt.json": "a3b92500a730a1070a846f5d369100b26a2c95d5f9df35dffa42db5e47452aee",
+    "lf_data_preparation/native_tangent_001/audit/summary.json": "ad3050dfb6a0de31720b0e8528e99ed44141dfaddf5e0605fb7ef077a91d3a4e",
+    "lf_data_preparation/native_tangent_001/result/result.json": "aed46ccf6cfc35f1872b50bfb9fd98929c9f1172973a6d8bffdfc95ce609bdcf",
+    "lf_data_preparation/native_tangent_001/result/model/model.json": "597a92b4a3de63697e875b0a733592c1b1f27e8b0ab8ed229cfb33f4649e26e2",
+    "lf_data_preparation/native_tangent_001/result/model/model.npz": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79",
+    "lf_data_preparation/native_tangent_001/result/state.npz": "f13bcba017e75bd7e36f103383d5da1798eeba9dd448331f6fd2bae2d3748ccb",
+    "lf_data_preparation/native_tangent_001/result/tangents.npz": "e871ddf6a17a64f6c449ec6213629f7ec0fcc3212e31f3ed6f1b0b42ba0c5def",
+    "lf_data_preparation/native_force_001/states/gripper_canonical/checker.npz": "f13bcba017e75bd7e36f103383d5da1798eeba9dd448331f6fd2bae2d3748ccb",
+    "lf_data_preparation/native_model_001/tasks/gripper_canonical.json": "67d21a63898b2f31962f3e930bc2cb17e36b2813671dfa413c85c7834e6c9b63",
+    "lf_data_preparation/native_tangent_001/result/model/source_geometry/geometry.json": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+    "lf_data_preparation/native_tangent_001/result/model/source_geometry/geometry.npz": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+    "lf_data_preparation/native_tangent_001/result/material_matrix.npz": "6a2028d598bf3857648033e85d5889bd445bedc55107c83ba7a5b969ade05be0",
+    "lf_data_preparation/native_tangent_001/result/regularization_matrix.npz": "98634531c6968dd3df08e1df702ec14f3a8d17ceedcbe849913d63321c0e5b7f",
+    "lf_data_preparation/native_tangent_001/result/total_matrix.npz": "fc732858a41575070d35c11e8907ed2910e002ab9a07b14e2c4c3cd3b596af40",
+    "lf_data_preparation/native_tangent_001/audit/vx_stripe/actions.npz": "53c23c0a513877845499801d8f781050f40ca110ad08ea4d84ea5f9b09fbe4eb",
+    "lf_data_preparation/native_tangent_001/directions.npz": "ae4d9d88a16638fcbd28a907be938538042052a1b8fc9863c7498ccf529b630e",
+    "lf_data_preparation/native_tangent_001/audit/vy_checker/actions.npz": "aac076b72e4a3727bd5829d5f6ec6beb31140e081158eb984c32f950049b108d"
+  },
+  "display": {
+    "geometry_scale": 1.0,
+    "direction_color_range": [
+      0.0,
+      1.0
+    ],
+    "direction_units": "dimensionless",
+    "direction_arrow_scale_display_mm_per_unit": 3.0,
+    "action_units": "N/mm",
+    "action_log_color_ranges": {
+      "material": [
+        5.7661061912533084e-06,
+        53.84620886592914
+      ],
+      "regularization": [
+        4.336808689942018e-19,
+        0.01857607538740831
+      ],
+      "total": [
+        1.0878317731876679e-05,
+        53.84620886592914
+      ]
+    },
+    "common_action_arrow_scale_N_per_mm_per_display_mm": 13.461552216482286,
+    "maximum_action_N_per_mm": 53.84620886592914,
+    "maximum_action_arrow_length_display_mm": 4.0,
+    "arrow_logical_stride": 7,
+    "arrow_nodes": [
+      0,
+      7,
+      14,
+      21,
+      28,
+      35,
+      42,
+      49,
+      56,
+      63,
+      70,
+      77,
+      567,
+      574,
+      581,
+      588,
+      595,
+      602,
+      609,
+      616,
+      623,
+      630,
+      637,
+      644,
+      1134,
+      1141,
+      1148,
+      1155,
+      1162,
+      1169,
+      1176,
+      1183,
+      1190,
+      1197,
+      1204,
+      1211,
+      1701,
+      1708,
+      1715,
+      1722,
+      1729,
+      1736,
+      1743,
+      1750,
+      1757,
+      1764,
+      1771,
+      1778,
+      2268,
+      2275,
+      2282,
+      2289,
+      2296,
+      2303,
+      2310,
+      2317,
+      2324,
+      2331,
+      2338,
+      2345,
+      2835,
+      2842,
+      2849,
+      2856,
+      2863,
+      2870,
+      2877,
+      2884,
+      2891,
+      2898,
+      2905,
+      2912
+    ],
+    "all_node_magnitudes_colored": true,
+    "exact_zero_action_display": "Uncolored; no artificial floor"
+  },
+  "schema_version": "native-tangent-view-1.0",
+  "input_layout": "result/result.json; directions.npz; audit/<direction>/actions.npz",
+  "scope": "Saved native tangent directional actions only; no force/tangent/HP/solver/model construction",
+  "directions": [
+    {
+      "name": "vx_stripe",
+      "direction_units": "dimensionless nodal shape; perturbation parameter in mm",
+      "action_units": "N/mm",
+      "direction_array_sha256": "42577d5c05e4b08d93cce5f0ed865cd8e49bd7a36705c32ece4b6c1a1c0d9a51",
+      "exact_input_classes": 10,
+      "local_worst": [
+        {
+          "component": "total",
+          "normalized_error": "6.41735555614011662277590342926600306795154633771605364482943021166937178893592753000520256923868956964225565211932723825E-15",
+          "hp80_hp120_error": "2.44514730662606638379037793580601813385470414581812565611248649856707098632184163414999402950380777253034051300318921790E-80",
+          "denominator_N_per_mm": "0.0000540022889255522549673993027434071008984594959061903019796782666472290262901293478766258581961104746520237877498738617603",
+          "element": 0,
+          "group": 0,
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "component": "material",
+          "normalized_error": "8.96735788594725759022778959808296645653547780339027596471705896778923151252441765165968289032775416311882548780442422297E-17",
+          "hp80_hp120_error": "2.34899072405476149083757884861976036726218593761728415827309980104484627344668688531898881272620147453292448379253293284E-80",
+          "denominator_N_per_mm": "0.0000292914662749994645375543576558109786259129771835769238163524185029068539032186576679509805898530057449168532426594271926",
+          "element": 0,
+          "group": 0,
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "component": "regularization",
+          "normalized_error": "2.59236651853406849772689520500479945116748617430534163292371924318380674644366767973052713998101899093089608277766995216E-14",
+          "hp80_hp120_error": "4.35983177099126192175452338551136117806508306863935490481731260155220689724000380802391382789978355363539784999484564429E-80",
+          "denominator_N_per_mm": "0.0000226205123668307728900261152477134352679569302677357586340175233124675733988605100000000000000000000000000000000000000000",
+          "element": 560,
+          "group": 7,
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      ],
+      "global_checks": [
+        {
+          "normalized_error": "1.08808194508985117590546610548831719033109421856825490666362257195730383778295642716941977210731199419507970647901259756E-16",
+          "hp80_hp120_error": "1.46975192731480800114879853920470513166868339998230734097865592365088010705567016098940439187048748845715913254674725362E-80",
+          "denominator_N_per_mm": "1686.67693923414294487686893172144966820142103644438350056253099735864580865135859440557995663178230838896517996696038842",
+          "component": "total",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "normalized_error": "7.86354872514462090756954219979162313215254432770896988884978845675975686675973129725771272249774543532545175388318052253E-17",
+          "hp80_hp120_error": "1.46466359766596217772132112347904300106401387747534468188289839457401605679110173371017165092104076380303002181248998729E-80",
+          "denominator_N_per_mm": "1686.67693931808073501812683566813084450303217726333935879118924134433687997053950522311439215549633067725959316872765406",
+          "component": "material",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "normalized_error": "9.03847153902740832469986328932308686698057776609669342785656798270680665039922300955615045168867944981435802152244991454E-15",
+          "hp80_hp120_error": "1.50569033767098898733627536240802801890478445499466171988866390920225927352421401735203904352131654868069932331310399012E-80",
+          "denominator_N_per_mm": "0.000399890253246389564107544529257230409958137897389971926742281770688896599179235396077057991682402960128524155056572936024",
+          "component": "regularization",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      ],
+      "csc_checks": [
+        {
+          "normalized_error": "6.21111937946732337804419686881016630612489105364045464657199890593307263995566171147305159075617328257019897046277192106E-17",
+          "hp80_hp120_error": "1.46975192731480800114879853920470513166868339998230734097865592365088010705567016098940439187048748845715913254674725362E-80",
+          "denominator_N_per_mm": "1686.67693923414294487686893172144966820142103644438350056253099735864580865135859440557995663178230838896517996696038842",
+          "component": "total",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "normalized_error": "1.10450661864858937656802051408703422102885060910108590943535169142786489551234814196839402003378357284577082123155221126E-16",
+          "hp80_hp120_error": "1.46466359766596217772132112347904300106401387747534468188289839457401605679110173371017165092104076380303002181248998729E-80",
+          "denominator_N_per_mm": "1686.67693931808073501812683566813084450303217726333935879118924134433687997053950522311439215549633067725959316872765406",
+          "component": "material",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "normalized_error": "4.43243974342258424652290629989585763599513873669968437895453753724483927982329653477699296831583343242926535683656864559E-14",
+          "hp80_hp120_error": "1.50569033767098898733627536240802801890478445499466171988866390920225927352421401735203904352131654868069932331310399012E-80",
+          "denominator_N_per_mm": "0.000399890253246389564107544529257230409958137897389971926742281770688896599179235396077057991682402960128524155056572936024",
+          "component": "regularization",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      ],
+      "elements_compared": 3200,
+      "global_DOF_entries_compared": 19926,
+      "CSC_DOF_entries_compared": 19926,
+      "max_nodal_action_norm_N_per_mm": {
+        "material": 53.84620886592914,
+        "regularization": 4.5351746551289436e-05,
+        "total": 53.84620886592914
+      }
+    },
+    {
+      "name": "vy_checker",
+      "direction_units": "dimensionless nodal shape; perturbation parameter in mm",
+      "action_units": "N/mm",
+      "direction_array_sha256": "9bafebf2ac32bd8154ca07421822b69c883a71a0371e8c49afc59aff546b3122",
+      "exact_input_classes": 10,
+      "local_worst": [
+        {
+          "component": "total",
+          "normalized_error": "9.03070333117318278532740622053656911418807959028114632701387493071583302716913119256371564887717172869662161348671263964E-17",
+          "hp80_hp120_error": "1.78287701306385125556713557735606536044363423834980011774003049237448426740123883790647658648144468588339127727513803874E-80",
+          "denominator_N_per_mm": "11.5477621396686835867754069267574157899513249217914427747699162312445413393205642641160737611179842278096001046546731021",
+          "element": 481,
+          "group": 3,
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "component": "material",
+          "normalized_error": "8.66580421762070523400605033441967950071996400805755975412897620101573018285973714604550714388640223957200845218878130104E-17",
+          "hp80_hp120_error": "1.71104395161094186027057822672329624629223549925274010523824842349582145282192733691369583898891039896545421806632487028E-80",
+          "denominator_N_per_mm": "11.5384741047066602692123739776724182016352409661836904382838093686023743534304120540411115028412864380321823644129265255",
+          "element": 482,
+          "group": 4,
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "component": "regularization",
+          "normalized_error": "8.63751254372166844087792161149536882464759344090092480355769790762794075261622451357891904241517686031968559342204952486E-17",
+          "hp80_hp120_error": "1.07880958011935333142372056657912573072048063510194981975528267710576178223554136748984000717455886824126169603009139658E-80",
+          "denominator_N_per_mm": "0.00463269473917143675877652654322138975954774196882587624999013834122802952379871839368528046335855932649474892848686660791",
+          "element": 480,
+          "group": 2,
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      ],
+      "global_checks": [
+        {
+          "normalized_error": "8.72854712630886721407192584000202774673062511197830518367052121957174496997205177383150305171740632945230453452055610588E-17",
+          "hp80_hp120_error": "1.69321228108469914223532191787988328768841257905960738621011998389823807887861071642359398950749654616889658902599521859E-80",
+          "denominator_N_per_mm": "723.745397613321970237792723778192522741205540779223196500524558271668010549841412747184543130904470125562647143679912237",
+          "component": "total",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "normalized_error": "8.40491014490316557939345130384080779763588156195622684878129409475135085905185467577360379917861938138121637448847747959E-17",
+          "hp80_hp120_error": "1.57591579887828232938385275576850441073686365350072444166114707536672765398114932355335776323428310361893593444186039373E-80",
+          "denominator_N_per_mm": "723.109676227936488221886621324942510237121397960392010713858837507324215231367918604521732837563028011072108205307915608",
+          "component": "material",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "normalized_error": "2.06900073749060478133619826448386445930310247366681377136308505675036760007101981524260573986145687398185766692017413707E-17",
+          "hp80_hp120_error": "2.85965830900936908039976046554556728981972376120060513983304668773735212317599054269138188944413562244691439845631357045E-80",
+          "denominator_N_per_mm": "1.03247683455024635737698225971377474234293265645841922891709953358839192867017110999091998537211166227163830630672920778",
+          "component": "regularization",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      ],
+      "csc_checks": [
+        {
+          "normalized_error": "2.84872627457324026757424798362362211165773680729764522226599322697392738664954654187030427253697498773267088953222567984E-16",
+          "hp80_hp120_error": "1.69321228108469914223532191787988328768841257905960738621011998389823807887861071642359398950749654616889658902599521859E-80",
+          "denominator_N_per_mm": "723.745397613321970237792723778192522741205540779223196500524558271668010549841412747184543130904470125562647143679912237",
+          "component": "total",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "normalized_error": "8.90279834075205550764188730229089809401293053774101197765504659551674671708148832354907374985188716605674050108863849621E-17",
+          "hp80_hp120_error": "1.57591579887828232938385275576850441073686365350072444166114707536672765398114932355335776323428310361893593444186039373E-80",
+          "denominator_N_per_mm": "723.109676227936488221886621324942510237121397960392010713858837507324215231367918604521732837563028011072108205307915608",
+          "component": "material",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        {
+          "normalized_error": "2.07116949998763471787316977942582291668079866912987908975228524698749409844542712392821813230604371570087545286500726702E-17",
+          "hp80_hp120_error": "2.85965830900936908039976046554556728981972376120060513983304668773735212317599054269138188944413562244691439845631357045E-80",
+          "denominator_N_per_mm": "1.03247683455024635737698225971377474234293265645841922891709953358839192867017110999091998537211166227163830630672920778",
+          "component": "regularization",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      ],
+      "elements_compared": 3200,
+      "global_DOF_entries_compared": 19926,
+      "CSC_DOF_entries_compared": 19926,
+      "max_nodal_action_norm_N_per_mm": {
+        "material": 34.61540236661815,
+        "regularization": 0.01857607538740831,
+        "total": 34.62933442233719
+      }
+    }
+  ],
+  "force_calls": 0,
+  "tangent_calls": 0,
+  "HP_calls": 0,
+  "solver_calls": 0,
+  "equilibrium_qualified": false,
+  "task_target_executed": false,
+  "displacement_step_applied": false,
+  "full_fixed_DOF_matrix_rows_columns_retained": true,
+  "matrices_symmetrized": false,
+  "fine_model_checked": false,
+  "half_model_quantities_doubled": false,
+  "workpiece_present": false,
+  "viewer_sha256": "ccb26bf9f957c80de2c248813a85d3b73aca31f6675b8110e68b5bedebb05368",
+  "frozen_helpers_sha256": {
+    "helpers/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812"
+  },
+  "media_sha256": {
+    "native_tangent_directional_actions.png": "0c52fc6571f927bba1cef9db8fa80b7e1d1220a55a28286efc07f0d38adf7d90"
+  }
+}

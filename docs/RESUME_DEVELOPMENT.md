@@ -1,5 +1,7 @@
 # 在新电脑或任意新目录接续开发
 
+2026-10-03最新：**普通原生模型的三分量NumPy切线入口及完整CSC组装已接通**。粗夹持器3200单元／6642DOF保存checker态，两个方向经40次新HP80/120全量核对通过，2案功能测试通过；最坏归一化误差4.43e-14，原门未改。三完整矩阵保留fixed行列及HuHu非对称性，见[实现、数值、成本及物理解释](NUMPY_FORCE_PROGRESS_20261002.md#native-tangent-20261003)与[两方向的内力变化率图](../functional_views/native_tangent_20261003/native_tangent_directional_actions.png)。本步21.25秒为粗例给定态实测，未求平衡／未执行.025mm目标；下一步接普通文件的小步平均驱动平衡并显示真实形变、输入力和自由输出。工件／研究H2-H3／完整接触与批量标签仍待完成。
+
 2026-10-03最新：**新普通候选的NumPy完整力入口已接通，三例六制造态经64次新HP80/120全量核对通过，3案功能测试通过**。材料/HuHu/总力均满足原门，38400单元/全部DOF覆盖，最大归一化误差8.64e-17；保存模型、原始split状态、三力/应力/J/Hu/能量和全精度参考。见[目标、实施、物理效果和接续](NUMPY_FORCE_PROGRESS_20261002.md#native-force-20261003)、[位移/J/Hu](../functional_views/native_force_20261003/native_force_fields.png)、[三类内力](../functional_views/native_force_20261003/native_force_components.png)。本步为给定位移静态内力，未执行task的.025mm目标；下一普通模型的非对称切线/小步平均驱动平衡，工件/研究H2-H3/一般接触/批量标签仍待完成。
 
 2026-10-03最新先看[显式原生任务／模型实现与恢复](NUMPY_FORCE_PROGRESS_20261002.md#native-model-construction-20261003)：native_project API／CLI、三份明确TEST task、23字段model.json／model.npz和源HF副本、独立核对、五案测试及两图随Git。两粗旧模型intrinsics精确相同；细.5mm保留五节点权重和169fixed。任务绑定四mask几何ID及完整descriptor语义SHA，analysis_grid.policy必须显式native；没有默认全研究政策。输入.025只是保存指令，force／solver未运行。下一步先新文件接口的NumPy静态力与参考，再安排有限路径；原冻结证据与默认内核保持。

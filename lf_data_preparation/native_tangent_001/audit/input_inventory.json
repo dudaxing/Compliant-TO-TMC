@@ -1,0 +1,90 @@
+{
+  "schema_version": "native-tangent-input-inventory-1.0",
+  "baseline_commit": "8373a9bde066a98d0514d9bbc78a425735be17e2",
+  "cases": [
+    {
+      "alias": "gripper_canonical",
+      "geometry_file": "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json",
+      "geometry_file_sha256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+      "geometry_npz_file": "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.npz",
+      "geometry_npz_sha256": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+      "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+      "task_file": "lf_data_preparation/native_model_001/tasks/gripper_canonical.json",
+      "task_file_sha256": "67d21a63898b2f31962f3e930bc2cb17e36b2813671dfa413c85c7834e6c9b63",
+      "prior_model_file": "lf_data_preparation/native_model_001/models/gripper_canonical/model.npz",
+      "prior_model_sha256": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79",
+      "state_file": "lf_data_preparation/native_force_001/states/gripper_canonical/checker.npz",
+      "state_file_sha256": "f13bcba017e75bd7e36f103383d5da1798eeba9dd448331f6fd2bae2d3748ccb",
+      "elements": 3200,
+      "dofs": 6642,
+      "state_name": "checker",
+      "result_directory": "result",
+      "directions": [
+        {
+          "name": "vx_stripe",
+          "file": "lf_data_preparation/native_tangent_001/directions.npz",
+          "sha256": "ae4d9d88a16638fcbd28a907be938538042052a1b8fc9863c7498ccf529b630e",
+          "array_sha256": "42577d5c05e4b08d93cce5f0ed865cd8e49bd7a36705c32ece4b6c1a1c0d9a51",
+          "exact_input_classes": 10,
+          "class_member_counts": {
+            "8c0c5b7dedc34ea1aa287872fbc08134df8f8bbdb6b7bdc4a634648328bc0bd3": 529,
+            "bdd2a9d2b72c0dcae2b9288b8709c9ee959ce2c621bf22d5c0bcc24986e4ad40": 526,
+            "19783616c17a848586a0e002052f995d2cb443cf1c24992e16a4487c725274fb": 535,
+            "d30d53547a7bf812f9561709bd8644e27748910d2bab2ace173af43b46e99517": 524,
+            "6a6c2258253279fdf093abd0754e0ee56b7d6cef026e39b2cbb7196a8fdf1840": 1,
+            "528e5e66864c1f6f657c2459651bebf8839627427fd6f9db2643f2ec4490c4cb": 274,
+            "c1dbca2dbd67a3a56dfa67c482bb7b18631ee7ce18fc21371138dfe8972635f0": 270,
+            "465f0a9a60aae5a632736ffc4b0fb167a89069d8624a103d6febcfbf6726d8b1": 1,
+            "37e59a2e2dcee228d922256ff563c24cf9c5d92bb6db7479b64e2fbfc3b0fb28": 276,
+            "b2e4c4a4cb221dd9c907d57b885d7417d42b392b6c67e600388a4c23498f1f9a": 264
+          },
+          "units": "dimensionless nodal shape; perturbation parameter in mm",
+          "fixed_dofs_exactly_zero": true
+        },
+        {
+          "name": "vy_checker",
+          "file": "lf_data_preparation/native_tangent_001/directions.npz",
+          "sha256": "ae4d9d88a16638fcbd28a907be938538042052a1b8fc9863c7498ccf529b630e",
+          "array_sha256": "9bafebf2ac32bd8154ca07421822b69c883a71a0371e8c49afc59aff546b3122",
+          "exact_input_classes": 10,
+          "class_member_counts": {
+            "ce84d4229c52562e5859069d7428a90f10bc2b2d14522b6b13bda93b724eca77": 1019,
+            "aa137bb8425e9000d3ccf598ca9484e4fcc79729abafe144a81b52365e45fd67": 1027,
+            "e2a1847e6bc1ed31b2d88bdc4a8950b54591532a0e51aa19d16e708e6f6c6de3": 1,
+            "d87bf5b2e7b6e088dfe00a5f7f78f3f95fb935f8676754741150b86eace7151e": 532,
+            "8c4c33d283c5d039c6d0827eb0370ce5b2ec0e60b0eb235c5cbb48d805aa5d16": 540,
+            "8fb85ab0d903985bb02f82dd7f5db6629a2ddbca94a8ca7a367c7837eb06e8b7": 1,
+            "ad3d8c84b0a80b8579ec946b5664e587c2314b89c42883ff23dcdfa091f49ee4": 6,
+            "f936b7d0102cb5f349778aa658f216e981bd561479c259004b0ebe6e910dc3ce": 6,
+            "804771700205224f6ca587ee0e4726caacd2e83f6fa91375c797ac815dfe7e0e": 34,
+            "9b2cc22afd323dcd4570ba13d000de1adfb753ab528f6d130aa2da0166213f81": 34
+          },
+          "units": "dimensionless nodal shape; perturbation parameter in mm",
+          "fixed_dofs_exactly_zero": true
+        }
+      ]
+    }
+  ],
+  "scope": "One coarse saved supplied-displacement state; two directions; no equilibrium or task actuation",
+  "physical_authority": "exact D(lift)+D(fluctuation); lift fixed during differentiation",
+  "matrix_semantics": "K_ij = d f_i / d w_j, N/mm, full DOFs, unsymmetrized",
+  "matrix_coverage": "All local entries and CSC assembly; HP directional verification only for the two declared directions",
+  "directions_definition": {
+    "vx_stripe": "vx=ix%2,vy=0",
+    "vy_checker": "vx=0,vy=(ix+iy)%2",
+    "fixed_DOFs": "Zeroed on the actual merged fixed set"
+  },
+  "thresholds": {
+    "total": "1e-10",
+    "material": "1e-9",
+    "regularization": "1e-9",
+    "HP80_HP120": "1e-40"
+  },
+  "denominator": "max(norm(reference Jv),1e-10 N/mm), separately per element/global/CSC component",
+  "execution_limits": {
+    "production_seconds": 120,
+    "reference_seconds": 120,
+    "sampled_RSS_bytes": 8589934592
+  },
+  "recovery": "One public CLI replay under 120s/8GiB; compare full tensor/model/state/CSC storage, no new HP"
+}
