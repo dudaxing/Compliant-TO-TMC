@@ -1,5 +1,7 @@
 # Compliant-TO-TMC：独立 HF 力学评估器
 
+2026-10-03当前功能：**NumPy split平均端口已实现，两条小实体路径及272项新HP检查通过**。见[实现、物理效果与恢复方法](docs/NUMPY_FORCE_PROGRESS_20261002.md#split-average-20261003)、[实际变形／力／自由输出图](functional_views/split_average_20261003/split_average_demo.png)和[动画](functional_views/split_average_20261003/split_average_demo.gif)。下一步接原HF3规范机构的小行程；此小任务不授予接触、工件或HF5资格。
+
 本项目为 LF/N4 的多样化机构研究提供独立、任务明确、可审计的 HF 正向力学评价。HF 不导入 LF、不依赖 MATLAB，也不执行拓扑优化更新；通过普通文件接入候选几何，再分别判断数据契约、几何资格、数值精度、接触物理和机构功能。研究层复用已有 N4 的选择、计分与统计方法，接入前核对任务、模型、有效前缀和来源身份。
 
 2026-10-03最新：**NumPy h=.125新平衡完成七原目标，19唯一新态／420项新HP80/120检查通过**。见[完整实施记录与下一步](docs/NUMPY_FORCE_PROGRESS_20261002.md#numpy-h0125-path-20261003)、[20帧实际变形动画](functional_views/numpy_c1_h0125_20261003/numpy_path.gif)和[薄介质局部](functional_views/numpy_c1_h0125_20261003/numpy_medium_zoom.png)。小输入、完整模型／状态／矩阵、新参考和来源均随main，任意克隆目录可读取／重绘。下一步优先split平均端口控制；整顶反力包含背景介质，不是实际工件夹持力，一般接触与HF5仍未完成。

@@ -1,0 +1,155 @@
+{
+  "schema_version": "split-average-demo-1.0",
+  "task": "3x2 Q1 tensile block",
+  "scope": "Ordinary controller demonstration; no contact or clamping qualification",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "E_MPa": 100.0,
+  "nu": 0.3,
+  "thickness_mm": 1.0,
+  "alpha": 1e-06,
+  "input_nodes": [
+    3,
+    7,
+    11
+  ],
+  "input_direction": "+x",
+  "input_weights": [
+    0.125,
+    0.25,
+    0.625
+  ],
+  "output_nodes": [
+    9,
+    10,
+    11
+  ],
+  "output_direction": "+y",
+  "output_weights": [
+    0.25,
+    0.5,
+    0.25
+  ],
+  "prescribed_individual_port_displacements": false,
+  "targets_mm": [
+    0.0,
+    0.025,
+    0.05,
+    0.1
+  ],
+  "output_spring_N_per_mm": [
+    0.0,
+    10.0
+  ],
+  "settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 25,
+    "armijo_c": 0.0001,
+    "max_backtracks": 12,
+    "max_bisections": 4,
+    "minimum_increment": 0.0015625,
+    "time_limit_seconds": 60.0
+  },
+  "budget_scope": "Each of two production paths separately bounded; later HP audit is separate",
+  "sampled_RSS_limit_bytes": 8589934592,
+  "gates": {
+    "production_residual": "1e-9",
+    "independent_residual": "1e-8",
+    "force_evaluation": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11",
+    "hp80_hp120": "1e-40",
+    "total_force": "1e-11",
+    "material_force": "1e-9",
+    "regularization_force": "1e-9",
+    "total_tangent": "1e-10",
+    "material_tangent": "1e-9",
+    "regularization_tangent": "1e-9",
+    "augmented_force_tangent": "1e-10",
+    "augmented_constraint_tangent": "1e-10"
+  },
+  "model_sha256": "b2622adb2087fc297799607153e50887a717eece12856a678f050be6bfbdb9a4",
+  "extra_augmented_gates": "Equation-identity directional checks using inherited force/tangent budgets; HF3 equilibrium gates unchanged",
+  "sources": [
+    {
+      "name": "run_split_average_demo.py",
+      "sha256": "e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb"
+    },
+    {
+      "name": "audit_numpy_c1_path.py",
+      "sha256": "145cce9dbcad3e8887ebea1ab251e07ef41059074d0ee9f5dff72be1092c81de"
+    },
+    {
+      "name": "hf4_split_precision_reference.py",
+      "sha256": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2"
+    },
+    {
+      "name": "hf2_precision_reference.py",
+      "sha256": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55"
+    },
+    {
+      "name": "tmc.py",
+      "sha256": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025"
+    },
+    {
+      "name": "tmc_kernel.py",
+      "sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0"
+    },
+    {
+      "name": "displacement.py",
+      "sha256": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386"
+    },
+    {
+      "name": "split_state.py",
+      "sha256": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e"
+    },
+    {
+      "name": "split_kernel_invariants_hu.py",
+      "sha256": "4fb1314058f4ab6d8b8cb5e102cbc1fcc7960a2372b39479db5e13827f61ce4e"
+    },
+    {
+      "name": "split_numpy_tangent.py",
+      "sha256": "1ea6c95b1936c9d6f3a163c0cf53713ce20526760020309daf0ee5a26ac0ca99"
+    },
+    {
+      "name": "compensated_invariants.py",
+      "sha256": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081"
+    },
+    {
+      "name": "compensated_kinematics.py",
+      "sha256": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36"
+    },
+    {
+      "name": "split_kernel_compensated.py",
+      "sha256": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c"
+    },
+    {
+      "name": "split_affine.py",
+      "sha256": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba"
+    },
+    {
+      "name": "split_prescribed.py",
+      "sha256": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9"
+    },
+    {
+      "name": "split_kernel.py",
+      "sha256": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127"
+    },
+    {
+      "name": "prescribed.py",
+      "sha256": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7"
+    },
+    {
+      "name": "split_displacement.py",
+      "sha256": "833eb0bf4d141dd282ce58f15c12b8ec7715231f44ac7c6c48000d4d219c7371"
+    }
+  ]
+}
