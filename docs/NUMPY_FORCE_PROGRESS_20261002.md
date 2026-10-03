@@ -1210,3 +1210,14 @@ helper唯一启动的普通入口仍为 solve_native_mean.py，显式传原geome
 python -B functional_views/native_inverter_task025_20261003/plot_native_mean_inverter_frozen.py --input lf_data_preparation/native_inverter_task_025_001 --output D:/hf-native-inverter-task025-public-view-20261003 --magnification 40
 ```
 新输出位于clone外，检查全部6件PNG/GIF/CSV/metadata/viewer/helper字节，0新model/force/tangent/solver/HP。不使用默认1000倍率，不启动新正式参考。完整普通CLI使用上述四targets/minimum-increment300秒命令；实际日志/4stateJSON/result/恢复receipt另随证明保存，数值payload已存在正式Git，不再复制大数组包。正式和公开计算前后来源保持且clone干净；manifest建立、验证、main提交/推送及公开fast-forward都按真实终止结果顺序执行，未完成程序不能提前宣称交付通过。
+
+
+### main交付与实际公开恢复
+
+科学源码、完整四态及8新HP、真实图和独立核对已提交推送main **1419427f4fe45ccfaed8142ffa27a6b5dea57f2a**；origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。公开clone D:/hf-restore-20260930由163db25仅fetch＋fast-forward到此提交，main/clean/HEAD实际核对；6077交付文件身份verify exit0/pass，science manifest SHA18f0bf187f5c2d31bbd7aae0958aa416979f8d2ff97b54887073e0b30206781d。本次必要普通输入、全部模型/状态/三力/CSC/raw新参考/来源/图/过程说明随普通Git，不依赖原盘符或Release读取这些结果。
+
+[实际恢复证明](../handoff/native_inverter_task025_20261003/public_recovery_verify.json) SHA491af2749d7212f7260285d319ffefaaf83c39ff7e3c3c25975e864aa84ec2fd：公开一次普通CLI184.7927093秒、外层185.0445906秒，采样child-tree750.359375MiB、wrapper＋child-tree787.125MiB，300秒／8GiB内。20数值payload文件字节精确相同，131数组dtype/shape/raw bytes相同；四state JSON及result仅排原明确实测时间与关联descriptor hash，全部物理/设置/14force9tangent1solver计数/Newton/Armijo/LU/资格类型与数值保留。不是整个result JSON字节相同。实测Popen根PID的RSS/Windows peak另仅4.6875MiB，排除后代进程；该root-only读数不能代表整个求解器，资源判定用包含后代的完整树采样峰。本字段范围已在proof注明，raw receipt不回写，不因附带遥测读数重开物理实验。
+
+冻结viewer唯一仅读公开Git数据2.7486531秒，x40明确参数、四帧GIF/PNG/CSV/metadata/reader/helper全部6件字节相同；0model/force/tangent/solver/HP。实际CLI log、4stateJSON/result、replay receipt及两outer receipts随proof保存，公共大数组不重复复制。公开计算前后clone干净，输出在clone外；同机同runtime异目录恢复不冒称另一机器性能或新物理验收。正式与公开本阶段共28force/18tangent/2solver，HP仍原唯一8调用，无重复小模型测试，全部source39/原23模型和task输入保持。
+
+本阶段生产／参考／读图／公开恢复窗口完成关闭，恢复证明及本记录按既有main授权另交付。整体目标仍active；下一夹爪原.025mm TEST已写执行前近期计划，**本轮没有创建或执行它**。补充只读核对确认gripper prior model与其旧.001模型23字段字节相同，实际87fixed/6555free、输入+x DOFs[6156,6318,6480]／.25,.5,.25、输出+y DOFs[4697,4859,5021]同权；其87约束来自3实体支承节点ux/uy6＋原显式TEST全top uy81。下一checker必须绑实际gripper geometry/task/model和+y符号，不能沿用inverter pins/89fixed/−x；fulltop来自task.background_symmetry，不由LF provenance (60,80]自动施加。原材料、min6.25e-5/no workpiece/zeroL/下半不翻倍与H2/H3待定均保持，300/240界有本机成本依据但不保证其Newton数。
