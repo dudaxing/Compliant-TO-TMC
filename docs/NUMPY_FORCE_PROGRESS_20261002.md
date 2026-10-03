@@ -290,3 +290,5 @@ python hf_repo/scripts/plot_numpy_path.py --approach hf4_c2_stable_f_validation/
 ```
 
 后续需要新数值路径时，沿用绑定小输入及新输出目录：`run_numpy_c1_path.py --task-input …/inputs --output new-root/approach`，再传入该`last_state.npz`运行compression；`audit_numpy_c1_path.py --path new-root --task-input …/inputs --output new-root/audit --time-limit 300`重新生成参考。这是恢复方法，不是建议重复本次已完成实验或复用关闭的窗口。具体执行、独立复核及交付另存本新根和handoff记录。
+
+本轮科学结果及约28.6MB新证据／图已普通推送main提交`6580f00cdda6a51cf95ff0daeb6ab41bcea84728`。本机和另目录公开克隆均通过4745文件清单；克隆只用Git中的数据重画主PNG、20帧GIF、局部PNG，三个媒体文件及查看器源码与作者版本逐字节相同。[公开恢复回执](../handoff/numpy_c1_h0125_20261003/public_recovery_verify.json)保存原提交、清单SHA、实际命令／exit和各图SHA。未重跑candidate、HP或求解，不新增Release依赖；这是同机异目录恢复证明，不能扩大为异机数值准入。
