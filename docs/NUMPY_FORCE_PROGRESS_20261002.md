@@ -1766,3 +1766,6 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 诊断独立只读复核无阻断：190外层/139诊断绑定、57current+57caps/21inputs和27首坏字段均SHA同；4invalid在medium cells1275/q6、1348/q8，原a/b与父公共DD输入及广播fullbyte一致，均low×high，valid全True，高位约-8.502/-7.062e-110合法，EFT尾词4.22328/4.37678e-126小于2^-400。S列入返回场/全局supported是源码核查，public response未返回且最终S数组未保存，所以拒绝传播为结合源码推断，不称完整物理场实测。320 selected matmul可把这4尾词提高128位到约e-87，保守上界低于2^400/2^900，但极小孤立项及回缩下界仍不能普遍保证。下一另冻一次完整响应候选，不在本轮回写或删场放宽门。独立review5fd96226...，0新F/T/HP/solve/构造/test/plot。
 
 交付一次非科学读检查因read_text未指定UTF-8、实际采用GBK而失败，Python exit1；同shell后续git diff check exit0不能掩盖它。原失败回执保存handoff/native_workpiece_peak05_20261004/delivery_read_preflight_failure.json。修正仅下一交付读取显式UTF-8，所有正式科学阶段/原文件不动、0新数值重跑。
+
+
+本轮科学资料已正常提交并推送 main `167ab6fd6b5454a34aec9792b7f6e09ac0b5d9a8`。随后在干净异目录公共副本 `D:/hf-restore-20260930` 实际 fetch、fast-forward 到该精确提交，HEAD=origin/main、main/origin正确，7506文件身份验收 exit 0/pass；manifest SHA `ed4f199680c1f04000cd5d317b5d36cc0d6d91c90bd76ef3dd9b9c23301dbbeb`。这次恢复没有新力/切线/求解/HP、没有数值/几何/绘图重放，full_evidence_checked=false。原件见 [异目录公共恢复回执](../handoff/native_workpiece_peak05_20261004/public_restore_science_receipt.json)。后续交付回执提交会改变manifest，不能以该回执声称后续提交身份也已核验。

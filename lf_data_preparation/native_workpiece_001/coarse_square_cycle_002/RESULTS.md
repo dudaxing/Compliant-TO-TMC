@@ -57,3 +57,6 @@
 整体记录见[持续报告](../../../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-workpiece-peak05-20261004)。后续全部在main，origin固定https://github.com/dudaxing/Compliant-TO-TMC.git；源码、失败、接受态、独立参考、图和接续说明随本轮上传，异目录恢复文件身份不等于再做数值验证。
 
 四项逐字节独立核对见[诊断复核](independent_diagnostic_review.json)：medium cells1275/q6和1348/q8的low×high，高位合法、EFT尾词越界；320尺度只作下一候选，不称全面合法态已解决。
+
+
+本轮科学资料已正常提交并推送 main `167ab6fd6b5454a34aec9792b7f6e09ac0b5d9a8`。随后在干净异目录公共副本 `D:/hf-restore-20260930` 实际 fetch、fast-forward 到该精确提交，HEAD=origin/main、main/origin正确，7506文件身份验收 exit 0/pass；manifest SHA `ed4f199680c1f04000cd5d317b5d36cc0d6d91c90bd76ef3dd9b9c23301dbbeb`。这次恢复没有新力/切线/求解/HP、没有数值/几何/绘图重放，full_evidence_checked=false。原件见 [异目录公共恢复回执](../../../handoff/native_workpiece_peak05_20261004/public_restore_science_receipt.json)。后续交付回执提交会改变manifest，不能以该回执声称后续提交身份也已核验。
