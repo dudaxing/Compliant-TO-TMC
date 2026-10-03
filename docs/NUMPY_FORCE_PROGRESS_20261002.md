@@ -605,3 +605,7 @@ python functional_views/native_q1_20261003/plot_native_geometry_map_frozen.py --
 ```
 
 map.json／map.npz及source_geometry副本均普通数据；独立检查和冻结源码／图同时随main交付。显示metadata仅保存相对输入布局／路径与SHA，异目录可对照完整字节；实际CLI／恢复运行与main推送将在下段按真实结果补记。
+
+本轮原生Q1 API／CLI、三份完整映射／HF源副本、冻结源码、独立审阅／测试和两张图已普通推送main提交6076ad70b29291b21f361240570ed824b7698702。公开异目录克隆只fetch＋fast-forward至该提交，5113件普通仓库文件身份通过，工作树前后干净；公开克隆的9个执行源码SHA也与冻结生产身份一致。
+
+实际仅使用公开克隆中的普通HF转换包和CLI，三例各准备一次至三个新的外部目录；12件map.json／map.npz／source_geometry JSON／NPZ全部与已发布结果逐字节相同。冻结查看器仅读公开克隆的保存map重绘一次，**两张PNG、冻结查看器和完整view_metadata.json四件全部逐字节相同**；本次metadata只用相对输入布局，未出现前步LF查看器的绝对input_root差异。[公开恢复回执](../handoff/native_q1_20261003/public_recovery_verify.json)记录实际命令、启动／运行时间、exit、全部文件SHA及结果，均exit0、无重试。它证明同机另一目录使用普通Git资料的数据准备及显示可复现，不证明异机环境或新力／切线／平衡资格。实际恢复没有导入LF、选择分析网格政策、创建物理任务或调用组装／force／HP／solver；没有新增Release依赖。回执和本段说明随后与更新后的普通文件清单一同交付main。

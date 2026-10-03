@@ -1,0 +1,364 @@
+{
+  "schema_version": "native-q1-public-recovery-1.0",
+  "started_utc": "2026-10-03T06:54:32.761665+00:00",
+  "scientific_commit": "6076ad70b29291b21f361240570ed824b7698702",
+  "source_root": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC",
+  "public_root": "D:\\hf-restore-20260930",
+  "new_map_root": "D:\\hf-native-q1-public-maps-20261003",
+  "new_view_root": "D:\\hf-native-q1-public-view-20261003",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:32.761684+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.6562119000009261,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:33.417961+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.06474739999976009,
+      "exit_code": 0,
+      "stdout": "ccbd902aad73abebeb171795e3d37b98d88dd1b8\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:33.482732+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.05990890000248328,
+      "exit_code": 0,
+      "stdout": "https://github.com/dudaxing/Compliant-TO-TMC.git\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "fetch",
+        "origin"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:33.542665+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 2.9045995000051335,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "From https://github.com/dudaxing/Compliant-TO-TMC\n   ccbd902..6076ad7  main       -> origin/main\n"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "origin/main"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:36.447501+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.07612539996625856,
+      "exit_code": 0,
+      "stdout": "6076ad70b29291b21f361240570ed824b7698702\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "merge",
+        "--ff-only",
+        "origin/main"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:36.523662+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.7876891000196338,
+      "exit_code": 0,
+      "stdout": "Updating ccbd902..6076ad7\nFast-forward\n README.md                                          |    2 +-\n docs/CURRENT_STATUS.md                             |    2 +-\n docs/HF5_LF_V2_ADAPTER_AND_TASK_PLAN.md            |    2 +-\n docs/NUMPY_FORCE_PROGRESS_20261002.md              |   63 ++\n docs/PHYSICS_AND_FUNCTION_PROGRESS_20261001.md     |    4 +-\n docs/RESUME_DEVELOPMENT.md                         |    2 +-\n .../native_q1_20261003/native_q1_geometry.png      |  Bin 0 -> 265093 bytes\n .../native_q1_ports_candidates.png                 |  Bin 0 -> 252833 bytes\n .../plot_native_geometry_map_frozen.py             |  267 +++++\n .../native_q1_20261003/view_metadata.json          | 1097 ++++++++++++++++++++\n handoff/repository_manifest.json                   |  229 +++-\n hf_repo/README.md                                  |    2 +-\n hf_repo/scripts/plot_native_geometry_map.py        |  267 +++++\n hf_repo/scripts/prepare_native_geometry.py         |   30 +\n hf_repo/src/hf_eval/native_map.py                  |  135 +++\n hf_repo/tests/test_native_map.py                   |  209 ++++\n .../native_q1_001/execute_mapping.py               |  121 +++\n .../native_q1_001/execution_receipt.json           |   90 ++\n .../native_q1_001/independent_review.json          |  339 ++++++\n .../native_q1_001/input_inventory.json             |   45 +\n .../mapped/gripper_canonical/map.json              |  771 ++++++++++++++\n .../native_q1_001/mapped/gripper_canonical/map.npz |  Bin 0 -> 28215 bytes\n .../source_geometry/geometry.json                  |  511 +++++++++\n .../gripper_canonical/source_geometry/geometry.npz |  Bin 0 -> 1108 bytes\n .../mapped/gripper_native_fine/map.json            |  775 ++++++++++++++\n .../mapped/gripper_native_fine/map.npz             |  Bin 0 -> 101592 bytes\n .../source_geometry/geometry.json                  |  515 +++++++++\n .../source_geometry/geometry.npz                   |  Bin 0 -> 1493 bytes\n .../mapped/inverter_canonical/map.json             |  712 +++++++++++++\n .../mapped/inverter_canonical/map.npz              |  Bin 0 -> 28145 bytes\n .../source_geometry/geometry.json                  |  481 +++++++++\n .../source_geometry/geometry.npz                   |  Bin 0 -> 1072 bytes\n .../native_q1_001/plot_receipt.json                |   22 +\n .../native_q1_001/review_launch_receipt.json       |   46 +\n .../native_q1_001/review_mapping.py                |  238 +++++\n .../native_q1_001/sources/__init__.py              |    7 +\n lf_data_preparation/native_q1_001/sources/data.py  |  337 ++++++\n .../native_q1_001/sources/execute_mapping.py       |  121 +++\n .../native_q1_001/sources/native_map.py            |  135 +++\n .../sources/plot_native_geometry_map.py            |  267 +++++\n .../sources/prepare_native_geometry.py             |   30 +\n .../native_q1_001/sources/regions.py               |  202 ++++\n .../native_q1_001/sources/review_mapping.py        |  238 +++++\n .../native_q1_001/sources/test_native_map.py       |  209 ++++\n .../native_q1_001/test_receipt.json                |   21 +\n .../native_q1_001/visual_review_math.json          |  266 +++++\n .../native_q1_001/visual_review_tests.json         |  403 +++++++\n 47 files changed, 9189 insertions(+), 24 deletions(-)\n create mode 100644 functional_views/native_q1_20261003/native_q1_geometry.png\n create mode 100644 functional_views/native_q1_20261003/native_q1_ports_candidates.png\n create mode 100644 functional_views/native_q1_20261003/plot_native_geometry_map_frozen.py\n create mode 100644 functional_views/native_q1_20261003/view_metadata.json\n create mode 100644 hf_repo/scripts/plot_native_geometry_map.py\n create mode 100644 hf_repo/scripts/prepare_native_geometry.py\n create mode 100644 hf_repo/src/hf_eval/native_map.py\n create mode 100644 hf_repo/tests/test_native_map.py\n create mode 100644 lf_data_preparation/native_q1_001/execute_mapping.py\n create mode 100644 lf_data_preparation/native_q1_001/execution_receipt.json\n create mode 100644 lf_data_preparation/native_q1_001/independent_review.json\n create mode 100644 lf_data_preparation/native_q1_001/input_inventory.json\n create mode 100644 lf_data_preparation/native_q1_001/mapped/gripper_canonical/map.json\n create mode 100644 lf_data_preparation/native_q1_001/mapped/gripper_canonical/map.npz\n create mode 100644 lf_data_preparation/native_q1_001/mapped/gripper_canonical/source_geometry/geometry.json\n create mode 100644 lf_data_preparation/native_q1_001/mapped/gripper_canonical/source_geometry/geometry.npz\n create mode 100644 lf_data_preparation/native_q1_001/mapped/gripper_native_fine/map.json\n create mode 100644 lf_data_preparation/native_q1_001/mapped/gripper_native_fine/map.npz\n create mode 100644 lf_data_preparation/native_q1_001/mapped/gripper_native_fine/source_geometry/geometry.json\n create mode 100644 lf_data_preparation/native_q1_001/mapped/gripper_native_fine/source_geometry/geometry.npz\n create mode 100644 lf_data_preparation/native_q1_001/mapped/inverter_canonical/map.json\n create mode 100644 lf_data_preparation/native_q1_001/mapped/inverter_canonical/map.npz\n create mode 100644 lf_data_preparation/native_q1_001/mapped/inverter_canonical/source_geometry/geometry.json\n create mode 100644 lf_data_preparation/native_q1_001/mapped/inverter_canonical/source_geometry/geometry.npz\n create mode 100644 lf_data_preparation/native_q1_001/plot_receipt.json\n create mode 100644 lf_data_preparation/native_q1_001/review_launch_receipt.json\n create mode 100644 lf_data_preparation/native_q1_001/review_mapping.py\n create mode 100644 lf_data_preparation/native_q1_001/sources/__init__.py\n create mode 100644 lf_data_preparation/native_q1_001/sources/data.py\n create mode 100644 lf_data_preparation/native_q1_001/sources/execute_mapping.py\n create mode 100644 lf_data_preparation/native_q1_001/sources/native_map.py\n create mode 100644 lf_data_preparation/native_q1_001/sources/plot_native_geometry_map.py\n create mode 100644 lf_data_preparation/native_q1_001/sources/prepare_native_geometry.py\n create mode 100644 lf_data_preparation/native_q1_001/sources/regions.py\n create mode 100644 lf_data_preparation/native_q1_001/sources/review_mapping.py\n create mode 100644 lf_data_preparation/native_q1_001/sources/test_native_map.py\n create mode 100644 lf_data_preparation/native_q1_001/test_receipt.json\n create mode 100644 lf_data_preparation/native_q1_001/visual_review_math.json\n create mode 100644 lf_data_preparation/native_q1_001/visual_review_tests.json\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:37.311435+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.068699800001923,
+      "exit_code": 0,
+      "stdout": "6076ad70b29291b21f361240570ed824b7698702\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:/Python313/python.exe",
+        "-B",
+        "tools/handoff.py",
+        "verify"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:37.380164+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 7.831909300002735,
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"pass\",\n  \"repository_files\": 5113,\n  \"restored_historical_files\": 0,\n  \"asset_closure\": [],\n  \"saved_archives_checked\": 0,\n  \"full_evidence_checked\": false,\n  \"scope\": \"file identity, not a new mechanics validation\",\n  \"created_utc\": \"2026-10-03T06:54:45.194188+00:00\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Scripts/python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\hf_repo\\scripts\\prepare_native_geometry.py",
+        "--geometry",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\v2_adapter_001\\converted\\inverter_canonical\\geometry.json",
+        "--output",
+        "D:\\hf-native-q1-public-maps-20261003\\inverter_canonical"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:45.240597+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.278236799989827,
+      "exit_code": 0,
+      "stdout": "{\n  \"map_file\": \"map.json\",\n  \"source_geometry_id\": \"2e2bb3466ade06f920dfbb92577ccbe46106acec430837bac8e1a30b8083527a\",\n  \"counts\": {\n    \"elements\": 3200,\n    \"nodes\": 3321,\n    \"dofs\": 6642,\n    \"solid_cells\": 1128,\n    \"design_cells\": 3200,\n    \"passive_solid_cells\": 0,\n    \"passive_void_cells\": 0,\n    \"support_nodes\": 9,\n    \"support_solid_nodes\": 4,\n    \"symmetry_nodes\": 81,\n    \"symmetry_solid_nodes\": 13,\n    \"input_nodes\": 3,\n    \"output_nodes\": 3,\n    \"background_source_nodes\": 0,\n    \"background_source_solid_nodes\": 0\n  },\n  \"analysis_grid_policy\": \"not_selected\",\n  \"constraints_applied\": false,\n  \"material_assigned\": false,\n  \"task_created\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Scripts/python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\hf_repo\\scripts\\prepare_native_geometry.py",
+        "--geometry",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\v2_adapter_001\\converted\\gripper_canonical\\geometry.json",
+        "--output",
+        "D:\\hf-native-q1-public-maps-20261003\\gripper_canonical"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:45.577139+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.24792490003164858,
+      "exit_code": 0,
+      "stdout": "{\n  \"map_file\": \"map.json\",\n  \"source_geometry_id\": \"d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d\",\n  \"counts\": {\n    \"elements\": 3200,\n    \"nodes\": 3321,\n    \"dofs\": 6642,\n    \"solid_cells\": 1086,\n    \"design_cells\": 2960,\n    \"passive_solid_cells\": 40,\n    \"passive_void_cells\": 200,\n    \"support_nodes\": 9,\n    \"support_solid_nodes\": 3,\n    \"symmetry_nodes\": 61,\n    \"symmetry_solid_nodes\": 14,\n    \"input_nodes\": 3,\n    \"output_nodes\": 3,\n    \"background_source_nodes\": 20,\n    \"background_source_solid_nodes\": 0\n  },\n  \"analysis_grid_policy\": \"not_selected\",\n  \"constraints_applied\": false,\n  \"material_assigned\": false,\n  \"task_created\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Scripts/python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\hf_repo\\scripts\\prepare_native_geometry.py",
+        "--geometry",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\v2_adapter_001\\converted\\gripper_native_fine\\geometry.json",
+        "--output",
+        "D:\\hf-native-q1-public-maps-20261003\\gripper_native_fine"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:45.875307+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.27151980000780895,
+      "exit_code": 0,
+      "stdout": "{\n  \"map_file\": \"map.json\",\n  \"source_geometry_id\": \"62dd40a9ed8a41a6a2deb55927982c7f409d63bfedbf96079b2ee032e816da8d\",\n  \"counts\": {\n    \"elements\": 12800,\n    \"nodes\": 13041,\n    \"dofs\": 26082,\n    \"solid_cells\": 4358,\n    \"design_cells\": 11840,\n    \"passive_solid_cells\": 160,\n    \"passive_void_cells\": 800,\n    \"support_nodes\": 17,\n    \"support_solid_nodes\": 4,\n    \"symmetry_nodes\": 121,\n    \"symmetry_solid_nodes\": 24,\n    \"input_nodes\": 5,\n    \"output_nodes\": 5,\n    \"background_source_nodes\": 40,\n    \"background_source_solid_nodes\": 0\n  },\n  \"analysis_grid_policy\": \"not_selected\",\n  \"constraints_applied\": false,\n  \"material_assigned\": false,\n  \"task_created\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Scripts/python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\functional_views\\native_q1_20261003\\plot_native_geometry_map_frozen.py",
+        "--input",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\native_q1_001",
+        "--output",
+        "D:\\hf-native-q1-public-view-20261003"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:46.204642+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 2.2643818000215106,
+      "exit_code": 0,
+      "stdout": "{\"output\": \"D:\\\\hf-native-q1-public-view-20261003\", \"cases\": 3, \"all_element_signed_areas_positive\": true, \"mechanics_calls\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T06:54:48.491589+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.6800956000224687,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "map_files": [
+    {
+      "path": "inverter_canonical/map.json",
+      "bytes": 22893,
+      "actual_sha256": "8a40abd9c872438ca0c0f987dcddf4a1e4e8f2d9cbd4689c47fbf2a97d53e432",
+      "published_sha256": "8a40abd9c872438ca0c0f987dcddf4a1e4e8f2d9cbd4689c47fbf2a97d53e432",
+      "byte_equal": true
+    },
+    {
+      "path": "inverter_canonical/map.npz",
+      "bytes": 28145,
+      "actual_sha256": "a7db3fe2d4b03091a22cf8b09027719d52e7bacbb64eca1976fb65cedb67d1ea",
+      "published_sha256": "a7db3fe2d4b03091a22cf8b09027719d52e7bacbb64eca1976fb65cedb67d1ea",
+      "byte_equal": true
+    },
+    {
+      "path": "inverter_canonical/source_geometry/geometry.json",
+      "bytes": 15494,
+      "actual_sha256": "23adf44ea8164fb103998ab97363747540a11ef7bb589ae81aa2fde23ff57eee",
+      "published_sha256": "23adf44ea8164fb103998ab97363747540a11ef7bb589ae81aa2fde23ff57eee",
+      "byte_equal": true
+    },
+    {
+      "path": "inverter_canonical/source_geometry/geometry.npz",
+      "bytes": 1072,
+      "actual_sha256": "1911362efaa5b6c5104af0cecf95310f262b129f3e0cd2a1c648cf550b756132",
+      "published_sha256": "1911362efaa5b6c5104af0cecf95310f262b129f3e0cd2a1c648cf550b756132",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_canonical/map.json",
+      "bytes": 24953,
+      "actual_sha256": "450e817333d3c3edd5bd88be973d4444d24c8f3253a699f8605bc2a32ec28dd7",
+      "published_sha256": "450e817333d3c3edd5bd88be973d4444d24c8f3253a699f8605bc2a32ec28dd7",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_canonical/map.npz",
+      "bytes": 28215,
+      "actual_sha256": "6c477d8973eeb716c803b3921ea2b56939ba92b682b44d1f5f68804098311e1b",
+      "published_sha256": "6c477d8973eeb716c803b3921ea2b56939ba92b682b44d1f5f68804098311e1b",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_canonical/source_geometry/geometry.json",
+      "bytes": 16636,
+      "actual_sha256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+      "published_sha256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_canonical/source_geometry/geometry.npz",
+      "bytes": 1108,
+      "actual_sha256": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+      "published_sha256": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_native_fine/map.json",
+      "bytes": 25130,
+      "actual_sha256": "0e51d7b58311eabe40578245614eeae13d7607c98f9d861aed16fce324745270",
+      "published_sha256": "0e51d7b58311eabe40578245614eeae13d7607c98f9d861aed16fce324745270",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_native_fine/map.npz",
+      "bytes": 101592,
+      "actual_sha256": "b73f98a3eac7312bc59d227de34fe8216502cbfc9df2434550a09c29451b37ed",
+      "published_sha256": "b73f98a3eac7312bc59d227de34fe8216502cbfc9df2434550a09c29451b37ed",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_native_fine/source_geometry/geometry.json",
+      "bytes": 16786,
+      "actual_sha256": "dbab7567c98e18174d198318f025184b3545c3681c060fa77d9435122bb0f32c",
+      "published_sha256": "dbab7567c98e18174d198318f025184b3545c3681c060fa77d9435122bb0f32c",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_native_fine/source_geometry/geometry.npz",
+      "bytes": 1493,
+      "actual_sha256": "92ff8918ae7502c3f8bfb99398b654ea1521549e7ff3ce0e8b24a9b4fa720d21",
+      "published_sha256": "92ff8918ae7502c3f8bfb99398b654ea1521549e7ff3ce0e8b24a9b4fa720d21",
+      "byte_equal": true
+    }
+  ],
+  "view_files": [
+    {
+      "path": "native_q1_geometry.png",
+      "bytes": 265093,
+      "actual_sha256": "662f3e10a62f228ee3ba1bf7a8d3e6305114bc88c75da127f9668206a247c3d4",
+      "published_sha256": "662f3e10a62f228ee3ba1bf7a8d3e6305114bc88c75da127f9668206a247c3d4",
+      "byte_equal": true
+    },
+    {
+      "path": "native_q1_ports_candidates.png",
+      "bytes": 252833,
+      "actual_sha256": "41a7e9a55d0ebfdb609898ed0b7d430a33ac777616854b92c0ac876fc05a33cd",
+      "published_sha256": "41a7e9a55d0ebfdb609898ed0b7d430a33ac777616854b92c0ac876fc05a33cd",
+      "byte_equal": true
+    },
+    {
+      "path": "plot_native_geometry_map_frozen.py",
+      "bytes": 16823,
+      "actual_sha256": "455bffcbfc520b7718d655c3d881d35ea9bdd12e939e4279cfad96ad001551db",
+      "published_sha256": "455bffcbfc520b7718d655c3d881d35ea9bdd12e939e4279cfad96ad001551db",
+      "byte_equal": true
+    },
+    {
+      "path": "view_metadata.json",
+      "bytes": 23453,
+      "actual_sha256": "b90702b2ee582b08da6c75717692697f3c9ecd9da8b5ddca13a8a79f7ceece8a",
+      "published_sha256": "b90702b2ee582b08da6c75717692697f3c9ecd9da8b5ddca13a8a79f7ceece8a",
+      "byte_equal": true
+    }
+  ],
+  "source_pins": {
+    "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+    "hf_repo/src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+    "hf_repo/src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/scripts/prepare_native_geometry.py": "901c6fe2353a0e61d823df30073d1ea99f59573c4d242691b966610a7a0124bd",
+    "hf_repo/scripts/plot_native_geometry_map.py": "455bffcbfc520b7718d655c3d881d35ea9bdd12e939e4279cfad96ad001551db",
+    "hf_repo/tests/test_native_map.py": "f371131640018efec052edb37c8258f1a0681cd98867fa9216788ca9efccb497",
+    "lf_data_preparation/native_q1_001/review_mapping.py": "9cd43f86176f982be29f2325410173d304e485c655bb30eb7db65cb2e25bb31e",
+    "lf_data_preparation/native_q1_001/execute_mapping.py": "dbaa97d0f7ecb9d8e15c188dbfcaea4daf8dc22484f42d8db55a81dccc004981"
+  },
+  "status": "pass",
+  "scope": "Same-machine independent public clone; native data CLI and saved-data viewing only, no force, HP, assembly, physical task or solver qualification",
+  "force_calls": 0,
+  "HP_calls": 0,
+  "solver_calls": 0,
+  "mechanics_assembly_calls": 0,
+  "LF_imports": 0,
+  "previous_public_commit": "ccbd902aad73abebeb171795e3d37b98d88dd1b8",
+  "public_file_verification": {
+    "status": "pass",
+    "repository_files": 5113,
+    "restored_historical_files": 0,
+    "asset_closure": [],
+    "saved_archives_checked": 0,
+    "full_evidence_checked": false,
+    "scope": "file identity, not a new mechanics validation",
+    "created_utc": "2026-10-03T06:54:45.194188+00:00"
+  },
+  "public_manifest_sha256": "1053e0a68b7afbc6f639f436f325658da6f6fb09893e32829ee433de6c684926",
+  "actual_cli_invocations": 3,
+  "actual_plot_invocations": 1,
+  "all_12_map_files_byte_equal": true,
+  "all_4_view_files_byte_equal": true,
+  "public_worktree_clean": true,
+  "completed_utc": "2026-10-03T06:54:49.171771+00:00"
+}
