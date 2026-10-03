@@ -1,0 +1,237 @@
+{
+  "schema_version": "saved-tiny-cycle-view-1.0",
+  "scope": "saved JSON visualization only",
+  "inputs": {
+    "Before": {
+      "path": "lf_data_preparation/native_workpiece_001/tiny_cycle_diagnostic_001/result/result.json",
+      "sha256": "14d897b0d60815f12598ae0e5e62409e3f5a17baeec838a9fce404f2e2d8cc1e"
+    },
+    "After": {
+      "path": "lf_data_preparation/native_workpiece_001/v4_validation/tiny_cycle/result.json",
+      "sha256": "46ad88236a96742d029a6d536ae221c6cd681a95c3b65b439dffa92b38ed3ea3"
+    }
+  },
+  "input_sha256_after": {
+    "Before": "14d897b0d60815f12598ae0e5e62409e3f5a17baeec838a9fce404f2e2d8cc1e",
+    "After": "46ad88236a96742d029a6d536ae221c6cd681a95c3b65b439dffa92b38ed3ea3"
+  },
+  "inputs_unchanged": true,
+  "script": {
+    "path": "functional_views/native_zero_cycle_20261004/plot_cycle_diagnostic.py",
+    "sha256": "dd6a2841678958566d030d6cc620e5d6eac804b9fa77d3ec3a3e8b9ec2d9809a"
+  },
+  "outputs": {
+    "cycle_diagnostic.png": "56580a03f0b7507ccb3bb12500d164a12f004cad5b1175a6ae0f895419a9e53d",
+    "numeric_records.csv": "f1d487de0b90e75298c3c72c677768c0e88eae1fc1c0d2d26cb7dd07a9789344"
+  },
+  "original_relative_residual_gate": 1e-09,
+  "residual_y_limits": [
+    1e-15,
+    1.0
+  ],
+  "exact_zero_policy": "event strip only; never replaced by a positive floor",
+  "rejected_trial_residual_policy": "not available; events have no fabricated residual",
+  "line_policy": "join observations in order only; no computed intermediate states",
+  "mechanics_calls": 0,
+  "force_calls": 0,
+  "tangent_calls": 0,
+  "HP_calls": 0,
+  "contact_qualified": false,
+  "public_recovery_qualified": false,
+  "elapsed_seconds": 5.693411700020079,
+  "datasets": {
+    "Before": {
+      "status": "failed",
+      "failure": {
+        "code": "time_limit",
+        "reason": "split average path wall-time budget exceeded"
+      },
+      "path_completed": false,
+      "loading_peak_reached": true,
+      "unload_endpoint_reached": false,
+      "counts": {
+        "cells": 16,
+        "nodes": 25,
+        "dofs": 50,
+        "solid_cells": 15,
+        "medium_cells": 1,
+        "solid_incident_nodes": 25,
+        "fixed_dofs": 9,
+        "free_dofs": 41
+      },
+      "call_counts": {
+        "force_calls": 131,
+        "force_calls_completed": 91,
+        "tangent_calls": 48,
+        "tangent_calls_completed": 48,
+        "solver_invocations": 1,
+        "JIT_calls": 0,
+        "HP_calls": 0
+      },
+      "declared_targets_mm": [
+        0.0,
+        0.0005,
+        0.0
+      ],
+      "segments": [
+        {
+          "label": "O",
+          "target_mm": 0.0,
+          "check_range": [
+            1,
+            1
+          ]
+        },
+        {
+          "label": "L",
+          "target_mm": 0.0005,
+          "check_range": [
+            2,
+            3
+          ]
+        },
+        {
+          "label": "U1",
+          "target_mm": 0.0,
+          "check_range": [
+            4,
+            28
+          ]
+        },
+        {
+          "label": "B",
+          "target_mm": 0.00025,
+          "check_range": [
+            29,
+            30
+          ]
+        },
+        {
+          "label": "U2",
+          "target_mm": 0.0,
+          "check_range": [
+            31,
+            48
+          ]
+        }
+      ],
+      "full_range_rejects": 40,
+      "half_accepts": 39,
+      "full_accepts": 4,
+      "last_half_trial_unrecorded_at_clock": true,
+      "accepted_states": [
+        {
+          "d": 0.0,
+          "R_input": 0.0,
+          "relative_residual": 0.0,
+          "leg": "origin",
+          "is_original_target": true,
+          "bisection_depth": 0
+        },
+        {
+          "d": 0.0005,
+          "R_input": 0.0002839434175985735,
+          "relative_residual": 5.059312651755695e-11,
+          "leg": "loading",
+          "is_original_target": true,
+          "bisection_depth": 0
+        },
+        {
+          "d": 0.00025,
+          "R_input": 0.00014196564344249807,
+          "relative_residual": 6.3165659970823915e-12,
+          "leg": "unloading",
+          "is_original_target": false,
+          "bisection_depth": 1
+        }
+      ]
+    },
+    "After": {
+      "status": "success",
+      "failure": null,
+      "path_completed": true,
+      "loading_peak_reached": true,
+      "unload_endpoint_reached": true,
+      "counts": {
+        "cells": 16,
+        "nodes": 25,
+        "dofs": 50,
+        "solid_cells": 15,
+        "medium_cells": 1,
+        "solid_incident_nodes": 25,
+        "fixed_dofs": 9,
+        "free_dofs": 41
+      },
+      "call_counts": {
+        "force_calls": 9,
+        "force_calls_completed": 9,
+        "tangent_calls": 6,
+        "tangent_calls_completed": 6,
+        "solver_invocations": 1,
+        "JIT_calls": 0,
+        "HP_calls": 0
+      },
+      "declared_targets_mm": [
+        0.0,
+        0.0005,
+        0.0
+      ],
+      "segments": [
+        {
+          "label": "O",
+          "target_mm": 0.0,
+          "check_range": [
+            1,
+            1
+          ]
+        },
+        {
+          "label": "L",
+          "target_mm": 0.0005,
+          "check_range": [
+            2,
+            3
+          ]
+        },
+        {
+          "label": "U1",
+          "target_mm": 0.0,
+          "check_range": [
+            4,
+            6
+          ]
+        }
+      ],
+      "full_range_rejects": 0,
+      "half_accepts": 0,
+      "full_accepts": 3,
+      "last_half_trial_unrecorded_at_clock": false,
+      "accepted_states": [
+        {
+          "d": 0.0,
+          "R_input": 0.0,
+          "relative_residual": 0.0,
+          "leg": "origin",
+          "is_original_target": true,
+          "bisection_depth": 0
+        },
+        {
+          "d": 0.0005,
+          "R_input": 0.0002839434175985735,
+          "relative_residual": 5.059312651755695e-11,
+          "leg": "loading",
+          "is_original_target": true,
+          "bisection_depth": 0
+        },
+        {
+          "d": 0.0,
+          "R_input": 4.733165431326071e-30,
+          "relative_residual": 1.1980304655177976e-15,
+          "leg": "unloading",
+          "is_original_target": true,
+          "bisection_depth": 0
+        }
+      ]
+    }
+  }
+}

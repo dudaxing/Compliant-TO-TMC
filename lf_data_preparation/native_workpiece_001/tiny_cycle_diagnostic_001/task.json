@@ -1,0 +1,72 @@
+{
+  "schema_version": "hf-native-project-task-1.1",
+  "task_id": "TEST_small_native_cycle",
+  "case_family": "gripper",
+  "purpose": "supplied_displacement_test_only",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "geometry": {
+    "geometry_id": "4b7bac118969b353d53e1af217831ad01f3b532d9a961f858ffbc6f0112aa6ba",
+    "descriptor_sha256": "38ca552f2451e1708cdf4cecb1d30bbeb61c48af1836d70c1924762257755490"
+  },
+  "analysis_grid": {
+    "policy": "native"
+  },
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain"
+  },
+  "third_medium": {
+    "gamma": 1e-06
+  },
+  "regularization": {
+    "alpha": 0.0001,
+    "length_mm": 2.0
+  },
+  "input": {
+    "tag": "input",
+    "control": "average_displacement",
+    "target_mm": 0.0005
+  },
+  "output": {
+    "tag": "output",
+    "spring_N_per_mm": 0.0
+  },
+  "constraints": [
+    {
+      "tag": "support",
+      "components": [
+        0,
+        1
+      ]
+    },
+    {
+      "tag": "symmetry",
+      "components": [
+        1
+      ]
+    }
+  ],
+  "support_selection": "solid_incident_nodes_only",
+  "background_symmetry": null,
+  "input_auxiliary_spring_N_per_mm": 0.0,
+  "workpiece": null,
+  "reference_state": "undeformed",
+  "qualification_criteria": {
+    "max_design_volume_fraction": null,
+    "min_feature_mm": null
+  },
+  "path": {
+    "kind": "ordered_cycle",
+    "targets_mm": [
+      0.0,
+      0.0005,
+      0.0
+    ]
+  }
+}

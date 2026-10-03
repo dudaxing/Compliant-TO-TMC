@@ -1,0 +1,133 @@
+{
+  "status": "first_rejected_force_captured",
+  "qualification": false,
+  "error": {
+    "code": "unsupported_arithmetic_range",
+    "message": "NumPy response exceeded the declared compensated arithmetic support range",
+    "details": {}
+  },
+  "counts": {
+    "force_started": 8,
+    "force_completed": 7,
+    "accepted": [
+      {
+        "d": 0.0,
+        "state_sha256": "d8ca928540363bc3cf4f6fd5897bf3ae39173462e5c350daf2d312af1e151805"
+      },
+      {
+        "d": 0.0005,
+        "state_sha256": "39027800e1b4b2495d81c788032fce0659a19d1e8e506f132422ebed12b63138"
+      }
+    ]
+  },
+  "first_bad_primitive": {
+    "caller": "_dd_product_primal",
+    "caller_line": 168,
+    "stack": [
+      {
+        "file": "lf_data_preparation\\native_workpiece_001\\tiny_range_diagnostic_001\\run_once.py",
+        "line": 70,
+        "function": "<module>",
+        "text": "native_mean.solve_native_mean(SOURCE/'inputs/geometry.json', task, task['path']['targets_mm'],"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\native_mean.py",
+        "line": 182,
+        "function": "solve_native_mean",
+        "text": "path = solve_split_displacement_path(model, project.bin, project.bout, targets, project.k_out,"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_displacement.py",
+        "line": 327,
+        "function": "solve_split_displacement_path",
+        "text": "advance(float(s), 0, float(s), index, leg)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_displacement.py",
+        "line": 292,
+        "function": "advance",
+        "text": "solved, R, K, measured = newton(before, before_R, before_s, before_K, s)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_displacement.py",
+        "line": 263,
+        "function": "newton",
+        "text": "_, trial_internal, trial_fields = evaluate(trial, False)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_displacement.py",
+        "line": 127,
+        "function": "evaluate",
+        "text": "K, internal, fields = assembly(model, state, tangent=tangent)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\native_mean.py",
+        "line": 138,
+        "function": "assemble",
+        "text": "_, internal, fields = _assemble_force(actual_model, state)"
+      },
+      {
+        "file": "lf_data_preparation\\native_workpiece_001\\tiny_range_diagnostic_001\\run_once.py",
+        "line": 50,
+        "function": "force",
+        "text": "result = original_force(model, state)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+        "line": 313,
+        "function": "assemble_split_numpy",
+        "text": "return _assemble_split(model, state, tangent=False, numpy=True)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+        "line": 296,
+        "function": "_assemble_split",
+        "text": "fields = batch_response_split_numpy(*args) if numpy else batch_response_split(*args, tangent=tangent)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+        "line": 273,
+        "function": "batch_response_split_numpy",
+        "text": "_, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+        "line": 240,
+        "function": "_numpy_response",
+        "text": "_, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+        "line": 105,
+        "function": "_response",
+        "text": "T = ci.dd_div(ci.dd_cofactor(F, xp), _index(J, (..., None, None)), xp)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+        "line": 346,
+        "function": "dd_div",
+        "text": "return _jax_binary(a, b, \"div\") if xp is jnp else _dd_div_primal(a, b, xp)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+        "line": 192,
+        "function": "_dd_div_primal",
+        "text": "residual = _dd_add_primal(a, dd_neg(_dd_mul_primal(quotient, b, xp)), xp)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+        "line": 176,
+        "function": "_dd_mul_primal",
+        "text": "result = _dd_add_primal(result, _dd_product_primal(a[i], b[j], xp), xp)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+        "line": 168,
+        "function": "_dd_product_primal",
+        "text": "return _finish(high, low, valid, xp)"
+      }
+    ],
+    "operand_min": 3.8725919148493183e-121,
+    "operand_max": 2.5822498780869086e+120
+  }
+}

@@ -1,0 +1,555 @@
+{
+  "status": "first_rejected_force_captured",
+  "error": {
+    "code": "unsupported_arithmetic_range",
+    "message": "NumPy response exceeded the declared compensated arithmetic support range"
+  },
+  "force_started": 1,
+  "force_completed": 0,
+  "tangent_calls": 0,
+  "solver_calls": 0,
+  "HP_calls": 0,
+  "range_roots": [
+    {
+      "caller": "_dd_product_primal",
+      "caller_line": 168,
+      "stack": [
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 50,
+          "function": "<module>",
+          "text": "batch_response_split_numpy(fixture['lift'][fixture['edofs']], fixture['fluctuation'][fixture['edofs']],"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 287,
+          "function": "batch_response_split_numpy",
+          "text": "_, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 254,
+          "function": "_numpy_response",
+          "text": "_, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+        },
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 45,
+          "function": "response",
+          "text": "value, fields = original_response(*args)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 129,
+          "function": "_response",
+          "text": "direct_P = add(mul(mu_matrix, F), mul(_index(coefficient, (..., None, None)), T))"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 108,
+          "function": "<lambda>",
+          "text": "mul = lambda a, b: ci.dd_mul(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 342,
+          "function": "dd_mul",
+          "text": "return _jax_binary(a, b, \"mul\") if xp is jnp else _dd_mul_primal(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 176,
+          "function": "_dd_mul_primal",
+          "text": "result = _dd_add_primal(result, _dd_product_primal(a[i], b[j], xp), xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 168,
+          "function": "_dd_product_primal",
+          "text": "return _finish(high, low, valid, xp)"
+        }
+      ]
+    },
+    {
+      "caller": "_dd_product_primal",
+      "caller_line": 168,
+      "stack": [
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 50,
+          "function": "<module>",
+          "text": "batch_response_split_numpy(fixture['lift'][fixture['edofs']], fixture['fluctuation'][fixture['edofs']],"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 287,
+          "function": "batch_response_split_numpy",
+          "text": "_, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 254,
+          "function": "_numpy_response",
+          "text": "_, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+        },
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 45,
+          "function": "response",
+          "text": "value, fields = original_response(*args)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 133,
+          "function": "_response",
+          "text": "small_P = ci.dd_matmul(incremental_tensor, T, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 401,
+          "function": "dd_matmul",
+          "text": "products = dd_mul(tuple(value[..., :, :, None] for value in a),"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 342,
+          "function": "dd_mul",
+          "text": "return _jax_binary(a, b, \"mul\") if xp is jnp else _dd_mul_primal(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 176,
+          "function": "_dd_mul_primal",
+          "text": "result = _dd_add_primal(result, _dd_product_primal(a[i], b[j], xp), xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 168,
+          "function": "_dd_product_primal",
+          "text": "return _finish(high, low, valid, xp)"
+        }
+      ]
+    },
+    {
+      "caller": "_dd_product_primal",
+      "caller_line": 168,
+      "stack": [
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 50,
+          "function": "<module>",
+          "text": "batch_response_split_numpy(fixture['lift'][fixture['edofs']], fixture['fluctuation'][fixture['edofs']],"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 287,
+          "function": "batch_response_split_numpy",
+          "text": "_, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 254,
+          "function": "_numpy_response",
+          "text": "_, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+        },
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 45,
+          "function": "response",
+          "text": "value, fields = original_response(*args)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 133,
+          "function": "_response",
+          "text": "small_P = ci.dd_matmul(incremental_tensor, T, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 401,
+          "function": "dd_matmul",
+          "text": "products = dd_mul(tuple(value[..., :, :, None] for value in a),"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 342,
+          "function": "dd_mul",
+          "text": "return _jax_binary(a, b, \"mul\") if xp is jnp else _dd_mul_primal(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 176,
+          "function": "_dd_mul_primal",
+          "text": "result = _dd_add_primal(result, _dd_product_primal(a[i], b[j], xp), xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 168,
+          "function": "_dd_product_primal",
+          "text": "return _finish(high, low, valid, xp)"
+        }
+      ]
+    },
+    {
+      "caller": "_dd_product_primal",
+      "caller_line": 168,
+      "stack": [
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 50,
+          "function": "<module>",
+          "text": "batch_response_split_numpy(fixture['lift'][fixture['edofs']], fixture['fluctuation'][fixture['edofs']],"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 287,
+          "function": "batch_response_split_numpy",
+          "text": "_, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 254,
+          "function": "_numpy_response",
+          "text": "_, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+        },
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 45,
+          "function": "response",
+          "text": "value, fields = original_response(*args)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 136,
+          "function": "_response",
+          "text": "S = ci.dd_matmul(ci.dd_transpose(T, axes, xp), P, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 401,
+          "function": "dd_matmul",
+          "text": "products = dd_mul(tuple(value[..., :, :, None] for value in a),"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 342,
+          "function": "dd_mul",
+          "text": "return _jax_binary(a, b, \"mul\") if xp is jnp else _dd_mul_primal(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 176,
+          "function": "_dd_mul_primal",
+          "text": "result = _dd_add_primal(result, _dd_product_primal(a[i], b[j], xp), xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 168,
+          "function": "_dd_product_primal",
+          "text": "return _finish(high, low, valid, xp)"
+        }
+      ]
+    },
+    {
+      "caller": "_dd_product_primal",
+      "caller_line": 168,
+      "stack": [
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 50,
+          "function": "<module>",
+          "text": "batch_response_split_numpy(fixture['lift'][fixture['edofs']], fixture['fluctuation'][fixture['edofs']],"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 287,
+          "function": "batch_response_split_numpy",
+          "text": "_, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 254,
+          "function": "_numpy_response",
+          "text": "_, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+        },
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 45,
+          "function": "response",
+          "text": "value, fields = original_response(*args)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 136,
+          "function": "_response",
+          "text": "S = ci.dd_matmul(ci.dd_transpose(T, axes, xp), P, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 401,
+          "function": "dd_matmul",
+          "text": "products = dd_mul(tuple(value[..., :, :, None] for value in a),"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 342,
+          "function": "dd_mul",
+          "text": "return _jax_binary(a, b, \"mul\") if xp is jnp else _dd_mul_primal(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 176,
+          "function": "_dd_mul_primal",
+          "text": "result = _dd_add_primal(result, _dd_product_primal(a[i], b[j], xp), xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 168,
+          "function": "_dd_product_primal",
+          "text": "return _finish(high, low, valid, xp)"
+        }
+      ]
+    },
+    {
+      "caller": "_dd_product_primal",
+      "caller_line": 168,
+      "stack": [
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 50,
+          "function": "<module>",
+          "text": "batch_response_split_numpy(fixture['lift'][fixture['edofs']], fixture['fluctuation'][fixture['edofs']],"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 287,
+          "function": "batch_response_split_numpy",
+          "text": "_, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 254,
+          "function": "_numpy_response",
+          "text": "_, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+        },
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 45,
+          "function": "response",
+          "text": "value, fields = original_response(*args)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 155,
+          "function": "_response",
+          "text": "remainder = add(mul(remainder, small_delta), c((-1.0)**power / power))"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 108,
+          "function": "<lambda>",
+          "text": "mul = lambda a, b: ci.dd_mul(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 342,
+          "function": "dd_mul",
+          "text": "return _jax_binary(a, b, \"mul\") if xp is jnp else _dd_mul_primal(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 176,
+          "function": "_dd_mul_primal",
+          "text": "result = _dd_add_primal(result, _dd_product_primal(a[i], b[j], xp), xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 168,
+          "function": "_dd_product_primal",
+          "text": "return _finish(high, low, valid, xp)"
+        }
+      ]
+    },
+    {
+      "caller": "_dd_product_primal",
+      "caller_line": 168,
+      "stack": [
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 50,
+          "function": "<module>",
+          "text": "batch_response_split_numpy(fixture['lift'][fixture['edofs']], fixture['fluctuation'][fixture['edofs']],"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 287,
+          "function": "batch_response_split_numpy",
+          "text": "_, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 254,
+          "function": "_numpy_response",
+          "text": "_, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+        },
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 45,
+          "function": "response",
+          "text": "value, fields = original_response(*args)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 155,
+          "function": "_response",
+          "text": "remainder = add(mul(remainder, small_delta), c((-1.0)**power / power))"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 108,
+          "function": "<lambda>",
+          "text": "mul = lambda a, b: ci.dd_mul(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 342,
+          "function": "dd_mul",
+          "text": "return _jax_binary(a, b, \"mul\") if xp is jnp else _dd_mul_primal(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 176,
+          "function": "_dd_mul_primal",
+          "text": "result = _dd_add_primal(result, _dd_product_primal(a[i], b[j], xp), xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 168,
+          "function": "_dd_product_primal",
+          "text": "return _finish(high, low, valid, xp)"
+        }
+      ]
+    },
+    {
+      "caller": "_dd_product_primal",
+      "caller_line": 168,
+      "stack": [
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 50,
+          "function": "<module>",
+          "text": "batch_response_split_numpy(fixture['lift'][fixture['edofs']], fixture['fluctuation'][fixture['edofs']],"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 287,
+          "function": "batch_response_split_numpy",
+          "text": "_, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 254,
+          "function": "_numpy_response",
+          "text": "_, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+        },
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 45,
+          "function": "response",
+          "text": "value, fields = original_response(*args)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 161,
+          "function": "_response",
+          "text": "small_energy = mul(c(0.5), add(mul(lambda_pair, scaled_square(log_small)),"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 108,
+          "function": "<lambda>",
+          "text": "mul = lambda a, b: ci.dd_mul(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 342,
+          "function": "dd_mul",
+          "text": "return _jax_binary(a, b, \"mul\") if xp is jnp else _dd_mul_primal(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 174,
+          "function": "_dd_mul_primal",
+          "text": "result = _dd_product_primal(a[0], b[0], xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 168,
+          "function": "_dd_product_primal",
+          "text": "return _finish(high, low, valid, xp)"
+        }
+      ]
+    },
+    {
+      "caller": "_dd_product_primal",
+      "caller_line": 168,
+      "stack": [
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 50,
+          "function": "<module>",
+          "text": "batch_response_split_numpy(fixture['lift'][fixture['edofs']], fixture['fluctuation'][fixture['edofs']],"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 287,
+          "function": "batch_response_split_numpy",
+          "text": "_, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 254,
+          "function": "_numpy_response",
+          "text": "_, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+        },
+        {
+          "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace_all\\run_once.py",
+          "line": 45,
+          "function": "response",
+          "text": "value, fields = original_response(*args)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 164,
+          "function": "_response",
+          "text": "direct_energy = mul(c(0.5), add(mul(lambda_pair, scaled_square(log_J)),"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+          "line": 108,
+          "function": "<lambda>",
+          "text": "mul = lambda a, b: ci.dd_mul(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 342,
+          "function": "dd_mul",
+          "text": "return _jax_binary(a, b, \"mul\") if xp is jnp else _dd_mul_primal(a, b, xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 174,
+          "function": "_dd_mul_primal",
+          "text": "result = _dd_product_primal(a[0], b[0], xp)"
+        },
+        {
+          "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+          "line": 168,
+          "function": "_dd_product_primal",
+          "text": "return _finish(high, low, valid, xp)"
+        }
+      ]
+    }
+  ],
+  "qualification": false
+}

@@ -13,7 +13,7 @@ from hf_eval.native_project import build_native_project, write_native_project
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--geometry", type=Path, required=True, help="ordinary HF geometry.json")
-    parser.add_argument("--task", type=Path, required=True, help="explicit hf-native-project-task-1.0 JSON")
+    parser.add_argument("--task", type=Path, required=True, help="explicit native project task 1.0 or 1.1 JSON")
     parser.add_argument("--output", type=Path, required=True, help="new native model directory")
     args = parser.parse_args()
     try:

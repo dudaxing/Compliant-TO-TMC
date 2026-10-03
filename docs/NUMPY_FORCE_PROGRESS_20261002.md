@@ -1,6 +1,13 @@
 # NumPy 完整力入口：功能进度与参考比较
 
-2026-10-03当前：普通文件两类粗机构已接通NumPy完整力、非对称CSC切线与平均驱动平衡。新增反向器0→.001mm两态4新HP参考通过，实际output ux=−.0016019203686mm，输入R=.00016987267293N。完整目标、行动、依据、成本、效果、执行边界及下一阶段见本文[反向器最新记录](#native-inverter-mean-20261003)，[真实形变和力](../functional_views/native_inverter_mean_20261003/native_mean_path.png)、[两帧实际动画](../functional_views/native_inverter_mean_20261003/native_mean_path.gif)可人工检查。当前仍为无工件TEST；下一唯一功能阶段为反向器明确.025mm测试路径，尚未执行。
+2026-10-04当前：**普通文件的固定半工件、平均输入驱动和连续加载—卸载已实现；粗方形工件[0,.1,0] mm实际完成，3接受态的6次新HP80/120独立参考全部通过。** 正方形side16mm、中心(70,40)mm，计算下半；3200单元／6642DOF／376有效fixed。峰值输入R=.020941490699N、自由+y输出=.114466446177mm，半工件总(Fx,Fy)=(-3.0237102546e-5,+2.3930273461e-5)N，minJ=.947487891；卸载末输入R≈-1.19e-27N、输出≈1.76e-27mm。生产263.45秒，参考60.11秒／58010检查；30项相关测试通过。见[完整目标、实现、诊断、成本和效果](NUMPY_FORCE_PROGRESS_20261002.md#native-workpiece-cycle-20261004)、[实际结构与力](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_physical.png)、[三帧真实动画](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_actual.gif)、[数值与分力](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_response.png)。
+
+独立参考覆盖全部单元与DOF、三力、声明方向切线作用、CSC组装、平均约束及工件/支承反力；不是高精度穷举全部切线列。生产22F开始/19完成、11T完成、1solve，差额是3次返零力-only全步范围拒绝及原规则下的半步回溯，接受态通过不代表这些拒绝态已获资格。原“所有F开始必须完成”前置合同明确0HP关闭；[新保存态合同与计数对账](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_001/reference_002/reference_contract.json)只修订这一已声明计数条件，全部原数学门保持。算术范围限制未完全消失；不扩大到接触、夹持压力、H2/H3、HF5、AD/JIT或全部任意输入。
+
+Agent已按用户授权选择圆r8mm和正方形side16mm、中心(70,40)mm，粗方/细方/细圆三包构造通过；细方/细圆尚未求平衡。当前×1图仍明显张开，底/左节点窗口约1.896/2.039mm只是代理观测，非真实表面距离；微小预接触介质传力不能当有效夹持。下一功能先读保存态计算真实Q1栅格外边界间距/交叉位置，排除y=40对称切口，再以同一粗方模型探索[0,.1,.25,.5,.25,.1,0]mm；依据实际作用和成本再扩到1/2/3mm及圆形/细网格。该大行程当前未执行。仅在main开发，origin固定为https://github.com/dudaxing/Compliant-TO-TMC.git。旧无工件细.025路径及公开重放保留各自冻结资格；本轮公开恢复仅验文件身份，不借用其数值重放资格。
+
+
+2026-10-03历史记录：普通文件两类粗机构已接通NumPy完整力、非对称CSC切线与平均驱动平衡。新增反向器0→.001mm两态4新HP参考通过，实际output ux=−.0016019203686mm，输入R=.00016987267293N。完整目标、行动、依据、成本、效果、执行边界及下一阶段见本文[反向器最新记录](#native-inverter-mean-20261003)，[真实形变和力](../functional_views/native_inverter_mean_20261003/native_mean_path.png)、[两帧实际动画](../functional_views/native_inverter_mean_20261003/native_mean_path.gif)可人工检查。当前仍为无工件TEST；下一唯一功能阶段为反向器明确.025mm测试路径，尚未执行。
 
 本文以下各阶段按原执行时点保留；当前状态以最新段为准，不能将历史“下一步”重新当作当前待办。
 
@@ -1574,3 +1581,119 @@ root纯proof收集曾用每态文件basename state.json，exclusive copy在第�
 正式public helper预先冻结的同一runtime实际调用及20/131/5全比较仍terminal0/pass；root独立原raw读取、6图逐bytes比较和199bindings保持检查仍成立。当前完整公开恢复成功和补充review未完成这两件事分别保存，不把后者删掉、不借独立review未完成的覆盖。下一功能没有需要再求解已通过路径或新增进程框架的依据。
 
 工件物理只读审阅另确认：unique workpiece DOF组负holding-reaction和是半工件离散FX/FY及material/Hu合力；33uy与原sym交集诊断单列，总fixed平衡不重复，不机械扣掉其反力。固定全部工件节点意味着工件内部F=I/Hu=0，后续应检查workpiece内单元应力/残量0，读数来自周围medium弱式传力，不能叫接触面压力或独立mirror-cut应力。当前fine.025左壁x60/y32..40的ux约−.00952～−.00822mm，其2mm侧间隙目前增大；仅实际已保存的小位移现象，大行程仍需保留侧间隙及FX，不能预设纯+y接触。
+
+<a id="native-workpiece-cycle-20261004"></a>
+## 固定工件与有序加载—卸载：最近功能实施阶段
+
+本轮main实核a658945ba4cc629c311fd6f65a1bced6262e1412，工作树clean、exact origin；前一goal turn属于progress：实际完成细原.025路径、8HP及独立普通CLI/图包恢复，科学EA和最终a658均推送，最终root/clean clone6610文件核验pass。当前stage不重开旧卡、旧caps/失败/图/参考目录全部不改。
+
+目标是将用户已委托的对称工件与较大行程探索接成可用入口。最近只实现显式fixed_rigid工件任务、缓存FX/FY及material/Hu测力、一个连续有序循环；先完成代码/构造与有意义小测试，再冻结真实粗夹爪[0,.1,0]mm任务，依据实际响应向闭合与大变形推进。该粗设计与细设计不同，首次粗小循环的结果不能直接代替细工件路径；细无工件约2.31mm闭合外推只是选步线索，不能作为粗或带工件预测。
+
+新task-1.1显式path.kind=ordered_cycle及按顺序targets_mm，input.target_mm记录峰值；旧1.0/no-workpiece默认单调规则保持。工件kind=fixed_rigid、shape=square或circle、center(70,40)、side16或radius8、fixed_components=[0,1]。cell-center规则选原passive_void里的下半单元，所有关联节点ux/uy固定；保持LF四mask、原全域Q1、材料参数及机构solid定义，不赋巨大E或把工件变成新机构。刚体占位单元原材料数组保持，全部内部节点固定使F=I/Hu=0；物理有效模型由新task/固定集合/独立workpiece cells-nodes-DOFs和原geometry共同绑定。原机构、端口、支承不得共享工件节点，顶部背景uy交集只合并一次并单列诊断。geometry未改与effective boundary已改应分别记录，不能仍称原fixed模型相同。
+
+从已有完整global force/support cache提取工件离散合力，FX/FY与material/Hu分量分别保存，负holding reaction为工件所受力；不新增保存F/T，不裁零接触前medium传力，不称输入R或J为夹持力/压力。工件优先的unique反力分组及其余fixed组不得重复计总平衡。上下镜像上半(FX,−FY)，完整净力(2FX,0)，法向大小2|FY|与signed FY另列；左/底间隙都保留。
+
+有序cycle控制器复用signed predictor/KKT/Armijo/rollback，仅显式允许下降targets并用abs(Δd)/2判断二分下限；从已接受加载态连续卸载，不重置state/R/K。accepted index/original_target_index/leg区分两次0和二分态，不排序/去重。结果分别保存peak_reached、unload_endpoint_reached、path_completed，不把循环末位移0与峰值不同误判task失败。普通CLI从任务显式path读取targets，用户另给targets时须匹配，不能静默改变物理路径。
+
+本轮代码与纯构造先行：计划三新模型（粗方、细方、细圆）保存到lf_data_preparation/native_workpiece_001的未存在路径，unique construction outer120秒/8GiB；focused tests一次合计outer240秒/8GiB，只测新构造/旧入口兼容、解析有序控制与卸载二分、缓存工件反力符号/分组/保存，以及必要tiny真实NumPy循环。测试不是研究实体接触资格；若代码测试发现错误，可在正式数值阶段冻结前正常作者迭代，但失败输出与原因保留，不把合成测试当HP。源任务、冻结closure及实际schema在正式数值执行前独立核对。
+
+接着唯一真实粗夹爪[0,.1,0]小循环建议新production600秒/8GiB/outer660，全部接受态fresh HP80/120 reference240秒/8GiB/outer300，saved-view outer120，预算依据旧粗14F9T约176秒、四态8HP约101秒，给返零与二分留余量；正式源/输入和合同明确后才执行，不借本次代码测试或旧卡窗口。原数值门、平均驱动、未对称化CSC、Et标尺、材料/Lr不改；首正式错误保存并关闭该独立阶段，无修复重试/force。当前新workpiece模型/科学cycle/HP均0，后续以实物与结果更新，整体goal active。
+
+### 新代码测试首错及最近诊断安排
+
+三作者及独立数学静态审阅通过后，唯一focused testphase真实exit1，12passed/1failed，pytest24.12秒、监控25.5460414秒、采样峰177946624B；42当前context/sourcecaps保持，原fine双caps39保持。粗/细方与细圆构造、旧1.0原model metadata/23数组、共享实体节点拒绝、显式path语义、独立dense循环/下降二分/默认兼容及缓存反力符号都通过。裸ordered_cycle此前无下降也误给unload flag，已在未执行作者阶段补“有下降且末低于peak”，351/f4632beb版本进入本次测试；未改变数学。
+
+失败为最后tiny真实16单元[0,.0005,0]：solve返回path.status failed，在assert前尚未保存返回对象，因此原pytest输出缺API failure reason/accepted缓存/精确F/T计数。原失败及JUnit保存为tests_v1_launch.json/tests_v1_junit.xml，不能编造原因或把它算通过；整体tests合成controller调用与这一实际NumPy小例分开。本阶段已停止，尚未执行真实工件夹爪循环、新HP或三模型正式pureprep。
+
+下一唯一tiny_cycle_diagnostic_001是代码作者阶段的可观测性诊断，outer60秒/采样8GiB、同16单元fixture/相同[0,.0005,0]任务/API15秒/minincrement3.125e-5及全部原门；不加行程、不调tol/尺度、不修改力或切线。由冻结fixture定义＋原失败source重建精确任务，唯一API调用先持久化返回success/partial，再读取原因/残量/接受态和实际计数，不从旧窗口续跑。其protocol已经保存，不能据缺reason先假定只是时间不足或把残量力归零。当前只写输入/协议，new diagnostic force/T/solve/HP仍0；诊断结果才决定正常作者修复与后续新测试窗口。
+
+### 返零失败的实际诊断及范围原语定位
+
+唯一tiny_cycle_diagnostic_001实际捕获exit0，科学结果failed/time_limit；完整partial路径保存，不能称循环通过。API15.0622107秒、outer19.8542917秒、采样峰136495104B；131F开始/91完成、48T开始/完成、1solve、0HP/JIT；接受[0,.0005,.00025]。全部42source和5input bindings未变，result SHA14d897b0d60815f12598ae0e5e62409e3f5a17baeec838a9fce404f2e2d8cc1e。
+
+独立只读审查83条trial：40个全步均unsupported_arithmetic_range，39个随后半步接受，另4个正常全步接受；第40次拒绝后的半步在clock处中止，尚无trial。半步使残量约减半、phi约四分之一；首次返零25check触发newton_limit后二分接受.00025，再次返零18check耗尽15秒。KKT后向误差约1e-17，未见方向失效或精度平台。当前证据支持算术范围拒绝造成收敛降阶，不能以增加时间/次数、放松tol或强制归零修复。
+
+下一tiny_range_diagnostic_001是新的作者定位，单次outer60秒/采样8GiB，同任务/API15秒/全部门；仅在进程内包装原ci._finish与force，原操作及结果原样返回，保存首次非法原语输入/输出/调用栈和首次被拒state后立即停止。不执行后续半步/循环、HP或真实夹爪，不修改core/V1caps或旧失败。截获成功只授定位数据，不授科学成功；具体原语才决定等价缩放或代数修复。
+
+截获已实际exit0/captured：outer4.8289747秒，采样127311872B，第8次F首拒绝/7完成，接受origin及.0005；42source/5inputs原样。首非法运算位于cofactor(F)/J原DD除法的quotient×J孤立低词乘积，4项high约6.6055e-148～2.7056e-146、low0，原操作数均合法但结果低于2^-400，因此触发原范围门。物理fluctuation最大7.888609052210118e-30mm，J有效，不能把该失败归为物理穿透、LU失准或力残量平台。具体原state/primitive/调用栈永久保留。
+
+独立数学审阅后正常作者候选V2只新增共享_divide_by_J：near分支分子乘2^192、保留原DD除法全部项、商乘2^-192；far单位scale。near的B≤1/16及|δ|≤1/64使F/J近单位，本h=.5/1的物理方向也在原域；截获孤立项经缩放约1e-90～1e-88，所有原range门保留，不改通用DD、zero/tol/预算/材料/物理导数。force T及NumPy切线T、dJ/J、d(cofF)/J一致使用，版本分别v2；不只修force后让切线再次失败。此候选不证明所有near数值输入，也不授新JIT/AD资格。
+
+V1 freeze/caps和两诊断/首pytest失败保持永久原bytes。V2下一独立作者验证按序：截获态candidate一次完整NumPy F/T（outer60秒/8GiB）；另进程fresh80/120各一次的全16cells三force及声明方向Jv（outer90秒/8GiB，原gate）；成功后新focused tests outer240秒/8GiB，原tiny API仍15秒，增加必要force/tangent旧解析与范围回归。任何新phase首错停止并保存，不以旧窗口续跑。tiny测试先保存返回partial再assert，避免重复丢失原因；当前仅实现候选，尚无V2通过结果或真实夹爪/新HP执行。
+
+V2新45来源context及protocol已冻结（source_freeze SHA767b3fed22c2c1d9a9dc84c0610eb873337a4ba9c30f7a533988a6d5da5f2c94）。唯一截获态candidate真实exit1/fail，outer2.961616秒、采样125894656B，1F开始/0完成、0T/HP/solve/JIT，全部45binding未变；仅inverse缩放仍不足，不能称修复通过。该phase关闭，独立参考与后续tests均0。下一新force_trace仅读同fixture，原V2源及门，一次F、outer60秒/8GiB，记录首失效原语后退出，0solver/T/HP；只授定位，不能把它当重新验收V2。
+
+准备V2文件清单时曾请求不存在的tests/conftest.py，空的新目录创建后即FileNotFound停止；确认目录确实空后按实际test_native_force.py fixture等45文件完成来源快照，未运行任何candidate/HP/tests。另一个找辅助脚本的作者rg误指D:/，约10秒取消，未返回或读文件；后续只用明确根/顶层指定目录，不把这次查询作为盘符或历史恢复核验。
+
+V2 force_trace实际exit0/captured、2.9832166秒、123432960B，1F开始/0完成、0其他力学/HP；首非法转移到direct_P乘法。但当前near候选最终不选direct_P，仅“最早NaN”不足以归因最终range门。下一新force_trace_all同V2源/fixture/原门，唯一1F、outer60秒/8GiB，只保存全部合法操作数产生非法结果的root位置及最终_response原fields（含非有限值的诊断NPZ），不重开candidate门、不做solver/T/HP。需区分被丢弃的分支与真实选定输出，再决定最小修复，不能依据最早事件猜改。
+
+all-sites实际exit0/captured、1.7948856秒、124874752B，1F开始/0完成、0T/solve/HP/JIT，45bindings不变。9个root对应small_P、S、余项Horner及λlog²等链；最终选定材料/总力128项、P493项、S544项和能量2项非有限，Hu正则力、F/J/G/Hu/T有限。不是只在未选择direct_P发生。因此V2独立参考/测试仍未启动，不删失败。
+
+V3正常作者候选只改kernel及NumPy切线的局部算术组织：当所有G≤2^-64且near成立、材料/参考算子幅度≤2^8时，选用完整DD乘法/矩阵收缩的共同2^192尺度，保留原ci的全部四乘积、求和、所有输入/中间/输出检查，再恢复物理单位；普通加载态直接走原乘法以保留成本和行为。辅助能量分项可能有合法high≈1e-118但非法low≈1e-135，不能各项立刻回缩；故平方/λlog²/μshear²/μremainder保持同一能量尺度至完整组合与积分后仅最终回缩。独立审阅据保存原值指出此阻断，已在执行前修正，不靠删除低词或能量裁零。
+
+这是新的局部算术版本和支持子域实现，**不继承V1/V2的数值资格**；通用ci字节、原2^±400、物理材料/力/导数、tol/归一化/时间门保持。上界约2^332提供余量，下界仍由原checks决定，不保证任意tiny输入都通过。V2sourcecaps/首fail/alltrace永久不改。下一新V3来源冻结及验证继续同序同预算：截获候选一次F/T outer60／另进程80+120各一次outer90／成功后新tests outer240且tiny API15。无真实工件夹爪科学或HP执行，后续必须依据此次结果决定。
+
+V3独立静态审阅无阻断后45source冻结SHA911d8b6b9a5462b22f7674beafbe97b119cc7e68313ca717b5ae111b8b67727c；唯一candidate实际exit1/fail，outer4.9151195秒、采样127594496B，1F开始/完成、1T开始/0完成、0HP/solve/JIT、45binding不变。完整force_fields已有限保存；total_tangent范围失败，整体候选未通过，参考及focused测试仍0，不授F的独立资格。下一新tangent_trace仅用该force_fields/原fixture，一次T、0F/solver/HP、outer60秒/8GiB，保存全部invalidroot和最终3tensor原pairs后退出；不重开V3验收、不给缺少原因的猜测修复。
+
+V3唯一T trace实际exit0/captured、3.4760877秒、125435904B；0F、1T开始/0完成、0solve/HP/JIT、45binding原样。2root都是完整dP方向张量分项，λratio*T约hi9.08e-120/low−2.52e-137、coefficient*dT约hi1.51e-119～3.94e-117/low约1e-136～1e-133；T/dT/ratio此前有效，最终material/total各24元素非有限，regularization有限。完整切线分项太小而其最终相加/积分不一定小，需共同方向尺度至完整tensor后回缩。
+
+下一作者V4保留V3已完成的force组织，只将tiny selector下八个单位dF/dHu方向共乘2^128，沿原线性的dJ、ratio、dT、dP、材料/Hu全部收缩，最后三个完整tensor共乘2^-128；普通态单位尺度。2^128与既有乘法2^192的组合比再叠2^192有更宽2^400上界余量；全项和原checks保留，最终不能合法的小tensor仍拒绝。该版新来源和独立验证不继承V3资格；V3来源/fail/Ttrace不改。下一仍同序同预算candidate60/ref90/tests240、tiny15，当前新的reference和tests仍0，真实夹爪未启动。
+
+### V4实际数值结果：近零参考通过与连续返零恢复
+
+V4唯一截获态candidate实际exit0/pass，outer2.968812300秒、峰126607360B，完整1F/1T均完成，0HP/solve/JIT。另进程fresh HP80/120各一次实际exit0/pass，outer1.431228300秒、峰47546368B，全部16单元三分量force与声明方向Jv共96门通过，384力值及384作用值保存。最坏归一化force(total/material/Hu)分别3.1347062e-32/2.2458563e-20/2.1754948e-24；Jv分别1.7966377e-15/2.7481551e-16/6.4448452e-11，满足原1e-10/1e-9/1e-9门，HP80/120最坏差约3.81e-54小于1e-40。Hu方向参考几乎仿射、分母取原1e-10下限，因此该归一化数不可解释为大Hu力误差。能量仅保存差值诊断，没有新增或冒称能量验收门。两进程45当前source与原captured-input bindings全部保持。
+
+此独立参考只覆盖之前首次被拒绝的近零保存状态、全16单元完整力和一个声明方向，不能扩展为tiny整条路径所有状态HP、全部切线列、AD/JIT、真实夹爪或接触资格。原V1/V2/V3失败、trace、源caps永久保留；本轮只以完整DD共同尺度解决具体支持域问题，不调tol、物理材料、2^±400门或15秒API预算，不截断低词或强制归零。
+
+接着唯一focused tests实际terminal0，30passed/6.13秒，监控7.596633800秒、峰170283008B，45bindings保持。覆盖新工件构造/旧1.0兼容、独立解析有序加载卸载与下降二分、缓存反力符号/不重复分组、原NumPy力及切线的必要解析/有限差分/分支/范围回归，以及tiny真实NumPy循环。JUnit与stdout/launch原件保存。tiny API原15秒内实际1.011179700秒通过：9F/6T/1solve全部完成，0JIT/HP，接受[0,.0005,0]，6Newton checks、3个全步trial均接受，无失败attempt或二分。峰值R=.0002839434175985735N、qout=-.00012857691960860155mm；返零R=4.733165431326071e-30N、qout=2.7240353133413064e-30mm、相对残量1.1980304655177976e-15。连续卸载返回浮点极小非零态，未重置R/state/K或把力裁零。
+
+tiny完整20文件缓存及JUnit已从实际pytest临时输出逐bytes复制到[v4_validation](../lf_data_preparation/native_workpiece_001/v4_validation/)，tiny result SHA46ad88236a96742d029a6d536ae221c6cd681a95c3b65b439dffa92b38ed3ea3；复制0F/T/solve/HP。效果是消除原全步算术拒绝导致的半步降阶，恢复同一小例原门下的全步返零；这是功能代码测试和独立截获态参考两种不同证据。当前真实带工件夹爪平衡/夹持/大变形仍未计算。
+
+下一步按已记录预算生成旧失败与新返零saved-only图，纯构建粗方/细方/细圆三个模型并核对原21非边界数组、有效固定集合及工件分组；这些准备通过后再冻结首个真实粗方[0,.1,0]循环。选择小循环是先检验新增固定物体与连续卸载物理入口，随后依据实际间隙和FX/FY响应增加行程，而非把.1mm当最终大变形范围。
+
+唯一saved-only对比图实际exit0、outer 6.819354400秒、采样峰103321600B，45source/输入保持，0F/T/solve/HP；root实际查看2700×1800 PNG，旧失败/未保存半步clock事件与新6checks/3full接受均如实展示。图、数字CSV、metadata和raw launch见[保存图结果](../functional_views/native_zero_cycle_20261004/RESULTS.md)。
+
+三例pure construction唯一terminal0/pass：outer12.058666800秒、采样峰148062208B，3次构造/3次写包，全部响应guard实际0，0F/T/solve/HP/LF。粗方128cells/153nodes/376mergedfixed/17背景uy交集；细方512/561/1258/33；细圆406/455/1046/33。每模型27数组，除fixed/free外原21数组dtype/shape/裸bytes一致；原solid/material/ports/region/geometry字节与参数保持。summary SHA8ca8f25bdf6a8549bc4537dae36fd98f65cd550d1c2247cdc198afa4da0ec5c5，每包inspection/9sourcecaps与实际输入pins保留于[构造阶段](../lf_data_preparation/native_workpiece_001/construction_summary.json)。此结果只验构造，不授工件受力或循环资格。
+
+首粗方新卡作者准备：task1.1显式[0,.1,0]，API/整体production600秒，outer660/8GiB；新reference240秒/outer300，全接受态full3200cells/6642DOFs/HP80+120，viewouter120。最小增量明确=.00625mm=.1/16，沿普通CLI首步规则，本新参数不借细例6.25e-5；所有其他settings与原参考门逐项保留。仅一次production/首错止，0retry/force。源码/任务/方向/新有效model在执行前冻结。作者静态核对发现新coarse目录比旧fine深一层，两个新helper ROOT parents[2]在未执行前修正为[3]，未造成生产/参考调用。准备和来源核对通过后执行，并根据实际cycle效果决定更大行程；当前整体goal active。
+
+新coarse数据准备唯一exit0/pass，outer.989860500秒、峰40484864B，0F/T/solve/HP；49source已冻为c671f8b49f0d69a285fd3a35bb41ea8d68e57e7fce094def0b40139d1e9f019a，17inputs保持，inventory SHA1dc20131715c3d580ab7bad698e878352709bd2550371be3115f7f77f2b991a2。root全文静态核新78行prepare、96行execute及382行independent wrapper，后者未覆盖/复制CoreAudit.run_state数学，复用原331eb1...1678，HP80/120保存key80/120及方程接口与原源码一致。共同时间/内存及末source变更会先写not_pass，再退出，避免失败回执留下pass。原参考门、17forcefields/未对称CSC/KKT逐態门保留；新工件projection只读同份全局HP结果、无额外参考。当前生产与参考仍0，新sources冻结之后不得修改这些文件或借旧执行窗口。
+
+粗方生产唯一真实terminal0，API path success/failure=None、3原态[0,.1,0]完整，API263.4539788秒／outer267.0089399秒；外采样tree789487616B与API Windows进程峰851865600B来源不同，均低于8GiB。22F开始/19完成、11T全完成、1solve、0HP/JIT；原49source/17inputs保持。加载R=.0209414906988N、qout=.114466446177mm、minJ=.947487890587、相对残量7.8725e-12；半工件总(Fx,Fy)=(-3.0237102546e-5,+2.3930273461e-5)N，材(-7.5593257490e-6,+1.4599854653e-5)、Hu(-2.2677776797e-5,+9.3304188088e-6)；底/左节点窗口1.8960971204/2.0389606004mm，仍非真实接触面gap。卸载末R=-1.1949270562e-27N、qout=1.7588639958e-27mm、body合力(-5.3226254e-31,+3.5791630e-31)N、相对残量1.3121129276e-15、minJ1。全部三态body F-I/J-1/Hu/P/localforce0，仅约束内部dummy场；工件测力来自邻域弱式力。
+
+两名独立只读审阅严格对账：11个Newton base F/T全成功＋11力-only trial F，其中8完成、3在返零checks3/4/5的factor1以unsupported_arithmetic_range拒绝；各随后factor.5成功且phi约四分之一。第6check恢复全步、第7check接受零态，无failed_attempts/target二分。拒绝仅属原controller明文允许的trial域回溯，并非uncaught/base/T/cached阶段失败；但算术域拒绝未完全消失，也不能把22次F全称成功。未保存的拒绝态没有selector/原语数据，暂不能确诊具体算术根因，不猜改kernel。
+
+原382行冻结HP loader要求全部F开始==完成，实际22/19不满足。因此原reference计划在[前置检查](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_001/reference_precondition_001.json)明确关闭且0HP，未启动已知必失败审计，不冒称数值门失败/通过，不删改旧49caps/loader/production。下一另立reference_002保存态合同，仅将三次差额严格对账到完整记录的未接受域trial，仍要求每个base/T与接受缓存完整、最终path成功、所有原Core force/Jv/CSC/KKT/mean/fixed/J/balance门及HP80/120一致性不变；同一3态一次新参考240秒/outer300/8GiB，0新F/T/solve，不重跑生产。这是公开声明的调用计数前置合同修正，不能静默删条件或扩大接触/H2/H3/HF5资格。
+
+工件saved-view唯一terminal0，outer4.578849900秒、采样tree峰242626560B，0F/T/solve/HP/model构造；全部输入/49source保持。root实际查看3040×1520结构PNG（×1与独立×20）和2880×2080response PNG；GIF恰3真实×1接受帧/0插值，全部数值CSV/6输出文件及来源metadata保存。[实际工件可视化结果](../functional_views/native_workpiece_cycle_20261004/RESULTS.md)明确生产已收敛、独立参考当时仍pending、3次原域回溯，signed力/材Hu/净(2Fx,0)/2|Fy|和两个node-window不混同压力。图中×20显示重叠仅放大效果，×1仍有明显间隙，不能据放大图称接触。
+
+reference_002新合同已显式冻结SHAf2def10fd35583e2a50f459a2d80b7fa6b54e41d00ecc3544d9aa0ef1a6bb575，新201行薄子类SHA3ba493bcdf44d444717b626a514f8ea1155551d36eba1acd0b9ae88126741be7；root/作者及独立静态审阅无阻断。仅精确命名Production completed counters differ的旧instrumentation判据可替换一次，且要求旧condition确为False，逐个重建22/19 F序号、11T和已接受缓存F1/6/22与T1/4/11；原predicate后被短路的其他计数条件全部重验，任何未知差额仍拒绝。全部identity/check/gate/scalar_gate/原CoreAudit.run_state/workpiece_checks数学不复制、不覆盖，旧382/aa86及49双caps完全不改。新helper/contract新增caps与旧unlaunched前置记录共同绑定。已启动唯一6freshHP的独立进程；0生产重跑/新F/T/solve，结果尚待实际返回，不能提前称通过。
+
+### 真实粗方三态的新独立参考实际通过
+
+reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6完成、58010项检查全过；lifecycle60.113474900秒、过程采样355000320B，外监控60.626148900秒/359780352B，限额240/outer300秒、8GiB均满足。完整49旧来源、17准备输入、新helper/contract/preflight以及生产result/receipt从启动到结束未变，源caps与所有保存参考另可按summary逐文件核对。生产不重跑，0新F/T/solver/JIT，仅6新HP。summary SHA55075277d2cf19ef9597f1bfb1f831c6c6e35239c678fb494855d3a5b6d4c1dd；[summary](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_001/reference_002/audit/summary.json)、[lifecycle](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_001/reference_002/audit/lifecycle.json)、[真实外监控](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_001/reference_002/launch.json)及每态全精度gz参考原件保留。
+
+| 全部三态的最大归一误差 | 总量 | 材料 | Hu正则 | 原门（总/材/Hu） |
+|---|---:|---:|---:|---|
+| 全局力 | 1.03749e-15 | 2.50359e-16 | 1.24514e-16 | 1e-11 / 1e-9 / 1e-9 |
+| 全局声明方向Jv | 6.07827e-17 | 4.79835e-17 | 4.54321e-17 | 1e-10 / 1e-9 / 1e-9 |
+| 单元力最坏 | 1.08483e-16 | 9.42766e-17 | 1.37662e-16 | 1e-11 / 1e-9 / 1e-9 |
+| 单元方向Jv最坏 | 7.61530e-17 | 5.98022e-17 | 9.99681e-17 | 1e-10 / 1e-9 / 1e-9 |
+
+完整保存CSC的所有组装entries核对，HP切线核对该声明方向，不声称HP穷举全部列；三态最大CSC作用误差1.04798e-16。工件同一全局参考按唯一节点DOF投影，材料/Hu/总量、保持约束负号、去重分组与镜像全部原门通过，没有把邻域力改称dummy单元内力。峰值独立相对残量7.8725147e-12、约束0、fixed误差0、全局力平衡1.1034521e-14；卸载相对残量1.3121129e-15。计数替换只触发一次，严格重建11个完整base＋11trial（8完整/3range拒绝）及F1/6/22、T1/4/11接受缓存，不豁免任何未知差额。原0HP关闭记录和旧49来源永久保持，3拒绝试探态无独立参考及定位数据，算术域限制仍待针对性诊断。
+
+效果：这是首个普通机构带明确固定工件的连续加载—卸载功能闭环，有实际形变、有单位/符号的输入力、自由输出及工件/保持力，且这3个实际态独立数值成立。当前0.1mm使最大真实节点位移约.15946mm、底侧靠近、左侧略远，×1几何仍明显未夹紧；半工件微小+y介质力含材料和Hu传递，双侧法向量级2|Fy|=4.7860546923e-5N，与净矢量(2Fx,0)=(-6.0474205093e-5,0)N不同。没有把背景/正则预接触传力裁零、没有宣布接触/夹持/压力或完整大变形已完成。可视化metadata当时仅标production范围且独立资格false，是原绘图时点；后来的新参考由本节与独立summary补证，不回写冻结图或重画。
+
+### 为什么下一步先做真实边界观测，再扩大行程
+
+用户已明确委托选择对称圆/正方形的尺寸、位置以及更大探索行程，不再等待固定物理任务参数。先固定同一粗方side16/中心(70,40)与原材料、约束、网格，减少同时变化；下一有序循环计划[0,.1,.25,.5,.25,.1,0]mm，记录每一实际接受态和卸载腿，再根据间隙、Fx/Fy、材料/Hu分力、minJ与成本决定1/2/3mm峰值，不用细无工件.025线性外推冒称粗带工件预测，也不把粗/细不同设计称网格收敛。当前该.5及后续峰值均未执行。
+
+首先新增一个小的保存态几何功能：从原solid cells和body raster cells提取Q1外边，使用实际L+w端点计算距离/最近位置与交叉，排除y=40镜像切口；底/左对应边分开，原node-window诊断继续明确标注。圆形使用实际栅格外边，不以解析圆替代离散求解物体。该功能读缓存，0F/T/solve/HP；它能直接显示夹口是否接近，避免放大图或孤立节点窗口误判，但几何距离也不独自授予接触压力、硬接触精度或自由刚体平衡资格。真实夹持、释放/重入、形状/位置/间隙系统探索、研究H2/H3、HF5批量接口和compiled AD/JIT仍为未完成工作。下一新数值阶段在前一步观测和成本基础上冻结自己的输入/来源/资源，失败原件保留，无同阶段重跑/修补。
+
+本轮完整新源码、任务、构造包、V1—V4失败/定位/通过、tiny缓存、粗方完整三態/参考以及×1/×20图和三帧GIF将一起提交main。交付清单仅对Git-index文件SHA验身份；异目录公开文件恢复不等于重新计算本轮工件循环或继承旧公开重放数值资格。新机器的入口、证据关系和普通CLI示例见[native_workpiece_001 README](../lf_data_preparation/native_workpiece_001/README.md)。整体独立HF项目保持进行中。
+
+独立只读终核：50当前源码绑定/50审计源码caps、49原生产caps、199输入绑定、33逐态引用文件及合同副本SHA均一致；原谓词确实仅替换一次，CoreAudit.run_state和原GATES未改。HP80/120最大保存差异1.322530581e-52小于1e-40；工件CSV3行/51列中48项选定物理标量、镜像式、90可视化输入绑定及所有图/CSV SHA逐项对应。审阅0新FE/HP/测试/绘图/编辑，无阻断；与原生产、参考、绘图三阶段分别记账。
+
+交付文件预检曾因编排错误失败：manifest全文件hash进程超过默认10秒返回running，但后续identity verify过早启动，仍读取旧清单并报告README已改变，真实exit1。此为交付前置流程失败，0F/T/solve/HP；原失败stdout/退出保留于外部交付记录。随后等待生成器真实完成、补记本条，再显式重建并验证新清单；不将旧失败改成通过、不重算科学结果或借用任何已关闭阶段。
+
+上述交付失败的真实输出已另保存入仓[delivery_preflight_failure.json](../handoff/native_workpiece_20261004/delivery_preflight_failure.json)。staged diff白空检查另报告原失败JUnit第16行尾空白及冻结诊断脚本EOF空行，这两项作为原证据保持bytes；明确排除二者后的当前代码/文档检查真实exit0。新增简短tools/build_repository_manifest.py仅遍历Git-index并保留科学baseline头，先stage再生成，等待terminal后才stage清单与verify，避免该编排问题；没有新增力学或资格流程。

@@ -1,0 +1,67 @@
+{
+  "status": "first_rejected_force_captured",
+  "error": {
+    "code": "unsupported_arithmetic_range",
+    "message": "NumPy response exceeded the declared compensated arithmetic support range"
+  },
+  "force_started": 1,
+  "force_completed": 0,
+  "tangent_calls": 0,
+  "solver_calls": 0,
+  "HP_calls": 0,
+  "first_bad_primitive": {
+    "caller": "_dd_product_primal",
+    "caller_line": 168,
+    "stack": [
+      {
+        "file": "lf_data_preparation\\native_workpiece_001\\v2_validation\\force_trace\\run_once.py",
+        "line": 43,
+        "function": "<module>",
+        "text": "batch_response_split_numpy(fixture['lift'][fixture['edofs']], fixture['fluctuation'][fixture['edofs']],"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+        "line": 287,
+        "function": "batch_response_split_numpy",
+        "text": "_, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+        "line": 254,
+        "function": "_numpy_response",
+        "text": "_, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+        "line": 129,
+        "function": "_response",
+        "text": "direct_P = add(mul(mu_matrix, F), mul(_index(coefficient, (..., None, None)), T))"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py",
+        "line": 108,
+        "function": "<lambda>",
+        "text": "mul = lambda a, b: ci.dd_mul(a, b, xp)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+        "line": 342,
+        "function": "dd_mul",
+        "text": "return _jax_binary(a, b, \"mul\") if xp is jnp else _dd_mul_primal(a, b, xp)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+        "line": 176,
+        "function": "_dd_mul_primal",
+        "text": "result = _dd_add_primal(result, _dd_product_primal(a[i], b[j], xp), xp)"
+      },
+      {
+        "file": "hf_repo\\src\\hf_eval\\compensated_invariants.py",
+        "line": 168,
+        "function": "_dd_product_primal",
+        "text": "return _finish(high, low, valid, xp)"
+      }
+    ]
+  },
+  "qualification": false
+}

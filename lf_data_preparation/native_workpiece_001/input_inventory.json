@@ -1,0 +1,73 @@
+{
+  "schema_version": "native-workpiece-construction-inventory-1.0",
+  "baseline_commit": "a658945ba4cc629c311fd6f65a1bced6262e1412",
+  "cases": [
+    {
+      "alias": "gripper_coarse_square",
+      "source_alias": "gripper_canonical",
+      "geometry_file": "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json",
+      "task_file": "lf_data_preparation/native_workpiece_001/tasks/gripper_coarse_square.json",
+      "model_directory": "models/gripper_coarse_square",
+      "original_native_model": "lf_data_preparation/native_model_001/models/gripper_canonical/model.npz",
+      "expected_fixed_DOFs": 376,
+      "path_instruction_mm": [
+        0.0,
+        0.1,
+        0.0
+      ],
+      "path_executed_by_construction": false
+    },
+    {
+      "alias": "gripper_fine_square",
+      "source_alias": "gripper_native_fine",
+      "geometry_file": "lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.json",
+      "task_file": "lf_data_preparation/native_workpiece_001/tasks/gripper_fine_square.json",
+      "model_directory": "models/gripper_fine_square",
+      "original_native_model": "lf_data_preparation/native_model_001/models/gripper_native_fine/model.npz",
+      "expected_fixed_DOFs": 1258,
+      "path_instruction_mm": [
+        0.0,
+        0.1,
+        0.0
+      ],
+      "path_executed_by_construction": false
+    },
+    {
+      "alias": "gripper_fine_circle",
+      "source_alias": "gripper_native_fine",
+      "geometry_file": "lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.json",
+      "task_file": "lf_data_preparation/native_workpiece_001/tasks/gripper_fine_circle.json",
+      "model_directory": "models/gripper_fine_circle",
+      "original_native_model": "lf_data_preparation/native_model_001/models/gripper_native_fine/model.npz",
+      "expected_fixed_DOFs": 1046,
+      "path_instruction_mm": [
+        0.0,
+        0.1,
+        0.0
+      ],
+      "path_executed_by_construction": false
+    }
+  ],
+  "input_bindings": {
+    "lf_data_preparation/native_model_001/input_inventory.json": "6d47cdee2afb40068cf91706c2e68e13b872c32d9d7cad03be4664f07f3aca1f",
+    "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+    "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.npz": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+    "lf_data_preparation/native_model_001/tasks/gripper_canonical.json": "67d21a63898b2f31962f3e930bc2cb17e36b2813671dfa413c85c7834e6c9b63",
+    "lf_data_preparation/native_workpiece_001/tasks/gripper_coarse_square.json": "aeb5d42b9ebddade87f9294994ea1d9c506cf6bdd102abebeb14f544886368b6",
+    "lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.json": "dbab7567c98e18174d198318f025184b3545c3681c060fa77d9435122bb0f32c",
+    "lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.npz": "92ff8918ae7502c3f8bfb99398b654ea1521549e7ff3ce0e8b24a9b4fa720d21",
+    "lf_data_preparation/native_model_001/tasks/gripper_native_fine.json": "3638394a88ab8def0324c1e1fc58c7c6d63963296cc5d47c696aefbdac8fd78b",
+    "lf_data_preparation/native_workpiece_001/tasks/gripper_fine_square.json": "169fdb83968c71fa329f2f0d521afe0bd7a600585cffe98d06e7808f0b2a1552",
+    "lf_data_preparation/native_workpiece_001/tasks/gripper_fine_circle.json": "1d9cd4d9b6e934c631e44bbf326c4a76e7cc87a7d2e61144e368222125258783"
+  },
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "source_role": "Original LF geometry, original material arrays, new explicit fixed workpiece constraints; no optimization",
+  "execution_scope": "Three pure constructions only; no forces, tangent, equilibrium, HP, pressure, clamping or unloading computation",
+  "construction_outer_seconds": 120,
+  "sampled_RSS_limit_bytes": 8589934592
+}
