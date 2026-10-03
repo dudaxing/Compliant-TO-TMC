@@ -1,0 +1,136 @@
+{
+  "schema_version": "saved-action-static-math-review-1.0",
+  "reviewed_at_utc": "2026-10-03T22:25:35.773853+00:00",
+  "status": "no_static_blocker",
+  "review_kind": "Read-only source review and saved-array range postprocessing; not runtime qualification",
+  "sources": {
+    "consumer": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/tangent_action.py",
+      "sha256": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+      "lines": 29
+    },
+    "wrapper_author": {
+      "path": "D:/hf-native-workpiece-matmul320-author-20261004/saved_requalification.py",
+      "sha256": "23cc067d1c8e50cf476a612f9a342292bb936cfe9f62f34bbe5b9fc174d93817",
+      "lines": 197
+    },
+    "stage_readme": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_workpiece_001/matmul320_action_requalification_001/README.md",
+      "sha256": "34b031c4e474fa065bb0f0408bab4b908ee1dfa1b79279b8be61b9e14c6a4eea",
+      "lines": 21
+    },
+    "compensated_invariants": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/compensated_invariants.py",
+      "sha256": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+      "lines": 471
+    },
+    "tmc_kernel": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/tmc_kernel.py",
+      "sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+      "lines": 256
+    },
+    "package_init": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/__init__.py",
+      "sha256": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+      "lines": 7
+    },
+    "frozen_pure_validator": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_workpiece_001/matmul320_candidate_001/check/candidate/sources/validate_matmul320.py",
+      "sha256": "3e302022c0f5e253daa38cdfdf9ef900c27b52d804f08f173fbd3db12a9098a9",
+      "lines": 415
+    }
+  },
+  "original_nine_pins": {
+    "check/candidate/result.json": "320f26bb219a884e697ebd534868e96dab17570de05352c8b3cc60ae8fcae997",
+    "check/candidate/fixture.npz": "b69a0b1aa0cb22f0f5fd8dbad37026d136e35d75a37cb44e3abc637cfcdcb38b",
+    "check/candidate/arrays.npz": "b7b455a36651416594c4f5f8086907ab5e0357e5bfa3db3eccf6994b37596db7",
+    "check/candidate/force_fields.npz": "dd0f022712c123f97cd163b63bd8fddd390616d7c990493b27cdb8b046295e97",
+    "check/reference/result.json": "1c3aaf8b67efba42958b91eab7b951fee948d3c4590d774a5bb09b1afb71b707",
+    "check/reference/reference_fixture.npz": "67ba48eb995736c0a98313108c3c429e595f5c3fd2bbfb1a4901d1bc0d85172f",
+    "check/reference/hp80.json.gz": "7a11e6ca1075a39dacee6c1d218c180534fe1e4fff65f737cb420245f55bd839",
+    "check/reference/hp120.json.gz": "cd44231efc6ae292f8a670fff3c5499933a250cc073ace23f56b1f143b09a976",
+    "reference_launch.json": "a679d5a9480882c1f213962146859203419d556fcb35f481a4b5582b204d9d71"
+  },
+  "new_calls": {
+    "action_consumer": 0,
+    "force": 0,
+    "tangent": 0,
+    "HP_evaluate": 0,
+    "solver": 0,
+    "tests": 0
+  },
+  "original_failed_reference_preserved": true,
+  "formal_repository_source_edits": 0,
+  "subject": "Compensated action consumer",
+  "checks": {
+    "axes": "(...,8,8) force rows and fluctuation columns multiply matching (...,8,1) direction; output (...,8). No broadcasting or symmetry operation.",
+    "algorithm": "Both inputs begin as zero-low checked DD pairs. Original dd_mul includes all four products. dd_matmul reduces the eight inner terms in fixed index order, then dd_value rounds once at the output boundary.",
+    "layout": "The arithmetic order is explicit elementwise EFT and fixed inner-index addition; no einsum/BLAS reduction dependence on C/strided memory layout.",
+    "support_contract": "Unmodified CI input/intermediate component limits, normalized-pair checks and unsupported_arithmetic_range rejection remain active.",
+    "precision_limit": "This is compensated evaluation of the saved binary64 coefficients, not recovery of coefficient words discarded when the tangent was stored, an exact dot-product promise, or an arbitrary-direction support guarantee."
+  },
+  "saved_range_evidence": {
+    "kind": "Read saved NPZ arrays only, magnitude bounds plus three exact scalar Decimal examples; never call CI or consumer",
+    "coefficients": {
+      "total": {
+        "min_nonzero_abs": 9.615384615384613e-07,
+        "max_abs": 11.540783538658145,
+        "nonzero_entries": 204800
+      },
+      "material": {
+        "min_nonzero_abs": 9.615384615384613e-07,
+        "max_abs": 11.538461538461538,
+        "nonzero_entries": 204800
+      },
+      "regularization": {
+        "min_nonzero_abs": 1.431043107046474e-34,
+        "max_abs": 0.0023220001966079143,
+        "nonzero_entries": 199296
+      }
+    },
+    "direction": {
+      "min_nonzero_abs": 0.0078125,
+      "max_abs": 1.0,
+      "dyadic_denominator": 128
+    },
+    "proof": {
+      "minimum_coefficient_floor_exponent": -113,
+      "conservative_minimum_coefficient_lsb_exponent": -165,
+      "product_and_sum_lattice_exponent": -172,
+      "original_operand_min_exponent": -400,
+      "eight_term_sum_abs_bound_exclusive": 96,
+      "splitter_temporary_upper_exponent_conservative": 32,
+      "original_temporary_max_exponent": 900,
+      "reason": "Binary64 coefficients of floor exponent at least -113 have no bit finer than 2^-165; direction is an integer multiple of 2^-7. All nonzero exact products and subsequent EFT/sum words are integer multiples of 2^-172 or a coarser grid. Splitter multiplication is by an integer and EFT uses addition/subtraction, so it cannot introduce a finer nonzero word. Zero-low auxiliary products are exactly zero. This covers this saved tensor/witness only."
+    },
+    "exact_scalar_examples": [
+      {
+        "component": "total_and_material",
+        "index": [
+          0,
+          0,
+          3
+        ],
+        "coefficient_hex": "0x1.021c6b8116469p-20",
+        "direction_hex": "-0x1.1000000000000p-3",
+        "exact_product_minus_binary64_product": "1.15805285757423874481997216889794799499213695526123046875E-23"
+      },
+      {
+        "component": "regularization",
+        "index": [
+          1564,
+          0,
+          1
+        ],
+        "coefficient_hex": "-0x1.7c6fbf43abe0ep-113",
+        "direction_hex": "0x1.d000000000000p-1",
+        "exact_product_minus_binary64_product": "6.6819117752304891153513411678787046970379922002626217449048437304009966024678258966762456338983611203730106353759765625E-51"
+      }
+    ]
+  },
+  "limits": [
+    "Runtime consumer qualification remains pending.",
+    "General supported inputs are not a multiplication/summation-closed set under the original CI domain; unsupported intermediates must still reject.",
+    "No equilibrium, contact, all Jacobian columns, stress, JAX/AD or old seven-state path qualification is implied."
+  ]
+}

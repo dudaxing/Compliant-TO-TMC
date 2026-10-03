@@ -1,0 +1,55 @@
+{
+  "schema_version": "matmul320-saved-action-diagnostic-static-math-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "sources": {
+    "analyze_saved_actions.py": {
+      "sha256": "93a58dd5b7a1c0c89d13a58c4bc91eed8943f41dbcce162a916bef1c8fc8318a",
+      "lines": 137
+    },
+    "launch_phase.py": {
+      "sha256": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+      "lines": 64
+    },
+    "README.md": {
+      "sha256": "162bb7499e55bfb2a5ba29076eb3736bb8dc94a756ca825e3592a08065c89a13",
+      "lines": 13
+    }
+  },
+  "scope": "Static delta review only; helper not imported or executed",
+  "new_calls": {
+    "force": 0,
+    "tangent_kernel": 0,
+    "solver": 0,
+    "HP_mechanics": 0,
+    "test": 0,
+    "saved_analysis_helper": 0,
+    "plot": 0
+  },
+  "math": {
+    "inputs": "Original saved three local tensor arrays, original saved actions, full saved witness and HP80/120 strings. Original fail receipt required; no mechanics or reference formula import.",
+    "local_rows": "3200 elements times three components = 9600 classification rows; all eight products per action entry retain the saved binary64 tensor coefficients and direction.",
+    "exact": "Decimal.from_float finite-payload dot at 3000 digits with Inexact trap; exact local actions and both HP precisions scattered to the original 6642 DOFs at that precision.",
+    "comparison": "120-digit norms; original action denominator max(norm(HP120),1e-10), total limit1e-10 and material/regularization1e-9; diagnostic classification only.",
+    "HP_agreement_delta": "Every local row records agreement and explicit >1e-40 boolean. Summary counts each component. All nine global rows record the two exact-scattered HP precisions agreement, original limit, reference limit1e-40 and >1e-40 boolean.",
+    "layout": "Rebuild original _tangent swapaxes view by saved K.swapaxes().copy(C).swapaxes(); byte comparison against original saved action retained as diagnostic. C-layout separately recomputed from unchanged saved K; all rows now record C-layout normalized error and limit-exceedance plus summary counts.",
+    "global": "Saved global action, saved CSC action and exact local scatter each compared with the exact HP120 scatter; no new full matrix, derivative or CSC assembly evaluation.",
+    "no_acceptance_replacement": "Original saved action stays the official failed object; C-layout or exact data contraction does not overwrite it or mark the closed reference passing."
+  },
+  "visual": "One three-component log-error figure: original saved versus exact saved K*v, original gate line. The 1e-30 floor affects display only; raw norm strings and classification values remain unchanged. Title explicitly diagnostic/no qualification.",
+  "resource_contract": {
+    "helper_seconds": 120,
+    "outer_seconds": 150,
+    "sampled_limit_bytes": 8589934592,
+    "includes": "Loading, all saved arithmetic, serialization and plotting",
+    "limits": "Cooperative checkpoints and outer sampled tree RSS; no OS hard cap/force; no observed compliance claimed statically"
+  },
+  "compatibility": "This addition changes no physical kernel, arithmetic domain, mathematical gate, old action arrays or original failed reference files. Exception records failed diagnostic without retry.",
+  "blocking_issues": [],
+  "limits": [
+    "Static source review gives no execution pass, resource compliance or all-volume diagnostic finding",
+    "No new force/tangent/equilibrium/contact or JAX/AD qualification",
+    "Exact saved-matrix action is a data-arithmetic diagnostic, not a new independent mechanics reference"
+  ],
+  "review_writer_note": "Initial pure-stdlib receipt writer failed on Windows default GBK reading the Chinese README before importing/executing the diagnostic or writing any receipt. Explicit UTF-8 read corrected that writer only; no reviewed source or numeric stage changed."
+}

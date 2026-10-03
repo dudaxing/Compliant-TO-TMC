@@ -1,0 +1,33 @@
+{
+  "schema_version": "matmul320-test-static-math-review-1.0",
+  "status": "pass",
+  "script_sha256": "89006d8d5d48cc6175739448e5a5d0b5dab27f8df6f79d4edee6e2202c366089",
+  "lines": 84,
+  "scope": "Source-only static review of three isolated DD matmul regressions; no test import or execution",
+  "new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "test": 0
+  },
+  "checks": {
+    "captured_primitive_SHA": "bc2bae73881cdd0a4ff74d204bee0736d3a125b1e6e5e0e969d2128ce98342d2",
+    "candidate_kernel_SHA": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+    "actual_operands": "frame4 unscaled complete DD 2x2 operands at solid e1275/q6 and solid e1348/q8; not already-upscaled frame3",
+    "reference": "For each of all four matrix entries, exact two-term dot of Decimal.from_float(hi)+Decimal.from_float(lo); both operand words retained",
+    "precision": "2000 digits is sufficient for stored finite binary64 operands; independent Inexact flag cleared at context entry and required unset",
+    "error_gate": "abs(represented_exact_DD_sum - exact_dot) <= 2^-98 * sum(abs(exact_dot_product_terms)); 2^-98=64*(2^-52)^2; no absolute floor",
+    "cancellation": "Sum of absolute individual physical product terms gives an appropriate DD accumulation scale even when their final sum cancels",
+    "support": "All returned DD components must remain finite and satisfy original pair_supported; no range-gate replacement",
+    "unselected": "False branch compares dtype/shape/C bytes of both result words directly with unchanged ci.dd_matmul",
+    "path": "ROOT=parents[3] is correct only after copying the author file to the declared repository stage; external author location is not an execution target",
+    "AST_compile": "Source parsing and compile only; no exec/import"
+  },
+  "limits": [
+    "These three tests do not constitute full captured force/tangent qualification",
+    "No general arbitrary-matrix domain guarantee",
+    "No new JAX/AD, equilibrium or contact qualification"
+  ],
+  "issues": []
+}

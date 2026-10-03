@@ -1,0 +1,50 @@
+{
+  "schema_version": "matmul320-validator-direction-delta-static-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "prior_review_sha256": "d9a0f291485b7456f4261bceffbc600564c36742b103f96149196127a652bbf7",
+  "prior_validator_sha256": "e79ed7e8bc0b8fc93b650d005b026bbab9cc1fbe3738a427577b1e28d42d17ab",
+  "final_validator": {
+    "lines": 415,
+    "sha256": "3e302022c0f5e253daa38cdfdf9ef900c27b52d804f08f173fbd3db12a9098a9",
+    "AST_and_compile_only": true
+  },
+  "direction_delta": {
+    "definition": "v_i=((37*i mod257)-128)/128, i=0..6641; original fixed DOFs zero",
+    "file_sha256": "e966528297c827b0598af7bc67e4f0f6522e91a001586a77c35c6c55163867be",
+    "description_array_sha256": "7a574db74c9ef12b2d6a840e145bd8ce5b307a06708cf03302bfd6b5dcb3524a",
+    "description_nonzero_elements": 3072,
+    "description_counts_scope": "Read from saved witness_direction.json; this reviewer did not generate or numerically reconstruct the vector",
+    "candidate_validation": "Independently reconstruct the dyadic formula with float64/int64, set original fixed DOFs to positive zero, compare vector dtype/shape/raw bytes, and require nonzero local directions at both failure cells1275/1348",
+    "original_port_direction": "Original file/array hashes and fixed compatibility remain checked; original snapshot and declaration are retained as historical context. It is not the reference tangent direction.",
+    "witness_snapshot": "Copy new witness NPZ separately; bind original file to portable production-root-relative bindings and record witness_direction_source_sha256",
+    "reference_validation": "Require witness snapshot SHA, raw fixture direction equal snapshot, original fixed DOFs zero, raw local direction equal direction[edofs], and nonzero witness at both failure cells before importing HP helpers",
+    "HP_and_CSC_usage": "The same fixture witness drives local_inputs[direction] in both fresh HP evaluations, all three local actions, exact global scatter and all three full CSC actions",
+    "end_binding_scope": "Original witness source is part of the before/after portable bindings; fixture archive containing the actual witness is rehashed after HP. Copied snapshot SHA is checked on reference entry; this review does not claim an additional end rehash of that copy.",
+    "physical_F36_unchanged": true,
+    "qualification_scope": "One declared non-affine diagnostic witness; not all tangent columns or a changed physical loading path"
+  },
+  "unchanged_from_prior_review": {
+    "call_sequence": "1 full batch force, 1 cached shadow tangent, then separate 80/120 references once each; no new force, solver or JIT call",
+    "gates": "19200 local plus9 global gates; original total force1e-11, total Jv1e-10, components1e-9, HP agreement1e-40 and Et20 force floor2e-13",
+    "assembly_scope": "Three unsymmetrized full6642x6642 CSCs; all saved local coefficients checked, one direction independently compared",
+    "failure_and_budgets": "First failure preserves partial outputs, blocks subsequent reference; helper90/180, outer120/210 and8GiB cooperative sampled tree limits unchanged",
+    "qualification_limits": "No equilibrium/contact/clamping, exhaustive HP columns or HP stress qualification"
+  },
+  "saved_plot_static_review": {
+    "path": "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/plot_saved_reference.py",
+    "lines": 75,
+    "sha256": "028f167d58f4e17eb6bffc6215e3d7179a093d157fb7255fbc0f5cc526155372",
+    "AST_and_compile_only": true,
+    "data_only": "Read passing saved reference result and SHA-bound checks gzip; require expected gate count and every pass_gate. Plot saved worst normalized_error/original_limit for local/global force, Jv and global CSC action.",
+    "no_mechanics_imports_or_calls": true,
+    "display_floor": "Ratios zero or below1e-30 are displayed at1e-30 only, explicitly captioned; saved raw values are retained in metadata",
+    "scope": "One diagnostic direction, no equilibrium/contact qualification; graph does not independently recompute HP gates or stress",
+    "outputs_and_budget": "Exclusive saved_reference_view directory; PNG and SHA metadata; helper120seconds/8GiB current-process sample after rendering. Separate launch observation supplies external control.",
+    "blocking_issues": []
+  },
+  "blocking_issues": [],
+  "new_executions": {"force": 0, "tangent": 0, "solver": 0, "HP": 0, "test": 0, "plot": 0, "model": 0, "witness_generation": 0},
+  "repository_files_edited_by_reviewer": 0,
+  "prior_review_preserved": true
+}

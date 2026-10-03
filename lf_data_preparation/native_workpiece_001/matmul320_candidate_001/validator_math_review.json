@@ -1,0 +1,115 @@
+{
+  "schema_version": "matmul320-validator-static-math-review-1.0",
+  "status": "pass",
+  "qualification": false,
+  "validator": {
+    "lines": 415,
+    "sha256": "3e302022c0f5e253daa38cdfdf9ef900c27b52d804f08f173fbd3db12a9098a9",
+    "AST_compile_source_only": true
+  },
+  "scope": "Read-only source plus saved input/model/witness checks before any candidate/reference execution",
+  "new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "test": 0,
+    "plot": 0
+  },
+  "mapping": {
+    "original_elements": 3200,
+    "original_dofs": 6642,
+    "fixed_dofs": 376,
+    "edofs_independently_derived_from_connectivity": true,
+    "raw_state_hash_reconstructed": true,
+    "state_sha256": "dabcc967cfb475bd42b5baacca0adf6ae58f50a765d9c6e43994257ef42b4a03",
+    "lift_fluctuation_original_bytes_retained": true,
+    "source_model_14_fields_exact_overlap": true,
+    "points_from_saved_27_array_model": true,
+    "captured_solid_cells": [
+      1275,
+      1348
+    ]
+  },
+  "direction": {
+    "witness_file_sha256": "e966528297c827b0598af7bc67e4f0f6522e91a001586a77c35c6c55163867be",
+    "witness_array_sha256": "7a574db74c9ef12b2d6a840e145bd8ce5b307a06708cf03302bfd6b5dcb3524a",
+    "all_raw_formula_and_fixed_zero_match": true,
+    "nonzero_elements": 3072,
+    "failed_cells_directions": {
+      "1275": [
+        -0.1171875,
+        0.171875,
+        0.4609375,
+        0.75,
+        -0.8984375,
+        -0.609375,
+        0.53125,
+        0.8203125
+      ],
+      "1348": [
+        0.5,
+        0.7890625,
+        -0.9296875,
+        -0.640625,
+        -0.28125,
+        0.0078125,
+        -0.859375,
+        -0.5703125
+      ]
+    },
+    "max_abs": 1.0,
+    "dtype": "float64",
+    "shape": [
+      6642
+    ],
+    "definition": "v_i=((37*i mod 257)-128)/128; original fixed DOFs zero",
+    "original_port_direction": "Original source file/hash and separate snapshot retained; not used as the new witness",
+    "role": "Dimensionless non-affine fluctuation derivative with fixed lift; no finite displacement step"
+  },
+  "candidate_call_graph": "One full batch_response_split_numpy followed by cached _tangent(response,...); no public tangent wrapper that repeats force. All local tensors and 3 full CSC retained, fixed rows/columns kept, no symmetrization.",
+  "reference": {
+    "imports": "Only fixed-SHA independent Decimal source copies; no candidate production mechanics imported in reference mode",
+    "evaluations": "Exactly one complete disjoint-local model at 80 and one at 120 digits; 3200*8 local DOFs each; original L/w/v selected by exact edofs",
+    "mapping": "Every element retained; original global 6642 numbering restored with 3000-digit exact Decimal scatter and Inexact trap",
+    "local_gate_count": 19200,
+    "global_gate_count": 9,
+    "force_entries_per_local_comparison_set": 76800,
+    "action_entries_per_local_comparison_set": 76800,
+    "complete_three_tangent_coefficients_assembly_checked": 614400,
+    "directions_HP_checked": 1
+  },
+  "gates": {
+    "force_scale_floor_N": "2e-13 = 1e-8 * Et20 * max(abs(return_target0),1e-6)",
+    "local_force_scale": "max(norm(HP total local), floor)",
+    "global_force_scale": "max(norm(HP total full scatter), floor)",
+    "force_component_denominator": "max(own component HP norm,1e-12*total scale)",
+    "action_denominator": "max(own HP Jv norm,1e-10)",
+    "total_force_limit": "1e-11",
+    "material_regularization_force_limit": "1e-9",
+    "total_action_limit": "1e-10",
+    "material_regularization_action_limit": "1e-9",
+    "HP80_HP120_agreement_limit": "1e-40",
+    "original_rules_retained": true
+  },
+  "CSC_checks": "Shape/full storage and all data/indices/indptr SHA; independently reconstruct every saved local coefficient index; bitwise saved CSC payload comparison; each CSC actual witness action compared with independent full-DOF HP action.",
+  "bindings": "Original frozen 57 live/capsule sources and 21 inputs checked; runtime-origin 41 sources plus validator capsules checked. Original input/model/port snapshots, new witness snapshot, raw split-state hash, fixture/all arrays/full CSC and candidate result rechecked through reference completion. Paths saved root-relative after installed-stage execution.",
+  "controls": {
+    "candidate_seconds": 90,
+    "candidate_outer_seconds": 120,
+    "reference_seconds": 180,
+    "reference_outer_seconds": 210,
+    "sampled_tree_limit_bytes": 8589934592,
+    "clock": "STARTED precedes third-party imports; cooperative checkpoints cover saved data reads, evaluations, serialization and end-binding checks",
+    "stop_file": "OUTPUT.parent/stop_requested.txt",
+    "first_error": "Fail receipt preserves actual started/completed counters; no retry; reference requires completed passing force and tangent"
+  },
+  "limits": [
+    "Source review is not actual pass or observed resource compliance",
+    "The new witness is nonzero in all 3072 non-body elements, including both failure elements; fixed all-body elements legitimately have zero direction",
+    "One HP direction is not an all-column tangent reference qualification",
+    "P/S are finite supported complete observations; existing independent helper does not return P/S stress reference arrays",
+    "The input remains the original rejected F36 trial: no equilibrium, contact, clamping, full-cycle or JAX/AD qualification"
+  ],
+  "blocking_issues": []
+}

@@ -1,0 +1,356 @@
+{
+  "schema_version": "matmul320-saved-action-failure-review-1.0",
+  "status": "saved_first_failure_explained",
+  "qualification": false,
+  "scope": "Element0 saved tensor/direction/action and saved HP strings only; no rerun of failed validation or force/tangent/reference evaluation",
+  "failed_phase": {
+    "status": "fail",
+    "error": {
+      "type": "ValueError",
+      "message": "First local gate failed: element0 regularization action",
+      "code": null,
+      "details": {}
+    },
+    "call_counts": {
+      "force_started": 0,
+      "force_completed": 0,
+      "tangent_started": 0,
+      "tangent_completed": 0,
+      "HP_started": 2,
+      "HP_completed": 2,
+      "solver_calls": 0,
+      "JIT_calls": 0
+    },
+    "saved_gate_records": 6,
+    "first_failed_gate": {
+      "scope": "local",
+      "element": 0,
+      "component": "regularization",
+      "kind": "action",
+      "normalized_error": "2.42434975903093399702402924724032750427225664570868089213889408774661378168144232228817805333749393376017998875818864589E-9",
+      "hp80_hp120_error": "2.74123584069041105505799713033386091925757501965633464093300996990437055254921477658004555560710585166205369309658252371E-101",
+      "denominator": "1E-10",
+      "limit": "1E-9",
+      "reference_limit": "1e-40",
+      "pass_gate": false
+    },
+    "unexecuted_gates": "Remaining local and all global gates were not executed; no pass inferred"
+  },
+  "successful_candidate_scope": {
+    "call_counts": {
+      "force_started": 1,
+      "force_completed": 1,
+      "tangent_started": 1,
+      "tangent_completed": 1,
+      "HP_started": 0,
+      "HP_completed": 0,
+      "solver_calls": 0,
+      "JIT_calls": 0
+    },
+    "status": "pass",
+    "scope": "Finite supported force/tangent production only; overall independent qualification failed"
+  },
+  "identity_bindings": {
+    "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/validate_matmul320.py": "3e302022c0f5e253daa38cdfdf9ef900c27b52d804f08f173fbd3db12a9098a9",
+    "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/check/candidate/result.json": "320f26bb219a884e697ebd534868e96dab17570de05352c8b3cc60ae8fcae997",
+    "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/check/candidate/arrays.npz": "b7b455a36651416594c4f5f8086907ab5e0357e5bfa3db3eccf6994b37596db7",
+    "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/check/candidate/fixture.npz": "b69a0b1aa0cb22f0f5fd8dbad37026d136e35d75a37cb44e3abc637cfcdcb38b",
+    "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/check/reference/result.json": "1c3aaf8b67efba42958b91eab7b951fee948d3c4590d774a5bb09b1afb71b707",
+    "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/check/reference/checks.json.gz": "561323fc18b6a886169a8228459ec325dd9e3a56537671e922dd88570b3850c7",
+    "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/check/reference/differences.json.gz": "2e4de0b91826685a81a62ee6359cfdfc511aff8ad59fdf7b0754f27a3798604f",
+    "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/check/reference/hp80.json.gz": "7a11e6ca1075a39dacee6c1d218c180534fe1e4fff65f737cb420245f55bd839",
+    "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/check/reference/hp120.json.gz": "cd44231efc6ae292f8a670fff3c5499933a250cc073ace23f56b1f143b09a976"
+  },
+  "before_after_bindings_match": true,
+  "array_raw_fields_match": true,
+  "element0": {
+    "edofs": [
+      0,
+      1,
+      2,
+      3,
+      164,
+      165,
+      162,
+      163
+    ],
+    "local_witness": [
+      -1.0,
+      -0.7109375,
+      -0.421875,
+      -0.1328125,
+      0.2265625,
+      0.515625,
+      -0.3515625,
+      -0.0625
+    ],
+    "local_directional_Hu_exact": [
+      [
+        [
+          "0E-7",
+          "0E-7"
+        ],
+        [
+          "0E-7",
+          "0E-7"
+        ]
+      ],
+      [
+        [
+          "0E-7",
+          "0E-7"
+        ],
+        [
+          "0E-7",
+          "0E-7"
+        ]
+      ]
+    ],
+    "current_Hu_per_mm": [
+      [
+        [
+          0.0,
+          -1.1832913578315177e-30
+        ],
+        [
+          -1.1832913578315177e-30,
+          0.0
+        ]
+      ],
+      [
+        [
+          0.0,
+          -6.656013887802287e-31
+        ],
+        [
+          -6.656013887802287e-31,
+          0.0
+        ]
+      ]
+    ],
+    "HP80_regularization_action": [
+      "1.6850532585472231200840144867386811316942550904123573256753597807152853249714727E-32",
+      "9.4784245793281300504725814879050813657801848835695099569238987665234799529645334E-33",
+      "-1.6850532585472231200840144867386811316942550904123573256753597807152853249714727E-32",
+      "-9.4784245793281300504725814879050813657801848835695099569238987665234799529645334E-33",
+      "1.6850532585472231200840144867386811316942550904123573256753597807152853249714727E-32",
+      "9.4784245793281300504725814879050813657801848835695099569238987665234799529645334E-33",
+      "-1.6850532585472231200840144867386811316942550904123573256753597807152853249714727E-32",
+      "-9.4784245793281300504725814879050813657801848835695099569238987665234799529645334E-33"
+    ],
+    "HP120_regularization_action": [
+      "1.68505325854722312008401448673868113169425509041235732567535978071528532497147256476749965656525758612066623432914570350E-32",
+      "9.47842457932813005047258148790508136578018488356950995692389876652347995296453317681718556817957392192874756810144458225E-33",
+      "-1.68505325854722312008401448673868113169425509041235732567535978071528532497147256476749965656525758612066623432914570350E-32",
+      "-9.47842457932813005047258148790508136578018488356950995692389876652347995296453317681718556817957392192874756810144458225E-33",
+      "1.68505325854722312008401448673868113169425509041235732567535978071528532497147256476749965656525758612066623432914570350E-32",
+      "9.47842457932813005047258148790508136578018488356950995692389876652347995296453317681718556817957392192874756810144458225E-33",
+      "-1.68505325854722312008401448673868113169425509041235732567535978071528532497147256476749965656525758612066623432914570350E-32",
+      "-9.47842457932813005047258148790508136578018488356950995692389876652347995296453317681718556817957392192874756810144458225E-33"
+    ],
+    "logical_tensor_shape": [
+      3200,
+      8,
+      8
+    ],
+    "saved_archive_layout_strides": [
+      512,
+      64,
+      8
+    ],
+    "restored_original_return_layout_strides": [
+      512,
+      8,
+      64
+    ],
+    "same_tensor_values_different_layout": true,
+    "restored_einsum_matches_saved_raw_bytes": true,
+    "exact_saved_binary64_tensor_dot_witness": {
+      "values": [
+        "8.908243341364299970177870545935693759827151156616477214441767029031451520215514280959847584137611953281066234922036528587341308593750E-33",
+        "4.467537699810711271168872405221328054678676031655011603613930908422427447899168825210349572513157667685845808591693639755249023437500E-33",
+        "-8.908243341364299970177870545935693759827151156616477214441767029031451520215514280959847584137611953281066234922036528587341308593750E-33",
+        "-4.467537699810711271168872405221328054678676031655011603613930908422427447899168825210349572513157667685845808591693639755249023437500E-33",
+        "8.908243341364299970177870545935693759827151156616477214441767029031451520215514280959847584137611953281066234922036528587341308593750E-33",
+        "4.467537699810711271168872405221328054678676031655011603613930908422427447899168825210349572513157667685845808591693639755249023437500E-33",
+        "-8.908243341364299970177870545935693759827151156616477214441767029031451520215514280959847584137611953281066234922036528587341308593750E-33",
+        "-4.467537699810711271168872405221328054678676031655011603613930908422427447899168825210349572513157667685845808591693639755249023437500E-33"
+      ],
+      "difference_norm_N_per_mm": "1.8781793924584770422303512875942005923095E-32",
+      "normalized_error_using_original_1e_10_floor": "1.8781793924584770422303512875942005923095E-22"
+    },
+    "consumer_arithmetic_methods": {
+      "original_saved_einsum": {
+        "values": [
+          -1.0842021724855088e-19,
+          -5.421010862427522e-20,
+          1.0842021724855088e-19,
+          5.421010862427522e-20,
+          -1.0842021724855088e-19,
+          -5.421010862427522e-20,
+          1.0842021724855088e-19,
+          5.421010862427522e-20
+        ],
+        "hex": [
+          "-0x1.0000000000012p-63",
+          "-0x1.0000000000000p-64",
+          "0x1.0000000000012p-63",
+          "0x1.0000000000000p-64",
+          "-0x1.0000000000012p-63",
+          "-0x1.0000000000000p-64",
+          "0x1.0000000000012p-63",
+          "0x1.0000000000000p-64"
+        ],
+        "difference_norm_N_per_mm": "2.4243497590309339970240292472403275042723E-19",
+        "normalized_error_using_original_1e_10_floor": "2.4243497590309339970240292472403275042723E-9"
+      },
+      "restored_transposed_view_einsum": {
+        "values": [
+          -1.0842021724855088e-19,
+          -5.421010862427522e-20,
+          1.0842021724855088e-19,
+          5.421010862427522e-20,
+          -1.0842021724855088e-19,
+          -5.421010862427522e-20,
+          1.0842021724855088e-19,
+          5.421010862427522e-20
+        ],
+        "hex": [
+          "-0x1.0000000000012p-63",
+          "-0x1.0000000000000p-64",
+          "0x1.0000000000012p-63",
+          "0x1.0000000000000p-64",
+          "-0x1.0000000000012p-63",
+          "-0x1.0000000000000p-64",
+          "0x1.0000000000012p-63",
+          "0x1.0000000000000p-64"
+        ],
+        "difference_norm_N_per_mm": "2.4243497590309339970240292472403275042723E-19",
+        "normalized_error_using_original_1e_10_floor": "2.4243497590309339970240292472403275042723E-9"
+      },
+      "loaded_C_layout_einsum": {
+        "values": [
+          8.9082433413643e-33,
+          4.467537699810711e-33,
+          -8.9082433413643e-33,
+          -4.467537699810711e-33,
+          8.9082433413643e-33,
+          4.467537699810711e-33,
+          -8.9082433413643e-33,
+          -4.467537699810711e-33
+        ],
+        "hex": [
+          "0x1.7208b108d22dbp-107",
+          "0x1.732604d844eeap-108",
+          "-0x1.7208b108d22dbp-107",
+          "-0x1.732604d844eeap-108",
+          "0x1.7208b108d22dbp-107",
+          "0x1.732604d844eeap-108",
+          "-0x1.7208b108d22dbp-107",
+          "-0x1.732604d844eeap-108"
+        ],
+        "difference_norm_N_per_mm": "1.8781793924584770623791092298296972499288E-32",
+        "normalized_error_using_original_1e_10_floor": "1.8781793924584770623791092298296972499288E-22"
+      },
+      "ordinary_K_matmul_v": {
+        "values": [
+          8.9082433413643e-33,
+          5.421010862427969e-20,
+          -8.9082433413643e-33,
+          -5.421010862427969e-20,
+          8.9082433413643e-33,
+          5.421010862427969e-20,
+          -8.9082433413643e-33,
+          -5.421010862427969e-20
+        ],
+        "hex": [
+          "0x1.7208b108d22dbp-107",
+          "0x1.0000000000173p-64",
+          "-0x1.7208b108d22dbp-107",
+          "-0x1.0000000000173p-64",
+          "0x1.7208b108d22dbp-107",
+          "0x1.0000000000173p-64",
+          "-0x1.7208b108d22dbp-107",
+          "-0x1.0000000000173p-64"
+        ],
+        "difference_norm_N_per_mm": "1.0842021724854041805170372079678162254633E-19",
+        "normalized_error_using_original_1e_10_floor": "1.0842021724854041805170372079678162254633E-9"
+      },
+      "fsum_of_rounded_products": {
+        "values": [
+          -1.0842021724854154e-19,
+          5.421010862427969e-20,
+          1.0842021724854154e-19,
+          -5.421010862427969e-20,
+          -1.0842021724854154e-19,
+          5.421010862427969e-20,
+          1.0842021724854154e-19,
+          -5.421010862427969e-20
+        ],
+        "hex": [
+          "-0x1.ffffffffffd1cp-64",
+          "0x1.0000000000173p-64",
+          "0x1.ffffffffffd1cp-64",
+          "-0x1.0000000000173p-64",
+          "-0x1.ffffffffffd1cp-64",
+          "0x1.0000000000173p-64",
+          "0x1.ffffffffffd1cp-64",
+          "-0x1.0000000000173p-64"
+        ],
+        "difference_norm_N_per_mm": "2.4243497590306372920947117119980127670920E-19",
+        "normalized_error_using_original_1e_10_floor": "2.4243497590306372920947117119980127670920E-9"
+      },
+      "product_EFT_fma_plus_fsum": {
+        "values": [
+          8.9082433413643e-33,
+          4.467537699810711e-33,
+          -8.9082433413643e-33,
+          -4.467537699810711e-33,
+          8.9082433413643e-33,
+          4.467537699810711e-33,
+          -8.9082433413643e-33,
+          -4.467537699810711e-33
+        ],
+        "hex": [
+          "0x1.7208b108d22dbp-107",
+          "0x1.732604d844eeap-108",
+          "-0x1.7208b108d22dbp-107",
+          "-0x1.732604d844eeap-108",
+          "0x1.7208b108d22dbp-107",
+          "0x1.732604d844eeap-108",
+          "-0x1.7208b108d22dbp-107",
+          "-0x1.732604d844eeap-108"
+        ],
+        "difference_norm_N_per_mm": "1.8781793924584770623791092298296972499288E-32",
+        "normalized_error_using_original_1e_10_floor": "1.8781793924584770623791092298296972499288E-22"
+      }
+    }
+  },
+  "findings": [
+    "The original transposed-view einsum contraction reproduces the saved failed action byte for byte. Changing layout alone changes rounding while leaving every tensor value unchanged.",
+    "Exact accumulation of the stored binary64 matrix and dyadic witness is close to saved HP120 under the original floor; the primary element0 failure is consumer product/summation rounding, not demonstrated wrong mechanical tangent coefficients.",
+    "This local witness has exact Hu(v)=0. Its total regularization Jv is still nonzero: the current Hu and J-dependent scale derivative contribute about1e-32. Do not replace that action by zero.",
+    "Summation compensation alone on already rounded products is insufficient here. Product EFT plus compensated accumulation is a plausible minimal arithmetic correction; layout-dependent cancellation is not a general guarantee.",
+    "Ordinary K@v also has a near-floor residual here. The diagnosis concerns a component action near its Hessian nullspace, while total/material actions already passed the recorded element0 gates."
+  ],
+  "suggested_next_step": "Classify the remaining saved local/global and CSC actions without new mechanics, then choose a small accurate action-consumer implementation including product rounding. Bind any future candidate to a new card; preserve this failed reference and all original gates. Do not promote matmul320 on this local diagnosis.",
+  "limits": [
+    "This is a diagnosis, not a replacement result or new HP qualification.",
+    "Only element0 was examined; no full tensor-column HP check or all-cell/global pass is asserted.",
+    "Scalar Decimal arithmetic and FMA/fsum used existing saved arrays, not a force/FE/reference kernel.",
+    "The broader214/273 binding reviews were reported by parent; this child independently checked only the9 listed files and two selected raw array fields."
+  ],
+  "saved_arithmetic_elapsed_seconds": 0.5340927999932319,
+  "new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "reference_evaluate": 0,
+    "assembly": 0,
+    "model": 0,
+    "test": 0,
+    "plot": 0
+  },
+  "repository_files_edited": 0
+}

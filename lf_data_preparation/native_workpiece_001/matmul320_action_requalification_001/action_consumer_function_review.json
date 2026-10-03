@@ -1,0 +1,22 @@
+{
+  "schema_version": "element-tangent-action-static-function-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "source": "hf_repo/src/hf_eval/tangent_action.py",
+  "lines": 29,
+  "sha256": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+  "ACTION_VERSION": "q1_saved_tangent_dd_action_v1",
+  "AST_compile_only_passed": true,
+  "checked": [
+    "Accepts one(8,8) tensor with(8) direction or matching leading batch dimensions(...,8,8)/(...,8); shape mismatches raise KernelError invalid_shape before DD matmul.",
+    "Shared _array validates real numeric inputs, converts to float64 and rejects nonfinite inputs with existing error codes. No input array is mutated.",
+    "Matrix rows are force components and columns are displacement components. No transpose, symmetry operation, fixed-DOF removal or boundary policy is applied.",
+    "dd_from retains each supplied binary64 coefficient, dd_matmul retains product errors and a fixed-order eight-term sum, pair_supported enforces the original arithmetic support and dd_value rounds at the output boundary.",
+    "The result has matching(...,8) shape. Units are tensor units times direction units; a dimensionless diagnostic direction gives N/mm, not an applied physical force.",
+    "The function consumes an already computed element tensor. It has no constitutive force/tangent evaluation, solver, model construction, reference or JIT call."
+  ],
+  "range_review_boundary": "This reviewer did not execute the consumer or prove recorded-data support. The mathematical review separately handles the supplied K and dyadic witness range proof. For arbitrary inputs the original unsupported_arithmetic_range rejection remains part of the API; finite inputs alone are not a universal support guarantee.",
+  "blocking_interface_issues": [],
+  "new_calls": {"consumer": 0, "force": 0, "tangent_kernel": 0, "HP": 0, "solver": 0, "model": 0, "test": 0},
+  "repository_files_edited_by_reviewer": 0
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": "saved-action-static-math-review-1.0",
+  "reviewed_at_utc": "2026-10-03T22:25:35.773853+00:00",
+  "status": "no_static_blocker",
+  "review_kind": "Read-only source review and saved-array range postprocessing; not runtime qualification",
+  "sources": {
+    "consumer": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/tangent_action.py",
+      "sha256": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+      "lines": 29
+    },
+    "wrapper_author": {
+      "path": "D:/hf-native-workpiece-matmul320-author-20261004/saved_requalification.py",
+      "sha256": "23cc067d1c8e50cf476a612f9a342292bb936cfe9f62f34bbe5b9fc174d93817",
+      "lines": 197
+    },
+    "stage_readme": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_workpiece_001/matmul320_action_requalification_001/README.md",
+      "sha256": "34b031c4e474fa065bb0f0408bab4b908ee1dfa1b79279b8be61b9e14c6a4eea",
+      "lines": 21
+    },
+    "compensated_invariants": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/compensated_invariants.py",
+      "sha256": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+      "lines": 471
+    },
+    "tmc_kernel": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/tmc_kernel.py",
+      "sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+      "lines": 256
+    },
+    "package_init": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/__init__.py",
+      "sha256": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+      "lines": 7
+    },
+    "frozen_pure_validator": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_workpiece_001/matmul320_candidate_001/check/candidate/sources/validate_matmul320.py",
+      "sha256": "3e302022c0f5e253daa38cdfdf9ef900c27b52d804f08f173fbd3db12a9098a9",
+      "lines": 415
+    }
+  },
+  "original_nine_pins": {
+    "check/candidate/result.json": "320f26bb219a884e697ebd534868e96dab17570de05352c8b3cc60ae8fcae997",
+    "check/candidate/fixture.npz": "b69a0b1aa0cb22f0f5fd8dbad37026d136e35d75a37cb44e3abc637cfcdcb38b",
+    "check/candidate/arrays.npz": "b7b455a36651416594c4f5f8086907ab5e0357e5bfa3db3eccf6994b37596db7",
+    "check/candidate/force_fields.npz": "dd0f022712c123f97cd163b63bd8fddd390616d7c990493b27cdb8b046295e97",
+    "check/reference/result.json": "1c3aaf8b67efba42958b91eab7b951fee948d3c4590d774a5bb09b1afb71b707",
+    "check/reference/reference_fixture.npz": "67ba48eb995736c0a98313108c3c429e595f5c3fd2bbfb1a4901d1bc0d85172f",
+    "check/reference/hp80.json.gz": "7a11e6ca1075a39dacee6c1d218c180534fe1e4fff65f737cb420245f55bd839",
+    "check/reference/hp120.json.gz": "cd44231efc6ae292f8a670fff3c5499933a250cc073ace23f56b1f143b09a976",
+    "reference_launch.json": "a679d5a9480882c1f213962146859203419d556fcb35f481a4b5582b204d9d71"
+  },
+  "new_calls": {
+    "action_consumer": 0,
+    "force": 0,
+    "tangent": 0,
+    "HP_evaluate": 0,
+    "solver": 0,
+    "tests": 0
+  },
+  "original_failed_reference_preserved": true,
+  "formal_repository_source_edits": 0,
+  "subject": "Saved data requalification wrapper and stage README",
+  "checks": {
+    "origin_and_pins": "Original candidate pass, original reference fail/exit1 and its two completed HP calls are hard-pinned; nine original file hashes actually verified. Candidate source capsules/226 bindings and frozen HP sources are retained in before/end bindings.",
+    "decoupling": "Only frozen pure comparison utilities are imported. No candidate/reference function, constitutive force/tangent, model construction, HP reference class/evaluate or solver is called. Three new consumer invocations are counted separately.",
+    "full_coverage": "All 3200 elements and six force/action rows per element give 19200 local gates. Three full-DOF force, scattered-action and CSC-action rows per component give nine global gates. Full three CSC reconstructions cover 614400 stored element coefficients.",
+    "unchanged_gates": {
+      "total_force": "1e-11",
+      "material_and_regularization_force": "1e-9",
+      "total_action": "1e-10",
+      "material_and_regularization_action": "1e-9",
+      "HP80_120_agreement": "1e-40",
+      "Et_N_per_mm": 20,
+      "force_floor_N": "2e-13",
+      "action_denominator_floor_N_per_mm": "1e-10",
+      "component_force_floor": "1e-12 times original total force scale"
+    },
+    "reference_use": "All saved HP80/120 decimal force/action values are loaded and independently scattered at Decimal precision3000 with Inexact trapped; norms/gates use precision120. Existing HP calls are inherited and explicitly not fresh for this phase.",
+    "new_and_old_results": "New output directory is exclusive; original failed arrays/results stay untouched. Output says changed method and false equilibrium/contact/all-column/stress qualification.",
+    "budget": "STARTED precedes third-party imports; cooperative120 seconds and sampled tree8GiB checks cover load, consumer, comparisons, reconstruction and saves; outer150 is a separate launcher responsibility.",
+    "readme": "README states the new arithmetic consumer, original support/gates, inherited HP, full coverage, closed original failure and narrow qualification scope correctly. UTF-8 file has no replacement characters."
+  },
+  "limits": [
+    "Author wrapper must be installed under the production root for its ROOT-relative own-source binding before execution; external author copy is static only.",
+    "This review does not execute the consumer, re-evaluate HP, or predeclare gate success.",
+    "Only the captured F36 state and one saved dyadic witness can be requalified by the proposed phase."
+  ]
+}

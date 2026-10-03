@@ -1,0 +1,85 @@
+{
+  "schema_version": "matmul320-validator-static-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "scope": "Read-only source/contract review before the one authorized execution; no candidate, test or reference execution",
+  "validator": {
+    "path": "D:/hf-native-workpiece-matmul320-author-20261004/validate_matmul320.py",
+    "lines": 401,
+    "sha256": "e79ed7e8bc0b8fc93b650d005b026bbab9cc1fbe3738a427577b1e28d42d17ab",
+    "AST_and_compile_only": true
+  },
+  "unit_runner": {
+    "path": "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/run_tests_once.py",
+    "lines": 69,
+    "sha256": "4397e1be20424e3f690a6a60d21f4ff8cdcbac95feca3efa798fad5b1ecd1c5e",
+    "AST_and_compile_only": true,
+    "files": [
+      "hf_repo/tests/test_split_numpy_force.py",
+      "hf_repo/tests/test_split_numpy_tangent.py",
+      "hf_repo/tests/test_split_cycle.py",
+      "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/test_matmul320.py"
+    ],
+    "actual_collection_and_pass_count": "Not executed; record actual pytest output, not a predeclared 30 or 33",
+    "runtime_priority": "Prepend isolated runtime/hf_repo/src and import hf_eval before pytest configuration; require its actual package file to be the candidate package",
+    "test_budget_seconds": 60,
+    "outer_budget_seconds": 90,
+    "RSS_limit_bytes": 8589934592,
+    "budget_scope": "Runner checks its process RSS/peak_wset at entry, per-item teardown and exit. The separate launcher supplies the outer deadline and any tree observer. This source review is not evidence of observed resource compliance.",
+    "call_accounting": "Tests exercise mechanical and toy solver paths; runner explicitly says calls are not separately instrumented and does not report them as zero",
+    "maxfail": 1,
+    "pytest_cache_disabled": true
+  },
+  "final_external_probe": {
+    "path": "D:/hf-native-workpiece-matmul320-author-20261004/test_matmul320.py",
+    "lines": 84,
+    "sha256": "89006d8d5d48cc6175739448e5a5d0b5dab27f8df6f79d4edee6e2202c366089",
+    "pre_freeze_action": "Root must synchronize this author copy to the staged test. The sole change from the previous 83-line probe is context.clear_flags(), as authorized, before the exact Decimal reference arithmetic.",
+    "gate_changed": false
+  },
+  "candidate_control_flow": {
+    "force_calls": "Exactly one call site, batch_response_split_numpy; started increments before the call and completed only after return",
+    "tangent_calls": "Exactly one call site, _tangent(response,...), consuming the retained full response. Static inspection of _tangent confirms it has no force call; the public batch_tangent_components entry that would evaluate force again is not used.",
+    "additional_force_calls": 0,
+    "solver_and_JIT_calls": 0,
+    "source_scope": "Isolated 41-source runtime is checked against original live pins; AST delta permits only the two selected matmul scales, candidate version and function docstring. Original production sources and capsules remain inputs.",
+    "data_identity": "Captured ordinal36/code, observation NPZ/field hashes, original inventory/freeze, 14 raw model overlaps, saved points and direction are checked. The split state SHA is independently reconstructed from representation prefix, little-endian ndof, raw lift and fluctuation.",
+    "portable_bindings": "All saved bindings are relative to production_root. The validator must be installed in the formal stage before running; its temporary external author path is not intended as a runtime path.",
+    "outputs": "Full force fields, including P/S and retained invariant high/low words, three unsymmetrized local tensors, local/global directional actions, all-DOF force scatters and three full CSC matrices",
+    "partial_failure": "Input/fixture/source snapshots are saved before evaluation. Full force fields are saved immediately after a successful force call and before tangent. An exception records fail with actual started/completed counters; no retry is present. A later reference requires a passing candidate with one completed force and tangent.",
+    "budgets_seconds": {"helper": 90, "outer": 120},
+    "stop_file": "OUTPUT.parent/stop_requested.txt",
+    "memory_scope": "Cooperative sampled tree sum of max(RSS, Windows peak_wset), not an OS hard cap"
+  },
+  "reference_control_flow": {
+    "production_imports": "None in reference mode; only fixed-SHA Decimal helper copies are imported",
+    "fresh_HP_calls": "Exactly one evaluate at 80 digits and one at 120 digits, with the original local split arrays and saved direction",
+    "elements": 3200,
+    "original_DOFs": 6642,
+    "local_gates": 19200,
+    "global_gates": 9,
+    "local_force_entries": 76800,
+    "local_directional_action_entries": 76800,
+    "all_local_tangent_coefficients_assembly_checked": 614400,
+    "global_numbering": "Independent disjoint local numbering for HP, then exact 3000-digit scatter with Inexact trapped to the original edofs",
+    "CSC_validation": "Load each full CSC, verify archive/raw fields, independently reassemble every saved local tensor coefficient, and compare its actual saved-direction action. This is saved coefficient/assembly checking, not fresh production mechanics or exhaustive HP matrix-column checking.",
+    "original_force_floor_N": "2e-13 = 1e-8 * Et20 * max(abs(return_target0),1e-6)",
+    "force_limits": {"total": "1e-11", "material": "1e-9", "regularization": "1e-9"},
+    "action_limits": {"total": "1e-10", "material": "1e-9", "regularization": "1e-9"},
+    "HP_agreement_limit": "1e-40",
+    "denominators": "Force: total HP norm/floor maximum, component own norm versus 1e-12 total scale; action: own HP norm versus 1e-10. Original native rules are retained.",
+    "first_failure": "The failing gate raises immediately; finally persists all checks/differences accumulated so far. Each completed HP raw gzip remains saved. No subsequent mathematical gate or retry occurs.",
+    "end_bindings": "After successful comparison, original bindings, source capsules, HP helpers, candidate result, fixture, arrays, force fields and all three CSC archives are rehashed",
+    "budgets_seconds": {"helper": 180, "outer": 210}
+  },
+  "limits": [
+    "Static review cannot assert execution pass or observed budget compliance.",
+    "P/S have finite supported output checks; frozen HP reference does not expose independent stress tensors.",
+    "Only one saved direction has HP derivative checks; no all-column tangent qualification.",
+    "Captured F36 is a rejected trial state. This review and eventual force/Jv gates do not qualify equilibrium, contact or clamping.",
+    "Source and numeric checks after an exception are not claimed complete; fail receipts and partial files must remain immutable."
+  ],
+  "blocking_issues": [],
+  "new_executions": {"force": 0, "tangent": 0, "solver": 0, "HP": 0, "test": 0, "plot": 0, "model": 0},
+  "repository_files_edited_by_reviewer": 0
+}

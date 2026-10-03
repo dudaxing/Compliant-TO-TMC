@@ -1,0 +1,70 @@
+{
+  "schema_version": "native-matmul320-static-math-review-1.0",
+  "status": "candidate_reasonable_pending_new_validation",
+  "scope": "Read-only source and saved NPZ inspection; no new candidate evaluation or numerical qualification",
+  "formal_baseline": "167ab6fd6b5454a34aec9792b7f6e09ac0b5d9a8",
+  "new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "test": 0,
+    "plot": 0
+  },
+  "source_sha256": {
+    "split_kernel_invariants_hu.py": "31d955d70c9e9ebd053cd2e652668afc571428c1f42a2ff7f0f0665d09c500ea",
+    "split_numpy_tangent.py": "f7549b1a51f21d8598892f3d74cebfc544a24a5bc79e60b87e7734f2a6058a1c",
+    "compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2"
+  },
+  "saved_input": {
+    "force_ordinal": 36,
+    "state_sha256": "dabcc967cfb475bd42b5baacca0adf6ae58f50a765d9c6e43994257ef42b4a03",
+    "input_npz_sha256": "f83186e0bab2f7840459bc89d38db9392e0db6068c7927a35b98d37fa08b2095",
+    "first_bad_npz_sha256": "bc2bae73881cdd0a4ff74d204bee0736d3a125b1e6e5e0e969d2128ce98342d2",
+    "all_27_diagnostic_fields_sha_dtype_shape_match": true,
+    "near_all": true,
+    "small_products": true,
+    "first_bad": "S = transpose(T) @ P; isolated low-times-high EFT tail",
+    "invalid_entries": 4,
+    "tail_binary_exponent": -417,
+    "extra_scale_exponent_needed_for_stored_tails_only": 17,
+    "counterfactual_shift_with_320_scale": -289
+  },
+  "candidate": {
+    "change": "Only selected _scaled_matmul up/down power 192 to 320; retain original four DD products, fixed-order inner sum, final downscale, selectors and domain gates",
+    "actual_call_sites": [
+      "small_P = incremental_tensor @ T",
+      "S = transpose(T) @ P"
+    ],
+    "callsite_bound": "For supported preceding quantities, tiny G<=2^-64 and coefficient magnitudes<=256 bound F,T near identity and M,P small. A conservative entry bound of 2 gives scaled left<=2^321, each product<=2^322 and two-term sum<=2^323. This is specific to these two response call sites, not arbitrary matrices.",
+    "bounds_unchanged": "Normalized nonzero components 2^-400..2^400; temporaries<=2^900",
+    "lower_bound_limit": "No fixed scale proves all isolated tails, cancellation words or final downscaled pairs remain >=2^-400. Unseen failures remain possible and must retain the original rejection.",
+    "alternative": "224 or 256 covers the four stored tails; no full-response evidence supports a smaller choice. 320 has identical operation count and more tail margin, while retaining ample upper-bound headroom.",
+    "tangent_path": "NumPy shadow tangent does not call _scaled_matmul. Its wrapper first calls the shared force response; derivative algebra remains existing 192-product and 128-direction scaling. Fresh captured-state Jv comparison is required.",
+    "JAX_AD_scope": "Shared response source changes the JAX graph; no new JAX/AD qualification is granted"
+  },
+  "minimum_new_validation": {
+    "input": "Exact full captured 3200-cell batch and 6642-DOF two arrays, pinned original operators/material/model; not selected elements, because tiny selector is batch-global",
+    "candidate_calls": "One full force; only if complete, one existing full three-component shadow tensor evaluation",
+    "saved_arrays": "Full response including P,S,F,G,Hu,J/energy and support flags; three complete element tensors, independent full-DOF assembly and declared fixed-zero direction",
+    "fresh_reference": "Two independent full-model evaluations at 80 and 120 decimal digits using disjoint local reindexing, original local inputs and an exact scatter back to original DOFs",
+    "gates": "Original local/global total force 1e-11, material/Hu force 1e-9; total Jv 1e-10, material/Hu Jv 1e-9; HP80/120 agreement 1e-40; retain original scales and component floors",
+    "zero_force_floor_N": "For this Et=20 model and dscale>=1e-6, force-only floor is 2e-13; do not inherit the tiny 16-cell fixture literal 2e-14",
+    "stress_scope": "Existing Decimal helper does not return P/S arrays. Their complete supported/finite observation can be verified; do not claim independent stress HP gates without a separately explicit reference.",
+    "qualification_limit": "Only new captured-input qualification; old seven accepted states remain tied to old source. No solver retry or inherited full-cycle qualification"
+  },
+  "candidate_static_check": {
+    "candidate_kernel_sha256": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+    "relative_path": "lf_data_preparation/native_workpiece_001/matmul320_candidate_001/runtime/hf_repo/src/hf_eval/split_kernel_invariants_hu.py",
+    "exact_expected_change": true,
+    "AST_and_compile_source_only": true,
+    "unchanged_runtime_dependencies": 40,
+    "numeric_calls": 0,
+    "only_changes": [
+      "matmul up/down constants 192 to 320",
+      "kernel identity",
+      "one docstring"
+    ]
+  }
+}

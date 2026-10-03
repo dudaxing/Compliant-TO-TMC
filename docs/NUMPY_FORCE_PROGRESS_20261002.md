@@ -1,10 +1,10 @@
 # NumPy 完整力入口：功能进度与参考比较
 
-2026-10-04当前：**同一粗方固定半工件的[0,.1,.25,.5,.25,.1,0]mm循环一次实际完成，七接受态14次新HP80/120全通过（135286检查），并完成实际边测量、结构/力图、七帧动画及首次范围拒绝诊断。** 峰值输入力.106253248N、自由+y输出.575755712mm、最大节点位移.796706551mm、minJ=.735764774；半工件(Fx,Fy)=(-1.50412414e-4,+1.34183314e-4)N。真实底最近无符号距离1.471935964mm，×1仍张开，尚未夹紧；卸载输出约1.758e-27mm，未重置状态。见[完整结果与功能进度](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/RESULTS.md)、[持续过程报告](NUMPY_FORCE_PROGRESS_20261002.md#native-workpiece-peak05-20261004)、[实际结构和力](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_physical.png)、[力/分量及卸载响应](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_response.png)、[七帧真实动画](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_actual.gif)、[外边与最近点](../functional_views/native_workpiece_peak05_20261004/boundary_001/native_boundary_geometry.png)。
+2026-10-04当前：**已完成卸载范围问题定位、隔离matmul320完整F/T及补偿切线作用入口。新的保存数据重新验收实际exit0，19200局部＋9全局原门全通过，614400局部矩阵存储贡献/三完整CSC核对通过。** 原候选reference的e0 Hu action失败永久保留；全域诊断原Hu693越门、精确保存K×v0、C布局507，支持修正乘积/求和消费端。新生产入口29行；本次3consumer调用、0新F/T/HP/solve，复用原实际完整HP80/120，而非新参考求值。见[候选与诊断全过程](../lf_data_preparation/native_workpiece_001/matmul320_candidate_001/RESULTS.md)、[新实际验收](../lf_data_preparation/native_workpiece_001/matmul320_action_requalification_001/RESULTS.md)、[实际补偿作用比较图](../lf_data_preparation/native_workpiece_001/matmul320_action_view_001/evidence/requalified_action_errors.png)。
 
-生产521.28秒、46F开始/43完成、25T完成、1solve；独立参考约149.25秒，原数学门保持，覆盖完整单元/DOF与CSC组装，但HP切线只核声明方向，非所有列。末腿仍有F36/39/42三次范围拒绝并各接受原半步；首次完整输入现已保存。新独立单次诊断复现同异常：S=TᵀP矩阵乘法的四个乘积低词修正约4.22–4.38e-126低于2^-400支持下界，输入有效、tiny分支已选中；不是J失效或已证实的残量精度平台。核心与旧49来源不变，范围问题尚未修复；拒绝态不授资格。
+物理进度仍为旧源码下同粗方固定半工件 `[0,.1,.25,.5,.25,.1,0]`mm循环七态14次新HP通过。峰值输入力.106253248N、自由+y输出.575755712mm、最大节点位移.796706551mm、minJ=.735764774；真实底最近无符号距离1.471935964mm，**尚未夹紧**。见[完整物理结果](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/RESULTS.md)、[七帧实际×1动画](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_actual.gif)、[整体目标和持续开发记录](NUMPY_FORCE_PROGRESS_20261002.md#matmul320-action-20261004)。
 
-下一先对该矩阵乘法做最小尺度候选及独立数值验证，成立后同粗方探索1.0mm，再按几何/力/成本决定更大行程和圆形/细设计；1/2/3mm均未执行。压力/夹持判据、signed normal gap/包容、自由工件、研究H2/H3、HF5及完整AD/JIT仍待实现或资格化。仅在main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；旧粗/细、无工件和公开数值重放资格各自冻结。本轮异目录文件身份恢复另记录，不冒称数值再跑。
+live core仍保留旧31d955，matmul320隔离核心7fff未合入；新资格仅限完整捕获F36、该候选、补偿consumer和声明dyadic方向，不能转给旧七态或全部切线列。下一独立阶段按候选原字节合入、重新冻结同粗方0.5mm有序循环/全部新接受态fresh HP，然后依据实际几何/成本探索1mm。1/2/3mm未执行；压力/夹持判据、signed normal gap/包容、自由工件、H2/H3/HF5及完整AD/JIT仍待实现或资格化。仅main、origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；异目录公开恢复只验文件身份，不称数值重放。
 
 以下为上一阶段及更早时点的保留记录；当前状态以页首与持续报告末节为准。
 
@@ -1763,9 +1763,23 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 首次F36输入stateSHAdabcc967cfb475bd42b5baacca0adf6ae58f50a765d9c6e43994257ef42b4a03保存。新独立60／outer90秒／8GiB诊断protocol0d3391c75c173afc59399cc902a00da11233b3e54b756e6ed7a18aff302a6986，trace257行2a77d784...静态交叉无阻断；原16fields缺points，仅从已绑定原27模型补原points，14重叠字段raw同、不构造模型/算子。一次原batch1开始/0完成，same type/code/message/details范围异常复现，diagstatus diagnostic_captured，0T/solver/HP/JIT/全局组装，hooks最终恢复；helper9.1850516秒270798848B／outer10.8103171秒256180224B，190外层绑定保持。resultSHAd6ac1983304f8e189f40765ef2c43eb708f9396c1319df5975085e645377f916。首坏是在S=TᵀP实际返回场的_scaled_matmul，tiny selector True，合法low×high输入得到合法high约e-110，却有4个EFT低词4.22328–4.37678e-126低于2^-400。是原声明支持下界拒绝，并非IEEE零下溢；S参与全局supported门，所以不能把应力观测删掉规避。后续所有其他首坏未独立枚举，当前内核没改，也不宣布修复。下一最小matmul尺度候选应独立核捕获完整力/切线与有序返零，再同方探1mm；所有失败/原caps永久保留，项目整体active。
 
 
-诊断独立只读复核无阻断：190外层/139诊断绑定、57current+57caps/21inputs和27首坏字段均SHA同；4invalid在medium cells1275/q6、1348/q8，原a/b与父公共DD输入及广播fullbyte一致，均low×high，valid全True，高位约-8.502/-7.062e-110合法，EFT尾词4.22328/4.37678e-126小于2^-400。S列入返回场/全局supported是源码核查，public response未返回且最终S数组未保存，所以拒绝传播为结合源码推断，不称完整物理场实测。320 selected matmul可把这4尾词提高128位到约e-87，保守上界低于2^400/2^900，但极小孤立项及回缩下界仍不能普遍保证。下一另冻一次完整响应候选，不在本轮回写或删场放宽门。独立review5fd96226...，0新F/T/HP/solve/构造/test/plot。
+诊断独立只读复核无阻断：190外层/139诊断绑定、57current+57caps/21inputs和27首坏字段均SHA同；4invalid在机构实体单元cells1275/q6、1348/q8，原a/b与父公共DD输入及广播fullbyte一致，均low×high，valid全True，高位约-8.502/-7.062e-110合法，EFT尾词4.22328/4.37678e-126小于2^-400。S列入返回场/全局supported是源码核查，public response未返回且最终S数组未保存，所以拒绝传播为结合源码推断，不称完整物理场实测。320 selected matmul可把这4尾词提高128位到约e-87，保守上界低于2^400/2^900，但极小孤立项及回缩下界仍不能普遍保证。下一另冻一次完整响应候选，不在本轮回写或删场放宽门。独立review5fd96226...，0新F/T/HP/solve/构造/test/plot。
 
 交付一次非科学读检查因read_text未指定UTF-8、实际采用GBK而失败，Python exit1；同shell后续git diff check exit0不能掩盖它。原失败回执保存handoff/native_workpiece_peak05_20261004/delivery_read_preflight_failure.json。修正仅下一交付读取显式UTF-8，所有正式科学阶段/原文件不动、0新数值重跑。
 
 
 本轮科学资料已正常提交并推送 main `167ab6fd6b5454a34aec9792b7f6e09ac0b5d9a8`。随后在干净异目录公共副本 `D:/hf-restore-20260930` 实际 fetch、fast-forward 到该精确提交，HEAD=origin/main、main/origin正确，7506文件身份验收 exit 0/pass；manifest SHA `ed4f199680c1f04000cd5d317b5d36cc0d6d91c90bd76ef3dd9b9c23301dbbeb`。这次恢复没有新力/切线/求解/HP、没有数值/几何/绘图重放，full_evidence_checked=false。原件见 [异目录公共恢复回执](../handoff/native_workpiece_peak05_20261004/public_restore_science_receipt.json)。后续交付回执提交会改变manifest，不能以该回执声称后续提交身份也已核验。
+
+
+2026-10-04 文案复核纠正：此前把cells1275/q6和1348/q8写成medium cells是分类错误；原捕获input/source_model的solid两者均True，原independent_diagnostic_review中medium_cell均False。现正文修正为机构实体单元，冻结数据、材料系数、异常定位及数值资格均保持；不把文案修正称为数值重验。
+
+
+<a id="matmul320-action-20261004"></a>
+
+## 2026-10-04：卸载范围候选与补偿切线作用
+
+整体目标、实际物理状态、为何排查、两层原因、最小实现、取舍及完整实际过程见[候选结果](../lf_data_preparation/native_workpiece_001/matmul320_candidate_001/RESULTS.md)。新consumer只消费保存K，不改TMC物理张量；全域9600作用分类证据决定此取舍，原失败保持。新独立保存数据卡真实终止exit0，19200局部＋9全局原门，原2e-13N/1e-10action分母和1e-40两HP一致尺度保持。新调用仅3次consumer，原1F1T2HP分别记录为历史完成，不伪计新HP。
+
+本次helper 12.672815s、outer 13.338634s，采样树峰368619520B；全部冻结绑定不变、无stop/修复重试。scope是同一捕获F36/声明方向的保存数据重新资格，不是新平衡或真实接触结果。详见[新验收实据](../lf_data_preparation/native_workpiece_001/matmul320_action_requalification_001/RESULTS.md)。live核心未promote，旧源码七态资格保持；下一卡再明确替换原字节与新0.5有序路径资格，之后1mm探索。
+
+独立保存态查看卡实际exit0，outer2.3579347s、322bindings不变；root实际打开2600×950PNG检查。图展示原Hu693越门、新actual consumer0越门；9600行表保存。旧图对照HP120，新门对照HP80，显示floor1e-30不参与判门；0新consumer或力学。见[实际图与保存数据说明](../lf_data_preparation/native_workpiece_001/matmul320_action_view_001/RESULTS.md)。

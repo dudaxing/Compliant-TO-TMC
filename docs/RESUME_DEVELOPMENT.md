@@ -1,10 +1,10 @@
 # 在新电脑或任意新目录接续开发
 
-2026-10-04当前：**同一粗方固定半工件的[0,.1,.25,.5,.25,.1,0]mm循环一次实际完成，七接受态14次新HP80/120全通过（135286检查），并完成实际边测量、结构/力图、七帧动画及首次范围拒绝诊断。** 峰值输入力.106253248N、自由+y输出.575755712mm、最大节点位移.796706551mm、minJ=.735764774；半工件(Fx,Fy)=(-1.50412414e-4,+1.34183314e-4)N。真实底最近无符号距离1.471935964mm，×1仍张开，尚未夹紧；卸载输出约1.758e-27mm，未重置状态。见[完整结果与功能进度](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/RESULTS.md)、[持续过程报告](NUMPY_FORCE_PROGRESS_20261002.md#native-workpiece-peak05-20261004)、[实际结构和力](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_physical.png)、[力/分量及卸载响应](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_response.png)、[七帧真实动画](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_actual.gif)、[外边与最近点](../functional_views/native_workpiece_peak05_20261004/boundary_001/native_boundary_geometry.png)。
+2026-10-04当前：**已完成卸载范围问题定位、隔离matmul320完整F/T及补偿切线作用入口。新的保存数据重新验收实际exit0，19200局部＋9全局原门全通过，614400局部矩阵存储贡献/三完整CSC核对通过。** 原候选reference的e0 Hu action失败永久保留；全域诊断原Hu693越门、精确保存K×v0、C布局507，支持修正乘积/求和消费端。新生产入口29行；本次3consumer调用、0新F/T/HP/solve，复用原实际完整HP80/120，而非新参考求值。见[候选与诊断全过程](../lf_data_preparation/native_workpiece_001/matmul320_candidate_001/RESULTS.md)、[新实际验收](../lf_data_preparation/native_workpiece_001/matmul320_action_requalification_001/RESULTS.md)、[实际补偿作用比较图](../lf_data_preparation/native_workpiece_001/matmul320_action_view_001/evidence/requalified_action_errors.png)。
 
-生产521.28秒、46F开始/43完成、25T完成、1solve；独立参考约149.25秒，原数学门保持，覆盖完整单元/DOF与CSC组装，但HP切线只核声明方向，非所有列。末腿仍有F36/39/42三次范围拒绝并各接受原半步；首次完整输入现已保存。新独立单次诊断复现同异常：S=TᵀP矩阵乘法的四个乘积低词修正约4.22–4.38e-126低于2^-400支持下界，输入有效、tiny分支已选中；不是J失效或已证实的残量精度平台。核心与旧49来源不变，范围问题尚未修复；拒绝态不授资格。
+物理进度仍为旧源码下同粗方固定半工件 `[0,.1,.25,.5,.25,.1,0]`mm循环七态14次新HP通过。峰值输入力.106253248N、自由+y输出.575755712mm、最大节点位移.796706551mm、minJ=.735764774；真实底最近无符号距离1.471935964mm，**尚未夹紧**。见[完整物理结果](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/RESULTS.md)、[七帧实际×1动画](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_actual.gif)、[整体目标和持续开发记录](NUMPY_FORCE_PROGRESS_20261002.md#matmul320-action-20261004)。
 
-下一先对该矩阵乘法做最小尺度候选及独立数值验证，成立后同粗方探索1.0mm，再按几何/力/成本决定更大行程和圆形/细设计；1/2/3mm均未执行。压力/夹持判据、signed normal gap/包容、自由工件、研究H2/H3、HF5及完整AD/JIT仍待实现或资格化。仅在main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；旧粗/细、无工件和公开数值重放资格各自冻结。本轮异目录文件身份恢复另记录，不冒称数值再跑。
+live core仍保留旧31d955，matmul320隔离核心7fff未合入；新资格仅限完整捕获F36、该候选、补偿consumer和声明dyadic方向，不能转给旧七态或全部切线列。下一独立阶段按候选原字节合入、重新冻结同粗方0.5mm有序循环/全部新接受态fresh HP，然后依据实际几何/成本探索1mm。1/2/3mm未执行；压力/夹持判据、signed normal gap/包容、自由工件、H2/H3/HF5及完整AD/JIT仍待实现或资格化。仅main、origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；异目录公开恢复只验文件身份，不称数值重放。
 
 以下为上一阶段及更早时点的保留记录；当前状态以页首与持续报告末节为准。
 
