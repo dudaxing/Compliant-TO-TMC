@@ -2,7 +2,7 @@
 
 2026-10-03当前：**两例普通粗机构原0.025mm TEST均已完成NumPy完整力、非对称CSC切线与split平均驱动平衡**。本轮夹爪四态[0,.005,.010,.025]mm／8新HP80/120全模型参考通过，输入反力.00521459203N，自由钳口+y输出.02860371846mm；生产176.48秒、14force/9tangent/1solver，无二分或失败。见[目标、实现、成本、物理效果与接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-gripper-task025-20261003)、[实际x1形变／力与补充x40](functional_views/native_gripper_task025_20261003/native_mean_path.png)及[四帧动画](functional_views/native_gripper_task025_20261003/native_mean_path.gif)。下一功能优先现有原生细夹爪的小步平均驱动及真实切线/LU成本；该设计不同于粗设计，不称网格收敛。完整研究行程／真实夹持／释放重入／H2-H3／HF5标签仍待完成。
 
-本阶段来源、完整四态、8新HP及真实图已完成；正在按既定main授权交付并准备一次明确异目录普通CLI恢复。当前未把静态审阅或公开恢复计划写作已执行结果，恢复实际证明将随后登记。
+main 7baa4b6及[本阶段实际公开恢复](handoff/native_gripper_task025_20261003/public_recovery_verify.json)通过：20 payload／131数组、图包6文件字节相同；物理与求解诊断JSON仅排明确耗时及关联hash。公开CLI192.58秒、0新HP，同机同runtime异目录范围；正式与公开共28force/18tangent/2solver，原新HP仍8。下一细候选小步路径已具体规划，尚未准备或执行。
 
 以下增补保留各执行时点；当前结论和下一步以本条及报告末节为准。旧记录中的“尚未实现”和旧计划不作为当前状态。
 

@@ -1316,3 +1316,17 @@ python -B functional_views/native_gripper_task025_20261003/plot_native_mean_inve
 依据本机粗两态67秒／4HP45秒及细制造force约6倍，近期新阶段预算为唯一pure prepare outer30，**唯一生产连续600秒／8GiB／outer660**，仅pass后**全部实际接受态参考360秒／8GiB／outer420**，pass后唯一实际图outer120。这是明确新阶段上限，不借已关闭300/240窗口；细DOF约3.93倍、LU填充未知，不保证运行时间/内存。原tol/scale/Armijo/bisection及minimum_increment6.25e-5保持，所有接受态2N新HP、完整元素/DOF/所有系数组装与声明v方向参考；首阶段错误停止，无修复重试/force。执行前先实际全文审来源/facts、冻结sources/inputs并登记，本文仅只读计划，未创建fine stage或启动fine physics。
 
 成功后用实际五输入节点/均值、自由+y输出/R、全CSC/LU成本及原门决定继续原.025还是排查具体问题。后续只保持能力依赖路线：明确研究行程/工件测力协议→真实夹持与释放→少量同任务候选比较→HF5研究输出；H2/H3未选择，草案5mm不自动成为已批准物理任务。整体goal仍active。
+
+### main交付与实际公开恢复
+
+科学源码、完整四态及8新HP、真实图和独立核对已提交推送main **7baa4b6d058ea59d8e6bb3e495b1fce062867735**，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。公开干净clone D:/hf-restore-20260930从54aaa4e只fetch＋fast-forward至此HEAD，main/clean/origin/0-0实际确认，6260交付文件manifest verify真实terminal exit0/pass。science manifest SHAd2aafd625cced0682a2212224825e760e7f9e352116d4a45adbd88fed71bb8ba；本次普通输入、完整模型/状态/三力/CSC/完整raw参考/源胶囊/图/过程随普通Git，不依赖原盘符或额外Release读取这些结果。六入口最新指针及四项真实功能矩阵已更新，早期时点记录保留。
+
+[实际恢复证明](../handoff/native_gripper_task025_20261003/public_recovery_verify.json) SHA**475da5796a2795c392f2f1983de6c49ec8983b89e6bd465e27bdfc738df82088**。公开一次普通CLI192.5838339秒、outer193.3865813秒，在300秒／8GiB内；child-tree采样761.015625MiB、wrapper＋完整child-tree797.71484375MiB。Popen root-only另4.625MiB、明确排除后代且不用作整个worker/资源判定。20数值payload文件原bytes相同，131数组dtype/shape/C-bytes相同；4state JSON/result只排原明确实测time及关联descriptor hash，物理/所有settings/14force9tangent1solver counts/Newton/Armijo/LU/资格字段类型与数值均精确相同，不是整result JSON字节相同。
+
+冻结viewer一次仅读公开保存数据3.0511152秒，明确x40，与原6件PNG/GIF/CSV/metadata/reader/helper逐bytes相同，0model/force/tangent/solver/HP。公开log/replayreceipt/result及4stateJSON和两outer receipts随proof保存，已有正式大数组不重复复制。39sources及全部inputs/参考bindings前后SHA不变，publicclone干净，output在clone外；同机同runtime异目录不能冒称另一机器性能或新物理资格。本阶段正式＋公开共28force/18tangent/2solver，HP仍唯一8新调用，无重复小模型测试/修复重试，原生产/参考窗口未重开。
+
+实际保存生产计时还显示内核/transfer170.1505011秒、组装.037915秒、稀疏LU累计.32674秒、callback.0479881秒；本粗任务成本主要在内核，未来细网格须实测，不能将此次LU时钟简单推广。八次线性求解均保留非对称general sparse LU，混合单位normwise backward error仅作diagnostic；原force/constraint残量及独立物理门承担验收。另一作者仅读复核本轮六入口/新增报告的physics/cost/count/scope与记录相符，0新增科学执行。
+
+本阶段正式生产／参考／仅读图／公开恢复窗口完成关闭，恢复证明与本记录按既有main授权另交付。整体goal仍active；下一唯一功能按前节现有细gripper [0,.001]mm计划，**尚未创建fine阶段/prepare/force/tangent/solve/HP/plot**。原construction .025指令保持、不同设计不网格收敛、原门不放宽；先适配真实fine身份/规模与五节点显示，再冻结新窗口与输入来源。本阶段已完成两粗原TEST的功能目标，后续仍由实际响应和成本决定，不将完整研究行程/工件/释放/HF5误列完成。
+
+公开proof另由独立作者仅读轻核pass：198 wholebindings/39双胶囊及七inputs、公开clean HEAD7baa4b6/science manifest d2aafd、复制receipt/log/result＋四stateJSON、两真实outer回执、20payload SHA／131数组声明／5JSON原排除规则／6实际图SHA均相符；memory root_PID与全树范围准确、合计28/18/2/8及下一fine未执行表述正确。未新增文件、物理运行、HP、完整数组重比较或raw/gate重建。
