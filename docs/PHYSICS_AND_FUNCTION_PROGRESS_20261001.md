@@ -1,6 +1,8 @@
 # 物理与功能开发进度
 
-2026-10-03最新：新候选在**两类实际机构**实现NumPy力／切线、平均端口平衡与独立验收；反相器和原夹持器各3状态／111新HP门及111完整保存重放通过。夹持器输入.025mm时输出+y .0286037mm、增益1.14415、输入力5.21459mN；输入节点独立运动、87原固定DOF保留。看[真实x1／明确x100变形、力、J及节点位移](../functional_views/numpy_gripper_prefix_20261003/split_project_path.png)、[动画](../functional_views/numpy_gripper_prefix_20261003/split_project_path.gif)与[完整记录](NUMPY_FORCE_PROGRESS_20261002.md#numpy-gripper-prefix-20261003)。小前缀没有工件，不能叫夹持力或原父1mm全程；下一步普通LF v2数据适配，完整行程／工件功能仍待完成。
+2026-10-03最新：**普通LF v2→HF几何入口已接通**，两个规范设计及一个原生0.5mm夹持器的四张掩膜、尺寸、厚度、端口方向和权重独立核对通过，相关测试72通过／1平台跳过。看[原生结构与来源对照](../functional_views/lf_v2_adapter_20261003/lf_v2_native_masks.png)、[支承关联及端口节点](../functional_views/lf_v2_adapter_20261003/lf_v2_native_nodes.png)和[目标、依据、实施与效果](NUMPY_FORCE_PROGRESS_20261002.md#lf-v2-adapter-20261003)。前步新NumPy力／切线／平均平衡已在两规范机构各.025mm前缀通过111新参考及111重放，实际力和形变可看后文。数据转换尚未创建HF任务；一般网格模型、完整行程、工件夹持、一般接触和批量评价仍待实现。
+
+以下增补按执行时点保留；功能矩阵已更新到本条日期，旧近期建议作为开发历程阅读。
 
 2026-10-03最新增补：**split平均输入与输出弹簧已接入NumPy平衡**，两条实体拉伸诊断路径／272项新HP门通过。看[实际x1变形、支反力、驱动力、自由输出及各节点位移](../functional_views/split_average_20261003/split_average_demo.png)、[四帧动画](../functional_views/split_average_20261003/split_average_demo.gif)及[完整记录](NUMPY_FORCE_PROGRESS_20261002.md#split-average-20261003)。.1mm平均输入时，10N/mm弹簧使输出收缩幅度减少约30.86%，输入力提高约5.083%；弹簧力+.416813N不是夹持力。这里节点只满足加权平均，未绑等位移。这次验证新控制器的小实体任务；原HF3机构已有历史功能结果，新候选尚需转接机构小行程、文件适配和真实工件任务。
 
@@ -20,19 +22,19 @@
 
 | 功能 | 代码与当前进度 | 物理含义及范围 |
 |---|---|---|
-| 独立几何读取 | [data.py](../hf_repo/src/hf_eval/data.py)、[evaluate/inspect](../hf_repo/src/hf_eval/evaluation.py)；两例规范几何导出、独立安装与断开 LF 读取已通过 | 单元掩膜、尺度、厚度、支承与端口可独立读取。LF v2 新格式的准备层转换仍是方案，不能直接当作已接入 |
+| 独立几何读取 | [data.py](../hf_repo/src/hf_eval/data.py)、[evaluate/inspect](../hf_repo/src/hf_eval/evaluation.py)；两例规范几何导出、独立安装与断开 LF 读取已通过 | 单元掩膜、尺度、厚度、支承与端口可独立读取；新增 [lf_v2.py](../hf_repo/src/hf_eval/lf_v2.py) 的纯数据转换已验证两个规范包与一个原生细网格包，全部30／1800包仍未验收 |
 | 实体线性诊断 | [linear.py](../hf_repo/src/hf_eval/linear.py)；反向器、夹持器两例通过 HF1 | 已得到微小输入下的位移、输入广义力与变形图；用于单位、方向、支承及线性极限检查，无工件接触 |
-| TMC 非线性与内力组装 | [tmc_kernel.py](../hf_repo/src/hf_eval/tmc_kernel.py)、[tmc.py](../hf_repo/src/hf_eval/tmc.py)；HF2 修正 C-shape 的100原目标、HF3 两条40目标机构路径已验证 | **已有实际材料力、HuHu 正则力、总内力及一致非对称 Jacobian，并能求平衡。** 最近新候选尚未通过，不等于旧 TMC 没有 force 功能 |
+| TMC 非线性与内力组装 | [tmc_kernel.py](../hf_repo/src/hf_eval/tmc_kernel.py)、[tmc.py](../hf_repo/src/hf_eval/tmc.py)；HF2 修正 C-shape 的100原目标、HF3 两条40目标机构路径已验证 | **已有实际材料力、HuHu 正则力、总内力及一致非对称 Jacobian，并能求平衡。** 显式NumPy新候选已通过96静态状态、新C1路径及两规范机构小前缀；默认内核保持原入口 |
 | 单数组平均端口控制 | [displacement.py](../hf_repo/src/hf_eval/displacement.py)、[project_evaluation.py](../hf_repo/src/hf_eval/project_evaluation.py)；HF3 两例自由输出路径通过 | 约束端口平均位移，端口节点仍能相对变形；输入乘子为驱动器作用于模型的广义力，可读出输出平均位移 |
 | split 位移与 Dirichlet 路径 | [split_state.py](../hf_repo/src/hf_eval/split_state.py)、[split_prescribed.py](../hf_repo/src/hf_eval/split_prescribed.py)、[split_affine.py](../hf_repo/src/hf_eval/split_affine.py)；HF4-B 四组合完整通过，C1/C2 有受限通过结果 | 分别保存宏观 lift 与微小 fluctuation，避免微小 Newton 更新被大位移吞掉；现有 split 控制是规定自由度位移，支持显式阶段交接 |
-| split 平均端口增广控制 | 尚未实现；现有单数组平均端口与 split Dirichlet 控制不能直接拼接充当该系统 | 需要对 `b_inᵀ(u_lift+u_fluctuation)=d` 建立明确的增广方程，才能将 split 状态用于同类机构平均驱动 |
+| split 平均端口增广控制 | [split_displacement.py](../hf_repo/src/hf_eval/split_displacement.py) 已实现；两个小实体路径及两规范机构小前缀通过新参考核查 | 明确求解 `b_inᵀ(u_lift+u_fluctuation)=d` 的非对称增广CSC方程，节点允许相对位移；新普通文件任务映射尚待扩展 |
 | 受限法向接触 | [contact_reference_a0.py](../hf_repo/src/hf_eval/contact_reference_a0.py)、[contact_c1.py](../hf_repo/src/hf_eval/contact_c1.py)、[contact_c2.py](../hf_repo/src/hf_eval/contact_c2.py)；C1十条选定路径80态通过，v4细网格21态通过 | 已比较分离接近、规定闭合阶段及持续压紧的参考/TMC响应，也观察二维非均匀加载。v4只补测一个固定均匀任务 |
 | 一般局部接触、释放与重新接触 | 未完成一般主动集及相应物理验证 | 目前不能保证任意接触面、有限面离开/重入、卸载释放、角点等情形；已有阶段约束激活不等于一般接触算法 |
 | 真实夹持力 | 尚未实现带真实机构与工件的已验收任务；[HF5任务草案](HF5_LF_V2_ADAPTER_AND_TASK_PLAN.md)已有定义建议 | 需要明确工件、间隙与加载后，读取工件的约束反力。HF3自由输出位移、输入广义力或 LF 输出弹簧力均不能改名为夹持力 |
-| 近旋转新候选的完整 force / AD | [split_kernel_invariants_hu.py](../hf_repo/src/hf_eval/split_kernel_invariants_hu.py)已有响应实现及 NumPy 运算路径；有限算术/结构比较通过。完整 compiled force 同步及三力精度门仍未闭合，完整候选 AD 验证未完成 | 稳定 F 旧候选63保存态通过，但33制造场中3近旋转场失败。新候选应以实际力向量和参考比较判断，不能用微图通过或编译完成代替 |
+| 近旋转新候选的完整 force / AD | [split_kernel_invariants_hu.py](../hf_repo/src/hf_eval/split_kernel_invariants_hu.py) 的NumPy完整力与 [split_numpy_tangent.py](../hf_repo/src/hf_eval/split_numpy_tangent.py) 的解析机械切线已接通，并完成原静态范围和受限新平衡验证 | 96静态状态／774候选及774参考门通过，近旋转与微小应变误差已定位修正；完整compiled AD资格仍未闭合，不将NumPy结果换称AD通过 |
 | HF5、优化与1800候选 HF 标签 | HF5尚未实施；优化/生成研究层在 LF/N4 来源中存在，独立 HF 不是新优化器。1800包来源与语义已有审阅，未在本线生成可验收的批量 HF 标签或最终排名 | 外部标签可作研究资料，不能当作本实现、当前任务的高保真结果；先用一个有效任务，再逐步扩大比较数量 |
 
-历史功能结果分别见 [HF1](HF1_REPORT.md)、[HF2修正](HF2_REPAIR_REPORT.md)、[HF3](HF3_REPORT.md)、[HF4 split修正](HF4_REPAIR_REPORT.md)、[C1](HF4_C1_FINAL_REPORT.md)和 [v4](HF4_C2_V4_RETEST_REPORT.md)。这些报告中的旧“下一阶段未执行”描述属于当时状态；上述矩阵汇总到本页日期。
+历史功能结果分别见 [HF1](HF1_REPORT.md)、[HF2修正](HF2_REPAIR_REPORT.md)、[HF3](HF3_REPORT.md)、[HF4 split修正](HF4_REPAIR_REPORT.md)、[C1](HF4_C1_FINAL_REPORT.md)和 [v4](HF4_C2_V4_RETEST_REPORT.md)。这些报告中的旧“下一阶段未执行”描述属于当时状态；上述矩阵更新到2026-10-03最新数据适配阶段；原路径资格各按原报告范围。
 
 ## 现有物理结果怎样理解
 
@@ -63,7 +65,7 @@ C1 的合成实体为2×1 mm、厚1 mm，初始间隙0.25 mm，材料E=100 MPa�
 
 已有 [C1两网格力比较](../hf4_c1_results/summary_v2/c1_force_comparison.png)、[分量与数值误差](../hf4_c1_results/summary_v2/c1_precision_and_components.png)和 [实际比例变形](../hf4_c1_results/summary_v2/c1_last_accepted_deformation.png)仍可对照。重绘不增加物理覆盖。
 
-最近的最小功能闭环建议是：为新候选已有 `_response(..., xp=np)` 提供清晰的 NumPy 力入口，先用原 `unit__near_rotation` 的实际 lift/fluctuation 计算全部八个自由度的材料力、正则力和总力。它能绕开当前大型 JIT 图的执行等待，直接回答新公式是否改善已知的力误差；这会增加可用的固定状态响应入口，尚不等于实现新的平衡路径。
+以下为2026-10-01当时的近期建议，其NumPy力／切线／平衡及后续平均端口工作已完成受限验证，当前接续见本页首条及最新实施记录。原建议是：为新候选已有 `_response(..., xp=np)` 提供清晰的 NumPy 力入口，先用原 `unit__near_rotation` 的实际 lift/fluctuation 计算全部八个自由度的材料力、正则力和总力。它能绕开当前大型 JIT 图的执行等待，直接回答新公式是否改善已知的力误差；这会增加可用的固定状态响应入口，尚不等于实现新的平衡路径。
 
 本步只需比较已保存 HP80/120 参考，保留原总力 `1e-11`、两分力 `1e-9` 的归一尺度与门限，同时检查有限值、`J>0`、支持域及力分解一致性。给出八分量数值表、参考/变形网格叠图、三类力及误差图，明确该位移场是给定场。随后根据结果决定：通过则接一个已验证 C1 保存态的全局组装，检验实际残差的切线/Jv，再推进平衡控制；失败则针对实际误差分量修改。记录一份结果 JSON、数值数组与短说明即可。
 

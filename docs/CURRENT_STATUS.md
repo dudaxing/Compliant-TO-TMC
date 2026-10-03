@@ -1,6 +1,8 @@
 # 当前目标与状态
 
-2026-10-03最新：**共用NumPy split平均入口已完成原反相器及夹持器各自[0,.001,.025]mm小前缀，每例111新HP检查及111完整保存重放通过**。夹持器末态输出+y .0286037mm／输入力.00521459N，原87固定DOF及全背景对称保留；反相器结果见前节。看[完整实施、效果、限制及恢复](NUMPY_FORCE_PROGRESS_20261002.md#numpy-gripper-prefix-20261003)、[夹持器实际x1／明确x100结构及力图](../functional_views/numpy_gripper_prefix_20261003/split_project_path.png)、[三帧动画](../functional_views/numpy_gripper_prefix_20261003/split_project_path.gif)。下一步普通LF v2纯数据适配；原父1mm、一般接触、工件、夹持力及HF5继续未完成。
+2026-10-03最新：**普通LF v2数据入口已实现，三例原生转换与独立读取通过，四掩膜零差异；72项相关测试通过、1项Windows符号链接测试跳过**。两个规范HF身份和标签与原件一致；细夹持器保留160×80／0.5mm及五节点端半权，背景(60,80]仅为来源。看[完整目标、实施、效果和接续](NUMPY_FORCE_PROGRESS_20261002.md#lf-v2-adapter-20261003)、[原生结构对照](../functional_views/lf_v2_adapter_20261003/lf_v2_native_masks.png)、[节点权重](../functional_views/lf_v2_adapter_20261003/lf_v2_native_nodes.png)。前步两例NumPy力／切线／平均平衡各111新参考及111重放保持；下一步扩展显式普通任务／模型映射，分析网格政策仍待决定，未新增FE／HP／求解。
+
+以下历史条目按执行时点保留，旧“下一步／未实现”不覆盖本条及最新实施记录。完整行程、工件、真实夹持力、一般接触及批量HF标签仍待完成。
 
 2026-10-03最新：**split平均端口＋NumPy增广平衡已实现；六单元实体诊断的两条路径完成，8记录／272项新HP80/120检查通过**。见[目标、实现、实际效果和接续](NUMPY_FORCE_PROGRESS_20261002.md#split-average-20261003)、[实际形变／力／输出／独立节点图](../functional_views/split_average_20261003/split_average_demo.png)和[四帧动画](../functional_views/split_average_20261003/split_average_demo.gif)。平均输入为.1mm时，输出弹簧使收缩从−.0602864减至−.0416813mm，输入力从4.45438增至4.68079N。三输入节点允许不同位移，默认内核不变；小实体功能资格不等于规范机构、接触或HF5资格。下一步为原HF3规范机构的小行程NumPy split路径；文件dispatcher／LF v2适配、真实工件和一般接触仍待实现。
 

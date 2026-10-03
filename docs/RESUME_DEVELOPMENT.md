@@ -1,6 +1,8 @@
 # 在新电脑或任意新目录接续开发
 
-2026-10-03最新先看[两例NumPy split小行程及接续](NUMPY_FORCE_PROGRESS_20261002.md#numpy-gripper-prefix-20261003)：原夹持器新增3状态／111新HP检查及111完整保存重放通过，与前步反相器共用驱动／审计／查看器。普通输入、模型、向量、CSC和新参考随Git；随图冻结的`viewer_source.py`可无力学计算重画[实际夹持器图](../functional_views/numpy_gripper_prefix_20261003/split_project_path.png)。原87固定DOF、+y端口和Et20保持。下一步普通LF v2数据适配，不自动用analysis_mesh代替原生网格；父1mm、工件、一般接触及HF5尚未完成。
+2026-10-03最新先看[LF v2数据适配、验证与恢复命令](NUMPY_FORCE_PROGRESS_20261002.md#lf-v2-adapter-20261003)：API／CLI、三份原始普通包、转换包、独立检查及原生图均随Git；后续不需原下载ZIP或旧机盘符。三例四掩膜零差，两规范HF身份与旧件相同，细夹持器保持0.5mm五节点端口；72项相关测试通过、1项Windows符号链接测试跳过。本步没有新力学计算；前步两机构NumPy split小前缀仍受限通过。下一步显式普通任务／模型映射；原生数据保留不等于已决定后续HF分析网格、工件或完整行程。
+
+以下按执行时点保留早期恢复说明；接续优先使用最新实施记录，不重开关闭窗口。
 
 2026-10-03最新先看[split平均端口功能与恢复命令](NUMPY_FORCE_PROGRESS_20261002.md#split-average-20261003)：显式新入口已接NumPy实际CSC增广系统，两条六单元路径／272项新HP检查通过。模型、split状态、总／增广矩阵、参考、协议与[实际图](../functional_views/split_average_20261003/split_average_demo.png)均随Git。新平均入口尚未接入旧文件dispatcher；下一步用原HF3规范机构小行程，不能将普通实体演示当作机构、接触或批量标签验收。
 

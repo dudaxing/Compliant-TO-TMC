@@ -479,3 +479,62 @@ python functional_views/numpy_gripper_prefix_20261003/viewer_source.py --input h
 ```
 
 使用随图冻结的查看器保持该次显示身份，既有反相器同理；新的入口修改不要求覆盖历史图或证据。独立保存重放若核对当时代码来源，应在对应科学提交或源码副本上运行，文件恢复校验与新力学资格仍分开。
+
+<a id="lf-v2-adapter-20261003"></a>
+## 2026-10-03后续：普通LF v2数据适配
+
+### 目标、依据与近期范围
+
+整体目标要求HF从独立LF优化器输出的普通几何继续计算；前步已接通两例规范机构的NumPy力／切线／平衡，但`dmftd.hf_export.v2`与`hf-geometry-1.0`仍不同。本步实现准备阶段转换入口，读取普通JSON／NPZ、保留原生几何及来源语义，供后续明确任务读取；不把LF生成条件、LF参考响应或评分变成HF材料／任务／资格。
+
+基线main`b8e04f15abfc9145ac866bda39727698787285ef`，开始工作树干净。已从用户所指`Diversity-TO-Compliant-O-main (10).zip`按明确成员复制两个规范设计及按名字排序第一份原生细网格交接夹持器；ZIP前后SHA79c44fbf2570651539137d74299714823c8046d13efd9c3bad6eb32bc389745e相同，三个NPZ均与原描述SHA一致。[来源清单](../lf_data_preparation/v2_adapter_001/source_inventory.json)记录成员、原字节、原生／analysis网格与LF身份，普通输入随Git保存，后续无需原下载盘符。选择与性能无关，不冒称全部30或1800包已转换／验收。
+
+近期只细化这个数据阶段：新增独立HF数据模块和普通CLI；bool四掩膜无损转uint8、`design_domain`→`design`，原native_mesh／cell_mm／origin／domain／厚度／下半模型和四闭线段标签保持。保存完整原JSON／NPZ、原JSON／NPZ SHA、LF→HF身份与原背景(60,80]开闭语义；该背景不作为已施加HF约束，`analysis_mesh`只作来源，不重采样、不清理、不阈值、不优化。
+
+执行范围和预算在运行前明确：三个正式转换按序首错停止、无阶段重试；预计几秒，转换／独立纯数据核对阶段合计上限120秒／8GiB采样，另一次必要pytest子进程上限120秒、纯绘图上限120秒。均没有力、HP或平衡求解。坏输入反例放临时目录，原输入与旧冻结输出不改。验收为两规范HF四掩膜／权威网格／模型范围／区域标签／HF geometry_id逐项相同、细网格保持160×80／0.5mm且端口五节点梯形权重、来源和身份哈希正确、损坏SHA／掩膜／方向／区间等拒绝行为，并生成未变形几何对照图。图中端口箭头表示参考方向，不是力或位移。
+
+完成这个阶段不授予细网格FE、统一分析网格、工件、完整行程、正式标签或HF5资格。现有HF3 `build_project`的原80×40／1mm任务限制保持；下一步根据转换结果扩展普通任务／模型入口，再决定有限路径与物理定义。实际实现、测试、效果、取舍与恢复将在本节补记。
+
+### 实际实现、验证与可见效果
+
+新增 [lf_v2.py](../hf_repo/src/hf_eval/lf_v2.py)（163行）与 [普通CLI](../hf_repo/scripts/import_lf_v2.py)（28行），复用既有HF几何写入、区域节点和梯形权重实现。严格读取原声明的四个bool数组，保留原生轴向／尺度／厚度／半模型及原始JSON／NPZ；仅无损dtype和字段名映射。LF v2继承的LF v1 geometry_id只覆盖三掩膜，因而同时保存原JSON／NPZ SHA和新的HF四掩膜身份，避免把未覆盖的design_domain或区域记录当作已校验。完整LF参考响应／生成记录只保留为来源。
+
+运行前静态交叉审阅发现类型比较可能让False==0或数字字符串通过前段比较，已在正式执行前改为把原始类型交给既有HF规范化器验证；增加两个定向反例，未放宽门、未改既有data.py／regions.py。实现、CLI、测试、查看器和独立核对器的执行字节随[sources](../lf_data_preparation/v2_adapter_001/sources)冻结。
+
+[正式转换回执](../lf_data_preparation/v2_adapter_001/execution_receipt.json)记录三例各一次、exit0／pass、内部0.104891秒、采样峰值38,334,464bytes（36.56MiB）；这是准备后区间，非整进程墙钟。原ZIP与保存输入来源绑定，三例源文件和9份冻结源码前后SHA一致。LF导入、FE、force、HP和solver调用均为0。
+
+| 原生包 | 网格nx×ny／h mm | 实体单元 | 四掩膜变化单元 | 原生端口节点／权重 |
+| --- | --- | ---: | ---: | --- |
+| 规范反相器 | 80×40／1 | 1128 | 每张0 | 3／[.25,.5,.25]；输入+x、输出−x |
+| 规范夹持器 | 80×40／1 | 1086 | 每张0 | 3／[.25,.5,.25]；输入+x、输出+y |
+| 原生细夹持器 | 160×80／.5 | 4358 | 每张0 | 5／[.125,.25,.25,.25,.125]；输入+x、输出+y |
+
+[独立核对器](../lf_data_preparation/v2_adapter_001/review_conversion.py)不调用作者适配器，按冻结原文件SHA、独立LF三掩膜header、HF权威四掩膜ID、原生闭段和单元关联核对；实际一次2.254537秒／exit0，三例通过，见[独立结果](../lf_data_preparation/v2_adapter_001/independent_review.json)。两规范HF身份分别2e2bb346…／d4e82cfd…，四掩膜、网格、厚度、model_extent和region_tags与旧规范件相同；细包新HF身份62dd40a9ed8a41a6a2deb55927982c7f409d63bfedbf96079b2ee032e816da8d。支承原闭段关联实体节点分别4/9、3/9、4/17；原背景和实体对称段互斥并覆盖顶线，背景保持来源且未施加HF约束。
+
+独立检查初始外层启动包装因Windows路径键的斜杠不一致出现KeyError，发生于subprocess之前、检查器实际启动0次；仅包装使用as_posix统一后执行唯一一次实际检查，冻结检查器及实现字节未改。[启动回执](../lf_data_preparation/v2_adapter_001/review_launch_receipt.json)保留异常和0→1次的区别；没有重转换、修改数据或放宽验收。
+
+[相关pytest](../lf_data_preparation/v2_adapter_001/test_receipt.json)唯一一次，进程3.449562秒、pytest内部2.63秒，**72通过、1跳过**：新16项包括三例正例与13定向坏输入反例，另复用数据／区域回归。跳过项是既有descriptor_symlink测试，Windows WinError1314禁止创建符号链接，本轮未授予该项通过；没有导入LF或运行力学回归。
+
+[未变形结构对照](../functional_views/lf_v2_adapter_20261003/lf_v2_native_masks.png)和[原生节点／端口权重](../functional_views/lf_v2_adapter_20261003/lf_v2_native_nodes.png)纯读取保存数据一次绘成（2.653237秒／exit0），原生尺寸与结构倍率1。深蓝为设计实体、橙为被动实体、浅蓝为设计空区、灰为被动空区；左右四掩膜与来源一致。箭头固定5mm仅表示原声明参考方向，无力或位移含义；背景(60,80]以开／闭端点标source-only／unapplied。填充绿方块是与实体单元相邻的支承候选节点，空心是不相邻节点；均不代表本步创建或施加了HF任务。细网格五节点权重可逐点人工检查。[绘图回执](../lf_data_preparation/v2_adapter_001/plot_receipt.json)和[身份元数据](../functional_views/lf_v2_adapter_20261003/view_metadata.json)绑定来源／viewer／图SHA。
+
+### 用途、当前缺口与接续
+
+本步补上普通LF文件进入独立HF准备层的真实功能；无需LF软件、优化器或原下载工作目录。运行时HF仍读取明确的hf-geometry-1.0。它没有使用analysis_mesh重采样，没有自动采用源LF弹簧／评分／材料，也没有完成细网格力学、统一网格政策、工件或全量候选资格。已有HF3 build_project的80×40／1mm限制与原任务保持；新转换包不能自动变成细网格HF任务。
+
+下一步扩展**显式普通任务／模型映射**：复用既有Q1模型构造和端口函数，明确材料、支承关联、实体／背景对称、输入均值和输出方向；先做无力／无求解的模型核对及节点图，验证规范包与旧模型等价、细包五节点正确，再根据新模型成本计划有限路径。后续HF分析网格的原生／统一.5mm政策已向所有者提问，尚无答复；本轮只保留原生数据。工件、行程、真实夹持力定义也仍未由HF5草案自动批准。全部30／1800包的转换与资格另按需要扩展，不用三例结论代替全量验收。
+
+在任意克隆根可运行普通数据转换（new-geometry必须不存在；expected SHA见来源清单）：
+
+```text
+python hf_repo/scripts/import_lf_v2.py --source lf_data_preparation/v2_adapter_001/inputs/gripper_native_fine/design.json --output new-geometry --expected-descriptor-sha256 05aa71c6d3a77d4a221fe16453f06e7e19b45325a4aff824a951c95d4fd1a443
+```
+
+仅读保存数据重画本次图（my-data-view必须不存在）：
+
+```text
+python functional_views/lf_v2_adapter_20261003/plot_lf_v2_conversion_frozen.py --input lf_data_preparation/v2_adapter_001 --output my-data-view
+```
+
+这是数据入口和显示的复现，不是新力、HP或平衡求解。异目录图元数据中的input_root会跟随实际读入根，其他身份与数值须一致，不虚称完整metadata字节相同。main交付和公开异目录恢复的实际结果将在下段补记。
+
+两路实际审图及独立保存数据检查通过，见[测试／数据审图](../lf_data_preparation/v2_adapter_001/visual_review_tests.json)和[独立数理审图](../lf_data_preparation/v2_adapter_001/visual_review_math.json)。均确认三例结构与mm尺度、细网格端半权、实体关联节点、开闭背景、方向箭头和未施加HF任务说明；无重绘／重转换／力学计算。测试回执的started_utc字段实际在运行后写入；回执原字节保持，这里明确更正其解释：该值不是实测启动时间。3.449562秒为实际subprocess墙钟，不受字段命名影响。
