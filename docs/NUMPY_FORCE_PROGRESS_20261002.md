@@ -416,4 +416,6 @@ HP均值和固定误差均零，所有J为正。[与原HF3标量的对照](../hf
 python hf_repo/scripts/plot_split_project_path.py --input hf4_c2_stable_f_validation/numpy_inverter_prefix_001/solve --audit hf4_c2_stable_f_validation/numpy_inverter_prefix_001/audit --output my-view
 ```
 
-另需新数值时以新的solve／audit目录运行本节冻结身份入口，不覆盖本次数据；旧科研结果、失败和卡窗口都不重开。本轮公开克隆恢复与推送身份将在交付后补记。
+另需新数值时以新的solve／audit目录运行本节冻结身份入口，不覆盖本次数据；旧科研结果、失败和卡窗口都不重开。
+
+本轮科学代码、状态、新参考与图普通推送main提交`581a9990c6cee05f5d48c3936c86c9a3bc220f65`。另目录公开克隆从`496b317`仅fetch＋fast-forward至该提交，4938件普通文件身份校验通过，前后工作树干净；使用Git保存输入和证据纯重画三帧。当前PNG、GIF、数值CSV、查看器源码及完整metadata五文件均与作者版本逐字节相同；[公开恢复回执](../handoff/numpy_inverter_prefix_20261003/public_recovery_verify.json)保存实际命令、exit与SHA。本次不调用力、HP或求解，不新增Release资产；这是同机异目录恢复及显示可复现证明，不冒称异机运行环境或新的力学资格。
