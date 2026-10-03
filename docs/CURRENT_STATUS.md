@@ -1,6 +1,6 @@
 # 当前目标与状态
 
-2026-10-03最新：**普通原生Q1映射已接通，三例各19数组独立精确相同，10项针对测试通过**。坐标、BL／BR／TR／TL连接、四掩膜、端口向量与候选／实体关联子集均保存；细网格12800单元／13041节点／26082DOF，每单元面积.25mm²，五节点端半权保持。见[实施、效果、预算及接续](NUMPY_FORCE_PROGRESS_20261002.md#native-q1-preparation-20261003)、[Q1网格图](../functional_views/native_q1_20261003/native_q1_geometry.png)、[端口／候选节点图](../functional_views/native_q1_20261003/native_q1_ports_candidates.png)。本步无材料、fixed/free、任务或力学计算；下一步显式任务／模型构造。H2分析网格及H3工件仍待决定，原完整行程／一般接触／批量标签尚未完成。
+2026-10-03最新：**显式native任务模型已接通，三例23字段独立精确相同，5案构造测试通过**。材料／实体与背景实际边界／端口均值／free DOF／九点Simpson算子均保存；两粗17旧intrinsic字段相同，细26082DOF／169fixed／25913free，物理Lr保持80mm。见[目标、执行、预算和接续](NUMPY_FORCE_PROGRESS_20261002.md#native-model-construction-20261003)、[实际模型边界图](../functional_views/native_model_20261003/native_model_applied_bcs.png)、[端口方程图](../functional_views/native_model_20261003/native_model_port_equations.png)。仅构造TEST，没有执行.025mm或组装／force／HP／solver；下一步新普通模型的静态NumPy力／参考。全研究H2／H3、原完整行程／一般接触／批量标签未完成。
 
 以下历史条目按执行时点保留，旧“下一步／未实现”不覆盖本条及最新实施记录。完整行程、工件、真实夹持力、一般接触及批量HF标签仍待完成。
 

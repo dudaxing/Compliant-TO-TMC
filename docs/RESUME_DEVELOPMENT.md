@@ -1,6 +1,6 @@
 # 在新电脑或任意新目录接续开发
 
-2026-10-03最新先看[原生Q1准备功能与恢复](NUMPY_FORCE_PROGRESS_20261002.md#native-q1-preparation-20261003)：API／CLI、三例19字段map.json／map.npz、可直接HF读取的source_geometry副本、独立核对、测试及两图随Git；已有普通LF v2转换包继续作为输入。十项针对测试通过，两个粗规范映射与原保存模型字段相同；细包12800元素／13041节点／26082DOF及五节点端半权保持。映射没有材料或施加边界，H2仍未默认选择。下一步添加明确任务合同的模型入口；旧HF3身份／h1限制、原冻结数值证据和关闭窗口保持。
+2026-10-03最新先看[显式原生任务／模型实现与恢复](NUMPY_FORCE_PROGRESS_20261002.md#native-model-construction-20261003)：native_project API／CLI、三份明确TEST task、23字段model.json／model.npz和源HF副本、独立核对、五案测试及两图随Git。两粗旧模型intrinsics精确相同；细.5mm保留五节点权重和169fixed。任务绑定四mask几何ID及完整descriptor语义SHA，analysis_grid.policy必须显式native；没有默认全研究政策。输入.025只是保存指令，force／solver未运行。下一步先新文件接口的NumPy静态力与参考，再安排有限路径；原冻结证据与默认内核保持。
 
 以下按执行时点保留早期恢复说明；接续优先使用最新实施记录，不重开关闭窗口。
 

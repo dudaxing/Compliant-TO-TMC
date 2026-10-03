@@ -1,6 +1,6 @@
 # Compliant-TO-TMC：独立 HF 力学评估器
 
-2026-10-03当前：**原生Q1准备入口已实现，三例各19项映射数组独立精确核对通过，10项针对测试通过**。节点、单元连接、端口向量和来源候选节点已有普通JSON／NPZ；细夹持器保留12800单元／13041节点／26082DOF及五节点端半权。看[目标、实现、实际效果及接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-q1-preparation-20261003)、[网格／Q1编号图](functional_views/native_q1_20261003/native_q1_geometry.png)、[端口分量与候选节点](functional_views/native_q1_20261003/native_q1_ports_candidates.png)。本步没有生成材料或施加边界；下一步显式任务／模型入口。此前两规范机构NumPy力／切线／平均平衡小前缀各111新参考及111重放保持，工件和批量HF仍待完成。
+2026-10-03当前：**显式原生任务／模型入口已实现，三例23项模型数组独立精确核对、5案构造测试通过**。两粗规范17项旧模型字段相同，细夹持器保留.5mm／26082DOF及五节点均值，构造TEST下fixed为89／87／169。看[目标、实现、效果和接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-model-construction-20261003)、[实际模型边界](functional_views/native_model_20261003/native_model_applied_bcs.png)、[端口均值方程](functional_views/native_model_20261003/native_model_port_equations.png)。本步已分配材料和模型边界，未执行保存的.025mm指令；下一步新普通模型的NumPy静态完整力与参考，再推进数值路径。此前NumPy力／切线和两规范小前缀受限通过，工件／批量HF仍待完成。
 
 以下按执行时点保留此前进展；当前下一步以本条及链接末节为准。
 

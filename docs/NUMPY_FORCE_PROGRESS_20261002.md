@@ -609,3 +609,67 @@ map.json／map.npz及source_geometry副本均普通数据；独立检查和冻�
 本轮原生Q1 API／CLI、三份完整映射／HF源副本、冻结源码、独立审阅／测试和两张图已普通推送main提交6076ad70b29291b21f361240570ed824b7698702。公开异目录克隆只fetch＋fast-forward至该提交，5113件普通仓库文件身份通过，工作树前后干净；公开克隆的9个执行源码SHA也与冻结生产身份一致。
 
 实际仅使用公开克隆中的普通HF转换包和CLI，三例各准备一次至三个新的外部目录；12件map.json／map.npz／source_geometry JSON／NPZ全部与已发布结果逐字节相同。冻结查看器仅读公开克隆的保存map重绘一次，**两张PNG、冻结查看器和完整view_metadata.json四件全部逐字节相同**；本次metadata只用相对输入布局，未出现前步LF查看器的绝对input_root差异。[公开恢复回执](../handoff/native_q1_20261003/public_recovery_verify.json)记录实际命令、启动／运行时间、exit、全部文件SHA及结果，均exit0、无重试。它证明同机另一目录使用普通Git资料的数据准备及显示可复现，不证明异机环境或新力／切线／平衡资格。实际恢复没有导入LF、选择分析网格政策、创建物理任务或调用组装／force／HP／solver；没有新增Release依赖。回执和本段说明随后与更新后的普通文件清单一同交付main。
+
+<a id="native-model-construction-20261003"></a>
+## 2026-10-03接续：显式任务与原生模型构造
+
+### 目标、依据与正式执行前计划
+
+原生Q1准备及公开异目录恢复已闭合，main基线a0b009dfafef7c2dcbb6aa817f9428cd7e9461f5。整体目标和“NumPy完整力／参考→组装／切线→平衡”的数值顺序保持；现有函数层和两规范小前缀已分阶段验证，当前新几何进入实际模型仍被旧HF3严格接口阻碍。本阶段复用native_map与现有Project／TMCModel，新增显式task API／普通CLI，只生成材料、边界、端口和Q1参考算子，随后才为新候选安排静态力与有限平衡。
+
+新接口build_native_project(geometry_file,task_dict)不改旧project.py／HF3 schema／驱动身份表／NumPy公式／默认内核／编译选项／依赖。新task独立schema且完整必填：几何四掩膜ID及覆盖区域的语义descriptor SHA、显式analysis_grid.policy、单位／plane_strain材料／γ／α／物理Lr、实体关联支承与实体对称分量、明确背景段或null、输入加权平均及目标、自由输出、无输入辅助弹簧／工件、未变形参考及待定资格门。首版policy只支持显式native；不隐式选择或实现统一细分。几何hx／hy／厚度保持，kr使用物理Lr，力与能量保持下半模型无自动倍增，LF参数／背景候选不会自动施加。
+
+本轮只构造[清单](../lf_data_preparation/native_model_001/input_inventory.json)绑定的三份普通HF几何，各配一个[构造TEST任务](../lf_data_preparation/native_model_001/tasks)：两规范沿旧HF3材料与完整顶线条件，细夹持器明确native及相同测试材料／完整顶线条件，仅验证接口。目标.025mm是保存指令，不在本阶段执行；与原父task1mm的hash不等价，不授予父完整路径资格。细包是另一结构，不能作为粗→细网格收敛证据。这些TEST不回答全研究H2网格选择，不采用HF5工件／5mm／夹持力草案；新项目记录和原mapping的未施加标记各属不同层，不改原mapping。
+
+正式构造三例各唯一一次、首错停止、不覆盖／重试；生产一个进程120秒／采样RSS8GiB，独立核对另一个子进程120秒，两个窗口明确独立、不声称跨调度的连续总窗口。必要pytest一次120秒，仅读保存模型绘图一次120秒。只调用构造器／写入器，组装、force、HP和solver为0；导入TMC定义可能载入JAX Python模块，但NumPy reference operators不初始化／编译或调用JAX响应。预算仅协作elapsed/RSS及subprocess timeout，非硬OS资源监督。源码／输入正式执行前冻结，执行后核SHA；旧失败、卡窗口、原TMC源码保持。
+
+最低验收为三例全部intrinsic数组／材料／端口／约束与独立索引／参数公式相同；粗两例只读旧model.npz intrinsic字段精确对照（不借F0／lift／方向／路径资格）。细例12800单元／13041节点／26082DOF、五节点端半权、169 merged fixed；从h1到h.5参考梯度×2、mixed Hessian×4、九点Simpson积分权重÷4，物理Lr／kr不变。独立审阅器不调用作者native_project、旧build_project或TMCModel，以Q1节点符号解析微分重建九点算子、材料数组、约束、free／edofs和端口。五案针对测试：两粗等价、细模型及制造仿射梯度／零Hessian、显式background=null不会继承LF来源、缺policy拒绝；不扩展重复防御检查。
+
+可视化仅读保存模型，真实mm／x1展示已施加support ux／uy、entity uy、task background uy及交集／merged计数，来源(60,80]另标来源。输入说明Σwᵢuₓᵢ=d，个别端口自由度不被逐点固定；k_out=0为自由输出，方向只是参考，无力／形变／接触含义。通过后根据实际模型／成本制定新候选NumPy静态力与参考核对，再推进有限平衡；不从构造成功直接授予非线性响应或夹持资格。实际执行、效果及交付将继续在本节补记。
+
+
+### 实际实现、核对结果与作用
+
+新增 [native_project.py](../hf_repo/src/hf_eval/native_project.py) 239行和[普通CLI](../hf_repo/scripts/prepare_native_project.py) 33行，复用既有Project的数据结构／验证小函数、native_map和TMCModel。task schema为hf-native-project-task-1.0；材料值由明确任务提供，范围为E>0／0≤ν<.5／0<γ≤1／α≥0／Lr>0，首版仍限plane strain／两机构方向profile／无工件／自由输出／无辅助弹簧。这些接口范围不是对任意材料／任务的新数值资格；本次实际三个TEST均沿原E=1MPa、ν=.3、γ=α=1e-6、Lr80mm。
+
+[正式构造](../lf_data_preparation/native_model_001/execution_receipt.json)三例各唯一一次pass；构造区间1.4459982秒，采样RSS峰值137,342,976bytes（130.98MiB）。[外层生产启动](../lf_data_preparation/native_model_001/production_launch_receipt.json)记录整子进程2.2175733秒／exit0、120秒timeout；13个current／frozen源码及所有输入前后身份一致。执行前静态交叉审阅只给root包装补了最终sample()，保障最后SHA检查也在生产协作预算内；旧包装未执行，模型源码未改。构造阶段仅准备NumPy数组／算子和区域；没有组装、force、HP或solver，未执行任何.025mm目标。
+
+每个产物是[model.json／model.npz及源副本](../lf_data_preparation/native_model_001/models)：JSON保存完整task／task hash、source几何四maskID／完整semantic descriptor SHA／原JSON与NPZ SHA、网格／厚度／extent、材料、实际groups／交集／counts和资格诊断；23数组是坐标、连接、flat bool solid、λ／μ／γ、kr／hx／hy／thickness、edofs／fixed／free／solid nodes／solid DOFs、b_in／b_out、grad／hessian／weights／points、k_out及Et参考力标度。原四张二维uint8掩膜与完整metadata保留在可独立HF读取的原字节source_geometry包；不重复保存原生准备层19项数组。模型标明material／constraints／task已构造、response_evaluated=false，与前步map的未施加状态各属各层，不改其文件或语义。
+
+[独立审阅](../lf_data_preparation/native_model_001/independent_review.json)唯一子进程.5255859秒／exit0（独立120秒窗口），见[启动回执](../lf_data_preparation/native_model_001/review_launch_receipt.json)。不调用作者native_project／旧build_project／TMCModel／kernel或JAX，以节点索引、独立集合并集和N=(1+s_x ξ)(1+s_y η)/4解析微分重建：三例原19字段与前步冻结map精确相同，当前23字段dtype／shape／全部值精确一致，各C-order raw SHA声明正确，源四mask零改变，所有材料／task／背景与端口集合正确。两粗规范17个intrinsic字段与旧保存model.npz精确相同；不借用F0／lift／切线方向或原任务路径资格。
+
+| 明确构造TEST | 单元／节点／DOF | 支承DOF | entity uy DOF | task顶线uy DOF | entity／task重叠 | merged fixed／free |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| 规范反相器 | 3200／3321／6642 | 8 | 13 | 81 | 13 | 89／6553 |
+| 规范夹持器 | 3200／3321／6642 | 6 | 14 | 81 | 14 | 87／6555 |
+| 原生细夹持器 | 12800／13041／26082 | 8 | 24 | 161 | 24 | 169／25913 |
+
+背景在本TEST明确为全顶线，不是源LF(60,80]补集；重叠DOF只合并一次。E、厚度、Lr保持，λ_s=.5769230769230769MPa、μ_s=.3846153846153846MPa、κ_s=.8333333333333333MPa、kr=.008615384615384613MPa mm²，Et=20N/mm；实体材料因子为1，第三介质因子γ仅缩放其λ与μ；kr不随γ或网格hx缩放。细网格梯度×2、mixed Hessian×4、九点Simpson权重÷4；每单元参考积分体积5mm³、全计算域含介质64,000mm³。五节点端半权保持，驱动方向DOF均在free集合，未逐点绑输入位移。
+
+[五案pytest](../lf_data_preparation/native_model_001/test_receipt.json)一次 **5通过**，pytest2.78秒、整子进程4.0333607秒／exit0。两粗模型及保存源副本等价；细模型显式TEST下169fixed／25913free、独立制造仿射梯度准确重建且Hu=0；背景显式null时粗夹持器只有6支承＋14entity=20fixed，即使LF来源背景仍存在也不自动施加；缺少analysis_grid.policy明确拒绝、不从analysis_mesh推断。临时测试模型与正式三份产物分开，没有重复旧力学／LF适配测试。五案与下一绘图独立子进程并行启动，预算各自120秒，不合并为单一连续窗口。
+
+三例几何诊断均status=pending：共享边连通、支承／端口实体关联及同一连通体检查通过，设计体积分数门与最小特征门仍pending，没有重定义门或授予正式研究资格。数据／模型入口成功不代表非线性平衡、一般接触、夹持力或批量标签成功。
+
+### 实际可视化、近期接续与普通复现
+
+[实际模型边界图](../functional_views/native_model_20261003/native_model_applied_bcs.png)及[端口均值方程图](../functional_views/native_model_20261003/native_model_port_equations.png)仅读保存模型／task／HF源副本一次绘成，2.0740424秒／exit0，见[绘图回执](../lf_data_preparation/native_model_001/plot_receipt.json)。整幅真实mm／x1；深蓝实体、浅蓝第三介质；绿色实心支承ux／uy、紫色entity uy、蓝空心显式task uy均来自实际fixed groups。源LF背景另淡虚线标provenance，右表列交集并明确合并一次；5mm方向箭头仅参考。没有绘制力、真实形变或工件。
+
+端口图在原生坐标局部zoom内逐点显示3／5权重、b符号与真实非驱动分量约束。输入Σw_i ux_i=.025mm是保存指令、节点值unsolved，并未各点规定同位移；只有y40顶点的非驱动uy实际为0，其余uy不固定。反相器output−x顶点uy=0，夹持器output+y的非驱动ux均未固定；k_out=0为自由输出，不能解释为夹持力。青色标签改用白底，避免前步深蓝底低对比。细例明确是另一源设计，不作粗细收敛对。
+
+两路实际审图通过，见[数据／测试审图](../lf_data_preparation/native_model_001/visual_review_tests.json)及[独立数理审图](../lf_data_preparation/native_model_001/visual_review_math.json)。均实际看两PNG并核对保存的显示字段／文件身份，不重跑23字段全检查或构造。夹持器overview的LF背景来源虚线与task顶线标记共线，局部被遮；文字／图例／metadata仍明确provenance-only，记录为非阻断显示限制，不覆盖本轮冻结图。
+
+本阶段补齐普通几何＋明确task到真实材料／边界／端口／算子的功能接口。下一近期工作是用这些明确普通模型接入已验证的NumPy完整force，先做少量明确静态场的参考比较及三力显示，再据成本推进组装／切线和有限平衡；不从构造结果跳过新候选验证。H2全研究网格政策、H3工件／行程／真实夹持力仍未决定。新runner或批量调度尚未实现；旧HF3严格入口及已关闭数值卡保持。
+
+在任意克隆根构造新的普通模型（my-native-model必须不存在，TEST保存目标不执行）：
+
+```text
+python hf_repo/scripts/prepare_native_project.py --geometry lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.json --task lf_data_preparation/native_model_001/tasks/gripper_native_fine.json --output my-native-model
+```
+
+仅读保存模型重绘本次图（my-model-view必须不存在）：
+
+```text
+python functional_views/native_model_20261003/plot_native_project_frozen.py --input lf_data_preparation/native_model_001 --output my-model-view
+```
+
+模型、源HF普通副本、明确task、冻结源码、独立核对／测试／图都随main。查看器的实际HF reader仍来自完整Git根，helpers/data.py保存其原字节和SHA；显示metadata仅相对布局，无绝对input_root或时间。main／公开异目录恢复在下段按真实结果补记。
