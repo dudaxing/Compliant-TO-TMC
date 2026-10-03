@@ -1,0 +1,418 @@
+{
+  "schema_version": "native-force-range-saved-review-1.0",
+  "status": "pass",
+  "qualification": false,
+  "reviewed_utc": "2026-10-03T20:56:12.634408+00:00",
+  "scope": "Saved NPZ/JSON byte identities and four local scalar domain checks; read-only source interpretation",
+  "new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "assembly": 0,
+    "model_construction": 0,
+    "test": 0,
+    "plot": 0
+  },
+  "formal_diagnostic_calls": {
+    "force_started": 1,
+    "force_completed": 0,
+    "tangent_calls": 0,
+    "solver_calls": 0,
+    "HP_calls": 0,
+    "JIT_calls": 0
+  },
+  "diagnostic_helper_elapsed_seconds": 9.185051599983126,
+  "diagnostic_helper_sampled_peak_bytes": 270798848,
+  "outer_elapsed_seconds": 10.810317100025713,
+  "outer_peak_sampled_tree_bytes": 256180224,
+  "diagnostic_helper_peak_scope": "Tree sample sum of max(RSS, Windows peak_wset), conservative per-process peaks; not OS hard bound",
+  "outer_peak_scope": "Launch tree instantaneous RSS sample; different metric from child peak_wset",
+  "source_count": 57,
+  "capsule_count": 57,
+  "production_input_count": 21,
+  "diagnostic_input_binding_count": 139,
+  "protocol_binding_count": 190,
+  "npz_field_count": 27,
+  "all_field_sha_dtype_shape_match": true,
+  "captured_16_fields_match": true,
+  "model_14_overlap_fields_byte_match": true,
+  "parent_parameter_checks": {
+    "a_is_parent_low": true,
+    "b_is_parent_high": true,
+    "parent_equals_public": {
+      "a_hi": true,
+      "a_lo": true,
+      "b_hi": true,
+      "b_lo": true
+    },
+    "matmul_broadcast_equals_parent": {
+      "a_hi": true,
+      "a_lo": true,
+      "b_hi": true,
+      "b_lo": true
+    },
+    "original_right_matrix_unchanged": {
+      "hi": true,
+      "lo": true
+    }
+  },
+  "valid_all_true": true,
+  "near_all_true": true,
+  "small_products": true,
+  "selected": true,
+  "first_bad": {
+    "kind": "_finish",
+    "caller": "_dd_product_primal",
+    "caller_line": 168,
+    "stack": [
+      {
+        "file": "hf_repo/src/hf_eval/compensated_invariants.py",
+        "line": 168,
+        "function": "_dd_product_primal"
+      },
+      {
+        "file": "hf_repo/src/hf_eval/compensated_invariants.py",
+        "line": 176,
+        "function": "_dd_mul_primal"
+      },
+      {
+        "file": "hf_repo/src/hf_eval/compensated_invariants.py",
+        "line": 342,
+        "function": "dd_mul"
+      },
+      {
+        "file": "hf_repo/src/hf_eval/compensated_invariants.py",
+        "line": 401,
+        "function": "dd_matmul"
+      },
+      {
+        "file": "hf_repo/src/hf_eval/split_kernel_invariants_hu.py",
+        "line": 124,
+        "function": "_scaled_matmul"
+      },
+      {
+        "file": "hf_repo/src/hf_eval/split_kernel_invariants_hu.py",
+        "line": 165,
+        "function": "_response"
+      },
+      {
+        "file": "hf_repo/src/hf_eval/split_kernel_invariants_hu.py",
+        "line": 284,
+        "function": "_numpy_response"
+      },
+      {
+        "file": "hf_repo/src/hf_eval/split_kernel_invariants_hu.py",
+        "line": 317,
+        "function": "batch_response_split_numpy"
+      },
+      {
+        "file": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/range_diagnostic_001/trace_once.py",
+        "line": 205,
+        "function": "main"
+      },
+      {
+        "file": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/range_diagnostic_001/trace_once.py",
+        "line": 257,
+        "function": "<module>"
+      }
+    ],
+    "product": "low_x_high",
+    "input_domain_rejection": false,
+    "finite_EFT_tail_below_lower_bound": true,
+    "invalid_count": 4
+  },
+  "bounds": {
+    "OPERAND_MIN": 3.8725919148493183e-121,
+    "OPERAND_MAX": 2.5822498780869086e+120,
+    "TEMPORARY_MAX": 8.452712498170644e+270,
+    "SPLITTER": 134217729.0,
+    "EXP_ARGUMENT_MAX": 256.0
+  },
+  "invalid_entries": [
+    {
+      "index": [
+        1275,
+        6,
+        0,
+        1,
+        0
+      ],
+      "index_order": [
+        "element",
+        "integration_point",
+        "output_row",
+        "contracted_inner",
+        "output_column"
+      ],
+      "product": "low_x_high",
+      "a": {
+        "decimal": "-2.355912447473548e-26",
+        "hex": "-0x1.d2a2f40000000p-86",
+        "in_component_domain": true
+      },
+      "b": {
+        "decimal": "3.6088317917368917e-84",
+        "hex": "0x1.c0b060c4ec4ecp-278",
+        "in_component_domain": true
+      },
+      "high": {
+        "decimal": "-8.50209173899121e-110",
+        "hex": "-0x1.98ef55b5e7805p-363",
+        "in_component_domain": true
+      },
+      "low": {
+        "decimal": "4.223281860738571e-126",
+        "hex": "0x1.6dee200000000p-417",
+        "in_component_domain": false
+      },
+      "valid": true,
+      "result_hi_nan": true,
+      "result_lo_nan": true,
+      "pair_overlap_bound_satisfied": true,
+      "lower_bound_ratio": 1.0905569070018828e-05,
+      "original_left_matrix_low": {
+        "decimal": "-3.7531850634063676e-84",
+        "hex": "-0x1.d2a2f40000000p-278",
+        "in_component_domain": true
+      },
+      "power_of_two_192_input_identity": true,
+      "medium_cell": false,
+      "lam_saved": 0.5769230769230769,
+      "mu_saved": 0.3846153846153846,
+      "additional_exponent_needed_for_this_tail": 17,
+      "tail_if_existing_product_exactly_shifted_128": {
+        "decimal": "1.4371083477463862e-87",
+        "hex": "0x1.6dee200000000p-289",
+        "in_component_domain": true
+      },
+      "counterfactual_scope": "Exact power shift of stored scalar tail only; not a candidate force or EFT evaluation"
+    },
+    {
+      "index": [
+        1275,
+        6,
+        1,
+        0,
+        1
+      ],
+      "index_order": [
+        "element",
+        "integration_point",
+        "output_row",
+        "contracted_inner",
+        "output_column"
+      ],
+      "product": "low_x_high",
+      "a": {
+        "decimal": "2.355912447473548e-26",
+        "hex": "0x1.d2a2f40000000p-86",
+        "in_component_domain": true
+      },
+      "b": {
+        "decimal": "-3.6088317917368917e-84",
+        "hex": "-0x1.c0b060c4ec4ecp-278",
+        "in_component_domain": true
+      },
+      "high": {
+        "decimal": "-8.50209173899121e-110",
+        "hex": "-0x1.98ef55b5e7805p-363",
+        "in_component_domain": true
+      },
+      "low": {
+        "decimal": "4.223281860738571e-126",
+        "hex": "0x1.6dee200000000p-417",
+        "in_component_domain": false
+      },
+      "valid": true,
+      "result_hi_nan": true,
+      "result_lo_nan": true,
+      "pair_overlap_bound_satisfied": true,
+      "lower_bound_ratio": 1.0905569070018828e-05,
+      "original_left_matrix_low": {
+        "decimal": "3.7531850634063676e-84",
+        "hex": "0x1.d2a2f40000000p-278",
+        "in_component_domain": true
+      },
+      "power_of_two_192_input_identity": true,
+      "medium_cell": false,
+      "lam_saved": 0.5769230769230769,
+      "mu_saved": 0.3846153846153846,
+      "additional_exponent_needed_for_this_tail": 17,
+      "tail_if_existing_product_exactly_shifted_128": {
+        "decimal": "1.4371083477463862e-87",
+        "hex": "0x1.6dee200000000p-289",
+        "in_component_domain": true
+      },
+      "counterfactual_scope": "Exact power shift of stored scalar tail only; not a candidate force or EFT evaluation"
+    },
+    {
+      "index": [
+        1348,
+        8,
+        0,
+        1,
+        0
+      ],
+      "index_order": [
+        "element",
+        "integration_point",
+        "output_row",
+        "contracted_inner",
+        "output_column"
+      ],
+      "product": "low_x_high",
+      "a": {
+        "decimal": "-2.1471410252043894e-26",
+        "hex": "-0x1.a948fc0000000p-86",
+        "in_component_domain": true
+      },
+      "b": {
+        "decimal": "3.289031730109378e-84",
+        "hex": "0x1.98ed8fd89d89dp-278",
+        "in_component_domain": true
+      },
+      "high": {
+        "decimal": "-7.062014960916817e-110",
+        "hex": "-0x1.53ab7c947607bp-363",
+        "in_component_domain": true
+      },
+      "low": {
+        "decimal": "4.37677928495482e-126",
+        "hex": "0x1.7b3ae80000000p-417",
+        "in_component_domain": false
+      },
+      "valid": true,
+      "result_hi_nan": true,
+      "result_lo_nan": true,
+      "pair_overlap_bound_satisfied": true,
+      "lower_bound_ratio": 1.1301937774987891e-05,
+      "original_left_matrix_low": {
+        "decimal": "-3.4205929993137535e-84",
+        "hex": "-0x1.a948fc0000000p-278",
+        "in_component_domain": true
+      },
+      "power_of_two_192_input_identity": true,
+      "medium_cell": false,
+      "lam_saved": 0.5769230769230769,
+      "mu_saved": 0.3846153846153846,
+      "additional_exponent_needed_for_this_tail": 17,
+      "tail_if_existing_product_exactly_shifted_128": {
+        "decimal": "1.4893408145749588e-87",
+        "hex": "0x1.7b3ae80000000p-289",
+        "in_component_domain": true
+      },
+      "counterfactual_scope": "Exact power shift of stored scalar tail only; not a candidate force or EFT evaluation"
+    },
+    {
+      "index": [
+        1348,
+        8,
+        1,
+        0,
+        1
+      ],
+      "index_order": [
+        "element",
+        "integration_point",
+        "output_row",
+        "contracted_inner",
+        "output_column"
+      ],
+      "product": "low_x_high",
+      "a": {
+        "decimal": "2.1471410252043894e-26",
+        "hex": "0x1.a948fc0000000p-86",
+        "in_component_domain": true
+      },
+      "b": {
+        "decimal": "-3.289031730109378e-84",
+        "hex": "-0x1.98ed8fd89d89dp-278",
+        "in_component_domain": true
+      },
+      "high": {
+        "decimal": "-7.062014960916817e-110",
+        "hex": "-0x1.53ab7c947607bp-363",
+        "in_component_domain": true
+      },
+      "low": {
+        "decimal": "4.37677928495482e-126",
+        "hex": "0x1.7b3ae80000000p-417",
+        "in_component_domain": false
+      },
+      "valid": true,
+      "result_hi_nan": true,
+      "result_lo_nan": true,
+      "pair_overlap_bound_satisfied": true,
+      "lower_bound_ratio": 1.1301937774987891e-05,
+      "original_left_matrix_low": {
+        "decimal": "3.4205929993137535e-84",
+        "hex": "0x1.a948fc0000000p-278",
+        "in_component_domain": true
+      },
+      "power_of_two_192_input_identity": true,
+      "medium_cell": false,
+      "lam_saved": 0.5769230769230769,
+      "mu_saved": 0.3846153846153846,
+      "additional_exponent_needed_for_this_tail": 17,
+      "tail_if_existing_product_exactly_shifted_128": {
+        "decimal": "1.4893408145749588e-87",
+        "hex": "0x1.7b3ae80000000p-289",
+        "in_component_domain": true
+      },
+      "counterfactual_scope": "Exact power shift of stored scalar tail only; not a candidate force or EFT evaluation"
+    }
+  ],
+  "original_matrix_max_abs": {
+    "frame4_a_hi": 1.0,
+    "frame4_a_lo": 1.8899529567285e-26,
+    "frame4_b_hi": 2.939549837087383e-28,
+    "frame4_b_lo": 1.9869974318347326e-44
+  },
+  "causality": {
+    "operation": "S = transpose(T) @ P",
+    "source_line": 165,
+    "small_P_already_selected_before_S": true,
+    "S_in_output_pairs": true,
+    "S_required_by_scalar_arithmetic_supported": true,
+    "response_internal_dictionary_return_inferred_from_original_NumPy_response_exception": true,
+    "public_response_returned": false,
+    "source_interpretation": "No branch selection discards S. Unsupported matmul products propagate through S and its support check; outer NumPy response rejects the whole complete response. S itself is an auxiliary stress observation, not the weak-force P contraction.",
+    "limitation": "Final S tensor and later support flags were not saved by this observer; their propagation is source inference, not a second evaluation."
+  },
+  "minimal_candidate": {
+    "status": "proposal_only_not_executed",
+    "change": "Only selected _scaled_matmul up/down scale from 2^+/-192 to 2^+/-320; direct branch and _scaled_mul/division/energy/tangent expressions and all gates remain unchanged",
+    "basis": "For the four stored tails, the extra 128-bit scale shifts exponent -417 to -289. These four tails require at least 17 extra bits, but that alone does not cover unseen inner products or later operations.",
+    "upper_bound": "Selected response branch has all |G_ij|<=2^-64 and |lambda|,|mu|<=256. Thus F and inverse-transpose T remain near identity, while the incremental tensor and P are small. At the two actual matmul call sites, bounding both matrix operands by 2 gives 320-scaled operands <=2^321, products <=2^322 and a two-term sum <=2^323, below the unchanged normalized upper bound 2^400 and temporary bound 2^900. This is a response-call-site bound, not a universal arbitrary-matrix promise.",
+    "saved_upper_check": {
+      "max_left_high": 1.0,
+      "hypothetical_q320_left_high_max": 2.13598703592091e+96,
+      "below_operand_max": true
+    },
+    "lower_bound_risk": "No fixed scale guarantees every isolated high/low product or EFT tail remains >=2^-400 for all legal normalized input pairs. A constant scale can move this rejection to another product, a different near-zero state, cancellation, or the final downscale; complete response replay is still needed under a separate frozen candidate phase.",
+    "other_state_risk": "selected=False path must remain identical. selected=True must retain the existing small-G/operator/coefficient preconditions; general larger left operands could exceed the new upscaled operand or product bound. Inverse scale 2^-320 is itself within the operand domain.",
+    "validation_next": "A separate candidate once on this exact captured input should first establish whether the full force response completes; only then compare retained P/S/forces and applicable derivative identities with independent reference using original gates. The original production and diagnostic cards remain closed; no repair/retry under their budgets."
+  },
+  "input_files_sha256": {
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/range_diagnostic_001/evidence/result.json": "d6ac1983304f8e189f40765ef2c43eb708f9396c1319df5975085e645377f916",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/range_diagnostic_001/evidence/first_bad_primitive.npz": "bc2bae73881cdd0a4ff74d204bee0736d3a125b1e6e5e0e969d2128ce98342d2",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/range_diagnostic_001/evidence/input.npz": "f83186e0bab2f7840459bc89d38db9392e0db6068c7927a35b98d37fa08b2095",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/range_diagnostic_001/evidence/observation.json": "6aa40960c2ef4186f644d70a37f6cef5d59fd76760fff153eee666dc3fec34a6",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/range_diagnostic_001/evidence/source_model.npz": "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/range_diagnostic_001/evidence/trace_once.py": "2a77d784820c523778beb72d6313c87be51457dbb1a53bf1ded89a9c58da085b",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/range_diagnostic_001/trace_once.py": "2a77d784820c523778beb72d6313c87be51457dbb1a53bf1ded89a9c58da085b",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/range_diagnostic_001/protocol.json": "0d3391c75c173afc59399cc902a00da11233b3e54b756e6ed7a18aff302a6986",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/range_diagnostic_launch.json": "9ee262df1bb3e20397680800cacadd64fd13970f49d747f048230c3f8659132d",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/first_force_range_input/input.npz": "f83186e0bab2f7840459bc89d38db9392e0db6068c7927a35b98d37fa08b2095",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/first_force_range_input/observation.json": "6aa40960c2ef4186f644d70a37f6cef5d59fd76760fff153eee666dc3fec34a6",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/source_freeze.json": "b11b7d5002b46aec3ebdcf38fcf1a01ed4c8ec9737b89b6c7785657ad16cfdc0",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/input_inventory.json": "4952660e08c6b0beb00e87c856278206859e7a25e43fce76e1f86fb17e1e2fec",
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "31d955d70c9e9ebd053cd2e652668afc571428c1f42a2ff7f0f0665d09c500ea",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "f7549b1a51f21d8598892f3d74cebfc544a24a5bc79e60b87e7734f2a6058a1c",
+    "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0"
+  },
+  "input_files_unchanged_after_review": true,
+  "all_production_sources_and_capsules_unchanged_after_review": true
+}

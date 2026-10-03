@@ -1,6 +1,15 @@
 # HF5 计划草案：LF v2 几何接入、网格与任务映射、真实夹持任务（待所有者确认，未实施）
 
-2026-10-04当前：**普通文件的固定半工件、平均输入驱动和连续加载—卸载已实现；粗方形工件[0,.1,0] mm实际完成，3接受态的6次新HP80/120独立参考全部通过。** 正方形side16mm、中心(70,40)mm，计算下半；3200单元／6642DOF／376有效fixed。峰值输入R=.020941490699N、自由+y输出=.114466446177mm，半工件总(Fx,Fy)=(-3.0237102546e-5,+2.3930273461e-5)N，minJ=.947487891；卸载末输入R≈-1.19e-27N、输出≈1.76e-27mm。生产263.45秒，参考60.11秒／58010检查；30项相关测试通过。见[完整目标、实现、诊断、成本和效果](NUMPY_FORCE_PROGRESS_20261002.md#native-workpiece-cycle-20261004)、[实际结构与力](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_physical.png)、[三帧真实动画](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_actual.gif)、[数值与分力](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_response.png)。
+2026-10-04当前：**同一粗方固定半工件的[0,.1,.25,.5,.25,.1,0]mm循环一次实际完成，七接受态14次新HP80/120全通过（135286检查），并完成实际边测量、结构/力图、七帧动画及首次范围拒绝诊断。** 峰值输入力.106253248N、自由+y输出.575755712mm、最大节点位移.796706551mm、minJ=.735764774；半工件(Fx,Fy)=(-1.50412414e-4,+1.34183314e-4)N。真实底最近无符号距离1.471935964mm，×1仍张开，尚未夹紧；卸载输出约1.758e-27mm，未重置状态。见[完整结果与功能进度](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_002/RESULTS.md)、[持续过程报告](NUMPY_FORCE_PROGRESS_20261002.md#native-workpiece-peak05-20261004)、[实际结构和力](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_physical.png)、[力/分量及卸载响应](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_response.png)、[七帧真实动画](../functional_views/native_workpiece_peak05_20261004/physical_001/workpiece_cycle_actual.gif)、[外边与最近点](../functional_views/native_workpiece_peak05_20261004/boundary_001/native_boundary_geometry.png)。
+
+生产521.28秒、46F开始/43完成、25T完成、1solve；独立参考约149.25秒，原数学门保持，覆盖完整单元/DOF与CSC组装，但HP切线只核声明方向，非所有列。末腿仍有F36/39/42三次范围拒绝并各接受原半步；首次完整输入现已保存。新独立单次诊断复现同异常：S=TᵀP矩阵乘法的四个乘积低词修正约4.22–4.38e-126低于2^-400支持下界，输入有效、tiny分支已选中；不是J失效或已证实的残量精度平台。核心与旧49来源不变，范围问题尚未修复；拒绝态不授资格。
+
+下一先对该矩阵乘法做最小尺度候选及独立数值验证，成立后同粗方探索1.0mm，再按几何/力/成本决定更大行程和圆形/细设计；1/2/3mm均未执行。压力/夹持判据、signed normal gap/包容、自由工件、研究H2/H3、HF5及完整AD/JIT仍待实现或资格化。仅在main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；旧粗/细、无工件和公开数值重放资格各自冻结。本轮异目录文件身份恢复另记录，不冒称数值再跑。
+
+以下为上一阶段及更早时点的保留记录；当前状态以页首与持续报告末节为准。
+
+
+2026-10-04历史状态（0.1mm阶段）：**普通文件的固定半工件、平均输入驱动和连续加载—卸载已实现；粗方形工件[0,.1,0] mm实际完成，3接受态的6次新HP80/120独立参考全部通过。** 正方形side16mm、中心(70,40)mm，计算下半；3200单元／6642DOF／376有效fixed。峰值输入R=.020941490699N、自由+y输出=.114466446177mm，半工件总(Fx,Fy)=(-3.0237102546e-5,+2.3930273461e-5)N，minJ=.947487891；卸载末输入R≈-1.19e-27N、输出≈1.76e-27mm。生产263.45秒，参考60.11秒／58010检查；30项相关测试通过。见[完整目标、实现、诊断、成本和效果](NUMPY_FORCE_PROGRESS_20261002.md#native-workpiece-cycle-20261004)、[实际结构与力](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_physical.png)、[三帧真实动画](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_actual.gif)、[数值与分力](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_response.png)。
 
 独立参考覆盖全部单元与DOF、三力、声明方向切线作用、CSC组装、平均约束及工件/支承反力；不是高精度穷举全部切线列。生产22F开始/19完成、11T完成、1solve，差额是3次返零力-only全步范围拒绝及原规则下的半步回溯，接受态通过不代表这些拒绝态已获资格。原“所有F开始必须完成”前置合同明确0HP关闭；[新保存态合同与计数对账](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_001/reference_002/reference_contract.json)只修订这一已声明计数条件，全部原数学门保持。算术范围限制未完全消失；不扩大到接触、夹持压力、H2/H3、HF5、AD/JIT或全部任意输入。
 
