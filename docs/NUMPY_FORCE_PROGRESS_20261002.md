@@ -1447,3 +1447,88 @@ CLI pass后只一次**冻结viewer仅读恢复outer120**，明确传原x1000：
 前节原.025四目标/1500-720新预算仍为后续唯一力学计划，但本次公开错误将包装修订列为它的前置；不得直接将已冻结e215旧helper复制为下一stage通过版本。修订不改变原材料/169fixed/五节点权重/+y输出/原task.025/门，也不升级依赖或换默认内核。没有新FE根因证据，不需要重复旧小模型或全历史审计。下一功能的完成与停止条件仍按前节；完整行程、工件/真实夹持、释放重入、H2/H3、批量HF5只保留粗路线。本节正式科学pass、原publicfail、保存诊断通过三种状态完整并列，资料再按已有main授权交付。
 
 root第一次只读失败摘要编排JS缺闭括号在任何工具执行前解析失败，修正后仅读raw；无source/卡/数值重跑，此编排错误不写作pass或根因。public卡与formal/ref/图窗口全部关闭，后续观察或剩余钟不成为新执行；整体goal继续active，本turn既有fine真实功能进展，也有新包装缺陷，下一步依据这些实质证据调整。
+
+<a id="native-fine-task-025-20261003"></a>
+## 同一细候选的原 0.025 mm TEST：未来包装修订及下一功能
+
+当前main基线为 **66398e9245c63c05d225f015cf50f1d95909344d**，origin实核为 https://github.com/dudaxing/Compliant-TO-TMC.git；仅此主干继续。目标是在已经通过完整力、三分量切线/CSC及0.001前缀参考的同一个gripper_native_fine设计上完成原construction TEST，不把原生细设计与粗设计当网格收敛。既有.001正式science pass／public wrapper fail／saved-only精确比较分别保留。
+
+独立读实际CLI和SUP2 API后，未来普通CLI恢复采用**真实Popen返回码0＋完整保存产物/源输入绑定与原规范JSON比较**。成员列表只作采样RSS和诊断，不要求为空，也不授予全后代同实例清理资格；有界异常清理仍仅观测范围。全owned Job清理若未来确有任务要求，应直接复用SUP2，而不在每个功能恢复中重建生命周期框架。新候选 [replay_public.py](../handoff/native_fine_task_025_20261003/replay_public.py)单列returncode/decision成员身份/保存API状态与计数观察原因，gate前及finally读取已产生result；不修改失败的332/e215旧helper。本候选尚未运行，replay_contract.json须来自本次新正式结果、接受态、SHA及实际成本，当前不编造它或预填未知计数。未为修订包装重复求解已两次得到相同bytes的.001路径。
+
+下一唯一本阶段：新目录lf_data_preparation/native_fine_task_025_001，targets **[0,.005,.010,.025]mm**，从未变形zero-lift原点开始，minimum_increment **6.25e-5mm**保持。仍为同一80×40mm/h.5、12800Q1/26082DOF/169fixed、五节点输入+x和自由输出+y原权重、E1MPa/nu.3/plane strain/t20、gamma=alpha=1e-6/Lr80、kout0/no workpiece，下半模型不自动翻倍。原geometry/23model/task物理SHA在新prepare再次绑定；task仅四身份/解释字段更新，原target.025不改。只有实际达到.025且所有正式/参考门通过，才报告原TEST完成；不是工件夹持力、完整研究行程或H2/H3/HF5资格。
+
+新连续预算 **production1500秒/采样8GiB/outer1560**；所有实际接受态新参考 **720秒/8GiB/outer780**；唯一saved viewer **outer120秒，补充x40**。依据前节267秒内核与粗原任务调用比例估计801～935秒生产、四态参考约376～420秒，不作为完成保证。每实际接受态含新增二分态均新HP80/120两次，完整12800元素/26082DOF及全部CSC组装系数；方向参考仍fixed-lift v=b_in/maxabs, δR0，不声称HP矩阵列穷尽。全部原门/尺度/控制器及生产核心字节保持，仅两stage薄包装与family checker新增身份/资源合同。保存额外F/T为0，无JIT/LF/优化。source集合实际静态核查后冻结；首错保存原结果并关闭阶段，无修复重试/force/剩余额度续跑。
+
+将以实际accepted_progress、调用计数、残量/均值/合力/minJ和完整参考判断推进，saved PNG/GIF/CSV展示每个接受态的实际x1、共同外力标尺、补充x40、五ux/mean、+y输出和输入R。独立审阅静态code/输入合同后只一次prepare、production、reference和view；public新scope/预算另依据实际结果冻结。此条是新阶段执行前记录，当前新prepare/force/T/solve/HP/view/public均0，旧卡全部关闭。下一功能以实际结果决定，不先增加性能/防御工程。
+
+### 执行前实际冻结
+
+两薄包装实物83/157行，SHA分别1e3442969b77ab4938b1eb9e19951eb8b14c3ea1231abf087a2fb262b5596370／23e0e73985690d2ada50d5f9e429c2759e3a59bcbde36c37faa119ecd7b4b728；family checker342行 SHA7d4f56f5fa14d9901cbe00a89d4c1af491c0d406cdc678e8bb7fef744cafa1e1，仅新增66398合同及reference ceiling，旧四合同/原数学未变。viewer406/29a89字节未变。author与独立tests静态通过，未import作者或执行数学。
+
+唯一pureprepare真实exit0，outer1.445360800018534秒，0F/T/solver/HP；新inventory SHA8af425217d7afffca6fe99e2336df11006466e35586d7f2d35adba11c9cab3be，task SHA41ed18b9ce8afbba1e1555c8db3b886c4547eac91163912d9c75d0f8bb709ab2，原geometry/23model/task物理不变，方向/zeroL两个NPZ与前stage bytes一致。root实际 prepared-data [冻结核查](../lf_data_preparation/native_fine_task_025_001/static_review_fine_task_025.json) SHAe7ba8fd7b1130ceccf368543bd92c1c0e8b80354ba4e08e0f0fe5f0a58d8802e pass：7inputs/39unique source/原33source/23model/五ports/原gates/旧四合同/新输出不存在均核实。当前仅准备完成，新force/T/solver/HP/view=0；本次生产与参考按前节新阶段预算各一次，不从旧卡借额度。
+
+未来public候选在独立读审中修订了diagnostic finally可能遮蔽首错、清理分项记录及contract前后绑定三点，当前378行 SHA5dfa7fd124a25e01248b5d1091f9ae65229d0de3e9ff27d24b49bdc5c27de061。真实exitcode与API计数独立、已退root不再次terminate、observed清理psutil.Error不阻断其他项；保持原9cdd比较、无empty-member门，未加SUP2资格。最终静态通过，0CLI/test/physics；缺实际replay_contract仍故意不可执行，预算须在新science结果后另记录。旧332/e215原失败完整不改。这些改动是未来候选作者迭代，不是旧卡修复重跑。
+
+
+### 用户补充：工件与行程的探索定义已委托
+
+2026-10-03，本次0.025TEST生产期间，用户答复最近物理问题：采用对称物体并计算对称的一半；圆形或矩形/正方形工件的radius/side由Agent自行设置、探索参数影响；最大平均输入及卸载终点亦由Agent探索，并要求面向大变形扩大探索空间。这是新的明确授权，不再把文档旧“工件/行程待用户决定”当阻断，也不把旧草案数值当已验证结论。
+
+当前正式fine.025阶段继续，39source/原inputs/预算/门保持。下一最近实现会先选择一个由真实fine geometry检查过、无初始实体重叠、与对称面一致的固定刚体工件，将工件节点组和有符号法向合反力单独保存；单侧量及基于明确镜像假设的2倍压紧力另列，完整装配净矢量不能误当2倍单侧反力。圆/方及多尺寸作为后续结果驱动的探索范围，不能现在批量跑未定义任务或给排名。先接通显式workpiece与load→unload，再依据实际间隙/响应提高行程；数值预算与具体物理定义仍在下一独立阶段执行前记录，不延长本次1500/720窗口。当前相关工作仅独立读取真实geometry和代码，未覆盖LF源几何、未修改当前力学核心、未启动工件或卸载路径。
+
+
+### 正式生产结果（参考尚在进行）
+
+唯一生产真实exit0/pass，四接受态[0,.005,.010,.025]，原task_target_executed=True；1099.2188283000141秒／outer1100.0507605000166秒，采样峰值2811535360B≈2.618 GiB，均在新1500秒/8GiB窗内。实际14force（14 kernel calls，其中9同时给切线）／9tangent／1solver、0HP/JIT/LF、0saveF/T；3predictors+5correctors，5次Armijo均factor1接受，0failed_attempt/0bisection，无修复或重试。原近前缀force4/tangent3证据没有替代新正式接受态。
+
+|实际输入mean(mm)|输入R(N)|自由输出+y mean(mm)|生产relative residual|minJ|
+|---:|---:|---:|---:|---:|
+|0|0|0|0|1|
+|.005|.0007509358032546804|.00477440401508482|1.5818350456725429e-12|.9995072098134392|
+|.010|.0015020315102325249|.009549388665770327|6.04538537329731e-10|.9990144001785846|
+|.025|.003756278785289989|.02387782438969154|1.6509863324797911e-12|.9975358538247068|
+
+末态mean误差−4.336808689942018e-19mm，relative global force balance2.7276425291852718e-15，max|Hu|=.00136933652851374/mm。输出增益约.9551，仍是无工件自由运动；R不是夹持力，J不是接触压力。矩阵采用未对称化general sparseLU，8次线性解（3predictors/5correctors），kernel＋transfer1088.9777928999974秒、assembly.22321289987303317秒、LU2.858715900045354秒、callback.08752869995078072秒。主要成本仍在NumPy内核，本次kernel267→1089的实测比例约4.08，比按恒定单次成本估计的3～3.5高；具体状态/运行时成本没有独立profile，不能直接断言是某一物理项或迭代异常。14/9调用与粗原TEST相同，新预算有实际余量，不以估计当实测。
+
+新正式result SHA9945ccb37d03b960949104a834b817606651bf00a615d110d41e2ad33e39b8cc。实际read-only phase gate核对source39/input7与静态freeze保持、原task完成/4states/14-9-1 counts/0HP后，唯一新reference720秒/outer780已开始，要求全部四态共8次fresh HP80/120；此条不预授参考或图/public资格。
+
+
+### 新独立参考、保存后验与实际图
+
+唯一新reference真实terminal0/pass；四态8次新HP80/120（共102400 element-precision instances）全部覆盖，audit总307565检查，所有原门保持。summary实际elapsed546.3174423999735秒、终端print546.3207527999766秒、outer547.1122931999853秒，采样峰1169354752B≈1.089GiB；不同落盘时点分别记录，不把数字误作重复运行。末态HP残量1.6509605953505412e-12、mean相对误差1.734723475976807e-17、合力相对误差2.647412069130863e-15、fixed0；四态最大HP残量6.045385187199067e-10（.010mm），都满足原1e-8门。fullCSC所有系数组装检查与原fixed-lift端口方向参考明确分开，不称HP全矩阵列导数。summary SHA6392d6c79d085d13049919bbf0e2cc77f299ef053df32c8d0fccd3f73858b1ec。
+
+独立[saved-only后验](../lf_data_preparation/native_fine_task_025_001/postrun_identity_review_fine_task_025.json) SHAb5230e91ac17f3b2e282e323341be8012da12d6f7b183f37916426a3e704b39d pass：source39/current＋双caps/原33/input7/205完整bindings、23model＋4states共131数组dtype-shape-Cbytes、40完整参考payload保持。保存数值records=307200逐元素＋156含worst重复摘要，614640次saved Decimal error/limit比较皆过；这些只是已保存数值核查，独立报告内部1845698布尔identity predicates也不是新增力学测试。0F/T/solve/HP/scatter/assembly/plot/test或作者import，不重复授予物理覆盖。
+
+唯一仅读viewer真实exit0、outer6.622543699981179秒、四帧0插值、0physics/HP，明确x1与补充x40。实际[PNG](../functional_views/native_fine_task_025_20261003/native_mean_path.png) SHA1b77ae4b8c58b0b5a26794febdceeb5161586236f6bfe886cdcbb5e1661cc212／[GIF](../functional_views/native_fine_task_025_20261003/native_mean_path.gif) SHA856072623db9aac6e0f7ecfa7116ae5e60b18e484ba8fe3d604c7f274250f33e。末态max nodal|u|=.03402845779074982mm，实体/介质所有IP minJ=.9994567355905836/.9975358538247068，五ux=[.024702899158403322,.024906231983024572,.025041784284527004,.025124447141586046,.02515217402332144]mm，均值.025；输出+y是测量而非外力。common force scale最大.005957791741454755N=4displaymm用于全部状态/分量，不把反力节点局部大小当压力。
+
+root实际看PNG；独立[四帧实际视觉审阅](../lf_data_preparation/native_fine_task_025_001/visual_review_fine_task_025.json) SHA8ccf9abc9239cd91301c1276b3fe49c0e9988b9dd71c38d9551b29f40b9cea44 pass：43保存数据核对、154原viewer bindings及扩展160 before/after保持，4GIF帧在内存解码逐帧查看/各1000ms。密集端口/支承glyph、小输入箭头、近重合五ux曲线、GIF量化色板及无数字J色条均记录显示限制，不为美观改冻结图。作者两次纯inspection的不存在files键与组合image输出截断已透明记入回执；无科学/查看器重跑。原TEST完成不授真实工件夹持/H2-H3/HF5或跨设计网格资格。
+
+### 新独立目录恢复：执行前合同
+
+当前production/reference/view三窗口均完成并关闭。新future helper378行/5dfa7fd124a25e01248b5d1091f9ae65229d0de3e9ff27d24b49bdc5c27de061，与旧9cdd规范JSON规则一起冻结；[实际replay_contract](../handoff/native_fine_task_025_20261003/replay_contract.json) SHAa5966c8fc7a6c2d550e037f0faad6977f3801c39df146a3b4dd249c8ea806e1a已由四态正式/参考/7formal pins生成并独立实核。各实际接受态/callcounts/20payload131arrays5JSON均采用正式结果，不猜调用数。普通成功门为真实returncode0＋完整产物，member observations仅采样资源/诊断；无全owned-tree清理资格，无新增HP，旧.001332/e215 fail不改、不开旧卡。
+
+本次新的恢复预算**wrapper1800秒／8GiB采样／outer1860**，内部普通CLI retained time_limit1500秒；以正式1099.2188283秒计有约400.78秒CLI余量，wrapper额外300秒只覆盖前后identity/完整payload与JSON比较/回执，outer余量只处理监督收尾，不续跑force或放宽门。CLI先取得完整保存API计数即独立记录，nonzero/资源/比较失败都不得掩盖首错；异常仅observed identities做有界terminate/wait10，无force/重试，root已有真实退出码则不再次terminate。两外部输出目录已独立核不存在，不写publicclone里的冻结路径：
+
+~~~powershell
+& '<HF python>' -B handoff/native_fine_task_025_20261003/replay_public.py --output 'D:/hf-native-fine-task-025-replay-20261003'
+~~~
+
+main交付和干净clone file identity实际通过之后才唯一执行该CLI；成功才唯一saved-view outer120：
+
+~~~powershell
+& '<HF python>' -B functional_views/native_fine_task_025_20261003/plot_native_mean_inverter_frozen.py --input lf_data_preparation/native_fine_task_025_001 --output 'D:/hf-native-fine-task-025-public-view-20261003' --magnification 40
+~~~
+
+图包6files原bytes比较，无新physics/HP，保存rawCLI log/result＋4state JSON/replayreceipt/两outer receipts及proof，不重复复制大NPZ/HP。此scope只是同机同runtime异目录普通功能复现与文件交付，不称另一机器性能、全部历史外部资产、全后代清理或HF5新物理。此条public CLI/plot仍0，不预授恢复资格。
+
+### 根据新用户授权确定最近功能
+
+真实静态geometry复核：镜像面y40，passive jaw=[60,80]×[28,30]，其上[60,80]×[30,40]为passive_void。选择完整正方形side16/center(70,40)，下半[62,78]×[32,40]在fine有512cells/561nodes，实体/solid-incident/输入输出支承交叠皆0；最近原实体间隙2mm来自本次掩码计算，不是沿用2mm草案。其顶部33uy与原sym同值合并，fine若接该工件fixed会169→1258，必须新任务身份，不能假称原23model保持不变。后来圆形探索可同center r≤9避免x边截断；在x80设圆心会被域界截断，不能叫完整半圆。
+
+实际.025保存态在参考jaw y30、x62..78的uy min/mean/max=.00395155/.01273555/.02165152mm，最大位于x78、变形x77.99243仍在未来工件宽内；若假定底面y32，当前最小verticalgap1.97834848mm。原点线性外推首次名义闭合约2.309307mm输入，最近.010→.025斜率外推2.309052mm，平均名义闭合3.926017mm；仅用于选步，不是带工件接触或大变形预测。
+
+最近代码功能为显式fixed_rigid workpiece任务/独立workpiece cells-nodes-DOFs和effective-model身份；只在明确空区形成工件，不覆盖LF源四mask、不换源端口/支承/材料/网格、不形成机构共节点直接连接。原全域Q1/CSC可复用，工件全uxuy固定，无巨大E或新刚体框架。缓存global total/material/Hu力直接提取工件外部保持反力的负值作为工件所受+y力，分量独立、输入R不改名，整体fixed分组/平衡去重复；完整对称装配两侧法向大小和另列2×单侧，净矢量对称相消。介质接触前传力保留，不裁零或靠J改名压力。
+
+加载—卸载需显式ordered-targets/cycle模式、保留旧load_only；现有严格递增检查及minimum bisection signed difference需改为适用于两向的abs步差，核心KKT/预测器/Armijo/门不改。按顺序保存target_index/leg，不按位移值去重或排序；元数据分别记录loading_peak/unload_endpoint/path_completed，末位移不等于峰值不能误说失败。新增工件组/语义及保存路径需要独立新identity/参考合同，不能直接套本次no-workpiece checker。
+
+下一最近阶段先实现和可视化这个明确任务的构造/测力/连续循环接口，再依据实际gap和有效加载态逐步进入约2.5mm量级探索循环并卸载回0；起步建议1、2mm及闭合附近细步只作算法选步，由新任务预算/结果约束，尚未执行。优先一个可检查的功能链，后续圆/方/多尺寸和更大行程按结果展开，不现在跑全面campaign或宣布HF5。用户已委托物理探索，不重复索要工件/行程授权；具体source、物理任务、预算及独立核查仍在下一阶段执行前明确。当前只读设计，0新增workpiece model/force/solver/HP，不修改本stage39来源。
