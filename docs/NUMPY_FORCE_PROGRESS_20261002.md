@@ -1413,3 +1413,37 @@ CLI pass后只一次**冻结viewer仅读恢复outer120**，明确传原x1000：
 [独立actual media审阅](../lf_data_preparation/native_fine_mean_001/visual_review_fine_mean.json) SHA**acccb25f6de978aa3075b825843b721646fe696f9dde8ef9f94abbad8ce73099** pass：实际查看PNG与内存解码两GIF帧，130media/helper/输入bindings前后相同，39source/23model/CSV数值/端口/J/外力共同标尺均匹配。最大节点外力.0002383857570298802N=4displaymm；x1实际位移约.00136/80mm非常小，由x1000补图帮助识别。密集.5mm端口/支承/外力glyph局部重叠、otherfixedstride3与小力难单辨，五ux曲线接近，GIF共palette无数值Jbars，均记录为显示限制，不为美观回写冻结图或追加物理实验。viewer作者一次回执构造JS缺括号在工具调用前解析失败，修正后仅写新回执；0scientific执行或来源/媒体修改。
 
 另一作者已独立全文静态审332/e215062d新publichelper，实际7formal pins/原9cdd/39source/600-660/8GiB/观察全childtree/异常清理/12payload77arrays3JSON及原.025pending均无阻断，消息反馈不改冻结回执。root与独立作者static通过后该helper不再更改。正式production/ref/图窗已经完成，下一仅本节冻结的交付与一次公开恢复；截至本条public CLI尚未执行，不把静态审阅或已有粗恢复当本次恢复证明。整体goal仍active。
+
+### 下一唯一功能：同一细候选原.025mm TEST
+
+独立科学/成本复审支持下一步直接完成该fine设计的原.025TEST；当前.001阶段没有失败/二分，完整力与方向导数/CSC/平衡原门已过，minimumJ=.99990144，尚无证据要求先重构性能或反复诊断。内核267.010秒而两次LU仅.5379秒，先改LU不足以改变本阶段主要成本。当前2718019584bytes=2592.10546875MiB=2.531353GiB；参考1168130048bytes=1.087906GiB，以字节为资源原记录，不误写2.59GiB。
+
+下一详细任务保持同一80×40/h.5 geometry、原23model、原.025task/材料/169fixed/五节点+y输出、kout0/no workpiece/zeroL/下半不翻倍及所有控制/验收门；仅实际targets改为[0,.005,.010,.025]mm，min_increment仍6.25e-5。从本任务未变形原点执行，不借现有制造场或旧接受态替代新参考；成功才允许task_target_executed=True。这是原TEST的算法continuation，仍不是完整研究行程、真实夹持/H2-H3或网格收敛。
+
+拟新阶段连续上限**production1500秒/采样8GiB/outer1560**，所有实际接受态**reference720秒/8GiB/outer780**，唯一仅读图outer120、补充x40。明确这是下一新阶段的规划范围；本轮600/360窗口已完成且不重开，本条没有准备/执行下一stage。依据fine4F3T下267秒内核，若原.025调用接近粗14F9T，则非负force/T单次成本加权约3～3.5倍=801～935秒；粗实际kernel比例约3.10也支持约827秒量级。四态/8HP基础约376秒，粗参考两态→四态成本比例提示约420秒量级，720秒含新的nonzero参考/保存余量。上述估计不是保证，额外Newton/回溯/二分、四态缓存和峰值仍实际门控；首错保存原状态停，不抽样代替全N参考，不借剩余时间重试/改门。
+
+实现最小范围是两薄包装与现有family checker的原.025/新baseline/资源合同，viewer已有fine五节点与原task完成判断可复用；生产核心/NumPy内核/非对称CSC数学不改。具体source集合及SHA、原input/model pins、新stage输出不存在和实际main基线，在实现静态交叉后冻结，不预填未知HEAD或虚构新调用数。新参考仍每实际接受态2次新HP80/120，完整12800元素/26082DOF/全部CSC系数组装与声明固定lift方向；所有新增二分态也必须覆盖。保存0额外F/T，实际图/CSV显示全部接受态、五ux及mean、自由+y输出、R、受力/形变/J、原.025target完成状态。必要资料随main；公开恢复预算只依据该新阶段实际成本另冻结，不能照抄当前273秒结果。
+
+完成条件是原.025真正到达、原输入/模型/物理与门保持、所有接受态新参考通过、数值与真实图一致、记录/数据/源码及明确普通CLI可恢复。失败则就具体分量/状态/成本定位最小问题，停止本阶段；成功后再选择研究行程或明确工件测力任务。真实夹持与释放重入、少量同任务候选比较及HF5标签仍只保留能力粗路线，未把待决工件/行程草案当任务。本阶段current public CLI仍进行中，本节不预先宣称其恢复成功。整体goal active。
+
+### 实际公开交付：数值产物相同，但恢复包装拒绝
+
+科学结果/完整数据/图/记录已实际提交并推送main **2b026e9cffba805ffdf6e1b0bebc3c780467b17b**，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。干净public clone D:/hf-restore-20260930由a663962仅fetch＋fast-forward到此HEAD，main/origin/clean/0-0实核；6411文件identity verify真实terminal0/pass，science manifest SHA**1d9bcdfb937bda1c814a63998d2be2a19543f0e7ab8784cc98d7c25b47e6f910**。初次复用历史S0 builder曾生成CRLF并回填旧storage header；提交前root检查diff，改为当前stage/前交付HEAD/LF，原file records不改，随后重新实际verify pass。这是移交metadata修订，不是新力学测试或原输入/source变更。
+
+唯一公开CLI恢复包装在315.3016480000224秒（outer315.5934220000054秒）真实exit1/fail，位于冻结332/e215 helper第250行 combined gate `child.returncode == 0 and not members`。原卡首错关闭，无修复重跑，未执行原计划的public frozen viewer，不能称public workflow pass或6图包公开字节恢复通过。保留[失败原记录](../handoff/native_fine_mean_20261003/public_recovery_failure.json) SHA**d23cd3ff575a29b518eaacb0e57aa12536da527397dd7b54a42174d4dc4f62c2**，raw receipt/log/result＋两stateJSON/outer/scienceverify原bytes全部随Git；raw countsNone/比较0保留，不回填虚构通过。
+
+另一个事实是实际CLI log及完整result已经返回saved success：两态[0,.001]／4F3T1solve／0HP、0saveF/T，CLI日志elapsed313.2625620000181秒；原task.025仍未执行。采样childtree2696257536B、wrapper＋tree2734727168B，600秒/8GiB内，Popen root-only4894720B明确不是整个求解器。API成功产物与包装验收必须分别记录；raw失败发生在读取result计数与数组比较之前，所以原None不能改作0或用作力学失败证明。原error记录未保存decision returncode/PID＋creationtime/memberlist，故不能唯一确定合并判据中的哪项false。事后cleanup_remaining_observed_pids=[]只反映观测集合；root后来针对已知fine CLI argv的只读快照也为空，二者均不能补回失败时刻的全树/同实例证明。
+
+已完成[独立保存-only诊断](../handoff/native_fine_mean_20261003/saved_public_payload_diagnostic.json) SHA**cf98139c16260001dfffe42a5c5b167558203bd84b23070d024fcee89a133d03**：**12 payload bytes／77数组dtype-shape-Cbytes／3JSON按冻结9cdd原times及consequenthash规则全部精确相同**，无新增排除；168wholebindings在当前root和publicclone都相符，39current与双caps/7inputs/全部参考保持。只是读现有已生成文件并调用一次SHA-pin纯比较模块，0CLI/force/T/solve/HP/test/plot/scatter；不重开卡、不授予workflow pass。正式与这次实际CLI合计8F/6T/2solve/4原新HP，counts来自两保存result，raw失败receipt仍None。普通数据、源码、完整HP与图已由Git实际异目录取得；同机同runtime数值产物复现成立，但自动恢复/进程验收没有闭合，不冒称另一机器性能或HF5资格。
+
+### 问题判断、最小修订与当前下一步
+
+三作者只读复核installed psutil7.2.2/CPython3.13实际代码和既有CLEAN1/SUP2结论：新helper96行用`Process.is_running()`（PID＋creationtime的process-list身份）过滤members，250行再把空列表当终止验收。循环已通过Popen.poll进入该行，但返回码值和当时成员表未落盘。进程终止信号和对象在其他句柄尚打开时的存续不同；因此非空列表可能误拒已完成CLI，空采样列表也不能证明成员全覆盖。[psutil is_running定义](https://psutil.readthedocs.io/stable/#psutil.Process.is_running)与[Windows终止语义](https://learn.microsoft.com/en-us/windows/win32/procthread/terminating-a-process)支持这种区分。此项是确定的设计缺陷；“已终止对象仍可查询而触发本次拒绝”只是强候选解释，缺现场decision字段不能当已证实根因。
+
+这是本次root和作者静态交叉没有识别的遗漏：既有CLEAN1已明确同实例signal＋成员覆盖＋handle释放合同，本helper却自加了不可靠empty-members门。现有21测试/10proofs不自动授予本helper资格；不重写failed原文件或原验收，亦不以物理结果pass掩盖包装fail。正式NumPy力/切线/平衡、4新HP与真实media资格保持，数值保存复现另单列；整体项目仍active。
+
+**当前最近一步先修订未来恢复包装的合同和可观测性，再接上前节同fine原.025TEST计划**，不是再次重算这个已两次得到同bytes的.001路径。未来普通CLI成功须把真实returncode单独落盘、逐项判断，保存已生成API计数与缺失原因；member observations仅作资源/诊断，不能以空PID-list自造同实例终止资格。若新阶段确实要求全后代清理的硬资格，只复用既有SUP2.run_owned的signal/覆盖/handle-release proof，不另建进程框架、不改成循环等PID消失或force。新scope/资源/完成标准先明确记录并静态独立核对；本stage332helper/source39/inputs及已关闭600/360窗口保持，当前没有任何新helper修复执行、nextstage prepare/force/T/solver/HP/plot。
+
+前节原.025四目标/1500-720新预算仍为后续唯一力学计划，但本次公开错误将包装修订列为它的前置；不得直接将已冻结e215旧helper复制为下一stage通过版本。修订不改变原材料/169fixed/五节点权重/+y输出/原task.025/门，也不升级依赖或换默认内核。没有新FE根因证据，不需要重复旧小模型或全历史审计。下一功能的完成与停止条件仍按前节；完整行程、工件/真实夹持、释放重入、H2/H3、批量HF5只保留粗路线。本节正式科学pass、原publicfail、保存诊断通过三种状态完整并列，资料再按已有main授权交付。
+
+root第一次只读失败摘要编排JS缺闭括号在任何工具执行前解析失败，修正后仅读raw；无source/卡/数值重跑，此编排错误不写作pass或根因。public卡与formal/ref/图窗口全部关闭，后续观察或剩余钟不成为新执行；整体goal继续active，本turn既有fine真实功能进展，也有新包装缺陷，下一步依据这些实质证据调整。

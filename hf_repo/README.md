@@ -2,7 +2,7 @@
 
 2026-10-03当前：**新NumPy候选已接通普通文件完整力、非对称CSC切线与split平均驱动平衡；原生细夹爪五节点端口0→.001mm前缀通过新独立参考**。12800单元／26082DOF／169fixed，2实际接受态／4新HP80/120／153861总检查，输入反力.00015017437N，输出+y平均位移.00095483434mm；生产273.20秒、4force/3tangent/1solver，无二分或失败。两粗机构原.025mm TEST先前已完成；细模型原task.025保持pending，不能把小前缀当完整任务。见[目标、实现、物理效果、成本与接续](../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-fine-mean-20261003)、[实际x1结构／外力及补充x1000](../functional_views/native_fine_mean_20261003/native_mean_path.png)与[两帧真实动画](../functional_views/native_fine_mean_20261003/native_mean_path.gif)。原生细设计不同于粗设计，不称网格收敛；研究完整行程／真实夹持／释放重入／H2-H3／HF5标签仍待完成。
 
-完整普通输入、两态三力／CSC与raw参考、来源胶囊、实际图及过程准备随main交付。正式生产、唯一参考、仅读图及独立后验／实际media复核均pass；本阶段公开异目录CLI恢复尚未执行，不能提前称恢复通过。下一功能按fine真实结果推进原.025mm TEST，预算依据本次内核成本明确记录。
+main 2b026e9科学数据已交付，公开干净clone的6411文件identity核验通过。公开CLI已保存success；另做只读诊断，12payload／77数组／3规范JSON与正式精确一致。但恢复包装315.59秒在合并进程判据处拒绝，原卡fail关闭、没有重跑或public viewer；具体拒绝分支缺现场记录，不能称公开workflow通过。见[原失败与保存文件诊断](../handoff/native_fine_mean_20261003/public_recovery_failure.json)。下一步先修订未来包装的终止判据／记录，再推进细原.025TEST；已通过的力学与media资格保持。
 
 以下增补保留各执行时点；当前结论和下一步以本条及报告末节为准。旧记录中的“尚未实现”和旧计划不作为当前状态。
 
