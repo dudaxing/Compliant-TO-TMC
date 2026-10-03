@@ -1783,3 +1783,5 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 本次helper 12.672815s、outer 13.338634s，采样树峰368619520B；全部冻结绑定不变、无stop/修复重试。scope是同一捕获F36/声明方向的保存数据重新资格，不是新平衡或真实接触结果。详见[新验收实据](../lf_data_preparation/native_workpiece_001/matmul320_action_requalification_001/RESULTS.md)。live核心未promote，旧源码七态资格保持；下一卡再明确替换原字节与新0.5有序路径资格，之后1mm探索。
 
 独立保存态查看卡实际exit0，outer2.3579347s、322bindings不变；root实际打开2600×950PNG检查。图展示原Hu693越门、新actual consumer0越门；9600行表保存。旧图对照HP120，新门对照HP80，显示floor1e-30不参与判门；0新consumer或力学。见[实际图与保存数据说明](../lf_data_preparation/native_workpiece_001/matmul320_action_view_001/RESULTS.md)。
+
+科学资料提交 `ef574c2b9b03e0dcb8d1aa3169e3beb832cfc3bf` 已推送main，随后在清洁异目录公开克隆 `D:/hf-restore-20260930` 实际fetch/fast-forward到同一提交，文件身份验证真实exit0、7687项、manifest `bf0e0dafef29a9f5bcb829252df09234bd9daa229a331a0a04f0e87f6aec78f8`。完整回执见[公开恢复证据](../handoff/native_workpiece_matmul320_20261004/public_restore_science_receipt.json)。这是文件身份恢复，无新增consumer/FE/HP/几何/查看器重放；随后回执提交的manifest会改变，不能把此hash移用到后续提交。
