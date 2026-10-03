@@ -538,3 +538,7 @@ python functional_views/lf_v2_adapter_20261003/plot_lf_v2_conversion_frozen.py -
 这是数据入口和显示的复现，不是新力、HP或平衡求解。异目录图元数据中的input_root会跟随实际读入根，其他身份与数值须一致，不虚称完整metadata字节相同。main交付和公开异目录恢复的实际结果将在下段补记。
 
 两路实际审图及独立保存数据检查通过，见[测试／数据审图](../lf_data_preparation/v2_adapter_001/visual_review_tests.json)和[独立数理审图](../lf_data_preparation/v2_adapter_001/visual_review_math.json)。均确认三例结构与mm尺度、细网格端半权、实体关联节点、开闭背景、方向箭头和未施加HF任务说明；无重绘／重转换／力学计算。测试回执的started_utc字段实际在运行后写入；回执原字节保持，这里明确更正其解释：该值不是实测启动时间。3.449562秒为实际subprocess墙钟，不受字段命名影响。
+
+本轮数据源码、三份原始包／转换包、独立核对、测试和图已普通推送main提交602d0763183eab82f4c00fbb1dc5b42619be7aae。另目录公开克隆仅fetch＋fast-forward至此，5073件普通文件身份校验通过，工作树前后干净。实际使用该克隆中的CLI和保存普通输入各转换一次到新的外部目录；三例共12个geometry JSON／NPZ及原始source副本与已发布结果逐字节相同，HF身份一致；转换输入与执行源码均来自公开克隆，未读原下载ZIP。
+
+冻结查看器以该克隆中的保存数据重绘，两张PNG及查看器源码逐字节相同；metadata只有input_root随实际克隆根变化，其他全部字段、数值及SHA一致。完整metadata不声称字节相同。[公开恢复回执](../handoff/lf_v2_adapter_20261003/public_recovery_verify.json)保存每条命令、exit、墙钟与12件产物／图SHA，所有步骤exit0，无重试、无LF导入／FE／force／HP／solver，没有新增Release依赖。这证明同机异目录普通数据接入和显示可重现；不是异机运行环境或新力学资格证明。

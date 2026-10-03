@@ -1,0 +1,322 @@
+{
+  "schema_version": "lf-v2-public-recovery-1.0",
+  "recorded_utc": "2026-10-03T06:13:26.295357+00:00",
+  "scientific_commit": "602d0763183eab82f4c00fbb1dc5b42619be7aae",
+  "source_root": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC",
+  "public_root": "D:\\hf-restore-20260930",
+  "ordinary_conversion_root": "D:\\hf-lf-v2-public-conversion-20261003",
+  "new_view_root": "D:\\hf-lf-v2-public-view-20261003",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.6843419999931939,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.06507609999971464,
+      "exit_code": 0,
+      "stdout": "b8e04f15abfc9145ac866bda39727698787285ef\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "fetch",
+        "origin"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 2.3979125999612734,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "From https://github.com/dudaxing/Compliant-TO-TMC\n   b8e04f1..602d076  main       -> origin/main\n"
+    },
+    {
+      "argv": [
+        "git",
+        "merge",
+        "--ff-only",
+        "origin/main"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.7887791999964975,
+      "exit_code": 0,
+      "stdout": "Updating b8e04f1..602d076\nFast-forward\n README.md                                          |   4 +-\n docs/CURRENT_STATUS.md                             |   4 +-\n docs/HF5_LF_V2_ADAPTER_AND_TASK_PLAN.md            |   8 +-\n docs/NUMPY_FORCE_PROGRESS_20261002.md              |  59 +++\n docs/PHYSICS_AND_FUNCTION_PROGRESS_20261001.md     |  16 +-\n docs/RESUME_DEVELOPMENT.md                         |   4 +-\n .../lf_v2_adapter_20261003/lf_v2_native_masks.png  | Bin 0 -> 192295 bytes\n .../lf_v2_adapter_20261003/lf_v2_native_nodes.png  | Bin 0 -> 230705 bytes\n .../plot_lf_v2_conversion_frozen.py                | 292 +++++++++++\n .../lf_v2_adapter_20261003/view_metadata.json      | 534 +++++++++++++++++++++\n handoff/repository_manifest.json                   | 259 +++++++++-\n hf_repo/README.md                                  |   4 +-\n hf_repo/scripts/import_lf_v2.py                    |  28 ++\n hf_repo/scripts/plot_lf_v2_conversion.py           | 292 +++++++++++\n hf_repo/src/hf_eval/lf_v2.py                       | 163 +++++++\n hf_repo/tests/test_lf_v2.py                        | 158 ++++++\n .../converted/gripper_canonical/geometry.json      | 511 ++++++++++++++++++++\n .../converted/gripper_canonical/geometry.npz       | Bin 0 -> 1108 bytes\n .../gripper_canonical/sources/design.json          | 335 +++++++++++++\n .../converted/gripper_canonical/sources/design.npz | Bin 0 -> 1122 bytes\n .../converted/gripper_native_fine/geometry.json    | 515 ++++++++++++++++++++\n .../converted/gripper_native_fine/geometry.npz     | Bin 0 -> 1493 bytes\n .../gripper_native_fine/sources/design.json        | 339 +++++++++++++\n .../gripper_native_fine/sources/design.npz         | Bin 0 -> 1507 bytes\n .../converted/inverter_canonical/geometry.json     | 481 +++++++++++++++++++\n .../converted/inverter_canonical/geometry.npz      | Bin 0 -> 1072 bytes\n .../inverter_canonical/sources/design.json         | 305 ++++++++++++\n .../inverter_canonical/sources/design.npz          | Bin 0 -> 1086 bytes\n .../v2_adapter_001/execute_conversion.py           |  96 ++++\n .../v2_adapter_001/execution_receipt.json          | 113 +++++\n .../v2_adapter_001/independent_review.json         | 338 +++++++++++++\n .../inputs/gripper_canonical/design.json           | 335 +++++++++++++\n .../inputs/gripper_canonical/design.npz            | Bin 0 -> 1122 bytes\n .../inputs/gripper_native_fine/design.json         | 339 +++++++++++++\n .../inputs/gripper_native_fine/design.npz          | Bin 0 -> 1507 bytes\n .../inputs/inverter_canonical/design.json          | 305 ++++++++++++\n .../inputs/inverter_canonical/design.npz           | Bin 0 -> 1086 bytes\n .../v2_adapter_001/plot_receipt.json               |  21 +\n .../v2_adapter_001/review_conversion.py            | 224 +++++++++\n .../v2_adapter_001/review_launch_receipt.json      |  45 ++\n .../v2_adapter_001/source_inventory.json           |  79 +++\n .../v2_adapter_001/sources/__init__.py             |   7 +\n lf_data_preparation/v2_adapter_001/sources/data.py | 337 +++++++++++++\n .../v2_adapter_001/sources/execute_conversion.py   |  96 ++++\n .../v2_adapter_001/sources/import_lf_v2.py         |  28 ++\n .../v2_adapter_001/sources/lf_v2.py                | 163 +++++++\n .../sources/plot_lf_v2_conversion.py               | 292 +++++++++++\n .../v2_adapter_001/sources/regions.py              | 202 ++++++++\n .../v2_adapter_001/sources/review_conversion.py    | 224 +++++++++\n .../v2_adapter_001/sources/test_lf_v2.py           | 158 ++++++\n .../v2_adapter_001/test_receipt.json               |  23 +\n .../v2_adapter_001/visual_review_math.json         |  33 ++\n .../v2_adapter_001/visual_review_tests.json        | 394 +++++++++++++++\n 53 files changed, 8131 insertions(+), 32 deletions(-)\n create mode 100644 functional_views/lf_v2_adapter_20261003/lf_v2_native_masks.png\n create mode 100644 functional_views/lf_v2_adapter_20261003/lf_v2_native_nodes.png\n create mode 100644 functional_views/lf_v2_adapter_20261003/plot_lf_v2_conversion_frozen.py\n create mode 100644 functional_views/lf_v2_adapter_20261003/view_metadata.json\n create mode 100644 hf_repo/scripts/import_lf_v2.py\n create mode 100644 hf_repo/scripts/plot_lf_v2_conversion.py\n create mode 100644 hf_repo/src/hf_eval/lf_v2.py\n create mode 100644 hf_repo/tests/test_lf_v2.py\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.npz\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/gripper_canonical/sources/design.json\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/gripper_canonical/sources/design.npz\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.json\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.npz\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/sources/design.json\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/sources/design.npz\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/inverter_canonical/geometry.json\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/inverter_canonical/geometry.npz\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/inverter_canonical/sources/design.json\n create mode 100644 lf_data_preparation/v2_adapter_001/converted/inverter_canonical/sources/design.npz\n create mode 100644 lf_data_preparation/v2_adapter_001/execute_conversion.py\n create mode 100644 lf_data_preparation/v2_adapter_001/execution_receipt.json\n create mode 100644 lf_data_preparation/v2_adapter_001/independent_review.json\n create mode 100644 lf_data_preparation/v2_adapter_001/inputs/gripper_canonical/design.json\n create mode 100644 lf_data_preparation/v2_adapter_001/inputs/gripper_canonical/design.npz\n create mode 100644 lf_data_preparation/v2_adapter_001/inputs/gripper_native_fine/design.json\n create mode 100644 lf_data_preparation/v2_adapter_001/inputs/gripper_native_fine/design.npz\n create mode 100644 lf_data_preparation/v2_adapter_001/inputs/inverter_canonical/design.json\n create mode 100644 lf_data_preparation/v2_adapter_001/inputs/inverter_canonical/design.npz\n create mode 100644 lf_data_preparation/v2_adapter_001/plot_receipt.json\n create mode 100644 lf_data_preparation/v2_adapter_001/review_conversion.py\n create mode 100644 lf_data_preparation/v2_adapter_001/review_launch_receipt.json\n create mode 100644 lf_data_preparation/v2_adapter_001/source_inventory.json\n create mode 100644 lf_data_preparation/v2_adapter_001/sources/__init__.py\n create mode 100644 lf_data_preparation/v2_adapter_001/sources/data.py\n create mode 100644 lf_data_preparation/v2_adapter_001/sources/execute_conversion.py\n create mode 100644 lf_data_preparation/v2_adapter_001/sources/import_lf_v2.py\n create mode 100644 lf_data_preparation/v2_adapter_001/sources/lf_v2.py\n create mode 100644 lf_data_preparation/v2_adapter_001/sources/plot_lf_v2_conversion.py\n create mode 100644 lf_data_preparation/v2_adapter_001/sources/regions.py\n create mode 100644 lf_data_preparation/v2_adapter_001/sources/review_conversion.py\n create mode 100644 lf_data_preparation/v2_adapter_001/sources/test_lf_v2.py\n create mode 100644 lf_data_preparation/v2_adapter_001/test_receipt.json\n create mode 100644 lf_data_preparation/v2_adapter_001/visual_review_math.json\n create mode 100644 lf_data_preparation/v2_adapter_001/visual_review_tests.json\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.07022600003983825,
+      "exit_code": 0,
+      "stdout": "602d0763183eab82f4c00fbb1dc5b42619be7aae\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:/Python313/python.exe",
+        "-B",
+        "tools/handoff.py",
+        "verify"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 9.49015570001211,
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"pass\",\n  \"repository_files\": 5073,\n  \"restored_historical_files\": 0,\n  \"asset_closure\": [],\n  \"saved_archives_checked\": 0,\n  \"full_evidence_checked\": false,\n  \"scope\": \"file identity, not a new mechanics validation\",\n  \"created_utc\": \"2026-10-03T06:13:39.688162+00:00\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Scripts\\python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\hf_repo\\scripts\\import_lf_v2.py",
+        "--source",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\v2_adapter_001\\inputs\\inverter_canonical\\design.json",
+        "--output",
+        "D:\\hf-lf-v2-public-conversion-20261003\\inverter_canonical",
+        "--expected-descriptor-sha256",
+        "7afa92b2e3618562349741458cb48b92b69a076b332c5cc4fbb06f12e2b6c301"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.44821300002513453,
+      "exit_code": 0,
+      "stdout": "D:\\hf-lf-v2-public-conversion-20261003\\inverter_canonical\\geometry.json\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Scripts\\python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\hf_repo\\scripts\\import_lf_v2.py",
+        "--source",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\v2_adapter_001\\inputs\\gripper_canonical\\design.json",
+        "--output",
+        "D:\\hf-lf-v2-public-conversion-20261003\\gripper_canonical",
+        "--expected-descriptor-sha256",
+        "6daaf44e9f691fc1791881743765c27266ef658f60d58ca7fb3050d4a176c6e7"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.6508134999894537,
+      "exit_code": 0,
+      "stdout": "D:\\hf-lf-v2-public-conversion-20261003\\gripper_canonical\\geometry.json\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Scripts\\python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\hf_repo\\scripts\\import_lf_v2.py",
+        "--source",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\v2_adapter_001\\inputs\\gripper_native_fine\\design.json",
+        "--output",
+        "D:\\hf-lf-v2-public-conversion-20261003\\gripper_native_fine",
+        "--expected-descriptor-sha256",
+        "05aa71c6d3a77d4a221fe16453f06e7e19b45325a4aff824a951c95d4fd1a443"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.6240964000462554,
+      "exit_code": 0,
+      "stdout": "D:\\hf-lf-v2-public-conversion-20261003\\gripper_native_fine\\geometry.json\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Scripts\\python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\functional_views\\lf_v2_adapter_20261003\\plot_lf_v2_conversion_frozen.py",
+        "--input",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\v2_adapter_001",
+        "--output",
+        "D:\\hf-lf-v2-public-view-20261003"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 2.4101296000299044,
+      "exit_code": 0,
+      "stdout": "{\"output\": \"D:\\\\hf-lf-v2-public-view-20261003\", \"cases\": 3, \"all_four_masks_changed_cells\": 0, \"mechanics_calls\": 0, \"media\": [\"lf_v2_native_masks.png\", \"lf_v2_native_nodes.png\"]}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.6798424000153318,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "LF_imports": 0,
+  "FE_calls": 0,
+  "force_calls": 0,
+  "HP_calls": 0,
+  "solver_calls": 0,
+  "scope": "Same machine, public clone in independent directory; ordinary-file conversion and saved-data display only, no new mechanics qualification",
+  "old_public_HEAD": "b8e04f15abfc9145ac866bda39727698787285ef",
+  "public_HEAD": "602d0763183eab82f4c00fbb1dc5b42619be7aae",
+  "repository_verification": {
+    "status": "pass",
+    "repository_files": 5073,
+    "restored_historical_files": 0,
+    "asset_closure": [],
+    "saved_archives_checked": 0,
+    "full_evidence_checked": false,
+    "scope": "file identity, not a new mechanics validation",
+    "created_utc": "2026-10-03T06:13:39.688162+00:00"
+  },
+  "source_inventory_sha256": "59db13cec37df2fb3d5c55a49706561714e28334686a674c339d46c0feb4b94a",
+  "conversions": [
+    {
+      "alias": "inverter_canonical",
+      "invocations": 1,
+      "files": [
+        {
+          "path": "geometry.json",
+          "sha256": "23adf44ea8164fb103998ab97363747540a11ef7bb589ae81aa2fde23ff57eee",
+          "bytes": 15494,
+          "byte_equal_published": true
+        },
+        {
+          "path": "geometry.npz",
+          "sha256": "1911362efaa5b6c5104af0cecf95310f262b129f3e0cd2a1c648cf550b756132",
+          "bytes": 1072,
+          "byte_equal_published": true
+        },
+        {
+          "path": "sources/design.json",
+          "sha256": "7afa92b2e3618562349741458cb48b92b69a076b332c5cc4fbb06f12e2b6c301",
+          "bytes": 9432,
+          "byte_equal_published": true
+        },
+        {
+          "path": "sources/design.npz",
+          "sha256": "cb28e2013a837083cc4a2b1f5bf45085e315c51db29e677eae72499815375b64",
+          "bytes": 1086,
+          "byte_equal_published": true
+        }
+      ],
+      "HF_geometry_id": "2e2bb3466ade06f920dfbb92577ccbe46106acec430837bac8e1a30b8083527a"
+    },
+    {
+      "alias": "gripper_canonical",
+      "invocations": 1,
+      "files": [
+        {
+          "path": "geometry.json",
+          "sha256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+          "bytes": 16636,
+          "byte_equal_published": true
+        },
+        {
+          "path": "geometry.npz",
+          "sha256": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+          "bytes": 1108,
+          "byte_equal_published": true
+        },
+        {
+          "path": "sources/design.json",
+          "sha256": "6daaf44e9f691fc1791881743765c27266ef658f60d58ca7fb3050d4a176c6e7",
+          "bytes": 10372,
+          "byte_equal_published": true
+        },
+        {
+          "path": "sources/design.npz",
+          "sha256": "fd1e4e15791aa75d7c0411c5442dfad5f4c868967dee13a3e8c9321be90d70f3",
+          "bytes": 1122,
+          "byte_equal_published": true
+        }
+      ],
+      "HF_geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d"
+    },
+    {
+      "alias": "gripper_native_fine",
+      "invocations": 1,
+      "files": [
+        {
+          "path": "geometry.json",
+          "sha256": "dbab7567c98e18174d198318f025184b3545c3681c060fa77d9435122bb0f32c",
+          "bytes": 16786,
+          "byte_equal_published": true
+        },
+        {
+          "path": "geometry.npz",
+          "sha256": "92ff8918ae7502c3f8bfb99398b654ea1521549e7ff3ce0e8b24a9b4fa720d21",
+          "bytes": 1493,
+          "byte_equal_published": true
+        },
+        {
+          "path": "sources/design.json",
+          "sha256": "05aa71c6d3a77d4a221fe16453f06e7e19b45325a4aff824a951c95d4fd1a443",
+          "bytes": 10471,
+          "byte_equal_published": true
+        },
+        {
+          "path": "sources/design.npz",
+          "sha256": "8ce4f2114f96b2ffd596f889ccdfa9e7eb2a8a2c87ce6000ac4a35f9c9f6fbf6",
+          "bytes": 1507,
+          "byte_equal_published": true
+        }
+      ],
+      "HF_geometry_id": "62dd40a9ed8a41a6a2deb55927982c7f409d63bfedbf96079b2ee032e816da8d"
+    }
+  ],
+  "view_files": [
+    {
+      "name": "lf_v2_native_masks.png",
+      "sha256": "75f85b53fc34daaf55c302d3f1d60a29fa87d0341d52b9b0beaa550a01276163",
+      "bytes": 192295,
+      "byte_equal_published": true
+    },
+    {
+      "name": "lf_v2_native_nodes.png",
+      "sha256": "6cd1187c3bd3cd32a6a7e828f998a37188d09fa0ad41f0df86a8a2b31a64d627",
+      "bytes": 230705,
+      "byte_equal_published": true
+    },
+    {
+      "name": "plot_lf_v2_conversion_frozen.py",
+      "sha256": "fdfccd477d66a1ade239dd974734c688adf0e7231b77348e39351fcae4300716",
+      "bytes": 16773,
+      "byte_equal_published": true
+    }
+  ],
+  "metadata": {
+    "published_sha256": "b3c985afa3da415570a7e24bb7d5ae57eae8e04a05c8877cf5847b2f6c7e15b5",
+    "recreated_sha256": "612871cfbbe60f65d737bb6295cf6125882eff7645334e27237be6d7453ce8eb",
+    "published_input_root": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\v2_adapter_001",
+    "recreated_input_root": "D:\\hf-restore-20260930\\lf_data_preparation\\v2_adapter_001",
+    "only_path_field_differs": true,
+    "full_metadata_byte_equal": false
+  },
+  "public_clean_before_after": true,
+  "status": "pass"
+}
