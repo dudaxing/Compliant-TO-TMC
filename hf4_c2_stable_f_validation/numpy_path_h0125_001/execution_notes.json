@@ -1,0 +1,71 @@
+{
+  "schema": "numpy_c1_h0125_execution_notes_v1",
+  "date": "2026-10-03",
+  "git_baseline": "c720b532d3ec04e803ad51872aeebcbd1d53afa4",
+  "working_tree": "main; scientific bytes identified by each execution source snapshot, not the baseline commit alone",
+  "environment_python": "D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Scripts/python.exe",
+  "original_model_sha256": "bba3322d048a93ba0d3f710b9d5a56b8c42500b08727073f7bd8415f981dc94f",
+  "physical_authority": "Exact sum of the two stored binary64 arrays; rounded display is for visualization only",
+  "numerical_formula_change_this_stage": false,
+  "operations": [
+    {
+      "operation": "ordinary task extraction",
+      "command": "python -B hf_repo/scripts/prepare_numpy_c1_input.py --reference hf4_c2_stable_f_validation/invariants_hu_campaign_001/version_002/data/hf4_c1_results/TMC_h0125_uniform_r2 --scope-input hf4_c2_stable_f_validation/numpy_scope_001/inputs --output hf4_c2_stable_f_validation/numpy_path_h0125_001/inputs",
+      "exit_code": 0,
+      "terminal_call_wall_seconds": 6.7980318,
+      "candidate_HP_or_solve_executed": false
+    },
+    {
+      "operation": "relevant regressions",
+      "cwd_relative": "hf_repo",
+      "command": "python -B -m pytest -q tests/test_numpy_equilibrium.py tests/test_split_affine.py",
+      "exit_code": 0,
+      "tests_passed": 38,
+      "pytest_seconds": 3.68,
+      "terminal_call_wall_seconds": 8.0808852
+    },
+    {
+      "operation": "single approach",
+      "command": "python -B hf_repo/scripts/run_numpy_c1_path.py --task-input hf4_c2_stable_f_validation/numpy_path_h0125_001/inputs --output hf4_c2_stable_f_validation/numpy_path_h0125_001/approach",
+      "exit_code": 0,
+      "controller_elapsed_seconds": 28.893040900002234,
+      "accepted_records": 3,
+      "peak_working_set_bytes": 222826496
+    },
+    {
+      "operation": "single compression",
+      "command": "python -B hf_repo/scripts/run_numpy_c1_path.py --task-input hf4_c2_stable_f_validation/numpy_path_h0125_001/inputs --initial hf4_c2_stable_f_validation/numpy_path_h0125_001/approach/last_state.npz --output hf4_c2_stable_f_validation/numpy_path_h0125_001/compression",
+      "exit_code": 0,
+      "controller_elapsed_seconds": 266.62909350002883,
+      "accepted_records": 17,
+      "peak_working_set_bytes": 233492480
+    },
+    {
+      "operation": "single fresh HP80/120 audit",
+      "command": "python -B hf_repo/scripts/audit_numpy_c1_path.py --path hf4_c2_stable_f_validation/numpy_path_h0125_001 --task-input hf4_c2_stable_f_validation/numpy_path_h0125_001/inputs --output hf4_c2_stable_f_validation/numpy_path_h0125_001/audit --time-limit 300",
+      "exit_code": 0,
+      "driver_elapsed_seconds": 118.12348299997393,
+      "records": 20,
+      "unique_new_states": 19,
+      "fresh_HP_evaluations": 38,
+      "passed_checks": 420,
+      "peak_working_set_bytes": 700080128
+    },
+    {
+      "operation": "render actual accepted states",
+      "command": "python -B hf_repo/scripts/plot_numpy_path.py --approach hf4_c2_stable_f_validation/numpy_path_h0125_001/approach --compression hf4_c2_stable_f_validation/numpy_path_h0125_001/compression --audit hf4_c2_stable_f_validation/numpy_path_h0125_001/audit/summary.json --comparison hf4_c2_stable_f_validation/numpy_path_001 --output functional_views/numpy_c1_h0125_20261003",
+      "exit_code": 0,
+      "exact_render_wall_seconds": null,
+      "frames": 20,
+      "actual_images_viewed": ["terminal main PNG", "thin-medium PNG", "GIF first and eleventh frames"],
+      "displacement_scale": 1,
+      "fixed_arrow_mm_per_N": 0.1854019222670081
+    }
+  ],
+  "budget_semantics": "300 seconds per solver stage and 300 for new audit, cooperative clock and sampled RSS 8GiB; peak working set is Windows process metadata, not a hard supervisor receipt",
+  "trial_recovery": "Original Newton/Armijo rollback and bisection within one controller invocation retained. No final failed stage was retried.",
+  "audit_pre_review_correction": "Added checkpoints after each HP return, candidate return and before final pass; no change to mechanical formula or acceptance gates",
+  "completion": "Two stage invocations and one new numerical audit pass; independent saved-evidence review recorded separately",
+  "not_completed": ["general contact physics admission", "release/re-entry", "split average-port control", "LF v2 adapter", "real workpiece clamping", "HF5 batch labels/ranking"],
+  "next": "Prioritize split average-port functionality, starting with a small analytic/Q1 closure, then an existing canonical mechanism at small stroke; further mesh refinement should answer a specific unresolved question"
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "numpy_c1_h0125_path_v1",
+  "date": "2026-10-03",
+  "goal": "Develop the independent HF forward evaluator; advance NumPy equilibrium after the full static force/CSC corpus passed.",
+  "authorization": "User authorized NumPy full force/reference comparison and subsequent assembly, tangent and equilibrium, and automatic project development. This is a new NumPy stage; no old execution window is reused.",
+  "baseline_commit": "c720b532d3ec04e803ad51872aeebcbd1d53afa4",
+  "input": "inputs: exact h=.125 C1 factory/model, original solver protocol, saved unit fluctuation direction, historical HP curve only for comparison",
+  "physical_targets_mm": [0, 0.125, 0.21875, 0.25, 0.28125, 0.375, 0.5],
+  "stages": {
+    "approach": [0, 0.125, 0.21875],
+    "compression_additional_parameter": [0, 0.03125, 0.0625, 0.15625, 0.28125],
+    "handoff": "Explicit stored lift and fluctuation; compression independently checks inherited s=0 state. No display-array initialization."
+  },
+  "budget": {
+    "solve_seconds_per_stage": 300,
+    "maximum_approach_runs": 1,
+    "maximum_compression_runs": 1,
+    "fresh_HP_audit_seconds": 300,
+    "maximum_audit_runs": 1,
+    "sampled_RSS_limit_bytes": 8589934592,
+    "enforcement": "Original cooperative solver clock; audit between-state/between-precision clock; RSS at accepted states/audit checkpoints. Not a hard process supervisor. Preparation, tests, rendering and delivery recorded separately."
+  },
+  "gates": {
+    "solver_relative_residual": "1e-9",
+    "solver_relative_constraint": "1e-10",
+    "positive_J": true,
+    "total_force_over_SF": "1e-11",
+    "material_regularization_force_over_max_HP_norm_1e-12SF": "1e-9",
+    "total_CSC_Jv_over_max_HP_norm_1e-10": "1e-10",
+    "material_regularization_CSC_Jv_over_max_HP_norm_1e-10": "1e-9",
+    "HP80_HP120_same_denominator": "1e-40",
+    "HP_relative_residual": "1e-9",
+    "HP_relative_constraint": "1e-10",
+    "HP_relative_force_balance": "1e-8"
+  },
+  "completion": "Both stages reach all original targets and each actual accepted record passes a newly computed HP80/120 numerical audit; show actual x1 geometry, reactions, components, J, gap and mesh comparison.",
+  "stop": "First solver failure, resource checkpoint failure or precision gate failure stops dependent work. Preserve accepted prefix and failure; no gate relaxation or automatic same-stage retry.",
+  "scope_limit": "Numerical C1 equilibrium qualification, not general contact/release or full original physical admission. Full top reaction includes background medium; not real workpiece clamping force. No LF import/optimization, HF5 labels, ranking, default-kernel change or factory material change."
+}
