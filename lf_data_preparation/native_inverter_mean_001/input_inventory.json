@@ -1,0 +1,79 @@
+{
+  "schema_version": "native-mean-input-inventory-1.0",
+  "baseline_commit": "3f0c45d0554a340217bdbfe504b68c445008a06b",
+  "case": {
+    "alias": "inverter_canonical",
+    "geometry_file": "lf_data_preparation/v2_adapter_001/converted/inverter_canonical/geometry.json",
+    "geometry_file_sha256": "23adf44ea8164fb103998ab97363747540a11ef7bb589ae81aa2fde23ff57eee",
+    "geometry_npz_file": "lf_data_preparation/v2_adapter_001/converted/inverter_canonical/geometry.npz",
+    "geometry_npz_sha256": "1911362efaa5b6c5104af0cecf95310f262b129f3e0cd2a1c648cf550b756132",
+    "geometry_id": "2e2bb3466ade06f920dfbb92577ccbe46106acec430837bac8e1a30b8083527a",
+    "prior_model_file": "lf_data_preparation/native_model_001/models/inverter_canonical/model.npz",
+    "prior_model_sha256": "321a10e0d46149cee9d17caf40dd1819c810ec9498d74c8882da1e3146aab9c6",
+    "elements": 3200,
+    "dofs": 6642,
+    "task_file": "lf_data_preparation/native_inverter_mean_001/task.json",
+    "task_file_sha256": "d0f898b2f44dce4d2928ade24f3a1b63d8ba367242cf2d673d065e6786f67f8c",
+    "prior_task_file": "lf_data_preparation/native_model_001/tasks/inverter_canonical.json",
+    "prior_task_sha256": "5d488f275515b77e37c07ef57c3ebda71f706ba498cec20f72261400408bfe65",
+    "direction_file": "lf_data_preparation/native_inverter_mean_001/direction.npz",
+    "direction_file_sha256": "177124bd1968f9e451e59cba4d7124c393eb8fee15cc93851f570f980aada29a",
+    "direction_array_sha256": "a408f3547e73d0acd2f4ca718b82dfa49cc543a9606aba37fcacb4f1fa3d12f1",
+    "lifting_file": "lf_data_preparation/native_inverter_mean_001/lifting.npz",
+    "lifting_file_sha256": "fbfe6d9d1e77aa541991d1f0124a596d7a9574b720eb0e4ac5dbf851fcf1d465",
+    "targets_mm": [
+      0.0,
+      0.001
+    ],
+    "fixed_DOFs": 89,
+    "free_DOFs": 6553,
+    "result_directory": "result"
+  },
+  "settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 25,
+    "armijo_c": 0.0001,
+    "max_backtracks": 12,
+    "max_bisections": 4,
+    "minimum_increment": 6.25e-05,
+    "time_limit_seconds": 180.0
+  },
+  "gates": {
+    "production_residual": "1e-9",
+    "independent_residual": "1e-8",
+    "force_evaluation": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11",
+    "hp80_hp120": "1e-40",
+    "total_force": "1e-11",
+    "material_force": "1e-9",
+    "regularization_force": "1e-9",
+    "total_tangent": "1e-10",
+    "material_tangent": "1e-9",
+    "regularization_tangent": "1e-9",
+    "augmented_force_tangent": "1e-10",
+    "augmented_constraint_tangent": "1e-10"
+  },
+  "preparation_source": {
+    "inventory_file": "lf_data_preparation/native_force_001/input_inventory.json",
+    "sha256": "3de1412ec3cc392b48106a6835e42ee7a89054d38d53561dd59df413eb5a5dc8",
+    "selected_alias": "inverter_canonical",
+    "role": "Geometry, original task and saved intrinsic model only; no historical displacement reused"
+  },
+  "direction_definition": "v=b_in/max(abs(b_in)); actual fixed DOFs zero; dimensionless; multiplier direction 0 N/mm",
+  "state_authority": "D(lift)+D(fluctuation); zero lift origin and shape; independent mean measurement",
+  "reference_definition": "Per accepted state HP80/120 on all elements with disconnected local numbering, then exact Decimal scatter to real DOFs; no spatial sampling",
+  "qualification": "Small coarse no-workpiece numerical TEST only; independent qualification stored separately from production",
+  "execution_limits": {
+    "production_seconds": 180,
+    "reference_seconds": 180,
+    "sampled_RSS_bytes": 8589934592,
+    "outer_seconds": 210
+  },
+  "stop_policy": "First stage error stops; no repair, retry, force or reopening a closed window",
+  "reference_call_rule": "2 times actual accepted-state count; normal two states -> 4 calls, 12800 element-precision instances"
+}
