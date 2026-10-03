@@ -41,3 +41,13 @@ python hf_repo/scripts/solve_native_mean.py --geometry lf_data_preparation/v2_ad
 若 task1.1 声明 `path`，CLI 自动采用其 `targets_mm`；显式 `--targets` 必须与任务一致。改峰值必须建立新任务同时更新 `input.target_mm` 和 `path`，不修改本目录冻结任务。缺省最小增量为首个非零目标/16；本轮 .1mm 循环为 .00625mm，其他设置不改。
 
 下一步先从保存态提取真实 Q1 栅格外边界，排除 y=40 对称切口，计算距离/最近位置/交叉，0新力学调用；随后同一粗方初探 `[0,.1,.25,.5,.25,.1,0]mm`，依据实际几何、力、J和成本再决定1/2/3mm与圆形/细网格。当前这些新行程未执行。保持完整失败记录、原数值门、每个新阶段明确来源/资源以及首错停止规则；正常作者实现后再冻结新阶段，不用延长旧窗口或静默修验收条件。
+
+## 新增保存态边界观测
+
+boundary_geometry_001 的14解析例与3接受态一次读取均实际通过；0新F/T/solve/HP。双方Q1外边已排除y40切口，峰值底/左最近无符号距离为1.8958824759664/1.9814928770650mm，卸载后均显示2mm。左最近点是下角到下方实体，不能称侧向normal gap；旧left窗口2.0389606004mm独立保留。未检测全包容，不因正距离/无交叉授予无重叠、接触或夹持资格。
+
+```powershell
+python hf_repo/scripts/measure_native_workpiece_boundaries.py --input lf_data_preparation/native_workpiece_001/coarse_square_cycle_001/result --output new-boundary-measurements
+```
+
+此命令是可移目录的普通保存态接口示例，本轮不再执行；已有测量见boundary_geometry_001/measurements/boundary_measurements.json，来源及一次执行见protocol.json与两个launch/JUnit/stdout。

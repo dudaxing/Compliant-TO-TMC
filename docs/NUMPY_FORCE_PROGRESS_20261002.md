@@ -4,7 +4,7 @@
 
 独立参考覆盖全部单元与DOF、三力、声明方向切线作用、CSC组装、平均约束及工件/支承反力；不是高精度穷举全部切线列。生产22F开始/19完成、11T完成、1solve，差额是3次返零力-only全步范围拒绝及原规则下的半步回溯，接受态通过不代表这些拒绝态已获资格。原“所有F开始必须完成”前置合同明确0HP关闭；[新保存态合同与计数对账](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_001/reference_002/reference_contract.json)只修订这一已声明计数条件，全部原数学门保持。算术范围限制未完全消失；不扩大到接触、夹持压力、H2/H3、HF5、AD/JIT或全部任意输入。
 
-Agent已按用户授权选择圆r8mm和正方形side16mm、中心(70,40)mm，粗方/细方/细圆三包构造通过；细方/细圆尚未求平衡。当前×1图仍明显张开，底/左节点窗口约1.896/2.039mm只是代理观测，非真实表面距离；微小预接触介质传力不能当有效夹持。下一功能先读保存态计算真实Q1栅格外边界间距/交叉位置，排除y=40对称切口，再以同一粗方模型探索[0,.1,.25,.5,.25,.1,0]mm；依据实际作用和成本再扩到1/2/3mm及圆形/细网格。该大行程当前未执行。仅在main开发，origin固定为https://github.com/dudaxing/Compliant-TO-TMC.git。旧无工件细.025路径及公开重放保留各自冻结资格；本轮公开恢复仅验文件身份，不借用其数值重放资格。
+Agent已按用户授权选择圆r8mm和正方形side16mm、中心(70,40)mm，粗方/细方/细圆三包构造通过；细方/细圆尚未求平衡。当前×1图仍明显张开，底/左节点窗口约1.896/2.039mm只是代理观测，非真实表面距离；微小预接触介质传力不能当有效夹持。新增纯保存态Q1外边界测量已通过14解析例及3接受态读取，双方排除y=40镜像切口、0新F/T/solve/HP；峰值底边最近无符号距离1.895882476mm、左边集1.981492877mm（最近为下角到下方实体，非侧向normal gap），卸载显示2mm，包容未检测。见[实际×1边界/最近点与独立代理曲线](../functional_views/native_workpiece_boundaries_20261004/render_001/native_boundary_geometry.png)。下一以同一粗方模型探索[0,.1,.25,.5,.25,.1,0]mm；依据实际作用和成本再扩到1/2/3mm及圆形/细网格。该大行程当前未执行。仅在main开发，origin固定为https://github.com/dudaxing/Compliant-TO-TMC.git。旧无工件细.025路径及公开重放保留各自冻结资格；本轮公开恢复仅验文件身份，不借用其数值重放资格。
 
 
 2026-10-03历史记录：普通文件两类粗机构已接通NumPy完整力、非对称CSC切线与平均驱动平衡。新增反向器0→.001mm两态4新HP参考通过，实际output ux=−.0016019203686mm，输入R=.00016987267293N。完整目标、行动、依据、成本、效果、执行边界及下一阶段见本文[反向器最新记录](#native-inverter-mean-20261003)，[真实形变和力](../functional_views/native_inverter_mean_20261003/native_mean_path.png)、[两帧实际动画](../functional_views/native_inverter_mean_20261003/native_mean_path.gif)可人工检查。当前仍为无工件TEST；下一唯一功能阶段为反向器明确.025mm测试路径，尚未执行。
@@ -1697,3 +1697,29 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 交付文件预检曾因编排错误失败：manifest全文件hash进程超过默认10秒返回running，但后续identity verify过早启动，仍读取旧清单并报告README已改变，真实exit1。此为交付前置流程失败，0F/T/solve/HP；原失败stdout/退出保留于外部交付记录。随后等待生成器真实完成、补记本条，再显式重建并验证新清单；不将旧失败改成通过、不重算科学结果或借用任何已关闭阶段。
 
 上述交付失败的真实输出已另保存入仓[delivery_preflight_failure.json](../handoff/native_workpiece_20261004/delivery_preflight_failure.json)。staged diff白空检查另报告原失败JUnit第16行尾空白及冻结诊断脚本EOF空行，这两项作为原证据保持bytes；明确排除二者后的当前代码/文档检查真实exit0。新增简短tools/build_repository_manifest.py仅遍历Git-index并保留科学baseline头，先stage再生成，等待terminal后才stage清单与verify，避免该编排问题；没有新增力学或资格流程。
+
+### 保存态真实Q1外边界观测：作者实现及新阶段
+
+粗方science/context已提交推送main 62e3d1e，root清单7176文件验身份通过；公开异目录核验进行中，未重算力学。下一功能纯NumPy边界模块约180行及83行CLI仅从实际coordinates+L+w读Q1外边，双方排除y40镜像切口，方形bottom/left/all各读几何距离、最近点与交叉，圆保留cell staircase。它不调用force/T/solve/HP，不改变力学源码或旧缓存。无符号边界距离不能代替signed penetration，全包容未检测，正距离或无交叉不能证明无重叠或夹持。
+
+正常作者静态阶段两次发现并修正分类：正但小于roundoff容差的平行段/退化点不能标相交；极小夹角真实crossing不能被容差吞成overlap。最终共线用精确浮点平行/共线，容差仅收录near-touch；原距离不裁剪。未执行这两版作者草稿，未有失败实验或借用旧窗口。14项必要解析例覆盖交叉/重叠/端点/退化/正微间距/微角交点、Q1共享边与镜像边、实际split运动和圆阶梯。新[boundary_geometry_001 protocol](../lf_data_preparation/native_workpiece_001/boundary_geometry_001/protocol.json)冻结5来源/6保存输入；test outer60秒/8GiB，成功后saved测量outer60秒/8GiB，各一次首错关闭，无retry/force；当前正式测试和测量均0。此阶段只补功能观测，不是更大行程或接触验收。
+
+62e3d1e交付终态：origin main普通push真实exit0；干净异目录D:/hf-restore-20260930 fetch/ff真实terminal0，其HEAD同62e3d1e且Git clean。root与公开clone的tools/handoff.py verify均真实terminal0/pass，7176 tracked-payload文件，manifest SHAe982ee00f283155a7c1341169f40588b8a67e3b73a4b6f499b3b06ae02aa0b00；完整证据外部资产未全恢复/未checked，0新力学重放。外部原始交付记录分别为D:/hf-native-workpiece-root-delivery-20261004.json及D:/hf-native-workpiece-public-delivery-20261004.json。此证明新机器可恢复本轮已入Git的源码/上下文/接受态/参考/失败与图文件身份，不能冒称工件数值公开重跑通过。
+
+新boundary_geometry_001正式两phase均唯一真实terminal0/pass：14解析tests/1.01秒（外3.995520400秒、采样峰56631296B）；saved measurement外.371186100秒/40648704B，3实际接受态一次读取，5source/6原payload全部保持，0F/T/solve/HP。原qualified粗方49source/缓存不改。measurement SHAe478e5011bbeb32bbab59119cd439f50d66fb930e68c6f3db68a0f9d8f92970d；[原始测量](../lf_data_preparation/native_workpiece_001/boundary_geometry_001/measurements/boundary_measurements.json)。机制实际外边496条、工件暴露边32条（底16/左8/右8），双方y40镜像切口均排除。
+
+| 实际态 | 底边最近无符号距离mm | 左边最近无符号距离mm | 底/左旧node-window mm | 边相交/roundoff近触 |
+|---|---:|---:|---|---|
+| origin 0 | 2 | 2 | 2 / 2 | 均否 |
+| loading .1 | 1.8958824759664 | 1.9814928770650 | 1.8960971204304 / 2.0389606003787 | 均否 |
+| unloading 0 | 2 | 2 | 2 / 2 | 均否 |
+
+峰值底最近机构点(78.0100011835,30.1041439034)、工件点(78,32)；左最近点为机构(62.0102388437,30.0185335764)到工件下角(62,32)。因此左几何最近距离下降和旧左窗口增加并不矛盾：前者允许角点到其下方实体的斜距，后者是原节点集合的侧向代理，均不是signed侧normal gap。当前点/边观测确认底侧接近趋势，不以intersects=false推出不存在全包容；containment_tested仍false。全部运动端点采用普通binary64 coordinates+L+w作保存几何显示，返零约e-27位移在30/60mm绝对坐标中不显现，因此图示2mm不能当tiny力学状态精确为零。新增函数没有裁剪力学状态或力。下一saved-only图只画这些已有最近点/数值，不重做几何或力学；更大[0,.1,.25,.5,.25,.1,0]循环仍未执行。
+
+新边界证据只读独立核验无阻断：JUnit14通过/0fail/error/skip；两launch真实exit0/pass；6原输入、5当前源码/5caps和测量8绑定全部SHA一致；三态496/32边均无遗留y40截边，9组已保存最近点Euclidean norm与声明距离逐项相同。该核验只作9个保存点对的局部标量校对，0新边提取/全边距离测量/FE/HP/测试/绘图。再次确认peak bottom/right下角与left/左下角的点对含义，返零2mm为该普通坐标显示精度，不更改split力学极小态。
+
+边界saved-view一次真实terminal0/pass，outer1.998361400秒、采样峰105123840B，14来源/输入绑定保持，0F/T/solve/HP/新几何测量或边提取。root实际查看3060×1785 PNG，三×1实际态近点/线、left下角标签和独立node-window面板清楚；没有插值新态或放大。保存4文件（PNG/3行35列CSV/冻结源码/metadata），原launch见boundary_geometry_001/saved_view_launch.json；[可视化结果](../functional_views/native_workpiece_boundaries_20261004/RESULTS.md)。普通viewer要求显式--result，并将6payload完整relative suffix和2producer/module的hf_repo suffix映射到当前脚本所在clone、逐SHA核对，不访问旧机器绝对路径；支持缓存放repo外。该可移目录行为经过源静态核对，当前只有本目录一次图执行，不冒称第二异目录绘图重放。
+
+本轮新增边界功能及记录随后提交main；下一.5mm循环是新的唯一近期数值阶段，当前0调用，保留同一粗方、材料、376fixed、0输出弹簧与全部原门，minimum_increment仍.00625mm。约263秒的三态实测与7态增加的Newton工作量是下一独立资源预算的依据；不沿用已关闭.1窗口或提前规定夹持结果，先冻结新任务/来源/资源，再按真实效果决定更大行程。项目整体仍active。
+
+边界view只读交付终核：CSV3行35列共105字段与保存测量和metadata逐项相同；14protocol绑定/10metadata角色绑定及PNG/CSV/冻结脚本SHA一致，当前与冻结viewer均29f9afac527bec323897704db5477992465198c1f00562d1a36e22b32a5aa3b5，PNG3060×1785。独立核查0重绘/边提取/距离测量/FE/HP/测试/编辑；source/metadata/图片范围一致，可交付。原49粗方力学来源当前SHA另实际核对全相同。
