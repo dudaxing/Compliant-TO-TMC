@@ -6,7 +6,7 @@
 
 后续开发统一在本仓库的 **main** 上进行，`origin` 固定为 `https://github.com/dudaxing/Compliant-TO-TMC.git`。本机正式开发根为 `D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC`；其内部 `hf_repo/` 是源码。外层旧 `Compliant-Nonlinear-TMC-O/hf_repo/` 保留为历史工作区，不再作为并行开发或推送入口。其他机器可克隆到任意目录。
 
-2026-10-02最新功能：[新候选NumPy完整力、组装、解析切线与平衡](docs/NUMPY_FORCE_PROGRESS_20261002.md)。三近旋转场和C1保存态三力门通过；七方向21项切线门通过；新C1接近/压紧路径的15唯一状态、336项独立HP80/120检查通过。可看[实际新路径图](functional_views/numpy_c1_20261002/numpy_path.png)及[16帧动画](functional_views/numpy_c1_20261002/numpy_path.gif)。当前为显式NumPy入口，原默认入口仍沿用；完整矩阵、compiled AD与真实工件夹持的范围尚待后续验证。整体能力见[物理/功能进度表](docs/PHYSICS_AND_FUNCTION_PROGRESS_20261001.md)。[F-SELECT1](docs/F_SELECT1_RESULT_20261001.md)的前缀结果保留原资格。
+2026-10-03最新功能：[NumPy完整力、组装、解析切线与进度记录](docs/NUMPY_FORCE_PROGRESS_20261002.md#numpy-scope-20261003)。修复一次微小应变算术拒绝后，原33制造＋63保存态、129方向的774候选门及774参考门全过；26功能回归通过。可看[完整范围图](functional_views/numpy_scope_20261003/numpy_scope_coverage.png)和[细网格真实形变／三力／J](functional_views/numpy_scope_20261003/numpy_scope_terminal.png)。10月2日新C1接近／压紧路径的15唯一状态、336新HP检查按当时源码通过，[实际新路径图](functional_views/numpy_c1_20261002/numpy_path.png)及[16帧动画](functional_views/numpy_c1_20261002/numpy_path.gif)保留。当前入口显式选择NumPy；compiled AD、平均端口及真实工件任务尚待实施。图示细网格旧末态平衡仍not_pass，静态通过不授予新路径资格。整体能力见[物理/功能进度](docs/PHYSICS_AND_FUNCTION_PROGRESS_20261001.md)。
 
 ## 开始阅读
 

@@ -1,6 +1,8 @@
 # 物理与功能开发进度
 
-2026-10-02增补：新候选的[NumPy完整力、组装、解析切线与新平衡](NUMPY_FORCE_PROGRESS_20261002.md)已闭合一条C1固定压缩任务。三近旋转场/C1保存态三力门、七方向21切线门、15唯一新平衡态336项新HP80/120检查均通过；[新实际变形与力曲线](../functional_views/numpy_c1_20261002/numpy_path.png)、[16帧动画](../functional_views/numpy_c1_20261002/numpy_path.gif)可人工检查。以下2026-10-01矩阵中的“新候选完整force未闭合”是当时状态：现在NumPy功能已有上述受限验证，compiled force/AD和原全矩阵资格仍待后续。整体目标、一般接触、平均端口及真实夹持任务边界继续适用。
+2026-10-03增补：新NumPy完整力及固定lift的实际CSC切线已通过原33制造＋63保存静态范围（96状态／129方向，774候选及774参考门）。微小应变拒绝已局部修复，原域和原门保持；[完整记录](NUMPY_FORCE_PROGRESS_20261002.md#numpy-scope-20261003)、[范围图](../functional_views/numpy_scope_20261003/numpy_scope_coverage.png)和[细网格保存形变与三力](../functional_views/numpy_scope_20261003/numpy_scope_terminal.png)可对照。最细保存末态h=0.0625／d=0.5 mm，完整顶边法向读数71.42389357316964 N，最小J约1.42743e-5；其**原HP平衡审计仍not_pass**。这次准确读取静态响应，没有对旧状态重新求解；一般接触、split平均端口和真实工件功能继续待实施。下一步是新的h=0.125 NumPy路径及新状态审计。
+
+2026-10-02增补：新候选的[NumPy完整力、组装、解析切线与新平衡](NUMPY_FORCE_PROGRESS_20261002.md)已闭合一条C1固定压缩任务。三近旋转场/C1保存态三力门、七方向21切线门、15唯一新平衡态336项新HP80/120检查均通过；[新实际变形与力曲线](../functional_views/numpy_c1_20261002/numpy_path.png)、[16帧动画](../functional_views/numpy_c1_20261002/numpy_path.gif)可人工检查。以下2026-10-01矩阵中的“新候选完整force未闭合”是当时状态；10月3日静态范围已补齐，compiled AD和一般接触资格仍待后续。整体目标、平均端口及真实夹持任务边界继续适用。
 
 2026-10-01。本文回答“目前能算什么、这些量意味着什么、下一步怎样得到有用结果”。依据现有源码和已经保存的数值结果整理；本次文档编写没有运行新的力学计算。近期执行细节另见 [CURRENT_STATUS](CURRENT_STATUS.md)，这里以功能为主。
 

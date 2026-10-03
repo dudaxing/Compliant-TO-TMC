@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-03",
+  "previous_execution": "results/summary.json: stopped at nondyadic_rect__tiny_strain after 25 cases; that invocation is closed",
+  "new_execution": "One complete 33-manufactured + 63-saved comparison of the locally repaired source; new results_revision_002 directory; stop at first error, no reuse of previous passes",
+  "problem": "Valid inputs and J=1 were rejected by isolated low-part DD products in log1p correction and auxiliary energy squares",
+  "changes": [
+    "Use the existing binary64 transcendental correction boundary for low/(1+high); retain original operand/pair checks and the retained minus-one fallback",
+    "Scale the auxiliary square operands by exact 2^128, retain all four DD products and the Horner contraction, then scale back by exact 2^-256",
+    "Use the same square evaluation in the unselected direct-energy branch to avoid its observed internal NaN"
+  ],
+  "unchanged": ["OPERAND_MIN/MAX and all DD primitive range checks", "Original six candidate gates and HP80/120 gate", "Physical weak force model and fixed-lift unsymmetrized tangent", "Original input/reference bytes", "Default kernel and controller settings"],
+  "local_validation": "Independent Decimal log/energy regression and the affected NumPy force, tangent, and analytic equilibrium tests; single stopped-field static probe before the complete scope",
+  "budget": {"between_case_wall_seconds": 600, "between_case_sampled_rss_GiB": 8, "enforcement": "Cooperative checks before and after cases; not a hard process supervisor"},
+  "scope": "Existing static NumPy inputs/directions; no FE path, no reference HP generation, no JIT/compiled AD qualification"
+}

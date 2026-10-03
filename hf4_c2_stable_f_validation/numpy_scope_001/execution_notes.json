@@ -1,0 +1,46 @@
+{
+  "preparation": {
+    "command": "numerical-python -B hf_repo/scripts/prepare_numpy_scope_inputs.py --source hf4_c2_stable_f_validation/invariants_hu_campaign_001/version_002/data --output hf4_c2_stable_f_validation/numpy_scope_001/inputs",
+    "first_exit_code": 1,
+    "first_error": "FileNotFoundError from duplicate Windows extended-path prefix; no output directory created",
+    "corrected_exit_code": 0,
+    "seconds": 43.258430999994744,
+    "executed_source": "preparation/sources/prepare_numpy_scope_inputs.py",
+    "executed_source_sha256": "238c419aaa600869bb08f2d93a6101c8c6eda72e45a40f63dcf052c41b77c401",
+    "later_manifest_pin_source_sha256": "03bce2ae46684117298514470528e197c8f3a981d902db539d1034e2d0f7d8d6",
+    "input_index_sha256": "a73e839f309d60fd2621b159a5b990293df24b957086f46ed7dbcf2cc8a28a0e"
+  },
+  "first_scope": {
+    "exit_code": 1,
+    "summary": "results/summary.json",
+    "case_stop": "nondyadic_rect__tiny_strain",
+    "cases": 25,
+    "candidate_gates": 300
+  },
+  "diagnosis": {
+    "first_exit_code": 1,
+    "first_error": "JSON exporter rejected propagated NaN, after raw NPZ and sources were saved in diagnosis_001; files retained",
+    "corrected_exit_code": 0,
+    "summary": "diagnosis_002/summary.json",
+    "acceptance_behavior_modified": false
+  },
+  "regression": {
+    "command": "numerical-python -B -m pytest hf_repo/tests/test_log1p_tiny_energy.py hf_repo/tests/test_split_numpy_force.py hf_repo/tests/test_split_numpy_tangent.py hf_repo/tests/test_numpy_equilibrium.py -q -p no:cacheprovider",
+    "exit_code": 0,
+    "passed": 26,
+    "pytest_seconds": 9.96,
+    "scope": "Includes a small analytic equilibrium test; no new contact path or HP-reference generation"
+  },
+  "reference_regenerated": false,
+  "revised_scope": {
+    "command": "numerical-python -B hf_repo/scripts/run_numpy_scope.py --input hf4_c2_stable_f_validation/numpy_scope_001/inputs --output hf4_c2_stable_f_validation/numpy_scope_001/results_revision_002 --max-seconds 600",
+    "exit_code": 0,
+    "summary": "results_revision_002/summary.json",
+    "cases": 96,
+    "directions": 129,
+    "candidate_gates": 774,
+    "reference_gates": 774,
+    "elapsed_seconds": 422.5942714000121,
+    "sampled_peak_rss_bytes": 136491008
+  }
+}
