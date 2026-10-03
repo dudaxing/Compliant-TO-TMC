@@ -2,6 +2,8 @@
 
 2026-10-03最新：**普通文件的NumPy平均驱动平衡入口已接通**。粗夹持器0→.001mm实际路径、两态4次新HP80/120全量参考及两功能测试通过；输入力.0002084121N、自由+y输出.0011437157mm，独立残量1.54e-11。见[目标、实现、数值和物理解释](NUMPY_FORCE_PROGRESS_20261002.md#native-mean-20261003)、[实际形变/力/端口图](../functional_views/native_mean_20261003/native_mean_path.png)与[两帧动画](../functional_views/native_mean_20261003/native_mean_path.gif)。这是无工件小TEST，普通反向器新路径、完整行程、研究H2/H3、真实夹持与批量标签仍未完成；下一步同入口接粗反向器小步，现未执行。
 
+main 93851df的[实际公开恢复](../handoff/native_mean_20261003/public_recovery_verify.json)通过：12 payload／77数组及图包6文件字节相同，物理/求解诊断JSON除耗时与关联hash外一致，0新HP。下一粗反向器小TEST尚未执行。
+
 2026-10-03最新：**普通原生模型的三分量NumPy切线入口及完整CSC组装已接通**。粗夹持器3200单元／6642DOF保存checker态，两个方向经40次新HP80/120全量核对通过，2案功能测试通过；最坏归一化误差4.43e-14，原门未改。三完整矩阵保留fixed行列及HuHu非对称性，见[实现、数值、成本及物理解释](NUMPY_FORCE_PROGRESS_20261002.md#native-tangent-20261003)与[两方向的内力变化率图](../functional_views/native_tangent_20261003/native_tangent_directional_actions.png)。本步21.25秒为粗例给定态实测，未求平衡／未执行.025mm目标；下一步接普通文件的小步平均驱动平衡并显示真实形变、输入力和自由输出。工件／研究H2-H3／完整接触与批量标签仍待完成。
 
 科学交付main ae8f29c及[实际公开恢复证明](../handoff/native_tangent_20261003/public_recovery_verify.json)已通过：异目录9结果文件／43数组精确相同，图包4文件字节相同，0新HP。接续见[粗夹持器0→.001mm平均驱动平衡的新近期计划](NUMPY_FORCE_PROGRESS_20261002.md#native-mean-next-20261003)，截至本条尚未执行该新路径。

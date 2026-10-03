@@ -4,6 +4,8 @@
 
 2026-10-03最新：**普通文件的NumPy平均驱动平衡入口已接通**。粗夹持器0→.001mm实际路径、两态4次新HP80/120全量参考及两功能测试通过；输入力.0002084121N、自由+y输出.0011437157mm，独立残量1.54e-11。见[目标、实现、数值和物理解释](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-mean-20261003)、[实际形变/力/端口图](functional_views/native_mean_20261003/native_mean_path.png)与[两帧动画](functional_views/native_mean_20261003/native_mean_path.gif)。这是无工件小TEST，普通反向器新路径、完整行程、研究H2/H3、真实夹持与批量标签仍未完成；下一步同入口接粗反向器小步，现未执行。
 
+main 93851df的[实际公开恢复](handoff/native_mean_20261003/public_recovery_verify.json)通过：12 payload／77数组及图包6文件字节相同，物理/求解诊断JSON除耗时与关联hash外一致，0新HP。下一粗反向器小TEST尚未执行。
+
 main ae8f29c的[公开异目录恢复](handoff/native_tangent_20261003/public_recovery_verify.json)通过；9结果文件／43数组精确一致，图包4文件字节相同。下一步[粗夹持器小步平均驱动平衡](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-mean-next-20261003)尚未执行。
 
 2026-10-03最新：**新普通候选的NumPy完整力入口已接通，三例六制造态经64次新HP80/120全量核对通过，3案功能测试通过**。材料/HuHu/总力均满足原门，38400单元/全部DOF覆盖，最大归一化误差8.64e-17；保存模型、原始split状态、三力/应力/J/Hu/能量和全精度参考。见[目标、实施、物理效果和接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-force-20261003)、[位移/J/Hu](functional_views/native_force_20261003/native_force_fields.png)、[三类内力](functional_views/native_force_20261003/native_force_components.png)。本步为给定位移静态内力，未执行task的.025mm目标；下一普通模型的非对称切线/小步平均驱动平衡，工件/研究H2-H3/一般接触/批量标签仍待完成。

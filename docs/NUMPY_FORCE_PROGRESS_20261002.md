@@ -958,3 +958,14 @@ python functional_views/native_mean_20261003/plot_native_mean_frozen.py --input 
 ### 独立保存态事后复核与本次关账
 
 [保存数据交叉复核](../lf_data_preparation/native_mean_001/postrun_identity_review.json) 79ffe5fa，pass：API作者另用保存数据核对33 current源＋两套来源胶囊共99件、7输入、23model、两态全部2state／17force／3tensor／full CSC。4保存HP覆盖12800 element-precision instances，159408全域Decimal force/action entries以3000位/Inexact trap重新精确scatter；38400局部门＋18global/CSC/KKT门＋48scalar门共38466数值门逐值重放与原字串一致。270270 checks是保存数据核对总数，不能与原38634执行checks相加作为新物理门。0新模型／force／tangent／solver／HP.evaluate／test／plot，独立物理参考仍是原唯一4 HP调用。实际4/3/1及保存0calls再次闭合；所有结束绑定一致、无阻断。唯一正式生产／参考／测试／图窗口至此完成关闭，接下来仅按已写范围交付与公开同小TEST恢复。
+
+
+### main交付与实际公开恢复
+
+科学实现、两态新求解／4新HP／两案测试／图及两路事后复核已推送main **93851df65a656396d1efd22d65d9eaaf21d08a79**，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。公开克隆D:/hf-restore-20260930从8a6e188仅fetch＋fast-forward到93851df，干净main；5750交付文件verify通过，science manifest SHA1d74af5f570bb2b18759e1cc94a1da56af22999ed5890d9e84f0b3bb725d6fda。全参考／普通模型／源码／图为Git普通文件，不需旧机盘符或额外Release即可读取本次。
+
+[实际公开恢复证明](../handoff/native_mean_20261003/public_recovery_verify.json) c25b3123：一次普通CLI到公开根之外D:/hf-native-mean-public-results-20261003，63.1868441秒，外层63.3185445秒；采样child-tree724.4375MiB、wrapper＋child759.91796875MiB，180秒／8GiB范围内。12 payload文件原字节相同，23model＋两接受态各(2state＋17force＋3tensor＋5CSC存储)=77数组dtype／shape／Cbytes相同。两个state.json和result全部非时间字段一致，包括所有物理值、source/task、settings、Newton／Armijo／LU诊断、4/3/1计数和资格；只排明确耗时及其关联hash，不称整个JSON字节相同。公开CLI log、回执及实际JSON随本次恢复证明保存，原正式JSON不覆盖。
+
+公开冻结查看器一次到D:/hf-native-mean-public-view-20261003，2.9188564秒；PNG／两帧GIF／CSV／脚本／helper／metadata六件字节相同，0model／force／tangent／HP／solver。正式与公开合计8force／6tangent／2solver，测试另两次临时solver及未单独持久化的force/tangent数不猜算；新HP仍唯一4次，不重复扩大数值资格。此为同机/runtime异目录恢复，不是另一机器的性能或一般接触验收。main交付过程有一次身份check在manifest builder尚未结束时读到旧清单，拒绝modified README；待builder正常结束、重新暂存新清单后完整verify通过，未重跑任何科学执行，此先后错误在恢复证明delivery_events保留。
+
+恢复证明、本补充和原接续计划随后另作普通main提交／推送。粗反向器0→.001mm近期阶段尚未执行；将复用当前入口、原两态参考门、实际89fixed与自由-y输出、新明确TEST和180秒／8GiB各一次预算，先补齐第二类普通机构的功能。下一阶段同时将legend移出结构区域改善力显示；原冻结图/数据不回写。更长行程、真实工件／接触夹持、研究H2/H3及批量HF仍需后续逐步实施，整体目标保持active。
