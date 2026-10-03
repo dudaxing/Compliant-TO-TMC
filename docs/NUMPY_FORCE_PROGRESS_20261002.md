@@ -542,3 +542,66 @@ python functional_views/lf_v2_adapter_20261003/plot_lf_v2_conversion_frozen.py -
 本轮数据源码、三份原始包／转换包、独立核对、测试和图已普通推送main提交602d0763183eab82f4c00fbb1dc5b42619be7aae。另目录公开克隆仅fetch＋fast-forward至此，5073件普通文件身份校验通过，工作树前后干净。实际使用该克隆中的CLI和保存普通输入各转换一次到新的外部目录；三例共12个geometry JSON／NPZ及原始source副本与已发布结果逐字节相同，HF身份一致；转换输入与执行源码均来自公开克隆，未读原下载ZIP。
 
 冻结查看器以该克隆中的保存数据重绘，两张PNG及查看器源码逐字节相同；metadata只有input_root随实际克隆根变化，其他全部字段、数值及SHA一致。完整metadata不声称字节相同。[公开恢复回执](../handoff/lf_v2_adapter_20261003/public_recovery_verify.json)保存每条命令、exit、墙钟与12件产物／图SHA，所有步骤exit0，无重试、无LF导入／FE／force／HP／solver，没有新增Release依赖。这证明同机异目录普通数据接入和显示可重现；不是异机运行环境或新力学资格证明。
+
+<a id="native-q1-preparation-20261003"></a>
+## 2026-10-03后续：原生Q1几何与端口映射
+
+### 最近阶段的目标与执行前约束
+
+前步普通LF v2适配及公开异目录CLI／图恢复已经闭合。整体目标仍是普通几何进入明确HF任务后获得力、形变及接触响应；当前阻碍是project.py的80×40／1mm、三节点端口和规范文件身份限制。只读沿真实代码核对发现regions.py、Q1算子、NumPy组装及split均值控制已经按实际尺寸工作，因此下一步复用几何映射，随后再接显式任务；不复制或修改力／切线公式，不把新候选塞进旧CASES身份表。
+
+main基线ccbd902aad73abebeb171795e3d37b98d88dd1b8，开始工作树干净、fetch后无分叉、origin保持Compliant-TO-TMC。近期只详细实施原生Q1准备层：同一三份已转换普通HF包，由既有HF reader和regions函数导出坐标、BL／BR／TR／TL连接、四掩膜、实体关联节点、支承／实体对称段的完整节点及关联子集、两端口节点／梯形权重／完整向量，以及LF背景开闭区间的来源候选节点。不会产生fixed/free、材料、已施加约束、HF任务或求解状态；analysis policy明确not_selected。原生几何保留和后续HF分析网格的选择是不同决定，H2问题仍待答，H3工件和5mm草案仍未自动采用。
+
+[输入清单](../lf_data_preparation/native_q1_001/input_inventory.json)绑定三份HF JSON原字节SHA、NPZ SHA和HF身份，不读ZIP或LF工作目录。新小API与CLI仅标准库／NumPy／data／regions，输出普通map.json／map.npz并保存可直接HF读取的原HF JSON／NPZ字节副本；LF provenance仍为原包上下文，原LF普通包在前步证据目录完整保存，不为几何映射引入对LF源码或外部路径的运行依赖。映射描述保存完整原HF metadata、输出字段形状／dtype／SHA及节点／元素／DOF顺序说明，不引入新力学标签。
+
+三个正式映射各唯一一次，首个失败停止、无生产阶段重试；本次映射及独立纯数据核对合计120秒／8GiB采样预算，必要pytest一次子进程120秒、纯绘图一次120秒。预计均数秒；预算是协作采样及subprocess时限，非硬OS监督，不借用任何旧科学卡额度。源和输入在运行前冻结、前后核SHA，旧证据不改。测试可只读两规范已保存model.npz的坐标／连接／实体掩膜／端口向量进行等价对照，不导入TMC或启动新的模型响应。
+
+验收限定三例完整映射：两规范数据逐项与直接索引及既有模型字段相同；细网格12800单元、13041节点、26082DOF，.5mm及五节点端半权保持；每单元有向面积h_x h_y为正；实体关联集合由独立四角节点并集复核；全部／关联支承与对称集合分开，背景(60,80]排60含80但未施加。端口向量仿射平均／虚功身份、反向闭段、非零原点与矩形单元用最少有意义的测试验证。离网格端点、源哈希损坏和复用输出目录应明确拒绝。独立审阅器不调用作者mapping API，以原生索引自行重建所有字段。
+
+图只展示真实mm／x1原生网格、局部Q1节点编号及BL→BR→TR→TL顺序、端口权重与方向、支承完整段和实体关联子集、来源背景；无力／变形／实际fixed边界含义。完成条件为三例mapping通过、独立完整数组核对、相应测试通过和实际图可人工查看。该步骤不授予细网格力学、任务／材料合同、工件或全量候选资格；通过后下一步才添加显式任务／模型入口，并据模型及实际成本规划有限路径。实际结果、异常、图、取舍及main恢复将在本节补记。
+
+### 实际实现、独立核对与效果
+
+新增 [native_map.py](../hf_repo/src/hf_eval/native_map.py) 135行和[普通CLI](../hf_repo/scripts/prepare_native_geometry.py) 30行，复用现有data／regions，既有project.py、力、切线、控制器和默认入口均未改。19项普通数组包括坐标／连接、原四掩膜、实体关联标志、两段完整／关联节点、两个端口向量／节点／权重和背景来源完整／关联节点；元数据写明原生网格、厚度、下半模型、DOF交错顺序和CCW局部单元顺序，并明确无fixed/free／材料／task／已施加约束及未选择HF分析网格政策。
+
+源HF JSON原字节SHA、语义descriptor_sha256、NPZ SHA和几何ID分别记录；完整原HF metadata与可直接load_geometry的HF JSON／NPZ原字节副本随输出保存。HF几何ID不覆盖区域标签，源描述的完整身份继续绑定区域和来源语义。metadata中LF provenance的路径明确属于原来源上下文，不在mapping中解析；原LF数据仍完整保存在前步包内。无外部LF软件、ZIP、旧机盘符或原始优化运行需求。
+
+正式执行前六新源码的最终SHA／AST核对通过；两路静态交叉审阅未发现索引／API／背景语义问题。查看器在正式绘图前增加entity／background实际来源节点的实心／空心关联显示，最终9源码随[sources](../lf_data_preparation/native_q1_001/sources)冻结，没有在生产后修改。执行脚本此前消息中的117行是手工计数错误，实际初次保存及冻结均121行／dbaa97d0…，不代表执行中编辑。
+
+[正式生产](../lf_data_preparation/native_q1_001/execution_receipt.json)唯一一次exit0／pass，三例各一次。内部准备后区间1.4180471秒、采样RSS峰值46,948,352bytes（44.77MiB）；9源码及三源JSON／NPZ前后身份相同。生产不导入TMC／project／split／JAX或LF，没有组装、force、HP或solver调用。
+
+[独立审阅器](../lf_data_preparation/native_q1_001/review_mapping.py)不导入mapping作者，以直接i+j(nx+1)索引、四角单元并集与独立闭段／梯形权重重建全部字段；实际子进程一次2.3074527秒／exit0，19字段×3例的dtype、shape和全部值精确相同，源副本可独立HF读取，见[完整独立结果](../lf_data_preparation/native_q1_001/independent_review.json)。原四掩膜每张零变化，全单元有向面积正，源背景与实体对称段互斥并覆盖顶线。9个current／frozen源码SHA前后均相同，原project.py身份593c7c8a…保持。
+
+[审阅启动回执](../lf_data_preparation/native_q1_001/review_launch_receipt.json)记录唯一子进程、118秒时限、源码前后和exit／stderr。本阶段“合计120秒”按生产内部实际运行区间与独立子进程运行区间扣计；两者测得合计3.7254998秒，独立上限已扣生产。生产receipt的continuous_seconds字段是生产自身的协作时限，不是两个独立进程及其间消息调度的连续墙钟窗口；两者之间没有统一整进程墙钟计时，不以此声称连续窗口验收。8GiB只为生产RSS协作采样上限，未声称checker峰值或硬OS监督。
+
+| 原生几何 | 单元／节点／DOF | 单元有向面积mm² | 支承关联／全部 | 实体对称关联／全部 | 背景来源节点 |
+| --- | --- | ---: | --- | --- | ---: |
+| 规范反相器 | 3200／3321／6642 | 1 | 4／9 | 13／81 | 0 |
+| 规范夹持器 | 3200／3321／6642 | 1 | 3／9 | 14／61 | 20 |
+| 原生细夹持器 | 12800／13041／26082 | .25 | 4／17 | 24／121 | 40 |
+
+端口权重为三点[.25,.5,.25]或五点[.125,.25,.25,.25,.125]；b按交错ux／uy位置放置，输入+x、反相器输出−x、夹持器输出+y。独立制造的仿射位移场下，梯形平均与解析端口中点均值精确相同，制造广义载荷下的节点虚功恒等式也精确成立。这是端口代数核对，未计算真实位移或作用力；后续明确任务可用bᵀu读取均值、Rb形成相应节点载荷。
+
+[pytest](../lf_data_preparation/native_q1_001/test_receipt.json)唯一一次，**10项全通过**；pytest内部.74秒、子进程1.2204181秒。两规范坐标／连接／实体掩膜／b_in／b_out与原已保存model.npz字段逐项相同，测试绑定两旧文件SHA；不导入或重构TMC模型，不借用旧平衡资格。另验证非零原点[10,−3]和2×.5mm矩形单元、反向端点保持向量、离网格端点不吸附、源NPZ损坏拒绝、原输出不可覆盖。临时目录中的测试映射与本步三份正式产物计数分开，没有重复运行旧LFv2或力学测试。
+
+### 可视化、取舍和接续
+
+[原生几何／Q1编号](../functional_views/native_q1_20261003/native_q1_geometry.png)与[端口b分量／候选节点](../functional_views/native_q1_20261003/native_q1_ports_candidates.png)仅从保存数据一次绘成，exit0／2.612122秒，见[绘图回执](../lf_data_preparation/native_q1_001/plot_receipt.json)。整幅真实mm、结构倍率1；右侧局部视窗是原生坐标zoom，标明BL→BR→TR→TL及面积。细包e12160节点[12236,12237,12398,12397]对应x0..0.5、y38..38.5，面积.25mm²；不以视窗放大表示位移。
+
+绿支承／紫实体对称／橙背景均为来源候选，实心表示相邻实体单元、空心表示非实体关联；背景节点实际从61或60.5至80，60只属entity段。端口图逐点写权重和对应b_ux或b_uy，反相器负bx／夹持器正by明确。5mm箭头仅原参考方向；没有载荷、变形或实际fixed边界、接触／夹持含义。背景20／40节点均非实体关联，且未施加。两路实际审图与显示metadata一致，见[数据／测试审图](../lf_data_preparation/native_q1_001/visual_review_tests.json)、[数理审图](../lf_data_preparation/native_q1_001/visual_review_math.json)。输入青色小文字在深蓝实体上对比略低但可辨认，记为后续查看器非阻断改进，不覆盖本次冻结图或重跑数值。
+
+本步使不同原生网格的节点、连接、端口及来源候选集合真实可用，补齐进入任务模型前的数据缺口。旧project.py三节点／h1限制仍保留，纯准备层没有替代完整HF任务或给细网格授予力学资格。下一步增加**显式任务／模型构造入口**：重用native mapping与既有TMCModel，任务明确网格政策、材料／γ／α／Lr、支承关联、entity／background实际约束、端口控制／自由输出；先用纯模型核对原两规范模型数组、约束集合与算子，再构造一个明确测试合同的细网格模型，不启动未决定的物理路径。后续新平衡和HP的目标／预算由模型及成本另定；H2／H3仍待明确，不从LF analysis_mesh／来源弹簧或HF5草案推断。
+
+在任意克隆根可用普通HF几何准备新原生映射（my-native-map必须不存在）：
+
+```text
+python hf_repo/scripts/prepare_native_geometry.py --geometry lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.json --output my-native-map
+```
+
+仅读保存映射重画本次两图（my-native-view必须不存在）：
+
+```text
+python functional_views/native_q1_20261003/plot_native_geometry_map_frozen.py --input lf_data_preparation/native_q1_001 --output my-native-view
+```
+
+map.json／map.npz及source_geometry副本均普通数据；独立检查和冻结源码／图同时随main交付。显示metadata仅保存相对输入布局／路径与SHA，异目录可对照完整字节；实际CLI／恢复运行与main推送将在下段按真实结果补记。

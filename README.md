@@ -1,6 +1,6 @@
 # Compliant-TO-TMC：独立 HF 力学评估器
 
-2026-10-03当前：**普通LF v2适配入口已实现，两个规范包及一个原生0.5mm夹持器完成转换和独立读取，四掩膜均零差异；72项相关测试通过、1项Windows符号链接测试跳过**。看[目标、实现、验证与接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#lf-v2-adapter-20261003)、[三例原生结构对照](functional_views/lf_v2_adapter_20261003/lf_v2_native_masks.png)和[端口节点／权重](functional_views/lf_v2_adapter_20261003/lf_v2_native_nodes.png)。新NumPy力／切线／平均端口平衡此前已在两规范机构各.025mm前缀通过111项新参考与111项重放；一般网格任务入口、完整行程、真实工件及HF5批量评价仍待完成。
+2026-10-03当前：**原生Q1准备入口已实现，三例各19项映射数组独立精确核对通过，10项针对测试通过**。节点、单元连接、端口向量和来源候选节点已有普通JSON／NPZ；细夹持器保留12800单元／13041节点／26082DOF及五节点端半权。看[目标、实现、实际效果及接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-q1-preparation-20261003)、[网格／Q1编号图](functional_views/native_q1_20261003/native_q1_geometry.png)、[端口分量与候选节点](functional_views/native_q1_20261003/native_q1_ports_candidates.png)。本步没有生成材料或施加边界；下一步显式任务／模型入口。此前两规范机构NumPy力／切线／平均平衡小前缀各111新参考及111重放保持，工件和批量HF仍待完成。
 
 以下按执行时点保留此前进展；当前下一步以本条及链接末节为准。
 

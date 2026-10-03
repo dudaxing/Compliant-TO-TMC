@@ -1,6 +1,6 @@
 # 物理与功能开发进度
 
-2026-10-03最新：**普通LF v2→HF几何入口已接通**，两个规范设计及一个原生0.5mm夹持器的四张掩膜、尺寸、厚度、端口方向和权重独立核对通过，相关测试72通过／1平台跳过。看[原生结构与来源对照](../functional_views/lf_v2_adapter_20261003/lf_v2_native_masks.png)、[支承关联及端口节点](../functional_views/lf_v2_adapter_20261003/lf_v2_native_nodes.png)和[目标、依据、实施与效果](NUMPY_FORCE_PROGRESS_20261002.md#lf-v2-adapter-20261003)。前步新NumPy力／切线／平均平衡已在两规范机构各.025mm前缀通过111新参考及111重放，实际力和形变可看后文。数据转换尚未创建HF任务；一般网格模型、完整行程、工件夹持、一般接触和批量评价仍待实现。
+2026-10-03最新：**普通LF文件→HF几何→原生Q1数据已接通**。三例各19字段独立精确核对、10项针对测试通过，细夹持器保留.5mm／26082DOF。看[真实mm网格与Q1编号](../functional_views/native_q1_20261003/native_q1_geometry.png)、[端口b分量、权重和节点关联](../functional_views/native_q1_20261003/native_q1_ports_candidates.png)及[目标、依据、实施与效果](NUMPY_FORCE_PROGRESS_20261002.md#native-q1-preparation-20261003)。b可用于加权均值和功共轭节点载荷；本步只是准备向量，尚未选择材料、施加边界或计算力。此前两规范NumPy平均平衡小前缀已受限通过；下一步显式任务／模型，完整行程、工件、一般接触及批量HF仍待实现。
 
 以下增补按执行时点保留；功能矩阵已更新到本条日期，旧近期建议作为开发历程阅读。
 
@@ -22,7 +22,7 @@
 
 | 功能 | 代码与当前进度 | 物理含义及范围 |
 |---|---|---|
-| 独立几何读取 | [data.py](../hf_repo/src/hf_eval/data.py)、[evaluate/inspect](../hf_repo/src/hf_eval/evaluation.py)；两例规范几何导出、独立安装与断开 LF 读取已通过 | 单元掩膜、尺度、厚度、支承与端口可独立读取；新增 [lf_v2.py](../hf_repo/src/hf_eval/lf_v2.py) 的纯数据转换已验证两个规范包与一个原生细网格包，全部30／1800包仍未验收 |
+| 独立几何读取 | [data.py](../hf_repo/src/hf_eval/data.py)、[evaluate/inspect](../hf_repo/src/hf_eval/evaluation.py)；两例规范几何导出、独立安装与断开 LF 读取已通过 | 单元掩膜、尺度、厚度、支承与端口可独立读取；新增 [lf_v2.py](../hf_repo/src/hf_eval/lf_v2.py) 纯数据转换和 [native_map.py](../hf_repo/src/hf_eval/native_map.py) 原生Q1准备均已验证两个规范包与一个细网格包；全部30／1800包和通用任务仍未验收 |
 | 实体线性诊断 | [linear.py](../hf_repo/src/hf_eval/linear.py)；反向器、夹持器两例通过 HF1 | 已得到微小输入下的位移、输入广义力与变形图；用于单位、方向、支承及线性极限检查，无工件接触 |
 | TMC 非线性与内力组装 | [tmc_kernel.py](../hf_repo/src/hf_eval/tmc_kernel.py)、[tmc.py](../hf_repo/src/hf_eval/tmc.py)；HF2 修正 C-shape 的100原目标、HF3 两条40目标机构路径已验证 | **已有实际材料力、HuHu 正则力、总内力及一致非对称 Jacobian，并能求平衡。** 显式NumPy新候选已通过96静态状态、新C1路径及两规范机构小前缀；默认内核保持原入口 |
 | 单数组平均端口控制 | [displacement.py](../hf_repo/src/hf_eval/displacement.py)、[project_evaluation.py](../hf_repo/src/hf_eval/project_evaluation.py)；HF3 两例自由输出路径通过 | 约束端口平均位移，端口节点仍能相对变形；输入乘子为驱动器作用于模型的广义力，可读出输出平均位移 |
