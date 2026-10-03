@@ -1723,3 +1723,5 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 本轮新增边界功能及记录随后提交main；下一.5mm循环是新的唯一近期数值阶段，当前0调用，保留同一粗方、材料、376fixed、0输出弹簧与全部原门，minimum_increment仍.00625mm。约263秒的三态实测与7态增加的Newton工作量是下一独立资源预算的依据；不沿用已关闭.1窗口或提前规定夹持结果，先冻结新任务/来源/资源，再按真实效果决定更大行程。项目整体仍active。
 
 边界view只读交付终核：CSV3行35列共105字段与保存测量和metadata逐项相同；14protocol绑定/10metadata角色绑定及PNG/CSV/冻结脚本SHA一致，当前与冻结viewer均29f9afac527bec323897704db5477992465198c1f00562d1a36e22b32a5aa3b5，PNG3060×1785。独立核查0重绘/边提取/距离测量/FE/HP/测试/编辑；source/metadata/图片范围一致，可交付。原49粗方力学来源当前SHA另实际核对全相同。
+
+边界科学/图交付51713dbcd9f40f9317f58cfeb2ec1097f408d5ce已普通推送main；root及公开干净异目录均tools/handoff.py verify真实terminal0/pass、7201payload，manifest SHA21814e555b564a0cf36b74a8ad4738de6507f6070adf4024198e3eb3b9dc6b25，两处Git clean/HEAD相同。[公开恢复回执](../handoff/native_workpiece_20261004/boundary_delivery_identity_001.json)明文该7201身份只授这一准确commit；0力学/几何/view重放，full外部历史assets仍false。随后仅回执/说明/清单提交，不更改任何本轮物理源码、接受态、HP、几何或图；整体下一功能仍新粗方.5mm有序循环，尚未执行。
