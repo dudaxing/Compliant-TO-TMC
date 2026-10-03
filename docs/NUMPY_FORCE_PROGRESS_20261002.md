@@ -350,3 +350,9 @@ python hf_repo/scripts/run_split_average_demo.py plot --input hf4_c2_stable_f_va
 ```
 
 API：从`hf_eval.split_displacement`导入`solve_split_displacement_path`，显式传入NumPy combined assembler；lift/mean/R按上述合同提供。CLI的solve和audit只用于该诊断夹具；复算必须另用新目录、记录新预算及身份，不覆盖本次证据。只看／重绘无需力学或新HP；后续公开克隆恢复与独立只读复核记录补在本节。
+
+本轮科学结果普通推送main提交`5443b6b64352a69b6aeee8304319af7ea4223c49`，本机及另目录公开克隆4842件轻量校验通过。公开克隆只用Git输入重画PNG、四帧GIF；两媒体、查看器源码及完整metadata与作者版本逐字节相同，[恢复回执](../handoff/split_average_20261003/public_recovery_verify.json)保存命令、exit和SHA。没有新力／HP／求解、不新增Release依赖；这是同机异目录恢复证明。
+
+接续预研已纯构造核对原HF3普通机构输入：`geometry_dataset/canonical/inverter/geometry.json`＋`geometry.npz`及`hf_repo/configs/hf3/inverter_pilot_v1.json`全部随Git。拟先反向器[0,.001,.025]mm前缀，父任务仍1mm，不改写完成范围。保持原80×40／1mm、3200Q1／6642DOF、E1MPa、t20mm、nu.3、gamma=alpha=1e-6、Lr80mm、kr=.008615384615384613、k0与无工件。新lift仅三个输入ux DOF为1，节点fluctuation独立。直接`build_project`后调用split平均入口；旧`evaluate_project`仍单数组且强制父任务末目标，尚不改成新dispatcher。
+
+拟一次300秒／8GiB NumPy路径和一次300秒／8GiB新HP审计；按480单元实测粗估3200单元约10秒／内核、20秒／参考，仅预算依据，不是保证。保持原HF3门，**SF下限必须使用E*t=20N/mm，不能套用小演示的100**。新参考不能复用旧单数组态；保存各候选作用向量以便完整重放。这个近期范围尚未执行，不声称规范机构新候选通过；后续根据结果扩大行程／转夹持器，再推进普通文件适配。
