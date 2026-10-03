@@ -866,3 +866,95 @@ python functional_views/native_tangent_20261003/plot_native_tangent_frozen.py --
 独立新参考按每个接受态完整模型HP80/120，不能沿用本制造场10raw类或空间采样；正常两接受态预计4次整模型参考调用（覆盖12800个单元precision instances）。若出现二分中间接受态，它也必须检查，按2×实际接受态数记录，未完成时不授予本轮路径资格。绑定一条明确无量纲输入支撑方向v=b_in/max|b_in|，固定DOF零、lift固定，参考同时给三力／Jv及均值/KKT边界检查；全量局部与global门和HP80/120一致门沿用当前原门/尺度，真实平衡门沿用旧HF3定义，不能只检查已组装抵消后的总残量。正式执行前应把精确检查定义和输入/来源原SHA写入新清单，并静态交叉核对。
 
 新范围建议生产与独立参考各一次连续**180秒／采样8GiB**、各外层210秒，包含导入、构造、所有试探／参考／序列化和结束身份核对；首错误停止、不修复重试/force。历史同物理.001前缀正常3切线＋1force试探，结合本轮21.25秒／完整切线仅估正常约60–75秒，不作保证；历史三态整模型参考实际144.64秒，支持本轮先用180秒两态预算，但新普通模型／方向的真实成本未知。参考超时或有未审状态时明确保留“生产完成、独立验收未完成”，不用墙钟余量重开。小功能测试／仅读图分别一次120秒外层、回执与正式计算分开。通过后main／公开普通CLI及图恢复按当时实测成本再定最小范围。此为基于用户允许按结果推进平衡的最新授权之新阶段计划，不是延用已关闭切线120秒窗口；本段截至提交只读规划，尚未编码或启动新平衡。
+
+
+<a id="native-mean-20261003"></a>
+## 普通文件小步平均驱动：执行前核定（2026-10-03）
+
+前轮普通完整力与切线均有新参考、实际图和公开恢复，属于实质进展。本轮接用户“根据结果推进组装、切线和平衡求解”的授权，采用上一段唯一近期阶段，不重开旧卡。整体目标仍是读LF普通几何，独立计算非线性响应供研究层优选；此处先让普通入口真正产生机构形变、输入力和自由输出。
+
+**已实现与静态取舍**：新增native_mean.py 194行及solve_native_mean.py 47行，构造原Project一次、复用旧平均控制器。原assemble_split_numpy只保留总张量，无法保存/比较三分量；新薄assembler依次调用既有_assemble_force、_tangent、_assemble_tangent(total)，不复制公式或Newton。仅切线调用更新接受态cache；接受state SHA必须相同，force-only试探不覆盖cache。保存从cache取值，0额外力/切线求值；真实attempt/completed分别计数。默认内核/严格选项/依赖及旧源字节不变。
+
+纯数据prepare_inputs.py已唯一执行，0模型/力/切线/求解/HP。清单e0b5ccd8绑定同粗gripper 3200单元/6642 DOF/87fixed/6555free、新task目标[0,.001]mm及零lift。E=1、nu=.3、t=20、gamma=1e-6、alpha=1e-6、Lr=80、kr=.008615384615384613；原实体支承与对称/全顶线约束保持，均值输入、自由+y输出、k_out=0、无工件。task目的small_mean_driven_test；原.025 construction-only草案未自动执行。非对称KKT/通用LU及HF3门保持，minimum_increment=.001/16。
+
+**独立参考的精确定义**：每个接受态，HP80/120各一次整模型计算，预计两态共4次/12800 element-precision instances；若有二分接受态，也逐态覆盖。参考临时conn=arange(4ne).reshape(ne,4)，向量由真实edofs展开，F0/fixed为空；因此一次evaluate能直接给每单元8个局部力/Jv，而非只有相互抵消后的global值。再以3000位Decimal/Inexact trap精确scatter至真实6642 DOF。此仅参考节点重编号，原实际模型未断开、不新增平衡求解，不重新实现本构。保存完整两precision、映射、全局scatter、差值及门字串。方向v=b_in/max|b_in|，实际fixed清零，无量纲；扰动参数mm，Jv为N/mm，乘子方向deltaR=0。
+
+原force总门1e-11、材料/Hu1e-9；global SF=max(||HP fint_free||,||b_in R_free||,||spring_free||,1e-8 Et max(|d|,1e-6))。每单元SF_e=max(||HP total_e||,同物理floor)；分量分母max(||自身HP分量||,1e-12 SF_e)，global分量用自身norm和1e-12 SF。不分摊外力或用全局尺度稀释局部误差。局部/global/CSC三Jv分母各max(||自身HP Jv||,1e-10 N/mm)，原总1e-10、材料/Hu1e-9；HP80/120同分母1e-40。KKT力方向为(K+k b_out b_out.T)v-b_in deltaR，自由部分分母max(||HP作用||,1e-10)，均值方向分母max(|b_in·v|,1e-6)，各1e-10。完整CSC所有204800局部系数组装逐项核对，但独立HP导数范围只有这一方向，不称所有列通过。
+
+真实平衡另按原门：生产残量1e-9、独立残量1e-8、力求值1e-9、平均约束1e-10、global力平衡1e-6、fixed位移8e-11mm。完整17力场、3张量、2split数组和全DOF总CSC保存；输入/支反力/残量及SF由HP再计算，两precision都检查。production JSON资格保持false；独立small TEST资格由audit单独声明，不能冒充HF5完整任务或接触资格。
+
+**执行边界及静态证据**：生产/参考各一次连续180秒/采样8GiB，各外层210秒，包括第三方导入、所有试探/参考、保存及结束来源核对。首个阶段错误停止，无修复重试/force；旧控制器原本有界的Armijo/backtrack/bisection是算法步骤，未增加循环权限。API异常未返回时计数None，避免虚报0。新两功能测试和仅读图各一次外层120秒，仅正式通过后执行；测试临时16单元模型与正式计算分开计数。
+
+API95a3b710、CLI64cbb8c4、checker331eb1d5、tests3771e1af、viewer0f6e3ae5已静态冻结。独立API交叉记录static_review_api.json（af7e3d1c）确认33源覆盖22模块导入闭包、平铺basename唯一、schema/任务/source/state/计数兼容；root已读源码并复核，0数值执行。正式source/input SHA将在生产回执与胶囊留存，期间不得改源。
+
+图从实际接受态显示结构x1、另附明确x1000形变、N力箭头公共尺度、输入q-R/free output、三个输入节点位移与均值、全部3200单元J以及独立残量/平衡；动画只含真实接受帧，不插值。此阶段尚无工件接触/夹持力、细网格路径、完整行程或批量标签。通过后按实测成本规划一次公开CLI/保存图恢复，再提交main；下一最小功能阶段依据本轮结果决定。
+
+
+### 实际实现结果、成本与物理效果
+
+唯一生产[回执](../lf_data_preparation/native_mean_001/execution_receipt.json) b488b170：pass、67.0487453秒（外层67.3984977），Windows峰工作集/采样RSS736.9140625MiB；2接受态、4完整force／3三分量tangent／1controller调用，0JIT／HP／LF。模型23原始字段与前步逐字节相同。初态切线→预测器→末目标一次Newton修正（factor1 Armijo接受），未二分、无failed_attempt；两次general sparse LU保留非对称，混合单位backward error只作诊断。API力学阶段55.1113222秒，4核调用/3切线占54.9599992秒，CSC组装.0131678秒、稀疏求解.0863224秒；本例主要成本为切线核，不能用此单例保证细模型成本。导入和保存/结束绑定也包含在67.05秒内。
+
+唯一[新独立参考](../lf_data_preparation/native_mean_001/audit/summary.json) 08cc44a0及[lifecycle](../lf_data_preparation/native_mean_001/audit/lifecycle.json) 1b33ad0c：pass，两态4/4 HP调用完成；summary45.1257777秒，lifecycle45.1269200秒、终端45.1274267秒，外层45.9999773秒，采样324.34375MiB。所有3200单元／6642 DOF逐态覆盖，12800 element-precision instances；两态共153600局部力标量及153600局部Jv标量、三全域力和作用，以及409600局部矩阵系数组装核对。38634 checks含绑定等，不全称物理门。参考节点重编号与真实edofs精确scatter完整保存，没有沿用制造态raw类或新增生产计算。
+
+| 全量接受态最坏归一化误差 | 总分量 | 材料 | HuHu |
+|---|---:|---:|---:|
+| 单元力 | 1.05018e-16 | 9.55427e-17 | 1.36411e-16 |
+| 全域力 | 1.14365e-15 | 2.57875e-16 | 1.06772e-16 |
+| 单元Jv | 6.33200e-17 | 5.70314e-17 | 8.90240e-17 |
+| 全域element-scatter Jv | 5.48463e-17 | 7.78141e-17 | 1.55781e-16 |
+
+总CSC@v最坏1.04798e-16，KKT自由力方向1.05831e-16、均值方向0；都在原1e-10门内。HP80/120完整局部门最坏2.76254e-72（不是只取候选最坏条目所附的HP误差），远小于原1e-40。完整总CSC6642×6642、每态存储nnz116644（含存储零值），所有fixed行列保留。独立方向仍只有v=b_in/max|b_in|，不把完整组装核对称作全部矩阵列HP验收。
+
+| 实际末态物理量 | 数值 |
+|---|---:|
+| 加权平均输入 | .001 mm |
+| 输入执行器对模型总+x力R | .0002084120736447459 N |
+| 自由输出加权均值（+y） | .0011437156847236257 mm |
+| 此小步输出/输入比 | 1.1437156847 |
+| 最大节点位移模 | .00159567335422854 mm |
+| 实体最小J | .9999744402870642 |
+| 背景介质最小J／全域最小J | .9998630314571697 |
+| 生产自由残量／独立HP残量 | 1.5357180e-11／1.5357166e-11 |
+| HP平均约束相对误差 | 5.4210109e-17 |
+| HP外力平衡相对误差 | 2.4569826e-15 |
+| fixed位移 | 精确0 |
+
+这里input force=b_in R，三个节点权重(.25,.5,.25)，三ux实际为(.0009893878015,.0010022700415,.0010060721156)mm，均值为.001mm；节点没有强制等值。输入横向运动产生自由夹爪端+y微位移，下半模型往对称线的这一响应已从普通文件真正算出。R是输入反力/执行器力；输出无弹簧、无工件，不能称夹持力。J接近1，本步只是小变形自由响应，尚未展示介质压薄接触或完整行程。
+
+实体支承节点486/567/648（x=0,y=6/7/8mm）对模型力合计(-.0002084120736447474,-.00005680788371915068)N；其他实际约束合计(0,+5.68078837e-5)N。输入合计(+.0002084120736447459,0)N，完整ΣFx/Fy=(-1.50433e-18,-1.87985e-20)N。支承+y与对称背景约束+y相抵，不能只看实体支承组误认为全域不平衡。原下半模型数量未翻倍。
+
+[真实形变、力和路径图](../functional_views/native_mean_20261003/native_mean_path.png)、[两帧实际动画](../functional_views/native_mean_20261003/native_mean_path.gif)及numeric_states.csv随Git保存。主几何x1；补充图仅位移x1000且没有力箭头，用于看清微米运动。全部3200单元J着色为各单元九点平均，精确min为所有积分点；J不是压力。三输入节点及mean各自显示，右轴输出单位µm，精确N/mm数值另列。路径只存0和.001两个真实接受帧、无插值；连接线不是连续路径所有中间状态的证明。root已实际看2880×1680 PNG，工具缩至2048×1195；面板open返回queued，未声称用户已看到面板。
+
+本版左下legend遮挡实体支承箭头，作为显示局限保留，上表提供完整支承数值；未用新增绘图窗口改写已冻结图。公共最大节点外力.00033157975963119245N对应4显示mm，结构仍x1；力箭头显示长度不是结构位移，顶线支反力按stride3显示，支承节点来源全保存。后续查看器应将legend移出几何区域并保持原数字/尺度。
+
+[唯一两案功能测试](../lf_data_preparation/native_mean_001/tests_launch_receipt.json) pass、2passed/3.97秒，外层5.4174432秒；临时16单元／50DOF检验构造一次、mean-only不同节点、zeroL/fixed0/J>0/原门及cached无新求值保存/源无修改。另有两次临时API/solver，测试临时调用计数没有单独持久化，不能猜算并合入正式4/3。[唯一仅读图回执](../lf_data_preparation/native_mean_001/view_launch_receipt.json) pass、6.6999717秒，0模型/力/切线/HP/solver。图包PNG/GIF/CSV/冻结脚本/helper/metadata共6件，所有bindings及单位保存。
+
+### 普通入口及恢复使用
+
+当前普通文件链路已接通：LF v2数据→HF普通几何→显式native任务模型→NumPy完整力和CSC切线→非对称mean增广平衡→实际形变/输入力/自由输出，并对粗gripper这条小TEST作新独立参考。CLI默认执行明确task目标，API也可给explicit targets；task_target_executed只有成功且实际末目标等于task目标才true。生产equilibrium_qualified/HP/HF flags保持false，audit另声明受限数值TEST通过；不静默升级研究层资格。
+
+从完整克隆根、独立HF环境执行（新输出目录须不存在）：
+
+```text
+python hf_repo/scripts/solve_native_mean.py --geometry lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json --task lf_data_preparation/native_mean_001/task.json --output my-native-mean
+```
+
+只读取本次保存态与参考重绘：
+
+```text
+python functional_views/native_mean_20261003/plot_native_mean_frozen.py --input lf_data_preparation/native_mean_001 --output my-mean-view
+```
+
+上述说明不是重开唯一正式生产/HP/测试/图窗口。两路保存态交叉复核后按用户既有main提交/推送授权交付。根据正式67.05秒成本，公开异目录单次CLI采用同settings／180秒／采样8GiB、外层210秒；只复现同小TEST、0新HP。逐字节比较模型/source与两接受态全部payload，77数组dtype/shape/值；result/state JSON只排实测耗时与其关联descriptor hash，其余源/设置/步序/残量/力/位移/调用计数/资格字段全部核对。另一次冻结查看器仅读原Git保存数据，6件图包字节比较，外层120秒；不把同机异目录恢复当异机性能证明。
+
+整体功能仍缺普通反向器的新平衡、普通两例更长路径/任务行程、真实工件/夹持力、一般接触释放重入、研究H2分析网格/H3定义及HF5批量输出。下一唯一近阶段优先同一薄入口的**粗inverter 0→.001mm小TEST**，检验几何/实体支承/自由-y输出的另一种机构响应；先绑定新task、原model/89个实际fixed DOF，沿用原门和完整两态参考，以本轮成本提出生产/参考各一次180秒、各外层210秒。该阶段截至本段仅计划，未构造/求解；无自动细化或工件假定。通过后再按两例结果选择更长前缀，不详细承诺后续所有阶段。
+
+
+### 实际审图交叉记录
+
+[实际图审](../lf_data_preparation/native_mean_001/visual_review_tests.json) 2b5ce99e，pass：另一作者实际查看PNG及GIF原1680×770的首末两帧，129文件SHA／33来源绑定一致；NPZ/CSV/meta中三节点ux、精确dyadic均值、J、输入/实体支承/其他fixed合力一致。0新模型／force／tangent／HP／solver／test／CLI／plot，媒体与源字节未改。除图例遮挡外，也明确GIF量化减弱局部颜色、两点双y轴自动尺度使R与q_out连线重叠；应按各自单位及保存数值读量，不能凭重叠线宣称函数关系或完整曲线资格。
+
+
+### 独立保存态事后复核与本次关账
+
+[保存数据交叉复核](../lf_data_preparation/native_mean_001/postrun_identity_review.json) 79ffe5fa，pass：API作者另用保存数据核对33 current源＋两套来源胶囊共99件、7输入、23model、两态全部2state／17force／3tensor／full CSC。4保存HP覆盖12800 element-precision instances，159408全域Decimal force/action entries以3000位/Inexact trap重新精确scatter；38400局部门＋18global/CSC/KKT门＋48scalar门共38466数值门逐值重放与原字串一致。270270 checks是保存数据核对总数，不能与原38634执行checks相加作为新物理门。0新模型／force／tangent／solver／HP.evaluate／test／plot，独立物理参考仍是原唯一4 HP调用。实际4/3/1及保存0calls再次闭合；所有结束绑定一致、无阻断。唯一正式生产／参考／测试／图窗口至此完成关闭，接下来仅按已写范围交付与公开同小TEST恢复。

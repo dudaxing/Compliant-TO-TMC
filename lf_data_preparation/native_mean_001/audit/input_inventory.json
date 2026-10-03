@@ -1,0 +1,73 @@
+{
+  "schema_version": "native-mean-input-inventory-1.0",
+  "baseline_commit": "8a6e188463e5d18fe3655792b6469dd68a165598",
+  "case": {
+    "alias": "gripper_canonical",
+    "geometry_file": "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json",
+    "geometry_file_sha256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+    "geometry_npz_file": "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.npz",
+    "geometry_npz_sha256": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+    "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+    "prior_model_file": "lf_data_preparation/native_model_001/models/gripper_canonical/model.npz",
+    "prior_model_sha256": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79",
+    "elements": 3200,
+    "dofs": 6642,
+    "task_file": "lf_data_preparation/native_mean_001/task.json",
+    "task_file_sha256": "3ea87ca08334981a5947b10cc0bf06d355f6ee4cd46a9402ae2d686dc0d160e3",
+    "prior_task_file": "lf_data_preparation/native_model_001/tasks/gripper_canonical.json",
+    "prior_task_sha256": "67d21a63898b2f31962f3e930bc2cb17e36b2813671dfa413c85c7834e6c9b63",
+    "direction_file": "lf_data_preparation/native_mean_001/direction.npz",
+    "direction_file_sha256": "177124bd1968f9e451e59cba4d7124c393eb8fee15cc93851f570f980aada29a",
+    "direction_array_sha256": "a408f3547e73d0acd2f4ca718b82dfa49cc543a9606aba37fcacb4f1fa3d12f1",
+    "lifting_file": "lf_data_preparation/native_mean_001/lifting.npz",
+    "lifting_file_sha256": "fbfe6d9d1e77aa541991d1f0124a596d7a9574b720eb0e4ac5dbf851fcf1d465",
+    "targets_mm": [
+      0.0,
+      0.001
+    ],
+    "fixed_DOFs": 87,
+    "free_DOFs": 6555,
+    "result_directory": "result"
+  },
+  "settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 25,
+    "armijo_c": 0.0001,
+    "max_backtracks": 12,
+    "max_bisections": 4,
+    "minimum_increment": 6.25e-05,
+    "time_limit_seconds": 180.0
+  },
+  "gates": {
+    "production_residual": "1e-9",
+    "independent_residual": "1e-8",
+    "force_evaluation": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11",
+    "hp80_hp120": "1e-40",
+    "total_force": "1e-11",
+    "material_force": "1e-9",
+    "regularization_force": "1e-9",
+    "total_tangent": "1e-10",
+    "material_tangent": "1e-9",
+    "regularization_tangent": "1e-9",
+    "augmented_force_tangent": "1e-10",
+    "augmented_constraint_tangent": "1e-10"
+  },
+  "direction_definition": "v=b_in/max(abs(b_in)); actual fixed DOFs zero; dimensionless; multiplier direction 0 N/mm",
+  "state_authority": "D(lift)+D(fluctuation); zero lift origin and shape; independent mean measurement",
+  "reference_definition": "Per accepted state HP80/120 on all elements with disconnected local numbering, then exact Decimal scatter to real DOFs; no spatial sampling",
+  "qualification": "Small coarse no-workpiece numerical TEST only; independent qualification stored separately from production",
+  "execution_limits": {
+    "production_seconds": 180,
+    "reference_seconds": 180,
+    "sampled_RSS_bytes": 8589934592,
+    "outer_seconds": 210
+  },
+  "stop_policy": "First stage error stops; no repair, retry, force or reopening a closed window",
+  "reference_call_rule": "2 times actual accepted-state count; normal two states -> 4 calls, 12800 element-precision instances"
+}
