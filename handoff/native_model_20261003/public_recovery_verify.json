@@ -1,0 +1,381 @@
+{
+  "schema_version": "native-model-public-recovery-1.0",
+  "started_utc": "2026-10-03T07:34:13.016296+00:00",
+  "scientific_commit": "bc39526ace4f827e6c5248d44c3e612f84c23609",
+  "source_root": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC",
+  "public_root": "D:\\hf-restore-20260930",
+  "new_model_root": "D:\\hf-native-model-public-models-20261003",
+  "new_view_root": "D:\\hf-native-model-public-view-20261003",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:13.016314+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.6417195999529213,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:13.658065+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.06846699997549877,
+      "exit_code": 0,
+      "stdout": "a0b009dfafef7c2dcbb6aa817f9428cd7e9461f5\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:13.726567+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.06043030001455918,
+      "exit_code": 0,
+      "stdout": "https://github.com/dudaxing/Compliant-TO-TMC.git\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "fetch",
+        "origin"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:13.787019+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 3.9875428000232205,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "From https://github.com/dudaxing/Compliant-TO-TMC\n   a0b009d..bc39526  main       -> origin/main\n"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "origin/main"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:17.774733+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.06547009997302666,
+      "exit_code": 0,
+      "stdout": "bc39526ace4f827e6c5248d44c3e612f84c23609\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "merge",
+        "--ff-only",
+        "origin/main"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:17.840237+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.8800192000344396,
+      "exit_code": 0,
+      "stdout": "Updating a0b009d..bc39526\nFast-forward\n README.md                                          |    2 +-\n docs/CURRENT_STATUS.md                             |    2 +-\n docs/HF5_LF_V2_ADAPTER_AND_TASK_PLAN.md            |    2 +-\n docs/NUMPY_FORCE_PROGRESS_20261002.md              |   64 +\n docs/PHYSICS_AND_FUNCTION_PROGRESS_20261001.md     |    7 +-\n docs/RESUME_DEVELOPMENT.md                         |    2 +-\n .../native_model_20261003/helpers/data.py          |  337 ++++\n .../native_model_applied_bcs.png                   |  Bin 0 -> 470575 bytes\n .../native_model_port_equations.png                |  Bin 0 -> 262014 bytes\n .../plot_native_project_frozen.py                  |  248 +++\n .../native_model_20261003/view_metadata.json       | 1442 +++++++++++++\n handoff/repository_manifest.json                   |  274 ++-\n hf_repo/README.md                                  |    2 +-\n hf_repo/scripts/plot_native_project.py             |  248 +++\n hf_repo/scripts/prepare_native_project.py          |   33 +\n hf_repo/src/hf_eval/native_project.py              |  239 +++\n hf_repo/tests/test_native_project.py               |  159 ++\n .../native_model_001/execute_models.py             |  122 ++\n .../native_model_001/execution_receipt.json        |  107 +\n .../native_model_001/independent_review.json       |  570 ++++++\n .../native_model_001/input_inventory.json          |   52 +\n .../models/gripper_canonical/model.json            | 1192 +++++++++++\n .../models/gripper_canonical/model.npz             |  Bin 0 -> 73820 bytes\n .../source_geometry/geometry.json                  |  511 +++++\n .../gripper_canonical/source_geometry/geometry.npz |  Bin 0 -> 1108 bytes\n .../models/gripper_native_fine/model.json          | 1717 ++++++++++++++++\n .../models/gripper_native_fine/model.npz           |  Bin 0 -> 281907 bytes\n .../source_geometry/geometry.json                  |  515 +++++\n .../source_geometry/geometry.npz                   |  Bin 0 -> 1493 bytes\n .../models/inverter_canonical/model.json           | 1207 +++++++++++\n .../models/inverter_canonical/model.npz            |  Bin 0 -> 73782 bytes\n .../source_geometry/geometry.json                  |  481 +++++\n .../source_geometry/geometry.npz                   |  Bin 0 -> 1072 bytes\n .../native_model_001/plot_receipt.json             |   27 +\n .../production_launch_receipt.json                 |   49 +\n .../native_model_001/review_launch_receipt.json    |   51 +\n .../native_model_001/review_models.py              |  367 ++++\n .../native_model_001/sources/__init__.py           |    7 +\n .../native_model_001/sources/data.py               |  337 ++++\n .../native_model_001/sources/execute_models.py     |  122 ++\n .../native_model_001/sources/native_map.py         |  135 ++\n .../native_model_001/sources/native_project.py     |  239 +++\n .../sources/plot_native_project.py                 |  248 +++\n .../sources/prepare_native_project.py              |   33 +\n .../native_model_001/sources/project.py            |  266 +++\n .../native_model_001/sources/regions.py            |  202 ++\n .../native_model_001/sources/review_models.py      |  367 ++++\n .../sources/test_native_project.py                 |  159 ++\n .../native_model_001/sources/tmc.py                |  363 ++++\n .../native_model_001/sources/tmc_kernel.py         |  256 +++\n .../native_model_001/tasks/gripper_canonical.json  |   80 +\n .../tasks/gripper_native_fine.json                 |   80 +\n .../native_model_001/tasks/inverter_canonical.json |   80 +\n .../native_model_001/test_receipt.json             |   26 +\n .../native_model_001/visual_review_math.json       |  275 +++\n .../native_model_001/visual_review_tests.json      | 2131 ++++++++++++++++++++\n 56 files changed, 15410 insertions(+), 25 deletions(-)\n create mode 100644 functional_views/native_model_20261003/helpers/data.py\n create mode 100644 functional_views/native_model_20261003/native_model_applied_bcs.png\n create mode 100644 functional_views/native_model_20261003/native_model_port_equations.png\n create mode 100644 functional_views/native_model_20261003/plot_native_project_frozen.py\n create mode 100644 functional_views/native_model_20261003/view_metadata.json\n create mode 100644 hf_repo/scripts/plot_native_project.py\n create mode 100644 hf_repo/scripts/prepare_native_project.py\n create mode 100644 hf_repo/src/hf_eval/native_project.py\n create mode 100644 hf_repo/tests/test_native_project.py\n create mode 100644 lf_data_preparation/native_model_001/execute_models.py\n create mode 100644 lf_data_preparation/native_model_001/execution_receipt.json\n create mode 100644 lf_data_preparation/native_model_001/independent_review.json\n create mode 100644 lf_data_preparation/native_model_001/input_inventory.json\n create mode 100644 lf_data_preparation/native_model_001/models/gripper_canonical/model.json\n create mode 100644 lf_data_preparation/native_model_001/models/gripper_canonical/model.npz\n create mode 100644 lf_data_preparation/native_model_001/models/gripper_canonical/source_geometry/geometry.json\n create mode 100644 lf_data_preparation/native_model_001/models/gripper_canonical/source_geometry/geometry.npz\n create mode 100644 lf_data_preparation/native_model_001/models/gripper_native_fine/model.json\n create mode 100644 lf_data_preparation/native_model_001/models/gripper_native_fine/model.npz\n create mode 100644 lf_data_preparation/native_model_001/models/gripper_native_fine/source_geometry/geometry.json\n create mode 100644 lf_data_preparation/native_model_001/models/gripper_native_fine/source_geometry/geometry.npz\n create mode 100644 lf_data_preparation/native_model_001/models/inverter_canonical/model.json\n create mode 100644 lf_data_preparation/native_model_001/models/inverter_canonical/model.npz\n create mode 100644 lf_data_preparation/native_model_001/models/inverter_canonical/source_geometry/geometry.json\n create mode 100644 lf_data_preparation/native_model_001/models/inverter_canonical/source_geometry/geometry.npz\n create mode 100644 lf_data_preparation/native_model_001/plot_receipt.json\n create mode 100644 lf_data_preparation/native_model_001/production_launch_receipt.json\n create mode 100644 lf_data_preparation/native_model_001/review_launch_receipt.json\n create mode 100644 lf_data_preparation/native_model_001/review_models.py\n create mode 100644 lf_data_preparation/native_model_001/sources/__init__.py\n create mode 100644 lf_data_preparation/native_model_001/sources/data.py\n create mode 100644 lf_data_preparation/native_model_001/sources/execute_models.py\n create mode 100644 lf_data_preparation/native_model_001/sources/native_map.py\n create mode 100644 lf_data_preparation/native_model_001/sources/native_project.py\n create mode 100644 lf_data_preparation/native_model_001/sources/plot_native_project.py\n create mode 100644 lf_data_preparation/native_model_001/sources/prepare_native_project.py\n create mode 100644 lf_data_preparation/native_model_001/sources/project.py\n create mode 100644 lf_data_preparation/native_model_001/sources/regions.py\n create mode 100644 lf_data_preparation/native_model_001/sources/review_models.py\n create mode 100644 lf_data_preparation/native_model_001/sources/test_native_project.py\n create mode 100644 lf_data_preparation/native_model_001/sources/tmc.py\n create mode 100644 lf_data_preparation/native_model_001/sources/tmc_kernel.py\n create mode 100644 lf_data_preparation/native_model_001/tasks/gripper_canonical.json\n create mode 100644 lf_data_preparation/native_model_001/tasks/gripper_native_fine.json\n create mode 100644 lf_data_preparation/native_model_001/tasks/inverter_canonical.json\n create mode 100644 lf_data_preparation/native_model_001/test_receipt.json\n create mode 100644 lf_data_preparation/native_model_001/visual_review_math.json\n create mode 100644 lf_data_preparation/native_model_001/visual_review_tests.json\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:18.720309+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.0707043000147678,
+      "exit_code": 0,
+      "stdout": "bc39526ace4f827e6c5248d44c3e612f84c23609\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:/Python313/python.exe",
+        "-B",
+        "tools/handoff.py",
+        "verify"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:18.791042+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 7.365760300017428,
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"pass\",\n  \"repository_files\": 5162,\n  \"restored_historical_files\": 0,\n  \"asset_closure\": [],\n  \"saved_archives_checked\": 0,\n  \"full_evidence_checked\": false,\n  \"scope\": \"file identity, not a new mechanics validation\",\n  \"created_utc\": \"2026-10-03T07:34:26.021471+00:00\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Scripts/python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\hf_repo\\scripts\\prepare_native_project.py",
+        "--geometry",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\v2_adapter_001\\converted\\inverter_canonical\\geometry.json",
+        "--task",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\native_model_001\\tasks\\inverter_canonical.json",
+        "--output",
+        "D:\\hf-native-model-public-models-20261003\\inverter_canonical"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:26.160117+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 2.1567246000049636,
+      "exit_code": 0,
+      "stdout": "{\n  \"model_file\": \"model.json\",\n  \"task_sha256\": \"16e802af1c46904e8d6f065695209909f63a5a9f84e17bc2b3ab307bb909e262\",\n  \"source_geometry_id\": \"2e2bb3466ade06f920dfbb92577ccbe46106acec430837bac8e1a30b8083527a\",\n  \"counts\": {\n    \"cells\": 3200,\n    \"nodes\": 3321,\n    \"dofs\": 6642,\n    \"solid_cells\": 1128,\n    \"medium_cells\": 2072,\n    \"solid_incident_nodes\": 1351,\n    \"fixed_dofs\": 89,\n    \"free_dofs\": 6553\n  },\n  \"analysis_grid_policy\": \"native\",\n  \"stored_input_target_mm\": 0.025,\n  \"response_evaluated\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Scripts/python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\hf_repo\\scripts\\prepare_native_project.py",
+        "--geometry",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\v2_adapter_001\\converted\\gripper_canonical\\geometry.json",
+        "--task",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\native_model_001\\tasks\\gripper_canonical.json",
+        "--output",
+        "D:\\hf-native-model-public-models-20261003\\gripper_canonical"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:28.387029+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 3.4584827999933623,
+      "exit_code": 0,
+      "stdout": "{\n  \"model_file\": \"model.json\",\n  \"task_sha256\": \"e6f449ec04bf9f5fb8de32b2f29c9c442c357f254cd9f2539d59fa6e05285c05\",\n  \"source_geometry_id\": \"d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d\",\n  \"counts\": {\n    \"cells\": 3200,\n    \"nodes\": 3321,\n    \"dofs\": 6642,\n    \"solid_cells\": 1086,\n    \"medium_cells\": 2114,\n    \"solid_incident_nodes\": 1337,\n    \"fixed_dofs\": 87,\n    \"free_dofs\": 6555\n  },\n  \"analysis_grid_policy\": \"native\",\n  \"stored_input_target_mm\": 0.025,\n  \"response_evaluated\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Scripts/python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\hf_repo\\scripts\\prepare_native_project.py",
+        "--geometry",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\v2_adapter_001\\converted\\gripper_native_fine\\geometry.json",
+        "--task",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\native_model_001\\tasks\\gripper_native_fine.json",
+        "--output",
+        "D:\\hf-native-model-public-models-20261003\\gripper_native_fine"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:31.902731+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 3.065236399997957,
+      "exit_code": 0,
+      "stdout": "{\n  \"model_file\": \"model.json\",\n  \"task_sha256\": \"e5f6ecb340f6e9f1dd570b6a7396c28a56fde52b7a8ee92738c406a474e4f9ef\",\n  \"source_geometry_id\": \"62dd40a9ed8a41a6a2deb55927982c7f409d63bfedbf96079b2ee032e816da8d\",\n  \"counts\": {\n    \"cells\": 12800,\n    \"nodes\": 13041,\n    \"dofs\": 26082,\n    \"solid_cells\": 4358,\n    \"medium_cells\": 8442,\n    \"solid_incident_nodes\": 4881,\n    \"fixed_dofs\": 169,\n    \"free_dofs\": 25913\n  },\n  \"analysis_grid_policy\": \"native\",\n  \"stored_input_target_mm\": 0.025,\n  \"response_evaluated\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Scripts/python.exe",
+        "-B",
+        "D:\\hf-restore-20260930\\functional_views\\native_model_20261003\\plot_native_project_frozen.py",
+        "--input",
+        "D:\\hf-restore-20260930\\lf_data_preparation\\native_model_001",
+        "--output",
+        "D:\\hf-native-model-public-view-20261003"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:35.024944+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 1.8665558000211604,
+      "exit_code": 0,
+      "stdout": "{\"output\": \"D:\\\\hf-native-model-public-view-20261003\", \"cases\": 3, \"configured_fixed_dofs\": [89, 87, 169], \"response_calls\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "cwd": "D:\\hf-restore-20260930",
+      "started_utc": "2026-10-03T07:34:36.906255+00:00",
+      "timeout_seconds": 120,
+      "elapsed_seconds": 0.6719842999591492,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "model_files": [
+    {
+      "path": "inverter_canonical/model.json",
+      "bytes": 24072,
+      "actual_sha256": "aa4b5b347c558a305c165cd1473a426dfaf98a8e3acf062e5ec0dc9761663573",
+      "published_sha256": "aa4b5b347c558a305c165cd1473a426dfaf98a8e3acf062e5ec0dc9761663573",
+      "byte_equal": true
+    },
+    {
+      "path": "inverter_canonical/model.npz",
+      "bytes": 73782,
+      "actual_sha256": "321a10e0d46149cee9d17caf40dd1819c810ec9498d74c8882da1e3146aab9c6",
+      "published_sha256": "321a10e0d46149cee9d17caf40dd1819c810ec9498d74c8882da1e3146aab9c6",
+      "byte_equal": true
+    },
+    {
+      "path": "inverter_canonical/source_geometry/geometry.json",
+      "bytes": 15494,
+      "actual_sha256": "23adf44ea8164fb103998ab97363747540a11ef7bb589ae81aa2fde23ff57eee",
+      "published_sha256": "23adf44ea8164fb103998ab97363747540a11ef7bb589ae81aa2fde23ff57eee",
+      "byte_equal": true
+    },
+    {
+      "path": "inverter_canonical/source_geometry/geometry.npz",
+      "bytes": 1072,
+      "actual_sha256": "1911362efaa5b6c5104af0cecf95310f262b129f3e0cd2a1c648cf550b756132",
+      "published_sha256": "1911362efaa5b6c5104af0cecf95310f262b129f3e0cd2a1c648cf550b756132",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_canonical/model.json",
+      "bytes": 24360,
+      "actual_sha256": "597a92b4a3de63697e875b0a733592c1b1f27e8b0ab8ed229cfb33f4649e26e2",
+      "published_sha256": "597a92b4a3de63697e875b0a733592c1b1f27e8b0ab8ed229cfb33f4649e26e2",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_canonical/model.npz",
+      "bytes": 73820,
+      "actual_sha256": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79",
+      "published_sha256": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_canonical/source_geometry/geometry.json",
+      "bytes": 16636,
+      "actual_sha256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+      "published_sha256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_canonical/source_geometry/geometry.npz",
+      "bytes": 1108,
+      "actual_sha256": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+      "published_sha256": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_native_fine/model.json",
+      "bytes": 33150,
+      "actual_sha256": "bb84034c655f4b74e5cfc478688af5c2565fa25358b4bb8e89ac3b3981883ccc",
+      "published_sha256": "bb84034c655f4b74e5cfc478688af5c2565fa25358b4bb8e89ac3b3981883ccc",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_native_fine/model.npz",
+      "bytes": 281907,
+      "actual_sha256": "f3ad62046286023344a2aab0cea4ac7466dcb98637c12f2ff7cdc66f988144d6",
+      "published_sha256": "f3ad62046286023344a2aab0cea4ac7466dcb98637c12f2ff7cdc66f988144d6",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_native_fine/source_geometry/geometry.json",
+      "bytes": 16786,
+      "actual_sha256": "dbab7567c98e18174d198318f025184b3545c3681c060fa77d9435122bb0f32c",
+      "published_sha256": "dbab7567c98e18174d198318f025184b3545c3681c060fa77d9435122bb0f32c",
+      "byte_equal": true
+    },
+    {
+      "path": "gripper_native_fine/source_geometry/geometry.npz",
+      "bytes": 1493,
+      "actual_sha256": "92ff8918ae7502c3f8bfb99398b654ea1521549e7ff3ce0e8b24a9b4fa720d21",
+      "published_sha256": "92ff8918ae7502c3f8bfb99398b654ea1521549e7ff3ce0e8b24a9b4fa720d21",
+      "byte_equal": true
+    }
+  ],
+  "view_files": [
+    {
+      "path": "native_model_applied_bcs.png",
+      "bytes": 470575,
+      "actual_sha256": "1c196f378fe528db8d57752f821a80b75cd94ae911229b23eace5bf74a5234e1",
+      "published_sha256": "1c196f378fe528db8d57752f821a80b75cd94ae911229b23eace5bf74a5234e1",
+      "byte_equal": true
+    },
+    {
+      "path": "native_model_port_equations.png",
+      "bytes": 262014,
+      "actual_sha256": "cfa9195b8b030fd6596a969b604935f96e382f09fa01b0000deb21ef96ae6af6",
+      "published_sha256": "cfa9195b8b030fd6596a969b604935f96e382f09fa01b0000deb21ef96ae6af6",
+      "byte_equal": true
+    },
+    {
+      "path": "plot_native_project_frozen.py",
+      "bytes": 15565,
+      "actual_sha256": "3f525bc23d6f85fa640df9a956d61266817bd15f71b2906f3a66df8a355a8618",
+      "published_sha256": "3f525bc23d6f85fa640df9a956d61266817bd15f71b2906f3a66df8a355a8618",
+      "byte_equal": true
+    },
+    {
+      "path": "helpers/data.py",
+      "bytes": 16477,
+      "actual_sha256": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+      "published_sha256": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+      "byte_equal": true
+    },
+    {
+      "path": "view_metadata.json",
+      "bytes": 32036,
+      "actual_sha256": "6657125c3aa5d954c6d81ec776d59ad129bf9aaef32ee483a928e9a8e0bf01cd",
+      "published_sha256": "6657125c3aa5d954c6d81ec776d59ad129bf9aaef32ee483a928e9a8e0bf01cd",
+      "byte_equal": true
+    }
+  ],
+  "source_pins": {
+    "hf_repo/src/hf_eval/native_project.py": "0d454ea37360d5785bc1de82e18f3be89ec1acdcb7bccf9aebe16a1424913813",
+    "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+    "hf_repo/src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+    "hf_repo/src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+    "hf_repo/src/hf_eval/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+    "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+    "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/scripts/prepare_native_project.py": "5ff97a2dd9a278d06f02f9793fc57a24a056242d486292b2caf05115d4a802b4",
+    "hf_repo/scripts/plot_native_project.py": "3f525bc23d6f85fa640df9a956d61266817bd15f71b2906f3a66df8a355a8618",
+    "hf_repo/tests/test_native_project.py": "edd3be628b6aaaf496adf5ceca4e072f0fd9838fc1c152f16293d26a14b96dae",
+    "lf_data_preparation/native_model_001/review_models.py": "8c7a11cd40e08707b1a795e00ac83fd92ea4784712e77e3e4cc9e38ed9f8ebe2",
+    "lf_data_preparation/native_model_001/execute_models.py": "6c6ad185f4635b167f24a410605c1bdce8a02171724fa6bf0994c76d0bece1a4"
+  },
+  "status": "pass",
+  "scope": "Same-machine independent public clone; three ordinary CLI construction TEST models and saved-data views only; no response/path or study H2/H3 qualification",
+  "force_calls": 0,
+  "HP_calls": 0,
+  "solver_calls": 0,
+  "mechanics_assembly_calls": 0,
+  "LF_imports": 0,
+  "previous_public_commit": "a0b009dfafef7c2dcbb6aa817f9428cd7e9461f5",
+  "public_file_verification": {
+    "status": "pass",
+    "repository_files": 5162,
+    "restored_historical_files": 0,
+    "asset_closure": [],
+    "saved_archives_checked": 0,
+    "full_evidence_checked": false,
+    "scope": "file identity, not a new mechanics validation",
+    "created_utc": "2026-10-03T07:34:26.021471+00:00"
+  },
+  "public_manifest_sha256": "ebf5d51a5c1efecd6961adff72ec5def8a3d9f3d5d53cbb8d13da7cae727c7e4",
+  "actual_model_construction_cli_invocations": 3,
+  "actual_plot_invocations": 1,
+  "all_12_model_files_byte_equal": true,
+  "all_5_view_files_byte_equal": true,
+  "public_worktree_clean": true,
+  "completed_utc": "2026-10-03T07:34:37.578283+00:00"
+}

@@ -673,3 +673,10 @@ python functional_views/native_model_20261003/plot_native_project_frozen.py --in
 ```
 
 模型、源HF普通副本、明确task、冻结源码、独立核对／测试／图都随main。查看器的实际HF reader仍来自完整Git根，helpers/data.py保存其原字节和SHA；显示metadata仅相对布局，无绝对input_root或时间。main／公开异目录恢复在下段按真实结果补记。
+
+
+本轮显式native任务／模型源码、三份TEST、23字段模型／HF源副本、独立核对、五案测试和两图已普通推送main提交bc39526ace4f827e6c5248d44c3e612f84c23609。公开异目录克隆只fetch＋fast-forward至此，5162件普通文件身份通过，13个执行源码SHA与冻结生产一致，工作树前后干净。
+
+实际使用该公开克隆中的CLI、已保存普通HF几何和明确TEST任务，三例各构造一次至新的外部目录；12件model JSON／NPZ及source_geometry JSON／NPZ与已发布模型逐字节相同，task hash、source geometry ID及所有counts一致。恢复确实执行了三次模型构造，这是相同TEST合同的普通CLI异目录复现，不计作重新执行正式三例生产或新物理任务；没有组装、force、HP或solver。
+
+冻结查看器仅读公开保存模型重绘一次，两张PNG、冻结查看器、helpers/data.py和完整view_metadata.json **五件全部逐字节相同**。[公开恢复回执](../handoff/native_model_20261003/public_recovery_verify.json)记录真实命令、启动／运行时间、exit及每件文件SHA，所有步骤exit0、无重试；未读原LF工作目录／ZIP，也没有新的Release依赖。它证明同机另一目录用完整Git普通文件可构造同一模型并显示同一图；不证明异机运行环境、统一分析政策或新非线性资格。回执、本段说明和更新后的普通文件清单随后一并交付main。
