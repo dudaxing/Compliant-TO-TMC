@@ -843,3 +843,26 @@ python functional_views/native_tangent_20261003/plot_native_tangent_frozen.py --
 只读保存方向与hessian收缩还确认vx_stripe全部二阶梯度精确零，fixed清零未改该方向；vy_checker3200单元均非零，最大绝对2mm^-2（v无量纲）。据此确认上述HuHu方向作用解释，不修改力/切线公式或门。
 
 [实际审图回执](../lf_data_preparation/native_tangent_001/visual_review_tests.json)SHA 0770a2caafe236e2aed5306681f7be800088c6a2342a8a6382ad20e7910db97a，pass：实际查看3040×1472 PNG（工具全图显示2048×992），76文件SHA和26来源绑定相同，计数/全部节点/矩阵语义及单位无阻断。明确公共箭头标尺使Hu glyph亚像素，只能按颜色/精确数值读量；没有为了观感改变数值或重绘。root也实际看图并请求面板打开，工具返回queued，不声称用户已经看到面板。唯一正式一态/40HP、两测试/一次图窗口均已完成关闭；接下来按已授权main提交/推送和计划内公开异目录一次CLI恢复。
+
+### main交付与实际公开异目录恢复
+
+科学实现、唯一一态／40新HP／两测试／实际图及独立后审已推送main **ae8f29c62f1a449adb64cfcef42b055281160d0d**，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。公开克隆D:/hf-restore-20260930从8373a9b仅fetch＋fast-forward到ae8f29c，main且干净；5611普通交付文件verify通过，26来源pins与原正式同字节。未改分支、未覆盖旧结果或重开旧卡。
+
+[公开恢复证明](../handoff/native_tangent_20261003/public_recovery_verify.json)SHA 73bbb607b43d8887e82289ed010f5f68de96b209b091107d6e183a1b4f042211：在公开根实际一次普通CLI，外部新目录D:/hf-native-tangent-public-results-20261003，连续22.5660826秒、外层22.9040424秒，采样child-tree峰647.76171875MiB，在120秒／8GiB范围内。9件模型／source／state／tensor／CSC文件字节一致；23model＋2state＋3tensor＋三CSC各5存储字段=43数组全部dtype／shape／values相同。result除timing_seconds与其关联descriptor hash外全字段相同，不称整个result JSON字节相同。完整CLI log、replay及外层回执随main普通文件保存。
+
+公开冻结查看器又一次仅读原保存数据到D:/hf-native-tangent-public-view-20261003，4.5966989秒；PNG、脚本、helper和完整metadata四件字节相同。0force/tangent/HP/solver。正式1＋临时测试2＋公开CLI1=4force与4tangent分别计数，HP仍原唯一40，solver/LF0；后审和重绘不新增数值资格。这是同机/runtime的异目录恢复证明，不是另一机器的性能或一般接触验收。恢复资料、本补充与下一计划随后另作普通main提交推送。
+
+<a id="native-mean-next-20261003"></a>
+### 根据本步证据确定的下一唯一近期阶段（尚未执行）
+
+下一步集中实现**普通文件粗gripper小步平均驱动平衡**，目标是得到真实机构形变、输入乘子与自由输出；不先扩大细网格或制造态矩阵列核查。旧split平均控制器已有小实体／旧规范模型受限结果，现在缺普通文件薄入口。新入口构造Project一次后显式注入既有split_numpy_tangent.assemble_split_numpy，其(K,internal,fields)满足控制器真实合同；不能直接把native_tangent返回的保存包当assembler。新增薄API／CLI／保存函数，不复制本构／Newton／审计框架，不改当前源及冻证据。
+
+另建明确的新TEST任务和hash：同粗gripper普通几何、材料和80mm正则长度，87 actual fixed、全顶线对称、输入加权均值、自由+y输出、k_out=0、无工件；目标仅[0,.001]mm，不将原construction-only的.025mm草案当已执行/批准路径。明确本阶段零lift_origin／零lift_shape，从undeformed开始，真实物理仍D(L)+D(w)。求解方程为(f_int−b_in R)_free=0及b_in·(L+w)=d；端口节点允许各自不同位移，不能绑等值或以每节点载荷总和之外的量冒称输入R。
+
+非对称KKT／通用LU、原HF3 stopping／constraint／force floor／Armijo／backtrack／bisection门保持；minimum_increment按既有初始增量/16规则显式设为.001/16，时间上限单独设定。不改变默认内核，使用NumPy显式assembler；不能为通过关闭严格选项／升级依赖／放宽残量或Jv门。新task目的只为small_mean_driven_test，H2/H3与正式标签资格继续待定。
+
+保存完整23模型＋task/source、所有接受态原L/w／R／三内力／输入与支承力／spring（本例0）／J/Hu／均值／SF及残量、接受态CSC与绑定、Newton试探／LU／Armijo／二分记录；统计正式baseforce／tangent／reference调用真实次数。图以actual结构及x1／声明放大局部对比、输入q-R／自由输出、三端口各节点位移、J及平衡力解释；有限制造态箭头不能替代本次实际解。
+
+独立新参考按每个接受态完整模型HP80/120，不能沿用本制造场10raw类或空间采样；正常两接受态预计4次整模型参考调用（覆盖12800个单元precision instances）。若出现二分中间接受态，它也必须检查，按2×实际接受态数记录，未完成时不授予本轮路径资格。绑定一条明确无量纲输入支撑方向v=b_in/max|b_in|，固定DOF零、lift固定，参考同时给三力／Jv及均值/KKT边界检查；全量局部与global门和HP80/120一致门沿用当前原门/尺度，真实平衡门沿用旧HF3定义，不能只检查已组装抵消后的总残量。正式执行前应把精确检查定义和输入/来源原SHA写入新清单，并静态交叉核对。
+
+新范围建议生产与独立参考各一次连续**180秒／采样8GiB**、各外层210秒，包含导入、构造、所有试探／参考／序列化和结束身份核对；首错误停止、不修复重试/force。历史同物理.001前缀正常3切线＋1force试探，结合本轮21.25秒／完整切线仅估正常约60–75秒，不作保证；历史三态整模型参考实际144.64秒，支持本轮先用180秒两态预算，但新普通模型／方向的真实成本未知。参考超时或有未审状态时明确保留“生产完成、独立验收未完成”，不用墙钟余量重开。小功能测试／仅读图分别一次120秒外层、回执与正式计算分开。通过后main／公开普通CLI及图恢复按当时实测成本再定最小范围。此为基于用户允许按结果推进平衡的最新授权之新阶段计划，不是延用已关闭切线120秒窗口；本段截至提交只读规划，尚未编码或启动新平衡。

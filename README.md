@@ -2,6 +2,8 @@
 
 2026-10-03最新：**普通原生模型的三分量NumPy切线入口及完整CSC组装已接通**。粗夹持器3200单元／6642DOF保存checker态，两个方向经40次新HP80/120全量核对通过，2案功能测试通过；最坏归一化误差4.43e-14，原门未改。三完整矩阵保留fixed行列及HuHu非对称性，见[实现、数值、成本及物理解释](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-tangent-20261003)与[两方向的内力变化率图](functional_views/native_tangent_20261003/native_tangent_directional_actions.png)。本步21.25秒为粗例给定态实测，未求平衡／未执行.025mm目标；下一步接普通文件的小步平均驱动平衡并显示真实形变、输入力和自由输出。工件／研究H2-H3／完整接触与批量标签仍待完成。
 
+main ae8f29c的[公开异目录恢复](handoff/native_tangent_20261003/public_recovery_verify.json)通过；9结果文件／43数组精确一致，图包4文件字节相同。下一步[粗夹持器小步平均驱动平衡](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-mean-next-20261003)尚未执行。
+
 2026-10-03最新：**新普通候选的NumPy完整力入口已接通，三例六制造态经64次新HP80/120全量核对通过，3案功能测试通过**。材料/HuHu/总力均满足原门，38400单元/全部DOF覆盖，最大归一化误差8.64e-17；保存模型、原始split状态、三力/应力/J/Hu/能量和全精度参考。见[目标、实施、物理效果和接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-force-20261003)、[位移/J/Hu](functional_views/native_force_20261003/native_force_fields.png)、[三类内力](functional_views/native_force_20261003/native_force_components.png)。本步为给定位移静态内力，未执行task的.025mm目标；下一普通模型的非对称切线/小步平均驱动平衡，工件/研究H2-H3/一般接触/批量标签仍待完成。
 
 2026-10-03当前：**显式原生任务／模型入口已实现，三例23项模型数组独立精确核对、5案构造测试通过**。两粗规范17项旧模型字段相同，细夹持器保留.5mm／26082DOF及五节点均值，构造TEST下fixed为89／87／169。看[目标、实现、效果和接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#native-model-construction-20261003)、[实际模型边界](functional_views/native_model_20261003/native_model_applied_bcs.png)、[端口均值方程](functional_views/native_model_20261003/native_model_port_equations.png)。本步已分配材料和模型边界，未执行保存的.025mm指令；下一步新普通模型的NumPy静态完整力与参考，再推进数值路径。此前NumPy力／切线和两规范小前缀受限通过，工件／批量HF仍待完成。
