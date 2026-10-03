@@ -1,0 +1,33 @@
+{
+  "baseline_commit": "496b317db7f4a54db8fe9599a243136384ec75f6",
+  "source_pre_review": {
+    "driver_sha256": "2d74e1dfb2ba5000da42ed26014cf9bbab01eddc0bde75df13ddf5f0d69ab19c",
+    "audit_sha256": "6245bc46c6edf207fe2d2baedf86d472a689674b77e3e7b8d18cdff16807272a",
+    "viewer_sha256": "41e7b11da8c8623f1c8c0da51e84925df67965a8f6ba02c7790b2be8c75d8820",
+    "reviewer": "Root and avg_fixture_audit",
+    "result": "pass",
+    "checks": [
+      "Canonical file identities and pure-data model reproduction",
+      "Et=20 original HF3 force scale and settings/minimum increment rule",
+      "Exact split mean and input-only lift with independent fluctuations",
+      "Fresh reference/candidate vector/CSC persistence and unchanged original gates",
+      "Cooperative checkpoints and actual attempt/completion counters"
+    ],
+    "numerical_execution_in_pre_review": false
+  },
+  "local_test": {
+    "command": "python -B -c 'subprocess.run([sys.executable,\"-B\",\"-m\",\"pytest\",\"-q\",\"tests/test_split_displacement.py\",\"tests/test_displacement.py\"], timeout=120)'",
+    "cwd": "hf_repo",
+    "exit_code": 0,
+    "passed": 45,
+    "failed": 0,
+    "pytest_elapsed_seconds": 4.85,
+    "tool_command_seconds": 7.6702734,
+    "timeout_seconds": 120,
+    "change": "Set x64/CPU at new test-file import start, matching the original displacement-test policy; fixes test collection order",
+    "legacy_JAX_small_mechanics_executed": true,
+    "new_NumPy_production_not_started_by_test": true,
+    "old_failure_preserved": "split_average_001/independent_review.json test_history"
+  },
+  "scope": "Prefix only; pre-review/test evidence does not itself grant numerical, full parent-task or contact qualification"
+}

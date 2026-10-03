@@ -1,5 +1,7 @@
 # Compliant-TO-TMC：独立 HF 力学评估器
 
+2026-10-03当前：**新NumPy split控制已计算原反向器小行程[0,.001,.025]mm，111新HP门及111完整保存重放通过**。输入.025mm→输出−x .040096mm、输入力4.24985mN。看[实施与接续](docs/NUMPY_FORCE_PROGRESS_20261002.md#numpy-inverter-prefix-20261003)、[实际x1／明确x100变形与力图](functional_views/numpy_inverter_prefix_20261003_display_v2/split_project_path.png)、[三帧动画](functional_views/numpy_inverter_prefix_20261003_display_v2/split_project_path.gif)。完整普通输入与新证据随Git；父1mm、真实工件和HF5尚未完成。
+
 2026-10-03当前功能：**NumPy split平均端口已实现，两条小实体路径及272项新HP检查通过**。见[实现、物理效果与恢复方法](docs/NUMPY_FORCE_PROGRESS_20261002.md#split-average-20261003)、[实际变形／力／自由输出图](functional_views/split_average_20261003/split_average_demo.png)和[动画](functional_views/split_average_20261003/split_average_demo.gif)。下一步接原HF3规范机构的小行程；此小任务不授予接触、工件或HF5资格。
 
 本项目为 LF/N4 的多样化机构研究提供独立、任务明确、可审计的 HF 正向力学评价。HF 不导入 LF、不依赖 MATLAB，也不执行拓扑优化更新；通过普通文件接入候选几何，再分别判断数据契约、几何资格、数值精度、接触物理和机构功能。研究层复用已有 N4 的选择、计分与统计方法，接入前核对任务、模型、有效前缀和来源身份。

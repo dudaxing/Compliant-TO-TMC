@@ -1,0 +1,45 @@
+{
+  "baseline_commit": "496b317db7f4a54db8fe9599a243136384ec75f6",
+  "production": {
+    "command": "python -B hf_repo/scripts/run_split_project_path.py --geometry geometry_dataset/canonical/inverter/geometry.json --task hf_repo/configs/hf3/inverter_pilot_v1.json --output hf4_c2_stable_f_validation/numpy_inverter_prefix_001/solve --time-limit 300",
+    "invocations": 1,
+    "exit_code": 0,
+    "records": 3,
+    "solver_seconds": 141.45503169996664,
+    "invocation_seconds": 141.87896360002924,
+    "peak_working_set_bytes": 772149248
+  },
+  "independent_reference": {
+    "command": "python -B hf_repo/scripts/audit_split_project_path.py --input hf4_c2_stable_f_validation/numpy_inverter_prefix_001/solve --output hf4_c2_stable_f_validation/numpy_inverter_prefix_001/audit --time-limit 300",
+    "invocations": 1,
+    "exit_code": 0,
+    "fresh_HP_evaluations": 6,
+    "fresh_HP_attempts": 6,
+    "checks_passed": 111,
+    "elapsed_summary_seconds": 150.8710171999992,
+    "elapsed_lifecycle_seconds": 150.93911310000112,
+    "peak_working_set_bytes": 956456960
+  },
+  "rendering": {
+    "invocations": 2,
+    "first_command_seconds": 5.3076152,
+    "second_command_seconds": 9.4379216,
+    "exit_codes": [
+      0,
+      0
+    ],
+    "original_directory": "functional_views\\numpy_inverter_prefix_20261003",
+    "current_directory": "functional_views\\numpy_inverter_prefix_20261003_display_v2",
+    "reason_for_second_render": "Display J ticks as actual positive values instead of +1 offset. Original render retained; no force, HP or solve repeated.",
+    "original_and_current_numeric_CSV_identical": true,
+    "original_and_current_GIF_identical": true,
+    "current_viewer_sha256": "8f959b17e99fe155944e2a2edc4d186676bd8bc595995da1b0277308ca5b68dc"
+  },
+  "budgets": {
+    "solve_seconds": 300,
+    "audit_seconds": 300,
+    "sampled_RSS_limit_bytes": 8589934592,
+    "policy": "Cooperative checkpoints, not hard OS supervision"
+  },
+  "scope": "Only canonical original HF3 inverter prefix [0,.001,.025]mm; parent1mm, general contact, workpiece and HF5 incomplete"
+}

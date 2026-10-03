@@ -5,7 +5,12 @@ examples. The final test uses the NumPy constitutive kernel and a scalar
 homogeneous-stretch root instead of another finite-element solver.
 """
 from fractions import Fraction
+import os
 import struct
+
+# Match the existing displacement tests before importing the shared JAX module.
+os.environ["JAX_ENABLE_X64"] = "true"
+os.environ["JAX_PLATFORMS"] = "cpu"
 
 import numpy as np
 import pytest
