@@ -1,0 +1,440 @@
+{
+  "schema_version": "native-fine-mean-visual-review-1.0",
+  "status": "pass",
+  "review_role": "Independent actual saved-media inspection and lightweight saved-data cross-check; not a new mathematical audit",
+  "stage": "lf_data_preparation/native_fine_mean_001",
+  "view_directory": "functional_views/native_fine_mean_20261003",
+  "case_alias": "gripper_native_fine",
+  "case_family": "gripper",
+  "actual_image_inspection": {
+    "PNG": {
+      "file": "functional_views/native_fine_mean_20261003/native_mean_path.png",
+      "inspected": true,
+      "original_pixels": [
+        2880,
+        1840
+      ],
+      "tool_display_pixels": [
+        1954,
+        1248
+      ]
+    },
+    "GIF": {
+      "file": "functional_views/native_fine_mean_20261003/native_mean_path.gif",
+      "inspected_all_actual_frames": true,
+      "frame_indices": [
+        0,
+        1
+      ],
+      "decoded_in_memory_only": true,
+      "no_temporary_image_files": true,
+      "frames": [
+        {
+          "index": 0,
+          "duration_ms": 1000
+        },
+        {
+          "index": 1,
+          "duration_ms": 1000
+        }
+      ]
+    }
+  },
+  "visual_findings": [
+    "Actual x1 panel identifies the solid body, third medium, left attached support, five input averaging nodes and five right output measurement nodes. The external legend does not cover the structure.",
+    "The five output nodes are visible as purple open diamonds at source x=80 mm,y=28..30 mm even though the output spring is zero. They denote measurement nodes, not force arrows or prescribed individual motion.",
+    "Attached support uses filled black triangles; input averaging nodes use orange circles. Separate input-node curves show five unequal ux values and the common weighted mean.",
+    "Separate R and q_out axes avoid dual-axis ambiguity. Input-displacement axes use micrometres, R uses N, and the numeric panel uses mm/N. Gripper output is +y, physical mean uy=q_out, without a second sign flip.",
+    "Both the final PNG and each real GIF frame state that the stored original 0.025 mm task remains pending. Only the requested [0,0.001] mm prefix is marked reached.",
+    "Main geometry and force arrows use actual x1 coordinates. The supplementary displacement x1000 panel is explicitly labelled and has no force arrows. Its visible deformation is a magnified view of the same saved state.",
+    "PNG solid/medium J colour scales show their actual narrow ranges without a +1 offset; all element means are coloured and reported minimum uses all saved quadrature values. J is explicitly not pressure.",
+    "GIF contains only the two actual accepted states, in order, each lasting 1000 ms; no interpolated state is presented. Frame zero has zero force and motion; final frame displays the saved positive-y output.",
+    "Force arrows share one N scale across the complete accepted path and support/input/spring components. All attached-support arrows are included; other fixed-node reactions use the declared stride 3."
+  ],
+  "blocking_findings": [],
+  "nonblocking_display_limits": [
+    "At the actual x1 scale the maximum saved displacement is about 0.00136 mm on an 80 mm domain and is visually small; the labelled x1000 supplement is needed to inspect motion.",
+    "Adjacent 0.5 mm port markers and four support triangles are tightly grouped. The group and five output diamonds are visible, but every overlapping input/support/force glyph cannot be individually distinguished at the displayed size; metadata and CSV retain exact node identities and values.",
+    "Many other fixed-node reactions are small under the common force scale, and those reactions are displayed at stride 3. This is a display sample, not a claim that all reaction arrows are separately visible.",
+    "The five input-node curves lie close together at this prefix. Their unequal values are numerically retained; visual separation is limited without a local curve zoom.",
+    "GIF uses a shared indexed palette and has no numeric J colour bars; the PNG and metadata provide exact J ranges. Palette quantization and dense native-cell raster edges can affect visual colour detail.",
+    "The straight line between two plotted samples is a connection between saved observations and does not demonstrate any uncomputed intermediate equilibrium."
+  ],
+  "physics_and_qualification_limits": {
+    "requested_targets_mm": [
+      0,
+      0.001
+    ],
+    "original_task_target_mm": 0.025,
+    "prefix_target_reached": true,
+    "original_task_target_executed": false,
+    "no_workpiece": true,
+    "no_contact_clamping_claim": true,
+    "no_half_model_doubling": true,
+    "fine_case_checked": "Only this saved existing native fine design and accepted TEST prefix; no other fine case/grid or mesh-convergence qualification",
+    "full_stroke_qualified": false,
+    "H2_qualified": false,
+    "H3_qualified": false,
+    "HF5_qualified": false,
+    "independent_audit_usage": "Previously completed saved audit status, coverage and metrics are inspected as records only; no HP, Decimal scatter or numerical gate reconstruction was performed",
+    "ordinary_float_measurement_note": "Saved port averages and group-force sums were checked with ordinary NumPy arithmetic solely for display consistency."
+  },
+  "saved_data": {
+    "checks": {
+      "all_view_input_media_helper_SHA_match": true,
+      "bound_files_count": 130,
+      "source_count": 39,
+      "dual_source_capsules_verified": true,
+      "all_23_model_fields_SHA_dtype_shape_verified": true,
+      "CSV_all_numeric_fields_match_metadata": true,
+      "all_frame_saved_state_audit_bindings_match": true,
+      "ports_and_markers_match_saved_model": true,
+      "actual_common_force_scale_matches": true,
+      "all_saved_J_range_matches": true,
+      "prefix_pending_task_labels_match": true
+    },
+    "counts": {
+      "cells": 12800,
+      "nodes": 13041,
+      "dofs": 26082,
+      "solid_cells": 4358,
+      "medium_cells": 8442,
+      "solid_incident_nodes": 4881,
+      "fixed_dofs": 169,
+      "free_dofs": 25913
+    },
+    "ports": {
+      "input": {
+        "nodes": [
+          12236,
+          12397,
+          12558,
+          12719,
+          12880
+        ],
+        "DOFs": [
+          24472,
+          24794,
+          25116,
+          25438,
+          25760
+        ],
+        "weights": [
+          0.125,
+          0.25,
+          0.25,
+          0.25,
+          0.125
+        ],
+        "coordinates_mm": [
+          [
+            0,
+            38
+          ],
+          [
+            0,
+            38.5
+          ],
+          [
+            0,
+            39
+          ],
+          [
+            0,
+            39.5
+          ],
+          [
+            0,
+            40
+          ]
+        ],
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "output": {
+        "nodes": [
+          9176,
+          9337,
+          9498,
+          9659,
+          9820
+        ],
+        "DOFs": [
+          18353,
+          18675,
+          18997,
+          19319,
+          19641
+        ],
+        "weights": [
+          0.125,
+          0.25,
+          0.25,
+          0.25,
+          0.125
+        ],
+        "coordinates_mm": [
+          [
+            80,
+            28
+          ],
+          [
+            80,
+            28.5
+          ],
+          [
+            80,
+            29
+          ],
+          [
+            80,
+            29.5
+          ],
+          [
+            80,
+            30
+          ]
+        ],
+        "direction": [
+          0,
+          1
+        ]
+      }
+    },
+    "attached_support_nodes": [
+      2093,
+      2254,
+      2415,
+      2576
+    ],
+    "attached_support_coordinates_mm": [
+      [
+        0,
+        6.5
+      ],
+      [
+        0,
+        7
+      ],
+      [
+        0,
+        7.5
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "observations": [
+      {
+        "index": 0,
+        "target_mm": 0,
+        "R_input_N": 0,
+        "q_in_mm": 0,
+        "q_out_mm": 0,
+        "physical_output_mean_uy_mm": 0,
+        "ordinary_dot_mean_input_mm": 0,
+        "ordinary_dot_mean_output_mm": 0,
+        "input_ux_mm": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_uy_mm": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "minimum_J": 1,
+        "solid_minimum_J": 1,
+        "maximum_displacement_mm": 0,
+        "support_force_sum_N": [
+          0,
+          0
+        ],
+        "other_fixed_force_sum_N": [
+          0,
+          0
+        ],
+        "all_constraint_reaction_sum_N": [
+          0,
+          0
+        ],
+        "input_force_sum_N": [
+          0,
+          0
+        ],
+        "spring_force_sum_N": [
+          0,
+          0
+        ],
+        "global_force_balance_N": [
+          0,
+          0
+        ],
+        "production_relative_residual": 0,
+        "independent_relative_residual_recorded": "0E-113",
+        "relative_force_balance_recorded": "0E-113"
+      },
+      {
+        "index": 1,
+        "target_mm": 0.001,
+        "R_input_N": 0.00015017437193423047,
+        "q_in_mm": 0.001,
+        "q_out_mm": 0.0009548343422572025,
+        "physical_output_mean_uy_mm": 0.0009548343422572025,
+        "ordinary_dot_mean_input_mm": 0.001,
+        "ordinary_dot_mean_output_mm": 0.0009548343422572025,
+        "input_ux_mm": [
+          0.0009881185552692438,
+          0.0009962499313990476,
+          0.001001670974338572,
+          0.0010049769127789666,
+          0.0010060858076975838
+        ],
+        "output_uy_mm": [
+          0.0009548010136468971,
+          0.0009548291280927093,
+          0.0009548421552643855,
+          0.000954844389592486,
+          0.0009548423785115616
+        ],
+        "minimum_J": 0.9999014435149092,
+        "solid_minimum_J": 0.999978267839215,
+        "maximum_displacement_mm": 0.0013613881655782291,
+        "support_force_sum_N": [
+          -0.00015017437193423183,
+          -0.00003776183608679801
+        ],
+        "other_fixed_force_sum_N": [
+          0,
+          0.00003776183608680162
+        ],
+        "all_constraint_reaction_sum_N": [
+          -0.00015017437193423183,
+          3.6800090856014376e-18
+        ],
+        "input_force_sum_N": [
+          0.00015017437193423047,
+          0
+        ],
+        "spring_force_sum_N": [
+          0,
+          0
+        ],
+        "global_force_balance_N": [
+          -1.3552527156068805e-18,
+          3.6800090856014376e-18
+        ],
+        "production_relative_residual": 9.795983242451133e-12,
+        "independent_relative_residual_recorded": "9.79596962635261637161881095848548749143356773596284826603012950368425921740990303077251517055773505906695145725796977558E-12",
+        "relative_force_balance_recorded": "8.95693736041130653912518326584845448638023788627277077531619578837743895943427959001797304921965870987992358436029751395E-15"
+      }
+    ],
+    "J_ranges": {
+      "solid": [
+        0.999978267839215,
+        1.0000280153336853
+      ],
+      "medium": [
+        0.9999014435149092,
+        1.000101268675525
+      ]
+    },
+    "force_display": {
+      "max_external_nodal_force_N": 0.0002383857570298802,
+      "N_per_display_mm": 0.00005959643925747005,
+      "max_arrow_mm": 4,
+      "support_nodes_all": [
+        2093,
+        2254,
+        2415,
+        2576
+      ],
+      "other_fixed_sampling_stride": 3
+    },
+    "media": {
+      "native_mean_path.png": {
+        "sha256": "e98d2209dda03cdfbddc029390e85dce2c7902f51bebf9b3ba7fa463783c16dc",
+        "pixels": [
+          2880,
+          1840
+        ],
+        "frames": 1,
+        "frame_duration_ms": [
+          null
+        ],
+        "loop": null
+      },
+      "native_mean_path.gif": {
+        "sha256": "127e453c22e398b74d14e92f0cf875f9f5f58006908fd1f39373566b590abe01",
+        "pixels": [
+          1680,
+          882
+        ],
+        "frames": 2,
+        "frame_duration_ms": [
+          1000,
+          1000
+        ],
+        "loop": 0
+      }
+    },
+    "metadata_sha256": "28cd6efff29ae0c786a38a092e7785f75d16fd379a2b994771cb907ce75ea0d9",
+    "CSV_sha256": "5a6dcfc36ab0344975b5e28038b2f43a99df4dccfea35981205fbe34a37440c2",
+    "source_sha256": "29a89a18e23e508a6a0da2aa0f0c89833d9ab8a572e44fdd80db171cea69160c",
+    "audit_scope": {
+      "schema_version": "native-mean-independent-audit-1.0",
+      "status": "pass",
+      "HP_calls_started": 4,
+      "HP_calls_completed": 4,
+      "checks_completed": 153861,
+      "all_element_DOF_coverage": true,
+      "HP_columns_exhaustive": false,
+      "elapsed_seconds": 188.22353419999126,
+      "qualification": "Independent recorded native no-workpiece gripper_native_fine TEST only; no H2/H3, other-design/grid, long-stroke or batch qualification"
+    },
+    "producer_scope": {
+      "call_counts": {
+        "force_calls": 4,
+        "force_calls_completed": 4,
+        "tangent_calls": 3,
+        "tangent_calls_completed": 3,
+        "solver_invocations": 1,
+        "JIT_calls": 0,
+        "HP_calls": 0
+      },
+      "elapsed_seconds": 273.20348319999175,
+      "task_target_executed": false
+    },
+    "zero_new_scientific_calls": true
+  },
+  "immutability": {
+    "bound_files_unchanged_after_review": 130,
+    "current_source39_unchanged": true,
+    "new_receipt_absent": true
+  },
+  "new_executions": {
+    "model_constructions": 0,
+    "force_calls": 0,
+    "tangent_calls": 0,
+    "solver_calls": 0,
+    "HP_calls": 0,
+    "test_runs": 0,
+    "plot_runs": 0,
+    "production_CLI_runs": 0
+  },
+  "files_modified": "Only this new visual_review_fine_mean.json receipt; frozen media, source capsules, active source and saved numerical evidence were not changed",
+  "review_failure_history": [
+    {
+      "scope": "Receipt-authoring orchestration only",
+      "result": "First functions.exec receipt constructor had a missing object brace and failed to parse before any tools ran; corrected wrapper then wrote the new receipt. No evidence, source or media mutation and no scientific call occurred."
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "schema_version": "native-mean-input-inventory-1.0",
+  "baseline_commit": "a663962308271384b8ba91efdb0f638c9b1d32ac",
+  "case": {
+    "alias": "gripper_native_fine",
+    "geometry_file": "lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.json",
+    "geometry_file_sha256": "dbab7567c98e18174d198318f025184b3545c3681c060fa77d9435122bb0f32c",
+    "geometry_npz_file": "lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.npz",
+    "geometry_npz_sha256": "92ff8918ae7502c3f8bfb99398b654ea1521549e7ff3ce0e8b24a9b4fa720d21",
+    "geometry_id": "62dd40a9ed8a41a6a2deb55927982c7f409d63bfedbf96079b2ee032e816da8d",
+    "prior_model_file": "lf_data_preparation/native_model_001/models/gripper_native_fine/model.npz",
+    "prior_model_sha256": "f3ad62046286023344a2aab0cea4ac7466dcb98637c12f2ff7cdc66f988144d6",
+    "elements": 12800,
+    "dofs": 26082,
+    "task_file": "lf_data_preparation/native_fine_mean_001/task.json",
+    "task_file_sha256": "935b96ce9a011e061e13296a1758438cfb7273639ebc6bbebb26e75dde0f81ec",
+    "prior_task_file": "lf_data_preparation/native_model_001/tasks/gripper_native_fine.json",
+    "prior_task_sha256": "3638394a88ab8def0324c1e1fc58c7c6d63963296cc5d47c696aefbdac8fd78b",
+    "direction_file": "lf_data_preparation/native_fine_mean_001/direction.npz",
+    "direction_file_sha256": "1bd56a0b8adb9d780111ea532f52fb23f306eccde595af7dea68d881545da3a5",
+    "direction_array_sha256": "7aec749af6547e4c678f14279a233864bab30e699fce2ec02993e7ed73f6d2c5",
+    "lifting_file": "lf_data_preparation/native_fine_mean_001/lifting.npz",
+    "lifting_file_sha256": "f952f6d940b83874a2f8452996d6e4c4d3f028714465a461020f1343878a0b84",
+    "targets_mm": [
+      0.0,
+      0.001
+    ],
+    "fixed_DOFs": 169,
+    "free_DOFs": 25913,
+    "result_directory": "result"
+  },
+  "settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 25,
+    "armijo_c": 0.0001,
+    "max_backtracks": 12,
+    "max_bisections": 4,
+    "minimum_increment": 6.25e-05,
+    "time_limit_seconds": 600.0
+  },
+  "gates": {
+    "production_residual": "1e-9",
+    "independent_residual": "1e-8",
+    "force_evaluation": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11",
+    "hp80_hp120": "1e-40",
+    "total_force": "1e-11",
+    "material_force": "1e-9",
+    "regularization_force": "1e-9",
+    "total_tangent": "1e-10",
+    "material_tangent": "1e-9",
+    "regularization_tangent": "1e-9",
+    "augmented_force_tangent": "1e-10",
+    "augmented_constraint_tangent": "1e-10"
+  },
+  "test_id": "TEST_native_fine_mean_20261003",
+  "stage_metadata": {
+    "purpose": "existing_native_fine_candidate_small_mean_prefix_TEST",
+    "stored_task_target_mm": 0.025,
+    "requested_prefix_mm": [
+      0.0,
+      0.001
+    ],
+    "minimum_increment_basis": "Inherited reviewed 0.001 mm / 16 = 6.25e-5 mm rule; native h0.5 prefix only",
+    "task_target_role": "Original 0.025 mm construction TEST is retained but not reached by this 0.001 mm prefix; no HF3/HF5 research target"
+  },
+  "preparation_source": {
+    "inventory_file": "lf_data_preparation/native_force_001/input_inventory.json",
+    "sha256": "3de1412ec3cc392b48106a6835e42ee7a89054d38d53561dd59df413eb5a5dc8",
+    "selected_alias": "gripper_native_fine",
+    "role": "Geometry, original task and saved intrinsic model only; no historical displacement reused"
+  },
+  "direction_definition": "v=b_in/max(abs(b_in)); actual fixed DOFs zero; dimensionless; multiplier direction 0 N/mm",
+  "state_authority": "D(lift)+D(fluctuation); zero lift origin and shape; independent mean measurement",
+  "reference_definition": "Per accepted state HP80/120 on all elements with disconnected local numbering, then exact Decimal scatter to real DOFs; no spatial sampling",
+  "qualification": "Existing native fine candidate [0,0.001] mm no-workpiece TEST prefix only; stored 0.025 mm task not completed; different design, not mesh convergence; independent qualification is separate",
+  "execution_limits": {
+    "production_seconds": 600,
+    "reference_seconds": 360,
+    "sampled_RSS_bytes": 8589934592,
+    "production_outer_seconds": 660,
+    "reference_outer_seconds": 420,
+    "view_outer_seconds": 120
+  },
+  "stop_policy": "First stage error stops; no repair, retry, force or reopening a closed window",
+  "reference_call_rule": "2 times actual accepted-state count including all bisections; requested two targets -> at least 4 calls, 51200 element-precision instances"
+}

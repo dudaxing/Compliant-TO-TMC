@@ -1,8 +1,8 @@
 # 物理与功能开发进度
 
-2026-10-03当前：**两例普通粗机构原0.025mm TEST均已完成NumPy完整力、非对称CSC切线与split平均驱动平衡**。本轮夹爪四态[0,.005,.010,.025]mm／8新HP80/120全模型参考通过，输入反力.00521459203N，自由钳口+y输出.02860371846mm；生产176.48秒、14force/9tangent/1solver，无二分或失败。见[目标、实现、成本、物理效果与接续](NUMPY_FORCE_PROGRESS_20261002.md#native-gripper-task025-20261003)、[实际x1形变／力与补充x40](../functional_views/native_gripper_task025_20261003/native_mean_path.png)及[四帧动画](../functional_views/native_gripper_task025_20261003/native_mean_path.gif)。下一功能优先现有原生细夹爪的小步平均驱动及真实切线/LU成本；该设计不同于粗设计，不称网格收敛。完整研究行程／真实夹持／释放重入／H2-H3／HF5标签仍待完成。
+2026-10-03当前：**新NumPy候选已接通普通文件完整力、非对称CSC切线与split平均驱动平衡；原生细夹爪五节点端口0→.001mm前缀通过新独立参考**。12800单元／26082DOF／169fixed，2实际接受态／4新HP80/120／153861总检查，输入反力.00015017437N，输出+y平均位移.00095483434mm；生产273.20秒、4force/3tangent/1solver，无二分或失败。两粗机构原.025mm TEST先前已完成；细模型原task.025保持pending，不能把小前缀当完整任务。见[目标、实现、物理效果、成本与接续](NUMPY_FORCE_PROGRESS_20261002.md#native-fine-mean-20261003)、[实际x1结构／外力及补充x1000](../functional_views/native_fine_mean_20261003/native_mean_path.png)与[两帧真实动画](../functional_views/native_fine_mean_20261003/native_mean_path.gif)。原生细设计不同于粗设计，不称网格收敛；研究完整行程／真实夹持／释放重入／H2-H3／HF5标签仍待完成。
 
-main 7baa4b6及[本阶段实际公开恢复](../handoff/native_gripper_task025_20261003/public_recovery_verify.json)通过：20 payload／131数组、图包6文件字节相同；物理与求解诊断JSON仅排明确耗时及关联hash。公开CLI192.58秒、0新HP，同机同runtime异目录范围；正式与公开共28force/18tangent/2solver，原新HP仍8。下一细候选小步路径已具体规划，尚未准备或执行。
+完整普通输入、两态三力／CSC与raw参考、来源胶囊、实际图及过程准备随main交付。正式生产、唯一参考、仅读图及独立后验／实际media复核均pass；本阶段公开异目录CLI恢复尚未执行，不能提前称恢复通过。下一功能按fine真实结果推进原.025mm TEST，预算依据本次内核成本明确记录。
 
 以下增补保留各执行时点；当前结论和下一步以本条及报告末节为准。旧记录中的“尚未实现”和旧计划不作为当前状态。
 
@@ -35,15 +35,15 @@ main 7baa4b6及[本阶段实际公开恢复](../handoff/native_gripper_task025_2
 | 功能 | 代码与当前进度 | 物理含义及范围 |
 |---|---|---|
 | 独立几何读取 | [data.py](../hf_repo/src/hf_eval/data.py)、[evaluate/inspect](../hf_repo/src/hf_eval/evaluation.py)；两例规范几何导出、独立安装与断开 LF 读取已通过 | 单元掩膜、尺度、厚度、支承与端口可独立读取；新增 [lf_v2.py](../hf_repo/src/hf_eval/lf_v2.py) 纯数据转换和 [native_map.py](../hf_repo/src/hf_eval/native_map.py) 原生Q1准备均已验证两个规范包与一个细网格包；全部30／1800包和一般接触任务仍未验收 |
-| 显式原生任务模型 | [native_project.py](../hf_repo/src/hf_eval/native_project.py) 与普通CLI已实现；三例23数组独立精确核对、5案构造测试通过 | 两粗规范17个旧模型intrinsic字段相同；细.5mm／五节点端半权与169fixed保持。材料、实际边界和算子已构造；两粗机构原.025mm TEST目标均已完成，细候选实际平衡仍未执行；H2／H3与正式响应资格保持待定 |
-| 普通原生模型完整内力 | [native_force.py](../hf_repo/src/hf_eval/native_force.py)／普通CLI已实现；三例六制造态64次新HP80/120全域核对及3案功能测试通过 | 12场及完整model/state保存，材料/HuHu/总单元与节点力均可读/显示；给定位移内力不是平衡/任务反力；另经普通平均驱动平衡，两粗机构原.025mm TEST均已完成。细候选实际平衡、完整研究行程及工件任务继续待推进 |
-| 普通原生模型完整切线 | [native_tangent.py](../hf_repo/src/hf_eval/native_tangent.py)／普通CLI已实现；粗夹持器两方向40次新HP80/120全量核对及2案测试通过 | 三张量及full-DOF CSC保存，HuHu非对称保留；所有系数组装一致，HP物理导数范围仅两方向。给定态切线及两粗普通机构小步平均驱动已实现；HP独立导数各按已测方向理解 |
-| 普通文件 NumPy 平均驱动平衡 | [native_mean.py](../hf_repo/src/hf_eval/native_mean.py)／solve_native_mean CLI；两粗机构各.025mm四态／各8新HP参考通过 | 真实反向器+x输入→−x输出，夹爪+x输入→+y输出；原模型/端口权重/约束保持，保存完整力与CSC，输出自由且无工件，不能称夹持力或完整行程 |
+| 显式原生任务模型 | [native_project.py](../hf_repo/src/hf_eval/native_project.py) 与普通CLI已实现；三例23数组独立精确核对、5案构造测试通过 | 两粗规范17个旧模型intrinsic字段相同；细.5mm／五节点端半权与169fixed保持。材料、实际边界和算子已构造；两粗机构原.025mm TEST目标均已完成；细候选0→.001mm前缀/4新HP已通过，原.025task未完成；H2／H3仍待定 |
+| 普通原生模型完整内力 | [native_force.py](../hf_repo/src/hf_eval/native_force.py)／普通CLI已实现；三例六制造态64次新HP80/120全域核对及3案功能测试通过 | 12场及完整model/state保存，材料/HuHu/总单元与节点力均可读/显示；给定位移内力不是平衡/任务反力；另经普通平均驱动平衡，两粗机构原.025mm TEST均已完成。另有细候选两接受态完整力/4新HP通过；细原.025task、完整研究行程及工件任务待推进 |
+| 普通原生模型完整切线 | [native_tangent.py](../hf_repo/src/hf_eval/native_tangent.py)／普通CLI已实现；粗夹持器两方向40次新HP80/120全量核对及2案测试通过 | 三张量及full-DOF CSC保存，HuHu非对称保留；所有系数组装一致，HP物理导数范围仅两方向。给定态切线、两粗原.025及细.001mm平均驱动fullCSC已通过；细接受态HP导数限固定lift端口方向，全部系数组装独立检查不等于HP全列导数 |
+| 普通文件 NumPy 平均驱动平衡 | [native_mean.py](../hf_repo/src/hf_eval/native_mean.py)／solve_native_mean CLI；两粗机构各.025mm四态／各8新HP通过；细模型五节点端口.001mm两态/4新HP通过 | 真实反向器+x输入→−x输出，夹爪+x输入→+y输出；原模型/端口权重/约束保持，保存完整力与CSC，输出自由且无工件，不能称夹持力或完整行程 |
 | 实体线性诊断 | [linear.py](../hf_repo/src/hf_eval/linear.py)；反向器、夹持器两例通过 HF1 | 已得到微小输入下的位移、输入广义力与变形图；用于单位、方向、支承及线性极限检查，无工件接触 |
 | TMC 非线性与内力组装 | [tmc_kernel.py](../hf_repo/src/hf_eval/tmc_kernel.py)、[tmc.py](../hf_repo/src/hf_eval/tmc.py)；HF2 修正 C-shape 的100原目标、HF3 两条40目标机构路径已验证 | **已有实际材料力、HuHu 正则力、总内力及一致非对称 Jacobian，并能求平衡。** 显式NumPy新候选已通过96静态状态、新C1路径及两规范机构小前缀；默认内核保持原入口 |
 | 单数组平均端口控制 | [displacement.py](../hf_repo/src/hf_eval/displacement.py)、[project_evaluation.py](../hf_repo/src/hf_eval/project_evaluation.py)；HF3 两例自由输出路径通过 | 约束端口平均位移，端口节点仍能相对变形；输入乘子为驱动器作用于模型的广义力，可读出输出平均位移 |
 | split 位移与 Dirichlet 路径 | [split_state.py](../hf_repo/src/hf_eval/split_state.py)、[split_prescribed.py](../hf_repo/src/hf_eval/split_prescribed.py)、[split_affine.py](../hf_repo/src/hf_eval/split_affine.py)；HF4-B 四组合完整通过，C1/C2 有受限通过结果 | 分别保存宏观 lift 与微小 fluctuation，避免微小 Newton 更新被大位移吞掉；现有 split 控制是规定自由度位移，支持显式阶段交接 |
-| split 平均端口增广控制 | [split_displacement.py](../hf_repo/src/hf_eval/split_displacement.py) 已实现；两个小实体路径及两规范机构小前缀通过新参考核查 | 明确求解 `b_inᵀ(u_lift+u_fluctuation)=d` 的非对称增广CSC方程，节点允许相对位移；普通native任务模型构造已通过；两粗机构普通文件0→.025mm新路径及每态全量HP参考已通过；下一现有细候选小步路径（不同设计，不称网格收敛） |
+| split 平均端口增广控制 | [split_displacement.py](../hf_repo/src/hf_eval/split_displacement.py) 已实现；两个小实体路径及两规范机构小前缀通过新参考核查 | 明确求解 `b_inᵀ(u_lift+u_fluctuation)=d` 的非对称增广CSC方程，节点允许相对位移；普通native任务模型构造已通过；两粗机构普通文件0→.025mm新路径及每态全量HP参考已通过；细候选五节点mean的0→.001mm两态/4新HP也通过；原.025task仍pending（不同设计，不称网格收敛） |
 | 受限法向接触 | [contact_reference_a0.py](../hf_repo/src/hf_eval/contact_reference_a0.py)、[contact_c1.py](../hf_repo/src/hf_eval/contact_c1.py)、[contact_c2.py](../hf_repo/src/hf_eval/contact_c2.py)；C1十条选定路径80态通过，v4细网格21态通过 | 已比较分离接近、规定闭合阶段及持续压紧的参考/TMC响应，也观察二维非均匀加载。v4只补测一个固定均匀任务 |
 | 一般局部接触、释放与重新接触 | 未完成一般主动集及相应物理验证 | 目前不能保证任意接触面、有限面离开/重入、卸载释放、角点等情形；已有阶段约束激活不等于一般接触算法 |
 | 真实夹持力 | 尚未实现带真实机构与工件的已验收任务；[HF5任务草案](HF5_LF_V2_ADAPTER_AND_TASK_PLAN.md)已有定义建议 | 需要明确工件、间隙与加载后，读取工件的约束反力。HF3自由输出位移、输入广义力或 LF 输出弹簧力均不能改名为夹持力 |

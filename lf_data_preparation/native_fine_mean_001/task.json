@@ -1,0 +1,80 @@
+{
+  "schema_version": "hf-native-project-task-1.0",
+  "task_id": "TEST_native_fine_mean_20261003",
+  "case_family": "gripper",
+  "purpose": "small_native_fine_mean_prefix_test",
+  "parameter_origin": "Small mean-driven prefix on the existing native h0.5 fine candidate; unchanged original TEST physics; H2/H3 unresolved",
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain"
+  },
+  "input": {
+    "tag": "input",
+    "control": "average_displacement",
+    "target_mm": 0.025
+  },
+  "output": {
+    "tag": "output",
+    "spring_N_per_mm": 0.0
+  },
+  "constraints": [
+    {
+      "tag": "support",
+      "components": [
+        0,
+        1
+      ]
+    },
+    {
+      "tag": "symmetry",
+      "components": [
+        1
+      ]
+    }
+  ],
+  "support_selection": "solid_incident_nodes_only",
+  "input_auxiliary_spring_N_per_mm": 0.0,
+  "workpiece": null,
+  "third_medium": {
+    "gamma": 1e-06
+  },
+  "qualification_criteria": {
+    "max_design_volume_fraction": null,
+    "min_feature_mm": null
+  },
+  "reference_state": "undeformed",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "regularization": {
+    "alpha": 1e-06,
+    "length_mm": 80.0
+  },
+  "background_symmetry": {
+    "points_mm": [
+      [
+        0.0,
+        40.0
+      ],
+      [
+        80.0,
+        40.0
+      ]
+    ],
+    "components": [
+      1
+    ]
+  },
+  "geometry": {
+    "geometry_id": "62dd40a9ed8a41a6a2deb55927982c7f409d63bfedbf96079b2ee032e816da8d",
+    "descriptor_sha256": "aa658442a28aa4a33a774767ef675bced99c19a4187dfd7177818b8629089b37"
+  },
+  "analysis_grid": {
+    "policy": "native"
+  },
+  "description": "Execute only targets [0,0.001] mm from undeformed zero lift on the existing fine candidate; stored task target 0.025 mm remains unexecuted. Free output and no workpiece; different design from the coarse candidate, not mesh convergence or H2/H3 research qualification"
+}
