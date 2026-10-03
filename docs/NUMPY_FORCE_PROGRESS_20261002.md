@@ -753,3 +753,18 @@ python functional_views/native_force_20261003/plot_native_force_frozen.py --inpu
 [保存数据复核](../lf_data_preparation/native_force_001/postrun_identity_review.json)SHA70fd3f794be93c3ebab1e0b0b6dc51a271a13ce9a818a5059a5af9eb002e43a7，pass_saved_data_review：22来源及18唯一输入身份、六例23模型＋2state＋12场，32 raw类成员恰覆盖每个单元，64参考SHA/precision/原输入字节均核对；从已保存有限Decimal字串另做精确scatter/验收重放，与所有全域值及局部门相同。此为API作者对root生产及另一数学作者审计的交叉核查，构成独立数值公式的仍是原Decimal参考；不把该身份复核伪称又做了64次新HP。所有新增force/reference.evaluate/构造/求解调用0。
 
 [实际两图审查](../lf_data_preparation/native_force_001/visual_review_tests.json)SHAc86ec5734b0405f69f4cad18dcf620a0454be642d797a4d80f65cc6ed82ea8ee，status=pass：实际查看PNG并复核116件来源/显示字段及全量审计范围。记录局部caption低对比和公用标尺下HuHu箭头最大仅约.00552显示mm（亚像素）的非阻断显示限制；力的全节点log色标仍可读，未为了图像夸大物理量或重绘。root亦实际看图；没有重复正式计算/测试或重绘。所有本轮必需检查已通过，现在按此前授权提交main和执行已计划的公开异目录恢复。
+
+### main交付与实际公开异目录恢复
+
+科学实现/六态/64HP/三案测试/两图及事后复核已推送main **537bf965417d4ea07f4f59614b358d0b91874f1e**，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。原正式工作区和公开异目录D:/hf-restore-20260930均核对为main，公开克隆从524ffc0仅fetch＋fast-forward至537bf96，无分支改换/覆盖/reset；5441件普通交付文件verify通过，22项current/frozen source pins相同。本次不恢复或重审完整历史Release资产。
+
+[公开恢复证明](../handoff/native_force_20261003/public_recovery_verify.json)SHAd955871df8fd9b9c40d97301d2bf4f9a2693f7087a381ec806e19b58900a49ca：在该公开根实际启动六次普通CLI，各新输出至D:/hf-native-force-public-results-20261003，内部连续61.7195277秒、外层64.4004638秒、采样child-tree峰值547758080bytes（522.3828125MiB），120秒/8GiB范围内。36件模型/source/state/force文件字节一致；每例23model＋2state＋12force=37数组，总222字段dtype/shape/values精确相同。result JSON除timing_seconds及其关联descriptor hash外全部字段相同，不能称JSON字节相同。每例stdout log、完整replay receipt和外层回执已普通保存handoff下。正式生产6＋临时测试3＋异目录CLI6=15 force calls分别计数；HP仍唯一64，没有追加或借旧HP来认定本轮通过；tangent/solver/LF调用均0。
+
+公开冻结查看器实际从公开保存的原正式模型/状态/审计读图至D:/hf-native-force-public-view-20261003，4.5970206秒／exit0；两PNG＋脚本＋helper＋完整metadata五件均字节相同，0 force/HP/solver。源审查不等于图重绘，恢复重绘不等于新数值资格。本证据为同一机器/runtime异目录的真实功能恢复，不能声称异机性能或一般物理验收。恢复证据及本补充另随main后续普通提交推送；所有正式窗口均已完成且不重开。
+
+<a id="native-tangent-next-20261003"></a>
+### 据本步结果决定的下一唯一近期阶段（尚未执行）
+
+下一步先接**粗夹持器普通模型的切线入口**，使用本轮已保存checker一态；两方向vx=stripe、vy=checker，均dyadic无量纲节点形状，actual fixed DOFs置0、lift固定，扰动参数单位mm、Jv单位N/mm。首先纯数据统计完整raw L/w/材料/公共算子及局部direction类数，再冻结。新module/CLI一次复用batch_tangent_components_split_numpy生成三分量(ne,8,8)，按原COO→CSC模式完整全DOF组装并sum_duplicates，不对称化、不删fixed rows/cols、不把任务端口当逐点强制。旧force/NumPy kernel/查看器字节保持，以继续读取本阶段冻结包。
+
+三分量所有单元和全域Jv分别与新HP80/120方向参考核对；沿用原切线门total1e-10、material/Hu1e-9、80/1201e-40及max(||HP Jv||,1e-10)分母。保存局部矩阵/CSC/方向/完整成员与Decimal参考及全节点力增量图，记录非对称性。建议生产与参考各一次120秒/采样8GiB、各外层150秒，首错停止；新阶段实际成本尚未测，不能把两方向理解成只生成两列（既有实现仍生成八个局部基方向），也不能从细例15.8秒force推出细例切线预算保证。粗例通过并看实测成本后，再决定细例/小步平均平衡。此最近阶段不启动平衡、工件或标签；研究H2/H3继续待决，没有从制造态外推路径资格。
