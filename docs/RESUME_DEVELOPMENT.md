@@ -2,6 +2,8 @@
 
 2026-10-03当前：**NumPy完整力、非对称切线和普通文件平均驱动平衡已接通两类粗机构**。新增反向器0→.001mm两态／4新HP全模型参考通过：实际输出ux=−.00160192037mm，输入R=.000169872673N，独立残量8.73e-12。夹爪此前小步亦通过。见[目标、实现、成本、物理效果与接续](NUMPY_FORCE_PROGRESS_20261002.md#native-inverter-mean-20261003)、[真实x1形变／力与补充x1000](../functional_views/native_inverter_mean_20261003/native_mean_path.png)及[两帧动画](../functional_views/native_inverter_mean_20261003/native_mean_path.gif)。均为无工件TEST；完整行程／真实夹持／释放重入／H2-H3／HF5标签仍待完成。下一唯一功能阶段为反向器明确TEST[0,.005,.010,.025]mm，尚未执行。
 
+main b86cd1d及[实际公开恢复](../handoff/native_inverter_mean_20261003/public_recovery_verify.json)通过：12数值payload／77数组和图包6文件字节相同，物理与求解诊断JSON仅排耗时及关联hash，0新HP；同机异目录范围。下一.025mm TEST尚未执行。
+
 以下增补保留各执行时点；当前结论和下一步以本条及报告末节为准。旧记录中的“尚未实现”和旧计划不作为当前状态。
 
 2026-10-03最新：**普通文件的NumPy平均驱动平衡入口已接通**。粗夹持器0→.001mm实际路径、两态4次新HP80/120全量参考及两功能测试通过；输入力.0002084121N、自由+y输出.0011437157mm，独立残量1.54e-11。见[目标、实现、数值和物理解释](NUMPY_FORCE_PROGRESS_20261002.md#native-mean-20261003)、[实际形变/力/端口图](../functional_views/native_mean_20261003/native_mean_path.png)与[两帧动画](../functional_views/native_mean_20261003/native_mean_path.gif)。这是无工件小TEST，普通反向器新路径、完整行程、研究H2/H3、真实夹持与批量标签仍未完成；下一步同入口接粗反向器小步，现未执行。

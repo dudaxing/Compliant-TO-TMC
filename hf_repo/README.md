@@ -2,6 +2,8 @@
 
 2026-10-03当前：**NumPy完整力、非对称切线和普通文件平均驱动平衡已接通两类粗机构**。新增反向器0→.001mm两态／4新HP全模型参考通过：实际输出ux=−.00160192037mm，输入R=.000169872673N，独立残量8.73e-12。夹爪此前小步亦通过。见[目标、实现、成本、物理效果与接续](../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-inverter-mean-20261003)、[真实x1形变／力与补充x1000](../functional_views/native_inverter_mean_20261003/native_mean_path.png)及[两帧动画](../functional_views/native_inverter_mean_20261003/native_mean_path.gif)。均为无工件TEST；完整行程／真实夹持／释放重入／H2-H3／HF5标签仍待完成。下一唯一功能阶段为反向器明确TEST[0,.005,.010,.025]mm，尚未执行。
 
+main b86cd1d及[实际公开恢复](../handoff/native_inverter_mean_20261003/public_recovery_verify.json)通过：12数值payload／77数组和图包6文件字节相同，物理与求解诊断JSON仅排耗时及关联hash，0新HP；同机异目录范围。下一.025mm TEST尚未执行。
+
 以下增补保留各执行时点；当前结论和下一步以本条及报告末节为准。旧记录中的“尚未实现”和旧计划不作为当前状态。
 
 2026-10-03 current: Native NumPy average-displacement API and CLI now solve an ordinary coarse gripper file for [0,.001] mm. Two accepted states passed four fresh HP80/120 full-element references and two integration tests: input R=.0002084121 N, free +y output=.0011437157 mm, independent residual 1.54e-11. See [implementation, evidence and commands](../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-mean-20261003), [actual deformation and forces](../functional_views/native_mean_20261003/native_mean_path.png), and [two actual frames](../functional_views/native_mean_20261003/native_mean_path.gif). This is a small no-workpiece TEST; next is the ordinary coarse inverter. Full stroke, workpiece, study H2/H3 and batch qualification remain incomplete.

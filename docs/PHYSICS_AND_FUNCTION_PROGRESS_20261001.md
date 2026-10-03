@@ -2,6 +2,8 @@
 
 2026-10-03当前：**NumPy完整力、非对称切线和普通文件平均驱动平衡已接通两类粗机构**。新增反向器0→.001mm两态／4新HP全模型参考通过：实际输出ux=−.00160192037mm，输入R=.000169872673N，独立残量8.73e-12。夹爪此前小步亦通过。见[目标、实现、成本、物理效果与接续](NUMPY_FORCE_PROGRESS_20261002.md#native-inverter-mean-20261003)、[真实x1形变／力与补充x1000](../functional_views/native_inverter_mean_20261003/native_mean_path.png)及[两帧动画](../functional_views/native_inverter_mean_20261003/native_mean_path.gif)。均为无工件TEST；完整行程／真实夹持／释放重入／H2-H3／HF5标签仍待完成。下一唯一功能阶段为反向器明确TEST[0,.005,.010,.025]mm，尚未执行。
 
+main b86cd1d及[实际公开恢复](../handoff/native_inverter_mean_20261003/public_recovery_verify.json)通过：12数值payload／77数组和图包6文件字节相同，物理与求解诊断JSON仅排耗时及关联hash，0新HP；同机异目录范围。下一.025mm TEST尚未执行。
+
 以下增补保留各执行时点；当前结论和下一步以本条及报告末节为准。旧记录中的“尚未实现”和旧计划不作为当前状态。
 
 2026-10-03最新：**普通原生模型的三分量NumPy切线入口及完整CSC组装已接通**。粗夹持器3200单元／6642DOF保存checker态，两个方向经40次新HP80/120全量核对通过，2案功能测试通过；最坏归一化误差4.43e-14，原门未改。三完整矩阵保留fixed行列及HuHu非对称性，见[实现、数值、成本及物理解释](NUMPY_FORCE_PROGRESS_20261002.md#native-tangent-20261003)与[两方向的内力变化率图](../functional_views/native_tangent_20261003/native_tangent_directional_actions.png)。本步21.25秒为粗例给定态实测，未求平衡／未执行.025mm目标；下一步接普通文件的小步平均驱动平衡并显示真实形变、输入力和自由输出。工件／研究H2-H3／完整接触与批量标签仍待完成。

@@ -1071,3 +1071,12 @@ python functional_views/native_inverter_mean_20261003/plot_native_mean_inverter_
 [实际图像交叉审查](../lf_data_preparation/native_inverter_mean_001/visual_review_inverter.json) 8f4f67a4：另一作者实际查看2880×1840 PNG及1680×882 GIF的两原帧，164文件SHA before/after与20参考payload绑定一致，CSV/metadata和NPZ、exact Fraction均值／physical ux=−q_out相符。四实体支承节点405/486/567/648均显示；实体支反力合计(-.0001698726729304567,-.000029949646186834165)N，otherfixed(0,+.000029949646186836177)N，input(+.00016987267293045455,0)N，完整平衡一致。legends无结构遮挡；邻近反力glyph可重叠、otherfixed按stride3显示、输入三曲线微差接近、GIF无数值J色条、两点连线不作连续函数证据等局限保留，PNG与数表供精确审查。0新图／数值计算，源和媒体未改。
 
 本例唯一正式生产／新HP／图窗口完成关闭，未重跑旧功能测试。接下来依既有main提交/推送授权，交付必要普通数据、完整新参考、源码、图、执行过程和恢复说明，并按已写范围仅一次公开同小TEST恢复；当前无阻断，整体目标仍active。
+
+
+### main交付与实际公开恢复
+
+科学实现、两态求解／4新HP／真实图及两路事后核查已提交推送main **b86cd1db9d45595d4bed63c43b727cd0ce4fddf9**。origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；公开clone D:/hf-restore-20260930仅fetch＋fast-forward，5896交付文件身份verify通过，science manifest SHA2d1fd3cebb64bbbc9af0b691b57ceaeb160d7a280a2c67c8e163423c635fdde8。必要模型、所有完整新参考、源码、图与过程记录均随普通Git，不需原目录或Release才能读本次。
+
+[实际公开恢复证明](../handoff/native_inverter_mean_20261003/public_recovery_verify.json) SHA b6935fe55112df2ce558c7feaaa2e94524e376433503d42eb948671ef964ab60：公开一次普通CLI 61.2949845秒、外层61.5714616秒，采样child-tree 721.67969MiB、wrapper＋child 757.48828MiB，在180秒／8GiB窗口内。12 payload原字节和77数组dtype/shape/Cbytes相同，2state JSON/result除原明确耗时与关联descriptor hash外全部类型/数值一致，物理/设置/4force3tangent1solver调用数/Newton/Armijo/LU诊断/资格均保留。不是整个JSON字节相同；实际CLI log、两state JSON/result及回执随证明保留，不覆盖正式输出。
+
+冻结viewer一次仅读Git保存数据 2.3021639秒，PNG／两帧GIF／CSV／脚本／helper／metadata6件字节相同，0构造／force／tangent／solver／HP。公开clone计算前后干净；输出位于clone之外。正式与公开共8force/6tangent/2solver，新HP仍原唯一4调用，本次未重跑小模型测试。此为同机同runtime异目录恢复，不称另一机器性能、一般接触或完整行程验收。原7输入／37source／原task/model/state均保持；本阶段执行窗口关账，恢复证明与本记录另提交main。下一唯一近期功能仍为上段明确反向器[0,.005,.010,.025]mm TEST，尚未开始准备或求解，完整研究任务与HF5目标仍active。
