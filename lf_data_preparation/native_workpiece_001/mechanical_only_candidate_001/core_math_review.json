@@ -1,0 +1,114 @@
+{
+  "schema_version": "mechanical-only-static-math-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "baseline_kernel_sha256": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+  "reviewed_sources": {
+    "split_kernel_mechanical_author.py": {
+      "sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+      "lines": 393
+    },
+    "test_mechanical_context.py": {
+      "sha256": "9a122b1aabf3b09a366fa8d75fd86cceaf5352520eed197cd200aa70ce2b35e4",
+      "lines": 123
+    },
+    "test_mechanical_entry.py": {
+      "sha256": "71da1e58f768ec02b47a1430fc7fd8be7b3cfbde1004a2b4b69b45516c8a86bc",
+      "lines": 93
+    }
+  },
+  "independent_inverse_AST_equals_whole_baseline": true,
+  "original_numpy_response_docstring_preserved": true,
+  "exactly_unchanged_baseline_functions": [
+    "_index",
+    "_reshape",
+    "_small_invariant_branch",
+    "_kinematics",
+    "_range_error",
+    "_numpy_kinematics",
+    "determinants_split",
+    "_pair_finite",
+    "_coefficient_support",
+    "_divide_by_J",
+    "_small_product_branch",
+    "_scaled_mul",
+    "_scaled_matmul",
+    "_residual_with_aux",
+    "_with_tangent",
+    "_without_tangent",
+    "_guarded_batch",
+    "_check_output",
+    "batch_response_split_numpy",
+    "batch_response_split",
+    "assemble_split_numpy",
+    "assemble_split"
+  ],
+  "declared_changes": "Only optional auxiliary-energy setup, entire auxiliary energy block and output inclusion; two new NumPy mechanical entries and private NumPy-only force assembly selector. Default auxiliary_energy=True and old KERNEL_VERSION retain original complete behavior.",
+  "required_checks_preserved": [
+    "kinematic pair support and finite/J checks",
+    "weights/lam/mu/kr coefficient support",
+    "material/regularization/total force DD pairs",
+    "first/second Piola DD pairs",
+    "T/log_J/exponential/Hu action DD support",
+    "output float64 and finiteness",
+    "original total-force scatter and unsymmetrized matrix behavior"
+  ],
+  "default_operation_order": "Inverse AST equals complete baseline. Energy setup executes at the former location when True; stress/force and energy arithmetic retain their order. Insertion of energy last retains field/support-fold order. Unchanged JAX entry invokes the default full response; no new JAX/AD execution qualification.",
+  "mechanical_scope": "Explicit NumPy mechanical mode omits material_energy rather than substituting zero or changing the full API gate. New metadata must declare energy not_evaluated/qualification false. It is not connected to a controller.",
+  "Horner_candidate_not_inherited": true,
+  "CI_domain_and_four_term_products_unchanged": true,
+  "preserved_context_test_helpers": [
+    "forbid_compilation",
+    "check_captured_dot",
+    "test_captured_solid_cell_1275_quadrature_6",
+    "test_captured_solid_cell_1348_quadrature_8",
+    "test_unselected_matrix_keeps_both_words_bytewise",
+    "test_unselected_response_keeps_all_fields_bytewise"
+  ],
+  "static_case_counts": [
+    {
+      "file": "test_split_numpy_force.py",
+      "sha256": "0d4aec07094d5f9b80fb891921b062e0c920765377cf2207d6d2faa7a6daed7c",
+      "expected_static_cases": 8
+    },
+    {
+      "file": "test_split_numpy_tangent.py",
+      "sha256": "44959fd60aacc274912abf29cf8ba2595ecf10845130ad11e92015667275bb91",
+      "expected_static_cases": 9
+    },
+    {
+      "file": "test_split_cycle.py",
+      "sha256": "dd3b4efb409fb427b8d95b8fb2c8ca532fa1e99f679b19e1f1ddec0c955b8ff0",
+      "expected_static_cases": 3
+    },
+    {
+      "file": "test_mechanical_context.py",
+      "sha256": "9a122b1aabf3b09a366fa8d75fd86cceaf5352520eed197cd200aa70ce2b35e4",
+      "expected_static_cases": 5
+    },
+    {
+      "file": "test_mechanical_entry.py",
+      "sha256": "71da1e58f768ec02b47a1430fc7fd8be7b3cfbde1004a2b4b69b45516c8a86bc",
+      "expected_static_cases": 7
+    }
+  ],
+  "expected_total_cases": 32,
+  "focused_test_meaning": [
+    "two near/direct byte comparisons against complete mechanical fields",
+    "auxiliary square trap demonstrates opt-in avoids energy work",
+    "default full API rejects nonfinite energy",
+    "shape and nonpositive physical J reject",
+    "shared-node total scatter/state immutable and no compiled/tangent work"
+  ],
+  "limits": "Static only. No F16 force/tangent or HP qualification. Does not repair non-energy range failures or T25. Old unit fixtures include toy solve paths and their numerical counts must not be reported as zero when later executed.",
+  "new_executions": {
+    "force": 0,
+    "tangent": 0,
+    "consumer": 0,
+    "constitutive_HP": 0,
+    "solver": 0,
+    "test": 0,
+    "plot": 0
+  },
+  "production_modules_imported": false
+}

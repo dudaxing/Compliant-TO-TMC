@@ -1,5 +1,13 @@
 # NumPy 完整力入口：功能进度与参考比较
 
+2026-10-04当前：**显式NumPy机械量入口与force-only组装器已按原验证字节合入main；原F16三力/缓存切线及fresh HP80/120通过原门。** 32/32测试、19200局部＋9全局门全部通过，614400个局部T系数的完整CSC组装身份核同；最大归一误差7.24336e-15，HP80/120最坏相互误差1.21169e-52。新core d5f7新增可选机械职责，默认完整NumPy/JAX公式及能量要求保留；能量明确not_evaluated/qualifiedfalse，P/S仅finite无HP资格。见[目标、实现、为何拆分、实际效果与后续](../lf_data_preparation/native_workpiece_001/mechanical_only_candidate_001/RESULTS.md)与[保存三力和方向力变化率图](../functional_views/mechanical_F16_20261004/saved_001/render_001/mechanical_F16_qualified_fields.png)。
+
+旧Horner192 001测试收集前失败、002的25例通过但完整F16失败、独立诊断48IP/35能量NaN均保持原记录；1d18候选未合入。新单态F16不是接受平衡，不解决尚未捕获的T25输入，也不转移到旧循环资格。粗方[0,.5,0]mm循环003仍仅2接受态、0新HP、卸载time_limit失败；见[真实0.5mm峰值与旧失败](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/RESULTS.md)。
+
+下一唯一近期功能：显式接入native_mean机械字段/能量可用性及source版本，保持原控制器、Armijo/KKT和默认结果合同；先小闭环，再新独立卡探索同一0.5mm加载—卸载，按新证据处理残余切线问题并扩到1/2/3mm与细方/圆工件。本接入和新路径尚未执行。压力/有效夹持、signed gap/交叉/包容、自由工件、H2/H3/HF5及完整AD/JIT仍待完成。整体HF目标未完成，继续仅main、origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；公开恢复只验文件身份。
+
+以下旧条目保留各执行时点；当前状态与接续以本条及持续报告末节为准，旧“下一步/尚未实现”不覆盖最新记录。
+
 2026-10-04当前：**matmul320候选7fff已按原字节合入；新粗方固定半工件[0,.5,0]mm三点探索正式失败并关闭，峰值达到但卸载未完成。** 2接受态[0,.5]、R_input=.106253248N、自由+y输出=.575755712mm、minJ=.735764774。600s内部预算后实际exit1，66F/50完成、27T/26完成、1solve、0新HP。16全步范围拒绝后half收敛，随后T25范围失败回滚、二分.25遇时间门；全部来源和原27数组不变。不能称新循环或两态独立参考通过。见[整体目标、选择依据、全过程与实际结果](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/RESULTS.md)、[×1结构/力及失败时序图](../functional_views/native_workpiece_cycle003_20261004/failure_saved_001/render_001/cycle003_failure.png)。
 
 新独立保存F16诊断一次复现原异常：首坏为已选辅助能量Horner乘积的(lo,hi)回缩项，非旧矩阵乘法、非overflow；36点物理词落到2^-400下界以下。只1F开始/0完成、0T/HP/solve，diagnostic_captured不是数学资格。下一最小候选改Horner共同尺度与乘加顺序，保留原14阶系数/CI域/P/门；尚未实现，先新F16完整F/T与fresh HP核验，再新连续路径和1mm探索。不增预算重开旧失败，不裁零或借旧F36解释后期未捕获T25。
@@ -1792,3 +1800,21 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 ## 2026-10-04：新内核三点循环未完成，先定位能量下界问题
 
 整体目标、为什么合入候选并选择三点、63源/27原数组、正式失败及准确计数、F16新诊断、实际失败图和下一步见[完整记录](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/RESULTS.md)。原七态和F36分别保留各自来源资格。本轮未执行新独立HP、返零未接受、较晚T25原输入未保存；不能把诊断捕获说成通过。
+
+
+<a id="mechanical-only-f16-20261004"></a>
+## 2026-10-04：能量范围诊断与显式机械量入口
+
+整体目标是独立HF普通文件评估、TMC非线性力/切线、平均驱动加载与卸载、工件反力及实际可视化。按用户授权探索对称半方/圆工件与较大行程；近期根据真实失败逐步实现功能，不扩大旧失败额度或把旧HP迁移到新源码/状态。
+
+本轮先执行隔离Horner192候选：001因pytest hook签名在收集前失败，0收集/0主体；不修改该卡。新002只修包装，25/25测试通过，但原F16完整力再次范围失败，1F开始/0完成、0T/HP；闭卡保持。随后新独立观测捕获48IP/35cells的辅助能量平方最终回缩(lo,hi)拒绝，35cells恰等能量NaN（29原solid/6medium/0body）。精确标量后处理证明结果4.21e-132..1.76e-121低于DD声明2^-400下界，但均是IEEE正常数；不是overflow或IEEE underflow。首次位置为scaled_square146最终×2^-64→_scaled_mul115最终down×2^-192，非145系数乘。原始finite机械字段当时不授HP资格。
+
+依实际证据改为显式新增机械职责入口：复用原机械公式/所有必需DD/系数/kinematics/正J/finite检查，跳过不参与mean残量回溯或缓存切线的辅助能量。旧完整输出和JAX要求保持，能量缺省状态显式not_evaluated，既不置零也不借旧支持flag。新core源d5f7从7fff构造，未采用失败1d18 Horner组织；独立逆向AST证明默认公式/顺序守恒。
+
+新卡实际32/32回归、一次机械F、一次缓存T、三次原B52 DD action、三完整非对称CSC完成；独立fresh HP80/120各一次，全3200单元/6642DOF的19200局部＋9全局门通过，614400个系数组装身份同，全部原门/floor保留。最大归一误差7.24336e-15，HP80/120最大差异1.21169e-52。unit/candidate/reference外层各6.0286181/35.2366682/30.1199898秒，采样树157462528/781123584/426860544B；372pins前后同。独立只读身份及数学后审复核保存字段、全部门/分母/HP差值；0新力学复算。按原字节合入可选API和7项focused测试。
+
+上排保存局部三力共N色阶，下排保存声明方向Jv共N/mm色阶。F16max位移分量3.407879e-28mm，是返零试算输入，未作为接受平衡；参考坐标显示，不放大成加载形变。总局部力max2.0831e-29N、总方向变化率max50.995N/mm，说明近零内力与有限线性化刚度并存。图/3200行14字段CSV/来源元数据实际生成，独立审图，0新F/T/HP/组装/求解/距离。
+
+完整可复核记录见[新机械量实现及结果](../lf_data_preparation/native_workpiece_001/mechanical_only_candidate_001/RESULTS.md)、[辅助能量诊断](../lf_data_preparation/native_workpiece_001/horner192_range_diagnostic_001/RESULTS.md)、[诊断位置图](../functional_views/horner192_diagnostic_20261004/saved_002/render_001/horner192_raw_diagnostic.png)、[新机械量参考图](../functional_views/mechanical_F16_20261004/saved_001/render_001/mechanical_F16_qualified_fields.png)。旧真实0.5mm变形/力图[保留](../functional_views/native_workpiece_cycle003_20261004/failure_saved_001/render_001/cycle003_failure.png)，其2态0HP、卸载失败不因单F16比较获恢复。
+
+下一仅详细推进native_mean新可选机械合同：明确省能量字段集/可用性/source版本，复用原mean控制器、Armijo/KKT与缓存切线；先小闭环，再单独新0.5mm加载—卸载及新接受态HP。尚未接入或运行，T25输入未捕获不能预判修复。按新结果再1/2/3mm、细方/圆形；一般接触压力、自由工件、几何signed gap/交叉/包容、H2/H3/HF5与AD/JIT保持后续能力依赖路线。旧完整能量如需使用，须单独实现/参考资格，不能用机械资格替代。

@@ -1,0 +1,83 @@
+{
+  "schema": "horner192-focused-tests-static-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "review_method": "Read source and standard-library AST/compile(source), without importing any numerical or test module.",
+  "files": {
+    "test_horner192.py": {
+      "lines": 122,
+      "sha256": "3bc25c21b80c183e1707ee4f349cee4c0171196999a85abf7a742271aa10314a",
+      "AST_compile": true
+    },
+    "run_tests_once.py": {
+      "lines": 90,
+      "sha256": "ef87f5d04de63dc3be40dd1ad03afa2466223c324cbbc1dd576c9e6a5817e432",
+      "AST_compile": true
+    },
+    "baseline_core.py": {
+      "lines": 361,
+      "sha256": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+      "AST_compile": true
+    }
+  },
+  "original20_test_source_bindings": {
+    "hf_repo/tests/test_split_numpy_force.py": "0d4aec07094d5f9b80fb891921b062e0c920765377cf2207d6d2faa7a6daed7c",
+    "hf_repo/tests/test_split_numpy_tangent.py": "44959fd60aacc274912abf29cf8ba2595ecf10845130ad11e92015667275bb91",
+    "hf_repo/tests/test_split_cycle.py": "dd3b4efb409fb427b8d95b8fb2c8ca532fa1e99f679b19e1f1ddec0c955b8ff0"
+  },
+  "original_matmul_test_source_sha256": "89006d8d5d48cc6175739448e5a5d0b5dab27f8df6f79d4edee6e2202c366089",
+  "original_probe_function_AST_unchanged": [
+    "check_captured_dot",
+    "test_captured_solid_cell_1275_quadrature_6",
+    "test_captured_solid_cell_1348_quadrature_8",
+    "test_unselected_matrix_keeps_both_words_bytewise"
+  ],
+  "baseline": {
+    "sha256": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+    "bytewise_equal_to_live7fff": true,
+    "original_path": "hf_repo/src/hf_eval/split_kernel_invariants_hu.py"
+  },
+  "candidate_kernel": {
+    "path": "runtime/hf_repo/src/hf_eval/split_kernel_invariants_hu.py",
+    "sha256": "1d18a5512396649200de908cc5106c17d7c9a9f7c3fa62ba518cbe7d5659517e",
+    "expected_version": "p26_q1_split_invariants_hu_horner192_candidate1"
+  },
+  "CI_sha256": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+  "new_branch_cases": [
+    {
+      "amplitude": "2^-10",
+      "expected_near": true,
+      "small_products": false
+    },
+    {
+      "amplitude": "1/8",
+      "expected_near": false,
+      "small_products": false
+    }
+  ],
+  "checks": [
+    "Original three probe functions and independent Decimal dot helper retain every assertion, coefficient and2^-98 relative bound; original fixed F36 primitive fixture identity remains an arithmetic regression only.",
+    "Only stage/runtime/current kernel identities changed in the old fixture; candidate,CI and baseline sources are explicitly pinned.",
+    "Both new cases compare all complete response fields by dtype,shape and C-order bytes, including material_energy and retained arithmetic words. Their actual near and non-tiny selector states are asserted.",
+    "Autouse fixture forbids compiled entry calls in candidate and baseline during the new tests.",
+    "The runner selects exactly the three existing test files and new stage test file, puts the isolated package first and checks imported package identity.",
+    "Single pytest invocation; maxfail1,no cacheprovider,no retry. Collection/started and unique outcome counts are recorded from actual pytest callbacks.",
+    "60-second child and8GiB RSS budget,cooperative stop at teardown; parent outer90seconds is the separate launch contract. No claim of an OS hard cap.",
+    "Original20 cases plus3 preserved probes plus2 parameter cases gives25 expected static collection; actual runtime collection/pass count will be recorded rather than assumed.",
+    "Unit tests exercise toy mechanics and controller paths. Runner explicitly does not report these numerical calls as zero; no full new physical-production path or full-model HP is part of this unit phase."
+  ],
+  "new_executions_by_review": {
+    "module_imports": 0,
+    "pytest": 0,
+    "force": 0,
+    "tangent": 0,
+    "HP": 0,
+    "solver": 0,
+    "consumer": 0,
+    "plot": 0
+  },
+  "limits": [
+    "This is author-stage static review only. No candidate arithmetic result, newF16 HP qualification,unobservedT25 repair or cycle completion is established.",
+    "Source pins are finalized before root performs the single formal test window."
+  ]
+}

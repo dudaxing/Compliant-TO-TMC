@@ -1,0 +1,49 @@
+{
+  "schema_version": "horner192-diagnostic-view-layout-static-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "baseline_source_sha256": "05f517cec5a46f7b004cbfbbf9b5a338468e83305948164370ed9ef481c2784b",
+  "layout_source": {
+    "path": "plot_horner192_diagnostic_layout2.py",
+    "sha256": "85a1ea81c69ef254d4c6155000375dccd3ec7da3111b9119be8ac6390a727eed",
+    "lines": 182
+  },
+  "changes": [
+    {
+      "before": "{\"font.size\": 12, \"axes.titlesize\": 14}",
+      "after": "{\"font.size\": 12, \"axes.titlesize\": 12}"
+    },
+    {
+      "before": "figsize=(16, 11)",
+      "after": "figsize=(16, 9.5)"
+    },
+    {
+      "before": "f\"Raw {label}: max {values.max():.6g} N\"",
+      "after": "f\"Raw {label}\\nmax {values.max():.6g} N\""
+    },
+    {
+      "before": "f\"Auxiliary energy unavailable: {energy_bad.sum()} / {count} cells\"",
+      "after": "f\"Auxiliary energy unavailable\\n{energy_bad.sum()} / {count} cells\""
+    },
+    {
+      "before": "f\"{label}: {values.sum()} bad IPs / {np.count_nonzero(values)} cells\"",
+      "after": "f\"{label}\\n{values.sum()} bad IPs / {np.count_nonzero(values)} cells\""
+    }
+  ],
+  "exact_reverse_source_equality": true,
+  "ast_compile_pass": true,
+  "data_and_bindings_unchanged": true,
+  "raw_data_csv_and_units_unchanged": true,
+  "source_self_hash_remains_dynamic": true,
+  "scope_and_resource_unchanged": "Unqualified saved observations only, 120 seconds/8 GiB, original before/after SHA checks and stop handling retained.",
+  "limitations": "Static layout review cannot confirm final pixels; root must render in a new directory/card and preserve the original frozen figure.",
+  "new_executions": {
+    "force": 0,
+    "tangent": 0,
+    "consumer": 0,
+    "constitutive_HP": 0,
+    "solver": 0,
+    "test": 0,
+    "plot": 0
+  }
+}

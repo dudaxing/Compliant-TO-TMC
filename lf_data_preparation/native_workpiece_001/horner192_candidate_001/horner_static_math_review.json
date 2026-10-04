@@ -1,0 +1,132 @@
+{
+  "schema_version": "horner192-static-math-review-1.0",
+  "reviewed_utc": "2026-10-04T00:11:31.946394+00:00",
+  "status": "static_pass",
+  "qualification": false,
+  "scope": "Read-only source/byte/AST review of isolated author candidate; no force, tangent, HP, consumer, solver, test, geometry or plot execution",
+  "new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "HP": 0,
+    "consumer": 0,
+    "solver": 0,
+    "tests": 0,
+    "geometry": 0,
+    "plot": 0
+  },
+  "blocking_issues": [],
+  "versions": {
+    "original": "p26_q1_split_invariants_hu_matmul320_candidate1",
+    "candidate": "p26_q1_split_invariants_hu_horner192_candidate1"
+  },
+  "pins": {
+    "live_kernel": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+    "candidate_kernel": "1d18a5512396649200de908cc5106c17d7c9a9f7c3fa62ba518cbe7d5659517e",
+    "baseline_copy": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+    "runtime_origin": "4b5bfefe86624065b1c6c80bb91970a961798fea0ae79c31ee46e56cfdc2d3d0",
+    "CI": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "NumPy_tangent": "f7549b1a51f21d8598892f3d74cebfc544a24a5bc79e60b87e7734f2a6058a1c",
+    "consumer": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe"
+  },
+  "source_identity": {
+    "original_and_candidate_source_count": 42,
+    "all_original_current_files_match": true,
+    "all_candidate_files_match": true,
+    "only_changed_source": [
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py"
+    ],
+    "baseline_copy_exact_original_bytes": true,
+    "byte_inverse": true,
+    "complete_AST_inverse": true,
+    "compile_source_only": true,
+    "live_source_unchanged": true
+  },
+  "unchanged_mechanics": {
+    "whole_source_reverse_scope": "Only KERNEL_VERSION and Horner common-scale block replaced; every other byte restores exactly.",
+    "function_source_segments_byte_identical": [
+      "_divide_by_J",
+      "_small_product_branch",
+      "_scaled_mul",
+      "_scaled_matmul"
+    ],
+    "P_and_S_response_prefix_byte_identical": true,
+    "response_force_contractions_and_original_energy_suffix_byte_identical": true,
+    "CI_full_four_term_multiply_and_domain_byte_identical": true,
+    "tangent_source_byte_identical": true,
+    "controller_and_model_other41_sources_byte_identical": true
+  },
+  "coefficients": {
+    "total_count": 13,
+    "powers": [
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2
+    ],
+    "initial": "c(1.0 / 14)",
+    "descending_loop": "range(13, 1, -1)",
+    "expression": "c((-1.0) ** power / power)",
+    "both_new_conditional_arms_keep_original_coefficient_AST": true,
+    "meaning": "The original binary64 coefficient expressions are preserved, not replaced by exact rational coefficients.",
+    "physical_polynomial": "delta^2*r_2(delta) = sum_{p=2}^{14} c_p*delta^p, with the same stored binary64 c_p and original descending Horner order.",
+    "none_truncated_or_zeroed": true
+  },
+  "branch": {
+    "existing_selector_unchanged": true,
+    "horner_scaled_expression": "xp is not np or bool(small_products)",
+    "NumPy_selected": "small_products True carries commonE192.",
+    "NumPy_unselected": {
+      "extra_CI_multiplication_by_one": false,
+      "original_initial_const": true,
+      "original_mul_remainder_delta_before_coefficient": true,
+      "original_coefficient_const_AST": true,
+      "original_add_after_two_arguments": true,
+      "no_final_rescaling_call": true,
+      "proof_scope": "The false conditional arm and original first add argument are exact AST matches. Python evaluates the multiply first and coefficient second, as before; this is static operation-order equivalence, not executed byte-regression evidence."
+    },
+    "JAX": {
+      "tracer_bool_avoided_by_short_circuit": true,
+      "unselected_JAX_can_execute_extra_unit_scale_calls": true,
+      "new_AD_or_JIT_qualification": false,
+      "scope": "Only mathematical algebra reviewed. JAX numerical/AD/JIT behavior has not been run or qualified."
+    }
+  },
+  "algebra": {
+    "E": "2^192, dimensionless positive exact power of two",
+    "initial": "R_14=E*c_14",
+    "update": "R_p=delta*R_(p+1)+E*c_p, p13..2",
+    "induction": "R_p=E*r_p at every completed Horner update.",
+    "restore": "r_2=R_2/E before the unchanged scaled_square(small_delta,remainder).",
+    "energy_units": "Existing scaled_square supplies the original common energy scale. Restoring the Horner coefficient first prevents a second unintended energy-scale factor.",
+    "rounding_scope": "Power-of-two homogeneity applies to finite supported intermediates without IEEE underflow/overflow. The changed operation organization is subject to fresh numerical accuracy checks; algebra alone does not grant qualification.",
+    "first_bad_mechanism": "SavedF16 was rejected when the temporary scaled product low word was restored to an isolated physicalO(delta^2) tail before coefficient addition. Holding the whole multiply-plus-add update atE permits the subsequent original DD normalization without explicit deletion of any term."
+  },
+  "bounds": {
+    "selection": "Unchanged all-near selector with every |G_ij|<=2^-64 and coefficient/operator guard<=2^8.",
+    "delta": "In2D delta=trG+detG, so |delta|<=2*2^-64+2*2^-128 <2^-62.",
+    "Horner_remainder": "|r_p|<1 for this tiny delta and original |c_p|<=1/2.",
+    "common_remainder": "|E*r_p|<2^192.",
+    "largest_new_Horner_operand": "Existing _scaled_mul adds2^192 before multiplication: upper bound below2^384, leaving16 exponent bits to OPERAND_MAX2^400.",
+    "largest_Horner_product": "The product with tiny delta is smaller; coefficient-timesE with the same internalup192 is also below2^384.",
+    "temporary": "EFT split products remain safely below TEMPORARY_MAX2^900; this is an upper-bound argument only.",
+    "general_lower_word_guarantee": false,
+    "lower_limit_caveat": "Sparse DD words or isolated terms can still be arbitrarily smaller than2^-400 for some near-zero inputs. No claim of universal near-zero support, clipping, relaxed domain or repair of laterT25 follows."
+  },
+  "required_next_evidence": [
+    "Complete actual capturedF16 field output including finite supported auxiliary energy; retain all original input/state/source pins.",
+    "One cached-state tangent with full three tensors and unsymmetrized assembly; F16 success does not establish the uncapturedT25 state.",
+    "Fresh80/120 full-element/global original force andJv gates with unchanged derived scales andB52 consumption; no oldF36 HP reuse or space sampling.",
+    "Unselected NumPy numerical fields byte regression for both near-but-nontiny and direct paths, within the separately frozen test scope.",
+    "No cycle003 rerun, equilibrium/contact/clamping or JAX/AD qualification is granted by this source-only pass."
+  ],
+  "author_phase_note": "This certifies the observed1d18 snapshot. Earlier author newline/cardinality assertions are not a scientific execution or qualification; the actual manifest count42 is used."
+}

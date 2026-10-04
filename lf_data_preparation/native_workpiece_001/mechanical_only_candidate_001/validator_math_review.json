@@ -1,0 +1,85 @@
+{
+  "schema_version": "mechanical-only-validator-static-math-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "reviewed_source": {
+    "path": "validate_mechanical_only.py",
+    "sha256": "b6af6313bfd1925a7e86763e41bcd35c895888fb5eb1f61f392cf986ae6f6c26",
+    "lines": 475
+  },
+  "baseline_validator_sha256": "29cfd37f0529c6ed243358ff7a101e47e2eda486f013c4287b14a96f53a72e8e",
+  "candidate_core_sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+  "mechanical_core_review_sha256": "256e104436a322433bdab04d4635a01322a84432c36c8254e12257c40c4d9076",
+  "exactly_unchanged_functions": [
+    "require",
+    "sha",
+    "read",
+    "npz",
+    "plain",
+    "write",
+    "gzip_write",
+    "fields",
+    "archive",
+    "same",
+    "checkpoint",
+    "norm",
+    "compare"
+  ],
+  "entire_reference_math_gate_try_AST_unchanged": true,
+  "fresh_HP_loop_AST_unchanged": true,
+  "reference_independence": "Pinned DecimalSplitQ1Reference sources 97a9/308ff are retained. Fresh80/120 evaluations use original full3200-element data with independent element-local reindexing; original edofs then scatter all element outputs exactly at precision3000 with Inexact trapped. No HP result is inherited from closed Horner or matmul stages.",
+  "gate_rules": {
+    "local_rows": 19200,
+    "local_force_limit_total": "1e-11",
+    "local_force_limit_components": "1e-9",
+    "local_force_scale": "max(norm(HP80 total local force),1e-8*Et20*1e-6)=at least2e-13 N",
+    "component_force_denominator": "max(norm(HP80 component),1e-12*local_or_global_total_force_scale)",
+    "action_limit_total": "1e-10",
+    "action_limit_components": "1e-9",
+    "action_denominator": "max(norm(HP80 component action),1e-10 N/mm)",
+    "HP80_120_agreement_limit": "1e-40",
+    "global_rows": 9,
+    "global_total_force_scale": "max(norm(exact-scattered HP80 total global force),same2e-13 N floor)",
+    "CSC_coefficients": 614400,
+    "global_DOFs": 6642,
+    "matrix_scope": "All3 full CSC matrices reconstructed from saved3 tensors without symmetrization; all data/indices/indptr byte checked, one fixed-compatible direction action freshly compared."
+  },
+  "coverage": "All3200 element force/action vectors and all6642 DOFs; historical26 failure cells and later35 are independently pinned and required to have nonzero witness. The same declared dyadic non-affine full direction and original port direction snapshot are preserved. No all-column HP claim.",
+  "candidate_calls": {
+    "force": 1,
+    "cached_shadow_tangent": 1,
+    "compensated_element_consumers": 3,
+    "solver": 0,
+    "JIT": 0
+  },
+  "reference_calls": {
+    "fresh_HP80": 1,
+    "fresh_HP120": 1,
+    "force": 0,
+    "tangent": 0,
+    "solver": 0
+  },
+  "auxiliary_energy_contract": "Candidate omits material_energy and declares not_evaluated/qualified false/field_present false. Candidate-minus-HP energy comparison is removed; HP evaluator analytical energy remains only in raw archives and supplies no energy/stress qualification. The full default API and closed failures are not reclassified.",
+  "bindings": "Original F16 state/model/63-source production provenance, fresh42-file isolated closure, B52 consumer, HP helper capsules, tensor partial archive, all fields and CSC archives checked before/after; latest35-cell diagnostic snapshots add identity only. Kernel_delta now uses reviewed immutable source pins plus parsing; independent full inverse-AST core review supplies the declared-delta proof.",
+  "resources": {
+    "candidate_internal_seconds": 90,
+    "candidate_outer_seconds": 120,
+    "reference_internal_seconds": 180,
+    "reference_outer_seconds": 210,
+    "sampled_tree_RSS_bytes": 8589934592,
+    "imports_save_and_binding_time_included": true,
+    "hard_OS_resource_claim": false,
+    "stop": "new output parent stop file",
+    "policy": "Each phase once; first error stops and reference requires passing candidate"
+  },
+  "limits": "Static source/AST only; no imported production or reference module and no numerical qualification. T25 and native equilibrium/controller routing remain outside this new static entry test.",
+  "new_executions": {
+    "force": 0,
+    "tangent": 0,
+    "consumer": 0,
+    "constitutive_HP": 0,
+    "solver": 0,
+    "test": 0,
+    "plot": 0
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schema": "horner192-trace-static-function-review-1.0",
+  "status": "static_pass",
+  "blocking_findings": [],
+  "source": {
+    "path": "D:\\hf-native-workpiece-horner192-author-20261004\\trace_horner192.py",
+    "sha256": "ca51fc4389a7a90a06e0d7fac9e554aecf0dbe6f1dfcbc4c787ddffe00f89f55",
+    "lines": 341
+  },
+  "review_mode": "Source, AST, saved JSON and SHA256 checks only; no candidate imports or execution.",
+  "reviewed_bindings": {
+    "original_sources": 63,
+    "original_source_capsules": 63,
+    "original_inputs": 25,
+    "runtime_original_files": 42,
+    "runtime_candidate_files": 42,
+    "closed_candidate_bindings": 246,
+    "closed_requalification_freeze_bindings": 192,
+    "closed_requalification_source_capsules": 43,
+    "all_actual_bound_file_hashes_checked": true,
+    "runtime_origin_sha256": "4b5bfefe86624065b1c6c80bb91970a961798fea0ae79c31ee46e56cfdc2d3d0",
+    "candidate_kernel_sha256": "1d18a5512396649200de908cc5106c17d7c9a9f7c3fa62ba518cbe7d5659517e",
+    "baseline_kernel_sha256": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+    "failed_candidate_result_sha256": "658cff6edc8efb7334dcb74a20bc7c868eb5a516a36333b81cb53f8211e41ed7",
+    "closed_requalification_freeze_sha256": "3e0ae71af1e8e8f5a784385e4e507caa3341ce6dff57a2558a9ee054bf5d7c2a",
+    "failed_candidate_launch_sha256": "20cd13bd33baa0ecfbe8963868a31cb64f107258321225f2c4f5a8551a9fb4f2"
+  },
+  "closed_candidate_observed_counts": {
+    "force_started": 1,
+    "force_completed": 0,
+    "tangent_started": 0,
+    "tangent_completed": 0,
+    "HP_started": 0,
+    "HP_completed": 0,
+    "action_consumer_started": 0,
+    "action_consumer_completed": 0,
+    "solver_calls": 0,
+    "JIT_calls": 0
+  },
+  "static_contract_checks": [
+    "Imports are explicitly pinned to horner192_candidate_001/runtime/hf_repo/src, with module __file__ and source SHA checks for the arithmetic, kernel and public force entry.",
+    "Raw sixteen-field captured input, fourteen overlapping saved model arrays, saved integration points and split-displacement SHA are checked before the sole force call; no model or operator reconstruction is performed.",
+    "capture, finish and from_value function source is identical to the frozen cycle003 tracer. Wrappers call the original operation with unchanged arguments, inspect returned pairs and return that same result.",
+    "Captured parameters are copied as evidence. No clipping, scaling replacement, range change, constitutive observer substitution or retry is introduced.",
+    "Exactly one full NumPy force attempt is allowed. No tangent, action consumer, HP, solve, JIT, LF or global assembly is called.",
+    "The generic observed KernelError is checked, but the new first primitive or cause is not predetermined. Branch scope is explicitly the first unsupported returned pair, not proof that the branch contributes to the selected output.",
+    "Output creation is exclusive. Hooks are restored in finally; partial captured arrays, the actual exception and final source/input hashes are persisted.",
+    "The cooperative checkpoint checks the new output parent stop file, the evidence output stop file and the existing cycle003 stop file, elapsed 60 seconds and sampled process-tree RSS/peak working set against 8 GiB.",
+    "Final binding and source checks preserve the closed failed stages. No original evidence or qualification result is overwritten.",
+    "The terminal observer invokes the original _response once, copies its returned numeric dictionary to raw_response.npz with finite counts and hashes, then returns that same tuple. Both finally blocks restore the original instance. Raw response return alone does not mark the complete public force entry as completed."
+  ],
+  "resource_contract": {
+    "helper_seconds": 60,
+    "outer_seconds": 90,
+    "rss_bytes": 8589934592,
+    "enforcement": "Cooperative helper checkpoints; outer launch belongs to the parent execution card."
+  },
+  "execution_performed_by_reviewer": {
+    "AST_parse": true,
+    "compile_source_without_execution": true,
+    "saved_JSON_and_hash_reads": true,
+    "force": 0,
+    "tangent": 0,
+    "action_consumer": 0,
+    "HP": 0,
+    "solve": 0,
+    "JIT": 0,
+    "tests": 0,
+    "plots": 0,
+    "geometry": 0
+  },
+  "limitations": [
+    "This is static review. The new first failing primitive remains unknown until the separately authorized single diagnostic execution.",
+    "A future diagnostic_captured status means exception reproduction and evidence capture only; it is not a completed supported force evaluation, HP pass or equilibrium qualification.",
+    "Resource checks are cooperative and are not a hard operating-system memory cap.",
+    "Terminal raw field observations may distinguish auxiliary energy support from force support, but their existence or finite count is not a new qualification or a substitute for the unchanged public force validation."
+  ],
+  "new_numerical_qualification": false,
+  "closed_failures_preserved": true,
+  "author_revision": {
+    "previous_source_sha256": "a7ff010f417dbd7cbd6934af3a248a8b63ebf10708260cf1f7264c089269597c",
+    "previous_review_sha256": "2dbb5e39c51e4e4326c5133a4d57825bf3740c2db585b08a96878bad31dc3584",
+    "previous_review_preserved_path": "D:\\hf-native-workpiece-horner192-author-20261004\\trace_horner192_function_review_author_v1.json",
+    "reason": "Before formal freeze, parent requested a terminal raw-response observer to distinguish returned fields from the later complete-force validation failure.",
+    "delta_review_only": true,
+    "original_binding_review_preserved": true
+  },
+  "terminal_response_observer_review": {
+    "lines": [
+      266,
+      277
+    ],
+    "calls_original_response_once_with_unchanged_arguments": true,
+    "returns_same_original_tuple": true,
+    "copies_only_returned_numeric_fields": true,
+    "raw_response_archive_file_and_field_hashes_recorded": true,
+    "finite_and_nonfinite_counts_only_no_new_numerical_gate": true,
+    "response_returned_flag_does_not_increment_force_completed": true,
+    "original_response_instance_restored_in_both_finally_blocks": true,
+    "restoration_status_records_all_three_hooks": true,
+    "original_capture_finish_from_value_source_unchanged_against_base": true,
+    "original_generic_KernelError_check_and_first_failure_capture_unchanged": true,
+    "no_additional_force_tangent_consumer_HP_or_solver_calls": true,
+    "raw_response_absent_if_original_response_raises": true,
+    "archive_IO_failure_is_a_diagnostic_failure_not_silently_ignored": true
+  }
+}

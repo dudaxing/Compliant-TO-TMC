@@ -1,0 +1,173 @@
+--- baseline7fff
++++ mechanical_author
+@@ -23,6 +23,7 @@
+ 
+ 
+ KERNEL_VERSION = "p26_q1_split_invariants_hu_matmul320_candidate1"
++MECHANICAL_KERNEL_VERSION = "p26_q1_split_mechanical_numpy_aux_omitted_candidate1"
+ B_LIMIT = 1.0 / 16
+ DELTA_LIMIT = 1.0 / 64
+ PAIR_FIELDS = ("F", "G", "Hu", "J", "B", "delta")
+@@ -124,7 +125,7 @@
+     return ci.dd_mul(ci.dd_matmul(ci.dd_mul(a, up, xp), b, xp), down, xp)
+ 
+ 
+-def _response(lift, fluctuation, grad, hessian, weights, lam, mu, kr, xp):
++def _response(lift, fluctuation, grad, hessian, weights, lam, mu, kr, xp, *, auxiliary_energy=True):
+     """Validated element response, sharing the NumPy/JAX operation order."""
+     values = _kinematics(lift, fluctuation, grad, hessian, xp)
+     pairs, near = values["pairs"], values["near"]
+@@ -134,16 +135,17 @@
+     add = lambda a, b: ci.dd_add(a, b, xp)
+     sub = lambda a, b: ci.dd_sub(a, b, xp)
+     mul = lambda a, b: _scaled_mul(a, b, small_products, xp)
+-    # Tiny energy terms can themselves have out-of-range low words. Keep a
+-    # common energy scale until all terms and quadrature contributions combine.
+-    energy_scale = c(xp.where(small_products, 2.0**192, 1.0))
+-    inverse_energy_scale = c(xp.where(small_products, 2.0**-192, 1.0))
+-    def scaled_square(a, coefficient=None):
+-        scaled = mul(a, c(2.0**128))
+-        square = mul(scaled, scaled)
+-        if coefficient is not None:
+-            square = mul(square, coefficient)
+-        return mul(square, c(xp.where(small_products, 2.0**-64, 2.0**-256)))
++    if auxiliary_energy:
++        # Tiny energy terms can themselves have out-of-range low words. Keep a
++        # common energy scale until all terms and quadrature contributions combine.
++        energy_scale = c(xp.where(small_products, 2.0**192, 1.0))
++        inverse_energy_scale = c(xp.where(small_products, 2.0**-192, 1.0))
++        def scaled_square(a, coefficient=None):
++            scaled = mul(a, c(2.0**128))
++            square = mul(scaled, scaled)
++            if coefficient is not None:
++                square = mul(square, coefficient)
++            return mul(square, c(xp.where(small_products, 2.0**-64, 2.0**-256)))
+     eye = ci.dd_from(xp.eye(2, dtype=lift.dtype), xp)
+     T = _divide_by_J(ci.dd_cofactor(F, xp), _index(J, (..., None, None)), near[..., None, None], xp)
+     # Unselected log1p receives zero: a compressed direct-branch state must
+@@ -177,27 +179,30 @@
+     regularization_pair = mul(_index(scale, (..., None)), action_pair)
+     residual_pair = add(material_pair, regularization_pair)
+ 
+-    # r(delta) = delta-log1p(delta), truncated only in the auxiliary energy.
+-    # Its gradient is NOT used for P or the residual Jacobian.
+-    remainder = c(1.0 / 14)
+-    for power in range(13, 1, -1):
+-        remainder = add(mul(remainder, small_delta), c((-1.0)**power / power))
+-    remainder = scaled_square(small_delta, remainder)
+-    G_small = ci.dd_where(near[..., None, None], G, c(0.0), xp)
+-    diagonal = sub(_index(G_small, (..., 0, 0)), _index(G_small, (..., 1, 1)))
+-    shear = add(_index(G_small, (..., 0, 1)), _index(G_small, (..., 1, 0)))
+-    shear_deviator = add(scaled_square(diagonal), scaled_square(shear))
+-    small_energy = mul(c(0.5), add(mul(lambda_pair, scaled_square(log_small)),
+-                                 mul(mu_pair, add(shear_deviator, mul(c(2.0), remainder)))))
+-    trace_C = ci.dd_sum(ci.dd_sum(mul(F, F), -1, xp), -1, xp)
+-    direct_energy = mul(c(0.5), add(mul(lambda_pair, scaled_square(log_J)),
+-                                  mul(mu_pair, mul(energy_scale,
+-                                      sub(sub(trace_C, c(2.0)), mul(c(2.0), log_J))))))
+-    density = ci.dd_where(near, small_energy, direct_energy, xp)
+-    energy_pair = mul(ci.dd_sum(mul(ci.dd_from(weights, xp), density), -1, xp), inverse_energy_scale)
++    if auxiliary_energy:
++        # r(delta) = delta-log1p(delta), truncated only in the auxiliary energy.
++        # Its gradient is NOT used for P or the residual Jacobian.
++        remainder = c(1.0 / 14)
++        for power in range(13, 1, -1):
++            remainder = add(mul(remainder, small_delta), c((-1.0)**power / power))
++        remainder = scaled_square(small_delta, remainder)
++        G_small = ci.dd_where(near[..., None, None], G, c(0.0), xp)
++        diagonal = sub(_index(G_small, (..., 0, 0)), _index(G_small, (..., 1, 1)))
++        shear = add(_index(G_small, (..., 0, 1)), _index(G_small, (..., 1, 0)))
++        shear_deviator = add(scaled_square(diagonal), scaled_square(shear))
++        small_energy = mul(c(0.5), add(mul(lambda_pair, scaled_square(log_small)),
++                                     mul(mu_pair, add(shear_deviator, mul(c(2.0), remainder)))))
++        trace_C = ci.dd_sum(ci.dd_sum(mul(F, F), -1, xp), -1, xp)
++        direct_energy = mul(c(0.5), add(mul(lambda_pair, scaled_square(log_J)),
++                                      mul(mu_pair, mul(energy_scale,
++                                          sub(sub(trace_C, c(2.0)), mul(c(2.0), log_J))))))
++        density = ci.dd_where(near, small_energy, direct_energy, xp)
++        energy_pair = mul(ci.dd_sum(mul(ci.dd_from(weights, xp), density), -1, xp), inverse_energy_scale)
+     output_pairs = dict(residual=residual_pair, material_residual=material_pair,
+                         regularization_residual=regularization_pair,
+-                        stress_first_piola=P, stress_second_piola=S, material_energy=energy_pair)
++                        stress_first_piola=P, stress_second_piola=S)
++    if auxiliary_energy:
++        output_pairs["material_energy"] = energy_pair
+     supported = values["supported"] & _coefficient_support(weights, lam, mu, kr, xp)
+     for value in (*output_pairs.values(), T, log_J, exponential, action_pair):
+         supported = supported & _pair_finite(value, xp)
+@@ -262,7 +267,7 @@
+                                compiler_options=COMPILER_OPTIONS)
+ 
+ 
+-def _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr):
++def _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr, *, auxiliary_energy=True):
+     """Shared input checks and complete force evaluation, before any JAX work."""
+     lift, fluctuation = _component(lift_e, "lift_e"), _component(fluctuation_e, "fluctuation_e")
+     if lift.shape != fluctuation.shape:
+@@ -282,7 +287,8 @@
+     # before any compiled constitutive work. It uses the identical DD formulas.
+     with np.errstate(over="ignore", invalid="ignore", divide="ignore", under="ignore"):
+         _, checked = _response(lift, fluctuation, reference["grad"], reference["hessian"],
+-                               reference["weights"], lam_values, mu_values, float(kr_value), np)
++                               reference["weights"], lam_values, mu_values, float(kr_value), np,
++                               auxiliary_energy=auxiliary_energy)
+         if checked["arithmetic_supported"] != 1.0:
+             raise _range_error("NumPy response")
+     args = (lift, fluctuation, reference["grad"], reference["hessian"], reference["weights"],
+@@ -318,6 +324,18 @@
+     return _check_output(result, "NumPy")
+ 
+ 
++def batch_response_split_mechanical_numpy(lift_e, fluctuation_e, ops, lam, mu, kr):
++    """Mechanical fields only; auxiliary material energy is not evaluated.
++
++    Returns the three forces, stresses, kinematics and retained pairs. The
++    mechanical support flag retains all their existing DD range requirements.
++    No energy field, tangent, JAX execution or equilibrium claim is supplied.
++    """
++    _, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr,
++                                auxiliary_energy=False)
++    return _check_output(result, "NumPy mechanical")
++
++
+ def batch_response_split(lift_e, fluctuation_e, ops, lam, mu, kr, *, tangent=True):
+     """Validated binary64 observations and the actual residual Jacobian."""
+     if not isinstance(tangent, (bool, np.bool_)):
+@@ -329,7 +347,9 @@
+     return _check_output(result, "JAX")
+ 
+ 
+-def _assemble_split(model, state, *, tangent, numpy=False):
++def _assemble_split(model, state, *, tangent, numpy=False, mechanical=False):
++    if mechanical and (not numpy or tangent):
++        raise KernelError("Mechanical assembly is NumPy force-only", code="invalid_input")
+     if not isinstance(model, TMCModel):
+         raise TMCError("model must be TMCModel", code="invalid_model")
+     if not isinstance(state, SplitDisplacement) or state.ndof != model.ndof:
+@@ -337,7 +357,10 @@
+     begin = perf_counter()
+     args = (state.lift[model.edofs], state.fluctuation[model.edofs],
+             model.ops, model.lam, model.mu, model.kr)
+-    fields = batch_response_split_numpy(*args) if numpy else batch_response_split(*args, tangent=tangent)
++    if mechanical:
++        fields = batch_response_split_mechanical_numpy(*args)
++    else:
++        fields = batch_response_split_numpy(*args) if numpy else batch_response_split(*args, tangent=tangent)
+     kernel_time = perf_counter() - begin
+     begin_assembly = perf_counter()
+     internal = np.bincount(model.edofs.ravel(), weights=fields["residual"].ravel(), minlength=model.ndof)
+@@ -357,5 +380,14 @@
+     return _assemble_split(model, state, tangent=False, numpy=True)
+ 
+ 
++def assemble_split_mechanical_numpy(model, state):
++    """Return force-only mechanical fields; auxiliary energy is unavailable.
++
++    Uses the original total-force assembly and timing fields. Native metadata
++    must declare auxiliary_material_energy not_evaluated/qualified false.
++    """
++    return _assemble_split(model, state, tangent=False, numpy=True, mechanical=True)
++
++
+ def assemble_split(model, state, *, tangent=True):
+     return _assemble_split(model, state, tangent=tangent)

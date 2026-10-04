@@ -1,0 +1,97 @@
+{
+  "schema_version": "horner192-diagnostic-view-static-math-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "reviewed_source": {
+    "path": "plot_horner192_diagnostic.py",
+    "sha256": "05f517cec5a46f7b004cbfbbf9b5a338468e83305948164370ed9ef481c2784b",
+    "lines": 182
+  },
+  "review_method": "Read source and actual saved JSON/NPZ schemas, AST/compile source only; no candidate import or drawing.",
+  "checked_physical_semantics": {
+    "reference_coordinates_mm": {
+      "shape": [
+        3321,
+        2
+      ],
+      "minimum": [
+        0,
+        0
+      ],
+      "maximum": [
+        80,
+        40
+      ]
+    },
+    "connectivity_shape": [
+      3200,
+      4
+    ],
+    "solid_mask_dtype_shape": [
+      "bool",
+      [
+        3200
+      ]
+    ],
+    "local_force_fields_shape": [
+      3200,
+      8
+    ],
+    "local_force_norm_units": "N; eight saved element force entries, not globally assembled forces or reactions",
+    "energy_units": "N mm; 35 unavailable cells remain marked nonfinite and CSV values blank",
+    "old_first_invalid_IPs_cells": [
+      36,
+      26
+    ],
+    "new_first_invalid_IPs_cells": [
+      48,
+      35
+    ],
+    "invalid_indices_shape_old_new": [
+      [
+        36,
+        2
+      ],
+      [
+        48,
+        2
+      ]
+    ],
+    "force_color_scale": "Shared logarithmic N scale; 1e-30 N is expressly only a display floor",
+    "coordinate_interpretation": "Original undeformed reference geometry, not new deformation or clearance calculation",
+    "scope": "Diagnostic captured complete-response failure, raw observations explicitly unqualified; finite mechanics do not imply HP, equilibrium or contact qualification"
+  },
+  "additional_minor_display_issue": "Title line 141 contains replacement characters; optional author cleanup does not change physics.",
+  "new_executions": {
+    "force": 0,
+    "tangent": 0,
+    "consumer": 0,
+    "constitutive_HP": 0,
+    "solver": 0,
+    "test": 0,
+    "plot": 0
+  },
+  "mechanical_or_numerical_gate_changes": false,
+  "resolved_author_issue": {
+    "source_lines": [
+      85,
+      86
+    ],
+    "detail": "Actual old/new result.json files have input_bindings, not bindings. The current viewer raises KeyError before plotting.",
+    "old_input_bindings": 155,
+    "new_input_bindings": 279,
+    "new_launch_bindings": 310,
+    "minimal_change": "Read result.input_bindings for the two observations; separately pin/read new diagnostic_launch.json and check its bindings to retain the 310-binding scope.",
+    "resolution": "Final 182-line source reads actual input_bindings, separately SHA-pins the actual launch receipt and its 310 bindings. This removes the demonstrated initial KeyError without changing plots, data, or scientific qualification.",
+    "previous_review_sha256": "35d94b816c6aaae4b20bc53834885c8f33dc7210e265ac219724f64c61c71429"
+  },
+  "checked_launch_binding": {
+    "path": "lf_data_preparation/native_workpiece_001/horner192_range_diagnostic_001/diagnostic_launch.json",
+    "sha256": "c76d64c600a8798695ce80ee087cf714bca0eadcf154e933645d8045807ffbda",
+    "status": "pass",
+    "exit_code": 0,
+    "invocations": 1,
+    "bindings": 310
+  },
+  "limits": "Static source/API review and saved data shape/identity inspection only. No rendered pixels were available or checked; first primitive maps are diagnostic observations, not a proof of all range causes. Raw finite forces/stresses remain unqualified."
+}

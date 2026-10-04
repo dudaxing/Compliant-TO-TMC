@@ -1,0 +1,45 @@
+{
+  "schema": "horner192-saved-view-static-review-1.0",
+  "status": "static_pass",
+  "blocking_findings": [],
+  "qualification": false,
+  "source": {
+    "file": "plot_saved_reference.py",
+    "lines": 104,
+    "sha256": "8b3642792fc42625ff1ec25c513a525c7e1cf390fc9ef795ca582fb4b3f60bdf",
+    "AST_compile": true
+  },
+  "scope": "Read-only source review; saved-data renderer has not been imported or executed by this reviewer.",
+  "checks": [
+    "Candidate and reference must both have actual pass status; reference-bound candidate result SHA is checked.",
+    "The two saved payloads checks.json.gz and auxiliary_energy_differences.json.gz are checked against the passing reference summary file pins before reading.",
+    "All19209 saved force/action gates must be marked pass. Graphs compare worst saved normalized-error/original-limit ratios for three components and local/global/CSC scopes; original thresholds are not recomputed or changed.",
+    "Each auxiliary-energy series has all3200 elements. Raw Decimal strings provide exact-zero counts and Decimal metadata summaries; float conversion is only for displayed energy points.",
+    "Error ratio floor1e-30 and energy difference floor1e-130N mm are explicitly display-only. Raw saved values/files are not overwritten.",
+    "The title and text identify one rejected F16 trial,one declared direction,1 completeF/1cachedT/3Jv and2fresh references. They explicitly exclude equilibrium,complete unloading,T25,stress andcontact qualifications.",
+    "No force,tangent,consumer,geometry,model,solver or reference function is imported/called. Numeric operations only summarize saved error values.",
+    "Saved-reference output is exclusive; only one PNG and metadata are written there. Length/force-energy units and input/output/script SHA are recorded.",
+    "Helper120seconds/8GiB sampled RSS/peak_wset and stage stop_requested.txt checks match the120-second outer saved-view card; no retry or force behavior is introduced."
+  ],
+  "author_correction": {
+    "previous_source_sha256": "8c3672629ea5a0a481a5562e151ffec39cd93b3c653a2ec129f7e9dcbc357354",
+    "issue": "A pre-final float-derived exact-zero count could misname converted underflow as exact zero.",
+    "resolution": "Final source parses raw energy strings with Decimal for the zero count and Decimal metadata summaries; no figure/gate change and0execution."
+  },
+  "limits": [
+    "Actual PNG readability remains to be checked after the sole root-authorized render.",
+    "Graph floors collapse zeros and smaller magnitudes to the display floor; the full raw values remain in hash-bound source payloads.",
+    "This static display review grants no fresh mechanics or scientific qualification."
+  ],
+  "new_calls": {
+    "plot": 0,
+    "force": 0,
+    "tangent": 0,
+    "consumer": 0,
+    "HP": 0,
+    "solver": 0,
+    "tests": 0,
+    "geometry": 0,
+    "numerical_module_import": 0
+  }
+}

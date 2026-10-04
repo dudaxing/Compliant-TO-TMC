@@ -1,0 +1,133 @@
+{
+  "schema": "horner192-requalification-runner-static-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "file": {
+    "name": "requalification_run_tests_once.py",
+    "lines": 93,
+    "sha256": "718e0a51c815a516c94388a0e4d04d056c3e7faaa86f4df016fa270f427aa3b9",
+    "AST_compile": true
+  },
+  "closed001_failure": {
+    "result_sha256": "70ea999e93184258fa7187b97c976ae5a8827a6e5db1564a726987ca8869d663",
+    "original_runner_sha256": "ef87f5d04de63dc3be40dd1ad03afa2466223c324cbbc1dd576c9e6a5817e432",
+    "status": "failed",
+    "invocations": 1,
+    "collected_tests": 0,
+    "started_tests": 0,
+    "elapsed_seconds": 0.26469290000386536,
+    "error": "PluginValidationError(\"Plugin '2657392868192' for hook 'pytest_runtest_logreport'\\nhookimpl definition: pytest_runtest_logreport(result)\\nArgument(s) {'result'} are declared in the hookimpl but can not be found in the hookspec\")",
+    "retained_without_edit": true
+  },
+  "root_cause": "Installed pluggy validates required positional argument names against hookspec. The old callback argument result does not occur in pytest_runtest_logreport(report), so registration fails before collection. compile(source) alone could not establish that integration contract.",
+  "minimal_correction": [
+    "Callback signature now pytest_runtest_logreport(self,report),matching the actual installed hookspec.",
+    "The outer statistics dict retains its independent stats=report alias; the callback updates stats and reads the received TestReport,avoiding variable shadowing.",
+    "Other hook names/parameters,unique outcome accounting, resource checkpoints and one pytest invocation are unchanged.",
+    "NewSTAGE holds new002 output and stop file. Frozen001 SOURCE_STAGE explicitly supplies runtime,test_horner192.py and baseline_core.py; existing20+3+2case sources/expectations/gates remain unchanged.",
+    "The old001 failure report SHA is included in new result provenance. This is a separate60/90-second8GiB window, not a reopened or repaired001 phase."
+  ],
+  "installed_signature_review": {
+    "pytest_collection_finish": {
+      "implementation": [
+        "session"
+      ],
+      "installed_hookspec": [
+        "session"
+      ],
+      "match": true,
+      "hookspec_line": 290
+    },
+    "pytest_runtest_logstart": {
+      "implementation": [
+        "nodeid",
+        "location"
+      ],
+      "installed_hookspec": [
+        "nodeid",
+        "location"
+      ],
+      "match": true,
+      "hookspec_line": 660
+    },
+    "pytest_runtest_logreport": {
+      "implementation": [
+        "report"
+      ],
+      "installed_hookspec": [
+        "report"
+      ],
+      "match": true,
+      "hookspec_line": 777
+    },
+    "pytest_runtest_teardown": {
+      "implementation": [
+        "item",
+        "nextitem"
+      ],
+      "installed_hookspec": [
+        "item",
+        "nextitem"
+      ],
+      "match": true,
+      "hookspec_line": 733
+    }
+  },
+  "installed_code_bindings": {
+    "_pytest/hookspec.py": {
+      "path": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\_pytest\\hookspec.py",
+      "sha256": "12098571044671c24ed0011e2bb7d94976380265e5734c30f856479482e6f88d"
+    },
+    "pluggy/_manager.py": {
+      "path": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_manager.py",
+      "sha256": "2b8229fe99048ef4f6a0e21f40fa7c0b0016a1756710d81045ccbdb651a28b4a"
+    },
+    "pluggy/_hooks.py": {
+      "path": "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Lib\\site-packages\\pluggy\\_hooks.py",
+      "sha256": "13a7f79d8708e9d6c4b8ed069b2eb5a3380653fe7dfdeebd902d3c6b4e8406ea"
+    }
+  },
+  "pluggy_source_reasoning": [
+    "pluggy/_hooks.py:293-347 extracts positional parameter names and strips bound self.",
+    "pluggy/_manager.py:341-349 computes hookimpl.argnames minus hook.spec.argnames and raises PluginValidationError for names absent from the specification.",
+    "All four new Budget hook positional arguments exactly match installed specification by independent AST parsing. No pytest registration was executed during this static review."
+  ],
+  "unchanged_test_source_bindings": {
+    "hf_repo/tests/test_split_numpy_force.py": "0d4aec07094d5f9b80fb891921b062e0c920765377cf2207d6d2faa7a6daed7c",
+    "hf_repo/tests/test_split_numpy_tangent.py": "44959fd60aacc274912abf29cf8ba2595ecf10845130ad11e92015667275bb91",
+    "hf_repo/tests/test_split_cycle.py": "dd3b4efb409fb427b8d95b8fb2c8ca532fa1e99f679b19e1f1ddec0c955b8ff0",
+    "lf_data_preparation/native_workpiece_001/horner192_candidate_001/test_horner192.py": "3bc25c21b80c183e1707ee4f349cee4c0171196999a85abf7a742271aa10314a"
+  },
+  "frozen001_runtime_bindings": {
+    "kernel": "1d18a5512396649200de908cc5106c17d7c9a9f7c3fa62ba518cbe7d5659517e",
+    "CI": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "baseline": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce"
+  },
+  "resource_scope": {
+    "helper_seconds": 60,
+    "outer_seconds": 90,
+    "RSS_bytes": 8589934592,
+    "single_pytest_invocation": true,
+    "maxfail": 1,
+    "cacheprovider": false,
+    "retry": false,
+    "actual_statistics": "Collection,start and unique outcomes are populated only by real pytest callbacks. Expected25 is not declared passed.",
+    "toy_calls": "Toy mechanics/controller calls remain uninstrumented and are not reported as zero."
+  },
+  "review_execution": {
+    "pytest_import": 0,
+    "pluggy_import": 0,
+    "registration": 0,
+    "tests": 0,
+    "force": 0,
+    "tangent": 0,
+    "consumer": 0,
+    "HP": 0,
+    "solver": 0,
+    "plot": 0
+  },
+  "limits": [
+    "Static installed-API compatibility is now checked, but a future actual terminal test result is still required.",
+    "This hook fix grants no candidate force/tangent,HP,cycle-return or scientific qualification; frozen001 validator/runtime have not been re-evaluated by this reviewer."
+  ]
+}

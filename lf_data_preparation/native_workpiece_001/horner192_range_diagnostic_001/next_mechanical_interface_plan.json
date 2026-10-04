@@ -1,0 +1,234 @@
+{
+  "schema": "mechanical-aux-interface-plan-1.0",
+  "status": "author_static_plan",
+  "new_qualification": false,
+  "objective": "Unblock a mechanically valid response from an independently unavailable auxiliary material-energy diagnostic, with explicit opt-in semantics and new numerical qualification.",
+  "observed_evidence": {
+    "diagnostic_result": "lf_data_preparation/native_workpiece_001/horner192_range_diagnostic_001/evidence/result.json",
+    "sha256": "3f2678fde968da9032237d52227db9e124307e3331e7450d812d83d411a8cd31",
+    "status": "diagnostic_captured",
+    "force_started": 1,
+    "force_completed": 0,
+    "raw_response_returned": true,
+    "raw_response_sha256": "512cf2c369e704efd1d1a4661c55da28aa175aecacb5ac74ed30bed79bee1aaf",
+    "raw_finite_counts": {
+      "residual": {
+        "finite": 25600,
+        "nonfinite": 0
+      },
+      "material_residual": {
+        "finite": 25600,
+        "nonfinite": 0
+      },
+      "regularization_residual": {
+        "finite": 25600,
+        "nonfinite": 0
+      },
+      "stress_first_piola": {
+        "finite": 115200,
+        "nonfinite": 0
+      },
+      "stress_second_piola": {
+        "finite": 115200,
+        "nonfinite": 0
+      },
+      "material_energy": {
+        "finite": 3165,
+        "nonfinite": 35
+      },
+      "F": {
+        "finite": 115200,
+        "nonfinite": 0
+      },
+      "F_hi": {
+        "finite": 115200,
+        "nonfinite": 0
+      },
+      "F_lo": {
+        "finite": 115200,
+        "nonfinite": 0
+      },
+      "G": {
+        "finite": 115200,
+        "nonfinite": 0
+      },
+      "G_hi": {
+        "finite": 115200,
+        "nonfinite": 0
+      },
+      "G_lo": {
+        "finite": 115200,
+        "nonfinite": 0
+      },
+      "Hu": {
+        "finite": 25600,
+        "nonfinite": 0
+      },
+      "Hu_hi": {
+        "finite": 25600,
+        "nonfinite": 0
+      },
+      "Hu_lo": {
+        "finite": 25600,
+        "nonfinite": 0
+      },
+      "J": {
+        "finite": 28800,
+        "nonfinite": 0
+      },
+      "J_hi": {
+        "finite": 28800,
+        "nonfinite": 0
+      },
+      "J_lo": {
+        "finite": 28800,
+        "nonfinite": 0
+      },
+      "B": {
+        "finite": 115200,
+        "nonfinite": 0
+      },
+      "B_hi": {
+        "finite": 115200,
+        "nonfinite": 0
+      },
+      "B_lo": {
+        "finite": 115200,
+        "nonfinite": 0
+      },
+      "delta": {
+        "finite": 28800,
+        "nonfinite": 0
+      },
+      "delta_hi": {
+        "finite": 28800,
+        "nonfinite": 0
+      },
+      "delta_lo": {
+        "finite": 28800,
+        "nonfinite": 0
+      },
+      "small_branch": {
+        "finite": 28800,
+        "nonfinite": 0
+      },
+      "arithmetic_supported": {
+        "finite": 1,
+        "nonfinite": 0
+      }
+    },
+    "scope": "Finite raw fields are observations only; complete public force entry still failed and no HP comparison ran."
+  },
+  "source_bindings": {
+    "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+    "hf_repo/src/hf_eval/native_mean.py": "948e73098e4bbb8748b6e256e12aac5e653019762f005efa6809c76eaacb4085",
+    "hf_repo/src/hf_eval/split_displacement.py": "f4632beb5697e6f25f374c4de31d25f712dd0c91723fed6021f866ada60a386c",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "f7549b1a51f21d8598892f3d74cebfc544a24a5bc79e60b87e7734f2a6058a1c",
+    "hf_repo/src/hf_eval/native_tangent.py": "272508789cd801e3af7a97d862be47d58766ff4150db924717729b7eda6ddd08",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce"
+  },
+  "actual_dependencies": [
+    {
+      "source": "split_kernel_invariants_hu.py",
+      "lines": [
+        180,
+        205,
+        265,
+        305
+      ],
+      "finding": "Auxiliary material-energy computation is not differentiated to obtain P or the weak residual. Its DD pair is nevertheless included in the combined support flag; _numpy_response rejects that flag, and _check_output requires every old returned field finite."
+    },
+    {
+      "source": "split_numpy_tangent.py",
+      "lines": [
+        33,
+        96,
+        99,
+        106,
+        134,
+        148
+      ],
+      "finding": "The explicit tangent uses residual size, retained F/J/Hu/delta and G pairs, branch selectors, operators and material coefficients; no material_energy input. Public tangent currently calls the full-field response first, so an energy failure blocks it upstream."
+    },
+    {
+      "source": "split_displacement.py",
+      "lines": [
+        122,
+        138,
+        183,
+        203,
+        257,
+        273
+      ],
+      "finding": "Mean constraint, fixed-force-scale Newton/Armijo merit, residual balance and accepted metrics use mechanical fields. Only output-spring energy appears as a separate finite algebraic metric; material_energy is not consumed."
+    },
+    {
+      "source": "native_mean.py",
+      "lines": [
+        135,
+        177,
+        229,
+        251
+      ],
+      "finding": "Assembly calls the full-field force entry, then cached mechanical tangent. Accepted packages require material_energy in the current 17-field forces archive. Persistence schema/readers must explicitly reflect an omitted auxiliary field."
+    },
+    {
+      "source": "native_force.py",
+      "lines": [
+        58,
+        88,
+        106,
+        122
+      ],
+      "finding": "The existing supplied-state force result includes material_energy and its sum in metadata; it cannot silently become a mechanical-only result."
+    },
+    {
+      "source": "native_tangent.py",
+      "lines": [
+        56,
+        57,
+        75,
+        89
+      ],
+      "finding": "The result itself stores only tangent tensors/matrices, but its public base response still inherits the full energy gate."
+    },
+    {
+      "source": "displacement.py",
+      "lines": [
+        295,
+        327
+      ],
+      "finding": "Legacy unsplit accepted metrics explicitly require finite material_energy and report solid/medium sums. Keep that entry unchanged; do not route mechanical-only fields into it."
+    }
+  ],
+  "minimal_proposed_interface": [
+    "Add one opt-in NumPy mechanical entry and corresponding assembler. Reuse unchanged stress, weak-force, kinematic and DD formulas. Do not compute the auxiliary energy branch when mechanical-only mode is selected.",
+    "Compute a named mechanical support flag from all required kinematic/coefficient/mechanical DD pairs, including inverse/log/exponential/action pairs; do not merely ignore or overwrite the old combined arithmetic_supported flag.",
+    "Keep existing complete-field NumPy/JAX entries, field sets, support bounds and error behavior unchanged. An explicit full/auxiliary request must retain the original energy requirements.",
+    "Mechanical-only fields omit material_energy. Record auxiliary_material_energy status=not_evaluated and qualified=false rather than synthesizing zero, replacing NaN, or pretending the old field is available.",
+    "Use an explicit new native mechanical force/path schema or entry. NativeMean cached arrays become an explicitly declared mechanical field set; metadata and pure saved readers distinguish availability. Reuse the existing controller/Armijo/KKT unchanged.",
+    "Reuse the cached mechanical response for _tangent. Preserve fixed-lift df/dw semantics, unsymmetrized full CSC and the qualified DD action consumer; do not switch to an energy Hessian."
+  ],
+  "next_verification": {
+    "captured_state": "Original full 3200-cell F16 split arrays and original 27-array model; no accepted-state or equilibrium claim.",
+    "required": "One newly evaluated complete mechanical force plus one cached tangent, three DD action consumer calls and fresh HP80/120 mechanical force/Jv comparisons on the declared full-domain witness.",
+    "gates": "Keep original total/component force and tangent-action limits, force/action floors, HP agreement gate, all element and DOF coverage, CSC storage checks and original CI bounds.",
+    "regression": "Existing meaningful focused tests plus bytewise unselected near/direct mechanical fields; confirm old full-field behavior and omitted-energy metadata explicitly. Avoid repeating prior unrelated whole-stage audits.",
+    "scope_after_pass": "Only this supplied F16 mechanical response and its declared directional action. No auxiliary-energy, T25, unloading path, equilibrium, contact/clamping or general-domain qualification."
+  },
+  "open_decisions": [
+    "Root chooses the precise opt-in entry/schema names before implementation. No numerical gate or old complete-field requirement is changed by this plan."
+  ],
+  "reviewer_execution": {
+    "force": 0,
+    "tangent": 0,
+    "consumer": 0,
+    "HP": 0,
+    "solver": 0,
+    "tests": 0,
+    "plot": 0,
+    "geometry": 0,
+    "production_module_imports": 0
+  }
+}
