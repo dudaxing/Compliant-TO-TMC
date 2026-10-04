@@ -1,0 +1,142 @@
+{
+  "schema_version": "cycle010-counter-contract-test-plan-1.0",
+  "status": "static_plan_only_not_run",
+  "created_utc": "2026-10-04T11:02:54.301701+00:00",
+  "scope": "Pure metadata/source reasoning; no NumPy import/API, production/reference evaluator, FE/HP/geometry/render/pytest calls. Original closed reference HP0 retained.",
+  "actual_saved_evidence": {
+    "result_status": "success",
+    "accepted_states": 12,
+    "call_counts": {
+      "force_calls": 94,
+      "force_calls_completed": 93,
+      "tangent_calls": 53,
+      "tangent_calls_completed": 52,
+      "solver_invocations": 1,
+      "JIT_calls": 0,
+      "HP_calls": 0
+    },
+    "completed_base_history": 52,
+    "trial_history": 41,
+    "controller_successful_assembler_returns": 92,
+    "failed_attempts": [
+      {
+        "from_displacement": 0.5,
+        "attempted_displacement": 0.0,
+        "from_R_input": 0.10625324798554082,
+        "depth": 0,
+        "code": "unsupported_arithmetic_range",
+        "reason": "NumPy tangent exceeded the declared compensated arithmetic support range",
+        "rollback_bitwise_equal": true
+      }
+    ],
+    "first_failed_T": {
+      "tangent_call_ordinal": 44,
+      "bound_force_call_ordinal": 77,
+      "state_sha256": "058bd50e0dd329595b324e185f793036733b72c887218fb26801091a49d54bd8",
+      "code": "unsupported_arithmetic_range",
+      "details": {
+        "field": "total_tangent"
+      },
+      "bound_force_fields_same_object": true,
+      "input_npz_sha256": "8849e6c1e641efd06321d5884ed1fe0f875535891844a7c47734dc74f07f42c9",
+      "force_fields_npz_sha256": "6a8c8401506e2303d676d07576f2b14959c68bb8497f3a2a51cd7deea1ac9510"
+    },
+    "first_failed_F": {
+      "force_call_ordinal": 90,
+      "state_sha256": "d33d6308a19c9f7578882a31472801f865990331b901cf29991da3efc99ea868",
+      "code": "unsupported_arithmetic_range",
+      "input_npz_sha256": "8fde8413062081f1bb4568fae8eb3b576a95b2de27699dd29870d74f4e7cc524"
+    }
+  },
+  "necessary_accounting": {
+    "F_started": "52 completed Newton bases +41 trials +1 completed-force/failed-tangent base =94",
+    "F_completed": "52 completed bases +40 completed trials +1 completed force before T44 failure =93",
+    "T_started": "52 completed bases +1 captured failed tangent =53",
+    "T_completed": "52 completed base/CSC returns",
+    "controller_successful_calls": "52 complete assembler bases +40 complete trial forces =92; not interchangeable with force_completed93",
+    "accepted_cache_rule": "Use actual started tangent ordinals with one missing44, not enumerate(history,1); no accepted cache may use failedT44 or capture state. Validate all12 cache F/T ordinals/state hashes in original order.",
+    "recovery_rule": "First T44 failure is a failed Newton attempt from d.5 toward0 at depth0, rollback true; exact signed midpoint.25 then endpoint0 at nextdepth. Do not treat it as a line-search force trial or append a fabricated completed history row.",
+    "independent_F_failure_rule": "Separate F90 range-rejected trial without merit fields, followed by same-base half factor; preserves existing original trial accounting.",
+    "captured_source_identity": "Receipt capture JSON/NPZ declarations, raw state/model/operator/force-field identity, actual freeze/inventory SHA, same-object bound force assertion and captured F77/T44 must match actual files in the new loader. Metadata tests do not replace actual file/SHA checks."
+  },
+  "minimum_synthetic_test_plan": [
+    {
+      "name": "real_saved_positive",
+      "expected": "reconstruct actual010 result/receipt/settings and match exact94/93,53/52,12cache,failedT44F77,F90; no new numerical qualification"
+    },
+    {
+      "name": "wrong_started_T",
+      "expected": "reject startedT inconsistent with single captured missing ordinal"
+    },
+    {
+      "name": "multiple_missing_T",
+      "expected": "reject extra incomplete T because only one capture/failed attempt is evidenced"
+    },
+    {
+      "name": "wrong_capture_bound_F",
+      "expected": "reject T44 bound to wrong force ordinal or missing same-object assertion"
+    },
+    {
+      "name": "unknown_failed_attempt",
+      "expected": "reject unrecorded failure code/reason, not generic deficit subtraction"
+    },
+    {
+      "name": "rollback_false",
+      "expected": "reject failed attempt without bitwise rollback evidence"
+    },
+    {
+      "name": "wrong_midpoint_or_depth",
+      "expected": "reject half-step/depth chronology inconsistent with original signed bisection"
+    },
+    {
+      "name": "cache_on_failed_T",
+      "expected": "reject accepted cache attached to44 or its failed state"
+    },
+    {
+      "name": "wrong_trial_halving",
+      "expected": "reject F90 rejection not immediately followed by original same-base half factor"
+    },
+    {
+      "name": "extra_trial_event",
+      "expected": "reject unseen event not reflected in counts/chronology"
+    },
+    {
+      "name": "cache_state_mismatch",
+      "expected": "reject accepted assembler/raw state identity mismatch"
+    },
+    {
+      "name": "cache_force_ordinal_mismatch",
+      "expected": "reject accepted cache force ordinal that is not the reconstructed completed base"
+    }
+  ],
+  "test_execution_plan_not_started": {
+    "helper_seconds": 60,
+    "outer_seconds": 90,
+    "sampled_RSS_bytes": 8589934592,
+    "execution": "One new metadata-only card; pure stdlib tests read fixed actual inputs and deep-copy mutations. First unexpected test outcome closes phase; unique receipt; no repairing or retrying the old card.",
+    "no_new_physics": true
+  },
+  "immutable_math_scope": "Original accepted force/Jv/equilibrium/body gates and saved HP80/120 procedure remain unchanged. Accounting the recovered failed attempt does not qualify that rejected state or resolve its arithmetic-range issue; fresh2N accepted-state HP still required.",
+  "principal_input_SHA256": {
+    "result/result.json": "7338a65980abaa7d45d72ccee453352c5960e6dc416f82b8d8a4db5ca46e31c4",
+    "execution_receipt.json": "fb3c998b414fc436a4da30435bc24ac0fc92b4dacd6b008effe643cce320df28",
+    "input_inventory.json": "bb08fa9339ea36c2057bf6672630f3231bc7f61a923b22a63ab77cc55abcf5f6",
+    "source_freeze.json": "a4eb119f87899c1a2b12db9ef7209f0a73cf4d0d0ea72186bbef57a7e51cd03b",
+    "first_tangent_range_input/observation.json": "622e37201748d630a3f410d43d0cd157a79be19a84f6fb2c5a0b7faf077b7c93",
+    "first_tangent_range_input/input.npz": "8849e6c1e641efd06321d5884ed1fe0f875535891844a7c47734dc74f07f42c9",
+    "first_tangent_range_input/force_fields.npz": "6a8c8401506e2303d676d07576f2b14959c68bb8497f3a2a51cd7deea1ac9510",
+    "first_force_range_input/observation.json": "b4cf4bc4492095001757f93d1dfcbc94fa04a54ed278f4eee07703c93f98a46c",
+    "reference/lifecycle.json": "d88b3a6c35e302c35d32553159fd7ba0480f2406d31dfbb1da4e2be26c265f45",
+    "reference_launch.json": "6ebb8342f36c77a5037267d138a5716e023954cc752217646f2d48c92ceccda2"
+  },
+  "new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "NumPy_API": 0,
+    "pytest": 0,
+    "geometry": 0,
+    "render": 0
+  }
+}

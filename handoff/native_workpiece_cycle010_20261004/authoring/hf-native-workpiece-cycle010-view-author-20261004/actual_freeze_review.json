@@ -1,0 +1,127 @@
+{
+  "schema_version": "cycle010-actual-freeze-readonly-review-1.0",
+  "status": "pass",
+  "reviewed_utc": "2026-10-04T10:47:55.290065+00:00",
+  "scope": "Actual completed input/source preparation and scientific freeze plus one observed running production launch. This pass is identity/readiness only, not production success or qualification.",
+  "baseline_commit": "07134ea6cd9aa0ab2de4bf97f80a8e8ca44c241e",
+  "actual_counts": {
+    "scientific_protocol_bindings": 230,
+    "input_inventory_bindings": 73,
+    "source_roots": 68,
+    "source_capsules": 68,
+    "prepare_protocol_bindings": 157
+  },
+  "checks": {
+    "all230_frozen_binding_SHA_current": true,
+    "all230_binding_SHA_unchanged_during_review": true,
+    "all68_root_and_flat_capsule_SHA_equal": true,
+    "all73_inputs_equal_expected00963_plus_new3_plus_prior7": true,
+    "prepare_protocol_bindings_preserved_in_scientific_protocol": true,
+    "baseline_sourcefreeze_inventory_protocol_match": true,
+    "historical003_four_transition_same_as009": true,
+    "base00363_current_sources_same_as009": true,
+    "new5wrapper_only_source_path_replacement": true,
+    "eleven_targets_task_case_protocol_equal": true,
+    "same_body_model_a2d6_and_direction_archive": true,
+    "all_original_gates_and_non_time_settings_same": true,
+    "phase_args_and_inner_outer_RSS_limits_exact": true,
+    "prepare_completed_before_production_start": true,
+    "fresh_reference_not_started_at_review": true
+  },
+  "actual_prepare": {
+    "status": "pass",
+    "invocations": 1,
+    "exit_code": 0,
+    "outer_elapsed_seconds": 1.3338463999680243,
+    "helper_elapsed_seconds": 1.1010872999904677,
+    "sampled_tree_peak_RSS_bytes": 30830592,
+    "helper_limit_seconds": 60,
+    "outer_limit_seconds": 90,
+    "stop_reason": null,
+    "all_bindings_unchanged": true,
+    "declared_preparation_calls": {
+      "force_calls": 0,
+      "tangent_calls": 0,
+      "solver_calls": 0,
+      "HP_calls": 0
+    },
+    "call_basis": "Preparation source only reads/copies/hashes ordinary inputs; no mechanical API evaluated."
+  },
+  "observed_running_production": {
+    "status": "running",
+    "invocations": 1,
+    "started_utc": "2026-10-04T10:44:13.119686+00:00",
+    "protocol_sha256": "2cc0ecb3f11bb4d08826772e6d004e999b84d5853e72a2db42455aae8a2c32d3",
+    "helper_seconds": 900,
+    "outer_seconds": 960,
+    "sampled_RSS_bytes": 8589934592,
+    "call_count_availability": "force/tangent/solver counts remain None until API returns, not inferred from targets or progress",
+    "observed_launch_snapshot_sha256": "bd289f891065f20e381d292ed915cff95b4e2e7413047f628781e7de9a2f89c1",
+    "observed_execution_snapshot_sha256": "10523f5a2d9ef20ce59193119bcc5e98bd679cd6e64a656383e18f33a4888c96",
+    "qualification_at_review": false,
+    "no_success_or_completion_inference": true,
+    "mutable_snapshots": "Running launch/execution hashes are observations only, not immutable protocol pins."
+  },
+  "resources": {
+    "production_seconds": 900,
+    "reference_seconds": 300,
+    "sampled_RSS_bytes": 8589934592,
+    "production_outer_seconds": 960,
+    "reference_outer_seconds": 360,
+    "view_outer_seconds": 120
+  },
+  "source_transition": {
+    "hf_repo/scripts/solve_native_mean.py": {
+      "previous_sha256": "b36d67444b122d2ed6ff693683dbd4d1c727e55ba27c0726c43f5cd4f211444f",
+      "current_sha256": "d457783d3818f3f4c5fe2ce558df9cd9a14245880198aaa6907e7b3541d54888"
+    },
+    "hf_repo/src/hf_eval/native_mean.py": {
+      "previous_sha256": "948e73098e4bbb8748b6e256e12aac5e653019762f005efa6809c76eaacb4085",
+      "current_sha256": "186a6662c14310b4dc577591764eef849988448de132474fd6953579449cb22b"
+    },
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": {
+      "previous_sha256": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+      "current_sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+    },
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": {
+      "previous_sha256": "f7549b1a51f21d8598892f3d74cebfc544a24a5bc79e60b87e7734f2a6058a1c",
+      "current_sha256": "fe36581e8b49f1a547973e135f3c8ca0f2bbc7d954502405418bd794d731955a"
+    }
+  },
+  "targets_mm": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    1.75,
+    1.8,
+    1.75,
+    1.5,
+    1.0,
+    0.5,
+    0.0
+  ],
+  "new_reference_rule": "Only after actual complete production terminal pass,2*Nactual_acceptances including repeats/bisections; not inherited009 HP.",
+  "frozen_metadata_SHA256": {
+    "prepare_launch.json": "598a0eba292cadddd43ecbd54958033e02c6a79757deb6dddb2a45b16354aac4",
+    "prepare_stdout.log": "7cc590cff59060dba92eaeaacff423b7a75520d56f2d65df2b7158e892a64580",
+    "prepare_protocol.json": "200224b740d06f83d5d9c700a5065bed553f40e2c7df9bab494ea51ac5654444",
+    "input_inventory.json": "bb08fa9339ea36c2057bf6672630f3231bc7f61a923b22a63ab77cc55abcf5f6",
+    "source_freeze.json": "a4eb119f87899c1a2b12db9ef7209f0a73cf4d0d0ea72186bbef57a7e51cd03b",
+    "protocol.json": "2cc0ecb3f11bb4d08826772e6d004e999b84d5853e72a2db42455aae8a2c32d3",
+    "task.json": "2da10dcf4913e91ecef17fc589a45931dca2d2e14e33bed0e48e7432b828d51f",
+    "README.md": "c761a04c6de7286e747b96b5443fcac695b5e2a9b7d8e2d7ce419364948d37b2"
+  },
+  "no_new_calls_by_reviewer": {
+    "prepare": 0,
+    "model_construction": 0,
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "pytest": 0,
+    "geometry": 0,
+    "render": 0
+  },
+  "limits_of_review": "No result payloads or running Newton data inspected; no scientific completion claim. Resource contract is cooperative clocks and sampled RSS, not OS hard caps."
+}

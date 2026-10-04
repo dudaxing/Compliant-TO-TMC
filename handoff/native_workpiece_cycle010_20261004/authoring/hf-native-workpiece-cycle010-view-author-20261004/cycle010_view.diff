@@ -1,0 +1,74 @@
+--- 009/plot_workpiece_cycle009.py
++++ 010/plot_workpiece_cycle010.py
+@@ -1,4 +1,4 @@
+-"""Read a complete saved cycle009 and its hash-bound fresh mechanical reference.
++"""Read a complete saved cycle010 and its hash-bound fresh mechanical reference.
+ 
+ Raw production qualification flags remain false; this view records the external
+ force/Jv/equilibrium/body-projection evidence, without pressure or energy claims.
+@@ -30,7 +30,7 @@
+ HELPER = ROOT/"functional_views/native_workpiece_cycle_20261004/plot_workpiece_cycle.py"
+ HELPER_SHA = "d256fe2b1541505cd5315f45c4a50462670a09436ceb91ecc8d01bbb25554169"
+ PEAK = 0
+-TARGETS = [0., .5, 1., 1.5, 1.75, 1.5, 1., .5, 0.]
++TARGETS = [0., .5, 1., 1.5, 1.75, 1.8, 1.75, 1.5, 1., .5, 0.]
+ TANGENT_EXECUTION = dict(mode="chunk256", element_block_size=256, global_selector_scope="full_batch")
+ sha = lambda p: sha256(p.read_bytes()).hexdigest()
+ 
+@@ -52,13 +52,13 @@
+         global PEAK
+         info = psutil.Process().memory_info(); PEAK = max(PEAK, info.rss, getattr(info, "peak_wset", info.rss))
+         if perf_counter()-STARTED > 120 or PEAK > 8*1024**3 or any((p/"stop_requested.txt").exists() for p in (stage, output.parent)):
+-            raise RuntimeError("Saved cycle009 view resource window closed; no retry")
++            raise RuntimeError("Saved cycle010 view resource window closed; no retry")
+     try:
+         protocol_file = args.protocol.resolve(); bind(protocol_file)
+         protocol = json.loads(protocol_file.read_text(encoding="utf-8"))
+         for name, pin in protocol["bindings"].items(): bind(ROOT/name, pin)
+         assert pins[Path(__file__).resolve()] == sha(Path(__file__)) and bind(HELPER, HELPER_SHA) == HELPER_SHA
+-        spec = importlib.util.spec_from_file_location("cycle009_numeric_rows", HELPER)
++        spec = importlib.util.spec_from_file_location("cycle010_numeric_rows", HELPER)
+         helper = importlib.util.module_from_spec(spec); spec.loader.exec_module(helper)
+         def read(path, expected=None, descriptor=False):
+             bind(path, expected); value = json.loads(path.read_text(encoding="utf-8"))
+@@ -74,7 +74,7 @@
+             return arrays
+         receipt = read(stage/"execution_receipt.json")
+         inventory = read(stage/"input_inventory.json", receipt["input_inventory_sha256"])
+-        assert stage.name == "coarse_square_cycle_009" and inventory["case"]["alias"] == "gripper_coarse_square"
++        assert stage.name == "coarse_square_cycle_010" and inventory["case"]["alias"] == "gripper_coarse_square"
+         freeze = read(stage/"source_freeze.json", inventory["source_freeze_sha256"])
+         assert receipt["sources"] == freeze["sources"] and receipt["inputs"] == inventory["input_bindings"]
+         for name, pin in freeze["sources"].items(): bind(stage/"sources"/Path(name).name, pin)
+@@ -242,11 +242,11 @@
+         counts = result["call_counts"]; text_ax.axis("off")
+         lines = ["COMPLETE PATH / FRESH MECHANICAL HP PASS",f"External fresh HP80/120 calls={reference['HP_calls_completed']}; 2 per actual state", "All elements/DOFs; force, PORT Jv, equilibrium and body projection.", "PORT is one direction, not all matrix columns.", "Raw production HP/equilibrium/HF flags remain false.",f"Status={result['status']}; failure={result['failure']}",f"Requested targets={targets} mm",f"Actual accepted count={len(rows)}; no deduplication",f"Path={path_label}; formal phase={receipt['status']}",f"Unload endpoint={result['unload_endpoint_reached']}","Energy NOT EVALUATED; 16 force fields; schema1.2",f"F started/completed={counts['force_calls']}/{counts['force_calls_completed']}",f"T started/completed={counts['tangent_calls']}/{counts['tangent_calls_completed']}",f"COMMON arrows: {arrow_N:.8g} N = 4 display mm",f"Peak: #{peak}, d={rows[peak]['d_mm']:g} mm; minJ={rows[peak]['minimum_J']:.8g}",f"Last: #{last}, {rows[last]['leg']}, d={rows[last]['d_mm']:g} mm", "Every accepted index is retained in curves and CSV.","ON body = negative model holding reaction.","Mirrored upper: (Fx,-Fy); net: (2Fx,0).","2|Fy| is a scalar sum, not full net force.","Unsigned boundary distance is not signed penetration.","Left boundary may be nearest at a corner.","Node-window proxies remain separate CSV quantities.",f"Peak/return max |Hu|={rows[peak]['maximum_Hu_per_mm']:.8g}/{rows[last]['maximum_Hu_per_mm']:.8g} 1/mm", "No pressure/contact/clamp/energy/stress-HP qualification."]
+         text_ax.text(0,1,"\n".join(fill(line,width=54) for line in lines),va="top",fontsize=9.3,linespacing=1.35)
+-        fig.suptitle("Cycle009 mechanical saved path: "+path_label+" / EXTERNAL FRESH MECHANICAL HP PASS\nActual x1 peak/return; all accepted states retained; no contact/clamp/energy qualification",fontsize=16,color="#176b4a")
+-        checkpoint(); fig.savefig(output/"cycle009_saved_path.png",dpi=150); plt.close(fig)
++        fig.suptitle("Cycle010 mechanical saved path: "+path_label+" / EXTERNAL FRESH MECHANICAL HP PASS\nActual x1 peak/return; all accepted states retained; no contact/clamp/energy qualification",fontsize=16,color="#176b4a")
++        checkpoint(); fig.savefig(output/"cycle010_saved_path.png",dpi=150); plt.close(fig)
+         with (output/"accepted_numeric_states.csv").open("x",encoding="utf-8",newline="") as stream:
+             writer = csv.DictWriter(stream,fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)
+-        (output/"plot_cycle009_saved_frozen.py").write_bytes(Path(__file__).read_bytes())
++        (output/"plot_cycle010_saved_frozen.py").write_bytes(Path(__file__).read_bytes())
+         checkpoint(); assert all(sha(p) == pin for p,pin in pins.items()), "Saved input changed during view"
+         report.update(status="rendered_saved_complete_reference_path",production_status=result["status"],production_phase_status=receipt["status"],failure=result["failure"],accepted_states=len(rows),accepted_d_mm=[r["d_mm"] for r in rows],requested_targets_mm=targets,call_counts=counts,actual_peak_index=peak,last_accepted_index=last,path_display_status=path_label,
+             response_contract=availability,full_path_completed=result["path_completed"],initial_and_return_zero_kept_by_index=True,return_zero_present=bool(len(rows)>1 and rows[-1]["d_mm"] == targets[-1] and rows[-1]["original_target_index"] == len(targets)-1),
+--- 009/animate_saved_path.py
++++ 010/animate_saved_path.py
+@@ -1,4 +1,4 @@
+-"""Animate each saved accepted state at physical deformation scale one."""
++"""Animate each saved cycle010 accepted state at physical deformation scale one."""
+ import argparse
+ import io
+ import json
+@@ -61,7 +61,7 @@
+             (args.output/f"actual_state_{index:03d}.png").write_bytes(buffer.getvalue())
+         buffer.seek(0)
+         frames.append(Image.open(buffer).convert("RGB"))
+-    gif=args.output/"cycle009_actual_path.gif"
++    gif=args.output/"cycle010_actual_path.gif"
+     frames[0].save(gif,save_all=True,append_images=frames[1:],duration=1000,loop=0)
+     (args.output/"metadata.json").write_text(json.dumps(dict(
+         actual_accepted_frames=len(states),state_sha256=[r["state_sha256"] for r,u in states],

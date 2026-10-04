@@ -1,0 +1,234 @@
+{
+  "schema_version": "workpiece-physical-plan-readonly-review-1.0",
+  "status": "static_suggest",
+  "executed": false,
+  "qualification": false,
+  "baseline_abbreviation_supplied_by_parent": "07134ea",
+  "scope": "Read existing 009 task/result/geometry/nodal evidence only; suggest a new independent 1.8 mm exploration, not contact or convergence qualification",
+  "sources": {
+    "task": {
+      "path": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/task.json",
+      "sha256": "aa6801849144f85fe6db1ab68db0869d6895b531a556481234f1e0fc9339c54c"
+    },
+    "inventory": {
+      "path": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/input_inventory.json",
+      "sha256": "9b646cce3df0fb920115c941e1d73589e3b6d794ab33021682aec411a078cf9e"
+    },
+    "production": {
+      "path": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/execution_receipt.json",
+      "sha256": "5b290825691130c96bdd74b22f2be8e29011ee304381ac54caf526a90cfbec6c"
+    },
+    "result": {
+      "path": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/result.json",
+      "sha256": "d62d584b618af4c1ead89c4c9fb07cea4585c9ce873221bf66600d019550cb42"
+    },
+    "reference": {
+      "path": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/summary.json",
+      "sha256": "7ffea3f27ae288d23fead7647bf4d24e468cc197bef7caa12dbfff22139110f7"
+    },
+    "geometry": {
+      "path": "functional_views/native_workpiece_cycle009_20261004/region_saved_001/measurement_001/regions_measurements.json",
+      "sha256": "3f31a36fae73cf5fe92d011cf35f8cc271bb63819efa5e7631afce5df4786cea"
+    },
+    "nodal_summary": {
+      "path": "functional_views/native_workpiece_nodal_20261004/square009_001/observation_001/summary.json",
+      "sha256": "a9db48cb4574e4b33ea0b3528039b792992f0b5fdce3e7e3aa93cac78e1f65d2"
+    },
+    "nodal_csv": {
+      "path": "functional_views/native_workpiece_nodal_20261004/square009_001/observation_001/nodes.csv",
+      "sha256": "bb2d770c9579a63fbafb264786a941c0d6cd9667454ca0941abf90b0046dd848"
+    }
+  },
+  "proposal": {
+    "model": "Same coarse h=1 mm fixed16 mm lower-half square centered (70,40); original27 model arrays a2d6 unchanged",
+    "targets_mm": [
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      1.75,
+      1.8,
+      1.75,
+      1.5,
+      1.0,
+      0.5,
+      0.0
+    ],
+    "zero_start": true,
+    "input_target_mm": 1.8,
+    "preserve_all_previous_targets_in_order": true,
+    "settings": {
+      "tolerance": 1e-09,
+      "constraint_tolerance": 1e-10,
+      "displacement_scale_floor": 1e-06,
+      "force_scale_floor_factor": 1e-08,
+      "max_checks": 25,
+      "armijo_c": 0.0001,
+      "max_backtracks": 12,
+      "max_bisections": 4,
+      "minimum_increment": 0.00625,
+      "time_limit_seconds": 600.0
+    },
+    "gates": {
+      "production_residual": "1e-9",
+      "independent_residual": "1e-8",
+      "force_evaluation": "1e-9",
+      "average_constraint": "1e-10",
+      "global_force_balance": "1e-6",
+      "fixed_displacement_mm": "8e-11",
+      "hp80_hp120": "1e-40",
+      "total_force": "1e-11",
+      "material_force": "1e-9",
+      "regularization_force": "1e-9",
+      "total_tangent": "1e-10",
+      "material_tangent": "1e-9",
+      "regularization_tangent": "1e-9",
+      "augmented_force_tangent": "1e-10",
+      "augmented_constraint_tangent": "1e-10"
+    },
+    "response_mode": "mechanical",
+    "tangent_mode": "chunk256",
+    "gamma": 1e-06,
+    "alpha": 1e-06,
+    "length_mm": 80.0,
+    "minimum_new_peak_increment_mm": 0.05,
+    "minimum_increment_mm": 0.00625
+  },
+  "prior_peak": {
+    "accepted_index": 4,
+    "input_mm": 1.75,
+    "R_input_N": 0.3969477463933483,
+    "q_out_mm": 2.0346869443877553,
+    "minimum_J": 0.02808043969551585,
+    "minimum_J_phase_scope": "Saved scalar is full-model minimum; parent reports the same value in medium. This review did not recalculate the phase minimum.",
+    "max_abs_Hu_per_mm": 0.4698093969993863,
+    "bottom_first_ray_hit_mm": 0.07671066678990902,
+    "bottom_witness": {
+      "distance_mm": 0.07671066678990902,
+      "face_point_mm": [
+        78.0,
+        32.0
+      ],
+      "edge_point_mm": [
+        78.0,
+        31.92328933321009
+      ],
+      "edge_index": 412,
+      "mechanism_nodes": [
+        2508,
+        2509
+      ],
+      "edge_parameter": 0.8546527774094016,
+      "face_parameter": 1.0,
+      "corner_hit": true,
+      "near_corner_hit": false,
+      "raw_reconstructed_normal_projection_mm": 0.07671066678990902,
+      "raw_reconstructed_tangential_coordinate_mm": 16.0,
+      "analytic_face_endpoint_root": true,
+      "analytic_forward_plane_root": false,
+      "witness_residual_mm": 1.6514567491299204e-15,
+      "minimizing_edge_parameter_interval": [
+        0.8546527774094016,
+        0.8546527774094016
+      ],
+      "minimizing_face_parameter_interval": [
+        1.0,
+        1.0
+      ]
+    },
+    "left_first_ray_hit_mm": 2.8327754289207783,
+    "minimum_unsigned_boundary_distance_mm": 0.0763716163872367,
+    "candidate_cell_pairs": 0,
+    "strict_interior_overlap": false,
+    "boundary_intersects": false,
+    "lower_body_force_N": {
+      "total": [
+        -0.0007910899872955321,
+        0.0037892857813192618
+      ],
+      "material": [
+        -0.0003137551201961619,
+        0.0023430611778208557
+      ],
+      "regularization": [
+        -0.00047733486709937006,
+        0.0014462246034984065
+      ]
+    },
+    "half_body_moment_origin_mm": [
+      70.0,
+      40.0
+    ],
+    "derived_nodal_moment_Nmm": {
+      "total": 0.06579467316655178,
+      "material": 0.012724871252725275,
+      "regularization": 0.05306980191382652
+    },
+    "regularization_fraction_of_signed_half_body_moment_approx_percent": 80.66,
+    "moment_fraction_scope": "About (70,40); derived saved nodal moment, not pressure fraction or newly HP-qualified torque",
+    "closest_corner_nodal_vector": {
+      "node_id": 2670,
+      "reference_xy_mm": [
+        78.0,
+        32.0
+      ],
+      "total_Fx_N": "-0.0006744397595420087",
+      "total_Fy_N": "0.012729792342344334",
+      "regularization_Fx_N": "-0.0005368949028685958",
+      "regularization_Fy_N": "0.011390967017562365"
+    }
+  },
+  "rationale": [
+    "The bottom outward first-ray hit remains positive but only about 0.0767 mm at the bottom-right corner. A 0.05 mm input increment is a modest local continuation of this approach and is eight times the unchanged minimum increment.",
+    "Keep the complete loading and unloading observations, including both 1.75 mm states around the new peak. Their force redistribution and return state are part of the intended function, not expendable samples.",
+    "This is a numerical approach study at the same coarse boundary representation. It does not establish mesh accuracy or select a new physical contact threshold."
+  ],
+  "risks": [
+    "The ray is a finite-face corner witness; output-port motion is not its closure rate. Linear extrapolation cannot predict contact at 1.8 mm.",
+    "Minimum J is already about 0.028. Further medium compression can sharply change force/tangent conditioning or cause original domain/J/line-search/time gates to fail. Positive J alone is not a stability or clamping proof.",
+    "The closest corner has much larger regularization nodal Fy than the whole-body regularization resultant, showing signed cancellation. The 80.66 percent derived-moment share warns against interpreting the weak holding force as physical face pressure.",
+    "Sub-grid approach distances are measurable on the existing continuous Q1 edges, but a 1 mm raster boundary and untested mechanism self-overlap/complete containment limit physical interpretation.",
+    "Complete return cost and low-force arithmetic remain relevant. No previous saved equilibrium may be used as the initial state or substituted for fresh reference checks."
+  ],
+  "required_outputs": [
+    "Every actual accepted index, original target index and leg, including repeated 1.75/1.5/1/.5 values and all bisection states; final zero return and its signed tiny residual values.",
+    "R_input and free mean output q_out; original average constraint/free residual/fixed displacement/global balance gates and valid accepted force/tangent cache counts.",
+    "All-quad J with cell/IP location and solid/medium/body classification, plus Hu magnitude/location; no new cutoff replaces J>0.",
+    "Bottom/left finite-ray values with actual witnesses, corner/tie/interval/no-hit semantics; cell-union overlap/roundoff classification and unsigned distance remain separate, not contact or signed penetration.",
+    "All153 body node total/material/regularization force vectors in N with one common scale, including signs at the bottom-right corner; four disjoint physical/cut groups and complete resultant/holding deduplication.",
+    "Signed half-body Fx/Fy, mirror relation upper=(Fx,-Fy), whole-workpiece net=(2Fx,0), and 2abs(Fy) only as a scalar magnitude sum; derived moments about the same declared (70,40) origin.",
+    "Load/unload differences at matching displacement values and original-to-return body/geometry/kinematic fields; do not infer energy hysteresis because auxiliary energy is not evaluated."
+  ],
+  "reference_scope": {
+    "production_full_success_prerequisite": true,
+    "fresh_HP80_120_per_actual_accepted_state": true,
+    "minimum_expected_calls_if_no_bisection": 22,
+    "full_local_and_global_three_component_force_and_PORT_direction_Jv": true,
+    "full_unsymmetrized_CSC_and_KKT_original_checks": true,
+    "no_state_hash_or_repeated_target_deduplication": true,
+    "all_columns_HP_qualified": false,
+    "energy_or_pressure_qualified": false
+  },
+  "cost_caution": {
+    "prior_production_seconds": 372.591996400035,
+    "prior_force_calls": 63,
+    "prior_tangent_calls": 36,
+    "prior_reference_seconds": 179.2952840999933,
+    "prior_fresh_HP_calls": 18,
+    "unchanged_existing_limits": {
+      "production_seconds": 600,
+      "reference_seconds": 240,
+      "sampled_RSS_bytes": 8589934592,
+      "production_outer_seconds": 660,
+      "reference_outer_seconds": 300,
+      "view_outer_seconds": 120
+    },
+    "estimate_basis": "Simple 11/9 state-count scaling would be about455 s production and219 s reference, not a timing prediction; the 240 s reference limit has only about21 s nominal margin before additional accepted states or difficult peak behavior.",
+    "new_budget_not_granted": true,
+    "first_formal_failure": "Preserve partial cache/diagnostics and close the new phase; no silent gate/budget/material change, retry or target deletion"
+  },
+  "verdict": "A reasonable next bounded 1.8 mm approach-and-return exploration under an explicit new card. Neither convergence nor contact/clamping is predicted.",
+  "new_force_tangent_consumer_HP_assembly_solver_calls": 0,
+  "new_geometry_measurements": 0,
+  "new_test_or_render_calls": 0
+}

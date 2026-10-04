@@ -1,0 +1,115 @@
+{
+  "schema_version": "cycle010-reference003-static-math-readiness-1.0",
+  "status": "pass",
+  "qualification": false,
+  "scope": "Source bytes/AST and saved identity only; no auditor imports or HP/F/T/consumer/solver/test execution",
+  "files": {
+    "audit_cycle010_ref003.py": "40cd8de0f06767a6361fcf95d5720ca9fbd3552e3781cd088b0400687f98e6b3",
+    "counter_contract.py": "547a76f7d1b750a2f423fdce043a90e4b6754c6148167bb350d36f2852ced32e",
+    "core_audit_mechanical.py": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+    "launch_phase.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+    "build_reference003.py": "efd165e6c0e20f1bb0941ef9c150faf1cad2c90dcbf262d1d72439086397b9ce",
+    "README.md": "a291cff11e28c2913af1fe56c262bd47d98975e63779b237e9d63b7d3bfba7cf",
+    "candidate.json": "ea523f27d9682ccee79d0cd426a7d0d7f0311b214f5efde3765d65f5a307e117",
+    "inventory_role_correction.json": "b888ce894023544a47b379cf165247313fbbf69f2622504b51d044ee8b0c4b97"
+  },
+  "original_auditor_sha256": "f7f344c76e5ae4cc4b7b16d72aa6524b536c1eb22668b1172435a2b506cb7806",
+  "inverse_bytes_exact": true,
+  "exact_substitutions": 5,
+  "substitutions": [
+    {
+      "original": "default=300.",
+      "candidate": "default=600."
+    },
+    {
+      "original": "reference_seconds=300,",
+      "candidate": "reference_seconds=600,"
+    },
+    {
+      "original": "reference_outer_seconds=360,",
+      "candidate": "reference_outer_seconds=660,"
+    },
+    {
+      "original": "declared 300 seconds",
+      "candidate": "declared 600 seconds"
+    },
+    {
+      "original": "and inventory[\"execution_limits\"] == LIMITS,",
+      "candidate": "and inventory[\"execution_limits\"] == dict(LIMITS,reference_seconds=300,reference_outer_seconds=360),"
+    }
+  ],
+  "method_AST_unchanged": [
+    "__init__",
+    "checkpoint",
+    "lifecycle",
+    "verify_chunk_prerequisites",
+    "reconstruct_counts",
+    "verify_first_range_observation",
+    "verify_tangent_range_observation",
+    "run"
+  ],
+  "load_delta": "Only immutable producer inventory limit identity remains reference300/outer360 while independent reference limits are600/660",
+  "unmodified_helpers": {
+    "counter_contract.py": "547a76f7d1b750a2f423fdce043a90e4b6754c6148167bb350d36f2852ced32e",
+    "core_audit_mechanical.py": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+    "launch_phase.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477"
+  },
+  "mathematical_overrides_added": false,
+  "resource_roles": {
+    "production_inventory": {
+      "production_seconds": 900,
+      "production_outer_seconds": 960,
+      "reference_seconds": 300,
+      "reference_outer_seconds": 360
+    },
+    "new_reference": {
+      "helper_seconds": 600,
+      "outer_seconds": 660,
+      "sampled_RSS_limit_bytes": 8589934592
+    },
+    "budget_mode": "Unchanged cooperative child clock/RSS and sampled child-tree launcher; no OS hard memory cap or forced termination"
+  },
+  "fresh_coverage": {
+    "actual_saved_states": 12,
+    "expected_fresh_HP_calls": 24,
+    "precisions": [
+      80,
+      120
+    ],
+    "includes_repeated_targets_and_bisection": true,
+    "all_elements": 3200,
+    "all_global_DOFs": 6642,
+    "reuses_old_HP_prefix": false,
+    "output_creation": "Inherited exclusive mkdir with exist_ok=False; new Ref003/reference"
+  },
+  "gates": "All original accepted-state force/Jv/CSC/KKT/workpiece equations, denominators and numerical gates unchanged; original PORT direction, not all columns",
+  "bindings": {
+    "production_sources_and_capsule_count": 68,
+    "verified_ref002_protocol_bindings": 331,
+    "production_inventory_sha256": "bb08fa9339ea36c2057bf6672630f3231bc7f61a923b22a63ab77cc55abcf5f6",
+    "production_result_sha256": "7338a65980abaa7d45d72ccee453352c5960e6dc416f82b8d8a4db5ca46e31c4",
+    "production_source_freeze_sha256": "a4eb119f87899c1a2b12db9ef7209f0a73cf4d0d0ea72186bbef57a7e51cd03b",
+    "ref002_protocol_sha256": "afaf64f9dc769be0f40ec632fa690259bcefde9aa401ea214992b9cbbf9c9693"
+  },
+  "prior_ref002": {
+    "status": "not_pass",
+    "HP_calls_completed": 16,
+    "full_rows": 7,
+    "error": "ValueError('Eleven-target cycle reference time limit exceeded')",
+    "summary_sha256": "b73e092d0f90f915569ab4e00417f6cb43ce389c70bddd31dfbc0d440d9aaf05",
+    "launch_sha256": "943f2875a31939dc1a06cd3a002bf3fdfec5419a5f98e9922b7a8e9039e4ce17",
+    "prefix_not_qualified_for_ref003": true
+  },
+  "author_role_correction": {
+    "preserved_initial_candidate": true,
+    "corrected_before_install": true,
+    "initial_formal_invocations": 0
+  },
+  "stop_and_clock": "STARTED before heavy imports; checkpoint/run/endpin/lifecycle unchanged; first exception records not_pass and re-raises; no retry/resume added",
+  "limits": [
+    "Static readiness is not an executed reference pass.",
+    "No failed T44/F77/F90 input, auxiliary energy, stress, pressure, clamp, full-column, shape or fine qualification.",
+    "Estimated cost is not guaranteed; Ref003 remains first-failure-stop."
+  ],
+  "issues": []
+}

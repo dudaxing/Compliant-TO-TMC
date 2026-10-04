@@ -1,0 +1,142 @@
+{
+  "schema_version": "cycle010-physical-result-static-checklist-1.0",
+  "status": "static_checklist_only",
+  "completed": true,
+  "scope": "Future saved-result interpretation checklist based on the actual009 schema and dynamic audit loop; no010 phase run or qualification",
+  "future_cycle010_executed": false,
+  "future_cycle010_qualified": false,
+  "prior_schema_source_SHA256": {
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/audit_cycle009.py": "87e1ad05477ce202aead0d6b6418412e020e248f02ee34de7c68566e300ec7fc",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/core_audit_mechanical.py": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/result.json": "d62d584b618af4c1ead89c4c9fb07cea4585c9ce873221bf66600d019550cb42",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/summary.json": "7ffea3f27ae288d23fead7647bf4d24e468cc197bef7caa12dbfff22139110f7",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/execution_receipt.json": "5b290825691130c96bdd74b22f2be8e29011ee304381ac54caf526a90cfbec6c"
+  },
+  "planned_original_targets_mm": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    1.75,
+    1.8,
+    1.75,
+    1.5,
+    1.0,
+    0.5,
+    0.0
+  ],
+  "actual_N": null,
+  "actual_HP_calls": null,
+  "actual_check_count": null,
+  "checklist": [
+    {
+      "topic": "Terminal and identity",
+      "report": [
+        "production launch exit/status/time/RSS/stop reason",
+        "execution_receipt status/returned_status/source and input endpins",
+        "task/inventory/result/model/source-freeze SHA and declared targets",
+        "reference launch and lifecycle actual terminal outcome"
+      ],
+      "requirement": "Use010 owned evidence. Do not borrow009 pass, state qualification or reference arrays. Failed/partial result remains failed even if a separate saved-data observation succeeds."
+    },
+    {
+      "topic": "All11 original targets and all actual accepted states",
+      "fields": [
+        "result.targets_mm",
+        "task input.target_mm",
+        "result.path_completed",
+        "loading_peak_reached",
+        "unload_endpoint_reached",
+        "task_target_executed",
+        "states[].is_original_target/original_target_index/original_target_displacement/d/leg/bisection_depth/state_sha256"
+      ],
+      "requirement": "Filter original-target records and require exactly the declared11 values in order with indices0..10. Require actual accepted N to match result/receipt/state lists; N may exceed11 after bisection. Peak belongs to original target index5, not hard-coded accepted index5. Final accepted record must be original target10 at0 for a complete path. Preserve initial and return0 separately even if array hashes ever coincide."
+    },
+    {
+      "topic": "Fresh reference coverage",
+      "fields": [
+        "summary.accepted_states",
+        "HP_calls_started",
+        "HP_calls_completed",
+        "states[].index/state_sha256/target_mm/original_target_index/leg/HP_calls",
+        "checks_completed",
+        "full_element_and_DOF_coverage",
+        "HP_matrix_columns_exhaustively_checked"
+      ],
+      "requirement": "Only after original strict production preconditions pass: fresh80+120 for every accepted index, started=completed=2N, each row2HP. At N=11 this would be22, not a prefilled result. No repeated target/state-hash deduplication. Report actual checks_completed instead of a predicted total."
+    },
+    {
+      "topic": "Production chronology and cost",
+      "fields": [
+        "call_counts.force_calls/force_calls_completed/tangent_calls/tangent_calls_completed/solver_invocations",
+        "observed_force_calls/observed_tangent_calls and completed counters",
+        "states[].assembler_force_call/assembler_tangent_call/assembler_state_sha256",
+        "path_diagnostics.trials/newton_history/failed_attempts/linear_solve_diagnostics/maximum_bisection_depth/timing_seconds",
+        "first_force_range_input/first_tangent_range_input"
+      ],
+      "requirement": "Report started and completed separately. Distinguish accepted line-search trials from accepted states. Reconstruct existing base/trial/cache accounting; no unexplained deficit is accepted. Retain first captured range evidence if present; rejected trials do not acquire accepted-state HP qualification. Preserve original full tangent precondition. Report helper/API/outer clocks and their scopes, kernel/assembly/LU costs, actual bisections/backtracks/failure reasons."
+    },
+    {
+      "topic": "Original numerical gates",
+      "fields": [
+        "each reference state checks/metrics",
+        "force_checks",
+        "tangent_checks",
+        "local_force_worst",
+        "local_tangent_worst",
+        "CSC_total_action_check",
+        "augmented_checks",
+        "workpiece_checks",
+        "exact_element_gates",
+        "global_differences"
+      ],
+      "requirement": "Report original limits, denominators/floors, maximum errors with state/element/component, and80/120 agreement. Every state covers3200 elements/6642 DOFs, all3 force and one fixed-lift PORT-direction action components, unsymmetrized total CSC and KKT/body projections. Stored3 tensors contain614400 coefficients per state; total independent assembly check is204800 local coefficients per state. These are not exhaustive constitutive HP checks of all matrix columns. Do not silently change any gate or floor."
+    },
+    {
+      "topic": "Actual mechanics and kinematics",
+      "fields": [
+        "states[].d/q_in/q_out/R_input/minimum_J/max_abs_Hu_per_mm/relative_residual/constraint_residual/relative_global_force_balance",
+        "saved forces.npz J/Hu plus model solid/workpiece_cells",
+        "workpiece.fixed_body_fields"
+      ],
+      "requirement": "Report each accepted state, especially peak and final0. Locate minimum sampled J and largest Hu by element/IP/component; distinguish original solid, non-body medium and fixed body using saved masks. Full-model Jmin is not automatically a phase minimum. Body should remain stationary with F=I/J=1/Hu=0. Geometry validity and sampled J positivity are distinct observations."
+    },
+    {
+      "topic": "Pure saved geometry",
+      "fields": [
+        "measurement accepted_index/original_target_index/leg/state_sha256",
+        "geometry.geometry_valid",
+        "regions.raw_interior_overlap/strict_interior_overlap/roundoff_ambiguous/candidate_cell_pairs",
+        "regions.boundary_intersections.minimum_boundary_distance_mm/intersects/roundoff_near_touch",
+        "faces.bottom/left.minimum_first_ray_hit_mm/closest_hit/minimum_hits"
+      ],
+      "requirement": "Use newly measured010 saved coordinates, no009 gap substitution. Report witness points/edge IDs/face parameters/corner flags/ties/intervals/residual and null no-hit. Separate unsigned distance, finite outward ray and source node-window proxy. None is contact pressure or a signed penetration law. State complete containment and mechanism self-overlap remain untested. Compare matching load/unload target indices and final geometry, not only peak."
+    },
+    {
+      "topic": "Body force distribution and moments",
+      "fields": [
+        "all-node CSV accepted_index/node_id/group/total_Fx_N/Fy_N/material_Fx_N/Fy_N/regularization_Fx_N/Fy_N",
+        "nodal summary groups/resultant/moment_origin_mm/derived moment",
+        "workpiece force_on_lower_body_N/holding_reaction_on_model_N/fixed_holding_reaction_partition_N/overlap/mirror/net/two_sided magnitude"
+      ],
+      "requirement": "Retain all153 body nodes and every accepted index, common N display scale, signed components and unchanged tiny values. Examine node2670(78,32) and2654(62,32) plus shared-cut endpoints3302/3318 without assigning their force to a single face. Report local cancellation as well as net force. Four groups must partition nodes and complete sums match cached body force/holding; WP ownership prevents symmetry overlap double counting. Mirror upper=(Fx,-Fy), full net=(2Fx,0),2abs(Fy) is a scalar magnitude sum. Moment about(70,40) is derived/unqualified, not pressure or an energy measurement."
+    },
+    {
+      "topic": "Loading/return comparison and interpretation",
+      "report": [
+        "original target pairs1.75 indices4/6,1.5 indices3/7,1 indices2/8,.5 indices1/9,0 indices0/10; actual accepted indices may differ",
+        "peak1.8 R/qout/J/Hu/body components and corner distribution",
+        "final signed R/qout/free residual, saved displacement and body vectors; no forced zeros"
+      ],
+      "requirement": "Do not declare contact from extrapolated009 closure, weak force growth or nodal moment. Mechanical equilibrium/force/Jv/body projection only qualifies new accepted states when the new reference passes. No new auxiliary-energy, stress-HP, pressure, clamping, all-column, mesh-convergence or H2/H3/HF5 qualification; preserve raw production qualification flags rather than editing them."
+    },
+    {
+      "topic": "Failure boundary",
+      "requirement": "First formal failure retains actual partial accepted state/diagnostic evidence and closes the new phase under its existing card. Do not extend budget, retry, drop targets, resume from009 or invoke HP on a known-false precondition. Any subsequent pure saved analysis must retain its own limited scope."
+    }
+  ],
+  "review_operations": "Only JSON/source schema reads and static checklist authoring. No evaluation of010 values or reuse of009 mathematics as010 proof.",
+  "new_force_tangent_consumer_HP_assembly_solver_calls": 0,
+  "new_geometry_measurements": 0,
+  "new_test_render_calls": 0
+}

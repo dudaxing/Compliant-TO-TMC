@@ -1,0 +1,282 @@
+{
+  "schema_version": "cycle010-readonly-migration-review-1.0",
+  "status": "pass",
+  "scope": "Readonly static migration plan from actual qualified cycle009; no cycle010 source/candidate validation or execution yet.",
+  "reviewed_root_HEAD": "07134ea6cd9aa0ab2de4bf97f80a8e8ca44c241e",
+  "mechanics_or_geometry_or_test_calls": 0,
+  "base_actual_identity": {
+    "stage": "coarse_square_cycle_009",
+    "source_freeze_sha256": "0fae6fd22d845f4014f1331b8b42736f1dc2c3081cfa5337d64100352211683f",
+    "input_inventory_sha256": "9b646cce3df0fb920115c941e1d73589e3b6d794ab33021682aec411a078cf9e",
+    "protocol_sha256": "0033dc61320e0423d86d35dd22e4cd68703468a079615849c45fb5636a59a0ed",
+    "sources": 68,
+    "source_capsules": 68,
+    "inputs": 63,
+    "all_current_source_and_capsule_SHA_match": true,
+    "actual_accepted_states": 9,
+    "actual_fresh_HP_completed": 18,
+    "qualified_previous_task_raw_SHA256": "aa6801849144f85fe6db1ab68db0869d6895b531a556481234f1e0fc9339c54c",
+    "original_fixed_body_model_file": "lf_data_preparation/native_workpiece_001/models/gripper_coarse_square/model.npz",
+    "original_fixed_body_model_SHA256": "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049",
+    "direction_file_SHA256": "177124bd1968f9e451e59cba4d7124c393eb8fee15cc93851f570f980aada29a",
+    "direction_array_SHA256": "a408f3547e73d0acd2f4ca718b82dfa49cc543a9606aba37fcacb4f1fa3d12f1"
+  },
+  "new_explicit_contract": {
+    "stage": "coarse_square_cycle_010",
+    "targets_mm": [
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      1.75,
+      1.8,
+      1.75,
+      1.5,
+      1.0,
+      0.5,
+      0.0
+    ],
+    "input_target_mm": 1.8,
+    "task_path": {
+      "kind": "ordered_cycle",
+      "targets_mm": [
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        1.75,
+        1.8,
+        1.75,
+        1.5,
+        1.0,
+        0.5,
+        0.0
+      ]
+    },
+    "zero_start": true,
+    "original_target_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "original_target_legs": [
+      "origin",
+      "loading",
+      "loading",
+      "loading",
+      "loading",
+      "loading",
+      "unloading",
+      "unloading",
+      "unloading",
+      "unloading",
+      "unloading"
+    ],
+    "peak_original_target_index": 5,
+    "return_original_target_index": 10,
+    "actual_accepted_N": "N>=11 when successful; retain every bisection and repeated target, enumerate in actual path order",
+    "fresh_HP_rule": "2*N, not hard-coded22; 22 only if exactly11 actual states",
+    "settings": {
+      "tolerance": 1e-09,
+      "constraint_tolerance": 1e-10,
+      "displacement_scale_floor": 1e-06,
+      "force_scale_floor_factor": 1e-08,
+      "max_checks": 25,
+      "armijo_c": 0.0001,
+      "max_backtracks": 12,
+      "max_bisections": 4,
+      "minimum_increment": 0.00625,
+      "time_limit_seconds": 900.0
+    },
+    "execution_limits": {
+      "production_seconds": 900,
+      "reference_seconds": 300,
+      "sampled_RSS_bytes": 8589934592,
+      "production_outer_seconds": 960,
+      "reference_outer_seconds": 360,
+      "view_outer_seconds": 120
+    },
+    "response_mode": "mechanical",
+    "tangent_execution": {
+      "mode": "chunk256",
+      "element_block_size": 256,
+      "global_selector_scope": "full_batch"
+    },
+    "auxiliary_material_energy": {
+      "status": "not_evaluated",
+      "qualified": false,
+      "field_present": false
+    }
+  },
+  "minimal_migration": [
+    {
+      "files": "prepare_cycle010.py + author builder",
+      "change": "PRIOR becomes qualified009, ORIGINAL remains003; BASELINE must equal the new actual clean HEAD. Rename only new wrappers/stage outputs, preserve ROOT parents[3]. Prior prerequisites must read actual009 pass/9states/18completed HP instead of007/7/14.",
+      "locations_in_009": [
+        "prepare_cycle009.py:24",
+        "prepare_cycle009.py:36",
+        "authoring/build_card.py:11"
+      ]
+    },
+    {
+      "files": "task.json + prepare_cycle010.py",
+      "change": "Allow only four descriptive keys(task_id,purpose,parameter_origin,description), input.target_mm1.8 and ordered path eleven targets vs009. Force case.targets_mm=TARGETS, assert equality with task.path.targets_mm and max==input.target_mm. Copy009 direction byte-exact; all other physics fields remain unchanged.",
+      "locations_in_009": [
+        "prepare_cycle009.py:44",
+        "prepare_cycle009.py:53"
+      ]
+    },
+    {
+      "files": "prepare_cycle010.py",
+      "change": "009 has the current exact core/nativeMean/CLI/tangent interface already. Change changed_from_prior expected set from three to empty if PRIOR009; retain original003 transition dict with its four historical previous/current pairs. Build original00363 root keys plus five new010 wrappers, count68 and unique basenames. Private core B850 must be raw-byte copied.",
+      "locations_in_009": [
+        "prepare_cycle009.py:66",
+        "prepare_cycle009.py:80"
+      ]
+    },
+    {
+      "files": "input_inventory + prepare/builder",
+      "change": "Inherit all00963 input bindings, add009 inventory/sourcefreeze/executionreceipt/reference summary4 and new010 task/direction/README3 ->70 distinct input bindings. Preserve existing chunk comparison/integration proofs,008failed artifacts as historical context,original geometry/native23/body27/direction pins. Replace settings.time_limit_seconds only900; replace production/reference inner/outer limits900/300/960/360, RSS8GiB/view120 unchanged. Remove blanket whole-settings/limits equality against009; assert the explicit override and all remaining values unchanged.",
+      "locations_in_009": [
+        "prepare_cycle009.py:90",
+        "prepare_cycle009.py:108",
+        "authoring/build_card.py:81"
+      ]
+    },
+    {
+      "files": "execute_cycle010.py",
+      "change": "The execution wrapper already reads case.targets_mm and settings/production limit from inventory; retain that and all actual dynamic counters. Preserve _assemble_mechanical_force/_tangent_chunked observers, same-object cached fields, first actual range capture, bare re-raise, finally hook restoration, model27 raw comparison, cached writer0 extra evaluations. Do not fill old63F36T or expected11 into actual counts.",
+      "locations_in_009": [
+        "execute_cycle009.py:179",
+        "execute_cycle009.py:191",
+        "execute_cycle009.py:215"
+      ]
+    },
+    {
+      "files": "audit_cycle010.py",
+      "change": "Update exact stage predicate,wrapper paths/BASELINE/TARGETS/PREVIOUS_TASK_PIN to actual009 task aa680184...c54c; previous_task_file must be009, not007. SETTINGS.time900 and LIMITS900/300/960/360; --time-limit and final require text300. Expected input cardinality70, scope strings eleven/1.8. Preserve original GATES/Core B850/B52/math/reconstruct_counts and all accepted-index chronology checks.",
+      "locations_in_009": [
+        "audit_cycle009.py:137",
+        "audit_cycle009.py:185",
+        "audit_cycle009.py:272",
+        "audit_cycle009.py:392",
+        "audit_cycle009.py:638"
+      ]
+    },
+    {
+      "files": "audit_cycle010.py + builder protocol",
+      "change": "Leave actual-state enumeration/run_state/workpiece_checks unchanged. Require each original index0..10 exactly once and correct increasing/decreasing leg, while permitting bisected states to inherit original index. Fresh reference only after true full production terminal pass, all tangents completed and final0accepted; enumerate Nstates and 2NHP. New protocol production helper900/outer960 and reference helper300/outer360 with reference argv--time-limit300. Count protocol bindings from actual resulting map, not copied213.",
+      "locations_in_009": [
+        "audit_cycle009.py:357",
+        "audit_cycle009.py:595",
+        "authoring/build_card.py:100"
+      ]
+    }
+  ],
+  "unchanged_physical_and_storage_contract": {
+    "model_arrays": 27,
+    "model_byte_identity": "All actual arrays dtype/shape/Cbytes equal original a2d6; task/model semantic metadata hashes legitimately change with new task identity/path. Do not copy old canonical task hash.",
+    "native_case": {
+      "alias": "gripper_coarse_square",
+      "source_alias": "gripper_canonical",
+      "elements": 3200,
+      "dofs": 6642,
+      "fixed_DOFs": 376,
+      "free_DOFs": 6266,
+      "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+      "geometry_file": "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json",
+      "geometry_file_sha256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+      "geometry_npz_file": "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.npz",
+      "geometry_npz_sha256": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+      "prior_task_file": "lf_data_preparation/native_model_001/tasks/gripper_canonical.json",
+      "prior_task_sha256": "67d21a63898b2f31962f3e930bc2cb17e36b2813671dfa413c85c7834e6c9b63",
+      "prior_model_file": "lf_data_preparation/native_model_001/models/gripper_canonical/model.npz",
+      "prior_model_sha256": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79",
+      "workpiece_model_file": "lf_data_preparation/native_workpiece_001/models/gripper_coarse_square/model.npz",
+      "workpiece_model_sha256": "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049",
+      "direction_array_sha256": "a408f3547e73d0acd2f4ca718b82dfa49cc543a9606aba37fcacb4f1fa3d12f1",
+      "tangent_mode": "chunk256"
+    },
+    "source_transition": {
+      "hf_repo/scripts/solve_native_mean.py": {
+        "previous_sha256": "b36d67444b122d2ed6ff693683dbd4d1c727e55ba27c0726c43f5cd4f211444f",
+        "current_sha256": "d457783d3818f3f4c5fe2ce558df9cd9a14245880198aaa6907e7b3541d54888"
+      },
+      "hf_repo/src/hf_eval/native_mean.py": {
+        "previous_sha256": "948e73098e4bbb8748b6e256e12aac5e653019762f005efa6809c76eaacb4085",
+        "current_sha256": "186a6662c14310b4dc577591764eef849988448de132474fd6953579449cb22b"
+      },
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": {
+        "previous_sha256": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+        "current_sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+      },
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": {
+        "previous_sha256": "f7549b1a51f21d8598892f3d74cebfc544a24a5bc79e60b87e7734f2a6058a1c",
+        "current_sha256": "fe36581e8b49f1a547973e135f3c8ca0f2bbc7d954502405418bd794d731955a"
+      }
+    },
+    "gates": {
+      "production_residual": "1e-9",
+      "independent_residual": "1e-8",
+      "force_evaluation": "1e-9",
+      "average_constraint": "1e-10",
+      "global_force_balance": "1e-6",
+      "fixed_displacement_mm": "8e-11",
+      "hp80_hp120": "1e-40",
+      "total_force": "1e-11",
+      "material_force": "1e-9",
+      "regularization_force": "1e-9",
+      "total_tangent": "1e-10",
+      "material_tangent": "1e-9",
+      "regularization_tangent": "1e-9",
+      "augmented_force_tangent": "1e-10",
+      "augmented_constraint_tangent": "1e-10"
+    },
+    "minimum_increment_mm": 0.00625,
+    "state_authority": "Exact D(lift)+D(fluctuation); zero lift, continuous loading to unloading",
+    "direction_definition": "v=b_in/max(abs(b_in)); merged fixed DOFs zero; multiplier direction0",
+    "model_npz_fields": "23original+4workpiece,16force fields/3tensors/fullCSC each actual accepted state; no material_energy",
+    "actual_counter_accounting": "Starts/completed separately; Newton bases and trial calls including range/Armijo rejection remain reconstructed from actual history, not targets count.",
+    "qualification": "Fresh declared010 accepted-state force/Jv/equilibrium/body gates only; no pressure/contact/clamp/H2/H3 or inherited009 state qualification."
+  },
+  "cost_basis": {
+    "actual009_production_outer_seconds": 373.5703417000477,
+    "actual009_reference_outer_seconds": 180.1542269999627,
+    "linear_11_over_9_production_seconds": 456.5859731889472,
+    "linear_11_over_9_reference_seconds": 220.18849966662108,
+    "new_budgets_explicit": true,
+    "estimate_is_success_guarantee": false,
+    "risk": "New1.8near-contact peak may increase Newton/backtracking/bisection and HP accepted-state cost; first formal failure closes the new card, no silent extension/retry. Cooperative elapsed/RSS monitoring is not an OS hard cap."
+  },
+  "known_migration_blockers_if_left_unmodified": [
+    "prepare previous-run7/14 assertions would reject qualified0099/18.",
+    "changed_from007 nonempty set becomes incorrect when switching PRIOR009.",
+    "Blanket600settings/240limits equality prevents declared900/300 resource changes.",
+    "Auditor previous task007/rawpin2d74 or stage009 predicate cannot validate010.",
+    "Copying63inputs or213protocol count without incorporating009prerequisites/new010 files loses identity scope.",
+    "Replacing task path without explicit case.targets_mm override silently executes the old nine-target path."
+  ],
+  "read_files_SHA256": {
+    "prepare_cycle009.py": "db9034899611610ae1ac681a322c47ac1317d03172d89071221c1159e6a51c0c",
+    "execute_cycle009.py": "d483998c35cb9edc67bb9059648a10f1fdafaf90e2e5121b6018e657147f3cc4",
+    "launch_cycle009.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+    "audit_cycle009.py": "87e1ad05477ce202aead0d6b6418412e020e248f02ee34de7c68566e300ec7fc",
+    "authoring/build_card.py": "06a21115f5b38abb2fa341429cf418d0d12ff4a98d9c2ea96f258e231317a356",
+    "core_audit_mechanical.py": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+    "source_freeze.json": "0fae6fd22d845f4014f1331b8b42736f1dc2c3081cfa5337d64100352211683f",
+    "input_inventory.json": "9b646cce3df0fb920115c941e1d73589e3b6d794ab33021682aec411a078cf9e",
+    "protocol.json": "0033dc61320e0423d86d35dd22e4cd68703468a079615849c45fb5636a59a0ed",
+    "task.json": "aa6801849144f85fe6db1ab68db0869d6895b531a556481234f1e0fc9339c54c",
+    "execution_receipt.json": "5b290825691130c96bdd74b22f2be8e29011ee304381ac54caf526a90cfbec6c",
+    "reference/summary.json": "7ffea3f27ae288d23fead7647bf4d24e468cc197bef7caa12dbfff22139110f7"
+  },
+  "no_cycle010_execution_or_pass_claim": true
+}

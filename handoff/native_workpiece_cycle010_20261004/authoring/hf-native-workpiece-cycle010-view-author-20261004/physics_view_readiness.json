@@ -1,0 +1,86 @@
+{
+  "schema_version": "cycle010-saved-physics-view-static-readiness-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "reviewed_files": {
+    "plot_saved_J_Hu.py": {
+      "sha256": "4705980834a9e4916f14367dcec755dfd7affb9ddaf2f8437d4a506940e38544",
+      "lines": 222,
+      "AST_compile_only": true,
+      "imports": [
+        "argparse",
+        "csv",
+        "hashlib",
+        "json",
+        "math",
+        "matplotlib",
+        "matplotlib.collections",
+        "matplotlib.colors",
+        "matplotlib.pyplot",
+        "numpy",
+        "pathlib",
+        "psutil",
+        "sys",
+        "time"
+      ]
+    },
+    "plot_saved_regions.py": {
+      "sha256": "9355f8c33f6e31d2e76bdad4d119afd03d8b404bb7a0c8cd1ab886e07cf96514",
+      "lines": 214,
+      "AST_compile_only": true,
+      "imports": [
+        "argparse",
+        "csv",
+        "hashlib",
+        "json",
+        "matplotlib",
+        "matplotlib.collections",
+        "matplotlib.pyplot",
+        "numpy",
+        "pathlib",
+        "psutil",
+        "sys",
+        "textwrap",
+        "time"
+      ]
+    }
+  },
+  "scope": "Static source/AST only. Ref003 was still running when this review was requested; no actual reference/render pass is asserted.",
+  "J_Hu": {
+    "J": "Per-cell minimum of exactly nine saved dimensionless J samples. Natural sample position comes from saved model.points; not a continuous minimum.",
+    "Hu": "Per-cell maximum absolute saved component Hu[i,J,K]=u_i,JK in 1/mm; Q1 reference Hessian is element-constant, so no quadrature index is assigned.",
+    "phase_extrema": "Mechanism-solid, nonbody-medium and fixed-body overlay are separate. Body is excluded from nonbody-medium extrema; first saved element then first sample/component breaks ties.",
+    "display": "Saved reference coordinates plus saved lift/fluctuation, actual scale1. Body grey overlay. Common norms between full/local panels, logJ and linear absHu.",
+    "CSV": "All3200 saved cells, ten columns with signed winning Hu component and component indices; no new fields or mechanical evaluation.",
+    "energy": "Not evaluated; no energy, stress-HP, pressure, contact/clamp or full-column claim."
+  },
+  "regions": {
+    "face_rays": "Dashed segments connect saved finite-face witness to saved mechanism-edge witness. They are forward directional geometric lengths, not forces, contact normals with pressure, signed gaps or penetration.",
+    "cut": "Closed-region boundary distance includes mathematical symmetry cut; physical finite-face rays exclude it. Wording preserves this distinction.",
+    "endpoint_labels": "Origin, actual maximum target state and final zero are selected dynamically. Repeated targets and bisection rows remain chronological and retain distinct indices.",
+    "no_hit": "Saved null becomes empty CSV cell/NaN curve, never zero. Saved corner/near-corner and tie counts remain in CSV; a drawn witness is only one representative saved minimum.",
+    "qualifications": "Cross-region cell-union overlap was measured separately. Whole-set containment/mechanism self-overlap/pressure/contact-clamp are explicitly unqualified.",
+    "display": "Saved deformed coordinates at scale1 with fixed grey half-square; no geometry measurement is called by viewer."
+  },
+  "eligibility": "Both loaders require successful complete original11-target path and same-result fresh2N reference. Actual N is dynamic (currently expected12 only from completed production); source/geometry/reference ownership must be frozen by future card. Raw producer flags remainFalse.",
+  "recommendation": {
+    "required": false,
+    "change": "Outline the already-selected phase-extremum cells with a thin unfilled PolyCollection in both full/local panels: minJ cells only in J column, maxabsHu cells only in Hu column.",
+    "inputs": "Use existing phase_extrema element IDs and existing polygons; no extra geometry/field reduction or API call.",
+    "labels": "Use distinct line style/color for mechanism-solid vs nonbody-medium, keep grey body and original color norms, identify e/q forJ and e/component forHu. No Hu quadrature label.",
+    "reason": "This lets a reader locate the printed discrete extrema without mistaking a whole colored region for the winning cell."
+  },
+  "issues": [],
+  "actual_image_QA_performed": false,
+  "new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "HP": 0,
+    "consumer": 0,
+    "assembly": 0,
+    "solver": 0,
+    "geometry": 0,
+    "render": 0,
+    "tests": 0
+  }
+}

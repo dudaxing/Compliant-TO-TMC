@@ -1,0 +1,121 @@
+{
+  "schema_version": "cycle010-saved-view-readiness-static-1.0",
+  "status": "conditional_static_pass",
+  "blocking_issues": [],
+  "scope": "Read-only source/AST/CLI/bindings/budget review; author files only. No viewer, builder, production module, test, action consumer, geometry or HP execution.",
+  "reviewed_sources": {
+    "plot_workpiece_cycle010.py": {
+      "sha256": "614bcbe15ac3de8c863913280d785b49bda84178ef0b64d67cc16613715949a0",
+      "lines": 264
+    },
+    "animate_saved_path.py": {
+      "sha256": "d4e28bb1d25cb10fc79e881fb3b4ee5d2a42d21391a92add2c97b55cd3f1ba6c",
+      "lines": 74
+    },
+    "plot_saved_J_Hu.py": {
+      "sha256": "4705980834a9e4916f14367dcec755dfd7affb9ddaf2f8437d4a506940e38544",
+      "lines": 222
+    },
+    "plot_saved_regions.py": {
+      "sha256": "9355f8c33f6e31d2e76bdad4d119afd03d8b404bb7a0c8cd1ab886e07cf96514",
+      "lines": 214
+    },
+    "build_region_card.py": {
+      "sha256": "8e1e8157b467e47350c3244c12f369928196af18b33314b2cfd5eeafff0c51e4",
+      "lines": 172
+    },
+    "build_saved_cards.py": {
+      "sha256": "909e415b5dd9769c65ff5d2bb64a2985babdbfbfbd4a2d71f388637c3dfaf762",
+      "lines": 126
+    }
+  },
+  "reference": {
+    "required_viewer_argument": "--reference",
+    "future_summary": "lf_data_preparation/native_workpiece_001/coarse_square_cycle010_ref_003/reference/summary.json",
+    "summary_existed_at_review": false,
+    "actual_reference_pass_claimed": false,
+    "whole_path_requirement": "One independent terminal-pass Ref003, all 12 actual states and 24 fresh HP80/120 calls, all state indices/identities and saved payloads bound to production010. Ref002 prefix rows are not merged.",
+    "closed_Ref002": "Parent-reported time_limit:16 HP calls,7 completed rows; independent closed failure retained. No failed Ref002 output was read or changed during this review."
+  },
+  "interfaces": {
+    "four_viewers": "Physical, animation, J/Hu and regions all require explicit --reference; changed sections are CLI/path/payload-root/metadata only. No gate or arithmetic/render-field change in this migration.",
+    "builder_reference_arguments": "build_saved_cards passes the Ref003 summary explicitly to all three wrapper programs, node observation, node render and geometry render. build_region_card binds Ref003 protocol/terminal launch/summary/per-state payloads before creating its output.",
+    "whole_path": "Completed successful production and full ordered 11-target path with return zero are required. Actual N is derived from saved states (12 here); state identity/original_target_index/leg checks retain both zero records and bisection state.",
+    "transitive_payload_binding": "Region card recursively binds actual reference path+SHA records and production JSON/NPZ files; later cards inherit terminal region protocol bindings. The lightweight animation has weaker standalone checks and relies on the enclosing source/data-bound 3-program wrapper, not standalone independent qualification.",
+    "production_closure": {
+      "inputs": 73,
+      "sources": 68,
+      "input_inventory_sha256": "bb08fa9339ea36c2057bf6672630f3231bc7f61a923b22a63ab77cc55abcf5f6",
+      "source_freeze_sha256": "a4eb119f87899c1a2b12db9ef7209f0a73cf4d0d0ea72186bbef57a7e51cd03b",
+      "check_basis": "Existing JSON key counts/declared path were read; this static review does not repeat all 213 production or later reference numerical checks."
+    },
+    "node_source_reuse": "All five nodal source SHA values agree with the original passing square009_001 source-freeze declarations. Original5 test evidence is reused, not rerun.",
+    "corrected_node_renderer": {
+      "path": "functional_views/native_workpiece_nodal_20261004/square009_view002/plot_saved_nodal_forces002.py",
+      "sha256": "778c08625353bfcb0273d17c134db8e90c6eb6a8302a551acdae43477c1c2edc",
+      "zero_vectors": "Original minlength=0,minshaft=1 correction is preserved byte-for-byte."
+    },
+    "render_wrapper": {
+      "path": "functional_views/native_workpiece_cycle009_20261004/saved_render_001/render_saved_once.py",
+      "sha256": "a3e101ffb930f8ccb3a7a6c069e538534e6823afab56269da152548b32b7b510",
+      "programs": 3,
+      "path_root": "Installed STAGE.parents[2] resolves to formal repo; exact physical+animation+J/Hu program count matches old wrapper."
+    },
+    "launcher": {
+      "path": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/launch_cycle010.py",
+      "sha256": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+      "path_root": "Installed launcher __file__.parents[3] resolves to formal repo."
+    }
+  },
+  "phase_resources": {
+    "region_measure": {
+      "helper_seconds": 120,
+      "outer_seconds": 150
+    },
+    "node_observe": {
+      "helper_seconds": 120,
+      "outer_seconds": 150
+    },
+    "render_three_programs_one_window": {
+      "helper_seconds": 120,
+      "outer_seconds": 150
+    },
+    "node_render": {
+      "helper_seconds": 120,
+      "outer_seconds": 150
+    },
+    "geometry_render": {
+      "helper_seconds": 120,
+      "outer_seconds": 150
+    },
+    "sampled_RSS_bytes": 8589934592,
+    "basis": "New explicit independent saved-data cards; original helper cooperative limits and sampled outer launcher preserved. No OS hard-memory cap or whole-tree cleanup guarantee is asserted."
+  },
+  "execution_order": "Root alone may build region card after actual complete Ref003 terminal pass, run one region measurement, build/run one node observation, then build render card and run render, node_render and geometry_render sequentially after prior terminal pass. First phase error closes the corresponding card; no retry or prefix merge.",
+  "display_and_scope": "Actual x1 animation with all accepted frames/no interpolation; physical plot x1 plus marked x4 only; forces N, J dimensionless, Hu 1/mm, geometric rays/distances mm. No-hit stays null/blank/NaN. Mechanical reference scope remains force/one PORT-Jv/equilibrium/body projection; no pressure/clamp/contact/energy/stress-HP/all-column or containment/self-overlap qualification.",
+  "author_history": {
+    "before_sources_preserved": "before_external_reference/ (six files)",
+    "initial_migration": "Five migrations completed; sixth builder uniqueness assertion failed because its literal occurred twice. Root completed builder literals and all reference argv before formal card installation. external_reference_author_result.json preserved.",
+    "latest_Ref003_path_note_sha256": "b41db64d50d1bd5514a00597d3f930e399b5a8bcf2dde307e69201c2c4c08e90",
+    "initial_author_result_sha256": "31bbb202d48ff12deff83917af3f05778b43164f61f387892b673179aa6156ed"
+  },
+  "review_probe_limit": "An initial read-only inspection used an incorrect nested key for the old flat nodal source-freeze JSON and raised KeyError before any execution or mutation; corrected read matched the actual builder schema. This is not a formal phase failure.",
+  "new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "action_consumer": 0,
+    "geometry": 0,
+    "pytest": 0,
+    "render": 0,
+    "builder": 0
+  },
+  "source_changes_by_reviewer": false,
+  "formal_repository_writes_by_reviewer": 0,
+  "prerequisites_pending": [
+    "Actual Ref003 terminal pass with complete fresh12/24 coverage and immutable bindings.",
+    "Each independently frozen saved-data protocol and root-controlled sequential terminal-pass invocation.",
+    "Actual images/CSV/geometry/reference qualification remain unreviewed until those new phases terminate."
+  ]
+}

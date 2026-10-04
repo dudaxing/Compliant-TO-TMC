@@ -1,0 +1,154 @@
+{
+  "schema_version": "cycle010-visual-migration-readonly-review-1.0",
+  "status": "author_plan_only_no_execution_or_actual010_qualification",
+  "created_utc": "2026-10-04T10:42:58.377317+00:00",
+  "scope": "Read existing saved-only source and historical protocol/row schemas; no formal repository edits and no plotting, geometry, HP, FE, pytest, force, tangent, solver or action-consumer calls.",
+  "planned_original_targets_mm": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    1.75,
+    1.8,
+    1.75,
+    1.5,
+    1.0,
+    0.5,
+    0.0
+  ],
+  "actual010_unknown": {
+    "installed": false,
+    "prepared": false,
+    "production_terminal_outcome_known": false,
+    "actual_accepted_states": null,
+    "actual_peak_index": null,
+    "last_accepted_index": null,
+    "reference_terminal_outcome_known": false,
+    "data_bindings_frozen": false,
+    "note": "Eleven is the declared original-target count, not an assertion of eleven actual accepted states. Bisection states must remain. Nominal peak original_target_index5 and final original_target_index10 must not become hardcoded accepted indices."
+  },
+  "reviewed_source_bindings": {
+    "functional_views/native_workpiece_cycle009_20261004/plot_workpiece_cycle009.py": {
+      "sha256": "a08b45765f8235eb90e3ab964a7acb6a736d8be58f8deda8b4e44996cf2a3ac6",
+      "lines": 264,
+      "AST_parse": "pass"
+    },
+    "functional_views/native_workpiece_cycle009_20261004/animate_saved_path.py": {
+      "sha256": "347aaa1e4da2cbbd75641e41c06df46d31adae34962ecaa810e9a951a71e6f92",
+      "lines": 73,
+      "AST_parse": "pass"
+    },
+    "functional_views/native_workpiece_cycle009_20261004/saved_render_001/render_saved_once.py": {
+      "sha256": "a3e101ffb930f8ccb3a7a6c069e538534e6823afab56269da152548b32b7b510",
+      "lines": 58,
+      "AST_parse": "pass"
+    },
+    "functional_views/native_workpiece_cycle009_20261004/saved_render_001/build_visual_card.py": {
+      "sha256": "6d229ebcf6b5e77ea3183a8f51aaab1d4ca6e1294cc21b56fd0a73ad055860b3",
+      "lines": 101,
+      "AST_parse": "pass"
+    },
+    "functional_views/native_workpiece_nodal_20261004/square009_view002/plot_saved_nodal_forces002.py": {
+      "sha256": "778c08625353bfcb0273d17c134db8e90c6eb6a8302a551acdae43477c1c2edc",
+      "lines": 126,
+      "AST_parse": "pass"
+    },
+    "functional_views/native_workpiece_nodal_20261004/square009_view002/build_view002.py": {
+      "sha256": "643478b730e5362b9d64214382251394d2be43c67ffdf38836f872d3c120dc41",
+      "lines": 72,
+      "AST_parse": "pass"
+    },
+    "functional_views/native_workpiece_nodal_20261004/square009_001/build_nodal_card.py": {
+      "sha256": "e50353ec3e7824b75a7a1b60a7efeb2c08c988e109b5d8b4c127508e13232774",
+      "lines": 104,
+      "AST_parse": "pass"
+    },
+    "functional_views/native_workpiece_cycle_20261004/plot_workpiece_cycle.py": {
+      "sha256": "d256fe2b1541505cd5315f45c4a50462670a09436ceb91ecc8d01bbb25554169",
+      "lines": 423,
+      "AST_parse": "pass"
+    }
+  },
+  "reusable_dynamic_behavior": [
+    {
+      "source": "plot_workpiece_cycle009.py",
+      "lines": "108-125,179-180,214-245",
+      "finding": "Reads every saved accepted state, preserves original_target_index/leg, checks original-target coverage, derives peak from actual d and last from actual length, and plots force/J/Hu/Newton/trial chronology by saved order."
+    },
+    {
+      "source": "animate_saved_path.py",
+      "lines": "29-38,54-69",
+      "finding": "Uses all saved states in sequence, derives peak and last, renders physical xy+(L+w) at x1, saves actual origin/peak/last PNGs and one frame per actual state. No interpolation or state-hash deduplication."
+    },
+    {
+      "source": "plot_saved_nodal_forces002.py",
+      "lines": "49-60,67-121",
+      "finding": "Uses all actual indices and every saved workpiece node in source order; derives peak, shares one N vector scale across components and states, retains tiny signed CSV values, and preserves corrected minlength0/minshaft1 so zero vectors remain invisible."
+    },
+    {
+      "source": "plot_workpiece_cycle.py::numerical_rows",
+      "lines": "174-199",
+      "finding": "Pure row formatting for every actual index includes d/qin/qout, R, Jmin, HuMax, residual/constraint/balance, body material/Hu/total resultants, holding partitions, node-window proxies and each mean-input node displacement; the old 17-field loader is not used."
+    }
+  ],
+  "minimum_migration_differences": {
+    "physical_source": [
+      "Create a new010 source/capsule; preserve all frozen009 source/media.",
+      "Change docstring/title/strict stage predicate coarse_square_cycle_009 -> coarse_square_cycle_010, numeric-helper module name and output/frozen-reader filenames.",
+      "Replace only declared TARGETS with the complete eleven-target list; retain task/result/inventory equality, original-target index coverage and at least-original-count actual N.",
+      "Keep schema1.2, mechanical16fields, omitted-energy declaration, chunk256 full-batch selector trace, 27model arrays, three tensor/full unsymmetrized CSC identities and exact split-state hash checks.",
+      "Keep full success and complete return plus same-stage fresh reference gates. If010 fails, preserve the closed card and use a separately declared partial saved-view card; never remove the success guard and call the original view passing.",
+      "All accepted records and reference records remain indexed and chronological; freshHP actualN*2, peak=argmax actual d, last=actualN-1. Do not hardcode5/10 or collapse loading/unloading duplicate d."
+    ],
+    "animation_source": [
+      "New010 source and GIF filename; existing all-N rendering loops can stay unchanged.",
+      "Full success/unload and reference pass remain prerequisites supplied and hash-bound by the outer saved card; the small animator does not itself verify all archive/file hashes.",
+      "Retain true x1 in full model and local detail; all actual accepted frames, initial0 and final0 both retained, no inserted/interpolated frames.",
+      "Its displacement colorbar uses path-wide maximum nodal norm while painted elements use mean nodal norm. Record this existing choice; do not confuse it with the physical figure colorbar whose range is the path maximum element mean."
+    ],
+    "physical_render_card": [
+      "build_visual_card.py lines8-10,50,52-53,71,85,92,95,100 encode009/9/18. New010 builder must read actualN from completed result, require all eleven declared original targets, and verify actualN matching reference plus2*actualN HP.",
+      "Freeze new actual stage result/model/source geometry/all state JSON+NPZ/tensors/CSC, receipt/progress, fresh reference summary/payload records, and new viewer/helper source capsules only after actual terminal outcomes exist.",
+      "Use a new card/output destination. Preserve root-relative roles and source capsules; do not invent absolute paths or use stale009 payloads as010 identities.",
+      "Historical plot_tangent_cost.py need not be copied/rendered again: its three-state benchmark remains old evidence, not a010 measurement. If omitting it, render_saved_once.py line42 must compare programs_completed with len(protocol.render_programs), rather than the old literal3.",
+      "Keep explicitly frozen saved-card120 helper/150 outer/8GiB unless root declares a new budget; the mechanical900/960 budget does not apply to rendering. The animator relies on outer supervision and program-boundary checks, not an inner per-frame cooperative stop check."
+    ],
+    "nodal_path": [
+      "Corrected plot_saved_nodal_forces002.py has no009 or fixed-nine predicate and can be copied byte-for-byte as a pinned saved renderer.",
+      "New010 requires its own saved nodal observation summary/nodes.csv bound to010 result/reference and source model/state/forces; old1377rows are not reused.",
+      "Expected rows must be actualN * actual saved workpiece_nodes count (same planned model153 nodes implies153*actualN; nominal eleven original states would1683, not an asserted actual count).",
+      "Keep all physical_only/cut_only/physical_and_cut/interior groups, every body node, total/material/regularization signed vectors, task-center moment origin and no pressure/face allocation claims.",
+      "build_view002.py is specifically a closed009 display correction requiring old three phase receipts and old observations. It is not the new010 card template. Adapt the original saved-observation card to a fresh observe then render path; unchanged API already has five passing analytic tests, so target-only migration needs no repeat test phase.",
+      "Renderer mapping uses report.input_source_bindings roles reference,repo/*,source/* exactly. Bind fresh role values and capsules, not guesses about newer source-schema fields."
+    ]
+  },
+  "display_contract_to_keep": {
+    "whole_loading_and_unloading": "All actual accepted indices with leg and original_target_index in CSV/frame captions; lines join successive saved observations only.",
+    "geometry": "Actual physical xy+L+w x1; grey undeformed mechanism outline; fixed lower square remains at saved reference coordinates. Supplementary x4 displacement panel explicitly display-only and without force arrows.",
+    "force_sign_and_units": "Actuator/support arrows ON model; lower-body force ON body=-holding. Signed body total/material/Hu in N. Output+y qout is physical mean uy in mm. Mirrored net(2Fx,0) and scalar2|Fy| are distinct; no clamp claim.",
+    "force_scaling": "Physical source uses one path-wide scale across actuator/support/lower-body resultant. Nodal source independently uses one scale across all body nodes/components/states. Each scale/key is explicit; do not imply the two figures use identical arrow scales.",
+    "J_and_Hu": "Current physical figure shows saved global minimum J (dimensionless) and max absolute Hu component (1/mm) through the full chronological path; no pressure interpretation. This is not a spatial field map.",
+    "Newton": "Keep actual completed base chronology and original residual gate, plus accepted/rejected trial factors. They are not accepted-state observations. Zero residuals omitted on log plot remain explicitly declared. For duplicate d a tiny legend change to attempt-number plus d would make distinct attempts easier to read without reconstructing an unrecorded leg.",
+    "markers": "Attached support/input nodes/output measurement remain visible; output diamond is a measurement, not a force. External legend strip avoids covering the structure.",
+    "unsigned_geometry": "Optional saved boundary or new region/ray quantities require a separate actual measurement card. Node-window proxies, exterior unsigned distance and finite-face normal ray are distinct; no new geometry inside the viewers.",
+    "limits": "No new stress-HP, auxiliary energy, pressure, contact/clamp, HP moment, all-column tangent, free-body or overall HF-completion qualification."
+  },
+  "known_readability_and_scope_limits": [
+    "New eleven-target text may wrap to additional lines; inspect actual PNG after the single render instead of assuming no overlap from source review.",
+    "All-state captions/frame counts must come from actualN. Root-relative CLI destinations and protocol role predicates must be read from the final new builder, not derived by global009 replacement.",
+    "The existing physical figure gives force/J/Hu summary curves and Newton history but no elementwise J/Hu spatial images. A separate pure saved-data peak-field view may be planned later, without FE/HP/new geometry.",
+    "Saved-reference qualification is external and same-stage; raw producer independent_HP/equilibrium/HF flags remain false and must not be rewritten by visualization.",
+    "No actual010 result or protocol exists in this review; source adaptation proposals do not freeze future data identities or promise successful eleven-state completion."
+  ],
+  "review_new_calls": {
+    "plot": 0,
+    "geometry": 0,
+    "HP": 0,
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "action_consumer": 0,
+    "pytest": 0
+  },
+  "formal_repository_writes": 0
+}

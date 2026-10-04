@@ -1,0 +1,248 @@
+--- audit_cycle010.py
++++ audit_cycle010_ref002.py
+@@ -93,6 +93,7 @@
+     and sha(ROOT/"hf_repo/src/hf_eval/split_kernel_invariants_hu.py") == KERNEL_PIN,
+     "Declared new kernel or saved-tensor consumer differs")
+ from core_audit_mechanical import Audit as ActionCoreAudit, MECHANICAL_AVAILABILITY
++from counter_contract import reconstruct
+ 
+ BASELINE = "07134ea6cd9aa0ab2de4bf97f80a8e8ca44c241e"
+ TARGETS = [0., .5, 1., 1.5, 1.75, 1.8, 1.75, 1.5, 1., .5, 0.]
+@@ -112,6 +113,7 @@
+         require(self.repo == ROOT and self.limit == LIMITS["reference_seconds"], "Explicit repository/reference budget differs")
+         self.accounting = None
+         self.first_range_observation = None
++        self.tangent_range_observation = None
+ 
+     def checkpoint(self):
+         self.peak = max(self.peak, self.process.memory_info().rss)
+@@ -170,7 +172,15 @@
+         for name, expected in CORE_PINS.items():
+             path = SCRIPTS/name
+             self.check(self.sources[path.relative_to(self.repo).as_posix()] == expected, "Inherited/reference source changed")
+-        self.check(Path(__file__).relative_to(self.repo).as_posix() in self.sources, "New checker is not source-bound")
++        reference_protocol = Path(__file__).with_name("protocol.json")
++        self.bind(reference_protocol)
++        self.reference_protocol_sha256 = sha(reference_protocol)
++        self.reference_bindings = read(reference_protocol)["bindings"]
++        for name, expected in self.reference_bindings.items():
++            self.bind(self.repo/name, expected)
++        self.check(self.reference_bindings.get(Path(__file__).relative_to(self.repo).as_posix()) == sha(Path(__file__))
++            and self.reference_bindings.get(Path(__file__).with_name("counter_contract.py").relative_to(self.repo).as_posix())
++                == sha(Path(__file__).with_name("counter_contract.py")), "Independent reference/counter source binding differs")
+         self.check(self.sources["hf_repo/scripts/audit_native_workpiece_cycle.py"] == OLD_CHECKER_SHA
+             and receipt["inputs"] == inventory["input_bindings"], "Inherited checker or new input closure differs")
+         legacy_stage = self.repo/"lf_data_preparation/native_workpiece_001/coarse_square_cycle_003"
+@@ -181,7 +191,7 @@
+                    "hf_repo/scripts/solve_native_mean.py": CLI_PIN,
+                    "hf_repo/src/hf_eval/split_numpy_tangent.py": TANGENT_PIN}
+         expected_sources = dict(legacy_sources, **changes)
+-        extra_paths = [PRIVATE_CORE, Path(__file__), *(self.stage/name for name in
++        extra_paths = [self.stage/"core_audit_mechanical.py", self.stage/"audit_cycle010.py", *(self.stage/name for name in
+             ("prepare_cycle010.py", "execute_cycle010.py", "launch_cycle010.py"))]
+         extras = {path.relative_to(self.repo).as_posix() for path in extra_paths}
+         transition = {name: dict(previous_sha256=legacy_sources[name], current_sha256=pin)
+@@ -191,7 +201,7 @@
+             and all(self.sources.get(name) == pin for name, pin in expected_sources.items())
+             and inventory["source_transition"] == freeze["source_transition"] == transition
+             and self.sources["hf_repo/src/hf_eval/tangent_action.py"] == CONSUMER_PIN
+-            and self.sources[PRIVATE_CORE.relative_to(self.repo).as_posix()] == sha(PRIVATE_CORE),
++            and self.sources[(self.stage/"core_audit_mechanical.py").relative_to(self.repo).as_posix()] == sha(PRIVATE_CORE),
+             "Previous 63 sources or the four declared mechanical/tangent-interface changes differ")
+         for name, pin in legacy_sources.items():
+             self.bind(legacy_stage/"sources"/Path(name).name, pin)
+@@ -243,10 +253,10 @@
+         self.accounting = self.reconstruct_counts(result, receipt)
+         counts = result["call_counts"]
+         self.check(receipt["observed_force_calls_completed"] == counts["force_calls_completed"]
+-            and receipt["observed_tangent_calls"] == receipt["observed_tangent_calls_completed"]
+-                == counts["tangent_calls"] == counts["tangent_calls_completed"]
+-            and receipt["first_tangent_range_input"] is None
+-            and not (self.stage/"first_tangent_range_input").exists()
++            and receipt["observed_tangent_calls"] == counts["tangent_calls"]
++            and receipt["observed_tangent_calls_completed"] == counts["tangent_calls_completed"]
++            and receipt["first_tangent_range_input"] is not None
++            and (self.stage/"first_tangent_range_input").is_dir()
+             and receipt["force_hook_restored"] is receipt["tangent_hook_restored"] is True,
+             "Completed force/tangent observer chronology or same-instance restoration differs")
+         self.check(all(self.sources[name] == pin for name, pin in result["mechanics_source_sha256"].items()),
+@@ -383,6 +393,7 @@
+         self.inventory, self.receipt, self.result, self.metadata = inventory, receipt, result, metadata
+         self.workpiece_dofs, self.groups = dofs, groups
+         self.first_range_observation = self.verify_first_range_observation(result, receipt, model)
++        self.tangent_range_observation = self.verify_tangent_range_observation(receipt, model)
+         self.checkpoint()
+ 
+     def verify_chunk_prerequisites(self, inventory):
+@@ -441,105 +452,8 @@
+             scope="Closed supplied-state cost/equivalence plus new tiny integration only; no inherited cycle008 HP")
+ 
+     def reconstruct_counts(self, result, receipt):
+-        """Attribute every force start to a complete base or a recorded trial.
+-
+-        A rejected Armijo trial has a complete force. Only a recorded range
+-        rejection without returned merit fields may account for an incomplete
+-        force, and its next factor must halve in that same Newton base.
+-        """
+-        counts, diagnostics = result["call_counts"], result["path_diagnostics"]
+-        history, trials, states = diagnostics["newton_history"], diagnostics["trials"], result["states"]
+-        expected_keys = {"force_calls", "force_calls_completed", "tangent_calls", "tangent_calls_completed",
+-                         "solver_invocations", "HP_calls", "JIT_calls"}
+-        self.check(set(counts) == expected_keys and all(type(v) is int and v >= 0 for v in counts.values())
+-            and counts["tangent_calls"] == counts["tangent_calls_completed"] == len(history)
+-            and counts["solver_invocations"] == 1 and counts["HP_calls"] == counts["JIT_calls"] == 0
+-            and receipt["call_counts"] == counts and receipt["force_calls"] == counts["force_calls"]
+-            and receipt["observed_force_calls"] == counts["force_calls"]
+-            and receipt["tangent_calls"] == counts["tangent_calls"] and receipt["solver_calls"] == 1
+-            and receipt["HP_calls"] == receipt["JIT_calls"] == receipt["LF_imports"] == 0
+-            and receipt["save_force_calls"] == receipt["save_tangent_calls"] == 0,
+-            "Completed Newton-base/tangent/receipt counters differ")
+-        by_tangent = {row["assembler_tangent_call"]: row for row in states}
+-        self.check(len(by_tangent) == len(states) and all(type(k) is int and 1 <= k <= len(history) for k in by_tangent),
+-                   "Accepted tangent-cache ordinals are not unique complete bases")
+-        events, caches, rejected, cursor, completed = [], [], [], 0, 0
+-        for tangent_call, base in enumerate(history, 1):
+-            self.check(type(base["newton_check"]) is int and 1 <= base["newton_check"] <= SETTINGS["max_checks"],
+-                       "Recorded Newton-base index differs")
+-            if base["newton_check"] > 1:
+-                previous = history[tangent_call-2] if tangent_call > 1 else None
+-                self.check(previous is not None and previous["d"] == base["d"]
+-                    and previous["newton_check"]+1 == base["newton_check"],
+-                    "Newton-base sequence skips an iteration or changes its attempt parameter")
+-            force_call = len(events)+1
+-            events.append(dict(force_call=force_call, kind="Newton_base", completed=True,
+-                d=base["d"], newton_check=base["newton_check"], tangent_call=tangent_call,
+-                state_sha256=base["state_sha256"]))
+-            completed += 1
+-            cached = by_tangent.get(tangent_call)
+-            if cached is not None:
+-                self.check(cached["assembler_force_call"] == force_call
+-                    and cached["assembler_state_sha256"] == cached["state_sha256"] == base["state_sha256"]
+-                    and cached["d"] == base["d"] and cached["newton_checks"] == base["newton_check"],
+-                    "Accepted state cache is not the recorded completed Newton base")
+-                caches.append(dict(force_call=force_call, tangent_call=tangent_call,
+-                                   state_sha256=cached["state_sha256"]))
+-                continue  # A converged base makes no line-search force call.
+-            group = []
+-            while cursor < len(trials) and len(group) <= SETTINGS["max_backtracks"]:
+-                trial = trials[cursor]
+-                if (trial["stage_parameter"], trial["newton_check"]) != (base["d"], base["newton_check"]):
+-                    break
+-                factor = 2.**(-len(group))
+-                self.check(type(trial["accepted"]) is bool and trial["factor"] == factor
+-                    and trial["target_displacement"] == trial["stage_parameter"] == base["d"]
+-                    and trial["fixed_residual_scale"] == base["residual_scale"],
+-                    "Trial chronology/factor/unchanged base scale differs")
+-                range_failure = trial["accepted"] is False and trial.get("reason") == "unsupported_arithmetic_range"
+-                if range_failure:
+-                    self.check(not any(k in trial for k in ("phi", "minimum_J", "R_input"))
+-                        and len(group) < SETTINGS["max_backtracks"] and cursor+1 < len(trials),
+-                        "Unaccounted incomplete force or terminal range rejection")
+-                    following = trials[cursor+1]
+-                    self.check((following["stage_parameter"], following["newton_check"], following["factor"])
+-                        == (base["d"], base["newton_check"], factor/2),
+-                        "Range-rejected trial is not followed by the controller half factor")
+-                    rejected.append(dict(trial_index=cursor, force_call=len(events)+1, **trial))
+-                else:
+-                    self.check(all(k in trial and np.isfinite(trial[k]) for k in ("phi", "minimum_J", "R_input"))
+-                        and trial["minimum_J"] > 0. and ((trial["accepted"] is True and trial.get("reason") is None)
+-                            or (trial["accepted"] is False and trial.get("reason") == "armijo_insufficient_decrease")),
+-                        "Unknown trial result cannot account for a completed force")
+-                events.append(dict(force_call=len(events)+1, kind="line_search_trial", completed=not range_failure,
+-                    d=trial["stage_parameter"], newton_check=trial["newton_check"], factor=factor,
+-                    accepted=trial["accepted"], reason=trial.get("reason")))
+-                completed += int(not range_failure)
+-                group.append(trial)
+-                cursor += 1
+-                if trial["accepted"]:
+-                    break
+-            if group:
+-                self.check(group[-1]["accepted"] is True or len(group) == SETTINGS["max_backtracks"]+1,
+-                           "Recorded bounded backtracking sequence terminates without acceptance or exhaustion")
+-        self.check(cursor == len(trials) and len(events) == counts["force_calls"]
+-            and completed == counts["force_calls_completed"]
+-            and counts["force_calls"]-counts["force_calls_completed"] == len(rejected)
+-            and [item["state_sha256"] for item in caches] == receipt["state_sha256"]
+-            and len(caches) == len(states), "Exact base/trial/accepted-cache chronology does not reconstruct counters")
+-        failures = diagnostics["failed_attempts"]
+-        self.check(all(item["rollback_bitwise_equal"] is True
+-            and item["code"] in ("newton_limit", "backtracking_failed", "singular_tangent", "nonfinite")
+-            and 0 <= item["depth"] < SETTINGS["max_bisections"] for item in failures)
+-            and 0 <= diagnostics["maximum_bisection_depth"] <= SETTINGS["max_bisections"],
+-            "Unrecorded rollback, unknown failed-attempt kind or excessive bisection")
+-        return dict(counts=counts, Newton_base_calls=len(history), trial_calls=len(trials),
+-            completed_trials=completed-len(history), rejected_range_trials=rejected,
+-            reconstructed_force_events=events, accepted_completed_caches=caches,
+-            all_Newton_base_and_tangent_calls_completed=True,
+-            policy="Only recorded unsupported_arithmetic_range trials followed by the same-base half factor account for incomplete forces; Armijo rejected forces remain complete",
+-            rejected_trials_independently_qualified=False, unsupported_arithmetic_issue_resolved=False,
+-            production_rerun=False, new_force_calls=0, new_tangent_calls=0, new_solver_calls=0)
++        """Strict captured-failure trace; all accepted caches must be complete."""
++        return reconstruct(result, receipt, SETTINGS, self.check)
+ 
+     def verify_first_range_observation(self, result, receipt, model):
+         """Bind the once-only observer's raw state/model without evaluating it."""
+@@ -587,6 +501,50 @@
+             model_and_operator_fields_match_saved_model=True, independently_qualified=False,
+             scope="First recorded rejected trial input only; no reevaluation or reference qualification")
+ 
++    def verify_tangent_range_observation(self, receipt, model):
++        """Read/copy failed input and its same-object force fields; no reevaluation."""
++        directory = self.stage/"first_tangent_range_input"
++        descriptor = directory/"observation.json"
++        self.bind(descriptor)
++        observation = read(descriptor)
++        self.check(observation == receipt["first_tangent_range_input"]
++            and observation["tangent_call_ordinal"] == self.accounting["failed_tangent_base"]["tangent_call"]
++            and observation["bound_force_call_ordinal"] == self.accounting["failed_tangent_base"]["force_call"]
++            and observation["state_sha256"] == self.accounting["failed_tangent_base"]["state_sha256"]
++            and observation["source_freeze_sha256"] == receipt["source_freeze_sha256"]
++            and observation["input_inventory_sha256"] == receipt["input_inventory_sha256"]
++            and observation["exception_type"] == "KernelError"
++            and np.isfinite(observation["elapsed_seconds"])
++            and 0 <= observation["elapsed_seconds"] <= receipt["elapsed_seconds"],
++            "Failed tangent observation/provenance differs")
++        archive, force_archive = directory/"input.npz", directory/"force_fields.npz"
++        self.bind(archive, observation["input_npz_sha256"])
++        self.bind(force_archive, observation["force_fields_npz_sha256"])
++        arrays, fields = npz(archive), npz(force_archive)
++        verify_fields(arrays, observation["fields"])
++        verify_fields(fields, observation["force_fields"])
++        intrinsic = ("edofs", "coordinates", "connectivity", "lam", "mu", "kr", "hx", "hy",
++                     "thickness", "solid", "fixed_dofs", "grad", "hessian", "weights", "points")
++        self.check(set(arrays) == set(intrinsic)|{"lift", "fluctuation"}, "Failed tangent input field contract")
++        same_arrays({k:arrays[k] for k in intrinsic},{k:model[k] for k in intrinsic}, "Failed tangent model/operator fields")
++        self.check(all(arrays[k].dtype == np.dtype("float64") and arrays[k].shape == (6642,)
++                and np.isfinite(arrays[k]).all() for k in ("lift","fluctuation"))
++            and np.count_nonzero(arrays["lift"]) == 0
++            and np.count_nonzero(arrays["fluctuation"][model["fixed_dofs"]]) == 0
++            and state_hash(arrays) == observation["state_sha256"]
++            and all(np.isfinite(v).all() for v in fields.values())
++            and fields["J"].shape == (3200,9) and np.all(fields["J"] > 0)
++            and not any(row["state_sha256"] == observation["state_sha256"] for row in self.result["states"]),
++            "Failed tangent raw fields/state/caches differ")
++        copied = self.output/"first_tangent_range_input"; copied.mkdir()
++        for path in (descriptor,archive,force_archive):
++            shutil.copyfile(path,copied/path.name); self.bind(copied/path.name,sha(path))
++        return dict(observation=self.record(copied/descriptor.name),input=self.record(copied/archive.name),
++            force_fields=self.record(copied/force_archive.name),tangent_call_ordinal=observation["tangent_call_ordinal"],
++            bound_force_call_ordinal=observation["bound_force_call_ordinal"],state_sha256=observation["state_sha256"],
++            independently_qualified=False,reevaluated=False,arithmetic_issue_resolved=False,
++            scope="Only bound failed local tangent input and returned force fields; no force/tangent/HP evaluation")
++
+     def run(self):
+         self.checkpoint()
+         self.load()
+@@ -623,7 +581,11 @@
+             candidate_force_calls=0, tangent_calls=0, solver_calls=0, counter_accounting=self.accounting,
+             first_force_range_input=self.first_range_observation,
+             tangent_observation=dict(observed_tangent_calls=self.receipt["observed_tangent_calls"],
+-                all_tangent_calls_completed=True, first_tangent_range_input=None),
++                observed_tangent_calls_completed=self.receipt["observed_tangent_calls_completed"],
++                all_tangent_calls_completed=False,all_accepted_caches_completed=True,
++                first_tangent_range_input=self.tangent_range_observation),
++            independent_reference_card_protocol_sha256=self.reference_protocol_sha256,
++            independent_reference_source_bindings=self.reference_bindings,
+             source_bindings=self.sources, input_bindings={p.relative_to(self.repo).as_posix(): h for p,h in self.bindings.items()},
+             elapsed_seconds=perf_counter()-STARTED, sampled_peak_RSS_bytes=self.peak,
+             time_limit_seconds=self.limit, sampled_RSS_limit_bytes=RSS_LIMIT)

@@ -1,0 +1,31 @@
+--- Ref002
++++ Ref003
+@@ -22,7 +22,7 @@
+ PARSER.add_argument("--input", type=Path, required=True)
+ PARSER.add_argument("--output", type=Path, required=True)
+ PARSER.add_argument("--repo", type=Path, help="Repository root; otherwise inferred after installation")
+-PARSER.add_argument("--time-limit", type=float, default=300.)
++PARSER.add_argument("--time-limit", type=float, default=600.)
+ ARGS = PARSER.parse_args()
+ ROOT = ARGS.repo.resolve() if ARGS.repo else next(p for p in Path(__file__).resolve().parents if (p/"hf_repo").is_dir())
+ SCRIPTS = ROOT/"hf_repo/scripts"
+@@ -100,8 +100,8 @@
+ SETTINGS = dict(tolerance=1e-9, constraint_tolerance=1e-10, displacement_scale_floor=1e-6,
+     force_scale_floor_factor=1e-8, max_checks=25, armijo_c=1e-4, max_backtracks=12,
+     max_bisections=4, minimum_increment=.1/16, time_limit_seconds=900.)
+-LIMITS = dict(production_seconds=900, reference_seconds=300, sampled_RSS_bytes=RSS_LIMIT,
+-    production_outer_seconds=960, reference_outer_seconds=360, view_outer_seconds=120)
++LIMITS = dict(production_seconds=900, reference_seconds=600, sampled_RSS_bytes=RSS_LIMIT,
++    production_outer_seconds=960, reference_outer_seconds=660, view_outer_seconds=120)
+ 
+ 
+ class CycleAudit(ActionCoreAudit, WorkpieceCycleAudit):
+@@ -597,7 +597,7 @@
+ 
+ 
+ def main():
+-    require(np.isfinite(ARGS.time_limit) and ARGS.time_limit == LIMITS["reference_seconds"], "Reference limit must be exactly the declared 300 seconds")
++    require(np.isfinite(ARGS.time_limit) and ARGS.time_limit == LIMITS["reference_seconds"], "Reference limit must be exactly the declared 600 seconds")
+     audit = CycleAudit(ARGS)
+     try:
+         audit.run()

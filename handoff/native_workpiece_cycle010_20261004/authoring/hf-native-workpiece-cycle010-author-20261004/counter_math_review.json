@@ -1,0 +1,1251 @@
+{
+  "schema_version": "cycle010-saved-counter-math-review-1.0",
+  "status": "saved_accounting_supported_only",
+  "independent_HP_qualification": false,
+  "new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "HP": 0,
+    "solver": 0,
+    "action_consumer": 0,
+    "assembly": 0,
+    "geometry": 0
+  },
+  "scope": "Pure saved chronology, raw-array/SHA checks and source reading. No constitutive/reference evaluations or numerical gate recomputation.",
+  "actual_production": {
+    "status": "success",
+    "accepted_states": 12,
+    "original_targets": [
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      1.75,
+      1.8,
+      1.75,
+      1.5,
+      1.0,
+      0.5,
+      0.0
+    ],
+    "accepted_displacements": [
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      1.75,
+      1.8,
+      1.75,
+      1.5,
+      1.0,
+      0.5,
+      0.25,
+      0.0
+    ],
+    "maximum_bisection_depth": 1,
+    "call_counts": {
+      "force_calls": 94,
+      "force_calls_completed": 93,
+      "tangent_calls": 53,
+      "tangent_calls_completed": 52,
+      "solver_invocations": 1,
+      "JIT_calls": 0,
+      "HP_calls": 0
+    },
+    "helper_seconds": 554.2431911999593,
+    "outer_seconds": 555.2541667000041,
+    "execution_limits": {
+      "production_seconds": 900,
+      "reference_seconds": 300,
+      "sampled_RSS_bytes": 8589934592,
+      "production_outer_seconds": 960,
+      "reference_outer_seconds": 360,
+      "view_outer_seconds": 120
+    }
+  },
+  "closed_original_reference": {
+    "status": "not_pass",
+    "exit_code": 1,
+    "checks_completed": 24,
+    "HP_calls_started": 0,
+    "HP_calls_completed": 0,
+    "error": "ValueError('Completed Newton-base/tangent/receipt counters differ')",
+    "old_result_not_overwritten": true
+  },
+  "exact_count_equations": {
+    "base_starts": "53 = 52 complete history entries + 1 captured failed tangent base",
+    "force_starts": "94 = 53 base forces + 41 trial forces",
+    "force_completed": "93 = 53 complete base forces + 40 complete trial forces",
+    "tangent_completed": "52 = 53 tangent starts - 1 captured rejected tangent",
+    "controller_successful_assemblies": "92 = 52 complete force+tangent bases + 40 complete force-only trials"
+  },
+  "rejected_tangent": {
+    "tangent_ordinal": 44,
+    "force_ordinal": 77,
+    "target_mm": 0.0,
+    "newton_check": 4,
+    "from_accepted_mm": 0.5,
+    "history_missing_because": "history.append follows successful evaluate(candidate, True)",
+    "failed_attempt": {
+      "from_displacement": 0.5,
+      "attempted_displacement": 0.0,
+      "from_R_input": 0.10625324798554082,
+      "depth": 0,
+      "code": "unsupported_arithmetic_range",
+      "reason": "NumPy tangent exceeded the declared compensated arithmetic support range",
+      "rollback_bitwise_equal": true
+    },
+    "following_bisection_accepted_index": 10,
+    "following_bisection_d_mm": 0.25,
+    "scope": "Force returned; tangent rejected before CSC/cache/history. Failed trial state is not an accepted state or HP-qualified."
+  },
+  "rejected_force": {
+    "force_ordinal": 90,
+    "trial_index": 38,
+    "target_mm": 0.0,
+    "newton_check": 3,
+    "factor": 1.0,
+    "following_half_trial_index": 39,
+    "following_half_accepted": true,
+    "scope": "Ordinary recorded line-search rejection with unchanged original support gate"
+  },
+  "reconstructed_force_events": [
+    {
+      "force_call": 1,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 1,
+      "tangent_completed": true,
+      "d": 0.0,
+      "newton_check": 1,
+      "state_sha256": "26d76fa997d7fc33a9ff6a4b606fc4f31e3f1c0753050e330d97c92565c2bbe2"
+    },
+    {
+      "force_call": 2,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 2,
+      "tangent_completed": true,
+      "d": 0.5,
+      "newton_check": 1,
+      "state_sha256": "173a5d96e40acd59025ac7e5c3e543f6986d60c25a9df9dd646bb74df8e846a2"
+    },
+    {
+      "force_call": 3,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.5,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 0,
+      "reason": null
+    },
+    {
+      "force_call": 4,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 3,
+      "tangent_completed": true,
+      "d": 0.5,
+      "newton_check": 2,
+      "state_sha256": "9e08747cee2689376bdf62ab39c79fcacb81e3798e8dcdc42e8672d74984f655"
+    },
+    {
+      "force_call": 5,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.5,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 1,
+      "reason": null
+    },
+    {
+      "force_call": 6,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 4,
+      "tangent_completed": true,
+      "d": 0.5,
+      "newton_check": 3,
+      "state_sha256": "b061bff10e705521656640782d572ea654e658f60b418c6f0a1a70dadaed2b29"
+    },
+    {
+      "force_call": 7,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.5,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 2,
+      "reason": null
+    },
+    {
+      "force_call": 8,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 5,
+      "tangent_completed": true,
+      "d": 0.5,
+      "newton_check": 4,
+      "state_sha256": "76e4112e43871de62a7a3e1ea79827dfb5cf945ab7512803685046f0cd376c28"
+    },
+    {
+      "force_call": 9,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 6,
+      "tangent_completed": true,
+      "d": 1.0,
+      "newton_check": 1,
+      "state_sha256": "21939a035bd4128ee36e2243be2e62fda2bcf4b52ceb4d07246b33ca6cd34751"
+    },
+    {
+      "force_call": 10,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.0,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 3,
+      "reason": null
+    },
+    {
+      "force_call": 11,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 7,
+      "tangent_completed": true,
+      "d": 1.0,
+      "newton_check": 2,
+      "state_sha256": "07c1ab0c06f000389948d97f89bbe3067227bb00289773b4682e4c194c7f0e0a"
+    },
+    {
+      "force_call": 12,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.0,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 4,
+      "reason": null
+    },
+    {
+      "force_call": 13,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 8,
+      "tangent_completed": true,
+      "d": 1.0,
+      "newton_check": 3,
+      "state_sha256": "5c9dcd984adc7da020a2d29f486a5739f473ba851fb7c88b70d48a1e19c3de27"
+    },
+    {
+      "force_call": 14,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.0,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 5,
+      "reason": null
+    },
+    {
+      "force_call": 15,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 9,
+      "tangent_completed": true,
+      "d": 1.0,
+      "newton_check": 4,
+      "state_sha256": "79bd847ce8fd33c00d5f35204999ba0060c18022a07bf2b2aca637e60549c367"
+    },
+    {
+      "force_call": 16,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 10,
+      "tangent_completed": true,
+      "d": 1.5,
+      "newton_check": 1,
+      "state_sha256": "89cd38d5f8bf252dc019f6ad1a5813b2c564a0a9382163ba3b5a8e2258a50abd"
+    },
+    {
+      "force_call": 17,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.5,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 6,
+      "reason": null
+    },
+    {
+      "force_call": 18,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 11,
+      "tangent_completed": true,
+      "d": 1.5,
+      "newton_check": 2,
+      "state_sha256": "88be9a2fe5fcc85ac86737bd8aafd6da960f8424f3187175f8cc368541ba12fe"
+    },
+    {
+      "force_call": 19,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.5,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 7,
+      "reason": null
+    },
+    {
+      "force_call": 20,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 12,
+      "tangent_completed": true,
+      "d": 1.5,
+      "newton_check": 3,
+      "state_sha256": "72b200a65986fc14a72900d420578b3812e6340ce71b0c44454a6d11a79a1c65"
+    },
+    {
+      "force_call": 21,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.5,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 8,
+      "reason": null
+    },
+    {
+      "force_call": 22,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 13,
+      "tangent_completed": true,
+      "d": 1.5,
+      "newton_check": 4,
+      "state_sha256": "10cc3f7fd3406eef1caf910e80e4a74e22340cba112d7fd8abee4226e42eabd4"
+    },
+    {
+      "force_call": 23,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 14,
+      "tangent_completed": true,
+      "d": 1.75,
+      "newton_check": 1,
+      "state_sha256": "5b8620cf0edcf4166969865f94e230972c90d3830c1275bcf707d3ae2d44fe3a"
+    },
+    {
+      "force_call": 24,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.75,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 9,
+      "reason": null
+    },
+    {
+      "force_call": 25,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 15,
+      "tangent_completed": true,
+      "d": 1.75,
+      "newton_check": 2,
+      "state_sha256": "1043e429a5f6b250bc39f7cdd4f86d404d0891e998c8c962042027ce709a8aa7"
+    },
+    {
+      "force_call": 26,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.75,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 10,
+      "reason": null
+    },
+    {
+      "force_call": 27,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 16,
+      "tangent_completed": true,
+      "d": 1.75,
+      "newton_check": 3,
+      "state_sha256": "6afbac79a4cfe4a0c3c0b09a367def7fe2f353280df78412ff5617d370f6d8f8"
+    },
+    {
+      "force_call": 28,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.75,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 11,
+      "reason": null
+    },
+    {
+      "force_call": 29,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 17,
+      "tangent_completed": true,
+      "d": 1.75,
+      "newton_check": 4,
+      "state_sha256": "40f828ce55e9530d5909f35566d0d518ba2e6e06fe7151d4aeb068550de23431"
+    },
+    {
+      "force_call": 30,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.75,
+      "newton_check": 4,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 12,
+      "reason": null
+    },
+    {
+      "force_call": 31,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 18,
+      "tangent_completed": true,
+      "d": 1.75,
+      "newton_check": 5,
+      "state_sha256": "dfc83d4510b22ca97a914b72fb593c140d1e542255cf2054836705b555bf2558"
+    },
+    {
+      "force_call": 32,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 19,
+      "tangent_completed": true,
+      "d": 1.8,
+      "newton_check": 1,
+      "state_sha256": "a03594a9719a922774d3c5827af18f20e0160e9f5c339e7966514454366c4cf1"
+    },
+    {
+      "force_call": 33,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.8,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 13,
+      "reason": null
+    },
+    {
+      "force_call": 34,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 20,
+      "tangent_completed": true,
+      "d": 1.8,
+      "newton_check": 2,
+      "state_sha256": "069d61fb60c52e62bc480acfc22aa5add1582ba811d2a0b594e2ab4ddd6201c0"
+    },
+    {
+      "force_call": 35,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.8,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 14,
+      "reason": null
+    },
+    {
+      "force_call": 36,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 21,
+      "tangent_completed": true,
+      "d": 1.8,
+      "newton_check": 3,
+      "state_sha256": "e94c82d4a5ec59b6653aafca13b88bfea4cc5bee3154369654df31675eb06462"
+    },
+    {
+      "force_call": 37,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.8,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 15,
+      "reason": null
+    },
+    {
+      "force_call": 38,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 22,
+      "tangent_completed": true,
+      "d": 1.8,
+      "newton_check": 4,
+      "state_sha256": "f3c0dec36e68a14ed46a2d6b8486a438a27a6d2f6a12c7dd262ea64380161dd5"
+    },
+    {
+      "force_call": 39,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.8,
+      "newton_check": 4,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 16,
+      "reason": null
+    },
+    {
+      "force_call": 40,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 23,
+      "tangent_completed": true,
+      "d": 1.8,
+      "newton_check": 5,
+      "state_sha256": "36ca9da8fc329a3d8b4b2a79b38c26f33458397a2c03a9bd293f207733bfbffe"
+    },
+    {
+      "force_call": 41,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 24,
+      "tangent_completed": true,
+      "d": 1.75,
+      "newton_check": 1,
+      "state_sha256": "1a7e0699146f1ad3397f9d7bd2f8192a1deba666d4df0e6bd7aadae656a87bf9"
+    },
+    {
+      "force_call": 42,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.75,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 17,
+      "reason": null
+    },
+    {
+      "force_call": 43,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 25,
+      "tangent_completed": true,
+      "d": 1.75,
+      "newton_check": 2,
+      "state_sha256": "6e5ccc45272f4da2e562ecab691f2f9fd1f454c2c8a5864e0ade8151e6264b57"
+    },
+    {
+      "force_call": 44,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.75,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 18,
+      "reason": null
+    },
+    {
+      "force_call": 45,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 26,
+      "tangent_completed": true,
+      "d": 1.75,
+      "newton_check": 3,
+      "state_sha256": "21d47395f35cd9a7ec99d49906ec95598afe682a11eb0f0852bf797ecfecf301"
+    },
+    {
+      "force_call": 46,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.75,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 19,
+      "reason": null
+    },
+    {
+      "force_call": 47,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 27,
+      "tangent_completed": true,
+      "d": 1.75,
+      "newton_check": 4,
+      "state_sha256": "cf79297f86d867db8318f47bba9f65ea072b8a99ee457d8e5a38642de0315d2f"
+    },
+    {
+      "force_call": 48,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 28,
+      "tangent_completed": true,
+      "d": 1.5,
+      "newton_check": 1,
+      "state_sha256": "f275908db6406cc4ecc2080d0772cd636423a0bdaa6faa4bf508a8429208b96a"
+    },
+    {
+      "force_call": 49,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.5,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 20,
+      "reason": null
+    },
+    {
+      "force_call": 50,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 29,
+      "tangent_completed": true,
+      "d": 1.5,
+      "newton_check": 2,
+      "state_sha256": "40c19941e4be64b2c71f0274a9f3fec47482aa18a4be16fb60ec42df77616983"
+    },
+    {
+      "force_call": 51,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.5,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 21,
+      "reason": null
+    },
+    {
+      "force_call": 52,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 30,
+      "tangent_completed": true,
+      "d": 1.5,
+      "newton_check": 3,
+      "state_sha256": "76b33e068e9cb9d3a9e43fe50bee60485b4149d3002e6fd403c718bbc58a61d4"
+    },
+    {
+      "force_call": 53,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.5,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 22,
+      "reason": null
+    },
+    {
+      "force_call": 54,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 31,
+      "tangent_completed": true,
+      "d": 1.5,
+      "newton_check": 4,
+      "state_sha256": "9545def4e2f0d58ee08738413d9a2b17e24dd90668b79ef029c34af4b7fe972d"
+    },
+    {
+      "force_call": 55,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.5,
+      "newton_check": 4,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 23,
+      "reason": null
+    },
+    {
+      "force_call": 56,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 32,
+      "tangent_completed": true,
+      "d": 1.5,
+      "newton_check": 5,
+      "state_sha256": "6cbe49f8ce9371c0d7b579a88613a836838e777adb38fe93579c95f9a4ea2ba9"
+    },
+    {
+      "force_call": 57,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 33,
+      "tangent_completed": true,
+      "d": 1.0,
+      "newton_check": 1,
+      "state_sha256": "42d2604967705eb4fb8abe49b0076ab77ce6940c2f62dd071d01181e4d445e30"
+    },
+    {
+      "force_call": 58,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.0,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 24,
+      "reason": null
+    },
+    {
+      "force_call": 59,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 34,
+      "tangent_completed": true,
+      "d": 1.0,
+      "newton_check": 2,
+      "state_sha256": "70fd3ecc87176c9f019fa31ca57faed652e2e43ba3a6dc6fec67131c020ae739"
+    },
+    {
+      "force_call": 60,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.0,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 25,
+      "reason": null
+    },
+    {
+      "force_call": 61,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 35,
+      "tangent_completed": true,
+      "d": 1.0,
+      "newton_check": 3,
+      "state_sha256": "ce11d2ad29506f5e0d390cfc8e95cdd18eca49844c7aaa9f9a435cd23484dc1f"
+    },
+    {
+      "force_call": 62,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 1.0,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 26,
+      "reason": null
+    },
+    {
+      "force_call": 63,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 36,
+      "tangent_completed": true,
+      "d": 1.0,
+      "newton_check": 4,
+      "state_sha256": "7d421c0e76944f949ba32160b67f24a50df8bbd77bf84bbb16c257dccb420b99"
+    },
+    {
+      "force_call": 64,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 37,
+      "tangent_completed": true,
+      "d": 0.5,
+      "newton_check": 1,
+      "state_sha256": "65d069eb743e8e54eb74d1786646ed93dcae530a932b74bdcbdb6b019b7aeac7"
+    },
+    {
+      "force_call": 65,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.5,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 27,
+      "reason": null
+    },
+    {
+      "force_call": 66,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 38,
+      "tangent_completed": true,
+      "d": 0.5,
+      "newton_check": 2,
+      "state_sha256": "4e436366a155d393fa7c713193016bea4e2f896e814e1ae8840351100f13adc6"
+    },
+    {
+      "force_call": 67,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.5,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 28,
+      "reason": null
+    },
+    {
+      "force_call": 68,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 39,
+      "tangent_completed": true,
+      "d": 0.5,
+      "newton_check": 3,
+      "state_sha256": "9812888a7836456af33a8654fc2ced8e03ae3478fb519b91325865f0348664f6"
+    },
+    {
+      "force_call": 69,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.5,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 29,
+      "reason": null
+    },
+    {
+      "force_call": 70,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 40,
+      "tangent_completed": true,
+      "d": 0.5,
+      "newton_check": 4,
+      "state_sha256": "19c273312df4e1cb042a71e4e24ebfe180c177c7d0dada5d1ab148841e9ea69a"
+    },
+    {
+      "force_call": 71,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 41,
+      "tangent_completed": true,
+      "d": 0.0,
+      "newton_check": 1,
+      "state_sha256": "69ffb1b785e3594612e7f3c5dece4bd6258303e204785410da16b866559d2fc7"
+    },
+    {
+      "force_call": 72,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.0,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 30,
+      "reason": null
+    },
+    {
+      "force_call": 73,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 42,
+      "tangent_completed": true,
+      "d": 0.0,
+      "newton_check": 2,
+      "state_sha256": "5a0a8f9c4281083ae913a7b42a2cb3fdaba2efccc4b59648e2bca1394d514971"
+    },
+    {
+      "force_call": 74,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.0,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 31,
+      "reason": null
+    },
+    {
+      "force_call": 75,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 43,
+      "tangent_completed": true,
+      "d": 0.0,
+      "newton_check": 3,
+      "state_sha256": "938f9a1442043b465f0ae009c73ab62ab3f053abba66070bb9a2225a76a91ef1"
+    },
+    {
+      "force_call": 76,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.0,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 32,
+      "reason": null
+    },
+    {
+      "force_call": 77,
+      "kind": "rejected_Newton_base",
+      "force_completed": true,
+      "tangent_call": 44,
+      "tangent_completed": false,
+      "d": 0.0,
+      "newton_check": 4,
+      "state_sha256": "058bd50e0dd329595b324e185f793036733b72c887218fb26801091a49d54bd8"
+    },
+    {
+      "force_call": 78,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 45,
+      "tangent_completed": true,
+      "d": 0.25,
+      "newton_check": 1,
+      "state_sha256": "ab29586b9b87376003eadd23bba4df6f3daf56e961a68d03af502946d733a362"
+    },
+    {
+      "force_call": 79,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.25,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 33,
+      "reason": null
+    },
+    {
+      "force_call": 80,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 46,
+      "tangent_completed": true,
+      "d": 0.25,
+      "newton_check": 2,
+      "state_sha256": "2f10e85919a2dbad27dbace03d6d65688ea49b5cabc7a2265133504d7daa6faf"
+    },
+    {
+      "force_call": 81,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.25,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 34,
+      "reason": null
+    },
+    {
+      "force_call": 82,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 47,
+      "tangent_completed": true,
+      "d": 0.25,
+      "newton_check": 3,
+      "state_sha256": "c553614d81946df28d1b9ea3fbe06690f355551928863b8a1ef95daba039ba96"
+    },
+    {
+      "force_call": 83,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.25,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 35,
+      "reason": null
+    },
+    {
+      "force_call": 84,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 48,
+      "tangent_completed": true,
+      "d": 0.25,
+      "newton_check": 4,
+      "state_sha256": "d40d5a72d83a8c742a7b1754d50684aaf6dfcbe86277ed516efa0dff6fd4ad2b"
+    },
+    {
+      "force_call": 85,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 49,
+      "tangent_completed": true,
+      "d": 0.0,
+      "newton_check": 1,
+      "state_sha256": "c5a7ad24525117c2d87cbecd42b0827d66101adac50c47a89f310e54aa5e4679"
+    },
+    {
+      "force_call": 86,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.0,
+      "newton_check": 1,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 36,
+      "reason": null
+    },
+    {
+      "force_call": 87,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 50,
+      "tangent_completed": true,
+      "d": 0.0,
+      "newton_check": 2,
+      "state_sha256": "b6c67f1edd32444d5e07a974d39d1e123e85820b0b5445dd567af72ebb504c03"
+    },
+    {
+      "force_call": 88,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.0,
+      "newton_check": 2,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 37,
+      "reason": null
+    },
+    {
+      "force_call": 89,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 51,
+      "tangent_completed": true,
+      "d": 0.0,
+      "newton_check": 3,
+      "state_sha256": "a0920e9b9e424ed8bf72468097b33bde366d5660bafe3cf0ebf9335ba6a3e8aa"
+    },
+    {
+      "force_call": 90,
+      "kind": "line_search_trial",
+      "force_completed": false,
+      "d": 0.0,
+      "newton_check": 3,
+      "factor": 1.0,
+      "accepted": false,
+      "trial_index": 38,
+      "reason": "unsupported_arithmetic_range"
+    },
+    {
+      "force_call": 91,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.0,
+      "newton_check": 3,
+      "factor": 0.5,
+      "accepted": true,
+      "trial_index": 39,
+      "reason": null
+    },
+    {
+      "force_call": 92,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 52,
+      "tangent_completed": true,
+      "d": 0.0,
+      "newton_check": 4,
+      "state_sha256": "ec66b6ca10f4f133eafce2d6bc0705c6cc8758bb1ca099ea32a546bbbced5e33"
+    },
+    {
+      "force_call": 93,
+      "kind": "line_search_trial",
+      "force_completed": true,
+      "d": 0.0,
+      "newton_check": 4,
+      "factor": 1.0,
+      "accepted": true,
+      "trial_index": 40,
+      "reason": null
+    },
+    {
+      "force_call": 94,
+      "kind": "completed_Newton_base",
+      "force_completed": true,
+      "tangent_call": 53,
+      "tangent_completed": true,
+      "d": 0.0,
+      "newton_check": 5,
+      "state_sha256": "e35137987f6a421a5166b049290dd800578b5cbdb9943094c410d7cdaaa05039"
+    }
+  ],
+  "accepted_completed_caches": [
+    {
+      "accepted_index": 0,
+      "force_call": 1,
+      "tangent_call": 1,
+      "state_sha256": "26d76fa997d7fc33a9ff6a4b606fc4f31e3f1c0753050e330d97c92565c2bbe2"
+    },
+    {
+      "accepted_index": 1,
+      "force_call": 8,
+      "tangent_call": 5,
+      "state_sha256": "76e4112e43871de62a7a3e1ea79827dfb5cf945ab7512803685046f0cd376c28"
+    },
+    {
+      "accepted_index": 2,
+      "force_call": 15,
+      "tangent_call": 9,
+      "state_sha256": "79bd847ce8fd33c00d5f35204999ba0060c18022a07bf2b2aca637e60549c367"
+    },
+    {
+      "accepted_index": 3,
+      "force_call": 22,
+      "tangent_call": 13,
+      "state_sha256": "10cc3f7fd3406eef1caf910e80e4a74e22340cba112d7fd8abee4226e42eabd4"
+    },
+    {
+      "accepted_index": 4,
+      "force_call": 31,
+      "tangent_call": 18,
+      "state_sha256": "dfc83d4510b22ca97a914b72fb593c140d1e542255cf2054836705b555bf2558"
+    },
+    {
+      "accepted_index": 5,
+      "force_call": 40,
+      "tangent_call": 23,
+      "state_sha256": "36ca9da8fc329a3d8b4b2a79b38c26f33458397a2c03a9bd293f207733bfbffe"
+    },
+    {
+      "accepted_index": 6,
+      "force_call": 47,
+      "tangent_call": 27,
+      "state_sha256": "cf79297f86d867db8318f47bba9f65ea072b8a99ee457d8e5a38642de0315d2f"
+    },
+    {
+      "accepted_index": 7,
+      "force_call": 56,
+      "tangent_call": 32,
+      "state_sha256": "6cbe49f8ce9371c0d7b579a88613a836838e777adb38fe93579c95f9a4ea2ba9"
+    },
+    {
+      "accepted_index": 8,
+      "force_call": 63,
+      "tangent_call": 36,
+      "state_sha256": "7d421c0e76944f949ba32160b67f24a50df8bbd77bf84bbb16c257dccb420b99"
+    },
+    {
+      "accepted_index": 9,
+      "force_call": 70,
+      "tangent_call": 40,
+      "state_sha256": "19c273312df4e1cb042a71e4e24ebfe180c177c7d0dada5d1ab148841e9ea69a"
+    },
+    {
+      "accepted_index": 10,
+      "force_call": 84,
+      "tangent_call": 48,
+      "state_sha256": "d40d5a72d83a8c742a7b1754d50684aaf6dfcbe86277ed516efa0dff6fd4ad2b"
+    },
+    {
+      "accepted_index": 11,
+      "force_call": 94,
+      "tangent_call": 53,
+      "state_sha256": "e35137987f6a421a5166b049290dd800578b5cbdb9943094c410d7cdaaa05039"
+    }
+  ],
+  "capture_identity_checks": {
+    "first_tangent_range_input": {
+      "observation_sha256": "622e37201748d630a3f410d43d0cd157a79be19a84f6fb2c5a0b7faf077b7c93",
+      "input_sha256": "8849e6c1e641efd06321d5884ed1fe0f875535891844a7c47734dc74f07f42c9",
+      "raw_fields_declared_sha_verified": true,
+      "model_and_operators_exact": true,
+      "state_sha256": "058bd50e0dd329595b324e185f793036733b72c887218fb26801091a49d54bd8",
+      "zero_lift": true,
+      "fixed_zero": true,
+      "max_abs_w_mm": 1.6527644091818034e-14,
+      "accepted_state": false,
+      "independently_qualified": false,
+      "force_fields_sha256": "6a8c8401506e2303d676d07576f2b14959c68bb8497f3a2a51cd7deea1ac9510",
+      "all_25_force_fields_finite": true,
+      "saved_G_max_abs": 1.6527644091818034e-14,
+      "saved_Hu_max_abs_per_mm": 9.551138662652379e-15,
+      "saved_J_range": [
+        0.9999999999999892,
+        1.000000000000003
+      ],
+      "saved_arithmetic_supported_unique": [
+        1.0
+      ],
+      "saved_near_branch_unique": [
+        1.0
+      ],
+      "global_tiny_selector_false_from_saved_G_bound": true
+    },
+    "first_force_range_input": {
+      "observation_sha256": "b4cf4bc4492095001757f93d1dfcbc94fa04a54ed278f4eee07703c93f98a46c",
+      "input_sha256": "8fde8413062081f1bb4568fae8eb3b576a95b2de27699dd29870d74f4e7cc524",
+      "raw_fields_declared_sha_verified": true,
+      "model_and_operators_exact": true,
+      "state_sha256": "d33d6308a19c9f7578882a31472801f865990331b901cf29991da3efc99ea868",
+      "zero_lift": true,
+      "fixed_zero": true,
+      "max_abs_w_mm": 1.1933843264757928e-19,
+      "accepted_state": false,
+      "independently_qualified": false
+    }
+  },
+  "accepted_archives_raw_fields_checked": 48,
+  "minimal_new_counter_contract": [
+    "Keep all old mathematical gates and Core.run_state unchanged; use a new explicit reference card, preserving the original zero-HP closed result.",
+    "Use started tangent ordinals rather than enumerate(history): insert only the exact captured T44/F77 rejection at the matching failed-attempt boundary; all remaining history bases must be complete in order.",
+    "Require API/observer receipt counts, 53/52 tangent and 94/93 force, reconstructed trial/base totals and controller 94/92 successful-assembly counters to agree. Unknown deficits remain rejected.",
+    "Bind first_tangent input17 and same-object force-fields25 to model/source/state SHA; require complete returned force, total_tangent range error, exactly one matching rollback from .5 to0 at depth0 and the actual .25 then0 subdivision.",
+    "Keep all accepted cache ordinals/state hashes unique by accepted index, force and tangent completed and neither rejection used as an accepted cache.",
+    "Retain exact F90 recorded factor1 range rejection and next same-base factor.5 acceptance; all other 40 trials have complete merit fields.",
+    "Update the explicitly named all-base-complete counter policy, accepted ordinal upper bound and known failed-attempt classification together. A single predicate bypass is insufficient; no residual/tangent/HP/CSC/workpiece gate may be bypassed.",
+    "If a new reference is authorized, fresh80/120 covers all12 accepted states, including .25 and both0 states: 24 calls, no rejected-state qualification and no state-hash deduplication."
+  ],
+  "arithmetic_scope": {
+    "near_branch": true,
+    "tiny_limit": 5.421010862427522e-20,
+    "saved_G_max_abs": 1.6527644091818034e-14,
+    "inference": "The full-batch tiny-product selector is false since at least one saved G component exceeds2^-64; chunk256 preserves that global decision. Captured force fields are finite. Primitive/element cause of total_tangent rejection is not captured and remains unproven; no claim of chunk-caused arithmetic change or repair."
+  },
+  "bindings": {
+    "protocol_sha256": "2cc0ecb3f11bb4d08826772e6d004e999b84d5853e72a2db42455aae8a2c32d3",
+    "protocol_bindings_checked": 230,
+    "all_protocol_bindings_unchanged": true,
+    "source_capsules": 68,
+    "owned": {
+      "protocol.json": "2cc0ecb3f11bb4d08826772e6d004e999b84d5853e72a2db42455aae8a2c32d3",
+      "input_inventory.json": "bb08fa9339ea36c2057bf6672630f3231bc7f61a923b22a63ab77cc55abcf5f6",
+      "source_freeze.json": "a4eb119f87899c1a2b12db9ef7209f0a73cf4d0d0ea72186bbef57a7e51cd03b",
+      "execution_receipt.json": "fb3c998b414fc436a4da30435bc24ac0fc92b4dacd6b008effe643cce320df28",
+      "production_launch.json": "9a2ddce2afbe0a5c9fc2015e3f2ae5349a6036a57e1625a931daf5025d8d4915",
+      "result/result.json": "7338a65980abaa7d45d72ccee453352c5960e6dc416f82b8d8a4db5ca46e31c4",
+      "reference_launch.json": "6ebb8342f36c77a5037267d138a5716e023954cc752217646f2d48c92ceccda2",
+      "reference/summary.json": "52c739e80e332ce6bae4c2282a55e5c26f6f7113979f3e036a36354c86d32f9c",
+      "reference/lifecycle.json": "d88b3a6c35e302c35d32553159fd7ba0480f2406d31dfbb1da4e2be26c265f45",
+      "audit_cycle010.py": "25340a9dbf566e9fb0db91dffcd7db50ee81a16fee7408102d88f3d02020dd91",
+      "core_audit_mechanical.py": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+      "first_tangent_range_input/observation.json": "622e37201748d630a3f410d43d0cd157a79be19a84f6fb2c5a0b7faf077b7c93",
+      "first_tangent_range_input/input.npz": "8849e6c1e641efd06321d5884ed1fe0f875535891844a7c47734dc74f07f42c9",
+      "first_tangent_range_input/force_fields.npz": "6a8c8401506e2303d676d07576f2b14959c68bb8497f3a2a51cd7deea1ac9510",
+      "first_force_range_input/observation.json": "b4cf4bc4492095001757f93d1dfcbc94fa04a54ed278f4eee07703c93f98a46c",
+      "first_force_range_input/input.npz": "8fde8413062081f1bb4568fae8eb3b576a95b2de27699dd29870d74f4e7cc524"
+    }
+  }
+}

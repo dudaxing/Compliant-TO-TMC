@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\lf_data_preparation\native_workpiece_001\coarse_square_cycle_010\audit_cycle010.py", line 654, in <module>
+    main()
+    ~~~~^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\lf_data_preparation\native_workpiece_001\coarse_square_cycle_010\audit_cycle010.py", line 641, in main
+    audit.run()
+    ~~~~~~~~~^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\lf_data_preparation\native_workpiece_001\coarse_square_cycle_010\audit_cycle010.py", line 592, in run
+    self.load()
+    ~~~~~~~~~^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\lf_data_preparation\native_workpiece_001\coarse_square_cycle_010\audit_cycle010.py", line 243, in load
+    self.accounting = self.reconstruct_counts(result, receipt)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\lf_data_preparation\native_workpiece_001\coarse_square_cycle_010\audit_cycle010.py", line 454, in reconstruct_counts
+    self.check(set(counts) == expected_keys and all(type(v) is int and v >= 0 for v in counts.values())
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        and counts["tangent_calls"] == counts["tangent_calls_completed"] == len(history)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        and receipt["save_force_calls"] == receipt["save_tangent_calls"] == 0,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "Completed Newton-base/tangent/receipt counters differ")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\lf_data_preparation\native_workpiece_001\coarse_square_cycle_010\core_audit_mechanical.py", line 121, in check
+    require(condition, label)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\hf_repo\scripts\audit_native_force.py", line 45, in require
+    raise ValueError(message)
+ValueError: Completed Newton-base/tangent/receipt counters differ

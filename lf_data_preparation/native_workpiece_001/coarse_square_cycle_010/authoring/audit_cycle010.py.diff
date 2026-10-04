@@ -1,0 +1,119 @@
+--- audit_cycle009.py
++++ audit_cycle010.py
+@@ -1,4 +1,4 @@
+-"""Fresh exhaustive mechanical-mode reference for the coarse square 1.75 mm cycle.
++"""Fresh exhaustive mechanical-mode reference for the coarse square 1.8 mm cycle.
+ 
+ The private CoreAudit retains the original compensated saved-tensor actions,
+ reference equations and mathematical gates. Only the declared sixteen-field
+@@ -22,7 +22,7 @@
+ PARSER.add_argument("--input", type=Path, required=True)
+ PARSER.add_argument("--output", type=Path, required=True)
+ PARSER.add_argument("--repo", type=Path, help="Repository root; otherwise inferred after installation")
+-PARSER.add_argument("--time-limit", type=float, default=240.)
++PARSER.add_argument("--time-limit", type=float, default=300.)
+ ARGS = PARSER.parse_args()
+ ROOT = ARGS.repo.resolve() if ARGS.repo else next(p for p in Path(__file__).resolve().parents if (p/"hf_repo").is_dir())
+ SCRIPTS = ROOT/"hf_repo/scripts"
+@@ -35,7 +35,7 @@
+ TANGENT_EXECUTION = dict(mode="chunk256", element_block_size=256, global_selector_scope="full_batch")
+ CONSUMER_PIN = "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe"
+ PRIVATE_CORE_PIN = 'b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5'
+-PREVIOUS_TASK_PIN = '2d74cda71e66d648fc27ef19a8950ee7b23901ce7cc41ac066c00b566c7f2906'
++PREVIOUS_TASK_PIN = 'aa6801849144f85fe6db1ab68db0869d6895b531a556481234f1e0fc9339c54c'
+ BODY_MODEL_PIN = "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049"
+ PRIVATE_CORE = Path(__file__).with_name("core_audit_mechanical.py")
+ if hashlib.sha256((SCRIPTS/"audit_native_workpiece_cycle.py").read_bytes()).hexdigest() != OLD_CHECKER_SHA:
+@@ -94,13 +94,13 @@
+     "Declared new kernel or saved-tensor consumer differs")
+ from core_audit_mechanical import Audit as ActionCoreAudit, MECHANICAL_AVAILABILITY
+ 
+-BASELINE = "97b7e0eecd07aee0bd16c61961dedb360202641c"
+-TARGETS = [0., .5, 1., 1.5, 1.75, 1.5, 1., .5, 0.]
++BASELINE = "07134ea6cd9aa0ab2de4bf97f80a8e8ca44c241e"
++TARGETS = [0., .5, 1., 1.5, 1.75, 1.8, 1.75, 1.5, 1., .5, 0.]
+ SETTINGS = dict(tolerance=1e-9, constraint_tolerance=1e-10, displacement_scale_floor=1e-6,
+     force_scale_floor_factor=1e-8, max_checks=25, armijo_c=1e-4, max_backtracks=12,
+-    max_bisections=4, minimum_increment=.1/16, time_limit_seconds=600.)
+-LIMITS = dict(production_seconds=600, reference_seconds=240, sampled_RSS_bytes=RSS_LIMIT,
+-    production_outer_seconds=660, reference_outer_seconds=300, view_outer_seconds=120)
++    max_bisections=4, minimum_increment=.1/16, time_limit_seconds=900.)
++LIMITS = dict(production_seconds=900, reference_seconds=300, sampled_RSS_bytes=RSS_LIMIT,
++    production_outer_seconds=960, reference_outer_seconds=360, view_outer_seconds=120)
+ 
+ 
+ class CycleAudit(ActionCoreAudit, WorkpieceCycleAudit):
+@@ -115,8 +115,8 @@
+ 
+     def checkpoint(self):
+         self.peak = max(self.peak, self.process.memory_info().rss)
+-        require(perf_counter()-STARTED <= self.limit, "Nine-target cycle reference time limit exceeded")
+-        require(self.peak <= RSS_LIMIT, "Nine-target cycle reference sampled RSS exceeds 8 GiB")
++        require(perf_counter()-STARTED <= self.limit, "Eleven-target cycle reference time limit exceeded")
++        require(self.peak <= RSS_LIMIT, "Eleven-target cycle reference sampled RSS exceeds 8 GiB")
+ 
+     def lifecycle(self, status, error=None):
+         write(self.output/"lifecycle.json", dict(status=status, error=error,
+@@ -134,7 +134,7 @@
+         inventory, receipt = read(inventory_file), read(receipt_file)
+         row = inventory["case"]
+         self.check(inventory["schema_version"] == "native-workpiece-cycle-input-inventory-1.0"
+-            and inventory["baseline_commit"] == BASELINE and self.stage.name == "coarse_square_cycle_009"
++            and inventory["baseline_commit"] == BASELINE and self.stage.name == "coarse_square_cycle_010"
+             and row["alias"] == "gripper_coarse_square" and row["source_alias"] == "gripper_canonical"
+             and row["targets_mm"] == TARGETS and row["geometry_id"] == GEOMETRY_ID
+             and (row["elements"], row["dofs"], row["fixed_DOFs"], row["free_DOFs"]) == (3200, 6642, 376, 6266)
+@@ -182,7 +182,7 @@
+                    "hf_repo/src/hf_eval/split_numpy_tangent.py": TANGENT_PIN}
+         expected_sources = dict(legacy_sources, **changes)
+         extra_paths = [PRIVATE_CORE, Path(__file__), *(self.stage/name for name in
+-            ("prepare_cycle009.py", "execute_cycle009.py", "launch_cycle009.py"))]
++            ("prepare_cycle010.py", "execute_cycle010.py", "launch_cycle010.py"))]
+         extras = {path.relative_to(self.repo).as_posix() for path in extra_paths}
+         transition = {name: dict(previous_sha256=legacy_sources[name], current_sha256=pin)
+                       for name, pin in changes.items()}
+@@ -269,7 +269,7 @@
+         self.bind(self.repo/row["workpiece_model_file"], BODY_MODEL_PIN)
+         same_arrays(model, npz(self.repo/row["workpiece_model_file"]), "All original 27 fixed-square arrays")
+         task, prior_task = (read(self.repo/row[key]) for key in ("task_file", "prior_task_file"))
+-        previous_task_file = self.repo/"lf_data_preparation/native_workpiece_001/coarse_square_cycle_007/task.json"
++        previous_task_file = self.repo/"lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/task.json"
+         self.bind(previous_task_file, PREVIOUS_TASK_PIN)
+         self.check(inventory["input_bindings"].get(previous_task_file.relative_to(self.repo).as_posix()) == PREVIOUS_TASK_PIN,
+             "Previous mechanical task is not bound by the new input closure")
+@@ -279,7 +279,7 @@
+             path=dict(kind="ordered_cycle", targets_mm=TARGETS))
+         self.check({key: value for key, value in task.items() if key not in descriptive}
+             == {key: value for key, value in expected_task.items() if key not in descriptive},
+-            "Task changed beyond the declared 1.75 mm peak/ordered path and four descriptive keys")
++            "Task changed beyond the declared 1.8 mm peak/ordered path and four descriptive keys")
+         changed = {"schema_version", "task_id", "purpose", "parameter_origin", "description", "input", "workpiece", "path"}
+         self.check(set(task) == set(prior_task)|{"path"}
+             and all(task[key] == prior_task[key] for key in set(prior_task)-changed)
+@@ -389,7 +389,7 @@
+         """Bind closed chunk equivalence and fresh integration before any HP."""
+         chunk = self.repo/"lf_data_preparation/native_workpiece_001/numpy_tangent_chunk_001"
+         integration = self.repo/"lf_data_preparation/native_workpiece_001/native_mean_chunk_integration_001"
+-        self.check(len(inventory["input_bindings"]) == 63, "Expected 63 declared inputs for the new nine-target card")
++        self.check(len(inventory["input_bindings"]) == 73, "Expected 73 declared inputs for the new eleven-target card")
+         for stage, phases in ((chunk, ("tests", "comparison")), (integration, ("tests",))):
+             protocol_file = stage/"protocol.json"
+             self.bind(protocol_file, inventory["input_bindings"][protocol_file.relative_to(self.repo).as_posix()])
+@@ -607,7 +607,7 @@
+             HP_matrix_columns_exhaustively_checked=False, full_element_and_DOF_coverage=True,
+             gates=GATES, global_scatter_precision=3000, global_scatter_inexact_trap=True,
+             reference_scope="Every actual accepted state and element, exact real-DOF scatter; fixed-lift b_in/max(abs(b_in)), deltaR=0; inherited signed-body/holding projections",
+-            qualification="Only accepted mechanical states of this declared coarse square [0,.5,1,1.5,1.75,1.5,1,.5,0] cycle under original force/Jv/equilibrium/workpiece gates; no auxiliary-energy, stress-HP, rejected-trial, pressure, clamp, H2/H3, HF5 or all-column qualification",
++            qualification="Only accepted mechanical states of this declared coarse square [0,.5,1,1.5,1.75,1.8,1.75,1.5,1,.5,0] cycle under original force/Jv/equilibrium/workpiece gates; no auxiliary-energy, stress-HP, rejected-trial, pressure, clamp, H2/H3, HF5 or all-column qualification",
+             response_mode="mechanical", response_contract=MECHANICAL_AVAILABILITY["response_contract"],
+             force_kernel_version=MECHANICAL_AVAILABILITY["force_kernel_version"],
+             auxiliary_material_energy=MECHANICAL_AVAILABILITY["auxiliary_material_energy"],
+@@ -635,7 +635,7 @@
+ 
+ 
+ def main():
+-    require(np.isfinite(ARGS.time_limit) and ARGS.time_limit == LIMITS["reference_seconds"], "Reference limit must be exactly the declared 240 seconds")
++    require(np.isfinite(ARGS.time_limit) and ARGS.time_limit == LIMITS["reference_seconds"], "Reference limit must be exactly the declared 300 seconds")
+     audit = CycleAudit(ARGS)
+     try:
+         audit.run()
