@@ -1,0 +1,157 @@
+{
+  "schema_version": "native-region-geometry-static-execution-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "blocking_findings": [],
+  "scope": "Source, AST, installed-hook signature, protocol/data identity and analytic-answer review only; no pytest collection or geometry execution",
+  "sources": {
+    "test": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/tests/test_native_region_geometry.py",
+      "sha256": "3f50a7b0d8c1d5bd28833aaca40a0bdc26c2393b5a81f94184ab39ff069c5284",
+      "lines": 282
+    },
+    "runner": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_region_geometry_20261004/square007_001/run_analytic_tests.py",
+      "sha256": "93459ed27413fec67a45268fdd197fbbfe12ac8ae0f8663dc963a0123ee14b87",
+      "lines": 63
+    },
+    "launcher": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_region_geometry_20261004/square007_001/launch_phase.py",
+      "sha256": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+      "lines": 64
+    },
+    "module": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/native_region_geometry.py",
+      "sha256": "1fe5bdd2f7188d9d80bdd5a843018e76aa32b035edf920201c3d57976d8965f2",
+      "lines": 269
+    },
+    "CLI": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/scripts/measure_native_workpiece_regions.py",
+      "sha256": "56bba89522481e9cad03865ff762fc207baa571b0e9fcbe41ba1c0ffc7aed925",
+      "lines": 265
+    },
+    "README": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_region_geometry_20261004/square007_001/README.md",
+      "sha256": "4d1ca8b7039068190e13b9232b1d50b4b39111dc8966fc7142a7b5b4ed369fb5",
+      "lines": 15
+    },
+    "protocol": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_region_geometry_20261004/square007_001/protocol.json",
+      "sha256": "9ad1aae0b13bb624ccee2f671e4de3543ee3f2480a18e06936f450debea77cc6",
+      "lines": 81
+    },
+    "inventory": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_region_geometry_20261004/square007_001/input_inventory.json",
+      "sha256": "dca26e4666d0805a452ee7c3ed8e040e1fafccea5798c25558a73c1e488c8c50",
+      "lines": 76
+    },
+    "source_freeze": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_region_geometry_20261004/square007_001/source_freeze.json",
+      "sha256": "7f4c551a1bd50e2e6e29bed89cfed4bb3030daae5f1bdaf5ad26a13be0db9a0e",
+      "lines": 34
+    },
+    "installed_pytest_hookspec": {
+      "path": "D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Lib/site-packages/_pytest/hookspec.py",
+      "sha256": "12098571044671c24ed0011e2bb7d94976380265e5734c30f856479482e6f88d",
+      "lines": 1289
+    }
+  },
+  "static_test_functions": 18,
+  "static_expected_test_items": 39,
+  "actual_collected_or_passed_items": null,
+  "test_case_counts": {
+    "test_aligned_finite_body_faces_have_two_mm_clearance": 2,
+    "test_finite_face_rejects_remote_edge_and_retains_an_exact_corner": 1,
+    "test_rotated_face_ray_uses_its_normal_not_an_axis_gap": 1,
+    "test_actual_cells_distinguish_nesting_hole_components_and_diagonal_touch": 5,
+    "test_raw_and_roundoff_strict_overlap_remain_distinct": 2,
+    "test_nonconvex_self_crossing_or_degenerate_quads_are_not_valid_geometry": 3,
+    "test_boundary_crossing_endpoint_and_collinear_touch_are_distinct": 3,
+    "test_parallel_edges_keep_continuous_minimizers_exact_ties_and_near_ties": 1,
+    "test_small_positive_hit_is_not_tolerance_snapped_to_zero": 1,
+    "test_continuous_face_endpoint_minimum_and_interior_plane_root": 1,
+    "test_ray_rejects_invalid_face_or_normal": 6,
+    "test_complete_square_closed_cut_is_classified_but_physical_ray_excludes_it": 1,
+    "test_near_corner_hit_keeps_its_interior_face_location": 1,
+    "test_node_ids_do_not_wrap_truncate_or_read_outside_coordinates": 6,
+    "test_cell_ids_do_not_wrap_to_the_last_quad": 1,
+    "test_reference_grid_hole_cannot_masquerade_as_a_complete_body": 1,
+    "test_incomplete_or_moving_body_is_rejected_before_region_and_ray_measurement": 2,
+    "test_cut_endpoint_touch_is_kept_as_math_not_a_physical_cut_edge": 1
+  },
+  "analytic_answer_review": [
+    "Aligned bottom/left finite faces have normal clearance 2 mm; rotated face has sqrt(2) mm hit along its own normalized normal.",
+    "Finite tangential bounds exclude a remote edge; exact corner endpoint remains a 2 mm hit. Near-corner positive interior face coordinate is retained.",
+    "Nested cells overlap internally without boundary crossings; a central hole and disconnected components do not; diagonal touching is not interior overlap.",
+    "2^-49 negative/positive separations preserve raw overlap signs while remaining below the roundoff margin; exact touches also retain uncertainty.",
+    "Concave, crossed and degenerate quads are rejected; proper crossing, endpoint touch and collinear overlap are separate boundary observations.",
+    "Flat parallel edges preserve two exact minimizers, a full face interval, and a distinct 2^-49 near tie; small positive hit is not snapped to zero.",
+    "Edge-interior finite-face endpoint minimizer is 1.5 mm at s=.75. Forward-plane clip gives analytic zero with face parameter near 7/18 and retained raw witness residual.",
+    "Complete 4x4 h2 reference grid with mechanism cells6/7/12 and body14/15 has bottom/left hits2 mm; one y40 mechanism cut edge is excluded only from physical rays.",
+    "Adding cell13 causes a true bottom-corner zero hit and closed-cut endpoint touch, without cross-region interior overlap.",
+    "Nonfinite/incorrect normals, invalid/fractional node IDs, negative cell IDs, reference-grid holes, incomplete body selection and moved body are rejected."
+  ],
+  "runner_review": {
+    "installed_hook_arguments": {
+      "pytest_runtest_setup": [
+        "item"
+      ],
+      "pytest_runtest_teardown": [
+        "item",
+        "nextitem"
+      ]
+    },
+    "candidate_hook_arguments": {
+      "pytest_runtest_setup": [
+        "item"
+      ],
+      "pytest_runtest_teardown": [
+        "item",
+        "nextitem"
+      ]
+    },
+    "hookspec_matched": true,
+    "JUnit": "Actual pytest JUnit tests/failures/errors/skipped are parsed after the single invocation; pass also requires pytest exit0, positive actual count, no failures/errors/skips and exact allowed hf_eval module paths. The 39 static expectation is not a runtime pass claim.",
+    "closure": "Only hf_eval init/native_region_geometry/boundary_geometry are allowed. Init lazy evaluate is not called. Test source contains only analytic geometry calls; mechanical zeros are explicitly static/loaded-module exclusion, not observed hooks.",
+    "failure": "-x stops on first test failure; budget exit or import/collection failure retains outer launch/log/any JUnit and closes the card. No test-receipt pass is inferred when the worker fails before writing it."
+  },
+  "protocol_review": {
+    "actual_binding_count": 37,
+    "input_binding_count": 18,
+    "source_count": 7,
+    "flat_capsules_exact": true,
+    "all_current_protocol_bindings_match": true,
+    "accepted_state_order_match": true,
+    "model27_archive_identity_match": true,
+    "test_helper_outer_seconds": [
+      60,
+      90
+    ],
+    "measurement_helper_outer_seconds": [
+      120,
+      150
+    ],
+    "sampled_tree_RSS_bytes": 8589934592,
+    "budget_scope": "STARTED covers child heavy imports; reused launcher records actual terminal code, sampled recursive child-tree RSS and cooperative stop; no OS hard cap or force termination is claimed.",
+    "sequential_precondition": "The unchanged generic launcher does not enforce a predecessor internally. Root must inspect actual tests launch/JUnit receipt and all original bindings before invoking measure; parent explicitly confirmed this orchestration. No successor may run after a failure.",
+    "phase_artifacts_absent_at_review": true,
+    "no_retry_or_overwrite": true
+  },
+  "README_scope_review": "Candidate-only status, preserved old unsigned data, complete closed-region versus physical cut distinction, PORT/mechanics not invoked, no signed penetration/contact/pressure/clamping/containment/self-overlap or new HF qualification are accurately stated.",
+  "limits": [
+    "Static analytic answers and valid hooks are not actual pytest collection or pass evidence.",
+    "This review does not execute the new geometry or independently validate future measured seven-state numbers.",
+    "Cooperative checkpoints and sampled RSS are not hard process or memory isolation."
+  ],
+  "new_calls": {
+    "pytest": 0,
+    "geometry": 0,
+    "force": 0,
+    "tangent": 0,
+    "consumer": 0,
+    "HP": 0,
+    "solver": 0,
+    "plot": 0
+  },
+  "bindings_unchanged_at_review_end": true
+}

@@ -1,5 +1,14 @@
 # NumPy 完整力入口：功能进度与参考比较
 
+2026-10-04当前：**新增完整原生Q1跨域内部重叠和固定方体有限底/左面射线诊断，39解析项通过，007保存七态测量完成。** 峰1.5mm底射线=.359398367462mm、左射线=2.698810358664mm，均是有限面端点命中；初/返两面2mm。七态有效、无内部域重叠/模糊；完整包含、自身重叠和有效夹持未证明。旧left unsigned=1.661960666472mm至下方角点，不能当水平间隙。见[整体目标、实现、排查、效果、成本和后续](../functional_views/native_region_geometry_20261004/RESULTS.md)、[×1结构/射线/七态三类距离图](../functional_views/native_region_geometry_20261004/square007_view_003/render_001/native_region_path.png)。
+
+001布尔返回类型首错与保存图001旧metadata角色首错均关闭并保留；各独立最小候选通过，zoom文字遮挡另图003修复、数据原字节相同。原旧边界/机械实现、27模型数组和007接受态fresh参考范围保持，新F/T/HP/solver0，pure来源basis非hooks监测；无新力学/能量/压力资格。峰底部靠近、有限左面远离，不能称有效夹持。
+
+下一据此准备独立1.75mm有序循环并保留中间/返程真实态，仍未执行；不线性推断接触或保证收敛，先核J/quad/域/面及原fresh门。细/圆/更大行程、自由体、压力/夹持、H2/H3/HF5/ADJIT和整体HF未完成。main唯一主干，origin固定https://github.com/dudaxing/Compliant-TO-TMC.git；公开恢复仅文件身份。
+
+以下保留以前时点原字节；当前以本条及持续记录末节为准。
+
+
 2026-10-04当前：**同一粗方固定半工件的新0→.5→1→1.5→1→.5→0 mm完整机械循环成功；7实际接受态的14次新HP80/120与135364项原参考检查通过。** 45/45F、26/26T、1solve；峰输入R=.333178493234 N、自由+y输出=1.747632769069 mm、minJ=.168678218781。实际all/bottom unsigned边界距最低.358231982207 mm，卸载返回2 mm；返回最大节点位移模3.42228e-28 mm。见[整体目标、行动、原因、真实效果与限制](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_007/RESULTS.md)、[实际结构/力/变形/最近点图](../functional_views/native_workpiece_cycle007_20261004/saved_001/render_001/cycle007_saved_path.png)。
 
 本轮只扩物理任务，004/006的力学实现与原算法/门字节保持，6项接口测试未重跑；新的资格仅七个接受机械态的力、声明PORT方向、组装、平衡及工件合力，不包含辅助能量、应力HP、全列HP、一般接触或有效夹持。图仅读生产/已保存几何，原flags不回填；14fresh参考资格另见报告。旧003卸载失败/未知T25与closed005保持冻结。
@@ -1950,3 +1959,18 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 完整目标/原因/输入/排查/实测数值/参考门/成本/限制见[007 RESULTS](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_007/RESULTS.md)，[实际七态图](../functional_views/native_workpiece_cycle007_20261004/saved_001/render_001/cycle007_saved_path.png)、[7×60 CSV](../functional_views/native_workpiece_cycle007_20261004/saved_001/render_001/accepted_numeric_states.csv)、[实际边界测量](../functional_views/native_workpiece_cycle007_20261004/boundary_saved_001/RESULTS.md)。图3300×3150，真实×1/辅助×4/commonN，0插值/GIF/新力学/几何；仍production-only，fresh资格单独授予。生产outer457.9415112秒、参考137.6813854秒；每正式阶段一次terminal exit0，无修复重试/force/延长。186science/49geo/168view绑定保持，保存身份与数学/实际图独立后审通过，无新FE/HP。
 
 未改API/core/controller/T/CI/B52或重跑旧6单测，schema1.2机械16字段和能量not_evaluated保持；旧003失败/未知T25和closed005不回填。下一先补封闭实体域包含/相交及明确法向gap，并以解析场及保存七态检验，再选新1.75 mm小步或其它工况；未执行1.75/2/3 mm、圆/细工况。压力/有效夹持、自由体、H2/H3/HF5与AD/JIT仍待实现。原证据逐字节保留；main交付与异目录公开恢复只核文件身份，不虚称数值重放。
+
+
+<a id="native-region-geometry-20261004"></a>
+
+## 保存Q1区域与有限面功能：2026-10-04
+
+整体目标仍是独立第三介质大变形HF评估器和可解释的加载、卸载、工件作用力/夹持评估。本步补齐完整原生Q1跨域内部重叠和固定半方体有限底/左面向外首次边界射线，仅读007七态，让实际几何依据支持下一物理选择。[完整目标、实现/API、排查、数表、成本、限制与后续](../functional_views/native_region_geometry_20261004/RESULTS.md)保留全部记录。
+
+新geometry module269行、CLI265行；完整Cartesian网格/固定body/凸quad前提、AABB+SAT raw/strict/模糊、解析连续有限面裁剪、端点/并列区间/null、原重构投影均实现。旧boundary和机械源/原27模型数组保持。001一次解析6项5pass1fail，原因numpy.bool_接口类型；闭卡无七态测量。002仅_tolerance最外层float转换，原binary64表达式/门/39tests/CLI/预算不变；一次39/39通过后才一次七态7/7测量。阶段40pins保持；F/T/HP/solver/consumer0依据纯来源闭包，不是力学hooks监测。
+
+峰index3有限bottom=.3593983674624708mm、left=2.6988103586642143mm，两项均唯一端点最小命中。初/返index0/6均2mm，但分别18/9个同值/连续区间，不能称唯一closest。1086×128跨域AABB完整筛选均0候选、七态valid且raw/strict/ambiguous false；不声称完整set containment、自身重叠、signed penetration/压力/夹持。旧left unsigned1.66196066647至下方角点，与horizontal有限面射线不同；实际是底面靠近、左面远离。
+
+图001因识别旧metadata错误role首错关闭、0PNG/CSV；图002独立严格使用真实stage/result/result.json role+同SHA而成功。其zoom文字遮左ray，经实际独立审图后另图003仅移文字，保留002原件，七态CSV逐字节一致。最终[实际×1峰/返结构、两面见证和三类距离](../functional_views/native_region_geometry_20261004/square007_view_003/render_001/native_region_path.png)，[7×28 CSV](../functional_views/native_region_geometry_20261004/square007_view_003/render_001/region_states.csv)；各单次预算测试60/90、几何120/150、图120/150s/8GiB sampled，协同非硬限，首错关闭不重开。所有真实outer/helper/RSS在完整报告。
+
+下一准备独立1.75mm有序循环，保留1.5→1.75及返程真实态；本轮无新1.75/2/3mm solve。不得由现距离线性推定接触或保证收敛，必须根据实际J/quad/域/面和原fresh门继续取舍。细/圆、自由工件、压力/有效夹持、stress HP/机械能量、全列HP、H2/H3/HF5/ADJIT与完整HF仍待实现或资格化。main唯一主干，origin固定Compliant-TO-TMC；恢复只核文件身份，后续发布receipt给出实际commit/manifest。

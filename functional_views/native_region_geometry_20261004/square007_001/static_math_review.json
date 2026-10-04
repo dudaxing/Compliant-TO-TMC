@@ -1,0 +1,84 @@
+{
+  "schema_version": "native-region-geometry-static-math-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "blocking_findings": [],
+  "scope": "Independent source/AST mathematical and IO review only; no module imports, geometry execution, tests, mechanics or plotting",
+  "sources": {
+    "hf_repo/src/hf_eval/native_region_geometry.py": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/native_region_geometry.py",
+      "sha256": "1fe5bdd2f7188d9d80bdd5a843018e76aa32b035edf920201c3d57976d8965f2",
+      "lines": 269
+    },
+    "hf_repo/src/hf_eval/boundary_geometry.py": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/boundary_geometry.py",
+      "sha256": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+      "lines": 181
+    },
+    "hf_repo/src/hf_eval/__init__.py": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/__init__.py",
+      "sha256": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+      "lines": 7
+    },
+    "external/measure_native_workpiece_regions.py": {
+      "path": "D:/hf-native-region-geometry001-author-20261004/measure_native_workpiece_regions.py",
+      "sha256": "56bba89522481e9cad03865ff762fc207baa571b0e9fcbe41ba1c0ffc7aed925",
+      "lines": 265
+    }
+  },
+  "module_imports": [
+    "from __future__ import annotations",
+    "import numpy as np",
+    "from .boundary_geometry import boundary_distances, exposed_q1_edges"
+  ],
+  "mathematical_checks": {
+    "convex_q1": "All selected mechanism/body cells require finite nonzero edge lengths, finite positive consecutive turns beyond the stated coordinate-roundoff scale, hence positive convex BL/BR/TR/TL quads. Nonfinite computed lengths/turns are invalid with string diagnostics, not silently zeroed.",
+    "sat": "Eight unit edge-normal axes from both quads are retained. Projection gap is explicitly max(minA,minB)-min(maxA,maxB); maximum raw gap<0 means pair-interior overlap in binary64, <-tolerance is the reported stricter margin; negative values are not penetration depth. Common projection origin reduces world-offset cancellation.",
+    "aabb": "Closed Cartesian AABBs expanded by the declared coordinate tolerance select candidates; every actual cross-region interior-overlap pair necessarily passes this filter. Candidate count and all retained pair axes/gaps are reported. The heuristic near-band is not a certified universal error bound.",
+    "cell_union": "A cross-region interior overlap of finite unions of full-dimensional cells exists iff at least one cell pair has interior overlap. This includes overlap caused by a contained cell without boundary crossings; it does not decide complete set containment.",
+    "roundoff": "Raw zero-touch retains its explicit classification and is included in roundoff_ambiguous. Tolerance changes classification only and is not a physical contact threshold.",
+    "closed_edges": "Existing boundary_distances operates on topologically exposed selected-cell edges including the symmetry cut for region classification. No mechanism self-overlap test or true geometric-union-boundary certification is claimed.",
+    "native_square": "Before generating faces, saved reference coordinates/connectivity must exactly equal the complete metadata Cartesian C_yx grid and BL/BR/TR/TL formulas. The complete in-box cell ID set plus exact body-node min/max bounds matches the declared square half-box, so missing cells/holes cannot be accepted through bbox alone in this native domain.",
+    "fixed_body": "Actual body-node split displacement sum must be exactly zero. Incomplete or moving bodies return geometry_valid=False, regions=None, faces={}, without region/ray evaluation. Invalid selected quads retain diagnostics and empty faces.",
+    "finite_rays": "With normalized tangent/normal, each edge has affine face coordinate u(s) and distance t(s); clipping s to [0,1], u to [0,length] and t>=0 yields a closed admissible interval. Linear t attains its minimum at an endpoint, or on the whole interval when constant. The minimum over all admissible edges equals the minimum of first boundary hits over the continuous finite face.",
+    "roots_and_ties": "Only equality with the analytic clipping root sets t=0 or u=0/length. Raw reconstructed normal/tangential projections and witness residual are retained. Strict equality ties, constant-distance minimizing intervals, sorted face intervals and separate roundoff-near ties/corners are recorded; small positive distances are not tolerance-clipped.",
+    "input_contract": "Integer cell/node IDs, nonnegative in-range indices, finite two-component face endpoints/normal, finite positive computed face/normal lengths and perpendicular normalized directions are required.",
+    "physical_scope": "Bottom outward (0,-1) and left outward (-1,0) faces are actual fixed square boundaries. Symmetry cut is excluded from physical ray edges. A positive boundary hit may be an exit from solid when the origin lies inside; overlap or uncertainty labels prohibit separation-gap interpretation."
+  },
+  "cli_checks": {
+    "sha256": "56bba89522481e9cad03865ff762fc207baa571b0e9fcbe41ba1c0ffc7aed925",
+    "identity": "Read-only source review confirms float.hex semantic descriptors, exact saved model/state fields and raw NPZ hashes, independent split-state SHA, result/state JSON linkage and accepted index/original target index/leg preservation.",
+    "partial_failure": "Each completed geometry dict is retained before invalid-geometry failure; started/completed counters and failing accepted-state identity are explicit. regions=None on invalid native bodies is supported.",
+    "unsigned_comparison": "Optional existing unsigned measurements are bound to the same task, accepted indices/legs and state hashes, then copied/read only; they are not recomputed or relabelled normal gaps.",
+    "mechanical_counts": "Zero mechanical counts are explicitly based on the inspected pinned pure import closure and loaded hf_eval-module exclusion, not on mechanical instrumentation; unavailable verification produces null counts."
+  },
+  "author_revisions_resolved": [
+    "Reject nonfinite/incorrect-shape face endpoints or normal and invalid integer node IDs.",
+    "Validate complete native Cartesian reference grid and actual body box/complete cell ID set before calling region/ray routines.",
+    "Include raw zero in uncertainty band and name exposed edges topological with self-overlap untested.",
+    "Reject nonfinite computed edge turns/lengths and nonfinite or zero normalization lengths."
+  ],
+  "limits": [
+    "Static reasoning and syntax compilation are not numerical test or geometry qualification.",
+    "No certified arithmetic/contact result, full set containment, mechanism self-overlap, signed penetration, pressure or clamping qualification.",
+    "Ray observations are directional boundary hits, not general signed normal gaps; analytic native square only in the combined API.",
+    "No claimed repeat measurement of prior physical unsigned distances and no mechanics-source or frozen-evidence changes."
+  ],
+  "operations_performed": [
+    "Read source and existing model metadata grid keys",
+    "AST parse and compile without execution",
+    "SHA256 source binding",
+    "Analytic algorithm reasoning"
+  ],
+  "new_calls": {
+    "geometry": 0,
+    "tests": 0,
+    "force": 0,
+    "tangent": 0,
+    "consumer": 0,
+    "HP": 0,
+    "solver": 0,
+    "plot": 0
+  },
+  "source_bytes_unchanged_during_review": true
+}
