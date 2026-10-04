@@ -1,0 +1,54 @@
+--- execute_cycle008.py
++++ execute_cycle009.py
+@@ -1,4 +1,4 @@
+-"""Execute the opt-in mechanical [0,.5,1,1.5,1.75,1.5,1,.5,0] path; save actual F/T range inputs."""
++"""Execute the opt-in mechanical [0,.5,1,1.5,1.75,1.5,1,.5,0] with explicit chunk256 tangent path; save actual F/T range inputs."""
+ from pathlib import Path
+ from time import perf_counter
+ from datetime import datetime, timezone
+@@ -76,7 +76,7 @@
+         print(json.dumps(row), flush=True)
+ 
+     original_force = native_mean._assemble_mechanical_force
+-    original_tangent = native_mean._tangent
++    original_tangent = native_mean._tangent_chunked
+     observed_force_calls = observed_force_completed = observed_tangent_calls = observed_tangent_completed = 0
+     captured_force = captured_tangent = last_force = None
+ 
+@@ -170,16 +170,19 @@
+         return values
+ 
+     native_mean._assemble_mechanical_force = observed_force
+-    native_mean._tangent = observed_tangent
++    native_mean._tangent_chunked = observed_tangent
+     try:
+         row = inventory["case"]
+         task = json.loads((ROOT/row["task_file"]).read_text(encoding="utf-8"))
+         receipt["invocations"] = 1
+         write(receipt_file, receipt)
+         result = solve_native_mean(ROOT/row["geometry_file"], task, row["targets_mm"],
+-            settings=DisplacementSettings(**inventory["settings"]), on_accept=accepted, response_mode="mechanical")
++            settings=DisplacementSettings(**inventory["settings"]), on_accept=accepted, response_mode="mechanical", tangent_mode="chunk256")
+         descriptor = write_native_mean(result, STAGE/row["result_directory"])
+         metadata = result.metadata
++        assert metadata["tangent_execution"] == inventory["tangent_execution"]
++        assert all(s.record["tangent_execution"] == inventory["tangent_execution"] for s in result.accepted)
++        receipt["tangent_execution"] = metadata["tangent_execution"]
+         assert metadata["schema_version"] == "hf-native-mean-result-1.2" and all(metadata[k] == v for k,v in availability.items())
+         with np.load(STAGE/"result/model/model.npz", allow_pickle=False) as saved, np.load(ROOT/row["workpiece_model_file"], allow_pickle=False) as original:
+             assert len(saved.files) == len(original.files) == 27 and set(saved.files) == set(original.files)
+@@ -211,12 +214,12 @@
+         raise
+     finally:
+         native_mean._assemble_mechanical_force = original_force
+-        native_mean._tangent = original_tangent
++        native_mean._tangent_chunked = original_tangent
+         receipt.update(observed_force_calls=observed_force_calls, observed_force_calls_completed=observed_force_completed,
+             observed_tangent_calls=observed_tangent_calls, observed_tangent_calls_completed=observed_tangent_completed,
+             first_force_range_input=captured_force, first_tangent_range_input=captured_tangent,
+             force_hook_restored=native_mean._assemble_mechanical_force is original_force,
+-            tangent_hook_restored=native_mean._tangent is original_tangent)
++            tangent_hook_restored=native_mean._tangent_chunked is original_tangent)
+         memory = process.memory_info()
+         peak = max(peak, memory.rss, getattr(memory, "peak_wset", memory.rss))
+         receipt.update(elapsed_seconds=perf_counter()-STARTED, sampled_peak_RSS_bytes=peak,

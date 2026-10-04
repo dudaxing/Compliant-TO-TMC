@@ -1,0 +1,17 @@
+--- D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_workpiece_cycle009_20261004/plot_tangent_cost.py
++++ D:/hf-native-workpiece-cycle009-author-20261004/plot_tangent_cost002.py
+@@ -39,12 +39,12 @@
+     ax.spines[["top", "right"]].set_visible(False)
+     ax.grid(axis="y", alpha=.15)
+     ax.set_axisbelow(True)
+-    fig.legend(*ax.get_legend_handles_labels(), loc="lower center", bbox_to_anchor=(.5,-.02),
++    fig.legend(*ax.get_legend_handles_labels(), loc="lower center", bbox_to_anchor=(.5,-.10),
+                ncol=3, fontsize=9)
+     fig.suptitle("Same mechanical Jacobian, lower measured cost", fontsize=18)
+     ax.set_title("Each state: all 614,400 tensor coefficients + full CSC bytes identical",
+                  fontsize=11, pad=12)
+-    fig.text(.01, -.10, "One pass per implementation, not a statistical benchmark. Shared exact rich cache; "
++    fig.text(.01, -.22, "One pass per implementation, not a statistical benchmark. Shared exact rich cache; "
+              "global small-product branch retained.\n3 force / 9 tangent / 9 CSC evaluations; 0 equilibrium solves or new HP. "
+              "This comparison does not qualify contact pressure or a new loading path.", fontsize=9)
+     image = output/"tangent_cost.png"

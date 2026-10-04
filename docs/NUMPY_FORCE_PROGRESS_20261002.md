@@ -1,3 +1,7 @@
+2026-10-04最新：**009保留原完整九目标，1.75mm加载与回零已完成；63F/36T，18次新HP/174111检查通过。** 显式256单元分块切线不改变数学或默认full；三份对照保存态（007初态、008峰态、007回零）逐字节等价，原前八态32整档相同，生产373.57秒在原600/660预算内。见[目标、变更、效果/成本、范围与下一步](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/RESULTS.md)及[实际九态×1动画](../functional_views/native_workpiece_cycle009_20261004/saved_render_001/animation_001/cycle009_actual_path.gif)。
+
+底面射线.0767107mm、左面2.83278mm，介质minJ=.0280804；几何无已测跨域内部重叠，尚未证明有效夹持、压力、能量或应力HP。旧008仍是time_limit失败。下一步补工件节点力位置图，再根据间隙/J规划近接触增量；圆/细网格未执行。以下逐字节保留此前时点原文，当前以本条与新报告为准。
+
 2026-10-04最新：**008的1.75mm峰值已达到，但九目标完整循环因600秒时间限制失败，8接受态保存至卸载.5mm；新HP0，原卡已关闭。** 底/左首次法向射线约.0767107/2.83278mm；第三介质minJ=.0280804，实体minJ=.956236；无已测跨域内部重叠，不能认定有效夹持。见[目标、实现、原因、实际效果/成本/限制与下一步](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_008/RESULTS.md)和[实际峰/最后态与距离图](../functional_views/native_workpiece_cycle008_20261004/partial_region_view_001/render_001/native_region_path.png)。
 
 四张独立保存partial观测/绘图卡各一次通过，不是机械重试或HP资格；未补返回零点。main/origin保持，009仅计划未执行。以下完整保留此前时点原文，当前以本条及新报告为准。
@@ -1987,3 +1991,12 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 四个新保存partial卡各一次通过、16次两种高层几何调用、绘图几何0；原39测试只来源复用。强压缩集中于介质，底距离.0767107mm，左射线2.83278mm；工件Fy=.003789285781N是生产量，不授接触/夹持/压力资格。
 
 预算预测不足已记录；下一近期先按真实调用成本选择另一明确完整路径采样任务，原数学门/600秒不变，不把旧008改pass。整体HF目标仍未完成。详细报告及实际源/输出/失败在本页最新入口，公开恢复为文件身份而非数值复算。
+
+
+## native-workpiece-cycle009-complete-20261004
+
+未采用删回程1.5mm的旧建议：完整原九目标在原预算内通过。新_tangent_chunked保留全批小量selector、单元内9Q/8列归约和全域CSC顺序；默认full不变，机械CLI显式chunk256。12针对测试和10集成测试通过；原三保存态alltensor/CSC逐字节一致，一次测量比1.84–1.87。
+
+009原27模型字段一致、213pins/68caps/63inputs、63F36T1solve9states18HP174111；前8的32文件同旧008。生产372.592/helper373.570outer秒，参考179.295summary180.154outer秒。原flagsfalse，外部fresh参考资格单独报告且限force/PORT方向Jv/equilibrium/bodyprojection，能源未评估、stressHP/全列/有效clamp仍未完成。
+
+新9次保存几何、九帧×1动画与力/场量图均有独立闭卡；成本图另建布局更正卡，原图保留。全过程与物理后续见页首新报告。
