@@ -1,0 +1,117 @@
+--- preserved_v1/reference_contract_builder.py
++++ v2/reference_contract_builder.py
+@@ -5,14 +5,15 @@
+ """
+ from pathlib import Path
+ from hashlib import sha256
++from math import isfinite
+ import argparse
+ import json
+ import shutil
+ 
+ RSS = 8*1024**3
+ CORE_PIN = "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5"
+-AUDIT_PIN = "7c714091af20aa6175310d1ddf74e84467df762d61ea6d2a3c440b4dc4bcdb8c"
+-COUNTER_PIN = "547a76f7d1b750a2f423fdce043a90e4b6754c6148167bb350d36f2852ced32e"
++AUDIT_PIN = "0fcf7f372ccdc10dbf0f66e3473ae59282b8667663e6e070f0a5a1625f87c9ea"
++COUNTER_PIN = "b028dba774d430a6d082ca05be86489a56e800be1f1bd69c60148ffccd51e8b3"
+ LAUNCHER_PIN = "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477"
+ MATH = ("audit_native_mean.py","audit_native_force.py","hf2_precision_reference.py",
+         "hf4_split_precision_reference.py","audit_native_workpiece_cycle.py","run_split_average_demo.py")
+@@ -32,10 +33,15 @@
+     parser.add_argument("--repo",type=Path,required=True)
+     parser.add_argument("--input",type=Path,required=True,help="Actual casecontrol/run_001")
+     parser.add_argument("--author",type=Path,default=Path(__file__).resolve().parent)
++    parser.add_argument("--reference-seconds",type=float,required=True,help="Explicit future window selected from actual full-path N before freezing")
++    parser.add_argument("--budget-basis",required=True,help="Recorded actual-N/cost basis; never extends a running window")
+     args = parser.parse_args()
+     root,stage,author = args.repo.resolve(),args.input.resolve(),args.author.resolve()
++    assert isfinite(args.reference_seconds) and args.reference_seconds > 0. and args.budget_basis.strip()
++    limit = args.reference_seconds
+     control = stage.parent
+-    assert stage.name == "run_001" and control.parent == root/"lf_data_preparation/native_workpiece_001"
++    assert stage.name == "run_001" and control.name == "shift_square_pose_002"
++    assert control.parent == root/"lf_data_preparation/native_workpiece_001"
+     stage.relative_to(root)
+     installed,output = control/"reference_author",control/"reference"
+     contract_file,protocol_file = control/"reference_contract.json",control/"reference_protocol.json"
+@@ -53,9 +59,9 @@
+     assert launch["exit_code"] == 0 and launch["invocations"] == receipt["invocations"] == 1
+     assert launch["stop_reason"] is None and launch["all_bindings_unchanged"] is True
+     assert launch["protocol_sha256"] == sha(production_protocol) and launch["bindings"] == protocol["bindings"]
+-    assert protocol["phases"]["production"]["helper_seconds"] == 900
+-    assert protocol["phases"]["production"]["outer_seconds"] == launch["outer_seconds"] == 960
+-    assert 0 <= launch["elapsed_seconds"] <= 960 and 0 <= launch["peak_sampled_tree_RSS_bytes"] <= RSS
++    assert protocol["phases"]["production"]["helper_seconds"] == 1500
++    assert protocol["phases"]["production"]["outer_seconds"] == launch["outer_seconds"] == 1560
++    assert 0 <= launch["elapsed_seconds"] <= 1560 and 0 <= launch["peak_sampled_tree_RSS_bytes"] <= RSS
+     assert receipt["input_inventory_sha256"] == sha(paths["input_inventory.json"])
+     assert receipt["source_freeze_sha256"] == inventory["source_freeze_sha256"] == sha(paths["source_freeze.json"])
+     assert receipt["sources"] == freeze["sources"] and receipt["inputs"] == inventory["input_bindings"]
+@@ -80,6 +86,7 @@
+     assert receipt["model_sha256"] == result["model"]["arrays_sha256"] == sha(model_file)
+     assert sha(model_file) == case["workpiece_model_sha256"] or receipt["declared_workpiece_model_arrays_equal"] is True
+     assert sha(author/"audit_shift_pose.py") == AUDIT_PIN and sha(author/"core_audit_mechanical.py") == CORE_PIN
++    assert sha(author/"counter_attempts.py") == COUNTER_PIN
+     launcher = control/"launch_pose.py"
+     assert sha(launcher) == LAUNCHER_PIN and launcher.resolve().parents[3] == root
+     source_map = freeze["sources"]
+@@ -95,39 +102,47 @@
+             *[q for q in result_file.parent.rglob("*") if q.is_file()],
+             *[q for q in stage.glob("first_*_range_input/*") if q.is_file()]]:
+         pins[path.relative_to(root).as_posix()] = sha(path)
++    previous_failed = root/"lf_data_preparation/native_workpiece_001/shift_square_pose_001"
++    failed_result_file = previous_failed/"run_001/result/result.json"
++    failed_result = read(failed_result_file)
++    assert failed_result["status"] == "failed" and failed_result["failure"]["code"] == "time_limit"
++    failed_context = {}
++    for path in (failed_result_file,previous_failed/"run_001/execution_receipt.json",previous_failed/"production_launch.json"):
++        name,pin = path.relative_to(root).as_posix(),sha(path)
++        pins[name] = pin; failed_context[name] = pin
+     # Source roles remain separate; this is an import closure/superset for the reference.
+     refs = {n:pin for n,pin in source_map.items() if n.startswith("hf_repo/src/hf_eval/")}
+     for name in MATH: refs["hf_repo/scripts/"+name] = source_map["hf_repo/scripts/"+name]
+-    counter = root/"lf_data_preparation/native_workpiece_001/coarse_square_cycle010_ref_003/counter_contract.py"
+-    assert sha(counter) == COUNTER_PIN
+-    refs[counter.relative_to(root).as_posix()] = COUNTER_PIN
+     refs[launcher.relative_to(root).as_posix()] = LAUNCHER_PIN
+     assert all(sha(root/n) == pin for n,pin in pins.items())
+     installed.mkdir()
+-    for name in ("audit_shift_pose.py","core_audit_mechanical.py"):
++    for name in ("audit_shift_pose.py","core_audit_mechanical.py","counter_attempts.py"):
+         shutil.copyfile(author/name,installed/name)
+         refs[(installed/name).relative_to(root).as_posix()] = sha(installed/name)
+     own = Path(__file__).resolve(); copied_builder = installed/own.name
+     shutil.copyfile(own,copied_builder)
+     refs[copied_builder.relative_to(root).as_posix()] = sha(copied_builder)
+     assert len({Path(n).name for n in refs}) == len(refs)
+-    contract = dict(schema_version="shift-square-reference-contract-1.0",
++    contract = dict(schema_version="shift-square-reference-contract-1.1",
+         production_stage=stage.relative_to(root).as_posix(),baseline_commit=inventory["baseline_commit"],
+-        limits=dict(helper_seconds=600,outer_seconds=660,sampled_RSS_bytes=RSS),workpiece=BODY,targets_mm=TARGETS,
+-        reference_sources=refs,input_inventory_sha256=sha(paths["input_inventory.json"]),
++        limits=dict(helper_seconds=limit,outer_seconds=limit+60,sampled_RSS_bytes=RSS),workpiece=BODY,targets_mm=TARGETS,
++        reference_sources=refs,counter_schema="shift-complete-attempt-counter-1.0",counter_helper_sha256=COUNTER_PIN,
++        actual_accepted_states=len(result["states"]),expected_new_HP80_120_calls=2*len(result["states"]),
++        reference_budget_basis=args.budget_basis,input_inventory_sha256=sha(paths["input_inventory.json"]),
+         production_receipt_sha256=sha(paths["execution_receipt.json"]),source_freeze_sha256=sha(paths["source_freeze.json"]),
+         production_launch_file=production_launch.relative_to(root).as_posix(),production_launch_sha256=sha(production_launch),
+         production_result_sha256=sha(result_file),production_model_sha256=sha(model_file),
+         source_transition=inventory["source_transition"],
+-        scope="Fresh exhaustive reference for all accepted x71 pose-only states; no failed-state, pressure/clamp, energy or all-column qualification")
++        preceding_failed_pose001=failed_context,preceding_failure_scope="Cost/closed-failure context only; no prefix reuse or failed-state qualification",
++        scope="Fresh exhaustive reference for all actual accepted complete pose002 states; no failed-state, pressure/clamp, energy or all-column qualification")
+     assert freeze["source_transition"] == contract["source_transition"]
+     write(contract_file,contract)
+     pins.update(refs); pins[contract_file.relative_to(root).as_posix()] = sha(contract_file)
+     argv = [(installed/"audit_shift_pose.py").relative_to(root).as_posix(),"--repo",str(root),
+         "--input",stage.relative_to(root).as_posix(),"--output",output.relative_to(root).as_posix(),
+-        "--contract",contract_file.relative_to(root).as_posix(),"--time-limit","600"]
+-    write(protocol_file,dict(schema_version="shift-square-reference-protocol-1.0",bindings=pins,
+-        sampled_RSS_bytes=RSS,phases=dict(reference=dict(helper_seconds=600,outer_seconds=660,argv=argv)),
++        "--contract",contract_file.relative_to(root).as_posix(),"--time-limit",str(limit)]
++    write(protocol_file,dict(schema_version="shift-square-reference-protocol-1.1",bindings=pins,
++        sampled_RSS_bytes=RSS,phases=dict(reference=dict(helper_seconds=limit,outer_seconds=limit+60,argv=argv)),
+         actual_accepted_states=len(result["states"]),expected_new_HP80_120_calls=2*len(result["states"]),
+         production_rerun=False,reference_started=False,
+         stop_policy="First failure closes reference; all states fresh, no prefix reuse/production retry",

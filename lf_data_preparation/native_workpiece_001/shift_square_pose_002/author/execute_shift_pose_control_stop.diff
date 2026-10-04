@@ -1,0 +1,11 @@
+--- before_control_stop/execute_shift_pose.py
++++ execute_shift_pose.py
+@@ -63,7 +63,7 @@
+         nonlocal peak
+         memory = process.memory_info()
+         peak = max(peak, memory.rss, getattr(memory, "peak_wset", memory.rss))
+-        if peak > receipt["sampled_RSS_limit_bytes"] or (STAGE/"stop_requested.txt").exists():
++        if peak > receipt["sampled_RSS_limit_bytes"] or (STAGE/"stop_requested.txt").exists() or (STAGE.parent/"stop_requested.txt").exists():
+             raise RuntimeError("Resource observation requested stage stop")
+         if perf_counter()-STARTED > receipt["seconds_limit"]:
+             raise KernelError("Whole-helper time budget exhausted", code="time_limit")

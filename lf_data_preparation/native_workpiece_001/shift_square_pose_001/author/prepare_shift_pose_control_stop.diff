@@ -1,0 +1,11 @@
+--- before_control_stop/prepare_shift_pose.py
++++ prepare_shift_pose.py
+@@ -55,7 +55,7 @@
+         nonlocal peak
+         memory = process.memory_info()
+         peak = max(peak, memory.rss, getattr(memory, "peak_wset", memory.rss))
+-        if perf_counter()-STARTED > 120 or peak > RSS_LIMIT or (stage/"stop_requested.txt").exists():
++        if perf_counter()-STARTED > 120 or peak > RSS_LIMIT or (stage/"stop_requested.txt").exists() or (stage.parent/"stop_requested.txt").exists():
+             raise RuntimeError("Preparation resource window closed")
+ 
+     previous = root/"lf_data_preparation/native_workpiece_001/coarse_square_cycle_010"

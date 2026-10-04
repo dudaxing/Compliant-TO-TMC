@@ -1,3 +1,34 @@
+<!-- current-front 2026-10-05 (phase20261004); historical baseline 38ecc77cc14fee9fd0c69d026ed8df1e32b19bc2 -->
+
+## 当前可移植接续入口
+
+pose002 已完整回零：17 态、34 次新 HP80/120、328767 项检查通过。
+
+soft001：完整加载—卸载完成，14 个实际接受态；独立参考全量通过：28 次新 HP80/120、270829 项检查。实体E减半、gamma/alpha倍增，绝对介质Lamé/kr不变；局部接触边最大应变增加约9.06%，但钳尖右面距离.167270→.172489mm，工件Fy约减半，未证明更贴合。E1保留为当前基准，E.5为独立低驱动力探索。
+
+[总体目标、实际结果、成本与资格](WORKPIECE_SHIFT_AND_SOFTNESS_20261004.md)；[完整实际路径图](../functional_views/workpiece_shift_20261004/complete_002/view/comparison.png)、[局部贴合与钳尖图](../functional_views/workpiece_shift_20261004/fit_001/view/local_fit.png)；[本轮持续总记录](evidence/workpiece_shift_20261004/final_comparison.json)。
+
+旧 pose001 失败只作成本来源；[T44 v5 修正与独立验证](../lf_data_preparation/native_workpiece_001/t44_direction_scaling_repair_001/README.md) 的资格限已捕获 T44，不延伸为一般接触或全列资格。
+
+从任意新目录获取 main 并校验文件：
+
+```text
+git clone https://github.com/dudaxing/Compliant-TO-TMC.git my-hf-work
+cd my-hf-work
+git switch main
+python tools/handoff.py verify
+```
+
+必要大资产按下面保留的移交说明 fetch-evidence 后 verify --full；无需创建原机器 D: 路径。先读本轮总报告/数值与图，再按新的明确任务和预算开发；历史命令和已闭卡不是当前同路径重跑指令。
+
+下一选择：优先定义最右钳尖与有限工件面的覆盖对齐；x72会触及x80分析域边界，必须作为新边界贴靠任务，不能继承x71资格，随后再比较局部软化，不继续盲目降低整体E。接受态资格限机械力、声明 PORT 方向切线作用、组装/平衡与工件投影；不含压力、应力 HP、辅助能量、全切线列或自由工件夹持。
+
+---
+
+## 历史内容（截至 38ecc77，以下原字节保留）
+
+以下‘最新/下一步/未完成’均指其当时时点；当前状态以本页上方和本轮总记录为准。
+
 2026-10-04最新：**010的1.8 mm完整加载—卸载已完成，原11目标全部达到，包含原控制器额外.25 mm的12实际态；新Ref003全24 HP/232272项检查通过。** 输入峰反力.414394469 N、输出+y=2.08019363 mm，底/左有限法向射线.0317909716/2.85343057 mm，介质minJ=.00662089875、实体minJ=.955246548。见[整体目标、实现、排查、效果、全部失败/资源/资格与后续](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/RESULTS.md)、[实际12帧×1动画](../functional_views/native_workpiece_cycle010_20261004/saved_render_001/animation_001/cycle010_actual_path.gif)、[J/Hu位置图](../functional_views/native_workpiece_cycle010_20261004/saved_render_001/fields_001/peak_saved_J_Hu.png)。
 
 新12次几何/12次全节点力观察、1836行节点CSV和位置图完成，右下角节点峰力模.0181035417 N。原010参考因错误完整计数假设在HP前失败、Ref002在16HP/7完整态后超时，均关闭保留；Ref003新预算独立全量重新计算，没有拼接旧前缀。T44/F77范围失败虽已按原控制器回滚二分，primitive根因仍未修复；新资格只覆盖接受机械态，不含失败trial、压力/夹持、能量、应力HP或切线全列。原生产flags保持false。下一优先定位已捕获范围问题，再补圆体边界观察并开展匹配形状工况；本轮圆/细网格/更大峰值未运行，整体项目仍未完成。以下逐字节保留先前记录，当前以本条和新报告为准。

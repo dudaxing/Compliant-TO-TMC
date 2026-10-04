@@ -1,0 +1,109 @@
+{
+  "status": "author_static_ready",
+  "qualification": false,
+  "files": {
+    "build_pose_card.py": {
+      "lines": 136,
+      "sha256": "e08a3174d58203ac2ba7f9afe58a025699dd47f8e4bb086e1269d804c3ff0519"
+    },
+    "execute_shift_pose.py": {
+      "lines": 251,
+      "sha256": "96bf1b48eebe22b1132f6736b17de2f4269d656442c8308c2822caa0ec0387ae"
+    },
+    "execute_shift_pose_control_stop.diff": {
+      "lines": 11,
+      "sha256": "c7dbf10bb8ae6e16170f90a0bc017e5d9da87500bb8926f819c7bf2718af6898"
+    },
+    "preparation_author_delta.diff": {
+      "lines": 99,
+      "sha256": "1eb55615762bfc3e4a60fc375f9f071402d0d3ec7499aa0e452e7ecc5643804a"
+    },
+    "prepare_shift_pose.py": {
+      "lines": 220,
+      "sha256": "30c6c1cf63d4941d75bb3907e8ec41d288b2b20b26d24703e49f3b94fd755df1"
+    },
+    "prepare_shift_pose_control_stop.diff": {
+      "lines": 11,
+      "sha256": "027746acf1644d73e74dd42f448f3d4cb0c75755dab37ce258c89c09e41c8b53"
+    },
+    "producer_delta.diff": {
+      "lines": 63,
+      "sha256": "74974defabaec299f4a83256e2248d3719a823c9d7604e88eb956696b93b93b3"
+    },
+    "README.md": {
+      "lines": 38,
+      "sha256": "4701916e335aff995754bc0a1275066ece74881296723f9fd16dedfe9a3a88a8"
+    },
+    "task.json": {
+      "lines": 108,
+      "sha256": "70ce5d31298ae4d91b7c07355d03daf8770eb78e1449af05c1ac95ded2aa6e10"
+    },
+    "task_delta.diff": {
+      "lines": 33,
+      "sha256": "9d2d7ebe3d81644db823eb4cf349fbb536782aca89e019109ee756f1564927c1"
+    }
+  },
+  "ownership": "External author files only; no formal repo file edited by this agent",
+  "execution": {
+    "card_builder_invocations": 0,
+    "preparation_invocations": 0,
+    "model_constructions": 0,
+    "force_calls": 0,
+    "tangent_calls": 0,
+    "solver_calls": 0,
+    "HP_calls": 0,
+    "test_invocations": 0,
+    "geometry_calls": 0,
+    "render_invocations": 0
+  },
+  "checks": {
+    "AST_and_compile_source_only": true,
+    "historical68_capsules_byte_identical": true,
+    "current_only_explicit_tangent_transition": {
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": {
+        "historical_sha256": "fe36581e8b49f1a547973e135f3c8ca0f2bbc7d954502405418bd794d731955a",
+        "current_sha256": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f"
+      }
+    },
+    "source_count_planned": 70,
+    "producer_6_mechanical_cache_helpers_AST_unchanged": {
+      "accepted": true,
+      "model_inputs": true,
+      "archive": true,
+      "capture_range": true,
+      "observed_force": true,
+      "observed_tangent": true
+    },
+    "both_checkpoint_diffs_only_add_parent_control_stop": true,
+    "launcher_copy_exact_sha256": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+    "builder_prepare_mode_installs_exclusive_control_and_freezes_only": true,
+    "builder_production_mode_requires_actual_prepare_pass_before_freeze": true
+  },
+  "repair_actual_saved_proof_read": {
+    "files": {
+      "protocol.json": "7b86fbe16c592abaf1d7594297689b8e0912fbdd6a6bf8bdaf1a3dd62d05710d",
+      "validation_launch.json": "a80248c8f81209fdad5a29f0332cf6628cdc52e98baee4a9a3b4dd3efbf004a4",
+      "result/receipt.json": "6f222f029b4b5b015a934d2c48719017b1e74cde1cfe4ca8e78250ab1ee0b2f4"
+    },
+    "status": "pass",
+    "scope": "Bounded captured derivative support and saved-input HP action; no equilibrium/contact/all-column claim",
+    "observed_saved_calls": {
+      "cached_T_started": 2,
+      "cached_T_completed": 2,
+      "HP_started": 2,
+      "HP_completed": 2
+    },
+    "observed_saved_checks": 9603,
+    "new_mechanical_evaluations_by_review": 0
+  },
+  "stop_contract": "F3 writes control/stop_requested.txt; both entrypoints check run_001 and parent/control; the outer monitor is cooperative, not OS hard termination.",
+  "model_contract": "Future actual pose construction must yield21 byte-identical intrinsic fields and6 changed overlay fields; total27 retained with a new model identity.",
+  "future_soft_case": "Author preparation can admit E=.5,gamma=alpha=2e-6 only under a separate physical/reference card; lam/mu/gamma/Et change, global kr and nonbody-medium Lamé stay byte-identical.",
+  "reader_probe_note": "Earlier source-all-same assertion stopped on the now explicitly proven T transition; no formal preparation or mechanical evaluation occurred.",
+  "limitations": [
+    "No new task/model/path has run.",
+    "Historical Ref003 qualifies original accepted states only.",
+    "T44 repair proof does not qualify shifted equilibrium, failed-state equilibrium or all columns.",
+    "No new reference/counter contract is silently inherited."
+  ]
+}

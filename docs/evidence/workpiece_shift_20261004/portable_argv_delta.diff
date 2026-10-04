@@ -1,0 +1,11 @@
+--- v2/reference_contract_builder.py
++++ portable/reference_contract_builder.py
+@@ -138,7 +138,7 @@
+     assert freeze["source_transition"] == contract["source_transition"]
+     write(contract_file,contract)
+     pins.update(refs); pins[contract_file.relative_to(root).as_posix()] = sha(contract_file)
+-    argv = [(installed/"audit_shift_pose.py").relative_to(root).as_posix(),"--repo",str(root),
++    argv = [(installed/"audit_shift_pose.py").relative_to(root).as_posix(),"--repo",".",
+         "--input",stage.relative_to(root).as_posix(),"--output",output.relative_to(root).as_posix(),
+         "--contract",contract_file.relative_to(root).as_posix(),"--time-limit",str(limit)]
+     write(protocol_file,dict(schema_version="shift-square-reference-protocol-1.1",bindings=pins,

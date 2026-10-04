@@ -1,0 +1,263 @@
+--- preserved_v1/audit_shift_pose.py
++++ v2/audit_shift_pose.py
+@@ -1,4 +1,4 @@
+-"""Fresh accepted-state reference for the explicit x71 pose-only square cycle.
++"""Fresh accepted-state reference for the explicit complete x71 pose002 cycle.
+ 
+ B850 run_state and aa86 workpiece_checks are unchanged. No construction,
+ constitutive force, production tangent, controller or solver is evaluated.
+@@ -19,7 +19,7 @@
+ parser = argparse.ArgumentParser(description=__doc__)
+ for name in ("repo", "input", "output", "contract"):
+     parser.add_argument("--"+name, type=Path, required=True)
+-parser.add_argument("--time-limit", type=float, default=600.)
++parser.add_argument("--time-limit", type=float, required=True)
+ ARGS = parser.parse_args()
+ ROOT = ARGS.repo.resolve()
+ SCRIPTS = ROOT/"hf_repo/scripts"
+@@ -27,8 +27,8 @@
+ CORE_PIN = "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5"
+ WP_PIN = "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938"
+ CONSUMER_PIN = "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe"
+-COUNTER_PIN = "547a76f7d1b750a2f423fdce043a90e4b6754c6148167bb350d36f2852ced32e"
+-COUNTER_FILE = ROOT/"lf_data_preparation/native_workpiece_001/coarse_square_cycle010_ref_003/counter_contract.py"
++COUNTER_PIN = "b028dba774d430a6d082ca05be86489a56e800be1f1bd69c60148ffccd51e8b3"
++COUNTER_FILE = Path(__file__).with_name("counter_attempts.py")
+ sha_raw = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+ if sha_raw(PRIVATE_CORE) != CORE_PIN or sha_raw(SCRIPTS/"audit_native_workpiece_cycle.py") != WP_PIN:
+     raise ValueError("Frozen reference mathematics changed")
+@@ -47,7 +47,7 @@
+ BODY = dict(kind="fixed_rigid", shape="square", center_mm=[71.,40.], side_mm=16., fixed_components=[0,1])
+ SETTINGS = dict(tolerance=1e-9, constraint_tolerance=1e-10, displacement_scale_floor=1e-6,
+     force_scale_floor_factor=1e-8, max_checks=25, armijo_c=1e-4, max_backtracks=12,
+-    max_bisections=4, minimum_increment=.1/16, time_limit_seconds=900.)
++    max_bisections=4, minimum_increment=.1/16, time_limit_seconds=1500.)
+ OVERLAY = {"fixed_dofs", "free_dofs", "workpiece_cells", "workpiece_nodes", "workpiece_dofs",
+            "workpiece_background_symmetry_overlap_dofs"}
+ 
+@@ -57,7 +57,7 @@
+     def __init__(self, args):
+         super().__init__(args)
+         self.repo = ROOT
+-        require(self.limit == 600., "Only the explicit fresh 600-second reference card is supported")
++        require(np.isfinite(self.limit) and self.limit > 0., "An explicit pre-frozen positive reference window is required")
+         self.accounting = self.first_range_observation = self.tangent_range_observation = None
+ 
+     def checkpoint(self):
+@@ -78,13 +78,23 @@
+         contract_file = ARGS.contract.resolve()
+         self.bind(contract_file)
+         contract = read(contract_file)
+-        self.check(contract["schema_version"] == "shift-square-reference-contract-1.0"
++        self.check(contract["schema_version"] == "shift-square-reference-contract-1.1"
+             and contract["production_stage"] == self.stage.relative_to(self.repo).as_posix()
+-            and contract["limits"] == dict(helper_seconds=600,outer_seconds=660,sampled_RSS_bytes=RSS_LIMIT)
+-            and contract["workpiece"] == BODY and contract["targets_mm"] == TARGETS,
++            and contract["limits"] == dict(helper_seconds=self.limit,outer_seconds=self.limit+60,sampled_RSS_bytes=RSS_LIMIT)
++            and contract["workpiece"] == BODY and contract["targets_mm"] == TARGETS
++            and self.stage.name == "run_001" and self.stage.parent.name == "shift_square_pose_002"
++            and contract["counter_schema"] == "shift-complete-attempt-counter-1.0"
++            and contract["counter_helper_sha256"] == COUNTER_PIN,
+             "Wrong explicit shifted-square reference card")
+         self.reference_contract = contract
+         self.reference_contract_sha256 = sha(contract_file)
++        self.check(contract["preceding_failure_scope"] == "Cost/closed-failure context only; no prefix reuse or failed-state qualification",
++            "Prior failed pose card may only supply cost/failure context")
++        for name,pin in contract["preceding_failed_pose001"].items(): self.bind(self.repo/name,pin)
++        old_failure_file = self.repo/"lf_data_preparation/native_workpiece_001/shift_square_pose_001/run_001/result/result.json"
++        self.check(contract["preceding_failed_pose001"].get(old_failure_file.relative_to(self.repo).as_posix()) == sha(old_failure_file)
++            and read(old_failure_file)["status"] == "failed" and read(old_failure_file)["failure"]["code"] == "time_limit",
++            "Prior pose001 is not the closed failed context")
+         ref_sources = contract["reference_sources"]
+         own = Path(__file__).resolve().relative_to(self.repo).as_posix()
+         core = PRIVATE_CORE.relative_to(self.repo).as_posix()
+@@ -101,7 +111,7 @@
+         self.bind(COUNTER_FILE,ref_sources[counter])
+         spec = importlib.util.spec_from_file_location("shift_reference_counter",COUNTER_FILE)
+         counter_module = importlib.util.module_from_spec(spec); spec.loader.exec_module(counter_module)
+-        self.captured_counts = counter_module.reconstruct
++        self.attempt_counts = counter_module.reconstruct
+         inventory_file,receipt_file,freeze_file = (self.stage/n for n in
+             ("input_inventory.json","execution_receipt.json","source_freeze.json"))
+         for path,key in ((inventory_file,"input_inventory_sha256"),(receipt_file,"production_receipt_sha256"),
+@@ -117,7 +127,7 @@
+             and all(row[k] == v for k,v in PINS.items()) and inventory["settings"] == SETTINGS
+             and inventory["gates"] == GATES and inventory["source_freeze_sha256"] == sha(freeze_file)
+             and all(inventory[k] == MECHANICAL_AVAILABILITY[k] for k in ("response_mode","response_contract","auxiliary_material_energy"))
+-            and inventory["execution_limits"] == dict(production_seconds=900,production_outer_seconds=960,
++            and inventory["execution_limits"] == dict(production_seconds=1500,production_outer_seconds=1560,
+                 sampled_RSS_bytes=RSS_LIMIT,preparation_seconds=120,preparation_outer_seconds=150),
+             "Shifted pose inventory changed physics/settings or original gates")
+         self.check(receipt["schema_version"] == "native-mean-execution-1.0" and receipt["status"] == "pass"
+@@ -126,8 +136,8 @@
+             and receipt["source_freeze_sha256"] == sha(freeze_file)
+             and receipt["sources"] == freeze["sources"] and receipt["inputs"] == inventory["input_bindings"]
+             and receipt["sources_unchanged"] is receipt["inputs_unchanged"] is True
+-            and receipt["seconds_limit"] == 900 and receipt["sampled_RSS_limit_bytes"] == RSS_LIMIT
+-            and np.isfinite(receipt["elapsed_seconds"]) and 0 <= receipt["elapsed_seconds"] <= 900
++            and receipt["seconds_limit"] == 1500 and receipt["sampled_RSS_limit_bytes"] == RSS_LIMIT
++            and np.isfinite(receipt["elapsed_seconds"]) and 0 <= receipt["elapsed_seconds"] <= 1500
+             and 0 <= receipt["sampled_peak_RSS_bytes"] <= RSS_LIMIT
+             and receipt["force_hook_restored"] is receipt["tangent_hook_restored"] is True,
+             "Complete production/frozen source/input/resource precondition failed")
+@@ -136,7 +146,7 @@
+         launch = read(launch_file)
+         self.check(launch["status"] == "pass" and launch["exit_code"] == 0 and launch["invocations"] == 1
+             and launch["all_bindings_unchanged"] is True and launch["stop_reason"] is None
+-            and 0 <= launch["elapsed_seconds"] <= 960 and 0 <= launch["peak_sampled_tree_RSS_bytes"] <= RSS_LIMIT,
++            and 0 <= launch["elapsed_seconds"] <= 1560 and 0 <= launch["peak_sampled_tree_RSS_bytes"] <= RSS_LIMIT,
+             "Production terminal outcome/resource precondition failed")
+         self.bind(PREVIOUS/"source_freeze.json",PREVIOUS_FREEZE_PIN)
+         previous_sources = read(PREVIOUS/"source_freeze.json")["sources"]
+@@ -308,7 +318,9 @@
+             and all(s["original_target_displacement"] == TARGETS[i] for i,s in enumerate(original))
+             and all(s["target_origin"] == 0. and s["physical_mean_target_mm"] == s["d"] for s in states)
+             and states[0]["d"] == states[-1]["d"] == 0. and states[0]["leg"] == "origin"
+-            and states[0]["bisection_depth"] == 0,"Every original target/actual accepted index must be retained")
++            and states[0]["bisection_depth"] == 0
++            and contract["actual_accepted_states"] == len(states)
++            and contract["expected_new_HP80_120_calls"] == 2*len(states),"Every original target/actual accepted index must be retained")
+         for a,b in zip(states,states[1:]):
+             leg = b["original_target_index"]; oldleg = a["original_target_index"]
+             self.check(type(leg) is int and 1 <= leg < len(TARGETS) and leg in (oldleg,oldleg+1)
+@@ -333,114 +345,8 @@
+         self.checkpoint()
+ 
+     def reconstruct_counts(self,result,receipt):
+-        counts = result["call_counts"]
+-        if counts["tangent_calls"] == counts["tangent_calls_completed"]:
+-            return self.complete_counts(result,receipt)
+-        # The existing pure captured-failure contract supports a generic ordinal,
+-        # one complete-force/failed-tangent base, recorded rollback and midpoint.
+-        # Multiple/unobserved/other structures remain explicitly unsupported.
+-        return self.captured_counts(result,receipt,SETTINGS,self.check)
+-
+-    def complete_counts(self, result, receipt):
+-        """Attribute every force start to a complete base or a recorded trial.
+-
+-        A rejected Armijo trial has a complete force. Only a recorded range
+-        rejection without returned merit fields may account for an incomplete
+-        force, and its next factor must halve in that same Newton base.
+-        """
+-        counts, diagnostics = result["call_counts"], result["path_diagnostics"]
+-        history, trials, states = diagnostics["newton_history"], diagnostics["trials"], result["states"]
+-        expected_keys = {"force_calls", "force_calls_completed", "tangent_calls", "tangent_calls_completed",
+-                         "solver_invocations", "HP_calls", "JIT_calls"}
+-        self.check(set(counts) == expected_keys and all(type(v) is int and v >= 0 for v in counts.values())
+-            and counts["tangent_calls"] == counts["tangent_calls_completed"] == len(history)
+-            and counts["solver_invocations"] == 1 and counts["HP_calls"] == counts["JIT_calls"] == 0
+-            and receipt["call_counts"] == counts and receipt["force_calls"] == counts["force_calls"]
+-            and receipt["observed_force_calls"] == counts["force_calls"]
+-            and receipt["tangent_calls"] == counts["tangent_calls"] and receipt["solver_calls"] == 1
+-            and receipt["HP_calls"] == receipt["JIT_calls"] == receipt["LF_imports"] == 0
+-            and receipt["save_force_calls"] == receipt["save_tangent_calls"] == 0,
+-            "Completed Newton-base/tangent/receipt counters differ")
+-        by_tangent = {row["assembler_tangent_call"]: row for row in states}
+-        self.check(len(by_tangent) == len(states) and all(type(k) is int and 1 <= k <= len(history) for k in by_tangent),
+-                   "Accepted tangent-cache ordinals are not unique complete bases")
+-        events, caches, rejected, cursor, completed = [], [], [], 0, 0
+-        for tangent_call, base in enumerate(history, 1):
+-            self.check(type(base["newton_check"]) is int and 1 <= base["newton_check"] <= SETTINGS["max_checks"],
+-                       "Recorded Newton-base index differs")
+-            if base["newton_check"] > 1:
+-                previous = history[tangent_call-2] if tangent_call > 1 else None
+-                self.check(previous is not None and previous["d"] == base["d"]
+-                    and previous["newton_check"]+1 == base["newton_check"],
+-                    "Newton-base sequence skips an iteration or changes its attempt parameter")
+-            force_call = len(events)+1
+-            events.append(dict(force_call=force_call, kind="Newton_base", completed=True,
+-                d=base["d"], newton_check=base["newton_check"], tangent_call=tangent_call,
+-                state_sha256=base["state_sha256"]))
+-            completed += 1
+-            cached = by_tangent.get(tangent_call)
+-            if cached is not None:
+-                self.check(cached["assembler_force_call"] == force_call
+-                    and cached["assembler_state_sha256"] == cached["state_sha256"] == base["state_sha256"]
+-                    and cached["d"] == base["d"] and cached["newton_checks"] == base["newton_check"],
+-                    "Accepted state cache is not the recorded completed Newton base")
+-                caches.append(dict(force_call=force_call, tangent_call=tangent_call,
+-                                   state_sha256=cached["state_sha256"]))
+-                continue  # A converged base makes no line-search force call.
+-            group = []
+-            while cursor < len(trials) and len(group) <= SETTINGS["max_backtracks"]:
+-                trial = trials[cursor]
+-                if (trial["stage_parameter"], trial["newton_check"]) != (base["d"], base["newton_check"]):
+-                    break
+-                factor = 2.**(-len(group))
+-                self.check(type(trial["accepted"]) is bool and trial["factor"] == factor
+-                    and trial["target_displacement"] == trial["stage_parameter"] == base["d"]
+-                    and trial["fixed_residual_scale"] == base["residual_scale"],
+-                    "Trial chronology/factor/unchanged base scale differs")
+-                range_failure = trial["accepted"] is False and trial.get("reason") == "unsupported_arithmetic_range"
+-                if range_failure:
+-                    self.check(not any(k in trial for k in ("phi", "minimum_J", "R_input"))
+-                        and len(group) < SETTINGS["max_backtracks"] and cursor+1 < len(trials),
+-                        "Unaccounted incomplete force or terminal range rejection")
+-                    following = trials[cursor+1]
+-                    self.check((following["stage_parameter"], following["newton_check"], following["factor"])
+-                        == (base["d"], base["newton_check"], factor/2),
+-                        "Range-rejected trial is not followed by the controller half factor")
+-                    rejected.append(dict(trial_index=cursor, force_call=len(events)+1, **trial))
+-                else:
+-                    self.check(all(k in trial and np.isfinite(trial[k]) for k in ("phi", "minimum_J", "R_input"))
+-                        and trial["minimum_J"] > 0. and ((trial["accepted"] is True and trial.get("reason") is None)
+-                            or (trial["accepted"] is False and trial.get("reason") == "armijo_insufficient_decrease")),
+-                        "Unknown trial result cannot account for a completed force")
+-                events.append(dict(force_call=len(events)+1, kind="line_search_trial", completed=not range_failure,
+-                    d=trial["stage_parameter"], newton_check=trial["newton_check"], factor=factor,
+-                    accepted=trial["accepted"], reason=trial.get("reason")))
+-                completed += int(not range_failure)
+-                group.append(trial)
+-                cursor += 1
+-                if trial["accepted"]:
+-                    break
+-            if group:
+-                self.check(group[-1]["accepted"] is True or len(group) == SETTINGS["max_backtracks"]+1,
+-                           "Recorded bounded backtracking sequence terminates without acceptance or exhaustion")
+-        self.check(cursor == len(trials) and len(events) == counts["force_calls"]
+-            and completed == counts["force_calls_completed"]
+-            and counts["force_calls"]-counts["force_calls_completed"] == len(rejected)
+-            and [item["state_sha256"] for item in caches] == receipt["state_sha256"]
+-            and len(caches) == len(states), "Exact base/trial/accepted-cache chronology does not reconstruct counters")
+-        failures = diagnostics["failed_attempts"]
+-        self.check(all(item["rollback_bitwise_equal"] is True
+-            and item["code"] in ("newton_limit", "backtracking_failed", "singular_tangent", "nonfinite")
+-            and 0 <= item["depth"] < SETTINGS["max_bisections"] for item in failures)
+-            and 0 <= diagnostics["maximum_bisection_depth"] <= SETTINGS["max_bisections"],
+-            "Unrecorded rollback, unknown failed-attempt kind or excessive bisection")
+-        return dict(counts=counts, Newton_base_calls=len(history), trial_calls=len(trials),
+-            completed_trials=completed-len(history), rejected_range_trials=rejected,
+-            reconstructed_force_events=events, accepted_completed_caches=caches,
+-            all_Newton_base_and_tangent_calls_completed=True,
+-            policy="Only recorded unsupported_arithmetic_range trials followed by the same-base half factor account for incomplete forces; Armijo rejected forces remain complete",
+-            rejected_trials_independently_qualified=False, unsupported_arithmetic_issue_resolved=False,
+-            production_rerun=False, new_force_calls=0, new_tangent_calls=0, new_solver_calls=0)
++        return self.attempt_counts(result,receipt,SETTINGS,self.check)
++
+ 
+     def verify_first_range_observation(self, result, receipt, model):
+         """Bind the once-only observer's raw state/model without evaluating it."""
+@@ -550,12 +456,12 @@
+             HP_matrix_columns_exhaustively_checked=False,full_element_and_DOF_coverage=True,
+             gates=GATES,global_scatter_precision=3000,global_scatter_inexact_trap=True,
+             reference_scope="All actual accepted states/elements/real DOFs; fixed-lift PORT direction, deltaR=0; original signed workpiece and disjoint holding projections",
+-            qualification="Accepted mechanical states of this explicit x71 pose-only coarse square cycle; no pressure, clamp, contact, auxiliary energy, stress-HP, rejected-state, all-column, H2/H3 or HF5 qualification",
++            qualification="Accepted mechanical states of this explicit complete x71 pose002 coarse square cycle; no pressure, clamp, contact, auxiliary energy, stress-HP, rejected-state, all-column, H2/H3 or HF5 qualification",
+             **MECHANICAL_AVAILABILITY,analytic_HP_energy_scope="Archived reference only, without candidate comparison or energy qualification",
+             contact_qualified=False,clamp_qualified=False,pressure_qualified=False,
+             original_run_state_source_sha256=CORE_PINS["audit_native_mean.py"],private_run_state_source_sha256=CORE_PIN,
+             inherited_workpiece_checker_sha256=WP_PIN,tangent_action_consumer_sha256=CONSUMER_PIN,
+-            tangent_execution=self.result["tangent_execution"],counter_accounting=self.accounting,
++            tangent_execution=self.result["tangent_execution"],counter_accounting=self.accounting,counter_helper_sha256=COUNTER_PIN,
+             first_force_range_input=self.first_range_observation,first_tangent_range_input=self.tangent_range_observation,
+             independent_reference_contract_sha256=self.reference_contract_sha256,
+             independent_reference_source_bindings=self.reference_contract["reference_sources"],
+@@ -569,7 +475,7 @@
+ 
+ 
+ def main():
+-    require(np.isfinite(ARGS.time_limit) and ARGS.time_limit == 600.,"Reference limit must be explicitly 600 seconds")
++    require(np.isfinite(ARGS.time_limit) and ARGS.time_limit > 0.,"Reference window must be explicitly supplied and pre-frozen")
+     audit = ShiftPoseAudit(ARGS)
+     try:
+         audit.run()

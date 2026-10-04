@@ -1,0 +1,44 @@
+--- pose001/prepare_shift_pose.py
++++ pose002/prepare_shift_pose.py
+@@ -60,6 +60,13 @@
+ 
+     previous = root/"lf_data_preparation/native_workpiece_001/coarse_square_cycle_010"
+     reference = root/"lf_data_preparation/native_workpiece_001/coarse_square_cycle010_ref_003"
++    cost_stage = root/"lf_data_preparation/native_workpiece_001/shift_square_pose_001"
++    cost_files = [cost_stage/"production_protocol.json", cost_stage/"production_launch.json",
++        cost_stage/"run_001/execution_receipt.json", cost_stage/"run_001/result/result.json",
++        cost_stage/"run_001/accepted_progress.jsonl"]
++    cost_result, cost_launch = read(cost_files[3]), read(cost_files[1])
++    assert cost_result["status"] == "failed" and cost_result["failure"]["code"] == "time_limit"
++    assert cost_launch["status"] == "not_pass" and cost_launch["exit_code"] == 1 and cost_launch["all_bindings_unchanged"]
+     old, result = read(previous/"input_inventory.json"), read(previous/"result/result.json")
+     receipt, qualified = read(previous/"execution_receipt.json"), read(reference/"reference/summary.json")
+     for directory, phase in ((previous, "production"), (reference, "reference")):
+@@ -92,6 +99,7 @@
+         reference/"reference/summary.json", root/old_row["geometry_file"], root/old_row["geometry_npz_file"],
+         root/old_row["prior_task_file"], root/old_row["prior_model_file"], root/old_row["workpiece_model_file"],
+         (root/old_row["workpiece_model_file"]).with_suffix(".json"), previous/"direction.npz"]}
++    inputs.update({p.relative_to(root).as_posix(): digest(p) for p in cost_files})
+     for key, pin_key in (("geometry_file", "geometry_file_sha256"), ("geometry_npz_file", "geometry_npz_sha256"),
+             ("workpiece_model_file", "workpiece_model_sha256"), ("prior_model_file", "prior_model_sha256")):
+         assert digest(root/old_row[key]) == old_row[pin_key]
+@@ -189,14 +197,18 @@
+     inventory = {k:deepcopy(old[k]) for k in ("schema_version", "settings", "gates", "units", "path_kind",
+         "minimum_increment_basis", "direction_definition", "state_authority", "stop_policy", "response_mode",
+         "response_contract", "auxiliary_material_energy", "range_observation_rule", "tangent_execution")}
++    inventory["settings"]["time_limit_seconds"] = 1500.0
+     inventory.update(baseline_commit=args.baseline, case=row, source_count=len(sources), source_freeze_sha256=digest(freeze),
+-        source_transition=source_transition, input_bindings=inputs, execution_limits=dict(production_seconds=900, production_outer_seconds=960,
++        source_transition=source_transition, input_bindings=inputs, execution_limits=dict(production_seconds=1500, production_outer_seconds=1560,
+             sampled_RSS_bytes=RSS_LIMIT, preparation_seconds=120, preparation_outer_seconds=150),
+         model_comparison=dict(total_fields=27, unchanged_fields=row["unchanged_model_fields"],
+             actual_changed_fields=delta, parameter_case="pose_only" if not material_changed else "explicit_softened_parameters"),
+         prerequisite_reference=dict(stage=reference.relative_to(root).as_posix(), summary_sha256=digest(reference/"reference/summary.json"),
+             scope="Original accepted-state predecessor only; no new-state or failedT qualification."),
+         qualification="New shifted model constructed only; no response/HP/clamp/pressure qualification.",
++        budget_evidence=dict(stage=cost_stage.relative_to(root).as_posix(),
++            scope="Closed900s card supplies observed cost/rejection metadata only; no accepted-prefix or reference qualification inherited.",
++            prior_accepted_states=cost_result["accepted_states"], prior_elapsed_seconds=cost_launch["elapsed_seconds"]),
+         reference_plan="No reference source/counter contract is inherited; future card must use actual fresh trace and every accepted index.")
+     checkpoint()
+     assert all(digest(root/p) == pin for p,pin in {**inputs, **sources}.items())

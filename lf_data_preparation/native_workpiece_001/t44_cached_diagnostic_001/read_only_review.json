@@ -1,0 +1,92 @@
+{
+  "schema_version": "t44-cached-diagnostic-static-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "blocking_issues": [],
+  "candidate": {
+    "path": "D:/hf-t44-cached-diag-author-20261004/trace_t44_cached.py",
+    "sha256": "ca3f0b30997b10b14a6f7f3ca64f3648bbeea6e741585f43bede93656239ed3b",
+    "lines": 168,
+    "syntax": "AST parse and compile(source) passed; no import"
+  },
+  "read_inputs": {
+    "observation_sha256": "622e37201748d630a3f410d43d0cd157a79be19a84f6fb2c5a0b7faf077b7c93",
+    "source_freeze_sha256": "a4eb119f87899c1a2b12db9ef7209f0a73cf4d0d0ea72186bbef57a7e51cd03b",
+    "state_sha256": "058bd50e0dd329595b324e185f793036733b72c887218fb26801091a49d54bd8",
+    "input_npz_sha256": "8849e6c1e641efd06321d5884ed1fe0f875535891844a7c47734dc74f07f42c9",
+    "force_fields_npz_sha256": "6a8c8401506e2303d676d07576f2b14959c68bb8497f3a2a51cd7deea1ac9510",
+    "input_arrays": 17,
+    "force_fields": 25
+  },
+  "current_source_SHA_equal_production_freeze": {
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "fe36581e8b49f1a547973e135f3c8ca0f2bbc7d954502405418bd794d731955a",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+  },
+  "checks": {
+    "transparent_original_calls_per_wrapper": {
+      "from_value": 1,
+      "checked_pair": 1,
+      "finish": 1,
+      "block": 1,
+      "final": 1
+    },
+    "one_cached_tangent_call_site": 1,
+    "original_finish_tangent_called_once_after_observation": true,
+    "arithmetic_domain_and_primitive_rules_not_changed": true,
+    "original_return_objects_and_tuples_retained": true,
+    "same_instance_hooks_restored_in_finally": true,
+    "expected_exception_is_original_total_tangent_unsupported_arithmetic_range": true,
+    "global_three_DD_pairs_saved_before_original_finish_with_file_and_field_SHA": true,
+    "first_invalid_scalar_witness_archive_has_SHA": true,
+    "capture_raw_state_hash_recomputed_from_pinned_L_and_w": true,
+    "loaded_CI_tangent_force_kernel_paths_bound_to_actual_production_freeze": true,
+    "root_and_input_endpins_and_exclusive_outputs_present": true,
+    "closure_failure_changes_report_to_not_pass": true
+  },
+  "axis_review": {
+    "global_pairs": [
+      "cell",
+      "direction",
+      "force"
+    ],
+    "published_tensors_after_original_finish": [
+      "cell",
+      "force",
+      "direction"
+    ],
+    "block_sizes": [
+      256,
+      128
+    ],
+    "shared_dF_dHu_leading_direction_size": 8,
+    "mapping_rule": "Only leading dimension equal to the active 256/128 cell count receives a chunk offset; shared size-8 direction tensors remain unmapped. Final 3200-cell pair masks use direct element IDs.",
+    "scope": "Valid for this fixed 3200-element/block256 diagnostic, not a generic arbitrary-block-size axis classifier."
+  },
+  "limits": {
+    "helper_seconds": 60,
+    "sampled_process_RSS_bytes": 8589934592,
+    "clock_starts_before_numpy_psutil_and_production_imports": true,
+    "sampling": "Cooperative self-process RSS plus Windows peak_wset at checkpoints; no whole-tree cleanup claim. Outer launcher budget must be supplied by the separate frozen protocol.",
+    "post_serialization_limit_note": "Final closure checkpoint precedes JSON serialization; terminal outer receipt must remain authoritative for total elapsed and exit."
+  },
+  "accepted_limitations": [
+    "Every recorded invalid event may be downstream propagation or a masked intermediate; first event is not automatically the causal failure or sole cause.",
+    "Only the first eight scalar indices per event are retained, while full invalid counts and all three terminal DD tensors are saved.",
+    "Zero force/model/CSC/solver/HP/consumer/geometry counts describe the statically absent call paths; they are not independent runtime hooks for those APIs.",
+    "Unexpected success, different exception, incomplete block coverage, source drift, or observer/resource failure closes this diagnostic without a retry or qualification.",
+    "--repo is the formal hf_repo directory; copied candidate must itself be a protocol binding. Formal protocol/launcher was not yet reviewed in this receipt."
+  ],
+  "execution": {
+    "candidate_imports": 0,
+    "candidate_runs": 0,
+    "F": 0,
+    "T": 0,
+    "HP": 0,
+    "solver": 0,
+    "model_constructions": 0,
+    "tests": 0,
+    "geometry": 0,
+    "operation": "Source/AST reads and raw file SHA only; no archive numeric evaluation."
+  }
+}

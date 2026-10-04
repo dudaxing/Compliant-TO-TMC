@@ -1,0 +1,131 @@
+{
+  "schema_version": "cycle010-T44-cached-tangent-diagnostic-design-1.0",
+  "status": "static_design_only_not_executed",
+  "baseline_commit": "38ecc77cc14fee9fd0c69d026ed8df1e32b19bc2",
+  "objective": "One original chunk256 tangent attempt from the captured F77 returned fields. Locate the first actual unsupported constructor/normalized-pair/temporary predicate and its producer source location, then connect it to all three saved DD tangent fields and the original total_tangent rejection. No force reevaluation or production-core change.",
+  "established_facts": {
+    "capture_identity": {
+      "tangent_ordinal": 44,
+      "bound_force_ordinal": 77,
+      "original_same_object_binding": true,
+      "state_sha256": "058bd50e0dd329595b324e185f793036733b72c887218fb26801091a49d54bd8",
+      "original_exception": {
+        "type": "KernelError",
+        "code": "unsupported_arithmetic_range",
+        "details": {
+          "field": "total_tangent"
+        }
+      }
+    },
+    "saved_inputs": {
+      "arrays": 17,
+      "elements": 3200,
+      "dofs": 6642,
+      "lift_max_abs_mm": 0.0,
+      "fluctuation_max_abs_mm": 1.6527644091818034e-14,
+      "fluctuation_min_nonzero_abs_mm": 1.708354147120747e-22
+    },
+    "saved_force_fields": {
+      "arrays": 25,
+      "all_field_C_bytes_match_observation_declarations": true,
+      "all_near_flags_one": true,
+      "all_force_arithmetic_supported_flags_one": true,
+      "G_hi_max_abs": 1.6527644091818034e-14,
+      "G_lo_max_abs": 0.0,
+      "J_hi_min": 0.9999999999999892,
+      "J_hi_max": 1.000000000000003,
+      "J_lo_min_nonzero_abs": 3.479528854900073e-36,
+      "Hu_hi_max_abs_per_mm": 9.551138662652379e-15,
+      "Hu_lo_max_abs": 0.0
+    },
+    "selector_fact_not_root_cause": "Saved near flags are all true, but G_hi max exceeds the literal 2^-64 bound and G_lo is zero. Thus the whole-batch tiny-product selector is false for these saved words. This identifies a branch, not the failing primitive or component. No selector/DD function was executed during design.",
+    "field_order": "_finish_tangent visits total_tangent, material_tangent, regularization_tangent and stops at the first original failed predicate. Original details total_tangent therefore do not establish that the two component tensors are supported.",
+    "unresolved": "No primitive, element, directional/force entry or offending high/low word has been observed yet. No root cause or repair is asserted."
+  },
+  "frozen_bindings": {
+    "sources": {
+      "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": "fe36581e8b49f1a547973e135f3c8ca0f2bbc7d954502405418bd794d731955a",
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+      "hf_repo/src/hf_eval/native_mean.py": "186a6662c14310b4dc577591764eef849988448de132474fd6953579449cb22b"
+    },
+    "observation_json_sha256": "622e37201748d630a3f410d43d0cd157a79be19a84f6fb2c5a0b7faf077b7c93",
+    "input_npz_sha256": "8849e6c1e641efd06321d5884ed1fe0f875535891844a7c47734dc74f07f42c9",
+    "force_fields_npz_sha256": "6a8c8401506e2303d676d07576f2b14959c68bb8497f3a2a51cd7deea1ac9510",
+    "source_freeze_sha256": "a4eb119f87899c1a2b12db9ef7209f0a73cf4d0d0ea72186bbef57a7e51cd03b",
+    "input_inventory_sha256": "bb08fa9339ea36c2057bf6672630f3231bc7f61a923b22a63ab77cc55abcf5f6",
+    "paths": {
+      "observation": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/first_tangent_range_input/observation.json",
+      "input": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/first_tangent_range_input/input.npz",
+      "returned_force_fields": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/first_tangent_range_input/force_fields.npz"
+    }
+  },
+  "single_attempt_recipe": [
+    "Freeze a new independent diagnostic source/protocol and fresh output. Hash observation, both NPZ archives and actual saved source capsules/current matching sources before importing. Recheck all17/25 dtype/shape/C-byte declarations and raw split-state SHA; reuse captured grad/hessian/weights/points/lam/mu/kr exactly. No TMCModel/Project or operators reconstruction.",
+    "Import the exact source-bound NumPy tangent implementation in one process. Directly invoke _tangent_chunked(cached_fields, saved_ops, saved_lam, saved_mu, saved_kr, block_size=256) once under the original NumPy errstate. Do not call batch_tangent_components_split_numpy, assemble_split_numpy or native_mean, since those would evaluate force or build/assemble a model.",
+    "Install small temporary observation wrappers before the attempt: ci.dd_from, ci._pair_mask and ci._finish plus a _tangent_pairs block-context wrapper and a terminal _finish_tangent wrapper. Each invokes its original exactly once and returns the same returned object or raises the original exception; no input mutation, arithmetic replacement, retry, extra DD evaluation or changed support predicate.",
+    "Constructor wrapper records the first raw operand that the original dd_from converts to unsupported NaN; pair-mask wrapper records the first false mask returned by the original predicate, including its already-normalized high/low words; finish wrapper records the first newly unsupported result/temporary case and raw high/low/valid arguments. A single first-event NPZ/JSON is saved for each category at most, not an unbounded operation log. Record exact caller/source line and nested primitive chain.",
+    "The block wrapper tracks the actual original sequential slices (0:256,...,3072:3200) and returns original pairs unchanged. The terminal wrapper copies all three assembled global DD pairs before delegating once to original _finish_tangent. Do not re-evaluate a block to obtain missing context. The observation may capture an intermediate bad predicate and continue the same one attempt until the original finish raises; observing a false mask is not a new permission to override it.",
+    "After the original exception, summarize all three saved complete DD fields with finite/range/normalization masks using plain saved-array predicates and the original literal limits, not another tangent/CI evaluation. Keep original total_tangent-first error authoritative; identify component failures separately without changing original field order. Preserve partial fields if the original attempt exits before the terminal wrapper.",
+    "Restore all wrapped same instances in finally and verify restoration plus input/source end hashes. Close the one diagnostic attempt after any unexpected exception or resource stop. No automatic repair, fallback, full-vs-chunk second attempt or repeat is included."
+  ],
+  "index_and_provenance_rules": {
+    "before_rounding_tensor_axes": [
+      "element",
+      "direction",
+      "force_entry"
+    ],
+    "finished_tensor_axes": [
+      "element",
+      "force_entry",
+      "direction"
+    ],
+    "direction_and_force_mapping": "Local index 2*node+component, node order matches captured edofs/connectivity. Preserve the raw DD index as well as decoded node/component; no symmetrization.",
+    "cell_mapping": "Attach global element = actual block start + local leading element index only when the raw tensor has a known element axis equal to the current block count. Shared 8-direction operator tensors and scalar predicates have no cell axis; mark shared/undetermined instead of guessing an element. Record broadcast operand indices/shapes and global coordinate/connectivity when a cell is known.",
+    "first_event_caveat": "First invalid intermediate may lie in an evaluated branch later selected away; record whether its output survives the observed term/terminal failure. Do not call every first bad intermediate the causal root merely because it is earlier in evaluation order.",
+    "failure_reasons": "Separate original input-valid=false propagation, nonfinite words, nonzero |word|<2^-400, |word|>2^400, normalized-low overlap bound, and nonfinite/|temporary|>2^900. Zeros remain admitted. Record actual values/float hex and raw words; no snapping, widening, threshold clipping or scale changes."
+  },
+  "minimal_outputs": [
+    "result.json with original exception, one-attempt counters, selector context, first observed event references and restoration/end-hash status",
+    "first_bad_primitive.npz/json with exact operands/high/low/valid/mask, source stack and block/axis mapping (if observed)",
+    "tangent_pairs.npz for total/material/regularization high and low words copied immediately before original finish, or explicitly incomplete/absent if not reached",
+    "component_summary.json listing each saved DD field bad counts/first indexed entries under the original predicate; no numerical qualification"
+  ],
+  "proposed_new_window": {
+    "helper_seconds": 60,
+    "outer_seconds": 90,
+    "sampled_RSS_bytes": 8589934592,
+    "includes": "Imports/hash reads/observer copies/one tangent attempt/output/restoration/end hashes",
+    "status": "Proposed independent card only; no window started by this design",
+    "first_error_policy": "Expected original KernelError may produce observation-complete status only, with tangent completed0 and qualificationfalse. Any other error/no reproduction/resource stop is recorded without retry."
+  },
+  "planned_call_counts": {
+    "tangent_attempts_started": 1,
+    "tangent_attempts_completed_if_original_failure_reproduced": 0,
+    "force": 0,
+    "solver": 0,
+    "HP": 0,
+    "action_consumer": 0,
+    "CSC_assembly": 0,
+    "geometry": 0,
+    "model_construction": 0,
+    "tests": 0,
+    "JIT_execution": 0
+  },
+  "qualification": "Observation of the existing rejected T44 input only. Raw DD fields may be unsupported/nonfinite; they do not acquire fresh force/Jv/equilibrium/contact/pressure/energy/stress-HP/all-column qualification. No accepted-path or right-shift task is rerun.",
+  "work_executed_for_this_design": {
+    "source_reads_and_hashes": true,
+    "NPZ_reads_declaration_hashes_and_plain_reductions": true,
+    "DD_calls": 0,
+    "force": 0,
+    "tangent": 0,
+    "evaluator": 0,
+    "solver": 0,
+    "HP": 0,
+    "geometry": 0,
+    "tests": 0,
+    "production_source_edits": 0,
+    "source_capsule_edits": 0
+  },
+  "next_decision": "Only after this one actual trace identifies a primitive and surviving field/cell may a targeted mathematical repair and its minimal independent qualification be proposed. Do not choose new scaling or revise support gates from Gmax alone."
+}

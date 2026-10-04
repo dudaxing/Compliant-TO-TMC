@@ -1,0 +1,107 @@
+{
+  "schema_version": "soft-shift-author-note-1.0",
+  "status": "author_static_ready_conditional_on_future_pose002_reference",
+  "qualification": false,
+  "base": "pose002_candidate final author sources",
+  "files": {
+    "build_pose_card.diff": {
+      "lines": 134,
+      "sha256": "8807139d4724fd3fbeca59d7f0b2302bcbec8a295f038b58efd4b5f1ac2cc4c3"
+    },
+    "build_pose_card.py": {
+      "lines": 186,
+      "sha256": "f455b90d95fbc6db7eb3a9451c44af2f7b9cf288925e042ea1628947e809896f"
+    },
+    "execute_shift_pose.py": {
+      "lines": 251,
+      "sha256": "96bf1b48eebe22b1132f6736b17de2f4269d656442c8308c2822caa0ec0387ae"
+    },
+    "prepare_shift_pose.diff": {
+      "lines": 148,
+      "sha256": "7807eca515affa7e5a8647129058ae8f6b2a8a25f6c32fb4abb1b78f0d83ed6c"
+    },
+    "prepare_shift_pose.py": {
+      "lines": 294,
+      "sha256": "bc8b9f7bb0863bc319942f926e27374939cca3cdac5f3a681d53f821c05d0ed3"
+    },
+    "README.md": {
+      "lines": 28,
+      "sha256": "0aab79a26be66c385c04f13f156b2f208711d6aa5d8287c177679e0007c8ed9b"
+    },
+    "task.diff": {
+      "lines": 45,
+      "sha256": "48176d8d376f08912c3eac4911744c8683e1b08fdb0cf77b35b143fc25745368"
+    },
+    "task.json": {
+      "lines": 108,
+      "sha256": "1361c49fb5d74a661b59efbf4d219a268c074df588c5989e99bfe3115a3cca43"
+    }
+  },
+  "checks": {
+    "AST_and_compile_only": true,
+    "producer_byte_exact_96bf": true,
+    "task_only_four_description_fields_and_three_parameters_change": true,
+    "qualified_pose_helper_AST_identical_in_preparer_and_builder": true,
+    "actual_AST_prerequisite_control_pose002_and_install_control_soft001": true,
+    "no_installed_soft_control_or_actual_fixture": true
+  },
+  "stage": "shift_square_soft_001",
+  "case_alias": "gripper_coarse_square_x71_soft",
+  "resources": {
+    "preparation_helper_seconds": 120,
+    "preparation_outer_seconds": 150,
+    "production_helper_seconds": 1800,
+    "production_outer_seconds": 1860,
+    "RSS_bytes": 8589934592
+  },
+  "source_count": 70,
+  "source_scope": "Original01068 with the same explicitly qualified v5 tangent transition plus these two wrappers; other current sources unchanged. Pose002 full proof is prerequisite input metadata, not production runtime or initial state.",
+  "changed_fields_vs_original010": [
+    "fixed_dofs",
+    "force_scale_per_length",
+    "free_dofs",
+    "gamma",
+    "lam",
+    "mu",
+    "workpiece_background_symmetry_overlap_dofs",
+    "workpiece_cells",
+    "workpiece_dofs",
+    "workpiece_nodes"
+  ],
+  "changed_fields_vs_qualified_pose002": [
+    "force_scale_per_length",
+    "gamma",
+    "lam",
+    "mu"
+  ],
+  "unchanged_specific": [
+    "all geometry/overlay/ports/fixed/free against qualified pose002",
+    "third-medium lam/mu C bytes",
+    "global kr C bytes",
+    "tolerances/floors formulas/range gates/controller",
+    "whole eleven target path and zero initial state"
+  ],
+  "physics": "E0.5 halves entity stiffness; gamma/alpha double retain original third-medium stiffness and global kr. Et20 becomes10; this is not blanket medium softening.",
+  "future_precondition": "Every actual accepted pose002 state and result has a matching whole-path fresh2N reference and terminal pass proof. Missing/failing future files prevent installation and preparation. No actual pose002 reference file has been evaluated by author.",
+  "new_calls": {
+    "builder": 0,
+    "model": 0,
+    "F": 0,
+    "T": 0,
+    "consumer": 0,
+    "solver": 0,
+    "HP": 0,
+    "pytest": 0,
+    "geometry": 0,
+    "plot": 0
+  },
+  "author_role": "External author files only. Diffs show code/task changes; no formal card/source/capsule modified.",
+  "author_v1_correction": {
+    "issue": "First stage string replacement reached the newly inserted qualified_pose helper instead of main; helper AST equality assertion caught reversed source/destination roles before ready/freeze.",
+    "original_files": {
+      "build_pose_card.diff": "6081a48891bdaa861e5ac2b3a688c0805cf213a814a11c6fc944de96b2c7f375",
+      "build_pose_card.py": "8c578e84a660bda12166b54b8d75899ea0c78bb060e8a2bb8f943e7b22546c60"
+    },
+    "correction": "Only actual two control roles corrected: qualified_pose reads closed/future-qualified pose002; main installs fresh soft001. No builder/preparation/numerical program executed."
+  }
+}

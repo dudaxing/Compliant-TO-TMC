@@ -1,0 +1,68 @@
+--- D:\hf-workpiece-shift-author-20261004\reference_soft_candidate\audit_shift_soft.py
++++ D:\hf-workpiece-shift-author-20261004\reference_soft_candidate_v2\audit_shift_soft.py
+@@ -15,6 +15,7 @@
+ STARTED = _SOFT_STARTED
+ SETTINGS = dict(SETTINGS,time_limit_seconds=1800.)
+ MATERIAL_FIELDS = {"lam","mu","gamma","force_scale_per_length"}
++MATERIAL_PRESERVATION_SCOPE = "The current soft task base material assignment is unchanged by the kinematic body overlay; equality to historical E1 or qualified-pose material arrays is not asserted."
+ 
+ 
+ class SoftShiftAudit(ShiftPoseAudit):
+@@ -57,8 +58,10 @@
+         own = Path(__file__).resolve().relative_to(self.repo).as_posix()
+         core = PRIVATE_CORE.relative_to(self.repo).as_posix()
+         counter = COUNTER_FILE.relative_to(self.repo).as_posix()
++        pose_interface = _pose_file.resolve().relative_to(self.repo).as_posix()
+         self.check(ref_sources.get(own) == sha(Path(__file__)) and ref_sources.get(core) == CORE_PIN
+-            and ref_sources.get(counter) == COUNTER_PIN and len({Path(n).name for n in ref_sources}) == len(ref_sources),
++            and ref_sources.get(counter) == COUNTER_PIN and ref_sources.get(pose_interface) == POSE_INTERFACE_PIN
++            and len({Path(n).name for n in ref_sources}) == len(ref_sources),
+             "Independent reference source closure is not bound")
+         ref_caps = self.output/"reference_sources"; ref_caps.mkdir()
+         for name,pin in ref_sources.items():
+@@ -70,6 +73,15 @@
+         spec = importlib.util.spec_from_file_location("shift_reference_counter",COUNTER_FILE)
+         counter_module = importlib.util.module_from_spec(spec); spec.loader.exec_module(counter_module)
+         self.attempt_counts = counter_module.reconstruct
++        counter_proof = contract["counter_metadata_validation"]
++        for name,pin in counter_proof["files"].items(): self.bind(self.repo/name,pin)
++        proof = read(self.repo/counter_proof["result_file"])
++        self.check(counter_proof["files"].get(counter_proof["result_file"]) == counter_proof["result_sha256"]
++            and proof["status"] == "pass" and proof["helper_sha256"] == COUNTER_PIN
++            and len(proof["cases"]) == 8 and proof["all_bindings_unchanged"] is True
++            and proof["physical_qualification"] is False
++            and all(proof[k] == 0 for k in ("force_calls","tangent_calls","HP_calls","model_constructions","solver_calls","consumer_calls")),
++            "Counter metadata proof changed; it may not supply physical qualification")
+         inventory_file,receipt_file,freeze_file = (self.stage/n for n in
+             ("input_inventory.json","execution_receipt.json","source_freeze.json"))
+         for path,key in ((inventory_file,"input_inventory_sha256"),(receipt_file,"production_receipt_sha256"),
+@@ -241,7 +253,12 @@
+             and pose_summary["independent_reference_contract_sha256"] == sha(pose_control/"reference_contract.json")
+             and pose_ref_launch["protocol_sha256"] == sha(pose_control/"reference_protocol.json")
+             and pose_ref_launch["bindings"] == pose_ref_protocol["bindings"]
++            and all(pose_result[k] is True for k in ("production_converged","target_reached","task_target_executed",
++                "path_completed","loading_peak_reached","unload_endpoint_reached"))
++            and pose_result["states"][0]["d"] == pose_result["states"][-1]["d"] == 0.
++            and pose_result["targets_mm"] == TARGETS == [r["d"] for r in pose_result["states"] if r["is_original_target"]]
+             and pose_summary["accepted_states"] == pose_result["accepted_states"] == len(pose_result["states"])
++                == pose_lifecycle["accepted_states_completed"]
+             and pose_summary["HP_calls_started"] == pose_summary["HP_calls_completed"]
+                 == pose_lifecycle["HP_calls_started"] == pose_lifecycle["HP_calls_completed"] == 2*len(pose_result["states"])
+             and [r["state_sha256"] for r in pose_summary["states"]] == [r["state_sha256"] for r in pose_result["states"]]
+@@ -282,6 +299,7 @@
+         for key in ("lambda_s_MPa","mu_s_MPa","kappa_s_MPa"): expected_material[key] *= .5
+         self.check(metadata["material"] == expected_material, "Explicit material metadata or unchanged global kr differs")
+         self.qualified_pose = pose
++        self.source_material_preservation_scope = MATERIAL_PRESERVATION_SCOPE
+         source = metadata["source_geometry"]
+         expected_source = dict(source,snapshot={k:"model/"+p for k,p in source["snapshot"].items()})
+         self.check(source == prior_metadata["source_geometry"] and result["source_geometry"] == expected_source
+@@ -395,6 +413,8 @@
+             original_run_state_source_sha256=CORE_PINS["audit_native_mean.py"],private_run_state_source_sha256=CORE_PIN,
+             inherited_workpiece_checker_sha256=WP_PIN,tangent_action_consumer_sha256=CONSUMER_PIN,
+             material_parameters=dict(E_MPa=.5,gamma=2e-6,alpha=2e-6,force_scale_per_length=10.),qualified_pose_prerequisite=self.qualified_pose,
++            source_material_arrays_preserved=True,source_material_preservation_scope=self.source_material_preservation_scope,
++            counter_metadata_validation=self.reference_contract["counter_metadata_validation"],
+             tangent_execution=self.result["tangent_execution"],counter_accounting=self.accounting,counter_helper_sha256=COUNTER_PIN,
+             first_force_range_input=self.first_range_observation,first_tangent_range_input=self.tangent_range_observation,
+             independent_reference_contract_sha256=self.reference_contract_sha256,

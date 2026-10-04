@@ -1,0 +1,125 @@
+{
+  "schema_version": "t44-direction-scaling-static-review-1.0",
+  "status": "conditional_static_pass",
+  "qualification": false,
+  "blocking_issues": [],
+  "sources": {
+    "new_tangent": {
+      "path": "hf_repo/src/hf_eval/split_numpy_tangent.py",
+      "sha256": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+      "lines": 192
+    },
+    "sealed_previous": {
+      "path": "lf_data_preparation/native_workpiece_001/t44_cached_diagnostic_001/sources/hf_repo/src/hf_eval/split_numpy_tangent.py",
+      "sha256": "fe36581e8b49f1a547973e135f3c8ca0f2bbc7d954502405418bd794d731955a"
+    },
+    "validator": {
+      "path": "D:\\hf-t44-cached-diag-author-20261004\\validate_direction_scaling.py",
+      "sha256": "f937940e0e7d725352af46103a350a5be77e3675d540b2c7f87a5c6ea90f2891",
+      "lines": 132
+    },
+    "freeze_builder": {
+      "path": "D:\\hf-t44-cached-diag-author-20261004\\freeze_repair.py",
+      "sha256": "55f00649257c75d96ab420de07f34561392421468cadda2a334d93561dcd68f6"
+    }
+  },
+  "patch_checks": {
+    "reverse_declared_selector_version_signature_call_edits_restores_whole_module_AST": true,
+    "full_and_chunk_use_same_full_batch_selector": true,
+    "exact_direction_scale_power": 128,
+    "all_direction_terms_scaled_through_original_final_inverse_scale": true,
+    "small_product_selector_unchanged": true,
+    "force_formula_and_entry_unchanged": true,
+    "four_DD_products_and_finish_guards_unchanged": true,
+    "original_direct_or_outside_bound_path_unchanged": true,
+    "original_tiny_branch_scale_unchanged": true
+  },
+  "mathematical_scope": "The Jacobian is linear in its direction: dF,dHu,dJ,ratio,dT,dP,d_action,d_scale and material/Hu contractions share a common factor. The candidate separates bounded all-near direction scaling from the more restrictive tiny-G multiplication selector. It preserves original equations and executable range gates; static linearity is not proof of numerical success for all bounded states.",
+  "diagnostic_basis": {
+    "cell": 1981,
+    "directions": [
+      3,
+      5
+    ],
+    "product_term": [
+      1,
+      1
+    ],
+    "original_operand_exponents": [
+      -177,
+      -178
+    ],
+    "original_rejected_low_exponent": -410,
+    "original_executable_floor_exponent": -400,
+    "old_failure_preserved": true,
+    "interpretation_SHA256": "7ba00295234bfe0b63fa81073c9cac421a0697ed23672d38c22250897652b093"
+  },
+  "validator_checks": {
+    "protocol_ROOT_and_argv_match": true,
+    "helper_seconds": 300,
+    "outer_seconds": 360,
+    "sampled_RSS_bytes": 8589934592,
+    "clock_includes_imports": true,
+    "one_pytest_invocation_maxfail1": true,
+    "original_test_files": [
+      "test_split_numpy_tangent.py",
+      "test_split_numpy_tangent_chunked.py"
+    ],
+    "actual_junit_totals_require_zero_fail_error_skip": true,
+    "synthetic_tests_real_F_model_T_CSC_not_reported_zero": true,
+    "cached_T_at_most2": true,
+    "cached_F_model_CSC_solver_zero_scope": true,
+    "each_completed_T_immediately_archived": true,
+    "full_chunk_all_three_tensor_bytes_and_strides_required": true,
+    "fresh_HP_precisions": [
+      80,
+      120
+    ],
+    "HP_at_most2": true,
+    "captured_raw_material_operator_and_local_displacement_preserved": true,
+    "disconnected_reference_layout_removes_candidate_scatter_reuse": true,
+    "reference_global_scatter_Decimal3000_Inexact_trapped": true,
+    "dense_seed20261004_direction_fixed_zero": true,
+    "cell1981_columns3_and5_vary": true,
+    "local_gate_count": 9600,
+    "global_gate_count": 3,
+    "total_limit": "1e-10",
+    "component_limit": "1e-9",
+    "HP_agreement": "1e-40",
+    "denominator_floor": "1e-10",
+    "consumer_local_actions_saved_before_gates": true,
+    "consumer_global_actions_and_HP_global_values_saved": true,
+    "first_failed_cell_part_errors_saved_no_recalculation": true,
+    "binding_drift_marks_not_pass_before_receipt_write": true,
+    "final_source_identity_check": true,
+    "no_equilibrium_contact_or_all_column_claim": true
+  },
+  "normal_author_revisions_before_formal_execution": [
+    "Immediate partial tensor archives after each completed T.",
+    "Late identity drift marks receipt not_pass before serialization.",
+    "Immediate local action arrays, global arrays/reference values and first failed action fields persist."
+  ],
+  "limits": [
+    "This is AST/compile/source review, not numerical qualification.",
+    "One dense direction across all cells/DOFs is not all columns or T44 equilibrium.",
+    "Synthetic pytest F/model/T/CSC calls are not separately instrumented; only the direct cached section has2T/0F/model/CSC/solver accounting.",
+    "No repaired physical path is run.",
+    "Cooperative checkpoints cannot interrupt a single pytest or reference call; outer sampling is not a hard kill or hard memory cap.",
+    "No pressure, auxiliary energy, independent stress or workpiece body-projection qualification."
+  ],
+  "private_static_collection_note": "An initial reviewer-only stdlib collection stopped on default GBK decoding of the Chinese freeze builder; corrected UTF-8 read only, no formal card or numerical call ran.",
+  "reviewer_calls": {
+    "production_imports": 0,
+    "pytest": 0,
+    "F": 0,
+    "T": 0,
+    "DD": 0,
+    "consumer": 0,
+    "model": 0,
+    "CSC": 0,
+    "solver": 0,
+    "HP": 0,
+    "geometry": 0,
+    "render": 0
+  }
+}

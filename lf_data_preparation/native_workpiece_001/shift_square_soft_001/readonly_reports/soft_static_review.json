@@ -1,0 +1,106 @@
+{
+  "schema_version": "soft-candidate-static-review-1.0",
+  "status": "conditional_static_pass",
+  "qualification": false,
+  "reviewed_utc": "2026-10-04T14:05:37.310422+00:00",
+  "sources": {
+    "prepare_shift_pose.py": {
+      "sha256": "bc8b9f7bb0863bc319942f926e27374939cca3cdac5f3a681d53f821c05d0ed3",
+      "lines": 294
+    },
+    "build_pose_card.py": {
+      "sha256": "f455b90d95fbc6db7eb3a9451c44af2f7b9cf288925e042ea1628947e809896f",
+      "lines": 186
+    },
+    "execute_shift_pose.py": {
+      "sha256": "96bf1b48eebe22b1132f6736b17de2f4269d656442c8308c2822caa0ec0387ae",
+      "lines": 251
+    },
+    "task.json": {
+      "sha256": "1361c49fb5d74a661b59efbf4d219a268c074df588c5989e99bfe3115a3cca43",
+      "lines": 108
+    },
+    "README.md": {
+      "sha256": "0aab79a26be66c385c04f13f156b2f208711d6aa5d8287c177679e0007c8ed9b",
+      "lines": 28
+    }
+  },
+  "pose_reference_interface": {
+    "path": "D:\\hf-workpiece-shift-author-20261004\\reference_candidate_v2\\audit_shift_pose.py",
+    "sha256": "0fcf7f372ccdc10dbf0f66e3473ae59282b8667663e6e070f0a5a1625f87c9ea",
+    "builder_sha256": "bd7416d2fca6c2a7bb8f4314cba68d8805b2de6a06e4aa2fd3113f0ca9b0e014",
+    "fields_checked": [
+      "status",
+      "alias",
+      "audited_targets_mm",
+      "states.state_sha256",
+      "accepted_states",
+      "HP_calls_started",
+      "HP_calls_completed",
+      "result_sha256",
+      "independent_reference_contract_sha256",
+      "full_element_and_DOF_coverage",
+      "HP_matrix_columns_exhaustively_checked",
+      "workpiece",
+      "lifecycle.accepted_states_completed"
+    ]
+  },
+  "checks": {
+    "qualified_pose_function_AST_same_in_preparer_and_builder": true,
+    "producer_original_bytes": true,
+    "qualified_pose_requires_actual_complete_production_and_fresh_2N_reference": true,
+    "targets_preserved_all11": true,
+    "production_seconds": 1800,
+    "production_outer_seconds": 1860,
+    "preparation_seconds": 120,
+    "preparation_outer_seconds": 150,
+    "sampled_RSS_bytes": 8589934592,
+    "original_x70_model_changed_fields": [
+      "fixed_dofs",
+      "force_scale_per_length",
+      "free_dofs",
+      "gamma",
+      "lam",
+      "mu",
+      "workpiece_background_symmetry_overlap_dofs",
+      "workpiece_cells",
+      "workpiece_dofs",
+      "workpiece_nodes"
+    ],
+    "qualified_pose_model_changed_fields": [
+      "force_scale_per_length",
+      "gamma",
+      "lam",
+      "mu"
+    ],
+    "original_intrinsics_same": 17,
+    "qualified_pose_other_arrays_same": 23,
+    "Et_N_per_mm": 10,
+    "medium_lame_raw_same": true,
+    "kr_raw_same": true,
+    "production_source_roles": 70,
+    "source_material_arrays_preserved_semantics": "The current soft task base material assignment is unchanged by the kinematic body overlay; this does not assert equality to E1 historical or qualified-pose material arrays."
+  },
+  "pure_counter_metadata_proof": {
+    "protocol.json": "bd56a2ff8f6bd5649772211b7cc59f8cb8ab574333d18b7df412e00ba6f9811d",
+    "validation_launch.json": "21d8c7641ba04c89159b969cb7c048e23736587a915a7466e4a7b13a3f67941b",
+    "result/result.json": "edbce09a4989229e698ebf9507f0c0c800e6faa500f1fe2e7dc5e4a620524c72"
+  },
+  "proof_scope": "Eight metadata cases only; no new equilibrium or HP qualification.",
+  "blockers": [],
+  "limitations": [
+    "Pose002 production/reference is not yet terminal. This review verifies future field compatibility and guards, not their actual success.",
+    "The builder fixed baseline must still match the eventual authorized Git state before installation.",
+    "Future soft reference uses every actual accepted index with fresh HP80/120 and an explicitly selected pre-freeze budget."
+  ],
+  "executed": {
+    "candidate_programs": 0,
+    "model_constructions": 0,
+    "force": 0,
+    "tangent": 0,
+    "HP": 0,
+    "solver": 0,
+    "tests": 0,
+    "card_builds": 0
+  }
+}

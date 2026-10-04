@@ -1,0 +1,45 @@
+--- pose002/task.json
++++ soft001/task.json
+@@ -1,11 +1,11 @@
+ {
+   "schema_version": "hf-native-project-task-1.1",
+-  "task_id": "EXPLORATORY_fixed_workpiece_gripper_square_x71_pose_only_1p8mm",
++  "task_id": "EXPLORATORY_fixed_workpiece_gripper_square_x71_soft_E0p5_1p8mm",
+   "case_family": "gripper",
+-  "purpose": "shifted_square_pose_only_1p8mm_ordered_loading_return",
+-  "parameter_origin": "User-authorized rightward workpiece placement exploration; pose-only +1 mm, inherited material and full1.8mm targets",
++  "purpose": "explicit_softened_square_x71_1p8mm_ordered_loading_return",
++  "parameter_origin": "Independent softened-parameter task after complete pose002 production and reference pass; E halves while gamma/alpha double",
+   "material": {
+-    "E_MPa": 1.0,
++    "E_MPa": 0.5,
+     "nu": 0.3,
+     "formulation": "plane_strain"
+   },
+@@ -49,7 +49,7 @@
+     "side_mm": 16.0
+   },
+   "third_medium": {
+-    "gamma": 1e-06
++    "gamma": 2e-06
+   },
+   "qualification_criteria": {
+     "max_design_volume_fraction": null,
+@@ -63,7 +63,7 @@
+     "energy": "N mm"
+   },
+   "regularization": {
+-    "alpha": 1e-06,
++    "alpha": 2e-06,
+     "length_mm": 80.0
+   },
+   "background_symmetry": {
+@@ -88,7 +88,7 @@
+   "analysis_grid": {
+     "policy": "native"
+   },
+-  "description": "Distinct zero-start square center(71,40),side16; unchanged original materials, grid/ports/controller and eleven target1.8mm path; own overlay/model identity, no inherited HP qualification",
++  "description": "Zero-start square center(71,40),side16; E0.5,gamma/alpha2e-6; original grid/ports/controller and all eleven1.8mm targets; own material/model identity and fresh reference required",
+   "path": {
+     "kind": "ordered_cycle",
+     "targets_mm": [

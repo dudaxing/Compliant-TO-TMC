@@ -1,0 +1,63 @@
+--- frozen010/execute_cycle010.py
++++ pose_candidate/execute_shift_pose.py
+@@ -1,13 +1,18 @@
+-"""Execute the opt-in mechanical [0,.5,1,1.5,1.75,1.8,1.75,1.5,1,.5,0] with explicit chunk256 tangent path; save actual F/T range inputs."""
++"""One shifted-square mechanical path; save cached states and first actual range failures."""
+ from pathlib import Path
+ from time import perf_counter
+ from datetime import datetime, timezone
+ import hashlib
+ import json
+ import sys
++import argparse
+ STARTED = perf_counter()
+-ROOT = Path(__file__).resolve().parents[3]
+-STAGE = Path(__file__).resolve().parent
++PARSER = argparse.ArgumentParser(description=__doc__)
++PARSER.add_argument("--repo", type=Path, required=True)
++PARSER.add_argument("--input", type=Path, required=True)
++ARGS = PARSER.parse_args()
++ROOT, STAGE = ARGS.repo.resolve(), ARGS.input.resolve()
++STAGE.relative_to(ROOT)
+ sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+ 
+ 
+@@ -22,7 +27,7 @@
+     assert sha(freeze_file) == inventory["source_freeze_sha256"]
+     sources = json.loads(freeze_file.read_text(encoding="utf-8"))["sources"]
+     inputs = inventory["input_bindings"]
+-    assert len(sources) == 68 and len({Path(p).name for p in sources}) == 68
++    assert len(sources) == inventory["source_count"] == len({Path(p).name for p in sources})
+     assert all(sha(ROOT/p) == pin and sha(STAGE/"sources"/Path(p).name) == pin for p, pin in sources.items())
+     assert all(sha(ROOT/p) == pin for p, pin in inputs.items())
+     receipt_file = STAGE/"execution_receipt.json"
+@@ -184,10 +189,17 @@
+         assert all(s.record["tangent_execution"] == inventory["tangent_execution"] for s in result.accepted)
+         receipt["tangent_execution"] = metadata["tangent_execution"]
+         assert metadata["schema_version"] == "hf-native-mean-result-1.2" and all(metadata[k] == v for k,v in availability.items())
++        assert metadata["targets_mm"] == task["path"]["targets_mm"] == row["targets_mm"]
++        assert metadata["task_target_mm"] == task["input"]["target_mm"] == 1.8
+         with np.load(STAGE/"result/model/model.npz", allow_pickle=False) as saved, np.load(ROOT/row["workpiece_model_file"], allow_pickle=False) as original:
+             assert len(saved.files) == len(original.files) == 27 and set(saved.files) == set(original.files)
+             assert all(saved[name].dtype == original[name].dtype and saved[name].shape == original[name].shape
+-                and saved[name].tobytes() == original[name].tobytes() for name in original.files), "Original 27 model arrays changed"
++                and saved[name].tobytes() == original[name].tobytes() for name in original.files), "Declared shifted fixture 27 arrays changed"
++        from prepare_shift_pose import model_delta
++        with np.load(STAGE/"result/model/model.npz", allow_pickle=False) as saved, np.load(ROOT/row["comparison_model_file"], allow_pickle=False) as baseline:
++            delta = model_delta(saved, baseline)
++        assert delta == row["expected_model_changed_fields"] == inventory["model_comparison"]["actual_changed_fields"]
++        receipt["model_comparison"] = dict(inventory["model_comparison"], actual_changed_fields=delta)
+         counts = metadata["call_counts"]
+         receipt["call_counts"] = counts
+         assert (observed_force_calls, observed_force_completed, observed_tangent_calls) == (
+@@ -196,8 +208,8 @@
+         assert counts["tangent_calls_completed"] <= observed_tangent_completed
+         if metadata["status"] == "success":
+             assert counts["tangent_calls_completed"] == observed_tangent_completed
+-        receipt.update(model_arrays_compared=27, original_workpiece_model_arrays_equal=True,
+-            original_workpiece_model_sha256=sha(ROOT/row["workpiece_model_file"]),
++        receipt.update(model_arrays_compared=27, declared_workpiece_model_arrays_equal=True,
++            declared_workpiece_model_sha256=sha(ROOT/row["workpiece_model_file"]),
+             **{name: metadata[name] for name in ("target_reached","path_completed","loading_peak_reached","unload_endpoint_reached","task_target_executed")},
+             **availability)
+         receipt.update(status="pass" if metadata["status"] == "success" else "not_pass",

@@ -1,0 +1,206 @@
+{
+  "schema_version": "workpiece-shift-source-contract-review-1.0",
+  "status": "pass",
+  "reviewed_utc": "2026-10-04T12:29:02.927949+00:00",
+  "baseline_commit_observed": "38ecc77cc14fee9fd0c69d026ed8df1e32b19bc2",
+  "scope": "Source-only contract and migration review for an explicit new fixed square shifted +1 mm. No geometry construction, array derivation, force/tangent, solver, HP, measurement or admission was executed.",
+  "admission": {
+    "new_task_created": false,
+    "new_model_constructed": false,
+    "new_geometry_measured": false,
+    "new_model_admitted": false,
+    "new_mechanics_qualified": false,
+    "contact_clamp_pressure_qualified": false
+  },
+  "proposed_position_only_task_delta": {
+    "workpiece.center_mm": {
+      "before": [
+        70.0,
+        40.0
+      ],
+      "after": [
+        71.0,
+        40.0
+      ]
+    },
+    "workpiece.side_mm": 16.0,
+    "workpiece.shape": "square",
+    "new_task_id_purpose_parameter_origin_description": "Use a distinct shifted-placement identity and explanation; no new unsupported task fields.",
+    "input.target_mm": 1.8,
+    "path": {
+      "kind": "ordered_cycle",
+      "targets_mm": [
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        1.75,
+        1.8,
+        1.75,
+        1.5,
+        1.0,
+        0.5,
+        0.0
+      ]
+    },
+    "physical_fields_other_than_center": "Keep exactly unchanged for placement attribution.",
+    "analytic_half_box_mm": {
+      "x": [
+        63.0,
+        79.0
+      ],
+      "y": [
+        32.0,
+        40.0
+      ]
+    },
+    "symmetry": "Center y=40 and full explicit y40 background remain; no half-model doubling."
+  },
+  "minimal_core_changes": "None for position-only square: native_project._workpiece_region derives cells/nodes/DOFs from center; native_mean._workpiece_observations uses actual body arrays; native_region_geometry derives square faces from task center/side.",
+  "predicted_model_array_contract": {
+    "status": "Predicted from existing native-grid construction formulas, not a new computed/admitted model.",
+    "old_model_SHA256": "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049",
+    "old_model_must_not_be_claimed_new": "Shift changes constraints/overlay, so old a2d6 whole-model equality is invalid.",
+    "unchanged_21_keys": [
+      "coordinates",
+      "connectivity",
+      "solid",
+      "lam",
+      "mu",
+      "gamma",
+      "edofs",
+      "solid_nodes",
+      "solid_dofs",
+      "b_in",
+      "b_out",
+      "grad",
+      "hessian",
+      "weights",
+      "points",
+      "kr",
+      "hx",
+      "hy",
+      "thickness",
+      "k_out",
+      "force_scale_per_length"
+    ],
+    "changed_6_keys": [
+      "fixed_dofs",
+      "free_dofs",
+      "workpiece_cells",
+      "workpiece_nodes",
+      "workpiece_dofs",
+      "workpiece_background_symmetry_overlap_dofs"
+    ],
+    "native_index_translation_expectation": "Coarse h=1 aligned square: body cell and node IDs shift +1; body DOFs and background overlap DOFs shift +2. Fixed/free sets must be newly merged, not shifted as whole arrays.",
+    "expected_counts_not_yet_verified": {
+      "cells": 3200,
+      "nodes": 3321,
+      "DOFs": 6642,
+      "body_cells": 128,
+      "body_nodes": 153,
+      "body_fixed_DOFS": 306,
+      "background_uy_overlap": 17,
+      "merged_fixed": 376,
+      "free": 6266
+    },
+    "must_actual_verify": [
+      "Selected body cells all source passive_void; no original solid-incident/support/input/output node sharing.",
+      "Top body nodes all covered by declared background symmetry; all body ux/uy fixed and zero.",
+      "Actual 27 fields/bytes, counts and fresh effective-boundary task/fixed SHA; compare only 21 position-invariant fields to old a2d6.",
+      "Recompute initial node-line gaps in the new construction; old left=2/bottom=2 is not a transferable admission gate.",
+      "Derived square complete-box check must match exact new cell set, actual native extent and corners."
+    ]
+  },
+  "frozen_identity_changes_required": [
+    {
+      "file": "coarse_square_cycle_010/prepare_cycle010.py:29-58",
+      "problem": "Direct inheritance requires prior reference/summary pass, but original010 reference is closed failure; it also forbids workpiece changes and hardpins old model.",
+      "minimal_revision": "New stage/prior baseline. Bind original010 production plus externalRef003 pass summary/result identity. Permit only declared center and descriptive changes; bind a genuinely constructed new shifted model or independently check the six declared arrays against new task, while retaining old model as comparison."
+    },
+    {
+      "file": "coarse_square_cycle_010/prepare_cycle010.py:60-101",
+      "problem": "case/workpiece_model_file inherited unchanged, old source/input lengths and qualification prose.",
+      "minimal_revision": "Keep source geometry and no-body prior model/task pins; update task path/hash, new body model metadata/archive pins, stage/baseline/alias and source closure. Compute declared input set/count from actual roles; do not merely retain73 or copyold model pin. PORT direction can remain old bytes only after new fixed-DOF compatibility verified."
+    },
+    {
+      "file": "coarse_square_cycle_010/execute_cycle010.py:187-208",
+      "problem": "Requires saved27 equal original a2d6 model and emits original model equality meaning.",
+      "minimal_revision": "Compare complete27 against new shifted fixture identity; preserve21 equality to source/old model separately. Keep counters, cachedsave0, first-range observers, tuple/bare raise and hooks restoration unchanged."
+    },
+    {
+      "file": "coarse_square_cycle010_ref_003/audit_cycle010_ref003.py:278-356",
+      "problem": "BODY imported70, oldmodelpin, exact oldtask physical comparison, rectangle62..78/32..40 and initialgap2/2.",
+      "minimal_revision": "Fresh local BODY center71; new model pin and explicit allowed center delta; derive independent box63..79/32..40 and body sets from bound task. Retain128/153/306/17 and376 only as newly checked aligned-square expectations. Keep original21material/geometry fields equality for placement-only. Update task/model/canonical descriptor/effectiveboundary hashes and original target identities."
+    },
+    {
+      "file": "coarse_square_cycle010_ref_003/counter_contract.py:29-45",
+      "problem": "Known010 trace requires exactlyone capturedT failure and one rollback/midpoint. Even a clean shifted path would be rejected if reused unchanged.",
+      "minimal_revision": "Declare success chronology handling: standard all-T-complete branch when actual all complete; bounded captured-failure branch only when actual complete provenance meets its stated pattern. Do not transplant knownT44/F77/F90 ordinals,stateSHAs,.25 extra state or twelve-state count. Unknown missing events close the reference, not silently relaxed."
+    }
+  ],
+  "gates_and_scientific_scope": {
+    "keep": {
+      "production_residual": "1e-9",
+      "independent_residual": "1e-8",
+      "force_evaluation": "1e-9",
+      "average_constraint": "1e-10",
+      "global_force_balance": "1e-6",
+      "fixed_displacement_mm": "8e-11",
+      "hp80_hp120": "1e-40",
+      "total_force": "1e-11",
+      "material_force": "1e-9",
+      "regularization_force": "1e-9",
+      "total_tangent": "1e-10",
+      "material_tangent": "1e-9",
+      "regularization_tangent": "1e-9",
+      "augmented_force_tangent": "1e-10",
+      "augmented_constraint_tangent": "1e-10"
+    },
+    "settings_except_explicit_new_resources": "Same tolerance/floors/Armijo/checks/backtracks/bisections/minimum_increment; mininc0.00625 stays.",
+    "direction": "Existing b_in/max(abs(b_in)),deltaR0; force/T reference all actual accepted indices with fresh80/120, dynamic2N and bisections notdeduped.",
+    "non_transferable": "Original010 twelve-state HP pass and old failed captures are history, not new shifted-state qualification.",
+    "T44_issue": "Original support-range root cause remains unresolved; moving or softening cannot be reported as a primitive repair. Preserve both old failures and observe first actual new F/T range exceptions without extra evaluation.",
+    "geometry": "Square API supports shifted center, full native rectangle and zero body motion. Circle construction exists, but this square geometry observer and hardcoded reference cannot qualify circles; circle-specific physical boundary contract needed.",
+    "forces": "Continue negative saved weak-form internal forces on body, signed Fx/Fy; mirror aroundy40 is(2Fx,0),2absFy separate scalar sum, not pressure/clamping."
+  },
+  "softening_decision_not_selected": {
+    "must_be_explicit": "Position-only task keeps allmaterial params. Any softening must specify which parameter/value and be a separately declared model delta or a clearly named combined test with no attribution to position alone.",
+    "gamma": "Changing third_medium.gamma alters gamma/lam/mu only in original medium; mechanism E,kr and Et remain whenalpha/E unchanged. Requires explicit newmaterial checks; cannot keep all21 equality.",
+    "alpha": "Changing regularization.alpha changes scalar kr everywhere; this regularizer has kr_material_factor_applied=False, so not a medium-only softness knob. Lr stays physical80mm.",
+    "E": "Changing E scales both material phases and kr; force_scale_per_length Et changes and original derived floor rule must follow actual Et while numerical threshold constants remain.",
+    "availability": "Mechanical mode keeps auxiliary energy not_evaluated; no unrequested pressure/energy qualification."
+  },
+  "minimal_next_sequence": [
+    "Freeze distinct explicit shifted task, fresh source/input bindings and declared resources.",
+    "One pure construction/admission of new overlay and27fields; inspect actual placement/gaps/ports before FE.",
+    "One zero-start original eleven-target mechanical path, cache-only persistence and first-range capture; then fresh all-accepted reference if declared predecessor conditions pass.",
+    "Only afterward saved x1 peak/return, true surface/ray diagnostics and all-body nodal force observations; no reuse of old geometry distances as new data."
+  ],
+  "input_files_sha256": {
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/native_mean.py": "186a6662c14310b4dc577591764eef849988448de132474fd6953579449cb22b",
+    "hf_repo/src/hf_eval/native_region_geometry.py": "0bc3fa706431de16761d3ffa89b37e56ef3f4782984362d14792b1f5dd26aa98",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/task.json": "2da10dcf4913e91ecef17fc589a45931dca2d2e14e33bed0e48e7432b828d51f",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/input_inventory.json": "bb08fa9339ea36c2057bf6672630f3231bc7f61a923b22a63ab77cc55abcf5f6",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/prepare_cycle010.py": "78601e6fe0164af42a4e8c924dd806a758ef22f08a970fa44679b791f6ca830c",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/execute_cycle010.py": "313e2a7b2700b1e374fabb59c58ee994d4b70ce1b65483af61fbde9b1f2826a6",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/audit_cycle010.py": "25340a9dbf566e9fb0db91dffcd7db50ee81a16fee7408102d88f3d02020dd91",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle010_ref_003/audit_cycle010_ref003.py": "40cd8de0f06767a6361fcf95d5720ca9fbd3552e3781cd088b0400687f98e6b3",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle010_ref_003/counter_contract.py": "547a76f7d1b750a2f423fdce043a90e4b6754c6148167bb350d36f2852ced32e",
+    "hf_repo/scripts/audit_native_workpiece_cycle.py": "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938"
+  },
+  "reader_import_policy": "Onlystdlib/AST/source and existingJSON were read. No production module imports.",
+  "new_calls": {
+    "construction": 0,
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "consumer": 0,
+    "geometry": 0,
+    "tests": 0,
+    "render": 0
+  },
+  "repository_files_modified": false
+}

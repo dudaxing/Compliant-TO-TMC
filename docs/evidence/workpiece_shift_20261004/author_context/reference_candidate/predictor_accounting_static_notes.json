@@ -1,0 +1,46 @@
+{
+  "status": "static_branch_analysis_pending_actual_terminal_trace",
+  "qualification": false,
+  "sources": {
+    "hf_repo/src/hf_eval/split_displacement.py": "f4632beb5697e6f25f374c4de31d25f712dd0c91723fed6021f866ada60a386c",
+    "hf_repo/src/hf_eval/native_mean.py": "186a6662c14310b4dc577591764eef849988448de132474fd6953579449cb22b",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "hf_repo/src/hf_eval/split_kernel.py": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386"
+  },
+  "known_source_order": [
+    "advance copies accepted state/R/s/K and records each failed attempt before recursively trying midpoint then original target",
+    "newton records successful predictor LU before first newton-base evaluate; predictor does not itself evaluate constitutive fields",
+    "evaluate(tangent=True) enters assembler: force start, force completion, tangent start, tangent/CSC completion, then controller records successful kernel call and Newton history",
+    "mechanical NumPy force rejects nonpositive physical J before returning force; invalid_J does not trigger range-only raw capture",
+    "Armijo/trial records occur only after a completed corrector LU; range or invalid-J force exception may be recorded as unaccepted trial without returned phi/J/R fields",
+    "accepted caches preserve actual F/T ordinal and state SHA, providing independent event-sequence anchors"
+  ],
+  "existing_v1_limitations": [
+    "Complete-T accounting currently attributes every incomplete F only to recorded range trial; it cannot accept a predictor-base invalid_J deficit",
+    "The prior pure captured-T helper supports one recorded tangent failure and a constrained recovery pattern only",
+    "No new branch is accepted before actual terminal chronology and source-pinned error provenance are read"
+  ],
+  "minimal_reconstruction_plan": [
+    "Walk original targets using the same ordered recursive advance tree; match from-displacement, attempted target, depth, original index and rollback before midpoint retry",
+    "Consume predictor/corrector LU records, Newton history, trial groups and accepted cache ordinals with separate cursors",
+    "Classify missing first base history only when a recorded invalid_J failed attempt, completed predictor row, native positive-J rejection reason, subsequent midpoint tree, counters and all cache ordinals agree",
+    "Each such event contributes one incomplete F and zero T; no raw failed-state force/J is inferred and no HP claim is made",
+    "Completed bases and trial forces retain original gates; unsupported/ambiguous before-F, missing linear row, unknown error or unexplained deficit fails closed",
+    "Require complete consumption of all event lists and exact F/T/kernel-call and accepted-cache totals; do not deduce causality from deficit alone"
+  ],
+  "budget": {
+    "reference_v1_seconds": 600,
+    "reference_v1_outer_seconds": 660,
+    "final_budget": "pending actual accepted N; parent proposes new explicit 720/780 if N <= 16"
+  },
+  "new_evaluations": {
+    "force": 0,
+    "tangent": 0,
+    "HP": 0,
+    "solver": 0,
+    "geometry": 0,
+    "consumer": 0
+  },
+  "active_production_result_read": false
+}

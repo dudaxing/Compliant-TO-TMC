@@ -1,0 +1,163 @@
+{
+  "schema_version": "workpiece-shift-saved-source-physics-review-1.0",
+  "status": "static_geometry_and_physics_suggestion",
+  "qualification": false,
+  "scope": "Actual source text and saved model/mask/connectivity/coordinate/state data only. Prospective aligned-cell selection and set checks; no constructor, region measurement, force/tangent/HP/solve/consumer/test/render.",
+  "input_sha256": {
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/task.json": "2da10dcf4913e91ecef17fc589a45931dca2d2e14e33bed0e48e7432b828d51f",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/result/result.json": "7338a65980abaa7d45d72ccee453352c5960e6dc416f82b8d8a4db5ca46e31c4",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/result/model/model.json": "015469b55cbb1fbc9b878becceeeba3c2d35e67d49275f26aab6c8a2325ca584",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/result/model/model.npz": "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/result/model/source_geometry/geometry.json": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/result/model/source_geometry/geometry.npz": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+  },
+  "old_peak_state_npz_sha256": "dafb5952e20cdc52f9d5211075b1a69329a2824760f54745c9ae7106e5e1d63f",
+  "old_peak_state_sha256": "36ca9da8fc329a3d8b4b2a79b38c26f33458397a2c03a9bd293f207733bfbffe",
+  "placement": {
+    "old_center_mm": [
+      70.0,
+      40.0
+    ],
+    "proposed_center_mm": [
+      71.0,
+      40.0
+    ],
+    "side_mm": 16.0,
+    "symmetry_plane_y_mm": 40.0,
+    "lower_half_box_mm": {
+      "x": [
+        63.0,
+        79.0
+      ],
+      "y": [
+        32.0,
+        40.0
+      ]
+    },
+    "grid_h_mm": 1.0,
+    "exact_one_native_cell_shift": true,
+    "selected_cells": 128,
+    "incident_nodes": 153,
+    "workpiece_DOFs": 306,
+    "background_uy_overlap_DOFs": 17,
+    "inferred_merged_fixed_DOFs": 376,
+    "inferred_free_DOFs": 6266,
+    "all_selected_source_passive_void": true,
+    "original_solid_cell_overlap_count": 0,
+    "original_solid_shared_node_count": 0,
+    "support_input_output_node_intersections": {
+      "support": [],
+      "input": [],
+      "output": []
+    },
+    "full_top_nodes_covered": true,
+    "domain_bounds_mm": {
+      "x": [
+        0.0,
+        80.0
+      ],
+      "y": [
+        0.0,
+        40.0
+      ]
+    },
+    "right_domain_margin_mm": 1.0,
+    "initial_aligned_native_extent_gaps_mm": {
+      "bottom": 2.0,
+      "left": 3.0
+    },
+    "initial_gap_basis": "Body bottom y32 vs reference solid jaw top y30; body left x63 vs source vertical solid wall x60. This is coordinate inference, not a new boundary measurement or contact-onset test.",
+    "added_node_count": 9,
+    "removed_node_count": 9,
+    "added_node_x_mm": 79.0,
+    "removed_node_x_mm": 62.0,
+    "identity": "Body indices and fixed/free identity change although counts and original geometry/material masks stay the same. Must be a new task/model; prior27model SHA cannot be reused as this shifted model identity."
+  },
+  "saved_tip": {
+    "actual_old_peak_mm": 1.8,
+    "reference_top_right_tip_node": 2510,
+    "reference_tip_xy_mm": [
+      80.0,
+      30.0
+    ],
+    "old_equilibrated_tip_xy_mm": [
+      79.11853779335102,
+      32.075436070881956
+    ],
+    "adjacent_top_edge_node": 2509,
+    "adjacent_reference_xy_mm": [
+      79.0,
+      30.0
+    ],
+    "adjacent_old_peak_xy_mm": [
+      78.12299325732214,
+      31.98008226830101
+    ],
+    "output_port_nodes": [
+      2348,
+      2429,
+      2510
+    ],
+    "interpretation": "The true reference far-right upper jaw tip is x80,y30, not x78,y30. At the old peak the edge2509->2510 rises through y32 while its x endpoints bracket the proposed right edge79. Extending the body to79 brings more of this rising tip-edge beneath/against the bottom-corner neighbourhood; tip2510 itself remains slightly outside x79 in the old state.",
+    "old_peak_state_violates_new_fixed_body": true,
+    "limitation": "Old displacements are not translated/reused as a new equilibrium. Their intersection tendency only motivates placement; no new contact, gap, overlap or convergence result is asserted."
+  },
+  "bottom_left_objectives": "Keep bottom face y32 to target the upward moving far-right jaw neighbourhood. Moving left face63 away from wall60 increases initial left separation, helping isolate bottom/tip action. Right-side medium strip shrinks from2native cells to1, so boundary proximity and medium distortion deserve explicit attention.",
+  "stiffness": {
+    "actual_material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain",
+      "lambda_s_MPa": 0.5769230769230769,
+      "mu_s_MPa": 0.3846153846153846,
+      "kappa_s_MPa": 0.8333333333333333,
+      "thickness_mm": 20.0,
+      "third_medium_gamma": 1e-06,
+      "alpha": 1e-06,
+      "regularization_length_mm": 80.0,
+      "kr_MPa_mm2": 0.008615384615384613,
+      "kr_material_factor_applied": false,
+      "force_scale_per_length": 20.0
+    },
+    "source_rules": {
+      "solid_lame": "lambda_s and mu_s are proportional to E at fixednu",
+      "medium_lame": "lambda_m=gamma*lambda_s,mu_m=gamma*mu_s",
+      "regularization": "kr=alpha*Lr^2*(kappa_s+4mu_s/3), global scalar and NOT multiplied by gamma"
+    },
+    "uniform_scaling": "If E->cE with gamma,alpha,nu,Lr,thickness and all kinematics unchanged, all material/Hu forces and tangents scale byc at a fixed displacement. With zero external/output/input springs and only an unknown average-input reaction, every ideal equilibrium(u,R) maps to(u,cR). Thus this mainly changes force scale and does not by itself promote geometric conformity; finite-arithmetic/domain and solution-branch behaviour still needs fresh qualification.",
+    "ratio_caveat": "Keeping only gamma/alpha ratio is insufficient to define a change. Holding both numerical values fixed gives uniform scaling. Co-scaling gamma and alpha can instead change the mechanism/medium contrast.",
+    "genuine_relative_softening_existing_schema": "An explicit later comparison E->cE,gamma->gamma/c,alpha->alpha/c keeps original medium Lamé coefficients and globalkr fixed while lowering solid Lamé coefficients. gamma/alpha ratio is unchanged, but gamma and alpha individually change. This can change deformation allocation near the rigid obstacle; it does not guarantee contact or a fitted jaw.",
+    "suggested_example_only": {
+      "c": 0.5,
+      "E_MPa": 0.5,
+      "gamma": 2e-06,
+      "alpha": 2e-06,
+      "nu": 0.3,
+      "Lr_mm": 80.0,
+      "status": "proposal_not_executed"
+    },
+    "caveat": "kr is global, so preserving it while lowering solidE also increases regularization relative to solid stiffness. Alpha tunes Hu regularization, not a standalone calibrated physical contact stiffness or numerical tolerance. This remains a new physical parameter task requiring all original gates/fresh accepted-state reference."
+  },
+  "recommendation": "First execute one separately declared shifted-centre71 task with E1/gamma1e-6/alpha1e-6 and the complete original loading/return targets, so placement has an interpretable effect. Only then use one explicit relative-softening comparison if saved body force/gaps/J/Hu indicate that shaping remains needed; do not change geometry and stiffness together merely to obtain a pass.",
+  "observe": [
+    "Bottom and left finite-face rays/corner witnesses plus cell-union overlap, interpreted separately from contact proof.",
+    "Actual far-right jaw position/shape, medium and solid minimum savedJ,Hu and body-node force localisation.",
+    "Signed bodyFx/Fy/material/Hu,cut overlap,return endpoint and all actual accepted chronology.",
+    "Domain-edge proximity from the1mm outer medium strip; no assumption of mesh-independent pressure or contact."
+  ],
+  "unresolved": "CurrentT44/F77 primitive range cause remains unresolved. This geometry review neither repairs it nor grants failed-state qualification.",
+  "new_calls": {
+    "model_construction": 0,
+    "force": 0,
+    "tangent": 0,
+    "HP": 0,
+    "consumer": 0,
+    "solver": 0,
+    "geometry_measurement": 0,
+    "render": 0,
+    "tests": 0
+  },
+  "issues": []
+}

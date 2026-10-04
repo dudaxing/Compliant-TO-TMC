@@ -1,0 +1,11 @@
+--- D:\hf-workpiece-shift-author-20261004\reference_soft_candidate_v2\.author_v1\reference_contract_builder.py
++++ D:\hf-workpiece-shift-author-20261004\reference_soft_candidate_v2\reference_contract_builder.py
+@@ -215,7 +215,7 @@
+     assert freeze["source_transition"] == contract["source_transition"]
+     write(contract_file,contract)
+     pins.update(refs); pins[contract_file.relative_to(root).as_posix()] = sha(contract_file)
+-    argv = [(installed/"audit_shift_soft.py").relative_to(root).as_posix(),"--repo",str(root),
++    argv = [(installed/"audit_shift_soft.py").relative_to(root).as_posix(),"--repo",".",
+         "--input",stage.relative_to(root).as_posix(),"--output",output.relative_to(root).as_posix(),
+         "--contract",contract_file.relative_to(root).as_posix(),"--time-limit",str(limit)]
+     write(protocol_file,dict(schema_version="shift-square-softened-reference-protocol-1.0",bindings=pins,
