@@ -1,0 +1,38 @@
+{
+  "scope": "Authoring and syntax-only checks; zero FE/solver/HP/geometry calls",
+  "baseline_commit": "39443b5ad5504101bb8a16d6ac8c6b204c2dce8b",
+  "target_changes": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    1.75,
+    1.5,
+    1.0,
+    0.5,
+    0.0
+  ],
+  "notes": {
+    "prepare": {
+      "prior_sha256": "b7024e9a87024bb6f5bdffddc9b20b99061024890a5e6704fb916044749b9dd8",
+      "candidate_sha256": "47f32de45058f7e0491a9a9258f410e26c0c6c3c8ded26a6aeea32c951258c50",
+      "diff": "--- prepare_cycle007.py\n+++ prepare_cycle008.py\n@@ -1,4 +1,4 @@\n-\"\"\"Freeze a new1.5mm task while retaining the qualified physical model and rules.\"\"\"\n+\"\"\"Freeze a new1.75mm task while retaining the qualified physical model and rules.\"\"\"\n from pathlib import Path\n import hashlib\n import json\n@@ -7,9 +7,9 @@\n \n ROOT = Path(__file__).resolve().parents[3]\n STAGE = Path(__file__).resolve().parent\n-BASELINE = '747f685cf6be41c6f67266005ed772d1813d62da'\n+BASELINE = '39443b5ad5504101bb8a16d6ac8c6b204c2dce8b'\n MODEL_SHA = 'a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049'\n-TARGETS = [0., .5, 1., 1.5, 1., .5, 0.]\n+TARGETS = [0., .5, 1., 1.5, 1.75, 1.5, 1., .5, 0.]\n sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()\n \n \n@@ -18,7 +18,7 @@\n \n \n def main():\n-    prior = STAGE.parent/'coarse_square_cycle_006'\n+    prior = STAGE.parent/'coarse_square_cycle_007'\n     original = STAGE.parent/'coarse_square_cycle_003'\n     old = json.loads((prior/'input_inventory.json').read_text(encoding='utf-8'))\n     old_sources = json.loads((prior/'source_freeze.json').read_text(encoding='utf-8'))['sources']\n@@ -29,13 +29,13 @@\n     previous_ref = json.loads((prior/'reference/summary.json').read_text(encoding='utf-8'))\n     assert unit['status'] == 'pass' and unit['failed_tests'] == unit['skipped_tests'] == 0\n     assert previous_run['status'] == previous_ref['status'] == 'pass'\n-    assert previous_ref['accepted_states'] == 5 and previous_ref['HP_calls_completed'] == 10\n+    assert previous_ref['accepted_states'] == 7 and previous_ref['HP_calls_completed'] == 14\n     task_file = STAGE/'task.json'\n     task, old_task = (json.loads(p.read_text(encoding='utf-8')) for p in (task_file, prior/'task.json'))\n     descriptive = {'task_id','purpose','parameter_origin','description'}\n     allowed = descriptive | {'input', 'path'}\n     assert {k:v for k,v in task.items() if k not in allowed} == {k:v for k,v in old_task.items() if k not in allowed}\n-    assert task['input'] == dict(old_task['input'], target_mm=1.5)\n+    assert task['input'] == dict(old_task['input'], target_mm=1.75)\n     assert task['path'] == dict(kind='ordered_cycle', targets_mm=TARGETS)\n     assert sha(ROOT/old['case']['workpiece_model_file']) == MODEL_SHA\n     shutil.copyfile(prior/'direction.npz', STAGE/'direction.npz')\n@@ -56,7 +56,7 @@\n     assert transition.keys() == allowed_sources\n     assert sources['hf_repo/src/hf_eval/split_kernel_invariants_hu.py'] == 'd5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a'\n     assert sha(STAGE/'core_audit_mechanical.py') == sha(prior/'core_audit_mechanical.py') == 'b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5'\n-    for name in ('core_audit_mechanical.py','audit_cycle007.py','prepare_cycle007.py','execute_cycle007.py','launch_cycle007.py'):\n+    for name in ('core_audit_mechanical.py','audit_cycle008.py','prepare_cycle008.py','execute_cycle008.py','launch_cycle008.py'):\n         path = STAGE/name\n         sources[path.relative_to(ROOT).as_posix()] = sha(path)\n     assert len(sources) == len({Path(name).name for name in sources}) == 68\n@@ -66,17 +66,17 @@\n     freeze_file = STAGE/'source_freeze.json'\n     write(freeze_file, dict(schema_version='native-workpiece-cycle-source-freeze-1.0',\n         baseline_commit=BASELINE, sources=sources, source_transition=transition,\n-        scope='Original00363 byte-pinned closure with3 unchanged declared live transitions, plus5 new-card wrappers; no numerical implementation change from006'))\n+        scope='Original00363 byte-pinned closure with3 unchanged declared live transitions, plus5 new-card wrappers; no numerical implementation change from007'))\n     inputs = dict(old['input_bindings'])\n-    assert len(inputs) == 39 and all(sha(ROOT/name) == pin for name,pin in inputs.items())\n+    assert len(inputs) == 46 and all(sha(ROOT/name) == pin for name,pin in inputs.items())\n     for path in (prior/'input_inventory.json', prior/'source_freeze.json', prior/'execution_receipt.json',\n                  prior/'reference/summary.json', task_file, STAGE/'direction.npz', STAGE/'README.md'):\n         inputs[path.relative_to(ROOT).as_posix()] = sha(path)\n-    assert len(inputs) == 46\n+    assert len(inputs) == 53\n     observation = 'Save first actual force and first actual tangent range-exception input, without additional evaluation or altered returns; original controller handles rethrown range exceptions'\n     inventory = dict(old, baseline_commit=BASELINE, case=row,\n         source_freeze_sha256=sha(freeze_file), input_bindings=inputs, source_transition=transition,\n-        qualification='Only this new explicit-mechanical coarse fixed-square0/.5/1/1.5/1/.5/0 task and all its actual accepted states; no inherited old-state qualification',\n+        qualification='Only this new explicit-mechanical coarse fixed-square0/.5/1/1.5/1.75/1.5/1/.5/0 task and all its actual accepted states; no inherited old-state qualification',\n         reference_call_rule='Fresh HP80/120 separately on every actual accepted index including repeated targets and bisections; all3200cells/6642DOFs and original force/Jv/CSC/KKT/body gates, no energy or all-column qualification',\n         observation_rule=observation, range_observation_rule=observation)\n     assert inventory['settings'] == old['settings'] and inventory['gates'] == old['gates']\n"
+    },
+    "execute": {
+      "prior_sha256": "73070139ca91120f6ad57fcd7da15a4cbab7d322006692e4c8152ad75028cdeb",
+      "candidate_sha256": "0be5967c00bc0b310a47eab49ecd2f5a7bd7bfa3f23609ef2afb35c1d2fbed8e",
+      "diff": "--- execute_cycle007.py\n+++ execute_cycle008.py\n@@ -1,4 +1,4 @@\n-\"\"\"Execute the opt-in mechanical [0,.5,1,1.5,1,.5,0] path; save actual F/T range inputs.\"\"\"\n+\"\"\"Execute the opt-in mechanical [0,.5,1,1.5,1.75,1.5,1,.5,0] path; save actual F/T range inputs.\"\"\"\n from pathlib import Path\n from time import perf_counter\n from datetime import datetime, timezone\n"
+    },
+    "launch": {
+      "prior_sha256": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+      "candidate_sha256": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+      "diff": ""
+    },
+    "private_core": {
+      "prior_sha256": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+      "candidate_sha256": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+      "diff": ""
+    }
+  },
+  "task_sha256": "78292a5469c59ea39157645c0ca8603c676879e829c944057b52d2e7fd4bca6b"
+}

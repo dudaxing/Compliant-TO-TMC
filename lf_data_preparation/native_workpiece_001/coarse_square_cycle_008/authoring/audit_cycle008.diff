@@ -1,0 +1,84 @@
+--- lf_data_preparation/native_workpiece_001/coarse_square_cycle_007/audit_cycle007.py
++++ external/audit_cycle008.py
+@@ -1,4 +1,4 @@
+-"""Fresh exhaustive mechanical-mode reference for the coarse square 1.5 mm cycle.
++"""Fresh exhaustive mechanical-mode reference for the coarse square 1.75 mm cycle.
+ 
+ The private CoreAudit retains the original compensated saved-tensor actions,
+ reference equations and mathematical gates. Only the declared sixteen-field
+@@ -33,7 +33,7 @@
+ CLI_PIN = "01f6f1277d0d596138f024706fca996984222769925679896c4a01e4461fc52b"
+ CONSUMER_PIN = "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe"
+ PRIVATE_CORE_PIN = 'b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5'
+-PREVIOUS_TASK_PIN = '98e2cbd6f39c1b6ac9f4e792b4d0b63ffe2d35409309433c16c41f620312739e'
++PREVIOUS_TASK_PIN = '2d74cda71e66d648fc27ef19a8950ee7b23901ce7cc41ac066c00b566c7f2906'
+ BODY_MODEL_PIN = "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049"
+ PRIVATE_CORE = Path(__file__).with_name("core_audit_mechanical.py")
+ if hashlib.sha256((SCRIPTS/"audit_native_workpiece_cycle.py").read_bytes()).hexdigest() != OLD_CHECKER_SHA:
+@@ -92,8 +92,8 @@
+     "Declared new kernel or saved-tensor consumer differs")
+ from core_audit_mechanical import Audit as ActionCoreAudit, MECHANICAL_AVAILABILITY
+ 
+-BASELINE = "747f685cf6be41c6f67266005ed772d1813d62da"
+-TARGETS = [0., .5, 1., 1.5, 1., .5, 0.]
++BASELINE = "39443b5ad5504101bb8a16d6ac8c6b204c2dce8b"
++TARGETS = [0., .5, 1., 1.5, 1.75, 1.5, 1., .5, 0.]
+ SETTINGS = dict(tolerance=1e-9, constraint_tolerance=1e-10, displacement_scale_floor=1e-6,
+     force_scale_floor_factor=1e-8, max_checks=25, armijo_c=1e-4, max_backtracks=12,
+     max_bisections=4, minimum_increment=.1/16, time_limit_seconds=600.)
+@@ -113,8 +113,8 @@
+ 
+     def checkpoint(self):
+         self.peak = max(self.peak, self.process.memory_info().rss)
+-        require(perf_counter()-STARTED <= self.limit, "Seven-target cycle reference time limit exceeded")
+-        require(self.peak <= RSS_LIMIT, "Seven-target cycle reference sampled RSS exceeds 8 GiB")
++        require(perf_counter()-STARTED <= self.limit, "Nine-target cycle reference time limit exceeded")
++        require(self.peak <= RSS_LIMIT, "Nine-target cycle reference sampled RSS exceeds 8 GiB")
+ 
+     def lifecycle(self, status, error=None):
+         write(self.output/"lifecycle.json", dict(status=status, error=error,
+@@ -132,7 +132,7 @@
+         inventory, receipt = read(inventory_file), read(receipt_file)
+         row = inventory["case"]
+         self.check(inventory["schema_version"] == "native-workpiece-cycle-input-inventory-1.0"
+-            and inventory["baseline_commit"] == BASELINE and self.stage.name == "coarse_square_cycle_007"
++            and inventory["baseline_commit"] == BASELINE and self.stage.name == "coarse_square_cycle_008"
+             and row["alias"] == "gripper_coarse_square" and row["source_alias"] == "gripper_canonical"
+             and row["targets_mm"] == TARGETS and row["geometry_id"] == GEOMETRY_ID
+             and (row["elements"], row["dofs"], row["fixed_DOFs"], row["free_DOFs"]) == (3200, 6642, 376, 6266)
+@@ -179,7 +179,7 @@
+                    "hf_repo/scripts/solve_native_mean.py": CLI_PIN}
+         expected_sources = dict(legacy_sources, **changes)
+         extra_paths = [PRIVATE_CORE, Path(__file__), *(self.stage/name for name in
+-            ("prepare_cycle007.py", "execute_cycle007.py", "launch_cycle007.py"))]
++            ("prepare_cycle008.py", "execute_cycle008.py", "launch_cycle008.py"))]
+         extras = {path.relative_to(self.repo).as_posix() for path in extra_paths}
+         transition = {name: dict(previous_sha256=legacy_sources[name], current_sha256=pin)
+                       for name, pin in changes.items()}
+@@ -262,7 +262,7 @@
+         self.bind(self.repo/row["workpiece_model_file"], BODY_MODEL_PIN)
+         same_arrays(model, npz(self.repo/row["workpiece_model_file"]), "All original 27 fixed-square arrays")
+         task, prior_task = (read(self.repo/row[key]) for key in ("task_file", "prior_task_file"))
+-        previous_task_file = self.repo/"lf_data_preparation/native_workpiece_001/coarse_square_cycle_006/task.json"
++        previous_task_file = self.repo/"lf_data_preparation/native_workpiece_001/coarse_square_cycle_007/task.json"
+         self.bind(previous_task_file, PREVIOUS_TASK_PIN)
+         self.check(inventory["input_bindings"].get(previous_task_file.relative_to(self.repo).as_posix()) == PREVIOUS_TASK_PIN,
+             "Previous mechanical task is not bound by the new input closure")
+@@ -272,7 +272,7 @@
+             path=dict(kind="ordered_cycle", targets_mm=TARGETS))
+         self.check({key: value for key, value in task.items() if key not in descriptive}
+             == {key: value for key, value in expected_task.items() if key not in descriptive},
+-            "Task changed beyond the declared 1.5 mm peak/ordered path and four descriptive keys")
++            "Task changed beyond the declared 1.75 mm peak/ordered path and four descriptive keys")
+         changed = {"schema_version", "task_id", "purpose", "parameter_origin", "description", "input", "workpiece", "path"}
+         self.check(set(task) == set(prior_task)|{"path"}
+             and all(task[key] == prior_task[key] for key in set(prior_task)-changed)
+@@ -545,7 +545,7 @@
+             HP_matrix_columns_exhaustively_checked=False, full_element_and_DOF_coverage=True,
+             gates=GATES, global_scatter_precision=3000, global_scatter_inexact_trap=True,
+             reference_scope="Every actual accepted state and element, exact real-DOF scatter; fixed-lift b_in/max(abs(b_in)), deltaR=0; inherited signed-body/holding projections",
+-            qualification="Only accepted mechanical states of this declared coarse square [0,.5,1,1.5,1,.5,0] cycle under original force/Jv/equilibrium/workpiece gates; no auxiliary-energy, stress-HP, rejected-trial, pressure, clamp, H2/H3, HF5 or all-column qualification",
++            qualification="Only accepted mechanical states of this declared coarse square [0,.5,1,1.5,1.75,1.5,1,.5,0] cycle under original force/Jv/equilibrium/workpiece gates; no auxiliary-energy, stress-HP, rejected-trial, pressure, clamp, H2/H3, HF5 or all-column qualification",
+             response_mode="mechanical", response_contract=MECHANICAL_AVAILABILITY["response_contract"],
+             force_kernel_version=MECHANICAL_AVAILABILITY["force_kernel_version"],
+             auxiliary_material_energy=MECHANICAL_AVAILABILITY["auxiliary_material_energy"],

@@ -1,0 +1,67 @@
+{
+  "schema_version": "native-cycle008-saved-view-author-note-1.0",
+  "status": "author_static_ready_not_executed",
+  "authored_utc": "2026-10-04T06:46:06.001140+00:00",
+  "source_baseline": {
+    "path": "functional_views/native_workpiece_cycle007_20261004/saved_001/plot_cycle007_saved.py",
+    "sha256": "b2e9df6ce359f9bc8458a631c64fbc29995371f3532c06bcdd666808d2ea4814",
+    "lines": 231
+  },
+  "new_author_source": {
+    "filename": "plot_workpiece_cycle008.py",
+    "sha256": "ba14de8876130f8bee0e97c7056092982a499611c717a7dbc0d233be831d46f7",
+    "lines": 231
+  },
+  "exact_identity_replacements": {
+    "coarse_square_cycle_007": 1,
+    "cycle007": 5,
+    "Cycle007": 1
+  },
+  "exact_diff": "--- frozen007\n+++ author008\n@@ -1,4 +1,4 @@\n-\"\"\"Read saved mechanical cycle007 only; accepted production states are unqualified.\r\n+\"\"\"Read saved mechanical cycle008 only; accepted production states are unqualified.\r\n \r\n Install within the repository before use. No force, tangent, solve, HP, action\r\n consumer or boundary measurement is evaluated. The old helper is used only\r\n@@ -47,13 +47,13 @@\n         global PEAK\r\n         info = psutil.Process().memory_info(); PEAK = max(PEAK, info.rss, getattr(info, \"peak_wset\", info.rss))\r\n         if perf_counter()-STARTED > 120 or PEAK > 8*1024**3 or any((p/\"stop_requested.txt\").exists() for p in (stage, output.parent)):\r\n-            raise RuntimeError(\"Saved cycle007 view resource window closed; no retry\")\r\n+            raise RuntimeError(\"Saved cycle008 view resource window closed; no retry\")\r\n     try:\r\n         protocol_file = args.protocol.resolve(); bind(protocol_file)\r\n         protocol = json.loads(protocol_file.read_text(encoding=\"utf-8\"))\r\n         for name, pin in protocol[\"bindings\"].items(): bind(ROOT/name, pin)\r\n         assert pins[Path(__file__).resolve()] == sha(Path(__file__)) and bind(HELPER, HELPER_SHA) == HELPER_SHA\r\n-        spec = importlib.util.spec_from_file_location(\"cycle007_numeric_rows\", HELPER)\r\n+        spec = importlib.util.spec_from_file_location(\"cycle008_numeric_rows\", HELPER)\r\n         helper = importlib.util.module_from_spec(spec); spec.loader.exec_module(helper)\r\n         def read(path, expected=None, descriptor=False):\r\n             bind(path, expected); value = json.loads(path.read_text(encoding=\"utf-8\"))\r\n@@ -69,7 +69,7 @@\n             return arrays\r\n         receipt = read(stage/\"execution_receipt.json\")\r\n         inventory = read(stage/\"input_inventory.json\", receipt[\"input_inventory_sha256\"])\r\n-        assert stage.name == \"coarse_square_cycle_007\" and inventory[\"case\"][\"alias\"] == \"gripper_coarse_square\"\r\n+        assert stage.name == \"coarse_square_cycle_008\" and inventory[\"case\"][\"alias\"] == \"gripper_coarse_square\"\r\n         freeze = read(stage/\"source_freeze.json\", inventory[\"source_freeze_sha256\"])\r\n         assert receipt[\"sources\"] == freeze[\"sources\"] and receipt[\"inputs\"] == inventory[\"input_bindings\"]\r\n         for name, pin in freeze[\"sources\"].items(): bind(stage/\"sources\"/Path(name).name, pin)\r\n@@ -209,11 +209,11 @@\n         counts = result[\"call_counts\"]; text_ax.axis(\"off\")\r\n         lines = [\"PRODUCTION ONLY - UNQUALIFIED\",f\"Status={result['status']}; failure={result['failure']}\",f\"Requested targets={targets} mm\",f\"Actual accepted count={len(rows)}; no deduplication\",f\"Path={path_label}; formal phase={receipt['status']}\",f\"Unload endpoint={result['unload_endpoint_reached']}\",\"Energy NOT EVALUATED; 16 force fields; schema1.2\",f\"F started/completed={counts['force_calls']}/{counts['force_calls_completed']}\",f\"T started/completed={counts['tangent_calls']}/{counts['tangent_calls_completed']}\",f\"COMMON arrows: {arrow_N:.8g} N = 4 display mm\",f\"Peak: #{peak}, d={rows[peak]['d_mm']:g} mm; minJ={rows[peak]['minimum_J']:.8g}\",f\"Last: #{last}, {rows[last]['leg']}, d={rows[last]['d_mm']:g} mm\", \"Every accepted index is retained in curves and CSV.\",\"ON body = negative model holding reaction.\",\"Mirrored upper: (Fx,-Fy); net: (2Fx,0).\",\"2|Fy| is a scalar sum, not full net force.\",\"Unsigned boundary distance is not signed penetration.\",\"Left boundary may be nearest at a corner.\",\"Node-window proxies remain separate CSV quantities.\",\"No pressure/contact/clamp/equilibrium qualification.\"]\r\n         text_ax.text(0,1,\"\\n\".join(fill(line,width=54) for line in lines),va=\"top\",fontsize=9.3,linespacing=1.35)\r\n-        fig.suptitle(\"Cycle007 mechanical saved path: \"+result[\"status\"].upper()+\" / \"+path_label+\" / PRODUCTION ONLY - UNQUALIFIED\\nActual accepted chronology; auxiliary material energy omitted; no fresh reference qualification claimed\",fontsize=16,color=\"#9b1c1c\" if result[\"status\"] == \"failed\" else \"#8a4b08\")\r\n-        checkpoint(); fig.savefig(output/\"cycle007_saved_path.png\",dpi=150); plt.close(fig)\r\n+        fig.suptitle(\"Cycle008 mechanical saved path: \"+result[\"status\"].upper()+\" / \"+path_label+\" / PRODUCTION ONLY - UNQUALIFIED\\nActual accepted chronology; auxiliary material energy omitted; no fresh reference qualification claimed\",fontsize=16,color=\"#9b1c1c\" if result[\"status\"] == \"failed\" else \"#8a4b08\")\r\n+        checkpoint(); fig.savefig(output/\"cycle008_saved_path.png\",dpi=150); plt.close(fig)\r\n         with (output/\"accepted_numeric_states.csv\").open(\"x\",encoding=\"utf-8\",newline=\"\") as stream:\r\n             writer = csv.DictWriter(stream,fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)\r\n-        (output/\"plot_cycle007_saved_frozen.py\").write_bytes(Path(__file__).read_bytes())\r\n+        (output/\"plot_cycle008_saved_frozen.py\").write_bytes(Path(__file__).read_bytes())\r\n         checkpoint(); assert all(sha(p) == pin for p,pin in pins.items()), \"Saved input changed during view\"\r\n         report.update(status=\"rendered_saved_production\",production_status=result[\"status\"],production_phase_status=receipt[\"status\"],failure=result[\"failure\"],accepted_states=len(rows),accepted_d_mm=[r[\"d_mm\"] for r in rows],requested_targets_mm=targets,call_counts=counts,actual_peak_index=peak,last_accepted_index=last,path_display_status=path_label,\r\n             response_contract=availability,full_path_completed=result[\"path_completed\"],initial_and_return_zero_kept_by_index=True,return_zero_present=bool(len(rows)>1 and rows[-1][\"d_mm\"] == targets[-1] and rows[-1][\"original_target_index\"] == len(targets)-1),\r\n",
+  "inverse_whole_file_bytes_equal": true,
+  "inverse_whole_AST_equal": true,
+  "actual_stage_comparators": [
+    "coarse_square_cycle_008"
+  ],
+  "AST_and_source_compile": "pass_no_import",
+  "preserved_contract": [
+    "hf-native-mean-result-1.2 / 16 forces / 27 model fields / energy not evaluated",
+    "Actual accepted-index loops and original_target_index/leg; no statehash deduplication",
+    "Peak argmax(saved d), last=len(actual rows)-1; partial or complete read truthfully",
+    "Actual ×1 plus explicit ×4 displacement-only supplement and original common force scale",
+    "Input/output/support/force ON body, material/Hu/total, mirror and scalar conventions",
+    "Source capsules, actual receipt/inventory/task/protocol and declared relative file roles",
+    "Original pinned pure numerical_rows helper only; no old loader/render call"
+  ],
+  "planned_original_targets_mm": [
+    0,
+    0.5,
+    1,
+    1.5,
+    1.75,
+    1.5,
+    1,
+    0.5,
+    0
+  ],
+  "actual_accepted_states": null,
+  "planned_no_bisection_peak_index": 4,
+  "planned_no_bisection_return_index": 8,
+  "counts_are_planned_only": true,
+  "executed_calls": {
+    "plot": 0,
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "geometry": 0,
+    "consumer": 0,
+    "pytest": 0
+  },
+  "qualification": false,
+  "limitations": [
+    "External author-only source; root will install/freeze a separate saved-view card after real008 terminal result.",
+    "No actual outcome, accepted-state count, reference pass or image legibility is claimed.",
+    "Original007 source/media and formal repository were not modified."
+  ]
+}

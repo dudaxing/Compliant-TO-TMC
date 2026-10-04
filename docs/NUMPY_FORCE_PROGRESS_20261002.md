@@ -1,3 +1,7 @@
+2026-10-04最新：**008的1.75mm峰值已达到，但九目标完整循环因600秒时间限制失败，8接受态保存至卸载.5mm；新HP0，原卡已关闭。** 底/左首次法向射线约.0767107/2.83278mm；第三介质minJ=.0280804，实体minJ=.956236；无已测跨域内部重叠，不能认定有效夹持。见[目标、实现、原因、实际效果/成本/限制与下一步](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_008/RESULTS.md)和[实际峰/最后态与距离图](../functional_views/native_workpiece_cycle008_20261004/partial_region_view_001/render_001/native_region_path.png)。
+
+四张独立保存partial观测/绘图卡各一次通过，不是机械重试或HP资格；未补返回零点。main/origin保持，009仅计划未执行。以下完整保留此前时点原文，当前以本条及新报告为准。
+
 # NumPy 完整力入口：功能进度与参考比较
 
 2026-10-04当前：**新增完整原生Q1跨域内部重叠和固定方体有限底/左面射线诊断，39解析项通过，007保存七态测量完成。** 峰1.5mm底射线=.359398367462mm、左射线=2.698810358664mm，均是有限面端点命中；初/返两面2mm。七态有效、无内部域重叠/模糊；完整包含、自身重叠和有效夹持未证明。旧left unsigned=1.661960666472mm至下方角点，不能当水平间隙。见[整体目标、实现、排查、效果、成本和后续](../functional_views/native_region_geometry_20261004/RESULTS.md)、[×1结构/射线/七态三类距离图](../functional_views/native_region_geometry_20261004/square007_view_003/render_001/native_region_path.png)。
@@ -1974,3 +1978,12 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 图001因识别旧metadata错误role首错关闭、0PNG/CSV；图002独立严格使用真实stage/result/result.json role+同SHA而成功。其zoom文字遮左ray，经实际独立审图后另图003仅移文字，保留002原件，七态CSV逐字节一致。最终[实际×1峰/返结构、两面见证和三类距离](../functional_views/native_region_geometry_20261004/square007_view_003/render_001/native_region_path.png)，[7×28 CSV](../functional_views/native_region_geometry_20261004/square007_view_003/render_001/region_states.csv)；各单次预算测试60/90、几何120/150、图120/150s/8GiB sampled，协同非硬限，首错关闭不重开。所有真实outer/helper/RSS在完整报告。
 
 下一准备独立1.75mm有序循环，保留1.5→1.75及返程真实态；本轮无新1.75/2/3mm solve。不得由现距离线性推定接触或保证收敛，必须根据实际J/quad/域/面和原fresh门继续取舍。细/圆、自由工件、压力/有效夹持、stress HP/机械能量、全列HP、H2/H3/HF5/ADJIT与完整HF仍待实现或资格化。main唯一主干，origin固定Compliant-TO-TMC；恢复只核文件身份，后续发布receipt给出实际commit/manifest。
+
+
+## native-workpiece-cycle008-partial-20261004
+
+本轮从零独立探索1.75mm，199pins/68sources/53inputs，27模型数组不变；机械实现与门未改。63/63F、36/36T、1solve，time_limit而非算术范围异常；615.8091694s helper/616.8831691s outer，八态保存，返回0未完成、新HP0。
+
+四个新保存partial卡各一次通过、16次两种高层几何调用、绘图几何0；原39测试只来源复用。强压缩集中于介质，底距离.0767107mm，左射线2.83278mm；工件Fy=.003789285781N是生产量，不授接触/夹持/压力资格。
+
+预算预测不足已记录；下一近期先按真实调用成本选择另一明确完整路径采样任务，原数学门/600秒不变，不把旧008改pass。整体HF目标仍未完成。详细报告及实际源/输出/失败在本页最新入口，公开恢复为文件身份而非数值复算。

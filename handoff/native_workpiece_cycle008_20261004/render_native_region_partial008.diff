@@ -1,0 +1,93 @@
+--- external/render_native_region_path008.py
++++ external/render_native_region_partial008.py
+@@ -99,14 +99,18 @@
+     if len(model) != 27:
+         raise ValueError("Expected the original fixed-workpiece model's 27 fields")
+     count = len(result["states"])
+-    if (count < 2 or count != result["accepted_states"] or result["status"] != "success" or
+-            result["path_completed"] is not True or result["unload_endpoint_reached"] is not True or
+-            result["targets_mm"][-1] != 0. or result["states"][-1]["d"] != 0. or
++    if (count < 2 or count != result["accepted_states"] or result["status"] != "failed" or
++            (result["failure"] or {}).get("code") != "time_limit" or
++            result["production_converged"] is not False or result["path_completed"] is not False or
++            result["loading_peak_reached"] is not True or result["unload_endpoint_reached"] is not False or
++            result["task_target_executed"] is not False or result["targets_mm"][-1] != 0. or
++            result["states"][-1]["d"] <= 0. or result["reached_displacement"] != result["states"][-1]["d"] or
++            measurement["production_status"] != result["status"] or comparison["production_status"] != result["status"] or
+             measurement["declared_accepted_states"] != count or
+             len(measurement["accepted_states"]) != count or len(comparison["accepted_states"]) != count or
+             measurement["geometry_calls_started"] != count or measurement["geometry_calls_completed"] != count or
+             any(row["geometry"]["geometry_valid"] is not True for row in measurement["accepted_states"])):
+-        raise ValueError("Expected a complete zero-return path and all actual saved measurement states")
++        raise ValueError("Expected a peak-reached time-limit partial path and all actual saved measurement states")
+     legacy_view_file = args.saved_view.resolve()
+     legacy = read(legacy_view_file, "saved_view/view_metadata.json")
+     if legacy["accepted_states"] != count or legacy["accepted_d_mm"] != [state["d"] for state in result["states"]]:
+@@ -172,7 +176,7 @@
+     conn, solid, body_cells = model["connectivity"], model["solid"], model["workpiece_cells"]
+     cut = metadata["model_extent"]["symmetry_axis"]["offset_mm"]
+ 
+-    def structure(ax, index, zoom_face=None):
++    def structure(ax, index, zoom_face=None, title_role=None):
+         actual, geometry = coordinates[index], measurement["accepted_states"][index]["geometry"]
+         ax.add_collection(PolyCollection(model["coordinates"][conn[solid]], facecolors="#d1d5db", edgecolors="none", alpha=.5))
+         ax.add_collection(PolyCollection(actual[conn[solid]], facecolors="#334155", edgecolors="#64748b", linewidths=.2))
+@@ -193,7 +197,7 @@
+                     shown_points.extend((p, q))
+         ax.axhline(cut, ls="--", lw=1., color="#dc2626", label="mathematical y=40 cut")
+         if zoom_face is None:
+-            ax.set(xlim=(-1, 82), ylim=(-1, 42), title=f"{'Peak' if index == peak else 'Return'} index {index}: d={rows[index]['d_mm']:g} mm | actual ×1")
++            ax.set(xlim=(-1, 82), ylim=(-1, 42), title=f"{title_role or ('Peak' if index == peak else 'Last accepted')} index {index}: d={rows[index]['d_mm']:g} mm | actual ×1")
+         else:
+             points = np.asarray(shown_points)
+             lower, upper = points.min(axis=0) - 1., points.max(axis=0) + 1.
+@@ -212,7 +216,7 @@
+                 bbox=dict(facecolor="white", alpha=.9, edgecolor="none"))
+ 
+     structure(axes[0, 0], peak)
+-    structure(axes[0, 1], last)
++    structure(axes[0, 1], last, title_role="Last accepted")
+     structure(axes[1, 0], peak, "bottom")
+     structure(axes[1, 1], peak, "left")
+     for ax, name in zip(axes[2], ("bottom", "left")):
+@@ -227,9 +231,10 @@
+         ax.grid(alpha=.2)
+         ax.legend(fontsize=8)
+     axes[0, 0].legend(loc="upper left", fontsize=8)
+-    fig.suptitle("Saved Q1 regions and finite-face rays | no geometry remeasurement in this view", fontsize=16)
++    fig.suptitle("FAILED / PARTIAL saved Q1 regions and finite-face rays | no remeasurement", fontsize=16)
+     no_hits = {name: [row["accepted_index"] for row in rows if row[name + "_no_hit"]] for name in ("bottom", "left")}
+-    fig.supxlabel("Cut closure is mathematical, not a contact face. Rays/unsigned distances/proxies are distinct; null rays are missing curve points.\n"
++    fig.supxlabel(f"Time-limit partial path: zero return was not accepted; last accepted d={rows[last]['d_mm']:g} mm.\n"
++                  "Cut closure is mathematical, not a contact face. Rays/unsigned distances/proxies are distinct; null rays are missing curve points.\n"
+                   "No signed penetration, complete containment, self-overlap, contact pressure or clamping qualification. No force arrows. " + str(no_hits), fontsize=9)
+     png = output / "native_region_path.png"
+     fig.savefig(png, dpi=160)
+@@ -248,8 +253,10 @@
+     if any(name == "hf_eval" or name.startswith("hf_eval.") for name in sys.modules):
+         raise ValueError("Saved renderer must not import hf_eval APIs")
+     checkpoint()
+-    view = dict(schema_version="native-workpiece-region-saved-view-1.0", status="rendered_saved_geometry",
+-        actual_peak_index=peak, return_index=last, accepted_states=rows, input_files_sha256=file_roles,
++    view = dict(schema_version="native-workpiece-region-partial-saved-view-1.0", status="rendered_saved_partial_geometry",
++        actual_peak_index=peak, last_accepted_index=last, last_accepted_d_mm=rows[last]["d_mm"],
++        production_status=result["status"], production_failure=result["failure"], path_completed=False,
++        unload_endpoint_reached=False, accepted_states=rows, input_files_sha256=file_roles,
+         inputs_and_sources_unchanged=True, source_sha256=own_sha,
+         outputs_sha256={path.name: file_sha(path) for path in (png, csv_file, frozen_source)},
+         display=dict(actual_coordinate_scale=1, normal_witness_arrows="Saved body-to-edge ray points; geometric direction, not force",
+@@ -259,12 +266,12 @@
+         new_calls={name: 0 for name in ("geometry_measurement", "force", "tangent", "consumer", "assembly", "solver", "HP")},
+         call_count_basis="Only saved JSON/NPZ/CSV and Matplotlib; no hf_eval imports or API calls",
+         identity_scope="Archive/file SHA and saved stateSHA/index checks; per-field and canonical state identities were verified by the bound measurement, not re-evaluated here",
+-        qualification=False, scope="New saved-region/face diagnostics displayed alongside bound legacy unsigned distances and node proxies; no new physics/contact qualification",
++        qualification=False, scope="Failed/time-limit partial path saved-region/face diagnostics alongside bound unsigned distances and node proxies; no zero-return, new mechanical/HP/contact qualification",
+         legacy_view_scope="Only metadata path identity and its declared numerical CSV were bound; old PNG/sources/reference were not re-audited")
+     with (output / "view.json").open("x", encoding="utf-8") as stream:
+         json.dump(view, stream, indent=2, ensure_ascii=False, allow_nan=False)
+         stream.write("\n")
+-    print(json.dumps(dict(status=view["status"], accepted_states=count, actual_peak_index=peak, return_index=last, output=str(output))))
++    print(json.dumps(dict(status=view["status"], accepted_states=count, actual_peak_index=peak, last_accepted_index=last, last_accepted_d_mm=rows[last]["d_mm"], output=str(output))))
+     return 0
+ 
+ 
