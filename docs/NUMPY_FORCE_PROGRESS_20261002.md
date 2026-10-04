@@ -1,5 +1,14 @@
 # NumPy 完整力入口：功能进度与参考比较
 
+2026-10-04当前：**可选机械模式已接入NumPy平均位移求解器；新的固定对称半方形工件0→0.5→0 mm完整加载—卸载成功，三个接受态的6次新HP80/120及58,197项原门检查通过。** 接口6项实际测试通过；本次生产17/17力、10/10切线、1求解，213.73秒。峰值R=.106253247986 N、自由输出+y=.575755712293 mm、minJ=.735764774113；卸载返回近初始。真实外边界距2→1.471935964045→2 mm，均无交叉；仍未证明有效夹持。见[目标、实现、原因、效果及全部限制](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/RESULTS.md)、[真实结构/力/变形图](../functional_views/native_workpiece_cycle004_20261004/saved_001/render_001/cycle004_saved_path.png)、[实际边界距离](../functional_views/native_workpiece_cycle004_20261004/boundary_saved_001/RESULTS.md)。
+
+默认complete响应保持原17字段；新response_mode=mechanical/schema1.2保存16力字段/3切线/full CSC，并明确材料能量not_evaluated/qualified:false/field_present:false。原控制器/CI/T/B52/收敛门未放宽。旧003卸载失败及未捕获T25问题保留；新三态资格限声明task/source的力、PORT方向作用、组装和平衡，不包含能量/应力HP/全列切线/一般接触。图只读生产所以标题仍PRODUCTION ONLY UNQUALIFIED；fresh参考资格另读本报告，不回填原生产flags。
+
+下一步同一粗方形固定工件的新1 mm递增加载与卸载，根据实际收敛/minJ/距离/费用再推进2/3 mm；圆形r8/细方/细圆模型已构建但对应平衡未执行。压力、有效夹持判据、signed gap/包容、自由工件、H2/H3/HF5及完整AD/JIT仍待完成。整体独立HF目标未完成，后续在main，origin固定https://github.com/dudaxing/Compliant-TO-TMC.git；公有恢复只核对文件身份。
+
+以下保留先前阶段的原始记录。当前状态以上述新结论及执行记录末节为准，旧“下一步/尚未实现”只代表该记录当时状态。
+
+
 2026-10-04当前：**显式NumPy机械量入口与force-only组装器已按原验证字节合入main；原F16三力/缓存切线及fresh HP80/120通过原门。** 32/32测试、19200局部＋9全局门全部通过，614400个局部T系数的完整CSC组装身份核同；最大归一误差7.24336e-15，HP80/120最坏相互误差1.21169e-52。新core d5f7新增可选机械职责，默认完整NumPy/JAX公式及能量要求保留；能量明确not_evaluated/qualifiedfalse，P/S仅finite无HP资格。见[目标、实现、为何拆分、实际效果与后续](../lf_data_preparation/native_workpiece_001/mechanical_only_candidate_001/RESULTS.md)与[保存三力和方向力变化率图](../functional_views/mechanical_F16_20261004/saved_001/render_001/mechanical_F16_qualified_fields.png)。
 
 旧Horner192 001测试收集前失败、002的25例通过但完整F16失败、独立诊断48IP/35能量NaN均保持原记录；1d18候选未合入。新单态F16不是接受平衡，不解决尚未捕获的T25输入，也不转移到旧循环资格。粗方[0,.5,0]mm循环003仍仅2接受态、0新HP、卸载time_limit失败；见[真实0.5mm峰值与旧失败](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/RESULTS.md)。
@@ -1818,3 +1827,21 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 完整可复核记录见[新机械量实现及结果](../lf_data_preparation/native_workpiece_001/mechanical_only_candidate_001/RESULTS.md)、[辅助能量诊断](../lf_data_preparation/native_workpiece_001/horner192_range_diagnostic_001/RESULTS.md)、[诊断位置图](../functional_views/horner192_diagnostic_20261004/saved_002/render_001/horner192_raw_diagnostic.png)、[新机械量参考图](../functional_views/mechanical_F16_20261004/saved_001/render_001/mechanical_F16_qualified_fields.png)。旧真实0.5mm变形/力图[保留](../functional_views/native_workpiece_cycle003_20261004/failure_saved_001/render_001/cycle003_failure.png)，其2态0HP、卸载失败不因单F16比较获恢复。
 
 下一仅详细推进native_mean新可选机械合同：明确省能量字段集/可用性/source版本，复用原mean控制器、Armijo/KKT与缓存切线；先小闭环，再单独新0.5mm加载—卸载及新接受态HP。尚未接入或运行，T25输入未捕获不能预判修复。按新结果再1/2/3mm、细方/圆形；一般接触压力、自由工件、几何signed gap/交叉/包容、H2/H3/HF5与AD/JIT保持后续能力依赖路线。旧完整能量如需使用，须单独实现/参考资格，不能用机械资格替代。
+
+<a id="native-mean-mechanical-cycle004-20261004"></a>
+
+## 2026-10-04：机械模式平均位移集成及真实0.5 mm完整循环
+
+整体独立HF目标延续：普通LF几何→独立非线性力/切线/平衡→明确夹持与卸载任务→有参考、可看见的物理效果；不运行LF优化/MPM。为解决旧卸载中辅助材料能量支持域阻断已验证机械量的问题，只增加显式可选机械合同，保持默认完整响应、原控制器/CI/T/B52、原残差/约束/支持门。能量未求值且明确不可用，不以0/NaN代替，不降门/捕错fallback。
+
+完成两步：独立接口卡实际6/6测试通过（旧完整4+新机械2；含真实小循环及异常partial/bitwise rollback/保存不重算）；新coarse_square_cycle_004同一a2d6/27数组模型与原[0,.5,0]目标，真实3态完整通过，17/17F、10/10T、1solver、无range异常/拒绝/二分，生产outer213.7339334秒。起始26d7/峰76e4/返回9db不同index；返回为旧F16输入的新实际成功与接受，不挪用旧资格。旧003仍失败；新路径10次T全部完成，旧T25输入未捕获，无法对其原失败状态作对应或修复结论。
+
+新6HP80/120、58,197项原门全部通过：全部3200单元/6642DOF，57600局部+27全局原门及原结构/平衡/工件投影；每态204800个局部总T系数到非对称CSC组装核对（三态合计614400），声明PORT单方向而非全列HP。reference outer66.1238177秒，原172pins不变。生产1e-9/独立残差1e-8/均值1e-10/平衡1e-6/总力1e-11/总方向1e-10/HP互检1e-40等原门与分母保持。能量、应力HP、全列切线/一般支持域/旧异常输入/压力/夹持/H2/H3/HF5/AD/JIT未授予资格。
+
+峰值R=.10625324798554 N、qout=.57575571229331 mm、minJ=.73576477411298；下半体总(Fx,Fy)=(-.000150412413805,+.000134183313564) N，与材料和Hu之和相符。返回R=-4.80403965e-30 N、qout=3.15775474e-29 mm、最大绝对位移分量=3.40787911e-28 mm。镜像净力与双侧法向标量分开，微小预接触第三介质力不等同有效夹持。
+
+新保存图一次生成3300×3150及3×51CSV，实际×1/标注4×、共同N箭头/真实mm色标、求解顺序，0新F/T/consumer/solve/HP/scatter/测距；独立审图通过。查看器只读生产原flags，所以标题PRODUCTION ONLY UNQUALIFIED；新fresh机械资格在独立报告中。新保存边界测量3次，0新力学：unsigned Q1外边界距2→1.4719359640452387→2 mm，全部无交叉/near-touch、containment未测；峰left1.9022564574612992 mm，不能与图中node-window代理混用。效果为夹持前缩距及卸载恢复，尚未闭隙。
+
+完整目标/实现/原因/效果/资源与作者准备SyntaxError、错误提前依赖launcher等说明见[cycle004 RESULTS](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/RESULTS.md)，[接口卡](../lf_data_preparation/native_workpiece_001/native_mean_mechanical_integration_001/RESULTS.md)、[实际图](../functional_views/native_workpiece_cycle004_20261004/saved_001/render_001/cycle004_saved_path.png)、[边界记录](../functional_views/native_workpiece_cycle004_20261004/boundary_saved_001/RESULTS.md)。所有正式阶段一次terminal exit0，无重试/force/延长。旧记录原body bytes保留，不把旧失败改成pass。
+
+下一新卡同一粗方固定半体1 mm探索，优先ordered目标0→.5→1→.5→0，在调用前固定新协议与预算，再逐实际接受态fresh参考/显示/测距。根据新结果决定2/3 mm，圆/细工况另行资格；不线性外推接触阈值、不把已构建模型称已求解或不同LF设计称网格收敛。更大变形与多工况是用户授权方向，当前无1/2/3 mm执行结果。全部上传main并作公有恢复文件核对；whole goal保持进行中。

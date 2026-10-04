@@ -1,0 +1,119 @@
+{
+  "schema_version": "native-workpiece-mechanical-cycle-static-math-review-1.0",
+  "status": "static_pass",
+  "qualification": false,
+  "blocking_issues": [],
+  "scope": "External author source only; no importer, constitutive F/T, tensor consumer, solver, HP, constructor, tests or plotting executed by this review",
+  "files": {
+    "core_audit_mechanical.py": {
+      "sha256": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+      "lines": 551
+    },
+    "audit_cycle004.py": {
+      "sha256": "13271a24a952846c5f09b9606476e74eb3a151a35158612d8acd0aaaef2cb27b",
+      "lines": 583
+    },
+    "execute_cycle004.py": {
+      "sha256": "d0f901e3ee915604a60a6a99e2ec67f94323df39ed0f185fdb2edb014a073a81",
+      "lines": 236
+    }
+  },
+  "parent_prepare": {
+    "path": "D:/hf-native-workpiece-horner192-author-20261004/prepare_cycle004.py",
+    "sha256": "07e7bcfc869d0e26a7e4ab756848b7f37f64736119708b41d19dc25f99b8c4e1"
+  },
+  "original_private_core": {
+    "path": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/core_audit.py",
+    "sha256": "f81e4297948b65d02201fe3a67f0f0d9eda9af30c2f64c23c1b513a685557000"
+  },
+  "original_cycle_loader": {
+    "path": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/audit_cycle.py",
+    "sha256": "53f3849e8db88f7f4d7d68e6f8d793c9304db6789948fb28ed59ee5827e239aa"
+  },
+  "original_full_core": {
+    "path": "hf_repo/scripts/audit_native_mean.py",
+    "sha256": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678"
+  },
+  "proofs": {
+    "expected_private_source_generator_exact": true,
+    "private_whole_AST_reverse_exact": true,
+    "reverse_only": [
+      "mechanical availability constant and per-state metadata check",
+      "material_energy shape removed (17 to16); force-field error label",
+      "scope docstring"
+    ],
+    "compensated_consumer_and_original_equations_GATES_HP_CSC_KKT_unchanged": true,
+    "counter_method_AST_identical": true,
+    "first_force_range_observer_method_AST_identical": true,
+    "workpiece_projections": "Inherited unmodified aa86 WorkpieceCycleAudit.workpiece_checks",
+    "old63_capsules_all_SHA_match": true,
+    "closure_expected": 68,
+    "unique_flat_basenames": true,
+    "actual_live_transitions": {
+      "hf_repo/scripts/solve_native_mean.py": "01f6f1277d0d596138f024706fca996984222769925679896c4a01e4461fc52b",
+      "hf_repo/src/hf_eval/native_mean.py": "205572334129ec4d7aaf9fdd5838935b450fce929e6b2ea18844308f85ae8fd3",
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+    }
+  },
+  "identity": {
+    "stage": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_004",
+    "baseline_commit": "380b28d1211f084d1482ef6b28b853464f26d78a",
+    "result_schema": "hf-native-mean-result-1.2",
+    "response_contract": "split-numpy-mechanical-1.0",
+    "targets_mm": [
+      0.0,
+      0.5,
+      0.0
+    ],
+    "forces_fields": 16,
+    "model_fields": 27,
+    "original_21_intrinsic_and_all27_model_arrays_exact": true,
+    "elements": 3200,
+    "DOFs": 6642,
+    "fixed_DOFs": 376,
+    "free_DOFs": 6266,
+    "minimum_increment_mm": 0.00625,
+    "original_settings_except_no_changes": true,
+    "reference_seconds": 240,
+    "reference_outer_seconds": 300,
+    "sampled_RSS_bytes": 8589934592
+  },
+  "prior_unit_receipt": {
+    "path": "lf_data_preparation/native_workpiece_001/native_mean_mechanical_integration_001/unit_tests_result.json",
+    "sha256": "5521fa560965831b9a4d47dddc3363e03d0585b8c2c5d5db1c12fa58cdbe208a",
+    "status": "pass"
+  },
+  "reference_scope": {
+    "fresh_HP": "80 and120 for every actual accepted state, including genuine bisections; 2*N",
+    "local_and_global_three_force_and_one_direction_gates": "Original unchanged full coverage and scale/floor rules",
+    "energy": "Absent candidate field; analytic HP energy remains raw archive only, unqualified",
+    "stress": "Finite saved stress required; no independent stress HP qualification",
+    "whole_matrix_columns_independently_HP_checked": false,
+    "pressure_qualified": false,
+    "clamp_qualified": false
+  },
+  "observer_contract": {
+    "force": "Original strict base/trial accounting; only recorded range rejection immediately followed by half factor may explain incomplete F",
+    "tangent": "All T starts/completions/Newton history must agree; observed local returns and API CSC completions equal on admitted success",
+    "first_tangent_range_input": "Must be None and directory absent for this unchanged all-T-complete reference precondition",
+    "first_tangent_output": "Not part of producer contract; not required by loader",
+    "restoration": "Both force/tangent same original function instances",
+    "observation_calls_are_transparent": "Original force tuple and tangent dict returned; same errors bare-rethrown; no extra evaluation"
+  },
+  "restrictions": [
+    "No qualification before fresh successful production and full new reference run",
+    "A recovered incomplete tangent/CSC evaluation is not automatically admitted; requires a separate explicit accounting decision",
+    "Rejected range trial input remains diagnostic only, not independently qualified",
+    "No transferred old rejected-state, failed-cycle, auxiliary-energy, T25, H2/H3, HF5, pressure, clamp or all-column qualification"
+  ],
+  "new_review_numerical_calls": {
+    "force": 0,
+    "tangent": 0,
+    "consumer": 0,
+    "HP": 0,
+    "solver": 0,
+    "constructor": 0,
+    "tests": 0,
+    "plot": 0
+  }
+}
