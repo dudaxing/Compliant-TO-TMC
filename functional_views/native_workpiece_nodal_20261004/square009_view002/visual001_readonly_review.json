@@ -1,0 +1,159 @@
+{
+  "schema_version": "saved-nodal-force-visual-readonly-review-1.0",
+  "status": "render_completed_with_visual_defect",
+  "scope": "Actual PNG review and saved CSV zero classification only; no rerender or mechanics",
+  "original_card": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_workpiece_nodal_20261004/square009_001",
+  "original_renderer_sha256": "46a4babf1a199b9d0b5c0cc194b122bc52fc928c448e47448815b30e9d9a26f0",
+  "original_protocol_sha256": "8e78e7014b579edd10d532f1250803c72385a05c691a59b7a543b9b142e7ad23",
+  "original_render_launch": {
+    "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_workpiece_nodal_20261004/square009_001/render_launch.json",
+    "sha256": "f8f5a2a818344ad6988bbe94a727f02a90839432e4fde1374a3d8d45f67cef3b",
+    "status": "pass",
+    "invocations": 1,
+    "exit_code": 0,
+    "elapsed_seconds": 8.196124200010672,
+    "peak_sampled_RSS_bytes": null
+  },
+  "observation_summary": {
+    "sha256": "a9db48cb4574e4b33ea0b3528039b792992f0b5fdce3e7e3aa93cac78e1f65d2",
+    "status": "pass",
+    "observations_started": 9,
+    "observations_completed": 9
+  },
+  "nodal_csv_sha256": "bb2d770c9579a63fbafb264786a941c0d6cd9667454ca0941abf90b0046dd848",
+  "key_states_sha256": "82da20de69bc7f742fbbebbadb24a7f8ee7db82af86675a61618cd1ec22f9ddc",
+  "images": [
+    {
+      "accepted_index": 0,
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_workpiece_nodal_20261004/square009_001/render_001/nodes_state_000.png",
+      "sha256": "8036af635d4929657ce15aa29f53237776d05ec550b35bdbb88fa2718260cc0a",
+      "width": 1950,
+      "height": 754,
+      "actually_viewed": true
+    },
+    {
+      "accepted_index": 4,
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_workpiece_nodal_20261004/square009_001/render_001/nodes_state_004.png",
+      "sha256": "964c6de94f149e3c261b8123240d7f69df75ab3ea490ae7780657ded39ca2399",
+      "width": 1950,
+      "height": 754,
+      "actually_viewed": true
+    },
+    {
+      "accepted_index": 8,
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/functional_views/native_workpiece_nodal_20261004/square009_001/render_001/nodes_state_008.png",
+      "sha256": "00be554b771eddc5aec49158d512d76c2095af182846570818394b197e5fe9bb",
+      "width": 1950,
+      "height": 754,
+      "actually_viewed": true
+    }
+  ],
+  "saved_zero_classification": [
+    {
+      "accepted_index": 0,
+      "nodes": 153,
+      "groups": {
+        "physical_only": 31,
+        "cut_only": 15,
+        "physical_and_cut": 2,
+        "interior": 105
+      },
+      "exact_zero_vectors": {
+        "total": 153,
+        "material": 153,
+        "regularization": 153
+      },
+      "exact_zero_interior_vectors": {
+        "total": 105,
+        "material": 105,
+        "regularization": 105
+      }
+    },
+    {
+      "accepted_index": 4,
+      "nodes": 153,
+      "groups": {
+        "physical_only": 31,
+        "cut_only": 15,
+        "physical_and_cut": 2,
+        "interior": 105
+      },
+      "exact_zero_vectors": {
+        "total": 120,
+        "material": 120,
+        "regularization": 120
+      },
+      "exact_zero_interior_vectors": {
+        "total": 105,
+        "material": 105,
+        "regularization": 105
+      }
+    },
+    {
+      "accepted_index": 8,
+      "nodes": 153,
+      "groups": {
+        "physical_only": 31,
+        "cut_only": 15,
+        "physical_and_cut": 2,
+        "interior": 105
+      },
+      "exact_zero_vectors": {
+        "total": 120,
+        "material": 120,
+        "regularization": 120
+      },
+      "exact_zero_interior_vectors": {
+        "total": 105,
+        "material": 105,
+        "regularization": 105
+      }
+    }
+  ],
+  "visual_findings": [
+    "Initial state shows fixed right-pointing arrowheads at all 153 body nodes although each saved component vector is exactly zero.",
+    "Peak state shows false interior arrowheads: all 105 interior vectors are exactly zero in each component; 120 of 153 body vectors per component are zero.",
+    "Return state also has fixed arrowheads for zero/tiny vectors; these are misleading under the declared common all-path N scale.",
+    "Titles, x1 geometry, ON-body sign, cut/shared-node markings and derived-moment/no-pressure scope are otherwise readable and accurate."
+  ],
+  "cause": {
+    "matplotlib_quiver_source": "D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Lib/site-packages/matplotlib/quiver.py",
+    "sha256": "831fa65f8044d8357512345031347fde3a9933c3438759e950e8b37400b2e224",
+    "source_lines": [
+      719,
+      727,
+      731,
+      744,
+      747,
+      749,
+      750,
+      760
+    ],
+    "explanation": "minshaft=0 makes minsh=0 and length<minsh false for zero. The normal arrow vertices keep nonzero head Y offsets independent of length. With minshaft=1, minsh=headlength>0; zero uses the short shape with shrink=0 and all vertices collapse. minlength=0 avoids replacement by a finite dot. Tiny arrows shrink proportionally rather than receiving a fixed head."
+  },
+  "candidate_static": {
+    "path": "D:/hf-workpiece-nodal-force001-author-20261004/plot_saved_nodal_forces002.py",
+    "sha256": "778c08625353bfcb0273d17c134db8e90c6eb6a8302a551acdae43477c1c2edc",
+    "lines": 126,
+    "only_change": "quiver minshaft 0 -> 1; minlength remains 0",
+    "exact_diff": "--- square009_001/plot_saved_nodal_forces.py\n+++ external/plot_saved_nodal_forces002.py\n@@ -83,7 +83,7 @@\n             ax.scatter(*fixed_xy[mask].T,s=6,c=\"#8753a4\",zorder=4)\n             force = vectors[name]\n             arrows = ax.quiver(*fixed_xy.T,*force.T,color=color,angles=\"xy\",scale_units=\"xy\",scale=1./scale,\n-                               width=.005,headwidth=3.5,headlength=4.5,minlength=0,minshaft=0)\n+                               width=.005,headwidth=3.5,headlength=4.5,minlength=0,minshaft=1)\n             ax.quiverkey(arrows,.70,.05,key,f\"{key:g} N\",labelpos=\"E\",coordinates=\"axes\")\n             fx,fy = observed[\"summary\"][\"force_on_lower_body_N\"][name]\n             moment = observed[\"summary\"][\"moment_about_origin_Nmm\"][name]\n",
+    "byte_inverse_equals_original": true,
+    "AST_inverse_equals_original": true,
+    "source_compile_only": true,
+    "observations_and_csv_unchanged": true,
+    "common_N_scale_unchanged": true,
+    "states_nodes_and_signs_unchanged": true,
+    "planned_resource_scope": {
+      "helper_seconds": 120,
+      "outer_seconds": 150,
+      "sampled_RSS_bytes": 8589934592
+    },
+    "render_executed": false,
+    "visual_fix_actual_verified": false
+  },
+  "original_artifacts_preserved": true,
+  "new_force_tangent_consumer_HP_assembly_solver_calls": 0,
+  "new_geometry_measurements": 0,
+  "new_render_calls": 0,
+  "qualification": "No change to saved mechanical/HP evidence. The old render is not visually qualified for vector magnitude; the new literal-only display candidate awaits its separate one-time render."
+}

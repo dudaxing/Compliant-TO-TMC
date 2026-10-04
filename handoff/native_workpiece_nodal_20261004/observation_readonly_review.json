@@ -1,0 +1,1347 @@
+{
+  "schema_version": "saved-nodal-observation-readonly-review-1.0",
+  "status": "pass",
+  "stage": "functional_views/native_workpiece_nodal_20261004/square009_001",
+  "scope": "Read-only saved CSV vs binary64 global nodal vectors, saved fsum resultants/moments, existing HP body checks. No production API imports or calls.",
+  "calls_performed_by_review": {
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "geometry": 0,
+    "node_observation": 0,
+    "pytest": 0
+  },
+  "actual_cards": {
+    "tests": {
+      "status": "pass",
+      "invocations": 1,
+      "exit_code": 0,
+      "elapsed_seconds": 4.358203899988439,
+      "peak_sampled_tree_RSS_bytes": 62922752,
+      "outer_seconds": 150,
+      "sampled_RSS_limit_bytes": 8589934592,
+      "stop_reason": null,
+      "all_bindings_unchanged": true,
+      "budget_mode": "Cooperative child limits and sampled tree RSS; no OS hard memory cap or force termination",
+      "junit_tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "helper_elapsed_seconds": 3.452323300007265
+    },
+    "observation": {
+      "status": "pass",
+      "invocations": 1,
+      "exit_code": 0,
+      "elapsed_seconds": 0.9873161000432447,
+      "peak_sampled_tree_RSS_bytes": 53002240,
+      "outer_seconds": 150,
+      "sampled_RSS_limit_bytes": 8589934592,
+      "stop_reason": null,
+      "all_bindings_unchanged": true,
+      "budget_mode": "Cooperative child limits and sampled tree RSS; no OS hard memory cap or force termination",
+      "helper_elapsed_seconds": 0.5172996000037529,
+      "observations_started": 9,
+      "observations_completed": 9
+    }
+  },
+  "identity": {
+    "csv_rows": 1377,
+    "csv_columns": 15,
+    "column_names": [
+      "accepted_index",
+      "original_target_index",
+      "leg",
+      "d_mm",
+      "state_sha256",
+      "node_id",
+      "x_mm",
+      "y_mm",
+      "group",
+      "total_Fx_N",
+      "total_Fy_N",
+      "material_Fx_N",
+      "material_Fy_N",
+      "regularization_Fx_N",
+      "regularization_Fy_N"
+    ],
+    "actual_states": 9,
+    "nodes_per_state": 153,
+    "body_DOFs": 306,
+    "merged_fixed_DOFs": 376,
+    "model_fields": 27,
+    "source_input_role_bindings_checked": 36,
+    "source_snapshots_checked": 5,
+    "selected_files_checked_before_after": 57,
+    "selected_binding_bytes_unchanged": true,
+    "full_protocol_674_binding_rehash_performed": false,
+    "all_index_original_index_leg_d_stateSHA_match": true,
+    "body_lift_fluctuation_exact_zero": true,
+    "CSV_positions_equal_saved_fixed_body_coordinates": true
+  },
+  "consistency": {
+    "CSV_signed_force_scalars_exact": 8262,
+    "body_total_minus_holding_scalars_exact": 2754,
+    "sign": "ON lower fixed body = negative saved global internal weak force; holding ON model is opposite.",
+    "all_three_component_fsum_equal_original_cached_body_resultants": true,
+    "ordinary_moments_equal_saved_observation": true,
+    "groups": {
+      "physical_only": 31,
+      "cut_only": 15,
+      "physical_and_cut": 2,
+      "interior": 105
+    },
+    "body_edges": {
+      "closed": 48,
+      "physical": 32,
+      "mathematical_symmetry_cut": 16
+    },
+    "all_cut_only_interior_forces_exact_zero": true,
+    "two_shared_top_corners_counted_once": true,
+    "maximum_group_force_roundoff_N": 4.336808689942018e-19,
+    "maximum_total_minus_material_minus_Hu_nodal_error_N": 4.336808689942018e-19,
+    "maximum_group_moment_roundoff_Nmm": 6.938893903907228e-18,
+    "group_force_roundoff_within_saved_8eps_absolute_sum_bounds": true
+  },
+  "scientific_findings": {
+    "peak_index": 4,
+    "peak_d_mm": 1.75,
+    "peak_total_on_lower_body_N": [
+      -0.0007910899872955321,
+      0.0037892857813192618
+    ],
+    "peak_Hu_net_N": [
+      -0.00047733486709937006,
+      0.0014462246034984065
+    ],
+    "peak_Hu_sum_nodal_norms_N": 0.021623541615575757,
+    "peak_Hu_sum_norms_over_net_norm": 14.198343294606799,
+    "peak_Hu_signed_y_sums": {
+      "positive_sum_N": 0.011392229152024645,
+      "negative_sum_N": -0.009946004548526238,
+      "absolute_sum_N": 0.021338233700550883,
+      "absolute_sum_over_abs_net": 14.754439696941855
+    },
+    "peak_Hu_maximum_nodal_norm_N": 0.011403612836812722,
+    "peak_Hu_maximum_node_id": 2670,
+    "peak_Hu_share_of_total_net_y": 0.38166152857304286,
+    "peak_Hu_share_of_total_ordinary_moment": 0.8065972419907963,
+    "peak_total_ordinary_moment_about_70_40_Nmm": 0.06579467316655178,
+    "full_mirror_net_force_N": [
+      -0.0015821799745910643,
+      0.0
+    ],
+    "two_side_normal_magnitude_sum_N": 0.0075785715626385235,
+    "return_index": 8,
+    "return_d_mm": 0,
+    "return_total_on_lower_body_N": [
+      -4.407897629741671e-31,
+      2.985672011257475e-32
+    ],
+    "return_Hu_net_N": [
+      -3.905889056372646e-31,
+      1.4453535381169385e-32
+    ],
+    "return_total_moment_Nmm": -3.713643972160984e-30,
+    "origin_force_moment_exact_zero": true,
+    "tiny_return_preserved_nonzero": true,
+    "interpretation": "Hu local signed nodal forces cancel substantially. Net force understates the local weak-force magnitude. Shared corner nodal vectors cannot be uniquely assigned to faces and are not surface pressure."
+  },
+  "existing_HP_provenance": {
+    "reference_summary_SHA256": "7ffea3f27ae288d23fead7647bf4d24e468cc197bef7caa12dbfff22139110f7",
+    "original_HP_completed": 18,
+    "fresh_HP_in_review": 0,
+    "body_payload_bindings": [
+      {
+        "accepted_index": 0,
+        "path": "accepted_000/workpiece_checks.json.gz",
+        "sha256": "8503353bdf642395f24f9d86410ee7d2ceb0a2a963ea4d43e263debcbc8e5dec",
+        "saved_check_count": 13,
+        "saved_check_results_pass": true
+      },
+      {
+        "accepted_index": 1,
+        "path": "accepted_001/workpiece_checks.json.gz",
+        "sha256": "a00f83f18d43d0a0737978bd12c53db0920349ee30397f3207cbc8f085954bac",
+        "saved_check_count": 13,
+        "saved_check_results_pass": true
+      },
+      {
+        "accepted_index": 2,
+        "path": "accepted_002/workpiece_checks.json.gz",
+        "sha256": "e0f81e99960105a75bc9b752a9bb3e4c5a1a9969621e3c89c8574d13eeddc9b4",
+        "saved_check_count": 13,
+        "saved_check_results_pass": true
+      },
+      {
+        "accepted_index": 3,
+        "path": "accepted_003/workpiece_checks.json.gz",
+        "sha256": "811054b5c4e1cb59bdf3f8a7e824271c011276e2b4e7790132a729ae46036213",
+        "saved_check_count": 13,
+        "saved_check_results_pass": true
+      },
+      {
+        "accepted_index": 4,
+        "path": "accepted_004/workpiece_checks.json.gz",
+        "sha256": "932b3e5e88119528baa9230eab023f08c5b6758c1640f419152d2149bd2a70f6",
+        "saved_check_count": 13,
+        "saved_check_results_pass": true
+      },
+      {
+        "accepted_index": 5,
+        "path": "accepted_005/workpiece_checks.json.gz",
+        "sha256": "2c75114b28fb538a7ffc141462638296981a08f90fa85766921a231a85fb0fb1",
+        "saved_check_count": 13,
+        "saved_check_results_pass": true
+      },
+      {
+        "accepted_index": 6,
+        "path": "accepted_006/workpiece_checks.json.gz",
+        "sha256": "2395e2900edce37647ffd541bf7bf4581989ef69904514da838a47df275a6a7e",
+        "saved_check_count": 13,
+        "saved_check_results_pass": true
+      },
+      {
+        "accepted_index": 7,
+        "path": "accepted_007/workpiece_checks.json.gz",
+        "sha256": "ad16b2b4b8b15f46d6205d6ae3f39bb527ed41bfabe65a3a6fc424b2f1a2d18a",
+        "saved_check_count": 13,
+        "saved_check_results_pass": true
+      },
+      {
+        "accepted_index": 8,
+        "path": "accepted_008/workpiece_checks.json.gz",
+        "sha256": "732d91b495d9e738eefabe0c8c68867be339da7154b4d8384f0bfc965a2f3ea6",
+        "saved_check_count": 13,
+        "saved_check_results_pass": true
+      }
+    ],
+    "scope": "Original body resultant/node-vector force qualification only; no new HP moment or cancellation/group gate."
+  },
+  "zero_call_basis": {
+    "mechanical_scope_verified": true,
+    "new_force_tangent_solver_HP_calls": 0,
+    "mechanical_hooks_monitored": false,
+    "loaded_hf_eval_modules": [
+      "hf_eval",
+      "hf_eval.boundary_geometry",
+      "hf_eval.workpiece_nodal"
+    ],
+    "call_count_basis": "Saved global-vector lookup and pure boundary topology; no mechanical modules called"
+  },
+  "states": [
+    {
+      "accepted_index": 0,
+      "original_target_index": 0,
+      "leg": "origin",
+      "d_mm": 0.0,
+      "state_sha256": "26d76fa997d7fc33a9ff6a4b606fc4f31e3f1c0753050e330d97c92565c2bbe2",
+      "components": {
+        "total": {
+          "net_force_N": [
+            0.0,
+            0.0
+          ],
+          "net_norm_N": 0.0,
+          "sum_nodal_norms_N": 0.0,
+          "sum_norms_over_net_norm": null,
+          "maximum_nodal_norm_N": 0.0,
+          "maximum_node_id": 2654,
+          "maximum_node_xy_mm": [
+            62.0,
+            32.0
+          ],
+          "moment_Nmm": 0.0,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": 0.0,
+              "absolute_sum_N": 0.0,
+              "absolute_sum_over_abs_net": null
+            },
+            "y": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": 0.0,
+              "absolute_sum_N": 0.0,
+              "absolute_sum_over_abs_net": null
+            }
+          },
+          "nonzero_nodes": 0
+        },
+        "material": {
+          "net_force_N": [
+            0.0,
+            0.0
+          ],
+          "net_norm_N": 0.0,
+          "sum_nodal_norms_N": 0.0,
+          "sum_norms_over_net_norm": null,
+          "maximum_nodal_norm_N": 0.0,
+          "maximum_node_id": 2654,
+          "maximum_node_xy_mm": [
+            62.0,
+            32.0
+          ],
+          "moment_Nmm": 0.0,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": 0.0,
+              "absolute_sum_N": 0.0,
+              "absolute_sum_over_abs_net": null
+            },
+            "y": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": 0.0,
+              "absolute_sum_N": 0.0,
+              "absolute_sum_over_abs_net": null
+            }
+          },
+          "nonzero_nodes": 0
+        },
+        "regularization": {
+          "net_force_N": [
+            0.0,
+            0.0
+          ],
+          "net_norm_N": 0.0,
+          "sum_nodal_norms_N": 0.0,
+          "sum_norms_over_net_norm": null,
+          "maximum_nodal_norm_N": 0.0,
+          "maximum_node_id": 2654,
+          "maximum_node_xy_mm": [
+            62.0,
+            32.0
+          ],
+          "moment_Nmm": 0.0,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": 0.0,
+              "absolute_sum_N": 0.0,
+              "absolute_sum_over_abs_net": null
+            },
+            "y": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": 0.0,
+              "absolute_sum_N": 0.0,
+              "absolute_sum_over_abs_net": null
+            }
+          },
+          "nonzero_nodes": 0
+        }
+      },
+      "saved_HP120_body_resultants_N": {
+        "total": [
+          "0E-125",
+          "0E-125"
+        ],
+        "material": [
+          "0E-125",
+          "0E-125"
+        ],
+        "regularization": [
+          "0E-124",
+          "0E-124"
+        ]
+      }
+    },
+    {
+      "accepted_index": 1,
+      "original_target_index": 1,
+      "leg": "loading",
+      "d_mm": 0.5,
+      "state_sha256": "76e4112e43871de62a7a3e1ea79827dfb5cf945ab7512803685046f0cd376c28",
+      "components": {
+        "total": {
+          "net_force_N": [
+            -0.00015041241380519055,
+            0.0001341833135636149
+          ],
+          "net_norm_N": 0.00020156650482065533,
+          "sum_nodal_norms_N": 0.00030115740909635724,
+          "sum_norms_over_net_norm": 1.4940845919033687,
+          "maximum_nodal_norm_N": 0.00013265350727448036,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": -5.1642386873825637e-05,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": -0.00015041241380519055,
+              "absolute_sum_N": 0.00015041241380519055,
+              "absolute_sum_over_abs_net": 1.0
+            },
+            "y": {
+              "positive_sum_N": 0.00015180379726801105,
+              "negative_sum_N": -1.7620483704396175e-05,
+              "absolute_sum_N": 0.00016942428097240723,
+              "absolute_sum_over_abs_net": 1.2626330090744478
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "material": {
+          "net_force_N": [
+            -3.947677569365762e-05,
+            8.797781521271886e-05
+          ],
+          "net_norm_N": 9.642879128543852e-05,
+          "sum_nodal_norms_N": 0.00011201751704841513,
+          "sum_norms_over_net_norm": 1.1616604911787443,
+          "maximum_nodal_norm_N": 9.681075741196575e-06,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": -1.6107217376656287e-05,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": -3.947677569365762e-05,
+              "absolute_sum_N": 3.947677569365762e-05,
+              "absolute_sum_over_abs_net": 1.0
+            },
+            "y": {
+              "positive_sum_N": 8.859030413175215e-05,
+              "negative_sum_N": -6.124889190332801e-07,
+              "absolute_sum_N": 8.920279305078543e-05,
+              "absolute_sum_over_abs_net": 1.0139237128713043
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "regularization": {
+          "net_force_N": [
+            -0.00011093563811153294,
+            4.620549835089602e-05
+          ],
+          "net_norm_N": 0.0001201734741158283,
+          "sum_nodal_norms_N": 0.0003158284781228075,
+          "sum_norms_over_net_norm": 2.628104749791943,
+          "maximum_nodal_norm_N": 0.00012303665582119163,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": -3.55351694971694e-05,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 1.7156793572947828e-06,
+              "negative_sum_N": -0.00011265131746882772,
+              "absolute_sum_N": 0.0001143669968261225,
+              "absolute_sum_over_abs_net": 1.0309310765503483
+            },
+            "y": {
+              "positive_sum_N": 0.00012930214016122613,
+              "negative_sum_N": -8.309664181033011e-05,
+              "absolute_sum_N": 0.00021239878197155623,
+              "absolute_sum_over_abs_net": 4.596829155667734
+            }
+          },
+          "nonzero_nodes": 33
+        }
+      },
+      "saved_HP120_body_resultants_N": {
+        "total": [
+          "-0.000150412413805190555077731798357473947216303310998663729468235742449590875711581281003119286040219731228453594070850897381",
+          "0.000134183313563614876067447676568307306451746765142727024124084432997882500900731345089384012609701542449587376543495075150"
+        ],
+        "material": [
+          "-0.0000394767756936576227532200862480780327663228068775943235199625117705386774832294055995177881362140245824383050428514442856",
+          "0.0000879778152127188658477086367017681881938275406405204724790281289648916336571281044163538330181752548694907787333593502925"
+        ],
+        "regularization": [
+          "-0.000110935638111532932324511712109395914449980504121069405948273230679052198228351875403601497904005706646015289027999453096",
+          "0.0000462054983508960102197390398665391182579192245022065516450563040329908672436032406730301795915262875800965978101357248571"
+        ]
+      }
+    },
+    {
+      "accepted_index": 2,
+      "original_target_index": 2,
+      "leg": "loading",
+      "d_mm": 1.0,
+      "state_sha256": "79bd847ce8fd33c00d5f35204999ba0060c18022a07bf2b2aca637e60549c367",
+      "components": {
+        "total": {
+          "net_force_N": [
+            -0.0003042966617286106,
+            0.00034824084961240163
+          ],
+          "net_norm_N": 0.0004624588064659855,
+          "sum_nodal_norms_N": 0.0016860904322942654,
+          "sum_norms_over_net_norm": 3.645925666718339,
+          "maximum_nodal_norm_N": 0.0008954390950576395,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.003863257140430575,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 1.4078256511915754e-06,
+              "negative_sum_N": -0.00030570448737980216,
+              "absolute_sum_N": 0.00030711231303099377,
+              "absolute_sum_over_abs_net": 1.009252981240045
+            },
+            "y": {
+              "positive_sum_N": 0.0008960078216196279,
+              "negative_sum_N": -0.0005477669720072262,
+              "absolute_sum_N": 0.001443774793626854,
+              "absolute_sum_over_abs_net": 4.145908773292397
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "material": {
+          "net_force_N": [
+            -8.425220204178354e-05,
+            0.0002455603701522514
+          ],
+          "net_norm_N": 0.0002596118813502191,
+          "sum_nodal_norms_N": 0.0002908929055008076,
+          "sum_norms_over_net_norm": 1.1204914967215622,
+          "maximum_nodal_norm_N": 3.2401585922634904e-05,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.0002011764400319416,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": -8.425220204178354e-05,
+              "absolute_sum_N": 8.425220204178354e-05,
+              "absolute_sum_over_abs_net": 1.0
+            },
+            "y": {
+              "positive_sum_N": 0.00024673929941749074,
+              "negative_sum_N": -1.1789292652393527e-06,
+              "absolute_sum_N": 0.0002479182286827301,
+              "absolute_sum_over_abs_net": 1.0096019505468934
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "regularization": {
+          "net_force_N": [
+            -0.000220044459686827,
+            0.00010268047946014987
+          ],
+          "net_norm_N": 0.00024282266183582187,
+          "sum_nodal_norms_N": 0.001820040862559809,
+          "sum_norms_over_net_norm": 7.495350099532232,
+          "maximum_nodal_norm_N": 0.0008631743117221578,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.003662080700398631,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 1.4524368788868859e-05,
+              "negative_sum_N": -0.00023456882847569586,
+              "absolute_sum_N": 0.00024909319726456474,
+              "absolute_sum_over_abs_net": 1.1320130378155426
+            },
+            "y": {
+              "positive_sum_N": 0.0008634766672017412,
+              "negative_sum_N": -0.0007607961877415914,
+              "absolute_sum_N": 0.0016242728549433324,
+              "absolute_sum_over_abs_net": 15.818711243685906
+            }
+          },
+          "nonzero_nodes": 33
+        }
+      },
+      "saved_HP120_body_resultants_N": {
+        "total": [
+          "-0.000304296661728610566636275265481808916046779893847199422836212869964832398480133258304285391487352442093587470975119417984",
+          "0.000348240849612401343283876051142591709972460673614607880377335013423051007891319271691931166008113685577802032323071507032"
+        ],
+        "material": [
+          "-0.0000842522020417835434168061594553731054099531327554895991162222983336858761504409141063268834185143196726791525676142239770",
+          "0.000245560370152251394703532024960763594187234175416483221882643393698466220125241133214192357410276625248527032073204298814"
+        ],
+        "regularization": [
+          "-0.000220044459686827023219469106026435810636826761091709823719990571631146522329692344197958508068838122420908318407505194007",
+          "0.000102680479460149948580344026181828115785226498198124658494691619724584787766078138477738808597837060329275000249867208216"
+        ]
+      }
+    },
+    {
+      "accepted_index": 3,
+      "original_target_index": 3,
+      "leg": "loading",
+      "d_mm": 1.5,
+      "state_sha256": "10cc3f7fd3406eef1caf910e80e4a74e22340cba112d7fd8abee4226e42eabd4",
+      "components": {
+        "total": {
+          "net_force_N": [
+            -0.0004918744882668527,
+            0.0009807651115565457
+          ],
+          "net_norm_N": 0.0010971967536655865,
+          "sum_nodal_norms_N": 0.009336316127571296,
+          "sum_norms_over_net_norm": 8.509245125252077,
+          "maximum_nodal_norm_N": 0.005003420963310496,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.024370471401259447,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 8.964026955837398e-05,
+              "negative_sum_N": -0.0005815147578252267,
+              "absolute_sum_N": 0.0006711550273836007,
+              "absolute_sum_over_abs_net": 1.3644843214952111
+            },
+            "y": {
+              "positive_sum_N": 0.005001118857264349,
+              "negative_sum_N": -0.004020353745707804,
+              "absolute_sum_N": 0.009021472602972152,
+              "absolute_sum_over_abs_net": 9.19840285576066
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "material": {
+          "net_force_N": [
+            -0.00014797723450186282,
+            0.0007019574934630576
+          ],
+          "net_norm_N": 0.0007173852413869119,
+          "sum_nodal_norms_N": 0.0007655087925180484,
+          "sum_norms_over_net_norm": 1.0670818806337579,
+          "maximum_nodal_norm_N": 0.0001556272440013099,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.001967543375009003,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": -0.00014797723450186282,
+              "absolute_sum_N": 0.00014797723450186282,
+              "absolute_sum_over_abs_net": 1.0
+            },
+            "y": {
+              "positive_sum_N": 0.0007036459864324957,
+              "negative_sum_N": -1.6884929694380999e-06,
+              "absolute_sum_N": 0.0007053344794019338,
+              "absolute_sum_over_abs_net": 1.0048108125781463
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "regularization": {
+          "net_force_N": [
+            -0.00034389725376498994,
+            0.00027880761809348753
+          ],
+          "net_norm_N": 0.000442717753262805,
+          "sum_nodal_norms_N": 0.009666249634762383,
+          "sum_norms_over_net_norm": 21.83388753561985,
+          "maximum_nodal_norm_N": 0.004848117256265153,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.02240292802625044,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.00016106954312964742,
+              "negative_sum_N": -0.0005049667968946373,
+              "absolute_sum_N": 0.0006660363400242847,
+              "absolute_sum_over_abs_net": 1.9367306157072015
+            },
+            "y": {
+              "positive_sum_N": 0.004845657996446917,
+              "negative_sum_N": -0.004566850378353429,
+              "absolute_sum_N": 0.009412508374800345,
+              "absolute_sum_over_abs_net": 33.75986796617666
+            }
+          },
+          "nonzero_nodes": 33
+        }
+      },
+      "saved_HP120_body_resultants_N": {
+        "total": [
+          "-0.000491874488266852800652684705231926906514297027222346942790757392850793057078813068542751780837032033858140408367980931388",
+          "0.000980765111556545232276942459099096833229379677395176041196954565055167552134951445921767632678164900901572326134511215271"
+        ],
+        "material": [
+          "-0.000147977234501862817532311671408334380447024824111809450655843302160969718199075602066733688407726584439812887634138747208",
+          "0.000701957493463057619306216828984632890747100139699669091132811484331734479363020157010558920887632689135635461099465034930"
+        ],
+        "regularization": [
+          "-0.000343897253764989983120373033823592526067272203110537492134914090689823338879737466476018092429305449418327520733842184180",
+          "0.000278807618093487612970725630114463942482279537695506950064143080723433072771931288911208711790532211765936865035046180330"
+        ]
+      }
+    },
+    {
+      "accepted_index": 4,
+      "original_target_index": 4,
+      "leg": "loading",
+      "d_mm": 1.75,
+      "state_sha256": "dfc83d4510b22ca97a914b72fb593c140d1e542255cf2054836705b555bf2558",
+      "components": {
+        "total": {
+          "net_force_N": [
+            -0.0007910899872955321,
+            0.0037892857813192618
+          ],
+          "net_norm_N": 0.003870983092252868,
+          "sum_nodal_norms_N": 0.022029141318069,
+          "sum_norms_over_net_norm": 5.690838940153648,
+          "maximum_nodal_norm_N": 0.012747646138344896,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.06579467316655178,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.00031032882791592984,
+              "negative_sum_N": -0.001101418815211462,
+              "absolute_sum_N": 0.0014117476431273917,
+              "absolute_sum_over_abs_net": 1.7845601205921935
+            },
+            "y": {
+              "positive_sum_N": 0.01273217031378031,
+              "negative_sum_N": -0.008942884532461049,
+              "absolute_sum_N": 0.02167505484624136,
+              "absolute_sum_over_abs_net": 5.720089773407131
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "material": {
+          "net_force_N": [
+            -0.0003137551201961619,
+            0.0023430611778208557
+          ],
+          "net_norm_N": 0.0023639750333835094,
+          "sum_nodal_norms_N": 0.0024243488868146558,
+          "sum_norms_over_net_norm": 1.0255391248124708,
+          "maximum_nodal_norm_N": 0.0013458721476703704,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.012724871252725275,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": -0.0003137551201961619,
+              "absolute_sum_N": 0.0003137551201961619,
+              "absolute_sum_over_abs_net": 1.0
+            },
+            "y": {
+              "positive_sum_N": 0.0023449872070154215,
+              "negative_sum_N": -1.9260291945661772e-06,
+              "absolute_sum_N": 0.0023469132362099877,
+              "absolute_sum_over_abs_net": 1.0016440280883807
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "regularization": {
+          "net_force_N": [
+            -0.00047733486709937006,
+            0.0014462246034984065
+          ],
+          "net_norm_N": 0.001522962303904104,
+          "sum_nodal_norms_N": 0.021623541615575757,
+          "sum_norms_over_net_norm": 14.198343294606799,
+          "maximum_nodal_norm_N": 0.011403612836812722,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.05306980191382652,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0004205756020644191,
+              "negative_sum_N": -0.0008979104691637892,
+              "absolute_sum_N": 0.0013184860712282082,
+              "absolute_sum_over_abs_net": 2.762182614566327
+            },
+            "y": {
+              "positive_sum_N": 0.011392229152024645,
+              "negative_sum_N": -0.009946004548526238,
+              "absolute_sum_N": 0.021338233700550883,
+              "absolute_sum_over_abs_net": 14.754439696941855
+            }
+          },
+          "nonzero_nodes": 33
+        }
+      },
+      "saved_HP120_body_resultants_N": {
+        "total": [
+          "-0.000791089987295532076145589632744895706091523055703826708172005318735675970174734587107840377288713891816359894489690184043",
+          "0.00378928578131926168951279806366219033992408033030774792614986417908959677892468184219495712174636599151716294111409307858"
+        ],
+        "material": [
+          "-0.000313755120196161923936597068116414873358320507321757073771741915068654276671301164536071713879689071307346267216878479962",
+          "0.00234306117782085550621339748400960874097137516016470599137766906636530937342639358917415898035622622912180633834605167597"
+        ],
+        "regularization": [
+          "-0.000477334867099370152208992564628480832733202548382069634400263403667021693503433422571768663409024820509013627272811704082",
+          "0.00144622460349840618329940057965258159895270517014304193477219511272428740549828825302079814139013976239535660276804140262"
+        ]
+      }
+    },
+    {
+      "accepted_index": 5,
+      "original_target_index": 5,
+      "leg": "unloading",
+      "d_mm": 1.5,
+      "state_sha256": "8970f92f1582862065517cf3ae0e5ca1ffde95b706ad5e09c289a15623323746",
+      "components": {
+        "total": {
+          "net_force_N": [
+            -0.0004918744882680524,
+            0.0009807651115581958
+          ],
+          "net_norm_N": 0.0010971967536675994,
+          "sum_nodal_norms_N": 0.009336316127571848,
+          "sum_norms_over_net_norm": 8.50924512523697,
+          "maximum_nodal_norm_N": 0.005003420963310388,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.02437047140123536,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 8.964026955838397e-05,
+              "negative_sum_N": -0.0005815147578264364,
+              "absolute_sum_N": 0.0006711550273848204,
+              "absolute_sum_over_abs_net": 1.364484321494363
+            },
+            "y": {
+              "positive_sum_N": 0.005001118857264211,
+              "negative_sum_N": -0.004020353745706014,
+              "absolute_sum_N": 0.009021472602970225,
+              "absolute_sum_over_abs_net": 9.198402855743218
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "material": {
+          "net_force_N": [
+            -0.00014797723450193158,
+            0.0007019574934631593
+          ],
+          "net_norm_N": 0.0007173852413870257,
+          "sum_nodal_norms_N": 0.0007655087925181808,
+          "sum_norms_over_net_norm": 1.0670818806337734,
+          "maximum_nodal_norm_N": 0.00015562724400132818,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.001967543375008445,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": -0.00014797723450193158,
+              "absolute_sum_N": 0.00014797723450193158,
+              "absolute_sum_over_abs_net": 1.0
+            },
+            "y": {
+              "positive_sum_N": 0.000703645986432598,
+              "negative_sum_N": -1.6884929694386606e-06,
+              "absolute_sum_N": 0.0007053344794020367,
+              "absolute_sum_over_abs_net": 1.0048108125781474
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "regularization": {
+          "net_force_N": [
+            -0.0003438972537661208,
+            0.00027880761809503577
+          ],
+          "net_norm_N": 0.00044271775326465846,
+          "sum_nodal_norms_N": 0.00966624963476289,
+          "sum_norms_over_net_norm": 21.833887535529588,
+          "maximum_nodal_norm_N": 0.0048481172562650264,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.02240292802622691,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.000161069543129679,
+              "negative_sum_N": -0.0005049667968957998,
+              "absolute_sum_N": 0.0006660363400254788,
+              "absolute_sum_over_abs_net": 1.936730615704305
+            },
+            "y": {
+              "positive_sum_N": 0.004845657996446771,
+              "negative_sum_N": -0.004566850378351736,
+              "absolute_sum_N": 0.009412508374798508,
+              "absolute_sum_over_abs_net": 33.7598679659826
+            }
+          },
+          "nonzero_nodes": 33
+        }
+      },
+      "saved_HP120_body_resultants_N": {
+        "total": [
+          "-0.000491874488268052413325197323366393245100423718021934472788933945832191680831380588490468881471016525978578995544212012741",
+          "0.000980765111558194859624896591576815558488640170313877715821675883054087185371515815690191278020048578713375211260099540214"
+        ],
+        "material": [
+          "-0.000147977234501931597840397628415379147460836434412514576065231681792845119058966333117658917975580301286948721276459134722",
+          "0.000701957493463159331169605537084079076289106851703409778338076014970751089551638687394502118518198538486592212816179407931"
+        ],
+        "regularization": [
+          "-0.000343897253766120815484799694951014097639587283609419896723702264039346561772414255372809963495436224691630274267752878018",
+          "0.000278807618095035528455291054492736482199533318610467937483599868083336095819877128295689159501850040226782998443920132291"
+        ]
+      }
+    },
+    {
+      "accepted_index": 6,
+      "original_target_index": 6,
+      "leg": "unloading",
+      "d_mm": 1.0,
+      "state_sha256": "996720719e0ce3a2e72a50a4e2d2e2d11ffddd22afd40b5c3badfccae2c66a2f",
+      "components": {
+        "total": {
+          "net_force_N": [
+            -0.00030429666173170867,
+            0.00034824084960495083
+          ],
+          "net_norm_N": 0.0004624588064624134,
+          "sum_nodal_norms_N": 0.0016860904322976223,
+          "sum_norms_over_net_norm": 3.6459256667537594,
+          "maximum_nodal_norm_N": 0.0008954390950577231,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.003863257140471558,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 1.4078256511817566e-06,
+              "negative_sum_N": -0.0003057044873828904,
+              "absolute_sum_N": 0.00030711231303407214,
+              "absolute_sum_over_abs_net": 1.009252981239886
+            },
+            "y": {
+              "positive_sum_N": 0.0008960078216196925,
+              "negative_sum_N": -0.0005477669720147417,
+              "absolute_sum_N": 0.001443774793634434,
+              "absolute_sum_over_abs_net": 4.1459087734028675
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "material": {
+          "net_force_N": [
+            -8.425220204112602e-05,
+            0.00024556037015162384
+          ],
+          "net_norm_N": 0.0002596118813494121,
+          "sum_nodal_norms_N": 0.0002908929054997392,
+          "sum_norms_over_net_norm": 1.1204914967209298,
+          "maximum_nodal_norm_N": 3.240158592260686e-05,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.0002011764400374122,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": -8.425220204112602e-05,
+              "absolute_sum_N": 8.425220204112602e-05,
+              "absolute_sum_over_abs_net": 1.0
+            },
+            "y": {
+              "positive_sum_N": 0.00024673929941685914,
+              "negative_sum_N": -1.178929265235273e-06,
+              "absolute_sum_N": 0.0002479182286820944,
+              "absolute_sum_over_abs_net": 1.0096019505468845
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "regularization": {
+          "net_force_N": [
+            -0.00022004445969058266,
+            0.00010268047945332695
+          ],
+          "net_norm_N": 0.00024282266183634006,
+          "sum_nodal_norms_N": 0.0018200408625631088,
+          "sum_norms_over_net_norm": 7.495350099529826,
+          "maximum_nodal_norm_N": 0.0008631743117222682,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": 0.003662080700434146,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 1.4524368788491023e-05,
+              "negative_sum_N": -0.00023456882847907367,
+              "absolute_sum_N": 0.0002490931972675647,
+              "absolute_sum_over_abs_net": 1.132013037809855
+            },
+            "y": {
+              "positive_sum_N": 0.0008634766672018355,
+              "negative_sum_N": -0.0007607961877485085,
+              "absolute_sum_N": 0.001624272854950344,
+              "absolute_sum_over_abs_net": 15.818711244805314
+            }
+          },
+          "nonzero_nodes": 33
+        }
+      },
+      "saved_HP120_body_resultants_N": {
+        "total": [
+          "-0.000304296661731708663402153046160966441139708830672439924574232200290755107201028554056389044861794457753833190412344470750",
+          "0.000348240849604950794459778871377838975998670391196733427396084622737497868129738560914928850053531323129617964188192003459"
+        ],
+        "material": [
+          "-0.0000842522020411260265076685985147263082221497419678163726826934922075933852710189137578905749485266059147355641653882733037",
+          "0.000245560370151623855028226887591460224714710938195949255993797606719578856827700302130224096541282780892892058800500392653"
+        ],
+        "regularization": [
+          "-0.000220044459690582636894484447646240132917559088704623551891538708083161721930009640298498469913267851839097626246956197447",
+          "0.000102680479453326939431551983786378751283959453000784171402287016017919011302038258784704753512248542236725905387691610808"
+        ]
+      }
+    },
+    {
+      "accepted_index": 7,
+      "original_target_index": 7,
+      "leg": "unloading",
+      "d_mm": 0.5,
+      "state_sha256": "c8eb53aa0c3daf3ce1fe1452cffbe99f17925d83c780d16a3a5f1c7ba80a49a5",
+      "components": {
+        "total": {
+          "net_force_N": [
+            -0.0001504124138051964,
+            0.00013418331356360755
+          ],
+          "net_norm_N": 0.00020156650482065482,
+          "sum_nodal_norms_N": 0.00030115740909636386,
+          "sum_norms_over_net_norm": 1.4940845919034054,
+          "maximum_nodal_norm_N": 0.00013265350727448117,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": -5.1642386873806995e-05,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": -0.0001504124138051964,
+              "absolute_sum_N": 0.0001504124138051964,
+              "absolute_sum_over_abs_net": 1.0
+            },
+            "y": {
+              "positive_sum_N": 0.000151803797268005,
+              "negative_sum_N": -1.7620483704397466e-05,
+              "absolute_sum_N": 0.00016942428097240246,
+              "absolute_sum_over_abs_net": 1.2626330090744813
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "material": {
+          "net_force_N": [
+            -3.947677569365747e-05,
+            8.797781521271782e-05
+          ],
+          "net_norm_N": 9.64287912854375e-05,
+          "sum_nodal_norms_N": 0.00011201751704841229,
+          "sum_norms_over_net_norm": 1.1616604911787272,
+          "maximum_nodal_norm_N": 9.681075741196566e-06,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": -1.6107217376662125e-05,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": -3.947677569365747e-05,
+              "absolute_sum_N": 3.947677569365747e-05,
+              "absolute_sum_over_abs_net": 1.0
+            },
+            "y": {
+              "positive_sum_N": 8.859030413175105e-05,
+              "negative_sum_N": -6.124889190332208e-07,
+              "absolute_sum_N": 8.920279305078427e-05,
+              "absolute_sum_over_abs_net": 1.013923712871303
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "regularization": {
+          "net_force_N": [
+            -0.00011093563811153893,
+            4.620549835088974e-05
+          ],
+          "net_norm_N": 0.00012017347411583141,
+          "sum_nodal_norms_N": 0.0003158284781228162,
+          "sum_norms_over_net_norm": 2.6281047497919476,
+          "maximum_nodal_norm_N": 0.00012303665582119247,
+          "maximum_node_id": 2670,
+          "maximum_node_xy_mm": [
+            78.0,
+            32.0
+          ],
+          "moment_Nmm": -3.553516949714487e-05,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 1.7156793572955318e-06,
+              "negative_sum_N": -0.00011265131746883445,
+              "absolute_sum_N": 0.00011436699682612999,
+              "absolute_sum_over_abs_net": 1.03093107655036
+            },
+            "y": {
+              "positive_sum_N": 0.00012930214016122036,
+              "negative_sum_N": -8.309664181033062e-05,
+              "absolute_sum_N": 0.00021239878197155097,
+              "absolute_sum_over_abs_net": 4.596829155668245
+            }
+          },
+          "nonzero_nodes": 33
+        }
+      },
+      "saved_HP120_body_resultants_N": {
+        "total": [
+          "-0.000150412413805196414610734750990548287765131201394696322404065303640746590805499509864658695385807997205895525061225052098",
+          "0.000134183313563607548952316350800434214340293212959640209295554966438955541527402697942472687685958562105179714181389637175"
+        ],
+        "material": [
+          "-0.0000394767756936574755733383505387165489929657675398209280670087804777457605997507564804137660697752490904248815939216615541",
+          "0.0000879778152127178233146877633037821460328301077850193143306504994415923579204628698332405046380299410038403906062477447125"
+        ],
+        "regularization": [
+          "-0.000110935638111538939037396400451831738772165433854875394337056523163000830205748753384244929316032748115470643467303390544",
+          "0.0000462054983508897256376285874966520683074631051746208949649044669973631836069398281092321830479286211013393235751418924624"
+        ]
+      }
+    },
+    {
+      "accepted_index": 8,
+      "original_target_index": 8,
+      "leg": "unloading",
+      "d_mm": 0.0,
+      "state_sha256": "ac522b8e239841d3e59a19a6dd61ba3ff76e03f4d296c5225e78dc6a2cbd5891",
+      "components": {
+        "total": {
+          "net_force_N": [
+            -4.407897629741671e-31,
+            2.985672011257475e-32
+          ],
+          "net_norm_N": 4.417997723841685e-31,
+          "sum_nodal_norms_N": 6.779469910050903e-31,
+          "sum_norms_over_net_norm": 1.5345118612138604,
+          "maximum_nodal_norm_N": 4.510755096030271e-31,
+          "maximum_node_id": 2654,
+          "maximum_node_xy_mm": [
+            62.0,
+            32.0
+          ],
+          "moment_Nmm": -3.713643972160984e-30,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 1.145706944980269e-31,
+              "negative_sum_N": -5.55360457472194e-31,
+              "absolute_sum_N": 6.699311519702209e-31,
+              "absolute_sum_over_abs_net": 1.5198428099825965
+            },
+            "y": {
+              "positive_sum_N": 4.403599908826469e-32,
+              "negative_sum_N": -1.4179278975689943e-32,
+              "absolute_sum_N": 5.821527806395463e-32,
+              "absolute_sum_over_abs_net": 1.9498216094887164
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "material": {
+          "net_force_N": [
+            -5.020085733690248e-32,
+            1.5403184731405362e-32
+          ],
+          "net_norm_N": 5.251080057692736e-32,
+          "sum_nodal_norms_N": 5.348533596749893e-32,
+          "sum_norms_over_net_norm": 1.0185587608618516,
+          "maximum_nodal_norm_N": 3.601530882369274e-33,
+          "maximum_node_id": 2654,
+          "maximum_node_xy_mm": [
+            62.0,
+            32.0
+          ],
+          "moment_Nmm": -3.740687597553737e-31,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 0.0,
+              "negative_sum_N": -5.020085733690248e-32,
+              "absolute_sum_N": 5.020085733690248e-32,
+              "absolute_sum_over_abs_net": 1.0
+            },
+            "y": {
+              "positive_sum_N": 1.6020146018697805e-32,
+              "negative_sum_N": -6.169612872924428e-34,
+              "absolute_sum_N": 1.6637107305990246e-32,
+              "absolute_sum_over_abs_net": 1.080108276054695
+            }
+          },
+          "nonzero_nodes": 33
+        },
+        "regularization": {
+          "net_force_N": [
+            -3.905889056372646e-31,
+            1.4453535381169385e-32
+          ],
+          "net_norm_N": 3.9085623685945032e-31,
+          "sum_nodal_norms_N": 6.740880044552832e-31,
+          "sum_norms_over_net_norm": 1.7246443599611316,
+          "maximum_nodal_norm_N": 4.4792977312021985e-31,
+          "maximum_node_id": 2654,
+          "maximum_node_xy_mm": [
+            62.0,
+            32.0
+          ],
+          "moment_Nmm": -3.33957521240561e-30,
+          "signed_component_sums": {
+            "x": {
+              "positive_sum_N": 1.381529015542666e-31,
+              "negative_sum_N": -5.287418071915312e-31,
+              "absolute_sum_N": 6.668947087457978e-31,
+              "absolute_sum_over_abs_net": 1.707408221587162
+            },
+            "y": {
+              "positive_sum_N": 3.5507757093590635e-32,
+              "negative_sum_N": -2.1054221712421248e-32,
+              "absolute_sum_N": 5.656197880601188e-32,
+              "absolute_sum_over_abs_net": 3.9133663366336635
+            }
+          },
+          "nonzero_nodes": 33
+        }
+      },
+      "saved_HP120_body_resultants_N": {
+        "total": [
+          "-4.40789762974167095366216289168301413601585734508829249545238583275602513903402366989009961522965060959725463890490840027E-31",
+          "2.98567201125747493090860366254559452154385796033056846912293882264101872247846598127940656408708585478734647745730154379E-32"
+        ],
+        "material": [
+          "-5.02008573369024852636847275928030265836036405759391743373330482662871580849410651832645062208145487517822231141375461535E-32",
+          "1.54031847314053620370278232014979631383366632812115265699470694735817460304100026257069947999170571393866512927148773836E-32"
+        ],
+        "regularization": [
+          "-3.90588905637264610102531561575498387017982093932890075207905535009315355818461301805745455302150512207943240776353293873E-31",
+          "1.44535353811693872720582134239579820771019163220941581212823187528284411943746571870870708409538014084868134818581380542E-32"
+        ]
+      }
+    }
+  ],
+  "bindings": {
+    "functional_views/native_workpiece_nodal_20261004/square009_001/observation_001/summary.json": "a9db48cb4574e4b33ea0b3528039b792992f0b5fdce3e7e3aa93cac78e1f65d2",
+    "functional_views/native_workpiece_nodal_20261004/square009_001/observation_001/nodes.csv": "bb2d770c9579a63fbafb264786a941c0d6cd9667454ca0941abf90b0046dd848",
+    "functional_views/native_workpiece_nodal_20261004/square009_001/protocol.json": "8e78e7014b579edd10d532f1250803c72385a05c691a59b7a543b9b142e7ad23",
+    "functional_views/native_workpiece_nodal_20261004/square009_001/observe_launch.json": "ed6e6b58bc6600289773c4da53562dbee34269fbeca18f66c989384ff255d35e",
+    "functional_views/native_workpiece_nodal_20261004/square009_001/tests_launch.json": "7293c133355c0f910c086cdbed6c829e5ebf6bc6325da5b6e62c90335ad94c54",
+    "functional_views/native_workpiece_nodal_20261004/square009_001/tests_receipt.json": "780e2650251f244fb28061a114ab1889d9e75754bdb61828ba83b7da5283bdcb",
+    "functional_views/native_workpiece_nodal_20261004/square009_001/junit.xml": "d25395e50d1b4b0ea4e3ae1d777b4caa0387aac7727dc84a4189baeb71db7d4d",
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/src/hf_eval/workpiece_nodal.py": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9",
+    "hf_repo/src/hf_eval/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+    "hf_repo/scripts/observe_workpiece_nodal_forces.py": "b30cc3af4587ae60b764f300aded6d6f29cc0f26ad2bfc5b84aa207a75bbe2c3",
+    "hf_repo/scripts/measure_native_workpiece_regions.py": "56bba89522481e9cad03865ff762fc207baa571b0e9fcbe41ba1c0ffc7aed925",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/result.json": "d62d584b618af4c1ead89c4c9fb07cea4585c9ce873221bf66600d019550cb42",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/summary.json": "7ffea3f27ae288d23fead7647bf4d24e468cc197bef7caa12dbfff22139110f7",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/model/model.json": "7570b702a674b197f58cb8f22246f1b115ae3420e35feb7b5100285794ef01b8",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/model/model.npz": "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/000/state.json": "0a7444e9fbef618a260abcea5486d74033ab3889773aba6b1883d5b96c923a59",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/000/state.npz": "521742979e13f4b681696e160d2d37bcdbddb38b457ce97c5ba0acdf931788f5",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/000/forces.npz": "d9efa098a6cf276dfe017a5ab439faef715610d9dbc1c060fbb2bbf81668664a",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/001/state.json": "ab5b15075897449461b66ec4ffadd85110a72e92066f526f28997a6ff0bd87c8",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/001/state.npz": "f0f1d3eecf05d8d0d6a9ba831b8583374c8170768d77a65056fc654d882c21b0",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/001/forces.npz": "1217510d3d148117bd41545d29200f841fb35102483c100d141ee6cf2b576d8a",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/002/state.json": "6460105b0224ed651f82a291dbacadc1f44286f392af2da7a641a3a033f1bcfa",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/002/state.npz": "0e71852108f482cb1ce67345e4fff916e158397693dd75ed2d4b66a93513a2f3",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/002/forces.npz": "143267802a6543bd0ba9b7f8a2b95cf459e8541eb9b4363718c41d3ad21b3462",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/003/state.json": "2673e79baa8990e57c7ec1364c1992ef5042020c78dda0efe510fe7fa8aa487d",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/003/state.npz": "273dbe9f575077d56d961e4aca1a7b8dc853f99fc1f0f6f9c1ead52d1fc7ae60",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/003/forces.npz": "f9256794eb8a04b979214d621c37a201da60afb8705c9351d3a007b8d6a4829f",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/004/state.json": "0c54d624bd26e3ea257108c3f63420398e528c171e33982e89c67ca3616f3607",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/004/state.npz": "0b3ff13d41958a738a8f8205157d472bfa66bafa9abeceb0746eb650bc204677",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/004/forces.npz": "492b8cb36b164223d922434c67c97816e20a311b2551c70b5d93eab6503fd611",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/005/state.json": "7ae091713f89501420dfa0ed6ecf71f681152e95d2c5e033ca89d43b237447bc",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/005/state.npz": "2e338487bcdf3adde87abc50c09b293a3b6ebfc0692f6a601d94cc471a25bd8a",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/005/forces.npz": "1422c77ccb8a00521e935e08c213f2fddbb74b49050618240a54eaf16d02b963",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/006/state.json": "a28cdfeac573e31eb762dd8664189ed32b57ca3c34c42456394eaea382685c62",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/006/state.npz": "e481124667784d464a5b8839d2780ae5c73110e24a75731b05b40175c1dba8aa",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/006/forces.npz": "c3b5100c31e2f76d830bf3e9af74936503d2f63d217de70e0500ab49423ee1e2",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/007/state.json": "ee2414691395035dfe1a13026de21d8d61f3036f0ce6adc494ea0ba38723262a",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/007/state.npz": "7328c4bd10345140d61c1a9cdf4f386d2610592c6e307123fef77fb77061e1d4",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/007/forces.npz": "4eaf122c875cea22e8888c78f0e6c38d7a3d38f43c3617f117daaf18f2f4366a",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/008/state.json": "94d51fab778f4feb669386b994b70db0c692b7273197d2296afff5dfd145a255",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/008/state.npz": "e4d9f02e40fc80215a64767f94ed3a2ebf6fa06335f07d9a28491cf3163720eb",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/result/accepted/008/forces.npz": "c163643be7a3f97bc8fbe3cfb0c8464126afe30823695ac2d6cf59c5b5a0199e",
+    "functional_views/native_workpiece_nodal_20261004/square009_001/observation_001/sources/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "functional_views/native_workpiece_nodal_20261004/square009_001/observation_001/sources/workpiece_nodal.py": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9",
+    "functional_views/native_workpiece_nodal_20261004/square009_001/observation_001/sources/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+    "functional_views/native_workpiece_nodal_20261004/square009_001/observation_001/sources/observe_workpiece_nodal_forces.py": "b30cc3af4587ae60b764f300aded6d6f29cc0f26ad2bfc5b84aa207a75bbe2c3",
+    "functional_views/native_workpiece_nodal_20261004/square009_001/observation_001/sources/measure_native_workpiece_regions.py": "56bba89522481e9cad03865ff762fc207baa571b0e9fcbe41ba1c0ffc7aed925",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/accepted_000/workpiece_checks.json.gz": "8503353bdf642395f24f9d86410ee7d2ceb0a2a963ea4d43e263debcbc8e5dec",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/accepted_001/workpiece_checks.json.gz": "a00f83f18d43d0a0737978bd12c53db0920349ee30397f3207cbc8f085954bac",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/accepted_002/workpiece_checks.json.gz": "e0f81e99960105a75bc9b752a9bb3e4c5a1a9969621e3c89c8574d13eeddc9b4",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/accepted_003/workpiece_checks.json.gz": "811054b5c4e1cb59bdf3f8a7e824271c011276e2b4e7790132a729ae46036213",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/accepted_004/workpiece_checks.json.gz": "932b3e5e88119528baa9230eab023f08c5b6758c1640f419152d2149bd2a70f6",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/accepted_005/workpiece_checks.json.gz": "2c75114b28fb538a7ffc141462638296981a08f90fa85766921a231a85fb0fb1",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/accepted_006/workpiece_checks.json.gz": "2395e2900edce37647ffd541bf7bf4581989ef69904514da838a47df275a6a7e",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/accepted_007/workpiece_checks.json.gz": "ad16b2b4b8b15f46d6205d6ae3f39bb527ed41bfabe65a3a6fc424b2f1a2d18a",
+    "lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/reference/accepted_008/workpiece_checks.json.gz": "732d91b495d9e738eefabe0c8c68867be339da7154b4d8384f0bfc965a2f3ea6"
+  },
+  "reader_probe_note": "The first pure read-only script used outer_seconds_limit instead of the existing outer_seconds launch key. It stopped with KeyError before writing any review output; a second reader probe expected model.path instead of the actual model.arrays_path and also stopped before output. Both corrected by direct artifact schema inspection. A third pure-reader probe treated workpiece_checks.checks as a list instead of its saved dict; corrected to values(). All probes stopped before output and did not invoke mechanics. No formal card was rerun.",
+  "limitations": [
+    "No full protocol rehash, element scatter, tangent/CSC gate or HP mechanics replay.",
+    "Moment is an ordinary binary64 nodal sum in Nmm (positive CCW), with no new HP moment qualification.",
+    "2|Fy| is the two-side magnitude sum, not net vertical force; complete mirror net is [2Fx,0].",
+    "Physical/cut topology labels do not allocate face traction or pressure.",
+    "No contact, clamping or pressure qualification.",
+    "No saved-media render or image review in this observation-only audit."
+  ]
+}
