@@ -1,0 +1,125 @@
+{
+  "schema_version": "native-region-public-restoration-1.0",
+  "status": "pass",
+  "created_utc": "2026-10-04T06:30:23.235139+00:00",
+  "expected_commit": "59e5c7de1da7efc669381ace421679d88b573ca3",
+  "actual_public_HEAD": "59e5c7de1da7efc669381ace421679d88b573ca3",
+  "remote": "https://github.com/dudaxing/Compliant-TO-TMC.git",
+  "restoration": "Actual network Git fetch then fast-forward in independent restoration checkout",
+  "public_worktree_clean": true,
+  "manifest_sha256": "e2314ed79c7c3f050f4a546b9736af5dab95387817a9ba524b7f4eb8be5dbf2f",
+  "verification": {
+    "status": "pass",
+    "repository_files": 9268,
+    "restored_historical_files": 0,
+    "asset_closure": [],
+    "saved_archives_checked": 0,
+    "full_evidence_checked": false,
+    "scope": "file identity, not a new mechanics validation",
+    "created_utc": "2026-10-04T06:30:22.357993+00:00"
+  },
+  "mechanics_run": false,
+  "geometry_run": false,
+  "pytest_run": false,
+  "HP_run": false,
+  "render_run": false,
+  "scope": "Git/manifest file identity only; no numerical replay or new scientific qualification",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "exit_code": 0,
+      "stdout": "https://github.com/dudaxing/Compliant-TO-TMC.git\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "fetch",
+        "origin",
+        "main"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "From https://github.com/dudaxing/Compliant-TO-TMC\n * branch            main       -> FETCH_HEAD\n   96c4665..59e5c7d  main       -> origin/main\n"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "origin/main"
+      ],
+      "exit_code": 0,
+      "stdout": "59e5c7de1da7efc669381ace421679d88b573ca3\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "merge",
+        "--ff-only",
+        "origin/main"
+      ],
+      "exit_code": 0,
+      "stdout": "Updating 96c4665..59e5c7d\nFast-forward\n README.md                                          |     9 +\n docs/CURRENT_STATUS.md                             |     9 +\n docs/HF5_LF_V2_ADAPTER_AND_TASK_PLAN.md            |     9 +\n docs/NUMPY_FORCE_PROGRESS_20261002.md              |    24 +\n docs/PHYSICS_AND_FUNCTION_PROGRESS_20261001.md     |     9 +\n docs/RESUME_DEVELOPMENT.md                         |     9 +\n .../native_region_geometry_20261004/RESULTS.md     |    78 +\n .../square007_001/README.md                        |    15 +\n .../square007_001/RESULTS.md                       |     9 +\n .../square007_001/closed_failure.json              |    25 +\n .../square007_001/input_inventory.json             |    76 +\n .../square007_001/launch_phase.py                  |    64 +\n .../square007_001/protocol.json                    |    81 +\n .../square007_001/run_analytic_tests.py            |    63 +\n .../square007_001/source_freeze.json               |    34 +\n .../square007_001/sources/__init__.py              |     7 +\n .../square007_001/sources/boundary_geometry.py     |   181 +\n .../square007_001/sources/launch_phase.py          |    64 +\n .../sources/measure_native_workpiece_regions.py    |   265 +\n .../sources/native_region_geometry.py              |   269 +\n .../square007_001/sources/run_analytic_tests.py    |    63 +\n .../sources/test_native_region_geometry.py         |   282 +\n .../square007_001/static_execution_review.json     |   157 +\n .../square007_001/static_identity_review.json      |   209 +\n .../square007_001/static_math_review.json          |    84 +\n .../square007_001/tests_001/junit.xml              |    20 +\n .../square007_001/tests_001/test_receipt.json      |    29 +\n .../square007_001/tests_launch.json                |    68 +\n .../square007_001/tests_stdout.log                 |    29 +\n .../square007_002/README.md                        |    11 +\n .../actual_math_and_view_static_review.json        |   267 +\n .../actual_saved_identity_review.json              |   820 +\n .../square007_002/input_inventory.json             |    76 +\n .../square007_002/launch_phase.py                  |    64 +\n .../square007_002/measure_launch.json              |    75 +\n .../square007_002/measure_precondition.json        |    14 +\n .../square007_002/measure_stdout.log               |     1 +\n .../measurement_001/boundary_comparison.json       | 15721 ++++++++++++++++\n .../measurement_001/regions_measurements.json      | 17982 +++++++++++++++++++\n .../measurement_001/sources/__init__.py            |     7 +\n .../measurement_001/sources/boundary_geometry.py   |   181 +\n .../sources/measure_native_workpiece_regions.py    |   265 +\n .../sources/native_region_geometry.py              |   269 +\n .../square007_002/protocol.json                    |    84 +\n .../square007_002/run_analytic_tests.py            |    63 +\n .../square007_002/source_freeze.json               |    36 +\n .../square007_002/sources/__init__.py              |     7 +\n .../square007_002/sources/boundary_geometry.py     |   181 +\n .../square007_002/sources/launch_phase.py          |    64 +\n .../sources/measure_native_workpiece_regions.py    |   265 +\n .../sources/native_region_geometry.py              |   269 +\n .../square007_002/sources/run_analytic_tests.py    |    63 +\n .../sources/test_native_region_geometry.py         |   282 +\n .../square007_002/static_candidate_review.json     |   140 +\n .../square007_002/static_identity_review.json      |   225 +\n .../square007_002/tests_001/junit.xml              |     1 +\n .../square007_002/tests_001/test_receipt.json      |    29 +\n .../square007_002/tests_launch.json                |    71 +\n .../square007_002/tests_stdout.log                 |     9 +\n .../square007_view_001/README.md                   |     9 +\n .../square007_view_001/RESULTS.md                  |     7 +\n .../square007_view_001/closed_failure.json         |    18 +\n .../square007_view_001/launch_phase.py             |    64 +\n .../square007_view_001/protocol.json               |    90 +\n .../square007_view_001/render_launch.json          |    97 +\n .../render_native_region_path.py                   |   267 +\n .../square007_view_001/render_stdout.log           |     7 +\n .../square007_view_001/source_freeze.json          |    14 +\n .../square007_view_001/sources/launch_phase.py     |    64 +\n .../sources/render_native_region_path.py           |   267 +\n .../square007_view_001/static_identity_review.json |    83 +\n .../square007_view_002/README.md                   |     7 +\n .../square007_view_002/actual_view_review.json     |    75 +\n .../square007_view_002/launch_phase.py             |    64 +\n .../square007_view_002/protocol.json               |    95 +\n .../render_001/native_region_path.png              |   Bin 0 -> 529157 bytes\n .../render_001/region_states.csv                   |     8 +\n .../render_001/render_native_region_path_frozen.py |   265 +\n .../square007_view_002/render_001/view.json        |   281 +\n .../square007_view_002/render_launch.json          |   102 +\n .../render_native_region_path.py                   |   265 +\n .../square007_view_002/render_stdout.log           |     1 +\n .../square007_view_002/source_freeze.json          |    15 +\n .../square007_view_002/sources/launch_phase.py     |    64 +\n .../sources/render_native_region_path.py           |   265 +\n .../static_candidate_review.json                   |    40 +\n .../square007_view_003/README.md                   |     7 +\n .../square007_view_003/actual_view_review.json     |    55 +\n .../square007_view_003/launch_phase.py             |    64 +\n .../square007_view_003/protocol.json               |   100 +\n .../render_001/native_region_path.png              |   Bin 0 -> 530732 bytes\n .../render_001/region_states.csv                   |     8 +\n .../render_001/render_native_region_path_frozen.py |   267 +\n .../square007_view_003/render_001/view.json        |   281 +\n .../square007_view_003/render_launch.json          |   107 +\n .../render_native_region_path.py                   |   267 +\n .../square007_view_003/render_stdout.log           |     1 +\n .../square007_view_003/source_freeze.json          |    15 +\n .../square007_view_003/sources/launch_phase.py     |    64 +\n .../sources/render_native_region_path.py           |   267 +\n .../static_candidate_review.json                   |    89 +\n .../delivery_readonly_review.json                  |   133 +\n .../document_preservation.json                     |    55 +\n handoff/repository_manifest.json                   |   534 +-\n hf_repo/README.md                                  |     9 +\n .../scripts/measure_native_workpiece_regions.py    |   265 +\n hf_repo/src/hf_eval/native_region_geometry.py      |   269 +\n hf_repo/tests/test_native_region_geometry.py       |   282 +\n 108 files changed, 45439 insertions(+), 17 deletions(-)\n create mode 100644 functional_views/native_region_geometry_20261004/RESULTS.md\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/README.md\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/RESULTS.md\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/closed_failure.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/input_inventory.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/launch_phase.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/protocol.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/run_analytic_tests.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/source_freeze.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/sources/__init__.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/sources/boundary_geometry.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/sources/launch_phase.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/sources/measure_native_workpiece_regions.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/sources/native_region_geometry.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/sources/run_analytic_tests.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/sources/test_native_region_geometry.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/static_execution_review.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/static_identity_review.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/static_math_review.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/tests_001/junit.xml\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/tests_001/test_receipt.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/tests_launch.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_001/tests_stdout.log\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/README.md\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/actual_math_and_view_static_review.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/actual_saved_identity_review.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/input_inventory.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/launch_phase.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/measure_launch.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/measure_precondition.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/measure_stdout.log\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/measurement_001/boundary_comparison.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/measurement_001/regions_measurements.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/measurement_001/sources/__init__.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/measurement_001/sources/boundary_geometry.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/measurement_001/sources/measure_native_workpiece_regions.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/measurement_001/sources/native_region_geometry.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/protocol.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/run_analytic_tests.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/source_freeze.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/sources/__init__.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/sources/boundary_geometry.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/sources/launch_phase.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/sources/measure_native_workpiece_regions.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/sources/native_region_geometry.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/sources/run_analytic_tests.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/sources/test_native_region_geometry.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/static_candidate_review.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/static_identity_review.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/tests_001/junit.xml\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/tests_001/test_receipt.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/tests_launch.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_002/tests_stdout.log\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/README.md\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/RESULTS.md\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/closed_failure.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/launch_phase.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/protocol.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/render_launch.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/render_native_region_path.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/render_stdout.log\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/source_freeze.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/sources/launch_phase.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/sources/render_native_region_path.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_001/static_identity_review.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/README.md\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/actual_view_review.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/launch_phase.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/protocol.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/render_001/native_region_path.png\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/render_001/region_states.csv\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/render_001/render_native_region_path_frozen.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/render_001/view.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/render_launch.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/render_native_region_path.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/render_stdout.log\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/source_freeze.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/sources/launch_phase.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/sources/render_native_region_path.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_002/static_candidate_review.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/README.md\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/actual_view_review.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/launch_phase.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/protocol.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/render_001/native_region_path.png\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/render_001/region_states.csv\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/render_001/render_native_region_path_frozen.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/render_001/view.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/render_launch.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/render_native_region_path.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/render_stdout.log\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/source_freeze.json\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/sources/launch_phase.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/sources/render_native_region_path.py\n create mode 100644 functional_views/native_region_geometry_20261004/square007_view_003/static_candidate_review.json\n create mode 100644 handoff/native_region_geometry_20261004/delivery_readonly_review.json\n create mode 100644 handoff/native_region_geometry_20261004/document_preservation.json\n create mode 100644 hf_repo/scripts/measure_native_workpiece_regions.py\n create mode 100644 hf_repo/src/hf_eval/native_region_geometry.py\n create mode 100644 hf_repo/tests/test_native_region_geometry.py\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "59e5c7de1da7efc669381ace421679d88b573ca3\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Scripts\\python.exe",
+        "-B",
+        "tools/handoff.py",
+        "verify",
+        "--output",
+        "D:\\hf-native-region-geometry001-author-20261004\\public_science_file_verify.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"pass\",\n  \"repository_files\": 9268,\n  \"restored_historical_files\": 0,\n  \"asset_closure\": [],\n  \"saved_archives_checked\": 0,\n  \"full_evidence_checked\": false,\n  \"scope\": \"file identity, not a new mechanics validation\",\n  \"created_utc\": \"2026-10-04T06:30:22.357993+00:00\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "59e5c7de1da7efc669381ace421679d88b573ca3\n",
+      "stderr": ""
+    }
+  ]
+}
