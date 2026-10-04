@@ -1,0 +1,167 @@
+{
+  "schema_version": "native-cycle-saved-view-static-review-1.0",
+  "status": "static_pass_no_render",
+  "review_role": "Viewer author static verification; independent mathematical review is separate.",
+  "source": "plot_cycle006_saved.py",
+  "source_sha256": "1b628cf886db425296c7c8424b30280f3f2cfc1ff42c0d195b0416dd82ffb69d",
+  "source_lines": 231,
+  "AST_and_compile_source_pass": true,
+  "base_viewer": {
+    "source": "plot_cycle004_saved.py",
+    "sha256": "2495aafc303d66cb7d2a31f02e9162999aeb315a92acd7cfe9befa04254fd4e4",
+    "scope": "Pure saved16-field mechanical reader; old17-field loader is never called"
+  },
+  "source_imports": [
+    "from time import perf_counter",
+    "import argparse",
+    "import csv",
+    "from hashlib import sha256",
+    "import importlib.util",
+    "import json",
+    "from pathlib import Path",
+    "from textwrap import fill",
+    "import matplotlib",
+    "import matplotlib.pyplot as plt",
+    "from matplotlib.collections import PolyCollection",
+    "from matplotlib.colors import Normalize",
+    "from matplotlib.lines import Line2D",
+    "from matplotlib.ticker import ScalarFormatter",
+    "import numpy as np",
+    "import psutil"
+  ],
+  "pure_helper": {
+    "source": "functional_views/native_workpiece_cycle_20261004/plot_workpiece_cycle.py",
+    "sha256": "d256fe2b1541505cd5315f45c4a50462670a09436ceb91ecc8d01bbb25554169",
+    "used_functions": [
+      "semantic_hash",
+      "numerical_rows"
+    ],
+    "unused": [
+      "load_saved",
+      "render"
+    ]
+  },
+  "static_contract_checks": {
+    "stage_identity": "coarse_square_cycle_006",
+    "response_mode": "mechanical",
+    "schema": "hf-native-mean-result-1.2",
+    "force_fields": 16,
+    "auxiliary_material_energy": "not_evaluated/qualified:false/field_present:false",
+    "original_state_and_array_file_descriptors_SHA_checked": true,
+    "saved_model27_state2_force16_tensor3_fullCSC_fields_verified": true,
+    "original_target_index_and_leg_order_checked": true,
+    "each_actual_accepted_index_retained": true,
+    "repeated_half_and_origin_return_not_deduplicated": true,
+    "peak_selection": "argmax(d_mm) over all actual accepted rows, never fixedindex1",
+    "last_selection": "len(rows)-1, no fabricated requested endpoint",
+    "all_accepted_rows_in_curves_and_CSV": true,
+    "partial_or_complete_path_label_from_saved_result": true,
+    "formal_phase_status_read_from_receipt": true,
+    "scientific_reference_qualified": false,
+    "actual_geometry_scale": 1,
+    "supplementary_displacement_scale": 4,
+    "supplementary_force_arrows": false,
+    "force_arrows": "Common whole-path N scale for input/support/body forces, body ON-force from saved record; output marker measures+y, not force.",
+    "displacement_colors": "Actual saved mean nodal displacement magnitude in mm, whole-path shared scale; distinct solid/medium maps and two bars.",
+    "all_curves_chronological": true,
+    "animation_frames": 0,
+    "interpolated_states": 0,
+    "unsigned_boundary_read": "Optional --measurements. Saved all_exposed/bottom/left distance curves; bottom/left closest savedpoints only at actual x1 peak, no new geometry or distance arithmetic. Left may be a corner, not side-normal gap.",
+    "node_window_proxy": "Separate CSV quantities; not labelled boundary distance, penetration or contact proof.",
+    "measurement_task_state_index_leg_target_SHA_checked": true,
+    "measurement_all_input_payload_and_source_coverage_checked": true,
+    "historical_source_provenance": "Measurement hf_repo sources mapped to bound006 stage/sources byte capsules; no dependence on old absolute-machine paths or current live source version.",
+    "input_and_source_before_after_SHA_checked_by_viewer": true,
+    "output_exclusive": true,
+    "cooperative_limit_seconds": 120,
+    "sampled_RSS_bytes": 8589934592
+  },
+  "actual006_boundary_source_capsules": {
+    "boundary_geometry.py": {
+      "source_key": "hf_repo/src/hf_eval/boundary_geometry.py",
+      "sha256": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+      "exists": true,
+      "raw_SHA_match": true
+    },
+    "measure_native_workpiece_boundaries.py": {
+      "source_key": "hf_repo/scripts/measure_native_workpiece_boundaries.py",
+      "sha256": "2a3c3e2d67a00fa9372f4befe2a44645f0234ee4f3ebcf31bcab6df08512937f",
+      "exists": true,
+      "raw_SHA_match": true
+    }
+  },
+  "actual_measurement_schema_reference": {
+    "file": "functional_views/native_workpiece_cycle004_20261004/boundary_saved_001/measurement_001/boundary_measurements.json",
+    "sha256": "4d622d3c2658b2ba195e23d1b16a82f999e27c7ad3fa77e3e947f04ab6364738",
+    "schema_version": "native-workpiece-boundary-path-1.0",
+    "state_list_field": "accepted_states",
+    "input_map_field": "input_files_sha256",
+    "actual_example_rows": 3,
+    "actual_example_bindings": 8,
+    "mapping_checks": [
+      {
+        "declared_relative_suffix": "result/result.json",
+        "mapped_source": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/result/result.json",
+        "sha256": "db7fe54eb730bee17bc8a9f95f6a62772f3a0dc316b44a64f459c6b55c653586",
+        "matches": true
+      },
+      {
+        "declared_relative_suffix": "result/model/model.json",
+        "mapped_source": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/result/model/model.json",
+        "sha256": "8db08f63aa4511e7acb36fc467a24a39b80206144af712e9507f5d7e4df8784a",
+        "matches": true
+      },
+      {
+        "declared_relative_suffix": "result/model/model.npz",
+        "mapped_source": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/result/model/model.npz",
+        "sha256": "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049",
+        "matches": true
+      },
+      {
+        "declared_relative_suffix": "result/accepted/000/state.npz",
+        "mapped_source": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/result/accepted/000/state.npz",
+        "sha256": "521742979e13f4b681696e160d2d37bcdbddb38b457ce97c5ba0acdf931788f5",
+        "matches": true
+      },
+      {
+        "declared_relative_suffix": "result/accepted/001/state.npz",
+        "mapped_source": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/result/accepted/001/state.npz",
+        "sha256": "f0f1d3eecf05d8d0d6a9ba831b8583374c8170768d77a65056fc654d882c21b0",
+        "matches": true
+      },
+      {
+        "declared_relative_suffix": "result/accepted/002/state.npz",
+        "mapped_source": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/result/accepted/002/state.npz",
+        "sha256": "19c143383b30aa1f16cd7e12fd89a89cc90954baa50be5750b248c36211a1e6a",
+        "matches": true
+      },
+      {
+        "declared_relative_suffix": "hf_repo/scripts/measure_native_workpiece_boundaries.py",
+        "mapped_source": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_006/sources/measure_native_workpiece_boundaries.py",
+        "sha256": "2a3c3e2d67a00fa9372f4befe2a44645f0234ee4f3ebcf31bcab6df08512937f",
+        "matches": true
+      },
+      {
+        "declared_relative_suffix": "hf_repo/src/hf_eval/boundary_geometry.py",
+        "mapped_source": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_006/sources/boundary_geometry.py",
+        "sha256": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+        "matches": true
+      }
+    ],
+    "all_mapped_saved_payload_source_SHA_match": true,
+    "scope": "Only actual004 saved schema/path mapping was read; this does not qualify future006 measurement or production outputs."
+  },
+  "review_new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "action_consumer": 0,
+    "geometry": 0,
+    "plot": 0,
+    "tests": 0
+  },
+  "rendered": false,
+  "new_numerical_physical_or_contact_qualification": false,
+  "remaining_verification": "Root owns the future exclusive rendering and checks actual006 measurement bindings; inspect actual PNG/CSV then. Partial data still requires internally consistent cached descriptor/progress metadata."
+}

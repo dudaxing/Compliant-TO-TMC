@@ -1,0 +1,111 @@
+{
+  "schema_version": "cycle-preproduction-static-function-review-1.0",
+  "status": "blocked_preproduction",
+  "stage": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_005",
+  "baseline_commit": "836e4c43ad6b97140657dd2da1192f071deb9bcb",
+  "review_method": "Read source text and diffs; stdlib AST/compile(source), JSON reads and SHA256 only. No production imports or invocation.",
+  "blocking_issue": {
+    "file": "audit_cycle005.py",
+    "line": 135,
+    "actual_condition": "self.stage.name == \"coarse_square_cycle_004\"",
+    "actual_input_stage": "coarse_square_cycle_005",
+    "effect": "load() rejects the actual new-stage identity before HP; therefore no preproduction approval.",
+    "old_task_binding": "coarse_square_cycle_004/task.json at line265 is legitimate prior-task provenance and must remain unchanged."
+  },
+  "reviewed_files_sha256": {
+    "prepare_cycle005.py": "c8f92a7f264ff79d0f1e3f8152f960ec1e02240c14675d29beb921ca57c0c3f4",
+    "execute_cycle005.py": "023145d815637888ee500eb3d7b1a4b73230cf612f17d4709bed1c08bb319061",
+    "launch_cycle005.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+    "audit_cycle005.py": "b780cbe4fa889597e38449e53ce228546eb5836f925b04764d6ede64c7601afd",
+    "core_audit_mechanical.py": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+    "task.json": "bbeeddecd1fbf967f3f19434f89b4d7543a7792fff2fb213a7c2b0030098eb6a",
+    "input_inventory.json": "e5269b434a6d49cc2d80d951bbbbaaf0ac181163247f359889b506dbc0cb1d5d",
+    "source_freeze.json": "0293ed8f83161e6ffe4c6282502d5124ff2f526194cd0eef5635b5fa5e145380",
+    "prepare_protocol.json": "99cb40bbc6f0414d8e8f581925d7ca9637f08abdc2c11114e33ee8b4ac4454dd",
+    "prepare_launch.json": "54f4b853c3ea1dbe3ae0d4edf37841797120b857ae6bf87e6a400a4fa660a978",
+    "protocol.json": "bcc040b923636cee769a052b2d08ab2b4b061727cdaeeb9c89b308375078b702"
+  },
+  "author_preparation_files_sha256": {
+    "install_cycle005_stage.py": "a742aa58b50d05c900d9f437067632117012a6695f31e066aa113bf273455c48",
+    "build_cycle005_protocol.py": "efde212e06cc6c0dc0e38c73dc918a45fac3e145befdf0e2bed9fd439abaf8eb"
+  },
+  "passed_static_checks": {
+    "all_reviewed_python_parse_and_compile_source": true,
+    "execute_vs004_only_docstring_diff": true,
+    "launch_vs004_byte_identical": true,
+    "private_core_vs004_byte_identical": true,
+    "audit_author_installed_byte_identical": true,
+    "audit_function_AST_differences_only": [
+      "checkpoint",
+      "load",
+      "run"
+    ],
+    "reconstruct_counts_AST_unchanged": true,
+    "verify_first_range_observation_AST_unchanged": true,
+    "mathematical_equations_gates_and_workpiece_checks_inherited_unchanged": true,
+    "task_target_mm": 1.0,
+    "ordered_targets_mm": [
+      0.0,
+      0.5,
+      1.0,
+      0.5,
+      0.0
+    ],
+    "original_27_array_model_sha256": "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049",
+    "source_counts": {
+      "total": 68,
+      "unique_basenames": 68,
+      "live_current_and_capsules_match": true,
+      "base003": 63,
+      "new005_roles": 5,
+      "declared_existing_live_transitions": 3
+    },
+    "binding_counts": {
+      "prepare_protocol": 106,
+      "inputs": 39,
+      "source_live": 68,
+      "source_capsules": 68,
+      "additional_protocol_files": 4,
+      "production_reference_protocol": 179,
+      "all_current_SHA256_match": true
+    },
+    "input39_composition": "Unchanged old32 + prior004 inventory/source_freeze/execution_receipt/reference_summary4 + new005 task/direction/README3",
+    "settings_gates_limits_vs004_equal": true,
+    "resource_limits": {
+      "production_helper_seconds": 600,
+      "production_outer_seconds": 660,
+      "reference_helper_seconds": 240,
+      "reference_outer_seconds": 300,
+      "sampled_RSS_bytes": 8589934592,
+      "minimum_increment_mm": 0.00625
+    },
+    "all_actual_accepted_indices_reference_rule": "fresh HP80/120 per actual index, including repeated displacement and any accepted bisection state; no state-hash deduplication",
+    "failure_policy": "One formal invocation per phase; first formal phase failure closes card, partial data retained, no repair/retry/force/extension. Original internal controller trial rejection/backtracking remains declared algorithm."
+  },
+  "unchanged_contract_limits": [
+    "Cooperative time/RSS monitoring; no OS hard memory cap or force kill.",
+    "Reference requires complete tangent chronology and no tangent-range deficit; production success alone does not bypass those preconditions.",
+    "Auxiliary material energy remains not_evaluated, unqualified and absent; no stress-HP, all-column, contact or clamp qualification."
+  ],
+  "execution_status_at_review": {
+    "prepare_launch": "pass",
+    "production_launch_absent": true,
+    "execution_receipt_absent": true,
+    "result_directory_absent": true,
+    "reference_directory_absent": true,
+    "production_invocations": 0,
+    "HP_invocations": 0
+  },
+  "review_new_calls": {
+    "force": 0,
+    "tangent": 0,
+    "solver": 0,
+    "HP": 0,
+    "consumer": 0,
+    "tests": 0,
+    "geometry": 0,
+    "plot": 0
+  },
+  "resolution_record": "Parent elected to keep005 frozen and close at zero production/HP after this static blocker, then create a distinct006 card. This report does not authorize editing or retrying005.",
+  "new_numerical_or_physical_qualification": false
+}

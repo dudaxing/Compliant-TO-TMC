@@ -1,0 +1,94 @@
+{
+  "schema_version": "native-workpiece-cycle-static-math-review-1.0",
+  "status": "static_pass",
+  "numerical_qualification": false,
+  "author_script": "audit_cycle006.py",
+  "author_script_sha256": "d7fb8417f6a35186b31ec766c56491d891d00b40cd396e5535eca8567e13a922",
+  "author_script_lines": 590,
+  "baseline_commit": "836e4c43ad6b97140657dd2da1192f071deb9bcb",
+  "stage": "coarse_square_cycle_006",
+  "targets_mm": [
+    0,
+    0.5,
+    1,
+    0.5,
+    0
+  ],
+  "superseded_author_review": {
+    "stage": "coarse_square_cycle_005",
+    "author_script_sha256": "b780cbe4fa889597e38449e53ce228546eb5836f925b04764d6ede64c7601afd",
+    "incorrect_static_pass_receipt_sha256": "59e85c5d148007896539b2e270d6e98e7538f9ae10c4f7ab08ae08741cfaf61c",
+    "omission": "Author and first static math receipt overlooked the retained strict self.stage.name == coarse_square_cycle_004 predicate",
+    "found_by": "Independent static reviewers before production or reference",
+    "closed_without_production_or_HP": true,
+    "scope": "Execution-precondition identity error; not a numerical, force or HP failure. Frozen 005 sources and receipts remain unchanged"
+  },
+  "exact_delta_from_closed_005": [
+    "One strict self.stage.name comparator: coarse_square_cycle_004 to coarse_square_cycle_006",
+    "Three new stage source-role filenames: prepare_cycle006.py, execute_cycle006.py, launch_cycle006.py"
+  ],
+  "verified_stage_name_comparators": [
+    "coarse_square_cycle_006"
+  ],
+  "no_remaining_005_stage_or_wrapper_names": true,
+  "historical_task_binding": {
+    "path": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/task.json",
+    "sha256": "18285aacdf19bb994c084608676125e004d02da291999269865e731449147bd7",
+    "retained": true,
+    "allowed_delta": "Four descriptive keys plus input.target_mm = 1 and path ordered_cycle [0,.5,1,.5,0]; all other old004 task fields identical"
+  },
+  "private_core_sha256": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+  "private_core_modified": false,
+  "unchanged_AST_methods_vs_frozen_004": [
+    "__init__",
+    "lifecycle",
+    "reconstruct_counts",
+    "verify_first_range_observation"
+  ],
+  "unchanged_AST_declarations_vs_frozen_004": [
+    "SETTINGS",
+    "LIMITS",
+    "KERNEL_PIN",
+    "NATIVE_MEAN_PIN",
+    "CLI_PIN",
+    "CONSUMER_PIN",
+    "BODY_MODEL_PIN",
+    "OLD_CHECKER_SHA",
+    "LEGACY_FREEZE_SHA"
+  ],
+  "inherited_unchanged_math": [
+    "CoreAudit.run_state",
+    "WorkpieceCycleAudit.workpiece_checks",
+    "Original GATES and reference equations"
+  ],
+  "source_contract": "Original 003 63 source paths with the same three declared live updates plus 006 five wrappers = 68 unique basename capsules",
+  "reference_coverage": "Every actual accepted state including repeated targets and bisection states receives fresh HP80 and HP120; 3200 whole elements and 6642 DOFs, fixed-lift PORT direction and deltaR=0; no all-column HP or energy/stress/contact/clamp qualification",
+  "reference_preconditions": "Original production success, all tangent/base calls complete and strict force trial/cache/first-observer accounting retained",
+  "resources": {
+    "production_seconds": 600,
+    "production_outer_seconds": 660,
+    "reference_seconds": 240,
+    "reference_outer_seconds": 300,
+    "sampled_RSS_bytes": 8589934592
+  },
+  "static_operations": [
+    "Read author 006 and closed005 bytes",
+    "Exact whole-source delta",
+    "AST parse and compile(source), no import",
+    "Enumerated actual stage-name comparison AST",
+    "Compared specified declaration and method AST with frozen004",
+    "Read pinned prior004 task and private Core bytes"
+  ],
+  "review_limits": [
+    "External author source only; final installed task/inventory/freeze still require identity cross-review",
+    "No numerical qualification",
+    "1mm convergence and cost unmeasured; no budget extension or scope reduction"
+  ],
+  "new_force_calls": 0,
+  "new_tangent_calls": 0,
+  "new_consumer_calls": 0,
+  "new_HP_evaluations": 0,
+  "new_solver_calls": 0,
+  "new_test_runs": 0,
+  "new_geometry_calls": 0
+}

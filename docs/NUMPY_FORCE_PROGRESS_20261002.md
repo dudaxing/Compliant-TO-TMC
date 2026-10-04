@@ -1,5 +1,14 @@
 # NumPy 完整力入口：功能进度与参考比较
 
+2026-10-04当前：**同一粗方固定半工件的新0→.5→1→.5→0 mm完整机械循环成功，5实际接受态的10次新HP80/120与96,781项原门检查通过。** 31/31F、18/18T、1solve；峰输入R=.216813996933 N、自由+y输出=1.159355055764 mm、minJ=.458189164213。真实unsigned外边界距2→1.47194→.924425→1.47194→2 mm；各保存态无相交，尚未证明接触或有效夹持。见[目标、原因、问题排查、物理效果与限制](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_006/RESULTS.md)、[实际结构/力/变形/最近点图](../functional_views/native_workpiece_cycle006_20261004/saved_001/render_001/cycle006_saved_path.png)。
+
+本轮只扩物理任务，004实现与6项接口既有实测保持，未重复测试；schema1.2机械模式能量明确not_evaluated，原算法/门未变。005因冻结stage身份谓词错误在生产前闭卡、0新数值；006作者路径遗漏在正式安装前修正，原字节留存。新资格仅接受态机械力/声明PORT方向/组装/平衡与工件合力，不含能量、应力HP、全列HP或一般接触。图仅读生产，原独立flags不回填，fresh参考资格另见报告。
+
+下一步新1.5 mm粗方加载—卸载，据实际minJ/距离/成本再考虑2/3 mm；1.5/2/3 mm、圆形/细网格平衡尚未执行。signed gap/包容/法向、压力/有效夹持、自由工件、H2/H3/HF5、AD/JIT及完整项目仍待完成。仅main开发，origin=https://github.com/dudaxing/Compliant-TO-TMC.git；公开恢复只核文件身份。
+
+以下保留以前时点原字节；当前接续以上述新结果与持续记录末节为准。
+
+
 2026-10-04当前：**可选机械模式已接入NumPy平均位移求解器；新的固定对称半方形工件0→0.5→0 mm完整加载—卸载成功，三个接受态的6次新HP80/120及58,197项原门检查通过。** 接口6项实际测试通过；本次生产17/17力、10/10切线、1求解，213.73秒。峰值R=.106253247986 N、自由输出+y=.575755712293 mm、minJ=.735764774113；卸载返回近初始。真实外边界距2→1.471935964045→2 mm，均无交叉；仍未证明有效夹持。见[目标、实现、原因、效果及全部限制](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/RESULTS.md)、[真实结构/力/变形图](../functional_views/native_workpiece_cycle004_20261004/saved_001/render_001/cycle004_saved_path.png)、[实际边界距离](../functional_views/native_workpiece_cycle004_20261004/boundary_saved_001/RESULTS.md)。
 
 默认complete响应保持原17字段；新response_mode=mechanical/schema1.2保存16力字段/3切线/full CSC，并明确材料能量not_evaluated/qualified:false/field_present:false。原控制器/CI/T/B52/收敛门未放宽。旧003卸载失败及未捕获T25问题保留；新三态资格限声明task/source的力、PORT方向作用、组装和平衡，不包含能量/应力HP/全列切线/一般接触。图只读生产所以标题仍PRODUCTION ONLY UNQUALIFIED；fresh参考资格另读本报告，不回填原生产flags。
@@ -1845,3 +1854,77 @@ reference_002唯一真实terminal0/pass，3接受态分别HP80/120、6开始/6�
 完整目标/实现/原因/效果/资源与作者准备SyntaxError、错误提前依赖launcher等说明见[cycle004 RESULTS](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/RESULTS.md)，[接口卡](../lf_data_preparation/native_workpiece_001/native_mean_mechanical_integration_001/RESULTS.md)、[实际图](../functional_views/native_workpiece_cycle004_20261004/saved_001/render_001/cycle004_saved_path.png)、[边界记录](../functional_views/native_workpiece_cycle004_20261004/boundary_saved_001/RESULTS.md)。所有正式阶段一次terminal exit0，无重试/force/延长。旧记录原body bytes保留，不把旧失败改成pass。
 
 下一新卡同一粗方固定半体1 mm探索，优先ordered目标0→.5→1→.5→0，在调用前固定新协议与预算，再逐实际接受态fresh参考/显示/测距。根据新结果决定2/3 mm，圆/细工况另行资格；不线性外推接触阈值、不把已构建模型称已求解或不同LF设计称网格收敛。更大变形与多工况是用户授权方向，当前无1/2/3 mm执行结果。全部上传main并作公有恢复文件核对；whole goal保持进行中。
+
+
+<a id="native-workpiece-cycle006-20261004"></a>
+
+## 2026-10-04：新1 mm加载—卸载完成及下一步
+
+
+## 目标、实施与原因
+
+整体目标是可独立读取普通几何与物理任务的HF第三介质接触力学评估器，可靠计算力、变形、平衡与接触相关指标，支持外部研究比较。HF不运行LF优化、dmftd或MPM；完整项目尚未完成。
+
+在004已实现可选NumPy机械模式并完成0→.5→0 mm后，本轮保持全部力学实现和原门，扩至0→.5→1→.5→0 mm，观察大变形、工件作用和卸载恢复。没有新增防御框架、放宽门、辅助能量填0/NaN、捕错fallback或借旧资格。API/core/controller/T/CI/B52与004字节相同；6项机械接口单测为004既有实测，本轮未重复执行。
+
+## 前置问题排查与保留失败
+
+005完成准备后，独立静审发现其冻结auditor的stage谓词仍要求004。005在生产前关闭，0F/T/solve/HP，不是1 mm数值失败，也没有修复后重开原卡。[闭卡原因与完整记录](../coarse_square_cycle_005/RESULTS.md)保留原来源、协议、任务及审阅。
+
+新006作者准备还发现两个下划线STAGE字面量漏改为006；在安装/准备/数值调用之前修正作者文件，原author_v1留存。重新静审实际路径、完整输入、任务同步、算法与门，006随后每正式阶段仅执行一次。查看卡AST读取曾因未指定UTF-8而GBK解码失败；改读取编码后AST通过，查看源码未变且正式安装/绘图各一次。[作者错误及前后字节](author_provenance/record.json)透明留存。旧003完整响应卸载失败与未捕获T25输入仍冻结；新成功不解释或修复那个未知输入。
+
+## 本次物理任务
+
+用户授权探索对称方形/圆形与较大行程。本卡Agent选择与004相同的固定完整方形side16 mm、center(70,40) mm，只计算下半；底/左初始间隔2 mm。h=1 mm、3200单元、3321节点、6642 DOF，376有效fixed/6266free；工件128单元、153节点、306体DOF（17与对称约束重叠）。E=1 MPa、nu=.3、平面应变、厚20 mm，gamma=alpha=1e-6、Lr=80 mm，输出/辅助弹簧0。平均输入+x，输出自由+y，无lift。
+
+004原27模型数组逐项保持；task仅原四个描述键以及input.target_mm/path.targets_mm改变，case目标同步。模型archive SHA `a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049`；task规范SHA `2acc75d2fe02ae328220287e91bd0402a542c101b2c95dd3f66bff9598f5d912`。原minincrement=.00625 mm、Newton25、backtrack12、bisection4不变。68 source路径/各自caps、39输入、179科学协议绑定全部前后不变；详细字节与来源见source_freeze/input_inventory/protocol。core d5f7/mean205/CLI01f6是004既有实现，不是本轮新增转换。
+
+## 实际物理效果
+
+完整5目标/5接受态成功，31/31F、18/18T、1solver、0生产HP/JIT/LF；18Newton base、13full-factor trial，无拒绝、二分或捕获范围异常。保存复用返回缓存，0额外F/T，两个观测hook均恢复。相同目标的loading/unloading仍保留独立index与stateSHA，不去重。
+
+| 实际index/leg | 平均输入 mm | 输入R N | 自由输出+y mm | minJ | 实际unsigned外边界距 mm |
+|---|---:|---:|---:|---:|---:|
+| 0 初始 | 0 | 0 | 0 | 1 | 2 |
+| 1 加载 | .5 | .106253247986 | .575755712293 | .735764774113 | 1.471935964045 |
+| 2 峰值 | 1 | .216813996933 | 1.159355055764 | .458189164213 | .924425179299 |
+| 3 卸载 | .5 | .106253247986 | .575755712293 | .735764774113 | 1.471935964045 |
+| 4 返回 | 0 | -4.57909104e-30 | 3.15929548e-29 | 1 | 2 |
+
+峰值相对残差4.077724452174e-13；返回5.958714885445e-17，最大绝对位移分量3.34477023813709e-28 mm，最大节点向量模3.38627215411739e-28 mm。峰值最大节点位移模1.59226972882768 mm，最大Hu=.163638586657615 1/mm。输入三节点ux分别.989152444079、1.002324497114、1.006198561693 mm：控制的是平均量，节点并不全部钉为1 mm。两次.5 mm响应在舍入范围内重合，只说明本次模型路径返回，不能普遍证明无滞回。
+
+峰值模型/第三介质作用于固定下半工件的总(Fx,Fy)=(-.000304296661729,+.000348240849612) N；材料(-.000084252202042,+.000245560370152) N，Hu(-.000220044459687,+.000102680479460) N。模型holding反力取反；镜像上半为(Fx,-Fy)，完整装配净矢量(2Fx,0)=(-.000608593323457,0) N。2|Fy|=.000696481699225 N只是两侧y合力绝对值之和。正距离下介质传小力；这些值尚不能称接触压力或有效夹持力。
+
+## 一次新独立参考：范围与原门
+
+生产成功后，对全部5个实际接受态/3200单元/6642DOF重新执行HP80与HP120，10/10新HP、96,781检查全部通过，未转移旧峰值或旧循环资格。包括96000局部门、45全局力/声明方向Jv/CSC/KKT门、原平衡/约束/支持/工件投影门；完整CSC每态204800局部总T系数组装对账，五态合计1,024,000。HP方向为声明PORT、deltaR=0；不是高精度逐列切线。
+
+原生产残差1e-9、HP残差1e-8、平均约束1e-10、平衡1e-6、fixed8e-11 mm；总力1e-11、总Jv1e-10、分量1e-9、HP互检1e-40保持，原floor/分母与Decimal3000全局精确scatter/Inexact trap不变。最坏全局总力归一差1.026786886213e-15，总Jv8.628015141776e-17，CSC1.047977066846e-16，局部Hu Jv1.591488337383e-16；HP80/120最坏互差1.270362559928e-52。峰值HP相对残差4.077709661555e-13，平均约束5.551115123126e-17、平衡1.322142643722e-15、fixed误差0。
+
+[实际reference summary](reference/summary.json)、逐元素门/全精度payload和[保存数学复核](actual_saved_math_review.json)给出原值、分母、门与身份。后者仅重现保存Decimal差/归一值，无新F/T/consumer/HP/组装/scatter/solver，不把96781计为重跑。保存身份核对157 NPZ数组字段、55参考payload；179协议与68来源/caps均一致。
+
+资格仅限此task/model/source及5个接受机械态的力、声明方向作用、组装、平衡和工件合力。schema1.2为16力字段/3切线/full CSC，辅助材料能量not_evaluated/qualified:false/field_present:false；P/S仅finite，无应力HP。能量、全列HP、旧T25/拒绝trial、一般支持域、压力/有效夹持、自由工件、H2/H3/HF5、AD/JIT仍未资格化。
+
+## 可视化与几何效果
+
+[实际五态结构/力/变形/边界图](../../../functional_views/native_workpiece_cycle006_20261004/saved_001/render_001/cycle006_saved_path.png)3300×3150，真实×1峰值和返回，明确标注4×辅助放大，共同N箭头尺度和mm色标；[5行×60列CSV](../../../functional_views/native_workpiece_cycle006_20261004/saved_001/render_001/accepted_numeric_states.csv)按实际index保留全部数值。节点平均位移色值最大1.55896 mm，不等同最大节点模1.59227 mm。图只读生产，标题PRODUCTION ONLY UNQUALIFIED与生产原flags保持；本报告另行授予fresh参考的明确范围。无插值/动画或新数值、组装、几何调用。
+
+[五次实际Q1边界测量](../../../functional_views/native_workpiece_cycle006_20261004/boundary_saved_001/RESULTS.md)排除y=40对称切口，496机制边/32体边；最小all/bottom距离2→1.47194→.924425→1.47194→2 mm，无交叉/roundoff near-touch，未测containment。峰left=1.790156357371 mm为下角欧氏距离，并非水平normal gap。峰节点窗口bottom=.948768611401、left=2.440586262978 mm，与真实边界距不同；CSV单列保留。图上的最近点虚线不是力箭头。距离下降与卸载恢复说明夹持前运动，不证明形成接触。
+
+## 实际成本、执行与恢复
+
+| 正式阶段 | helper秒 / 采样峰值字节 | outer秒 / 采样树峰值字节 | 上限秒 |
+|---|---|---|---|
+| prepare | 不适用 | .392891400028 / 25411584 | 60 |
+| production | 374.003127499949 / 875114496 | 375.006206199992 / 822308864 | 600 / 660 |
+| fresh reference | 102.519100400037 / 419549184 | 102.799705200014 / 423469056 | 240 / 300 |
+| saved geometry | .775346500042 / 41218048 | 1.366642699984 / 45817856 | 120 / 120 |
+| saved view | 3.123552000034 / 164405248 | 3.512272100023 / 169209856 | 120 / 120 |
+
+每阶段8GiB采样树，预算含imports/hash/IO，非OS硬cap；每正式阶段一次，实际terminal exit0，无重试/force/修复/延长。view151绑定、geometry39绑定前后不变；几何5/5真实调用且0F/T/solve/HP。source、模型、原协议与早先失败均冻结。后续公开异目录恢复只核文件身份，不构成新数值重放；科学提交与实际恢复回执将记录于handoff/native_workpiece_cycle006_20261004。
+
+## 下一步依据
+
+先在新卡探索同一粗方固定模型1.5 mm加载—卸载，建议[0,.5,1,1.5,1,.5,0] mm。当前1 mm minJ=.45819且unsigned最短距=.92443仍为正；按实际收敛、成本、J与边界距再决定2/3 mm，不线性外推闭隙阈值。冻结新卡目标/来源/原门/预算后执行；首失败保存partial并关闭，不修复旧卡重试。1.5/2/3 mm尚未运行，当前不是正式最大行程。
+
+细方与圆r8 mm模型已构建但其平衡未执行。接触需明确signed gap/包容/法向及压力或有效夹持定义，随后再处理自由刚体。不同LF设计对比不能称网格收敛。整体HF目标继续，main为唯一开发主干，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。

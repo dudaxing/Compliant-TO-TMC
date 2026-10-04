@@ -1,0 +1,108 @@
+{
+  "schema_version": "cycle005-preproduction-fixture-readonly-review-1.0",
+  "status": "blocked",
+  "reviewed_utc": "2026-10-04T03:23:15.375575+00:00",
+  "stage": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_005",
+  "baseline_commit": "836e4c43ad6b97140657dd2da1192f071deb9bcb",
+  "qualification": false,
+  "blocking_findings": [
+    {
+      "file": "lf_data_preparation/native_workpiece_001/coarse_square_cycle_005/audit_cycle005.py",
+      "line": 135,
+      "source_sha256": "b780cbe4fa889597e38449e53ce228546eb5836f925b04764d6ede64c7601afd",
+      "actual_required_stage": "coarse_square_cycle_004",
+      "actual_invocation_stage": "coarse_square_cycle_005",
+      "impact": "Fresh-reference load will fail the stage identity gate before HP; do not start the production/reference card under this frozen source.",
+      "scope": "No source repair or numerical invocation performed by reviewer"
+    }
+  ],
+  "passed_fixture_checks": {
+    "task_and_case_targets_mm": [
+      0.0,
+      0.5,
+      1.0,
+      0.5,
+      0.0
+    ],
+    "task_peak_mm": 1.0,
+    "changed_top_level_task_keys": [
+      "description",
+      "input",
+      "parameter_origin",
+      "path",
+      "purpose",
+      "task_id"
+    ],
+    "task_file_sha256": "bbeeddecd1fbf967f3f19434f89b4d7543a7792fff2fb213a7c2b0030098eb6a",
+    "task_semantic_sha256": "7ab72d249e25b1020309427141c3ae310dce48f1360b765751755093160c6853",
+    "canonical_contract": "Sorted compact UTF-8 JSON, float.hex values, zero normalized as original data.canonical_hash; new task/model metadata identity required",
+    "new_audit_task_canonical_checks_present": true,
+    "source_root_and_capsule_pairs_verified": 68,
+    "unique_source_basenames": 68,
+    "original003_sources_retained": 63,
+    "declared_live_transitions": {
+      "hf_repo/scripts/solve_native_mean.py": {
+        "previous_sha256": "b36d67444b122d2ed6ff693683dbd4d1c727e55ba27c0726c43f5cd4f211444f",
+        "current_sha256": "01f6f1277d0d596138f024706fca996984222769925679896c4a01e4461fc52b"
+      },
+      "hf_repo/src/hf_eval/native_mean.py": {
+        "previous_sha256": "948e73098e4bbb8748b6e256e12aac5e653019762f005efa6809c76eaacb4085",
+        "current_sha256": "205572334129ec4d7aaf9fdd5838935b450fce929e6b2ea18844308f85ae8fd3"
+      },
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": {
+        "previous_sha256": "7fff354270a276764445b45a281a5924fd9f0356236b89e0dbd4f00088b383ce",
+        "current_sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+      }
+    },
+    "old004_input_bindings_preserved": 32,
+    "input_bindings_verified": 39,
+    "prepare_protocol_bindings_verified": 106,
+    "production_reference_bindings_verified": 179,
+    "prepare_terminal": {
+      "status": "pass",
+      "exit_code": 0,
+      "invocations": 1,
+      "elapsed_seconds": 0.3866747999563813,
+      "peak_sampled_tree_RSS_bytes": 26644480
+    },
+    "model_archive_sha256": "a2d6e141fecb5f34efa66455c19ee67f47f476e019f760feb685f1a091266049",
+    "model_archive_fields": 27,
+    "model_arrays_recomputed": false,
+    "direction_archive_sha256": "177124bd1968f9e451e59cba4d7124c393eb8fee15cc93851f570f980aada29a",
+    "direction_original_bytes_equal": true,
+    "settings_gates_limits_exactly_equal004": true,
+    "mechanical_availability_exactly_equal004": true,
+    "prior_unit_status": "pass"
+  },
+  "source_file_pins": {
+    "task.json": "bbeeddecd1fbf967f3f19434f89b4d7543a7792fff2fb213a7c2b0030098eb6a",
+    "input_inventory.json": "e5269b434a6d49cc2d80d951bbbbaaf0ac181163247f359889b506dbc0cb1d5d",
+    "source_freeze.json": "0293ed8f83161e6ffe4c6282502d5124ff2f526194cd0eef5635b5fa5e145380",
+    "prepare_protocol.json": "99cb40bbc6f0414d8e8f581925d7ca9637f08abdc2c11114e33ee8b4ac4454dd",
+    "prepare_launch.json": "54f4b853c3ea1dbe3ae0d4edf37841797120b857ae6bf87e6a400a4fa660a978",
+    "protocol.json": "bcc040b923636cee769a052b2d08ab2b4b061727cdaeeb9c89b308375078b702",
+    "prepare_cycle005.py": "c8f92a7f264ff79d0f1e3f8152f960ec1e02240c14675d29beb921ca57c0c3f4",
+    "execute_cycle005.py": "023145d815637888ee500eb3d7b1a4b73230cf612f17d4709bed1c08bb319061",
+    "audit_cycle005.py": "b780cbe4fa889597e38449e53ce228546eb5836f925b04764d6ede64c7601afd",
+    "core_audit_mechanical.py": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+    "launch_cycle005.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477"
+  },
+  "before_after_bound_source_input_bytes_unchanged": true,
+  "methods": [
+    "stdlib JSON/AST/compile/source/ZIP-member/SHA reads",
+    "Pure task semantic hash",
+    "No NumPy or production-module imports"
+  ],
+  "new_calls": {
+    "model_construction": 0,
+    "force": 0,
+    "tangent": 0,
+    "tangent_consumer": 0,
+    "assembly": 0,
+    "solver": 0,
+    "HP": 0,
+    "tests": 0,
+    "plot": 0
+  },
+  "limits": "Preparation fixture and static task/reference interface only; does not grant numerical qualification. Frozen source stage-name mismatch is a blocker."
+}
