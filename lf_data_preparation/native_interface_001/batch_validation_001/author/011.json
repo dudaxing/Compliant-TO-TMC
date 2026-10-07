@@ -1,0 +1,48 @@
+{
+  "schema_version": "native-batch-test-author-checks-1.0",
+  "status": "source_only_not_run",
+  "source_sha256": {
+    "test_native_batch.py": "78a94bb87904322d8d0c170ca92678f9232a406941cffc07c22b365786ac57e0"
+  },
+  "tests": {
+    "test_ordered_once_transport_preserves_options_target_endpoint_and_case_qualification": 2,
+    "test_second_task_physical_difference_rejects_the_whole_batch_before_any_evaluate": 2,
+    "test_second_geometry_port_or_task_binding_rejects_before_the_first_evaluate": 2,
+    "test_invalid_options_or_existing_outputs_leave_every_case_unexecuted_and_keep_old_bytes": 4,
+    "test_first_failure_or_changed_input_stops_without_overwriting_completed_response": 2,
+    "test_escaped_error_stops_and_records_original_exception_without_fabricating_partial": 2,
+    "test_cli_from_unrelated_cwd_uses_explicit_repo_and_prints_its_own_saved_index": 1
+  },
+  "test_functions": 7,
+  "expected_items": 15,
+  "expected_mock_transport_counts": {
+    "evaluate_started": 10,
+    "evaluate_returned": 8,
+    "evaluate_escaped": 2
+  },
+  "fixture_json_inputs": [
+    "lf_data_preparation/native_mean_001/task.json",
+    "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json"
+  ],
+  "environment": {
+    "HF_BATCH_TEST_REPO": "Optional explicit repository root; default formal hf_repo/tests file parents[2]"
+  },
+  "source_checks": [
+    "AST parsed",
+    "compiled to code object without execution",
+    "7 definitions/15 parameterized items statically enumerated"
+  ],
+  "scope": "Mocked evaluate transport and temporary JSON only. Production/reference/mesh/HF5 qualification is not granted by these tests.",
+  "activity": {
+    "pytest_executions": 0,
+    "product_imports": 0,
+    "arrays_read": 0,
+    "constructors": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "plots": 0,
+    "formal_writes": 0
+  }
+}

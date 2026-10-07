@@ -1,0 +1,78 @@
+--- native_batch_45ae06_source_only.py
++++ native_batch.py
+@@ -5,7 +5,6 @@
+ import json
+ import math
+ from pathlib import Path
+-import sys
+ 
+ from .displacement import DisplacementSettings
+ from .native_evaluate import evaluate_native, resolve_native_path
+@@ -15,7 +14,8 @@
+ DEFAULTS = dict(targets=None, settings=None, time_limit_seconds=180.,
+                 minimum_increment=None, response_mode="complete",
+                 tangent_mode="full", initial_guess="tangent")
+-RESPONSE_FIELDS = ("identity", "path", "target_response", "requested_endpoint_response",
++RESPONSE_FIELDS = ("identity", "options", "invocation", "evaluation_elapsed_scope",
++                   "qualification_scope", "path", "target_response", "requested_endpoint_response",
+                    "maximum_loading_stroke", "last_accepted", "call_counts",
+                    "timing_seconds", "evaluation_elapsed_seconds", "failure",
+                    "producer_flags", "independent_reference", "views")
+@@ -145,6 +145,12 @@
+                 exception_class=type(error).__name__, reason=str(error))
+ 
+ 
++def _mark_unrun(index, label):
++    for row in index["cases"]:
++        if row["status"] == "not_run":
++            row["reason"] = f"Stopped after non-success at {label}"
++
++
+ def evaluate_native_batch(manifest_path, output_directory, *, repo_root=None) -> dict:
+     """Preflight all cases, then call evaluate_native once per case until non-success.
+ 
+@@ -173,7 +179,7 @@
+                     output=_artifact(p["output"], root), declared_paths=p["declared_paths"],
+                     analysis_grid_declared=p["analysis_grid_declared"],
+                     requested_targets_mm=p["requested_targets_mm"], response=None,
+-                    failure=None) for p in plans],
++                    reason="Not started", **dict.fromkeys(RESPONSE_FIELDS)) for p in plans],
+         failure_case=None, HF5_qualified=False, ranking_qualified=False,
+         qualification_scope="Batch transport only; each response retains its own independent reference, views and flags")
+     call_options = dict(options)
+@@ -182,9 +188,12 @@
+     directory.mkdir(parents=True)
+     _write_index(directory, index)
+     for plan, entry in zip(plans, index["cases"]):
+-        entry["status"] = "running"
++        entry.update(status="running", reason=None)
+         _write_index(directory, index)
+         try:
++            for key in ("geometry", "task"):
++                if sha256(plan[key].read_bytes()).hexdigest() != plan[key + "_sha256"]:
++                    raise ValueError(f"{entry['label']}: {key} changed after preflight")
+             response = evaluate_native(plan["geometry"], plan["task"], plan["output"],
+                                        repo_root=root, **call_options)
+             response_file = plan["output"] / "response.json"
+@@ -193,14 +202,17 @@
+             entry["response"] = _artifact(response_file, root, sha256(response_file.read_bytes()).hexdigest())
+         except (OSError, ValueError, KeyError, TypeError) as error:
+             entry.update(status="error", failure=_failure(error))
++        except BaseException as error:
++            # Record an escaping interrupt/resource error, then preserve its propagation.
++            entry.update(status="error", failure=_failure(error))
++            index.update(status="interrupted", failure_case=entry["label"])
++            _mark_unrun(index, entry["label"])
++            raise
+         finally:
+-            escaped = sys.exc_info()[1]
+-            if escaped is not None:
+-                entry.update(status="error", failure=_failure(escaped))
+-                index.update(status="interrupted", failure_case=entry["label"])
+             _write_index(directory, index)
+         if entry["status"] != "success":
+             index.update(status="stopped", failure_case=entry["label"])
++            _mark_unrun(index, entry["label"])
+             break
+     else:
+         index["status"] = "success"

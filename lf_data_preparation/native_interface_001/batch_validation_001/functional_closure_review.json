@@ -1,0 +1,106 @@
+{
+  "schema_version": "native-batch-functional-closure-review-1.0",
+  "status": "pass_saved_only",
+  "blocking_findings": [],
+  "reviewed_utc": "2026-10-07T19:00:52.159261+00:00",
+  "protocol_sha256": "6f10298e11b7aecfd413cf4692a821e2b729d4fb279b90dced71c9da3e88258b",
+  "evidence_sha256": {
+    "functional_protocol.json": "6f10298e11b7aecfd413cf4692a821e2b729d4fb279b90dced71c9da3e88258b",
+    "functional_launch.json": "8c08530a8eeb99f11908227fa6cee2c414bf646bbfb05ff9096bd40ae8caa5f3",
+    "functional_stdout.log": "69d2c0412f7843e6d8ea2fc2fcfc0cecf6605e7e3cce11a51e73750df5d32b8f",
+    "run_001/execution_receipt.json": "ff7aa2529c0dec0000bb80f6c3ae17309c397b74853c86af9e8ac7f6cb67f43d",
+    "run_001/test_results.xml": "11dccadc47b77ff6eaac2a9066b273a8abdb070f4abb8d707ff72cab47ef03eb",
+    "installation_receipt.json": "1f8519b07139188bbd9cdf24e754d1eebe72ac2e354514337aa06b1fd5406d5b",
+    "author/INDEX.json": "c7f5ca1ca9d8af91287d1905b8949ad6d86f195d86a1df09a3dc0c96ab92532f"
+  },
+  "source_sha256": {
+    "hf_repo/src/hf_eval/native_batch.py": "fa765e02f18511045db1b0fd9b3f37da828985c0bc21dfdedb3185b6959b90ef",
+    "hf_repo/scripts/evaluate_native_batch.py": "9dbdb761d2bad20f5d211b7262a0583515a0ad22b36c181988911ff544108dd8",
+    "hf_repo/tests/test_native_batch.py": "78a94bb87904322d8d0c170ca92678f9232a406941cffc07c22b365786ac57e0"
+  },
+  "worker_sha256": "af1fb1b381038503ec69aaaa021e42be23bfa7a4cf12ebefc7f4a1e7ecf5457f",
+  "original_sources_unchanged": 27,
+  "original_mechanics_core_unchanged": 25,
+  "prior_API_response_sources_unchanged": 2,
+  "frozen_bindings_verified": 35,
+  "archive_records_verified": 16,
+  "source_review_sha256": "9aa260411fd23a3bd3e2aa603b3dbcfe07ff1b53aaec102245938c657ff4187f",
+  "tests": {
+    "functions": 7,
+    "items": 15,
+    "XML": {
+      "tests": 15,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "item_names": [
+      "test_ordered_once_transport_preserves_options_target_endpoint_and_case_qualification[False]",
+      "test_ordered_once_transport_preserves_options_target_endpoint_and_case_qualification[True]",
+      "test_second_task_physical_difference_rejects_the_whole_batch_before_any_evaluate[E]",
+      "test_second_task_physical_difference_rejects_the_whole_batch_before_any_evaluate[path]",
+      "test_second_geometry_port_or_task_binding_rejects_before_the_first_evaluate[port]",
+      "test_second_geometry_port_or_task_binding_rejects_before_the_first_evaluate[binding]",
+      "test_invalid_options_or_existing_outputs_leave_every_case_unexecuted_and_keep_old_bytes[unknown_option]",
+      "test_invalid_options_or_existing_outputs_leave_every_case_unexecuted_and_keep_old_bytes[invalid_mode]",
+      "test_invalid_options_or_existing_outputs_leave_every_case_unexecuted_and_keep_old_bytes[existing_batch]",
+      "test_invalid_options_or_existing_outputs_leave_every_case_unexecuted_and_keep_old_bytes[existing_case]",
+      "test_first_failure_or_changed_input_stops_without_overwriting_completed_response[failed_response]",
+      "test_first_failure_or_changed_input_stops_without_overwriting_completed_response[changed_input]",
+      "test_escaped_error_stops_and_records_original_exception_without_fabricating_partial[False]",
+      "test_escaped_error_stops_and_records_original_exception_without_fabricating_partial[True]",
+      "test_cli_from_unrelated_cwd_uses_explicit_repo_and_prints_its_own_saved_index"
+    ],
+    "suite_seconds": 2.584,
+    "stdout_pytest_seconds": 2.6,
+    "mock_transport_calls": {
+      "evaluate_started": 10,
+      "evaluate_returned": 8,
+      "evaluate_escaped": 2
+    },
+    "scientific_calls": {
+      "model_constructions": 0,
+      "force_calls": 0,
+      "tangent_calls": 0,
+      "solver_calls": 0,
+      "HP_calls": 0,
+      "geometry_calls": 0,
+      "nodal_calls": 0,
+      "NPZ_reads": 0,
+      "real_cached_writer_calls": 0
+    }
+  },
+  "resources": {
+    "helper_limit_seconds": 120,
+    "outer_limit_seconds": 150,
+    "sampled_RSS_limit_bytes": 8589934592,
+    "helper_elapsed_seconds": 3.1671812999993563,
+    "outer_elapsed_seconds": 4.2031512999674305,
+    "helper_peak_sampled_RSS_bytes": 128983040,
+    "outer_peak_sampled_tree_RSS_bytes": 133791744,
+    "invocations": 1,
+    "stop_reason": null
+  },
+  "conclusions": [
+    "Actual once functional phase passed all15 mock/temporary-JSON tests: whole-batch physical/declaration preflight, unrelated-cwd paths, once ordered transport, options, no overwrite, partial/not_run and original ordinary/interruption failure semantics.",
+    "Task target, requested endpoint and last state remain separate; each mocked case retains its own reference/view flags without batch qualification or ranking.",
+    "Tests were authored by this reviewer and independently read by the parent before execution; this closed-result review verifies saved records rather than rerunning tests.",
+    "Installation introduced only the two batch product/CLI files and one test file in hf_repo; old25 mechanics files and two original API/response files remain exact bytes.",
+    "Installation receipt installed_not_executed describes the installation time; the later launch/worker/XML are the authoritative once execution records.",
+    "No new real API evaluation, constructor, force, tangent, solver, HP, array read or saved-field observation occurred; no numerical, contact/pressure, mesh or HF5 qualification is granted.",
+    "XML suite time, pytest stdout duration, helper and outer clocks are distinct measurements; the8-GiB sampled/cooperative limit is not an OS hard memory cap."
+  ],
+  "activity": {
+    "candidate_imports": 0,
+    "pytest_reruns": 0,
+    "NPZ_reads": 0,
+    "constructors": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "observations": 0,
+    "plots": 0,
+    "formal_writes": 0
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "hf-native-batch-manifest-1.0",
+  "options": {
+    "targets": [
+      0,
+      0.005,
+      0.01,
+      0.025
+    ],
+    "minimum_increment": 6.25e-05,
+    "time_limit_seconds": 1800,
+    "response_mode": "complete",
+    "tangent_mode": "full",
+    "initial_guess": "tangent"
+  },
+  "cases": [
+    {
+      "label": "canonical",
+      "geometry": "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json",
+      "task": "lf_data_preparation/native_model_001/tasks/gripper_canonical.json",
+      "output": "lf_data_preparation/native_interface_001/batch_forward_001/run_001/canonical"
+    },
+    {
+      "label": "native_fine",
+      "geometry": "lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.json",
+      "task": "lf_data_preparation/native_model_001/tasks/gripper_native_fine.json",
+      "output": "lf_data_preparation/native_interface_001/batch_forward_001/run_001/native_fine"
+    }
+  ]
+}

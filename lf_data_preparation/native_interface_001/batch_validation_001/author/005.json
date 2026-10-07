@@ -1,0 +1,19 @@
+{
+  "schema_version": "native-batch-source-author-note-1.0",
+  "role": "Source-only candidate, no scientific execution or formal installation",
+  "goal": "Small sequential evaluation function that reuses the existing API and preserves each case identity, saved responses and failure semantics",
+  "source_sha256": {
+    "native_batch.py": "fa765e02f18511045db1b0fd9b3f37da828985c0bc21dfdedb3185b6959b90ef",
+    "evaluate_native_batch.py": "9dbdb761d2bad20f5d211b7262a0583515a0ad22b36c181988911ff544108dd8"
+  },
+  "baseline_commit": "7e54e34d82b5a98191c6d777f0fc85942f03eee7",
+  "changes": "Two new files only; existing evaluate_native/native_response and mechanics core untouched",
+  "design": "All JSON-declaration/output/options checks complete before any model call or output creation; fixed stop at first non-success; unknown exceptions propagate after index checkpoint.",
+  "scope": "No ranking/HF5/pressure/contact/grid qualification merge; references/views are only whatever the individual response reported; full batch resource control remains outside product.",
+  "prefreeze_changes": {
+    "preimage_module_sha256": "45ae06b7d0aea8c7de8c382c9e6535662467a40d763a3ceebb32c9937479f27a",
+    "delta": "review_delta.diff",
+    "reason": "Make not-run null/reasons explicit; retain actual response identity/options/invocation/scope; recheck input JSON raw SHA before each call; replace sys.exc_info observer with record-and-reraise interrupt handler so caller exception context cannot mislabel success.",
+    "executions_before_or_after": 0
+  }
+}

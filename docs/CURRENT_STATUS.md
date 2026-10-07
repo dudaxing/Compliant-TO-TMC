@@ -1,3 +1,13 @@
+## 当前：两例批量入口功能验证完成
+
+新增 native_batch API/CLI，15项纯功能检查一次通过：mock10 started /8 returned /2 escaped，9类科学计数为0，helper3.1671813s /outer4.2031513s。既有25份力学/几何相关源与2份单例接口保持原字节。全批先核共享物理声明和新输出，再顺序各例一次，首非success保留原失败/partial并记录后续not_run原因。
+
+真实两例仍待下一阶段：原canonical/native_fine各自0.025mm任务，明确[0,.005,.010,.025]、minimum_increment6.25e-5，complete/full/tangent；新whole2400/outer2460s、8GiB与共享controller1800s只是下一卡计划，尚未执行。两设计和native网格均不同，不作排名或收敛结论。原固定工件24态/48HP物理证据及单例真实API证据保留，HF5/压力/有效接触/匹配网格等整体边界不扩。[接口与示例](NATIVE_BATCH_INTERFACE.md)；[实际功能结果](../lf_data_preparation/native_interface_001/batch_validation_001/RESULTS.md)。
+
+---
+
+以下完整原字节保留为7e54e34阶段历史；批量当前状态以上方为准。
+
 ## 当前：真实薄评价入口已完成小型正向任务
 
 HF复用LF/N4几何与研究成果，提供独立正向力学评价，不含优化器。新入口从无关工作目录、显式repo完成无工件夹持器0→0.001mm（1µm）任务：2个真实接受态、4次新HP及保存图通过；真实构模、求解、缓存保存和响应生成各一次，默认complete/full/tangent与25个既有核心文件保持。前一阶段21项JSON/模拟集成是首次纯功能验证，本次才验证真实调用流程。
