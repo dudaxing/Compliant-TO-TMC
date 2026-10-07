@@ -1,0 +1,961 @@
+{
+  "schema_version": "native-mean-independent-audit-1.0",
+  "status": "pass",
+  "alias": "gripper_canonical",
+  "accepted_states": 2,
+  "states": [
+    {
+      "index": 0,
+      "status": "pass",
+      "state_sha256": "26d76fa997d7fc33a9ff6a4b606fc4f31e3f1c0753050e330d97c92565c2bbe2",
+      "target_mm": 0.0,
+      "elements_compared": 3200,
+      "global_DOFs_compared": 6642,
+      "local_force_entries_compared": 76800,
+      "local_tangent_entries_compared": 76800,
+      "full_matrix_entries_assembly_checked": 204800,
+      "HP_calls": 2,
+      "checks": [
+        {
+          "name": "hp80 relative_residual",
+          "normalized_error": "0E-111",
+          "limit": "1e-8",
+          "pass_gate": true
+        },
+        {
+          "name": "hp80 relative_constraint",
+          "normalized_error": "0E+4",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "hp80 relative_force_balance",
+          "normalized_error": "0E-111",
+          "limit": "1e-6",
+          "pass_gate": true
+        },
+        {
+          "name": "hp80 fixed_error_mm",
+          "normalized_error": "0",
+          "limit": "8e-11",
+          "pass_gate": true
+        },
+        {
+          "name": "hp120 relative_residual",
+          "normalized_error": "0E-111",
+          "limit": "1e-8",
+          "pass_gate": true
+        },
+        {
+          "name": "hp120 relative_constraint",
+          "normalized_error": "0E+4",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "hp120 relative_force_balance",
+          "normalized_error": "0E-111",
+          "limit": "1e-6",
+          "pass_gate": true
+        },
+        {
+          "name": "hp120 fixed_error_mm",
+          "normalized_error": "0",
+          "limit": "8e-11",
+          "pass_gate": true
+        },
+        {
+          "name": "saved production relative_residual",
+          "normalized_error": "0E+14",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved production relative_constraint",
+          "normalized_error": "0E+4",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "saved production relative_force_balance",
+          "normalized_error": "0E+14",
+          "limit": "1e-6",
+          "pass_gate": true
+        },
+        {
+          "name": "reported production residual",
+          "normalized_error": "0",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "reported residual reconstruction",
+          "normalized_error": "0",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "reported balance reconstruction",
+          "normalized_error": "0",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "reported force scale reconstruction",
+          "normalized_error": "9.584399927196151795227309876101795538261285400949418544769287109375E-17",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved input_force versus independent",
+          "normalized_error": "0E+12",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved spring_force_on_structure versus independent",
+          "normalized_error": "0E+10",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved support_reaction versus independent",
+          "normalized_error": "0E-111",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved force_residual versus independent",
+          "normalized_error": "0E-111",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved q_in",
+          "normalized_error": "0E+4",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "saved q_out",
+          "normalized_error": "0E+4",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "saved constraint_residual",
+          "normalized_error": "0E+4",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "saved balance reconstruction",
+          "normalized_error": "0E+14",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved residual reconstruction",
+          "normalized_error": "0E+14",
+          "limit": "1e-9",
+          "pass_gate": true
+        }
+      ],
+      "metrics": {
+        "production_relative_residual": "0E+14",
+        "independent_relative_residual": "0E-111",
+        "relative_constraint": "0E+4",
+        "relative_force_balance": "0E-111",
+        "minimum_J": "1",
+        "fixed_displacement_mm": "0",
+        "q_in_mm": "0.00",
+        "q_out_mm": "0.00",
+        "R_input_N": "0",
+        "force_scale_N": "2.0E-13",
+        "displacement_scale_mm": "0.000001"
+      },
+      "force_checks": {
+        "total": {
+          "normalized_error": "0E-111",
+          "hp80_hp120_error": "0E-111",
+          "denominator": "2.0E-13",
+          "limit": "1E-11",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        "material": {
+          "normalized_error": "0E-99",
+          "hp80_hp120_error": "0E-99",
+          "denominator": "2.0E-25",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        "regularization": {
+          "normalized_error": "0E-59",
+          "hp80_hp120_error": "0E-99",
+          "denominator": "2.0E-25",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      },
+      "tangent_checks": {
+        "total": {
+          "normalized_error": "5.34357298568440031463364099001174559344658352765068346632699219650040224258895692559031738323200899138504166982340514640E-17",
+          "hp80_hp120_error": "4.21080316850267793177806291732484038919485080116891023659815060308811439088317401034961599129009887611689976343431645177E-80",
+          "denominator": "40.8079768558156242921976220576334011146393642766071273364285174364038491161881346677884439389429962777049656274976019703",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        "material": {
+          "normalized_error": "4.79834747852597299186559820490132000744388698893546691046918418689789271021280720735501813024576713574135889215433415322E-17",
+          "hp80_hp120_error": "1.40441415173023829651752206977746695113010870215956336558469982816944987551067939853796936029634659792666387771531713386E-80",
+          "denominator": "40.8059522575441224846234882792430396371872951261616984902610323504490150037509785989780724447878097255162021915836044483",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        "regularization": {
+          "normalized_error": "4.25591706402633028341047970657342823781190647660055761385268063196690837395755754474792912773345510962672288747350594921E-17",
+          "hp80_hp120_error": "3.44075622153852326880721127330856350914928454091989955555831299853088057013183462005196383982020696836912565571259181672E-80",
+          "denominator": "0.00402182231570982990840351675306187633940991743467033068596386989534446027004398426862146931764084027837431598217934180324",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      },
+      "local_force_worst": [
+        {
+          "component": "total",
+          "element": 0,
+          "normalized_error": "0E-111",
+          "hp80_hp120_error": "0E-111",
+          "denominator": "2.0E-13",
+          "limit": "1E-11",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "0E-111"
+        },
+        {
+          "component": "material",
+          "element": 0,
+          "normalized_error": "0E-99",
+          "hp80_hp120_error": "0E-99",
+          "denominator": "2.0E-25",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "0E-99"
+        },
+        {
+          "component": "regularization",
+          "element": 0,
+          "normalized_error": "0E-58",
+          "hp80_hp120_error": "0E-98",
+          "denominator": "2.0E-25",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "0E-98"
+        }
+      ],
+      "local_tangent_worst": [
+        {
+          "component": "total",
+          "element": 3120,
+          "normalized_error": "6.33200009188450287697970529742162667955316714054942801470518149636504860390498073897866324013309337611676267937799255808E-17",
+          "hp80_hp120_error": "2.81103851812977800942582576148722034375220928602544328298573503304676621721963828013872749061736423573917483009508000031E-80",
+          "denominator": "22.3237362545617203499499552868491507298092105104607745987657161352141863077259271981576845137957448458749845807553996272",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "5.65277260330582502124217696248771581610975071311607918751525539882196543026125205629377673302775332191556065722989749051E-80"
+        },
+        {
+          "component": "material",
+          "element": 3040,
+          "normalized_error": "3.52355104735032468275238962284381330552002365634643516894842665044349592716740486474129751485645084867215004571015284816E-17",
+          "hp80_hp120_error": "3.24842980569542306384745790463613765703080639436393851135479365586125029672861083139373335796648100850827170523022000653E-80",
+          "denominator": "22.3234360889305749161446455712051436587903440496658568776570289191951355322901629634328060951857694952783000255917542152",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "3.24842980569542306384745790463613765703080639436393851135479365586125029672861083139373335796648100850827170523022000653E-80"
+        },
+        {
+          "component": "regularization",
+          "element": 2960,
+          "normalized_error": "4.25591706402633028341047970657342823781190647660055761385268063196690837395755754474792912773345510962672288747350594922E-17",
+          "hp80_hp120_error": "3.44075622153852326880721127330856350914928454091989955555831299853088057013183462005196383982020696836912565571259181674E-80",
+          "denominator": "0.00232200019660791435489744738405656619132082298909592519036358903070121105489282560000000000000000000000000000000000000000",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "3.44075622153852326880721127330856350914928454091989955555831299853088057013183462005196383982020696836912565571259181674E-80"
+        }
+      ],
+      "CSC_total_action_check": {
+        "normalized_error": "1.04797706684613236842953925173211248714973029091629429558873037128349150014976181246703514767127549548542166154732073225E-16",
+        "hp80_hp120_error": "4.21080316850267793177806291732484038919485080116891023659815060308811439088317401034961599129009887611689976343431645177E-80",
+        "denominator": "40.8079768558156242921976220576334011146393642766071273364285174364038491161881346677884439389429962777049656274976019703",
+        "limit": "1E-10",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "augmented_checks": {
+        "force": {
+          "normalized_error": "1.05831487023019038057506992300682304482840800198801235541808034036003928381687686709841369456005598635808550465878605945E-16",
+          "hp80_hp120_error": "4.25440570724710335288609516661647519540910346829412544722673837824382545005257011383032997384198471353671884226503256015E-80",
+          "denominator": "40.3236572747503796051384987787412876579307669203852295507880410303371080948864351053726918855118114724888180259023752294",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        "constraint": {
+          "normalized_error": "0",
+          "hp80_hp120_error": "0",
+          "denominator": "0.750",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      },
+      "references": [
+        {
+          "path": "accepted_000/hp80_full_local.json.gz",
+          "sha256": "ed7ded8a7a5c8a84844d7b720ebbc8cddd33df6ca133d6f7dae2e7955ce90ffe"
+        },
+        {
+          "path": "accepted_000/hp120_full_local.json.gz",
+          "sha256": "3849f081263beb84615408434bc8f026437e7e4a4acd641f5843016774315081"
+        }
+      ],
+      "raw_fixture": {
+        "path": "accepted_000/reference_fixture.npz",
+        "sha256": "5cab8cc58a7e15019da78c4b7d3bf5b4130103be8ba3e0908ebe5eb603b29a77"
+      },
+      "global_references": {
+        "path": "accepted_000/hp80_hp120_full_global.json.gz",
+        "sha256": "18079c44c1f4dce126419049c5b0c4ac777a332a5dd6c6698f04f4a95e85500c"
+      },
+      "exact_element_gates": {
+        "path": "accepted_000/element_gates.json.gz",
+        "sha256": "149a04e9edb560819319d4ee3bd448d7618af780f2e1009a3fdb64446fda00b2"
+      },
+      "global_differences": {
+        "path": "accepted_000/global_differences.json.gz",
+        "sha256": "66f051c2eaa52d27833092c46562e616dbf0f96f965aebaf3a1158a5d7744b24"
+      },
+      "equations": {
+        "path": "accepted_000/equation_hp80_hp120.json.gz",
+        "sha256": "59f172eb4930a31e143e9c43bea1eed7ee4ceb3e0a9aaed4918ec7e6f38505a5"
+      },
+      "actions": {
+        "path": "accepted_000/actions.npz",
+        "sha256": "8b8c659eccc359177e3b2badd707e6c5f98987e10fc0e9b649c9d665844ee26d"
+      },
+      "rounded_kinematics": {
+        "path": "accepted_000/rounded_hp120_kinematics.npz",
+        "sha256": "9b47c7ae93227b2603ca46d9b805bfff529a11b53050ae921331ed74e73e732e"
+      },
+      "independent_total_matrix": {
+        "path": "accepted_000/independent_total_matrix.npz",
+        "sha256": "7faff48d1fccc88da94c603f37f4a263922dc34f432305e7aba39aeaff21f3bf"
+      },
+      "kinematic_diagnostics": {
+        "J": {
+          "exact_binary64_match": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "F": {
+          "exact_binary64_match": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "Hu": {
+          "exact_binary64_match": true,
+          "maximum_absolute_difference": 0.0
+        }
+      }
+    },
+    {
+      "index": 1,
+      "status": "pass",
+      "state_sha256": "66f894c288ff8a249f755453f8cf4aa08d4909b0c1e8714020e8a6e3c381d44c",
+      "target_mm": 0.001,
+      "elements_compared": 3200,
+      "global_DOFs_compared": 6642,
+      "local_force_entries_compared": 76800,
+      "local_tangent_entries_compared": 76800,
+      "full_matrix_entries_assembly_checked": 204800,
+      "HP_calls": 2,
+      "checks": [
+        {
+          "name": "hp80 relative_residual",
+          "normalized_error": "1.53571659726233466882798897738874888394646505747321641572147977661896862413824641687109807205468675500231137529738490673E-11",
+          "limit": "1e-8",
+          "pass_gate": true
+        },
+        {
+          "name": "hp80 relative_constraint",
+          "normalized_error": "5.42101086242752205718980632541011014123980715613319564444696021799095138795576244458114420580125321536385090273768817762E-17",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "hp80 relative_force_balance",
+          "normalized_error": "2.45698258979388240446222700840640503665730106223341802031277651261332613392060811636213080334466461423639819725500321016E-15",
+          "limit": "1e-6",
+          "pass_gate": true
+        },
+        {
+          "name": "hp80 fixed_error_mm",
+          "normalized_error": "0",
+          "limit": "8e-11",
+          "pass_gate": true
+        },
+        {
+          "name": "hp120 relative_residual",
+          "normalized_error": "1.53571659726233466882798897738874888394646505747321641572147977636449136132426831537543688159262678597702815899147391714E-11",
+          "limit": "1e-8",
+          "pass_gate": true
+        },
+        {
+          "name": "hp120 relative_constraint",
+          "normalized_error": "5.42101086242752205718980632541011014123980715613319564444696021799095138795576244458114420580125321536385090273768817762E-17",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "hp120 relative_force_balance",
+          "normalized_error": "2.45698258979388240446222700840640503665730106223341802031277623834664108386635174211577255251237620527071212288562422775E-15",
+          "limit": "1e-6",
+          "pass_gate": true
+        },
+        {
+          "name": "hp120 fixed_error_mm",
+          "normalized_error": "0",
+          "limit": "8e-11",
+          "pass_gate": true
+        },
+        {
+          "name": "saved production relative_residual",
+          "normalized_error": "1.53571802756495953197705792975276681360391511440310708573837648213467529888811444182747250053608875210781451131070889434E-11",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved production relative_constraint",
+          "normalized_error": "5.42101086242752205718980632541011014123980715613319564444696021799095138795576244458114420580125321536385090273768817762E-17",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "saved production relative_force_balance",
+          "normalized_error": "2.42920941066647579790305548166506041144901095959230284331000022825522666678314023246959926002405024677310305036048621364E-15",
+          "limit": "1e-6",
+          "pass_gate": true
+        },
+        {
+          "name": "reported production residual",
+          "normalized_error": "1.53571802756495928081535384269521696438964841746610545669682323932647705078125E-11",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "reported residual reconstruction",
+          "normalized_error": "2.5116170408705754984921426669693700162904155324280819824810686444182747250053608875210781451131070889434E-27",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "reported balance reconstruction",
+          "normalized_error": "2.227429944414446296577988778488746926018829846404935642055404719227606549377627143665073997594975322689694963951378636E-17",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "reported force scale reconstruction",
+          "normalized_error": "5.20603701948850709052954739335249811316875042593536365300568199842741441969835407688180892329702122291329832902498638723E-17",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved input_force versus independent",
+          "normalized_error": "0E+57",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved spring_force_on_structure versus independent",
+          "normalized_error": "0E+46",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved support_reaction versus independent",
+          "normalized_error": "2.73651047655919314414574829480038968743204351385866966836737105558728983576971091005613187697930064211743201895229198898E-16",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved force_residual versus independent",
+          "normalized_error": "1.14365184419640469784763132901607183904929577149138579848955746070759663243595423847257325437156167387343506572407591713E-15",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved q_in",
+          "normalized_error": "5.42101086242752205718980632541011014123980715613319564444696021799095138795576244458114420580125321536385090273768817762E-17",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "saved q_out",
+          "normalized_error": "5.42101086242752205718980632541011014123980715613319564444696021799095138795576244458114420580125321536385090273768817762E-17",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "saved constraint_residual",
+          "normalized_error": "0E-15",
+          "limit": "1e-10",
+          "pass_gate": true
+        },
+        {
+          "name": "saved balance reconstruction",
+          "normalized_error": "3.61813224839299238221932142346034424021214561498536955972285138891464794743793294049390090281995387176411911465527938583E-17",
+          "limit": "1e-9",
+          "pass_gate": true
+        },
+        {
+          "name": "saved residual reconstruction",
+          "normalized_error": "0E-7",
+          "limit": "1e-9",
+          "pass_gate": true
+        }
+      ],
+      "metrics": {
+        "production_relative_residual": "1.53571802756495953197705792975276681360391511440310708573837648213467529888811444182747250053608875210781451131070889434E-11",
+        "independent_relative_residual": "1.53571659726233466882798897738874888394646505747321641572147977636449136132426831537543688159262678597702815899147391714E-11",
+        "relative_constraint": "5.42101086242752205718980632541011014123980715613319564444696021799095138795576244458114420580125321536385090273768817762E-17",
+        "relative_force_balance": "2.45698258979388240446222700840640503665730106223341802031277623834664108386635174211577255251237620527071212288562422775E-15",
+        "minimum_J": "0.999863031457169711242766973758398858432534121457132990954162247173584799695364319855120371904888543213019147515296936035",
+        "fixed_displacement_mm": "0",
+        "q_in_mm": "0.000999999999999999966606573087446463432570453733205795288085937500000000000",
+        "q_out_mm": "0.001143715684723625627527282544448894441302400082349777221679687500000000000",
+        "R_input_N": "0.0002084120736447458966354717713187483241199515759944915771484375",
+        "force_scale_N": "0.000127625809166244349370906204825664250339062207352770218423260703928034118062105916271468101312026416845079497832270756897",
+        "displacement_scale_mm": "0.001000000000000000020816681711721685132943093776702880859375"
+      },
+      "force_checks": {
+        "total": {
+          "normalized_error": "1.14365184419640469784763132901607183904929577149138579848955428857687931161996973231330816698048058006498342432754211342E-15",
+          "hp80_hp120_error": "1.14164856591052590235632628146455739774138920403125287980862124354604159559474188921081276069302613067181378135698461556E-73",
+          "denominator": "0.000127625809166244349370906204825664250339062207352770218423260703928034118062105916271468101312026416845079497832270756897",
+          "limit": "1E-11",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        "material": {
+          "normalized_error": "2.57875166606080600544231367545368500828342929133711460102628897942865447763199044896639159805815298940554655458842607441E-16",
+          "hp80_hp120_error": "2.89954372587596885969901600348948706471436253841248784445645292957662409478862277064189251577230479393946491260700854017E-74",
+          "denominator": "0.000502506043124851203001557441821862150876118615510492992692886329848221222733283767600128863901623978415479688273136531857",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        "regularization": {
+          "normalized_error": "1.06772273892629998965962291465036756304767676541747077737183702063489063460282657640032705691084271370594665470862694950E-16",
+          "hp80_hp120_error": "1.31697914853940751835972391305569028394764651598680602522013198570946565105170590643501879493667842866976512720976875856E-79",
+          "denominator": "8.81487578470277139705655797557236659195592330461959454557979423047525397524789532113528401829219791288340873134600166065E-7",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      },
+      "tangent_checks": {
+        "total": {
+          "normalized_error": "5.48462888948886109097028342449334039314473578430080749855241138392280006976902821253816449307379020616779597132971427001E-17",
+          "hp80_hp120_error": "1.97318255014543456031984337281362931775904658933133796787696982283014399547993051147701923453076015876872266806571844498E-80",
+          "denominator": "40.8080983647821888705338593675602380835392837798361409898407555184386439153801752157741965473558398111494730526081647099",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        "material": {
+          "normalized_error": "7.78140689161291776811282202721013782029542127448575939159754398902389897414493455551960131481679883972993982631452543896E-17",
+          "hp80_hp120_error": "1.93336475243029396721817777201829713233120325346008195862252231247821848135922003651050102654518881336807894126603651510E-80",
+          "denominator": "40.8060737061400305736742714613800824411941151148245308137424232507762295031420398246530069607495888782229181556170424749",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        "regularization": {
+          "normalized_error": "1.55780973187094805871122026719158470215700264931145162939775984914635324960363138553610120000698848761123980200485385366E-16",
+          "hp80_hp120_error": "1.98401008708777619438017304020604786781199001897957299835470991252548811318769548220230949407641452874262938428811797453E-80",
+          "denominator": "0.00402196451163577689964161296508679233482365862957829401368703403284507689085610928153956040378334908558501112033419173385",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      },
+      "local_force_worst": [
+        {
+          "component": "total",
+          "element": 1406,
+          "normalized_error": "1.05018490640812377436779119066086167272088609312446216079575508889923688539554355837990248755649054695293559420918311586E-16",
+          "hp80_hp120_error": "4.72475944840874527497463675658305927274436793760355395177325591919234727969152557517997442022620693507455372854703295920E-78",
+          "denominator": "7.00011789517900098319228123214626392063862459258463659265805028217377543030307945365984027090470742570217361857373274733E-8",
+          "limit": "1E-11",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "2.76242532027908747226828829425178507244609992887196173568232703276971900173974890421715949488480909078445933239147120458E-72"
+        },
+        {
+          "component": "material",
+          "element": 2982,
+          "normalized_error": "9.55427077114813741867598399511259514528488232339895526528658802637535756536656541199653361496738883137248414214531724840E-17",
+          "hp80_hp120_error": "1.07801425993275038445500384350843005175865107387397141928026159744769783634191821531473083860838247886722369109070000325E-76",
+          "denominator": "2.24925982592801144479082791885483513494239079236251372159034686966838465312598310714936937738142970310773208401879434040E-9",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "2.76254266014512550505855361607438383166678313290126697911084383949034200155570113531520138030676571907168687458198221890E-72"
+        },
+        {
+          "component": "regularization",
+          "element": 448,
+          "normalized_error": "1.36411237368298956413337540107805620544974041300813400751878755789852777964532087918859454509959646784937849527249484926E-16",
+          "hp80_hp120_error": "1.44130385308170268852289655699036491746892847350248334747602297727726676657344112527986172985322617865271492511364996228E-80",
+          "denominator": "8.11194190453205413503819065163100902010128672632624262900723325113366333741691683640323791663172195658949430323273326708E-9",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "3.35729590551345365931434649553003115848977932763864850106638980683729072545871926928249351602645937750238354169207400237E-79"
+        }
+      ],
+      "local_tangent_worst": [
+        {
+          "component": "total",
+          "element": 3120,
+          "normalized_error": "6.26999719052002051937800307534906939265636518742700430772552663713909405539805317607267631745121140194053367592737288898E-17",
+          "hp80_hp120_error": "4.78490757875418954242916738264201661360330792605749235117106765187106001278883900568184965736179495605831269846170644187E-80",
+          "denominator": "22.3238582863256844225568119835928190788894030017148375773234989099407153168937055896589360333138308400962985849699759755",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "4.78490757875418954242916738264201661360330792605749235117106765187106001278883900568184965736179495605831269846170644187E-80"
+        },
+        {
+          "component": "material",
+          "element": 3120,
+          "normalized_error": "5.70314453335291545447831492132882871449809777217009174085841838854235729832001225760968361735322668980984486620001064547E-17",
+          "hp80_hp120_error": "2.42142718791204118367073479556452068809912275129403896352957987342876531337736950748947272784791970208129523147416407105E-80",
+          "denominator": "22.3235581082929414573195887955570314110803081159910935518303194761087590353805321252883937466476033291417873520440047957",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "2.42142718791204118367073479556452068809912275129403896352957987342876531337736950748947272784791970208129523147416407105E-80"
+        },
+        {
+          "component": "regularization",
+          "element": 3120,
+          "normalized_error": "8.90239830340558075975462430746013744566068366221607817723154836464776898079961779522309953672348088798923979038110811771E-17",
+          "hp80_hp120_error": "2.34774724228568089417063110593263050835355482332709085109052707529917751493770496847707547650236381466566489700987815034E-80",
+          "denominator": "0.00232209553965077903980824325557844625615120993504067952502756088564827660093630175352326716381948271736948897012721170012",
+          "limit": "1E-9",
+          "reference_limit": "1E-40",
+          "pass_gate": true,
+          "maximum_hp80_hp120_error": "2.34774724228568089417063110593263050835355482332709085109052707529917751493770496847707547650236381466566489700987815034E-80"
+        }
+      ],
+      "CSC_total_action_check": {
+        "normalized_error": "5.08134369468552916345198442082841587802557138502802931236293572447792414901372448374805646071137069389927847021690458654E-17",
+        "hp80_hp120_error": "1.97318255014543456031984337281362931775904658933133796787696982283014399547993051147701923453076015876872266806571844498E-80",
+        "denominator": "40.8080983647821888705338593675602380835392837798361409898407555184386439153801752157741965473558398111494730526081647099",
+        "limit": "1E-10",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "augmented_checks": {
+        "force": {
+          "normalized_error": "4.98733191133096916931627969847137257176162200499365680504251810292176844101270740612258607805487539885874605872258326770E-17",
+          "hp80_hp120_error": "1.95999315916644906550450510469410717366904279525141965245272061241737852452631933372603050259606592727799774808191640919E-80",
+          "denominator": "40.3237724620894756942671780479331544536516245648193853154689580357664326469085371472608867336995377950067432204221442578",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        },
+        "constraint": {
+          "normalized_error": "0",
+          "hp80_hp120_error": "0",
+          "denominator": "0.750",
+          "limit": "1E-10",
+          "reference_limit": "1E-40",
+          "pass_gate": true
+        }
+      },
+      "references": [
+        {
+          "path": "accepted_001/hp80_full_local.json.gz",
+          "sha256": "f350a8be74674be85fdd5e3765afa32e8304ded97aeec4b4d5a6dde599bde70f"
+        },
+        {
+          "path": "accepted_001/hp120_full_local.json.gz",
+          "sha256": "0d99f187102d4bca7221f7766ea7caab3fa0efad1d59646ea7f136e23ef4094d"
+        }
+      ],
+      "raw_fixture": {
+        "path": "accepted_001/reference_fixture.npz",
+        "sha256": "2096afcbc8f7fbd4cf535b161b21a426ae8a347f3cd71bc99d79e2c808e3645a"
+      },
+      "global_references": {
+        "path": "accepted_001/hp80_hp120_full_global.json.gz",
+        "sha256": "68ec25243f989fc96c2ec7bc86a805f3bfd629e09f2cc6317d7c0cd86a0f4b94"
+      },
+      "exact_element_gates": {
+        "path": "accepted_001/element_gates.json.gz",
+        "sha256": "66a498d4c75bce7a461058b078ea82efb9089286ad2d907943c531c89664af4d"
+      },
+      "global_differences": {
+        "path": "accepted_001/global_differences.json.gz",
+        "sha256": "80d8c8d79f39b1dc39daed6d3d774cd3c7312038049da8c89163f1e812172112"
+      },
+      "equations": {
+        "path": "accepted_001/equation_hp80_hp120.json.gz",
+        "sha256": "7c764616aad5616d349e51e0b8fa14c23ea7a7fb81a3be5dcb54fc59572e670c"
+      },
+      "actions": {
+        "path": "accepted_001/actions.npz",
+        "sha256": "abf8ff3ec824e56f294c745119db30029273b069e9808ee22f1c1051aa509fe0"
+      },
+      "rounded_kinematics": {
+        "path": "accepted_001/rounded_hp120_kinematics.npz",
+        "sha256": "aa20fea7f473411da17bf2aec9bf2b3d1758fb69aa8a47d2274859f452fcdbe0"
+      },
+      "independent_total_matrix": {
+        "path": "accepted_001/independent_total_matrix.npz",
+        "sha256": "cc9f910e01454586785f5088faab05ceb0b91b95f0332e72d7a72437c943e8db"
+      },
+      "kinematic_diagnostics": {
+        "J": {
+          "exact_binary64_match": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "F": {
+          "exact_binary64_match": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "Hu": {
+          "exact_binary64_match": true,
+          "maximum_absolute_difference": 0.0
+        }
+      }
+    }
+  ],
+  "result_sha256": "00e32322daf0683cb1a4172c3157f9af296a548260ee03912d5d3749d22fd1d4",
+  "checks_completed": 38640,
+  "HP_calls_started": 4,
+  "HP_calls_completed": 4,
+  "HP_matrix_columns_exhaustively_checked": false,
+  "full_element_and_DOF_coverage": true,
+  "gates": {
+    "production_residual": "1e-9",
+    "independent_residual": "1e-8",
+    "force_evaluation": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11",
+    "hp80_hp120": "1e-40",
+    "total_force": "1e-11",
+    "material_force": "1e-9",
+    "regularization_force": "1e-9",
+    "total_tangent": "1e-10",
+    "material_tangent": "1e-9",
+    "regularization_tangent": "1e-9",
+    "augmented_force_tangent": "1e-10",
+    "augmented_constraint_tangent": "1e-10"
+  },
+  "global_scatter_precision": 3000,
+  "global_scatter_inexact_trap": true,
+  "reference_scope": "All accepted states, all elements and real DOFs; fixed-lift direction b_in/max(abs(b_in)), deltaR=0",
+  "qualification": "Independent small coarse no-workpiece TEST only; no H2/H3, fine-grid or full-task qualification",
+  "candidate_force_calls": 0,
+  "tangent_calls": 0,
+  "solver_calls": 0,
+  "source_bindings": {
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+    "hf_repo/src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+    "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/prescribed.py": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+    "hf_repo/src/hf_eval/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+    "hf_repo/src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+    "hf_repo/src/hf_eval/split_affine.py": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba",
+    "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+    "hf_repo/src/hf_eval/split_kernel.py": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+    "hf_repo/src/hf_eval/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+    "hf_repo/src/hf_eval/split_prescribed.py": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+    "hf_repo/src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+    "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+    "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+    "hf_repo/src/hf_eval/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+    "hf_repo/src/hf_eval/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+    "hf_repo/src/hf_eval/analysis_domain.py": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+    "hf_repo/src/hf_eval/native_evaluate.py": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942",
+    "hf_repo/src/hf_eval/native_response.py": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af",
+    "hf_repo/scripts/audit_native_mean.py": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678",
+    "hf_repo/scripts/audit_native_force.py": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+    "hf_repo/scripts/hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+    "hf_repo/scripts/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+    "hf_repo/scripts/run_split_average_demo.py": "e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb",
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_author/audit_real_api.py": "980f9b9384da37ecb28160a56063dbe9beb6b8e73f12d970ffc247b68b6da3a2",
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_author/reference_card_builder.py": "45ff485499dcf61a730181979bcf6ce6a1e4ee8939c49f1cf2be6416b5d0424a"
+  },
+  "input_bindings": {
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_contract.json": "566dd5440aa9298b7dc5b0729b1d2f365f39b6da76ce88c9492af2f45545c907",
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_protocol.json": "df30bf48c74b796c4e3c5786602b7e146f7307ea0fd85276fe97e45e42438117",
+    "lf_data_preparation/native_interface_001/real_forward_001/production_protocol.json": "77d2c8dd225f1627a8c3e7e4f9dff85b93c59d6a8ec932833f36c473e8040dc8",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/execution_receipt.json": "676a7ded8b596f3c5ae59059073f65ed1fe8aaa20f168ccaf66a181256b1fceb",
+    "lf_data_preparation/native_interface_001/real_forward_001/production_launch.json": "7ec8b43c938241ddd0824dfa4e041b08e93b019ac5d3ee78c8c3fdc07a0e3993",
+    "lf_data_preparation/native_interface_001/real_forward_001/installation_receipt.json": "475db6cf1bd9e1ce6856c028b15d4333dbe9417677eb31c8b7743b7b9fe6fa5e",
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+    "hf_repo/src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+    "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/prescribed.py": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+    "hf_repo/src/hf_eval/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+    "hf_repo/src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+    "hf_repo/src/hf_eval/split_affine.py": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba",
+    "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+    "hf_repo/src/hf_eval/split_kernel.py": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+    "hf_repo/src/hf_eval/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+    "hf_repo/src/hf_eval/split_prescribed.py": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+    "hf_repo/src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+    "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+    "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+    "hf_repo/src/hf_eval/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+    "hf_repo/src/hf_eval/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+    "hf_repo/src/hf_eval/analysis_domain.py": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+    "hf_repo/src/hf_eval/native_evaluate.py": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942",
+    "hf_repo/src/hf_eval/native_response.py": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af",
+    "lf_data_preparation/native_mean_001/task.json": "3ea87ca08334981a5947b10cc0bf06d355f6ee4cd46a9402ae2d686dc0d160e3",
+    "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+    "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.npz": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+    "lf_data_preparation/native_mean_001/input_inventory.json": "e0b5ccd8defb0f1c8d8d6cb7d8501844e8639ccc010b58f7d362e7f2dbca0b6b",
+    "lf_data_preparation/native_mean_001/result/result.json": "4c61a8618f0d1668dd76d169866edd331f7c11c0efa46f466779a92e11d1e9dc",
+    "lf_data_preparation/native_mean_001/execution_receipt.json": "b488b170abd89ebda737a15c5211da9d8c77f706936aaccbea429ae737f9559c",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/001.py": "986ee3162b90b134ccfa9e245a43a2b24eee4221d1e5e83ccd152f3bd6ff5c03",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/002.py": "7aaeea504bb7a61c06689d0280be653da6ae4faca4c2cba96a35ef4629c39364",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/003.md": "785921d746596ccc80e5f80818363bf141921264f36a4ab5c0108cf9e0c1de65",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/004.json": "19f111aaf1eaa8b947a3d2a383cba0151d4b16f90216fc67ba5f571a291174a2",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/005.json": "6dfa84c854736b63959065e49b6282e5155e1e55581281cb7ffd1169f932ad3b",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/006.diff": "65e15df4b5367363109f1d64944d38496c9386089796d52a66dbced9415edce9",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/007.json": "f8e8295d9b0d83a7ea6ae8820f276dedb72987ce4930a5f93341ad7611929750",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/008.md": "3465d51add75e583831b046cb5583ed0a28b73e2be70cc9b814c5e09783e207f",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/009.json": "46420db9cb07d4a111e001c4ddb634b638f2b8b2b51177c342f989b6296a479f",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/010.diff": "4e0ff03d826bfb8d5b931f63d83f79463894402a4098cd6157c9c3bf88a6b8de",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/011.diff": "6873323740af47680653cb9d8a4f1b80ddf9dc49c72e3d89abf5cb9fd4097ae3",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/012.py": "262b6a3a38ead976188175deac35011a830087c7ff6fc5f2a03ce9125275af79",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/013.json": "1ac07f2e5cfe43483ba8168d8924bd31d1f2b94aefc6f2a53ee45c89f8baa5fb",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/014.json": "2ab80a8443c653c566e66b321d8c920a0814030acc18db0c7c876b940abb0da1",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/015.diff": "2d4206aade5e3ed3258b58b115eeb0768f1cab673f3129014b0dde5732b1e866",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/016.json": "51955e5f6325114e2c8083939cb7029367908bbf885c3f9cf72c797c258cf296",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/017.py": "607a7518bec23ab0d721ab21e126c661d3e73015144b0fdd8ad5180c71111b1e",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/018.json": "5a66064db4d43c546a14ef90ce7794e66cf26e4826c8064c422b083c5d5e6381",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/019.json": "13b62c046841160a5ca80027b7344720967002e709dbeb3d956a03fd6c7ed634",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/020.py": "9aa769a43820ef1fcaca4f86fa5990403dbcec127f84206b2054ab459a98c16a",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/021.json": "dbd75bec4f55287961ec4532eed49341fcf32e3dbdc4146db785fbd4ba84abfd",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/022.json": "7a9949f6b8c2952100fef794a26fdcb17593a17010e4b594e17ca394a02bdd33",
+    "lf_data_preparation/native_interface_001/real_forward_001/author/023.json": "3c9175bf491c16676523eb79e5b86748ebc3453b33fcbc4d99dfa85655877acc",
+    "lf_data_preparation/native_interface_001/real_forward_001/launch_pose.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/response.json": "8ab532089a38c56fe463289a645d438de08f724ec3029b128185005035781b05",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/result.json": "00e32322daf0683cb1a4172c3157f9af296a548260ee03912d5d3749d22fd1d4",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/model/model.json": "b244ecaa688e32321d43fd0bf8f39f60cca5f39f27d493e0678bdabb9791320a",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/model/model.npz": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/model/source_geometry/geometry.json": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/model/source_geometry/geometry.npz": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/accepted/000/forces.npz": "cf0b4d0256a9d84a77a7bb152ddb0c44b646fa72b5b7ebe23b394a2b81cc07b5",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/accepted/000/state.json": "2f7fab9dfea46dcbf2a841183fb24a5c970c389910ceb4882301ebe8909f32d0",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/accepted/000/state.npz": "521742979e13f4b681696e160d2d37bcdbddb38b457ce97c5ba0acdf931788f5",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/accepted/000/tangents.npz": "f05007536ddf650b1dc099431e06370de2dab61096898c6f5d52d994e3c944fc",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/accepted/000/total_matrix.npz": "7faff48d1fccc88da94c603f37f4a263922dc34f432305e7aba39aeaff21f3bf",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/accepted/001/forces.npz": "323f586de051cd788353a511a3bd84f31eb73b8e096877af88c3e1a58b97e32c",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/accepted/001/state.json": "45b69148f51cc4ee59d3e1d5c538d32a3b232d10644f9ff034d842a00a6eafd3",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/accepted/001/state.npz": "665b6075c63f6906d66166f1ed88ffb706ebc430b0582db51c2dfde4c33fc70d",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/accepted/001/tangents.npz": "ef5efdba0b717691a0a58961e78f2184f15231c1d2c243e0148fab7cb7aaf153",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/result/accepted/001/total_matrix.npz": "cc9f910e01454586785f5088faab05ceb0b91b95f0332e72d7a72437c943e8db",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/accepted_progress.jsonl": "8d585e08ab3ec0a72e1fa0be0e56c0f1aa110531a2c5a29e44c103156ab6558e",
+    "lf_data_preparation/native_model_001/models/gripper_canonical/model.npz": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79",
+    "lf_data_preparation/native_model_001/tasks/gripper_canonical.json": "67d21a63898b2f31962f3e930bc2cb17e36b2813671dfa413c85c7834e6c9b63",
+    "lf_data_preparation/native_mean_001/direction.npz": "177124bd1968f9e451e59cba4d7124c393eb8fee15cc93851f570f980aada29a",
+    "lf_data_preparation/native_mean_001/lifting.npz": "fbfe6d9d1e77aa541991d1f0124a596d7a9574b720eb0e4ac5dbf851fcf1d465",
+    "hf_repo/scripts/audit_native_mean.py": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678",
+    "hf_repo/scripts/audit_native_force.py": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+    "hf_repo/scripts/hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+    "hf_repo/scripts/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+    "hf_repo/scripts/run_split_average_demo.py": "e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb",
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_author/audit_real_api.py": "980f9b9384da37ecb28160a56063dbe9beb6b8e73f12d970ffc247b68b6da3a2",
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_author/reference_card_builder.py": "45ff485499dcf61a730181979bcf6ce6a1e4ee8939c49f1cf2be6416b5d0424a",
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_author/README.md": "feeee4bf845010237d076124577baeb378861d9926395bc70531273d5dcf95b7",
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_author/author_note.json": "f133d2465e2efc2485d895e594935d8efb7f3b1bb00df19623af1c3935b5257a",
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_author/author_checks.json": "20f4f599051ff97a0e38806cbe6295a991dcd8489ae6f6a11b8eeb993a676e6d",
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_author/source_additions.diff": "458ace7a460baee27a3d152b6d87a1b9f473458082b5e0e8d4c934171044c48e",
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_author/root_review.json": "a82509bc49974aedb9d6802df3a405d2b9507e22da68d6dee7870cdfb77ac68b",
+    "lf_data_preparation/native_interface_001/real_forward_001/reference_author/peer_review.json": "c5833bfb49b8a91720bc978ac9d2770fb2b328b03cf4ede82e3f9d8259a7aca6",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/prescribed.py": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/split_affine.py": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/split_kernel.py": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/split_prescribed.py": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/analysis_domain.py": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/native_evaluate.py": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/native_response.py": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/audit_native_mean.py": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/audit_native_force.py": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/run_split_average_demo.py": "e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/audit_real_api.py": "980f9b9384da37ecb28160a56063dbe9beb6b8e73f12d970ffc247b68b6da3a2",
+    "lf_data_preparation/native_interface_001/real_forward_001/run_001/audit/sources/reference_card_builder.py": "45ff485499dcf61a730181979bcf6ce6a1e4ee8939c49f1cf2be6416b5d0424a"
+  },
+  "elapsed_seconds": 39.522717900108546,
+  "sampled_peak_RSS_bytes": 337489920,
+  "time_limit_seconds": 180.0,
+  "sampled_RSS_limit_bytes": 8589934592
+}

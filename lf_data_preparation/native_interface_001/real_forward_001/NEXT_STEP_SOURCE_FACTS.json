@@ -1,0 +1,69 @@
+{
+  "schema_version": "next-function-sourcefacts-1.0",
+  "status": "readonly_source_and_JSON",
+  "formal_repo": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC",
+  "design_pair": [
+    {
+      "alias": "gripper_canonical",
+      "geometry_file": "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json",
+      "geometry_JSON_raw_SHA256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+      "HF_geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+      "LF_design_id": "gripper__sweep__kin_1e+01__kout_1e+00",
+      "LF_initial_design": "uniform",
+      "case_family": "gripper",
+      "grid_shape_yx": [40,80],
+      "cell_size_mm": [1.0,1.0],
+      "declared_native_solid_cells": 1086,
+      "task_file": "lf_data_preparation/native_model_001/tasks/gripper_canonical.json",
+      "task_JSON_raw_SHA256": "67d21a63898b2f31962f3e930bc2cb17e36b2813671dfa413c85c7834e6c9b63"
+    },
+    {
+      "alias": "gripper_native_fine",
+      "geometry_file": "lf_data_preparation/v2_adapter_001/converted/gripper_native_fine/geometry.json",
+      "geometry_JSON_raw_SHA256": "dbab7567c98e18174d198318f025184b3545c3681c060fa77d9435122bb0f32c",
+      "HF_geometry_id": "62dd40a9ed8a41a6a2deb55927982c7f409d63bfedbf96079b2ee032e816da8d",
+      "LF_design_id": "gripper__refine__kin_1e+00__kout_1e+00__random",
+      "LF_initial_design": "random",
+      "case_family": "gripper",
+      "grid_shape_yx": [80,160],
+      "cell_size_mm": [0.5,0.5],
+      "declared_native_solid_cells": 4358,
+      "task_file": "lf_data_preparation/native_model_001/tasks/gripper_native_fine.json",
+      "task_JSON_raw_SHA256": "3638394a88ab8def0324c1e1fc58c7c6d63963296cc5d47c696aefbdac8fd78b"
+    }
+  ],
+  "read_only_comparison": {
+    "task_keys_different": ["task_id","geometry"],
+    "task_keys_identical": ["schema_version","case_family","purpose","parameter_origin","material","input","output","constraints","support_selection","input_auxiliary_spring_N_per_mm","workpiece","third_medium","qualification_criteria","reference_state","units","regularization","background_symmetry","analysis_grid","description"],
+    "region_tags_semantically_identical": true,
+    "model_extent_identical": true,
+    "thickness_identical_mm": 20.0,
+    "domain_identical_mm": [80.0,40.0],
+    "physical_task": {"E_MPa":1.0,"nu":0.3,"gamma":0.000001,"alpha":0.000001,"Lr_mm":80.0,"input_target_mm":0.025,"workpiece":null,"free_output":true,"background_top_uy":true},
+    "comparison_scope": "Different LF designs at their distinct native grids under the same physical task; neither same-design mesh convergence nor pure-design ranking.",
+    "array_verification_scope": "JSON provenance and mask/statistic declarations only; no NPZ opened or arrays recomputed.",
+    "existing_task_label": "construction_test_only; no new task qualification or execution inherited"
+  },
+  "current_API_support": ["One geometry/task evaluation and one cached write","Explicit task and optional declared path","Native positive grid spacing with physical-coordinate regions","Default and explicit response/tangent/initial guess","repo-relative resolution from arbitrary cwd","Saved complete/partial/error compact response and separate reference/view identities"],
+  "small_batch_gaps": ["Explicit case manifest with shared physical-condition equality","Per-case fresh output and once-only execution under declared case/total resources","Compact case index containing real responses, failures, source identities and correctly owned figures","Fresh actual-model/all-N reference and views for each new case; no borrowed coarse .001 PASS"],
+  "conditional_same_design_grid_alternative": {
+    "priority_if": "Transferable side18 clamping mechanics rather than external interface usability",
+    "missing": "Explicit HF-derived nested-refinement geometry adapter; existing analysis_domain only pads right void columns",
+    "preserve": ["Same source mechanism masks in physical space","Same side18/center71 workpiece and right4mm domain","Physical supports/ports/background","E,nu,gamma,alpha,thickness,Lr80","Declared load/unload targets","Original LF provenance"],
+    "must_rebuild_from_geometry": ["DOF mapping","Port weights","Direction","Source/task geometry bindings"],
+    "existing_fine_LF_design_is_not_this_alternative": true
+  },
+  "source_pins": {
+    "lf_data_preparation/v2_adapter_001/source_inventory.json": "59db13cec37df2fb3d5c55a49706561714e28334686a674c339d46c0feb4b94a",
+    "hf_repo/src/hf_eval/native_evaluate.py": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+    "hf_repo/src/hf_eval/lf_v2.py": "3ec75b97b2d6a069f56c9ecbc506d80339915949d84175843f2cca9cdceabb73",
+    "hf_repo/src/hf_eval/analysis_domain.py": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+    "hf_repo/scripts/evaluate_native.py": "04201797fa227dc18302e75817f5fb4100723732a1a97ecd71343aa49b727d64"
+  },
+  "recommendation": "Thin two-case manifest/index using existing same-physical-task native designs; do not add an optimizer/ranking or call this mesh convergence. Root chooses any next scientific scope separately.",
+  "new_card_frozen": false,
+  "new_result_qualified": false,
+  "activity": {"HF_imports":0,"LF_imports":0,"NPZ_reads":0,"model_constructions":0,"F_calls":0,"T_calls":0,"solver_calls":0,"HP_calls":0,"observation_calls":0,"plot_calls":0,"formal_repo_writes":0}
+}

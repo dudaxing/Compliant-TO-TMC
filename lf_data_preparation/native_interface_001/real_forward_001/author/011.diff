@@ -1,0 +1,15 @@
+--- pre_native_receipt_001/001.py
++++ execute_real_api.py
+@@ -210,6 +210,12 @@
+     finally:
+         for module, name, original in reversed(patches):
+             setattr(module, name, original)
++        if native_result is not None:
++            receipt.update(call_counts=dict(native_result.metadata["call_counts"]),
++                accepted_states=native_result.metadata["accepted_states"],
++                task_target_executed=native_result.metadata["task_target_executed"])
++        else:
++            receipt.update(call_counts=None, accepted_states=None, task_target_executed=None)
+         try:
+             outputs = {path.relative_to(root).as_posix(): sha(path)
+                        for path in result_directory.rglob("*") if path.is_file()}

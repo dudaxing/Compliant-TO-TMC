@@ -1,0 +1,443 @@
+--- /dev/null
++++ collect_real_api_docs.py
+@@ -0,0 +1,440 @@
++"""Propose/install closed real-API documentation from saved JSON and raw files only."""
++from __future__ import annotations
++
++import argparse
++from datetime import datetime, timezone
++import hashlib
++import json
++import os
++from pathlib import Path
++
++BASE = "8330b821af1f9ab58bdd9f51c85eb2e7d3cdcb37"
++CONTROL = "lf_data_preparation/native_interface_001/real_forward_001"
++AUTHOR = Path(__file__).resolve().parent
++FRONTS = ["README.md", "hf_repo/README.md", "docs/CURRENT_STATUS.md",
++          "docs/PROJECT_STATUS.md", "docs/RESUME_DEVELOPMENT.md"]
++DOCS = FRONTS + ["docs/NATIVE_EVALUATION_INTERFACE.md", "docs/PHYSICAL_FUNCTION_PROGRESS.md"]
++PHASES = {
++    "production": ("run_001/execution_receipt.json", 180, 210),
++    "reference": ("run_001/audit/execution_receipt.json", 180, 210),
++    "view": ("run_001/view_execution_receipt.json", 60, 90),
++}
++
++
++def sha(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def json_bytes(value):
++    return (json.dumps(value, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
++
++
++def gather(repo):
++    """Check already closed phases; never import HF or open an array archive."""
++    bindings = {}
++
++    def pin(name, expected=None):
++        path = repo / name
++        assert path.suffix.lower() != ".npz", "This documentation collector never opens NPZ"
++        actual = sha(path)
++        assert expected is None or actual == expected, name
++        bindings[name] = actual
++        return path
++
++    def read(name, expected=None):
++        return json.loads(pin(name, expected).read_bytes())
++
++    records = {}
++    for phase, (receipt_name, helper, outer) in PHASES.items():
++        protocol_name = CONTROL + "/" + phase + "_protocol.json"
++        protocol = read(protocol_name)
++        launch = read(CONTROL + "/" + phase + "_launch.json")
++        receipt = read(CONTROL + "/" + receipt_name)
++        limits = protocol["phases"][phase]
++        assert limits["helper_seconds"] == helper and limits["outer_seconds"] == outer
++        assert protocol["sampled_RSS_bytes"] == 8 * 1024**3
++        assert launch["status"] == receipt["status"] == "pass"
++        assert launch["invocations"] == 1 and launch["exit_code"] == 0
++        assert launch["stop_reason"] is None
++        assert launch["protocol_sha256"] == receipt["protocol_sha256"] == bindings[protocol_name]
++        assert launch["all_bindings_unchanged"] and receipt["all_bindings_unchanged"]
++        assert launch["bindings"] == protocol["bindings"]
++        assert launch["elapsed_seconds"] <= outer
++        assert receipt["elapsed_seconds"] <= helper
++        assert launch["peak_sampled_tree_RSS_bytes"] <= protocol["sampled_RSS_bytes"]
++        assert receipt["peak_sampled_RSS_bytes"] <= protocol["sampled_RSS_bytes"]
++        for name, expected in protocol["bindings"].items():
++            if Path(name).suffix.lower() in {".py", ".json", ".md", ".diff"}:
++                pin(name, expected)
++        records[phase] = {
++            "status": "pass", "protocol_file": protocol_name,
++            "protocol_sha256": bindings[protocol_name],
++            "launch_file": CONTROL + "/" + phase + "_launch.json",
++            "receipt_file": CONTROL + "/" + receipt_name,
++            "helper_limit_seconds": helper, "outer_limit_seconds": outer,
++            "sampled_RSS_limit_bytes": protocol["sampled_RSS_bytes"],
++            "helper_elapsed_seconds": receipt["elapsed_seconds"],
++            "outer_elapsed_seconds": launch["elapsed_seconds"],
++            "helper_peak_sampled_RSS_bytes": receipt["peak_sampled_RSS_bytes"],
++            "outer_peak_sampled_tree_RSS_bytes": launch["peak_sampled_tree_RSS_bytes"],
++            "completed_utc": datetime.fromisoformat(launch["completed_utc"]).astimezone(timezone.utc).isoformat(),
++            "receipt": receipt,
++        }
++
++    result_name = CONTROL + "/run_001/result/result.json"
++    result = read(result_name)
++    original_name = CONTROL + "/run_001/result/response.json"
++    original = read(original_name)
++    qualified_name = CONTROL + "/run_001/qualified_response.json"
++    qualified = read(qualified_name)
++    model = read(CONTROL + "/run_001/result/model/model.json")
++    summary_name = CONTROL + "/run_001/audit/summary.json"
++    reference = read(summary_name)
++    contract_name = CONTROL + "/reference_contract.json"
++    pin(contract_name, records["reference"]["receipt"]["contract_sha256"])
++    manifest_name = CONTROL + "/run_001/view/manifest.json"
++    view = read(manifest_name)
++    view_summary_name = CONTROL + "/run_001/view/real_api/summary.json"
++    view_summary = read(view_summary_name)
++    n = len(result["states"])
++    prod = records["production"]["receipt"]
++    ref = records["reference"]["receipt"]
++    vis = records["view"]["receipt"]
++    assert result["status"] == original["status"] == qualified["status"] == "success"
++    assert result["target_reached"] and result["task_target_executed"]
++    assert result["accepted_states"] == prod["accepted_states"] == n
++    assert result["targets_mm"] == [0.0, model["task"]["input"]["target_mm"]]
++    assert model["task"]["workpiece"] is None and qualified["physics"]["workpiece"] is None
++    assert prod["result_sha256"] == qualified["identity"]["result"]["sha256"] == bindings[result_name]
++    assert prod["response_sha256"] == vis["original_response_sha256"] == bindings[original_name]
++    assert qualified["identity"]["model"]["sha256"] == bindings[CONTROL + "/run_001/result/model/model.json"]
++    assert model["task_sha256"] == result["task_sha256"] == qualified["identity"]["task_sha256"]
++    assert result["call_counts"] == prod["call_counts"] == qualified["call_counts"]
++    assert prod["HP_calls"] == prod["JIT_calls"] == prod["LF_imports"] == 0
++    assert all(row == {"started": 1, "completed": 1} for row in prod["counts"].values())
++    assert len(prod["counts"]) == 7
++    assert prod["constructor_result_type"] == "hf_eval.tmc.TMCModel"
++    assert prod["cached_write_F_T_delta"] == {"force_calls": 0, "tangent_calls": 0}
++    assert result["save_force_calls"] == result["save_tangent_calls"] == 0
++    assert original["independent_reference"]["status"] == original["views"]["status"] == "not_provided"
++    assert reference["status"] == "pass"
++    assert ref["result_sha256"] == reference["result_sha256"] == bindings[result_name]
++    assert ref["summary_sha256"] == bindings[summary_name]
++    assert reference["accepted_states"] == ref["accepted_states"] == n
++    assert reference["HP_calls_started"] == reference["HP_calls_completed"] == ref["HP_calls_started"] == ref["HP_calls_completed"] == 2*n
++    assert reference["checks_completed"] == ref["checks_completed"]
++    assert reference["full_element_and_DOF_coverage"] and not reference["HP_matrix_columns_exhaustively_checked"]
++    assert ref["candidate_force_calls"] == ref["candidate_tangent_calls"] == ref["solver_calls"] == ref["model_constructions"] == 0
++    assert reference["candidate_force_calls"] == reference["tangent_calls"] == reference["solver_calls"] == 0
++    for name, expected in reference["source_bindings"].items():
++        pin(name, expected)
++    for name, expected in reference["input_bindings"].items():
++        if Path(name).suffix.lower() in {".json", ".py", ".md", ".diff"}:
++            pin(name, expected)
++    assert len(reference["states"]) == len(view_summary["rows"]) == n
++    for i, (state, hp, row) in enumerate(zip(result["states"], reference["states"], view_summary["rows"])):
++        assert hp["index"] == row["index"] == i and hp["status"] == "pass"
++        assert hp["HP_calls"] == 2 and all(check["pass_gate"] for check in hp["checks"])
++        assert state["state_sha256"] == hp["state_sha256"] == row["state_sha256"]
++        assert state["d"] == hp["target_mm"] == row["d_mm"]
++    assert view["status"] == "pass" and len(view["cases"]) == 1
++    case = view["cases"][0]
++    assert case["label"] == "real_api" and case["task"] == model["task"]
++    assert case["model_sha256"] == model["arrays"]["sha256"]
++    assert case["saved_accepted_states"] == case["observed_states"] == vis["accepted_states"] == n
++    assert case["production_status"] == view_summary["production_status"] == result["status"]
++    assert view["input_source_bindings"][result_name] == bindings[result_name]
++    assert view["outputs"]["real_api/summary.json"] == bindings[view_summary_name]
++    assert vis["outputs"][manifest_name] == bindings[manifest_name]
++    assert vis["outputs"][view_summary_name] == bindings[view_summary_name]
++    assert all(vis[key] == view[key] == 0 for key in ["force_calls", "tangent_calls", "solver_calls", "HP_calls", "model_constructions"])
++    assert vis["outputs"][qualified_name] == bindings[qualified_name]
++    qr = qualified["independent_reference"]
++    assert qr["status"] == "matched" and qr["accepted_reference_pass"] and qr["full_path_reference_pass"]
++    assert qr["report"]["sha256"] == bindings[summary_name]
++    assert not any(qr[key] for key in ["HP_all_columns_qualified", "contact_qualified", "clamp_qualified", "pressure_qualified", "HF5_qualified"])
++    assert qualified["producer_flags"] == original["producer_flags"] == {
++        key: result[key] for key in ["independent_HP_qualified", "equilibrium_qualified", "HF_qualified"]}
++    assert not any(qualified["producer_flags"].values())
++    assert qualified["views"]["status"] == "matched" and qualified["views"]["case_label"] == "real_api"
++    assert qualified["views"]["manifest"]["sha256"] == bindings[manifest_name]
++    assert {link["kind"] for link in qualified["views"]["links"]} == {"png", "gif"}
++    assert len(qualified["views"]["links"]) == 2
++    for link in qualified["views"]["links"]:
++        name = link["path"]
++        assert link["path_scope"] == "repo_relative"
++        pin(name, link["sha256"])
++        key = name.removeprefix(CONTROL + "/run_001/view/")
++        assert vis["outputs"][name] == view["outputs"][key] == link["sha256"]
++
++    closure_review = read(CONTROL + "/closure_author/001.json")
++    assert closure_review["status"] == "pass_saved_only" and closure_review["blocking_findings"] == []
++    return {"records": records, "result": result, "qualified": qualified,
++            "model": model, "view_summary": view_summary, "reference": reference,
++            "bindings": bindings}
++
++
++def relative_link(destination, target):
++    return os.path.relpath(target, str(Path(destination).parent)).replace("\\", "/")
++
++
++def current_front(destination, data):
++    q = data["qualified"]
++    n, hp = q["path"]["accepted_states"], data["reference"]["HP_calls_completed"]
++    report = relative_link(destination, CONTROL + "/RESULTS.md")
++    interface = relative_link(destination, "docs/NATIVE_EVALUATION_INTERFACE.md")
++    return f"""## 当前：真实薄评价入口已完成小型正向任务
++
++HF复用LF/N4几何与研究成果，提供独立正向力学评价，不含优化器。新入口从无关工作目录、显式repo完成无工件夹持器0→{q['path']['task_target_mm']:g}mm（1µm）任务：{n}个真实接受态、{hp}次新HP及保存图通过；真实构模、求解、缓存保存和响应生成各一次，默认complete/full/tangent与25个既有核心文件保持。前一阶段21项JSON/模拟集成是首次纯功能验证，本次才验证真实调用流程。
++
++这项小任务检验接口接通与身份/保存语义；此前固定side18方体、4mm右介质域完整24态/48HP仍是大行程固定工件力学的独立证据。两者不混用资格。HF5整体、同任务比较/小批量、匹配网格、连续压力、有效接触定义、自由体和摩擦仍待完成；q_out是加权端口位移，不是钳尖间隙。
++
++[本次效果与实际图]({report})；[接口用法]({interface})。后续按现有物理证据选择同任务比较或匹配网格步骤，不重跑旧闭卡；开发统一main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
++
++---
++
++以下完整原字节为8330b821阶段历史；其中“新API真实任务尚待执行”等文字只描述当时状态，当前以上方及本次闭卡报告为准。
++
++"""
++
++
++def results_text(data):
++    q, reference, rows = data["qualified"], data["reference"], data["view_summary"]["rows"]
++    end = q["target_response"]
++    records = data["records"]
++    png = next(link["path"] for link in q["views"]["links"] if link["kind"] == "png")
++    gif = next(link["path"] for link in q["views"]["links"] if link["kind"] == "gif")
++    paths = []
++    for phase, row in records.items():
++        paths.append(f"| {phase} | {row['helper_limit_seconds']}/{row['outer_limit_seconds']} | {row['helper_elapsed_seconds']:.6f}/{row['outer_elapsed_seconds']:.6f} | {row['helper_peak_sampled_RSS_bytes']}/{row['outer_peak_sampled_tree_RSS_bytes']} |")
++    return f"""# 真实薄评价入口：小型无工件正向任务
++
++整体目标是给外部LF/N4研究层提供独立HF正向响应，供比较、优选并推进HF5评价接口；HF不含优化器。此前21项纯功能验证使用JSON与模拟transport，本次通过同一个已有普通夹持器几何及明确0→{q['path']['task_target_mm']:g}mm任务，验证真实入口确实只构模/求解/缓存保存一次，再生成紧凑响应。任务ID、边界及默认complete/full/tangent均保持，25个既有核心文件不改。此例没有工件，也不是新大行程夹持任务。
++
++实际得到{q['path']['accepted_states']}个接受态。构造器、project builder、controller、native solve、cached writer、formatter、response writer七个真实委托各started/completed一次；生产F={q['call_counts']['force_calls']}、T={q['call_counts']['tangent_calls']}，缓存保存额外F/T为0。新独立参考覆盖全部实际态、{q['physics']['counts']['cells']}单元和{q['physics']['counts']['dofs']}DOF，用{reference['HP_calls_completed']}次新HP（每态80/120位）完成{reference['checks_completed']}项检查；核对完整力、PORT方向切线作用及离散平衡，未核对全部切线列或独立能量。参考未借旧结果资格。
++
++| 任务目标态保存量 | 实际值 |
++|---|---:|
++| 平均输入d / q_in (mm) | {end['d_mm']:.16g} / {end['q_in_mm']:.16g} |
++| 半模型输入反力R (N) | {end['R_input_N']:.16g} |
++| 加权输出端口q_out (mm) | {end['q_out_mm']:.16g} |
++| 全域minimum J | {end['minimum_J']:.16g} |
++| 相对平衡残差 | {end['relative_residual']:.8g} |
++| 相对全局力平衡 | {end['relative_global_force_balance']:.8g} |
++| 全域max abs Hu (1/mm) | {end['max_abs_Hu_per_mm']:.8g} |
++| 工件力 | null（没有工件，不填零力） |
++
++输入端口三个节点ux分别为{rows[-1]['input_node_0_ux_mm']:.10g}、{rows[-1]['input_node_1_ux_mm']:.10g}、{rows[-1]['input_node_2_ux_mm']:.10g}mm；加权均值满足目标，节点没有被刚性绑成相同位移。q_out不是钳尖距离；J不是压力。complete模式保存辅助材料能量，不据此授予独立能量资格。
++
++原比例×1图及明确标注×1000的位移补充图均使用全部{len(rows)}个实际保存态；保存视图新增F/T、构模、求解和HP为0。PNG和GIF引用同结果/模型/所有状态身份，未重新计算力学。
++
++[结构、位移、力与J图]({relative_link(CONTROL + '/RESULTS.md', png)})；[全部实际态动画]({relative_link(CONTROL + '/RESULTS.md', gif)})；[图中保存数值](run_001/view/real_api/numeric_states.csv)；[新参考与视图响应](run_001/qualified_response.json)。原[result/response.json](run_001/result/response.json)保持生产时的无参考/无视图版本，没有覆盖。
++
++| 阶段 | helper/outer上限(s) | helper/outer实际(s) | helper/outer采样峰值(bytes) |
++|---|---:|---:|---:|
++{chr(10).join(paths)}
++
++各窗口均一次且8GiB采样上限，无修复重试；采样/协作停止不表示OS硬内存上限。API through-summary耗时{records['production']['receipt']['evaluation_elapsed_seconds']:.6f}s，不含response写出和CLI启动/stdout；与整helper/outer时钟分开。
++
++生产原independent_HP/equilibrium/HF flags仍false；新响应单独记录同结果/all-N/2N参考匹配及请求路径通过。全切线列、连续压力、一般接触/夹持定义、HF5整体仍false/未完成。此前固定方体24态/48HP的大行程证据见[工件报告]({relative_link(CONTROL + '/RESULTS.md', 'docs/WORKPIECE_ENLARGEMENT_20261007.md')})；本次无工件1µm例不替代该物理任务，也不证明匹配网格或域收敛。
++
++[生产卡](production_protocol.json) / [启动](production_launch.json) / [回执](run_001/execution_receipt.json)；[参考卡](reference_protocol.json) / [启动](reference_launch.json) / [回执](run_001/audit/execution_receipt.json) / [摘要](run_001/audit/summary.json)；[视图卡](view_protocol.json) / [启动](view_launch.json) / [回执](run_001/view_execution_receipt.json)；[闭卡进度](closure_progress.json)；[独立保存证据审阅](closure_author/001.json)。
++
++后续依据现有证据选择同任务比较或匹配网格的一个步骤，再推进小批量和HF5重复性合同；压力/有效接触、圆体自身任务、自由体及摩擦仍需各自物理验证。
++"""
++
++
++def interface_section(data):
++    q, reference = data["qualified"], data["reference"]
++    p = data["records"]["production"]
++    ref = data["records"]["reference"]
++    view = data["records"]["view"]
++    report = relative_link("docs/NATIVE_EVALUATION_INTERFACE.md", CONTROL + "/RESULTS.md")
++    response = relative_link("docs/NATIVE_EVALUATION_INTERFACE.md", CONTROL + "/run_001/qualified_response.json")
++    return f"""## 当前追加：真实API、同结果参考及保存视图已完成
++
++首次纯功能验证为下方8330原文中的21项JSON/模拟集成、4份已有结果摘要和真实科学调用0。随后本次从无关cwd、显式repo，通过evaluate_native真实完成已有无工件夹持器0→{q['path']['task_target_mm']:g}mm：{q['path']['accepted_states']}态、生产{q['call_counts']['force_calls']}F/{q['call_counts']['tangent_calls']}T，七个真实委托各一次，保存阶段新增F/T为0。默认complete/full/tangent和25个既有核心文件不改。
++
++新独立参考针对本次同result全部{q['path']['accepted_states']}态完成{reference['HP_calls_completed']}次新HP、{reference['checks_completed']}检查，原力/PORT方向切线作用/平衡门通过；新保存视图仅用缓存，×1和标明×1000、全部实际帧，0新力学调用。helper/outer实际：生产{p['helper_elapsed_seconds']:.6f}/{p['outer_elapsed_seconds']:.6f}s，参考{ref['helper_elapsed_seconds']:.6f}/{ref['outer_elapsed_seconds']:.6f}s，视图{view['helper_elapsed_seconds']:.6f}/{view['outer_elapsed_seconds']:.6f}s。
++
++[实际效果、图及各阶段卡]({report})；[同参考/视图的紧凑响应]({response})。原response保持不覆盖，新响应accepted/full-path参考匹配单独为true；生产者原flags保持false，全列、接触/压力/夹持、HF5不升级。请求完整路径仅指此例0→1µm，工件力为null；此例不替代此前固定方体24态的物理证据。下一项仍须是明确同任务比较或匹配网格步骤，小批量和HF5重复性尚未完成。
++
++---
++
++以下完整原字节为8330b821首次纯功能验证与接口用法历史；其中“尚未执行真实平衡”及其下一步只描述当时，现状以上方为准。
++
++"""
++
++
++def matrix_section(data):
++    q = data["qualified"]
++    report = relative_link("docs/PHYSICAL_FUNCTION_PROGRESS.md", CONTROL + "/RESULTS.md")
++    return f"""# 当前功能矩阵补充：真实薄API小任务已闭合
++
++HF仍仅正向评价，不含优化器。此前固定方体2/4mm域完整周期物理证据保留；本次新入口无工件1µm任务{q['path']['accepted_states']}态、{data['reference']['HP_calls_completed']}新HP及保存图完成，范围见[实际报告]({report})。
++
++| 功能 | 当前已验证 | 仍未完成 |
++|---|---|---|
++| 输入与域 | 既有普通native几何/task，经真实API一次构模/求解/保存；原边界、任务ID和默认模式保持 | 同设计匹配网格/域收敛；其它新模型自身资格 |
++| HF5与易用 | 薄API/CLI、21项首次纯功能验证、4旧摘要；另本次真实coarse两态路径及同结果参考/视图身份闭合 | 同任务比较、小批量、重复性合同与HF5整体 |
++| 力与显示 | 新例半模型R、加权q_out、J/Hu及×1/标明×1000图；没有工件，工件力null | 新例不授夹持/接触/压力、全切线列或自由工件资格 |
++| 能量范围 | 新例complete保存辅助材料能量；旧固定工件mechanical卡不计算该辅助项 | 独立能量验证；不得从材料能量缓存扩展物理资格 |
++
++未改变匹配网格、压力/接触定义、圆体自身完整任务、自由体、摩擦和统一E源码推论的原边界。下面机械模式说明只对应此前固定工件卡，与本次complete不同；当时“后续科学卡尚未执行”亦仅历史。
++
++---
++
++以下完整原字节为8330b821阶段功能矩阵历史；当前变化以上方为准。
++
++"""
++
++
++def propose(repo, output):
++    assert not output.exists(), output
++    data = gather(repo)
++    baseline_index = json.loads((AUTHOR / "baseline_index.json").read_bytes())
++    payloads = {}
++    before = {}
++    for destination in DOCS:
++        entry = baseline_index[destination]
++        raw = (AUTHOR / entry["file"]).read_bytes()
++        assert hashlib.sha256(raw).hexdigest() == entry["sha256"]
++        assert (repo / destination).read_bytes() == raw, destination
++        before[destination] = sha(repo / destination)
++        prefix = (current_front(destination, data) if destination in FRONTS else
++                  interface_section(data) if destination.endswith("NATIVE_EVALUATION_INTERFACE.md") else
++                  matrix_section(data))
++        payloads[destination] = prefix.encode("utf-8") + raw
++    progress = {
++        "schema_version": "native-real-api-closure-progress-1.0",
++        "status": "pass", "baseline_commit": BASE,
++        "goal": "Independent HF forward evaluation for external LF/N4 comparison; no optimizer; HF5 remains incomplete.",
++        "case_scope": "Existing coarse gripper, no workpiece, load-only 0 to 0.001mm; not a large-stroke clamp qualification.",
++        "phases": {name: {k: v for k, v in row.items() if k != "receipt"} for name, row in data["records"].items()},
++        "actual_states": data["qualified"]["path"]["accepted_states"],
++        "actual_targets_mm": data["result"]["targets_mm"],
++        "call_counts": data["result"]["call_counts"],
++        "real_delegate_counts": data["records"]["production"]["receipt"]["counts"],
++        "new_HP_calls": data["reference"]["HP_calls_completed"],
++        "checks_completed": data["reference"]["checks_completed"],
++        "target_response": data["qualified"]["target_response"],
++        "last_accepted": data["qualified"]["last_accepted"],
++        "producer_flags": data["qualified"]["producer_flags"],
++        "independent_reference": data["qualified"]["independent_reference"],
++        "views": data["qualified"]["views"],
++        "former_functional_scope": "api_validation_001: first 21 saved-JSON/mock transport tests and four exports; zero real mechanics.",
++        "remaining": ["Matched-design mesh and domain convergence", "Same-task comparison and batch repeatability/HF5",
++                      "Effective contact/clamp criteria and continuous pressure", "Circle task, free body and friction"],
++        "source_json_media_bindings": data["bindings"],
++        "independent_closure_review": {"path": CONTROL + "/closure_author/001.json", "sha256": data["bindings"][CONTROL + "/closure_author/001.json"]},
++        "collector_scope": "Saved JSON/source/media byte audit only; no NPZ/array or HP archive audit and no new HF calls.",
++    }
++    payloads[CONTROL + "/closure_progress.json"] = json_bytes(progress)
++    payloads[CONTROL + "/RESULTS.md"] = results_text(data).encode("utf-8")
++    for destination in payloads.keys() - before.keys():
++        assert not (repo / destination).exists(), destination
++        before[destination] = None
++    output.mkdir()
++    files = []
++    for i, (destination, raw) in enumerate(payloads.items(), 1):
++        short = f"{i:03}" + Path(destination).suffix
++        (output / short).write_bytes(raw)
++        item = {"destination": destination, "proposal": short,
++                "sha256": hashlib.sha256(raw).hexdigest(),
++                "expected_preimage_sha256": before[destination]}
++        if destination in baseline_index:
++            item["preserved_history"] = baseline_index[destination]
++        files.append(item)
++    manifest = {
++        "schema_version": "native-real-api-documentation-proposals-1.0",
++        "status": "proposed", "baseline_commit": BASE,
++        "collector_sha256": sha(__file__), "baseline_index_sha256": sha(AUTHOR / "baseline_index.json"),
++        "input_bindings": data["bindings"], "files": files, "new_scientific_calls": 0,
++    }
++    (output / "proposal_manifest.json").write_bytes(json_bytes(manifest))
++    print(json.dumps({"status": "proposed", "files": len(files),
++                      "manifest": str(output / "proposal_manifest.json"),
++                      "manifest_sha256": sha(output / "proposal_manifest.json")}))
++
++
++def apply(repo, proposals, review_file):
++    manifest_file = proposals / "proposal_manifest.json"
++    manifest = json.loads(manifest_file.read_bytes())
++    review = json.loads(review_file.read_bytes())
++    assert review["status"] == "pass_saved_only" and review["blocking_findings"] == []
++    assert review["proposal_manifest_sha256"] == sha(manifest_file)
++    assert manifest["collector_sha256"] == sha(__file__)
++    assert len(manifest["files"]) == 9
++    for name, expected in manifest["input_bindings"].items():
++        assert Path(name).suffix.lower() != ".npz"
++        assert sha(repo / name) == expected, name
++    # Check all nine proposal/preimage identities before any repository write.
++    for row in manifest["files"]:
++        destination = repo / row["destination"]
++        assert sha(proposals / row["proposal"]) == row["sha256"]
++        expected = row["expected_preimage_sha256"]
++        assert (not destination.exists()) if expected is None else sha(destination) == expected
++        if "preserved_history" in row:
++            entry = row["preserved_history"]
++            old = (AUTHOR / entry["file"]).read_bytes()
++            assert hashlib.sha256(old).hexdigest() == entry["sha256"]
++            assert (proposals / row["proposal"]).read_bytes().endswith(old)
++    archive = repo / CONTROL / "documentation_author_001"
++    assert not archive.exists()
++    receipt_file = repo / CONTROL / "documentation_install.json"
++    assert not receipt_file.exists()
++    selection = [Path(__file__), AUTHOR / "README.md", AUTHOR / "author_note.json",
++                 AUTHOR / "author_checks.json", AUTHOR / "source_additions.diff",
++                 AUTHOR / "documentation_static_review.json", AUTHOR / "baseline_index.json",
++                 manifest_file, review_file]
++    raw_sources = [source.read_bytes() for source in selection]
++    archive.mkdir()
++    archive_map = []
++    for i, (source, raw) in enumerate(zip(selection, raw_sources), 1):
++        short = f"{i:03}" + source.suffix
++        (archive / short).write_bytes(raw)
++        archive_map.append({"file": short, "source_name": str(source),
++                            "sha256": hashlib.sha256(raw).hexdigest()})
++    (archive / "INDEX.json").write_bytes(json_bytes(archive_map))
++    (archive / "INDEX.md").write_text(
++        "# Real API documentation source context\n\n"
++        "Numbered files preserve raw author, static review, proposal manifest and saved-only review. "
++        "Authoring source-only roles are historical. Scientific phase files remain unchanged. "
++        "The seven full 8330 documents are preserved as exact historical suffixes in their current files; "
++        "baseline_index records their raw hashes. External source names are provenance, not runtime dependencies.\n",
++        encoding="utf-8")
++    for row in manifest["files"]:
++        destination = repo / row["destination"]
++        destination.write_bytes((proposals / row["proposal"]).read_bytes())
++        assert sha(destination) == row["sha256"]
++    receipt = {
++        "schema_version": "native-real-api-documentation-install-1.0", "status": "pass",
++        "proposal_manifest_sha256": sha(manifest_file), "review_sha256": sha(review_file),
++        "collector_sha256": sha(__file__), "installed_files": manifest["files"],
++        "archive": (archive.relative_to(repo)).as_posix(), "archive_files": archive_map,
++        "original_input_bindings": manifest["input_bindings"], "new_scientific_calls": 0,
++        "completed_utc": datetime.now(timezone.utc).isoformat(),
++    }
++    receipt_file.write_bytes(json_bytes(receipt))
++    print(json.dumps({"status": "pass", "installed_files": 9, "receipt": str(receipt_file)}))
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--repo", type=Path, required=True)
++    commands = parser.add_subparsers(dest="mode", required=True)
++    proposal = commands.add_parser("propose")
++    proposal.add_argument("--output", type=Path, required=True)
++    install = commands.add_parser("apply")
++    install.add_argument("--proposals", type=Path, required=True)
++    install.add_argument("--review", type=Path, required=True)
++    args = parser.parse_args()
++    repo = args.repo.resolve()
++    if args.mode == "propose":
++        propose(repo, args.output.resolve())
++    else:
++        apply(repo, args.proposals.resolve(), args.review.resolve())
++
++
++if __name__ == "__main__":
++    main()

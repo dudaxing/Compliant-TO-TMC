@@ -1,0 +1,25 @@
+Selected real API source-only candidates and static reviews. Historical source facts/costs are context, not new qualification. Original absolute author paths are provenance only; runtime inputs are repository-relative.
+
+- [001.py](001.py): D:\hf-real-api-author-20261008\execute_real_api.py | SHA 986ee3162b90b134ccfa9e245a43a2b24eee4221d1e5e83ccd152f3bd6ff5c03
+- [002.py](002.py): D:\hf-real-api-author-20261008\install_real_api_card.py | SHA 7aaeea504bb7a61c06689d0280be653da6ae4faca4c2cba96a35ef4629c39364
+- [003.md](003.md): D:\hf-real-api-author-20261008\README.md | SHA 785921d746596ccc80e5f80818363bf141921264f36a4ab5c0108cf9e0c1de65
+- [004.json](004.json): D:\hf-real-api-author-20261008\author_note.json | SHA 19f111aaf1eaa8b947a3d2a383cba0151d4b16f90216fc67ba5f571a291174a2
+- [005.json](005.json): D:\hf-real-api-author-20261008\author_checks.json | SHA 6dfa84c854736b63959065e49b6282e5155e1e55581281cb7ffd1169f932ad3b
+- [006.diff](006.diff): D:\hf-real-api-author-20261008\source_additions.diff | SHA 65e15df4b5367363109f1d64944d38496c9386089796d52a66dbced9415edce9
+- [007.json](007.json): D:\hf-real-api-author-20261008\context\001.json | SHA f8e8295d9b0d83a7ea6ae8820f276dedb72987ce4930a5f93341ad7611929750
+- [008.md](008.md): D:\hf-real-api-author-20261008\context\002.md | SHA 3465d51add75e583831b046cb5583ed0a28b73e2be70cc9b814c5e09783e207f
+- [009.json](009.json): D:\hf-real-api-author-20261008\context\index.json | SHA 46420db9cb07d4a111e001c4ddb634b638f2b8b2b51177c342f989b6296a479f
+- [010.diff](010.diff): D:\hf-real-api-author-20261008\absent_view_gate_delta.diff | SHA 4e0ff03d826bfb8d5b931f63d83f79463894402a4098cd6157c9c3bf88a6b8de
+- [011.diff](011.diff): D:\hf-real-api-author-20261008\native_receipt_delta.diff | SHA 6873323740af47680653cb9d8a4f1b80ddf9dc49c72e3d89abf5cb9fd4097ae3
+- [012.py](012.py): D:\hf-real-api-author-20261008\pre_view_gate_001\001.py | SHA 262b6a3a38ead976188175deac35011a830087c7ff6fc5f2a03ce9125275af79
+- [013.json](013.json): D:\hf-real-api-author-20261008\pre_view_gate_001\002.json | SHA 1ac07f2e5cfe43483ba8168d8924bd31d1f2b94aefc6f2a53ee45c89f8baa5fb
+- [014.json](014.json): D:\hf-real-api-author-20261008\pre_view_gate_001\003.json | SHA 2ab80a8443c653c566e66b321d8c920a0814030acc18db0c7c876b940abb0da1
+- [015.diff](015.diff): D:\hf-real-api-author-20261008\pre_view_gate_001\004.diff | SHA 2d4206aade5e3ed3258b58b115eeb0768f1cab673f3129014b0dde5732b1e866
+- [016.json](016.json): D:\hf-real-api-author-20261008\pre_view_gate_001\index.json | SHA 51955e5f6325114e2c8083939cb7029367908bbf885c3f9cf72c797c258cf296
+- [017.py](017.py): D:\hf-real-api-author-20261008\pre_native_receipt_001\001.py | SHA 607a7518bec23ab0d721ab21e126c661d3e73015144b0fdd8ad5180c71111b1e
+- [018.json](018.json): D:\hf-real-api-author-20261008\pre_native_receipt_001\002.json | SHA 5a66064db4d43c546a14ef90ce7794e66cf26e4826c8064c422b083c5d5e6381
+- [019.json](019.json): D:\hf-real-api-author-20261008\pre_native_receipt_001\003.json | SHA 13b62c046841160a5ca80027b7344720967002e709dbeb3d956a03fd6c7ed634
+- [020.py](020.py): D:\hf-real-api-author-20261008\pre_native_receipt_001\004.py | SHA 9aa769a43820ef1fcaca4f86fa5990403dbcec127f84206b2054ab459a98c16a
+- [021.json](021.json): D:\hf-real-api-author-20261008\pre_native_receipt_001\index.json | SHA dbd75bec4f55287961ec4532eed49341fcf32e3dbdc4146db785fbd4ba84abfd
+- [022.json](022.json): D:\hf-real-api-author-20261008\root_source_static_review.json | SHA 7a9949f6b8c2952100fef794a26fdcb17593a17010e4b594e17ca394a02bdd33
+- [023.json](023.json): D:\hf-real-api-author-20261008\real_api_static_review.json | SHA 3c9175bf491c16676523eb79e5b86748ebc3453b33fcbc4d99dfa85655877acc

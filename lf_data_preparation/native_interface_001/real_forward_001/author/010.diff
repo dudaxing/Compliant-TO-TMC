@@ -1,0 +1,12 @@
+--- pre_view_gate_001/001.py
++++ execute_real_api.py
+@@ -179,7 +179,8 @@
+         assert response["independent_reference"]["status"] == "not_provided"
+         assert all(value is False for name, value in response["independent_reference"].items()
+                    if name.endswith("_pass") or name.endswith("_qualified"))
+-        assert not response["views"]
++        assert response["views"]["status"] == "not_provided"
++        assert response["views"]["manifest"] is None and not response["views"]["links"]
+         gates = protocol["gates"]
+         for snapshot in native_result.accepted:
+             row = snapshot.record
