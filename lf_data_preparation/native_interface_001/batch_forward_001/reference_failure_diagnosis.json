@@ -1,0 +1,384 @@
+{
+  "schema_version": "native-batch-reference-failure-diagnosis-1.0",
+  "status": "closed_not_pass",
+  "created_utc": "2026-10-07T20:32:01.470309+00:00",
+  "error": "KeyError('coords')",
+  "failure_location": "reference_author/audit_batch_case.py:125, added node-count check",
+  "actual_new_HP_calls": 0,
+  "accepted_states_audited": 0,
+  "checks_completed": 11,
+  "helper_seconds": 1.4976892999839038,
+  "outer_seconds": 1.8802615999011323,
+  "actual_exit_code": 1,
+  "production_unchanged": true,
+  "worker_sha256": "c874f83cb70f571b36dc59e9ed80791569babd70d6642ec41b0ad242c866c671",
+  "protocol_sha256": "22f76a85486c5dafdc481c563f985b8ceea40d45e0ae82d5c9c2dbcfec77bb71",
+  "cases": {
+    "canonical": {
+      "metadata_file": "lf_data_preparation/native_interface_001/batch_forward_001/run_001/canonical/model/model.json",
+      "metadata_sha256": "597a92b4a3de63697e875b0a733592c1b1f27e8b0ab8ed229cfb33f4649e26e2",
+      "declared_fields": {
+        "coordinates": {
+          "dtype": "float64",
+          "shape": [
+            3321,
+            2
+          ],
+          "sha256": "726f02249ba39dcb422acc792a3e8b1185b943f21b2686ed0b7d5b2ed75b0725"
+        },
+        "connectivity": {
+          "dtype": "int64",
+          "shape": [
+            3200,
+            4
+          ],
+          "sha256": "84831753bb802e5418c1fbad9473952e67a9c8e942cfe04c66145d67a05d266c"
+        },
+        "solid": {
+          "dtype": "bool",
+          "shape": [
+            3200
+          ],
+          "sha256": "77372d4862435f4566d0bee22744a97a19e9f81bfedf62cac0e2facf18f895d7"
+        },
+        "lam": {
+          "dtype": "float64",
+          "shape": [
+            3200
+          ],
+          "sha256": "2ebcc50c053c1e579606ba2f9ab628bca119b53e09106c932ad104f811153d81"
+        },
+        "mu": {
+          "dtype": "float64",
+          "shape": [
+            3200
+          ],
+          "sha256": "b0cd5bf03cd841a7b7d9673b6d8f936e1b9e622cf6c3b0c2635f1fa5b3733efe"
+        },
+        "gamma": {
+          "dtype": "float64",
+          "shape": [
+            3200
+          ],
+          "sha256": "c7a8d103bc415bc0c87bb549ef08e2acd75c74b4102cd575bbf4c95dfeffd1e3"
+        },
+        "edofs": {
+          "dtype": "int64",
+          "shape": [
+            3200,
+            8
+          ],
+          "sha256": "c5115b2eb89e54c5636f8080c747cfefaca89338f254f6351675cfb5a508a8c9"
+        },
+        "fixed_dofs": {
+          "dtype": "int64",
+          "shape": [
+            87
+          ],
+          "sha256": "538d05c6c25520299cd783103dcbd0a4a348967833dba780d03bebb2dbadddc2"
+        },
+        "free_dofs": {
+          "dtype": "int64",
+          "shape": [
+            6555
+          ],
+          "sha256": "a766d3ebc726b827d5b4fdb913a15f8f9e3e3beaaa2ef2d5c6250ebeb6bab4db"
+        },
+        "solid_nodes": {
+          "dtype": "int64",
+          "shape": [
+            1337
+          ],
+          "sha256": "7499009fec5ef066c3f5a56428021ae057459746ca3370c096da226b3da8cdd9"
+        },
+        "solid_dofs": {
+          "dtype": "int64",
+          "shape": [
+            2674
+          ],
+          "sha256": "48bb613e85143521e0a5fa8cac4981e36ddbea73da7fb924f26b2aaffadf80b7"
+        },
+        "b_in": {
+          "dtype": "float64",
+          "shape": [
+            6642
+          ],
+          "sha256": "b74ac1a13fc42328979c6fff6505ce1bff02280f0d040eaee6b0d86d85bf80d4"
+        },
+        "b_out": {
+          "dtype": "float64",
+          "shape": [
+            6642
+          ],
+          "sha256": "b293e516f7e93d8069bac9898ecd90494d6585857e25c6bebb9f98f95395f802"
+        },
+        "grad": {
+          "dtype": "float64",
+          "shape": [
+            9,
+            4,
+            2
+          ],
+          "sha256": "5367cbf39b1061f4187bebb33459c669cb8213f13ab414886ff8d80307187ef5"
+        },
+        "hessian": {
+          "dtype": "float64",
+          "shape": [
+            4,
+            2,
+            2
+          ],
+          "sha256": "7159a88b63bb29c790caba857b0668308a0bd79ee9cfb28379c11cc2e95af882"
+        },
+        "weights": {
+          "dtype": "float64",
+          "shape": [
+            9
+          ],
+          "sha256": "736b2b0ee0d4710b895ed9f9116d3fa32da144acbcb6701a87edb0408b7814b9"
+        },
+        "points": {
+          "dtype": "float64",
+          "shape": [
+            9,
+            2
+          ],
+          "sha256": "bbe5390364f8bb87d822c9ce2fea03b2523330f154c95827d4559b87f4ffeaa3"
+        },
+        "kr": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "992e1a3cebfcedb0e079143753e682376909011d13eec8e5e340d71f131de69c"
+        },
+        "hx": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+        },
+        "hy": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+        },
+        "thickness": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555"
+        },
+        "k_out": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        },
+        "force_scale_per_length": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555"
+        }
+      },
+      "wrapper_model_subscripts": [
+        "b_in",
+        "connectivity",
+        "coords",
+        "edofs",
+        "fixed_dofs",
+        "free_dofs"
+      ],
+      "missing_subscripts": [
+        "coords"
+      ],
+      "coordinates_shape": [
+        3321,
+        2
+      ],
+      "actual_states": 4
+    },
+    "native_fine": {
+      "metadata_file": "lf_data_preparation/native_interface_001/batch_forward_001/run_001/native_fine/model/model.json",
+      "metadata_sha256": "bb84034c655f4b74e5cfc478688af5c2565fa25358b4bb8e89ac3b3981883ccc",
+      "declared_fields": {
+        "coordinates": {
+          "dtype": "float64",
+          "shape": [
+            13041,
+            2
+          ],
+          "sha256": "0a8750d82699f0a82c4d8d3d0fb7bc21624110eda652f71692f7b6d03fefea05"
+        },
+        "connectivity": {
+          "dtype": "int64",
+          "shape": [
+            12800,
+            4
+          ],
+          "sha256": "a36b86748e7a3fcfe1f633cca56b30d716ecb8d682e9fe85da849c6f79377903"
+        },
+        "solid": {
+          "dtype": "bool",
+          "shape": [
+            12800
+          ],
+          "sha256": "dd8d39ef03d09a95b76fa26cff9860298c67771629adcf27f3a4159fe27283fd"
+        },
+        "lam": {
+          "dtype": "float64",
+          "shape": [
+            12800
+          ],
+          "sha256": "72247627f8019e70629aa78ec44104fbafd3acdc369828cdcd330a3badedc6cd"
+        },
+        "mu": {
+          "dtype": "float64",
+          "shape": [
+            12800
+          ],
+          "sha256": "34e0d0207766400bfb33ff06f0a739f68ded74a86a3d18a530fc6d0e9e38044c"
+        },
+        "gamma": {
+          "dtype": "float64",
+          "shape": [
+            12800
+          ],
+          "sha256": "e398080865143d4e80e6f708aa2519e19b77f3ba0cd6873a38cd3145e4f8af0a"
+        },
+        "edofs": {
+          "dtype": "int64",
+          "shape": [
+            12800,
+            8
+          ],
+          "sha256": "6c9bf7a93b6580534e5deb5f35e5965b20bd9364848a250d53158f1bb7df2337"
+        },
+        "fixed_dofs": {
+          "dtype": "int64",
+          "shape": [
+            169
+          ],
+          "sha256": "120aa55b7cb2683992965e982e112ddbcaaefd3e39a525830956db0290884fe0"
+        },
+        "free_dofs": {
+          "dtype": "int64",
+          "shape": [
+            25913
+          ],
+          "sha256": "f581b912b8028775e3c78959a2a7d3e9dba060d301dcb8bb2b936ce78f0a69f3"
+        },
+        "solid_nodes": {
+          "dtype": "int64",
+          "shape": [
+            4881
+          ],
+          "sha256": "a841cff79353b194a0529730245349a4cfd6279cbc83082bd1da053dcc717dbc"
+        },
+        "solid_dofs": {
+          "dtype": "int64",
+          "shape": [
+            9762
+          ],
+          "sha256": "85ceed9061152685cb7fde88f0ab029bfe879137a9589880611cecdb92d9657b"
+        },
+        "b_in": {
+          "dtype": "float64",
+          "shape": [
+            26082
+          ],
+          "sha256": "6ca1315a3655ebe1dbc50255ceb890555ac7b5af10c16497a3062b5470e58542"
+        },
+        "b_out": {
+          "dtype": "float64",
+          "shape": [
+            26082
+          ],
+          "sha256": "71e235a31dc21438649254c9d5b132d47e9d2cc2047de19cb80a2b2639707bf9"
+        },
+        "grad": {
+          "dtype": "float64",
+          "shape": [
+            9,
+            4,
+            2
+          ],
+          "sha256": "ff646881a03a9303c4ccc8b51d6837c0758bfcb032eb3a60b4bbad803a356e3a"
+        },
+        "hessian": {
+          "dtype": "float64",
+          "shape": [
+            4,
+            2,
+            2
+          ],
+          "sha256": "3c8c8d80f43f09b522633b614c448d320bc2c4aa07f28fe5ea9fe13520747dda"
+        },
+        "weights": {
+          "dtype": "float64",
+          "shape": [
+            9
+          ],
+          "sha256": "09ecedf8018fab73cfe4d565a669a3211b2e69e937524fa1f853963e3dab69a2"
+        },
+        "points": {
+          "dtype": "float64",
+          "shape": [
+            9,
+            2
+          ],
+          "sha256": "bbe5390364f8bb87d822c9ce2fea03b2523330f154c95827d4559b87f4ffeaa3"
+        },
+        "kr": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "992e1a3cebfcedb0e079143753e682376909011d13eec8e5e340d71f131de69c"
+        },
+        "hx": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "4cfa5b42ca669328764e67cd9a34bb8f90b16ed7ca8d85e8443783d7ccce15ed"
+        },
+        "hy": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "4cfa5b42ca669328764e67cd9a34bb8f90b16ed7ca8d85e8443783d7ccce15ed"
+        },
+        "thickness": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555"
+        },
+        "k_out": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        },
+        "force_scale_per_length": {
+          "dtype": "float64",
+          "shape": [],
+          "sha256": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555"
+        }
+      },
+      "wrapper_model_subscripts": [
+        "b_in",
+        "connectivity",
+        "coords",
+        "edofs",
+        "fixed_dofs",
+        "free_dofs"
+      ],
+      "missing_subscripts": [
+        "coords"
+      ],
+      "coordinates_shape": [
+        13041,
+        2
+      ],
+      "actual_states": 4
+    }
+  },
+  "root_cause": "Wrapper introduced coords, while both declared models and native writer use coordinates.",
+  "review_gap": "Source inheritance and dimensions were reviewed, but each added model subscript was not compared with the actual declared field names.",
+  "scope": "JSON/AST/raw-file identity only, no array loading or mechanics evaluation.",
+  "later_stages": {
+    "native_fine_reference": "not_frozen_not_executed",
+    "saved_views": "not_frozen_not_executed"
+  },
+  "next": "Prepare minimal V2 wrapper and complete field/state/attribute source review, then seek a separately reviewed new card; no retry of this closed card."
+}

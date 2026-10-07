@@ -1,3 +1,13 @@
+## 当前恢复入口：生产通过，参考读取失败卡已关闭
+
+先读 [CURRENT_STATUS](CURRENT_STATUS.md)、[当前结果](../lf_data_preparation/native_interface_001/batch_forward_001/RESULTS.md) 与该目录 `current_progress_002.json`、`reference_failure_diagnosis.json`。原两例生产卡 PASS，各四态/14F/9T，54份保存输出和28核心源字节保持。canonical 新参考一次 NOT_PASS：`coords` 字段不存在，HP=0；细例参考/图未执行。不得复跑原生产卡、失败参考卡或修改冻结 source/protocol/output。
+
+下一步是最小 V2 参考包装的全部字段、状态和属性审阅，随后单独新卡；原参考数学、门和资源预算保持。V2 数值执行尚未授权或启动。新参考两例均通过后才能生成自有批量图与 qualified_response；旧单例图/HP不能替代新结果资格。开发只用 main，origin=https://github.com/dudaxing/Compliant-TO-TMC.git；任意克隆目录以实际 Git 根为准，不依赖这台机器的绝对工作路径。
+
+以下为历史记录，当前以上方及真实终态记录为准。
+
+---
+
 ## 最近恢复入口：批量功能已完成，真实两例待执行
 
 先读[当前状态](CURRENT_STATUS.md)和[批量接口用法](NATIVE_BATCH_INTERFACE.md)。main新增两例顺序入口并通过15项mock检查；下一项是明确manifest中的两个原0.025mm任务及新资源卡。旧科学窗口均已关闭，新批量没有真实结果；不复用旧单例参考或图作为新batch资格。

@@ -1,0 +1,120 @@
+{
+  "schema_version": "native-batch-case-reference-static-peer-1.0",
+  "status": "pass_static_only",
+  "blocking_findings": [],
+  "reviewed_utc": "2026-10-07T20:23:05.066426+00:00",
+  "source_sha256": {
+    "audit_batch_case.py": "c874f83cb70f571b36dc59e9ed80791569babd70d6642ec41b0ad242c866c671",
+    "reference_case_builder.py": "856509a4e9d0b5aca7143e976997ed4a07def62228a48f0ec65577b9d48fe890"
+  },
+  "math_sha256": {
+    "audit_native_mean.py": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678",
+    "audit_native_force.py": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+    "hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+    "hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+    "run_split_average_demo.py": "e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb"
+  },
+  "current_runtime_source_count": 28,
+  "reference_source_count": 35,
+  "production_protocol_sha256": "5a0a7253bf7a6f8c44c9d53f744e545d61c0809474fb783d3716075deb305e28",
+  "cases": {
+    "canonical": {
+      "actual_N": 4,
+      "fresh_HP_required": 8,
+      "counts": {
+        "cells": 3200,
+        "nodes": 3321,
+        "dofs": 6642,
+        "solid_cells": 1086,
+        "medium_cells": 2114,
+        "solid_incident_nodes": 1337,
+        "fixed_dofs": 87,
+        "free_dofs": 6555
+      },
+      "input_nodes": [
+        3078,
+        3159,
+        3240
+      ],
+      "input_weights": [
+        0.25,
+        0.5,
+        0.25
+      ],
+      "result_sha256": "c7ef85b61e8a243217086581a2f490cbe396c6f6086f594937c07843a7f5154f",
+      "response_sha256": "73ed42225eb307254a867a558c6be2064e0a5f5c67fbea38a2a5dcab925acd28",
+      "model_declared_fields_match_prior": true,
+      "legacy_inventory_sha256": "7f12aebb330481ae0cc65708f39d4130fc21b0c1fcd68fa75aa1148ceea1427e"
+    },
+    "native_fine": {
+      "actual_N": 4,
+      "fresh_HP_required": 8,
+      "counts": {
+        "cells": 12800,
+        "nodes": 13041,
+        "dofs": 26082,
+        "solid_cells": 4358,
+        "medium_cells": 8442,
+        "solid_incident_nodes": 4881,
+        "fixed_dofs": 169,
+        "free_dofs": 25913
+      },
+      "input_nodes": [
+        12236,
+        12397,
+        12558,
+        12719,
+        12880
+      ],
+      "input_weights": [
+        0.125,
+        0.25,
+        0.25,
+        0.25,
+        0.125
+      ],
+      "result_sha256": "a764e26178fe71acd32fee5c0a106248e3f7947d47ce1ec11431fbe6f5a6a97d",
+      "response_sha256": "d21632abda91a6e3a0e7f7005c5b81ab7eba362b6edc088a14a79955a4fc330a",
+      "model_declared_fields_match_prior": true,
+      "legacy_inventory_sha256": "8af425217d7afffca6fe99e2336df11006466e35586d7f2d35adba11c9cab3be"
+    }
+  },
+  "explicit_root_budgets": {
+    "canonical": {
+      "helper_seconds": 240,
+      "outer_seconds": 270,
+      "sampled_RSS_bytes": 8589934592
+    },
+    "native_fine": {
+      "helper_seconds": 900,
+      "outer_seconds": 960,
+      "sampled_RSS_bytes": 8589934592
+    }
+  },
+  "conclusions": [
+    "Original Audit.run/run_state/HP80-120/Decimal scatter/GATES directly inherited without overrides; actual all-N loop and2N rule unchanged.",
+    "Dynamic cell/node/DOF/fixed/free/direction/lift shapes match both declared native cases; four structural files have explicit path-to-pin fields. Current model23 declared array-field identities match prior intrinsic metadata, without reading arrays or inheriting old result qualification.",
+    "New complete production helper/F3/index/two-case evidence, actual per-state scalar/gate identities, current sources and raw outputs required before freeze/load; no failed/partial batch or old HP qualifies.",
+    "Reference case outputs separated under run_001/audit; stage-root F3 distinct phase/stop signal and alias of original STARTED provide the stated240/270 and900/960 windows with8GiB sampled RSS.",
+    "Original summary raw remains; qualified_summary only changes alias/current task-scope metadata and binds original raw SHA. All numerical fields remain inherited.",
+    "Late resources can invalidate an already written mathematical summary; future consumers must require both reference execution_receipt and matching F3 launch terminal pass, all bindings and resource checks in addition to qualified_summary."
+  ],
+  "limitations": [
+    "Static source and saved JSON identities only; no reference has been executed by this reviewer and no HP or new scientific qualification is granted.",
+    "Only port-direction tangent action is independently planned, not all tangent columns, energy, pressure/contact, mesh convergence, ranking or wholeHF5."
+  ],
+  "activity": {
+    "candidate_imports": 0,
+    "builder_calls": 0,
+    "NPZ_loads": 0,
+    "HF_imports": 0,
+    "constructors": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "tests": 0,
+    "renders": 0,
+    "formal_writes": 0
+  }
+}

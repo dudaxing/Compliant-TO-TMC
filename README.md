@@ -1,3 +1,13 @@
+## 当前：两例真实批量生产通过，独立参考包装已停止
+
+两例无工件任务均完成 0→0.025 mm 的四个原目标态；输入反力分别为 0.00521459203 N 和 0.00375627879 N，生产残差、约束、固定边界及力平衡检查通过。新独立参考因包装误用 `coords` 而在读取模型时停止，实际模型字段为 `coordinates`；新 HP=0，细例参考及新批量图未执行。失败卡保留且不重试。当前正在准备最小 V2 包装和单独新卡，原力学源与生产证据不变。
+
+整体目标仍是复用 LF/N4 几何与研究层，完成独立非线性 TMC 正向评价；HF 不包含优化器。固定工件加载/卸载已有真实结果与图，通用接触/连续压力、匹配网格及 HF5 整体仍未完成。两例为不同设计，不能由此作网格收敛或排名。[当前状态](docs/CURRENT_STATUS.md)；[新生产及失败记录](lf_data_preparation/native_interface_001/batch_forward_001/RESULTS.md)；[物理功能矩阵](docs/PHYSICAL_FUNCTION_PROGRESS.md)。main 开发，origin 保持 https://github.com/dudaxing/Compliant-TO-TMC.git。
+
+以下保留历史记录；“真实两例尚未执行”等旧文字仅描述当时状态。
+
+---
+
 ## 当前：薄批量入口已通过纯功能检查
 
 两例顺序评价入口与 CLI 已实现，15项 JSON/mock 检查通过；真实科学调用为0。各例保持独立输入、输出与失败/参考/图来源，首个非success停止。新两例0.025mm计算尚未执行，HF5整体未完成。[批量用法与功能流程](docs/NATIVE_BATCH_INTERFACE.md)；[当前进度](docs/CURRENT_STATUS.md)。

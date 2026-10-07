@@ -1,0 +1,664 @@
+--- real_forward_001/reference_author/audit_real_api.py
++++ batch_forward_001/reference_author/audit_batch_case.py
+@@ -1,4 +1,4 @@
+-"""Fresh saved-state reference after one real native API call; original math reused."""
++"""Fresh all-state batch-case reference with the original native Audit mathematics."""
+ from time import perf_counter
+ STARTED = perf_counter()
+ from pathlib import Path
+@@ -8,187 +8,176 @@
+ import sys
+ 
+ parser = argparse.ArgumentParser(description=__doc__)
+-for name in ('repo', 'input', 'output', 'contract'):
+-    parser.add_argument('--'+name, type=Path, required=True)
+-parser.add_argument('--time-limit', type=float, required=True)
+-ARGS = parser.parse_args()
+-ROOT = ARGS.repo.resolve()
+-resolve = lambda path: (path if path.is_absolute() else ROOT/path).resolve()
+-ARGS.input, ARGS.output, ARGS.contract = map(resolve, (ARGS.input, ARGS.output, ARGS.contract))
+-SCRIPTS = ROOT/'hf_repo/scripts'
+-AUDIT_PIN = '331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678'
+-assert hashlib.sha256((SCRIPTS/'audit_native_mean.py').read_bytes()).hexdigest() == AUDIT_PIN
+-sys.path[:0] = [str(Path(__file__).resolve().parent), str(SCRIPTS)]
++for name in ('repo','input','output','contract'):
++    parser.add_argument('--'+name,type=Path,required=True)
++parser.add_argument('--case',choices=('canonical','native_fine'),required=True)
++parser.add_argument('--time-limit',type=float,required=True)
++ARGS=parser.parse_args()
++ROOT=ARGS.repo.resolve()
++resolve=lambda p:(p if p.is_absolute() else ROOT/p).resolve()
++ARGS.input,ARGS.output,ARGS.contract=map(resolve,(ARGS.input,ARGS.output,ARGS.contract))
++SCRIPTS=ROOT/'hf_repo/scripts'
++assert hashlib.sha256((SCRIPTS/'audit_native_mean.py').read_bytes()).hexdigest()=='331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678'
++sys.path[:0]=[str(Path(__file__).resolve().parent),str(SCRIPTS)]
+ import audit_native_mean as original_audit
+-original_audit.STARTED = STARTED  # Timing alias only: inherited summary/stdout cover the whole wrapper.
+-from audit_native_mean import Audit, GATES, RSS_LIMIT
+-from audit_native_force import canonical_hash, npz, read, require, same_arrays, sha, verify_descriptor, verify_fields, write
+-from reference_card_builder import BASE, MATH_PINS, STAGE, STRUCTURAL_PINS, gates_from_source, verify_production
++original_audit.STARTED=STARTED  # Timing alias only; original run/math bytes stay unchanged.
++from audit_native_mean import Audit,GATES,RSS_LIMIT
++from audit_native_force import canonical_hash,npz,read,require,same_arrays,sha,verify_descriptor,verify_fields,write
++from reference_case_builder import MATH_PINS,STAGE,STRUCTURAL_PINS,gates_from_source,verify_batch_production
+ import numpy as np
+ 
+ 
+-class RealAPIAudit(Audit):
+-    """Only task/source loading and whole-helper resource observations are adapted."""
+-    def __init__(self, args):
++class BatchCaseAudit(Audit):
++    """Only loading, resource observations and metadata provenance are adapted."""
++    def __init__(self,args):
+         super().__init__(args)
+-        self.repo = ROOT
+-        self.control = self.stage.parent
+-        self.contract_file = ARGS.contract
+-        self.check(self.limit == 180. and self.stage == ROOT/STAGE/'run_001'
+-            and self.output == self.stage/'audit' and self.contract_file == self.control/'reference_contract.json',
+-            'Wrong new real API reference scope')
++        self.repo,self.control,self.label,self.contract_file=ROOT,ROOT/STAGE,args.case,ARGS.contract
++        self.check(self.stage==self.control/'run_001'/self.label
++            and self.output==self.control/'run_001/audit'/self.label
++            and self.contract_file==self.control/f'reference_contract_{self.label}.json', 'Wrong case/output reference scope')
+ 
+     def checkpoint(self):
+-        self.peak = max(self.peak, self.process.memory_info().rss)
+-        require(perf_counter()-STARTED <= self.limit, 'Whole-helper independent API reference time limit exceeded')
+-        require(self.peak <= RSS_LIMIT, 'Independent API reference sampled RSS exceeds 8 GiB')
+-        require(not (self.control/'stop_requested.txt').exists(), 'Independent API reference stop requested')
++        self.peak=max(self.peak,self.process.memory_info().rss)
++        require(perf_counter()-STARTED<=self.limit,'Whole-helper case reference time limit exceeded')
++        require(self.peak<=RSS_LIMIT,'Case reference sampled RSS exceeds 8 GiB')
++        require(not (self.control/'stop_requested.txt').exists(),'Case reference stop requested')
+ 
+-    def lifecycle(self, status, error=None):
+-        write(self.output/'lifecycle.json', dict(status=status, error=error,
+-            elapsed_seconds=perf_counter()-STARTED, HP_calls_started=self.hp_started,
+-            HP_calls_completed=self.hp_completed, checks_completed=self.checks,
+-            accepted_states_completed=len(self.rows), sampled_peak_RSS_bytes=self.peak,
+-            time_limit_seconds=self.limit, sampled_RSS_limit_bytes=RSS_LIMIT,
++    def lifecycle(self,status,error=None):
++        write(self.output/'lifecycle.json',dict(status=status,error=error,
++            elapsed_seconds=perf_counter()-STARTED,HP_calls_started=self.hp_started,HP_calls_completed=self.hp_completed,
++            checks_completed=self.checks,accepted_states_completed=len(self.rows),sampled_peak_RSS_bytes=self.peak,
++            time_limit_seconds=self.limit,sampled_RSS_limit_bytes=RSS_LIMIT,
+             time_scope='Whole wrapper/import/load/HP/scatter/serialization lifetime',
+-            stop_policy='First failure stops; no production evaluation, solve, retry or repair'))
++            stop_policy='First failure stops; no production, solve, retry or repair'))
+ 
+     def load(self):
+-        self.bind(self.contract_file)
+-        contract = read(self.contract_file)
+-        self.check(contract['schema_version'] == 'native-real-api-reference-contract-1.0'
+-            and contract['production_stage'] == STAGE+'/run_001'
+-            and contract['limits'] == dict(helper_seconds=self.limit, outer_seconds=210, sampled_RSS_bytes=RSS_LIMIT)
+-            and contract['targets_mm'] == [0., .001] and contract['gates'] == GATES
+-            and contract['new_reference_status'] == 'not_executed' and contract['reference_budget_basis'].strip(),
+-            'Wrong explicit new reference contract')
+-        reference_protocol_file = self.control/'reference_protocol.json'
+-        self.bind(reference_protocol_file)
+-        reference_protocol = read(reference_protocol_file)
+-        self.check(reference_protocol['schema_version'] == 'native-real-api-reference-protocol-1.0'
+-            and reference_protocol['sampled_RSS_bytes'] == RSS_LIMIT
+-            and reference_protocol['phases']['reference']['helper_seconds'] == self.limit
+-            and reference_protocol['phases']['reference']['outer_seconds'] == 210
+-            and reference_protocol['actual_accepted_states'] == contract['accepted_states']
+-            and reference_protocol['fresh_HP_calls_required'] == contract['fresh_HP_calls_required'], 'Wrong actual reference protocol')
+-        for name, pin in reference_protocol['bindings'].items():
+-            self.bind(self.repo/name, pin)
+-        protocol, receipt, result, current = verify_production(self.repo, self.bind)
+-        self.check(contract['production_protocol_sha256'] == sha(self.control/'production_protocol.json')
+-            and contract['production_receipt_sha256'] == sha(self.stage/'execution_receipt.json')
+-            and contract['production_launch_sha256'] == sha(self.control/'production_launch.json')
+-            and contract['production_result_sha256'] == receipt['result_sha256']
+-            and contract['current_sources'] == current and contract['baseline_commit'] == protocol['baseline_commit'],
+-            'Actual new complete production identity differs')
+-        reference_sources = contract['reference_sources']
+-        required = dict(current, **{'hf_repo/scripts/'+name: pin for name, pin in MATH_PINS.items()},
+-            **{(Path(__file__).with_name(name)).relative_to(self.repo).as_posix(): sha(Path(__file__).with_name(name))
+-               for name in ('audit_real_api.py', 'reference_card_builder.py')})
+-        self.check(reference_sources == required and len(required) == len({Path(name).name for name in required}) == 34,
+-            'Reference source closure differs')
+-        for name, pin in reference_sources.items():
+-            self.bind(self.repo/name, pin)
+-            destination = self.output/'sources'/Path(name).name
+-            shutil.copyfile(self.repo/name, destination); self.bind(destination, pin)
+-            self.sources[name] = pin
+-        self.check(gates_from_source(SCRIPTS/'run_split_average_demo.py') == GATES == protocol['gates'], 'Original gates changed')
+-        for path in (self.contract_file, self.control/'production_protocol.json', self.stage/'execution_receipt.json'):
+-            shutil.copyfile(path, self.output/path.name)
+-        baseline_file = self.repo/BASE/'input_inventory.json'
+-        self.bind(baseline_file, 'e0b5ccd8defb0f1c8d8d6cb7d8501844e8639ccc010b58f7d362e7f2dbca0b6b')
+-        row = read(baseline_file)['case']
+-        structural = {key: row[key] for key in STRUCTURAL_PINS}
+-        self.check(structural == contract['structural_inputs'] and protocol['geometry_file'] == row['geometry_file']
+-            and protocol['task_file'] == row['task_file'] and protocol['settings'] == read(baseline_file)['settings'],
+-            'Original explicit no-workpiece physics or structural inputs changed')
+-        for key, name in structural.items():
+-            self.bind(self.repo/name, row[STRUCTURAL_PINS[key]])
+-        self.origin, self.result_file = self.stage/'result', self.stage/'result/result.json'
++        self.bind(self.contract_file);contract=read(self.contract_file)
++        self.check(contract['schema_version']=='native-batch-case-reference-contract-1.0'
++            and contract['case_label']==self.label and contract['production_stage']==STAGE
++            and contract['case_directory']==self.stage.relative_to(self.repo).as_posix()
++            and contract['reference_output']==self.output.relative_to(self.repo).as_posix()
++            and contract['limits']['helper_seconds']==self.limit and contract['limits']['sampled_RSS_bytes']==RSS_LIMIT
++            and contract['limits']['outer_seconds']>self.limit and contract['reference_budget_basis'].strip()
++            and contract['targets_mm']==[0.,.005,.010,.025] and contract['gates']==GATES
++            and contract['new_reference_status']=='not_executed','Wrong explicit fresh case reference contract')
++        reference_protocol_file=self.control/f'reference_protocol_{self.label}.json'
++        self.bind(reference_protocol_file);reference_protocol=read(reference_protocol_file)
++        self.check(reference_protocol['schema_version']=='native-batch-case-reference-protocol-1.0'
++            and reference_protocol['case_label']==self.label and reference_protocol['sampled_RSS_bytes']==RSS_LIMIT
++            and reference_protocol['phases']['reference_'+self.label]['helper_seconds']==self.limit
++            and reference_protocol['phases']['reference_'+self.label]['outer_seconds']==contract['limits']['outer_seconds']
++            and reference_protocol['actual_accepted_states']==contract['accepted_states']
++            and reference_protocol['fresh_HP_calls_required']==contract['fresh_HP_calls_required'],'Wrong actual-N reference protocol')
++        for name,pin in reference_protocol['bindings'].items():self.bind(self.repo/name,pin)
++        protocol,receipt,index,current,(plan,case,result)=verify_batch_production(self.repo,self.label,self.bind)
++        self.check(contract['production_protocol_sha256']==sha(self.control/'production_protocol.json')
++            and contract['production_receipt_sha256']==sha(self.control/'run_001/execution_receipt.json')
++            and contract['production_launch_sha256']==sha(self.control/'production_launch.json')
++            and contract['batch_index_sha256']==sha(self.control/'run_001/batch/index.json')
++            and contract['production_result_sha256']==case['result_sha256'] and contract['production_response_sha256']==case['response_sha256']
++            and contract['current_sources']==current and contract['baseline_commit']==protocol['baseline_commit']
++            and contract['expected_counts']==protocol['expected_counts'][self.label],'New complete batch/case identity differs')
++        required=dict(current,**{'hf_repo/scripts/'+n:p for n,p in MATH_PINS.items()},
++            **{Path(__file__).with_name(n).relative_to(self.repo).as_posix():sha(Path(__file__).with_name(n))
++                for n in ('audit_batch_case.py','reference_case_builder.py')})
++        self.check(contract['reference_sources']==required
++            and len(required)==len({Path(n).name for n in required})==35,'Reference source closure differs')
++        for name,pin in required.items():
++            self.bind(self.repo/name,pin);destination=self.output/'sources'/Path(name).name
++            shutil.copyfile(self.repo/name,destination);self.bind(destination,pin);self.sources[name]=pin
++        self.check(gates_from_source(SCRIPTS/'run_split_average_demo.py')==GATES==protocol['gates'],'Original gates changed')
++        legacy_file=self.repo/contract['legacy_inventory'];self.bind(legacy_file,protocol['bindings'][contract['legacy_inventory']])
++        prior=read(legacy_file)['case'];structural={k:prior[k] for k in STRUCTURAL_PINS}
++        self.check(structural==contract['structural_inputs'] and plan['geometry']==prior['geometry_file']
++            and plan['task']==prior['prior_task_file'],'Prior structural input identities differ')
++        for key,name in structural.items():self.bind(self.repo/name,prior[STRUCTURAL_PINS[key]])
++        self.origin,self.result_file=self.stage,self.stage/'result.json'
+         verify_descriptor(result)
+-        self.check(result['schema_version'] == 'hf-native-mean-result-1.0' and result['status'] == 'success'
+-            and all(result[key] is True for key in ('production_converged', 'target_reached', 'task_target_executed', 'lift_origin_zero', 'lift_shape_zero'))
+-            and result['targets_mm'] == [0., .001] and result['task_target_mm'] == .001 and result['target_origin'] == 0.
+-            and result['backend'] == 'numpy' and result['matrix_units'] == 'N/mm' and result['k_out_N_per_mm'] == 0.
+-            and result['force_scale_per_length'] == 20. and result['failure'] is None
+-            and all(result[key] is False for key in ('equilibrium_qualified', 'independent_HP_qualified', 'HF_qualified'))
++        self.check(result['schema_version']=='hf-native-mean-result-1.0' and result['status']=='success'
++            and all(result[k] is True for k in ('production_converged','target_reached','task_target_executed','lift_origin_zero','lift_shape_zero'))
++            and result['targets_mm']==contract['targets_mm'] and result['task_target_mm']==.025 and result['target_origin']==0.
++            and result['backend']=='numpy' and result['matrix_units']=='N/mm' and result['k_out_N_per_mm']==0.
++            and result['force_scale_per_length']==20. and result['failure'] is None
++            and all(result[k] is False for k in ('equilibrium_qualified','independent_HP_qualified','HF_qualified'))
+             and 'response_mode' not in result and 'tangent_execution' not in result and 'initial_guess' not in result,
+-            'Default complete/full/tangent path or producer qualification changed')
+-        model_file = self.origin/result['model']['arrays_path']
+-        model_json = self.origin/result['model']['descriptor_path']
+-        self.bind(model_file, result['model']['arrays_sha256']); self.bind(model_json, result['model']['descriptor_file_sha256'])
+-        model, metadata = npz(model_file), read(model_json)
+-        verify_descriptor(metadata); verify_fields(model, metadata['arrays']['fields'])
+-        same_arrays(model, npz(self.repo/row['prior_model_file']), 'Prior intrinsic arrays only; no inherited qualification')
+-        task, prior_task = read(self.repo/protocol['task_file']), read(self.repo/row['prior_task_file'])
+-        physical = set(prior_task)-{'task_id', 'purpose', 'parameter_origin', 'description', 'input'}
+-        self.check(all(task[key] == prior_task[key] for key in physical)
+-            and task['input'] == dict(prior_task['input'], target_mm=.001) and task['case_family'] == 'gripper'
+-            and task['workpiece'] is None and 'path' not in task, 'Explicit prior task physics changed')
+-        self.check(len(model) == 23 and metadata['schema_version'] == 'hf-native-project-model-1.0'
+-            and metadata['descriptor_sha256'] == result['model']['descriptor_sha256']
+-            and metadata['arrays']['sha256'] == sha(model_file) and metadata['task'] == task
+-            and metadata['task_sha256'] == canonical_hash(task) == result['task_sha256'], 'Ordinary model/task declaration differs')
+-        source = metadata['source_geometry']
+-        expected_source = dict(source, snapshot={key: 'model/'+path for key, path in source['snapshot'].items()})
+-        self.check(result['source_geometry'] == expected_source and source['geometry_id'] == row['geometry_id']
+-            and source['descriptor_file_sha256'] == row['geometry_file_sha256']
+-            and source['arrays_sha256'] == row['geometry_npz_sha256']
+-            and source['descriptor_sha256'] == read(self.repo/row['geometry_file'])['descriptor_sha256'], 'Source geometry identity differs')
+-        for key, pin in (('descriptor', 'geometry_file_sha256'), ('arrays', 'geometry_npz_sha256')):
+-            self.bind(self.origin/expected_source['snapshot'][key], row[pin])
+-        edofs = (2*model['connectivity'][:, :, None]+np.arange(2)).reshape(-1, 8)
+-        self.check(np.array_equal(edofs, model['edofs']) and len(edofs) == 3200
+-            and np.array_equal(np.setdiff1d(np.arange(6642), model['fixed_dofs']), model['free_dofs'])
+-            and len(model['fixed_dofs']) == 87 and len(model['free_dofs']) == 6555, 'Real element/fixed/free indexing differs')
+-        direction_arrays, lifting = npz(self.repo/row['direction_file']), npz(self.repo/row['lifting_file'])
+-        direction = model['b_in']/np.max(abs(model['b_in'])); direction[model['fixed_dofs']] = 0.
+-        self.check(direction_arrays.keys() == {'direction', 'multiplier_direction'}
+-            and direction_arrays['direction'].dtype == np.dtype('float64') and direction_arrays['direction'].shape == (6642,)
+-            and direction_arrays['direction'].tobytes() == direction.tobytes()
+-            and hashlib.sha256(direction.tobytes()).hexdigest() == row['direction_array_sha256']
+-            and float(direction_arrays['multiplier_direction']) == 0. and lifting.keys() == {'lift_origin', 'lift_shape'}
+-            and all(value.dtype == np.dtype('float64') and value.shape == (6642,) and np.count_nonzero(value) == 0 for value in lifting.values()),
+-            'Prior direction/zero-lift structural comparison differs from the new saved model')
+-        states = result['states']
+-        self.check(len(states) == contract['accepted_states'] == result['accepted_states'] == receipt['accepted_states']
+-            and contract['fresh_HP_calls_required'] == 2*len(states)
+-            and contract['state_sha256'] == [item['state_sha256'] for item in states]
+-            and [item['d'] for item in states if item['is_original_target']] == [0., .001]
+-            and states[0]['d'] == 0. and states[-1]['d'] == .001
+-            and all(a['d'] < b['d'] for a, b in zip(states, states[1:]))
+-            and all(item['target_origin'] == 0. and item['physical_mean_target_mm'] == item['d'] for item in states),
+-            'Actual accepted-state path coverage differs')
+-        self.model, self.edofs, self.direction = model, edofs, direction
+-        self.inventory, self.receipt, self.result = protocol, receipt, result
++            'Default complete/full/tangent task or producer qualification differs')
++        model_file,model_json=(self.origin/result['model'][k] for k in ('arrays_path','descriptor_path'))
++        self.bind(model_file,result['model']['arrays_sha256']);self.bind(model_json,result['model']['descriptor_file_sha256'])
++        model,metadata=npz(model_file),read(model_json)
++        verify_descriptor(metadata);verify_fields(model,metadata['arrays']['fields'])
++        same_arrays(model,npz(self.repo/prior['prior_model_file']),'Prior intrinsic arrays only; no inherited qualification')
++        task=read(self.repo/plan['task'])
++        self.check(task==read(self.repo/prior['prior_task_file']) and task['case_family']=='gripper'
++            and task['workpiece'] is None and 'path' not in task and task['input']['target_mm']==.025,'Explicit task physics differs')
++        self.check(len(model)==23 and metadata['schema_version']=='hf-native-project-model-1.0'
++            and metadata['descriptor_sha256']==result['model']['descriptor_sha256']
++            and metadata['arrays']['sha256']==sha(model_file) and metadata['task']==task
++            and metadata['task_sha256']==canonical_hash(task)==result['task_sha256'],'Ordinary model/task declaration differs')
++        source=metadata['source_geometry'];expected_source=dict(source,snapshot={k:'model/'+p for k,p in source['snapshot'].items()})
++        self.check(result['source_geometry']==expected_source and source['geometry_id']==prior['geometry_id']
++            and source['descriptor_file_sha256']==prior['geometry_file_sha256'] and source['arrays_sha256']==prior['geometry_npz_sha256']
++            and source['descriptor_sha256']==read(self.repo/plan['geometry'])['descriptor_sha256'],'Source geometry identity differs')
++        for key,pin in (('descriptor','geometry_file_sha256'),('arrays','geometry_npz_sha256')):
++            self.bind(self.origin/expected_source['snapshot'][key],prior[pin])
++        counts=contract['expected_counts'];ndof=counts['dofs']
++        edofs=(2*model['connectivity'][:,:,None]+np.arange(2)).reshape(-1,8)
++        self.check(np.array_equal(edofs,model['edofs']) and len(edofs)==counts['cells']
++            and len(model['coords'])==counts['nodes'] and len(model['b_in'])==ndof
++            and np.array_equal(np.setdiff1d(np.arange(ndof),model['fixed_dofs']),model['free_dofs'])
++            and len(model['fixed_dofs'])==counts['fixed_dofs'] and len(model['free_dofs'])==counts['free_dofs'],
++            'Actual case element/fixed/free indexing differs')
++        direction_arrays,lifting=npz(self.repo/prior['direction_file']),npz(self.repo/prior['lifting_file'])
++        direction=model['b_in']/np.max(abs(model['b_in']));direction[model['fixed_dofs']]=0.
++        self.check(direction_arrays.keys()=={'direction','multiplier_direction'}
++            and direction_arrays['direction'].dtype==np.dtype('float64') and direction_arrays['direction'].shape==(ndof,)
++            and direction_arrays['direction'].tobytes()==direction.tobytes()
++            and hashlib.sha256(direction.tobytes()).hexdigest()==prior['direction_array_sha256']
++            and float(direction_arrays['multiplier_direction'])==0. and lifting.keys()=={'lift_origin','lift_shape'}
++            and all(v.dtype==np.dtype('float64') and v.shape==(ndof,) and np.count_nonzero(v)==0 for v in lifting.values()),
++            'Actual port direction/zero-lift structural comparison differs')
++        states=result['states']
++        self.check(len(states)==contract['accepted_states']==result['accepted_states']
++            and contract['fresh_HP_calls_required']==2*len(states)
++            and contract['state_sha256']==[s['state_sha256'] for s in states]
++            and [s['d'] for s in states if s['is_original_target']]==contract['targets_mm']
++            and states[0]['d']==0. and states[-1]['d']==.025 and all(a['d']<b['d'] for a,b in zip(states,states[1:]))
++            and all(s['target_origin']==0. and s['physical_mean_target_mm']==s['d'] for s in states),
++            'All actual accepted-state path coverage differs')
++        self.model,self.edofs,self.direction=model,edofs,direction
++        self.inventory,self.receipt,self.result=protocol,receipt,result
++        self.contract,self.plan,self.alias=contract,plan,prior['alias']
+         self.checkpoint()
+ 
+ 
+ def main():
+-    audit = RealAPIAudit(ARGS)
++    audit=BatchCaseAudit(ARGS)
+     try:
+-        audit.run()  # Original all-N loop, HP80/120, scatter, run_state, GATES and summary.
+-        require(all(sha(path) == pin for path, pin in audit.bindings.items()), 'Reference bindings changed at final closure')
++        audit.run()  # Original raw run/all-N loop/run_state/HP80-120/scatter/GATES.
++        original_file=audit.output/'summary.json';original=read(original_file)
++        qualified=dict(original,alias=audit.alias,qualification=audit.contract['qualification_scope'],
++            case_label=audit.label,audited_targets_mm=audit.contract['targets_mm'],task_target_mm=.025,
++            original_summary=dict(path='summary.json',sha256=sha(original_file)),
++            metadata_adaptation='Original summary raw preserved; alias/task scope only. All states/math/checks/HP/gates copied unchanged.')
++        qualified_file=audit.output/'qualified_summary.json';write(qualified_file,qualified)
++        require(all(sha(p)==pin for p,pin in audit.bindings.items()),'Reference bindings changed at final closure')
+         audit.checkpoint()
+-        write(audit.output/'execution_receipt.json', dict(schema_version='native-real-api-reference-execution-1.0',
+-            status='pass', accepted_states=len(audit.rows), HP_calls_started=audit.hp_started, HP_calls_completed=audit.hp_completed,
+-            checks_completed=audit.checks, result_sha256=sha(audit.result_file), summary_sha256=sha(audit.output/'summary.json'),
+-            contract_sha256=sha(audit.contract_file), protocol_sha256=sha(audit.control/'reference_protocol.json'),
+-            all_bindings_unchanged=True, elapsed_seconds=perf_counter()-STARTED, peak_sampled_RSS_bytes=audit.peak,
+-            time_limit_seconds=audit.limit, sampled_RSS_limit_bytes=RSS_LIMIT,
+-            candidate_force_calls=0, candidate_tangent_calls=0, solver_calls=0, model_constructions=0,
+-            qualification_scope='Fresh all actual accepted-state original force/tangent-action/equilibrium gates; no pressure/contact/all-columns/HF5 upgrade.'))
++        write(audit.output/'execution_receipt.json',dict(schema_version='native-batch-case-reference-execution-1.0',status='pass',
++            case_label=audit.label,accepted_states=len(audit.rows),HP_calls_started=audit.hp_started,HP_calls_completed=audit.hp_completed,
++            checks_completed=audit.checks,result_sha256=sha(audit.result_file),summary_sha256=sha(original_file),
++            qualified_summary_sha256=sha(qualified_file),contract_sha256=sha(audit.contract_file),
++            protocol_sha256=sha(audit.control/f'reference_protocol_{audit.label}.json'),all_bindings_unchanged=True,
++            elapsed_seconds=perf_counter()-STARTED,peak_sampled_RSS_bytes=audit.peak,time_limit_seconds=audit.limit,
++            sampled_RSS_limit_bytes=RSS_LIMIT,candidate_force_calls=0,candidate_tangent_calls=0,solver_calls=0,model_constructions=0,
++            qualification_scope=audit.contract['qualification_scope']))
+         audit.checkpoint()
+     except Exception as error:
+-        audit.lifecycle('not_pass', repr(error))
+-        write(audit.output/'summary.json', dict(schema_version='native-mean-independent-audit-1.0', status='not_pass',
+-            error=repr(error), states=audit.rows, accepted_states=len(audit.rows), checks_completed=audit.checks,
+-            HP_calls_started=audit.hp_started, HP_calls_completed=audit.hp_completed,
+-            elapsed_seconds=perf_counter()-STARTED, sampled_peak_RSS_bytes=audit.peak))
+-        write(audit.output/'execution_receipt.json', dict(schema_version='native-real-api-reference-execution-1.0', status='not_pass',
+-            error=repr(error), accepted_states=len(audit.rows), HP_calls_started=audit.hp_started, HP_calls_completed=audit.hp_completed,
+-            checks_completed=audit.checks, elapsed_seconds=perf_counter()-STARTED, peak_sampled_RSS_bytes=audit.peak))
++        audit.lifecycle('not_pass',repr(error))
++        failure=dict(schema_version='native-batch-case-reference-execution-1.0',status='not_pass',case_label=audit.label,
++            error=repr(error),accepted_states=len(audit.rows),HP_calls_started=audit.hp_started,HP_calls_completed=audit.hp_completed,
++            checks_completed=audit.checks,elapsed_seconds=perf_counter()-STARTED,peak_sampled_RSS_bytes=audit.peak)
++        write(audit.output/'execution_receipt.json',failure)
++        # Preserve any original summary; a failure receipt never upgrades a qualified summary.
+         raise
+ 
+ 
+-if __name__ == '__main__':
+-    main()
++if __name__=='__main__':main()
+--- real_forward_001/reference_author/reference_card_builder.py
++++ batch_forward_001/reference_author/reference_case_builder.py
+@@ -1,13 +1,15 @@
+-"""Freeze fresh all-state HP only after the real API production card passes."""
++"""Freeze a case reference only after the complete new real batch passes."""
+ from pathlib import Path
+ import argparse
+ import ast
+ import hashlib
+ import json
++import math
+ import shutil
+ 
+-STAGE = 'lf_data_preparation/native_interface_001/real_forward_001'
+-BASE = 'lf_data_preparation/native_mean_001'
++STAGE = 'lf_data_preparation/native_interface_001/batch_forward_001'
++LABELS = ('canonical', 'native_fine')
++LEGACY = dict(canonical='native_gripper_task_025_001', native_fine='native_fine_task_025_001')
+ RSS = 8 * 1024**3
+ STRUCTURAL_PINS = dict(prior_model_file='prior_model_sha256', prior_task_file='prior_task_sha256',
+                        direction_file='direction_file_sha256', lifting_file='lifting_file_sha256')
+@@ -18,6 +20,10 @@
+     'hf2_precision_reference.py': '97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55',
+     'run_split_average_demo.py': 'e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb',
+ }
++SCALARS = ('state_sha256', 'd', 'R_input', 'q_in', 'q_out', 'minimum_J',
++           'relative_residual', 'constraint_residual', 'constraint_bound', 'relative_global_force_balance')
++ONCE = ('evaluate_native', 'native_solve', 'project_builder', 'constructor',
++        'controller', 'cached_writer', 'formatter', 'response_writer')
+ sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+ read = lambda path: json.loads(path.read_bytes())
+ 
+@@ -27,149 +33,178 @@
+ 
+ 
+ def gates_from_source(path):
+-    syntax = ast.parse(path.read_text(encoding='utf-8'))
+-    values = [node.value for node in syntax.body if isinstance(node, ast.Assign)
+-              and any(isinstance(item, ast.Name) and item.id == 'GATES' for item in node.targets)]
++    values = [n.value for n in ast.parse(path.read_bytes()).body if isinstance(n, ast.Assign)
++              and any(isinstance(t, ast.Name) and t.id == 'GATES' for t in n.targets)]
+     assert len(values) == 1
+     return {item.arg: ast.literal_eval(item.value) for item in values[0].keywords}
+ 
+ 
+-def verify_production(root, bind):
++def verify_batch_production(root, label, bind):
++    """JSON/raw hashes only; do not turn a partial batch into reference eligibility."""
++    assert label in LABELS
+     control, run = root/STAGE, root/STAGE/'run_001'
+-    protocol_file = control/'production_protocol.json'
+-    receipt_file, launch_file = run/'execution_receipt.json', control/'production_launch.json'
+-    for file in (protocol_file, receipt_file, launch_file, control/'installation_receipt.json'):
+-        bind(file)
+-    protocol, receipt, launch = map(read, (protocol_file, receipt_file, launch_file))
+-    assert protocol['schema_version'] == 'native-real-api-protocol-1.0'
+-    assert protocol['run_directory'] == STAGE+'/run_001' and protocol['result_directory'] == STAGE+'/run_001/result'
+-    assert protocol['targets_mm'] == [0., .001] and protocol['expected_model_fields'] == 23
+-    assert protocol['options'] == dict(response_mode='complete', tangent_mode='full', initial_guess='tangent')
++    protocol_file, receipt_file = control/'production_protocol.json', run/'execution_receipt.json'
++    launch_file, index_file = control/'production_launch.json', run/'batch/index.json'
++    for path in (protocol_file, receipt_file, launch_file, index_file):
++        bind(path)
++    protocol, receipt, launch, index = map(read, (protocol_file, receipt_file, launch_file, index_file))
++    assert protocol['schema_version'] == 'native-real-batch-protocol-1.0'
++    assert protocol['run_directory'] == STAGE+'/run_001' and protocol['batch_directory'] == STAGE+'/run_001/batch'
++    assert protocol['targets_mm'] == [0., .005, .010, .025] and protocol['expected_model_fields'] == 23
++    assert protocol['options'] == dict(targets=protocol['targets_mm'], minimum_increment=.0000625,
++        time_limit_seconds=1800, response_mode='complete', tangent_mode='full', initial_guess='tangent')
+     assert protocol['sampled_RSS_bytes'] == RSS
+-    assert protocol['phases']['production']['helper_seconds'] == 180 and protocol['phases']['production']['outer_seconds'] == 210
+-    assert receipt['schema_version'] == 'native-real-api-execution-1.0' and receipt['status'] == launch['status'] == 'pass'
+-    assert receipt['invocations'] == launch['invocations'] == 1 and launch['exit_code'] == 0 and launch['stop_reason'] is None
++    assert protocol['phases']['production']['helper_seconds'] == 2400 and protocol['phases']['production']['outer_seconds'] == 2460
++    assert receipt['schema_version'] == 'native-real-batch-execution-1.0'
++    assert receipt['status'] == launch['status'] == 'pass' and index['status'] == 'success'
++    assert receipt['batch_invocations'] == launch['invocations'] == 1 and launch['exit_code'] == 0 and launch['stop_reason'] is None
+     assert receipt['all_bindings_unchanged'] and launch['all_bindings_unchanged']
+     assert receipt['protocol_sha256'] == launch['protocol_sha256'] == sha(protocol_file)
+-    assert launch['bindings'] == protocol['bindings'] and receipt['baseline_commit'] == protocol['baseline_commit']
+-    assert receipt['seconds_limit'] == 180 and launch['outer_seconds'] == 210
+-    assert receipt['elapsed_seconds'] <= 180 and launch['elapsed_seconds'] <= 210
++    assert receipt['bindings'] == launch['bindings'] == protocol['bindings']
++    assert receipt['baseline_commit'] == protocol['baseline_commit'] and receipt['production_gates'] == protocol['gates']
++    assert receipt['seconds_limit'] == 2400 and receipt['outer_seconds'] == launch['outer_seconds'] == 2460
++    assert receipt['elapsed_seconds'] <= 2400 and launch['elapsed_seconds'] <= 2460
+     assert receipt['sampled_RSS_limit_bytes'] == launch['sampled_RSS_limit_bytes'] == RSS
+     assert receipt['peak_sampled_RSS_bytes'] <= RSS and launch['peak_sampled_tree_RSS_bytes'] <= RSS
+-    assert not any(receipt.get(key) for key in ('exception', 'finalization_exception', 'stop_reason', 'returned_API_failure'))
++    assert not any(receipt.get(k) for k in ('exception', 'finalization_exception', 'stop_reason'))
++    assert receipt['batch_returned'] == index and receipt['batch_index_file'] == STAGE+'/run_001/batch/index.json'
++    assert index['failure_case'] is None and index['HF5_qualified'] is index['ranking_qualified'] is False
++    assert receipt['options'] == protocol['options'] and index['options'] == dict(protocol['options'], settings=None)
+     for name, pin in protocol['bindings'].items():
+         bind(root/name, pin)
+-    current = {name: pin for name, pin in protocol['bindings'].items() if name.startswith('hf_repo/src/')}
+-    assert len(current) == len({Path(name).name for name in current}) == 27
+-    roles = {'constructor', 'project_builder', 'controller', 'native_solve', 'cached_writer', 'formatter', 'response_writer'}
+-    assert receipt['counts'].keys() == roles and all(value == dict(started=1, completed=1) for value in receipt['counts'].values())
+-    assert receipt['cached_write_F_T_delta'] == dict(force_calls=0, tangent_calls=0)
+-    assert receipt['HP_calls'] == receipt['JIT_calls'] == receipt['LF_imports'] == 0
+     for name, pin in receipt['outputs'].items():
+         bind(root/name, pin)
+-    assert receipt['result_file'] == STAGE+'/run_001/result/result.json'
+-    assert receipt['response_file'] == STAGE+'/run_001/result/response.json'
+-    result_file, response_file = root/receipt['result_file'], root/receipt['response_file']
+-    bind(result_file, receipt['result_sha256']); bind(response_file, receipt['response_sha256'])
+-    result, response = read(result_file), read(response_file)
+-    assert result['status'] == response['status'] == 'success' and result['failure'] is None
+-    assert result['call_counts'] == receipt['call_counts']
+-    counts = result['call_counts']
+-    assert counts['solver_invocations'] == 1 and counts['HP_calls'] == counts['JIT_calls'] == 0
+-    assert counts['force_calls'] == counts['force_calls_completed'] and counts['tangent_calls'] == counts['tangent_calls_completed']
+-    assert receipt['observed_F_T'] == {key: counts[key] for key in receipt['observed_F_T']}
+-    assert result['save_force_calls'] == result['save_tangent_calls'] == 0
+-    assert all(current.get(name) == pin for name, pin in result['mechanics_source_sha256'].items())
+-    assert result['settings'] == protocol['settings'] and result['counts'] == protocol['expected_counts']
+-    states = result['states']; n = len(states)
+-    assert n == result['accepted_states'] == receipt['accepted_states'] and n >= 2
+-    assert len(receipt['accepted_scalar_prefix']) == n and receipt['task_target_executed'] is True
+-    for index, (row, observed) in enumerate(zip(states, receipt['accepted_scalar_prefix'], strict=True)):
+-        assert observed['index'] == index
+-        assert all(observed[key] == row[key] for key in ('state_sha256', 'd', 'R_input', 'q_in', 'q_out', 'minimum_J',
+-                   'relative_residual', 'constraint_residual', 'relative_global_force_balance'))
+-    assert response['identity']['result']['sha256'] == sha(result_file)
+-    assert response['path']['completed'] and response['path']['accepted_states'] == n
+-    assert response['target_response']['d_mm'] == response['requested_endpoint_response']['d_mm'] == .001
+-    assert response['target_response']['workpiece'] is None and all(value is False for value in response['producer_flags'].values())
+-    assert response['independent_reference']['status'] == response['views']['status'] == 'not_provided'
+-    assert all(value is False for name, value in response['independent_reference'].items() if name.endswith('_pass') or name.endswith('_qualified'))
+-    assert response['views']['manifest'] is None and not response['views']['links']
+-    assert all(response['options'][name]['value'] == value for name, value in protocol['options'].items())
+-    return protocol, receipt, result, current
++    manifest = read(root/protocol['manifest_file'])
++    assert receipt['manifest_file'] == protocol['manifest_file'] and receipt['manifest_sha256'] == sha(root/protocol['manifest_file'])
++    assert manifest['options'] == protocol['options'] and [c['label'] for c in manifest['cases']] == list(LABELS)
++    assert [c['label'] for c in index['cases']] == list(LABELS) and set(receipt['cases']) == set(LABELS)
++    current = {name: pin for name, pin in protocol['bindings'].items() if name.startswith('hf_repo/src/hf_eval/')}
++    assert len(current) == len({Path(name).name for name in current}) == 28
++    selected = None
++    for plan, entry in zip(manifest['cases'], index['cases'], strict=True):
++        case = receipt['cases'][plan['label']]
++        assert plan['output'] == STAGE+'/run_001/'+plan['label'] == case['output'] == entry['output']['path']
++        assert case['attempted'] and case['status'] == entry['status'] == 'success' and case['production_pass']
++        assert all(case['counts'][name]['started'] == case['counts'][name]['completed'] == 1 for name in ONCE)
++        assert not case.get('exception') and case['cached_write_F_T_delta'] == dict(force_calls=0, tangent_calls=0)
++        assert case['result_file'] == plan['output']+'/result.json' and case['response_file'] == plan['output']+'/response.json'
++        result_file, response_file = root/case['result_file'], root/case['response_file']
++        bind(result_file, case['result_sha256']); bind(response_file, case['response_sha256'])
++        result, response = read(result_file), read(response_file)
++        assert response == case['returned_response'] and response['status'] == result['status'] == 'success'
++        assert entry['response']['path'] == case['response_file'] and entry['response']['sha256'] == case['response_sha256']
++        assert response['identity']['result']['sha256'] == case['result_sha256']
++        assert result['failure'] is None and result['targets_mm'] == protocol['targets_mm'] and result['task_target_mm'] == .025
++        assert result['settings'] == response['invocation']['settings'] == protocol['settings']
++        assert result['counts'] == protocol['expected_counts'][plan['label']]
++        assert all(current.get(name) == pin for name, pin in result['mechanics_source_sha256'].items())
++        counts = result['call_counts']
++        assert counts == entry['call_counts'] == case['original_result_metadata']['call_counts']
++        assert counts['solver_invocations'] == 1 and counts['HP_calls'] == counts['JIT_calls'] == 0
++        assert counts['force_calls'] == counts['force_calls_completed'] and counts['tangent_calls'] == counts['tangent_calls_completed']
++        assert case['observed_F_T'] == {key: counts[key] for key in case['observed_F_T']}
++        assert result['save_force_calls'] == result['save_tangent_calls'] == 0
++        states = result['states']; n = len(states)
++        assert n == result['accepted_states'] == len(case['accepted_scalar_prefix']) == response['path']['accepted_states']
++        assert case['counts']['accepted_callback']['started'] == case['counts']['accepted_callback']['completed'] == n
++        assert n >= len(protocol['targets_mm']) and response['path']['completed'] and response['path']['task_target_executed']
++        assert result['task_target_executed'] and case['production_gate_status'] == 'checked' and len(case['production_gate_rows']) == n
++        for i, (row, observed, gate) in enumerate(zip(states, case['accepted_scalar_prefix'], case['production_gate_rows'], strict=True)):
++            assert observed['case_index'] == i and all(observed[k] == gate[k] == row[k] for k in SCALARS)
++            assert all(gate[k] for k in ('positive_J', 'production_residual_pass', 'native_constraint_bound_pass',
++                                         'global_force_balance_pass', 'fixed_displacement_pass'))
++            assert gate['fixed_max_abs_displacement_mm'] <= float(protocol['gates']['fixed_displacement_mm'])
++        assert response['target_response']['d_mm'] == response['requested_endpoint_response']['d_mm'] == .025
++        assert response['target_response']['workpiece'] is None and all(v is False for v in response['producer_flags'].values())
++        assert response['independent_reference']['status'] == response['views']['status'] == 'not_provided'
++        assert all(v is False for k, v in response['independent_reference'].items() if k.endswith('_pass') or k.endswith('_qualified'))
++        assert response['views']['manifest'] is None and not response['views']['links']
++        assert all(response['options'][k]['value'] == protocol['options'][k] for k in ('response_mode','tangent_mode','initial_guess'))
++        if plan['label'] == label:
++            selected = plan, case, result
++    return protocol, receipt, index, current, selected
+ 
+ 
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument('--repo', type=Path, required=True)
++    parser.add_argument('--case', choices=LABELS, required=True)
+     parser.add_argument('--time-limit', type=float, required=True)
+     parser.add_argument('--outer-seconds', type=float, required=True)
+     parser.add_argument('--budget-basis', required=True)
+     parser.add_argument('--root-review', type=Path, required=True)
+     parser.add_argument('--peer-review', type=Path, required=True)
+     args = parser.parse_args()
+-    root, author = args.repo.resolve(), Path(__file__).resolve().parent
++    root, author, label = args.repo.resolve(), Path(__file__).resolve().parent, args.case
+     control = root/STAGE
+-    assert args.time_limit == 180 and args.outer_seconds == 210 and args.budget_basis.strip()
+-    assert not (control/'reference_protocol.json').exists() and not (control/'run_001/audit').exists()
+-    assert not (control/'reference_author').exists() and not (control/'stop_requested.txt').exists()
++    assert math.isfinite(args.time_limit) and args.time_limit > 0 and math.isfinite(args.outer_seconds) and args.outer_seconds > args.time_limit
++    assert args.budget_basis.strip() and not (control/'stop_requested.txt').exists()
++    contract_file, protocol_file = control/f'reference_contract_{label}.json', control/f'reference_protocol_{label}.json'
++    output = control/'run_001/audit'/label
++    assert not contract_file.exists() and not protocol_file.exists() and not output.exists()
+     bindings = {}
+     def bind(path, expected=None):
+         actual = sha(path); assert expected is None or actual == expected
+-        name = path.relative_to(root).as_posix()
+-        assert name not in bindings or bindings[name] == actual
++        name = path.relative_to(root).as_posix(); assert name not in bindings or bindings[name] == actual
+         bindings[name] = actual
+         return actual
+-    protocol, receipt, result, current = verify_production(root, bind)
+-    old_inventory_file = root/BASE/'input_inventory.json'
+-    bind(old_inventory_file, 'e0b5ccd8defb0f1c8d8d6cb7d8501844e8639ccc010b58f7d362e7f2dbca0b6b')
+-    baseline = read(old_inventory_file)['case']
+-    assert protocol['geometry_file'] == baseline['geometry_file'] and protocol['task_file'] == baseline['task_file']
+-    assert protocol['settings'] == read(old_inventory_file)['settings']
+-    structural = {key: baseline[key] for key in STRUCTURAL_PINS}
++    protocol, receipt, index, current, (plan, case, result) = verify_batch_production(root, label, bind)
++    legacy_file = root/'lf_data_preparation'/LEGACY[label]/'input_inventory.json'
++    bind(legacy_file, protocol['bindings'][legacy_file.relative_to(root).as_posix()])
++    prior = read(legacy_file)['case']
++    assert plan['geometry'] == prior['geometry_file'] and plan['task'] == prior['prior_task_file']
++    structural = {key: prior[key] for key in STRUCTURAL_PINS}
+     for key, name in structural.items():
+-        bind(root/name, baseline[STRUCTURAL_PINS[key]])
+-    math = {'hf_repo/scripts/'+name: pin for name, pin in MATH_PINS.items()}
+-    for name, pin in math.items():
+-        bind(root/name, pin)
++        bind(root/name, prior[STRUCTURAL_PINS[key]])
++    for name, pin in MATH_PINS.items():
++        bind(root/'hf_repo/scripts'/name, pin)
+     assert gates_from_source(root/'hf_repo/scripts/audit_native_mean.py') == gates_from_source(root/'hf_repo/scripts/run_split_average_demo.py') == protocol['gates']
+     reports = [args.root_review.resolve(), args.peer_review.resolve()]
+-    for report_file in reports:
+-        report = read(report_file)
+-        assert report['status'] == 'pass_static_only' and not report['blocking_findings']
+-        for source in (author/'audit_real_api.py', Path(__file__).resolve()):
+-            pins = {pin for name, pin in report['source_sha256'].items() if Path(name.replace('\\', '/')).name == source.name}
+-            assert pins == {sha(source)}
+-    target = control/'reference_author'; target.mkdir()
+-    selections = ['audit_real_api.py', 'reference_card_builder.py', 'README.md', 'author_note.json', 'author_checks.json', 'source_additions.diff']
+-    for name in selections:
+-        shutil.copyfile(author/name, target/name); bind(target/name, sha(author/name))
+-    for label, source in zip(('root_review.json', 'peer_review.json'), reports, strict=True):
+-        shutil.copyfile(source, target/label); bind(target/label, sha(source))
+-    ref_sources = dict(current, **math, **{(target/name).relative_to(root).as_posix(): sha(target/name)
+-                                      for name in ('audit_real_api.py', 'reference_card_builder.py')})
+-    assert len(ref_sources) == len({Path(name).name for name in ref_sources}) == 34
+-    contract = dict(schema_version='native-real-api-reference-contract-1.0', production_stage=STAGE+'/run_001',
++    for file in reports:
++        report = read(file); assert report['status'] == 'pass_static_only' and not report['blocking_findings']
++        for name in ('audit_batch_case.py', 'reference_case_builder.py'):
++            matched = {pin for key, pin in report['source_sha256'].items() if Path(key.replace('\\','/')).name == name}
++            assert matched == {sha(author/name)}
++    target = control/'reference_author'
++    files = ['audit_batch_case.py','reference_case_builder.py','README.md','author_note.json','author_checks.json','source_additions.diff']
++    if not target.exists():
++        target.mkdir()
++        for name in files:
++            shutil.copyfile(author/name, target/name)
++        for name, file in zip(('root_review.json','peer_review.json'), reports, strict=True):
++            shutil.copyfile(file, target/name)
++    for name in files:
++        bind(target/name, sha(author/name))
++    for name, file in zip(('root_review.json','peer_review.json'), reports, strict=True):
++        bind(target/name, sha(file))
++    ref_sources = dict(current, **{'hf_repo/scripts/'+n:p for n,p in MATH_PINS.items()},
++                       **{(target/n).relative_to(root).as_posix():sha(target/n) for n in ('audit_batch_case.py','reference_case_builder.py')})
++    assert len(ref_sources) == len({Path(name).name for name in ref_sources}) == 35
++    contract = dict(schema_version='native-batch-case-reference-contract-1.0', case_label=label,
++        production_stage=STAGE, case_directory=plan['output'], reference_output=output.relative_to(root).as_posix(),
+         baseline_commit=protocol['baseline_commit'], production_protocol_sha256=sha(control/'production_protocol.json'),
+-        production_receipt_sha256=sha(control/'run_001/execution_receipt.json'), production_result_sha256=sha(root/receipt['result_file']),
+-        production_launch_sha256=sha(control/'production_launch.json'), current_sources=current, reference_sources=ref_sources,
+-        accepted_states=len(result['states']), state_sha256=[row['state_sha256'] for row in result['states']],
+-        fresh_HP_calls_required=2*len(result['states']), targets_mm=[0., .001], gates=protocol['gates'],
+-        limits=dict(helper_seconds=args.time_limit, outer_seconds=args.outer_seconds, sampled_RSS_bytes=RSS),
+-        reference_budget_basis=args.budget_basis, structural_inputs=structural,
+-        structural_comparison_scope='Prior intrinsic model/task/direction/lift arrays are structural comparisons only; no old HP or production qualification inherited.',
+-        new_reference_status='not_executed', qualification_scope='New complete no-workpiece accepted-state mechanical reference only; no energy/pressure/contact/all-columns/HF5 upgrade.')
+-    write(control/'reference_contract.json', contract); bind(control/'reference_contract.json')
+-    argv = [STAGE+'/reference_author/audit_real_api.py', '--repo', '.', '--input', STAGE+'/run_001',
+-            '--output', STAGE+'/run_001/audit', '--contract', STAGE+'/reference_contract.json', '--time-limit', str(args.time_limit)]
+-    reference_protocol = dict(schema_version='native-real-api-reference-protocol-1.0', baseline_commit=protocol['baseline_commit'],
+-        bindings=bindings, sampled_RSS_bytes=RSS, phases=dict(reference=dict(helper_seconds=args.time_limit,
+-            outer_seconds=args.outer_seconds, argv=argv)), actual_accepted_states=len(result['states']),
+-        fresh_HP_calls_required=2*len(result['states']), scope=contract['qualification_scope'],
+-        stop_policy='New one-shot all-state reference; first error stops, no production evaluation, repair or retry.')
+-    write(control/'reference_protocol.json', reference_protocol)
+-    assert all(sha(root/name) == pin for name, pin in bindings.items())
+-    print(json.dumps(dict(status='reference_frozen_not_executed', actual_states=len(result['states']), fresh_HP=2*len(result['states']))))
++        production_receipt_sha256=sha(control/'run_001/execution_receipt.json'), production_launch_sha256=sha(control/'production_launch.json'),
++        batch_index_sha256=sha(control/'run_001/batch/index.json'), production_result_sha256=case['result_sha256'],
++        production_response_sha256=case['response_sha256'], current_sources=current, reference_sources=ref_sources,
++        accepted_states=len(result['states']), state_sha256=[r['state_sha256'] for r in result['states']],
++        fresh_HP_calls_required=2*len(result['states']), targets_mm=protocol['targets_mm'], gates=protocol['gates'],
++        expected_counts=protocol['expected_counts'][label], limits=dict(helper_seconds=args.time_limit,
++            outer_seconds=args.outer_seconds,sampled_RSS_bytes=RSS), reference_budget_basis=args.budget_basis,
++        legacy_inventory=legacy_file.relative_to(root).as_posix(), structural_inputs=structural,
++        structural_comparison_scope='Prior intrinsic model/task/direction/lift only; no prior production/HP qualification.',
++        new_reference_status='not_executed', qualified_summary='qualified_summary.json',
++        qualification_scope='Fresh complete 0.025mm no-workpiece all accepted-state mechanical TEST; no energy/pressure/contact/all-tangent-columns/HF5/ranking/mesh-convergence upgrade.')
++    write(contract_file,contract);bind(contract_file)
++    argv=[STAGE+'/reference_author/audit_batch_case.py','--repo','.', '--case',label,
++        '--input',plan['output'],'--output',output.relative_to(root).as_posix(), '--contract',contract_file.relative_to(root).as_posix(),
++        '--time-limit',str(args.time_limit)]
++    write(protocol_file,dict(schema_version='native-batch-case-reference-protocol-1.0',case_label=label,
++        baseline_commit=protocol['baseline_commit'],bindings=bindings,sampled_RSS_bytes=RSS,
++        phases={f'reference_{label}':dict(helper_seconds=args.time_limit,outer_seconds=args.outer_seconds,argv=argv)},
++        actual_accepted_states=len(result['states']),fresh_HP_calls_required=2*len(result['states']),
++        scope=contract['qualification_scope'],stop_policy='One fresh all-state case reference; first error stops, no production, retry or repair.'))
++    assert all(sha(root/name)==pin for name,pin in bindings.items())
++    print(json.dumps(dict(status='reference_frozen_not_executed',case=label,actual_states=len(result['states']),fresh_HP=2*len(result['states']))))
+ 
+ 
+ if __name__ == '__main__':

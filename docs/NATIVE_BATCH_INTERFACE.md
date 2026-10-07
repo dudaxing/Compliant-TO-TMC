@@ -1,3 +1,15 @@
+## 当前：真实两例生产通过，新的参考包装读取失败
+
+UTC 2026-10-07T20:32:01.470309+00:00：canonical 新参考卡已一次终止，exit1，新增节点数检查读取不存在的 `coords` 字段；真实23字段中的名称是 `coordinates`。失败前新HP=0、参考接受态=0、检查11项，helper约1.498秒/outer约1.880秒。fine参考与新图未执行。两例0.025 mm生产、28核心源与原54份输出字节不变，原生产资格仍通过。
+
+本张参考卡已关闭，不修复后重试；准备独立V2最小包装、逐项字段/状态/属性核对和新卡，再单独确认执行。两设计不同，不作网格收敛或排名；HF5整体尚未完成。[当前诊断](../lf_data_preparation/native_interface_001/batch_forward_001/reference_failure_diagnosis.json)；[实际阶段报告](../lf_data_preparation/native_interface_001/batch_forward_001/RESULTS.md)。以下为历史记录，当前以上方及真实终态回执为准。
+
+---
+
+当前更新：两例原示例已经实际完成生产计算；各4态，缓存保存零新增F/T，独立HP和新图仍待执行。详细结果见[真实阶段报告](../lf_data_preparation/native_interface_001/batch_forward_001/RESULTS.md)。下文原字节保留为aa072功能阶段说明，其中“尚未执行”描述当时状态。
+
+---
+
 # 原生 HF 两例批量入口
 
 薄 batch 已实现并通过15项功能检查。它把普通 LF 几何与各自绑定的物理任务依次交给既有 `evaluate_native`，每例最多调用一次，再保存一个便于核对的 `index.json`。这样可用同一份物理条件查看多个设计的位移、端口反力、成功状态和失败原因，保持 LF 优化层与独立 HF 分析分开。

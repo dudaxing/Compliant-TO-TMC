@@ -1,3 +1,31 @@
+## 当前：真实两例生产通过，新的参考包装读取失败
+
+UTC 2026-10-07T20:32:01.470309+00:00：canonical 新参考卡已一次终止，exit1，新增节点数检查读取不存在的 `coords` 字段；真实23字段中的名称是 `coordinates`。失败前新HP=0、参考接受态=0、检查11项，helper约1.498秒/outer约1.880秒。fine参考与新图未执行。两例0.025 mm生产、28核心源与原54份输出字节不变，原生产资格仍通过。
+
+本张参考卡已关闭，不修复后重试；准备独立V2最小包装、逐项字段/状态/属性核对和新卡，再单独确认执行。两设计不同，不作网格收敛或排名；HF5整体尚未完成。[当前诊断](../lf_data_preparation/native_interface_001/batch_forward_001/reference_failure_diagnosis.json)；[实际阶段报告](../lf_data_preparation/native_interface_001/batch_forward_001/RESULTS.md)。以下为历史记录，当前以上方及真实终态回执为准。
+
+---
+
+## 当前：两例真实 batch 生产阶段已完成
+
+UTC 2026-10-07T20:12:52.065634+00:00：新顺序batch实际terminal exit0，canonical/native_fine各完成原0/.005/.010/.025 mm四态，各14F/9T/1solve、8项真实入口各一次、cached save新增F/T=0。整段helper950.6635555秒/outer951.8787648秒，采样RSS在8GiB内，52绑定不变，独立saved-only闭卡核对通过。
+
+末态canonical R=0.00521459203 N/q_out=0.0286037185 mm/minJ=0.996581260；native_fine R=0.00375627879 N/q_out=0.0238778244 mm/minJ=0.997535854。原生产门保持；两设计不同且网格各自native，不授网格收敛/排名。新独立HP与图尚未执行，HF5整体未完成。
+
+[实际阶段报告](../lf_data_preparation/native_interface_001/batch_forward_001/RESULTS.md)。新参考候选只在外部source-only准备；按实际N4新卡各8HP后再生成自己的图，不重跑已闭生产卡。以下原字节保留为运行历史；当前以上方及实际terminal记录为准。
+
+---
+
+## 当前：两例真实 batch 已启动，canonical生产完成
+
+UTC 2026-10-07T19:53:25.069947+00:00 保存快照：canonical已完成原0/.005/.010/.025 mm四态，末态R=0.00521459203 N、q_out=0.0286037185 mm、minJ=0.996581260；native_fine仍在本次同一顺序窗口内。实际unifiedsession95337/进程实例已观察，terminal回执尚未取得；保存快照本身不作存活证明。
+
+当前28HF源与52项绑定冻结，source/physics/gates保持；新whole2400/outer2460秒、采样8GiB/shared controller1800秒/例，首错停止/no retry。新HP与图未执行，HF5/ranking未完成。任务无工件、两设计各自原生网格，结果不作网格收敛或排名。
+
+[本阶段实际记录](../lf_data_preparation/native_interface_001/batch_forward_001/RESULTS.md)；[批量接口](NATIVE_BATCH_INTERFACE.md)。以下原字节保留为aa072阶段历史；当前以上方和本次实际terminal回执为准。
+
+---
+
 ## 当前：两例批量入口功能验证完成
 
 新增 native_batch API/CLI，15项纯功能检查一次通过：mock10 started /8 returned /2 escaped，9类科学计数为0，helper3.1671813s /outer4.2031513s。既有25份力学/几何相关源与2份单例接口保持原字节。全批先核共享物理声明和新输出，再顺序各例一次，首非success保留原失败/partial并记录后续not_run原因。
