@@ -1,0 +1,1 @@
+001 saved-scalar comparison;002 original effects_note;003 saved-data peer review;004 file-only install helper;005 report append. Original names and rawSHA pins are in004 and receipt.json. No new scientific execution.

@@ -1,0 +1,78 @@
+{
+  "status": "source_reasoning_only",
+  "physical_conclusion": "Uniform positive E scaling preserves same-branch displacement under stated homogeneous displacement-control conditions; all mechanical residual components and physical tangents/reactions scale, not whole KKT matrix.",
+  "source_pins": {
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+    "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998"
+  },
+  "source_read_positions": {
+    "hf_repo/src/hf_eval/native_project.py": [
+      243,
+      250,
+      276,
+      284
+    ],
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": [
+      81,
+      104,
+      128,
+      158,
+      178,
+      327
+    ],
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": [
+      33,
+      38,
+      69,
+      94
+    ],
+    "hf_repo/src/hf_eval/split_displacement.py": [
+      55,
+      171,
+      177,
+      228,
+      252,
+      263,
+      280
+    ],
+    "hf_repo/src/hf_eval/displacement.py": [
+      105,
+      117,
+      129,
+      142
+    ],
+    "hf_repo/src/hf_eval/native_mean.py": [
+      66,
+      134,
+      209
+    ]
+  },
+  "conditions": [
+    "Same geometry/grid/thickness/material masks and geometric constraints/ports/targets/lift",
+    "c>0 and fixed nu/gamma/alpha/Lr so solid, medium and kr all scale",
+    "k_out=0 or spring stiffness also scaled",
+    "No independent nonzero force/weight/gravity/body/dead load, or all scaled equally",
+    "Same static solution branch; initial displacement identical and initial R scaled if nonzero"
+  ],
+  "numeric_limits": [
+    "Main force floor is proportional to E*t; relative force stop and normalized Armijo are homogeneous in exact arithmetic, constraint stop geometric",
+    "KKT b row/column unchanged; sparse LU rounding/conditioning may differ",
+    "CI absolute range/arithmetic selectors and tiny diagnostic floor prevent bitexact/general-input guarantee",
+    "No prediction of identical iteration counts, failure behaviour or branch selection; no scaling experiment"
+  ],
+  "implementation_implication": "Uniform E decrease alone is not an evidence-based route to better fit in the current displacement task; distinguish force reduction from geometric conformity.",
+  "qualification": "No new scientific result or execution card. Historical soft001 changed relative medium/kr stiffness, so not this uniform scaling scenario.",
+  "note_sha256": "ee589c20588bd2ecef6e6cc064505aabdc103cc6534321610acac6d8cb59ec0a",
+  "activity": {
+    "HF_imports": 0,
+    "NPZ_array_reads": 0,
+    "constructors": 0,
+    "F_T_solver_HP_calls": 0,
+    "geometry_nodal_plot_calls": 0,
+    "formal_writes": 0
+  }
+}

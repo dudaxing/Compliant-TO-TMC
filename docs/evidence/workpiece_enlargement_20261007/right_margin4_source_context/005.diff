@@ -1,0 +1,111 @@
+--- /dev/null
++++ record_source_phase.py
+@@ -0,0 +1,108 @@
++"""Record the closed4mm preparation from saved JSON/SHA only; never run science."""
++from hashlib import sha256
++from pathlib import Path
++import argparse
++import json
++
++PREP = 'lf_data_preparation/native_workpiece_001/right_margin4_preparation_001'
++CYCLE = 'lf_data_preparation/native_workpiece_001/right_margin4_cycle_001'
++PARENT = 'lf_data_preparation/native_workpiece_001/right_margin_cycle_001'
++VIEW = 'functional_views/right_margin4_20261007/geometry_001'
++EVIDENCE = 'docs/evidence/workpiece_enlargement_20261007'
++PROGRESS = EVIDENCE+'/right_margin4_progress.json'
++CONTEXT = EVIDENCE+'/right_margin4_source_context'
++REPORT = 'docs/WORKPIECE_ENLARGEMENT_20261007.md'
++CURRENT = 'docs/CURRENT_STATUS.md'
++sha = lambda data:sha256(data).hexdigest()
++read = lambda p:json.loads(p.read_text(encoding='utf-8'))
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--repo',type=Path,required=True)
++    root,author = parser.parse_args().repo.resolve(),Path(__file__).resolve().parent
++    notes = read(author/'author_note.json')
++    assert not (root/PROGRESS).exists() and not (root/CONTEXT).exists()
++    before = {name:(root/name).read_bytes() for name in (REPORT,CURRENT)}
++    assert all(sha(data)==notes['expected_preimages'][name] for name,data in before.items())
++    assert all(sha((author/name).read_bytes())==pin for name,pin in notes['candidate_sources'].items())
++    pins = {}
++    def load(name):
++        data = (root/name).read_bytes()
++        pins[name] = sha(data)
++        return json.loads(data)
++    p = load(PREP+'/preparation_protocol.json')
++    assert pins[PREP+'/preparation_protocol.json']==notes['preparation_protocol_sha256']
++    launch = load(PREP+'/prepare_launch.json')
++    receipt = load(PREP+'/run_001/preparation_receipt.json')
++    inventory = load(PREP+'/run_001/input_inventory.json')
++    freeze = load(PREP+'/run_001/source_freeze.json')
++    comparison = load(PREP+'/run_001/model_comparison.json')
++    assert receipt['status']=='pass' and receipt['invocations']==1
++    assert receipt['inputs_and_sources_unchanged'] and receipt['final_resource_check_passed']
++    assert all(receipt[k]==0 for k in ('force_calls','tangent_calls','solver_calls','HP_calls','JIT_calls','LF_imports'))
++    assert launch['status']=='pass' and launch['exit_code']==0 and launch['invocations']==1
++    assert launch['stop_reason'] is None and launch['all_bindings_unchanged']
++    assert launch['protocol_sha256']==pins[PREP+'/preparation_protocol.json'] and launch['bindings']==p['bindings']
++    assert receipt['elapsed_seconds']<=120 and launch['elapsed_seconds']<=150
++    assert launch['peak_sampled_tree_RSS_bytes']<=8*1024**3
++    assert all(sha((root/name).read_bytes())==pin for name,pin in p['bindings'].items())
++    assert all(sha((root/PREP/'run_001'/name).read_bytes())==pin for name,pin in receipt['outputs'].items())
++    assert freeze['protocol_sha256']==pins[PREP+'/preparation_protocol.json'] and freeze['sources']==p['sources']
++    assert inventory['actual_counts']==receipt['actual_counts']
++    assert comparison['parent_physical_subdomain_byte_exact']
++    assert len(comparison['raw_equal_fields'])==10 and len(comparison['physically_mapped_fields'])==17
++    assert not (root/CYCLE/'production_launch.json').exists(), 'This source-phase record is pre-production only'
++    production = dict(status='pending_not_executed',mechanical_qualification=False)
++    if (root/CYCLE/'production_protocol.json').exists():
++        card = load(CYCLE+'/production_protocol.json')
++        assert card['phases']['production']['helper_seconds']==4500
++        assert card['phases']['production']['outer_seconds']==4560 and card['sampled_RSS_bytes']==8*1024**3
++        production.update(status='frozen_not_executed',protocol_file=CYCLE+'/production_protocol.json',protocol_sha256=pins[CYCLE+'/production_protocol.json'])
++    previous = load(PARENT+'/run_001/execution_receipt.json')
++    assert previous['status']=='pass'
++    estimate = previous['elapsed_seconds']*3360/3280*1.5+90
++    view = dict(status='pending',scope='undeformed saved layout only',response_qualification=False)
++    if (root/VIEW/'view/receipt.json').exists():
++        vr = load(VIEW+'/view/receipt.json');vl = load(VIEW+'/view_launch.json');vp = load(VIEW+'/protocol.json')
++        assert vr['status']=='pass' and vl['status']=='pass' and vl['exit_code']==0 and vl['invocations']==1
++        assert vl['stop_reason'] is None and vl['all_bindings_unchanged'] and vr['all_bindings_unchanged']
++        assert vl['protocol_sha256']==pins[VIEW+'/protocol.json'] and vl['bindings']==vp['bindings']
++        assert all(sha((root/name).read_bytes())==pin for name,pin in vp['bindings'].items())
++        assert all(vr[k]==0 for k in ('new_F','new_T','new_solver','new_HP','new_model_constructions','new_geometry_observations','new_nodal_force_observations'))
++        assert sha((root/VIEW/'view/prepared_domain.png').read_bytes())==vr['png_sha256']
++        view.update(status='pass_saved_layout_only',receipt=vr,launch=vl,figure=VIEW+'/view/prepared_domain.png')
++    progress = dict(schema_version='right-margin4-progress-1.0',status='preparation_pass_not_mechanically_qualified',
++        goal='Independent HF forward evaluation reusing LF/N4 geometry/research; no optimizer in this project; future HF5 evaluation interface',
++        purpose='Same h1 physics, change only right-medium margin2to4mm to examine domain boundary sensitivity; no mesh/domain convergence claim',
++        preparation=dict(status='pass',stage=PREP,receipt=receipt,launch={k:v for k,v in launch.items() if k not in ('bindings','argv')},
++            protocol_sha256=pins[PREP+'/preparation_protocol.json'],source_count=len(p['sources']),binding_count=len(p['bindings']),source_sha256=p['sources'],input_and_helper_bindings=p['bindings'],
++            actual_counts=receipt['actual_counts'],domain_derivation={k:v for k,v in inventory['domain_derivation'].items() if k!='chain'},model_sha256=receipt['model_sha256'],task_sha256=receipt['task_sha256'],comparison=comparison),
++        prepared_view=view,production=production,
++        proposed_production_budget=dict(helper_seconds=4500,outer_seconds=4560,RSS_bytes=8*1024**3,previous2mm_helper_seconds=previous['elapsed_seconds'],formula='previous2mm_helper_seconds *3360/3280 *1.5 +90',estimated_seconds=estimate,qualification='planning estimate only; no production performed'),
++        reference=dict(status='pending',accepted_N=None,HP_calls=None,requirement='Fresh actualN accepted states and2N HP80/120 for this new result'),
++        complete_cycle_views=dict(status='pending'),input_json_sha256=pins,new_scientific_calls=0)
++    counts = receipt['actual_counts']
++    view_text = '未变形布局已通过，仅保存数据绘图、零观察 API；' if view['status']=='pass_saved_layout_only' else '未变形布局待执行；'
++    append = f"""\n\n## 2026-10-07：右侧第三介质余量2→4 mm，准备阶段完成\n\n本项目目标是复用 LF/N4 几何与研究成果，提供独立 HF 正向评价，供外部研究层比较、优选并推进 HF5 评价接口；本项目不含优化器。2 mm 完整力学、独立参考及保存态视图已完成。新阶段只检验右侧分析域余量：父82 mm HF派生域再补2列至84 mm，累计余量4 mm。h=1 mm、side18固定方块中心(71,40)、右面x=80、E=1 MPa、ν=0.3、厚20 mm、γ=α=1e-6、Lr=80 mm、实体支撑/端口/权重及24个0→1.2→0目标均保持。背景顶边延至84，DOF与PORT方向重建。\n\n实际准备 PASS：{counts['cells']}单元/{counts['nodes']}节点/{counts['dofs']}DOF，固定{counts['fixed_dofs']}/自由{counts['free_dofs']}；27字段10项整数组原字节一致、17项物理映射通过，父82宽全部物理子域保留。新增顶边uy6967/6969，尖端(80,30)坐标选取后2570→2630；工件162单元/190节点/380DOF、顶边交集19保持。80→82历史派生记录保留并追加82→84，增量2与累计4分别记录。一次几何/模型/方向准备，F/T/solver/HP/JIT/LF调用均为0。helper {receipt['elapsed_seconds']:.7f}秒、outer {launch['elapsed_seconds']:.7f}秒，原窗口120/150秒、8 GiB；26份来源（25 HF core+原CLI）及62绑定保持。\n\n{view_text}4 mm生产尚未执行，未获得新的力、变形或接触资格。拟生产4500/4560秒、8 GiB；预算依据已完成2 mm helper {previous['elapsed_seconds']:.7f}×3360/3280×1.5+90={estimate:.7f}秒，仅为规划估计。随后必须用实际接受N态做新的2N参考和保存态可视化，不借旧状态或参考标签。压力/摩擦/自由工件和HF5尚未实现；本次准备不证明域或网格收敛。\n\n进度、实际闭卡SHA与源码身份：[right_margin4_progress.json](evidence/workpiece_enlargement_20261007/right_margin4_progress.json)。本次文件记录helper本身零科学调用。\n"""
++    prefix = ('2026-10-07 当前：2 mm余量完整评价已完成；4 mm仅准备通过，'+view_text+'生产/新参考/完整周期视图尚未执行，暂无新夹持力结论。HF为独立正向评价器，不含优化器。\n\n').encode('utf-8')
++    context = root/CONTEXT;context.mkdir()
++    source_map = {}
++    selected = ['record_source_phase.py','README.md','author_note.json','author_checks.json','source_additions.diff']
++    for index,name in enumerate(selected,1):
++        short = f'{index:03d}{Path(name).suffix}'
++        data = (author/name).read_bytes();(context/short).write_bytes(data)
++        assert (context/short).read_bytes()==data
++        source_map[name] = dict(path=CONTEXT+'/'+short,sha256=sha(data))
++    (context/'INDEX.md').write_text('Selected ordinary source-author records; original names and rawSHA are in source_record_receipt.json. No large scientific output or historical front files are duplicated.\n',encoding='utf-8')
++    (root/PROGRESS).write_text(json.dumps(progress,ensure_ascii=False,indent=2,allow_nan=False)+'\n',encoding='utf-8')
++    (root/REPORT).write_bytes(before[REPORT]+append.encode('utf-8'))
++    (root/CURRENT).write_bytes(prefix+before[CURRENT])
++    installed = {name:dict(before_sha256=sha(before[name]),after_sha256=sha((root/name).read_bytes()),prior_raw_preserved=True) for name in before}
++    assert (root/REPORT).read_bytes().startswith(before[REPORT]) and (root/CURRENT).read_bytes().endswith(before[CURRENT])
++    record = dict(status='pass_file_record_only',new_scientific_calls=0,installed_files=installed,progress_file=PROGRESS,progress_sha256=sha((root/PROGRESS).read_bytes()),source_map=source_map,input_json_sha256=pins)
++    (context/'source_record_receipt.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++    print(json.dumps(dict(status=record['status'],progress_file=PROGRESS,source_receipt=CONTEXT+'/source_record_receipt.json')))
++
++
++if __name__=='__main__':main()

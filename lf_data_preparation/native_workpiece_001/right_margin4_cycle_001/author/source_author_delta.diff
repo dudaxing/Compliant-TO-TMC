@@ -1,0 +1,54 @@
+--- closed2mm/build_right_margin_production.py
++++ candidate4mm/build_right_margin_production.py
+@@ -7,12 +7,12 @@
+ import shutil
+ import subprocess
+ 
+-BASELINE = "abf62b04d0a384f3c9cfa352dd6232ad1d4ab3d1"
++BASELINE = "3305fe0c3a640bf22e0f89ea4386a41bdef96aa4"
+ PREFIX = "lf_data_preparation/native_workpiece_001/"
+-PREP = PREFIX + "right_margin_preparation_001"
+-OLD = PREFIX + "enlarged_square_projection_001"
+-RAW_ORIGIN = PREFIX + "gamma_half_cycle_001/author"
+-CONTROL = PREFIX + "right_margin_cycle_001"
++PREP = PREFIX + "right_margin4_preparation_001"
++OLD = PREFIX + "right_margin_cycle_001"
++RAW_ORIGIN = PREFIX + "right_margin_cycle_001/author"
++CONTROL = PREFIX + "right_margin4_cycle_001"
+ WORKER_SHA = "57d18bfea972c09db4c0866bdee3413088342327e32d3926be9eaa1bdbab466a"
+ SHIM_SHA = "fbb3e1975a7054599eb7d9fde5bf771805a698fe54015ac3d934e43cba2262ac"
+ LAUNCHER_SHA = "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477"
+@@ -65,13 +65,13 @@
+     assert frozen["protocol_sha256"] == digest(prep / "preparation_protocol.json") and frozen["sources"] == proof["sources"]
+     assert model["task"] == task and task["third_medium"] == {"gamma": 1e-6}
+     assert task["regularization"] == dict(alpha=1e-6, length_mm=80.) and task["material"] == dict(E_MPa=1., nu=.3, formulation="plane_strain")
+-    assert task["background_symmetry"]["points_mm"] == [[0.,40.],[82.,40.]] and model["grid"]["shape_yx"] == [40,82]
++    assert task["background_symmetry"]["points_mm"] == [[0.,40.],[84.,40.]] and model["grid"]["shape_yx"] == [40,84]
+     assert task["input"]["target_mm"] == 1.2 and task["path"]["targets_mm"] == read(old / "run_001/task.json")["path"]["targets_mm"]
+     assert model["task_sha256"] == receipt["task_sha256"] == inventory_prepared["task_sha256"]
+     assert digest(prepared / "model/model.npz") == model["arrays"]["sha256"] == receipt["model_sha256"]
+     counts = model["region_metadata"]["counts"]
+     assert counts == inventory_prepared["actual_counts"] == receipt["actual_counts"]
+-    assert counts == dict(cells=3280,nodes=3403,dofs=6806,solid_cells=1086,medium_cells=2194,solid_incident_nodes=1337,fixed_dofs=450,free_dofs=6356)
++    assert counts == dict(cells=3360,nodes=3485,dofs=6970,solid_cells=1086,medium_cells=2274,solid_incident_nodes=1337,fixed_dofs=452,free_dofs=6518)
+     direction = prepared / "direction.npz"
+     assert digest(direction) == inventory_prepared["direction_file_sha256"]
+     assert digest(prepared / "mapping.npz") == inventory_prepared["mapping_sha256"]
+@@ -111,7 +111,7 @@
+         scope="Current25 hf_eval sources including derived-domain adapter plus original worker/raw model_delta shim; no70-source historical inheritance."))
+     model_file = run / "fixture/model/model.npz"
+     geometry = run / "fixture/model/source_geometry/geometry.json"
+-    row = dict(alias="gripper_coarse_square_x71_side18_right_margin2", source_alias=baseline_row["source_alias"],
++    row = dict(alias="gripper_coarse_square_x71_side18_right_margin4", source_alias=baseline_row["source_alias"],
+         geometry_id=task["geometry"]["geometry_id"], elements=counts["cells"], dofs=counts["dofs"],
+         fixed_DOFs=counts["fixed_dofs"], free_DOFs=counts["free_dofs"], result_directory="result",
+         targets_mm=task["path"]["targets_mm"], direction_array_sha256=inventory_prepared["direction_array_sha256"],
+@@ -137,7 +137,7 @@
+         input_bindings=inputs,initial_guess="port_projection",
+         execution_limits=dict(production_seconds=4500,production_outer_seconds=4560,sampled_RSS_bytes=RSS_LIMIT),
+         model_comparison=dict(total_fields=27,actual_changed_fields=changed,unchanged_fields=unchanged,
+-            parameter_case="right_medium_domain_margin",parent_physical_subdomain_byte_exact=True,
++            parameter_case="right_medium_domain_margin2_to4mm",parent_physical_subdomain_byte_exact=True,
+             preparation_comparison_file=PREP+"/run_001/model_comparison.json",preparation_comparison_sha256=digest(prepared/"model_comparison.json"),
+             physical_mapping_file=PREP+"/run_001/mapping.npz",physical_mapping_sha256=digest(prepared/"mapping.npz")),
+         qualification="Prepared inputs only. Fresh zero-start production; no inherited accepted states, HP or clamp qualification.")

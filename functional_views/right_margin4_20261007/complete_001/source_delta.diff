@@ -1,0 +1,67 @@
+--- right_margin_20261007/complete_001/build_right_margin_view_card.py
++++ right_margin4_20261007/complete_001/build_right_margin_view_card.py
+@@ -5,10 +5,13 @@
+ import json
+ import shutil
+ 
+-STAGE = "functional_views/right_margin_20261007/complete_001"
++STAGE = "functional_views/right_margin4_20261007/complete_001"
+ BASE = "lf_data_preparation/native_workpiece_001/"
+-PREP = BASE + "right_margin_preparation_001"
+-CASES = {"gamma1e6": BASE + "enlarged_square_projection_001", "right2col": BASE + "right_margin_cycle_001"}
++PREPS = {"right2col": BASE + "right_margin_preparation_001", "right4col": BASE + "right_margin4_preparation_001"}
++CASES = {"right2col": BASE + "right_margin_cycle_001", "right4col": BASE + "right_margin4_cycle_001"}
++DOMAINS = {
++    "right2col": dict(shape_yx=[40,82],counts=dict(cells=3280,nodes=3403,dofs=6806,solid_cells=1086,medium_cells=2194,solid_incident_nodes=1337,fixed_dofs=450,free_dofs=6356)),
++    "right4col": dict(shape_yx=[40,84],counts=dict(cells=3360,nodes=3485,dofs=6970,solid_cells=1086,medium_cells=2274,solid_incident_nodes=1337,fixed_dofs=452,free_dofs=6518))}
+ VIEWER_SHA = "761a9ffd1512233ce048be364c00a86882b69e2fb3e3fe81d7f79f74ad52b166"
+ LAUNCHER_SHA = "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477"
+ read = lambda p: json.loads(p.read_text(encoding="utf-8"))
+@@ -59,13 +62,12 @@
+         assert model["task_sha256"] == result["task_sha256"]
+         for value in model["source_geometry"]["snapshot"].values(): bind(model_file.parent / value)
+         tasks[label] = model["task"]
+-        if label == "right2col":
+-            assert model["grid"]["shape_yx"] == [40,82]
+-            assert model["region_metadata"]["counts"] == dict(cells=3280,nodes=3403,dofs=6806,solid_cells=1086,medium_cells=2194,solid_incident_nodes=1337,fixed_dofs=450,free_dofs=6356)
+-            for path in ("preparation_protocol.json", "prepare_launch.json", "run_001/preparation_receipt.json", "run_001/input_inventory.json", "run_001/model_comparison.json", "run_001/mapping.npz", "run_001/direction.npz"):
+-                bind(root / PREP / path)
+-            prep = read(root / PREP / "run_001/preparation_receipt.json")
+-            assert prep["status"] == "pass" and prep["model_comparison"]["parent_physical_subdomain_byte_exact"]
++        assert model["grid"]["shape_yx"] == DOMAINS[label]["shape_yx"]
++        assert model["region_metadata"]["counts"] == DOMAINS[label]["counts"]
++        for path in ("preparation_protocol.json", "prepare_launch.json", "run_001/preparation_receipt.json", "run_001/input_inventory.json", "run_001/model_comparison.json", "run_001/mapping.npz", "run_001/direction.npz"):
++            bind(root / PREPS[label] / path)
++        prep = read(root / PREPS[label] / "run_001/preparation_receipt.json")
++        assert prep["status"] == "pass" and prep["model_comparison"]["parent_physical_subdomain_byte_exact"]
+         for record in records:
+             bind(directory / record["descriptor_path"],record["descriptor_file_sha256"])
+             for key in ("state", "forces", "tangents", "matrix"):
+@@ -79,14 +81,14 @@
+         references.append(label + "=" + reference_file.relative_to(root).as_posix())
+         counts[label] = dict(accepted_states=len(records),production_status=result["status"],complete=True,
+             reference_available=True,qualification="same-result actualN full path and fresh2N HP; strain/pressure not newly qualified")
+-    old,new = tasks["gamma1e6"],tasks["right2col"]
++    old,new = tasks["right2col"],tasks["right4col"]
+     assert old["third_medium"] == new["third_medium"] == {"gamma":1e-6}
+     assert all(new[key] == value for key,value in old.items() if key not in {"geometry","background_symmetry","task_id","purpose","parameter_origin","description"})
+-    assert old["background_symmetry"]["points_mm"] == [[0.,40.],[80.,40.]]
+-    assert new["background_symmetry"] == {**old["background_symmetry"],"points_mm":[[0.,40.],[82.,40.]]}
++    assert old["background_symmetry"]["points_mm"] == [[0.,40.],[82.,40.]]
++    assert new["background_symmetry"] == {**old["background_symmetry"],"points_mm":[[0.,40.],[84.,40.]]}
+     for name in ("src/hf_eval/__init__.py", "src/hf_eval/native_region_geometry.py", "src/hf_eval/boundary_geometry.py", "src/hf_eval/workpiece_nodal.py", "scripts/measure_native_workpiece_regions.py"):
+         bind(root / "hf_repo" / name)
+-    selected = [author/name for name in ("build_right_margin_view_card.py","execute_right_margin_views.py","saved_right_margin_views.py","launch_view.py","README.md","author_note.json","viewer_author_note.json","viewer_delta.diff","wrapper_delta.diff")]
++    selected = [author/name for name in ("build_right_margin_view_card.py","execute_right_margin_views.py","saved_right_margin_views.py","launch_view.py","README.md","author_note.json","viewer_author_note.json","viewer_delta.diff","wrapper_delta.diff","source_delta.diff","source_author_checks.json")]
+     reviews = sorted(author.glob("*review*.json")); assert reviews, "Complete view peer review required"
+     selected += reviews
+     stage.mkdir(parents=True)
+@@ -101,7 +103,7 @@
+         cases=counts,expected_observations_each=sum(row["accepted_states"] for row in counts.values()),
+         tip_selection=dict(reference_coordinates_mm=[80.,30.],method="unique exact saved coordinate per case"),
+         scope="Raw761a9f saved viewer once, geometry/nodal once each per all actual accepted states; zero new F/T/model/solver/HP.",
+-        comparison_scope="gamma1e-6 original domain versus2mm derived-domain margin; all other physics retained; no pressure/free-body qualification",
++        comparison_scope="gamma1e-6 2mm versus4mm right derived-domain margin; parent82 subdomain retained, top82 to84 only; all other physics retained; no pressure/free-body qualification",
+         stop_policy="One view invocation; first error closes card, no retry/extension/force.")
+     protocol_file = stage / "protocol.json"
+     with protocol_file.open("x",encoding="utf-8") as handle:

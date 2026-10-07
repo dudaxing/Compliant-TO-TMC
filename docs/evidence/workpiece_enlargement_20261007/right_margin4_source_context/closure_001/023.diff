@@ -1,0 +1,78 @@
+--- template/001.py
++++ close_margin4_docs.py
+@@ -19,6 +19,17 @@
+            'solid_Green_principal_min','solid_Green_principal_max']
+ sha = lambda data:sha256(data).hexdigest()
+ dump = lambda value:(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False)+'\n').encode('utf-8')
++
++
++SOURCE_CONTEXT = {'009.md': {'source_name': 'physical_progress_candidate/UNIFORM_E_SCALING_PHYSICAL_NOTE.md', 'sha256': 'ee589c20588bd2ecef6e6cc064505aabdc103cc6534321610acac6d8cb59ec0a', 'role': 'Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5', 'candidate_path': 'context/001.md'}, '010.json': {'source_name': 'physical_progress_candidate/uniform_E_scaling_review.json', 'sha256': 'a6173c922cba03dee9cd0caa1cd7c427f974fb99fd8b644d244fad0bf0aa228a', 'role': 'Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5', 'candidate_path': 'context/002.json'}, '011.md': {'source_name': 'interface_notes/HF5_USABLE_INTERFACE_FACTS_AND_MINIMUM_PROPOSAL.md', 'sha256': '5c2d65de2edcb296d8634193ff1c4e61d8787a281357a4cab17c9fcadba005a0', 'role': 'Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5', 'candidate_path': 'context/003.md'}, '012.json': {'source_name': 'interface_notes/source_facts.json', 'sha256': 'cb799d7383476eca305a03b92a4b6467d3e8698da0edc4b7d31cefe1c7ab46f5', 'role': 'Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5', 'candidate_path': 'context/004.json'}, '013.json': {'source_name': 'interface_notes/source_facts_peer_review.json', 'sha256': '5a8056494eb98a814e38851d91253f6c42cac312bb4032fc425c670dcea125ea', 'role': 'Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5', 'candidate_path': 'context/005.json'}, '014.json': {'source_name': 'interface_notes/author_note.json', 'sha256': 'de610ba04149539f92eb0ff9344877356b5adeb7b88edbb370a826f5a7bc71d9', 'role': 'Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5', 'candidate_path': 'context/006.json'}, '015.json': {'source_name': 'context/index.json', 'candidate_path': 'context/index.json', 'sha256': '1c15eded59e6698465ba101d7c139cc32f6f965618870e9258b6213246208d45', 'role': 'Source name/rawSHA map'}, '016.py': {'source_name': 'close_margin4_docs.py', 'sha256': '7e2e32543dd367fcadb84f8666fb32fb58cb4803aa1780adaa4ce7184ab2b1c9', 'role': 'Historical source-only reviewed 7e2e template; not executed', 'candidate_path': 'template/001.py'}, '017.md': {'source_name': 'README.md', 'sha256': '30d9b89976c2c6c1f2c19fa50282a601529bf44c1fc380ee7516fe65f8a2cc6b', 'role': 'Historical source-only reviewed 7e2e template; not executed', 'candidate_path': 'template/002.md'}, '018.json': {'source_name': 'author_note.json', 'sha256': '9e5dc5c82c1fa3f93d67a1eb3aa31fb6b24a0112243916b9258442941ed9594c', 'role': 'Historical source-only reviewed 7e2e template; not executed', 'candidate_path': 'template/003.json'}, '019.json': {'source_name': 'author_checks.json', 'sha256': '8ecdac7c80b413933c584d8611b550f0c5d46e2f058d166e5435eb1bbb2fa8bb', 'role': 'Historical source-only reviewed 7e2e template; not executed', 'candidate_path': 'template/004.json'}, '020.diff': {'source_name': 'source_additions.diff', 'sha256': 'b37ddc4efc845237af8086e0a257a41e5089d196e16a964ac94cdc80aacce152', 'role': 'Historical source-only reviewed 7e2e template; not executed', 'candidate_path': 'template/005.diff'}, '021.json': {'source_name': 'closure_static_review.json', 'sha256': '8d976894111d3248300f23afb8a324bd4e4cb83a0f443ffbbbf95a3362de0a00', 'role': 'Historical source-only reviewed 7e2e template; not executed', 'candidate_path': 'template/006.json'}, '022.json': {'source_name': 'template/index.json', 'candidate_path': 'template/index.json', 'sha256': '1e409d876b1660195e6b8f83cd41f53e50d7a89181c1de72e86e7218f9a2ce8f', 'role': 'Historical template name/rawSHA map'}}
++SCALING_NOTE = '统一E缩放是有条件的源码方程推论，尚未做本项实验：同几何/网格/厚度、位移约束与固定工件、同静态解分支，固定ν/γ/α/Lr，k_out=0且无未同比缩放的独立外载时，E→cE（c>0）理论上保持位移/贴合与q_out，机械力和反力乘c。物理刚度块缩放，但整个KKT矩阵不同比例缩放；数值舍入/解分支和迭代次数不保证相同。统一降低E不能据此宣称固定工件位移控制下更贴合。'
++
++
++def source_context_identity():
++    author=Path(__file__).resolve().parent
++    for entry in SOURCE_CONTEXT.values():
++        assert sha((author/entry['candidate_path']).read_bytes())==entry['sha256']
++    return SOURCE_CONTEXT
+ 
+ 
+ def collect(root):
+@@ -147,14 +158,17 @@
+ | 距离与场 | 有限面距离、保存J/Hu、binary64 Green主应变；原9点Lobatto含角点J门 | signed penetration、一般包含/自身重叠、应变/应力HP；场图不是压力 |
+ | 输入与域 | 自包含LFv2/明确task、Q1原生网格、HF派生介质域；82→84旧物理子域保持 | 同设计匹配网格、统一一次评价入口；新模型不继承旧资格 |
+ | 一般夹持 | 固定方体完整评价；固定圆体单元覆盖入口存在 | 圆体自身完整边界/平衡、自由刚体平移/转动/力矩、摩擦 |
++| 统一E尺度 | 严格同branch、无独立力尺度的方程缩放推论 | 尚无本项新实验；降低E不作为改善贴合证据 |
+ | HF5与易用 | 单任务后端和保存证据可用，LF/N4研究层保留 | 薄评价接口、同任务小批量、紧凑响应/失败/来源和重复性合同 |
+ 
+ R为半模型输入反力；下半工件Fy为固定体弱式on-body力，holding反向。2|Fy|为镜像法向幅值和，装配净力为(2Fx,0)。q_out为加权竖向端口位移，不是tip gap。Hu场最大值与Hu力分量分开记录。当前机械模式不计算辅助材料能量，不表示旧能量入口不存在。
+ 
+ 两域结果不单独证明域/网格收敛。看同方向/原目标全曲线、材料/Hu分量、绝对量及距离，再选择一次物理敏感性或同设计细网格；同时推进薄正向接口，不重写LF/N4优化器。后续科学卡尚未执行。
+ """
++    matrix+='\n'+SCALING_NOTE+f'\n\n[统一E源码说明](evidence/workpiece_enlargement_20261007/right_margin4_source_context/closure_001/009.md)；[HF5薄接口事实与未实现提案](evidence/workpiece_enlargement_20261007/right_margin4_source_context/closure_001/011.md)。\n'
+     matrix+=f"\n[完整报告](WORKPIECE_ENLARGEMENT_20261007.md)；[进度](evidence/workpiece_enlargement_20261007/right_margin4_progress.json)；[结构与力](../{VIEW}/view/comparison.png)；[距离与力](../{VIEW}/view/distances_forces.png)；[J/Hu/Green](../{VIEW}/view/peak_fields.png)；[4mm实际动画](../{VIEW}/view/right4col/actual_states.gif)。\n"
+     append=f"\n\n## 右介质余量2→4 mm：完整新生产、参考与保存视图终态\n\n同h1、E1/ν.3/厚20、γ=α=1e-6/Lr80、side18中心(71,40)、原端口/支撑与24目标，仅父82mm域再补2列至84mm、累计余量4mm并延长背景顶边。来源准备阶段的实际映射核验不代替力学资格。本次新生产实际接受{new['accepted_states']}态完成0→1.2→0，新全部N态{new['HP_calls']}次HP80/120、{new['checks_completed']}项检查通过。视图共{data['view']['observations_each']}次几何/{data['view']['observations_each']}次节点力观察，各1/态，零新F/T/构模/求解/HP。\n\n{table}\n共同原目标对照：加载/卸载按leg和原目标序号分别匹配，二分中间态保留于完整视图，不混下表。所有Fx、材料/Hu分量、J/Hu、Green主应变及回零原值在进度JSON保存，不重算物理或人为归零。\n\n{common}\nR、下半Fy及2侧法向幅值和分别解释；q_out与有限tip距离分别记录。完整力、离散平衡/固定工件力及声明PORT方向切线作用参考，不扩展到全切线列、连续压力、一般接触、自由体、应变HP或域/网格收敛。原准备/运行前缀是历史快照，本节为实际终态；冻结源码、门槛和科学窗口不改。\n\n[功能矩阵](PHYSICAL_FUNCTION_PROGRESS.md)；[实际进度](evidence/workpiece_enlargement_20261007/right_margin4_progress.json)；[结构/力](../{VIEW}/view/comparison.png)；[距离/力](../{VIEW}/view/distances_forces.png)；[J/Hu/Green](../{VIEW}/view/peak_fields.png)；[4mm动画](../{VIEW}/view/right4col/actual_states.gif)。HF只正向评价、不重写LF/N4优化器；HF5未完成。下一项依据整条2/4mm同目标曲线决定，不预先宣布收敛。\n"
++    append+='\n\n'+SCALING_NOTE+f'\n\n[统一E原说明](evidence/workpiece_enlargement_20261007/right_margin4_source_context/closure_001/009.md)；[HF5源码事实及薄接口提案](evidence/workpiece_enlargement_20261007/right_margin4_source_context/closure_001/011.md)。这些资料是源码意见，不赋新实验或HF5实现资格。\n'
+     matrix_bytes=matrix.encode('utf-8')
+     if before[MATRIX] is not None:matrix_bytes+=b'\n\n---\n\n'+before[MATRIX]
+     result={REPORT:before[REPORT]+append.encode('utf-8'),MATRIX:matrix_bytes,PROGRESS:dump(progress)}
+@@ -177,6 +191,7 @@
+     args=parser.parse_args();root,output=args.repo.resolve(),args.output.resolve()
+     assert not output.is_relative_to(root)
+     data=collect(root)  # Actual closed science/view gates precede any proposal/install write.
++    data['source_context_identity']=source_context_identity()
+     if args.action=='propose':
+         assert not output.exists();before,payloads=proposals(root,data);output.mkdir();(output/'files').mkdir()
+         files={}
+@@ -190,6 +205,7 @@
+     assert manifest['status']==data['status'] and review['status']=='pass_saved_only' and not review['blocking_findings']
+     assert review['proposal_sha256']=={name:entry['sha256'] for name,entry in manifest['files'].items()}
+     assert manifest['input_sha256']==data['input_sha256'], 'Closed inputs changed after review'
++    assert manifest['closed_summary']['source_context_identity']==data['source_context_identity']
+     before={name:(root/name).read_bytes() if (root/name).exists() else None for name in manifest['files']}
+     blobs={name:(output/entry['path']).read_bytes() for name,entry in manifest['files'].items()}
+     for name,entry in manifest['files'].items():
+@@ -199,6 +215,8 @@
+     archive={'001.json':before[PROGRESS],'002.json':(output/'manifest.json').read_bytes(),'003.json':args.review.read_bytes(),'004.py':Path(__file__).read_bytes()}
+     author=Path(__file__).resolve().parent
+     for short,name in [('005.md','README.md'),('006.json','author_note.json'),('007.json','author_checks.json'),('008.diff','source_additions.diff')]:archive[short]=(author/name).read_bytes()
++    for name,entry in SOURCE_CONTEXT.items():archive[name]=(author/entry['candidate_path']).read_bytes()
++    archive['023.diff']=(author/'source_revision.diff').read_bytes()
+     for name,payload in archive.items():(context/name).write_bytes(payload);assert (context/name).read_bytes()==payload
+     installed={}
+     for name,payload in blobs.items():
+@@ -207,9 +225,12 @@
+     assert (root/REPORT).read_bytes().startswith(before[REPORT]) and all((root/name).read_bytes().endswith(before[name]) for name in FRONTS)
+     receipt=dict(status='pass_reviewed_file_only_install',new_scientific_calls=0,installed_files=installed,
+         archive={name:dict(path=CONTEXT+'/'+name,sha256=sha(payload)) for name,payload in archive.items()},original_fronts_and_report_raw_preserved=True,
+-        prelaunch_and_running_archives='Existing source_context short files unchanged; prior progress raw001.json here',closed_input_sha256=data['input_sha256'])
++        prelaunch_and_running_archives='Existing source_context short files unchanged; prior progress raw001.json here',closed_input_sha256=data['input_sha256'],
++        source_context_identity=data['source_context_identity'])
+     (context/'documentation_install.json').write_bytes(dump(receipt))
+-    (context/'INDEX.md').write_text('Selected file-only closure:001 prior progress;002 proposal manifest;003 saved-only review;004–008 author source. RawSHA/path map in documentation_install.json. Existing prelaunch/running snapshots and scientific records unchanged; no large output or duplicated whole history tree.\n',encoding='utf-8')
++    index='Selected file-only closure:001 prior progress;002 manifest;003 saved-only review;004–008 current author;009–014 E/HF5 source reasoning;015 map;016–021 original reviewed source-only template;022 template map;023 narrow revision diff. RawSHA/path map in documentation_install.json. Source-only/pending statements are historical author roles, not completed experiments. Existing snapshots/science records unchanged. Historical original author names are provenance, not runtime dependencies.\n\n'
++    index+='\n'.join(f"- [{name}]({name}): {entry['source_name']} ({entry['role']})" for name,entry in SOURCE_CONTEXT.items())+'\n'
++    (context/'INDEX.md').write_text(index,encoding='utf-8')
+     print(json.dumps(dict(status=receipt['status'],files=len(installed),receipt=CONTEXT+'/documentation_install.json')))
+ 
+ 

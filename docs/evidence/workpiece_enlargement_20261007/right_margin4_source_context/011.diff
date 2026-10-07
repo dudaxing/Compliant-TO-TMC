@@ -1,0 +1,115 @@
+--- /dev/null
++++ record_running_phase.py
+@@ -0,0 +1,112 @@
++"""Record a timestamped running-phase snapshot from saved files, with closure checks."""
++from datetime import datetime, timezone
++from hashlib import sha256
++from pathlib import Path
++import argparse
++import json
++
++STAGE = 'lf_data_preparation/native_workpiece_001/right_margin4_cycle_001'
++BASE = 'docs/evidence/workpiece_enlargement_20261007'
++PROGRESS = BASE+'/right_margin4_progress.json'
++CONTEXT = BASE+'/right_margin4_source_context'
++REPORT = 'docs/WORKPIECE_ENLARGEMENT_20261007.md'
++CURRENT = 'docs/CURRENT_STATUS.md'
++PROTOCOL_SHA = 'f4d6d94f38bb9e27f9afbd21d97b62410e31e8c21e83fcfa90bedfa66712cbb1'
++sha = lambda data:sha256(data).hexdigest()
++read = lambda p:json.loads(p.read_bytes())
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--repo',type=Path,required=True)
++    root,author = parser.parse_args().repo.resolve(),Path(__file__).resolve().parent
++    notes = read(author/'running_author_note.json')
++    context,stage = root/CONTEXT,root/STAGE
++    assert context.is_dir() and not (context/'running_record_receipt.json').exists()
++    before = {name:(root/name).read_bytes() for name in (PROGRESS,REPORT,CURRENT)}
++    assert all(sha(data)==notes['expected_preimages'][name] for name,data in before.items())
++    assert all(sha((author/name).read_bytes())==pin for name,pin in notes['candidate_sources'].items())
++    protocol_bytes = (stage/'production_protocol.json').read_bytes()
++    assert sha(protocol_bytes)==PROTOCOL_SHA
++    protocol = json.loads(protocol_bytes)
++    assert protocol['phases']['production']['helper_seconds']==4500
++    assert protocol['phases']['production']['outer_seconds']==4560 and protocol['sampled_RSS_bytes']==8*1024**3
++
++    def running_records():
++        # A worker terminal receipt/result closes the tiny interval before launcher closure.
++        launch,execution = read(stage/'production_launch.json'),read(stage/'run_001/execution_receipt.json')
++        assert launch['status']==execution['status']=='running', 'Production already terminal or not demonstrably running'
++        assert launch['invocations']==execution['invocations']==1 and launch['protocol_sha256']==PROTOCOL_SHA
++        assert launch['bindings']==protocol['bindings']
++        assert not (stage/'stop_requested.txt').exists(), 'Stopping phase is not a running snapshot'
++        assert not (stage/'run_001/result/result.json').exists(), 'Result already saved; do not write running'
++        return launch,execution
++
++    launch,execution = running_records()
++    raw_started_timestamp = launch['started_utc']
++    source_time = datetime.fromisoformat(raw_started_timestamp)
++    assert source_time.tzinfo is not None, 'Started timestamp needs its source offset'
++    started_utc = source_time.astimezone(timezone.utc).isoformat()
++    offset = source_time.strftime('%z')
++    source_offset = offset[:3]+':'+offset[3:]
++    raw = (stage/'run_001/accepted_progress.jsonl').read_bytes()
++    end = raw.rfind(b'\n')+1
++    complete = raw[:end]
++    rows = [json.loads(line) for line in complete.splitlines() if line.strip()]
++    assert rows, 'No complete accepted-state progress line'
++    last = rows[-1]
++    captured = datetime.now(timezone.utc).isoformat()
++    progress = json.loads(before[PROGRESS])
++    assert progress['production']['status'] in ('pending_not_executed','frozen_not_executed')
++    progress['status'] = 'running_not_qualified'
++    progress['prelaunch_snapshot'] = dict(path=CONTEXT+'/006.json',sha256=sha(before[PROGRESS]))
++    progress['production'] = dict(status='running_not_qualified',mechanical_qualification=False,
++        started_utc=started_utc,started_source_field=STAGE+'/production_launch.json:started_utc',
++        raw_started_timestamp=raw_started_timestamp,source_offset=source_offset,snapshot_utc=captured,
++        timestamp_role='Source timestamp retained; only the displayed time is normalized to UTC',
++        protocol_file=STAGE+'/production_protocol.json',protocol_sha256=PROTOCOL_SHA,
++        helper_seconds=4500,outer_seconds=4560,RSS_bytes=8*1024**3,
++        saved_complete_accepted_lines=len(rows),last_saved_accepted_state=last,
++        progress_jsonl_file=STAGE+'/run_001/accepted_progress.jsonl',complete_prefix_bytes=len(complete),
++        complete_prefix_sha256=sha(complete),saved_prefix_path=CONTEXT+'/012.jsonl',
++        trailing_partial_line_ignored=bool(raw[end:]),
++        execution_receipt_accepted_states_role='Startup counter is stale during execution; current count comes only from complete saved JSONL lines',
++        initial_execution_receipt_accepted_states=execution.get('accepted_states'),
++        state_role='Timestamped saved progress snapshot; full cycle and independent reference not qualified')
++    banner = f"4 mm生产运行快照（UTC {captured}）：保存进度有{len(rows)}条完整接受态，末态index={last['index']}、d={last['d']:g} mm；完整周期和新独立参考尚未通过。2 mm完整评价已完成。本条记录是保存文件快照，不是进程存活证明。\n\n"
++    append = f"\n\n## 4 mm生产启动与运行快照（UTC {captured}）\n\n一次生产已于UTC {started_utc}启动；原production_launch.json.started_utc字段为`{raw_started_timestamp}`（源偏移{source_offset}），仅规范UTC显示，未改源时间。协议SHA `{PROTOCOL_SHA}`；窗口4500/4560秒、8 GiB，首错关闭、无重试或force。保存accepted_progress.jsonl现有{len(rows)}条完整行，末态index={last['index']}、{last['leg']}、d={last['d']:g} mm；末尾未完成行不计入。execution_receipt的启动accepted_states值不作当前进度依据。\n\n此处只记录运行中的保存文件快照，未给4 mm完整周期、参考或接触资格；独立参考仍须实际N态与新2N HP。原prelaunch进度保留为短文件006.json，当前完整JSONL前缀为012.jsonl，身份及运行记录见[right_margin4_progress.json](evidence/workpiece_enlargement_20261007/right_margin4_progress.json)。HF为独立正向评价器，不含优化器；本记录脚本零科学调用。\n"
++    after = {PROGRESS:(json.dumps(progress,ensure_ascii=False,indent=2,allow_nan=False)+'\n').encode('utf-8'),
++             CURRENT:banner.encode('utf-8')+before[CURRENT],REPORT:before[REPORT]+append.encode('utf-8')}
++    archive = {'006.json':before[PROGRESS],'012.jsonl':complete}
++    for short,name in [('007.py','record_running_phase.py'),('008.json','running_author_note.json'),
++                       ('009.md','RUNNING_README.md'),('010.json','running_author_checks.json'),('011.diff','running_source_additions.diff')]:
++        archive[short]=(author/name).read_bytes()
++    # Reuse an identical preserved snapshot; never rewrite or multiply old snapshots.
++    for name,data in archive.items():
++        if (context/name).exists():assert (context/name).read_bytes()==data,name
++    assert all((root/name).read_bytes()==data for name,data in before.items())
++    running_records()  # Final closure check before any write.
++    for name,data in archive.items():
++        if not (context/name).exists():(context/name).write_bytes(data)
++        assert (context/name).read_bytes()==data
++    running_records()  # Archive writing may take time; check immediately before docs.
++    for name,data in after.items():(root/name).write_bytes(data)
++    try:
++        running_records()  # If closure raced with docs, restore the three raw preimages.
++    except Exception:
++        for name,data in before.items():(root/name).write_bytes(data)
++        raise RuntimeError('Production closed during recording; raw docs restored, archive retained; no running record installed')
++    receipt = dict(status='pass_file_running_snapshot',snapshot_utc=captured,new_scientific_calls=0,
++        saved_complete_accepted_lines=len(rows),last_saved_index=last['index'],last_saved_d_mm=last['d'],
++        protocol_sha256=PROTOCOL_SHA,closure_checked_before_and_after_writes=True,
++        started_utc=started_utc,raw_started_timestamp=raw_started_timestamp,source_offset=source_offset,
++        started_source_field=STAGE+'/production_launch.json:started_utc',
++        archive={name:dict(path=CONTEXT+'/'+name,sha256=sha(data)) for name,data in archive.items()},
++        installed_files={name:dict(before_sha256=sha(before[name]),after_sha256=sha(data)) for name,data in after.items()},
++        source_names={'007.py':'record_running_phase.py','008.json':'running_author_note.json','009.md':'RUNNING_README.md','010.json':'running_author_checks.json','011.diff':'running_source_additions.diff'},
++        record_role='Historical snapshot from saved running records, not process liveness or whole-path/reference qualification')
++    (context/'running_record_receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++    print(json.dumps(dict(status=receipt['status'],complete_lines=len(rows),last_index=last['index'],last_d_mm=last['d'])))
++
++
++if __name__=='__main__':main()

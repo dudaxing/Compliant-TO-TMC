@@ -1,0 +1,16 @@
+Selected file-only closure:001 prior progress;002 manifest;003 saved-only review;004–008 current author;009–014 E/HF5 source reasoning;015 map;016–021 original reviewed source-only template;022 template map;023 narrow revision diff. RawSHA/path map in documentation_install.json. Source-only/pending statements are historical author roles, not completed experiments. Existing snapshots/science records unchanged. Historical original author names are provenance, not runtime dependencies.
+
+- [009.md](009.md): physical_progress_candidate/UNIFORM_E_SCALING_PHYSICAL_NOTE.md (Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5)
+- [010.json](010.json): physical_progress_candidate/uniform_E_scaling_review.json (Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5)
+- [011.md](011.md): interface_notes/HF5_USABLE_INTERFACE_FACTS_AND_MINIMUM_PROPOSAL.md (Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5)
+- [012.json](012.json): interface_notes/source_facts.json (Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5)
+- [013.json](013.json): interface_notes/source_facts_peer_review.json (Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5)
+- [014.json](014.json): interface_notes/author_note.json (Source-only physical/interface reasoning and peer review; no new experiment or implemented HF5)
+- [015.json](015.json): context/index.json (Source name/rawSHA map)
+- [016.py](016.py): close_margin4_docs.py (Historical source-only reviewed 7e2e template; not executed)
+- [017.md](017.md): README.md (Historical source-only reviewed 7e2e template; not executed)
+- [018.json](018.json): author_note.json (Historical source-only reviewed 7e2e template; not executed)
+- [019.json](019.json): author_checks.json (Historical source-only reviewed 7e2e template; not executed)
+- [020.diff](020.diff): source_additions.diff (Historical source-only reviewed 7e2e template; not executed)
+- [021.json](021.json): closure_static_review.json (Historical source-only reviewed 7e2e template; not executed)
+- [022.json](022.json): template/index.json (Historical template name/rawSHA map)

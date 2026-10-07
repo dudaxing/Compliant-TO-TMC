@@ -1,0 +1,121 @@
+{
+  "schema_version": "hf-native-project-task-1.1",
+  "task_id": "EXPLORATORY_fixed_square_x71_side18_E1_gamma1em6_rightmargin4_1p2mm",
+  "case_family": "gripper",
+  "purpose": "right_medium_margin_single_factor_contact_force_exploration",
+  "parameter_origin": "HF-derived82mm parent padded by two more right passive-medium columns to84mm; total right margin4mm, original LF and parent physical subdomains retained.",
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain"
+  },
+  "input": {
+    "tag": "input",
+    "control": "average_displacement",
+    "target_mm": 1.2
+  },
+  "output": {
+    "tag": "output",
+    "spring_N_per_mm": 0.0
+  },
+  "constraints": [
+    {
+      "tag": "support",
+      "components": [
+        0,
+        1
+      ]
+    },
+    {
+      "tag": "symmetry",
+      "components": [
+        1
+      ]
+    }
+  ],
+  "support_selection": "solid_incident_nodes_only",
+  "input_auxiliary_spring_N_per_mm": 0.0,
+  "workpiece": {
+    "kind": "fixed_rigid",
+    "shape": "square",
+    "center_mm": [
+      71.0,
+      40.0
+    ],
+    "fixed_components": [
+      0,
+      1
+    ],
+    "side_mm": 18.0
+  },
+  "third_medium": {
+    "gamma": 1e-06
+  },
+  "qualification_criteria": {
+    "max_design_volume_fraction": null,
+    "min_feature_mm": null
+  },
+  "reference_state": "undeformed",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "regularization": {
+    "alpha": 1e-06,
+    "length_mm": 80.0
+  },
+  "background_symmetry": {
+    "points_mm": [
+      [
+        0.0,
+        40.0
+      ],
+      [
+        84.0,
+        40.0
+      ]
+    ],
+    "components": [
+      1
+    ]
+  },
+  "geometry": {
+    "geometry_id": "002c29da804e50ebad4747060b034edb8896d8483e7698c2f75cd3bde9fc86c0",
+    "descriptor_sha256": "e3970e99d2eb4023fb9cca3fd93a1fe17ff7860b65401b3af08af59c7a21c0b2"
+  },
+  "analysis_grid": {
+    "policy": "native"
+  },
+  "description": "Fixed side18 square center(71,40), right face80, 4mm right medium margin; native h1, E1, gamma1e-6, alpha1e-6, Lr80 and original ports unchanged. Fresh zero-start 24-target 0-1.2-0mm cycle requires its own reference.",
+  "path": {
+    "kind": "ordered_cycle",
+    "targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.65,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0,
+      1.05,
+      1.1,
+      1.15,
+      1.2,
+      1.15,
+      1.1,
+      1.0,
+      0.9,
+      0.8,
+      0.75,
+      0.65,
+      0.5,
+      0.25,
+      0.0
+    ]
+  }
+}

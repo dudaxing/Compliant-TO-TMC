@@ -1,3 +1,15 @@
+## 当前：4 mm右介质域完整正向评价已完成
+
+HF复用LF/N4几何与研究成果，提供独立正向力学评价，不含优化器；开发统一main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git，HF5尚未完成。同固定side18中心(71,40)、h1/E1/γ=α=1e-6/Lr80，2→4mm域的新完整24态、48新HP及488232检查和保存视图通过；未借旧模型资格。
+
+最大加载行程态d=1.2mm：半模型R=0.407252771N，下半工件Fy=0.119361952N，两侧法向幅值和=0.238723903N，有限tip底面距=0.00573031619mm。2|Fy|不是装配净力，q_out是加权端口位移。同原目标全曲线、材料/Hu分量及绝对量须一起看，不由峰值概括全路径或域/网格收敛。压力/接触定义、圆体自身完整任务、自由体/摩擦和HF5仍待实现或验证。
+
+[完整报告](WORKPIECE_ENLARGEMENT_20261007.md)；[实际进度](evidence/workpiece_enlargement_20261007/right_margin4_progress.json)；[功能矩阵](PHYSICAL_FUNCTION_PROGRESS.md)；[结构/力](../functional_views/right_margin4_20261007/complete_001/view/comparison.png)；[距离/力](../functional_views/right_margin4_20261007/complete_001/view/distances_forces.png)；[4mm动画](../functional_views/right_margin4_20261007/complete_001/view/right4col/actual_states.gif)。异目录恢复main后以实际Git根定位；旧闭卡不重跑，下一项据整条2/4mm曲线选择一个物理或匹配网格步骤。默认tangent未切换，探索显式port_projection，HF不重写优化器。
+
+---
+
+以下整段原字节为收尾前历史；当前状态以上方及最新报告/进度为准。
+
 <!-- current-front right-margin actualcomplete; predecessor abf62b04d0a384f3c9cfa352dd6232ad1d4ab3d1 -->
 
 ## 当前：右侧2 mm介质域完整对照已完成（2026-10-07）
