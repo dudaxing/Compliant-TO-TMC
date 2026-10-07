@@ -1,3 +1,25 @@
+<!-- current-front gamma-half complete 2026-10-07; historical predecessor 16ee4ebb67161e2c8bc9a27d8e44285308778171 -->
+
+## 当前 HF 功能：γ 减半完整对照（2026-10-07）
+
+独立 HF 已接通 NumPy 机械力、三分量切线／CSC、平均输入 KKT、固定工件、有序卸载，以及保存态结构、节点力和 J 可视化。
+
+固定方块边长 `18 mm`、中心 `(71,40) mm`，对称下半体为 `[62,80]×[31,40] mm`，右面 `x=80 mm`，右侧介质余量仍为零。本次仅将 `gamma=1e-6` 改为 `5e-7`，其余物理参数、几何、端口、支撑与网格保持；24 个原始目标完成 `0→1.2→0 mm` 加载—卸载。
+
+新工况完整24态通过；全部24态的新 HP80/120 参考共48次，465255项检查通过。加载峰值 `d=1.2 mm`：半模型输入反力 `R=0.406911563 N`，下半工件 `Fy=0.118620312 N`，对称两侧法向力幅值和 `2|Fy|=0.237240623 N`；钳尖到底面的有限距离为 `5.535555 μm`。`2|Fy|` 不是完整装配净力。
+
+相同加载目标 `0.75–0.85 mm` 的 Fy 下降约42–43%，峰值下降0.3254%；因此不能概括为全路径不敏感。这是已通过独立数值参考的合力与变形对照，压力分布、物理接触／夹持判据仍未验证。
+
+[报告末尾 γ 对照](../docs/WORKPIECE_ENLARGEMENT_20261007.md)；[实际进度与证据](../docs/evidence/workpiece_enlargement_20261007/gamma_half_progress.json)；[同目标力／间隙对照](../functional_views/workpiece_gamma_20261007/complete_001/view/gamma_comparison/matched_force_gap.png)；[新工况24帧实际动画](../functional_views/workpiece_gamma_20261007/complete_001/view/gamma5em7/actual_states.gif)。
+
+本轮未改核心代码，默认 `initial_guess="tangent"` 保持；探索工况显式使用已有 `port_projection`。`q_out` 仍是加权竖向端口位移，与钳尖间隙分别报告。HF5 优化耦合尚未实现；圆体、自由工件及摩擦也未完成。
+
+下一步路线是以 `gamma=1e-6` 基线在同一物理坐标下扩展右侧第三介质 **HF 分析域**：保留原 LF 数据、原子域的 native 网格 `h=1 mm`、E、alpha、`Lr=80 mm` 及端口／支撑位置，重建 DOF 与 direction，并按坐标选择钳尖。该域扩展尚未执行，不能继承本轮旧模型的资格。
+
+---
+
+以下完整原文是 **16ee4ebb 阶段历史**，逐字节保留当时的状态、计划与命令；当前进度以本页上方及最新报告为准，历史中的已关闭执行卡不应重跑。
+
 <!-- current-front 2026-10-07; actual complete records; baseline b310033 -->
 
 ## 当前独立 HF 功能与接口

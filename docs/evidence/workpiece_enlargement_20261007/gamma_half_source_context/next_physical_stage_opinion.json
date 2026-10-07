@@ -1,0 +1,89 @@
+{
+  "schema_version": "saved-evidence-physical-stage-opinion-1.0",
+  "date": "2026-10-07",
+  "baseline_commit": "16ee4ebb67161e2c8bc9a27d8e44285308778171",
+  "status": "read_only_recommendation_not_execution_card",
+  "recommended_next_factor": "third_medium.gamma",
+  "proposed_pair": {"existing_baseline_gamma": 1e-6, "one_new_candidate_gamma": 5e-7, "alpha_unchanged": 1e-6, "Lr_mm_unchanged": 80.0},
+  "question": "For the current boundary-touching fixed-square task, how much do signed body force, finite-face gap and structural response change when only the medium material multiplier is halved?",
+  "limitations": [
+    "A two-value comparison measures sensitivity, not gamma convergence or a hard-contact limit.",
+    "The zero-right-margin boundary remains part of this task; gamma sensitivity does not exclude boundary influence or qualify transferable clamp force.",
+    "Gamma changes medium material coefficients only; re-equilibration also changes deformation and Hu. Force is not assumed proportional to gamma.",
+    "The small peak Hu Fy contribution does not prove alpha is unimportant."
+  ],
+  "baseline_pins": {
+    "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/task.json": "385cce960696b8c01e1323fc43d98f4ee28a392214c44a8f3609006324cde2e0",
+    "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/result.json": "b1bffb74a3ef105b111e9f6aa50ef6322e392899135073f58a4283f6408b3ba4",
+    "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/model.json": "54d71ac50a88b26876bd7bb02a3be3e4bdd36142948874c9bd37ef455eef10c5",
+    "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/reference/summary.json": "602d800682102d0e1565c5515a93d141c665ed8d62083a5eb33f4d19f583766d",
+    "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/execution_receipt.json": "34081cc086799339bcede3dda7c65051e7f056f3c3d2100e96185f5eb6dfbf20",
+    "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/production_launch.json": "687e4c3faaac693737a82d68394b21b8e3be0f12be3d8f248bd8bf326aae8ada",
+    "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/reference_launch.json": "f754cf4936df219c75fcee6fd28d9b36f98de984b8cc9aed3f82165a52413066",
+    "functional_views/workpiece_enlarge_20261007/complete_001/view/projection001/summary.json": "93b4e447de6797479d2a6826840429c1dfe5c3d54239114b458130cf0faccdbf",
+    "functional_views/workpiece_enlarge_20261007/fit_001/view/projection001_fit.json": "6a1b86df252e015ee50c77cdff8bcc0487d48154b7b55187f33b874e4694ef41",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc"
+  },
+  "independent_source_opinion": {
+    "file": "physical_parameter_order_source_review.json",
+    "sha256": "19e5e8419d8c3f7eed4903f838b4c421199c65f8c8fc46b9f60d7bd8d73fb87c",
+    "priority_difference": "Peer gives right-padding priority when the immediate goal is transferable body force; gamma first remains acceptable for a low-change functional experiment restricted to the present boundary task."
+  },
+  "actual_baseline": {
+    "accepted_states": 24,
+    "HP_calls_completed": 48,
+    "checks_completed": 465220,
+    "production_helper_seconds": 2839.981374300085,
+    "production_outer_seconds": 2841.368571299943,
+    "production_helper_limit_seconds": 3000,
+    "production_helper_peak_RSS_bytes": 562446336,
+    "production_outer_peak_tree_RSS_bytes": 560816128,
+    "F_started_completed": [354, 330],
+    "T_started_completed": [176, 176],
+    "reference_helper_seconds": 716.9894823000068,
+    "reference_outer_seconds": 718.8081383000826,
+    "reference_helper_peak_RSS_bytes": 424910848,
+    "reference_outer_peak_tree_RSS_bytes": 428838912,
+    "peak_original_target_index": 13,
+    "peak_d_mm": 1.2,
+    "peak_R_input_N": 0.40713527726967946,
+    "peak_q_out_mm": 1.0088870461171395,
+    "peak_body_Fy_N": {"total": 0.11900757232984849, "material": 0.11881806481831451, "Hu": 0.00018950751153397826},
+    "peak_medium_min_J": 3.2398412736436354e-5,
+    "peak_finite_bottom_tip_gap_mm": 0.005700752324191427,
+    "peak_all_solid_Green_principal_max": 0.032820128914029634,
+    "peak_local_window_Green_principal_max": 0.012726226176154662,
+    "local_window_reference_mm": {"x": [63, 80], "y": 30},
+    "final_body_Fy_N": -1.4985754973363611e-27
+  },
+  "matched_conditions": [
+    "Same raw LF geometry, solid/support/passive masks, absolute coordinates, domain 80x40 mm and native h=1 mm; no optimization, smoothing or resampling.",
+    "Same fixed square side18 center(71,40), lower box[62,80]x[31,40], body overlay, merged fixed/free DOFs and top symmetry cut.",
+    "Same E=1 MPa, nu=.3, plane strain, t=20 mm, alpha=1e-6, Lr=80 mm and kr=.008615384615384613 MPa mm^2; only original-medium gamma/lam/mu entries may change.",
+    "Same normalized reference-arclength average input/output ports, zero output/input auxiliary springs, force scale Et=20 and signed half-model force convention.",
+    "Same 24 original ordered targets and peak1.2 mm, zero start, port_projection initialization, NumPy force/tangent implementation and Newton/Armijo/KKT/J/range/rollback gates.",
+    "Compare the same original_target_index and leg, using actual states only. New inserted bisection states, if any, receive their own fresh reference and are not interpolated into matched comparisons."
+  ],
+  "outputs": [
+    "All actual path states: signed body total/material/Hu Fx,Fy; R_input; q_out; 2abs(Fy) and full mirrored net force reported separately.",
+    "Finite bottom/left/right tip distances, tip x/y, first normal rays, measured overlap/ambiguity diagnostics; gap differences in micrometres.",
+    "Medium minimum J and max absolute Hu; solid minimum J and all-solid Green extrema; same physical local-window extrema shown separately.",
+    "Load/unload matched common targets, force-gap curves, actual x1 shape/field/nodal-force views and complete unload return without clipping small forces to zero.",
+    "Actual force/tangent/LU counts, incomplete trial reasons, accepted N, wall time, RSS, and full fresh reference coverage."
+  ],
+  "budget_estimate_only": {
+    "production_basis": "2839.981374300085s x1.5 +90s =4349.972061450128s; round upward to4500s helper and4560s outer if root chooses this contingency.",
+    "reference_basis": "716.9894823000068s /24 x actualN x1.5 +90s; for N24 this is1165.4842234500102s. Freeze a positive explicit allowance only after full production PASS and actualN; retaining1500/1560 for N24 is a conservative option.",
+    "RSS_basis": "Observed under0.6 GiB, but retain the existing8 GiB sampling limit for comparability; this is not an OS hard cap.",
+    "stop_policy": "One finite card, first unexpected failure closes it; no same-card retry, repair, target deletion or budget extension.",
+    "authorization": "No new time budget or stage is authorized by this opinion. User delegated exploratory cases and stepwise continuation; the parent determines whether the concrete new numerical card is covered."
+  },
+  "subsequent_order": [
+    "Review this gamma pair first; do not pre-run alpha, padding and grid as a batch.",
+    "Before generalizing clamp force, test right-medium padding while preserving mechanism/body absolute coordinates and physical port/support definitions, h=1, E/nu/t/gamma/alpha and especially Lr=80. Moving or shrinking the body is not a padding-only comparison.",
+    "Then choose alpha-only sensitivity if force/deformation evidence warrants it, keeping gamma fixed; alpha acts through global kr and is not another name for gamma.",
+    "Use a nested h=.5 refinement of the same cell-union geometry and physical ports/supports for a later discretization comparison; another LF fine design does not qualify as mesh convergence."
+  ],
+  "mathematical_inheritance": "Preserve force/tangent formulas, B850 HP80/HP120 mechanical run_state, aa86 body checker, B52 declared PORT action, counter a751 schema and all original mathematical thresholds. Rebind the new task/material/model/states; require full production completion then fresh2N reference for all actual states. Historical reference passes do not qualify new gamma states, rejected trials, pressure, contact, free-body clamp, energy/stress HP or all tangent columns.",
+  "activity": {"new_F": 0, "new_T": 0, "new_solver": 0, "new_HP": 0, "new_model_constructions": 0, "new_geometry_API": 0, "candidate_imports": 0, "new_card_freezes": 0, "formal_repository_writes": 0}
+}

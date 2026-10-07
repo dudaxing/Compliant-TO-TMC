@@ -1,0 +1,1348 @@
+{
+  "schema_version": "gamma-half-physical-progress-1.1",
+  "updated_utc": "2026-10-07T11:55:40.213437+00:00",
+  "baseline_commit": "16ee4ebb67161e2c8bc9a27d8e44285308778171",
+  "goal": "Independent LF-data finite-deformation TMC forward response, workpiece forces and actual deformation observations; no HF optimization",
+  "status": "complete_current_gamma_milestone_project_incomplete",
+  "authorization_basis": "User authorized automated development and autonomous exploratory physical parameter choices. Independent new bounded windows were disclosed before execution; old closed cards and their qualifications remain closed.",
+  "physical_delta": {
+    "gamma_before": 1e-06,
+    "gamma_after": 5e-07,
+    "unchanged": "E, nu, alpha, Lr, kr, body, geometry, mesh, ports, boundaries, targets, kernels and numerical gates"
+  },
+  "model_comparison": {
+    "total_fields": 27,
+    "unchanged_fields": [
+      "b_in",
+      "b_out",
+      "connectivity",
+      "coordinates",
+      "edofs",
+      "fixed_dofs",
+      "force_scale_per_length",
+      "free_dofs",
+      "grad",
+      "hessian",
+      "hx",
+      "hy",
+      "k_out",
+      "kr",
+      "points",
+      "solid",
+      "solid_dofs",
+      "solid_nodes",
+      "thickness",
+      "weights",
+      "workpiece_background_symmetry_overlap_dofs",
+      "workpiece_cells",
+      "workpiece_dofs",
+      "workpiece_nodes"
+    ],
+    "changed_fields": [
+      "gamma",
+      "lam",
+      "mu"
+    ],
+    "medium_factor": 0.5,
+    "solid_values_byte_exact": true,
+    "comparison_model_file": "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/model.npz"
+  },
+  "model_identity": {
+    "task_sha256": "70a2f8b7f64f950ab9147d7ddd3af49a0f92d90fd8625fd27a0293ebb160088a",
+    "model_sha256": "85e3f1e1b8e4d690f6622f0e0d6385aec7edb3e915cc4014917587915e7e8e5e",
+    "result_sha256": "8199bbf61a1c5685f2a1fecc7759cb23b28e698c0c53aa582540f5fe3703bdd5"
+  },
+  "preparation": {
+    "status": "pass",
+    "invocations": 1,
+    "helper_seconds_limit": 120,
+    "outer_seconds_limit": 150,
+    "sampled_RSS_limit_bytes": 8589934592,
+    "helper_elapsed_seconds": 13.858668399974704,
+    "outer_elapsed_seconds": 14.85534110001754,
+    "helper_sampled_peak_RSS_bytes": 124612608,
+    "tree_sampled_peak_RSS_bytes": 129167360,
+    "all_bindings_unchanged": true,
+    "counts": {
+      "invocations": 1,
+      "model_constructions": 1,
+      "model_writes": 1,
+      "force_calls": 0,
+      "tangent_calls": 0,
+      "solver_calls": 0,
+      "HP_calls": 0,
+      "JIT_calls": 0,
+      "LF_imports": 0
+    },
+    "receipt": {
+      "path": "lf_data_preparation/native_workpiece_001/gamma_half_preparation_001/run_001/preparation_receipt.json",
+      "bytes": 1803,
+      "sha256": "3c650c95daadb762fec5b26c54e3170cb68d6aa939f448a13eab72082f1325cf"
+    },
+    "launch": {
+      "path": "lf_data_preparation/native_workpiece_001/gamma_half_preparation_001/prepare_launch.json",
+      "bytes": 7420,
+      "sha256": "6884b8fa6ce83cc9f3999be13ecf5d6336ef62935e158d9e1b84476f890993c9"
+    }
+  },
+  "production": {
+    "status": "pass",
+    "invocations": 1,
+    "helper_seconds_limit": 4500,
+    "outer_seconds_limit": 4560,
+    "sampled_RSS_limit_bytes": 8589934592,
+    "helper_elapsed_seconds": 1915.9591346998932,
+    "outer_elapsed_seconds": 1917.020782699925,
+    "helper_sampled_peak_RSS_bytes": 560902144,
+    "tree_sampled_peak_RSS_bytes": 561414144,
+    "all_bindings_unchanged": true,
+    "counts": {
+      "accepted_states": 24,
+      "force_calls": 368,
+      "force_calls_completed": 338,
+      "tangent_calls": 180,
+      "tangent_calls_completed": 180,
+      "solver_invocations": 1,
+      "JIT_calls": 0,
+      "HP_calls": 0,
+      "failed_loading_attempts": 0,
+      "bisections": 0,
+      "invalid_J_rejected_trials": 20,
+      "force_range_rejected_trials": 10,
+      "Armijo_complete_rejected_trials": 2,
+      "linear_solves": 179,
+      "linear_predictor_solves": 23,
+      "linear_corrector_solves": 156
+    },
+    "receipt": {
+      "path": "lf_data_preparation/native_workpiece_001/gamma_half_cycle_001/run_001/execution_receipt.json",
+      "bytes": 16241,
+      "sha256": "459631e84cf2b44150e5e9252a66bf4051191ff837450944248778bc822e6db7"
+    },
+    "launch": {
+      "path": "lf_data_preparation/native_workpiece_001/gamma_half_cycle_001/production_launch.json",
+      "bytes": 8125,
+      "sha256": "71e610ac0c4945f12492bada7257ef40747392c0edffb095d2bb1d51b11912a7"
+    }
+  },
+  "reference": {
+    "status": "pass",
+    "invocations": 1,
+    "helper_seconds_limit": 1500,
+    "outer_seconds_limit": 1560,
+    "sampled_RSS_limit_bytes": 8589934592,
+    "helper_elapsed_seconds": 471.0343072001124,
+    "outer_elapsed_seconds": 472.30611300002784,
+    "helper_sampled_peak_RSS_bytes": 423976960,
+    "tree_sampled_peak_RSS_bytes": 428068864,
+    "all_bindings_unchanged": true,
+    "counts": {
+      "accepted_states": 24,
+      "HP_calls_started": 48,
+      "HP_calls_completed": 48,
+      "checks_completed": 465255,
+      "candidate_force_calls": 0,
+      "tangent_calls": 0,
+      "solver_calls": 0,
+      "model_constructions": 0
+    },
+    "receipt": {
+      "path": "lf_data_preparation/native_workpiece_001/gamma_half_cycle_001/reference/summary.json",
+      "bytes": 808536,
+      "sha256": "a5cce0700148064edcb5157267340c514ca416ddadcc5d8904b0eccb552cda7e"
+    },
+    "launch": {
+      "path": "lf_data_preparation/native_workpiece_001/gamma_half_cycle_001/reference_launch.json",
+      "bytes": 152071,
+      "sha256": "43d00008b79b26b972a2e69e03401b10e2f0d5a346554917ef7c25aefcac4e05"
+    }
+  },
+  "view": {
+    "status": "pass",
+    "invocations": 1,
+    "helper_seconds_limit": 180,
+    "outer_seconds_limit": 210,
+    "sampled_RSS_limit_bytes": 8589934592,
+    "helper_elapsed_seconds": 27.728796800016426,
+    "outer_elapsed_seconds": 28.453084100037813,
+    "helper_sampled_peak_RSS_bytes": 388284416,
+    "tree_sampled_peak_RSS_bytes": 386215936,
+    "all_bindings_unchanged": true,
+    "counts": {
+      "geometry_observations": 48,
+      "nodal_observations": 48,
+      "matched_original_targets": 24,
+      "GIF_frames_per_case": 24,
+      "new_F_T_model_solver_HP_calls": 0,
+      "extra_cached_geometry_nodal_calls": 0
+    },
+    "receipt": {
+      "path": "functional_views/workpiece_gamma_20261007/complete_001/view/phase_view.json",
+      "bytes": 23762,
+      "sha256": "634c79984fe317637ddf60de70c0db986cd8ee81265303885a40322ca39b9044"
+    },
+    "launch": {
+      "path": "functional_views/workpiece_gamma_20261007/complete_001/view_launch.json",
+      "bytes": 51310,
+      "sha256": "4e2e110e28cdf40f675ebf6185dce69a93e261f4548d070b777bd2fc18a659a5"
+    }
+  },
+  "peak_rows": {
+    "gamma1e6": {
+      "index": 13,
+      "original_target_index": 13,
+      "leg": "loading",
+      "d_mm": 1.2,
+      "state_sha256": "6a38cf42a6b00b512354f512b5c3a184188c3c499bb10e36c5b46c45595c6178",
+      "R_input_N": 0.40713527726967946,
+      "q_out_mm": 1.0088870461171395,
+      "tip_x_mm": 79.71689115967126,
+      "tip_y_mm": 30.99429924767581,
+      "solid_min_J": 0.9758561788140395,
+      "medium_min_J": 3.2398412736436354e-05,
+      "solid_Green_principal_min": -0.021284158814381858,
+      "solid_Green_principal_max": 0.032820128914029634,
+      "medium_max_abs_Hu_per_mm": 0.2086300295268182,
+      "raw_overlap": false,
+      "strict_overlap": false,
+      "roundoff_ambiguous": false,
+      "tip_to_bottom_mm": 0.005700752324191427,
+      "tip_to_left_mm": 17.71689207683489,
+      "tip_to_right_mm": 0.2831662304183603,
+      "bottom_first_ray_mm": 0.005700752324191427,
+      "left_first_ray_mm": 2.3270320589590194,
+      "total_body_Fx_N": -0.002831894489475477,
+      "total_body_Fy_N": 0.11900757232984849,
+      "material_body_Fx_N": -0.0024000648249161917,
+      "material_body_Fy_N": 0.11881806481831451,
+      "regularization_body_Fx_N": -0.00043182966455928505,
+      "regularization_body_Fy_N": 0.00018950751153397826,
+      "cached_two_sided_normal_magnitude_sum_N": 0.23801514465969698
+    },
+    "gamma5em7": {
+      "index": 13,
+      "original_target_index": 13,
+      "leg": "loading",
+      "d_mm": 1.2,
+      "state_sha256": "33c743fb08ed7361b532d4aea920ef88578229a747b2d6a1e54b05f15a0b6f10",
+      "R_input_N": 0.40691156314535587,
+      "q_out_mm": 1.0092589317654048,
+      "tip_x_mm": 79.71683879435274,
+      "tip_y_mm": 30.994464445105,
+      "solid_min_J": 0.9758432333696754,
+      "medium_min_J": 1.6565460863402116e-05,
+      "solid_Green_principal_min": -0.021298452321801165,
+      "solid_Green_principal_max": 0.0328110172034176,
+      "medium_max_abs_Hu_per_mm": 0.21036047755531087,
+      "raw_overlap": false,
+      "strict_overlap": false,
+      "roundoff_ambiguous": false,
+      "tip_to_bottom_mm": 0.005535554895001127,
+      "tip_to_left_mm": 17.71683965913363,
+      "tip_to_right_mm": 0.2832153081166445,
+      "bottom_first_ray_mm": 0.005535554895001127,
+      "left_first_ray_mm": 2.327379501387002,
+      "total_body_Fx_N": -0.002748209852885853,
+      "total_body_Fy_N": 0.11862031155058476,
+      "material_body_Fx_N": -0.002318765327942815,
+      "material_body_Fy_N": 0.11843213787364379,
+      "regularization_body_Fx_N": -0.0004294445249430379,
+      "regularization_body_Fy_N": 0.00018817367694097816,
+      "cached_two_sided_normal_magnitude_sum_N": 0.23724062310116953
+    }
+  },
+  "return_rows": {
+    "gamma1e6": {
+      "index": 23,
+      "original_target_index": 23,
+      "leg": "unloading",
+      "d_mm": 0.0,
+      "state_sha256": "ca19aabd9cb3d294f63dec549dd1795eb06a34f4284b97ab91aab19ff89aef01",
+      "R_input_N": 8.78412395130692e-25,
+      "q_out_mm": -4.754108110565797e-24,
+      "tip_x_mm": 80.0,
+      "tip_y_mm": 30.0,
+      "solid_min_J": 1.0,
+      "medium_min_J": 1.0,
+      "solid_Green_principal_min": -2.4915670764723437e-24,
+      "solid_Green_principal_max": 2.4915670764723437e-24,
+      "medium_max_abs_Hu_per_mm": 2.096819107328693e-24,
+      "raw_overlap": false,
+      "strict_overlap": false,
+      "roundoff_ambiguous": false,
+      "tip_to_bottom_mm": 1.0,
+      "tip_to_left_mm": 18.027756377319946,
+      "tip_to_right_mm": 1.0,
+      "bottom_first_ray_mm": 1.0,
+      "left_first_ray_mm": 2.0,
+      "total_body_Fx_N": 1.3931475004277937e-27,
+      "total_body_Fy_N": -1.4985754973363611e-27,
+      "material_body_Fx_N": 5.633311671095397e-28,
+      "material_body_Fy_N": -1.3339053670238845e-27,
+      "regularization_body_Fx_N": 8.29816333318254e-28,
+      "regularization_body_Fy_N": -1.646701303124768e-28,
+      "cached_two_sided_normal_magnitude_sum_N": 2.9971509946727223e-27
+    },
+    "gamma5em7": {
+      "index": 23,
+      "original_target_index": 23,
+      "leg": "unloading",
+      "d_mm": 0.0,
+      "state_sha256": "73f1f000237306cf81fca6123e0c86b9d9d8a832fc0e046535645ebb5a1a5c2b",
+      "R_input_N": 8.694903783041328e-25,
+      "q_out_mm": -4.7531078349507595e-24,
+      "tip_x_mm": 80.0,
+      "tip_y_mm": 30.0,
+      "solid_min_J": 1.0,
+      "medium_min_J": 1.0,
+      "solid_Green_principal_min": -2.4928516378496827e-24,
+      "solid_Green_principal_max": 2.4928516378496827e-24,
+      "medium_max_abs_Hu_per_mm": 2.1236072459482507e-24,
+      "raw_overlap": false,
+      "strict_overlap": false,
+      "roundoff_ambiguous": false,
+      "tip_to_bottom_mm": 1.0,
+      "tip_to_left_mm": 18.027756377319946,
+      "tip_to_right_mm": 1.0,
+      "bottom_first_ray_mm": 1.0,
+      "left_first_ray_mm": 2.0,
+      "total_body_Fx_N": 1.0220406657479202e-27,
+      "total_body_Fy_N": -7.970267507203433e-28,
+      "material_body_Fx_N": 2.4901911332821003e-28,
+      "material_body_Fy_N": -6.64977419754172e-28,
+      "regularization_body_Fx_N": 7.730215524197101e-28,
+      "regularization_body_Fy_N": -1.320493309661712e-28,
+      "cached_two_sided_normal_magnitude_sum_N": 1.5940535014406866e-27
+    }
+  },
+  "peak_differences": {
+    "peak_Fy_change_percent": -0.325408519543923,
+    "peak_R_change_percent": -0.054948351767466354,
+    "peak_q_out_change_mm": 0.000371885648265291,
+    "peak_tip_bottom_gap_change_um": -0.16519742919030023,
+    "peak_medium_min_J_ratio": 0.5113047048990779
+  },
+  "early_loading_Fy_differences": [
+    {
+      "d_mm": 0.75,
+      "baseline_Fy_N": 0.0010301420259376279,
+      "gamma_half_Fy_N": 0.00059834046568452,
+      "relative_change_percent": -41.91670171499753
+    },
+    {
+      "d_mm": 0.8,
+      "baseline_Fy_N": 0.0014265981442544028,
+      "gamma_half_Fy_N": 0.0008083971955433721,
+      "relative_change_percent": -43.33392351594059
+    },
+    {
+      "d_mm": 0.85,
+      "baseline_Fy_N": 0.002524230732696866,
+      "gamma_half_Fy_N": 0.001429524766878677,
+      "relative_change_percent": -43.36790419505806
+    }
+  ],
+  "force_definitions": {
+    "input_R": "Half-model generalized input force N",
+    "lower_fixed_body": "Signed weak-form (Fx,Fy) N; total = material + Hu regularization",
+    "mirrored_normal_magnitude_sum": "2 abs(Fy) N, not net force",
+    "mirrored_net_force": "(2 Fx,0) N",
+    "nodal": "Weak nodal forces, not point pressure"
+  },
+  "reference_qualification": "Accepted mechanical states of this explicit complete gamma-half x71 side18 boundary-touching coarse square cycle; no pressure, clamp, contact, auxiliary energy, stress-HP, rejected-state, all-column, H2/H3 or HF5 qualification",
+  "production_qualification_flags_unchanged": "Original flags remain false; independent reference summary admits only its explicit accepted mechanical-state scope.",
+  "visualization_scope": "Saved binary64 F/weak forces and finite-segment geometry; strain fields not HP qualified, mirrored upper half not newly solved. Root inspected the five PNG plots and actual peak GIF frame; each GIF metadata has 24 frames. One additional independent cached local view is complete; its actual PNG was inspected. No new geometry/nodal/FE/HP calls.",
+  "plot_limit": "The original GIF long header is clipped at the right edge; case/index/d/x1 and three component labels remain readable. Production-only header describes the original saved production flags; fresh reference is separate.",
+  "interpretation": "Peak Fy differs 0.3254%, early weak-force loading differs 42-43%; two gamma values do not show convergence. Medium min J nearly halves but finite tip gap decreases only 0.1652 um. No scaling of force or gap is assumed.",
+  "next_stage": "Same physical coordinates and baseline gamma1e-6, add right-medium analysis-domain margin without LF reoptimization or resampling; preserve Lr80/alpha/E/native h1/physical masks and ports. Rebuild DOF/direction and select tip by coordinate. Source feasibility only so far: no padded model or mechanics has run.",
+  "remaining_project_capabilities": [
+    "Domain/grid/gamma/alpha sensitivity and contact/pressure criterion",
+    "Circular and movable workpieces, release and local compliance exploration",
+    "HF5 same-task connection to retained LF/N4 research layer"
+  ],
+  "budget_limit_meaning": "Cooperative clocks and sampled RSS, not OS hard memory caps; every new phase closed after a single invocation.",
+  "figures": {
+    "comparison.png": "functional_views/workpiece_gamma_20261007/complete_001/view/comparison.png",
+    "distances_forces.png": "functional_views/workpiece_gamma_20261007/complete_001/view/distances_forces.png",
+    "peak_fields.png": "functional_views/workpiece_gamma_20261007/complete_001/view/peak_fields.png",
+    "gamma_comparison/matched_force_gap.png": "functional_views/workpiece_gamma_20261007/complete_001/view/gamma_comparison/matched_force_gap.png",
+    "gamma_comparison/matched_differences.png": "functional_views/workpiece_gamma_20261007/complete_001/view/gamma_comparison/matched_differences.png",
+    "gamma1e6/actual_states.gif": "functional_views/workpiece_gamma_20261007/complete_001/view/gamma1e6/actual_states.gif",
+    "gamma5em7/actual_states.gif": "functional_views/workpiece_gamma_20261007/complete_001/view/gamma5em7/actual_states.gif",
+    "cached_local_fit.png": "functional_views/workpiece_gamma_20261007/fit_001/view/local_fit.png"
+  },
+  "cached_local_view": {
+    "status": "pass",
+    "invocations": 1,
+    "helper_seconds_limit": 120,
+    "outer_seconds_limit": 150,
+    "sampled_RSS_limit_bytes": 8589934592,
+    "helper_elapsed_seconds": 5.7699564000358805,
+    "outer_elapsed_seconds": 6.449945300002582,
+    "helper_sampled_peak_RSS_bytes": 111763456,
+    "tree_sampled_peak_RSS_bytes": 116551680,
+    "all_bindings_unchanged": true,
+    "new_F_T_model_solver_HP_geometry_nodal_calls": 0,
+    "receipt": {
+      "path": "functional_views/workpiece_gamma_20261007/fit_001/view/fit_view.json",
+      "bytes": 78018,
+      "sha256": "6923dec4e4ead33ded5adb90aa048ae86acd65d6e15600d10f19b02b318a40a8"
+    },
+    "launch": {
+      "path": "functional_views/workpiece_gamma_20261007/fit_001/view_launch.json",
+      "bytes": 78213,
+      "sha256": "cc7404ad73bc2e127811332b4a391f3c79db6aa0269e3872b0632757b834ee0c"
+    },
+    "window": {
+      "reference_y_mm": 30,
+      "reference_x_mm": [
+        63,
+        80
+      ],
+      "scope": "Adjacent physical boundary solid cells, not the full workpiece bottom x62-80 or whole solid"
+    },
+    "cases": {
+      "gamma1e6": {
+        "label": "gamma1e6",
+        "index": 13,
+        "leg": "loading",
+        "d_mm": 1.2,
+        "state_sha256": "6a38cf42a6b00b512354f512b5c3a184188c3c499bb10e36c5b46c45595c6178",
+        "source_reference_window": {
+          "y_mm": 30.0,
+          "x_mm": [
+            63.0,
+            80.0
+          ]
+        },
+        "physical_edges": [
+          [
+            2493,
+            2494
+          ],
+          [
+            2494,
+            2495
+          ],
+          [
+            2495,
+            2496
+          ],
+          [
+            2496,
+            2497
+          ],
+          [
+            2497,
+            2498
+          ],
+          [
+            2498,
+            2499
+          ],
+          [
+            2499,
+            2500
+          ],
+          [
+            2500,
+            2501
+          ],
+          [
+            2501,
+            2502
+          ],
+          [
+            2502,
+            2503
+          ],
+          [
+            2503,
+            2504
+          ],
+          [
+            2504,
+            2505
+          ],
+          [
+            2505,
+            2506
+          ],
+          [
+            2506,
+            2507
+          ],
+          [
+            2507,
+            2508
+          ],
+          [
+            2508,
+            2509
+          ],
+          [
+            2509,
+            2510
+          ]
+        ],
+        "adjacent_solid_cells": [
+          2383,
+          2384,
+          2385,
+          2386,
+          2387,
+          2388,
+          2389,
+          2390,
+          2391,
+          2392,
+          2393,
+          2394,
+          2395,
+          2396,
+          2397,
+          2398,
+          2399
+        ],
+        "tip_xy_mm": [
+          79.71689115967126,
+          30.99429924767581
+        ],
+        "body_box_mm": [
+          62.0,
+          80.0,
+          31.0,
+          40.0
+        ],
+        "saved_tip_distances": {
+          "bottom": {
+            "distance_mm": 0.005700752324191427,
+            "point_mm": [
+              79.71689115967126,
+              31.0
+            ]
+          },
+          "left": {
+            "distance_mm": 17.71689207683489,
+            "point_mm": [
+              62.0,
+              31.0
+            ]
+          },
+          "right": {
+            "distance_mm": 0.2831662304183603,
+            "point_mm": [
+              80.0,
+              31.0
+            ]
+          }
+        },
+        "saved_face_rays": {
+          "bottom": {
+            "minimum_first_ray_hit_mm": 0.005700752324191427,
+            "no_outward_ray_hit": false,
+            "closest_hit": {
+              "distance_mm": 0.005700752324191427,
+              "face_point_mm": [
+                79.71689115967126,
+                31.0
+              ],
+              "edge_point_mm": [
+                79.71689115967126,
+                30.99429924767581
+              ],
+              "edge_index": 382,
+              "mechanism_nodes": [
+                2429,
+                2510
+              ],
+              "edge_parameter": 1.0,
+              "face_parameter": 0.9842717310928479,
+              "corner_hit": false,
+              "near_corner_hit": false,
+              "raw_reconstructed_normal_projection_mm": 0.005700752324191427,
+              "raw_reconstructed_tangential_coordinate_mm": 17.716891159671263,
+              "analytic_face_endpoint_root": false,
+              "analytic_forward_plane_root": false,
+              "witness_residual_mm": 0.0,
+              "minimizing_edge_parameter_interval": [
+                1.0,
+                1.0
+              ],
+              "minimizing_face_parameter_interval": [
+                0.9842717310928479,
+                0.9842717310928479
+              ]
+            },
+            "minimum_hits": [
+              {
+                "distance_mm": 0.005700752324191427,
+                "face_point_mm": [
+                  79.71689115967126,
+                  31.0
+                ],
+                "edge_point_mm": [
+                  79.71689115967126,
+                  30.99429924767581
+                ],
+                "edge_index": 382,
+                "mechanism_nodes": [
+                  2429,
+                  2510
+                ],
+                "edge_parameter": 1.0,
+                "face_parameter": 0.9842717310928479,
+                "corner_hit": false,
+                "near_corner_hit": false,
+                "raw_reconstructed_normal_projection_mm": 0.005700752324191427,
+                "raw_reconstructed_tangential_coordinate_mm": 17.716891159671263,
+                "analytic_face_endpoint_root": false,
+                "analytic_forward_plane_root": false,
+                "witness_residual_mm": 0.0,
+                "minimizing_edge_parameter_interval": [
+                  1.0,
+                  1.0
+                ],
+                "minimizing_face_parameter_interval": [
+                  0.9842717310928479,
+                  0.9842717310928479
+                ]
+              },
+              {
+                "distance_mm": 0.005700752324191427,
+                "face_point_mm": [
+                  79.71689115967126,
+                  31.0
+                ],
+                "edge_point_mm": [
+                  79.71689115967126,
+                  30.99429924767581
+                ],
+                "edge_index": 413,
+                "mechanism_nodes": [
+                  2509,
+                  2510
+                ],
+                "edge_parameter": 1.0,
+                "face_parameter": 0.9842717310928479,
+                "corner_hit": false,
+                "near_corner_hit": false,
+                "raw_reconstructed_normal_projection_mm": 0.005700752324191427,
+                "raw_reconstructed_tangential_coordinate_mm": 17.716891159671263,
+                "analytic_face_endpoint_root": false,
+                "analytic_forward_plane_root": false,
+                "witness_residual_mm": 0.0,
+                "minimizing_edge_parameter_interval": [
+                  1.0,
+                  1.0
+                ],
+                "minimizing_face_parameter_interval": [
+                  0.9842717310928479,
+                  0.9842717310928479
+                ]
+              }
+            ],
+            "roundoff_near_minimum_hits": [],
+            "admissible_edge_count": 122,
+            "roundoff_tolerance_mm": 5.762920640982219e-13,
+            "face_start_mm": [
+              62.0,
+              31.0
+            ],
+            "face_end_mm": [
+              80.0,
+              31.0
+            ],
+            "outward_normal": [
+              0.0,
+              -1.0
+            ],
+            "method": "Analytic finite tangential-strip and forward-halfplane clipping; no dense sampling",
+            "scope": "Directional boundary-hit diagnostic; not signed penetration or contact pressure",
+            "separation_interpretation": "directional_separation_diagnostic_only"
+          },
+          "left": {
+            "minimum_first_ray_hit_mm": 2.3270320589590194,
+            "no_outward_ray_hit": false,
+            "closest_hit": {
+              "distance_mm": 2.3270320589590194,
+              "face_point_mm": [
+                62.0,
+                31.0
+              ],
+              "edge_point_mm": [
+                59.67296794104098,
+                31.0
+              ],
+              "edge_index": 394,
+              "mechanism_nodes": [
+                2490,
+                2571
+              ],
+              "edge_parameter": 0.9553826014931791,
+              "face_parameter": 0.0,
+              "corner_hit": true,
+              "near_corner_hit": false,
+              "raw_reconstructed_normal_projection_mm": 2.3270320589590194,
+              "raw_reconstructed_tangential_coordinate_mm": 0.0,
+              "analytic_face_endpoint_root": true,
+              "analytic_forward_plane_root": false,
+              "witness_residual_mm": 4.440892098500626e-16,
+              "minimizing_edge_parameter_interval": [
+                0.9553826014931791,
+                0.9553826014931791
+              ],
+              "minimizing_face_parameter_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "minimum_hits": [
+              {
+                "distance_mm": 2.3270320589590194,
+                "face_point_mm": [
+                  62.0,
+                  31.0
+                ],
+                "edge_point_mm": [
+                  59.67296794104098,
+                  31.0
+                ],
+                "edge_index": 394,
+                "mechanism_nodes": [
+                  2490,
+                  2571
+                ],
+                "edge_parameter": 0.9553826014931791,
+                "face_parameter": 0.0,
+                "corner_hit": true,
+                "near_corner_hit": false,
+                "raw_reconstructed_normal_projection_mm": 2.3270320589590194,
+                "raw_reconstructed_tangential_coordinate_mm": 0.0,
+                "analytic_face_endpoint_root": true,
+                "analytic_forward_plane_root": false,
+                "witness_residual_mm": 4.440892098500626e-16,
+                "minimizing_edge_parameter_interval": [
+                  0.9553826014931791,
+                  0.9553826014931791
+                ],
+                "minimizing_face_parameter_interval": [
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "roundoff_near_minimum_hits": [],
+            "admissible_edge_count": 76,
+            "roundoff_tolerance_mm": 5.762920640982219e-13,
+            "face_start_mm": [
+              62.0,
+              31.0
+            ],
+            "face_end_mm": [
+              62.0,
+              40.0
+            ],
+            "outward_normal": [
+              -1.0,
+              0.0
+            ],
+            "method": "Analytic finite tangential-strip and forward-halfplane clipping; no dense sampling",
+            "scope": "Directional boundary-hit diagnostic; not signed penetration or contact pressure",
+            "separation_interpretation": "directional_separation_diagnostic_only"
+          }
+        },
+        "nodal_summary": {
+          "force_on_lower_body_N": {
+            "total": [
+              -0.002831894489475477,
+              0.11900757232984849
+            ],
+            "material": [
+              -0.0024000648249161917,
+              0.11881806481831451
+            ],
+            "regularization": [
+              -0.00043182966455928505,
+              0.00018950751153397826
+            ]
+          },
+          "moment_about_origin_Nmm": {
+            "total": 1.0988679589858368,
+            "material": 1.0362390679998053,
+            "regularization": 0.06262889098603151
+          },
+          "holding_reaction_on_model_N": [
+            0.002831894489475477,
+            -0.11900757232984849
+          ],
+          "groups": {
+            "physical_only": {
+              "node_count": 35,
+              "force_on_body_N": {
+                "total": [
+                  -0.002829013194370703,
+                  0.11900930018849029
+                ],
+                "material": [
+                  -0.002397960178533732,
+                  0.11881902350214867
+                ],
+                "regularization": [
+                  -0.0004310530158369712,
+                  0.00019027668634162103
+                ]
+              },
+              "moment_about_origin_Nmm": {
+                "total": 1.0988524082580606,
+                "material": 1.0362304398452977,
+                "regularization": 0.06262196841276273
+              }
+            },
+            "cut_only": {
+              "node_count": 17,
+              "force_on_body_N": {
+                "total": [
+                  0.0,
+                  0.0
+                ],
+                "material": [
+                  0.0,
+                  0.0
+                ],
+                "regularization": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "moment_about_origin_Nmm": {
+                "total": 0.0,
+                "material": 0.0,
+                "regularization": 0.0
+              }
+            },
+            "physical_and_cut": {
+              "node_count": 2,
+              "force_on_body_N": {
+                "total": [
+                  -2.881295104773482e-06,
+                  -1.7278586417954694e-06
+                ],
+                "material": [
+                  -2.104646382459665e-06,
+                  -9.58683834152695e-07
+                ],
+                "regularization": [
+                  -7.766487223138171e-07,
+                  -7.691748076427743e-07
+                ]
+              },
+              "moment_about_origin_Nmm": {
+                "total": 1.5550727776159224e-05,
+                "material": 8.628154507374256e-06,
+                "regularization": 6.922573268784969e-06
+              }
+            },
+            "interior": {
+              "node_count": 136,
+              "force_on_body_N": {
+                "total": [
+                  0.0,
+                  0.0
+                ],
+                "material": [
+                  0.0,
+                  0.0
+                ],
+                "regularization": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "moment_about_origin_Nmm": {
+                "total": 0.0,
+                "material": 0.0,
+                "regularization": 0.0
+              }
+            }
+          }
+        },
+        "adjacent_solid_min_J": 0.9860364938696886,
+        "adjacent_solid_Green_principal_min": -0.017322165747876067,
+        "adjacent_solid_Green_principal_max": 0.012726226176154662,
+        "contact_or_pressure_qualified": false
+      },
+      "gamma5em7": {
+        "label": "gamma5em7",
+        "index": 13,
+        "leg": "loading",
+        "d_mm": 1.2,
+        "state_sha256": "33c743fb08ed7361b532d4aea920ef88578229a747b2d6a1e54b05f15a0b6f10",
+        "source_reference_window": {
+          "y_mm": 30.0,
+          "x_mm": [
+            63.0,
+            80.0
+          ]
+        },
+        "physical_edges": [
+          [
+            2493,
+            2494
+          ],
+          [
+            2494,
+            2495
+          ],
+          [
+            2495,
+            2496
+          ],
+          [
+            2496,
+            2497
+          ],
+          [
+            2497,
+            2498
+          ],
+          [
+            2498,
+            2499
+          ],
+          [
+            2499,
+            2500
+          ],
+          [
+            2500,
+            2501
+          ],
+          [
+            2501,
+            2502
+          ],
+          [
+            2502,
+            2503
+          ],
+          [
+            2503,
+            2504
+          ],
+          [
+            2504,
+            2505
+          ],
+          [
+            2505,
+            2506
+          ],
+          [
+            2506,
+            2507
+          ],
+          [
+            2507,
+            2508
+          ],
+          [
+            2508,
+            2509
+          ],
+          [
+            2509,
+            2510
+          ]
+        ],
+        "adjacent_solid_cells": [
+          2383,
+          2384,
+          2385,
+          2386,
+          2387,
+          2388,
+          2389,
+          2390,
+          2391,
+          2392,
+          2393,
+          2394,
+          2395,
+          2396,
+          2397,
+          2398,
+          2399
+        ],
+        "tip_xy_mm": [
+          79.71683879435274,
+          30.994464445105
+        ],
+        "body_box_mm": [
+          62.0,
+          80.0,
+          31.0,
+          40.0
+        ],
+        "saved_tip_distances": {
+          "bottom": {
+            "distance_mm": 0.005535554895001127,
+            "point_mm": [
+              79.71683879435274,
+              31.0
+            ]
+          },
+          "left": {
+            "distance_mm": 17.71683965913363,
+            "point_mm": [
+              62.0,
+              31.0
+            ]
+          },
+          "right": {
+            "distance_mm": 0.2832153081166445,
+            "point_mm": [
+              80.0,
+              31.0
+            ]
+          }
+        },
+        "saved_face_rays": {
+          "bottom": {
+            "minimum_first_ray_hit_mm": 0.005535554895001127,
+            "no_outward_ray_hit": false,
+            "closest_hit": {
+              "distance_mm": 0.005535554895001127,
+              "face_point_mm": [
+                79.71683879435274,
+                31.0
+              ],
+              "edge_point_mm": [
+                79.71683879435274,
+                30.994464445105
+              ],
+              "edge_index": 382,
+              "mechanism_nodes": [
+                2429,
+                2510
+              ],
+              "edge_parameter": 1.0,
+              "face_parameter": 0.9842688219084855,
+              "corner_hit": false,
+              "near_corner_hit": false,
+              "raw_reconstructed_normal_projection_mm": 0.005535554895001127,
+              "raw_reconstructed_tangential_coordinate_mm": 17.71683879435274,
+              "analytic_face_endpoint_root": false,
+              "analytic_forward_plane_root": false,
+              "witness_residual_mm": 0.0,
+              "minimizing_edge_parameter_interval": [
+                1.0,
+                1.0
+              ],
+              "minimizing_face_parameter_interval": [
+                0.9842688219084855,
+                0.9842688219084855
+              ]
+            },
+            "minimum_hits": [
+              {
+                "distance_mm": 0.005535554895001127,
+                "face_point_mm": [
+                  79.71683879435274,
+                  31.0
+                ],
+                "edge_point_mm": [
+                  79.71683879435274,
+                  30.994464445105
+                ],
+                "edge_index": 382,
+                "mechanism_nodes": [
+                  2429,
+                  2510
+                ],
+                "edge_parameter": 1.0,
+                "face_parameter": 0.9842688219084855,
+                "corner_hit": false,
+                "near_corner_hit": false,
+                "raw_reconstructed_normal_projection_mm": 0.005535554895001127,
+                "raw_reconstructed_tangential_coordinate_mm": 17.71683879435274,
+                "analytic_face_endpoint_root": false,
+                "analytic_forward_plane_root": false,
+                "witness_residual_mm": 0.0,
+                "minimizing_edge_parameter_interval": [
+                  1.0,
+                  1.0
+                ],
+                "minimizing_face_parameter_interval": [
+                  0.9842688219084855,
+                  0.9842688219084855
+                ]
+              },
+              {
+                "distance_mm": 0.005535554895001127,
+                "face_point_mm": [
+                  79.71683879435274,
+                  31.0
+                ],
+                "edge_point_mm": [
+                  79.71683879435274,
+                  30.994464445105
+                ],
+                "edge_index": 413,
+                "mechanism_nodes": [
+                  2509,
+                  2510
+                ],
+                "edge_parameter": 1.0,
+                "face_parameter": 0.9842688219084855,
+                "corner_hit": false,
+                "near_corner_hit": false,
+                "raw_reconstructed_normal_projection_mm": 0.005535554895001127,
+                "raw_reconstructed_tangential_coordinate_mm": 17.71683879435274,
+                "analytic_face_endpoint_root": false,
+                "analytic_forward_plane_root": false,
+                "witness_residual_mm": 0.0,
+                "minimizing_edge_parameter_interval": [
+                  1.0,
+                  1.0
+                ],
+                "minimizing_face_parameter_interval": [
+                  0.9842688219084855,
+                  0.9842688219084855
+                ]
+              }
+            ],
+            "roundoff_near_minimum_hits": [],
+            "admissible_edge_count": 122,
+            "roundoff_tolerance_mm": 5.75956778091864e-13,
+            "face_start_mm": [
+              62.0,
+              31.0
+            ],
+            "face_end_mm": [
+              80.0,
+              31.0
+            ],
+            "outward_normal": [
+              0.0,
+              -1.0
+            ],
+            "method": "Analytic finite tangential-strip and forward-halfplane clipping; no dense sampling",
+            "scope": "Directional boundary-hit diagnostic; not signed penetration or contact pressure",
+            "separation_interpretation": "directional_separation_diagnostic_only"
+          },
+          "left": {
+            "minimum_first_ray_hit_mm": 2.327379501387002,
+            "no_outward_ray_hit": false,
+            "closest_hit": {
+              "distance_mm": 2.327379501387002,
+              "face_point_mm": [
+                62.0,
+                31.0
+              ],
+              "edge_point_mm": [
+                59.672620498613,
+                31.0
+              ],
+              "edge_index": 394,
+              "mechanism_nodes": [
+                2490,
+                2571
+              ],
+              "edge_parameter": 0.9553143109562421,
+              "face_parameter": 0.0,
+              "corner_hit": true,
+              "near_corner_hit": false,
+              "raw_reconstructed_normal_projection_mm": 2.327379501387002,
+              "raw_reconstructed_tangential_coordinate_mm": 0.0,
+              "analytic_face_endpoint_root": true,
+              "analytic_forward_plane_root": false,
+              "witness_residual_mm": 1.7763568394002505e-15,
+              "minimizing_edge_parameter_interval": [
+                0.9553143109562421,
+                0.9553143109562421
+              ],
+              "minimizing_face_parameter_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "minimum_hits": [
+              {
+                "distance_mm": 2.327379501387002,
+                "face_point_mm": [
+                  62.0,
+                  31.0
+                ],
+                "edge_point_mm": [
+                  59.672620498613,
+                  31.0
+                ],
+                "edge_index": 394,
+                "mechanism_nodes": [
+                  2490,
+                  2571
+                ],
+                "edge_parameter": 0.9553143109562421,
+                "face_parameter": 0.0,
+                "corner_hit": true,
+                "near_corner_hit": false,
+                "raw_reconstructed_normal_projection_mm": 2.327379501387002,
+                "raw_reconstructed_tangential_coordinate_mm": 0.0,
+                "analytic_face_endpoint_root": true,
+                "analytic_forward_plane_root": false,
+                "witness_residual_mm": 1.7763568394002505e-15,
+                "minimizing_edge_parameter_interval": [
+                  0.9553143109562421,
+                  0.9553143109562421
+                ],
+                "minimizing_face_parameter_interval": [
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "roundoff_near_minimum_hits": [],
+            "admissible_edge_count": 76,
+            "roundoff_tolerance_mm": 5.75956778091864e-13,
+            "face_start_mm": [
+              62.0,
+              31.0
+            ],
+            "face_end_mm": [
+              62.0,
+              40.0
+            ],
+            "outward_normal": [
+              -1.0,
+              0.0
+            ],
+            "method": "Analytic finite tangential-strip and forward-halfplane clipping; no dense sampling",
+            "scope": "Directional boundary-hit diagnostic; not signed penetration or contact pressure",
+            "separation_interpretation": "directional_separation_diagnostic_only"
+          }
+        },
+        "nodal_summary": {
+          "force_on_lower_body_N": {
+            "total": [
+              -0.002748209852885853,
+              0.11862031155058476
+            ],
+            "material": [
+              -0.002318765327942815,
+              0.11843213787364379
+            ],
+            "regularization": [
+              -0.0004294445249430379,
+              0.00018817367694097816
+            ]
+          },
+          "moment_about_origin_Nmm": {
+            "total": 1.1018719677458828,
+            "material": 1.039158917867528,
+            "regularization": 0.0627130498783547
+          },
+          "holding_reaction_on_model_N": [
+            0.002748209852885853,
+            -0.11862031155058476
+          ],
+          "groups": {
+            "physical_only": {
+              "node_count": 35,
+              "force_on_body_N": {
+                "total": [
+                  -0.0027465074878352145,
+                  0.1186213205855868
+                ],
+                "material": [
+                  -0.002317766312879578,
+                  0.11843259191636121
+                ],
+                "regularization": [
+                  -0.00042874117495563663,
+                  0.00018872866922560496
+                ]
+              },
+              "moment_about_origin_Nmm": {
+                "total": 1.1018628864308646,
+                "material": 1.0391548314830712,
+                "regularization": 0.06270805494779307
+              }
+            },
+            "cut_only": {
+              "node_count": 17,
+              "force_on_body_N": {
+                "total": [
+                  0.0,
+                  0.0
+                ],
+                "material": [
+                  0.0,
+                  0.0
+                ],
+                "regularization": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "moment_about_origin_Nmm": {
+                "total": 0.0,
+                "material": 0.0,
+                "regularization": 0.0
+              }
+            },
+            "physical_and_cut": {
+              "node_count": 2,
+              "force_on_body_N": {
+                "total": [
+                  -1.7023650506383146e-06,
+                  -1.0090350020432331e-06
+                ],
+                "material": [
+                  -9.990150632370807e-07,
+                  -4.540427174164213e-07
+                ],
+                "regularization": [
+                  -7.033499874012338e-07,
+                  -5.549922846268117e-07
+                ]
+              },
+              "moment_about_origin_Nmm": {
+                "total": 9.081315018389097e-06,
+                "material": 4.086384456747792e-06,
+                "regularization": 4.994930561641305e-06
+              }
+            },
+            "interior": {
+              "node_count": 136,
+              "force_on_body_N": {
+                "total": [
+                  0.0,
+                  0.0
+                ],
+                "material": [
+                  0.0,
+                  0.0
+                ],
+                "regularization": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "moment_about_origin_Nmm": {
+                "total": 0.0,
+                "material": 0.0,
+                "regularization": 0.0
+              }
+            }
+          }
+        },
+        "adjacent_solid_min_J": 0.9857907972790529,
+        "adjacent_solid_Green_principal_min": -0.017607852502073917,
+        "adjacent_solid_Green_principal_max": 0.012992790686227466,
+        "contact_or_pressure_qualified": false
+      }
+    },
+    "qualification": "Binary64 saved-F principal strain and cached geometry/nodal force plot only; no HP stress/pressure/contact qualification"
+  }
+}

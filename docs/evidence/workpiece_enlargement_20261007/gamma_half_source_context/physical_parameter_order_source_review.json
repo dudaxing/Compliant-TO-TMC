@@ -1,0 +1,83 @@
+{
+  "status": "source_only_physical_inference",
+  "source_pins": {
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf_repo\\src\\hf_eval\\native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf_repo\\src\\hf_eval\\split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_workpiece_001\\enlarged_square_projection_001\\run_001\\task.json": "385cce960696b8c01e1323fc43d98f4ee28a392214c44a8f3609006324cde2e0"
+  },
+  "actual_task": {
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain"
+    },
+    "third_medium": {
+      "gamma": 1e-06
+    },
+    "regularization": {
+      "alpha": 1e-06,
+      "length_mm": 80.0
+    },
+    "workpiece": {
+      "kind": "fixed_rigid",
+      "shape": "square",
+      "center_mm": [
+        71.0,
+        40.0
+      ],
+      "fixed_components": [
+        0,
+        1
+      ],
+      "side_mm": 18.0
+    },
+    "background_symmetry": {
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ]
+    }
+  },
+  "source_facts": [
+    "native_project assigns factors=where(original solid,1,gamma), multiplying lambda_s and mu_s by this factor. Workpiece is a fixed kinematic overlay and preserves original phase arrays.",
+    "kr=alpha*Lr^2*(kappa_s+4mu_s/3) is independent of gamma; native mechanical Hu residual is assembled on the full domain and multiplied by exp(-5J).",
+    "Regularization length is an explicitly physical mm task value; construction comments require it remain physical across grids rather than silently become the analysis width.",
+    "Fixed groups are solid support, solid symmetry, explicit top-background uy and all workpiece ux/uy. No automatic additional right-boundary Dirichlet group is created.",
+    "The current body box ends atx80, the actual domain edge: no neighboring medium cells exist to its right. Body-edge nodes are fixed by the overlay; other uncovered right-edge nodes are constrained only when an explicit original group contains them."
+  ],
+  "inferences": [
+    "Changing gamma alone while all other geometry/grid/constraints/alpha/Lr settings stay identical isolates parameter sensitivity of this finite boundary task; it cannot eliminate or measure domain-boundary influence.",
+    "At a fixed displacement field gamma changes the medium material contribution while kr remains unchanged. A newly equilibrated field generally changesF/Hu/J too, so its material and Hu forces need not scale directly with gamma.",
+    "Reported material/Hu/total components identify weak-force components, not independent contact pressure or full physical-source separation."
+  ],
+  "suggested_order": {
+    "transferable_force_priority": "First compare added right-medium margin while preserving actual mechanism/workpiece coordinates, local1mmgrid, ports/support, E/nu/gamma/alpha and Lr80; then compare gamma on the chosen domain.",
+    "low_implementation_cost_priority": "A gamma-only task may precede padding as a clearly domain-limited exploratory sensitivity, but cannot replace the right-margin comparison or establish boundary-independent clamp force.",
+    "matching_requirement": "Moving or shrinking the body to gain margin changes the local contact geometry; a cleaner domain comparison keeps the body pose and extends passive medium. Refinement should keep the same physical geometry/ports/constraints and physical Lr.",
+    "no_permission_decision": true
+  },
+  "limitations": [
+    "This is source-based reasoning, not a new equilibrium prediction, validated convergence result, executable card or permission decision. No current running reference output is read."
+  ],
+  "activity": {
+    "candidate_imports": 0,
+    "numeric_array_reads": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "geometry_API": 0,
+    "render": 0,
+    "new_cards": 0,
+    "formal_writes": 0
+  }
+}
