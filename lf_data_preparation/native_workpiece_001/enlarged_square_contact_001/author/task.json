@@ -1,0 +1,121 @@
+{
+  "schema_version": "hf-native-project-task-1.1",
+  "task_id": "EXPLORATORY_fixed_workpiece_gripper_square_x71_side18_E1_1p2mm",
+  "case_family": "gripper",
+  "purpose": "enlarged_square_contact_and_body_force_exploration",
+  "parameter_origin": "User-delegated rightward placement and larger workpiece exploration; test TMC deformation and report actual lower-body reaction.",
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain"
+  },
+  "input": {
+    "tag": "input",
+    "control": "average_displacement",
+    "target_mm": 1.2
+  },
+  "output": {
+    "tag": "output",
+    "spring_N_per_mm": 0.0
+  },
+  "constraints": [
+    {
+      "tag": "support",
+      "components": [
+        0,
+        1
+      ]
+    },
+    {
+      "tag": "symmetry",
+      "components": [
+        1
+      ]
+    }
+  ],
+  "support_selection": "solid_incident_nodes_only",
+  "input_auxiliary_spring_N_per_mm": 0.0,
+  "workpiece": {
+    "kind": "fixed_rigid",
+    "shape": "square",
+    "center_mm": [
+      71.0,
+      40.0
+    ],
+    "fixed_components": [
+      0,
+      1
+    ],
+    "side_mm": 18.0
+  },
+  "third_medium": {
+    "gamma": 1e-06
+  },
+  "qualification_criteria": {
+    "max_design_volume_fraction": null,
+    "min_feature_mm": null
+  },
+  "reference_state": "undeformed",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "regularization": {
+    "alpha": 1e-06,
+    "length_mm": 80.0
+  },
+  "background_symmetry": {
+    "points_mm": [
+      [
+        0.0,
+        40.0
+      ],
+      [
+        80.0,
+        40.0
+      ]
+    ],
+    "components": [
+      1
+    ]
+  },
+  "geometry": {
+    "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+    "descriptor_sha256": "8c5c315e7328888a6ba16b28d5def1712e2ea5ddae21cfa97f99f06396e7977b"
+  },
+  "analysis_grid": {
+    "policy": "native"
+  },
+  "description": "Fixed square center(71,40),side18; lower half [62,80]x[31,40], 1mm initial bottom separation, no right-side medium margin. Native LF geometry, E1 material, ports and Newton settings stay unchanged. New zero-start ordered 1.2mm loading and unloading task with finer targets near expected contact; every actual accepted state requires fresh reference.",
+  "path": {
+    "kind": "ordered_cycle",
+    "targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.65,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0,
+      1.05,
+      1.1,
+      1.15,
+      1.2,
+      1.15,
+      1.1,
+      1.0,
+      0.9,
+      0.8,
+      0.75,
+      0.65,
+      0.5,
+      0.25,
+      0.0
+    ]
+  }
+}

@@ -1,0 +1,175 @@
+--- pose002/prepare_shift_pose.py
++++ pose72/prepare_shift_pose.py
+@@ -1,4 +1,4 @@
+-"""Prepare one explicit x71 square task and its own native model, without FE response."""
++"""Prepare a new x72 boundary-touch square and native model, without FE response."""
+ from pathlib import Path
+ from time import perf_counter
+ from datetime import datetime, timezone
+@@ -32,6 +32,47 @@
+     with path.open("x", encoding="utf-8") as f:
+         json.dump(value, f, ensure_ascii=False, indent=2, allow_nan=False)
+         f.write("\n")
++
++
++def qualified_prerequisites(root):
++    """Read complete predecessor identity/cost only; never borrow shifted-state qualification."""
++    proofs = {}
++    for label, name in (("pose002", "shift_square_pose_002"), ("soft001", "shift_square_soft_001")):
++        control = root/"lf_data_preparation/native_workpiece_001"/name
++        run = control/"run_001"
++        files = [control/n for n in ("production_protocol.json", "production_launch.json", "reference_contract.json",
++            "reference_protocol.json", "reference_launch.json", "reference/summary.json", "reference/lifecycle.json")]
++        files += [run/n for n in ("task.json", "input_inventory.json", "source_freeze.json", "preparation_receipt.json",
++            "execution_receipt.json", "result/result.json", "result/model/model.json", "result/model/model.npz")]
++        result, production, summary, lifecycle = (read(p) for p in (run/"result/result.json", run/"execution_receipt.json",
++            control/"reference/summary.json", control/"reference/lifecycle.json"))
++        for phase in ("production", "reference"):
++            terminal = read(control/(phase+"_launch.json"))
++            assert terminal["status"] == "pass" and terminal["exit_code"] == 0 and terminal["invocations"] == 1
++            assert terminal["stop_reason"] is None and terminal["all_bindings_unchanged"]
++            assert terminal["protocol_sha256"] == digest(control/(phase+"_protocol.json"))
++        assert result["status"] == "success" and all(result[k] for k in ("path_completed", "task_target_executed", "unload_endpoint_reached"))
++        assert production["status"] == summary["status"] == lifecycle["status"] == "pass"
++        result_file = run/"result/result.json"
++        assert summary["result_sha256"] == production["result_sha256"] == digest(result_file)
++        count = len(result["states"])
++        assert summary["accepted_states"] == lifecycle["accepted_states_completed"] == result["accepted_states"] == count
++        assert summary["HP_calls_started"] == summary["HP_calls_completed"] == lifecycle["HP_calls_completed"] == 2*count
++        assert [r["state_sha256"] for r in summary["states"]] == [r["state_sha256"] for r in result["states"]]
++        task = read(run/"task.json")
++        assert task["workpiece"]["center_mm"] == [71., 40.] and task["workpiece"]["side_mm"] == 16.
++        assert task["material"]["E_MPa"] == (1. if label == "pose002" else .5)
++        model_file, task_file, summary_file = run/"result/model/model.npz", run/"task.json", control/"reference/summary.json"
++        proofs[label] = dict(stage=control.relative_to(root).as_posix(), run_stage=run.relative_to(root).as_posix(), files={p.relative_to(root).as_posix():digest(p) for p in files},
++            model_file=model_file.relative_to(root).as_posix(), model_sha256=digest(model_file),
++            task_file=task_file.relative_to(root).as_posix(), task_file_sha256=digest(task_file),
++            result_file=result_file.relative_to(root).as_posix(), result_sha256=digest(result_file),
++            summary_file=summary_file.relative_to(root).as_posix(), summary_sha256=digest(summary_file),
++            accepted_states=count, HP_calls=summary["HP_calls_completed"],
++            production_helper_seconds=production["elapsed_seconds"], production_outer_seconds=read(control/"production_launch.json")["elapsed_seconds"],
++            reference_helper_seconds=summary["elapsed_seconds"], reference_outer_seconds=read(control/"reference_launch.json")["elapsed_seconds"],
++            scope="Completed x71 predecessor identity and choice/cost evidence only; no x72 model or accepted-state qualification.")
++    return proofs
+ 
+ 
+ def main():
+@@ -60,37 +101,26 @@
+ 
+     previous = root/"lf_data_preparation/native_workpiece_001/coarse_square_cycle_010"
+     reference = root/"lf_data_preparation/native_workpiece_001/coarse_square_cycle010_ref_003"
+-    cost_stage = root/"lf_data_preparation/native_workpiece_001/shift_square_pose_001"
+-    cost_files = [cost_stage/"production_protocol.json", cost_stage/"production_launch.json",
+-        cost_stage/"run_001/execution_receipt.json", cost_stage/"run_001/result/result.json",
+-        cost_stage/"run_001/accepted_progress.jsonl"]
+-    cost_result, cost_launch = read(cost_files[3]), read(cost_files[1])
+-    assert cost_result["status"] == "failed" and cost_result["failure"]["code"] == "time_limit"
+-    assert cost_launch["status"] == "not_pass" and cost_launch["exit_code"] == 1 and cost_launch["all_bindings_unchanged"]
++    qualified = qualified_prerequisites(root)
++    cost_files = [root/name for item in qualified.values() for name in item["files"]]
+     old, result = read(previous/"input_inventory.json"), read(previous/"result/result.json")
+-    receipt, qualified = read(previous/"execution_receipt.json"), read(reference/"reference/summary.json")
++    receipt, original_reference = read(previous/"execution_receipt.json"), read(reference/"reference/summary.json")
+     for directory, phase in ((previous, "production"), (reference, "reference")):
+         launch = read(directory/(phase+"_launch.json"))
+         assert launch["status"] == "pass" and launch["exit_code"] == 0 and launch["invocations"] == 1
+         assert launch["stop_reason"] is None and launch["all_bindings_unchanged"]
+     previous_result_sha = digest(previous/"result/result.json")
+-    assert receipt["status"] == qualified["status"] == "pass" and result["status"] == "success"
+-    assert qualified["result_sha256"] == receipt["result_sha256"] == previous_result_sha
+-    assert qualified["accepted_states"] == len(result["states"]) == result["accepted_states"]
+-    assert qualified["HP_calls_started"] == qualified["HP_calls_completed"] == 2*len(result["states"])
+-    assert [r["state_sha256"] for r in qualified["states"]] == [r["state_sha256"] for r in result["states"]]
++    assert receipt["status"] == original_reference["status"] == "pass" and result["status"] == "success"
++    assert original_reference["result_sha256"] == receipt["result_sha256"] == previous_result_sha
++    assert original_reference["accepted_states"] == len(result["states"]) == result["accepted_states"]
++    assert original_reference["HP_calls_started"] == original_reference["HP_calls_completed"] == 2*len(result["states"])
++    assert [r["state_sha256"] for r in original_reference["states"]] == [r["state_sha256"] for r in result["states"]]
+     task, original_task = read(task_file), read(previous/"task.json")
+-    allowed = {"task_id", "purpose", "parameter_origin", "description", "workpiece",
+-        "material", "third_medium", "regularization"}
++    allowed = {"task_id", "purpose", "parameter_origin", "description", "workpiece"}
+     assert {k:v for k,v in task.items() if k not in allowed} == {k:v for k,v in original_task.items() if k not in allowed}
+-    assert task["workpiece"] == dict(original_task["workpiece"], center_mm=[71., 40.])
+-    assert task["material"] == dict(original_task["material"], E_MPa=task["material"]["E_MPa"])
+-    assert task["regularization"] == dict(original_task["regularization"], alpha=task["regularization"]["alpha"])
+-    parameters = (task["material"]["E_MPa"], task["third_medium"]["gamma"], task["regularization"]["alpha"])
+-    assert parameters in ((1., 1e-6, 1e-6), (.5, 2e-6, 2e-6)), "Only the declared pose or future softened parameter case"
+-    assert task["third_medium"] == {"gamma": parameters[1]}
+-    material_changed = set() if parameters == (1., 1e-6, 1e-6) else {"lam", "mu", "gamma", "force_scale_per_length"}
+-    expected_changed = sorted(OVERLAY | material_changed)
++    assert task["workpiece"] == dict(original_task["workpiece"], center_mm=[72., 40.])
++    assert (task["material"]["E_MPa"], task["third_medium"]["gamma"], task["regularization"]["alpha"]) == (1., 1e-6, 1e-6)
++    expected_changed = sorted(OVERLAY)
+     old_row = old["case"]
+     inputs = {p.relative_to(root).as_posix(): digest(p) for p in [
+         task_file, previous/"task.json", previous/"input_inventory.json", previous/"source_freeze.json",
+@@ -162,27 +192,28 @@
+     with np.load(fixture, allow_pickle=False) as saved, np.load(root/old_row["workpiece_model_file"], allow_pickle=False) as original:
+         delta = model_delta(saved, original)
+         assert delta == expected_changed
+-        if material_changed:
+-            # E halves while gamma/alpha double: original-medium Lamé and global kr stay exact.
+-            assert saved["kr"].tobytes() == original["kr"].tobytes()
+-            for key in ("lam", "mu"):
+-                assert saved[key][~saved["solid"]].tobytes() == original[key][~original["solid"]].tobytes()
+-        assert np.array_equal(saved["workpiece_cells"], original["workpiece_cells"]+1)
+-        assert np.array_equal(saved["workpiece_nodes"], original["workpiece_nodes"]+1)
++        assert np.array_equal(saved["workpiece_cells"], original["workpiece_cells"]+2)
++        assert np.array_equal(saved["workpiece_nodes"], original["workpiece_nodes"]+2)
+         for key in ("workpiece_dofs", "workpiece_background_symmetry_overlap_dofs"):
+-            assert np.array_equal(saved[key], original[key]+2)
++            assert np.array_equal(saved[key], original[key]+4)
++        with np.load(root/qualified["pose002"]["model_file"], allow_pickle=False) as pose:
++            pose_delta = model_delta(saved, pose)
++            assert pose_delta == expected_changed
++            assert all(saved[k].dtype == pose[k].dtype and saved[k].shape == pose[k].shape
++                and saved[k].tobytes() == pose[k].tobytes() for k in INTRINSIC)
+         with np.load(stage/"direction.npz", allow_pickle=False) as direction:
+             assert not np.any(direction["direction"][saved["fixed_dofs"]])
+             assert direction["direction"].tobytes() == (saved["b_in"]/abs(saved["b_in"]).max()).tobytes()
+     assert (project.model.ne, project.model.ndof, len(project.model.fixed_dofs), len(project.model.free)) == (3200, 6642, 376, 6266)
+     body = project.region_metadata["workpiece"]
+     assert (body["selected_cells"], body["incident_nodes"], body["fixed_dofs"], len(body["background_symmetry_overlap_dofs"])) == (128, 153, 306, 17)
+-    row = dict(old_row, alias="gripper_coarse_square_x71", targets_mm=task["path"]["targets_mm"])
++    row = dict(old_row, alias="gripper_coarse_square_x72_tip", targets_mm=task["path"]["targets_mm"])
+     for key, file in (("task", stage/"task.json"), ("direction", stage/"direction.npz")):
+         row[key+"_file"] = file.relative_to(root).as_posix(); row[key+"_file_sha256"] = digest(file)
+     row.update(workpiece_model_file=fixture.relative_to(root).as_posix(), workpiece_model_sha256=digest(fixture),
+         comparison_model_file=old_row["workpiece_model_file"], comparison_model_sha256=old_row["workpiece_model_sha256"],
+-        expected_model_changed_fields=expected_changed, unchanged_model_fields=sorted(INTRINSIC-material_changed))
++        expected_model_changed_fields=expected_changed, unchanged_model_fields=sorted(INTRINSIC),
++        qualified_pose_model_file=qualified["pose002"]["model_file"], qualified_pose_model_sha256=qualified["pose002"]["model_sha256"])
+     for file in [stage/"task.json", stage/"direction.npz", descriptor, fixture,
+             descriptor.parent/"source_geometry/geometry.json", descriptor.parent/"source_geometry/geometry.npz"]:
+         inputs[file.relative_to(root).as_posix()] = digest(file)
+@@ -197,18 +228,22 @@
+     inventory = {k:deepcopy(old[k]) for k in ("schema_version", "settings", "gates", "units", "path_kind",
+         "minimum_increment_basis", "direction_definition", "state_authority", "stop_policy", "response_mode",
+         "response_contract", "auxiliary_material_energy", "range_observation_rule", "tangent_execution")}
+-    inventory["settings"]["time_limit_seconds"] = 1500.0
++    inventory["settings"]["time_limit_seconds"] = 1800.0
+     inventory.update(baseline_commit=args.baseline, case=row, source_count=len(sources), source_freeze_sha256=digest(freeze),
+-        source_transition=source_transition, input_bindings=inputs, execution_limits=dict(production_seconds=1500, production_outer_seconds=1560,
++        source_transition=source_transition, input_bindings=inputs, execution_limits=dict(production_seconds=1800, production_outer_seconds=1860,
+             sampled_RSS_bytes=RSS_LIMIT, preparation_seconds=120, preparation_outer_seconds=150),
+         model_comparison=dict(total_fields=27, unchanged_fields=row["unchanged_model_fields"],
+-            actual_changed_fields=delta, parameter_case="pose_only" if not material_changed else "explicit_softened_parameters"),
++            actual_changed_fields=delta, parameter_case="pose_only"),
+         prerequisite_reference=dict(stage=reference.relative_to(root).as_posix(), summary_sha256=digest(reference/"reference/summary.json"),
+             scope="Original accepted-state predecessor only; no new-state or failedT qualification."),
+-        qualification="New shifted model constructed only; no response/HP/clamp/pressure qualification.",
+-        budget_evidence=dict(stage=cost_stage.relative_to(root).as_posix(),
+-            scope="Closed900s card supplies observed cost/rejection metadata only; no accepted-prefix or reference qualification inherited.",
+-            prior_accepted_states=cost_result["accepted_states"], prior_elapsed_seconds=cost_launch["elapsed_seconds"]),
++        qualification="New x72 boundary-touch model constructed only; no response/HP/clamp/pressure qualification.",
++        qualified_prerequisites=qualified,
++        pose_model_comparison=dict(total_fields=27, unchanged_fields=sorted(INTRINSIC), actual_changed_fields=pose_delta,
++            scope="New x72 model versus qualified x71/E1: intrinsic identity only; workpiece coverages are distinct."),
++        boundary_placement=dict(body_box_mm=[64., 80., 32., 40.], right_outer_boundary_mm=80., right_medium_margin_mm=0.,
++            workpiece_touches_analysis_boundary=True, scope="New boundary-touch task; no right-side surrounding medium or inherited embedded-body qualification."),
++        budget_evidence=dict(predecessor_production_seconds={name:item["production_helper_seconds"] for name,item in qualified.items()},
++            scope="Complete x71/E1 cost1413.35s and x71/E.5 cost1193.07s inform a new1800/1860s E1 card; unknown tip compression cost, no extension or prefix reuse."),
+         reference_plan="No reference source/counter contract is inherited; future card must use actual fresh trace and every accepted index.")
+     checkpoint()
+     assert all(digest(root/p) == pin for p,pin in {**inputs, **sources}.items())

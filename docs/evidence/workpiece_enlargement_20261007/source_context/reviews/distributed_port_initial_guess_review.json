@@ -1,0 +1,70 @@
+{
+  "schema": "distributed-port-initial-guess-static-design-review-1.0",
+  "status": "design_supported_not_implemented_or_numerically_validated",
+  "replaces_proposal_only": "readonly_enlargement_terminal_review.json proposed_initial_guess.project_previous single-pivot seed; original failure statistics and qualification limits remain exact",
+  "evidence": {
+    "terminal_review_sha256": "d3578581a31a0052a6137b113ced27f7bac314921c868bf453cad2f6cf762543",
+    "counter_B028_sha256": "b028dba774d430a6d082ca05be86489a56e800be1f1bd69c60148ffccd51e8b3",
+    "scope": "Actual saved failed side18 path and source-level reading of original controller/counter; no new mechanics"
+  },
+  "equations": {
+    "seed_displacement": "Start from impose(previous.fluctuation, new_s). Compute actual compensated mean error e=b dot(lift+w)-target. Apply delta_w_free=-e*b_free/(b_free dot b_free) only on free DOFs, then use original feasible() for final rounding correction.",
+    "seed_reaction": "Execute the original predictor KKT LU with the original force/mean RHS and retain its dR: R_seed=R_previous+dR. Discard the computed predictor dw only in the opt-in strategy. Its displacement and reaction predictions need not both be applied to define a legitimate Newton initial guess.",
+    "remaining_solver": "Enter the existing Newton base evaluation, physical residual and mean checks, original KKT corrector, bounded Armijo backtracking, positive-J guards, rollback and bounded continuation without changes.",
+    "projection_interpretation": "The port-distributed change is the minimum Euclidean free displacement satisfying the one linear mean correction. It is not a rigid tie of input nodes. Final equilibrium has the existing single mean constraint, not extra port constraints."
+  },
+  "actual_native_port_example": {
+    "dofs": [6156, 6318, 6480],
+    "weights": [0.25, 0.5, 0.25],
+    "squared_weight_sum": 0.375,
+    "increment_mm": 0.25,
+    "distributed_seed_displacement_increments_mm": [0.16666666666666666, 0.3333333333333333, 0.16666666666666666],
+    "prior_single_pivot_max_increment_mm": 0.5,
+    "meaning": "Reduced maximum local seed increment, not a guarantee that J stays positive"
+  },
+  "required_trace_contract": {
+    "phase": "predictor",
+    "real_LU": true,
+    "newton_check": null,
+    "record_strategy_and_displacement_applied": true,
+    "applied_dw": false,
+    "mean_error_before_projection": "Actual value of the candidate passed to original feasible(), not the unapplied KKT predictor candidate",
+    "mean_error_after_projection": "Actual original compensated mean residual after feasible()",
+    "optional_distributed_before_after": "If recorded, distinguish before distribution from before the final original rounding projection",
+    "counter_compatibility": "Original B028 reconstruction accepts additional predictor keys and counts a real predictor LU. It does not check the new strategy/applied_dw semantics; future LOAD must validate them separately before invoking the unchanged B028 helper. Do not manufacture a predictor event if no LU occurred.",
+    "reaction_use": "The actual KKT dR is used, so the LU is a predictor of the multiplier even though its displacement increment is discarded."
+  },
+  "implementation_constraints": [
+    "Keep the default tangent initialization branch on its original operations and trace; only opt-in uses distributed projection and new strategy fields.",
+    "Use the new affine lift from impose() before mean distribution. Reusing old lift would violate the existing origin+s*shape contract for nonzero lift_shape.",
+    "Distribute only over model.free. Preserve fixed lift and fixed fluctuation values and use the original feasible() correction.",
+    "Keep the original compensated mean measurement. For the native normalized port, the norm denominator is exactly0.375; public generic inputs still need a finite positive denominator before division.",
+    "Add one explicit keyword to split/native mean entrypoints, leaving DisplacementSettings and the unsplit controller unchanged.",
+    "Record the new controller-source identities and qualification separately from the existing bounded T-v5 derivative proof. Existing reference LOAD assumes each transition is the T repair; it must distinguish the two new controller roles rather than pretending they share T repair qualification."
+  ],
+  "risks_and_limits": [
+    "The seed mean projection is feasible but can still invert an input-region element or, under nonzero affine lift, another element. Positive-J guard remains mandatory.",
+    "The retained multiplier predictor corresponds to the discarded global displacement predictor; it is a heuristic reaction seed and can increase the seed residual. Convergence comes from the unchanged physical Newton equations, not from this seed itself.",
+    "Near highly compressed third medium, this different seed can still fail, exhaust bounded corrections or follow another nonlinear branch. No depth, increment, J, residual or Armijo gate should be widened silently.",
+    "Neither the design review nor the failed path qualifies contact pressure, free-workpiece motion or a complete clamp/unload result."
+  ],
+  "minimal_meaningful_validation": [
+    "Run the existing relevant default controller tests to establish unchanged default behavior.",
+    "Use a coupled mean-control finite example whose tangent displacement predictor gives an invalid J but whose distributed seed is feasible; require the original Newton and Armijo rules to reach a valid equilibrium. Assert actual fixed DOFs and compensated mean, not only branch code.",
+    "Verify input nodes remain free to have different displacements after equilibrium; there is no rigid port tie.",
+    "Exercise nonzero affine lift and an ordered loading/unloading path so current lift, multiplier use, fixed values and rollback are covered.",
+    "Execute a new independent zero-start side18 physical card with the explicit strategy and bounded resources. Preserve the closed failed card and never reuse its accepted prefix.",
+    "Only if that complete path passes, run the unchanged mathematical reference on every actual accepted state with fresh80/120 HP and explicit strategy-aware LOAD metadata. Then inspect deformation, finite-body proximity, lower-body force, Hu contribution and return to zero."
+  ],
+  "review_calls": {
+    "candidate_module_imports": 0,
+    "model_constructors": 0,
+    "F_calls": 0,
+    "T_calls": 0,
+    "solver_invocations": 0,
+    "HP_calls": 0,
+    "geometry_API_calls": 0,
+    "render_calls": 0,
+    "formal_files_edited": 0
+  }
+}

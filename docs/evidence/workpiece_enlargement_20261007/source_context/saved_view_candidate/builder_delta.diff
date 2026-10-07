@@ -1,0 +1,20 @@
+--- qualified_complete002/build_shift_view_card.py
++++ enlarged/build_shift_view_card.py
+@@ -24,7 +24,7 @@
+     files=sources+[x for x in stage.iterdir() if x.is_file()]
+     prefix=stage.relative_to(root).as_posix()
+     argv=[prefix+"/saved_shift_views.py","--repo","hf_repo","--protocol",prefix+"/protocol.json",
+-        "--output",prefix+"/view","--time-limit","120","--stop-file",prefix+"/stop_requested.txt"]
++        "--output",prefix+"/view","--time-limit","180","--stop-file",prefix+"/stop_requested.txt"]
+     counts={}
+     for spec in a.case:
+         label,name=spec.split("=",1);directory=root/name;directory.relative_to(root)
+@@ -36,7 +36,7 @@
+         _,name=spec.split("=",1);files.append(root/name);argv += ["--reference",spec]
+     bindings={f.relative_to(root).as_posix():sha256(f.read_bytes()).hexdigest() for f in files}
+     protocol=dict(schema_version="saved-shift-view-card-1.0",bindings=bindings,sampled_RSS_bytes=8*1024**3,
+-        phases=dict(view=dict(helper_seconds=120,outer_seconds=150,argv=argv)),cases=counts,
++        phases=dict(view=dict(helper_seconds=180,outer_seconds=210,argv=argv)),cases=counts,
+         scope="Actual saved-state geometry/nodal weak-force observations and x1 plots; partial paths explicitly allowed as preliminary only.",
+         zero_mechanics_contract="Allowed pure module origins and saved-array derivations; no dynamic mechanics hook monitoring.",
+         stop_policy="One phase once; first failure closes, no retry/repair/extension/force. No mechanics or HP qualification.",

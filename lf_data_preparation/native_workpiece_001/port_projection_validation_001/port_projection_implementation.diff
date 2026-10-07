@@ -1,0 +1,103 @@
+diff --git a/hf_repo/src/hf_eval/native_mean.py b/hf_repo/src/hf_eval/native_mean.py
+index 1f7fff5..220bd2d 100644
+--- a/hf_repo/src/hf_eval/native_mean.py
++++ b/hf_repo/src/hf_eval/native_mean.py
+@@ -112,7 +112,8 @@ def _workpiece_observations(project, state, arrays):
+ 
+ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
+                       settings: DisplacementSettings, on_accept=None,
+-                      response_mode="complete", tangent_mode="full") -> NativeMeanResult:
++                      response_mode="complete", tangent_mode="full",
++                      initial_guess="tangent") -> NativeMeanResult:
+     """Solve explicit mean targets from zero lift and the undeformed state.
+ 
+     Settings are explicit. The CLI uses the original first-increment/16 rule;
+@@ -122,6 +123,7 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
+     Mechanical mode omits auxiliary material energy and records its absence;
+     the force residual, cached tangent and controller are otherwise unchanged.
+     Optional chunk256 tangents retain the full-batch arithmetic selector.
++    The opt-in port_projection initial guess changes only Newton initialization.
+     """
+     if not isinstance(settings, DisplacementSettings):
+         raise TMCError("settings must be DisplacementSettings", code="invalid_settings")
+@@ -206,7 +208,8 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
+ 
+     path = solve_split_displacement_path(model, project.bin, project.bout, targets, project.k_out,
+         settings=settings, force_scale_per_length=project.material["force_scale_per_length"],
+-        assembler=assemble, on_accept=capture, path_mode=path_mode)
++        assembler=assemble, on_accept=capture, path_mode=path_mode,
++        initial_guess=initial_guess)
+     source = deepcopy(project.region_metadata["source_geometry"])
+     source["snapshot"] = {key: "model/"+value for key, value in source["snapshot"].items()}
+     metadata = dict(schema_version=SCHEMA_VERSION, scope="native_small_mean_driven_numerical_path",
+@@ -245,6 +248,8 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
+         metadata.update(schema_version="hf-native-mean-result-1.2", **deepcopy(availability))
+     if tangent_execution is not None:
+         metadata["tangent_execution"] = deepcopy(tangent_execution)
++    if initial_guess != "tangent":
++        metadata["initial_guess"] = initial_guess
+     return NativeMeanResult(project, path, tuple(accepted), metadata)
+ 
+ 
+diff --git a/hf_repo/src/hf_eval/split_displacement.py b/hf_repo/src/hf_eval/split_displacement.py
+index c50b832..0d73f2a 100644
+--- a/hf_repo/src/hf_eval/split_displacement.py
++++ b/hf_repo/src/hf_eval/split_displacement.py
+@@ -56,7 +56,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
+                                  lift_origin=None, lift_shape=None, target_origin=0.,
+                                  initial_state=None, initial_R=0., settings=None,
+                                  force_scale_per_length, assembler=None, on_accept=None,
+-                                 path_mode="load_only"):
++                                 path_mode="load_only", initial_guess="tangent"):
+     """Solve fint(L,w)+k*b_out*q_out-b_in*R=0 and b_in·(L+w)=d0+s.
+ 
+     Targets are nonnegative stage parameters s, starting at zero. ``load_only``
+@@ -67,6 +67,8 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
+     remain zero. A warm start must match the supplied origin bit for bit;
+     its multiplier and target offset are explicit. No rebase or display array
+     enters mechanics, measurements, feasibility or initialization.
++    ``port_projection`` starts displacement from the previous fluctuation plus
++    a distributed port adjustment; the real tangent prediction still seeds R.
+     """
+     settings = DisplacementSettings() if settings is None else settings
+     if not isinstance(settings, DisplacementSettings):
+@@ -81,6 +83,8 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
+     levels = _vector(targets, len(raw), "targets")
+     if path_mode not in ("load_only", "ordered_cycle"):
+         raise TMCError("path_mode must be load_only or ordered_cycle", code="invalid_input")
++    if initial_guess not in ("tangent", "port_projection"):
++        raise TMCError("initial_guess must be tangent or port_projection", code="invalid_input")
+     if path_mode == "load_only" and (levels[0] != 0 or np.any(np.diff(levels) <= 0)):
+         raise TMCError("stage targets must start at zero and strictly increase", code="invalid_input")
+     if path_mode == "ordered_cycle" and (levels[0] != 0 or np.any(levels < 0)
+@@ -111,6 +115,10 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
+     accepted, trials, failures, history, linear_solves = [], [], [], [], []
+     failure, maximum_depth = None, 0
+     b_free = b_in[model.free]
++    if initial_guess == "port_projection":
++        port_norm_squared = float(b_free @ b_free)
++        if not np.isfinite(port_norm_squared) or port_norm_squared <= 0:
++            raise TMCError("port projection requires a finite positive weight norm", code="invalid_input")
+     pivot = model.free[int(np.argmax(np.abs(b_free)))]
+     times = dict(kernel_calls=0, successful_kernel_calls=0, kernel_and_transfer=0.,
+                  assembly=0., sparse_solve=0., callback=0., all_assembly_attempts_wall=0.)
+@@ -228,7 +236,11 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
+             mean_rhs = -_dot((candidate.lift, candidate.fluctuation), b_in, -target_origin, -s)
+             dw, dR, row = step(K, force_rhs, mean_rhs, "predictor", s)
+             w = start.fluctuation.copy()
+-            w[model.free] += dw
++            if initial_guess == "port_projection":
++                w[model.free] += mean_rhs*b_free/port_norm_squared
++                row.update(displacement_mode=initial_guess, applied_dw=False, applied_dR=True)
++            else:
++                w[model.free] += dw
+             candidate, before, after = feasible(impose(w, s), s)
+             R += dR
+             row.update(mean_error_before_projection=before, mean_error_after_projection=after)
+@@ -348,4 +360,6 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
+                       loading_peak_reached=any(row["is_original_target"] and row["d"] == float(levels.max())
+                                                for row in accepted),
+                       unload_endpoint_reached=completed)
++    if initial_guess != "tangent":
++        result["initial_guess"] = initial_guess
+     return result

@@ -1,0 +1,11 @@
+--- historical96bf/execute_shift_pose.py
++++ enlarged/execute_shift_pose.py
+@@ -190,7 +190,7 @@
+         receipt["tangent_execution"] = metadata["tangent_execution"]
+         assert metadata["schema_version"] == "hf-native-mean-result-1.2" and all(metadata[k] == v for k,v in availability.items())
+         assert metadata["targets_mm"] == task["path"]["targets_mm"] == row["targets_mm"]
+-        assert metadata["task_target_mm"] == task["input"]["target_mm"] == 1.8
++        assert metadata["task_target_mm"] == task["input"]["target_mm"] == 1.2
+         with np.load(STAGE/"result/model/model.npz", allow_pickle=False) as saved, np.load(ROOT/row["workpiece_model_file"], allow_pickle=False) as original:
+             assert len(saved.files) == len(original.files) == 27 and set(saved.files) == set(original.files)
+             assert all(saved[name].dtype == original[name].dtype and saved[name].shape == original[name].shape

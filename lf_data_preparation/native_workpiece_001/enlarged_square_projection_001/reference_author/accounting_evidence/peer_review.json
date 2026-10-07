@@ -1,0 +1,88 @@
+{
+  "schema_version": "projection-accounting-static-peer-review-1.0",
+  "status": "pass_static_and_saved_ledger_only",
+  "source_pins": {
+    "D:\\hf-workpiece-enlarge-author-20261007\\projection_accounting_candidate\\counter_original_B028.py": "b028dba774d430a6d082ca05be86489a56e800be1f1bd69c60148ffccd51e8b3",
+    "D:\\hf-workpiece-enlarge-author-20261007\\projection_accounting_candidate\\counter_attempts.py": "a751fe07a682ff89c88b16d8d69325b1990d45c26114b8715414116580737ed9",
+    "D:\\hf-workpiece-enlarge-author-20261007\\projection_accounting_candidate\\validate_saved_accounting.py": "51a33e9b838abe0b8dae5cb73f88c1392b5824d4f68832365915e0f4419a342e",
+    "D:\\hf-workpiece-enlarge-author-20261007\\projection_accounting_candidate\\saved_reproduction_001\\report.json": "f9a51880b895ad112caa8592e90ab56ba6bcf83965807f75df59a85ac3e43527",
+    "D:\\hf-workpiece-enlarge-author-20261007\\projection_accounting_candidate\\saved_reproduction_001\\current_accounting.json": "0157a4342bf8a97f90b12dc29c27d7defe8fa545fa38729483fe870d4f68ad0f",
+    "D:\\hf-workpiece-enlarge-author-20261007\\projection_counter_saved_evidence.json": "2f27abfc8ba6bd6f7ad787d7d49c61d4a20d3208f608791c9092a8ac8ea03114"
+  },
+  "exact_source_changes": [
+    [
+      "fail closed. Predictor invalid-J bases are distinct from rejected trials.",
+      "fail closed. Predictor invalid-J bases and recovered invalid-J trials are distinct."
+    ],
+    [
+      "events, caches, attempts, invalid_bases, range_trials, failed_tangents = [], [], [], [], [], []",
+      "events, caches, attempts, invalid_bases, range_trials, invalid_trials, failed_tangents = [], [], [], [], [], [], []"
+    ],
+    [
+      "incomplete = row[\"accepted\"] is False and reason == \"unsupported_arithmetic_range\"",
+      "incomplete = row[\"accepted\"] is False and reason in (\"unsupported_arithmetic_range\", \"invalid_J\")"
+    ],
+    [
+      "Rejected range force has contradictory fields or no supported half-factor continuation",
+      "Rejected incomplete force has contradictory fields or no supported half-factor continuation"
+    ],
+    [
+      "Range trial lacks the same-base half factor",
+      "Incomplete trial lacks the same-base half factor"
+    ],
+    [
+      "range_trials.append(dict(row, trial_index=ti, force_call=e[\"force_call\"]))",
+      "(invalid_trials if reason == \"invalid_J\" else range_trials).append(dict(row, trial_index=ti, force_call=e[\"force_call\"]))"
+    ],
+    [
+      "        rejected_range_trials=range_trials,\n",
+      "        rejected_range_trials=range_trials,\n        rejected_invalid_J_trials=invalid_trials,\n"
+    ]
+  ],
+  "unchanged_rest": true,
+  "checks": [
+    "Original B028 bytes retained with a distinct original source role.",
+    "New counter source differs only in documentation, incomplete invalid-J trial classification, separate list and reason-general diagnostic text.",
+    "Same-base half factors, no-completed-fields guard, continued group acceptance/exhaustion, original Armijo, predictor/base/T/cache/rollback logic and all final exact counters are unchanged.",
+    "Incomplete invalid-J trials remain distinct from original failed predictor bases and from ten unsupported-range trials.",
+    "Both authors independently match actual saved 24-cache chronology 354/330 F,176/176 T,175 LU; every invalid/range trial ordinal and accepted cache hash matches.",
+    "First range remains the actual range event at force ordinal325, not the earlier recovered invalid-J trial.",
+    "Author pure saved proof has1817checks, exact old baseline output assertions, and two malformed trace rejection assertions; reviewed without rerunning or importing it.",
+    "Every input/source binding in already saved author proof presently matches actual file SHA.",
+    "Rejected trial qualification and arithmetic issue resolution flags remain false; no mechanical source or production result is edited.",
+    "Actual cost source and 1500/1560/8GiB reference declaration independently verified; estimate1400.5936836000558seconds is not a guarantee."
+  ],
+  "budget": {
+    "baseline_helper_seconds": 618.8914617000264,
+    "baseline_lifecycle_seconds": 618.898931099975,
+    "baseline_states": 17,
+    "baseline_seconds_per_state": 36.40538010000155,
+    "requested_states": 24,
+    "margin_multiplier": 1.5,
+    "fixed_overhead_seconds": 90,
+    "estimate_seconds": 1400.5936836000558,
+    "declared_helper_seconds": 1500,
+    "declared_outer_seconds": 1560,
+    "RSS_limit_bytes": 8589934592,
+    "meaning": "Finite cost estimate using prior completed all-state reference; not a guarantee or new-state qualification."
+  },
+  "integration_requirements": [
+    "New reference source contract must pin new counterSHA, retain original B028 byte role and saved accounting proof, and distinguish this pure accounting transition from the three production math/controller transitions.",
+    "New helper schema/SHA must be consistent in builder, contract, LOAD, installed references and protocol; no original production source_freeze or failed card is rewritten.",
+    "B850 run_state, aa86 workpiece checks, B52 consumer and exhaustive actualN HP80/120 loop must remain byte/AST unchanged; all24states require48fresh HP calls."
+  ],
+  "limitations": [
+    "Reference integration wrapper has not yet been updated; its final source identity flow requires a separate minimal static review. No new reference or rejected-state physical qualification."
+  ],
+  "activity": {
+    "candidate_module_imports": 0,
+    "counter_invocations": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "geometry_API": 0,
+    "render": 0,
+    "formal_writes": 0
+  }
+}

@@ -1,0 +1,46 @@
+--- closed_enlarged/execute_shift_pose.py
++++ projection_candidate/execute_shift_pose.py
+@@ -1,4 +1,4 @@
+-"""One shifted-square mechanical path; save cached states and first actual range failures."""
++"""One same-task port-projection mechanical path; preserve cached states and actual range observations."""
+ from pathlib import Path
+ from time import perf_counter
+ from datetime import datetime, timezone
+@@ -23,6 +23,10 @@
+ def main():
+     inventory_file = STAGE/"input_inventory.json"
+     inventory = json.loads(inventory_file.read_text(encoding="utf-8"))
++    assert inventory["initial_guess"] == "port_projection"
++    initialization = inventory["predictor_initialization"]
++    assert initialization["displacement_mode"] == inventory["initial_guess"]
++    assert initialization["applied_dw"] is False and initialization["applied_dR"] is True
+     freeze_file = STAGE/"source_freeze.json"
+     assert sha(freeze_file) == inventory["source_freeze_sha256"]
+     sources = json.loads(freeze_file.read_text(encoding="utf-8"))["sources"]
+@@ -38,6 +42,7 @@
+         HP_calls=0, JIT_calls=0, LF_imports=0, accepted_states=0,
+         force_calls=None, tangent_calls=None, solver_calls=None, save_force_calls=None, save_tangent_calls=None,
+         response_mode="mechanical", seconds_limit=inventory["execution_limits"]["production_seconds"],
++        initial_guess=inventory["initial_guess"], predictor_initialization=initialization,
+         sampled_RSS_limit_bytes=inventory["execution_limits"]["sampled_RSS_bytes"],
+         started_utc=datetime.now(timezone.utc).isoformat(),
+         budget_mode="Whole-helper/API clocks and sampled process peak_wset; cooperative outer tree monitor, no OS hard cap/force",
+@@ -182,9 +187,17 @@
+         receipt["invocations"] = 1
+         write(receipt_file, receipt)
+         result = solve_native_mean(ROOT/row["geometry_file"], task, row["targets_mm"],
+-            settings=DisplacementSettings(**inventory["settings"]), on_accept=accepted, response_mode="mechanical", tangent_mode="chunk256")
++            settings=DisplacementSettings(**inventory["settings"]), on_accept=accepted, response_mode="mechanical", tangent_mode="chunk256",
++            initial_guess=inventory["initial_guess"])
+         descriptor = write_native_mean(result, STAGE/row["result_directory"])
+         metadata = result.metadata
++        assert metadata["initial_guess"] == result.path["initial_guess"] == inventory["initial_guess"]
++        predictors = [item for item in metadata["path_diagnostics"]["linear_solve_diagnostics"] if item["phase"] == "predictor"]
++        flags_match = all(item["displacement_mode"] == inventory["initial_guess"]
++            and item["applied_dw"] is False and item["applied_dR"] is True for item in predictors)
++        receipt["predictor_initialization"] = dict(initialization, actual_predictor_LU_records=len(predictors),
++            actual_predictor_flags_match=flags_match)
++        assert flags_match
+         assert metadata["tangent_execution"] == inventory["tangent_execution"]
+         assert all(s.record["tangent_execution"] == inventory["tangent_execution"] for s in result.accepted)
+         receipt["tangent_execution"] = metadata["tangent_execution"]

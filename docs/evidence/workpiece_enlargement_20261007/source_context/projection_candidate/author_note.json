@@ -1,0 +1,175 @@
+{
+  "status": "author_static_only_not_executed",
+  "formal_stage": "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001",
+  "baseline_commit": "b31003303960231c5cc6bf95c9fd6fe751f85da8",
+  "initial_guess": "port_projection",
+  "alias": "gripper_coarse_square_x71_side18",
+  "task_sha256": "385cce960696b8c01e1323fc43d98f4ee28a392214c44a8f3609006324cde2e0",
+  "task_identity": "Raw task exact to closed enlarged_square_contact_001; same geometry, materials, body, mean constraint, 24targets and1.2mm peak.",
+  "inherited_wrappers": {
+    "prepare_shift_pose.py": {
+      "file": "baseline_wrappers/prepare_shift_pose.py",
+      "sha256": "6ec7a93a8cbfe04ad4c0002321c9ecd76c51844f3912c8b40c5690f248ae3337"
+    },
+    "execute_shift_pose.py": {
+      "file": "baseline_wrappers/execute_shift_pose.py",
+      "sha256": "41751ec153e616487593bbe2d53a71fb56d1ec9bfc7355e555efea01cf37244b"
+    },
+    "build_pose_card.py": {
+      "file": "baseline_wrappers/build_pose_card.py",
+      "sha256": "f865b33fdf45c3c36a0e6b449aac2301943cc529de64822651aaaf45f2872673"
+    }
+  },
+  "compilation": {
+    "prepare_shift_pose.py": {
+      "status": "AST_and_compile_pass",
+      "sha256": "ee49f7141730e5bb03d56346175053af8ded2b05160db2184eeceedcb5e9c6f0",
+      "lines": 368
+    },
+    "execute_shift_pose.py": {
+      "status": "AST_and_compile_pass",
+      "sha256": "57d18bfea972c09db4c0866bdee3413088342327e32d3926be9eaa1bdbab466a",
+      "lines": 264
+    },
+    "build_pose_card.py": {
+      "status": "AST_and_compile_pass",
+      "sha256": "76cc3487cdfeb25d41fa8fcc5eef1901d268d8a4396459b1a19573e57ab07595",
+      "lines": 166
+    },
+    "producer_original_96bf.py": {
+      "status": "AST_and_compile_pass",
+      "sha256": "96bf1b48eebe22b1132f6736b17de2f4269d656442c8308c2822caa0ec0387ae",
+      "lines": 251
+    }
+  },
+  "declared_targets": [
+    0.0,
+    0.25,
+    0.5,
+    0.65,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95,
+    1.0,
+    1.05,
+    1.1,
+    1.15,
+    1.2,
+    1.15,
+    1.1,
+    1.0,
+    0.9,
+    0.8,
+    0.75,
+    0.65,
+    0.5,
+    0.25,
+    0.0
+  ],
+  "source_roles": {
+    "inherited": 68,
+    "added_wrappers": 2,
+    "total": 70,
+    "unchanged_current_roles": 65,
+    "historical_capsules_raw_exact": true,
+    "transitions": {
+      "hf_repo/src/hf_eval/native_mean.py": {
+        "previous_sha256": "186a6662c14310b4dc577591764eef849988448de132474fd6953579449cb22b",
+        "current_sha256": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+        "proof_kind": "port_projection_initialization"
+      },
+      "hf_repo/src/hf_eval/split_displacement.py": {
+        "previous_sha256": "f4632beb5697e6f25f374c4de31d25f712dd0c91723fed6021f866ada60a386c",
+        "current_sha256": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+        "proof_kind": "port_projection_initialization"
+      },
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": {
+        "previous_sha256": "fe36581e8b49f1a547973e135f3c8ca0f2bbc7d954502405418bd794d731955a",
+        "current_sha256": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+        "proof_kind": "tangent_direction_scaling"
+      }
+    }
+  },
+  "proof_contract": {
+    "controller_stage": "lf_data_preparation/native_workpiece_001/port_projection_validation_001",
+    "files": [
+      "protocol.json",
+      "validation_launch.json",
+      "result/receipt.json"
+    ],
+    "helper_seconds": 180,
+    "outer_seconds": 240,
+    "sampled_RSS_bytes": 8589934592,
+    "expected_tests": 15,
+    "tests_failed": 0,
+    "tests_errors": 0,
+    "tests_skipped": 0,
+    "full_HF_solver_calls": 0,
+    "HP_calls": 0,
+    "all_bindings_unchanged": true,
+    "production_force_changed": false,
+    "force_tangent_gates_changed": false,
+    "default_initial_guess_preserved": true,
+    "source_transition": "Two classified entries exactly matching protocol and historical/current identities.",
+    "status": "Required actual proof pass; author did not execute proof or claim qualification."
+  },
+  "producer_contract": {
+    "displacement_mode": "port_projection",
+    "applied_dw": false,
+    "applied_dR": true,
+    "predictor_LU_role": "Real cached-KKT solve seeds the reaction increment; its displacement solution is discarded.",
+    "displacement_seed": "Previous fluctuation plus mean_rhs*b_free/(b_free@b_free), then original feasible correction of roundoff.",
+    "residual_scope": "LU residual qualifies the real computed linear solution; not the applied port-projection seed.",
+    "actual_trace": "Result path/metadata initial_guess and every stored predictor mode/applied flags are checked; receipt counts actual predictor rows.",
+    "original_solver_call_equal_after_removing_only_initial_guess_keyword": true,
+    "unchanged_function_ASTs": [
+      "write",
+      "checkpoint",
+      "accepted",
+      "model_inputs",
+      "archive",
+      "capture_range",
+      "observed_force",
+      "observed_tangent"
+    ],
+    "default_initial_guess": "tangent"
+  },
+  "closed_same_task_failure": {
+    "stage": "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001",
+    "files": {
+      "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/production_protocol.json": "fb2da50e4124ef24f90bbbbd66ac6c291185893bef13e5380232c2b71dab70f2",
+      "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/production_launch.json": "ec9e4aafed426ea928558797c1c6cd6e5bbc6c30b10f5f0db12e2b406f9cda16",
+      "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/run_001/execution_receipt.json": "af6945a5e958fe497ad8ff30e49fe7a194e4fc8cb567d5d54e91e863d2b3fd6a",
+      "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/run_001/result/result.json": "a68c7c2dac03b35d2456daf7b66f032e2d6f489e7f975b673b71659f2ba6706e"
+    },
+    "accepted_states": 9,
+    "path_completed": false,
+    "unload_endpoint_reached": false,
+    "HP_calls": 0,
+    "production_helper_seconds": 453.4209809000604,
+    "production_outer_seconds": 454.95756260002963,
+    "scope": "Closed context only; no warm start, accepted prefix, model qualification, retry or change to that card."
+  },
+  "resource": {
+    "preparation_seconds": 120,
+    "preparation_outer_seconds": 150,
+    "production_seconds": 3000,
+    "production_outer_seconds": 3060,
+    "sampled_RSS_bytes": 8589934592
+  },
+  "gates": "Original force/tangent, Newton/Armijo, J, rollback, bisection, minimum increment, convergence and reference gates unchanged.",
+  "historical_T_proof_scope": "T44 proof/capsules remain raw exact. Its old root-path native_mean/split_displacement bindings are historical; only fresh classified controller proof supports current two-source transition.",
+  "calls": {
+    "model_constructions": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "geometry_API": 0,
+    "render": 0,
+    "builder": 0
+  },
+  "qualification": "External candidate only. No candidate modules imported or entrypoints executed. No formal repository file written."
+}

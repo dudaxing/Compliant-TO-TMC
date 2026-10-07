@@ -1,0 +1,46 @@
+--- original_projection_reference/audit_enlarged_square.py
++++ accounting_reference_candidate/audit_enlarged_square.py
+@@ -27,7 +27,9 @@
+ CORE_PIN = "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5"
+ WP_PIN = "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938"
+ CONSUMER_PIN = "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe"
+-COUNTER_PIN = "b028dba774d430a6d082ca05be86489a56e800be1f1bd69c60148ffccd51e8b3"
++COUNTER_PIN = "a751fe07a682ff89c88b16d8d69325b1990d45c26114b8715414116580737ed9"
++ORIGINAL_COUNTER_PIN = "b028dba774d430a6d082ca05be86489a56e800be1f1bd69c60148ffccd51e8b3"
++COUNTER_SCHEMA = "shift-complete-attempt-counter-recovered-invalid-J-1.1"
+ COUNTER_FILE = Path(__file__).with_name("counter_attempts.py")
+ sha_raw = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+ if sha_raw(PRIVATE_CORE) != CORE_PIN or sha_raw(SCRIPTS/"audit_native_workpiece_cycle.py") != WP_PIN:
+@@ -89,7 +91,7 @@
+             and contract["workpiece"] == BODY and contract["targets_mm"] == TARGETS
+             and self.stage.name == "run_001" and self.stage.parent.name == "enlarged_square_projection_001"
+             and contract["initial_guess"] == INITIAL_GUESS and contract["predictor_initialization"] == PREDICTOR_INITIALIZATION
+-            and contract["counter_schema"] == "shift-complete-attempt-counter-1.0"
++            and contract["counter_schema"] == COUNTER_SCHEMA
+             and contract["counter_helper_sha256"] == COUNTER_PIN,
+             "Wrong explicit enlarged-square reference card")
+         self.reference_contract = contract
+@@ -179,11 +181,15 @@
+         self.check(ref_sources.get(own) == sha(Path(__file__)) and ref_sources.get(core) == CORE_PIN
+             and ref_sources.get(counter) == COUNTER_PIN and len({Path(n).name for n in ref_sources}) == len(ref_sources),
+             "Independent reference source closure is not bound")
++        original_counter = Path(__file__).with_name("counter_original_B028.py").relative_to(self.repo).as_posix()
++        self.check(ref_sources.get(original_counter) == ORIGINAL_COUNTER_PIN,"Original B028 counter role must remain independently bound")
+         ref_caps = self.output/"reference_sources"; ref_caps.mkdir()
+         for name,pin in ref_sources.items():
+             self.bind(self.repo/name,pin)
+             shutil.copyfile(self.repo/name,ref_caps/Path(name).name)
+             self.bind(ref_caps/Path(name).name,pin)
++        from reference_contract_builder import verify_accounting_transition
++        verify_accounting_transition(self.repo,self.stage.parent,contract["accounting_source_transition"],self.bind)
+         # The counter helper is pure saved-data logic, imported only after its card pin is checked.
+         self.bind(COUNTER_FILE,ref_sources[counter])
+         spec = importlib.util.spec_from_file_location("shift_reference_counter",COUNTER_FILE)
+@@ -608,6 +614,7 @@
+             original_run_state_source_sha256=CORE_PINS["audit_native_mean.py"],private_run_state_source_sha256=CORE_PIN,
+             inherited_workpiece_checker_sha256=WP_PIN,tangent_action_consumer_sha256=CONSUMER_PIN,
+             tangent_execution=self.result["tangent_execution"],counter_accounting=self.accounting,counter_helper_sha256=COUNTER_PIN,
++            counter_schema=COUNTER_SCHEMA,accounting_source_transition=self.reference_contract["accounting_source_transition"],
+             first_force_range_input=self.first_range_observation,first_tangent_range_input=self.tangent_range_observation,
+             qualified_prerequisites=self.inventory["qualified_prerequisites"],
+             initial_guess=self.result["initial_guess"],predictor_initialization=self.receipt["predictor_initialization"],

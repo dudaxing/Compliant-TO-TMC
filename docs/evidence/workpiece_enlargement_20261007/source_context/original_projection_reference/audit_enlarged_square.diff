@@ -1,0 +1,187 @@
+--- original_enlarged_reference/audit_enlarged_square.py
++++ projection_reference_candidate/audit_enlarged_square.py
+@@ -1,4 +1,4 @@
+-"""Fresh accepted-state reference for the explicit complete x71 side18 position-and-size cycle.
++"""Fresh accepted-state reference for the complete x71 side18 port-projection cycle.
+ 
+ B850 run_state and aa86 workpiece_checks are unchanged. No construction,
+ constitutive force, production tangent, controller or solver is evaluated.
+@@ -46,6 +46,10 @@
+ PREDECESSOR_TARGETS = [0., .5, 1., 1.5, 1.75, 1.8, 1.75, 1.5, 1., .5, 0.]
+ TARGETS = [0., .25, .5, .65, .75, .8, .85, .9, .95, 1., 1.05, 1.1, 1.15, 1.2, 1.15, 1.1, 1., .9, .8, .75, .65, .5, .25, 0.]
+ BODY = dict(kind="fixed_rigid", shape="square", center_mm=[71.,40.], side_mm=18., fixed_components=[0,1])
++INITIAL_GUESS = "port_projection"
++PREDICTOR_INITIALIZATION = dict(displacement_mode=INITIAL_GUESS, applied_dw=False, applied_dR=True,
++    port_adjustment="distributed normalized free-port weights", predictor_LU_role="reaction increment estimator",
++    linear_residual_scope="Actual computed KKT solution; not the applied displacement seed.")
+ SETTINGS = dict(tolerance=1e-9, constraint_tolerance=1e-10, displacement_scale_floor=1e-6,
+     force_scale_floor_factor=1e-8, max_checks=25, armijo_c=1e-4, max_backtracks=12,
+     max_bisections=4, minimum_increment=.1/16, time_limit_seconds=3000.)
+@@ -83,7 +87,8 @@
+             and contract["production_stage"] == self.stage.relative_to(self.repo).as_posix()
+             and contract["limits"] == dict(helper_seconds=self.limit,outer_seconds=self.limit+60,sampled_RSS_bytes=RSS_LIMIT)
+             and contract["workpiece"] == BODY and contract["targets_mm"] == TARGETS
+-            and self.stage.name == "run_001" and self.stage.parent.name == "enlarged_square_contact_001"
++            and self.stage.name == "run_001" and self.stage.parent.name == "enlarged_square_projection_001"
++            and contract["initial_guess"] == INITIAL_GUESS and contract["predictor_initialization"] == PREDICTOR_INITIALIZATION
+             and contract["counter_schema"] == "shift-complete-attempt-counter-1.0"
+             and contract["counter_helper_sha256"] == COUNTER_PIN,
+             "Wrong explicit enlarged-square reference card")
+@@ -149,6 +154,24 @@
+             and failed_launch["protocol_sha256"] == sha(failed_stage/"production_protocol.json")
+             and failed_receipt["result_sha256"] == sha(failed_stage/"run_001/result/result.json"),
+             "Failed x72 is not a new-state or partial-path reference precondition")
++        enlarged_context = contract["failed_enlarged_context"]
++        enlarged_stage = self.repo/"lf_data_preparation/native_workpiece_001/enlarged_square_contact_001"
++        enlarged_files = [enlarged_stage/name for name in ("production_protocol.json","production_launch.json",
++            "run_001/execution_receipt.json","run_001/result/result.json")]
++        self.check(enlarged_context["stage"] == enlarged_stage.relative_to(self.repo).as_posix()
++            and enlarged_context["files"] == {path.relative_to(self.repo).as_posix():sha(path) for path in enlarged_files}
++            and enlarged_context["scope"] == "Closed same side18/center71/24-target tangent-initialization failure only; no qualification, prefix reuse or repair of that card.",
++            "Same-task failed predecessor may only supply its closed context")
++        for name,pin in enlarged_context["files"].items(): self.bind(self.repo/name,pin)
++        enlarged_protocol,enlarged_launch,enlarged_receipt,enlarged_result = map(read,enlarged_files)
++        self.check(enlarged_context["status"] == enlarged_launch["status"] == enlarged_receipt["status"] == "not_pass"
++            and enlarged_result["status"] == "failed" and enlarged_result["failure"]["code"] == "invalid_J"
++            and enlarged_context["accepted_states"] == enlarged_result["accepted_states"] == enlarged_receipt["accepted_states"] == 9
++            and enlarged_context["path_completed"] is enlarged_result["path_completed"] is False
++            and enlarged_context["unload_endpoint_reached"] is enlarged_result["unload_endpoint_reached"] is False
++            and enlarged_receipt["HP_calls"] == 0 and enlarged_launch["all_bindings_unchanged"] is True
++            and enlarged_launch["protocol_sha256"] == sha(enlarged_files[0]) and enlarged_receipt["result_sha256"] == sha(enlarged_files[-1]),
++            "Same-task failed predecessor is closed, with no partial reference or warm start")
+         ref_sources = contract["reference_sources"]
+         own = Path(__file__).resolve().relative_to(self.repo).as_posix()
+         core = PRIVATE_CORE.relative_to(self.repo).as_posix()
+@@ -174,6 +197,10 @@
+         inventory,receipt,freeze = map(read,(inventory_file,receipt_file,freeze_file))
+         row = inventory["case"]
+         self.check(inventory["failed_predecessor_context"] == failed_context,"Failed x72 identity differs between inventory and reference card")
++        self.check(inventory["failed_enlarged_context"] == enlarged_context,"Closed same-task context differs between inventory and reference card")
++        self.check(inventory["initial_guess"] == receipt["initial_guess"] == contract["initial_guess"] == INITIAL_GUESS
++            and inventory["predictor_initialization"] == contract["predictor_initialization"] == PREDICTOR_INITIALIZATION,
++            "Reference initialization option differs from actual production")
+         self.check(inventory["qualified_prerequisites"] == inventory_prerequisites,
+             "Completed baseline contexts differ between inventory and reference card")
+ 
+@@ -209,10 +236,11 @@
+         self.bind(PREVIOUS/"source_freeze.json",PREVIOUS_FREEZE_PIN)
+         previous_sources = read(PREVIOUS/"source_freeze.json")["sources"]
+         tangent_key = "hf_repo/src/hf_eval/split_numpy_tangent.py"
++        controller_keys = {"hf_repo/src/hf_eval/native_mean.py","hf_repo/src/hf_eval/split_displacement.py"}
+         transition = contract["source_transition"]
+-        self.check(set(transition) <= {tangent_key}
++        self.check(set(transition) == {tangent_key}|controller_keys
+             and all(v["previous_sha256"] == previous_sources[n] for n,v in transition.items()),
+-            "Only the independently declared tangent-source transition is supported")
++            "Exactly one tangent and two classified initialization transitions are required")
+         expected = dict(previous_sources,**{n:v["current_sha256"] for n,v in transition.items()})
+         sources = freeze["sources"]
+         extra = set(sources)-set(previous_sources)
+@@ -223,26 +251,59 @@
+             and len({Path(n).name for n in sources}) == len(sources)
+             and {Path(n).name for n in extra} == {"prepare_shift_pose.py","execute_shift_pose.py"}
+             and all(sources.get(n) == pin for n,pin in expected.items()),
+-            "Production closure differs beyond explicit one-source transition and two wrappers")
++            "Production closure differs beyond explicit three-source transitions and two wrappers")
+         for name,pin in previous_sources.items(): self.bind(PREVIOUS/"sources"/Path(name).name,pin)
+         for name,item in transition.items():
+             for role in ("previous_capsule","qualification_protocol","qualification_launch","qualification_receipt"):
+                 self.bind(self.repo/item[role+"_file"],item[role+"_sha256"])
+-            self.check(item["previous_capsule_sha256"] == previous_sources[name],"Historical tangent capsule pin differs")
++            self.check(item["previous_capsule_sha256"] == previous_sources[name],"Historical source capsule pin differs")
+             repair_protocol,repair_launch,repair = (read(self.repo/item[k+"_file"]) for k in
+                 ("qualification_protocol","qualification_launch","qualification_receipt"))
+-            self.check(repair_protocol["schema_version"] == "t44-direction-scaling-repair-1.0"
+-                and repair_protocol["source_transition"] == dict(path=name,previous_sha256=item["previous_sha256"],current_sha256=item["current_sha256"])
+-                and repair_launch["protocol_sha256"] == item["qualification_protocol_sha256"]
+-                and repair_launch["status"] == repair["status"] == "pass" and repair_launch["exit_code"] == 0
+-                and repair_launch["all_bindings_unchanged"] is repair["all_bindings_unchanged"] is True
+-                and repair_launch["stop_reason"] is None and repair["pytest_exit_code"] == 0
+-                and all(repair["tests"][k] == 0 for k in ("errors","failures","skipped"))
+-                and repair["cached_tangent_started"] == repair["cached_tangent_completed"] == 2
+-                and repair["HP_calls_started"] == repair["HP_calls_completed"] == 2
+-                and repair["full_chunk_all_tensors_byte_equal"] is True and repair["local_and_global_checks"] == 9603
+-                and repair["production_force_changed"] is repair["range_guards_changed"] is False,
+-                "Declared bounded tangent transition has no completed independent proof")
++            if name == tangent_key:
++                self.check(item["proof_kind"] == "tangent_direction_scaling"
++                    and repair_protocol["schema_version"] == "t44-direction-scaling-repair-1.0"
++                    and repair_protocol["source_transition"] == dict(path=name,previous_sha256=item["previous_sha256"],current_sha256=item["current_sha256"])
++                    and repair_launch["protocol_sha256"] == item["qualification_protocol_sha256"]
++                    and repair_launch["status"] == repair["status"] == "pass" and repair_launch["exit_code"] == 0
++                    and repair_launch["all_bindings_unchanged"] is repair["all_bindings_unchanged"] is True
++                    and repair_launch["stop_reason"] is None and repair["pytest_exit_code"] == 0
++                    and all(repair["tests"][k] == 0 for k in ("errors","failures","skipped"))
++                    and repair["cached_tangent_started"] == repair["cached_tangent_completed"] == 2
++                    and repair["HP_calls_started"] == repair["HP_calls_completed"] == 2
++                    and repair["full_chunk_all_tensors_byte_equal"] is True and repair["local_and_global_checks"] == 9603
++                    and repair["production_force_changed"] is repair["range_guards_changed"] is False,
++                    "Declared bounded tangent transition has no completed independent proof")
++            else:
++                controller_stage = self.repo/"lf_data_preparation/native_workpiece_001/port_projection_validation_001"
++                self.check(name in controller_keys and item["proof_kind"] == "port_projection_initialization"
++                    and [item["qualification_"+role+"_file"] for role in ("protocol","launch","receipt")] ==
++                        [(controller_stage/file).relative_to(self.repo).as_posix() for file in ("protocol.json","validation_launch.json","result/receipt.json")]
++                    and repair_protocol["schema_version"] == "port-projection-initialization-proof-1.0"
++                    and repair_protocol["initial_guess"] == INITIAL_GUESS
++                    and repair_protocol["source_transition"] == repair["source_transition"]
++                    and isinstance(repair_protocol["source_transition"],list) and len(repair_protocol["source_transition"]) == 2
++                    and {entry["path"] for entry in repair_protocol["source_transition"]} == controller_keys
++                    and all(entry == dict(path=entry["path"],previous_sha256=transition[entry["path"]]["previous_sha256"],
++                        current_sha256=transition[entry["path"]]["current_sha256"],proof_kind="port_projection_initialization")
++                        for entry in repair_protocol["source_transition"])
++                    and repair_protocol["bindings"][name] == item["current_sha256"]
++                    and repair_protocol["expected_tests"] == repair["tests_passed"] == repair["tests"]["tests"] == 15
++                    and all(repair[k] == 0 for k in ("tests_failed","tests_errors","tests_skipped","full_HF_solver_calls","HP_calls"))
++                    and all(repair["tests"][k] == 0 for k in ("errors","failures","skipped"))
++                    and repair["pytest_invocations"] == 1 and repair["pytest_exit_code"] == 0
++                    and repair["all_bindings_unchanged"] is repair["default_initial_guess_preserved"] is True
++                    and repair["production_force_changed"] is repair["force_tangent_gates_changed"] is False
++                    and repair_launch["status"] == repair["status"] == "pass" and repair_launch["exit_code"] == 0
++                    and repair_launch["invocations"] == 1 and repair_launch["stop_reason"] is None
++                    and repair_launch["all_bindings_unchanged"] is True
++                    and repair_launch["protocol_sha256"] == item["qualification_protocol_sha256"]
++                    and repair_protocol["phases"]["validation"]["helper_seconds"] == 180
++                    and repair_protocol["phases"]["validation"]["outer_seconds"] == repair_launch["outer_seconds"] == 240
++                    and repair_protocol["sampled_RSS_bytes"] == repair_launch["sampled_RSS_limit_bytes"] == RSS_LIMIT
++                    and 0 <= repair["elapsed_seconds"] <= 180 and 0 <= repair_launch["elapsed_seconds"] <= 240
++                    and 0 <= repair["peak_sampled_RSS_bytes"] <= RSS_LIMIT and 0 <= repair_launch["peak_sampled_tree_RSS_bytes"] <= RSS_LIMIT,
++                    "Initialization transition lacks its own actual complete controller proof")
++                for key,pin in repair_protocol["bindings"].items(): self.bind(self.repo/key,pin)
+         for name,pin in sources.items():
+             self.bind(self.repo/name,pin); self.bind(self.stage/"sources"/Path(name).name,pin)
+             shutil.copyfile(self.stage/"sources"/Path(name).name,self.output/"sources"/Path(name).name)
+@@ -263,6 +324,12 @@
+         self.bind(self.result_file,contract["production_result_sha256"])
+         self.bind(self.result_file,receipt["result_sha256"])
+         result = read(self.result_file); verify_descriptor(result)
++        predictors = [item for item in result["path_diagnostics"]["linear_solve_diagnostics"] if item["phase"] == "predictor"]
++        expected_initialization = dict(PREDICTOR_INITIALIZATION,actual_predictor_LU_records=len(predictors),actual_predictor_flags_match=True)
++        self.check(result["initial_guess"] == inventory["initial_guess"] == contract["initial_guess"] == INITIAL_GUESS
++            and receipt["predictor_initialization"] == expected_initialization
++            and all(item["displacement_mode"] == INITIAL_GUESS and item["applied_dw"] is False and item["applied_dR"] is True for item in predictors),
++            "Actual saved predictor initialization mode, applied flags or row count differs")
+         self.check(result["schema_version"] == "hf-native-mean-result-1.2" and result["status"] == "success"
+             and all(result[k] is True for k in ("production_converged","target_reached","task_target_executed",
+                 "path_completed","loading_peak_reached","unload_endpoint_reached","lift_origin_zero","lift_shape_zero"))
+@@ -314,6 +381,10 @@
+             and inventory["pose_model_comparison"]["actual_changed_fields"] == pose_delta,
+             "Only the six overlay fields may differ from the completed E1 pose")
+         task,prior_task,previous_task = read(self.repo/row["task_file"]),read(self.repo/row["prior_task_file"]),read(PREVIOUS/"task.json")
++        failed_task_file = enlarged_stage/"run_001/task.json"
++        self.bind(failed_task_file,inventory["input_bindings"][failed_task_file.relative_to(self.repo).as_posix()])
++        self.check(sha(self.repo/row["task_file"]) == sha(failed_task_file) == "385cce960696b8c01e1323fc43d98f4ee28a392214c44a8f3609006324cde2e0",
++            "Physical task raw bytes must match the closed same-task predecessor; only initialization changes")
+         self.bind(PREVIOUS/"task.json",inventory["input_bindings"][(PREVIOUS/"task.json").relative_to(self.repo).as_posix()])
+         descriptive = {"task_id","purpose","parameter_origin","description"}
+         expected_task = dict(previous_task,workpiece=BODY,
+@@ -539,7 +610,9 @@
+             tangent_execution=self.result["tangent_execution"],counter_accounting=self.accounting,counter_helper_sha256=COUNTER_PIN,
+             first_force_range_input=self.first_range_observation,first_tangent_range_input=self.tangent_range_observation,
+             qualified_prerequisites=self.inventory["qualified_prerequisites"],
++            initial_guess=self.result["initial_guess"],predictor_initialization=self.receipt["predictor_initialization"],
+             failed_predecessor_context=self.inventory["failed_predecessor_context"],
++            failed_enlarged_context=self.inventory["failed_enlarged_context"],
+             prerequisite_scope="Identity and cost contexts only; no reference or new-state qualification is inherited",
+             boundary_placement=self.inventory["boundary_placement"],
+             independent_reference_contract_sha256=self.reference_contract_sha256,

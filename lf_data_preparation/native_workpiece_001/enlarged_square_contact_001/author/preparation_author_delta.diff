@@ -1,0 +1,125 @@
+--- x72/prepare_shift_pose.py
++++ enlarged/prepare_shift_pose.py
+@@ -1,4 +1,4 @@
+-"""Prepare a new x72 boundary-touch square and native model, without FE response."""
++"""Prepare an enlarged side18 square on unchanged native arrays, without FE response."""
+ from pathlib import Path
+ from time import perf_counter
+ from datetime import datetime, timezone
+@@ -71,7 +71,7 @@
+             accepted_states=count, HP_calls=summary["HP_calls_completed"],
+             production_helper_seconds=production["elapsed_seconds"], production_outer_seconds=read(control/"production_launch.json")["elapsed_seconds"],
+             reference_helper_seconds=summary["elapsed_seconds"], reference_outer_seconds=read(control/"reference_launch.json")["elapsed_seconds"],
+-            scope="Completed x71 predecessor identity and choice/cost evidence only; no x72 model or accepted-state qualification.")
++            scope="Completed x71 predecessor identity and choice/cost evidence only; no enlarged-square model or accepted-state qualification.")
+     return proofs
+ 
+ 
+@@ -103,6 +103,15 @@
+     reference = root/"lf_data_preparation/native_workpiece_001/coarse_square_cycle010_ref_003"
+     qualified = qualified_prerequisites(root)
+     cost_files = [root/name for item in qualified.values() for name in item["files"]]
++    failed_stage = root/"lf_data_preparation/native_workpiece_001/shift_square_tip_align_001"
++    failed_files = [failed_stage/n for n in ("production_protocol.json", "production_launch.json",
++        "run_001/execution_receipt.json", "run_001/result/result.json")]
++    failed_result, failed_launch = read(failed_files[-1]), read(failed_files[1])
++    failed_context = dict(stage=failed_stage.relative_to(root).as_posix(),
++        files={p.relative_to(root).as_posix():digest(p) for p in failed_files},
++        status=failed_launch["status"], accepted_states=failed_result["accepted_states"],
++        path_completed=failed_result["path_completed"], unload_endpoint_reached=failed_result["unload_endpoint_reached"],
++        scope="Closed x72 side16 failed physical path retained as context only; no qualification, prefix reuse or repair of that card.")
+     old, result = read(previous/"input_inventory.json"), read(previous/"result/result.json")
+     receipt, original_reference = read(previous/"execution_receipt.json"), read(reference/"reference/summary.json")
+     for directory, phase in ((previous, "production"), (reference, "reference")):
+@@ -116,9 +125,11 @@
+     assert original_reference["HP_calls_started"] == original_reference["HP_calls_completed"] == 2*len(result["states"])
+     assert [r["state_sha256"] for r in original_reference["states"]] == [r["state_sha256"] for r in result["states"]]
+     task, original_task = read(task_file), read(previous/"task.json")
+-    allowed = {"task_id", "purpose", "parameter_origin", "description", "workpiece"}
++    allowed = {"task_id", "purpose", "parameter_origin", "description", "workpiece", "input", "path"}
+     assert {k:v for k,v in task.items() if k not in allowed} == {k:v for k,v in original_task.items() if k not in allowed}
+-    assert task["workpiece"] == dict(original_task["workpiece"], center_mm=[72., 40.])
++    assert task["workpiece"] == dict(original_task["workpiece"], center_mm=[71., 40.], side_mm=18.)
++    assert task["input"] == dict(original_task["input"], target_mm=1.2)
++    assert task["path"] == dict(original_task["path"], targets_mm=[0.0, 0.25, 0.5, 0.65, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0, 1.05, 1.1, 1.15, 1.2, 1.15, 1.1, 1.0, 0.9, 0.8, 0.75, 0.65, 0.5, 0.25, 0.0])
+     assert (task["material"]["E_MPa"], task["third_medium"]["gamma"], task["regularization"]["alpha"]) == (1., 1e-6, 1e-6)
+     expected_changed = sorted(OVERLAY)
+     old_row = old["case"]
+@@ -129,7 +140,7 @@
+         reference/"reference/summary.json", root/old_row["geometry_file"], root/old_row["geometry_npz_file"],
+         root/old_row["prior_task_file"], root/old_row["prior_model_file"], root/old_row["workpiece_model_file"],
+         (root/old_row["workpiece_model_file"]).with_suffix(".json"), previous/"direction.npz"]}
+-    inputs.update({p.relative_to(root).as_posix(): digest(p) for p in cost_files})
++    inputs.update({p.relative_to(root).as_posix(): digest(p) for p in cost_files+failed_files})
+     for key, pin_key in (("geometry_file", "geometry_file_sha256"), ("geometry_npz_file", "geometry_npz_sha256"),
+             ("workpiece_model_file", "workpiece_model_sha256"), ("prior_model_file", "prior_model_sha256")):
+         assert digest(root/old_row[key]) == old_row[pin_key]
+@@ -192,10 +203,18 @@
+     with np.load(fixture, allow_pickle=False) as saved, np.load(root/old_row["workpiece_model_file"], allow_pickle=False) as original:
+         delta = model_delta(saved, original)
+         assert delta == expected_changed
+-        assert np.array_equal(saved["workpiece_cells"], original["workpiece_cells"]+2)
+-        assert np.array_equal(saved["workpiece_nodes"], original["workpiece_nodes"]+2)
+-        for key in ("workpiece_dofs", "workpiece_background_symmetry_overlap_dofs"):
+-            assert np.array_equal(saved[key], original[key]+4)
++        with np.load(root/old_row["prior_model_file"], allow_pickle=False) as base:
++            coords, conn = base["coordinates"], base["connectivity"]
++            cells = np.flatnonzero((np.abs(coords[conn].mean(axis=1)-[71., 40.]) <= 9.).all(axis=1))
++            nodes = np.unique(conn[cells])
++            dofs = np.column_stack((2*nodes, 2*nodes+1)).ravel()
++            overlap = np.intersect1d(dofs, 2*np.flatnonzero(coords[:, 1] == 40.)+1)
++            fixed = np.union1d(base["fixed_dofs"], dofs)
++            expected = dict(workpiece_cells=cells, workpiece_nodes=nodes, workpiece_dofs=dofs,
++                workpiece_background_symmetry_overlap_dofs=overlap, fixed_dofs=fixed,
++                free_dofs=np.setdiff1d(np.arange(len(coords)*2), fixed))
++            assert all(saved[k].dtype == v.dtype and saved[k].shape == v.shape
++                and saved[k].tobytes() == v.tobytes() for k,v in expected.items())
+         with np.load(root/qualified["pose002"]["model_file"], allow_pickle=False) as pose:
+             pose_delta = model_delta(saved, pose)
+             assert pose_delta == expected_changed
+@@ -204,10 +223,11 @@
+         with np.load(stage/"direction.npz", allow_pickle=False) as direction:
+             assert not np.any(direction["direction"][saved["fixed_dofs"]])
+             assert direction["direction"].tobytes() == (saved["b_in"]/abs(saved["b_in"]).max()).tobytes()
+-    assert (project.model.ne, project.model.ndof, len(project.model.fixed_dofs), len(project.model.free)) == (3200, 6642, 376, 6266)
++    assert (project.model.ne, project.model.ndof, len(project.model.fixed_dofs), len(project.model.free)) == (3200, 6642, 448, 6194)
+     body = project.region_metadata["workpiece"]
+-    assert (body["selected_cells"], body["incident_nodes"], body["fixed_dofs"], len(body["background_symmetry_overlap_dofs"])) == (128, 153, 306, 17)
+-    row = dict(old_row, alias="gripper_coarse_square_x72_tip", targets_mm=task["path"]["targets_mm"])
++    assert (body["selected_cells"], body["incident_nodes"], body["fixed_dofs"], len(body["background_symmetry_overlap_dofs"])) == (162, 190, 380, 19)
++    row = dict(old_row, alias="gripper_coarse_square_x71_side18", targets_mm=task["path"]["targets_mm"],
++        fixed_DOFs=len(project.model.fixed_dofs), free_DOFs=len(project.model.free))
+     for key, file in (("task", stage/"task.json"), ("direction", stage/"direction.npz")):
+         row[key+"_file"] = file.relative_to(root).as_posix(); row[key+"_file_sha256"] = digest(file)
+     row.update(workpiece_model_file=fixture.relative_to(root).as_posix(), workpiece_model_sha256=digest(fixture),
+@@ -228,22 +248,22 @@
+     inventory = {k:deepcopy(old[k]) for k in ("schema_version", "settings", "gates", "units", "path_kind",
+         "minimum_increment_basis", "direction_definition", "state_authority", "stop_policy", "response_mode",
+         "response_contract", "auxiliary_material_energy", "range_observation_rule", "tangent_execution")}
+-    inventory["settings"]["time_limit_seconds"] = 1800.0
++    inventory["settings"]["time_limit_seconds"] = 3000.0
+     inventory.update(baseline_commit=args.baseline, case=row, source_count=len(sources), source_freeze_sha256=digest(freeze),
+-        source_transition=source_transition, input_bindings=inputs, execution_limits=dict(production_seconds=1800, production_outer_seconds=1860,
++        source_transition=source_transition, input_bindings=inputs, execution_limits=dict(production_seconds=3000, production_outer_seconds=3060,
+             sampled_RSS_bytes=RSS_LIMIT, preparation_seconds=120, preparation_outer_seconds=150),
+         model_comparison=dict(total_fields=27, unchanged_fields=row["unchanged_model_fields"],
+-            actual_changed_fields=delta, parameter_case="pose_only"),
++            actual_changed_fields=delta, parameter_case="position_and_size_only"),
+         prerequisite_reference=dict(stage=reference.relative_to(root).as_posix(), summary_sha256=digest(reference/"reference/summary.json"),
+             scope="Original accepted-state predecessor only; no new-state or failedT qualification."),
+-        qualification="New x72 boundary-touch model constructed only; no response/HP/clamp/pressure qualification.",
+-        qualified_prerequisites=qualified,
++        qualification="New enlarged-square boundary-touch model constructed only; no response/HP/clamp/pressure qualification.",
++        qualified_prerequisites=qualified, failed_predecessor_context=failed_context,
+         pose_model_comparison=dict(total_fields=27, unchanged_fields=sorted(INTRINSIC), actual_changed_fields=pose_delta,
+-            scope="New x72 model versus qualified x71/E1: intrinsic identity only; workpiece coverages are distinct."),
+-        boundary_placement=dict(body_box_mm=[64., 80., 32., 40.], right_outer_boundary_mm=80., right_medium_margin_mm=0.,
++            scope="New enlarged-square model versus qualified x71/E1: intrinsic identity only; workpiece coverages are distinct."),
++        boundary_placement=dict(body_box_mm=[62., 80., 31., 40.], right_outer_boundary_mm=80., right_medium_margin_mm=0.,
+             workpiece_touches_analysis_boundary=True, scope="New boundary-touch task; no right-side surrounding medium or inherited embedded-body qualification."),
+         budget_evidence=dict(predecessor_production_seconds={name:item["production_helper_seconds"] for name,item in qualified.items()},
+-            scope="Complete x71/E1 cost1413.35s and x71/E.5 cost1193.07s inform a new1800/1860s E1 card; unknown tip compression cost, no extension or prefix reuse."),
++            scope="Complete x71/E1 cost1413.35s and x71/E.5 cost1193.07s inform a new3000/3060s E1 card with 24 declared targets; unknown enlarged-body compression cost, no extension or prefix reuse."),
+         reference_plan="No reference source/counter contract is inherited; future card must use actual fresh trace and every accepted index.")
+     checkpoint()
+     assert all(digest(root/p) == pin for p,pin in {**inputs, **sources}.items())

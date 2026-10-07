@@ -85,3 +85,6 @@
 源码与当前状态、原始失败/通过输入输出、70项源胶囊、全部接受态、各协议与资源回执、作者版本/静态审阅及图像均保留于main。origin固定https://github.com/dudaxing/Compliant-TO-TMC.git。其他机器按[恢复入口](RESUME_DEVELOPMENT.md)克隆main到任意新路径；交付verify证明文件身份，历史卡/硬编码作者来源不是异目录同卡重跑指令，也不证明完整外部Release资产恢复或数值重验。
 
 原始主要证据：[position生产](../lf_data_preparation/native_workpiece_001/shift_square_pose_002/run_001/result/result.json)、[position新参考](../lf_data_preparation/native_workpiece_001/shift_square_pose_002/reference/summary.json)、[soft生产](../lf_data_preparation/native_workpiece_001/shift_square_soft_001/run_001/result/result.json)、[soft新参考](../lf_data_preparation/native_workpiece_001/shift_square_soft_001/reference/summary.json)、[完整比较JSON/输入SHA](evidence/workpiece_shift_20261004/final_comparison.json)、[作者复制/版本记录](evidence/workpiece_shift_20261004/author_copy_receipt.json)。旧010合格参考实际位于coarse_square_cycle010_ref_003，不能误指旧010/reference失败记录。
+
+
+2026-10-07接续：右缘到80mm、side18的新24态循环与48次新参考通过；峰单侧Fy=.119008N，双侧法向幅值和=.238015N，钳尖底面距.005701mm。参见[新功能与取舍记录](WORKPIECE_ENLARGEMENT_20261007.md)，本页既有内容保留为原时点历史。

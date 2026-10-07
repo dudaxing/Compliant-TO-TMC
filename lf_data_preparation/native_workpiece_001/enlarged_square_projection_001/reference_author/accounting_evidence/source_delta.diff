@@ -1,0 +1,55 @@
+--- counter_original_B028.py
++++ counter_attempts.py
+@@ -1,7 +1,7 @@
+ """Pure saved chronology accounting for a complete shifted-square cycle.
+ 
+ No model, force, tangent, consumer or HP evaluation. Unknown trace structures
+-fail closed. Predictor invalid-J bases are distinct from rejected trials.
++fail closed. Predictor invalid-J bases and recovered invalid-J trials are distinct.
+ """
+ from math import isfinite
+ 
+@@ -39,7 +39,7 @@
+             segments[-1]["correctors"].append(dict(index=index, **row))
+     hi = ti = si = fi = ai = tangent = completed = completed_tangents = 0
+     current_d, current_R = 0., 0.
+-    events, caches, attempts, invalid_bases, range_trials, failed_tangents = [], [], [], [], [], []
++    events, caches, attempts, invalid_bases, range_trials, invalid_trials, failed_tangents = [], [], [], [], [], [], []
+     observed_depth = 0
+ 
+     def event(kind, d, iteration, force_complete, tangent_started=False, tangent_complete=False, **extra):
+@@ -63,14 +63,14 @@
+                 and row["factor"] == 2.**(-len(group)) and row["fixed_residual_scale"] == base["residual_scale"]
+                 and isfinite(row["base_phi"]) and row["base_phi"] >= 0., "Trial chronology/factor/base scale differs")
+             reason = row.get("reason")
+-            incomplete = row["accepted"] is False and reason == "unsupported_arithmetic_range"
++            incomplete = row["accepted"] is False and reason in ("unsupported_arithmetic_range", "invalid_J")
+             if incomplete:
+                 check(not any(k in row for k in ("phi", "minimum_J", "R_input"))
+                     and len(group) < settings["max_backtracks"] and ti+1 < len(trials),
+-                    "Rejected range force has contradictory fields or no supported half-factor continuation")
++                    "Rejected incomplete force has contradictory fields or no supported half-factor continuation")
+                 following = trials[ti+1]
+                 check((following["stage_parameter"],following["newton_check"],following["factor"])
+-                    == (base["d"],base["newton_check"],row["factor"]/2), "Range trial lacks the same-base half factor")
++                    == (base["d"],base["newton_check"],row["factor"]/2), "Incomplete trial lacks the same-base half factor")
+             else:
+                 check(all(k in row and isfinite(row[k]) for k in ("phi", "minimum_J", "R_input"))
+                     and row["minimum_J"] > 0. and ((row["accepted"] is True and reason is None)
+@@ -81,7 +81,7 @@
+             e = event("line_search_trial", base["d"], base["newton_check"], not incomplete,
+                       trial_index=ti, factor=row["factor"], accepted=row["accepted"], reason=reason)
+             if incomplete:
+-                range_trials.append(dict(row, trial_index=ti, force_call=e["force_call"]))
++                (invalid_trials if reason == "invalid_J" else range_trials).append(dict(row, trial_index=ti, force_call=e["force_call"]))
+             group.append(row); ti += 1
+             if row["accepted"]:
+                 break
+@@ -186,6 +186,7 @@
+     return dict(counts=counts,Newton_base_calls=len(history),trial_calls=len(trials),
+         completed_trials=sum(e["completed"] for e in events if e["kind"] == "line_search_trial"),
+         rejected_range_trials=range_trials,
++        rejected_invalid_J_trials=invalid_trials,
+         predictor_invalid_J_bases=invalid_bases,reconstructed_attempts=attempts,reconstructed_force_events=events,
+         accepted_completed_caches=caches,all_Newton_base_and_tangent_calls_completed=not failed_tangents,
+         failed_tangent_base=failed_tangents[0] if failed_tangents else None,

@@ -1,0 +1,108 @@
+{
+  "schema_version": "hf-native-project-task-1.1",
+  "task_id": "EXPLORATORY_fixed_workpiece_gripper_square_x72_boundary_touch_E1_1p8mm",
+  "case_family": "gripper",
+  "purpose": "tip_face_alignment_boundary_touch_x72_E1_ordered_cycle",
+  "parameter_origin": "User-delegated tip-alignment exploration following complete x71/E1 and x71/E0.5 comparisons; choose E1 without assuming contact.",
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain"
+  },
+  "input": {
+    "tag": "input",
+    "control": "average_displacement",
+    "target_mm": 1.8
+  },
+  "output": {
+    "tag": "output",
+    "spring_N_per_mm": 0.0
+  },
+  "constraints": [
+    {
+      "tag": "support",
+      "components": [
+        0,
+        1
+      ]
+    },
+    {
+      "tag": "symmetry",
+      "components": [
+        1
+      ]
+    }
+  ],
+  "support_selection": "solid_incident_nodes_only",
+  "input_auxiliary_spring_N_per_mm": 0.0,
+  "workpiece": {
+    "kind": "fixed_rigid",
+    "shape": "square",
+    "center_mm": [
+      72.0,
+      40.0
+    ],
+    "fixed_components": [
+      0,
+      1
+    ],
+    "side_mm": 16.0
+  },
+  "third_medium": {
+    "gamma": 1e-06
+  },
+  "qualification_criteria": {
+    "max_design_volume_fraction": null,
+    "min_feature_mm": null
+  },
+  "reference_state": "undeformed",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "regularization": {
+    "alpha": 1e-06,
+    "length_mm": 80.0
+  },
+  "background_symmetry": {
+    "points_mm": [
+      [
+        0.0,
+        40.0
+      ],
+      [
+        80.0,
+        40.0
+      ]
+    ],
+    "components": [
+      1
+    ]
+  },
+  "geometry": {
+    "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+    "descriptor_sha256": "8c5c315e7328888a6ba16b28d5def1712e2ea5ddae21cfa97f99f06396e7977b"
+  },
+  "analysis_grid": {
+    "policy": "native"
+  },
+  "description": "Independent zero-start fixed square center(72,40),side16 lower half[64,80]x[32,40]; right face on native x80 boundary with zero right-side medium margin. Original LF masks/grid/material/ports/controller and eleven1.8mm targets unchanged; own overlay/model and fresh reference required.",
+  "path": {
+    "kind": "ordered_cycle",
+    "targets_mm": [
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      1.75,
+      1.8,
+      1.75,
+      1.5,
+      1.0,
+      0.5,
+      0.0
+    ]
+  }
+}

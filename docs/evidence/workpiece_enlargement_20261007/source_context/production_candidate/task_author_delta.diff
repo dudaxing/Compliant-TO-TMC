@@ -1,0 +1,81 @@
+--- x72/task.json
++++ enlarged/task.json
+@@ -1,9 +1,9 @@
+ {
+   "schema_version": "hf-native-project-task-1.1",
+-  "task_id": "EXPLORATORY_fixed_workpiece_gripper_square_x72_boundary_touch_E1_1p8mm",
++  "task_id": "EXPLORATORY_fixed_workpiece_gripper_square_x71_side18_E1_1p2mm",
+   "case_family": "gripper",
+-  "purpose": "tip_face_alignment_boundary_touch_x72_E1_ordered_cycle",
+-  "parameter_origin": "User-delegated tip-alignment exploration following complete x71/E1 and x71/E0.5 comparisons; choose E1 without assuming contact.",
++  "purpose": "enlarged_square_contact_and_body_force_exploration",
++  "parameter_origin": "User-delegated rightward placement and larger workpiece exploration; test TMC deformation and report actual lower-body reaction.",
+   "material": {
+     "E_MPa": 1.0,
+     "nu": 0.3,
+@@ -12,7 +12,7 @@
+   "input": {
+     "tag": "input",
+     "control": "average_displacement",
+-    "target_mm": 1.8
++    "target_mm": 1.2
+   },
+   "output": {
+     "tag": "output",
+@@ -39,14 +39,14 @@
+     "kind": "fixed_rigid",
+     "shape": "square",
+     "center_mm": [
+-      72.0,
++      71.0,
+       40.0
+     ],
+     "fixed_components": [
+       0,
+       1
+     ],
+-    "side_mm": 16.0
++    "side_mm": 18.0
+   },
+   "third_medium": {
+     "gamma": 1e-06
+@@ -88,20 +88,33 @@
+   "analysis_grid": {
+     "policy": "native"
+   },
+-  "description": "Independent zero-start fixed square center(72,40),side16 lower half[64,80]x[32,40]; right face on native x80 boundary with zero right-side medium margin. Original LF masks/grid/material/ports/controller and eleven1.8mm targets unchanged; own overlay/model and fresh reference required.",
++  "description": "Fixed square center(71,40),side18; lower half [62,80]x[31,40], 1mm initial bottom separation, no right-side medium margin. Native LF geometry, E1 material, ports and Newton settings stay unchanged. New zero-start ordered 1.2mm loading and unloading task with finer targets near expected contact; every actual accepted state requires fresh reference.",
+   "path": {
+     "kind": "ordered_cycle",
+     "targets_mm": [
+       0.0,
++      0.25,
+       0.5,
++      0.65,
++      0.75,
++      0.8,
++      0.85,
++      0.9,
++      0.95,
+       1.0,
+-      1.5,
+-      1.75,
+-      1.8,
+-      1.75,
+-      1.5,
++      1.05,
++      1.1,
++      1.15,
++      1.2,
++      1.15,
++      1.1,
+       1.0,
++      0.9,
++      0.8,
++      0.75,
++      0.65,
+       0.5,
++      0.25,
+       0.0
+     ]
+   }

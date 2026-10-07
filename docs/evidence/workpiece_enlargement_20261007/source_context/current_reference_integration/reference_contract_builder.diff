@@ -1,0 +1,104 @@
+--- original_projection_reference/reference_contract_builder.py
++++ accounting_reference_candidate/reference_contract_builder.py
+@@ -12,8 +12,15 @@
+ 
+ RSS = 8*1024**3
+ CORE_PIN = "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5"
+-AUDIT_PIN = "447e8d3c2c2d5af538dd72a46afb1995c6bd8e52d97606463e86d46c5d99f8b9"
+-COUNTER_PIN = "b028dba774d430a6d082ca05be86489a56e800be1f1bd69c60148ffccd51e8b3"
++AUDIT_PIN = "3988cc5e6e923784a3014cb74970fe83ebac4a5052d0093721392576f20cb17d"
++COUNTER_PIN = "a751fe07a682ff89c88b16d8d69325b1990d45c26114b8715414116580737ed9"
++ORIGINAL_COUNTER_PIN = "b028dba774d430a6d082ca05be86489a56e800be1f1bd69c60148ffccd51e8b3"
++COUNTER_SCHEMA = "shift-complete-attempt-counter-recovered-invalid-J-1.1"
++ACCOUNTING_EVIDENCE = dict(saved_report="saved_report.json",saved_accounting="saved_accounting.json",
++    peer_review="peer_review.json",independent_chronology="independent_chronology.json",
++    preflight_report="preflight_report.json",preflight_helper="preflight_helper.py",
++    validation_helper="validation_helper.py",source_author_note="source_author_note.json",
++    source_delta="source_delta.diff",source_author_helper="source_author_helper.py")
+ LAUNCHER_PIN = "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477"
+ MATH = ("audit_native_mean.py","audit_native_force.py","hf2_precision_reference.py",
+         "hf4_split_precision_reference.py","audit_native_workpiece_cycle.py","run_split_average_demo.py")
+@@ -130,6 +137,50 @@
+     assert 0 <= proof["elapsed_seconds"] <= 180 and 0 <= launch["elapsed_seconds"] <= 240
+     assert 0 <= proof["peak_sampled_RSS_bytes"] <= RSS and 0 <= launch["peak_sampled_tree_RSS_bytes"] <= RSS
+     assert all(sha(root/name) == pin for name,pin in protocol["bindings"].items())
++
++
++def verify_accounting_transition(root, control, transition, bind):
++    """Verify copied source and saved proof identities only; never run a counter or mechanics."""
++    installed = control/"reference_author"
++    assert transition["schema_version"] == "recovered-invalid-J-saved-accounting-transition-1.1"
++    assert transition["proof_kind"] == "recovered_invalid_J_saved_accounting"
++    assert transition["path"] == (installed/"counter_attempts.py").relative_to(root).as_posix()
++    assert transition["previous_sha256"] == ORIGINAL_COUNTER_PIN and transition["current_sha256"] == COUNTER_PIN
++    expected = dict(original_counter=installed/"counter_original_B028.py",counter=installed/"counter_attempts.py")
++    expected.update({role:installed/"accounting_evidence"/name for role,name in ACCOUNTING_EVIDENCE.items()})
++    evidence = transition["evidence"]
++    assert set(evidence) == set(expected)
++    for role,path in expected.items():
++        assert evidence[role]["file"] == path.relative_to(root).as_posix() and evidence[role]["sha256"] == sha(path)
++        bind(path,evidence[role]["sha256"])
++    assert evidence["original_counter"]["sha256"] == ORIGINAL_COUNTER_PIN and evidence["counter"]["sha256"] == COUNTER_PIN
++    proof,accounting,peer,independent,preflight = (read(expected[role]) for role in
++        ("saved_report","saved_accounting","peer_review","independent_chronology","preflight_report"))
++    assert proof["status"] == "saved_only_reproduction_pass" and proof["all_bindings_unchanged"]
++    assert proof["source_transition"] == dict(path="counter_attempts.py",previous_sha256=ORIGINAL_COUNTER_PIN,
++        current_sha256=COUNTER_PIN,proof_kind=transition["proof_kind"])
++    assert proof["current_accounting_sha256"] == evidence["saved_accounting"]["sha256"] and proof["checks_completed"] == 1817
++    assert proof["complete_current_states"] == independent["actual_states"] == 24
++    assert proof["independent_counts"] == accounting["counts"] == independent["counters"]
++    assert len(accounting["rejected_invalid_J_trials"]) == len(independent["incomplete_invalid_J_trials"]) == 14
++    assert len(accounting["rejected_range_trials"]) == proof["actual_rejected_range_trials"] == 10
++    assert proof["first_range_force_ordinal"] == accounting["rejected_range_trials"][0]["force_call"] == 325
++    assert len(proof["regressions"]) == 3 and len(proof["tampered_chronologies"]) == 2
++    assert all(value == 0 for value in proof["calls"].values())
++    assert peer["status"] == "pass_static_and_saved_ledger_only" and peer["unchanged_rest"] is True
++    assert independent["status"] == "pure_saved_chronology_pass" and all(value == 0 for value in peer["activity"].values())
++    assert preflight["status"] == "saved_accounting_unsupported" and preflight["source_sha256"] == ORIGINAL_COUNTER_PIN
++    assert proof["preflight_sha256"] == evidence["preflight_report"]["sha256"]
++    by_name = {Path(name.replace("\\","/")).name:pin for name,pin in peer["source_pins"].items()}
++    for name,role in (("counter_original_B028.py","original_counter"),("counter_attempts.py","counter"),
++        ("validate_saved_accounting.py","validation_helper"),("report.json","saved_report"),
++        ("current_accounting.json","saved_accounting"),("projection_counter_saved_evidence.json","independent_chronology")):
++        assert by_name[name] == evidence[role]["sha256"]
++    for name,pin in proof["input_bindings"].items(): bind(root/name,pin)
++    for name,pin in independent["input_pins"].items(): bind(root/name,pin)
++    result_file = control/"run_001/result/result.json"
++    assert proof["input_bindings"][result_file.relative_to(root).as_posix()] == sha(result_file)
++    assert read(result_file)["call_counts"] == accounting["counts"]
+ 
+ 
+ def main():
+@@ -270,18 +321,30 @@
+     refs[launcher.relative_to(root).as_posix()] = LAUNCHER_PIN
+     assert all(sha(root/n) == pin for n,pin in pins.items())
+     installed.mkdir()
+-    for name in ("audit_enlarged_square.py","core_audit_mechanical.py","counter_attempts.py"):
++    for name in ("audit_enlarged_square.py","core_audit_mechanical.py","counter_attempts.py","counter_original_B028.py"):
+         shutil.copyfile(author/name,installed/name)
+         refs[(installed/name).relative_to(root).as_posix()] = sha(installed/name)
+     own = Path(__file__).resolve(); copied_builder = installed/own.name
+     shutil.copyfile(own,copied_builder)
+     refs[copied_builder.relative_to(root).as_posix()] = sha(copied_builder)
++    shutil.copytree(author/"accounting_evidence",installed/"accounting_evidence")
++    evidence_files = dict(original_counter=installed/"counter_original_B028.py",counter=installed/"counter_attempts.py")
++    evidence_files.update({role:installed/"accounting_evidence"/name for role,name in ACCOUNTING_EVIDENCE.items()})
++    accounting_transition = dict(schema_version="recovered-invalid-J-saved-accounting-transition-1.1",
++        proof_kind="recovered_invalid_J_saved_accounting",path=(installed/"counter_attempts.py").relative_to(root).as_posix(),
++        previous_sha256=ORIGINAL_COUNTER_PIN,current_sha256=COUNTER_PIN,
++        evidence={role:dict(file=path.relative_to(root).as_posix(),sha256=sha(path)) for role,path in evidence_files.items()})
++    def bind_accounting(path,pin):
++        assert sha(path) == pin
++        pins[path.relative_to(root).as_posix()] = pin
++    verify_accounting_transition(root,control,accounting_transition,bind_accounting)
+     assert len({Path(n).name for n in refs}) == len(refs)
+     contract = dict(schema_version="shift-square-reference-contract-1.1",
+         production_stage=stage.relative_to(root).as_posix(),baseline_commit=inventory["baseline_commit"],
+         initial_guess=INITIAL_GUESS,predictor_initialization=PREDICTOR_INITIALIZATION,
+         limits=dict(helper_seconds=limit,outer_seconds=limit+60,sampled_RSS_bytes=RSS),workpiece=BODY,targets_mm=TARGETS,
+-        reference_sources=refs,counter_schema="shift-complete-attempt-counter-1.0",counter_helper_sha256=COUNTER_PIN,
++        reference_sources=refs,counter_schema=COUNTER_SCHEMA,counter_helper_sha256=COUNTER_PIN,
++        accounting_source_transition=accounting_transition,
+         actual_accepted_states=len(result["states"]),expected_new_HP80_120_calls=2*len(result["states"]),
+         reference_budget_basis=args.budget_basis,input_inventory_sha256=sha(paths["input_inventory.json"]),
+         production_receipt_sha256=sha(paths["execution_receipt.json"]),source_freeze_sha256=sha(paths["source_freeze.json"]),
