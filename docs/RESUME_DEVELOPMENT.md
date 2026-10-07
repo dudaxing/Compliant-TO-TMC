@@ -1,3 +1,5 @@
+B-REF2 更新：最小V2候选已完成作者、root与独立静审，尚未制卡、导入或执行；[具体新卡与源码](evidence/native_batch_reference_v2_proposal_001/B-REF2_CARD.md)待新授权。原生产PASS、V1参考失败HP0及未生成批量图的状态保持。
+
 ## 当前恢复入口：生产通过，参考读取失败卡已关闭
 
 先读 [CURRENT_STATUS](CURRENT_STATUS.md)、[当前结果](../lf_data_preparation/native_interface_001/batch_forward_001/RESULTS.md) 与该目录 `current_progress_002.json`、`reference_failure_diagnosis.json`。原两例生产卡 PASS，各四态/14F/9T，54份保存输出和28核心源字节保持。canonical 新参考一次 NOT_PASS：`coords` 字段不存在，HP=0；细例参考/图未执行。不得复跑原生产卡、失败参考卡或修改冻结 source/protocol/output。

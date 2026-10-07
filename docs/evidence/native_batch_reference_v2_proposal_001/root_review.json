@@ -1,0 +1,77 @@
+{
+  "schema_version": "native-batch-case-reference-v2-static-root-1.0",
+  "status": "pass_static_only",
+  "blocking_findings": [],
+  "reviewed_utc": "2026-10-07T20:39:26.613678+00:00",
+  "source_sha256": {
+    "audit_batch_case.py": "e9642a3e00d62ba0728dbe95e9214cd4771dbfbc2ad8f9ce115f8157e4a41588",
+    "reference_case_builder.py": "8744a981d1ec7d17a79ef4788701870d16bbf636a059b69144159a41de3d83f9"
+  },
+  "cases": {
+    "canonical": {
+      "actual_states": 4,
+      "fresh_HP_required": 8,
+      "model_subscripts": [
+        "b_in",
+        "connectivity",
+        "coordinates",
+        "edofs",
+        "fixed_dofs",
+        "free_dofs"
+      ],
+      "missing_subscripts": [],
+      "model_field_count": 23
+    },
+    "native_fine": {
+      "actual_states": 4,
+      "fresh_HP_required": 8,
+      "model_subscripts": [
+        "b_in",
+        "connectivity",
+        "coordinates",
+        "edofs",
+        "fixed_dofs",
+        "free_dofs"
+      ],
+      "missing_subscripts": [],
+      "model_field_count": 23
+    }
+  },
+  "full_load_diagnosis_sha256": "96a3da1aeec5cf5f8628972bfca97a29a04490c7f61e9439f92b9803879828ac",
+  "decisions": [
+    "Read the exact V1-to-V2 source diff and complete field/state/attribute diagnosis; added model subscript names were compared with both actual23-field declarations.",
+    "The only mechanics-adjacent loading correction is coords to coordinates; original Audit.run/run_state/80-120 precision/scatter/port direction/GATES remain inherited.",
+    "Checkpoint/lifecycle ASTs match V1 exactly; the new stage/output/rootstop separate future execution from the closed failure.",
+    "PRODUCTION_STAGE retains complete raw production and its aa072 baseline; current HEAD need not equal that historical producer baseline.",
+    "Closed V1 failure is pinned as context only, with HP0 and no numerical qualification. No closed source/card/output is modified.",
+    "Each new case still requires fresh2N (actualN4 gives8HP); fine starts only after the new canonical terminal pass.",
+    "Original summary is preserved; qualified summary cannot be used without matching worker receipt and outer F3 terminal/resource pass."
+  ],
+  "explicit_proposed_budgets": {
+    "canonical": {
+      "helper_seconds": 240,
+      "outer_seconds": 270
+    },
+    "native_fine": {
+      "helper_seconds": 900,
+      "outer_seconds": 960
+    }
+  },
+  "sampled_RSS_limit_bytes": 8589934592,
+  "execution_authorized": false,
+  "limitations": [
+    "Declared JSON and source compatibility only; no NumPy/NPZ/HP execution or new numerical qualification.",
+    "No production rerun, all tangent columns, energy, contact, pressure, mesh convergence, ranking or HF5 qualification."
+  ],
+  "activity": {
+    "candidate_imports": 0,
+    "builder_calls": 0,
+    "NPZ_loads": 0,
+    "HF_imports": 0,
+    "HP": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "renders": 0
+  }
+}
