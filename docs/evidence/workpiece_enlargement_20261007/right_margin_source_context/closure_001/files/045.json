@@ -1,0 +1,141 @@
+{
+  "schema_version": "right-medium-actual3200-preparation-plan-1.0",
+  "status": "not_executed_no_actual_constructor_or_new_state",
+  "baseline_commit": "abf62b04d0a384f3c9cfa352dd6232ad1d4ab3d1",
+  "selected_baseline": "gamma1e-6; enlarged_square_projection_001 only, no mixing gamma-half coefficients",
+  "baseline_inputs": {
+    "task": {
+      "file": "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/task.json",
+      "sha256": "385cce960696b8c01e1323fc43d98f4ee28a392214c44a8f3609006324cde2e0"
+    },
+    "model": {
+      "file": "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/model.npz",
+      "sha256": "e8725fc0b04c9f549ae48164ec5ab824393d699e7a980a7577c4ffef4d9414f4"
+    },
+    "model_metadata": {
+      "file": "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/model.json",
+      "sha256": "54d71ac50a88b26876bd7bb02a3be3e4bdd36142948874c9bd37ef455eef10c5"
+    },
+    "result": {
+      "file": "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/result.json",
+      "sha256": "b1bffb74a3ef105b111e9f6aa50ef6322e392899135073f58a4283f6408b3ba4"
+    },
+    "source_geometry": {
+      "file": "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/source_geometry/geometry.json",
+      "sha256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6"
+    },
+    "source_geometry_arrays": {
+      "file": "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/source_geometry/geometry.npz",
+      "sha256": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282"
+    }
+  },
+  "future_physical_delta": {
+    "right_columns": 2,
+    "right_medium_margin_mm": 2.0,
+    "domain_mm": [
+      82.0,
+      40.0
+    ],
+    "task_workpiece": {
+      "kind": "fixed_rigid",
+      "shape": "square",
+      "center_mm": [
+        71.0,
+        40.0
+      ],
+      "fixed_components": [
+        0,
+        1
+      ],
+      "side_mm": 18.0
+    },
+    "unchanged_task_physics": [
+      "material",
+      "third_medium",
+      "regularization",
+      "input",
+      "output",
+      "path",
+      "constraints",
+      "support_selection",
+      "input_auxiliary_spring_N_per_mm",
+      "workpiece",
+      "reference_state",
+      "qualification_criteria",
+      "analysis_grid"
+    ],
+    "explicit_task_adaptations": [
+      "new geometry_id/descriptor binding",
+      "background_symmetry top endpoint [80,40] to [82,40]",
+      "task descriptive identity mentions new HF domain and margin"
+    ],
+    "retained_material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain",
+      "lambda_s_MPa": 0.5769230769230769,
+      "mu_s_MPa": 0.3846153846153846,
+      "kappa_s_MPa": 0.8333333333333333,
+      "thickness_mm": 20.0,
+      "third_medium_gamma": 1e-06,
+      "alpha": 1e-06,
+      "regularization_length_mm": 80.0,
+      "kr_MPa_mm2": 0.008615384615384613,
+      "kr_material_factor_applied": false,
+      "force_scale_per_length": 20.0
+    },
+    "Lr_must_remain_80_mm": true
+  },
+  "expected_counts_analytical_not_actual": {
+    "old_cells": 3200,
+    "new_cells": 3280,
+    "added_cells": 80,
+    "old_nodes": 3321,
+    "new_nodes": 3403,
+    "added_nodes": 82,
+    "old_DOFs": 6642,
+    "new_DOFs": 6806,
+    "added_DOFs": 164,
+    "body_cells": 162,
+    "body_nodes": 190,
+    "body_DOFs": 380,
+    "body_top_uy_overlap": 19,
+    "old_fixed": 448,
+    "expected_new_fixed": 450,
+    "expected_new_free": 6356
+  },
+  "index_map": {
+    "cell": "old j*80+i -> new j*82+i; 0<=j<40,0<=i<80",
+    "node": "old j*81+i -> new j*83+i; 0<=j<=40,0<=i<=80",
+    "DOF": "2*old_node+c -> 2*new_node+c, c in [0,1]",
+    "new_cells": "two columns i=80,81; every row j=0..39",
+    "new_top_uy": "new nodes at (81,40) and (82,40), component uy only"
+  },
+  "future_saved_model_comparisons": [
+    "Require raw parent geometry JSON/NPZ bytes and all four masks unchanged in old [:,:80]; added columns solid/design/passive_solid0 and passive_void1.",
+    "Construct exactly one new padded native project and compare against the old saved NPZ; do not reconstruct or run the old equilibrium.",
+    "Coordinates[new_node_map] equal old physical coordinates raw; connectivity[new_cell_map] equals new_node_map[old connectivity], edofs similarly mapped.",
+    "Old solid/gamma/lam/mu at new_cell_map are dtype/shape/value raw exact. New cells medium with the selected baseline gamma and material coefficients.",
+    "Same scalar kr/hx/hy/thickness/k_out/force_scale and same reference operators points/grad/hessian/weights; Lr80 is not inferred from new width82.",
+    "Support/entity_symmetry/workpiece/ports map to identical physical coordinate/component sets. Body162/190/380 and top-overlap19 remain exact.",
+    "New fixed set equals remapped old fixed set union two new top uy DOFs. Verify actual fixed/free counts, not just expected totals.",
+    "Mean-port physical nodes, directions and per-node .25/.5/.25 weights remain exact; b vectors and free DOFs are rebuilt at6806 DOFs.",
+    "Recreate the saved PORT direction from the new model; compare new_direction[dof_map] to old stored direction and zero added DOFs. Old6642 vector or naive tail-zero padding is not reusable.",
+    "Read back saved new metadata/NPZ/source snapshot and bind all identities. HF-derived processing must be explicit while original lf_v2/native grid/source-background historical metadata stay unchanged."
+  ],
+  "scope": "Preparation-only future identity/mapping checks; no force/tangent/Newton/HP or deformed geometry/nodal/strain observations. Expected values confer no mechanical/contact qualification.",
+  "future_budget": "Actual preparation gets its own reviewed finite card; small synthetic tests120/150s8GiB are separate and cannot authorize production.",
+  "current_activity": {
+    "source_JSON_reads": true,
+    "raw_file_SHA_reads": true,
+    "NPZ_array_reads": 0,
+    "model_constructions": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "geometry_observations": 0,
+    "nodal_observations": 0,
+    "formal_writes": 0
+  }
+}

@@ -1,0 +1,118 @@
+--- /dev/null
++++ hf_repo/src/hf_eval/analysis_domain.py
+@@ -0,0 +1,83 @@
++"""Derive an HF analysis domain by adding passive-void columns on the right."""
++from __future__ import annotations
++
++from copy import deepcopy
++from hashlib import sha256
++from pathlib import Path
++
++import numpy as np
++
++from .data import ARRAY_NAMES, GeometryError, load_geometry, write_geometry
++
++
++def write_right_medium_geometry(parent_path, output_dir, right_columns: int) -> Path:
++    """Write a new HF geometry package; preserve the parent cell subdomain and tags.
++
++    This adds analysis cells, without LF optimization, resampling, a physical
++    task, materials or applied boundary conditions. Existing outputs are rejected.
++    """
++    if isinstance(right_columns, (bool, np.bool_)) or not isinstance(right_columns, (int, np.integer)) or right_columns <= 0:
++        raise GeometryError("right_columns must be a positive integer")
++    right_columns = int(right_columns)
++    output = Path(output_dir)
++    if output.exists() or output.is_symlink():
++        raise FileExistsError(f"Analysis-domain output already exists: {output}")
++    source = Path(parent_path)
++    if source.is_dir():
++        source = source / "geometry.json"
++    descriptor_bytes = source.read_bytes()
++    parent = load_geometry(source)
++    if descriptor_bytes != parent.path.read_bytes():
++        raise GeometryError("Parent geometry descriptor changed while reading")
++    array_bytes = parent.path.with_name(parent.metadata["arrays"]["path"]).read_bytes()
++    if sha256(array_bytes).hexdigest() != parent.metadata["arrays"]["sha256"]:
++        raise GeometryError("Parent geometry NPZ changed while reading")
++
++    metadata = deepcopy(parent.metadata)
++    old_grid = deepcopy(parent.grid)
++    ny, nx = old_grid["shape_yx"]
++    dx = old_grid["cell_size_mm"][0]
++    metadata["grid"]["shape_yx"] = [ny, nx + right_columns]
++    metadata["grid"]["extent_mm"][0] = (nx + right_columns) * dx
++    arrays = {}
++    for name in ARRAY_NAMES:
++        padded = np.zeros((ny, nx + right_columns), dtype=np.uint8)
++        padded[:, :nx] = parent.arrays[name]
++        if name == "passive_void":
++            padded[:, nx:] = 1
++        arrays[name] = padded
++
++    derivation = {
++        "operation": "right_passive_void_padding",
++        "parent_hf_geometry": {
++            "geometry_id": parent.geometry_id,
++            "descriptor_sha256": parent.metadata["descriptor_sha256"],
++            "geometry_json_sha256": sha256(descriptor_bytes).hexdigest(),
++            "geometry_npz_sha256": sha256(array_bytes).hexdigest(),
++            "array_fields": deepcopy(parent.metadata["arrays"]["fields"]),
++            "source_path_context": str(parent.path),
++            "processing": deepcopy(parent.metadata.get("processing", {})),
++        },
++        "old_grid": old_grid,
++        "right_columns": right_columns,
++        "margin_mm": right_columns * dx,
++        "new_grid": deepcopy(metadata["grid"]),
++        "parent_cell_slice_yx": [[0, ny], [0, nx]],
++        "index_policy": "physical coordinates unchanged; row strides change; rebuild cell/node/DOF indices and direction",
++        "path_context_role": "historical identity only; this geometry package is self-contained",
++    }
++    metadata.setdefault("provenance", {}).setdefault("hf_analysis_domain_derivations", []).append(derivation)
++    metadata["processing"] = {
++        "source_kind": "HF_derived_analysis_domain",
++        "analysis_domain_policy": "right_passive_void_padding",
++        "parent_native_subdomain_preserved": True,
++        "whole_grid_is_LF_native": False,
++        "resampling_applied": False,
++        "lf_optimization_applied": False,
++        "new_threshold_or_cleanup_applied": False,
++        "region_tags_policy": "unchanged physical coordinates, directions, components and averaging",
++        "background_boundary_applied": False,
++        "task_policy": "No HF task, materials, applied constraints or mechanical qualification are created",
++    }
++    output.mkdir(parents=True, exist_ok=False)
++    return write_geometry(output, metadata, arrays)
+--- /dev/null
++++ hf_repo/scripts/prepare_analysis_domain.py
+@@ -0,0 +1,29 @@
++"""Write a new HF analysis geometry with passive-void columns on its right."""
++from __future__ import annotations
++
++import argparse
++import json
++from pathlib import Path
++import sys
++
++sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
++from hf_eval.analysis_domain import write_right_medium_geometry
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--geometry", type=Path, required=True, help="parent HF geometry.json or package directory")
++    parser.add_argument("--output", type=Path, required=True, help="new derived HF geometry directory")
++    parser.add_argument("--right-columns", type=int, required=True, help="positive count of passive-void columns")
++    args = parser.parse_args()
++    try:
++        descriptor = write_right_medium_geometry(args.geometry, args.output, args.right_columns)
++    except (OSError, ValueError, KeyError, TypeError) as error:
++        parser.exit(1, f"Analysis-domain preparation failed: {error}\n")
++    print(json.dumps(dict(geometry_file=str(descriptor), right_columns=args.right_columns,
++                         task_created=False, response_evaluated=False), indent=2))
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())

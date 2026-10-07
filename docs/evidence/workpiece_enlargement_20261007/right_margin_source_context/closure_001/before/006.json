@@ -1,0 +1,1169 @@
+{
+  "schema_version": "right-margin-progress-1.0",
+  "baseline_commit": "abf62b04d0a384f3c9cfa352dd6232ad1d4ab3d1",
+  "objective": "Independent HF finite-deformation TMC forward evaluation of LF geometries; test contact response and fixed-workpiece force; no HF optimizer",
+  "reason": "Original enlarged square right face x80 touches analysis boundary; independently test right-medium-domain sensitivity with same body/ports/material/path",
+  "physical_delta": {
+    "right_columns": 2,
+    "domain_mm": [
+      82.0,
+      40.0
+    ],
+    "right_margin_mm": 2.0,
+    "body_center_mm": [
+      71.0,
+      40.0
+    ],
+    "side_mm": 18.0,
+    "initial_gap_mm": 1.0,
+    "gamma": 1e-06,
+    "Lr_mm": 80.0
+  },
+  "implementation": [
+    "Additive analysis_domain API and CLI; original four-mask physical subdomain and LF provenance retained",
+    "Rebuild cell/node/DOF/PORT indices from physical coordinates; preserve original physics"
+  ],
+  "closed_phases": {
+    "tests": {
+      "schema_version": "right-margin-adapter-test-receipt-1.0",
+      "status": "pass",
+      "pytest_exit_code": 0,
+      "error": null,
+      "constructor_invocations": 2,
+      "tests_collected": 5,
+      "tests_passed": 5,
+      "elapsed_seconds": 5.71815540001262,
+      "new_force_calls": 0,
+      "new_tangent_calls": 0,
+      "new_equilibrium_calls": 0,
+      "new_HP_calls": 0,
+      "zero_response_basis": "Selected test source contains geometry, map and two constructor operations only; no response API is invoked",
+      "protocol_sha256": "d928bdbc3bf0806325ef58cc1b4b6a62ed1fd57d63f66c29498f7a63dd166229",
+      "all_bindings_unchanged": true,
+      "reports": [
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_old_mask_bytes_and_hand_tabulated_physical_native_mesh_survive_padding",
+          "when": "setup",
+          "outcome": "passed",
+          "duration_seconds": 0.021519599948078394
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_old_mask_bytes_and_hand_tabulated_physical_native_mesh_survive_padding",
+          "when": "call",
+          "outcome": "passed",
+          "duration_seconds": 0.11791319993790239
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_old_mask_bytes_and_hand_tabulated_physical_native_mesh_survive_padding",
+          "when": "teardown",
+          "outcome": "passed",
+          "duration_seconds": 0.00029879994690418243
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_new_identity_records_hf_derivation_without_relabeling_lf_history",
+          "when": "setup",
+          "outcome": "passed",
+          "duration_seconds": 0.003967699944041669
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_new_identity_records_hf_derivation_without_relabeling_lf_history",
+          "when": "call",
+          "outcome": "passed",
+          "duration_seconds": 0.05019079998601228
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_new_identity_records_hf_derivation_without_relabeling_lf_history",
+          "when": "teardown",
+          "outcome": "passed",
+          "duration_seconds": 0.00029470003210008144
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_small_project_preserves_physical_groups_material_ports_and_rebuilds_direction",
+          "when": "setup",
+          "outcome": "passed",
+          "duration_seconds": 0.005480499938130379
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_small_project_preserves_physical_groups_material_ports_and_rebuilds_direction",
+          "when": "call",
+          "outcome": "passed",
+          "duration_seconds": 0.08022949995938689
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_small_project_preserves_physical_groups_material_ports_and_rebuilds_direction",
+          "when": "teardown",
+          "outcome": "passed",
+          "duration_seconds": 0.00028259993996471167
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_parent_and_existing_output_are_never_overwritten",
+          "when": "setup",
+          "outcome": "passed",
+          "duration_seconds": 0.00457079999614507
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_parent_and_existing_output_are_never_overwritten",
+          "when": "call",
+          "outcome": "passed",
+          "duration_seconds": 0.018158199964091182
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_parent_and_existing_output_are_never_overwritten",
+          "when": "teardown",
+          "outcome": "passed",
+          "duration_seconds": 0.00029200001154094934
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_only_positive_integer_column_counts_are_accepted",
+          "when": "setup",
+          "outcome": "passed",
+          "duration_seconds": 0.0046530000399798155
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_only_positive_integer_column_counts_are_accepted",
+          "when": "call",
+          "outcome": "passed",
+          "duration_seconds": 0.01827290002256632
+        },
+        {
+          "nodeid": "tests/test_analysis_domain.py::test_only_positive_integer_column_counts_are_accepted",
+          "when": "teardown",
+          "outcome": "passed",
+          "duration_seconds": 0.00031299993861466646
+        }
+      ]
+    },
+    "preparation": {
+      "schema_version": "right-margin-preparation-receipt-1.0",
+      "status": "pass",
+      "invocations": 1,
+      "geometry_constructions": 1,
+      "geometry_constructions_completed": 1,
+      "geometry_writes": 1,
+      "model_constructions": 1,
+      "model_constructions_completed": 1,
+      "model_writes": 1,
+      "direction_writes": 1,
+      "force_calls": 0,
+      "tangent_calls": 0,
+      "solver_calls": 0,
+      "HP_calls": 0,
+      "JIT_calls": 0,
+      "LF_imports": 0,
+      "qualification": "Preparation and physical mapping only; no equilibrium, contact or force qualification.",
+      "outputs": {
+        "direction.npz": "f9cbc54420c7dba86873ee6121698ee1261e7a138cc21da1105fb9cd3a8db524",
+        "input_inventory.json": "80b0e72eb2c9f590ae2a1a4eadd13fbe3cc2b3e07e7b0b76ca8f5320e795176e",
+        "mapping.npz": "46df2b1e81660e2818029e9fa5a386baeddc6e83c3477803c4be6dddcd61b0be",
+        "model_comparison.json": "48fdb5d2248c7be57a8a2bf9a18eb2c338f4600ce52c629fd5ff0b5de421b1b4",
+        "source_freeze.json": "ecfd3fd8968c12641427be2d293513dccca00a6df525e660bf33d97b45645ea9",
+        "task.json": "26c34ab2b168cc68e04cfb1743ad2872c7f37230bd6a36c4395ad1c46326393e",
+        "geometry/geometry.json": "db6a1259765d7abc33fdf76c9dd7882faae8da04910b4f19d442611cdc0a095b",
+        "geometry/geometry.npz": "0e06b920c92476c18e14f435d8283b253a3ff454cc42229a93988ad34d3d7ae1",
+        "model/model.json": "07d90e7d4ceca6d82f62f043f4c4728b5909dc35dc7df81058b2b24a1fc6b8cf",
+        "model/model.npz": "c880381a1906d6d0a53f54cd951a26bfdf2e5175658260213528e16e35b51c34",
+        "model/source_geometry/geometry.json": "db6a1259765d7abc33fdf76c9dd7882faae8da04910b4f19d442611cdc0a095b",
+        "model/source_geometry/geometry.npz": "0e06b920c92476c18e14f435d8283b253a3ff454cc42229a93988ad34d3d7ae1"
+      },
+      "model_comparison": {
+        "total_fields": 27,
+        "raw_equal_fields": [
+          "force_scale_per_length",
+          "grad",
+          "hessian",
+          "hx",
+          "hy",
+          "k_out",
+          "kr",
+          "points",
+          "thickness",
+          "weights"
+        ],
+        "physically_mapped_fields": [
+          "b_in",
+          "b_out",
+          "connectivity",
+          "coordinates",
+          "edofs",
+          "fixed_dofs",
+          "free_dofs",
+          "gamma",
+          "lam",
+          "mu",
+          "solid",
+          "solid_dofs",
+          "solid_nodes",
+          "workpiece_background_symmetry_overlap_dofs",
+          "workpiece_cells",
+          "workpiece_dofs",
+          "workpiece_nodes"
+        ],
+        "fields": {
+          "b_in": {
+            "old_shape": [
+              6642
+            ],
+            "new_shape": [
+              6806
+            ],
+            "dtype": "float64",
+            "old_array_sha256": "b74ac1a13fc42328979c6fff6505ce1bff02280f0d040eaee6b0d86d85bf80d4",
+            "new_array_sha256": "cd02f8c978c477fcd6c189976fc5fdc353425585b4dd1b0397434c9c3c72e3e9",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "b_out": {
+            "old_shape": [
+              6642
+            ],
+            "new_shape": [
+              6806
+            ],
+            "dtype": "float64",
+            "old_array_sha256": "b293e516f7e93d8069bac9898ecd90494d6585857e25c6bebb9f98f95395f802",
+            "new_array_sha256": "681f142f084035d74dc42904aeea9e9468e6df43c42340e941f9310094ed690f",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "connectivity": {
+            "old_shape": [
+              3200,
+              4
+            ],
+            "new_shape": [
+              3280,
+              4
+            ],
+            "dtype": "int64",
+            "old_array_sha256": "84831753bb802e5418c1fbad9473952e67a9c8e942cfe04c66145d67a05d266c",
+            "new_array_sha256": "ef97bed138774cf8690fd1de4099b7e87e60087a4edb26196675865efa8dd78c",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "coordinates": {
+            "old_shape": [
+              3321,
+              2
+            ],
+            "new_shape": [
+              3403,
+              2
+            ],
+            "dtype": "float64",
+            "old_array_sha256": "726f02249ba39dcb422acc792a3e8b1185b943f21b2686ed0b7d5b2ed75b0725",
+            "new_array_sha256": "403af9800638e3bef36e57f941f3b79ef4cb865d3e48b4c2fc5da15aaecaaf8e",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "edofs": {
+            "old_shape": [
+              3200,
+              8
+            ],
+            "new_shape": [
+              3280,
+              8
+            ],
+            "dtype": "int64",
+            "old_array_sha256": "c5115b2eb89e54c5636f8080c747cfefaca89338f254f6351675cfb5a508a8c9",
+            "new_array_sha256": "6a3be15e22ac4f83b42c5634dac079d3acf0722e3c14470569a6fbf3930dd16e",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "fixed_dofs": {
+            "old_shape": [
+              448
+            ],
+            "new_shape": [
+              450
+            ],
+            "dtype": "int64",
+            "old_array_sha256": "b920cefc74790139e07a100a86c98fe2945fbae7520fd43ed06bb2a4747aaa6b",
+            "new_array_sha256": "0ebf0a10e22b6d1bf4de44f9b0d89959b44bf21a8c5c4ab057f3d30d68ae5eb5",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "force_scale_per_length": {
+            "old_shape": [],
+            "new_shape": [],
+            "dtype": "float64",
+            "old_array_sha256": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555",
+            "new_array_sha256": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555",
+            "raw_equal": true,
+            "physical_comparison": "pass"
+          },
+          "free_dofs": {
+            "old_shape": [
+              6194
+            ],
+            "new_shape": [
+              6356
+            ],
+            "dtype": "int64",
+            "old_array_sha256": "f088cc367dab7b32182d1118572810c74a609085279eb8a79f64b9ae517bf833",
+            "new_array_sha256": "8e9ab48d0938c54871af147a490dcfb06eef99159afe627c6ae45b094c281d01",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "gamma": {
+            "old_shape": [
+              3200
+            ],
+            "new_shape": [
+              3280
+            ],
+            "dtype": "float64",
+            "old_array_sha256": "c7a8d103bc415bc0c87bb549ef08e2acd75c74b4102cd575bbf4c95dfeffd1e3",
+            "new_array_sha256": "b9003c5bccbc108c9ffabe05309f3aa8c70f732105beb7d5654de10cba4398e7",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "grad": {
+            "old_shape": [
+              9,
+              4,
+              2
+            ],
+            "new_shape": [
+              9,
+              4,
+              2
+            ],
+            "dtype": "float64",
+            "old_array_sha256": "5367cbf39b1061f4187bebb33459c669cb8213f13ab414886ff8d80307187ef5",
+            "new_array_sha256": "5367cbf39b1061f4187bebb33459c669cb8213f13ab414886ff8d80307187ef5",
+            "raw_equal": true,
+            "physical_comparison": "pass"
+          },
+          "hessian": {
+            "old_shape": [
+              4,
+              2,
+              2
+            ],
+            "new_shape": [
+              4,
+              2,
+              2
+            ],
+            "dtype": "float64",
+            "old_array_sha256": "7159a88b63bb29c790caba857b0668308a0bd79ee9cfb28379c11cc2e95af882",
+            "new_array_sha256": "7159a88b63bb29c790caba857b0668308a0bd79ee9cfb28379c11cc2e95af882",
+            "raw_equal": true,
+            "physical_comparison": "pass"
+          },
+          "hx": {
+            "old_shape": [],
+            "new_shape": [],
+            "dtype": "float64",
+            "old_array_sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712",
+            "new_array_sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712",
+            "raw_equal": true,
+            "physical_comparison": "pass"
+          },
+          "hy": {
+            "old_shape": [],
+            "new_shape": [],
+            "dtype": "float64",
+            "old_array_sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712",
+            "new_array_sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712",
+            "raw_equal": true,
+            "physical_comparison": "pass"
+          },
+          "k_out": {
+            "old_shape": [],
+            "new_shape": [],
+            "dtype": "float64",
+            "old_array_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+            "new_array_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+            "raw_equal": true,
+            "physical_comparison": "pass"
+          },
+          "kr": {
+            "old_shape": [],
+            "new_shape": [],
+            "dtype": "float64",
+            "old_array_sha256": "992e1a3cebfcedb0e079143753e682376909011d13eec8e5e340d71f131de69c",
+            "new_array_sha256": "992e1a3cebfcedb0e079143753e682376909011d13eec8e5e340d71f131de69c",
+            "raw_equal": true,
+            "physical_comparison": "pass"
+          },
+          "lam": {
+            "old_shape": [
+              3200
+            ],
+            "new_shape": [
+              3280
+            ],
+            "dtype": "float64",
+            "old_array_sha256": "2ebcc50c053c1e579606ba2f9ab628bca119b53e09106c932ad104f811153d81",
+            "new_array_sha256": "e56f49b9fc1ad84ca6339644983b3ccc5d4227afb16e8cef1b7f55c8a4461214",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "mu": {
+            "old_shape": [
+              3200
+            ],
+            "new_shape": [
+              3280
+            ],
+            "dtype": "float64",
+            "old_array_sha256": "b0cd5bf03cd841a7b7d9673b6d8f936e1b9e622cf6c3b0c2635f1fa5b3733efe",
+            "new_array_sha256": "20ff8784a35b37f82bfe1ed0d35468e299a2b6be53e72f09954f7f5ca87ecb64",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "points": {
+            "old_shape": [
+              9,
+              2
+            ],
+            "new_shape": [
+              9,
+              2
+            ],
+            "dtype": "float64",
+            "old_array_sha256": "bbe5390364f8bb87d822c9ce2fea03b2523330f154c95827d4559b87f4ffeaa3",
+            "new_array_sha256": "bbe5390364f8bb87d822c9ce2fea03b2523330f154c95827d4559b87f4ffeaa3",
+            "raw_equal": true,
+            "physical_comparison": "pass"
+          },
+          "solid": {
+            "old_shape": [
+              3200
+            ],
+            "new_shape": [
+              3280
+            ],
+            "dtype": "bool",
+            "old_array_sha256": "77372d4862435f4566d0bee22744a97a19e9f81bfedf62cac0e2facf18f895d7",
+            "new_array_sha256": "ff7c318ebbfc56f32612f2f06ad43ad80247352dbe6f258c00ff05c61ee089e1",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "solid_dofs": {
+            "old_shape": [
+              2674
+            ],
+            "new_shape": [
+              2674
+            ],
+            "dtype": "int64",
+            "old_array_sha256": "48bb613e85143521e0a5fa8cac4981e36ddbea73da7fb924f26b2aaffadf80b7",
+            "new_array_sha256": "cf605626fa56b6345181c8e0d4faae122f3e4cd43e733171cf1a9c6a84b9a848",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "solid_nodes": {
+            "old_shape": [
+              1337
+            ],
+            "new_shape": [
+              1337
+            ],
+            "dtype": "int64",
+            "old_array_sha256": "7499009fec5ef066c3f5a56428021ae057459746ca3370c096da226b3da8cdd9",
+            "new_array_sha256": "affd9a767652b16ffdc7658615578a1cd17a017da8deff157e805f4a07734b44",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "thickness": {
+            "old_shape": [],
+            "new_shape": [],
+            "dtype": "float64",
+            "old_array_sha256": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555",
+            "new_array_sha256": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555",
+            "raw_equal": true,
+            "physical_comparison": "pass"
+          },
+          "weights": {
+            "old_shape": [
+              9
+            ],
+            "new_shape": [
+              9
+            ],
+            "dtype": "float64",
+            "old_array_sha256": "736b2b0ee0d4710b895ed9f9116d3fa32da144acbcb6701a87edb0408b7814b9",
+            "new_array_sha256": "736b2b0ee0d4710b895ed9f9116d3fa32da144acbcb6701a87edb0408b7814b9",
+            "raw_equal": true,
+            "physical_comparison": "pass"
+          },
+          "workpiece_background_symmetry_overlap_dofs": {
+            "old_shape": [
+              19
+            ],
+            "new_shape": [
+              19
+            ],
+            "dtype": "int64",
+            "old_array_sha256": "4b86606b0e08187802b17e7b0ad93b801c4007ef3f1243d00c02919447650ec3",
+            "new_array_sha256": "2770812e5d616b2875a88d942e9c5bda1b9b3c363d3b971098f02c290c310873",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "workpiece_cells": {
+            "old_shape": [
+              162
+            ],
+            "new_shape": [
+              162
+            ],
+            "dtype": "int64",
+            "old_array_sha256": "f6bb2faf6c42365da16ff4ec22cf98d175fa4f1488d6d531faa722cb88d07b8a",
+            "new_array_sha256": "511eb01fd14022468dec2a85587bfac582ee1ed078396ab755cd7dc6dfc172da",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "workpiece_dofs": {
+            "old_shape": [
+              380
+            ],
+            "new_shape": [
+              380
+            ],
+            "dtype": "int64",
+            "old_array_sha256": "b42b46a7a08110ca976087c1bbcc45c2def901f761743b7ba944c7fb12ff627d",
+            "new_array_sha256": "bbf9fc6f3384b3dcad7b244411ba232363334518eeb1f856636690e909263f2e",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          },
+          "workpiece_nodes": {
+            "old_shape": [
+              190
+            ],
+            "new_shape": [
+              190
+            ],
+            "dtype": "int64",
+            "old_array_sha256": "dcb6c4ecbe3b744b0a59235891f873f94b512b4dff5082aa2ffa7130cdbad57c",
+            "new_array_sha256": "9e84ab001b6b2d2e57f0307a64e5dcae8c49172fc522076e67e2741c85cc877f",
+            "raw_equal": false,
+            "physical_comparison": "pass"
+          }
+        },
+        "new_top_uy_dofs": [
+          6803,
+          6805
+        ],
+        "parent_physical_subdomain_byte_exact": true
+      },
+      "actual_counts": {
+        "cells": 3280,
+        "nodes": 3403,
+        "dofs": 6806,
+        "solid_cells": 1086,
+        "medium_cells": 2194,
+        "solid_incident_nodes": 1337,
+        "fixed_dofs": 450,
+        "free_dofs": 6356
+      },
+      "model_sha256": "c880381a1906d6d0a53f54cd951a26bfdf2e5175658260213528e16e35b51c34",
+      "task_sha256": "b253ec84d5348f1104ab378af5acdfc65dd3f2d572310a6089fe705bd342a66a",
+      "inputs_and_sources_unchanged": true,
+      "final_resource_check_passed": true,
+      "elapsed_seconds": 6.696345800068229,
+      "peak_sampled_helper_RSS_bytes": 125997056,
+      "helper_seconds": 120,
+      "sampled_RSS_limit_bytes": 8589934592
+    },
+    "prepared_view": {
+      "status": "pass",
+      "schema_version": "right-margin-prepared-view-1.0",
+      "cases": [
+        {
+          "label": "Original domain x=80 | right margin 0 mm",
+          "model_file": "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/model.npz",
+          "model_sha256": "e8725fc0b04c9f549ae48164ec5ab824393d699e7a980a7577c4ffef4d9414f4",
+          "cells": 3200,
+          "nodes": 3321,
+          "DOFs": 6642,
+          "tip_reference_mm": [
+            80.0,
+            30.0
+          ],
+          "actual_tip_node": 2510,
+          "body_box_lower_half_mm": [
+            62.0,
+            80.0,
+            31.0,
+            40.0
+          ],
+          "initial_tip_gap_mm": 1.0,
+          "right_margin_mm": 0.0
+        },
+        {
+          "label": "Derived domain x=82 | right margin 2 mm",
+          "model_file": "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/model/model.npz",
+          "model_sha256": "c880381a1906d6d0a53f54cd951a26bfdf2e5175658260213528e16e35b51c34",
+          "cells": 3280,
+          "nodes": 3403,
+          "DOFs": 6806,
+          "tip_reference_mm": [
+            80.0,
+            30.0
+          ],
+          "actual_tip_node": 2570,
+          "body_box_lower_half_mm": [
+            62.0,
+            80.0,
+            31.0,
+            40.0
+          ],
+          "initial_tip_gap_mm": 1.0,
+          "right_margin_mm": 2.0
+        }
+      ],
+      "new_F": 0,
+      "new_T": 0,
+      "new_solver": 0,
+      "new_HP": 0,
+      "new_model_constructions": 0,
+      "qualification": "Undeformed prepared geometry only; no response or contact qualification",
+      "elapsed_seconds": 1.4583329999586567,
+      "peak_sampled_helper_RSS_bytes": 84447232,
+      "all_bindings_unchanged": true,
+      "png_sha256": "87d2aa4a9d9a5adb072ca02811ad560a6a0d741b992c18c75b0b4a9773dcc40d"
+    }
+  },
+  "prepared_view_file": "functional_views/right_margin_20261007/geometry_001/view/receipt.json",
+  "production": {
+    "status": "running_not_qualified",
+    "stage": "lf_data_preparation/native_workpiece_001/right_margin_cycle_001",
+    "protocol_sha256": "5be16256e1b347eb1ff3bab68b30643863eaa3631e677c1d1a5d8936ddb00778",
+    "helper_seconds": 4500,
+    "outer_seconds": 4560,
+    "sampled_RSS_bytes": 8589934592,
+    "original_targets": 24,
+    "HP_calls": 0
+  },
+  "qualification": "Complete production passed; fresh independent reference and response visualization remain pending",
+  "prior_document_sha256": {
+    "README.md": "1db3ede1a9c1165421a1c3279cefcd7fc659559110399915f2276029a0b19c3b",
+    "hf_repo/README.md": "5f559bf1fc3bd9e23dd1f710f2282561bfe627dab6f774b03d53daf5c086ce17",
+    "docs/CURRENT_STATUS.md": "6221661d4fdd5c1fb6d45897edc674aa2a6fbff2b8ff9dda8dd8b99c4014999a",
+    "docs/RESUME_DEVELOPMENT.md": "52be089970180bc6a8dcd1f1a88fc628dd8a5da668fbd8beae86a19ef009d875",
+    "docs/WORKPIECE_ENLARGEMENT_20261007.md": "01646c89a8256f67a226938516cfebf2436a1bdfbc563d020ed2af61c1064a8a"
+  },
+  "next": "Complete the one fresh all-state reference; only then freeze saved-response views",
+  "status": "production_complete_reference_running",
+  "source_phase_progress_snapshot_sha256": "75c0a6ecac35a57ba4930ba85f5da6aa518b329831d00fc8691a2524eb5bf1a4",
+  "completed_production": {
+    "receipt": {
+      "schema_version": "native-mean-execution-1.0",
+      "status": "pass",
+      "baseline_commit": "abf62b04d0a384f3c9cfa352dd6232ad1d4ab3d1",
+      "input_inventory_sha256": "0cdee6fdf00f4d246d628b387f5e83b9626d0759089f55e10a93954d43264e3d",
+      "source_freeze_sha256": "626851b1097d816286e1e9a9d3a86253dcff2a9ad48d022dacf03e26d6dd6283",
+      "sources": {
+        "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+        "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+        "hf_repo/src/hf_eval/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+        "hf_repo/src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+        "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+        "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+        "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+        "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+        "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+        "hf_repo/src/hf_eval/prescribed.py": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+        "hf_repo/src/hf_eval/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+        "hf_repo/src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+        "hf_repo/src/hf_eval/split_affine.py": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba",
+        "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+        "hf_repo/src/hf_eval/split_kernel.py": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+        "hf_repo/src/hf_eval/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+        "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+        "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+        "hf_repo/src/hf_eval/split_prescribed.py": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+        "hf_repo/src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+        "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+        "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+        "hf_repo/src/hf_eval/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+        "hf_repo/src/hf_eval/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+        "hf_repo/src/hf_eval/analysis_domain.py": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/author/execute_shift_pose.py": "57d18bfea972c09db4c0866bdee3413088342327e32d3926be9eaa1bdbab466a",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/author/prepare_shift_pose.py": "fbb3e1975a7054599eb7d9fde5bf771805a698fe54015ac3d934e43cba2262ac"
+      },
+      "inputs": {
+        "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+        "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+        "hf_repo/src/hf_eval/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+        "hf_repo/src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+        "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+        "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+        "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+        "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+        "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+        "hf_repo/src/hf_eval/prescribed.py": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+        "hf_repo/src/hf_eval/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+        "hf_repo/src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+        "hf_repo/src/hf_eval/split_affine.py": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba",
+        "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+        "hf_repo/src/hf_eval/split_kernel.py": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+        "hf_repo/src/hf_eval/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+        "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+        "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+        "hf_repo/src/hf_eval/split_prescribed.py": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+        "hf_repo/src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+        "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+        "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+        "hf_repo/src/hf_eval/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+        "hf_repo/src/hf_eval/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+        "hf_repo/src/hf_eval/analysis_domain.py": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+        "hf_repo/scripts/prepare_analysis_domain.py": "15c7dfd12cdaaa95ec0c6639ef54335eeb2898537f15283aeaf9b3f02bbf9a06",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/task.json": "385cce960696b8c01e1323fc43d98f4ee28a392214c44a8f3609006324cde2e0",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/model.json": "54d71ac50a88b26876bd7bb02a3be3e4bdd36142948874c9bd37ef455eef10c5",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/model.npz": "e8725fc0b04c9f549ae48164ec5ab824393d699e7a980a7577c4ffef4d9414f4",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/source_geometry/geometry.json": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/source_geometry/geometry.npz": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/direction.npz": "177124bd1968f9e451e59cba4d7124c393eb8fee15cc93851f570f980aada29a",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/source_freeze.json": "3f55e59a0f7b47802a541e725d9f4a79a0f705c603cb113a2b95b8fd77e30f4a",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/execution_receipt.json": "34081cc086799339bcede3dda7c65051e7f056f3c3d2100e96185f5eb6dfbf20",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/result.json": "b1bffb74a3ef105b111e9f6aa50ef6322e392899135073f58a4283f6408b3ba4",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/production_protocol.json": "54cb08fc6ef96cfea61d86ff4180c7378d6f26e3880b2e973f4f77c54a1c6c74",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/production_launch.json": "687e4c3faaac693737a82d68394b21b8e3be0f12be3d8f248bd8bf326aae8ada",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/reference_protocol.json": "b80111a64b474b7163744ba3efc3f54837043d7d4000d5658673d70ea06fe604",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/reference_launch.json": "f754cf4936df219c75fcee6fd28d9b36f98de984b8cc9aed3f82165a52413066",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/reference/summary.json": "602d800682102d0e1565c5515a93d141c665ed8d62083a5eb33f4d19f583766d",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/adapter_test_protocol.json": "d928bdbc3bf0806325ef58cc1b4b6a62ed1fd57d63f66c29498f7a63dd166229",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/tests_launch.json": "b2da3505d7d160d1c415230aad65d12a6a4e4779075968090ff156652cddb953",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/run_001/test_receipt.json": "db1fe2429037861f846cc12dc4c618afa600341a4f8e85cd7ccad59ab7e99a4f",
+        "hf_repo/tests/test_analysis_domain.py": "56d42ba7829bb413efbe564ff2065feeb83f5a2e864cd188619d0ddb0b2c6de9",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/adapter_test_static_review.json": "97eb97871107bd619ee9561fc29fd2c6e5cb39f5e5666ee549a0985506868d80",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/adapter_test_static_review.md": "ac106bf05266c11c2c7c29b96887eee5c42a4444ca78e48d94d6ed16316e10e4",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/install_adapter_test_card.py": "5086f23ac59190d5f50bb0fc35a963162d9d67cb465c3322e9298aacf3d041f1",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/right_margin_stage_static_review.json": "96b477011fb11985c45d8e88dd83bd57b97271f2599bd817803565d8b380bdee",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/right_margin_stage_static_review.md": "91e1f246e4ac21a8fe91ac9d9839cfc145157a287f894a39a6a01da257937f09",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/run_adapter_tests.py": "13588cba0318394a1a51120d7826e0fb664b89867920105d7ed26955b2e6161f",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/launch_pose.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/author_note.json": "8361b17fd66876980d5c36355722fdff111587a3610e4ecb52c2f1b82373f1cc",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/build_right_margin_card.py": "ee445d5fa85e0e34a13f838f379336318eef078da2a4e183c8e6f19e9496ad67",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/preparation_static_review.json": "04502e21dba719708dbf51abc98305efa388d9dfb902928b8bfa84bc09b052c0",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/prepare_right_margin.py": "5fdaa9088ff4d4129ba9073235a8cd6e68e40cfc3684d8287ee63a16140d1d91",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/README.md": "8ab311a36629b3268e4185d4418f2746d653201f86515cbf0d286bb0e1d7725d",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/source_additions.diff": "c11822c789c98e75a7e6fcf6e45af1c3b23a40b88306844abc6b40eaf854a1bd",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/launch_pose.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/preparation_protocol.json": "c61a60de4f21760805136ae5c0d65e479f897f32827777219f729870299e89fa",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/prepare_launch.json": "af3c65d87f14b9c5df1090257f30655828034bec532b8c63da6a2424374490d2",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/preparation_receipt.json": "6eb31f7a2c64d482431d0684283d8926688b62d6dcb6bff31965a691e87a090c",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/input_inventory.json": "80b0e72eb2c9f590ae2a1a4eadd13fbe3cc2b3e07e7b0b76ca8f5320e795176e",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/source_freeze.json": "ecfd3fd8968c12641427be2d293513dccca00a6df525e660bf33d97b45645ea9",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/model_comparison.json": "48fdb5d2248c7be57a8a2bf9a18eb2c338f4600ce52c629fd5ff0b5de421b1b4",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/mapping.npz": "46df2b1e81660e2818029e9fa5a386baeddc6e83c3477803c4be6dddcd61b0be",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/input_inventory.json": "80a697c4731ad599e4291e7dccd283fc70e4f5d1f7d6b3a2772ff011e294ebab",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/direction.npz": "f9cbc54420c7dba86873ee6121698ee1261e7a138cc21da1105fb9cd3a8db524",
+        "lf_data_preparation/native_workpiece_001/gamma_half_cycle_001/author/execute_shift_pose.py": "57d18bfea972c09db4c0866bdee3413088342327e32d3926be9eaa1bdbab466a",
+        "lf_data_preparation/native_workpiece_001/gamma_half_cycle_001/author/prepare_shift_pose.py": "fbb3e1975a7054599eb7d9fde5bf771805a698fe54015ac3d934e43cba2262ac",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/launch_pose.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/direction.npz": "f9cbc54420c7dba86873ee6121698ee1261e7a138cc21da1105fb9cd3a8db524",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/source_freeze.json": "626851b1097d816286e1e9a9d3a86253dcff2a9ad48d022dacf03e26d6dd6283",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/task.json": "26c34ab2b168cc68e04cfb1743ad2872c7f37230bd6a36c4395ad1c46326393e",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/fixture/model/model.json": "07d90e7d4ceca6d82f62f043f4c4728b5909dc35dc7df81058b2b24a1fc6b8cf",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/fixture/model/model.npz": "c880381a1906d6d0a53f54cd951a26bfdf2e5175658260213528e16e35b51c34",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/fixture/model/source_geometry/geometry.json": "db6a1259765d7abc33fdf76c9dd7882faae8da04910b4f19d442611cdc0a095b",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/fixture/model/source_geometry/geometry.npz": "0e06b920c92476c18e14f435d8283b253a3ff454cc42229a93988ad34d3d7ae1"
+      },
+      "invocations": 1,
+      "HP_calls": 0,
+      "JIT_calls": 0,
+      "LF_imports": 0,
+      "accepted_states": 24,
+      "force_calls": 348,
+      "tangent_calls": 177,
+      "solver_calls": 1,
+      "save_force_calls": 0,
+      "save_tangent_calls": 0,
+      "response_mode": "mechanical",
+      "seconds_limit": 4500,
+      "initial_guess": "port_projection",
+      "predictor_initialization": {
+        "displacement_mode": "port_projection",
+        "applied_dw": false,
+        "applied_dR": true,
+        "port_adjustment": "distributed normalized free-port weights",
+        "predictor_LU_role": "reaction increment estimator",
+        "linear_residual_scope": "Actual computed KKT solution; not the applied displacement seed.",
+        "actual_predictor_LU_records": 23,
+        "actual_predictor_flags_match": true
+      },
+      "sampled_RSS_limit_bytes": 8589934592,
+      "started_utc": "2026-10-07T12:53:00.140483+00:00",
+      "budget_mode": "Whole-helper/API clocks and sampled process peak_wset; cooperative outer tree monitor, no OS hard cap/force",
+      "stop_policy": "First phase error closes phase; retain partial evidence, no repair/retry/force",
+      "tangent_execution": {
+        "mode": "chunk256",
+        "element_block_size": 256,
+        "global_selector_scope": "full_batch"
+      },
+      "model_comparison": {
+        "total_fields": 27,
+        "actual_changed_fields": [
+          "b_in",
+          "b_out",
+          "connectivity",
+          "coordinates",
+          "edofs",
+          "fixed_dofs",
+          "free_dofs",
+          "gamma",
+          "lam",
+          "mu",
+          "solid",
+          "solid_dofs",
+          "solid_nodes",
+          "workpiece_background_symmetry_overlap_dofs",
+          "workpiece_cells",
+          "workpiece_dofs",
+          "workpiece_nodes"
+        ],
+        "unchanged_fields": [
+          "force_scale_per_length",
+          "grad",
+          "hessian",
+          "hx",
+          "hy",
+          "k_out",
+          "kr",
+          "points",
+          "thickness",
+          "weights"
+        ],
+        "parameter_case": "right_medium_domain_margin",
+        "parent_physical_subdomain_byte_exact": true,
+        "preparation_comparison_file": "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/model_comparison.json",
+        "preparation_comparison_sha256": "48fdb5d2248c7be57a8a2bf9a18eb2c338f4600ce52c629fd5ff0b5de421b1b4",
+        "physical_mapping_file": "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/mapping.npz",
+        "physical_mapping_sha256": "46df2b1e81660e2818029e9fa5a386baeddc6e83c3477803c4be6dddcd61b0be"
+      },
+      "call_counts": {
+        "force_calls": 348,
+        "force_calls_completed": 331,
+        "tangent_calls": 177,
+        "tangent_calls_completed": 177,
+        "solver_invocations": 1,
+        "JIT_calls": 0,
+        "HP_calls": 0
+      },
+      "model_arrays_compared": 27,
+      "declared_workpiece_model_arrays_equal": true,
+      "declared_workpiece_model_sha256": "c880381a1906d6d0a53f54cd951a26bfdf2e5175658260213528e16e35b51c34",
+      "target_reached": true,
+      "path_completed": true,
+      "loading_peak_reached": true,
+      "unload_endpoint_reached": true,
+      "task_target_executed": true,
+      "response_contract": "split-numpy-mechanical-1.0",
+      "force_kernel_version": "p26_q1_split_mechanical_numpy_aux_omitted_candidate1",
+      "auxiliary_material_energy": {
+        "status": "not_evaluated",
+        "qualified": false,
+        "field_present": false
+      },
+      "returned_status": "success",
+      "state_sha256": [
+        "5dc7eff9fc56587502ee3838b09ba4a21feeac7a6273497c942d563aecf9cb89",
+        "1049cf7979732f65d511aae2a6fc687672ef21e221eab6671a2624673de542db",
+        "5b70cf246080bc0df818b08763e35eed3dda34383e20e34da4c66e7bb0dc8f03",
+        "f27c26f890823b197af5b1a26f95688f16e5455345236d13f334dc9697a8ffa8",
+        "2835d741700f0f4436e12208c8796e700ae8de9e4fd916d955ed0577bcf26fcf",
+        "49524fcc2f7d90e5dc498b00fc29ec5e91dfb8f343ca7020880b45874415be63",
+        "f0be9e5b4d694bef8d928b91ef7b3c9cad0fa115750213abe08db003f0c3cd3d",
+        "df5318ab908305b93af84f73f7c1908c9f2cb6341215f4f09ee5a94d90e70d0a",
+        "07fbb6971ad1be9b0c7a5002fbf8c11068f479a6a8766e10a697ae34d9479d5e",
+        "1db8f2c0780a513f615b9ee0ccdb4b784cf1f6a6d9f6262afd6091a3283ae236",
+        "10b74fa9316622aacda3c22a74e43304b8b67a67359f20da9bc685a2da958a71",
+        "2f2a8f20442813418a569231f1ec040dfffa0f26c99cab5831a845d01bffc571",
+        "2a0aaba4a2097e650a83df4f62b5067dc35b417dea3e7bc3072becd0e81bb4a0",
+        "6ae284e297811d465ba791b9a2fe90289cf958d1ba8c6eb7eec8ad5d7463e4fc",
+        "d7aaaa575be032b9e950e360fd839d722551dd78fb913508f809232cdda4c3b4",
+        "faf706b3ba5c39b70a351342dcef21710e03c6d74174cd4c70b0f02c02185e36",
+        "3061154c9644a6e07832c442a633489902ad4ec83af1327a81e43c6e4396e054",
+        "9cb229a3f154bc6f96e2ee3f1b4e18b125126a6f97e6194c8b2902f0266d0f17",
+        "a801301b510562e9689081fa7f4396eeaabafbf2386b72118512b6944b9e40db",
+        "c97175986650d427c6c25abb94fa671f6dd1c7aab8d876ff077b1cc6abbb5a98",
+        "322b781349e1d476bbfd3e912a415249901e4dcc207844530ec0f845f57f2a0a",
+        "f5f4119921cc6cc25d51d8385ec633243b7eb254cf46a7cee8c9aa71f9aacd83",
+        "aabd12f24b5fbc79fef402098f91d799e86c33a6c9312a3613366fa4bde115db",
+        "073a8d58aedfe1f669d85a1f98485a2a3de5c192e2d963ce1b798bfa76150b69"
+      ],
+      "result_sha256": "e3ee572c2181a94134c99acab6bedf5f3736d6b665b03926e1507ed52bed090b",
+      "model_sha256": "c880381a1906d6d0a53f54cd951a26bfdf2e5175658260213528e16e35b51c34",
+      "task_sha256": "b253ec84d5348f1104ab378af5acdfc65dd3f2d572310a6089fe705bd342a66a",
+      "failure": null,
+      "observed_force_calls": 348,
+      "observed_force_calls_completed": 331,
+      "observed_tangent_calls": 177,
+      "observed_tangent_calls_completed": 177,
+      "first_force_range_input": {
+        "schema_version": "native-force-range-input-1.0",
+        "state_sha256": "c13bc08203a0c19328cf5a7a51a1cd8bc6fd8e213632e09aafc04cd326884146",
+        "exception_type": "KernelError",
+        "code": "unsupported_arithmetic_range",
+        "message": "NumPy response exceeded the declared compensated arithmetic support range",
+        "details": {},
+        "elapsed_seconds": 2301.766614100081,
+        "input_npz_sha256": "664a6ca084b516e665657cdbaf34a639867ae6a6e6e633b42bbe30c1499acb03",
+        "fields": {
+          "lift": {
+            "shape": [
+              6806
+            ],
+            "dtype": "float64",
+            "sha256": "101f38acd7a5d8b4217eaf3459bd050197cbc313fae52d4713692435dccd9c65"
+          },
+          "fluctuation": {
+            "shape": [
+              6806
+            ],
+            "dtype": "float64",
+            "sha256": "01ecb46f501f12580f8dc02d9403c78407a81a961ce49a590b58f529a145d8d6"
+          },
+          "edofs": {
+            "shape": [
+              3280,
+              8
+            ],
+            "dtype": "int64",
+            "sha256": "6a3be15e22ac4f83b42c5634dac079d3acf0722e3c14470569a6fbf3930dd16e"
+          },
+          "coordinates": {
+            "shape": [
+              3403,
+              2
+            ],
+            "dtype": "float64",
+            "sha256": "403af9800638e3bef36e57f941f3b79ef4cb865d3e48b4c2fc5da15aaecaaf8e"
+          },
+          "connectivity": {
+            "shape": [
+              3280,
+              4
+            ],
+            "dtype": "int64",
+            "sha256": "ef97bed138774cf8690fd1de4099b7e87e60087a4edb26196675865efa8dd78c"
+          },
+          "lam": {
+            "shape": [
+              3280
+            ],
+            "dtype": "float64",
+            "sha256": "e56f49b9fc1ad84ca6339644983b3ccc5d4227afb16e8cef1b7f55c8a4461214"
+          },
+          "mu": {
+            "shape": [
+              3280
+            ],
+            "dtype": "float64",
+            "sha256": "20ff8784a35b37f82bfe1ed0d35468e299a2b6be53e72f09954f7f5ca87ecb64"
+          },
+          "kr": {
+            "shape": [],
+            "dtype": "float64",
+            "sha256": "992e1a3cebfcedb0e079143753e682376909011d13eec8e5e340d71f131de69c"
+          },
+          "hx": {
+            "shape": [],
+            "dtype": "float64",
+            "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+          },
+          "hy": {
+            "shape": [],
+            "dtype": "float64",
+            "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+          },
+          "thickness": {
+            "shape": [],
+            "dtype": "float64",
+            "sha256": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555"
+          },
+          "solid": {
+            "shape": [
+              3280
+            ],
+            "dtype": "bool",
+            "sha256": "ff7c318ebbfc56f32612f2f06ad43ad80247352dbe6f258c00ff05c61ee089e1"
+          },
+          "fixed_dofs": {
+            "shape": [
+              450
+            ],
+            "dtype": "int64",
+            "sha256": "0ebf0a10e22b6d1bf4de44f9b0d89959b44bf21a8c5c4ab057f3d30d68ae5eb5"
+          },
+          "grad": {
+            "shape": [
+              9,
+              4,
+              2
+            ],
+            "dtype": "float64",
+            "sha256": "5367cbf39b1061f4187bebb33459c669cb8213f13ab414886ff8d80307187ef5"
+          },
+          "hessian": {
+            "shape": [
+              4,
+              2,
+              2
+            ],
+            "dtype": "float64",
+            "sha256": "7159a88b63bb29c790caba857b0668308a0bd79ee9cfb28379c11cc2e95af882"
+          },
+          "weights": {
+            "shape": [
+              9
+            ],
+            "dtype": "float64",
+            "sha256": "736b2b0ee0d4710b895ed9f9116d3fa32da144acbcb6701a87edb0408b7814b9"
+          }
+        },
+        "source_freeze_sha256": "626851b1097d816286e1e9a9d3a86253dcff2a9ad48d022dacf03e26d6dd6283",
+        "input_inventory_sha256": "0cdee6fdf00f4d246d628b387f5e83b9626d0759089f55e10a93954d43264e3d",
+        "extra_force_calls": 0,
+        "extra_tangent_calls": 0,
+        "extra_solver_calls": 0,
+        "HP_calls": 0,
+        "response_mode": "mechanical",
+        "response_contract": "split-numpy-mechanical-1.0",
+        "force_kernel_version": "p26_q1_split_mechanical_numpy_aux_omitted_candidate1",
+        "auxiliary_material_energy": {
+          "status": "not_evaluated",
+          "qualified": false,
+          "field_present": false
+        },
+        "force_call_ordinal": 323,
+        "scope": "First actual mechanical force range exception; base/trial classification requires chronology"
+      },
+      "first_tangent_range_input": null,
+      "force_hook_restored": true,
+      "tangent_hook_restored": true,
+      "elapsed_seconds": 2485.747854700079,
+      "sampled_peak_RSS_bytes": 572215296,
+      "sources_unchanged": true,
+      "inputs_unchanged": true,
+      "completed_utc": "2026-10-07T13:34:25.881876+00:00"
+    },
+    "launch": {
+      "phase": "production",
+      "status": "pass",
+      "invocations": 1,
+      "argv": [
+        "D:\\Coding\\Diversity TO\\Compliant-TO-TMC\\.venv-handoff\\Scripts\\python.exe",
+        "-B",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/author/execute_shift_pose.py",
+        "--repo",
+        ".",
+        "--input",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001"
+      ],
+      "protocol_sha256": "5be16256e1b347eb1ff3bab68b30643863eaa3631e677c1d1a5d8936ddb00778",
+      "bindings": {
+        "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+        "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+        "hf_repo/src/hf_eval/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+        "hf_repo/src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+        "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+        "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+        "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+        "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+        "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+        "hf_repo/src/hf_eval/prescribed.py": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+        "hf_repo/src/hf_eval/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+        "hf_repo/src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+        "hf_repo/src/hf_eval/split_affine.py": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba",
+        "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+        "hf_repo/src/hf_eval/split_kernel.py": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+        "hf_repo/src/hf_eval/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+        "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+        "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+        "hf_repo/src/hf_eval/split_prescribed.py": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+        "hf_repo/src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+        "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+        "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+        "hf_repo/src/hf_eval/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+        "hf_repo/src/hf_eval/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+        "hf_repo/src/hf_eval/analysis_domain.py": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+        "hf_repo/scripts/prepare_analysis_domain.py": "15c7dfd12cdaaa95ec0c6639ef54335eeb2898537f15283aeaf9b3f02bbf9a06",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/task.json": "385cce960696b8c01e1323fc43d98f4ee28a392214c44a8f3609006324cde2e0",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/model.json": "54d71ac50a88b26876bd7bb02a3be3e4bdd36142948874c9bd37ef455eef10c5",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/model.npz": "e8725fc0b04c9f549ae48164ec5ab824393d699e7a980a7577c4ffef4d9414f4",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/source_geometry/geometry.json": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/source_geometry/geometry.npz": "f7b23e8d16aedb0ebb5b7dc3954b7b59a80f99b6d3859046aa16904a610d6282",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/direction.npz": "177124bd1968f9e451e59cba4d7124c393eb8fee15cc93851f570f980aada29a",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/source_freeze.json": "3f55e59a0f7b47802a541e725d9f4a79a0f705c603cb113a2b95b8fd77e30f4a",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/execution_receipt.json": "34081cc086799339bcede3dda7c65051e7f056f3c3d2100e96185f5eb6dfbf20",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/result.json": "b1bffb74a3ef105b111e9f6aa50ef6322e392899135073f58a4283f6408b3ba4",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/production_protocol.json": "54cb08fc6ef96cfea61d86ff4180c7378d6f26e3880b2e973f4f77c54a1c6c74",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/production_launch.json": "687e4c3faaac693737a82d68394b21b8e3be0f12be3d8f248bd8bf326aae8ada",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/reference_protocol.json": "b80111a64b474b7163744ba3efc3f54837043d7d4000d5658673d70ea06fe604",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/reference_launch.json": "f754cf4936df219c75fcee6fd28d9b36f98de984b8cc9aed3f82165a52413066",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/reference/summary.json": "602d800682102d0e1565c5515a93d141c665ed8d62083a5eb33f4d19f583766d",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/adapter_test_protocol.json": "d928bdbc3bf0806325ef58cc1b4b6a62ed1fd57d63f66c29498f7a63dd166229",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/tests_launch.json": "b2da3505d7d160d1c415230aad65d12a6a4e4779075968090ff156652cddb953",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/run_001/test_receipt.json": "db1fe2429037861f846cc12dc4c618afa600341a4f8e85cd7ccad59ab7e99a4f",
+        "hf_repo/tests/test_analysis_domain.py": "56d42ba7829bb413efbe564ff2065feeb83f5a2e864cd188619d0ddb0b2c6de9",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/adapter_test_static_review.json": "97eb97871107bd619ee9561fc29fd2c6e5cb39f5e5666ee549a0985506868d80",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/adapter_test_static_review.md": "ac106bf05266c11c2c7c29b96887eee5c42a4444ca78e48d94d6ed16316e10e4",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/install_adapter_test_card.py": "5086f23ac59190d5f50bb0fc35a963162d9d67cb465c3322e9298aacf3d041f1",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/right_margin_stage_static_review.json": "96b477011fb11985c45d8e88dd83bd57b97271f2599bd817803565d8b380bdee",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/right_margin_stage_static_review.md": "91e1f246e4ac21a8fe91ac9d9839cfc145157a287f894a39a6a01da257937f09",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/author/run_adapter_tests.py": "13588cba0318394a1a51120d7826e0fb664b89867920105d7ed26955b2e6161f",
+        "lf_data_preparation/native_workpiece_001/right_margin_validation_001/launch_pose.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/author_note.json": "8361b17fd66876980d5c36355722fdff111587a3610e4ecb52c2f1b82373f1cc",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/build_right_margin_card.py": "ee445d5fa85e0e34a13f838f379336318eef078da2a4e183c8e6f19e9496ad67",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/preparation_static_review.json": "04502e21dba719708dbf51abc98305efa388d9dfb902928b8bfa84bc09b052c0",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/prepare_right_margin.py": "5fdaa9088ff4d4129ba9073235a8cd6e68e40cfc3684d8287ee63a16140d1d91",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/README.md": "8ab311a36629b3268e4185d4418f2746d653201f86515cbf0d286bb0e1d7725d",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/author/source_additions.diff": "c11822c789c98e75a7e6fcf6e45af1c3b23a40b88306844abc6b40eaf854a1bd",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/launch_pose.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/preparation_protocol.json": "c61a60de4f21760805136ae5c0d65e479f897f32827777219f729870299e89fa",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/prepare_launch.json": "af3c65d87f14b9c5df1090257f30655828034bec532b8c63da6a2424374490d2",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/preparation_receipt.json": "6eb31f7a2c64d482431d0684283d8926688b62d6dcb6bff31965a691e87a090c",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/input_inventory.json": "80b0e72eb2c9f590ae2a1a4eadd13fbe3cc2b3e07e7b0b76ca8f5320e795176e",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/source_freeze.json": "ecfd3fd8968c12641427be2d293513dccca00a6df525e660bf33d97b45645ea9",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/model_comparison.json": "48fdb5d2248c7be57a8a2bf9a18eb2c338f4600ce52c629fd5ff0b5de421b1b4",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/mapping.npz": "46df2b1e81660e2818029e9fa5a386baeddc6e83c3477803c4be6dddcd61b0be",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/input_inventory.json": "80a697c4731ad599e4291e7dccd283fc70e4f5d1f7d6b3a2772ff011e294ebab",
+        "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001/direction.npz": "f9cbc54420c7dba86873ee6121698ee1261e7a138cc21da1105fb9cd3a8db524",
+        "lf_data_preparation/native_workpiece_001/gamma_half_cycle_001/author/execute_shift_pose.py": "57d18bfea972c09db4c0866bdee3413088342327e32d3926be9eaa1bdbab466a",
+        "lf_data_preparation/native_workpiece_001/gamma_half_cycle_001/author/prepare_shift_pose.py": "fbb3e1975a7054599eb7d9fde5bf771805a698fe54015ac3d934e43cba2262ac",
+        "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/launch_pose.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/direction.npz": "f9cbc54420c7dba86873ee6121698ee1261e7a138cc21da1105fb9cd3a8db524",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/source_freeze.json": "626851b1097d816286e1e9a9d3a86253dcff2a9ad48d022dacf03e26d6dd6283",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/task.json": "26c34ab2b168cc68e04cfb1743ad2872c7f37230bd6a36c4395ad1c46326393e",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/fixture/model/model.json": "07d90e7d4ceca6d82f62f043f4c4728b5909dc35dc7df81058b2b24a1fc6b8cf",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/fixture/model/model.npz": "c880381a1906d6d0a53f54cd951a26bfdf2e5175658260213528e16e35b51c34",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/fixture/model/source_geometry/geometry.json": "db6a1259765d7abc33fdf76c9dd7882faae8da04910b4f19d442611cdc0a095b",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/fixture/model/source_geometry/geometry.npz": "0e06b920c92476c18e14f435d8283b253a3ff454cc42229a93988ad34d3d7ae1",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/author/execute_shift_pose.py": "57d18bfea972c09db4c0866bdee3413088342327e32d3926be9eaa1bdbab466a",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/author/prepare_shift_pose.py": "fbb3e1975a7054599eb7d9fde5bf771805a698fe54015ac3d934e43cba2262ac",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/author/author_note.json": "7fc8fff9d29059bdbd34705bedcfbf736fe833c6f0ab569cc025ad1b6183b8fd",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/author/build_right_margin_production.py": "b2c6c55f5f04f21e262bbd3687e3c41402fd0282e14f809ba55854c492b5c9f2",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/author/production_static_review.json": "eadcb07c0d06243b9a1dd49470abc9abc836b0943ea0d950b91219c16ee333df",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/author/README.md": "d8f2b8ec052a647d80c253e13145d94669095914618ee0ffa4755a8b7bfb1205",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/author/source_author_delta.diff": "96b8198d50b7754d6fc805840f131249a1dc05debf13e62786761a5e8a6200a8",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/launch_pose.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+        "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/input_inventory.json": "0cdee6fdf00f4d246d628b387f5e83b9626d0759089f55e10a93954d43264e3d"
+      },
+      "outer_seconds": 4560,
+      "sampled_RSS_limit_bytes": 8589934592,
+      "started_utc": "2026-10-07T12:52:59.958045+00:00",
+      "budget_mode": "Cooperative child limits and sampled tree RSS; no OS hard memory cap or force termination",
+      "exit_code": 0,
+      "elapsed_seconds": 2487.1738524000393,
+      "peak_sampled_tree_RSS_bytes": 569061376,
+      "stop_reason": null,
+      "all_bindings_unchanged": true,
+      "completed_utc": "2026-10-07T13:34:27.132421+00:00"
+    }
+  },
+  "reference": {
+    "status": "running_not_qualified",
+    "stage": "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/reference",
+    "helper_seconds": 1500,
+    "outer_seconds": 1560,
+    "expected_new_HP_calls": 48,
+    "actual_states": 24,
+    "protocol_sha256": "a77590a5b996cc63a5f5f4cd7f088af9fdc1b3f89ced835ea3c8280bb5dc2c11"
+  }
+}

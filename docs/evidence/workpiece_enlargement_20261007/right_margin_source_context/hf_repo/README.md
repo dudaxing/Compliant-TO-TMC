@@ -1,0 +1,233 @@
+<!-- current-front gamma-half complete 2026-10-07; historical predecessor 16ee4ebb67161e2c8bc9a27d8e44285308778171 -->
+
+## 当前 HF 功能：γ 减半完整对照（2026-10-07）
+
+独立 HF 已接通 NumPy 机械力、三分量切线／CSC、平均输入 KKT、固定工件、有序卸载，以及保存态结构、节点力和 J 可视化。
+
+固定方块边长 `18 mm`、中心 `(71,40) mm`，对称下半体为 `[62,80]×[31,40] mm`，右面 `x=80 mm`，右侧介质余量仍为零。本次仅将 `gamma=1e-6` 改为 `5e-7`，其余物理参数、几何、端口、支撑与网格保持；24 个原始目标完成 `0→1.2→0 mm` 加载—卸载。
+
+新工况完整24态通过；全部24态的新 HP80/120 参考共48次，465255项检查通过。加载峰值 `d=1.2 mm`：半模型输入反力 `R=0.406911563 N`，下半工件 `Fy=0.118620312 N`，对称两侧法向力幅值和 `2|Fy|=0.237240623 N`；钳尖到底面的有限距离为 `5.535555 μm`。`2|Fy|` 不是完整装配净力。
+
+相同加载目标 `0.75–0.85 mm` 的 Fy 下降约42–43%，峰值下降0.3254%；因此不能概括为全路径不敏感。这是已通过独立数值参考的合力与变形对照，压力分布、物理接触／夹持判据仍未验证。
+
+[报告末尾 γ 对照](../docs/WORKPIECE_ENLARGEMENT_20261007.md)；[实际进度与证据](../docs/evidence/workpiece_enlargement_20261007/gamma_half_progress.json)；[同目标力／间隙对照](../functional_views/workpiece_gamma_20261007/complete_001/view/gamma_comparison/matched_force_gap.png)；[新工况24帧实际动画](../functional_views/workpiece_gamma_20261007/complete_001/view/gamma5em7/actual_states.gif)。
+
+本轮未改核心代码，默认 `initial_guess="tangent"` 保持；探索工况显式使用已有 `port_projection`。`q_out` 仍是加权竖向端口位移，与钳尖间隙分别报告。HF5 优化耦合尚未实现；圆体、自由工件及摩擦也未完成。
+
+下一步路线是以 `gamma=1e-6` 基线在同一物理坐标下扩展右侧第三介质 **HF 分析域**：保留原 LF 数据、原子域的 native 网格 `h=1 mm`、E、alpha、`Lr=80 mm` 及端口／支撑位置，重建 DOF 与 direction，并按坐标选择钳尖。该域扩展尚未执行，不能继承本轮旧模型的资格。
+
+---
+
+以下完整原文是 **16ee4ebb 阶段历史**，逐字节保留当时的状态、计划与命令；当前进度以本页上方及最新报告为准，历史中的已关闭执行卡不应重跑。
+
+<!-- current-front 2026-10-07; actual complete records; baseline b310033 -->
+
+## 当前独立 HF 功能与接口
+
+HF 复用 LF/N4 的普通几何与物理任务，独立求解固体／第三介质有限变形、机械力及加载—卸载。NumPy 机械入口、材料/Hu/总力、三切线和 CSC、平均输入 KKT、固定工件、保存态几何与全节点力已接通；最新实际结果为：完整24态、原24目标和回零成功；新参考48 HP80/120、465220检查通过；峰值单侧Fy=0.119008 N、双侧法向幅值和=0.238015 N、钳尖底面距0.005701 mm（5.7 μm）。
+
+[整体/力曲线](../functional_views/workpiece_enlarge_20261007/complete_001/view/comparison.png)；[钳尖/应变/节点力](../functional_views/workpiece_enlarge_20261007/fit_001/view/local_fit.png)；[24帧实际动画](../functional_views/workpiece_enlarge_20261007/complete_001/view/projection001/actual_states.gif)。
+
+本轮仍用 E=1 MPa 的原夹持器，固定方体中心 `(71,40)` mm、边长 `18` mm，对称下半体 `[62,80]×[31,40]` mm；右面贴分析域边界，按 24 目标执行 `0→1.2→0` mm 平均输入探索。生产结果、独立参考范围、实际成本和图见 [本轮报告](../docs/WORKPIECE_ENLARGEMENT_20261007.md)。
+
+`solve_native_mean` 新增可选关键字 `initial_guess="port_projection"`；默认仍为 `"tangent"`。示例接口组合是 `response_mode="mechanical", tangent_mode="chunk256", initial_guess="port_projection"`，并显式提供任务、目标和 settings。端口投影沿前一 fluctuation 分配所需平均增量，保留真实 KKT LU 的反力预测和后续 Newton／Armijo／J 门；自由输入节点无需相同位移。15 项小模型测试已通过，默认回归保持。源码见 [native_mean.py](src/hf_eval/native_mean.py) 与 [split_displacement.py](src/hf_eval/split_displacement.py)。
+
+`q_out` 是 `.25 uy(80,28)+.5 uy(80,29)+.25 uy(80,30)` mm。`R_input` 是半模型输入端反力，固定下半工件 `(Fx,Fy)` 为弱式合力；镜像完整体净力是 `(2Fx,0)`，`2 abs(Fy)` 是双侧法向幅值和。工件材料/Hu/总力与节点力分别保存；有限面间隙和 ×1 钳尖变形由保存几何观察。压力、接触／夹持判据、应力 HP、辅助能量及全切线列仍有各自未完成范围。
+
+后续先按同一物理任务逐项检查网格、gamma/alpha和右侧介质余量，再明确接触／夹持判据与压力，随后探索圆体／可动工件与 HF5 接口。开发统一在 `main`；[跨目录恢复](../docs/RESUME_DEVELOPMENT.md) 保持原记录和来源。机械模式省略辅助材料能量，默认 complete/full 接口保持原合同。
+
+---
+
+## 历史记录
+
+以下保留此前完整文字；其中“当前”“下一步”对应当时阶段。现在的结论和开发顺序以上方及本轮报告为准。
+
+<!-- current-front 2026-10-05 (phase20261004); historical baseline 38ecc77cc14fee9fd0c69d026ed8df1e32b19bc2 -->
+
+## 当前独立求解器功能与接口
+
+pose002 已完整回零：17 态、34 次新 HP80/120、328767 项检查通过。
+
+soft001：完整加载—卸载完成，14 个实际接受态；独立参考全量通过：28 次新 HP80/120、270829 项检查。实体E减半、gamma/alpha倍增，绝对介质Lamé/kr不变；局部接触边最大应变增加约9.06%，但钳尖右面距离.167270→.172489mm，工件Fy约减半，未证明更贴合。E1保留为当前基准，E.5为独立低驱动力探索。
+
+[总体目标、实际结果、成本与资格](../docs/WORKPIECE_SHIFT_AND_SOFTNESS_20261004.md)；[完整实际路径图](../functional_views/workpiece_shift_20261004/complete_002/view/comparison.png)、[局部贴合与钳尖图](../functional_views/workpiece_shift_20261004/fit_001/view/local_fit.png)；[本轮持续总记录](../docs/evidence/workpiece_shift_20261004/final_comparison.json)。
+
+旧 pose001 失败只作成本来源；[T44 v5 修正与独立验证](../lf_data_preparation/native_workpiece_001/t44_direction_scaling_repair_001/README.md) 的资格限已捕获 T44，不延伸为一般接触或全列资格。
+
+显式 `solve_native_mean(..., response_mode='mechanical', tangent_mode='chunk256')` 保存 schema1.2、16机械字段/三切线/full CSC，材料能量 not_evaluated；默认 complete/full 保持原合同。端口只约束加权均值，工件当前是全部 ux/uy 固定的约束覆盖。接受态资格限机械力、声明 PORT 方向切线作用、组装/平衡与工件投影；不含压力、应力 HP、辅助能量、全切线列或自由工件夹持。
+
+源码与调用说明见 [native_mean.py](src/hf_eval/native_mean.py)；[T44 v5 修正与独立验证](../lf_data_preparation/native_workpiece_001/t44_direction_scaling_repair_001/README.md) 只修复已捕获方向支持，不宣称任意输入或全列资格。
+
+---
+
+## 历史内容（截至 38ecc77，以下原字节保留）
+
+以下‘最新/下一步/未完成’均指其当时时点；当前状态以本页上方和本轮总记录为准。
+
+2026-10-04最新：**010的1.8 mm完整加载—卸载已完成，原11目标全部达到，包含原控制器额外.25 mm的12实际态；新Ref003全24 HP/232272项检查通过。** 输入峰反力.414394469 N、输出+y=2.08019363 mm，底/左有限法向射线.0317909716/2.85343057 mm，介质minJ=.00662089875、实体minJ=.955246548。见[整体目标、实现、排查、效果、全部失败/资源/资格与后续](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_010/RESULTS.md)、[实际12帧×1动画](../functional_views/native_workpiece_cycle010_20261004/saved_render_001/animation_001/cycle010_actual_path.gif)、[J/Hu位置图](../functional_views/native_workpiece_cycle010_20261004/saved_render_001/fields_001/peak_saved_J_Hu.png)。
+
+新12次几何/12次全节点力观察、1836行节点CSV和位置图完成，右下角节点峰力模.0181035417 N。原010参考因错误完整计数假设在HP前失败、Ref002在16HP/7完整态后超时，均关闭保留；Ref003新预算独立全量重新计算，没有拼接旧前缀。T44/F77范围失败虽已按原控制器回滚二分，primitive根因仍未修复；新资格只覆盖接受机械态，不含失败trial、压力/夹持、能量、应力HP或切线全列。原生产flags保持false。下一优先定位已捕获范围问题，再补圆体边界观察并开展匹配形状工况；本轮圆/细网格/更大峰值未运行，整体项目仍未完成。以下逐字节保留先前记录，当前以本条和新报告为准。
+
+2026-10-04最新：**新增全工件节点力API/CLI，5解析项一次通过；009保存九态全部153节点、1377行CSV核对通过。** 见[目标、实现、效果、显示问题修正与后续](../functional_views/native_workpiece_nodal_20261004/square009_001/RESULTS.md)和[峰态材料/Hu/总节点力图](../functional_views/native_workpiece_nodal_20261004/square009_view002/render_001/nodes_state_004.png)。峰态右底角节点力模0.0127476461 N，Hu局部反向抵消显著；合力仍与009一致。派生力矩未新增HP资格，节点力不是压力。
+
+原001绘图零矢量假箭头已人工检出并保留；独立002仅改短箭头缩放，一次重绘相同数据通过。本轮无新力学/HP或更大行程求解。下一步依据底射线0.0767107 mm、介质minJ0.0280804，冻结小幅近接触峰值和完整卸载任务；圆体/尺寸位置/细网格继续作为独立工况。以下逐字节保留此前原文，当前以本条和新报告为准。
+
+2026-10-04最新：**009保留原完整九目标，1.75mm加载与回零已完成；63F/36T，18次新HP/174111检查通过。** 显式256单元分块切线不改变数学或默认full；三份对照保存态（007初态、008峰态、007回零）逐字节等价，原前八态32整档相同，生产373.57秒在原600/660预算内。见[目标、变更、效果/成本、范围与下一步](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_009/RESULTS.md)及[实际九态×1动画](../functional_views/native_workpiece_cycle009_20261004/saved_render_001/animation_001/cycle009_actual_path.gif)。
+
+底面射线.0767107mm、左面2.83278mm，介质minJ=.0280804；几何无已测跨域内部重叠，尚未证明有效夹持、压力、能量或应力HP。旧008仍是time_limit失败。下一步补工件节点力位置图，再根据间隙/J规划近接触增量；圆/细网格未执行。以下逐字节保留此前时点原文，当前以本条与新报告为准。
+
+2026-10-04最新：**008的1.75mm峰值已达到，但九目标完整循环因600秒时间限制失败，8接受态保存至卸载.5mm；新HP0，原卡已关闭。** 底/左首次法向射线约.0767107/2.83278mm；第三介质minJ=.0280804，实体minJ=.956236；无已测跨域内部重叠，不能认定有效夹持。见[目标、实现、原因、实际效果/成本/限制与下一步](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_008/RESULTS.md)和[实际峰/最后态与距离图](../functional_views/native_workpiece_cycle008_20261004/partial_region_view_001/render_001/native_region_path.png)。
+
+四张独立保存partial观测/绘图卡各一次通过，不是机械重试或HP资格；未补返回零点。main/origin保持，009仅计划未执行。以下完整保留此前时点原文，当前以本条及新报告为准。
+
+# Independent HF evaluator — HF-1 through HF-4-A/B
+
+2026-10-04当前：**新增完整原生Q1跨域内部重叠和固定方体有限底/左面射线诊断，39解析项通过，007保存七态测量完成。** 峰1.5mm底射线=.359398367462mm、左射线=2.698810358664mm，均是有限面端点命中；初/返两面2mm。七态有效、无内部域重叠/模糊；完整包含、自身重叠和有效夹持未证明。旧left unsigned=1.661960666472mm至下方角点，不能当水平间隙。见[整体目标、实现、排查、效果、成本和后续](../functional_views/native_region_geometry_20261004/RESULTS.md)、[×1结构/射线/七态三类距离图](../functional_views/native_region_geometry_20261004/square007_view_003/render_001/native_region_path.png)。
+
+001布尔返回类型首错与保存图001旧metadata角色首错均关闭并保留；各独立最小候选通过，zoom文字遮挡另图003修复、数据原字节相同。原旧边界/机械实现、27模型数组和007接受态fresh参考范围保持，新F/T/HP/solver0，pure来源basis非hooks监测；无新力学/能量/压力资格。峰底部靠近、有限左面远离，不能称有效夹持。
+
+下一据此准备独立1.75mm有序循环并保留中间/返程真实态，仍未执行；不线性推断接触或保证收敛，先核J/quad/域/面及原fresh门。细/圆/更大行程、自由体、压力/夹持、H2/H3/HF5/ADJIT和整体HF未完成。main唯一主干，origin固定https://github.com/dudaxing/Compliant-TO-TMC.git；公开恢复仅文件身份。
+
+以下保留以前时点原字节；当前以本条及持续记录末节为准。
+
+
+2026-10-04当前：**同一粗方固定半工件的新0→.5→1→1.5→1→.5→0 mm完整机械循环成功；7实际接受态的14次新HP80/120与135364项原参考检查通过。** 45/45F、26/26T、1solve；峰输入R=.333178493234 N、自由+y输出=1.747632769069 mm、minJ=.168678218781。实际all/bottom unsigned边界距最低.358231982207 mm，卸载返回2 mm；返回最大节点位移模3.42228e-28 mm。见[整体目标、行动、原因、真实效果与限制](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_007/RESULTS.md)、[实际结构/力/变形/最近点图](../functional_views/native_workpiece_cycle007_20261004/saved_001/render_001/cycle007_saved_path.png)。
+
+本轮只扩物理任务，004/006的力学实现与原算法/门字节保持，6项接口测试未重跑；新的资格仅七个接受机械态的力、声明PORT方向、组装、平衡及工件合力，不包含辅助能量、应力HP、全列HP、一般接触或有效夹持。图仅读生产/已保存几何，原flags不回填；14fresh参考资格另见报告。旧003卸载失败/未知T25与closed005保持冻结。
+
+下一先补封闭实体包容/相交和明确法向间隙诊断，再据实际结果选择1.75 mm或其它工况。正unsigned距离、left角点距离及第三介质小力不能直接作为夹持判据；1.75/2/3 mm、圆/细网格平衡尚未执行。压力/有效夹持、自由工件、H2/H3/HF5、AD/JIT及整体HF仍待完成。main为唯一开发主干，origin=https://github.com/dudaxing/Compliant-TO-TMC.git；公开恢复只核文件身份。
+
+以下保留以前时点的原字节；当前以本条及持续记录末节为准。
+
+
+2026-10-04当前：**同一粗方固定半工件的新0→.5→1→.5→0 mm完整机械循环成功，5实际接受态的10次新HP80/120与96,781项原门检查通过。** 31/31F、18/18T、1solve；峰输入R=.216813996933 N、自由+y输出=1.159355055764 mm、minJ=.458189164213。真实unsigned外边界距2→1.47194→.924425→1.47194→2 mm；各保存态无相交，尚未证明接触或有效夹持。见[目标、原因、问题排查、物理效果与限制](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_006/RESULTS.md)、[实际结构/力/变形/最近点图](../functional_views/native_workpiece_cycle006_20261004/saved_001/render_001/cycle006_saved_path.png)。
+
+本轮只扩物理任务，004实现与6项接口既有实测保持，未重复测试；schema1.2机械模式能量明确not_evaluated，原算法/门未变。005因冻结stage身份谓词错误在生产前闭卡、0新数值；006作者路径遗漏在正式安装前修正，原字节留存。新资格仅接受态机械力/声明PORT方向/组装/平衡与工件合力，不含能量、应力HP、全列HP或一般接触。图仅读生产，原独立flags不回填，fresh参考资格另见报告。
+
+下一步新1.5 mm粗方加载—卸载，据实际minJ/距离/成本再考虑2/3 mm；1.5/2/3 mm、圆形/细网格平衡尚未执行。signed gap/包容/法向、压力/有效夹持、自由工件、H2/H3/HF5、AD/JIT及完整项目仍待完成。仅main开发，origin=https://github.com/dudaxing/Compliant-TO-TMC.git；公开恢复只核文件身份。
+
+以下保留以前时点原字节；当前接续以上述新结果与持续记录末节为准。
+
+
+2026-10-04当前：**可选机械模式已接入NumPy平均位移求解器；新的固定对称半方形工件0→0.5→0 mm完整加载—卸载成功，三个接受态的6次新HP80/120及58,197项原门检查通过。** 接口6项实际测试通过；本次生产17/17力、10/10切线、1求解，213.73秒。峰值R=.106253247986 N、自由输出+y=.575755712293 mm、minJ=.735764774113；卸载返回近初始。真实外边界距2→1.471935964045→2 mm，均无交叉；仍未证明有效夹持。见[目标、实现、原因、效果及全部限制](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_004/RESULTS.md)、[真实结构/力/变形图](../functional_views/native_workpiece_cycle004_20261004/saved_001/render_001/cycle004_saved_path.png)、[实际边界距离](../functional_views/native_workpiece_cycle004_20261004/boundary_saved_001/RESULTS.md)。
+
+默认complete响应保持原17字段；新response_mode=mechanical/schema1.2保存16力字段/3切线/full CSC，并明确材料能量not_evaluated/qualified:false/field_present:false。原控制器/CI/T/B52/收敛门未放宽。旧003卸载失败及未捕获T25问题保留；新三态资格限声明task/source的力、PORT方向作用、组装和平衡，不包含能量/应力HP/全列切线/一般接触。图只读生产所以标题仍PRODUCTION ONLY UNQUALIFIED；fresh参考资格另读本报告，不回填原生产flags。
+
+下一步同一粗方形固定工件的新1 mm递增加载与卸载，根据实际收敛/minJ/距离/费用再推进2/3 mm；圆形r8/细方/细圆模型已构建但对应平衡未执行。压力、有效夹持判据、signed gap/包容、自由工件、H2/H3/HF5及完整AD/JIT仍待完成。整体独立HF目标未完成，后续在main，origin固定https://github.com/dudaxing/Compliant-TO-TMC.git；公有恢复只核对文件身份。
+
+以下保留先前阶段的原始记录。当前状态以上述新结论及执行记录末节为准，旧“下一步/尚未实现”只代表该记录当时状态。
+
+
+2026-10-04当前：**显式NumPy机械量入口与force-only组装器已按原验证字节合入main；原F16三力/缓存切线及fresh HP80/120通过原门。** 32/32测试、19200局部＋9全局门全部通过，614400个局部T系数的完整CSC组装身份核同；最大归一误差7.24336e-15，HP80/120最坏相互误差1.21169e-52。新core d5f7新增可选机械职责，默认完整NumPy/JAX公式及能量要求保留；能量明确not_evaluated/qualifiedfalse，P/S仅finite无HP资格。见[目标、实现、为何拆分、实际效果与后续](../lf_data_preparation/native_workpiece_001/mechanical_only_candidate_001/RESULTS.md)与[保存三力和方向力变化率图](../functional_views/mechanical_F16_20261004/saved_001/render_001/mechanical_F16_qualified_fields.png)。
+
+旧Horner192 001测试收集前失败、002的25例通过但完整F16失败、独立诊断48IP/35能量NaN均保持原记录；1d18候选未合入。新单态F16不是接受平衡，不解决尚未捕获的T25输入，也不转移到旧循环资格。粗方[0,.5,0]mm循环003仍仅2接受态、0新HP、卸载time_limit失败；见[真实0.5mm峰值与旧失败](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/RESULTS.md)。
+
+下一唯一近期功能：显式接入native_mean机械字段/能量可用性及source版本，保持原控制器、Armijo/KKT和默认结果合同；先小闭环，再新独立卡探索同一0.5mm加载—卸载，按新证据处理残余切线问题并扩到1/2/3mm与细方/圆工件。本接入和新路径尚未执行。压力/有效夹持、signed gap/交叉/包容、自由工件、H2/H3/HF5及完整AD/JIT仍待完成。整体HF目标未完成，继续仅main、origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；公开恢复只验文件身份。
+
+以下旧条目保留各执行时点；当前状态与接续以本条及持续报告末节为准，旧“下一步/尚未实现”不覆盖最新记录。
+
+2026-10-04当前：**matmul320候选7fff已按原字节合入；新粗方固定半工件[0,.5,0]mm三点探索正式失败并关闭，峰值达到但卸载未完成。** 2接受态[0,.5]、R_input=.106253248N、自由+y输出=.575755712mm、minJ=.735764774。600s内部预算后实际exit1，66F/50完成、27T/26完成、1solve、0新HP。16全步范围拒绝后half收敛，随后T25范围失败回滚、二分.25遇时间门；全部来源和原27数组不变。不能称新循环或两态独立参考通过。见[整体目标、选择依据、全过程与实际结果](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_003/RESULTS.md)、[×1结构/力及失败时序图](../functional_views/native_workpiece_cycle003_20261004/failure_saved_001/render_001/cycle003_failure.png)。
+
+新独立保存F16诊断一次复现原异常：首坏为已选辅助能量Horner乘积的(lo,hi)回缩项，非旧矩阵乘法、非overflow；36点物理词落到2^-400下界以下。只1F开始/0完成、0T/HP/solve，diagnostic_captured不是数学资格。下一最小候选改Horner共同尺度与乘加顺序，保留原14阶系数/CI域/P/门；尚未实现，先新F16完整F/T与fresh HP核验，再新连续路径和1mm探索。不增预算重开旧失败，不裁零或借旧F36解释后期未捕获T25。
+
+旧31d955七态14fresh HP及真实边距1.471935964mm保持自己的来源资格；保存F36/candidate7fff/consumer B52的19200局部＋9全局原门和原失败也保留，不能转给新循环。当前新图仅保存诊断、无新测距/夹持资格；1/2/3mm未执行。signed gap/交叉/包容、压力/有效夹持、自由工件、细/圆平衡、H2/H3/HF5及完整AD/JIT仍待实现或资格化。完整持续记录见[开发进度](../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-workpiece-cycle003-20261004)。仅main、origin固定https://github.com/dudaxing/Compliant-TO-TMC.git；公开恢复只验文件身份。
+
+以下为上一阶段及更早时点的保留记录；当前状态以页首与持续报告末节为准。
+
+
+2026-10-04历史状态（0.1mm阶段）：**普通文件的固定半工件、平均输入驱动和连续加载—卸载已实现；粗方形工件[0,.1,0] mm实际完成，3接受态的6次新HP80/120独立参考全部通过。** 正方形side16mm、中心(70,40)mm，计算下半；3200单元／6642DOF／376有效fixed。峰值输入R=.020941490699N、自由+y输出=.114466446177mm，半工件总(Fx,Fy)=(-3.0237102546e-5,+2.3930273461e-5)N，minJ=.947487891；卸载末输入R≈-1.19e-27N、输出≈1.76e-27mm。生产263.45秒，参考60.11秒／58010检查；30项相关测试通过。见[完整目标、实现、诊断、成本和效果](../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-workpiece-cycle-20261004)、[实际结构与力](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_physical.png)、[三帧真实动画](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_actual.gif)、[数值与分力](../functional_views/native_workpiece_cycle_20261004/render_001/workpiece_cycle_response.png)。
+
+独立参考覆盖全部单元与DOF、三力、声明方向切线作用、CSC组装、平均约束及工件/支承反力；不是高精度穷举全部切线列。生产22F开始/19完成、11T完成、1solve，差额是3次返零力-only全步范围拒绝及原规则下的半步回溯，接受态通过不代表这些拒绝态已获资格。原“所有F开始必须完成”前置合同明确0HP关闭；[新保存态合同与计数对账](../lf_data_preparation/native_workpiece_001/coarse_square_cycle_001/reference_002/reference_contract.json)只修订这一已声明计数条件，全部原数学门保持。算术范围限制未完全消失；不扩大到接触、夹持压力、H2/H3、HF5、AD/JIT或全部任意输入。
+
+Agent已按用户授权选择圆r8mm和正方形side16mm、中心(70,40)mm，粗方/细方/细圆三包构造通过；细方/细圆尚未求平衡。当前×1图仍明显张开，底/左节点窗口约1.896/2.039mm只是代理观测，非真实表面距离；微小预接触介质传力不能当有效夹持。新增纯保存态Q1外边界测量已通过14解析例及3接受态读取，双方排除y=40镜像切口、0新F/T/solve/HP；峰值底边最近无符号距离1.895882476mm、左边集1.981492877mm（最近为下角到下方实体，非侧向normal gap），卸载显示2mm，包容未检测。见[实际×1边界/最近点与独立代理曲线](../functional_views/native_workpiece_boundaries_20261004/render_001/native_boundary_geometry.png)。下一以同一粗方模型探索[0,.1,.25,.5,.25,.1,0]mm；依据实际作用和成本再扩到1/2/3mm及圆形/细网格。该大行程当前未执行。仅在main开发，origin固定为https://github.com/dudaxing/Compliant-TO-TMC.git。旧无工件细.025路径及公开重放保留各自冻结资格；本轮公开恢复仅验文件身份，不借用其数值重放资格。
+
+以下增补保留各执行时点；当前结论和下一步以本条及报告末节为准。旧记录中的“尚未实现”和旧计划不作为当前状态。
+
+2026-10-03 current: Native NumPy average-displacement API and CLI now solve an ordinary coarse gripper file for [0,.001] mm. Two accepted states passed four fresh HP80/120 full-element references and two integration tests: input R=.0002084121 N, free +y output=.0011437157 mm, independent residual 1.54e-11. See [implementation, evidence and commands](../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-mean-20261003), [actual deformation and forces](../functional_views/native_mean_20261003/native_mean_path.png), and [two actual frames](../functional_views/native_mean_20261003/native_mean_path.gif). This is a small no-workpiece TEST; next is the ordinary coarse inverter. Full stroke, workpiece, study H2/H3 and batch qualification remain incomplete.
+
+Science commit 93851df passed [public recovery](../handoff/native_mean_20261003/public_recovery_verify.json): 12 payload files, 77 arrays and all six saved-view files match. Physical and solver JSON matches except explicit measured times and their hashes; zero new HP calls. Next ordinary inverter small TEST is not yet executed.
+
+2026-10-03 current: `native_tangent.evaluate_native_tangent` and `scripts/evaluate_native_tangent.py` now save all three complete NumPy element tensors and full CSC matrices. One supplied coarse gripper checker state (3200 elements, 6642 DOFs) passed 40 fresh HP80/120 calls for both declared directions and two integration tests; worst normalized action error is 4.43e-14. Fixed rows/columns and HuHu asymmetry are retained. See [implementation, physical meaning and commands](../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-tangent-20261003) and [saved directional internal-force derivatives](../functional_views/native_tangent_20261003/native_tangent_directional_actions.png). The 21.25-second evaluation is not an equilibrium solve or an executed .025 mm target. Next is an ordinary-file small mean-driven path; workpiece, study H2/H3, complete contact and batch qualification remain incomplete.
+
+Science commit ae8f29c passed [public independent-directory recovery](../handoff/native_tangent_20261003/public_recovery_verify.json): nine result files, 43 array fields and all four view-package files match. The [next coarse-gripper small mean-driven path](../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-mean-next-20261003) is planned, not executed.
+
+2026-10-03 current: `native_force.evaluate_native_force` and the ordinary-file `scripts/evaluate_native_force.py` now provide complete NumPy element/global material, HuHu and total forces. Six supplied states on three native models passed 64 fresh HP80/120 calls with every element and DOF covered; three focused integration tests passed. Worst normalized force error is 8.64e-17. See [implementation, physical results and commands](../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-force-20261003), [displacement/J/Hu](../functional_views/native_force_20261003/native_force_fields.png), and [internal forces](../functional_views/native_force_20261003/native_force_components.png). These manufactured states are not equilibrium solutions or an executed .025 mm target. Next is ordinary-model unsymmetrized tangent validation, then a small mean-driven path; research H2/H3, workpiece clamping and batch qualification remain incomplete.
+
+2026-10-03 current: native_project.build_native_project and scripts/prepare_native_project.py bind an explicit task to unchanged native geometry and construct material arrays, actual Dirichlet groups, weighted ports and Q1 operators. Three TEST models passed exact independent comparison of all 23 saved arrays; five focused construction tests passed. The two coarse models match 17 intrinsic historical fields; the fine gripper has 26082 DOFs and 169 fixed DOFs under its explicit TEST contract. See [implementation and commands](../docs/NUMPY_FORCE_PROGRESS_20261002.md#native-model-construction-20261003), [actual boundary groups](../functional_views/native_model_20261003/native_model_applied_bcs.png) and [mean input equations](../functional_views/native_model_20261003/native_model_port_equations.png). The stored .025 mm target was not executed. Next is static NumPy force/reference for the new file interface, then bounded numerical paths; study H2/H3, workpiece clamping and formal HF5 remain incomplete.
+
+Earlier entries below retain their execution-time scope; use the latest linked record for the next step.
+
+2026-10-03 current feature: `hf_eval.split_displacement.solve_split_displacement_path` supports weighted mean input, a free output spring, explicit lift/warm state and multiplier, using the unsymmetrized augmented CSC system. Pass the NumPy combined assembler explicitly. Two six-element tensile-block paths completed; 272 fresh HP80/120 checks passed. See the [implementation and physical results](../docs/NUMPY_FORCE_PROGRESS_20261002.md#split-average-20261003) and [actual deformation/force/output view](../functional_views/split_average_20261003/split_average_demo.png). This small-task qualification does not extend to canonical mechanisms, contact or HF5. The legacy file dispatcher and default kernel remain unchanged.
+
+2026-10-03 follow-up: the new h=.125 NumPy C1 approach/compression reaches all seven original targets. Twenty accepted records / nineteen unique split states pass 420 newly computed HP80/120 numerical checks. The [functional record](../docs/NUMPY_FORCE_PROGRESS_20261002.md#numpy-h0125-path-20261003), [actual animation](../functional_views/numpy_c1_h0125_20261003/numpy_path.gif), task inputs, full models, matrices and exact new references are in Git. `scripts/run_numpy_c1_path.py --task-input` reads the compact ordinary task files; the default kernel is unchanged. Next is split average-port control; general contact and real workpiece clamping remain incomplete.
+
+2026-10-03 opt-in NumPy split mechanics: `split_kernel_invariants_hu.assemble_split_numpy` supplies forces; `split_numpy_tangent.assemble_split_numpy` also supplies the unsymmetrized mechanical Jacobian. The existing 33 manufactured + 63 saved static states passed 774 candidate and 774 HP80/120 gates after a local tiny-energy/log correction; 26 relevant regressions passed. See the [functional record and original scope](../docs/NUMPY_FORCE_PROGRESS_20261002.md#numpy-scope-20261003) and [actual deformation/force view](../functional_views/numpy_scope_20261003/numpy_scope_terminal.png). The default kernel remains unchanged. Static coverage does not admit new equilibrium paths, compiled AD, average-port split control or general contact.
+
+Version **0.5.0** adds explicit two-component displacement storage and prescribed-motion evaluation. The physical state is the exact sum of the saved binary64 `u_lift` and `u_fluctuation` arrays; `u_display` is a rounded plotting view. Four frozen uniform normal-contact combinations have passed their production, independent precision and reference audits with the original material parameters and thresholds. See [split-state implementation](docs/HF4_SPLIT_IMPLEMENTATION.md). General nonuniform contact, cylinder gripping and real mechanism performance remain outside this validation.
+
+Use `hf_eval.split_state.SplitDisplacement`, `hf_eval.split_kernel.assemble_split`, and `hf_eval.split_prescribed.solve_split_prescribed_path` for this explicit state interface. The synthetic geometry still comes from `hf_eval.normal_contact.build_normal_contact`. For ordinary NPZ/JSON evidence, run:
+
+```powershell
+python scripts/run_hf4_split_normal.py --spec configs/hf4/validation_spec.json --gamma-index 1 --mesh-index 1 --output ../new-split-result
+```
+
+The split interface has no automatic conversion of the geometry-file `evaluate` dispatcher below. Each state, reaction and gap must use the declared representation. The independent audit is `scripts/audit_hf4_split_normal.py`; a run-specific frozen source manifest binds its evidence. Reuse no output directory from a prior run.
+
+Historical **0.4.0** added the normal-contact task and U-only affine prescribed-motion interface, with **3 of 4 paths** completing. The fine gamma=1e-7 case stalled because free-node updates were lost in the absolute binary64 state. Its failed path, null target metrics and [original implementation](docs/HF4_IMPLEMENTATION.md) remain historical evidence. The old `solve_prescribed_path` and U-only kernel retain their original semantics; the split interface is explicit.
+
+This standalone Python package provides immutable geometry input, the HF-1 **solid-only small-strain linear diagnostic**, and the HF-2 **finite-deformation Q1 third-medium source-code benchmark**. The latter is one uploaded C-shape configuration, in explicitly labeled source numeric units. It is not a validation of contact accuracy or a research performance ranking; geometry generation and topology optimization are outside this package.
+
+Version **0.3.0** adds explicit project mapping and average-displacement control for the native inverter/gripper pilot tasks, plus stable near-zero material arithmetic. See [HF3 implementation](docs/HF3_IMPLEMENTATION.md) and [HF3 validation](docs/HF3_VALIDATION.md) for the recorded evidence and its limits. Readability, research qualification, numerical completion and functionality remain distinct.
+
+The historical **0.2.1** C-shape path passed independent high-precision equilibrium at all 100 targets under the unchanged external 1e-8 threshold. See [repair validation](docs/HF2_REPAIR_VALIDATION.md). That full-path evidence remains tied to version 0.2.1; version 0.3.0 separately reruns the original small and fixed strong-state regressions. The original 0.2.0 run remains [partially complete](docs/HF2_VALIDATION.md), with its failed states preserved.
+
+Runtime: Python 3.13, NumPy, SciPy, Matplotlib, JAX and jaxlib. All exact runtime versions and hashes are in `requirements.lock`. No LF source, LF environment, MATLAB process, exporter, or external source path is required. MATLAB and LF-specific preparation scripts are maintained outside this repository.
+
+```powershell
+python -m venv .venv
+.venv\Scripts\python -m pip install --require-hashes -r requirements.lock
+.venv\Scripts\python -m pip install --no-deps .
+.venv\Scripts\python -m hf_eval inspect <geometry.json>
+.venv\Scripts\python -m hf_eval evaluate <geometry.json> --task <task.json> --solver <solver.json> --output <new-result-directory>
+```
+
+The release ZIP also contains the tested wheel in `dist/`; it can replace the
+source installation step above (`pip install --no-deps <wheel>`). A Git checkout
+does not need that ignored build artifact: the source installation uses only this
+repository and its pinned build backend, never an LF checkout.
+
+For the supplied data package, use `canonical/inverter/geometry.json` with
+`tasks/inverter_linear_interface_smoke.json`, or the corresponding `gripper`
+files, and `solvers/hf1_q1_solid_linear_v1.json`. Paths are relative to the
+data package, not hardcoded by the evaluator. See `dataset_index.json` there.
+
+Developer validation: after installing the locked runtime, install `requirements-dev.txt` in the independent HF
+environment, then select tests appropriate to the current change. Routine tests use ordinary fixtures; full C-shape paths are excluded. The four campaign-bound modules `test_windows_owned_process.py`, `test_windows_owned_cpu.py`, `test_windows_cleanup_contract.py` and `test_s0_event_logging.py` retain closed-card identity/deadline requirements. Do not fabricate those environments for a generic suite. See [the scoped regression command](../docs/RESUME_DEVELOPMENT.md) and the archived campaign receipts. Recovery of evidence does not authorize replay of a closed experiment.
+
+The result has separate readability, geometry qualification, numerical convergence and functionality fields. Missing research criteria remain `pending`; a successful linear solve is not proof of nonlinear/contact fidelity. Output signs, reference thickness, mean-port weights and support selection are explicit. Every call starts from the undeformed state and generates a fresh evaluation ID.
+
+Q1 plane-strain stiffness is independently implemented with 2×2 Gauss integration and assembled only over solid cells. Mean input displacement uses a Lagrange multiplier, rather than equal displacement at every port node. Optional output loading is one generalized rank-one spring. Symmetry and fixtures constrain only solid-incident nodes in this diagnostic; there is no third medium.
+
+See `docs/DATA_FORMAT.md` for the frozen file contract and `docs/HF1_VALIDATION.md` for the historical 0.1.0 validation. The input geometry remains unchanged; results store hashes, configurations, dependency versions, arrays and plotting data.
+
+HF-2 keeps all solid/third-medium nodes, uses 3×3 Gauss–Lobatto integration,
+and differentiates the actual nonconservative residual with JAX float64 on CPU.
+The Jacobian is not symmetrized. Newton trials check positive J and finite values;
+bounded residual-based backtracking and bisection preserve the last verified state.
+For exactly the archived source target multipliers, run from this repository:
+
+```powershell
+.venv\Scripts\python -m hf_eval tmc-cshape --source-setup validation/hf2/reference/cshape_setup.npz --output new-cshape-result --time-limit 1200
+```
+
+The source setup is ordinary data and is checked against the independent preset.
+The preset has E=100, nu=0.3, kv=1e-6, alpha=1e-6, thickness factor 1 and total
+y-force −3 in source numeric units. It does not inherit HF-1's MPa/mm/thickness
+choices. For direct Python API use, set `JAX_ENABLE_X64=true` and
+`JAX_PLATFORMS=cpu` before the first JAX use; the CLI sets them explicitly.
+Every call begins from zero. Accepted steps are saved incrementally; failed
+targets have null metrics and the last reached multiplier. Hard process termination
+may leave only checkpoints and the external resource receipt.
+
+See `docs/HF2_IMPLEMENTATION.md` for the new interface and `docs/HF2_VALIDATION.md`
+for validation scope and evidence. The original HF-1 release ZIP remains unchanged.

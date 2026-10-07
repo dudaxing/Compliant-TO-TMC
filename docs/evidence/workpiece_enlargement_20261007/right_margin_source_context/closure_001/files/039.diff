@@ -1,0 +1,462 @@
+--- gamma_half_cycle_001/reference_author/audit_enlarged_square.py
++++ right_margin_cycle_001/reference_author/audit_enlarged_square.py
+@@ -81,25 +81,26 @@
+         contract_file = ARGS.contract.resolve()
+         self.bind(contract_file)
+         contract = read(contract_file)
+-        self.check(contract["schema_version"] == "gamma-half-reference-contract-1.0"
++        self.check(contract["schema_version"] == "right-margin-reference-contract-1.0"
+             and contract["production_stage"] == self.stage.relative_to(self.repo).as_posix()
+             and contract["limits"] == dict(helper_seconds=self.limit,outer_seconds=self.limit+60,sampled_RSS_bytes=RSS_LIMIT)
+             and self.limit == 1500. and contract["workpiece"] == BODY and contract["targets_mm"] == TARGETS
+-            and self.stage.name == "run_001" and self.stage.parent.name == "gamma_half_cycle_001"
++            and self.stage.name == "run_001" and self.stage.parent.name == "right_margin_cycle_001"
+             and contract["initial_guess"] == INITIAL_GUESS and contract["predictor_initialization"] == PREDICTOR_INITIALIZATION
+             and contract["counter_schema"] == COUNTER_SCHEMA and contract["counter_helper_sha256"] == COUNTER_PIN
+-            and contract["gamma"] == 5e-7 and contract["parameter_case"] == "gamma_only"
++            and contract["gamma"] == 1e-6 and contract["parameter_case"] == "right_medium_domain_margin"
++            and contract["direction_archive_fields"] == ["direction"] and contract["multiplier_direction"] == 0.
+             and contract["comparison_baseline_stage"] == "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001"
+-            and contract["preparation_stage"] == "lf_data_preparation/native_workpiece_001/gamma_half_preparation_001/run_001"
++            and contract["preparation_stage"] == "lf_data_preparation/native_workpiece_001/right_margin_preparation_001/run_001"
+             and isinstance(contract["reference_budget_basis"],str) and contract["reference_budget_basis"].strip(),
+-            "Wrong explicit gamma-half reference card")
++            "Wrong explicit right-margin reference card")
+         self.reference_contract,self.reference_contract_sha256 = contract,sha(contract_file)
+         ref_sources = contract["reference_sources"]
+         own = Path(__file__).resolve().relative_to(self.repo).as_posix()
+         core = PRIVATE_CORE.relative_to(self.repo).as_posix()
+         counter = COUNTER_FILE.relative_to(self.repo).as_posix()
+         self.check(ref_sources.get(own) == sha(Path(__file__)) and ref_sources.get(core) == CORE_PIN
+-            and ref_sources.get(counter) == COUNTER_PIN and len({Path(p).name for p in ref_sources}) == len(ref_sources) == 36,"Reference closure differs")
++            and ref_sources.get(counter) == COUNTER_PIN and len({Path(p).name for p in ref_sources}) == len(ref_sources) == 37,"Reference closure differs")
+         original_counter = Path(__file__).with_name("counter_original_B028.py").relative_to(self.repo).as_posix()
+         self.check(ref_sources.get(original_counter) == ORIGINAL_COUNTER_PIN,"Original B028 role differs")
+         ref_caps = self.output/"reference_sources";ref_caps.mkdir()
+@@ -107,7 +108,7 @@
+             self.bind(self.repo/name,pin)
+             shutil.copyfile(self.repo/name,ref_caps/Path(name).name)
+             self.bind(ref_caps/Path(name).name,pin)
+-        from reference_contract_builder import verify_complete_production,verify_accounting_transition
++        from reference_contract_builder import verify_complete_production,verify_accounting_transition,verify_padding_arrays,COUNTS
+         inventory,receipt,freeze,result = verify_complete_production(self.repo,self.stage,self.bind)
+         self.check(contract["input_inventory_sha256"] == sha(self.stage/"input_inventory.json")
+             and contract["production_receipt_sha256"] == sha(self.stage/"execution_receipt.json")
+@@ -168,84 +169,107 @@
+         self.bind(comparison_metadata_file)
+         comparison,comparison_metadata = npz(comparison_file),read(comparison_metadata_file)
+         verify_descriptor(comparison_metadata);verify_fields(comparison,comparison_metadata["arrays"]["fields"])
+-        same_arrays(model,npz(self.repo/row["workpiece_model_file"]),"Declared gamma-half27 fixture arrays")
+-        changed = {"gamma","lam","mu"};unchanged = set(comparison)-changed
+-        self.check(set(model) == set(comparison) and len(model) == 27 and len(unchanged) == 24,
+-            "Gamma-half field coverage differs")
+-        same_arrays({n:model[n] for n in unchanged},{n:comparison[n] for n in unchanged},"All24 nonmaterial fields raw exact")
+-        solid = comparison["solid"].astype(bool)
+-        for name in sorted(changed):
+-            self.check(model[name].dtype == comparison[name].dtype and model[name].shape == comparison[name].shape
+-                and model[name][solid].tobytes() == comparison[name][solid].tobytes()
+-                and np.array_equal(model[name][~solid],comparison[name][~solid]*.5),"Gamma-only solid identity/medium half differs: "+name)
+-        actual_delta = sorted(n for n in model if model[n].tobytes() != comparison[n].tobytes())
+-        self.check(actual_delta == sorted(changed) == inventory["model_comparison"]["actual_changed_fields"]
+-            and inventory["model_comparison"]["unchanged_fields"] == sorted(unchanged),"Gamma-half explicit field delta differs")
++        same_arrays(model,npz(self.repo/row["workpiece_model_file"]),"Declared padded27 fixture arrays")
++        maps,actual_comparison = verify_padding_arrays(np,comparison,model,comparison_metadata,metadata)
++        prep = self.repo/self.reference_contract["preparation_stage"]
++        prep_comparison_file = prep/"model_comparison.json"
++        self.bind(prep_comparison_file,inventory["model_comparison"]["preparation_comparison_sha256"])
++        self.check(actual_comparison == read(prep_comparison_file),"All27 saved physical mapping comparisons differ")
++        expected_delta = sorted(n for n,v in actual_comparison["fields"].items() if not v["raw_equal"])
++        self.check(expected_delta == inventory["model_comparison"]["actual_changed_fields"]
++            and actual_comparison["raw_equal_fields"] == inventory["model_comparison"]["unchanged_fields"],"Explicit padding raw-field delta differs")
+         task,baseline_task = read(self.repo/row["task_file"]),comparison_metadata["task"]
+-        descriptive = {"task_id","purpose","parameter_origin"}
+-        expected_task = dict(baseline_task,third_medium=dict(gamma=5e-7))
++        descriptive = {"task_id","purpose","parameter_origin","description"}
++        expected_task = dict(baseline_task,geometry=task["geometry"],background_symmetry=dict(points_mm=[[0.,40.],[82.,40.]],components=[1]))
+         self.check({k:v for k,v in task.items() if k not in descriptive} == {k:v for k,v in expected_task.items() if k not in descriptive}
+             and task["schema_version"] == "hf-native-project-task-1.1" and task["case_family"] == "gripper"
+             and task["workpiece"] == BODY and task["path"] == dict(kind="ordered_cycle",targets_mm=TARGETS)
+             and metadata["schema_version"] == "hf-native-project-model-1.1" and metadata["task"] == task
+             and metadata["task_sha256"] == result["task_sha256"] == receipt["task_sha256"] == canonical_hash(task)
+             and metadata["descriptor_sha256"] == result["model"]["descriptor_sha256"]
+-            and metadata["arrays"]["sha256"] == sha(model_file),"New gamma task/model identity differs")
+-        expected_material = dict(comparison_metadata["material"],third_medium_gamma=5e-7)
+-        self.check(metadata["material"] == expected_material
++            and metadata["arrays"]["sha256"] == sha(model_file),"New right-margin task/model identity differs")
++        self.check(metadata["material"] == comparison_metadata["material"]
++            and task["third_medium"] == baseline_task["third_medium"] == dict(gamma=1e-6)
+             and task["regularization"] == baseline_task["regularization"] == dict(alpha=1e-6,length_mm=80.)
+-            and metadata["material"]["force_scale_per_length"] == 20.,"Only gamma material metadata may change")
+-        self.check(all(metadata[k] == comparison_metadata[k] for k in ("grid","model_extent","units","quadrature",
+-            "element_node_order","dof_order","analysis_grid_policy","native_geometry_preserved","qualification",
+-            "constraints_applied","material_assigned","task_created","response_evaluated")),"Original geometry/model semantics differ")
++            and metadata["material"]["force_scale_per_length"] == 20.,"Original material and Lr80 must remain exact")
++        self.check(all(metadata[k] == comparison_metadata[k] for k in ("model_extent","units","quadrature",
++            "element_node_order","dof_order","analysis_grid_policy","native_geometry_preserved",
++            "constraints_applied","material_assigned","task_created","response_evaluated")),"Unchanged model semantics differ")
+         source = metadata["source_geometry"]
+         expected_source = dict(source,snapshot={k:"model/"+p for k,p in source["snapshot"].items()})
+-        self.check(source == comparison_metadata["source_geometry"] and result["source_geometry"] == expected_source
+-            and source["geometry_id"] == GEOMETRY_ID and source["descriptor_sha256"] == GEOMETRY_DESCRIPTOR_SHA
++        geometry = read(self.repo/row["geometry_file"])
++        verify_descriptor(geometry)
++        self.check(source["geometry_id"] == task["geometry"]["geometry_id"] == geometry["geometry_id"] == row["geometry_id"]
++            and source["descriptor_sha256"] == task["geometry"]["descriptor_sha256"] == geometry["descriptor_sha256"]
++            and source["geometry_id"] != GEOMETRY_ID and source["descriptor_sha256"] != GEOMETRY_DESCRIPTOR_SHA
++            and result["source_geometry"] == expected_source
+             and source["descriptor_file_sha256"] == row["geometry_file_sha256"]
+-            and source["arrays_sha256"] == row["geometry_npz_sha256"],"Original LF geometry identity differs")
++            and source["arrays_sha256"] == row["geometry_npz_sha256"],"Derived HF geometry identity differs")
++        derivation = geometry["provenance"]["hf_analysis_domain_derivations"][-1]
++        parent_file = self.repo/"lf_data_preparation/native_workpiece_001/enlarged_square_projection_001/run_001/result/model/source_geometry/geometry.json"
++        self.bind(parent_file);parent_geometry = read(parent_file)
++        self.bind(parent_file.with_suffix(".npz"))
++        self.check(derivation["operation"] == "right_passive_void_padding" and derivation["right_columns"] == 2
++            and derivation["margin_mm"] == 2. and derivation["parent_cell_slice_yx"] == [[0,40],[0,80]]
++            and derivation["parent_hf_geometry"]["geometry_id"] == GEOMETRY_ID
++            and derivation["parent_hf_geometry"]["descriptor_sha256"] == GEOMETRY_DESCRIPTOR_SHA
++            and derivation["parent_hf_geometry"]["geometry_json_sha256"] == sha(parent_file)
++            and derivation["parent_hf_geometry"]["geometry_npz_sha256"] == sha(parent_file.with_suffix(".npz"))
++            and geometry["provenance"]["lf_v2"] == parent_geometry["provenance"]["lf_v2"]
++            and geometry["region_tags"] == parent_geometry["region_tags"]
++            and geometry["processing"]["whole_grid_is_LF_native"] is False
++            and geometry["processing"]["background_boundary_applied"] is False,"HF derivation and retained LF history differ")
++        expected_grid = dict(parent_geometry["grid"],shape_yx=[40,82],extent_mm=[82.,40.])
++        self.check(metadata["grid"] == geometry["grid"] == expected_grid,"Derived domain grid differs")
++        padded_masks,parent_masks = npz(self.repo/row["geometry_npz_file"]),npz(parent_file.with_suffix(".npz"))
++        self.check(set(padded_masks) == set(parent_masks) and all(padded_masks[k].dtype == parent_masks[k].dtype
++            and padded_masks[k].shape == (40,82) and padded_masks[k][:,:80].tobytes() == parent_masks[k].tobytes()
++            and np.all(padded_masks[k][:,80:] == (1 if k == "passive_void" else 0)) for k in parent_masks),"Original four masks and added medium columns differ")
+         for key,pin in (("descriptor","geometry_file_sha256"),("arrays","geometry_npz_sha256")):
+             self.bind(self.origin/expected_source["snapshot"][key],row[pin])
+         conn,coords = model["connectivity"],model["coordinates"]
+         centres = coords[conn].mean(axis=1)
+         cells = np.flatnonzero((centres[:,0] >= 62.) & (centres[:,0] <= 80.) & (centres[:,1] >= 31.) & (centres[:,1] <= 40.))
+         nodes = np.unique(conn[cells]);dofs = (2*nodes[:,None]+np.arange(2)).ravel()
+-        groups = {n:comparison_metadata["region_metadata"][n]["dofs"] for n in ("support","entity_symmetry","background_symmetry")}
++        regions,body = metadata["region_metadata"],metadata["region_metadata"]["workpiece"]
++        groups = {n:regions[n]["dofs"] for n in ("support","entity_symmetry","background_symmetry")}
++        top_nodes = np.flatnonzero(coords[:,1] == 40.)
++        self.check(groups["background_symmetry"] == (2*top_nodes+1).tolist()
++            and regions["background_symmetry"]["points_mm"] == [[0.,40.],[82.,40.]],"Applied full-domain top constraint differs")
+         overlap = np.intersect1d(dofs,groups["background_symmetry"])
+         self.check((len(cells),len(nodes),len(dofs),len(overlap)) == (162,190,380,19)
+             and all(np.array_equal(model[name],value) for name,value in
+                 dict(workpiece_cells=cells,workpiece_nodes=nodes,workpiece_dofs=dofs,workpiece_background_symmetry_overlap_dofs=overlap).items())
+-            and np.all(npz(self.repo/row["geometry_npz_file"])["passive_void"].ravel()[cells])
++            and np.all(padded_masks["passive_void"].ravel()[cells])
+             and not np.intersect1d(nodes,model["solid_nodes"]).size,"Independent body coverage differs")
+-        regions,body = metadata["region_metadata"],metadata["region_metadata"]["workpiece"]
++        expected_body = dict(comparison_metadata["region_metadata"]["workpiece"],cells=cells.tolist(),nodes=nodes.tolist(),dofs=dofs.tolist(),background_symmetry_overlap_dofs=overlap.tolist())
+         fixed = np.unique(np.concatenate([np.asarray(value) for value in groups.values()]+[dofs]))
+         edofs = (2*conn[:,:,None]+np.arange(2)).reshape(-1,8)
+-        self.check(len(fixed) == 448 and np.array_equal(fixed,model["fixed_dofs"])
+-            and np.array_equal(np.setdiff1d(np.arange(6642),fixed),model["free_dofs"])
++        self.check(len(fixed) == 450 and np.array_equal(fixed,model["fixed_dofs"])
++            and np.array_equal(np.setdiff1d(np.arange(6806),fixed),model["free_dofs"])
+             and np.array_equal(edofs,model["edofs"]) and regions["fixed_dofs"] == fixed.tolist()
+-            and all(regions[n] == comparison_metadata["region_metadata"][n] for n in groups)
+-            and regions["ports"] == comparison_metadata["region_metadata"]["ports"]
+             and regions["source_background"] == comparison_metadata["region_metadata"]["source_background"]
+-            and body == comparison_metadata["region_metadata"]["workpiece"] and body["definition"] == BODY
++            and body == expected_body and body["definition"] == BODY
+             and regions["effective_boundary"] == dict(task_sha256=canonical_hash(task),
+                 fixed_dofs_sha256=hashlib.sha256(model["fixed_dofs"].astype("<i8").tobytes()).hexdigest(),
+                 workpiece_constraint_overlay=True,source_geometry_masks_preserved=True,source_material_arrays_preserved=True,
+-                material_phase_classification="original mechanism solid and original medium; workpiece is a kinematic overlay"),"Fixed overlay/groups differ")
+-        self.check(regions["counts"] == result["counts"] == comparison_metadata["region_metadata"]["counts"]
+-            and regions["solid_constraint_dofs"] == comparison_metadata["region_metadata"]["solid_constraint_dofs"]
+-            and (body["selected_cells"],body["incident_nodes"],body["fixed_dofs"]) == (162,190,380)
+-            and np.flatnonzero(model["b_in"]).tolist() == [6156,6318,6480]
+-            and np.flatnonzero(model["b_out"]).tolist() == [4697,4859,5021]
+-            and model["b_in"][[6156,6318,6480]].tolist() == model["b_out"][[4697,4859,5021]].tolist() == [.25,.5,.25],"Counts/ports differ")
++                material_phase_classification="original mechanism solid and original medium; workpiece is a kinematic overlay"),"Mapped fixed overlay/groups differ")
++        inlet_nodes = np.flatnonzero((coords[:,0] == 0.) & np.isin(coords[:,1],[38.,39.,40.]))
++        outlet_nodes = np.flatnonzero((coords[:,0] == 80.) & np.isin(coords[:,1],[28.,29.,30.]))
++        self.check(regions["counts"] == result["counts"] == COUNTS
++            and regions["solid_constraint_dofs"] == maps["dof_map"][comparison_metadata["region_metadata"]["solid_constraint_dofs"]].tolist()
++            and np.array_equal(np.flatnonzero(model["b_in"]),2*inlet_nodes)
++            and np.array_equal(np.flatnonzero(model["b_out"]),2*outlet_nodes+1)
++            and model["b_in"][2*inlet_nodes].tolist() == model["b_out"][2*outlet_nodes+1].tolist() == [.25,.5,.25],"Actual counts/physical ports differ")
+         directions = npz(self.repo/row["direction_file"]);v = directions["direction"]
+         expected_v = model["b_in"]/abs(model["b_in"]).max();expected_v[fixed] = 0.
+-        self.check(set(directions) == {"direction","multiplier_direction"} and v.dtype == np.dtype("float64")
+-            and v.shape == (6642,) and v.tobytes() == expected_v.tobytes()
++        self.check(set(directions) == set(contract["direction_archive_fields"]) and v.dtype == np.dtype("float64")
++            and v.shape == (6806,) and v.tobytes() == expected_v.tobytes()
+             and hashlib.sha256(v.tobytes()).hexdigest() == row["direction_array_sha256"]
+-            and float(directions["multiplier_direction"]) == 0.,"Original fixed-compatible PORT direction differs")
++            and contract["multiplier_direction"] == 0.,"New fixed-compatible6806 PORT direction differs")
+         placement = contract["boundary_placement"]
+-        self.check(placement == dict(body_box_mm=[62.,80.,31.,40.],right_outer_boundary_mm=80.,right_medium_margin_mm=0.,workpiece_touches_analysis_boundary=True)
+-            and model["coordinates"][:,0].max() == 80.,"Explicit boundary placement differs")
++        self.check(placement == dict(body_box_mm=[62.,80.,31.,40.],right_outer_boundary_mm=82.,right_medium_margin_mm=2.,workpiece_touches_analysis_boundary=False)
++            and coords[:,0].max() == 82.,"Explicit right-medium boundary placement differs")
+         states = result["states"]; original = [s for s in states if s["is_original_target"]]
+         self.check(len(states) >= len(TARGETS) and len(states) == result["accepted_states"] == receipt["accepted_states"]
+             and [s["state_sha256"] for s in states] == receipt["state_sha256"]
+@@ -314,7 +338,7 @@
+             "First saved force-range observation differs from exact trial/counter provenance")
+         same_arrays({key: arrays[key] for key in intrinsic}, {key: model[key] for key in intrinsic},
+                     "First force-range input model/operator raw fields")
+-        self.check(all(arrays[key].dtype == np.dtype("float64") and arrays[key].shape == (6642,)
++        self.check(all(arrays[key].dtype == np.dtype("float64") and arrays[key].shape == (len(model["coordinates"])*2,)
+                        and np.isfinite(arrays[key]).all() for key in ("lift", "fluctuation"))
+             and np.count_nonzero(arrays["lift"]) == 0
+             and np.count_nonzero(arrays["fluctuation"][model["fixed_dofs"]]) == 0
+@@ -356,13 +380,13 @@
+                      "thickness", "solid", "fixed_dofs", "grad", "hessian", "weights", "points")
+         self.check(set(arrays) == set(intrinsic)|{"lift", "fluctuation"}, "Failed tangent input field contract")
+         same_arrays({k:arrays[k] for k in intrinsic},{k:model[k] for k in intrinsic}, "Failed tangent model/operator fields")
+-        self.check(all(arrays[k].dtype == np.dtype("float64") and arrays[k].shape == (6642,)
++        self.check(all(arrays[k].dtype == np.dtype("float64") and arrays[k].shape == (len(model["coordinates"])*2,)
+                 and np.isfinite(arrays[k]).all() for k in ("lift","fluctuation"))
+             and np.count_nonzero(arrays["lift"]) == 0
+             and np.count_nonzero(arrays["fluctuation"][model["fixed_dofs"]]) == 0
+             and state_hash(arrays) == observation["state_sha256"]
+             and all(np.isfinite(v).all() for v in fields.values())
+-            and fields["J"].shape == (3200,9) and np.all(fields["J"] > 0)
++            and fields["J"].shape == (len(model["connectivity"]),9) and np.all(fields["J"] > 0)
+             and not any(row["state_sha256"] == observation["state_sha256"] for row in self.result["states"]),
+             "Failed tangent raw fields/state/caches differ")
+         copied = self.output/"first_tangent_range_input"; copied.mkdir()
+@@ -385,14 +409,14 @@
+         for path,pin in self.bindings.items(): self.check(sha(path) == pin,"Bound input/source changed: "+str(path))
+         self.checkpoint()
+         summary = dict(schema_version="native-workpiece-cycle-independent-audit-1.0",status="pass",
+-            alias="gripper_coarse_square_x71_side18_gamma_half",source_alias="gripper_canonical",case_family="gripper",
++            alias="gripper_coarse_square_x71_side18_right_margin2",source_alias="gripper_canonical",case_family="gripper",
+             baseline_commit=self.inventory["baseline_commit"],audited_targets_mm=TARGETS,path_kind="ordered_cycle",workpiece=BODY,
+             accepted_states=len(self.rows),states=self.rows,result_sha256=sha(self.result_file),
+             checks_completed=self.checks,HP_calls_started=self.hp_started,HP_calls_completed=self.hp_completed,
+             HP_matrix_columns_exhaustively_checked=False,full_element_and_DOF_coverage=True,
+             gates=GATES,global_scatter_precision=3000,global_scatter_inexact_trap=True,
+             reference_scope="All actual accepted states/elements/real DOFs; fixed-lift PORT direction, deltaR=0; original signed workpiece and disjoint holding projections",
+-            qualification="Accepted mechanical states of this explicit complete gamma-half x71 side18 boundary-touching coarse square cycle; no pressure, clamp, contact, auxiliary energy, stress-HP, rejected-state, all-column, H2/H3 or HF5 qualification",
++            qualification="Accepted mechanical states of this explicit complete gamma1e-6 x71 side18 coarse square cycle with2mm right medium margin; no pressure, clamp, contact, auxiliary energy, stress-HP, rejected-state, all-column, H2/H3 or HF5 qualification",
+             **MECHANICAL_AVAILABILITY,analytic_HP_energy_scope="Archived reference only, without candidate comparison or energy qualification",
+             contact_qualified=False,clamp_qualified=False,pressure_qualified=False,
+             original_run_state_source_sha256=CORE_PINS["audit_native_mean.py"],private_run_state_source_sha256=CORE_PIN,
+@@ -402,8 +426,8 @@
+             first_force_range_input=self.first_range_observation,first_tangent_range_input=self.tangent_range_observation,
+             comparison_baseline_stage=self.reference_contract["comparison_baseline_stage"],
+             initial_guess=self.result["initial_guess"],predictor_initialization=self.receipt["predictor_initialization"],
+-            parameter_case="gamma_only",
+-            gamma=5e-7,
++            parameter_case="right_medium_domain_margin",
++            gamma=1e-6,
+             prerequisite_scope="Identity and cost contexts only; no reference or new-state qualification is inherited",
+             boundary_placement=self.reference_contract["boundary_placement"],
+             independent_reference_contract_sha256=self.reference_contract_sha256,
+--- gamma_half_cycle_001/reference_author/reference_contract_builder.py
++++ right_margin_cycle_001/reference_author/reference_contract_builder.py
+@@ -12,7 +12,7 @@
+ 
+ RSS = 8*1024**3
+ CORE_PIN = "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5"
+-AUDIT_PIN = "74a9acee9ed434d8026e0fc4510a61d9a169d5af4f60d1545dbdf6ee2da450ac"
++AUDIT_PIN = "06cf071418fe05e632cf194d3df722022560d0e2a9e02d5477d96300674d5f4a"
+ COUNTER_PIN = "a751fe07a682ff89c88b16d8d69325b1990d45c26114b8715414116580737ed9"
+ ORIGINAL_COUNTER_PIN = "b028dba774d430a6d082ca05be86489a56e800be1f1bd69c60148ffccd51e8b3"
+ COUNTER_SCHEMA = "shift-complete-attempt-counter-recovered-invalid-J-1.1"
+@@ -28,20 +28,21 @@
+ sha = lambda p:sha256(p.read_bytes()).hexdigest()
+ 
+ 
+-BASELINE = "16ee4ebb67161e2c8bc9a27d8e44285308778171"
+-CONTROL = "lf_data_preparation/native_workpiece_001/gamma_half_cycle_001"
+-PREPARATION = "lf_data_preparation/native_workpiece_001/gamma_half_preparation_001"
++BASELINE = "abf62b04d0a384f3c9cfa352dd6232ad1d4ab3d1"
++CONTROL = "lf_data_preparation/native_workpiece_001/right_margin_cycle_001"
++PREPARATION = "lf_data_preparation/native_workpiece_001/right_margin_preparation_001"
+ PROOF_CONTROL = "lf_data_preparation/native_workpiece_001/enlarged_square_projection_001"
+-ALIAS = "gripper_coarse_square_x71_side18_gamma_half"
+-CHANGED = {"gamma", "lam", "mu"}
++ALIAS = "gripper_coarse_square_x71_side18_right_margin2"
++RAW_FIELDS = {"grad", "hessian", "weights", "points", "kr", "hx", "hy", "thickness", "k_out", "force_scale_per_length"}
++COUNTS = dict(cells=3280,nodes=3403,dofs=6806,solid_cells=1086,medium_cells=2194,solid_incident_nodes=1337,fixed_dofs=450,free_dofs=6356)
+ INITIAL_GUESS = "port_projection"
+ PREDICTOR_INITIALIZATION = dict(displacement_mode=INITIAL_GUESS, applied_dw=False, applied_dR=True,
+     port_adjustment="distributed normalized free-port weights", predictor_LU_role="reaction increment estimator",
+     linear_residual_scope="Actual computed KKT solution; not the applied displacement seed.")
+ TARGETS = [0.,.25,.5,.65,.75,.8,.85,.9,.95,1.,1.05,1.1,1.15,1.2,1.15,1.1,1.,.9,.8,.75,.65,.5,.25,0.]
+ BODY = dict(kind="fixed_rigid",shape="square",center_mm=[71.,40.],side_mm=18.,fixed_components=[0,1])
+-PLACEMENT = dict(body_box_mm=[62.,80.,31.,40.],right_outer_boundary_mm=80.,
+-    right_medium_margin_mm=0.,workpiece_touches_analysis_boundary=True)
++PLACEMENT = dict(body_box_mm=[62.,80.,31.,40.],right_outer_boundary_mm=82.,
++    right_medium_margin_mm=2.,workpiece_touches_analysis_boundary=False)
+ 
+ 
+ def verify_complete_production(root, stage, bind):
+@@ -58,12 +59,12 @@
+     result = read(result_file)
+     assert inventory["baseline_commit"] == receipt["baseline_commit"] == BASELINE
+     assert row["alias"] == ALIAS and row["source_alias"] == "gripper_canonical"
+-    assert (row["elements"],row["dofs"],row["fixed_DOFs"],row["free_DOFs"]) == (3200,6642,448,6194)
++    assert (row["elements"],row["dofs"],row["fixed_DOFs"],row["free_DOFs"]) == (3280,6806,450,6356)
+     assert inventory["schema_version"] == "native-workpiece-cycle-input-inventory-1.0"
+-    assert freeze["schema_version"] == "gamma-half-cycle-source-freeze-1.0"
+-    assert inventory["source_count"] == len(freeze["sources"]) == 26
+-    assert len({Path(p).name for p in freeze["sources"]}) == 26
+-    assert len([p for p in freeze["sources"] if p.startswith("hf_repo/src/hf_eval/")]) == 24
++    assert freeze["schema_version"] == "right-margin-cycle-source-freeze-1.0"
++    assert inventory["source_count"] == len(freeze["sources"]) == 27
++    assert len({Path(p).name for p in freeze["sources"]}) == 27
++    assert len([p for p in freeze["sources"] if p.startswith("hf_repo/src/hf_eval/")]) == 25
+     assert freeze["sources"][CONTROL+"/author/execute_shift_pose.py"] == "57d18bfea972c09db4c0866bdee3413088342327e32d3926be9eaa1bdbab466a"
+     assert freeze["sources"][CONTROL+"/author/prepare_shift_pose.py"] == "fbb3e1975a7054599eb7d9fde5bf771805a698fe54015ac3d934e43cba2262ac"
+     assert receipt["sources"] == freeze["sources"] and receipt["inputs"] == inventory["input_bindings"]
+@@ -103,16 +104,18 @@
+     assert [r["state_sha256"] for r in states] == receipt["state_sha256"]
+     task = read(root/row["task_file"])
+     baseline_task = read(root/PROOF_CONTROL/"run_001/task.json")
+-    descriptive = {"task_id","purpose","parameter_origin"}
+-    expected_task = dict(baseline_task,third_medium=dict(gamma=5e-7))
++    descriptive = {"task_id","purpose","parameter_origin","description"}
++    expected_task = dict(baseline_task,geometry=task["geometry"],background_symmetry=dict(points_mm=[[0.,40.],[82.,40.]],components=[1]))
+     assert {k:v for k,v in task.items() if k not in descriptive} == {k:v for k,v in expected_task.items() if k not in descriptive}
+     assert task["workpiece"] == BODY and task["path"]["targets_mm"] == TARGETS
+-    assert task["third_medium"]["gamma"] == 5e-7 and task["regularization"]["alpha"] == 1e-6
++    assert task["third_medium"]["gamma"] == 1e-6 and task["regularization"]["alpha"] == 1e-6
+     assert task["regularization"]["length_mm"] == 80. and task["material"]["E_MPa"] == 1.
+     comparison = inventory["model_comparison"]
+-    assert comparison["total_fields"] == 27 and comparison["actual_changed_fields"] == row["expected_model_changed_fields"] == sorted(CHANGED)
+-    assert len(comparison["unchanged_fields"]) == 24 and comparison["parameter_case"] == "gamma_only"
+-    assert comparison["medium_factor"] == .5 and comparison["solid_values_byte_exact"] is True
++    assert comparison["total_fields"] == 27 and comparison["parameter_case"] == "right_medium_domain_margin"
++    assert comparison["parent_physical_subdomain_byte_exact"] is True
++    assert len(comparison["actual_changed_fields"]) == 17 and len(comparison["unchanged_fields"]) == 10
++    assert comparison["actual_changed_fields"] == row["expected_model_changed_fields"]
++    assert comparison["unchanged_fields"] == row["unchanged_model_fields"] == sorted(RAW_FIELDS)
+     assert receipt["model_arrays_compared"] == 27 and receipt["declared_workpiece_model_arrays_equal"] is True
+     assert receipt["model_comparison"] == comparison and receipt["declared_workpiece_model_sha256"] == row["workpiece_model_sha256"]
+     assert row["comparison_model_file"] == PROOF_CONTROL+"/run_001/result/model/model.npz"
+@@ -132,6 +135,23 @@
+     assert 0 <= prep_receipt["peak_sampled_helper_RSS_bytes"] <= RSS and 0 <= prep_launch["peak_sampled_tree_RSS_bytes"] <= RSS
+     assert sha(root/row["task_file"]) == sha(prep/"run_001/task.json")
+     assert sha(root/row["workpiece_model_file"]) == prep_receipt["model_sha256"]
++    assert prep_receipt["final_resource_check_passed"] is True
++    assert prep_launch["bindings"] == prep_protocol["bindings"]
++    assert prep_receipt["geometry_constructions"] == prep_receipt["geometry_constructions_completed"] == prep_receipt["geometry_writes"] == prep_receipt["direction_writes"] == 1
++    assert prep_receipt["actual_counts"] == result["counts"] == COUNTS
++    for name,pin in prep_receipt["outputs"].items(): bind(prep/"run_001"/name,pin)
++    prepared_comparison = read(prep/"run_001/model_comparison.json")
++    assert prepared_comparison == prep_receipt["model_comparison"]
++    assert prepared_comparison["total_fields"] == len(prepared_comparison["fields"]) == 27
++    assert prepared_comparison["raw_equal_fields"] == comparison["unchanged_fields"]
++    assert prepared_comparison["physically_mapped_fields"] == sorted(set(prepared_comparison["fields"])-RAW_FIELDS)
++    assert prepared_comparison["parent_physical_subdomain_byte_exact"] is True
++    assert all(v["physical_comparison"] == "pass" for v in prepared_comparison["fields"].values())
++    assert sorted(n for n,v in prepared_comparison["fields"].items() if not v["raw_equal"]) == comparison["actual_changed_fields"]
++    assert comparison["preparation_comparison_file"] == PREPARATION+"/run_001/model_comparison.json"
++    assert comparison["preparation_comparison_sha256"] == sha(prep/"run_001/model_comparison.json")
++    assert comparison["physical_mapping_file"] == PREPARATION+"/run_001/mapping.npz"
++    assert comparison["physical_mapping_sha256"] == sha(prep/"run_001/mapping.npz")
+     pins = dict(protocol["bindings"])
+     pins.update(inventory["input_bindings"]); pins.update(freeze["sources"]); pins.update(prep_protocol["bindings"])
+     for path in [*paths,protocol_file,launch_file,*[p for p in result_file.parent.rglob("*") if p.is_file()],*[p for p in stage.glob("first_*_range_input/*") if p.is_file()]]:
+@@ -139,6 +159,63 @@
+     for name,pin in pins.items(): bind(root/name,pin)
+     for name,pin in freeze["sources"].items(): bind(stage/"sources"/Path(name).name,pin)
+     return inventory,receipt,freeze,result
++
++def verify_padding_arrays(np, old, new, old_meta, new_meta):
++    """Compare saved physical subdomains; stored indices use the new row strides."""
++    assert set(old) == set(new) and len(new) == 27
++    assert all(old[k].dtype == new[k].dtype for k in old)
++    assert new["coordinates"].shape == (3403, 2) and new["connectivity"].shape == (3280, 4)
++    assert new["edofs"].shape == (3280, 8) and new["b_in"].shape == new["b_out"].shape == (6806,)
++    assert all(new[k].shape == (3280,) for k in ("solid", "lam", "mu", "gamma"))
++    cell_map = (np.arange(40, dtype=np.int64)[:, None] * 82 + np.arange(80, dtype=np.int64)).ravel()
++    node_map = (np.arange(41, dtype=np.int64)[:, None] * 83 + np.arange(81, dtype=np.int64)).ravel()
++    dof_map = (2 * node_map[:, None] + np.arange(2, dtype=np.int64)).ravel()
++    added_cells = (np.arange(40, dtype=np.int64)[:, None] * 82 + np.array([80, 81])).ravel()
++    added_dofs = np.setdiff1d(np.arange(6806), dof_map)
++    same = lambda a, b: a.dtype == b.dtype and a.shape == b.shape and a.tobytes() == b.tobytes()
++    for name in RAW_FIELDS:
++        assert same(new[name], old[name]), name
++    assert same(new["coordinates"][node_map], old["coordinates"])
++    assert same(new["connectivity"][cell_map], node_map[old["connectivity"]])
++    assert same(new["edofs"][cell_map], dof_map[old["edofs"]])
++    for name in ("solid", "lam", "mu", "gamma"):
++        assert same(new[name][cell_map], old[name]), name
++    assert not new["solid"][added_cells].any()
++    for name in ("lam", "mu", "gamma"):
++        assert np.all(new[name][added_cells] == old[name][~old["solid"]][0]), name
++    for name in ("solid_nodes", "workpiece_nodes"):
++        assert same(new[name], node_map[old[name]]), name
++    for name in ("solid_dofs", "workpiece_dofs", "workpiece_background_symmetry_overlap_dofs"):
++        assert same(new[name], dof_map[old[name]]), name
++    assert same(new["workpiece_cells"], cell_map[old["workpiece_cells"]])
++    extra_top_uy = 2 * np.array([40 * 83 + 81, 40 * 83 + 82], dtype=np.int64) + 1
++    assert same(new["fixed_dofs"], np.union1d(dof_map[old["fixed_dofs"]], extra_top_uy))
++    assert same(new["free_dofs"], np.setdiff1d(np.arange(6806, dtype=np.int64), new["fixed_dofs"]))
++    assert len(new["fixed_dofs"]) == 450 and len(new["free_dofs"]) == 6356
++    for name in ("b_in", "b_out"):
++        assert same(new[name][dof_map], old[name]) and not new[name][added_dofs].any(), name
++    for name in ("support", "entity_symmetry"):
++        a, b = old_meta["region_metadata"][name], new_meta["region_metadata"][name]
++        for key in a:
++            if key in ("selected_nodes", "attached_nodes", "excluded_unattached_nodes"):
++                assert b[key] == node_map[np.asarray(a[key], dtype=np.int64)].tolist()
++            elif key == "dofs":
++                assert b[key] == dof_map[np.asarray(a[key], dtype=np.int64)].tolist()
++            else:
++                assert b[key] == a[key]
++    for name in ("input", "output"):
++        a, b = old_meta["region_metadata"]["ports"][name], new_meta["region_metadata"]["ports"][name]
++        assert b == {**a, "nodes": node_map[a["nodes"]].tolist(), "nonzero_dofs": dof_map[a["nonzero_dofs"]].tolist()}
++    body = new_meta["region_metadata"]["workpiece"]
++    assert (body["selected_cells"], body["incident_nodes"], body["fixed_dofs"]) == (162, 190, 380)
++    assert len(new["workpiece_background_symmetry_overlap_dofs"]) == 19
++    fields = {k: dict(old_shape=list(old[k].shape), new_shape=list(new[k].shape), dtype=new[k].dtype.name,
++        old_array_sha256=sha256(old[k].tobytes()).hexdigest(), new_array_sha256=sha256(new[k].tobytes()).hexdigest(),
++        raw_equal=same(new[k], old[k]), physical_comparison="pass") for k in sorted(new)}
++    return dict(cell_map=cell_map, node_map=node_map, dof_map=dof_map), dict(total_fields=27,
++        raw_equal_fields=sorted(k for k, v in fields.items() if v["raw_equal"]),
++        physically_mapped_fields=sorted(set(fields) - RAW_FIELDS), fields=fields,
++        new_top_uy_dofs=extra_top_uy.tolist(), parent_physical_subdomain_byte_exact=True)
+ 
+ def verify_accounting_transition(root, control, transition, bind):
+     """Verify copied source and saved proof identities only; never run a counter or mechanics."""
+@@ -218,7 +295,10 @@
+     bind(old_freeze_file,sha(old_freeze_file))
+     old_freeze = read(old_freeze_file)
+     core = {p:pin for p,pin in freeze["sources"].items() if p.startswith("hf_repo/src/hf_eval/")}
+-    assert core == {p:pin for p,pin in old_freeze["sources"].items() if p.startswith("hf_repo/src/hf_eval/")}
++    old_core = {p:pin for p,pin in old_freeze["sources"].items() if p.startswith("hf_repo/src/hf_eval/")}
++    assert len(old_core) == 24 and len(core) == 25
++    assert {p:pin for p,pin in core.items() if p != "hf_repo/src/hf_eval/analysis_domain.py"} == old_core
++    assert core["hf_repo/src/hf_eval/analysis_domain.py"] == "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6"
+     refs = dict(core)
+     for name in MATH:
+         path = "hf_repo/scripts/"+name
+@@ -241,7 +321,7 @@
+         proof_origin_stage=PROOF_CONTROL+"/run_001")
+     verify_accounting_transition(root,control,transition,bind)
+     model_file = stage/"result"/result["model"]["arrays_path"]
+-    contract = dict(schema_version="gamma-half-reference-contract-1.0",production_stage=stage.relative_to(root).as_posix(),
++    contract = dict(schema_version="right-margin-reference-contract-1.0",production_stage=stage.relative_to(root).as_posix(),
+         baseline_commit=BASELINE,initial_guess=INITIAL_GUESS,predictor_initialization=PREDICTOR_INITIALIZATION,
+         limits=dict(helper_seconds=1500.,outer_seconds=1560.,sampled_RSS_bytes=RSS),workpiece=BODY,targets_mm=TARGETS,
+         reference_sources=refs,counter_schema=COUNTER_SCHEMA,counter_helper_sha256=COUNTER_PIN,accounting_source_transition=transition,
+@@ -250,8 +330,8 @@
+         production_launch_file=(control/"production_launch.json").relative_to(root).as_posix(),production_launch_sha256=sha(control/"production_launch.json"),
+         production_result_sha256=sha(stage/"result/result.json"),production_model_sha256=sha(model_file),
+         comparison_baseline_stage=PROOF_CONTROL+"/run_001",preparation_stage=PREPARATION+"/run_001",boundary_placement=PLACEMENT,
+-        parameter_case="gamma_only",gamma=5e-7,
+-        scope="Fresh all-actual-state gamma-half mechanical reference only; old accounting proof is source-validation context, no state/HP/contact/pressure/clamp qualification inherited.")
++        parameter_case="right_medium_domain_margin",gamma=1e-6,direction_archive_fields=["direction"],multiplier_direction=0.,
++        scope="Fresh all-actual-state right-medium-margin mechanical reference only; old accounting proof is source-validation context, no state/HP/contact/pressure/clamp qualification inherited.")
+     with contract_file.open("x",encoding="utf-8") as handle:
+         json.dump(contract,handle,indent=2,allow_nan=False);handle.write("\n")
+     pins.update(refs);pins[contract_file.relative_to(root).as_posix()] = sha(contract_file)
+@@ -259,7 +339,7 @@
+     assert all(sha(root/p) == pin for p,pin in pins.items())
+     argv = [(installed/"audit_enlarged_square.py").relative_to(root).as_posix(),"--repo",".","--input",stage.relative_to(root).as_posix(),
+         "--output",output.relative_to(root).as_posix(),"--contract",contract_file.relative_to(root).as_posix(),"--time-limit","1500.0"]
+-    protocol = dict(schema_version="gamma-half-reference-protocol-1.0",bindings=pins,sampled_RSS_bytes=RSS,
++    protocol = dict(schema_version="right-margin-reference-protocol-1.0",bindings=pins,sampled_RSS_bytes=RSS,
+         phases=dict(reference=dict(helper_seconds=1500.,outer_seconds=1560.,argv=argv)),
+         actual_accepted_states=len(result["states"]),expected_new_HP80_120_calls=2*len(result["states"]),production_rerun=False,reference_started=False,
+         stop_policy="First failure closes reference; all actual states fresh, no prefix reuse/production retry",

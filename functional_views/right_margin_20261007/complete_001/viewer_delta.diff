@@ -1,0 +1,73 @@
+--- saved_shift_views_original_16d2c.py
++++ saved_right_margin_views.py
+@@ -13,6 +13,7 @@
+ 
+ PARTS = ("total", "material", "regularization")
+ GROUPS = ("physical_only", "cut_only", "physical_and_cut", "interior")
++TIP_REFERENCE_MM = (80., 30.)
+ 
+ def plain(x):
+     if isinstance(x, dict): return {k:plain(v) for k,v in x.items()}
+@@ -40,7 +41,7 @@
+             ax.quiver(*positions.T,*(vectors*scale).T,angles="xy",scale_units="xy",scale=1.,color="#c43b21",width=.003,minlength=0,minshaft=1)
+     ax.axhline(case["center"][1],color="grey",ls=":",lw=.7)
+     if zoom:
+-        tip=row["xy"][2510]; ax.scatter(*tip,c="#e09113",s=25,zorder=4)
++        tip=row["xy"][case["tip_node"]]; ax.scatter(*tip,c="#e09113",s=25,zorder=4)
+         for name,w in row["tip"].items():
+             q=w["point_mm"]; ax.plot([tip[0],q[0]],[tip[1],q[1]],"--",lw=1,label=f"tip to {name}: {w['distance_mm']:.4g} mm")
+         for face in row["geometry"]["faces"].values():
+@@ -107,11 +108,13 @@
+             meta=read(model_file,result["model"]["descriptor_file_sha256"],True)
+             if meta["task_sha256"]!=result["task_sha256"] or meta["arrays"]["sha256"]!=result["model"]["arrays_sha256"]: raise ValueError("Path/model/task differ")
+             model=archive(model_file.parent,meta["arrays"]); body=meta["task"]["workpiece"]
+-            if not np.array_equal(model["coordinates"][2510],[80.,30.]): raise ValueError("Declared coarse tip node2510 differs")
++            tip_nodes=np.flatnonzero(np.all(model["coordinates"] == TIP_REFERENCE_MM,axis=1))
++            if len(tip_nodes)!=1: raise ValueError("Require one saved reference node at (80,30) mm")
++            tip_node=int(tip_nodes[0])
+             ref=read(Path(references[label]).resolve()) if label in references else None
+             if result["accepted_states"]!=len(result["states"]): raise ValueError("Saved accepted count differs")
+             if ref and (ref["status"]!="pass" or ref["result_sha256"]!=pins[(directory/"result.json").resolve()] or ref["accepted_states"]!=len(result["states"]) or len(ref["states"])!=len(result["states"]) or ref["HP_calls_started"]!=ref["HP_calls_completed"] or ref["HP_calls_completed"]!=2*len(result["states"])): raise ValueError("Require same-path passing reference")
+-            target=out/label; target.mkdir(); case=dict(label=label,model=model,center=np.array(body["center_mm"]),side=float(body["side_mm"]),task=meta["task"],model_sha256=meta["arrays"]["sha256"],result=result,reference_available=ref is not None,cache=[]); cases.append(case)
++            target=out/label; target.mkdir(); case=dict(label=label,model=model,tip_node=tip_node,center=np.array(body["center_mm"]),side=float(body["side_mm"]),task=meta["task"],model_sha256=meta["arrays"]["sha256"],result=result,reference_available=ref is not None,cache=[]); cases.append(case)
+             node_file=(target/"nodes.csv").open("x",newline="",encoding="utf-8")
+             with node_file:
+                 writer=csv.writer(node_file); writer.writerow(["index","original_target_index","leg","d_mm","state_sha256","node_id","x_mm","y_mm","group"]+[c+"_F"+axis+"_N" for c in PARTS for axis in ("x","y")])
+@@ -128,11 +131,11 @@
+                     counts["nodal_started"]+=1; nodes=observe_workpiece_nodal_forces(model,force,symmetry_y_mm=case["center"][1],moment_origin_mm=case["center"]); counts["nodal_completed"]+=1; write(destination/"nodal.json",nodes)
+                     if nodes["summary"]["force_on_lower_body_N"]!=r["workpiece"]["force_on_lower_body_N"]: raise ValueError("Nodal sum differs from cached body resultant")
+                     if not np.array_equal(-nodes["forces_on_body_N"]["total"],force["support_reaction"].reshape(-1,2)[nodes["node_ids"]]): raise ValueError("Every body holding vector must oppose the ON-body total weak force")
+-                    xy=model["coordinates"]+state["lift"].reshape(-1,2)+state["fluctuation"].reshape(-1,2); tip=xy[2510]; lo=case["center"]-case["side"]/2; hi=np.array([case["center"][0]+case["side"]/2,case["center"][1]])
++                    xy=model["coordinates"]+state["lift"].reshape(-1,2)+state["fluctuation"].reshape(-1,2); tip=xy[case["tip_node"]]; lo=case["center"]-case["side"]/2; hi=np.array([case["center"][0]+case["side"]/2,case["center"][1]])
+                     segments=dict(bottom=(lo,np.array([hi[0],lo[1]])),left=(lo,np.array([lo[0],hi[1]])),right=(np.array([hi[0],lo[1]]),hi)); witnesses={k:point_segment(tip,*v) for k,v in segments.items()}
+                     medium=~model["solid"].copy(); medium[model["workpiece_cells"]]=False
+                     strain=(np.swapaxes(force["F"],-1,-2)@force["F"]-np.eye(2))*.5; eigen=np.linalg.eigvalsh(strain)
+-                    row=dict(index=index,original_target_index=r["original_target_index"],leg=r["leg"],d_mm=r["d"],state_sha256=r["state_sha256"],R_input_N=r["R_input"],q_out_mm=r["q_out"],tip_x_mm=tip[0],tip_y_mm=tip[1],solid_min_J=float(force["J"][model["solid"]].min()),medium_min_J=float(force["J"][medium].min()),solid_Green_principal_min=float(eigen[model["solid"]].min()),solid_Green_principal_max=float(eigen[model["solid"]].max()),medium_max_abs_Hu_per_mm=float(abs(force["Hu"][medium]).max()),raw_overlap=geometry["regions"]["raw_interior_overlap"],strict_overlap=geometry["regions"]["strict_interior_overlap"],roundoff_ambiguous=geometry["regions"]["roundoff_ambiguous"])
++                    row=dict(index=index,original_target_index=r["original_target_index"],leg=r["leg"],d_mm=r["d"],state_sha256=r["state_sha256"],R_input_N=r["R_input"],q_out_mm=r["q_out"],tip_node=case["tip_node"],tip_x_mm=tip[0],tip_y_mm=tip[1],solid_min_J=float(force["J"][model["solid"]].min()),medium_min_J=float(force["J"][medium].min()),solid_Green_principal_min=float(eigen[model["solid"]].min()),solid_Green_principal_max=float(eigen[model["solid"]].max()),medium_max_abs_Hu_per_mm=float(abs(force["Hu"][medium]).max()),raw_overlap=geometry["regions"]["raw_interior_overlap"],strict_overlap=geometry["regions"]["strict_interior_overlap"],roundoff_ambiguous=geometry["regions"]["roundoff_ambiguous"])
+                     row.update({"tip_to_"+k+"_mm":v["distance_mm"] for k,v in witnesses.items()}); row.update({k+"_first_ray_mm":v["minimum_first_ray_hit_mm"] for k,v in geometry["faces"].items()})
+                     row.update({c+"_body_F"+axis+"_N":nodes["summary"]["force_on_lower_body_N"][c][j] for c in PARTS for j,axis in enumerate(("x","y"))})
+                     row["cached_two_sided_normal_magnitude_sum_N"]=r["workpiece"]["two_sided_normal_magnitude_sum_N"]
+@@ -175,7 +178,7 @@
+         for i,case in enumerate(cases):
+             checkpoint(); x=case["cache"][case["peak_index"]]; model=case["model"]
+             for j,(ax,(title,mask,values)) in enumerate(zip(axes[i],peak_fields[i])):
+-                collection=PolyCollection(x["xy"][model["connectivity"][mask]],array=values[mask],cmap="viridis"); collection.set_clim(*field_ranges[j]); ax.add_collection(collection); ax.add_collection(PolyCollection(x["xy"][model["connectivity"][model["workpiece_cells"]]],facecolor="lightgrey")); ax.autoscale(); ax.set_aspect("equal"); ax.set_title(case["label"]+" | "+title,fontsize=8); fig.colorbar(collection,ax=ax)
++                collection=PolyCollection(x["xy"][model["connectivity"][mask]],array=values[mask],cmap="viridis"); collection.set_clim(*field_ranges[j]); ax.add_collection(collection); ax.add_collection(PolyCollection(x["xy"][model["connectivity"][model["workpiece_cells"]]],facecolor="lightgrey")); ax.autoscale(); ax.set_aspect("equal"); ax.set_title(case["label"]+"\n"+title,fontsize=8); fig.colorbar(collection,ax=ax,fraction=.046,pad=.035)
+         fig.tight_layout(); fig.savefig(out/"peak_fields.png",dpi=150); plt.close(fig)
+         for case in cases:
+             frames=[]
+@@ -199,11 +202,12 @@
+         write(out/"view.json",dict(schema_version="saved-shifted-workpiece-views-1.0",status="pass" if failure is None else "failed",failure=failure,**counts,
+             new_F_T_model_solver_HP_calls=0 if pure else None,mechanical_hooks_monitored=False,zero_mechanics_basis="Pinned pure module origins and saved-array derivations, not dynamic mechanical hook monitoring",
+             input_source_bindings={p.relative_to(root).as_posix():h for p,h in pins.items()},outputs={p.relative_to(out).as_posix():sha256(p.read_bytes()).hexdigest() for p in out.rglob("*") if p.is_file()},
+-            cases=[dict(label=c["label"],production_status=c["result"]["status"],production_path_completed=c["result"]["path_completed"],unload_endpoint_reached=c["result"]["unload_endpoint_reached"],reference_available=c["reference_available"],saved_accepted_states=c["result"]["accepted_states"],observed_states=len(c["cache"]),peak_index=c.get("peak_index"),last_index=len(c["cache"])-1,task=c["task"],model_sha256=c["model_sha256"]) for c in cases],
++            cases=[dict(label=c["label"],production_status=c["result"]["status"],production_path_completed=c["result"]["path_completed"],unload_endpoint_reached=c["result"]["unload_endpoint_reached"],reference_available=c["reference_available"],saved_accepted_states=c["result"]["accepted_states"],observed_states=len(c["cache"]),peak_index=c.get("peak_index"),last_index=len(c["cache"])-1,tip_node=c["tip_node"],task=c["task"],model_sha256=c["model_sha256"]) for c in cases],
+             common_nodal_force_scale=dict(max_force_N=force_max,display_length_mm=4,all_body_nodes=True,components=PARTS),
+             common_peak_field_ranges=field_ranges if "field_ranges" in locals() else None,
+             mirroring="Visualization only about native symmetry; lower-body resultants stay half-model quantities; reflected arrows flip Fy, no doubled solved DOFs",
+-            strain_scope="Binary64 in-plane Green eigenvalues from saved F; not fresh HP qualified",distance_scope="Node2510 unsigned finite-segment distance; outward face first rays separately; null=no hit, not zero",
++            tip_selection=dict(reference_coordinates_mm=list(TIP_REFERENCE_MM),method="Unique exact saved reference coordinate, no snapping or fixed node numbering"),
++            strain_scope="Binary64 in-plane Green eigenvalues from saved F; not fresh HP qualified",distance_scope="Unsigned finite-segment distance from the recorded reference (80,30) mm node; outward face first rays separately; null=no hit, not zero",
+             contact_pressure_clamping_qualified=False,elapsed_seconds=perf_counter()-STARTED,sampled_peak_RSS_bytes=peak))
+ 
+ if __name__=="__main__": main()

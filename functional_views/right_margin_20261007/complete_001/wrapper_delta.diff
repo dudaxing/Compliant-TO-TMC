@@ -1,0 +1,53 @@
+--- execute_gamma_views.py
++++ execute_right_margin_views.py
+@@ -1,4 +1,4 @@
+-"""Run the original saved viewer once, followed by cached gamma plots in one window."""
++"""Run the raw coordinate-selected viewer once within one whole-helper window."""
+ from hashlib import sha256
+ from pathlib import Path
+ from time import perf_counter
+@@ -22,7 +22,7 @@
+     import psutil
+     process = psutil.Process()
+     peak = 0
+-    saved, cached, failure = {}, None, None
++    saved, failure = {}, None
+ 
+     def checkpoint():
+         nonlocal peak
+@@ -34,7 +34,7 @@
+     try:
+         checkpoint()
+         original_argv = sys.argv[:]
+-        viewer = Path(__file__).with_name("saved_shift_views.py")
++        viewer = Path(__file__).with_name("saved_right_margin_views.py")
+         try:
+             sys.argv = [str(viewer), *original_argv[1:]]
+             runpy.run_path(str(viewer), run_name="__main__")
+@@ -44,9 +44,6 @@
+         assert saved["status"] == "pass" and saved["new_F_T_model_solver_HP_calls"] == 0
+         expected = protocol["expected_observations_each"]
+         assert all(saved[key] == expected for key in ("geometry_started", "geometry_completed", "nodal_started", "nodal_completed"))
+-        checkpoint()
+-        from plot_gamma_cached import plot_cached
+-        cached = plot_cached(output, protocol["mode"], checkpoint)
+         checkpoint()
+         assert all(sha256((root / name).read_bytes()).hexdigest() == pin for name, pin in protocol["bindings"].items())
+         checkpoint()
+@@ -64,13 +61,13 @@
+             except Exception as error:
+                 late_error = error
+                 failure = failure or repr(error)
+-            report = dict(schema_version="gamma-saved-view-phase-1.0", status="pass" if failure is None else "failed", failure=failure,
++            report = dict(schema_version="right-margin-saved-view-phase-1.0", status="pass" if failure is None else "failed", failure=failure,
+                 mode=protocol["mode"], original_view_sha256=sha256((output / "view.json").read_bytes()).hexdigest() if (output / "view.json").exists() else None,
+                 original_observation_counts={key: saved.get(key) for key in ("geometry_started", "geometry_completed", "nodal_started", "nodal_completed")},
+-                cached_comparison=cached, cached_geometry_nodal_F_T_model_solver_HP_calls=0,
++                new_geometry_nodal_F_T_model_solver_HP_calls_outside_raw_viewer=0,
+                 elapsed_seconds=perf_counter() - STARTED, sampled_peak_helper_RSS_bytes=peak,
+                 final_resource_check_passed=late_error is None, final_resource_error=repr(late_error) if late_error else None,
+-                scope="Raw saved viewer and CSV/derived plots only; no new mechanics or physical qualification.",
++                scope="Raw761a9f saved viewer only; no new mechanics or physical qualification.",
+                 outputs=outputs)
+             with (output / "phase_view.json").open("x", encoding="utf-8") as handle:
+                 json.dump(report, handle, indent=2, ensure_ascii=False, allow_nan=False); handle.write("\n")
