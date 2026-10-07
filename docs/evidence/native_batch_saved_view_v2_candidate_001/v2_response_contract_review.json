@@ -1,0 +1,77 @@
+{
+  "schema_version": "v2-native-response-source-contract-review-1.0",
+  "status": "pass_static_only",
+  "blocking_findings": [],
+  "source_sha256": {
+    "native_response.py": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af",
+    "audit_native_mean.py": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678",
+    "audit_batch_case.py": "e9642a3e00d62ba0728dbe95e9214cd4771dbfbc2ad8f9ce115f8157e4a41588",
+    "reference_case_builder.py": "8744a981d1ec7d17a79ef4788701870d16bbf636a059b69144159a41de3d83f9"
+  },
+  "reviewed_utc": "2026-10-07T20:50:51.615055+00:00",
+  "actual_closed_production_JSON": {
+    "canonical": {
+      "result_sha256": "c7ef85b61e8a243217086581a2f490cbe396c6f6086f594937c07843a7f5154f",
+      "model_descriptor_sha256": "597a92b4a3de63697e875b0a733592c1b1f27e8b0ab8ed229cfb33f4649e26e2",
+      "model_arrays_declared_sha256": "887279fc3d11c39af305c8ba96c34d71bd10de56f3cf464c917f9672eab46a79",
+      "current_response_sha256": "73ed42225eb307254a867a558c6be2064e0a5f5c67fbea38a2a5dcab925acd28",
+      "accepted_states": 4,
+      "task_target_mm": 0.025,
+      "requested_endpoint_mm": 0.025,
+      "current_reference_status": "not_provided",
+      "current_view_status": "not_provided",
+      "producer_flags": {
+        "independent_HP_qualified": false,
+        "equilibrium_qualified": false,
+        "HF_qualified": false
+      }
+    },
+    "native_fine": {
+      "result_sha256": "a764e26178fe71acd32fee5c0a106248e3f7947d47ce1ec11431fbe6f5a6a97d",
+      "model_descriptor_sha256": "bb84034c655f4b74e5cfc478688af5c2565fa25358b4bb8e89ac3b3981883ccc",
+      "model_arrays_declared_sha256": "f3ad62046286023344a2aab0cea4ac7466dcb98637c12f2ff7cdc66f988144d6",
+      "current_response_sha256": "d21632abda91a6e3a0e7f7005c5b81ab7eba362b6edc088a14a79955a4fc330a",
+      "accepted_states": 4,
+      "task_target_mm": 0.025,
+      "requested_endpoint_mm": 0.025,
+      "current_reference_status": "not_provided",
+      "current_view_status": "not_provided",
+      "producer_flags": {
+        "independent_HP_qualified": false,
+        "equilibrium_qualified": false,
+        "HF_qualified": false
+      }
+    }
+  },
+  "contract_mapping": {
+    "same_result": "Original Audit.run emits result_sha256 from self.result_file, which V2 load points to the original production case",
+    "same_model_task": "V2 bind records original production result/model JSON hashes in inherited input_bindings; task/source raw and canonical gates are in V2 LOAD; response resolves original case model from result and validates its own task identity",
+    "all_N_and_2N": "Original run iterates every actual result state; summary accepted_states/states and started/completed 2N; each run_state record emits index/status/state_sha256/target_mm/HP_calls=2 consumed by _reference",
+    "source_closure": "V2 self.sources contains 28 current core+5 raw mathematical+2 V2 wrapper .py paths; _reference only accepts currently existing raw-matching .py sources with explicit repo root",
+    "alias_scope": "qualified summary copies original then changes alias and qualification plus provenance only; _reference matches result/model/state identity rather than alias and displays qualification as scope",
+    "schema_versions": "Contract/protocol/execution2.0 are wrapper cards. Mathematical summary retains native-mean-independent-audit-1.0; _reference has no hard-coded V1 control/output path",
+    "V2_reference_path": "Explicit reference_file may be V2 stage/run_001/audit/<label>/qualified_summary.json; _artifact produces repository-relative link while production result remains in original stage",
+    "full_path": "full_path_reference_pass additionally requires original response path completed; current actual production is complete, but no future matched reference is asserted here",
+    "view_case_identity": "_views requires unique labels, same model array SHA/task/allN, input result binding, own label/summary.json output SHA and all row index/state SHA/d; own PNG/GIF bytes only contribute links",
+    "qualifications": "HP_all_columns/contact/clamp/pressure/HF5 remain fixed false. Producer flags are copied from original result, not flipped by reference or views"
+  },
+  "nonblocking_requirements": [
+    "Response formatter is saved JSON/source/image byte matching, not an HP rerun or an independent phase resource audit; execution orchestration must additionally require the new matching reference terminal receipt and F3 PASS",
+    "A future view must explicitly bind V2 audit output paths and protocol/launch/receipt; old V1 view89dbc asserted old audit path and must not be silently reused",
+    "Both new V2 references and the new view are still absent; no synthesized future PASS summary/manifest or runtime compatibility test was produced"
+  ],
+  "current_status": "No V2 reference or view runtime qualification; source consumer/provider keys compatible conditional on actual passing new phases",
+  "activities": {
+    "candidate_imports": 0,
+    "HF_imports": 0,
+    "NPZ_loads": 0,
+    "tests": 0,
+    "constructors": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "plots": 0,
+    "formal_writes": 0
+  }
+}

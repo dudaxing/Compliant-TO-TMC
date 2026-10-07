@@ -1,3 +1,5 @@
+视图准备更新：已将保存态视图候选适配至独立V2参考目录，作者/root/独立静审通过，通用响应接口字段交叉核对通过；绘图数学和3/5节点逻辑不变。[候选及审查](evidence/native_batch_saved_view_v2_candidate_001/README.md)仅源准备，两例新参考仍缺，未制视图卡、导入、加载数组、绘图或赋新资格；B-REF2确认仍待收到。
+
 B-REF2 更新：最小V2候选已完成作者、root与独立静审，尚未制卡、导入或执行；[具体新卡与源码](evidence/native_batch_reference_v2_proposal_001/B-REF2_CARD.md)待新授权。原生产PASS、V1参考失败HP0及未生成批量图的状态保持。
 
 ## 当前：真实两例生产通过，新的参考包装读取失败

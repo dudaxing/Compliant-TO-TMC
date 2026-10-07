@@ -1,0 +1,48 @@
+--- plot_native_mean.py:render
++++ cached_view_adapter.py:render
+@@ -1,4 +1,10 @@
+-def render(model, metadata, states, rows, input_dofs, output, magnification):
++def render(viewer, model, metadata, states, rows, input_dofs, output, magnification, case_label, task_caption):
++    np, plt = viewer.np, viewer.plt
++    PolyCollection, LineCollection = viewer.PolyCollection, viewer.LineCollection
++    Normalize, Line2D = viewer.Normalize, viewer.Line2D
++    ScalarFormatter, PillowWriter = viewer.ScalarFormatter, viewer.PillowWriter
++    boundary_edges = viewer.boundary_edges
++    FORCE_KEYS, FORCE_COLORS = viewer.FORCE_KEYS, viewer.FORCE_COLORS
+     coordinates, connectivity, solid = (model[key] for key in ("coordinates", "connectivity", "solid"))
+     positions = [coordinates+(s["state"]["lift"]+s["state"]["fluctuation"]).reshape(-1, 2) for s in states]
+     enlarged = [coordinates+magnification*(p-coordinates) for p in positions]
+@@ -69,7 +75,7 @@
+     axes[0, 2].plot(d, [r["R_input_N"] for r in rows], "o-", color=FORCE_COLORS[1], label="input multiplier R")
+     output_axis = axes[0, 2].twinx()
+     output_axis.plot(d, [1000*r["q_out_mm"] for r in rows], "s--", color="#176a80", label="output reference mean +y")
+-    axes[0, 2].set(xlabel="input weighted mean target [µm]", ylabel="input actuator R [N]", title="TEST small prefix: force and free-output mean")
++    axes[0, 2].set(xlabel="input weighted mean target [µm]", ylabel="input actuator R [N]", title=f"{case_label}: force and free-output mean")
+     output_axis.set_ylabel("q_out (+y) [µm]", color="#176a80")
+     handles, labels = axes[0, 2].get_legend_handles_labels()
+     other, other_labels = output_axis.get_legend_handles_labels()
+@@ -109,12 +115,12 @@
+         f"All {len(connectivity)} element J colors use actual accepted values.",
+         "Color: quadrature mean; numeric min: all quadrature points.",
+         "J = det(F), dimensionless; it is not pressure.", "",
+-        "Native coarse gripper; original lower half, free output.",
+-        "No workpiece/contact/clamping or full-stroke claim.",
++        task_caption,
++        "Declared TEST target completed; no contact/clamping or HF5 claim.",
+         "No half-model doubling; no interpolated states."]
+     axes[1, 2].text(0., 1., "\n".join(lines), transform=axes[1, 2].transAxes, va="top", fontsize=9,
+                        linespacing=1.5, bbox=dict(facecolor="white", edgecolor="none", pad=3))
+-    fig.suptitle(f"Native average-input TEST | main geometry ×1; supplementary displacement ×{magnification:g}\n"
++    fig.suptitle(f"{case_label} native average-input TEST | main geometry ×1; supplementary displacement ×{magnification:g}\n"
+         f"Common external-force arrow scale: {force_maximum:.9g} N = 4 display mm, fixed over the accepted path", fontsize=12)
+     fig.savefig(output/"native_mean_path.png", dpi=160)
+     plt.close(fig)
+@@ -125,7 +131,7 @@
+             for ax in frame_axes: ax.clear()
+             draw(frame_axes[0], index)
+             draw(frame_axes[1], index, zoom=True)
+-            frame.suptitle(f"Actual accepted state {index+1}/{len(rows)}; d={row['target_mm']:.9g} mm; "
++            frame.suptitle(f"{case_label}: actual accepted state {index+1}/{len(rows)}; d={row['target_mm']:.9g} mm; "
+                 f"R={row['R_input_N']:.9g} N; q_out (+y)={row['q_out_mm']:.9g} mm\n"
+                 "Saved-state independent audit PASS. No interpolation; J is not pressure.", fontsize=11)
+             writer.grab_frame()

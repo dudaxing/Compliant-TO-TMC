@@ -1,0 +1,12 @@
+--- plot_native_mean.py:numerical_rows
++++ cached_view_adapter.py:numerical_rows
+@@ -1,6 +1,7 @@
+-def numerical_rows(model, states):
++def numerical_rows(viewer, model, states, expected_input_node_count):
++    np, require = viewer.np, viewer.require
+     input_dofs = np.flatnonzero(model["b_in"])
+-    require(len(input_dofs) == 3 and np.all(input_dofs % 2 == 0), "Canonical input port differs")
++    require(len(input_dofs) == expected_input_node_count and np.all(input_dofs % 2 == 0), "Declared case input port differs")
+     rows = []
+     for index, accepted in enumerate(states):
+         record, forces = accepted["row"], accepted["forces"]

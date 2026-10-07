@@ -1,0 +1,36 @@
+--- view_author/execute_batch_view.py
++++ view_v2_author/execute_batch_view.py
+@@ -45,6 +45,9 @@
+     pins = protocol["bindings"]
+     assert all(sha(root / name) == pin for name, pin in pins.items())
+     run = root / protocol["input_directory"]
++    reference_run = root / protocol["reference_run"]
++    assert run == root / "lf_data_preparation/native_interface_001/batch_forward_001/run_001"
++    assert reference_run == root / "lf_data_preparation/native_interface_001/batch_reference_v2_001/run_001"
+     view = root / protocol["view_directory"]
+     assert view == run / "view" and not view.exists()
+     receipt_file = run / "view_execution_receipt.json"
+@@ -56,7 +59,7 @@
+     for case in plans:
+         label = case["label"]
+         assert root / case["result_file"] == run / label / "result.json"
+-        assert root / case["audit_file"] == run / "audit" / label / "qualified_summary.json"
++        assert root / case["audit_file"] == reference_run / "audit" / label / "qualified_summary.json"
+         assert root / case["output_directory"] == view / label
+         assert root / case["qualified_response_file"] == run / ("qualified_response_" + label + ".json")
+         assert not (root / case["qualified_response_file"]).exists()
+@@ -86,6 +89,14 @@
+         if role.startswith("reference_"):
+             label = role[len("reference_"):]
+             case = next(case for case in plans if case["label"] == label)
++            assert control["schema_version"] == "native-batch-case-reference-protocol-2.0"
++            assert receipt["schema_version"] == "native-batch-case-reference-execution-2.0"
++            assert control["case_label"] == label
++            assert control["actual_accepted_states"] == case["accepted_states"]
++            assert control["fresh_HP_calls_required"] == 2*case["accepted_states"]
++            assert root / dependency["protocol_file"] == reference_run.parent / ("reference_protocol_" + label + ".json")
++            assert root / dependency["launch_file"] == reference_run.parent / ("reference_" + label + "_launch.json")
++            assert root / dependency["receipt_file"] == reference_run / "audit" / label / "execution_receipt.json"
+             audit_file = root / case["audit_file"]
+             audit = read(audit_file)
+             assert receipt["case_label"] == label and receipt["accepted_states"] == case["accepted_states"]
