@@ -1,0 +1,45 @@
+--- pre_interface_protocol_001/001.py
++++ install_interface_card.py
+@@ -56,6 +56,7 @@
+     assert fixture['schema_version']=='native-interface-functional-fixtures-1.0'
+     assert set(fixture['fixtures'])=={'right2col','right4col','no_workpiece','failed_prefix','short_path'}
+     assert fixture['expected_exports']==4
++    expected_tests=fixture['expected_tests'];assert type(expected_tests) is int and expected_tests>0
+     compile(ast.parse(worker.decode('utf-8')), worker_name, 'exec')
+     for name, raw in raw_tests.items():compile(ast.parse(raw.decode('utf-8')), name, 'exec')
+     evaluate_review = author/'review_notes/evaluate_draft_static_review.json'
+@@ -82,7 +83,10 @@
+     author_names = [
+         'response_candidate/author_note.json','response_candidate/author_checks.json',
+         'response_candidate/README.md','response_candidate/source_additions.diff',
+-        'response_candidate/column_scope_delta.diff','tests_candidate/VERIFICATION_PLAN.md']
++        'response_candidate/column_scope_delta.diff','response_candidate/view_binding_delta.diff',
++        'tests_candidate/VERIFICATION_PLAN.md','tests_candidate/author_note.json',
++        'tests_candidate/source_author_checks.json','INSTALL_INTERFACE_README.md',
++        'install_interface_author_checks.json','install_interface_delta.diff']
+     archive = {'001.py':old_cli,'002.json':evaluate_review.read_bytes(),
+                '003.json':response_review.read_bytes(),'004.json':tests_review.read_bytes()}
+     source_names = {'001.py':'hf_repo/scripts/solve_native_mean.py before CLI option',
+@@ -90,6 +94,13 @@
+     for name in author_names:
+         short=f'{len(archive)+1:03d}{Path(name).suffix}'
+         archive[short]=(author/name).read_bytes();source_names[short]=name
++    for folder in ['response_candidate/pre_column_scope_001','response_candidate/pre_view_binding_001','pre_interface_protocol_001']:
++        folder_map=read(author/folder/'index.json')
++        for name,entry in folder_map.items():
++            raw=(author/folder/name).read_bytes();assert sha(raw)==entry['sha256']
++            short=f'{len(archive)+1:03d}{Path(name).suffix}';archive[short]=raw
++            source_names[short]=folder+'/'+entry['source_name']+' [historical source-only prefreeze] '
++        short=f'{len(archive)+1:03d}.json';archive[short]=(author/folder/'index.json').read_bytes();source_names[short]=folder+'/index.json'
+     installer_short=f'{len(archive)+1:03d}.py';archive[installer_short]=Path(__file__).read_bytes();source_names[installer_short]='install_interface_card.py'
+     stage.mkdir(parents=True);(stage/'author').mkdir();(stage/'tests').mkdir()
+     installed, bindings = {}, dict(core)
+@@ -114,7 +125,7 @@
+         phases=dict(functional=dict(helper_seconds=120,outer_seconds=150,
+             argv=[STAGE+'/author/'+worker_name,'--repo','.', '--protocol',STAGE+'/functional_protocol.json'])),
+         fixture_manifest_file=STAGE+'/author/'+fixture_name,tests_directory=STAGE+'/tests',
+-        output_directory=STAGE+'/run_001',expected_tests=20,expected_exports=4,
++        output_directory=STAGE+'/run_001',expected_tests=expected_tests,expected_exports=fixture['expected_exports'],
+         scope='Saved JSON response exports and mocked transport only; no actual HF, NPZ, construction, F/T/solver/HP or geometry/nodal observation',
+         mock_call_counts_role='Controlled success/failure test transport; never scientific evaluation counts',
+         stop_policy='One functional invocation; first error closes; no retry or force')

@@ -1,0 +1,220 @@
+{
+  "schema_version": "interface-documentation-source-review-1.0",
+  "status": "pass_source_only",
+  "time_utc": "2026-10-07T17:00:54.745828+00:00",
+  "source_pins": {
+    "documentation_writer": {
+      "path": "D:/hf-interface-author-20261008/write_interface_docs.py",
+      "sha256": "9cdf033ec52a06a53330e47bbc74dfa819b49b02fd6b7edd41a54d0344f40183"
+    },
+    "evaluate_api": {
+      "path": "D:/hf-interface-author-20261008/native_evaluate.py",
+      "sha256": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942"
+    },
+    "evaluate_cli": {
+      "path": "D:/hf-interface-author-20261008/evaluate_native_cli.py",
+      "sha256": "04201797fa227dc18302e75817f5fb4100723732a1a97ecd71343aa49b727d64"
+    },
+    "saved_summary_cli": {
+      "path": "D:/hf-interface-author-20261008/summarize_native_mean_cli.py",
+      "sha256": "6320328f9ff8dbcb4d6696b2d30c25557d43404470ceb966de5b28a83336e0ed"
+    },
+    "saved_response": {
+      "path": "D:/hf-interface-author-20261008/response_candidate/native_response.py",
+      "sha256": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af"
+    },
+    "native_mean": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/native_mean.py",
+      "sha256": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998"
+    },
+    "split_controller": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/split_displacement.py",
+      "sha256": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e"
+    },
+    "fixture_inventory": {
+      "path": "D:/hf-interface-author-20261008/tests_candidate/test_fixture_inventory.json",
+      "sha256": "547907778f056db3fec21f347bdaa8f88d0619498fae067d2445f7bf626861eb"
+    },
+    "execution_source_peer": {
+      "path": "D:/hf-interface-author-20261008/review_notes/interface_execution_static_review.json",
+      "sha256": "221bf76e28988cdbf2c5a48f876ec2282c3cb8bbaab2b663398bfe332920053c"
+    }
+  },
+  "facts_checked": [
+    {
+      "claim": "Declared task path cannot be overridden by differing targets.",
+      "evidence": {
+        "role": "native_mean",
+        "line": 146,
+        "text": "raise TMCError(\"Targets must match the explicitly declared task path\", code=\"invalid_input\")"
+      }
+    },
+    {
+      "claim": "Controller settings are passed after native project preparation; this is not a whole-CLI resource limit.",
+      "evidence": [
+        {
+          "role": "native_mean",
+          "line": 142,
+          "text": "project = build_native_project(geometry_file, task_dict)"
+        },
+        {
+          "role": "native_mean",
+          "line": 209,
+          "text": "path = solve_split_displacement_path(model, project.bin, project.bout, targets, project.k_out,"
+        },
+        {
+          "role": "split_controller",
+          "line": 113,
+          "text": "started = perf_counter()"
+        }
+      ]
+    },
+    {
+      "claim": "API resolves relative paths against an explicit repository or caller cwd and calls solve/write/summary once.",
+      "evidence": [
+        {
+          "role": "evaluate_api",
+          "line": 15,
+          "text": "def resolve_native_path(path, repo_root=None):"
+        },
+        {
+          "role": "evaluate_api",
+          "line": 60,
+          "text": "result = solve_native_mean(geometry, task, requested, settings=settings,"
+        },
+        {
+          "role": "evaluate_api",
+          "line": 64,
+          "text": "descriptor = write_native_mean(result, output)"
+        },
+        {
+          "role": "evaluate_api",
+          "line": 66,
+          "text": "response = summarize_saved_native_result(descriptor, repo_root=repo_root)"
+        }
+      ]
+    },
+    {
+      "claim": "Default minimum increment remains targets[1]/16, and elapsed time excludes response write and CLI startup/stdout.",
+      "evidence": [
+        {
+          "role": "evaluate_api",
+          "line": 52,
+          "text": "increment = requested[1] / 16 if minimum_increment is None else minimum_increment"
+        },
+        {
+          "role": "evaluate_api",
+          "line": 77,
+          "text": "response[\"evaluation_elapsed_scope\"] = \"Through summary; excludes response write and CLI startup/stdout\""
+        }
+      ]
+    },
+    {
+      "claim": "Evaluate CLI success follows production status; saved-summary CLI success means response serialization succeeded.",
+      "evidence": [
+        {
+          "role": "evaluate_cli",
+          "line": 32,
+          "text": "return 0 if response[\"status\"] == \"success\" else 1"
+        },
+        {
+          "role": "saved_summary_cli",
+          "line": 30,
+          "text": "return 0"
+        }
+      ]
+    },
+    {
+      "claim": "Completed task target, requested endpoint and last accepted state are separate; failed path endpoints stay null.",
+      "evidence": [
+        {
+          "role": "saved_response",
+          "line": 189,
+          "text": "endpoint = last if completed and last is not None and last['is_original_target'] and last['d_mm'] == targets[-1] else None"
+        },
+        {
+          "role": "saved_response",
+          "line": 192,
+          "text": "target = _state(*task_states[0]) if completed and result['task_target_executed'] and task_states else None"
+        },
+        {
+          "role": "saved_response",
+          "line": 202,
+          "text": "failure = dict(phase='equilibrium', **failure)"
+        }
+      ]
+    },
+    {
+      "claim": "Reference bookkeeping/source-byte matching does not upgrade contact, pressure, all-column or HF5 qualification.",
+      "evidence": [
+        {
+          "role": "saved_response",
+          "line": 75,
+          "text": "report=None, reasons=['No independent reference supplied'], HP_all_columns_qualified=False,"
+        },
+        {
+          "role": "saved_response",
+          "line": 113,
+          "text": "verification_scope='Matched saved JSON identities/all accepted states/2N bookkeeping and declared source bytes; no HP/NPZ archive re-audit')"
+        }
+      ]
+    },
+    {
+      "claim": "Saved view links require unique labels and same-label summary SHA/status/all-state identity.",
+      "evidence": [
+        {
+          "role": "saved_response",
+          "line": 125,
+          "text": "if any(not isinstance(label, str) or not label for label in labels) or len(set(labels)) != len(labels):"
+        },
+        {
+          "role": "saved_response",
+          "line": 147,
+          "text": "answer.update(status='mismatch', reasons=['View case summary SHA/status/all-state identities differ'])"
+        }
+      ]
+    },
+    {
+      "claim": "Writer only emits closure documents after actual functional/launch PASS with unchanged bindings/core hashes.",
+      "evidence": [
+        {
+          "role": "documentation_writer",
+          "line": 20,
+          "text": "assert receipt['status'] == launch['status'] == 'pass'"
+        },
+        {
+          "role": "documentation_writer",
+          "line": 25,
+          "text": "assert receipt['all_bindings_unchanged'] and launch['all_bindings_unchanged']"
+        },
+        {
+          "role": "documentation_writer",
+          "line": 27,
+          "text": "for name, pin in installation['original_core_sha256'].items())"
+        }
+      ]
+    }
+  ],
+  "pre_freeze_correction": {
+    "issue": "Previous draft suggested --targets could replace a task-declared ordered path.",
+    "resolution": "Current draft explicitly requires exact path equality and an explicit task change for a different path.",
+    "writer_executed_for_review": false
+  },
+  "scope": "Narrow literal source and documentation semantics review; no actual interface runtime qualification or document installation claimed.",
+  "science_activity": {
+    "candidate_module_imports": 0,
+    "tests": 0,
+    "forward_solver": 0,
+    "model_constructor": 0,
+    "force": 0,
+    "tangent": 0,
+    "HP": 0,
+    "NPZ_reads": 0,
+    "geometry_observation": 0,
+    "nodal_observation": 0,
+    "plot": 0,
+    "formal_repo_writes": 0,
+    "documentation_writer_calls": 0
+  },
+  "findings": []
+}

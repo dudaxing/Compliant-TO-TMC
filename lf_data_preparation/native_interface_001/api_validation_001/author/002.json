@@ -1,0 +1,33 @@
+{
+  "schema_version": "native-forward-draft-static-peer-1.0",
+  "status": "pass_static_only",
+  "generated_utc": "2026-10-07T16:36:02.119597+00:00",
+  "source_sha256": {
+    "native_evaluate.py": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942",
+    "evaluate_native_cli.py": "04201797fa227dc18302e75817f5fb4100723732a1a97ecd71343aa49b727d64",
+    "summarize_native_mean_cli.py": "6320328f9ff8dbcb4d6696b2d30c25557d43404470ceb966de5b28a83336e0ed",
+    "solve_native_mean.py": "f780cc689a4e8bfac1dcd4805ca013406f377d5016f131767883a5c3896973bb"
+  },
+  "AST_compile_only": true,
+  "original_cli_sha256": "d457783d3818f3f4c5fe2ce558df9cd9a14245880198aaa6907e7b3541d54888",
+  "original_cli_matches_current_formal_raw": true,
+  "existing_CLI_AST_exact_after_removing_only_new_argument_and_passed_keyword": true,
+  "findings": [
+    "One static solve call, one cachedwriter, one savedJSONsummary and one responsewriter; no retry loop or separatemodel construction.",
+    "Fresh output guard precedes solve; existingoutput errors cause neither solve nor write. Input/solve/persistence/summary failure preserve observedstage/raw exception/code and saved descriptor when available.",
+    "Cold defaults complete/full/tangent forwarded directly; controllerlimits separate from fullCLI walltime by explicit newCLI help. Existing solveCLI onlyadds initial-guess option/defaulttangent andpassedkeyword; all otherAST including STARTED,firstincrement/16,postsavewholewall gate andexit behavior exact.",
+    "SavedsummaryCLI resolves relativepaths independently and imports only native_response from HF; it avoids native_evaluate/native_mean imports. Its zeroexit means summaryfile creation, not numerical/reference qualification."
+  ],
+  "minor_clarifications": [],
+  "addressed_clarification": "Root revised2metadata lines to through-summary time_scope and explicit evaluation_elapsed_scope excluding responsewrite/CLI startup/stdout; timer/math/writecount/gates unchanged.",
+  "blocking_findings": [],
+  "dependency_scope": "native_response candidate schema/stdlibclosure/qualification/null behavior requires its separate review; this verdict grants no executed API or scientific qualification.",
+  "activity": {
+    "candidate_or_HF_imports": 0,
+    "candidate_execution": 0,
+    "NPZ_arrays": 0,
+    "constructors_F_T_solver_HP": 0,
+    "geometry_nodal_plot_tests": 0,
+    "formal_writes": 0
+  }
+}

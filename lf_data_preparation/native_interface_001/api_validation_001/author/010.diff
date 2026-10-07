@@ -1,0 +1,52 @@
+--- pre_view_binding_001/001.py
++++ native_response.py
+@@ -114,19 +114,38 @@
+     return answer
+ 
+ 
+-def _views(path, result_path, result_pin, model, n, repo):
++def _views(path, result_path, result_pin, model, states, production_status, repo):
+     answer = dict(status='not_provided', manifest=None, links=[], reasons=[])
+     if path is None:
+         return answer
+     view, pin = _read(path)
+     answer['manifest'] = _artifact(path, pin, repo)
+-    matches = [case for case in view.get('cases', []) if case.get('model_sha256') == model['arrays']['sha256']
++    cases = view.get('cases', [])
++    labels = [case.get('label') for case in cases]
++    if any(not isinstance(label, str) or not label for label in labels) or len(set(labels)) != len(labels):
++        answer.update(status='mismatch', reasons=['View case labels are missing or not unique'])
++        return answer
++    n = len(states)
++    matches = [case for case in cases if case.get('model_sha256') == model['arrays']['sha256']
+         and case.get('task') == model['task'] and case.get('saved_accepted_states') == case.get('observed_states') == n]
+     if view.get('status') != 'pass' or len(matches) != 1 or not _binding_matches(
+             view.get('input_source_bindings', {}), result_path, result_pin, repo):
+         answer.update(status='mismatch', reasons=['View is not a completed same-result/model/task/all-accepted-state manifest'])
+         return answer
+     label = matches[0]['label']
++    summary_name = label+'/summary.json'
++    summary_path = _child(path.parent, summary_name)
++    if not summary_path.is_file():
++        answer.update(status='mismatch', reasons=['View case summary is missing'])
++        return answer
++    summary, summary_pin = _read(summary_path)
++    rows = summary.get('rows', [])
++    if summary_pin != view.get('outputs', {}).get(summary_name) or summary.get('accepted_states') != n \
++            or summary.get('production_status') != matches[0].get('production_status') or summary.get('production_status') != production_status \
++            or len(rows) != n or any(row.get('index') != i or row.get('state_sha256') != state['state_sha256'] or row.get('d_mm') != state['d']
++                for i, (row, state) in enumerate(zip(rows, states))):
++        answer.update(status='mismatch', reasons=['View case summary SHA/status/all-state identities differ'])
++        return answer
+     for name, expected in view.get('outputs', {}).items():
+         if Path(name).suffix.lower() not in {'.png', '.gif'} or ('/' in name and not name.startswith(label+'/')):
+             continue
+@@ -199,7 +218,7 @@
+         independent_reference=_reference(_resolve(reference_file, repo) if reference_file is not None else None,
+             result_path, result_pin, model_path, model_pin, states, completed, repo),
+         views=_views(_resolve(view_manifest, repo) if view_manifest is not None else None,
+-            result_path, result_pin, model, len(states), repo),
++            result_path, result_pin, model, states, result['status'], repo),
+         call_counts=result['call_counts'], timing_seconds=result['timing_seconds'], failure=failure,
+         force_semantics='R is half-model actuator reaction; lower-body forces are signed weak-form resultants. Two-sided normal magnitude sum is not full-body net force. q_out is a weighted port displacement, not a surface gap.',
+         field_scope='J/Hu are saved global scalars, not separately observed solid/medium fields. Workpiece node-window clearance has its original raster scope, not finite surface distance.')

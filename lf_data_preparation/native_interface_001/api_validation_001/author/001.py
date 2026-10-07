@@ -25,8 +25,6 @@ def main():
                         help="Mechanical mode explicitly omits auxiliary material energy")
     parser.add_argument("--tangent-mode", choices=("full", "chunk256"), default="full",
                         help="Optional element blocks retain the full-batch arithmetic selector")
-    parser.add_argument("--initial-guess", choices=("tangent", "port_projection"), default="tangent",
-                        help="Explicit Newton initialization; existing tangent default is retained")
     args = parser.parse_args()
     try:
         task = json.loads(args.task.read_text(encoding="utf-8"))
@@ -36,8 +34,7 @@ def main():
         increment = targets[1]/16 if args.minimum_increment is None else args.minimum_increment
         settings = DisplacementSettings(minimum_increment=increment, time_limit_seconds=args.time_limit)
         result = solve_native_mean(args.geometry, task, targets, settings=settings,
-                                   response_mode=args.response_mode, tangent_mode=args.tangent_mode,
-                                   initial_guess=args.initial_guess)
+                                   response_mode=args.response_mode, tangent_mode=args.tangent_mode)
         descriptor = write_native_mean(result, args.output)
         elapsed = perf_counter()-STARTED
         if elapsed > args.time_limit:

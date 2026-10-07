@@ -1,0 +1,493 @@
+{
+  "schema_version": "hf-native-response-1.0",
+  "status": "success",
+  "identity": {
+    "result": {
+      "path": "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/result/result.json",
+      "path_scope": "repo_relative",
+      "sha256": "e3ee572c2181a94134c99acab6bedf5f3736d6b665b03926e1507ed52bed090b"
+    },
+    "model": {
+      "path": "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/result/model/model.json",
+      "path_scope": "repo_relative",
+      "sha256": "07d90e7d4ceca6d82f62f043f4c4728b5909dc35dc7df81058b2b24a1fc6b8cf"
+    },
+    "task_sha256": "b253ec84d5348f1104ab378af5acdfc65dd3f2d572310a6089fe705bd342a66a",
+    "geometry": {
+      "geometry_id": "bdcb2a203ac9c577cc50c3546c3cbdfc8379e8c7dac8787547aebbed03b39997",
+      "descriptor_sha256": "91e476c701e5940efc7b1467b6dd21b8128f5960c470c74a3b42098de5626c6a",
+      "descriptor_file_sha256": "db6a1259765d7abc33fdf76c9dd7882faae8da04910b4f19d442611cdc0a095b",
+      "arrays_sha256": "0e06b920c92476c18e14f435d8283b253a3ff454cc42229a93988ad34d3d7ae1",
+      "snapshot": {
+        "descriptor": "source_geometry/geometry.json",
+        "arrays": "source_geometry/geometry.npz"
+      }
+    },
+    "mechanics_source_sha256": {
+      "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+      "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+    },
+    "arrays_identity_scope": "Declared saved array SHA only; no NPZ was opened"
+  },
+  "physics": {
+    "grid": {
+      "shape_yx": [
+        40,
+        82
+      ],
+      "origin_mm": [
+        0.0,
+        0.0
+      ],
+      "cell_size_mm": [
+        1.0,
+        1.0
+      ],
+      "axes": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "extent_mm": [
+        82.0,
+        40.0
+      ],
+      "array_order": "C_yx_bottom_up",
+      "value_location": "cell"
+    },
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain",
+      "lambda_s_MPa": 0.5769230769230769,
+      "mu_s_MPa": 0.3846153846153846,
+      "kappa_s_MPa": 0.8333333333333333,
+      "thickness_mm": 20.0,
+      "third_medium_gamma": 1e-06,
+      "alpha": 1e-06,
+      "regularization_length_mm": 80.0,
+      "kr_MPa_mm2": 0.008615384615384613,
+      "kr_material_factor_applied": false,
+      "force_scale_per_length": 20.0
+    },
+    "model_extent": {
+      "kind": "lower_half",
+      "symmetry_axis": {
+        "normal": [
+          0.0,
+          1.0
+        ],
+        "offset_mm": 40.0
+      }
+    },
+    "counts": {
+      "cells": 3280,
+      "nodes": 3403,
+      "dofs": 6806,
+      "solid_cells": 1086,
+      "medium_cells": 2194,
+      "solid_incident_nodes": 1337,
+      "fixed_dofs": 450,
+      "free_dofs": 6356
+    },
+    "workpiece": {
+      "kind": "fixed_rigid",
+      "shape": "square",
+      "center_mm": [
+        71.0,
+        40.0
+      ],
+      "fixed_components": [
+        0,
+        1
+      ],
+      "side_mm": 18.0
+    },
+    "input": {
+      "tag": "input",
+      "control": "average_displacement",
+      "target_mm": 1.2
+    },
+    "output": {
+      "tag": "output",
+      "spring_N_per_mm": 0.0
+    },
+    "constraints": [
+      {
+        "tag": "support",
+        "components": [
+          0,
+          1
+        ]
+      },
+      {
+        "tag": "symmetry",
+        "components": [
+          1
+        ]
+      }
+    ],
+    "background_symmetry": {
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          82.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ]
+    }
+  },
+  "path": {
+    "kind": "ordered_cycle",
+    "requested_targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.65,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0,
+      1.05,
+      1.1,
+      1.15,
+      1.2,
+      1.15,
+      1.1,
+      1.0,
+      0.9,
+      0.8,
+      0.75,
+      0.65,
+      0.5,
+      0.25,
+      0.0
+    ],
+    "task_target_mm": 1.2,
+    "requested_endpoint_mm": 0.0,
+    "reached_displacement_mm": 0.0,
+    "accepted_states": 24,
+    "completed": true,
+    "task_target_executed": true
+  },
+  "options": {
+    "response_mode": {
+      "value": "mechanical",
+      "source": "result_metadata"
+    },
+    "tangent_mode": {
+      "value": "chunk256",
+      "source": "result_metadata"
+    },
+    "initial_guess": {
+      "value": "port_projection",
+      "source": "result_metadata"
+    }
+  },
+  "target_response": {
+    "index": 13,
+    "state_sha256": "6ae284e297811d465ba791b9a2fe90289cf958d1ba8c6eb7eec8ad5d7463e4fc",
+    "d_mm": 1.2,
+    "leg": "loading",
+    "original_target_index": 13,
+    "is_original_target": true,
+    "R_input_N": 0.40719945504929206,
+    "q_in_mm": 1.2,
+    "q_out_mm": 1.0088654161662878,
+    "minimum_J": 3.257042680782419e-05,
+    "relative_residual": 1.5085130797137474e-12,
+    "relative_global_force_balance": 3.144745190625273e-13,
+    "constraint_residual_mm": 5.551115123125783e-17,
+    "max_abs_Hu_per_mm": 0.20875017023127937,
+    "workpiece": {
+      "force_on_lower_body_N": {
+        "total": [
+          -0.002598086144019842,
+          0.1192316696477377
+        ],
+        "material": [
+          -0.0023295447090139333,
+          0.11842303481943982
+        ],
+        "regularization": [
+          -0.00026854143500590816,
+          0.0008086348282978718
+        ]
+      },
+      "holding_reaction_on_model_N": [
+        0.002598086144019842,
+        -0.1192316696477377
+      ],
+      "mirrored_upper_force_N": [
+        -0.002598086144019842,
+        -0.1192316696477377
+      ],
+      "full_workpiece_net_force_N": [
+        -0.005196172288039684,
+        0.0
+      ],
+      "two_sided_normal_magnitude_sum_N": 0.2384633392954754,
+      "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+      "node_window_clearance_mm": {
+        "bottom": 0.005716672637422704,
+        "left": 2.328598449676342
+      },
+      "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+    }
+  },
+  "requested_endpoint_response": {
+    "index": 23,
+    "state_sha256": "073a8d58aedfe1f669d85a1f98485a2a3de5c192e2d963ce1b798bfa76150b69",
+    "d_mm": 0.0,
+    "leg": "unloading",
+    "original_target_index": 23,
+    "is_original_target": true,
+    "R_input_N": 9.003553500921295e-25,
+    "q_in_mm": 4.591774807899561e-41,
+    "q_out_mm": -4.772557989447369e-24,
+    "minimum_J": 1.0,
+    "relative_residual": 9.170771233684159e-10,
+    "relative_global_force_balance": 1.2132130028117474e-10,
+    "constraint_residual_mm": 4.591774807899561e-41,
+    "max_abs_Hu_per_mm": 2.625387657609127e-22,
+    "workpiece": {
+      "force_on_lower_body_N": {
+        "total": [
+          4.6184517366680454e-26,
+          -5.026829877446041e-25
+        ],
+        "material": [
+          1.763210165978856e-27,
+          -2.3459991464914834e-27
+        ],
+        "regularization": [
+          4.44213072007016e-26,
+          -5.003369885981126e-25
+        ]
+      },
+      "holding_reaction_on_model_N": [
+        -4.6184517366680454e-26,
+        5.026829877446041e-25
+      ],
+      "mirrored_upper_force_N": [
+        4.6184517366680454e-26,
+        5.026829877446041e-25
+      ],
+      "full_workpiece_net_force_N": [
+        9.236903473336091e-26,
+        0.0
+      ],
+      "two_sided_normal_magnitude_sum_N": 1.0053659754892083e-24,
+      "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+      "node_window_clearance_mm": {
+        "bottom": 1.0,
+        "left": 2.0
+      },
+      "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+    }
+  },
+  "maximum_loading_stroke": {
+    "index": 13,
+    "state_sha256": "6ae284e297811d465ba791b9a2fe90289cf958d1ba8c6eb7eec8ad5d7463e4fc",
+    "d_mm": 1.2,
+    "leg": "loading",
+    "original_target_index": 13,
+    "is_original_target": true,
+    "R_input_N": 0.40719945504929206,
+    "q_in_mm": 1.2,
+    "q_out_mm": 1.0088654161662878,
+    "minimum_J": 3.257042680782419e-05,
+    "relative_residual": 1.5085130797137474e-12,
+    "relative_global_force_balance": 3.144745190625273e-13,
+    "constraint_residual_mm": 5.551115123125783e-17,
+    "max_abs_Hu_per_mm": 0.20875017023127937,
+    "workpiece": {
+      "force_on_lower_body_N": {
+        "total": [
+          -0.002598086144019842,
+          0.1192316696477377
+        ],
+        "material": [
+          -0.0023295447090139333,
+          0.11842303481943982
+        ],
+        "regularization": [
+          -0.00026854143500590816,
+          0.0008086348282978718
+        ]
+      },
+      "holding_reaction_on_model_N": [
+        0.002598086144019842,
+        -0.1192316696477377
+      ],
+      "mirrored_upper_force_N": [
+        -0.002598086144019842,
+        -0.1192316696477377
+      ],
+      "full_workpiece_net_force_N": [
+        -0.005196172288039684,
+        0.0
+      ],
+      "two_sided_normal_magnitude_sum_N": 0.2384633392954754,
+      "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+      "node_window_clearance_mm": {
+        "bottom": 0.005716672637422704,
+        "left": 2.328598449676342
+      },
+      "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+    }
+  },
+  "last_accepted": {
+    "index": 23,
+    "state_sha256": "073a8d58aedfe1f669d85a1f98485a2a3de5c192e2d963ce1b798bfa76150b69",
+    "d_mm": 0.0,
+    "leg": "unloading",
+    "original_target_index": 23,
+    "is_original_target": true,
+    "R_input_N": 9.003553500921295e-25,
+    "q_in_mm": 4.591774807899561e-41,
+    "q_out_mm": -4.772557989447369e-24,
+    "minimum_J": 1.0,
+    "relative_residual": 9.170771233684159e-10,
+    "relative_global_force_balance": 1.2132130028117474e-10,
+    "constraint_residual_mm": 4.591774807899561e-41,
+    "max_abs_Hu_per_mm": 2.625387657609127e-22,
+    "workpiece": {
+      "force_on_lower_body_N": {
+        "total": [
+          4.6184517366680454e-26,
+          -5.026829877446041e-25
+        ],
+        "material": [
+          1.763210165978856e-27,
+          -2.3459991464914834e-27
+        ],
+        "regularization": [
+          4.44213072007016e-26,
+          -5.003369885981126e-25
+        ]
+      },
+      "holding_reaction_on_model_N": [
+        -4.6184517366680454e-26,
+        5.026829877446041e-25
+      ],
+      "mirrored_upper_force_N": [
+        4.6184517366680454e-26,
+        5.026829877446041e-25
+      ],
+      "full_workpiece_net_force_N": [
+        9.236903473336091e-26,
+        0.0
+      ],
+      "two_sided_normal_magnitude_sum_N": 1.0053659754892083e-24,
+      "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+      "node_window_clearance_mm": {
+        "bottom": 1.0,
+        "left": 2.0
+      },
+      "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+    }
+  },
+  "producer_flags": {
+    "independent_HP_qualified": false,
+    "equilibrium_qualified": false,
+    "HF_qualified": false
+  },
+  "independent_reference": {
+    "status": "matched",
+    "accepted_reference_pass": true,
+    "full_path_reference_pass": true,
+    "report": {
+      "path": "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/reference/summary.json",
+      "path_scope": "repo_relative",
+      "sha256": "b871ff4791b296ab21d5b44c631f63b4cb81d62be1fdfeb725659379d7a68fe9"
+    },
+    "reasons": [],
+    "HP_all_columns_qualified": false,
+    "contact_qualified": false,
+    "clamp_qualified": false,
+    "pressure_qualified": false,
+    "HF5_qualified": false,
+    "reported_status": "pass",
+    "qualification_scope": "Accepted mechanical states of this explicit complete gamma1e-6 x71 side18 coarse square cycle with2mm right medium margin; no pressure, clamp, contact, auxiliary energy, stress-HP, rejected-state, all-column, H2/H3 or HF5 qualification",
+    "accepted_states": 24,
+    "HP_calls_completed": 48,
+    "reported_scope_flags": {
+      "full_element_and_DOF_coverage": true,
+      "HP_matrix_columns_exhaustively_checked": false,
+      "contact_qualified": false,
+      "clamp_qualified": false,
+      "pressure_qualified": false
+    },
+    "source_bindings_verified": true,
+    "verification_scope": "Matched saved JSON identities/all accepted states/2N bookkeeping and declared source bytes; no HP/NPZ archive re-audit"
+  },
+  "views": {
+    "status": "matched",
+    "manifest": {
+      "path": "functional_views/right_margin4_20261007/complete_001/view/view.json",
+      "path_scope": "repo_relative",
+      "sha256": "786847757c16c9fb8e0c7b6c41c640c53e56523c54f32dcde733732d66dee5dc"
+    },
+    "links": [
+      {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/comparison.png",
+        "path_scope": "repo_relative",
+        "sha256": "f1284fd40eeb719389188dfdbb7fb27075bf776736cc2fe18055a2dde3883bfa",
+        "kind": "png"
+      },
+      {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/distances_forces.png",
+        "path_scope": "repo_relative",
+        "sha256": "f71383e3737bc0f461383ab7cf8e8c0e7b04a7e3ce26c87045163320e4b0f19d",
+        "kind": "png"
+      },
+      {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/peak_fields.png",
+        "path_scope": "repo_relative",
+        "sha256": "b5872b5bc453c7908de373a7bffe847bc7571313604ef61a79cf5485c127ca48",
+        "kind": "png"
+      },
+      {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/right2col/actual_states.gif",
+        "path_scope": "repo_relative",
+        "sha256": "d8c63b5057bdf0dd93a73a091446c346ea76005c16e9f52fcfa9d70658562082",
+        "kind": "gif"
+      }
+    ],
+    "reasons": [],
+    "case_label": "right2col",
+    "scope": "Existing saved visualization only; does not add contact, pressure, strain-HP or other mechanical qualification"
+  },
+  "call_counts": {
+    "force_calls": 348,
+    "force_calls_completed": 331,
+    "tangent_calls": 177,
+    "tangent_calls_completed": 177,
+    "solver_invocations": 1,
+    "JIT_calls": 0,
+    "HP_calls": 0
+  },
+  "timing_seconds": {
+    "project_preparation": 0.03290809993632138,
+    "evaluation": 2472.8771550999954
+  },
+  "failure": null,
+  "force_semantics": "R is half-model actuator reaction; lower-body forces are signed weak-form resultants. Two-sided normal magnitude sum is not full-body net force. q_out is a weighted port displacement, not a surface gap.",
+  "field_scope": "J/Hu are saved global scalars, not separately observed solid/medium fields. Workpiece node-window clearance has its original raster scope, not finite surface distance."
+}

@@ -1,0 +1,216 @@
+"""Compact saved native response. Reads JSON/source/image bytes, never arrays or mechanics."""
+from hashlib import sha256
+import json
+import math
+from pathlib import Path
+
+RESULT_SCHEMAS = {'hf-native-mean-result-1.0', 'hf-native-mean-result-1.1', 'hf-native-mean-result-1.2'}
+
+
+def _read(path):
+    raw = path.read_bytes()
+    return json.loads(raw), sha256(raw).hexdigest()
+
+
+def _resolve(path, repo):
+    path = Path(path)
+    return ((repo/path) if repo is not None and not path.is_absolute() else path).resolve()
+
+
+def _child(directory, name):
+    path = (directory/name).resolve()
+    if not path.is_relative_to(directory):
+        raise ValueError('Saved package path escapes its descriptor directory')
+    return path
+
+
+def _artifact(path, pin, repo):
+    relative = repo is not None and path.is_relative_to(repo)
+    return dict(path=path.relative_to(repo).as_posix() if relative else path.as_posix(),
+                path_scope='repo_relative' if relative else 'absolute', sha256=pin)
+
+
+def _canonical(value):
+    if isinstance(value, dict):
+        return {key: _canonical(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_canonical(item) for item in value]
+    if isinstance(value, float):
+        if not math.isfinite(value):
+            raise ValueError('Saved JSON has nonfinite metadata')
+        return (0.0 if value == 0.0 else value).hex()
+    return value
+
+
+def _canonical_hash(value):
+    raw = json.dumps(_canonical(value), sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False)
+    return sha256(raw.encode('utf-8')).hexdigest()
+
+
+def _state(index, row):
+    workpiece = row.get('workpiece')
+    if workpiece is not None:
+        names = ('force_on_lower_body_N', 'holding_reaction_on_model_N', 'mirrored_upper_force_N',
+                 'full_workpiece_net_force_N', 'two_sided_normal_magnitude_sum_N', 'force_scope',
+                 'node_window_clearance_mm', 'clearance_scope')
+        workpiece = {name: workpiece.get(name) for name in names}
+    return dict(index=index, state_sha256=row['state_sha256'], d_mm=row['d'], leg=row.get('leg'),
+        original_target_index=row.get('original_target_index'), is_original_target=row.get('is_original_target'),
+        R_input_N=row['R_input'], q_in_mm=row['q_in'], q_out_mm=row['q_out'],
+        minimum_J=row['minimum_J'], relative_residual=row['relative_residual'],
+        relative_global_force_balance=row['relative_global_force_balance'],
+        constraint_residual_mm=row['constraint_residual'], max_abs_Hu_per_mm=row.get('max_abs_Hu_per_mm'),
+        workpiece=workpiece)
+
+
+def _binding_matches(bindings, path, pin, repo):
+    if repo is not None and path.is_relative_to(repo):
+        return bindings.get(path.relative_to(repo).as_posix()) == pin
+    # Copied external saved packages can match the original recorded content identity.
+    return pin in bindings.values()
+
+
+def _reference(path, result_path, result_pin, model_path, model_pin, states, complete, repo):
+    answer = dict(status='not_provided', accepted_reference_pass=False, full_path_reference_pass=False,
+        report=None, reasons=['No independent reference supplied'], HP_all_columns_qualified=False,
+        contact_qualified=False, clamp_qualified=False, pressure_qualified=False, HF5_qualified=False)
+    if path is None:
+        return answer
+    reference, pin = _read(path)
+    answer.update(report=_artifact(path, pin, repo), reasons=[], reported_status=reference.get('status'),
+        qualification_scope=reference.get('qualification'), accepted_states=reference.get('accepted_states'),
+        HP_calls_completed=reference.get('HP_calls_completed'),
+        reported_scope_flags={key: reference.get(key) for key in
+            ('full_element_and_DOF_coverage', 'HP_matrix_columns_exhaustively_checked',
+             'contact_qualified', 'clamp_qualified', 'pressure_qualified')})
+    n = len(states)
+    checks = {
+        'Reference status is not pass': reference.get('status') == 'pass',
+        'Reference result SHA differs': reference.get('result_sha256') == result_pin,
+        'Reference does not cover all accepted states': reference.get('accepted_states') == n and len(reference.get('states', [])) == n,
+        'Reference does not record fresh 2N HP': reference.get('HP_calls_started') == reference.get('HP_calls_completed') == 2*n and n > 0,
+        'Reference result/model input bindings differ': _binding_matches(reference.get('input_bindings', {}), result_path, result_pin, repo)
+            and _binding_matches(reference.get('input_bindings', {}), model_path, model_pin, repo),
+        'Reference state identities or 2HP records differ': all(check.get('index') == i and check.get('status') == 'pass'
+            and check.get('HP_calls') == 2 and check.get('state_sha256') == state['state_sha256']
+            and check.get('target_mm') == state['d']
+            for i, (state, check) in enumerate(zip(states, reference.get('states', [])))),
+        'Full element/DOF coverage is not declared': reference.get('full_element_and_DOF_coverage') is True}
+    sources = reference.get('source_bindings', {})
+    source_match = repo is not None and bool(sources)
+    if source_match:
+        for name, expected in sources.items():
+            source_file = _resolve(name, repo)
+            if source_file.suffix != '.py' or not source_file.is_file() or sha256(source_file.read_bytes()).hexdigest() != expected:
+                source_match = False
+                break
+    checks['Declared reference source bindings were not verified'] = source_match
+    answer['reasons'] = [reason for reason, passed in checks.items() if not passed]
+    passed = not answer['reasons']
+    answer.update(status='matched' if passed else 'mismatch', accepted_reference_pass=passed,
+        full_path_reference_pass=bool(passed and complete), source_bindings_verified=source_match,
+        HP_all_columns_qualified=False,
+        verification_scope='Matched saved JSON identities/all accepted states/2N bookkeeping and declared source bytes; no HP/NPZ archive re-audit')
+    return answer
+
+
+def _views(path, result_path, result_pin, model, n, repo):
+    answer = dict(status='not_provided', manifest=None, links=[], reasons=[])
+    if path is None:
+        return answer
+    view, pin = _read(path)
+    answer['manifest'] = _artifact(path, pin, repo)
+    matches = [case for case in view.get('cases', []) if case.get('model_sha256') == model['arrays']['sha256']
+        and case.get('task') == model['task'] and case.get('saved_accepted_states') == case.get('observed_states') == n]
+    if view.get('status') != 'pass' or len(matches) != 1 or not _binding_matches(
+            view.get('input_source_bindings', {}), result_path, result_pin, repo):
+        answer.update(status='mismatch', reasons=['View is not a completed same-result/model/task/all-accepted-state manifest'])
+        return answer
+    label = matches[0]['label']
+    for name, expected in view.get('outputs', {}).items():
+        if Path(name).suffix.lower() not in {'.png', '.gif'} or ('/' in name and not name.startswith(label+'/')):
+            continue
+        output = _child(path.parent, name)
+        if not output.is_file() or sha256(output.read_bytes()).hexdigest() != expected:
+            answer.update(status='mismatch', links=[], reasons=['Saved view output missing or SHA differs'])
+            return answer
+        answer['links'].append(dict(_artifact(output, expected, repo), kind=output.suffix.lower()[1:]))
+    answer.update(status='matched', case_label=label,
+        scope='Existing saved visualization only; does not add contact, pressure, strain-HP or other mechanical qualification')
+    return answer
+
+
+def summarize_saved_native_result(result_file, *, repo_root=None, reference_file=None, view_manifest=None):
+    """Summarize one saved success/partial path. Task target and requested path endpoint responses are distinct."""
+    repo = Path(repo_root).resolve() if repo_root is not None else None
+    result_path = _resolve(result_file, repo)
+    result, result_pin = _read(result_path)
+    if result.get('schema_version') not in RESULT_SCHEMAS:
+        raise ValueError('Unsupported native mean result schema')
+    model_path = _child(result_path.parent, result['model']['descriptor_path'])
+    model, model_pin = _read(model_path)
+    if model_pin != result['model']['descriptor_file_sha256']:
+        raise ValueError('Saved model JSON SHA differs from result')
+    for record in (result, model):
+        if _canonical_hash({key: value for key, value in record.items() if key != 'descriptor_sha256'}) != record['descriptor_sha256']:
+            raise ValueError('Saved descriptor identity differs')
+    if model['task_sha256'] != result['task_sha256'] or _canonical_hash(model['task']) != result['task_sha256']:
+        raise ValueError('Saved task identity differs')
+    if model['grid'] != result['grid'] or model['arrays']['sha256'] != result['model']['arrays_sha256']:
+        raise ValueError('Saved model grid/array identity differs')
+    states = result['states']
+    if result['accepted_states'] != len(states):
+        raise ValueError('Saved accepted-state count differs')
+    completed = bool(result['status'] == 'success' and result['target_reached'] and
+        result.get('path_completed', result['target_reached']))
+    last = _state(len(states)-1, states[-1]) if states else None
+    loading = [(i, row) for i, row in enumerate(states) if row.get('leg') != 'unloading']
+    peak = _state(*max(loading, key=lambda pair: pair[1]['d'])) if loading else None
+    targets = result['targets_mm']
+    endpoint = last if completed and last is not None and last['is_original_target'] and last['d_mm'] == targets[-1] else None
+    task_states = [(i, row) for i, row in enumerate(states) if row.get('is_original_target')
+        and row['d'] == result['task_target_mm']]
+    target = _state(*task_states[0]) if completed and result['task_target_executed'] and task_states else None
+    schema_source = 'schema_default:'+result['schema_version']+'; native_mean API default'
+    options = {}
+    for key, value, explicit in [
+        ('response_mode', result.get('response_mode', 'complete'), 'response_mode' in result),
+        ('tangent_mode', result.get('tangent_execution', {}).get('mode', 'full'), 'tangent_execution' in result),
+        ('initial_guess', result.get('initial_guess', 'tangent'), 'initial_guess' in result)]:
+        options[key] = dict(value=value, source='result_metadata' if explicit else schema_source)
+    failure = result.get('failure')
+    if failure is not None:
+        failure = dict(phase='equilibrium', **failure)
+    return dict(schema_version='hf-native-response-1.0', status=result['status'],
+        identity=dict(result=_artifact(result_path, result_pin, repo), model=_artifact(model_path, model_pin, repo),
+            task_sha256=result['task_sha256'], geometry=model['source_geometry'],
+            mechanics_source_sha256=result.get('mechanics_source_sha256', {}),
+            arrays_identity_scope='Declared saved array SHA only; no NPZ was opened'),
+        physics=dict(grid=model['grid'], material=model['material'], model_extent=model['model_extent'],
+            counts=result['counts'], workpiece=model['task'].get('workpiece'),
+            input=model['task']['input'], output=model['task']['output'],
+            constraints=model['task']['constraints'], background_symmetry=model['task'].get('background_symmetry')),
+        path=dict(kind=result.get('path_kind', 'load_only'), requested_targets_mm=targets,
+            task_target_mm=result['task_target_mm'], requested_endpoint_mm=targets[-1] if targets else None,
+            reached_displacement_mm=result['reached_displacement'], accepted_states=len(states), completed=completed,
+            task_target_executed=result['task_target_executed']),
+        options=options, target_response=target, requested_endpoint_response=endpoint, maximum_loading_stroke=peak, last_accepted=last,
+        producer_flags={name: result.get(name) for name in ('independent_HP_qualified', 'equilibrium_qualified', 'HF_qualified')},
+        independent_reference=_reference(_resolve(reference_file, repo) if reference_file is not None else None,
+            result_path, result_pin, model_path, model_pin, states, completed, repo),
+        views=_views(_resolve(view_manifest, repo) if view_manifest is not None else None,
+            result_path, result_pin, model, len(states), repo),
+        call_counts=result['call_counts'], timing_seconds=result['timing_seconds'], failure=failure,
+        force_semantics='R is half-model actuator reaction; lower-body forces are signed weak-form resultants. Two-sided normal magnitude sum is not full-body net force. q_out is a weighted port displacement, not a surface gap.',
+        field_scope='J/Hu are saved global scalars, not separately observed solid/medium fields. Workpiece node-window clearance has its original raster scope, not finite surface distance.')
+
+
+def write_native_response(response, output_file):
+    """Write once to a new JSON file; caller resolves its output path."""
+    output = Path(output_file).resolve()
+    if output.exists():
+        raise FileExistsError(output)
+    raw = json.dumps(response, ensure_ascii=False, indent=2, allow_nan=False)+'\n'
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(raw, encoding='utf-8')
+    return output

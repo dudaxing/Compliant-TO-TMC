@@ -1,0 +1,11 @@
+--- pre_column_scope_001/001.py
++++ native_response.py
+@@ -109,7 +109,7 @@
+     passed = not answer['reasons']
+     answer.update(status='matched' if passed else 'mismatch', accepted_reference_pass=passed,
+         full_path_reference_pass=bool(passed and complete), source_bindings_verified=source_match,
+-        HP_all_columns_qualified=bool(passed and reference.get('HP_matrix_columns_exhaustively_checked') is True),
++        HP_all_columns_qualified=False,
+         verification_scope='Matched saved JSON identities/all accepted states/2N bookkeeping and declared source bytes; no HP/NPZ archive re-audit')
+     return answer
+ 

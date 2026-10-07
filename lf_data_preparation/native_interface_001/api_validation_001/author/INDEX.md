@@ -1,0 +1,36 @@
+Selected interface sources and reviews; original CLI raw001.py. Current source-only author notes retain their historical roles. No historical model/state/NPZ/HP archive copied. Paths in original source notes are provenance, not runtime dependencies.
+
+- [001.py](001.py): hf_repo/scripts/solve_native_mean.py before CLI option
+- [002.json](002.json): D:\hf-interface-author-20261008\review_notes\evaluate_draft_static_review.json
+- [003.json](003.json): D:\hf-interface-author-20261008\review_notes\response_static_review.json
+- [004.json](004.json): D:\hf-interface-author-20261008\review_notes\interface_execution_static_review.json
+- [005.json](005.json): response_candidate/author_note.json
+- [006.json](006.json): response_candidate/author_checks.json
+- [007.md](007.md): response_candidate/README.md
+- [008.diff](008.diff): response_candidate/source_additions.diff
+- [009.diff](009.diff): response_candidate/column_scope_delta.diff
+- [010.diff](010.diff): response_candidate/view_binding_delta.diff
+- [011.md](011.md): tests_candidate/VERIFICATION_PLAN.md
+- [012.json](012.json): tests_candidate/author_note.json
+- [013.json](013.json): tests_candidate/source_author_checks.json
+- [014.md](014.md): INSTALL_INTERFACE_README.md
+- [015.json](015.json): install_interface_author_checks.json
+- [016.diff](016.diff): install_interface_delta.diff
+- [017.py](017.py): response_candidate/pre_column_scope_001/native_response.py [historical source-only prefreeze] 
+- [018.md](018.md): response_candidate/pre_column_scope_001/README.md [historical source-only prefreeze] 
+- [019.json](019.json): response_candidate/pre_column_scope_001/author_note.json [historical source-only prefreeze] 
+- [020.json](020.json): response_candidate/pre_column_scope_001/author_checks.json [historical source-only prefreeze] 
+- [021.diff](021.diff): response_candidate/pre_column_scope_001/source_additions.diff [historical source-only prefreeze] 
+- [022.json](022.json): response_candidate/pre_column_scope_001/index.json
+- [023.py](023.py): response_candidate/pre_view_binding_001/native_response.py [historical source-only prefreeze] 
+- [024.json](024.json): response_candidate/pre_view_binding_001/author_note.json [historical source-only prefreeze] 
+- [025.json](025.json): response_candidate/pre_view_binding_001/author_checks.json [historical source-only prefreeze] 
+- [026.diff](026.diff): response_candidate/pre_view_binding_001/source_additions.diff [historical source-only prefreeze] 
+- [027.json](027.json): response_candidate/pre_view_binding_001/response_static_review.json [historical source-only prefreeze] 
+- [028.md](028.md): response_candidate/pre_view_binding_001/README.md [historical source-only prefreeze] 
+- [029.json](029.json): response_candidate/pre_view_binding_001/index.json
+- [030.py](030.py): pre_interface_protocol_001/install_interface_card.py [historical source-only prefreeze] 
+- [031.md](031.md): pre_interface_protocol_001/INSTALL_INTERFACE_README.md [historical source-only prefreeze] 
+- [032.json](032.json): pre_interface_protocol_001/install_interface_author_checks.json [historical source-only prefreeze] 
+- [033.json](033.json): pre_interface_protocol_001/index.json
+- [034.py](034.py): install_interface_card.py

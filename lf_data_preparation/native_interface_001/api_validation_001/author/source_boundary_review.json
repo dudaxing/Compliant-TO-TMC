@@ -1,0 +1,304 @@
+{
+  "schema_version": "native-forward-interface-source-boundary-review-1.0",
+  "status": "source_boundary_advice_only",
+  "generated_utc": "2026-10-07T16:32:56.097123+00:00",
+  "baseline_head": "bbb73e74c9eacd6cd326f08379dcf79a665449e2",
+  "source_sha256": {
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+    "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+    "hf_repo/scripts/solve_native_mean.py": "d457783d3818f3f4c5fe2ce558df9cd9a14245880198aaa6907e7b3541d54888"
+  },
+  "closed_JSON_examples": {
+    "full4mm": {
+      "path": "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/result/result.json",
+      "sha256": "b49955f7e56cd714b35283c0834757ebefc947d3ca25a4f505ed44e8947db7b6",
+      "status": "success",
+      "accepted_states": 24,
+      "target_reached": true,
+      "path_completed": true,
+      "failure": null,
+      "production_qualification_flags": {
+        "independent_HP_qualified": false,
+        "equilibrium_qualified": false,
+        "HF_qualified": false
+      },
+      "initial_guess_field": "port_projection",
+      "response_mode_field": "mechanical",
+      "tangent_execution_field": {
+        "mode": "chunk256",
+        "element_block_size": 256,
+        "global_selector_scope": "full_batch"
+      },
+      "settings": {
+        "tolerance": 1e-09,
+        "constraint_tolerance": 1e-10,
+        "displacement_scale_floor": 1e-06,
+        "force_scale_floor_factor": 1e-08,
+        "max_checks": 25,
+        "armijo_c": 0.0001,
+        "max_backtracks": 12,
+        "max_bisections": 4,
+        "minimum_increment": 0.00625,
+        "time_limit_seconds": 4500.0
+      },
+      "state_scalar_keys": [
+        "R_input",
+        "assembler_force_call",
+        "assembler_state_sha256",
+        "assembler_tangent_call",
+        "auxiliary_material_energy",
+        "bisection_depth",
+        "constraint_bound",
+        "constraint_residual",
+        "d",
+        "descriptor_file_sha256",
+        "descriptor_path",
+        "descriptor_sha256",
+        "displacement_scale",
+        "elapsed_seconds",
+        "force_kernel_version",
+        "force_scale_floor",
+        "forces",
+        "free_force_residual_norm",
+        "global_force_balance_scale",
+        "is_original_target",
+        "leg",
+        "matrix",
+        "max_abs_Hu_per_mm",
+        "minimum_J",
+        "newton_checks",
+        "original_target_displacement",
+        "original_target_index",
+        "output_spring_energy",
+        "output_spring_generalized_force",
+        "physical_mean_target_mm",
+        "q_in",
+        "q_out",
+        "relative_global_force_balance",
+        "relative_residual",
+        "residual_scale",
+        "response_contract",
+        "response_mode",
+        "state",
+        "state_representation",
+        "state_sha256",
+        "tangent_execution",
+        "tangents",
+        "target_origin",
+        "workpiece"
+      ],
+      "body_present": true
+    },
+    "partial_side18": {
+      "path": "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/run_001/result/result.json",
+      "sha256": "a68c7c2dac03b35d2456daf7b66f032e2d6f489e7f975b673b71659f2ba6706e",
+      "status": "failed",
+      "accepted_states": 9,
+      "target_reached": false,
+      "path_completed": false,
+      "failure": {
+        "code": "invalid_J",
+        "reason": "NumPy total J must be positive"
+      },
+      "production_qualification_flags": {
+        "independent_HP_qualified": false,
+        "equilibrium_qualified": false,
+        "HF_qualified": false
+      },
+      "initial_guess_field": null,
+      "response_mode_field": "mechanical",
+      "tangent_execution_field": {
+        "mode": "chunk256",
+        "element_block_size": 256,
+        "global_selector_scope": "full_batch"
+      },
+      "settings": {
+        "tolerance": 1e-09,
+        "constraint_tolerance": 1e-10,
+        "displacement_scale_floor": 1e-06,
+        "force_scale_floor_factor": 1e-08,
+        "max_checks": 25,
+        "armijo_c": 0.0001,
+        "max_backtracks": 12,
+        "max_bisections": 4,
+        "minimum_increment": 0.00625,
+        "time_limit_seconds": 3000.0
+      },
+      "state_scalar_keys": [
+        "R_input",
+        "assembler_force_call",
+        "assembler_state_sha256",
+        "assembler_tangent_call",
+        "auxiliary_material_energy",
+        "bisection_depth",
+        "constraint_bound",
+        "constraint_residual",
+        "d",
+        "descriptor_file_sha256",
+        "descriptor_path",
+        "descriptor_sha256",
+        "displacement_scale",
+        "elapsed_seconds",
+        "force_kernel_version",
+        "force_scale_floor",
+        "forces",
+        "free_force_residual_norm",
+        "global_force_balance_scale",
+        "is_original_target",
+        "leg",
+        "matrix",
+        "max_abs_Hu_per_mm",
+        "minimum_J",
+        "newton_checks",
+        "original_target_displacement",
+        "original_target_index",
+        "output_spring_energy",
+        "output_spring_generalized_force",
+        "physical_mean_target_mm",
+        "q_in",
+        "q_out",
+        "relative_global_force_balance",
+        "relative_residual",
+        "residual_scale",
+        "response_contract",
+        "response_mode",
+        "state",
+        "state_representation",
+        "state_sha256",
+        "tangent_execution",
+        "tangents",
+        "target_origin",
+        "workpiece"
+      ],
+      "body_present": true
+    },
+    "fine_no_body": {
+      "path": "lf_data_preparation/native_fine_task_025_001/result/result.json",
+      "sha256": "9945ccb37d03b960949104a834b817606651bf00a615d110d41e2ad33e39b8cc",
+      "status": "success",
+      "accepted_states": 4,
+      "target_reached": true,
+      "path_completed": null,
+      "failure": null,
+      "production_qualification_flags": {
+        "independent_HP_qualified": false,
+        "equilibrium_qualified": false,
+        "HF_qualified": false
+      },
+      "initial_guess_field": null,
+      "response_mode_field": null,
+      "tangent_execution_field": null,
+      "settings": {
+        "tolerance": 1e-09,
+        "constraint_tolerance": 1e-10,
+        "displacement_scale_floor": 1e-06,
+        "force_scale_floor_factor": 1e-08,
+        "max_checks": 25,
+        "armijo_c": 0.0001,
+        "max_backtracks": 12,
+        "max_bisections": 4,
+        "minimum_increment": 6.25e-05,
+        "time_limit_seconds": 1500.0
+      },
+      "state_scalar_keys": [
+        "R_input",
+        "assembler_force_call",
+        "assembler_state_sha256",
+        "assembler_tangent_call",
+        "bisection_depth",
+        "constraint_bound",
+        "constraint_residual",
+        "d",
+        "descriptor_file_sha256",
+        "descriptor_path",
+        "descriptor_sha256",
+        "displacement_scale",
+        "elapsed_seconds",
+        "force_scale_floor",
+        "forces",
+        "free_force_residual_norm",
+        "global_force_balance_scale",
+        "is_original_target",
+        "matrix",
+        "max_abs_Hu_per_mm",
+        "minimum_J",
+        "newton_checks",
+        "original_target_displacement",
+        "output_spring_energy",
+        "output_spring_generalized_force",
+        "physical_mean_target_mm",
+        "q_in",
+        "q_out",
+        "relative_global_force_balance",
+        "relative_residual",
+        "residual_scale",
+        "state",
+        "state_representation",
+        "state_sha256",
+        "tangents",
+        "target_origin"
+      ],
+      "body_present": false
+    }
+  },
+  "findings": [
+    {
+      "boundary": "once",
+      "advice": "One solve_native_mean call already constructs one model; invoke one write_native_mean for its returned success/partial cache. Do not prebuild, reconstruct from saved model, re-evaluate F/T, or retry under another initial guess. Cache writer result once and retain partial output if later summary work fails."
+    },
+    {
+      "boundary": "task/options",
+      "advice": "Use geometry native grid and explicit unchanged task/material/background/workpiece/path. Schema1.1 targets must exactly match task.path;1.0 default targets are[0,input.target]. Expose response_mode complete/mechanical, tangent full/chunk256 and initial_guess tangent/port_projection explicitly. API accepts explicit settings unchanged; cold defaults remain complete/full/tangent. Existing CLI minimum increment is targets[1]/16, not DisplacementSettings fixed .025/16 default; keep the CLI rule and record actual settings."
+    },
+    {
+      "boundary": "partial",
+      "advice": "Returned controller status failed is an ordinary partial result to save once. Requested/target response is null when the declared path is not completed; last accepted and prefix peak remain separate actual observations. Zero accepted means both null. On cycles distinguish maximum loading stroke/Fy peak from final requested endpoint; reaching peak alone is not completion."
+    },
+    {
+      "boundary": "exceptions",
+      "advice": "Record only observable call boundary(stage read_task/solve/write_result/build_response/post_save_time_check), exact exception class/message and existing .code/.details. solve boundary includes constructor/input/controller setup, so do not invent a finer stage from code or message. OSError/ordinary ValueError without code stays null. Unexpected exceptions should not be converted into fabricated numerical partial states. Preserve genuine failure reasons; no automatic fallback or rerun."
+    },
+    {
+      "boundary": "time",
+      "advice": "Controller clock starts after its setup and excludes native construction and all saving. native_mean evaluation timing includes construction+solve but excludes writer. Existing CLI checks total STARTED timing after cache write and can fail after a success result exists. Keep controller/settings timing and whole entry+save+summary timing distinct. A total-time failure must be non-success with saved path retained, not overwritten solver status. Do not claim a hard process/RSS bound from a cooperative clock; finite external phase launcher remains separate."
+    },
+    {
+      "boundary": "raw fields",
+      "advice": "Use native state R_input/q_out/minimum_J/max_abs_Hu_per_mm with their actual scopes; do not substitute qout for gap, global minimumJ/Hu for medium-only fields, or raster node_window_clearance for finite tip-segment distance. Green/finite gap plots are not in these state JSON scalars; absent observer-derived quantities/links stay null unless explicitly supplied same-result/same-state saved-view evidence. No body force means null, not zero."
+    },
+    {
+      "boundary": "qualification",
+      "advice": "Never change producer HF/equilibrium/HP flags. Parsing a summary cannot create reference or HF5 qualification. At most record an explicitly supplied existing reference witness and its reported scope after same result SHA/allN/state identities and actual2N count; absent/mismatched/unclosed witness is unqualified. No auto-discovery by case label or directory, no pressure/freebody/all-column/energy/strain-HP expansion. New forward output needs its own future reference stage."
+    },
+    {
+      "boundary": "force",
+      "advice": "R is actuator-on-model signed scalar; body forces are weak fixed lower-half on-body total/material/Hu components and holding is opposite.2absFy is mirror magnitude sum; full mirror net is(2Fx,0). Neither nodal force nor body sum is pressure or general contact qualification."
+    },
+    {
+      "boundary": "files",
+      "advice": "Use a new output directory, cheaply reject an already-existing output before expensive solve, and preserve existing writer no-overwrite behavior. Resolve explicit repo/input/output paths deterministically; do not read historical provenance as dependencies. A stdlib JSON response should pin saved result/task/source and optional view/reference files, not import HF or read NPZ. A summary/save failure preserves whatever actual result was written and does not trigger another solve or write."
+    }
+  ],
+  "blocking_findings": [],
+  "source_read_ranges": {
+    "native_mean.py": "113–writer end",
+    "native_project.py": "30–139 task validation; prior full constructor/writer read remains applicable",
+    "displacement.py": "1–103 settings/vector/port input validation",
+    "split_displacement.py": "clock/evaluate and trial failure, path result/target_metrics lines123–140,285–356",
+    "tmc.py": "TMCError lines21–25",
+    "solve_native_mean.py": "full current CLI"
+  },
+  "activity": {
+    "HF_or_candidate_imports": 0,
+    "NPZ_or_array_reads": 0,
+    "constructors_F_T_solver_HP": 0,
+    "geometry_nodal_plot": 0,
+    "tests": 0,
+    "formal_writes": 0
+  },
+  "qualification": "Advice for forthcoming feature only. No candidate reviewed or executed and no new HF5/scientific qualification.",
+  "markdown_sha256": "d8d9d6a3ffb8da0fce1d2224ba9f6c6f022b94af4978e59ba74d8e4c8fb65067"
+}
