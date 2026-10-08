@@ -1,14 +1,3 @@
-# 固定工件薄API：实例准备完成，真实运行待授权
-
-整体目标仍是复用LF/N4几何与研究层，提供独立有限变形/TMC正向评价及可人工检查的力与变形输出，不含优化器。两例无工件.025 mm真实batch/各自全态参考与保存视图已完成；旧固定方体24态/48HP也已完成，两者的资格与输出保持各自身份。
-
-本次完成[固定方体可运行配置](../hf_repo/configs/native/fixed_square_cycle.json)与一次窄mock功能检查：真实batch→真实evaluate_native各一次，原24目标、10settings、mechanical/chunk256/port_projection和工件力字段正确透传；三个科学委托使用mock，本轮新F/T/求解/HP为0。特别显式保留最小增量.00625 mm，避免默认.015625 mm改变原任务路径控制。28份现有HF源与全部旧数值证据不变。
-
-[目标、选择、实际效果和旧工件图](../lf_data_preparation/native_interface_001/workpiece_api_preparation_001/RESULTS.md)中记录了本轮和后续W-API1具体卡。新真实工件CLI/API生产尚未授权或执行，不续用旧闭卡。接触/压力、匹配网格及域收敛、圆体自身任务、自由体/摩擦和HF5整体仍未完成。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
-
-<details>
-<summary>65020bd及更早阶段历史原文（原字节完整保留；旧“下一步”与未执行表述只指当时）</summary>
-
 # 两例批量评价完成记录（2026-10-08）
 
 两例同任务小批量已完成真实生产、逐例独立参考及保存显示：各4个原目标态，各8次新HP，共16新HP；双例保存独审PASS。每例PNG/GIF覆盖全部4态，另存自有qualified_response，原生产response和index保持原字节。 生产每例14F/9T/1solve、原门不变；V1包装LOAD失败HP0完整保留，V2为独立新阶段，canonical/fine分别77174/307574检查。B-VIEW2一次PASS，helper9.775682300 s、outer11.255066000 s，245绑定保持；显示新增构模/F/T/solver/HP为0。
@@ -476,9 +465,6 @@ CPU原237条和科学30条事件完整；严格同步内原行157–235全部79�
 公开 v3 数值复读的外部来源例外仍严格限于原搬迁补充声明的两份 MATLAB 编号源码及其精确哈希，不能扩大。公开数值复读既不伪装完整来源复核，也不授予生产执行资格。
 
 每次后续工作记录：整体目标、拟做事项、实际改动、理由、实际计算/测试、效果、失败和局限、代码/输入/输出身份、资源成本及下一步。当前状态入口可更新；被来源清单绑定的历史报告和证据不得为消除表面矛盾而改字节。
-
-
-</details>
 
 
 </details>

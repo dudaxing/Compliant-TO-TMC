@@ -1,0 +1,55 @@
+{
+  "schema_version": "native-workpiece-api-future-worker-static-peer-1.0",
+  "status": "pass_static_only",
+  "blocking_findings": [],
+  "reviewed_utc": "2026-10-08T08:15:26.979611+00:00",
+  "source_sha256": {
+    "execute_workpiece_forward.py": "76577bd72ed5b4a544069cf896ba1c97753ef36d7a82a51cdf534c1c72eeffdf",
+    "fixed_square_manifest.json": "01e271695b5aaf8e7e84597eb04da84ecf0dd96584055f5e12885be9bfdbba87"
+  },
+  "reviewed_product_sources_sha256": {
+    "hf_repo/src/hf_eval/native_batch.py": "fa765e02f18511045db1b0fd9b3f37da828985c0bc21dfdedb3185b6959b90ef",
+    "hf_repo/src/hf_eval/native_evaluate.py": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942",
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+    "hf_repo/src/hf_eval/native_response.py": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af"
+  },
+  "reviewed_context_sha256": {
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_workpiece_001\\right_margin4_cycle_001\\run_001\\input_inventory.json": "b59ad6aef4f23161590d77c5964831b7fa7a7995918484beebbc5ad3c2b66f83",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\workpiece_api_preparation_001\\source_preimages.json": "30c779225a86f45a73fe1ffe7ccb835db2c82ef33aaec7b6f486a9182a3931f7",
+    "README.md": "24007a1b95808167d9a57c2eb6e0c4eb52123855abf0764f17540ec079ae621c",
+    "author_checks.json": "fceacec3994bd502b9136f1c2510bc84334be9c970473eb653f06dff6b7397b5"
+  },
+  "findings": [
+    "One real batch entry uses the single product manifest. API/model-builder/solve/save/summary delegates each must start and complete exactly once on terminal success; force/tangent started/completed counts agree with the actual saved result.",
+    "The model count means build_native_project delegation, not an independently instrumented TMCModel constructor. The existing pinned builder creates its model once; no second construction is introduced.",
+    "The mechanical force and chunk256 tangent wrappers return original values and propagate recoverable trial errors in-budget. Checkpoints can escape with RuntimeError, which the original KernelError/TMCError controller handlers do not turn into retries.",
+    "Native mean capture creates and stores the accepted cache before invoking the inserted callback. The worker preserves any prior callback, flushes original scalar acceptance to JSONL, then checkpoints. It does not synthesize missing accepted arrays.",
+    "Save and summary wrappers require observed force/tangent counts unchanged across each call. The cached production gate scan uses only actual NativeMeanResult accepted objects and its actual project fixed DOFs, with no extra F/T/model/HP.",
+    "Global force balance <=1e-6 and fixed split-sum <=8e-11 are now explicitly checked along with J>0, residual <=1e-9 and each native mean bound. These are cached acceptance checks, not a change to Newton/backtracking or a claim that all are controller stopping conditions.",
+    "Full task path, all ten settings and mechanical/chunk256/port_projection modes are checked. Accepted N is actual, not hardcoded24. Normal controller partial returns proceed through the existing cached writer; resource escape promises only actual scalar prefix and already written outputs.",
+    "Whole clock begins before imports; all final input/output hashing precedes the last checkpoint. Worker receipt elapsed excludes its final write/stdout as stated; the outer F3 child deadline covers termination. No force kill, state warm start, independent reference or plotting is introduced.",
+    "Original production flags remain false and reference/view statuses not_provided; no old accepted/reference/view or node-window clearance is promoted to new finite geometry/contact qualification."
+  ],
+  "runtime_protocol_assumptions": [
+    "Root freezes a fresh workpiece_forward_001 stage, original raw F3 launcher at the same depth and production phase once; helper4500/outer4560seconds and sampled8GiB must match the explicit worker checks.",
+    "Frozen bindings include all28 unchanged product sources plus exact product manifest, original task, original geometry JSON/adjacent NPZ, worker and raw launcher. No new physics/task/settings or input arrays are introduced.",
+    "This review covers the future worker source only. Protocol/builder installation and runtime results are not validated here, and source-only PASS is not permission to repair/reopen any closed card."
+  ],
+  "execution_ready": false,
+  "scope": "Read/AST/JSON/ordinary SHA only. No candidate imports, mock reruns, NPZ load, model/F/T/solver/HP/observations/rendering or formal edits.",
+  "activities": {
+    "candidate_imports": 0,
+    "mock_runs": 0,
+    "NPZ_loads": 0,
+    "model": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "observations": 0,
+    "render": 0,
+    "formal_writes": 0
+  }
+}

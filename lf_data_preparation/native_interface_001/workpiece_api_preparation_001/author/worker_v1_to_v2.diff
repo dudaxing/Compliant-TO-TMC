@@ -1,0 +1,87 @@
+--- execute_workpiece_forward_v1.py
++++ execute_workpiece_forward_v2.py
+@@ -1,15 +1,18 @@
+-"""Candidate W-API1: one real batch/API call with cooperative observations only."""
++"""Candidate W-API1: one existing CLI/batch/API call with cooperative observations only."""
+ from time import perf_counter
+ STARTED = perf_counter()
+ from pathlib import Path
+ import argparse
+ import hashlib
++import importlib.util
+ import json
+ import sys
+ from math import fsum
+ 
+ STAGE = "lf_data_preparation/native_interface_001/workpiece_forward_001"
+ MANIFEST = "hf_repo/configs/native/fixed_square_cycle.json"
++CLI = "hf_repo/scripts/evaluate_native_batch.py"
++CLI_SHA256 = "9dbdb761d2bad20f5d211b7262a0583515a0ad22b36c181988911ff544108dd8"
+ sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+ read = lambda path: json.loads(path.read_bytes())
+ 
+@@ -31,15 +34,17 @@
+     assert protocol_file.parent == stage and protocol["manifest_file"] == MANIFEST
+     assert limits["helper_seconds"] == 4500 and limits["outer_seconds"] == 4560 and protocol["sampled_RSS_bytes"] == 8*1024**3
+     pins, manifest = protocol["bindings"], read(root / MANIFEST)
++    assert pins[CLI] == CLI_SHA256
+     assert all(sha(root / name) == pin for name, pin in pins.items())
+     assert len(manifest["cases"]) == 1 and manifest["cases"][0]["output"] == STAGE + "/run_001/fixed_square"
+     assert manifest["options"]["response_mode"] == "mechanical" and manifest["options"]["tangent_mode"] == "chunk256" and manifest["options"]["initial_guess"] == "port_projection"
+     assert not run.exists() and not (stage / "stop_requested.txt").exists()
+     run.mkdir()
+     receipt_file, progress = run / "execution_receipt.json", run / "accepted_progress.jsonl"
+-    counts = dict(batch_calls=0, **{kind + suffix: 0 for kind in ("api", "model", "solve", "force", "tangent", "save", "summary") for suffix in ("_started", "_completed")})
++    counts = dict(batch_calls=0, **{kind + suffix: 0 for kind in ("batch", "api", "model", "solve", "force", "tangent", "save", "summary") for suffix in ("_started", "_completed")})
+     receipt = dict(schema_version="native-workpiece-api-forward-execution-1.0", status="running",
+         protocol_sha256=sha(protocol_file), counts=counts, accepted_states=0, HP_calls=0, JIT_calls=0,
++        cli_source_sha256=CLI_SHA256,
+         qualification_scope="New production transport only; no independent reference/view/contact/pressure/HF5 qualification")
+     write(receipt_file, receipt)
+     peak, error = 0, None
+@@ -67,6 +72,8 @@
+             def call(*values, **options):
+                 checkpoint()
+                 counts[kind + "_started"] += 1
++                if kind == "batch":
++                    counts["batch_calls"] += 1
+                 before = tuple(counts[key] for key in ("force_started", "force_completed", "tangent_started", "tangent_completed")) if kind in ("save", "summary") else None
+                 try:
+                     value = delegate(*values, **options)
+@@ -118,14 +125,24 @@
+             return result  # Even a normal controller partial return proceeds to the existing cached writer.
+ 
+         native_evaluate.solve_native_mean = solve
++        native_batch.evaluate_native_batch = observed(native_batch.evaluate_native_batch, "batch")
+         checkpoint()
+-        counts["batch_calls"] += 1
+-        index = native_batch.evaluate_native_batch(root / MANIFEST, run / "batch", repo_root=root)
++        spec = importlib.util.spec_from_file_location("workpiece_native_batch_cli", root / CLI)
++        cli = importlib.util.module_from_spec(spec)
++        spec.loader.exec_module(cli)  # Its from-import binds the already observed batch alias.
++        original_argv = sys.argv
++        try:
++            sys.argv = [str(root / CLI), "--repo", str(root), "--manifest", MANIFEST, "--output", str(run / "batch")]
++            receipt["cli_invocations"] = 1
++            receipt["cli_exit_code"] = cli.main()
++        finally:
++            sys.argv = original_argv
+         checkpoint()
++        index = read(run / "batch/index.json")
+         receipt.update(batch_status=index["status"], failure_case=index["failure_case"])
+         if index["status"] != "success":
+             raise RuntimeError("Batch terminal non-success: " + str(index["failure_case"]))
+-        assert counts["batch_calls"] == 1 and all(counts[kind + suffix] == 1 for kind in ("api", "model", "solve", "save", "summary") for suffix in ("_started", "_completed"))
++        assert receipt["cli_exit_code"] == 0 and counts["batch_calls"] == 1 and all(counts[kind + suffix] == 1 for kind in ("batch", "api", "model", "solve", "save", "summary") for suffix in ("_started", "_completed"))
+         result = read(run / "fixed_square/result.json")
+         assert result["status"] == "success" and result["task_target_executed"] is True
+         assert receipt["accepted_states"] == result["accepted_states"] == len(result["states"])
+@@ -154,7 +171,7 @@
+             receipt["finalization_exception"] = dict(exception_class=type(exception).__name__, reason=str(exception))
+             error = error or exception
+         receipt.update(status="pass" if error is None else "not_pass", elapsed_seconds=perf_counter() - STARTED,
+-            peak_sampled_RSS_bytes=peak, elapsed_scope="Imports, one batch/API path, cached persistence and final hashing/checkpoint; final receipt write covered by outer child termination")
++            peak_sampled_RSS_bytes=peak, elapsed_scope="Imports, one existing CLI/batch/API path, cached persistence and final hashing/checkpoint; final receipt write covered by outer child termination")
+         write(receipt_file, receipt)
+         print(json.dumps({key: receipt[key] for key in ("status", "accepted_states", "elapsed_seconds", "peak_sampled_RSS_bytes")}), flush=True)
+     if error is not None:

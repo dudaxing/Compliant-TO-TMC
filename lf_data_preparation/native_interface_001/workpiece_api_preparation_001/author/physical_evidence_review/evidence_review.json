@@ -1,0 +1,688 @@
+{
+  "schema_version": "native-workpiece-thin-api-physical-evidence-read-review-1.0",
+  "status": "saved_source_facts_only",
+  "reviewed_utc": "2026-10-08T07:56:11.501364+00:00",
+  "formal_HEAD_at_review": "65020bdaac94c60d21ae47d4cff1badb885ad1d1",
+  "portable_inputs": {
+    "task_file": "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/task.json",
+    "task_raw_sha256": "da85758a9eaf89697c5cac657f492d565cfe7c66cf9cb74139c3464e9f667e84",
+    "normalized_task_sha256": "d7fcda36aab750f6dd6bfad776c37ba81d631c7bd4ccf1545e3e4ad4281244f5",
+    "geometry_file": "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/fixture/model/source_geometry/geometry.json",
+    "geometry_json_raw_sha256": "408908d2cb947e09999c6e2b2babd92b3c6b4c8c340b130908d134ae42e73286",
+    "geometry_array_relative_file": "geometry.npz",
+    "geometry_npz_declared_sha256": "5c575f3cc33107cd792be5bc6f1986639739df8c4a605784c2a9f1125ae07497",
+    "NPZ_binary_read_or_reverified": false,
+    "path_rule": "Explicit repo_root/--repo plus these repo-relative files; descriptor arrays path is adjacent geometry.npz. Source absolute provenance strings are historical context, not live input.",
+    "geometry": {
+      "geometry_id": "002c29da804e50ebad4747060b034edb8896d8483e7698c2f75cd3bde9fc86c0",
+      "descriptor_sha256": "e3970e99d2eb4023fb9cca3fd93a1fe17ff7860b65401b3af08af59c7a21c0b2",
+      "grid": {
+        "shape_yx": [
+          40,
+          84
+        ],
+        "origin_mm": [
+          0.0,
+          0.0
+        ],
+        "cell_size_mm": [
+          1.0,
+          1.0
+        ],
+        "axes": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "extent_mm": [
+          84.0,
+          40.0
+        ],
+        "array_order": "C_yx_bottom_up",
+        "value_location": "cell"
+      },
+      "processing": {
+        "source_kind": "HF_derived_analysis_domain",
+        "analysis_domain_policy": "right_passive_void_padding",
+        "parent_native_subdomain_preserved": true,
+        "whole_grid_is_LF_native": false,
+        "resampling_applied": false,
+        "lf_optimization_applied": false,
+        "new_threshold_or_cleanup_applied": false,
+        "region_tags_policy": "unchanged physical coordinates, directions, components and averaging",
+        "background_boundary_applied": false,
+        "task_policy": "No HF task, materials, applied constraints or mechanical qualification are created"
+      }
+    },
+    "task": {
+      "schema_version": "hf-native-project-task-1.1",
+      "task_id": "EXPLORATORY_fixed_square_x71_side18_E1_gamma1em6_rightmargin4_1p2mm",
+      "case_family": "gripper",
+      "purpose": "right_medium_margin_single_factor_contact_force_exploration",
+      "parameter_origin": "HF-derived82mm parent padded by two more right passive-medium columns to84mm; total right margin4mm, original LF and parent physical subdomains retained.",
+      "material": {
+        "E_MPa": 1.0,
+        "nu": 0.3,
+        "formulation": "plane_strain"
+      },
+      "input": {
+        "tag": "input",
+        "control": "average_displacement",
+        "target_mm": 1.2
+      },
+      "output": {
+        "tag": "output",
+        "spring_N_per_mm": 0.0
+      },
+      "constraints": [
+        {
+          "tag": "support",
+          "components": [
+            0,
+            1
+          ]
+        },
+        {
+          "tag": "symmetry",
+          "components": [
+            1
+          ]
+        }
+      ],
+      "support_selection": "solid_incident_nodes_only",
+      "input_auxiliary_spring_N_per_mm": 0.0,
+      "workpiece": {
+        "kind": "fixed_rigid",
+        "shape": "square",
+        "center_mm": [
+          71.0,
+          40.0
+        ],
+        "fixed_components": [
+          0,
+          1
+        ],
+        "side_mm": 18.0
+      },
+      "third_medium": {
+        "gamma": 1e-06
+      },
+      "qualification_criteria": {
+        "max_design_volume_fraction": null,
+        "min_feature_mm": null
+      },
+      "reference_state": "undeformed",
+      "units": {
+        "length": "mm",
+        "force": "N",
+        "stress": "MPa",
+        "energy": "N mm"
+      },
+      "regularization": {
+        "alpha": 1e-06,
+        "length_mm": 80.0
+      },
+      "background_symmetry": {
+        "points_mm": [
+          [
+            0.0,
+            40.0
+          ],
+          [
+            84.0,
+            40.0
+          ]
+        ],
+        "components": [
+          1
+        ]
+      },
+      "geometry": {
+        "geometry_id": "002c29da804e50ebad4747060b034edb8896d8483e7698c2f75cd3bde9fc86c0",
+        "descriptor_sha256": "e3970e99d2eb4023fb9cca3fd93a1fe17ff7860b65401b3af08af59c7a21c0b2"
+      },
+      "analysis_grid": {
+        "policy": "native"
+      },
+      "description": "Fixed side18 square center(71,40), right face80, 4mm right medium margin; native h1, E1, gamma1e-6, alpha1e-6, Lr80 and original ports unchanged. Fresh zero-start 24-target 0-1.2-0mm cycle requires its own reference.",
+      "path": {
+        "kind": "ordered_cycle",
+        "targets_mm": [
+          0.0,
+          0.25,
+          0.5,
+          0.65,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.15,
+          1.1,
+          1.0,
+          0.9,
+          0.8,
+          0.75,
+          0.65,
+          0.5,
+          0.25,
+          0.0
+        ]
+      }
+    },
+    "model_counts": {
+      "cells": 3360,
+      "nodes": 3485,
+      "dofs": 6970,
+      "solid_cells": 1086,
+      "medium_cells": 2274,
+      "solid_incident_nodes": 1337,
+      "fixed_dofs": 452,
+      "free_dofs": 6518
+    },
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain",
+      "lambda_s_MPa": 0.5769230769230769,
+      "mu_s_MPa": 0.3846153846153846,
+      "kappa_s_MPa": 0.8333333333333333,
+      "thickness_mm": 20.0,
+      "third_medium_gamma": 1e-06,
+      "alpha": 1e-06,
+      "regularization_length_mm": 80.0,
+      "kr_MPa_mm2": 0.008615384615384613,
+      "kr_material_factor_applied": false,
+      "force_scale_per_length": 20.0
+    }
+  },
+  "old_actual_forward": {
+    "entry": "stage author/execute_shift_pose.py directly calls solve_native_mean once and write_native_mean; no evaluate_native call",
+    "entry_lines": [
+      189,
+      190,
+      191,
+      192
+    ],
+    "targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.65,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0,
+      1.05,
+      1.1,
+      1.15,
+      1.2,
+      1.15,
+      1.1,
+      1.0,
+      0.9,
+      0.8,
+      0.75,
+      0.65,
+      0.5,
+      0.25,
+      0.0
+    ],
+    "settings": {
+      "tolerance": 1e-09,
+      "constraint_tolerance": 1e-10,
+      "displacement_scale_floor": 1e-06,
+      "force_scale_floor_factor": 1e-08,
+      "max_checks": 25,
+      "armijo_c": 0.0001,
+      "max_backtracks": 12,
+      "max_bisections": 4,
+      "minimum_increment": 0.00625,
+      "time_limit_seconds": 4500.0
+    },
+    "gates": {
+      "production_residual": "1e-9",
+      "independent_residual": "1e-8",
+      "force_evaluation": "1e-9",
+      "average_constraint": "1e-10",
+      "global_force_balance": "1e-6",
+      "fixed_displacement_mm": "8e-11",
+      "hp80_hp120": "1e-40",
+      "total_force": "1e-11",
+      "material_force": "1e-9",
+      "regularization_force": "1e-9",
+      "total_tangent": "1e-10",
+      "material_tangent": "1e-9",
+      "regularization_tangent": "1e-9",
+      "augmented_force_tangent": "1e-10",
+      "augmented_constraint_tangent": "1e-10"
+    },
+    "response_mode": "mechanical",
+    "tangent_execution": {
+      "mode": "chunk256",
+      "element_block_size": 256,
+      "global_selector_scope": "full_batch"
+    },
+    "initial_guess": "port_projection",
+    "call_counts": {
+      "force_calls": 340,
+      "force_calls_completed": 325,
+      "tangent_calls": 174,
+      "tangent_calls_completed": 174,
+      "solver_invocations": 1,
+      "JIT_calls": 0,
+      "HP_calls": 0
+    },
+    "accepted_states": 24,
+    "path_completed": true,
+    "unload_endpoint_reached": true,
+    "helper_seconds": 2489.5635227999883,
+    "outer_seconds": 2491.909717200091,
+    "own_peak_sampled_RSS_bytes": 581013504,
+    "tree_peak_sampled_RSS_bytes": 574099456,
+    "phase_limits": {
+      "production": {
+        "helper_seconds": 4500,
+        "outer_seconds": 4560,
+        "argv": [
+          "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/author/execute_shift_pose.py",
+          "--repo",
+          ".",
+          "--input",
+          "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001"
+        ]
+      }
+    },
+    "sampled_RSS_bytes": 8589934592,
+    "bindings_unchanged": true,
+    "source_unchanged": true,
+    "inputs_unchanged": true
+  },
+  "old_fresh_reference": {
+    "accepted_states": 24,
+    "HP_calls_started": 48,
+    "HP_calls_completed": 48,
+    "checks_completed": 488232,
+    "summary_elapsed_seconds": 531.4370633000508,
+    "lifecycle_elapsed_seconds": 531.4458076000446,
+    "outer_elapsed_seconds": 532.8025967999129,
+    "own_peak_sampled_RSS_bytes": 418926592,
+    "tree_peak_sampled_RSS_bytes": 430395392,
+    "phase_limits": {
+      "reference": {
+        "helper_seconds": 1500.0,
+        "outer_seconds": 1560.0,
+        "argv": [
+          "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_author/audit_enlarged_square.py",
+          "--repo",
+          ".",
+          "--input",
+          "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001",
+          "--output",
+          "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference",
+          "--contract",
+          "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_contract.json",
+          "--time-limit",
+          "1500.0"
+        ]
+      }
+    },
+    "bindings_unchanged": true
+  },
+  "saved_formatter_vs_thin_API": {
+    "saved_response_file": "lf_data_preparation/native_interface_001/api_validation_001/run_001/saved_right4col_response.json",
+    "saved_response_raw_sha256": "6762f15477b4aacc00167e5526a20189992deac046954c2888fc6b86219a3fab",
+    "functional_scientific_calls": {
+      "model_constructions": 0,
+      "force_calls": 0,
+      "tangent_calls": 0,
+      "solver_calls": 0,
+      "HP_calls": 0,
+      "geometry_calls": 0,
+      "nodal_calls": 0,
+      "NPZ_reads": 0,
+      "real_cached_writer_calls": 0
+    },
+    "formatter_calls_started": 4,
+    "formatter_calls_completed": 4,
+    "copied_old_call_counts": {
+      "force_calls": 340,
+      "force_calls_completed": 325,
+      "tangent_calls": 174,
+      "tangent_calls_completed": 174,
+      "solver_invocations": 1,
+      "JIT_calls": 0,
+      "HP_calls": 0
+    },
+    "reference_matching": {
+      "status": "matched",
+      "accepted_reference_pass": true,
+      "full_path_reference_pass": true
+    },
+    "conclusion": "Formatter and prior fixed-body backend evidence exist. They do not demonstrate a new real fixed-body large-stroke forward through evaluate_native.",
+    "already_supported_API": [
+      "task.path ordered_cycle targets",
+      "fixed_rigid square/circle",
+      "explicit response_mode/tangent_mode/initial_guess",
+      "body weak-form force/holding/mirror/net/two-sided response"
+    ],
+    "required_matching_options": {
+      "response_mode": "mechanical",
+      "tangent_mode": "chunk256",
+      "initial_guess": "port_projection",
+      "minimum_increment": 0.00625,
+      "time_limit_seconds": 4500.0
+    },
+    "default_differences": {
+      "response_mode": "complete",
+      "tangent_mode": "full",
+      "initial_guess": "tangent",
+      "minimum_increment_for_this_path": 0.015625,
+      "time_limit_seconds": 180.0
+    },
+    "full_settings_API_note": "To preserve all settings, pass DisplacementSettings(**saved_inventory.settings), leave API individual-limit arguments at defaults and minimum_increment=None; API rejects mixed settings plus overridden individual limits. No API call made here.",
+    "resource_scope": "Controller --time-limit is not whole CLI/import/construction/persistence clock. New outer budget and fresh output are separate; old closed production/reference windows cannot be reused."
+  },
+  "peak_saved_values": {
+    "index": 13,
+    "d": 1.2,
+    "leg": "loading",
+    "R_input": 0.4072527714891386,
+    "q_out": 1.008846132373483,
+    "minimum_J": 3.2722992545782586e-05,
+    "relative_residual": 1.0459402174471055e-12,
+    "max_abs_Hu_per_mm": 0.2088465633790193,
+    "body_force_components_N": {
+      "total": [
+        -0.0024081238889866684,
+        0.11936195151183741
+      ],
+      "material": [
+        -0.002320513785139891,
+        0.11785138159936352
+      ],
+      "regularization": [
+        -8.761010384677667e-05,
+        0.0015105699124738784
+      ]
+    },
+    "node_window_clearance_mm": {
+      "bottom": 0.005730316194075158,
+      "left": 2.3287460107852738
+    },
+    "two_sided_normal_magnitude_sum_N": 0.23872390302367483
+  },
+  "unload_saved_values": {
+    "d": 0.0,
+    "R_input": 1.2083582019558206e-24,
+    "q_out": -6.2153656524766926e-24,
+    "minimum_J": 1.0,
+    "relative_residual": 9.334514905629927e-10
+  },
+  "physical_applicability": {
+    "qualified_scope": "Accepted mechanical states of this explicit complete gamma1e-6 x71 side18 coarse square cycle with4mm right medium margin; no pressure, clamp, contact, auxiliary energy, stress-HP, rejected-state, all-column, H2/H3 or HF5 qualification",
+    "reference_scope": "All actual accepted states/elements/real DOFs; fixed-lift PORT direction, deltaR=0; original signed workpiece and disjoint holding projections",
+    "flags": {
+      "full_element_and_DOF_coverage": true,
+      "HP_matrix_columns_exhaustively_checked": false,
+      "contact_qualified": false,
+      "clamp_qualified": false,
+      "pressure_qualified": false
+    },
+    "body_representation": {
+      "cell_selection": "native cell centre inside closed analytic shape; only original lower-half cells",
+      "boundary_representation": "native cell staircase; analytic circle is not a fitted boundary",
+      "initial_gaps_mm": {
+        "left": 2.0,
+        "bottom": 1.0
+      },
+      "initial_gap_scope": "nearest original mechanism node on matching horizontal/vertical native node lines; not contact onset",
+      "kinematics": "fixed rigid constraint overlay, all incident ux/uy remain undeformed",
+      "selected_cells": 162,
+      "incident_nodes": 190,
+      "fixed_dofs": 380
+    },
+    "force_interpretation": "Signed weak-form force on fixed lower-half body; holding reaction is opposite. Mirrored net force is (2Fx,0), whereas 2|Fy| is the two-sided normal magnitude sum. Neither is pressure.",
+    "gap_interpretation": "Saved node-window clearance, a raster geometric diagnostic; positive small gap is not contact qualification.",
+    "domain_interpretation": "Explicit 4mm-right-medium task only. Earlier 2mm/4mm evidence did not establish whole-path domain convergence; no grid-convergence or design-ranking claim."
+  },
+  "old_HF_source_comparison": {
+    "hf_repo/src/hf_eval/__init__.py": {
+      "recorded_sha256": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+      "current_sha256": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/compensated_invariants.py": {
+      "recorded_sha256": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+      "current_sha256": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/compensated_kinematics.py": {
+      "recorded_sha256": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+      "current_sha256": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/data.py": {
+      "recorded_sha256": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+      "current_sha256": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/displacement.py": {
+      "recorded_sha256": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+      "current_sha256": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/native_force.py": {
+      "recorded_sha256": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+      "current_sha256": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/native_map.py": {
+      "recorded_sha256": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+      "current_sha256": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/native_mean.py": {
+      "recorded_sha256": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+      "current_sha256": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/native_project.py": {
+      "recorded_sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+      "current_sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/prescribed.py": {
+      "recorded_sha256": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+      "current_sha256": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/project.py": {
+      "recorded_sha256": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+      "current_sha256": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/regions.py": {
+      "recorded_sha256": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+      "current_sha256": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/split_affine.py": {
+      "recorded_sha256": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba",
+      "current_sha256": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/split_displacement.py": {
+      "recorded_sha256": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+      "current_sha256": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/split_kernel.py": {
+      "recorded_sha256": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+      "current_sha256": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/split_kernel_compensated.py": {
+      "recorded_sha256": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+      "current_sha256": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": {
+      "recorded_sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+      "current_sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": {
+      "recorded_sha256": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+      "current_sha256": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/split_prescribed.py": {
+      "recorded_sha256": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+      "current_sha256": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/split_state.py": {
+      "recorded_sha256": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+      "current_sha256": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/tmc.py": {
+      "recorded_sha256": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+      "current_sha256": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/tmc_kernel.py": {
+      "recorded_sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+      "current_sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/boundary_geometry.py": {
+      "recorded_sha256": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+      "current_sha256": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/tangent_action.py": {
+      "recorded_sha256": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+      "current_sha256": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+      "equal": true
+    },
+    "hf_repo/src/hf_eval/analysis_domain.py": {
+      "recorded_sha256": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+      "current_sha256": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+      "equal": true
+    }
+  },
+  "latest_document_facts": {
+    "docs/RESUME_DEVELOPMENT.md": [
+      {
+        "line": 10,
+        "text": "下一步先核已有固定工件大行程任务，经现有薄API的具体实例缺口：逐项对照原任务路径、fixed_rigid几何、初始化选项、力摘要和保存输出，再选择最小功能接续。task1.1已支持square/circle及ordered_cycle，API已透传路径/模式，摘要已有body弱式力、holding、mirror/net和双侧法向幅值和；不重复实现这些入口。此处只是接续计划，没有启动新科学计算。"
+      },
+      {
+        "line": 12,
+        "text": "任意clone/cwd均用显式repo作为相对路径基础，在项目HF环境中运行；后续在main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。保持原任务、几何、参数、网格、边界和模式明确，独立新执行须记录新范围与预算。不要把无工件两设计差异当作网格收敛、排名或夹持资格；不要把已实现fixedbody入口再写一遍。发布状态以实际Git记录确认。"
+      }
+    ],
+    "docs/NATIVE_BATCH_INTERFACE.md": [
+      {
+        "line": 12,
+        "text": "任意cwd用显式--repo统一解析输入和输出；请在项目HF环境中（与LF环境分开）运行。下方历史用法保留，但已使用的run_001输出不能再用作新执行目录；一次新的调用需新的输出和资源记录。本轮whole生产2400/2460 s、8 GiB和shared controller1800 s均已关闭，参考与显示为各自独立窗口。"
+      },
+      {
+        "line": 16,
+        "text": "下一步先核已有固定工件大行程任务，经现有薄API的具体实例缺口：逐项对照原任务路径、fixed_rigid几何、初始化选项、力摘要和保存输出，再选择最小功能接续。task1.1已支持square/circle及ordered_cycle，API已透传路径/模式，摘要已有body弱式力、holding、mirror/net和双侧法向幅值和；不重复实现这些入口。此处只是接续计划，没有启动新科学计算。"
+      }
+    ],
+    "docs/CURRENT_STATUS.md": [
+      {
+        "line": 12,
+        "text": "下一步先核已有固定工件大行程任务，经现有薄API的具体实例缺口：逐项对照原任务路径、fixed_rigid几何、初始化选项、力摘要和保存输出，再选择最小功能接续。task1.1已支持square/circle及ordered_cycle，API已透传路径/模式，摘要已有body弱式力、holding、mirror/net和双侧法向幅值和；不重复实现这些入口。此处只是接续计划，没有启动新科学计算。"
+      }
+    ],
+    "docs/PHYSICAL_FUNCTION_PROGRESS.md": [
+      {
+        "line": 21,
+        "text": "下一步先核已有固定工件大行程任务，经现有薄API的具体实例缺口：逐项对照原任务路径、fixed_rigid几何、初始化选项、力摘要和保存输出，再选择最小功能接续。task1.1已支持square/circle及ordered_cycle，API已透传路径/模式，摘要已有body弱式力、holding、mirror/net和双侧法向幅值和；不重复实现这些入口。此处只是接续计划，没有启动新科学计算。"
+      }
+    ],
+    "docs/NATIVE_EVALUATION_INTERFACE.md": []
+  },
+  "authorization_interpretation_boundary": "Read facts only: latest front entries require a new explicit scope/budget, new output and fixed task/options; they do not announce this fixed-body API numerical window. Whether existing direct human authorisation covers a proposed fresh stage belongs to root, not this read review. Historic closed-stage authorisation wording is not a new global restriction.",
+  "source_pins": {
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/task.json": "da85758a9eaf89697c5cac657f492d565cfe7c66cf9cb74139c3464e9f667e84",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/input_inventory.json": "b59ad6aef4f23161590d77c5964831b7fa7a7995918484beebbc5ad3c2b66f83",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/fixture/model/source_geometry/geometry.json": "408908d2cb947e09999c6e2b2babd92b3c6b4c8c340b130908d134ae42e73286",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/result/model/model.json": "00469390bd7091d1629f8c92277a7f8cfaf8f5047567ee64f36aaf4eed1433a1",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/result/result.json": "b49955f7e56cd714b35283c0834757ebefc947d3ca25a4f505ed44e8947db7b6",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/production_protocol.json": "f4d6d94f38bb9e27f9afbd21d97b62410e31e8c21e83fcfa90bedfa66712cbb1",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/execution_receipt.json": "3529e86aa25823b1995df889d5941fdf307d582e6b8c5a6f2c3ca165267b75b4",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/production_launch.json": "b395d2f5d48c6a7722c26e1e04e18f334eaa3bd67e672fc1095c97e17d049d12",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_protocol.json": "8af4df91d1897de525eba454f2a66ec61f03f25ee5b80f46076a41255f5d06cb",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference/summary.json": "91c3ef2720e80547e13e1c84e9bfb09d132804f16d3ab819509310e2bbd080e7",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_launch.json": "b2da6a5b2450d1267f1fcbc8b76e2f515350cbc268e65d425856e1587e7db189",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference/lifecycle.json": "b342a944af818cef92aecaf70186878fc745e52269b973cf74b540a03df81b0f",
+    "lf_data_preparation/native_interface_001/api_validation_001/run_001/saved_right4col_response.json": "6762f15477b4aacc00167e5526a20189992deac046954c2888fc6b86219a3fab",
+    "lf_data_preparation/native_interface_001/api_validation_001/run_001/execution_receipt.json": "5c4c7d953b3619248c0126f3683a21db511ee4d59501bcd2cdf631de3b7d5546",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/author/execute_shift_pose.py": "57d18bfea972c09db4c0866bdee3413088342327e32d3926be9eaa1bdbab466a",
+    "lf_data_preparation/native_interface_001/api_validation_001/author/execute_interface_tests.py": "6c453c8849183b4e9009d28b5b924dd36d11ca3af258063e1fb0ca7c632c06c1",
+    "hf_repo/src/hf_eval/native_evaluate.py": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942",
+    "hf_repo/scripts/evaluate_native.py": "04201797fa227dc18302e75817f5fb4100723732a1a97ecd71343aa49b727d64",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+    "hf_repo/src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+    "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+    "hf_repo/src/hf_eval/prescribed.py": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+    "hf_repo/src/hf_eval/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+    "hf_repo/src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+    "hf_repo/src/hf_eval/split_affine.py": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba",
+    "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+    "hf_repo/src/hf_eval/split_kernel.py": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+    "hf_repo/src/hf_eval/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+    "hf_repo/src/hf_eval/split_prescribed.py": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+    "hf_repo/src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+    "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+    "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+    "hf_repo/src/hf_eval/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+    "hf_repo/src/hf_eval/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+    "hf_repo/src/hf_eval/analysis_domain.py": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+    "docs/RESUME_DEVELOPMENT.md": "f1c79d4c1014ba3fc477a2ed4c593db6f10d5a8f18a709f60de7f540e5245042",
+    "docs/NATIVE_BATCH_INTERFACE.md": "9aad940a1baa502b42faa68f3a294adaa1681d6f96583b92b90c7e54a5018105",
+    "docs/CURRENT_STATUS.md": "63e9cc8619f83b39e08dd4ae4cac48baac46b76e36375df10e5d9a0db7485f00",
+    "docs/PHYSICAL_FUNCTION_PROGRESS.md": "d789f912728cc435987176a9fe902e355728096edfd7b00e31bfbf7868fc4c7d",
+    "docs/NATIVE_EVALUATION_INTERFACE.md": "bc5e0dc2b1935286685c346905283b2a81659347959a746c6c573604cb6cf780"
+  },
+  "activities": {
+    "HF_imports": 0,
+    "NPZ_reads": 0,
+    "constructors": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "tests": 0,
+    "geometry_observations": 0,
+    "nodal_observations": 0,
+    "renders": 0,
+    "formal_writes": 0
+  }
+}

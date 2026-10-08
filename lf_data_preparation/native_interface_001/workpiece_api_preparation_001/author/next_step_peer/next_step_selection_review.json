@@ -1,0 +1,122 @@
+{
+  "schema_version": "native-fixed-workpiece-api-next-selection-review-1.0",
+  "status": "readonly_selection_complete",
+  "blocking_findings": [],
+  "reviewed_utc": "2026-10-08T07:56:18.502404+00:00",
+  "repo_root": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC",
+  "head_at_review": "65020bdaac94c60d21ae47d4cff1badb885ad1d1",
+  "source_sha256": {
+    "docs/NATIVE_EVALUATION_INTERFACE.md": "bc5e0dc2b1935286685c346905283b2a81659347959a746c6c573604cb6cf780",
+    "docs/NATIVE_BATCH_INTERFACE.md": "9aad940a1baa502b42faa68f3a294adaa1681d6f96583b92b90c7e54a5018105",
+    "README.md": "3375b293ea41f48739c40a581c0d01dcd629b34f0023476cb458e998563aed60",
+    "hf_repo/README.md": "2a758fa85f75a420e17d1600307df1856b6b3849ce32898808f6dc50534373cd",
+    "hf_repo/scripts/evaluate_native.py": "04201797fa227dc18302e75817f5fb4100723732a1a97ecd71343aa49b727d64",
+    "hf_repo/scripts/evaluate_native_batch.py": "9dbdb761d2bad20f5d211b7262a0583515a0ad22b36c181988911ff544108dd8",
+    "hf_repo/scripts/summarize_native_mean.py": "6320328f9ff8dbcb4d6696b2d30c25557d43404470ceb966de5b28a83336e0ed",
+    "hf_repo/scripts/plot_native_mean.py": "0f6e3ae5e5c94d640f97c840a676eaf929180abd7eea5e0729e57eb0644bc7d1",
+    "hf_repo/src/hf_eval/native_evaluate.py": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942",
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/native_response.py": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/task.json": "da85758a9eaf89697c5cac657f492d565cfe7c66cf9cb74139c3464e9f667e84",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/input_inventory.json": "b59ad6aef4f23161590d77c5964831b7fa7a7995918484beebbc5ad3c2b66f83",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/result/result.json": "b49955f7e56cd714b35283c0834757ebefc947d3ca25a4f505ed44e8947db7b6",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/author/execute_shift_pose.py": "57d18bfea972c09db4c0866bdee3413088342327e32d3926be9eaa1bdbab466a",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/fixture/model/source_geometry/geometry.json": "408908d2cb947e09999c6e2b2babd92b3c6b4c8c340b130908d134ae42e73286",
+    "functional_views/right_margin4_20261007/complete_001/saved_right_margin_views.py": "761a9ffd1512233ce048be364c00a86882b69e2fb3e3fe81d7f79f74ad52b166"
+  },
+  "functional_gap": "Real fixed-body large-stroke proof through the existing thin API/CLI, plus a portable exact-parameter example; no new solver or task/CLI implementation is needed.",
+  "proposed_next_stage": "One new zero-start single-case CLI→evaluate_native→existing solver/cache writer/summary stage, distinct output and independent declared resources; no old card restart.",
+  "baseline_actual_options": {
+    "response_mode": "mechanical",
+    "tangent_mode": "chunk256",
+    "initial_guess": "port_projection",
+    "settings": {
+      "tolerance": 1e-09,
+      "constraint_tolerance": 1e-10,
+      "displacement_scale_floor": 1e-06,
+      "force_scale_floor_factor": 1e-08,
+      "max_checks": 25,
+      "armijo_c": 0.0001,
+      "max_backtracks": 12,
+      "max_bisections": 4,
+      "minimum_increment": 0.00625,
+      "time_limit_seconds": 4500.0
+    },
+    "task_target_mm": 1.2,
+    "path_kind": "ordered_cycle",
+    "targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.65,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0,
+      1.05,
+      1.1,
+      1.15,
+      1.2,
+      1.15,
+      1.1,
+      1.0,
+      0.9,
+      0.8,
+      0.75,
+      0.65,
+      0.5,
+      0.25,
+      0.0
+    ],
+    "workpiece": {
+      "kind": "fixed_rigid",
+      "shape": "square",
+      "center_mm": [
+        71.0,
+        40.0
+      ],
+      "fixed_components": [
+        0,
+        1
+      ],
+      "side_mm": 18.0
+    },
+    "counts": {
+      "cells": 3360,
+      "nodes": 3485,
+      "dofs": 6970,
+      "solid_cells": 1086,
+      "medium_cells": 2274,
+      "solid_incident_nodes": 1337,
+      "fixed_dofs": 452,
+      "free_dofs": 6518
+    }
+  },
+  "important_default_difference": {
+    "actual_minimum_increment_mm": 0.00625,
+    "implicit_first_increment_over_16_mm": 0.015625,
+    "explicit_modes_required": [
+      "mechanical",
+      "chunk256",
+      "port_projection"
+    ]
+  },
+  "observed_documentation_issue": {
+    "file": "docs/NATIVE_EVALUATION_INTERFACE.md",
+    "line": 3,
+    "fact": "Current top says .025mm real batch not executed, inconsistent with the completed batch and current linked batch guide.",
+    "minimal_change": "Short current facts/link and retain old prefix as historical bytes."
+  },
+  "view_selection": {
+    "reuse": "functional_views/right_margin4_20261007/complete_001/saved_right_margin_views.py",
+    "avoid_blind_reuse": "hf_repo/scripts/plot_native_mean.py is a no-workpiece TEST viewer; its caption and body display are not the required fixed-body interface view.",
+    "scopes": "Weak-form signed body components and holding/mirror semantics; node-window clearance vs finite geometric distance; saved Green is not pressure or HP strain qualification."
+  },
+  "qualification": "New production/reference/view result identities remain separate; old 24-state/48HP body evidence and completed no-body API/batch evidence cannot automatically qualify a new API body result.",
+  "scope": "Source/read-only saved JSON/raw hashes; zero candidate or HF imports, NPZ numerical loads, model/F/T/solver/HP, observation/rendering, new cards, or formal edits.",
+  "note_sha256": "6f478114d1469eb199591000f203af44aa1ca68d12e486528f44c3e1f7df58c6"
+}

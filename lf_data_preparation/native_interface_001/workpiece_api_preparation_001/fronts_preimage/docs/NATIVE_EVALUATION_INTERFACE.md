@@ -1,14 +1,3 @@
-# 固定工件薄API：实例准备完成，真实运行待授权
-
-整体目标仍是复用LF/N4几何与研究层，提供独立有限变形/TMC正向评价及可人工检查的力与变形输出，不含优化器。两例无工件.025 mm真实batch/各自全态参考与保存视图已完成；旧固定方体24态/48HP也已完成，两者的资格与输出保持各自身份。
-
-本次完成[固定方体可运行配置](../hf_repo/configs/native/fixed_square_cycle.json)与一次窄mock功能检查：真实batch→真实evaluate_native各一次，原24目标、10settings、mechanical/chunk256/port_projection和工件力字段正确透传；三个科学委托使用mock，本轮新F/T/求解/HP为0。特别显式保留最小增量.00625 mm，避免默认.015625 mm改变原任务路径控制。28份现有HF源与全部旧数值证据不变。
-
-[目标、选择、实际效果和旧工件图](../lf_data_preparation/native_interface_001/workpiece_api_preparation_001/RESULTS.md)中记录了本轮和后续W-API1具体卡。新真实工件CLI/API生产尚未授权或执行，不续用旧闭卡。接触/压力、匹配网格及域收敛、圆体自身任务、自由体/摩擦和HF5整体仍未完成。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
-
-<details>
-<summary>65020bd及更早阶段历史原文（原字节完整保留；旧“下一步”与未执行表述只指当时）</summary>
-
 ## 当前补充：顺序两例批量接口
 
 既有单例接口不变；新增 evaluate_native_batch 与 CLI，完整用法见[批量接口](NATIVE_BATCH_INTERFACE.md)。15项 JSON/mock 检查通过，覆盖共同物理声明、首错停止及独立身份；新两例真实0.025mm运行尚未执行。本次功能不增加数值、参考、压力、接触或HF5资格。
@@ -98,6 +87,3 @@ R为半模型输入反力；下半工件力保留signed total/material/regulariz
 [执行回执](../lf_data_preparation/native_interface_001/api_validation_001/run_001/execution_receipt.json)、[启动回执](../lf_data_preparation/native_interface_001/api_validation_001/functional_launch.json)、[阶段卡](../lf_data_preparation/native_interface_001/api_validation_001/functional_protocol.json)、[当前进度](../lf_data_preparation/native_interface_001/api_validation_001/closure_progress.json)、[源码与独审索引](../lf_data_preparation/native_interface_001/api_validation_001/author/INDEX.md)。
 
 下一步以独立的新资源窗口，通过本入口完成一次小型真实正向任务，再据实际结果接同任务比较和小批量。当前HF5整体仍未完成；压力/接触定义、匹配网格、圆体自身任务、自由工件和摩擦按物理证据逐项推进。
-
-
-</details>

@@ -1,14 +1,3 @@
-# 固定工件薄API：实例准备完成，真实运行待授权
-
-整体目标仍是复用LF/N4几何与研究层，提供独立有限变形/TMC正向评价及可人工检查的力与变形输出，不含优化器。两例无工件.025 mm真实batch/各自全态参考与保存视图已完成；旧固定方体24态/48HP也已完成，两者的资格与输出保持各自身份。
-
-本次完成[固定方体可运行配置](../hf_repo/configs/native/fixed_square_cycle.json)与一次窄mock功能检查：真实batch→真实evaluate_native各一次，原24目标、10settings、mechanical/chunk256/port_projection和工件力字段正确透传；三个科学委托使用mock，本轮新F/T/求解/HP为0。特别显式保留最小增量.00625 mm，避免默认.015625 mm改变原任务路径控制。28份现有HF源与全部旧数值证据不变。
-
-[目标、选择、实际效果和旧工件图](../lf_data_preparation/native_interface_001/workpiece_api_preparation_001/RESULTS.md)中记录了本轮和后续W-API1具体卡。新真实工件CLI/API生产尚未授权或执行，不续用旧闭卡。接触/压力、匹配网格及域收敛、圆体自身任务、自由体/摩擦和HF5整体仍未完成。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
-
-<details>
-<summary>65020bd及更早阶段历史原文（原字节完整保留；旧“下一步”与未执行表述只指当时）</summary>
-
 # 薄批量接口及真实两例结果
 
 evaluate_native_batch及CLI先预检全批共享物理声明、JSON和新输出，再每例调用现有evaluate_native一次；首非success保留原失败/partial，后续not_run。15项mock功能测试后，两例真实.025 mm路径、各4态/14F/9T/1solve已完成；逐例各8次新HP及全4态保存图也已完成。所有比较仍使用19个共同物理键和原complete/full/tangent，不静默改变任务或网格。
@@ -82,9 +71,6 @@ batch 输出目录与每例输出目录都必须新建且互不冲突。每例�
 下一次真实两例运行仍待下一阶段冻结新卡：一次连续 whole-helper2400秒 /outer2460秒、8 GiB 采样 RSS，两例共享 controller1800秒；controller 时间只覆盖求解，whole-helper应覆盖 imports、构模、缓存写出和 summary。每例完整通过后再按实际 N 另卡做 fresh2N（80/120精度）独立参考和全部保存态真实视图。canonical 是1 mm网格的uniform设计，fine 是0.5 mm网格的另一random设计；比较应称各自原生网格上的同任务分析，不作排名或网格收敛结论。
 
 已有0.025 mm旧独立单例图可作为历史物理背景：[canonical PNG](../functional_views/native_gripper_task025_20261003/native_mean_path.png)、[canonical GIF](../functional_views/native_gripper_task025_20261003/native_mean_path.gif)、[fine PNG](../functional_views/native_fine_task_025_20261003/native_mean_path.png)、[fine GIF](../functional_views/native_fine_task_025_20261003/native_mean_path.gif)。两套均为旧单例4保存态，并含标明40×倍率的变形显示；不是新 batch 图。
-
-
-</details>
 
 
 </details>

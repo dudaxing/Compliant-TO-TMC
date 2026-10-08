@@ -1,5 +1,3 @@
-固定工件薄API实例准备已完成：[配置](hf_repo/configs/native/fixed_square_cycle.json)与一次真实batch/API的mock对接检查通过，新F/T/求解/HP为0，28份HF源不变。[整体目标、实际进度及工件图](lf_data_preparation/native_interface_001/workpiece_api_preparation_001/RESULTS.md)记录了后续W-API1卡；新真实大行程生产尚未授权或执行。下方已完成的两例生产参考视图与旧固定工件力学证据保持各自身份。
-
 # 独立TMC正向评价：两例批量链路已贯通
 
 外部LF/N4普通几何进入明确物理任务后，HF完成一次正向评价并返回紧凑响应、失败原因和图链接。两例同任务小批量已完成真实生产、逐例独立参考及保存显示：各4个原目标态，各8次新HP，共16新HP；双例保存独审PASS。每例PNG/GIF覆盖全部4态，另存自有qualified_response，原生产response和index保持原字节。

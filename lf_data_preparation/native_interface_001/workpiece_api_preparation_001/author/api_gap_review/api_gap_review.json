@@ -1,0 +1,92 @@
+{
+  "schema_version": "native-workpiece-thin-api-gap-review-1.0",
+  "status": "read_only_source_review_complete",
+  "reviewed_utc": "2026-10-08T07:57:45.970360+00:00",
+  "baseline_commit": "65020bdaac94c60d21ae47d4cff1badb885ad1d1",
+  "source_sha256": {
+    "hf_repo/src/hf_eval/native_evaluate.py": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942",
+    "hf_repo/src/hf_eval/native_batch.py": "fa765e02f18511045db1b0fd9b3f37da828985c0bc21dfdedb3185b6959b90ef",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "hf_repo/src/hf_eval/native_response.py": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af",
+    "hf_repo/scripts/evaluate_native.py": "04201797fa227dc18302e75817f5fb4100723732a1a97ecd71343aa49b727d64",
+    "hf_repo/scripts/evaluate_native_batch.py": "9dbdb761d2bad20f5d211b7262a0583515a0ad22b36c181988911ff544108dd8",
+    "hf_repo/scripts/summarize_native_mean.py": "6320328f9ff8dbcb4d6696b2d30c25557d43404470ceb966de5b28a83336e0ed",
+    "lf_data_preparation/native_interface_001/batch_validation_001/example_two_case_manifest.json": "84b06d95cc5130b48027820f587385ae04ec01b6b73c63ae786fdb90448a38d5",
+    "lf_data_preparation/native_interface_001/api_validation_001/run_001/saved_right4col_response.json": "6762f15477b4aacc00167e5526a20189992deac046954c2888fc6b86219a3fab",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/author/execute_shift_pose.py": "57d18bfea972c09db4c0866bdee3413088342327e32d3926be9eaa1bdbab466a",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/input_inventory.json": "b59ad6aef4f23161590d77c5964831b7fa7a7995918484beebbc5ad3c2b66f83",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/fixture/model/source_geometry/geometry.json": "408908d2cb947e09999c6e2b2babd92b3c6b4c8c340b130908d134ae42e73286",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/task.json": "da85758a9eaf89697c5cac657f492d565cfe7c66cf9cb74139c3464e9f667e84"
+  },
+  "geometry_arrays_opaque_sha256": "5c575f3cc33107cd792be5bc6f1986639739df8c4a605784c2a9f1125ae07497",
+  "existing_capabilities": {
+    "single_API_modes": true,
+    "batch_modes": true,
+    "single_CLI_modes": true,
+    "ordered_cycle_task": true,
+    "fixed_square_workpiece": true,
+    "portable_geometry_JSON_NPZ_pair": true,
+    "portable_task_JSON": true,
+    "Python_custom_settings": "DisplacementSettings instance; current HF has no separate SolverSettings class",
+    "batch_custom_settings": "options.settings JSON reconstructs DisplacementSettings",
+    "saved_cycle_workpiece_peak_endpoint_summary": true
+  },
+  "settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 25,
+    "armijo_c": 0.0001,
+    "max_backtracks": 12,
+    "max_bisections": 4,
+    "minimum_increment": 0.00625,
+    "time_limit_seconds": 4500.0
+  },
+  "settings_field_count": 10,
+  "mandatory_core_feature_gaps": [],
+  "concrete_remaining": {
+    "task_example": "No fixed_square full-settings native batch example is currently provided; one-case manifest is enough",
+    "real_entry_validation": "Saved right4col response is a saved-summary export, not a new evaluate_native/batch solve; requires a distinct future real job to validate entry integration",
+    "CLI_convenience": "Single CLI exposes time/minimum and all modes, but no full settings-file option. For this task other defaults equal inventory; --minimum-increment .00625 --time-limit4500 is sufficient",
+    "batch_scope": "All cases share complete task JSON except task_id/geometry and physical geometry declarations; different descriptions/purpose/parameter_origin can fail equality even though these are metadata. Single-case chosen job needs no relaxation"
+  },
+  "minimum_choices": [
+    {
+      "choice": "Data-only one-case batch manifest",
+      "recommended": true,
+      "core_changes": 0,
+      "description": "Bind original portable geometry/task and all original settings; use existing batch API/CLI once into a fresh stage"
+    },
+    {
+      "choice": "Existing single CLI",
+      "core_changes": 0,
+      "description": "Explicit mechanical/chunk256/port_projection, minimum .00625, time4500; use exact declared task path"
+    }
+  ],
+  "default_pitfall": {
+    "first_step_mm": 0.25,
+    "API_CLI_default_minimum": 0.015625,
+    "required_original_minimum": 0.00625,
+    "API_CLI_default_seconds": 180,
+    "required_original_controller_seconds": 4500
+  },
+  "metadata_scope": "New response/index/invocation/transport metadata is not new physics or qualification; old closed evidence cannot qualify a new run",
+  "author_manifest": {
+    "path": "D:\\hf-native-workpiece-api-author-20261008\\api_job_candidate_001\\fixed_square_manifest.json",
+    "sha256": "01e271695b5aaf8e7e84597eb04da84ecf0dd96584055f5e12885be9bfdbba87",
+    "future_batch_directory": "lf_data_preparation/native_interface_001/workpiece_forward_001/run_001/batch"
+  },
+  "activities": {
+    "product_imports": 0,
+    "NPZ_loads": 0,
+    "solver": 0,
+    "F": 0,
+    "T": 0,
+    "HP": 0,
+    "tests": 0,
+    "formal_writes": 0
+  }
+}

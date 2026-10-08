@@ -1,0 +1,39 @@
+{
+  "schema_version": "fixed-workpiece-api-job-mock-static-peer-1.0",
+  "status": "pass_static_only",
+  "blocking_findings": [],
+  "reviewed_utc": "2026-10-08T08:07:26.371922+00:00",
+  "source_sha256": {
+    "fixed_square_manifest.json": "01e271695b5aaf8e7e84597eb04da84ecf0dd96584055f5e12885be9bfdbba87",
+    "check_fixed_square_mock.py": "e020a48c1c599f9eecec83754807fb8918453c683719a62688c149fd17cb7663"
+  },
+  "input_sha256": {
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/task.json": "da85758a9eaf89697c5cac657f492d565cfe7c66cf9cb74139c3464e9f667e84",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/fixture/model/source_geometry/geometry.json": "408908d2cb947e09999c6e2b2babd92b3c6b4c8c340b130908d134ae42e73286",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/input_inventory.json": "b59ad6aef4f23161590d77c5964831b7fa7a7995918484beebbc5ad3c2b66f83",
+    "lf_data_preparation/native_interface_001/api_validation_001/run_001/saved_right4col_response.json": "6762f15477b4aacc00167e5526a20189992deac046954c2888fc6b86219a3fab"
+  },
+  "findings": [
+    "One-case manifest binds the unchanged original 4mm ordinary geometry and task; all ten controller settings match the closed original inventory exactly.",
+    "Existing batch settings mutual-exclusion is respected: top-level time/minimum_increment are absent, so the actual settings use 4500s and 0.00625mm while API default limits are not mixed.",
+    "Mock takes required --manifest with explicit repo path resolution. Only an external test copy changes the output directory; task, geometry, label and all options remain exact.",
+    "Actual batch calls actual evaluate_native via wraps; only solve/cache writer/summary are mocked, with exact one-call assertions for all three and the actual API call. The actual JSON response writer remains used.",
+    "Old target/endpoint/body values are explicit fixtures. Fixture flags, reference, views and mechanical counters are reset; receipt records actual accepted states zero separately from old fixture states 24.",
+    "Elapsed includes imports and through-checks work, excludes final receipt/stdout as stated. This static review is not a mock runtime PASS or scientific qualification."
+  ],
+  "future_W_API1_worker_review": "Separate pending author revision; not approved by this manifest/mock review.",
+  "activities": {
+    "candidate_imports": 0,
+    "mock_runs": 0,
+    "HF_imports": 0,
+    "NPZ_loads": 0,
+    "model": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "observations": 0,
+    "render": 0,
+    "formal_writes": 0
+  }
+}

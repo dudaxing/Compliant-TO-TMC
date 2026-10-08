@@ -1,14 +1,3 @@
-# 固定工件薄API：实例准备完成，真实运行待授权
-
-整体目标仍是复用LF/N4几何与研究层，提供独立有限变形/TMC正向评价及可人工检查的力与变形输出，不含优化器。两例无工件.025 mm真实batch/各自全态参考与保存视图已完成；旧固定方体24态/48HP也已完成，两者的资格与输出保持各自身份。
-
-本次完成[固定方体可运行配置](../hf_repo/configs/native/fixed_square_cycle.json)与一次窄mock功能检查：真实batch→真实evaluate_native各一次，原24目标、10settings、mechanical/chunk256/port_projection和工件力字段正确透传；三个科学委托使用mock，本轮新F/T/求解/HP为0。特别显式保留最小增量.00625 mm，避免默认.015625 mm改变原任务路径控制。28份现有HF源与全部旧数值证据不变。
-
-[目标、选择、实际效果和旧工件图](../lf_data_preparation/native_interface_001/workpiece_api_preparation_001/RESULTS.md)中记录了本轮和后续W-API1具体卡。新真实工件CLI/API生产尚未授权或执行，不续用旧闭卡。接触/压力、匹配网格及域收敛、圆体自身任务、自由体/摩擦和HF5整体仍未完成。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
-
-<details>
-<summary>65020bd及更早阶段历史原文（原字节完整保留；旧“下一步”与未执行表述只指当时）</summary>
-
 # 恢复开发入口
 
 先读[本轮短报告](../lf_data_preparation/native_interface_001/batch_reference_v2_001/RESULTS.md)、[生产index](../lf_data_preparation/native_interface_001/batch_forward_001/run_001/batch/index.json)、[双例保存独审](../lf_data_preparation/native_interface_001/batch_reference_v2_001/closure_review/dual_saved_review.json)及[视图回执](../lf_data_preparation/native_interface_001/batch_forward_001/run_001/view_execution_receipt.json)。两例生产、V2独参和B-VIEW2均已实际PASS关闭；各4态/8次新HP/4帧，V1的HP0失败仍保留，不再补算已闭卡。
@@ -562,9 +551,6 @@ Pop-Location
 后续真实接触资格仍需围绕明确任务核查部分接触、释放/重入、模型与网格敏感性。负弱节点项不是已验证的负接触压力，材料名义应力也不是已经验证的真实接触压力；Aalpha 仅作诊断，TMC−Aalpha 不是纯接触误差。不要同时调整 alpha/gamma 追求净力吻合，也不能以三网格观察替代收敛证明。
 
 后续开发统一在 main，流程见 [DEVELOPMENT_WORKFLOW](DEVELOPMENT_WORKFLOW.md)。每次继续记录总体目标、要做与已做、理由、效果、局限、代码/输入/输出哈希和资源成本；保留失败和修正因果链。HF5、LF 优化、1800 例 HF 标签与最终排名仍未实施，不因本次仓库整合自动开始。
-
-
-</details>
 
 
 </details>

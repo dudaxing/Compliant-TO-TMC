@@ -1,0 +1,47 @@
+{
+  "schema_version": "native-workpiece-api-future-worker-v2-static-peer-1.0",
+  "status": "pass_static_only",
+  "blocking_findings": [],
+  "reviewed_utc": "2026-10-08T08:28:43.037802+00:00",
+  "source_sha256": {
+    "execute_workpiece_forward_v2.py": "13cc585224dee7567bde8982f7f25a17f7593341db1be1b82854dd80aa2c5b3e",
+    "hf_repo/scripts/evaluate_native_batch.py": "9dbdb761d2bad20f5d211b7262a0583515a0ad22b36c181988911ff544108dd8"
+  },
+  "delta_sha256": "0f09348361d63e8c74f2a5b22c9e4c1b212caf17820c433695c7bd01bd7192f8",
+  "prior_review": {
+    "path": "future_worker_peer_review.json",
+    "sha256": "0b79edec457ea3737fd4214af8e0342e7be43607ad7f5ee140b527a5f22f5d8b",
+    "worker_sha256": "76577bd72ed5b4a544069cf896ba1c97753ef36d7a82a51cdf534c1c72eeffdf",
+    "original_worker_bytes_retained": true
+  },
+  "unchanged_AST": {
+    "checkpoint": true,
+    "solve": true,
+    "accepted": true,
+    "write": true
+  },
+  "findings": [
+    "The current raw CLI is explicitly required in protocol bindings before any module loading. Original V1 source and peer report remain unchanged; V2 is a separate source candidate.",
+    "Observed native_batch.evaluate_native_batch is installed before importlib exec_module loads the existing CLI. Its from-import therefore binds the counted real batch delegate, which calls the real API with the original settings.",
+    "Exactly one CLI.main source call uses --repo, the single product manifest and a fresh batch directory. There is no direct second batch call; index is read from the fresh saved JSON after main.",
+    "sys.argv is restored in finally. On ordinary main exit1 the fresh index status/failure_case and cli_exit_code are recorded before the phase is rejected; partial result/response outputs stay intact. Parser/resource escapes preserve actual already-written outputs.",
+    "Success requires cli_exit_code0 and actual batch/API/model-builder/solve/save/summary one-call counters. CLI main executes in the supervised worker process, not an additional CLI subprocess.",
+    "Original solve/cached-gate/acceptance callback/resource checkpoint ASTs are exact. F/T observers, save/summary zero-extra checks, actualN, full path/settings/modes and unqualified producer/reference/view scope remain as independently reviewed in V1.",
+    "Whole clock includes CLI import/main/printing and final hashing; final receipt write/stdout remain covered by F3 outer child deadline. No scientific function, retry, new physical parameter or new output qualification is introduced by this delta."
+  ],
+  "runtime_conditions": "Root must freeze fresh stage and bind unchanged28 sources, exact task/geometry JSON+NPZ/config, newV2 worker and originalCLI/F3; helper4500/outer4560seconds/sampled8GiB. This source review does not execute or qualify the future phase.",
+  "execution_ready": false,
+  "activities": {
+    "candidate_or_CLI_imports": 0,
+    "mock_reruns": 0,
+    "NPZ_loads": 0,
+    "model": 0,
+    "F": 0,
+    "T": 0,
+    "solver": 0,
+    "HP": 0,
+    "observations": 0,
+    "render": 0,
+    "formal_writes": 0
+  }
+}
