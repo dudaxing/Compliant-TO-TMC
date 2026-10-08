@@ -1,0 +1,220 @@
+"""Sequential native evaluations with one declared physical task and no retries."""
+from __future__ import annotations
+
+from hashlib import sha256
+import json
+import math
+from pathlib import Path
+
+from .displacement import DisplacementSettings
+from .native_evaluate import evaluate_native, resolve_native_path
+from .native_project import _validate_task
+
+MANIFEST_SCHEMA = "hf-native-batch-manifest-1.0"
+DEFAULTS = dict(targets=None, settings=None, time_limit_seconds=180.,
+                minimum_increment=None, response_mode="complete",
+                tangent_mode="full", initial_guess="tangent")
+RESPONSE_FIELDS = ("identity", "options", "invocation", "evaluation_elapsed_scope",
+                   "qualification_scope", "path", "target_response", "requested_endpoint_response",
+                   "maximum_loading_stroke", "last_accepted", "call_counts",
+                   "timing_seconds", "evaluation_elapsed_seconds", "failure",
+                   "producer_flags", "independent_reference", "views")
+
+
+def _json_hash(value):
+    raw = json.dumps(value, sort_keys=True, separators=(",", ":"),
+                     ensure_ascii=False, allow_nan=False).encode("utf-8")
+    return sha256(raw).hexdigest()
+
+
+def _read(path):
+    raw = path.read_bytes()
+    return json.loads(raw), sha256(raw).hexdigest()
+
+
+def _artifact(path, root, digest=None):
+    relative = path.is_relative_to(root)
+    record = dict(path=path.relative_to(root).as_posix() if relative else path.as_posix(),
+                  path_scope="repo_relative" if relative else "absolute")
+    if digest is not None:
+        record["sha256"] = digest
+    return record
+
+
+def _options(raw):
+    if not isinstance(raw, dict) or raw.keys() - DEFAULTS.keys():
+        raise ValueError("options must contain only existing evaluate_native parameters")
+    options = DEFAULTS | raw
+    for key, allowed in [
+        ("response_mode", ("complete", "mechanical")),
+        ("tangent_mode", ("full", "chunk256")),
+        ("initial_guess", ("tangent", "port_projection")),
+    ]:
+        if options[key] not in allowed:
+            raise ValueError(f"Unsupported {key}: {options[key]}")
+    if options["settings"] is not None:
+        if options["minimum_increment"] is not None or options["time_limit_seconds"] != 180.:
+            raise ValueError("Pass settings or individual controller limits, not both")
+        DisplacementSettings(**options["settings"])
+    return options
+
+
+def _physical_geometry(geometry):
+    return {key: geometry[key] for key in
+            ("case_family", "thickness_mm", "model_extent", "region_tags")} | {
+        "grid": {key: geometry["grid"][key] for key in ("origin_mm", "axes", "extent_mm")}}
+
+
+def _requested_targets(task, options):
+    levels = options["targets"]
+    if levels is None:
+        levels = task.get("path", {}).get("targets_mm", [0., task["input"]["target_mm"]])
+    if (not isinstance(levels, list) or len(levels) < 2
+            or any(type(x) not in (int, float) or not math.isfinite(x) or x < 0 for x in levels)
+            or levels[0] != 0 or any(a == b for a, b in zip(levels, levels[1:]))):
+        raise ValueError("targets must start at zero and contain finite nonnegative distinct steps")
+    if "path" in task:
+        if levels != task["path"]["targets_mm"]:
+            raise ValueError("Shared targets must exactly match the declared task path")
+    elif any(a >= b for a, b in zip(levels, levels[1:])):
+        raise ValueError("A task without a cycle path requires increasing targets")
+    if options["settings"] is None:
+        increment = options["minimum_increment"]
+        DisplacementSettings(time_limit_seconds=options["time_limit_seconds"],
+                             minimum_increment=levels[1] / 16 if increment is None else increment)
+    return levels
+
+
+def _preflight(manifest, root, directory):
+    if (not isinstance(manifest, dict) or manifest.get("schema_version") != MANIFEST_SCHEMA
+            or manifest.keys() - {"schema_version", "cases", "options"}):
+        raise ValueError(f"Expected {MANIFEST_SCHEMA} with cases and optional shared options")
+    cases = manifest["cases"]
+    if not isinstance(cases, list) or not cases:
+        raise ValueError("Declare at least one case")
+    if directory.exists():
+        raise FileExistsError(f"Choose a new batch directory: {directory}")
+    options = _options(manifest.get("options", {}))
+    plans, labels, outputs = [], set(), set()
+    common_task, common_geometry = None, None
+    for case in cases:
+        if not isinstance(case, dict) or set(case) != {"label", "geometry", "task", "output"}:
+            raise ValueError("Every case needs label, geometry, task and output")
+        label = case["label"]
+        if not isinstance(label, str) or not label.strip() or label in labels:
+            raise ValueError("Case labels must be nonempty and unique")
+        labels.add(label)
+        geometry_path, task_path, output = [
+            resolve_native_path(case[key], root) for key in ("geometry", "task", "output")]
+        if output.exists() or output in outputs:
+            raise FileExistsError(f"Case output must be new and unique: {output}")
+        if directory.is_relative_to(output) or any(
+                output.is_relative_to(other) or other.is_relative_to(output) for other in outputs):
+            raise ValueError("Case outputs must not contain the batch directory or each other")
+        outputs.add(output)
+        geometry, geometry_sha = _read(geometry_path)
+        task, task_sha = _read(task_path)
+        _validate_task(task)  # Existing task validation only; no geometry arrays/model/force.
+        binding = {key: geometry[key] for key in ("geometry_id", "descriptor_sha256")}
+        if task["geometry"] != binding:
+            raise ValueError(f"{label}: task geometry identity differs from its descriptor")
+        if task["case_family"] != geometry["case_family"]:
+            raise ValueError(f"{label}: task and geometry families differ")
+        physical_task = {key: value for key, value in task.items() if key not in ("task_id", "geometry")}
+        physical_geometry = _physical_geometry(geometry)
+        if common_task is not None and (physical_task != common_task or physical_geometry != common_geometry):
+            raise ValueError(f"{label}: physical task or geometry declarations differ from the first case")
+        common_task, common_geometry = physical_task, physical_geometry
+        targets = _requested_targets(task, options)
+        plans.append(dict(label=label, geometry=geometry_path, task=task_path, output=output,
+                          task_id=task["task_id"], geometry_sha256=geometry_sha, task_sha256=task_sha,
+                          declared_paths={key: case[key] for key in ("geometry", "task", "output")},
+                          analysis_grid_declared=geometry["grid"], requested_targets_mm=targets))
+    return plans, options, common_task, common_geometry
+
+
+def _write_index(directory, index):
+    temporary = directory / "index.tmp"
+    temporary.write_text(json.dumps(index, indent=2, ensure_ascii=False, allow_nan=False) + "\n",
+                         encoding="utf-8")
+    temporary.replace(directory / "index.json")
+
+
+def _failure(error):
+    return dict(stage="batch_call", code=getattr(error, "code", None),
+                exception_class=type(error).__name__, reason=str(error))
+
+
+def _mark_unrun(index, label):
+    for row in index["cases"]:
+        if row["status"] == "not_run":
+            row["reason"] = f"Stopped after non-success at {label}"
+
+
+def evaluate_native_batch(manifest_path, output_directory, *, repo_root=None) -> dict:
+    """Preflight all cases, then call evaluate_native once per case until non-success.
+
+    Paths follow the existing API's explicit repo/cwd rule. Geometry checks compare
+    declarations only, not arrays, discretization equivalence or mesh convergence.
+    Exceptions outside the existing typed API boundary are recorded and re-raised.
+    This function has no resource manager, independent reference or ranking.
+    """
+    root = Path(repo_root or Path.cwd()).resolve()
+    manifest_file = resolve_native_path(manifest_path, root)
+    directory = resolve_native_path(output_directory, root)
+    manifest, manifest_sha = _read(manifest_file)
+    plans, options, task_contract, geometry_contract = _preflight(manifest, root, directory)
+    index = dict(
+        schema_version="hf-native-batch-index-1.0", status="running",
+        manifest=_artifact(manifest_file, root, manifest_sha),
+        path_base=dict(path=root.as_posix(), source="explicit_repo" if repo_root is not None else "caller_cwd"),
+        directory=_artifact(directory, root), options=options, stop_on_non_success=True,
+        shared_task_contract=task_contract, shared_task_contract_sha256=_json_hash(task_contract),
+        shared_geometry_declarations=geometry_contract,
+        shared_geometry_declarations_sha256=_json_hash(geometry_contract),
+        preflight_scope="Task and geometry JSON declarations only; no NPZ/model evaluation or mesh qualification",
+        cases=[dict(label=p["label"], status="not_run", task_id=p["task_id"],
+                    geometry=_artifact(p["geometry"], root, p["geometry_sha256"]),
+                    task=_artifact(p["task"], root, p["task_sha256"]),
+                    output=_artifact(p["output"], root), declared_paths=p["declared_paths"],
+                    analysis_grid_declared=p["analysis_grid_declared"],
+                    requested_targets_mm=p["requested_targets_mm"], response=None,
+                    reason="Not started", **dict.fromkeys(RESPONSE_FIELDS)) for p in plans],
+        failure_case=None, HF5_qualified=False, ranking_qualified=False,
+        qualification_scope="Batch transport only; each response retains its own independent reference, views and flags")
+    call_options = dict(options)
+    if options["settings"] is not None:
+        call_options["settings"] = DisplacementSettings(**options["settings"])
+    directory.mkdir(parents=True)
+    _write_index(directory, index)
+    for plan, entry in zip(plans, index["cases"]):
+        entry.update(status="running", reason=None)
+        _write_index(directory, index)
+        try:
+            for key in ("geometry", "task"):
+                if sha256(plan[key].read_bytes()).hexdigest() != plan[key + "_sha256"]:
+                    raise ValueError(f"{entry['label']}: {key} changed after preflight")
+            response = evaluate_native(plan["geometry"], plan["task"], plan["output"],
+                                       repo_root=root, **call_options)
+            response_file = plan["output"] / "response.json"
+            entry.update(status=response["status"],
+                         **{key: response.get(key) for key in RESPONSE_FIELDS})
+            entry["response"] = _artifact(response_file, root, sha256(response_file.read_bytes()).hexdigest())
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            entry.update(status="error", failure=_failure(error))
+        except BaseException as error:
+            # Record an escaping interrupt/resource error, then preserve its propagation.
+            entry.update(status="error", failure=_failure(error))
+            index.update(status="interrupted", failure_case=entry["label"])
+            _mark_unrun(index, entry["label"])
+            raise
+        finally:
+            _write_index(directory, index)
+        if entry["status"] != "success":
+            index.update(status="stopped", failure_case=entry["label"])
+            _mark_unrun(index, entry["label"])
+            break
+    else:
+        index["status"] = "success"
+    _write_index(directory, index)
+    return index

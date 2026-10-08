@@ -1,3 +1,12 @@
+# HF 正向评价：两例批量链路已完成
+
+薄单例与批量 API/CLI、两例真实生产、各自全态独立参考和实际保存图已经接通。本轮两例各4态／8次新HP／4帧，另存自己的 qualified 响应；原生产响应、原力学源与失败记录保持完整。
+
+当前状态以[开发进度](../docs/CURRENT_STATUS.md)、[参考结果](../lf_data_preparation/native_interface_001/batch_reference_v2_001/RESULTS.md)与[实际图和响应](../lf_data_preparation/native_interface_001/batch_saved_view_v2_001/RESULTS.md)为准。固定方体大行程已有独立历史证据；本轮无工件，两设计不能用于网格收敛或排名，HF5整体、一般接触/连续压力及自由体/摩擦仍未完成。
+
+<details>
+<summary>Historical records; full original bytes preserved.</summary>
+
 ## 当前：真实薄评价入口已完成小型正向任务
 
 HF复用LF/N4几何与研究成果，提供独立正向力学评价，不含优化器。新入口从无关工作目录、显式repo完成无工件夹持器0→0.001mm（1µm）任务：2个真实接受态、4次新HP及保存图通过；真实构模、求解、缓存保存和响应生成各一次，默认complete/full/tangent与25个既有核心文件保持。前一阶段21项JSON/模拟集成是首次纯功能验证，本次才验证真实调用流程。
@@ -283,3 +292,5 @@ may leave only checkpoints and the external resource receipt.
 
 See `docs/HF2_IMPLEMENTATION.md` for the new interface and `docs/HF2_VALIDATION.md`
 for validation scope and evidence. The original HF-1 release ZIP remains unchanged.
+
+</details>
