@@ -1,0 +1,103 @@
+{
+  "schema_version": "same-design-mesh-candidate-source-review-1.0",
+  "status": "pass_source_only_candidate_not_executed",
+  "review_date_local": "2026-10-09",
+  "reviewer": "/root/nested_refinement_source_review",
+  "reviewed_candidates": [
+    {
+      "path": "hf_repo/src/hf_eval/nested_geometry.py",
+      "sha256": "583edc4a496cee91f47f4b199716e736ac5efd639823cc637cb0b739de54b1eb",
+      "bytes": 3275,
+      "lines": 60,
+      "AST_parse": "pass_source_only",
+      "direct_entry_counts": {
+        "write_nested_geometry_2x2": 0,
+        "build_native_project": 0,
+        "write_native_project": 0,
+        "solve_native_mean": 0,
+        "evaluate_native": 0,
+        "batch_response": 0,
+        "assemble": 0,
+        "jit": 0
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_mesh_preparation_001/author/prepare_nested_model.py",
+      "sha256": "d4699e42c2bdf6dcde6b836f56f59836c361ec953c6501c3a1a3b4a302cae6e7",
+      "bytes": 15676,
+      "lines": 227,
+      "AST_parse": "pass_source_only",
+      "direct_entry_counts": {
+        "write_nested_geometry_2x2": 1,
+        "build_native_project": 1,
+        "write_native_project": 1,
+        "solve_native_mean": 0,
+        "evaluate_native": 0,
+        "batch_response": 0,
+        "assemble": 0,
+        "jit": 0
+      }
+    }
+  ],
+  "actual_source_dependencies_checked": [
+    "hf_repo/src/hf_eval/data.py",
+    "hf_repo/src/hf_eval/regions.py",
+    "hf_repo/src/hf_eval/native_project.py",
+    "hf_repo/src/hf_eval/project.py",
+    "hf_repo/src/hf_eval/tmc.py",
+    "hf_repo/src/hf_eval/tmc_kernel.py"
+  ],
+  "parent_JSON_checked": "lf_data_preparation/native_interface_001/workpiece_forward_001/run_001/fixed_square/model/model.json",
+  "source_schema_review_sha256": "fd367a9be863d92cbb51d03a8e674cab4c3d99596eed380c8cd7a8de8903de2a",
+  "resolutions": [
+    {
+      "concern": "Reference-operator scale and kr evidence",
+      "resolved_at": "worker lines 145-150",
+      "judgment": "Saved parent operators have actual keys grad/hessian/weights/points and kr; factors 2/4/.25/1 agree with actual operators(hx,hy,thickness) source."
+    },
+    {
+      "concern": "Actual lattice, local node order and coarse embedding",
+      "resolved_at": "worker lines 109-114 and 147",
+      "judgment": "Checks use physical coordinate increments and embedded even-even fine nodes, separately from model counts."
+    },
+    {
+      "concern": "Independent square cell selection",
+      "resolved_at": "worker lines 115-120",
+      "judgment": "Node closed-box and cell-centre strict-box select the aligned square [62,80]x[31,40]. Predictions 648 cells/703 nodes/1406 body DOFs are consistent; no numerical realization claimed."
+    },
+    {
+      "concern": "Actual support/symmetry/background ownership and merged fixed set",
+      "resolved_at": "worker lines 126-134",
+      "judgment": "Support uses incident nodes x=0,y<=8; entity uses incident top x<=60; task background covers all top x=0..84. Fixed union correctly includes ux/uy support and workpiece plus all top uy; entity subset is already contained in background."
+    },
+    {
+      "concern": "Saved archive integrity",
+      "resolved_at": "worker line 162 and 167-171",
+      "judgment": "Actual archive hash checked before per-field dtype/shape/raw hash. No second model construction."
+    },
+    {
+      "concern": "Undeformed visual boundary labels",
+      "resolved_at": "worker lines 182-188",
+      "judgment": "Ports, source support/entity symmetry and full applied background marked. Fine output nodes displayed. This is plot source review only; pixels not generated or inspected."
+    }
+  ],
+  "API_and_key_review": {
+    "Project_attributes": "model,region_metadata,material,qualification,bin,bout,gamma,task_hash exist in actual source",
+    "saved_parent_keys": "material,qualification,source_geometry,task,region_metadata.ports plus arrays.fields coordinates/lam/mu/gamma/grad/hessian/weights/points/kr exist in supplied parent JSON",
+    "workpiece_keys": "cells,nodes,dofs and definition match _workpiece_region",
+    "affine_means": "u_x=1+2x+3y, u_y=-2+4x-y. Normalized affine line integral is value at segment midpoint dotted with reference direction. Input/output half-mm quadrature values use exactly representable dyadic weights. Actual check still awaits execution."
+  },
+  "physical_scope": {
+    "writer": "Four uint8 authority masks are replicated 2x2 using row then column repeat; tags, physical extent/thickness/model_extent remain deep copied. Existing LF and padding provenance are retained. New ordinary geometry identity is produced by existing writer.",
+    "task": "Only task_id/geometry and descriptive metadata changed; all remaining physical task fields compared exactly. Existing policy native explicitly selects supplied HF-derived package. Existing native_project/native_map admission unchanged.",
+    "grid_owner": "whole_grid_is_LF_native=false; model native_geometry_preserved denotes supplied derived package unchanged during construction, not original parent grid identity.",
+    "entry_scope": "one writer, one native model build, one save, one PNG in future bounded execution; source call graph invokes no force/tangent/assembly/solver/HP/JIT/LF response entry.",
+    "qualifications": "No prior HP/reference transfer, new response or mechanical/contact/clamp/pressure/HF5 qualification. Counts and checks remain predictions until authorized execution."
+  },
+  "limitations": [
+    "Resource wrapper/protocol/card final binding and timer contract reviewed separately by root/another agent",
+    "No AST parsing of dependencies or byte scan beyond reviewed candidate source required",
+    "No HF/NumPy/JAX import; no NPZ decode; no arrays or models constructed; no renderer; no numerical tests; no repository edits"
+  ],
+  "unresolved_required_corrections": []
+}

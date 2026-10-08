@@ -1,0 +1,115 @@
+{
+  "schema_version": "new_api_old_right4_reference_static_scope_review-1.0",
+  "created_utc": "2026-10-08T15:01:12.698873+00:00",
+  "status": "pass_static_scope_only_pending_root_byte_identity",
+  "role": "Independent scope review; saved archive byte hashing is performed separately by root.",
+  "inspected_sources": {
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_author/core_audit_mechanical.py": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+    "hf_repo/scripts/audit_native_workpiece_cycle.py": "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_author/audit_enlarged_square.py": "82c650d57ca5e2ccb07791b28bf2f9be743d025430d70a276f0cc9e7cba68028",
+    "hf_repo/src/hf_eval/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+    "hf_repo/scripts/hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+    "hf_repo/scripts/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55"
+  },
+  "checks": {
+    "inherited_methods_not_overridden": true,
+    "original_gates_unchanged": true,
+    "all_24_reference_row_state_targets_legs_match_new_records": true,
+    "old_reference_artifact_links_exist": 264,
+    "old_reference_saved_complete_48_calls": true
+  },
+  "mathematical_dependency_closure": {
+    "constitutive_reference_fixture": "grad, hessian, weights, kr, lam, mu; element-local artificial connectivity arange(4*ne), F0 zero, fixed_dofs empty; lift, fluctuation and direction gathered through real edofs; raw fixture additionally archives real connectivity/fixed/state/direction.",
+    "assembly_and_constraints": "edofs, connectivity, fixed_dofs, free_dofs; all 3 local and global forces, all 3 saved element tangent tensors, full saved unsymmetrized CSC coefficients.",
+    "equilibrium_and_KKT": "b_in, b_out, k_out, force_scale_per_length; row R_input, d and target_origin; q_in/q_out/constraint and force-scale/report diagnostics; fixed compatible v=b_in/max(abs(b_in)), fixed entries zero; deltaR=0.",
+    "force_cache_fields": [
+      "element_total_force",
+      "element_material_force",
+      "element_regularization_force",
+      "global_total_force",
+      "global_material_force",
+      "global_regularization_force",
+      "J",
+      "Hu",
+      "F",
+      "stress_first_piola",
+      "stress_second_piola",
+      "input_force",
+      "support_reaction",
+      "spring_force_on_structure",
+      "force_residual",
+      "global_force_balance"
+    ],
+    "tangent_cache_fields": [
+      "total_tangent",
+      "material_tangent",
+      "regularization_tangent"
+    ],
+    "signed_workpiece_projections": "workpiece_dofs plus disjoint metadata support/entity_symmetry/background_symmetry groups, workpiece_background_symmetry_overlap_dofs; force on body is negative summed weak-form internal force. Lower Fy, upper [Fx,-Fy], full net [2Fx,0], two-sided normal magnitude sum 2abs(Fy); preserve original total/material/regularization scale rule.",
+    "fixed_body_field_sanity": "workpiece_cells/dofs, dummy body F=I/J=1/Hu=0, undeformed split state and zero saved interior force/stress-first-Piola; these sanity fields do not constitute HP stress qualification.",
+    "direction_archive": {
+      "file": "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/direction.npz",
+      "file_sha256": "3f21f792b9b11e563106a9d07e87519908ff188f2d4ac30601142633efbdb8d2",
+      "direction_array_sha256": "d82a233a97b6255dbc8947a5ff3dff77bca8945b81f9ed1c2ce80ebebb46d645",
+      "fields": [
+        "direction"
+      ],
+      "shape": [
+        6970
+      ],
+      "multiplier_direction": 0.0
+    },
+    "source_provenance": "Original source-freeze and old reference contract/summary bind production and reference methods. Current wrapper adds changed CLI/API orchestration; exact saved physical artifacts can share existing mathematical evidence, but orchestration timing/counts/terminal process evidence cannot be inherited."
+  },
+  "original_gates": {
+    "production_residual": "1e-9",
+    "independent_residual": "1e-8",
+    "force_evaluation": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11",
+    "hp80_hp120": "1e-40",
+    "total_force": "1e-11",
+    "material_force": "1e-9",
+    "regularization_force": "1e-9",
+    "total_tangent": "1e-10",
+    "material_tangent": "1e-9",
+    "regularization_tangent": "1e-9",
+    "augmented_force_tangent": "1e-10",
+    "augmented_constraint_tangent": "1e-10"
+  },
+  "qualification_reuse_conditions": [
+    "Root must prove all model/state/force/tangent/CSC archive bytes and associated field metadata are identical over the exact 24 ordered states, including row multiplier, targets and constraints.",
+    "Root must bind old direction/reference fixture/artifact hashes to old successful summary and preserved source methods/physics, not rely on shared state IDs alone.",
+    "Use a new separate evidence-identity/citation record. Preserve original old reference and new result/response bytes, status flags, call counts and no-new-HP truth.",
+    "If complete mathematical closure passes, another 48 identical HP evaluations add no numerical coverage and can be omitted; new states/models/materials/directions are outside the reuse decision."
+  ],
+  "qualifications_legitimately_unchanged": [
+    "All original force/equilibrium/constraint and signed workpiece projection gates for these exact saved states.",
+    "Single-direction total/material/regularization HP tangent action, saved CSC action and deltaR=0 KKT action.",
+    "All saved CSC coefficients independently checked against assembly of all element tensors; this is assembly coverage, not all-column HP derivative coverage."
+  ],
+  "qualifications_not_granted": [
+    "Pressure, certified contact/clamping, stress-HP, candidate energy, all tangent columns, rejected trial states, H2/H3/HF5 or final labels/ranking.",
+    "New CLI/API runtime provenance, new model/states, new directions and future fine meshes cannot borrow prior execution."
+  ],
+  "next_exact_refinement_dependency": {
+    "current_entry": "native_project._validate_task only accepts analysis_grid.policy=native; native_map is explicitly unchanged native cell/node mapping. analysis_domain currently only adds passive-void padding. No same-design nested refinement entry exists.",
+    "minimal_code": "A small explicit HF-derived geometry operation duplicating each coarse mask cell into 2x2 fine cells (no thresholding, smoothing, morphological changes or LF optimization), with parent hashes and precise derivation provenance; retain original physical grid extent/origin/thickness/region tags and make derived grid ownership explicit. Do not claim LF-native grid preservation for the derivative.",
+    "physical_invariants": "Same 84x40 mm domain, all physical staircase boundaries, square center(71,40)/side18, gamma=alpha1e-6/Lr80/E1/nu0.3/thickness20, support/background segments, physical 2mm port segments, original 24 target path; reconstruct normalized arclength port vectors on fine mesh rather than retaining 3-node weights.",
+    "expected_geometry_counts_only": "Fine grid 80x168 cells, 13440 elements, 13689 nodes, 27378 DOFs; square lower-half overlay 648 cells/703 nodes/1406 DOFs if exact aligned mapping; applied merged fixed count must be checked from construction.",
+    "port_weights": "On 0.5mm nodes across same 2mm segment, five normalized trapezoid weights become [0.125,0.25,0.25,0.25,0.125]. Same continuum averaging functional, different nodal vector.",
+    "minimal_pre_solve_evidence": "Exact blockwise four-mask coverage/area and physical region endpoints, derived provenance/ID, no solid workpiece overlap, physical constraints/port integration, fine model field shapes/quadrature/material/reg physical parameters, memory/time proposal based on fine actual model. Only then prepare one fine-cycle execution card.",
+    "comparison": "Match original-target loading/unloading legs even if fine solver inserts bisections. Compare body Fy/material/reg/R/qout, continuous boundary/point-segment tip distances, min J/Hu and unloading recovery. Two meshes show sensitivity, not established asymptotic convergence."
+  },
+  "no_new_science": {
+    "NPZ_decodes": 0,
+    "HF_imports": 0,
+    "force_calls": 0,
+    "tangent_calls": 0,
+    "HP_calls": 0,
+    "solver_calls": 0,
+    "renders": 0,
+    "repo_edits": 0
+  }
+}
