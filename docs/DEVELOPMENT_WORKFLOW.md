@@ -33,10 +33,12 @@ git log --oneline --left-right main...origin/main
 
 ```text
 git add <本轮预期文件>
-python tools/build_delivery_manifest.py --worktree .
+python tools/build_repository_manifest.py --stage <本轮交付阶段> --previous-delivery-commit <前次实际发布完整SHA>
 git add handoff/repository_manifest.json
 python tools/handoff.py verify
 ```
+
+先将命令中的两个占位符替换为本轮阶段名称和前次实际发布提交的完整 SHA，再执行。2026-10-08 核查发现，旧命令使用 `build_delivery_manifest.py` 的默认值，会把交付阶段和前次提交重写为 2026-09-27 的记录；现改用要求显式交付参数并保留现有科学基线标头的工具。此次仅修正文档，不改变科学源码、数值资格或 W-API1 的待授权状态。
 
 生成工具只读取 Git 已跟踪的路径，新文件须先暂存；恢复到工作树但未受 Git 管理的大证据不会被意外纳入轻量清单。生成后再改动任何受管文件，应重新生成并校验，不能沿用修改前的清单。
 
