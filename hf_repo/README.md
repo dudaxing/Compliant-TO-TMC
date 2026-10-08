@@ -1,10 +1,12 @@
-# 固定工件薄API：实例准备完成，真实运行待授权
+# 固定工件真实 CLI/API：完整加载—卸载已完成
 
-整体目标仍是复用LF/N4几何与研究层，提供独立有限变形/TMC正向评价及可人工检查的力与变形输出，不含优化器。两例无工件.025 mm真实batch/各自全态参考与保存视图已完成；旧固定方体24态/48HP也已完成，两者的资格与输出保持各自身份。
+2026-10-08，经用户明确批准，W-API1 唯一一次真实执行成功闭卡：24 原目标、24 接受态，1.2 mm 加载峰后卸载回 0 mm；CLI/batch/API/构模/求解/保存/摘要各一次，保存及摘要新增 F/T 为0。28 原 HF 源及36绑定不变。
 
-本次完成[固定方体可运行配置](configs/native/fixed_square_cycle.json)与一次窄mock功能检查：真实batch→真实evaluate_native各一次，原24目标、10settings、mechanical/chunk256/port_projection和工件力字段正确透传；三个科学委托使用mock，本轮新F/T/求解/HP为0。特别显式保留最小增量.00625 mm，避免默认.015625 mm改变原任务路径控制。28份现有HF源与全部旧数值证据不变。
+峰值输入反力0.4072527715 N，加权输出位移1.0088461324 mm，下半工件 signed Fy=0.1193619515 N（材料0.1178513816、正则0.0015105699）；两侧法向幅值和0.2387239030 N，与 full mirrored net (-0.0048162478,0) N 分开。回零输入反力约1.208e-24 N。实际 helper2170.0202 s / outer2171.3780 s，原缓存生产门通过。
 
-[目标、选择、实际效果和旧工件图](../lf_data_preparation/native_interface_001/workpiece_api_preparation_001/RESULTS.md)中记录了本轮和后续W-API1具体卡。新真实工件CLI/API生产尚未授权或执行，不续用旧闭卡。接触/压力、匹配网格及域收敛、圆体自身任务、自由体/摩擦和HF5整体仍未完成。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
+[目标、实现、理由、实际效果和限制](../lf_data_preparation/native_interface_001/workpiece_forward_001/RESULTS.md)及[新真实 response](../lf_data_preparation/native_interface_001/workpiece_forward_001/run_001/fixed_square/response.json)是本次恢复入口。新 HP/观察/渲染均0，reference/views未提供，producer flags仍false；旧固定工件48HP和旧图资格不转移。下一步优先复用保存态 viewer 展示新 API 数据，另立新范围/资源；W-API1已关闭不重跑。
+
+整体目标仍是供外部 LF/N4 研究层使用的独立有限变形/TMC正向评估，不包含优化。接触/压力资格、匹配网格与域收敛、圆体自身任务、自由体/摩擦、正式标签及HF5整体仍未完成。main开发，origin保持 https://github.com/dudaxing/Compliant-TO-TMC.git。
 
 <details>
 <summary>65020bd及更早阶段历史原文（原字节完整保留；旧“下一步”与未执行表述只指当时）</summary>
