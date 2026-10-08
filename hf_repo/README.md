@@ -1,3 +1,16 @@
+# 固定工件真实 API：24态完整路径与可视化已完成
+
+2026-10-08，W-API1完整加载—卸载已完成；明确批准的W-VIEW1唯一一次保存观察/绘图也成功闭卡，几何24/24、节点力24/24，3 PNG与全24帧GIF可人工检查。原力学源、输入/材料/端口/约束保持，W-VIEW1新增F/T/求解/HP均0；原窗口不续用。
+
+峰值d=1.2 mm：尖端到底面距离0.0057303162 mm，输入反力0.4072527715 N，下半工件Fy=0.1193619515 N，两侧法向幅值和0.2387239030 N；卸载后回到初始形态，力接近零。图为真实×1与显示镜像；力箭头为工件节点弱式力。J色图为单元平均，与最小积分点J分开。
+
+[目标、实现、依据、效果与限制](../functional_views/native_api_workpiece_20261008/complete_001/RESULTS.md) · [结构/尖端与力曲线](../functional_views/native_api_workpiece_20261008/complete_001/run_001/view/comparison.png) · [全24态动画](../functional_views/native_api_workpiece_20261008/complete_001/run_001/view/fixed_square/actual_states.gif) · [含图摘要响应](../functional_views/native_api_workpiece_20261008/complete_001/run_001/response_with_views.json)。新views=matched仅表示保存观察/图件匹配，独参仍未提供，producer flags仍false；原API生产JSON未改。
+
+整体目标仍为独立有限变形/TMC正向评估，HF不包含优化。新producer独参、接触压力/有效夹持、匹配网格/域收敛、圆体自身任务、自由体/摩擦、正式标签/排名及HF5整体仍未完成。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
+
+<details>
+<summary>W-API1原生产闭卡记录（当时新HP/观察/渲染均0）</summary>
+
 # 固定工件真实 CLI/API：完整加载—卸载已完成
 
 2026-10-08，经用户明确批准，W-API1 唯一一次真实执行成功闭卡：24 原目标、24 接受态，1.2 mm 加载峰后卸载回 0 mm；CLI/batch/API/构模/求解/保存/摘要各一次，保存及摘要新增 F/T 为0。28 原 HF 源及36绑定不变。
@@ -7,6 +20,9 @@
 [目标、实现、理由、实际效果和限制](../lf_data_preparation/native_interface_001/workpiece_forward_001/RESULTS.md)及[新真实 response](../lf_data_preparation/native_interface_001/workpiece_forward_001/run_001/fixed_square/response.json)是本次恢复入口。新 HP/观察/渲染均0，reference/views未提供，producer flags仍false；旧固定工件48HP和旧图资格不转移。下一步优先复用保存态 viewer 展示新 API 数据，另立新范围/资源；W-API1已关闭不重跑。
 
 整体目标仍是供外部 LF/N4 研究层使用的独立有限变形/TMC正向评估，不包含优化。接触/压力资格、匹配网格与域收敛、圆体自身任务、自由体/摩擦、正式标签及HF5整体仍未完成。main开发，origin保持 https://github.com/dudaxing/Compliant-TO-TMC.git。
+
+
+</details>
 
 <details>
 <summary>65020bd及更早阶段历史原文（原字节完整保留；旧“下一步”与未执行表述只指当时）</summary>
