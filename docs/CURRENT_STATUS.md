@@ -1,3 +1,20 @@
+# 当前接续：M-VIEW1细网格24态显示已通过（2026-10-09）
+
+明确批准后唯一一次PASS闭卡：24几何+24节点力、24帧GIF、4PNG、24原目标/14量粗细CSV/JSON。helper39.70 s/outer40.43 s，采样进程树峰值474,722,304 B（约453 MiB），96绑定保持；新求解/F/T/HP/JIT/LF0（纯保存态源码依据，非动态hook监测），无修复重跑/延期/force。
+
+本次显示的是M-CYCLE1同设计h0.5完整0→1.20→0 mm路径。峰值钳尖(79.701652,30.998856) mm、到底面有限线段距离0.00114436 mm，输入反力0.378706 N、平均输出位移1.016699 mm、下半工件Fy0.123179 N，两侧法向幅值和0.246359 N；完整镜像净力(−0.00175203,0) N。卸载末态钳尖回到(80,30) mm、底面距离1 mm，原力/位移微小残量保留。
+
+[整体目标、工作、理由、实际效果、24态及解释](../functional_views/native_nested_cycle_20261009/complete_001/RESULTS.md) · [24帧实际变形与红色节点力箭头](../functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/actual_states.gif) · [六量粗细曲线](../functional_views/native_nested_cycle_20261009/complete_001/run_001/view/mesh_response_comparison.png) · [峰值局部场](../functional_views/native_nested_cycle_20261009/complete_001/run_001/view/peak_fields.png) · [实际回执](../functional_views/native_nested_cycle_20261009/complete_001/run_001/view/phase_view.json) · [独立终态审阅](../functional_views/native_nested_cycle_20261009/complete_001/author/terminal_review.json)。全部生产NPZ与图件已保存，恢复/查看不需重求解。
+
+同设计h1→h0.5峰值R−7.01%、工件Fy+3.20%、介质minJ−28.50%、Hu最大分量+73.08%，只能说明两网格敏感性。min积分点J2.33967e−5不同于图中单元均值；Hu分量不同于Frobenius范数；平均输出位移不同于尖端距离；ON-body力不同于保持反力或压力。全部region-edge overlap标志false，但包含/自身重叠没有检查。原细网格reference/views仍not_provided、producer flags仍false；新raw view manifest提供匹配诊断，不能转移粗网格旧HP资格或改写原response。
+
+最近下一步完成细网格保存态的独立数学参考适配，按原严格门区分数值误差和离散敏感性，再据结果推进局部网格/介质研究。尚未运行新参考；不立即重跑四小时完整路径。正式细网格HP、压力/有效夹持、网格/域收敛、圆体自身任务、自由体/摩擦、正式批量标签/排名、HF5整体仍未完成。整体为独立HF正向评估，不含优化/dmftd；继续main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
+
+[M-REF1具体卡：完整24态自己的48次HP参考，源码/协议已独立静审，待新批准](../lf_data_preparation/native_interface_001/nested_reference_001/M-REF1_CARD.md)；一次helper4500 s/outer4560 s、采样8 GiB，原数学与严格门保持，无新生产路径，首错即停、无修复重跑/延期/force。[下一步只读范围与成本依据](../functional_views/native_nested_cycle_20261009/complete_001/author/fine_reference_scope.json)。本轮M-VIEW1窗口已关闭，新参考未授权、未执行。
+
+<details>
+<summary>M-CYCLE1及更早接续记录（历史原文，“下一步”只指当时）</summary>
+
 # 当前接续：M-CYCLE1细网格完整循环已通过（2026-10-09）
 
 明确批准后唯一一次PASS闭卡：同设计h0.5、24原目标/24接受态、无二分态；加载1.20 mm再卸载0。44绑定保持，13,440单元/13,689节点/27,378 DOF与M-PREP1模型身份匹配。helper11461.54 s/outer11463.22 s（191.05 min），原生产缓存门通过；采样RSS约1.76 GiB，窗口已关闭，无修复重跑/延期/force。
@@ -521,6 +538,9 @@ CPU原237条和科学30条事件完整；严格同步内原行157–235全部79�
 公开 v3 数值复读的外部来源例外仍严格限于原搬迁补充声明的两份 MATLAB 编号源码及其精确哈希，不能扩大。公开数值复读既不伪装完整来源复核，也不授予生产执行资格。
 
 每次后续工作记录：整体目标、拟做事项、实际改动、理由、实际计算/测试、效果、失败和局限、代码/输入/输出身份、资源成本及下一步。当前状态入口可更新；被来源清单绑定的历史报告和证据不得为消除表面矛盾而改字节。
+
+
+</details>
 
 
 </details>
