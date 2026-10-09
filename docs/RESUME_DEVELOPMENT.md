@@ -1,3 +1,16 @@
+# 当前接续：M-LINK1关联入口已通过（2026-10-09）
+
+整体目标仍是独立HF有限变形／TMC前向评估，提供可核对的反力、工件受力、加载／卸载变形及可恢复开发资料。用户明确批准后的唯一M-LINK1实际执行PASS闭卡：保存摘要1／1、response写1、索引写1，35绑定保持；helper 0.2004934000 s／outer 0.3920396001 s，采样自身 RSS 26537984 B／tree RSS 30978048 B，exit0／无stop。helper资源是收据构造／写入前快照，outer为完整launcher终态。独立终态审阅PASS；新增科学F/T/HP/求解/模型/渲染为0（固定调用路径依据、无动态hooks），新增保存摘要API为1。
+
+同一细网格24态与已有48HP参考、原3PNG＋GIF及原phase第四PNG／四表已关联到新增response与仓库相对路径轻索引。原生产response及false flags、raw view／phase和原图件保持历史字节。峰值R=0.3787064524N、q_out=1.016699361mm、下半工件Fy=0.1231794016N；卸载R=-2.746498125e-26N。原生产F443／T201等记录是历史，不是本次API运行成本。
+
+最近仅准备已有nodes.csv的stdlib CSV／JSON互斥载荷账本：保留total/material/Hu Fx/Fy原六列，将physical_only细分bottom/left/right侧内点与physical_corner，另保留physical_and_cut交点、cut内点、body内部；每节点一次，角点／交点向量不分摊。先观察缓存选定态，再按实际结果推进all24分类曲线；本轮未分组／求和新账本或执行未来卡。外邻medium材料P trace诊断留待账本结果之后，不纳最近阶段。材料P·N不能当Hu总压力；含材料＋Hu、物理表面／对称切面／角点的总边界力仍需单独定义。压力／有效夹持、网格／域收敛、全列切线及HF5仍未完成。
+
+[目标／实现／物理数值／原图与边界](../lf_data_preparation/native_interface_001/nested_link_001/RESULTS.md) · [新增关联response](../lf_data_preparation/native_interface_001/nested_link_001/run_001/linked_response.json) · [轻交付索引](../lf_data_preparation/native_interface_001/nested_link_001/run_001/delivery_index.json) · [下一物理功能只读规划](../lf_data_preparation/native_interface_001/nested_link_001/author/physical_next_scope.json) · [原24态×1变形GIF](../functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/actual_states.gif)
+
+<details>
+<summary>本次更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-REF2细网格完整24态独立参考已通过（2026-10-09）
 
 明确批准后的唯一新窗口PASS闭卡：48／48新HP80／120、24机械／24工件态、原15门、197绑定保持；helper2067.2045 s／outer2068.5295 s，采样自身RSS1390268416 B／tree1398767616 B。M-REF1历史失败未重跑。独立最大残差7.38799638e-10；全局总力归一化误差最大1.50051688e-15，声明PORT总切线action最大1.00623029e-16。全部13440单元／27378DOF已覆盖；完整CSC组装核对不赋予全部切线列的HP资格。
@@ -654,6 +667,9 @@ Pop-Location
 后续真实接触资格仍需围绕明确任务核查部分接触、释放/重入、模型与网格敏感性。负弱节点项不是已验证的负接触压力，材料名义应力也不是已经验证的真实接触压力；Aalpha 仅作诊断，TMC−Aalpha 不是纯接触误差。不要同时调整 alpha/gamma 追求净力吻合，也不能以三网格观察替代收敛证明。
 
 后续开发统一在 main，流程见 [DEVELOPMENT_WORKFLOW](DEVELOPMENT_WORKFLOW.md)。每次继续记录总体目标、要做与已做、理由、效果、局限、代码/输入/输出哈希和资源成本；保留失败和修正因果链。HF5、LF 优化、1800 例 HF 标签与最终排名仍未实施，不因本次仓库整合自动开始。
+
+
+</details>
 
 
 </details>

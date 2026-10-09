@@ -1,0 +1,372 @@
+{
+  "schema_version": "M-LINK1-readonly-next-physical-function-scope-1.0",
+  "status": "read_only_source_research_and_recommendation_no_execution_card",
+  "created_utc": "2026-10-09T14:39:31.722821+00:00",
+  "reviewer": "fine_reference_scope",
+  "repository": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC",
+  "main_point": "The nearest useful physical step is a compact ledger of existing saved nodal workpiece loads, splitting side-interior, physical corners, cut-interior, physical/cut intersections and interior points without corner force allocation. All signed total/material/Hu numbers come directly from existing node CSV/JSON. The already-validated total weak-form body load remains the grip-load quantity. A materialPiola surface probe is a later option after this ledger, not part of the nearest implementation.",
+  "what_is_already_physically_available": [
+    {
+      "quantity": "Signed lower-body total/material/Hu force and holding reaction",
+      "definition": "For body B, F_B^c=-sum_{n in B} f_internal^c[n], c=total/material/regularization. Equivalently negative discrete virtual work on a unit translation of all body DOFs. No boundary stress recovery or new force evaluation is needed.",
+      "evidence": [
+        "hf_repo/src/hf_eval/native_mean.py:66",
+        "hf_repo/src/hf_eval/workpiece_nodal.py:13",
+        "hf_repo/scripts/audit_native_workpiece_cycle.py:269"
+      ]
+    },
+    {
+      "quantity": "Discrete body moment about declared centre",
+      "definition": "M_B^c=-sum_n ((x_n-x0) f_internal_y^c[n]-(y_n-y0) f_internal_x^c[n]); use task body centre(71,40)mm for this case. Existing nodal observer has this already. It is a generalized nodal moment, not recovered continuous traction.",
+      "evidence": [
+        "hf_repo/src/hf_eval/workpiece_nodal.py:56",
+        "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/013/nodal.json"
+      ]
+    },
+    {
+      "quantity": "Physical/cut/intersection/interior nodal load groups, actual geometry and distances",
+      "definition": "Existing observer uniquely counts703body nodes with71physical_only,35cut_only,2physical_and_cut,595interior. Its groups conserve the nodal load but do not uniquely allocate corner vectors to incident faces. Boundary geometry is unsigned actualQ1 distance; it is not signed contact pressure or a free-body clamping test.",
+      "evidence": [
+        "hf_repo/src/hf_eval/workpiece_nodal.py:36",
+        "hf_repo/src/hf_eval/boundary_geometry.py:165",
+        "functional_views/native_nested_cycle_20261009/complete_001/RESULTS.md:19"
+      ]
+    },
+    {
+      "quantity": "All same-state material Piola samples, Hu, element component forces and global component forces",
+      "definition": "These are captured without extra force calls at accepted states. Future saved-only postprocessing can read them; this review did not decode their NPZ arrays.",
+      "evidence": [
+        "hf_repo/src/hf_eval/native_mean.py:176",
+        "hf_repo/src/hf_eval/native_mean.py:185"
+      ]
+    }
+  ],
+  "existing_peak_observation_not_new_calculation": {
+    "source": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/013/nodal.json",
+    "original_state": 13,
+    "leg": "loading",
+    "target_mm": 1.2,
+    "moment_origin_mm": [
+      71.0,
+      40.0
+    ],
+    "summary": {
+      "force_on_lower_body_N": {
+        "total": [
+          -0.0008760157046173312,
+          0.12317940160165043
+        ],
+        "material": [
+          -0.000561226821740675,
+          0.12191255705872141
+        ],
+        "regularization": [
+          -0.0003147888828766561,
+          0.0012668445429290087
+        ]
+      },
+      "moment_about_origin_Nmm": {
+        "total": 1.1238509984160445,
+        "material": 1.0517715415120525,
+        "regularization": 0.07207945690399212
+      },
+      "holding_reaction_on_model_N": [
+        0.0008760157046173312,
+        -0.12317940160165043
+      ],
+      "groups": {
+        "physical_only": {
+          "node_count": 71,
+          "force_on_body_N": {
+            "total": [
+              -0.0008747646598946732,
+              0.12311624876780866
+            ],
+            "material": [
+              -0.0005602834221288965,
+              0.1219131101735662
+            ],
+            "regularization": [
+              -0.00031448123776577655,
+              0.0012031385942424602
+            ]
+          },
+          "moment_about_origin_Nmm": {
+            "total": 1.123276003535049,
+            "material": 1.0517678819404384,
+            "regularization": 0.07150812159461081
+          }
+        },
+        "cut_only": {
+          "node_count": 35,
+          "force_on_body_N": {
+            "total": [
+              0.0,
+              0.0
+            ],
+            "material": [
+              0.0,
+              0.0
+            ],
+            "regularization": [
+              0.0,
+              0.0
+            ]
+          },
+          "moment_about_origin_Nmm": {
+            "total": 0.0,
+            "material": 0.0,
+            "regularization": 0.0
+          }
+        },
+        "physical_and_cut": {
+          "node_count": 2,
+          "force_on_body_N": {
+            "total": [
+              -1.2510447226580135e-06,
+              6.315283384176389e-05
+            ],
+            "material": [
+              -9.433996117784603e-07,
+              -5.53114844784463e-07
+            ],
+            "regularization": [
+              -3.076451108795532e-07,
+              6.370594868654836e-05
+            ]
+          },
+          "moment_about_origin_Nmm": {
+            "total": 0.0005749948809954457,
+            "material": 3.6595716141511617e-06,
+            "regularization": 0.0005713353093812946
+          }
+        },
+        "interior": {
+          "node_count": 595,
+          "force_on_body_N": {
+            "total": [
+              0.0,
+              0.0
+            ],
+            "material": [
+              0.0,
+              0.0
+            ],
+            "regularization": [
+              0.0,
+              0.0
+            ]
+          },
+          "moment_about_origin_Nmm": {
+            "total": 0.0,
+            "material": 0.0,
+            "regularization": 0.0
+          }
+        }
+      }
+    },
+    "interpretation": "Peak totalFy0.1231794016N remains a signed lower-body weak resultant. At the physical/cut corner group, HuFy6.3705949e-5N and materialFy-5.5311484e-7N have different signs and scales; throwing away the corner or allocating half its vector to each side changes the reported physical picture. Cut-only/interior groups are zero in this particular saved peak, not an assumed identity for arbitrary models."
+  },
+  "critical_source_physics": [
+    {
+      "point": "Body is a fixed kinematic overlay in the original medium",
+      "meaning": "All incident body ux/uy remain fixed; original phase coefficients are not converted to solid. Saved body cells have F=I,J=1,Hu=P=localforce=0. Sampling stress on the body side would therefore yield zero despite nonzero holding/body load. A material-interface probe must explicitly take the adjacent exterior cell trace and use the body outward reference normal.",
+      "evidence": [
+        "hf_repo/src/hf_eval/native_project.py:142",
+        "hf_repo/src/hf_eval/native_project.py:184",
+        "hf_repo/src/hf_eval/native_project.py:274",
+        "hf_repo/scripts/audit_native_workpiece_cycle.py:312"
+      ]
+    },
+    {
+      "point": "Material P and Hu forces are different weak operators",
+      "meaning": "Material local force is sum_q w_q P_q gradN; regularization local force is k_e H^T Hu with k_e=kr sum_q w_q exp(-5J_q). Saved firstPiola is material P only, while total force retains both terms.",
+      "evidence": [
+        "hf_repo/src/hf_eval/split_kernel_invariants_hu.py:160",
+        "hf_repo/src/hf_eval/split_kernel_invariants_hu.py:169",
+        "hf_repo/src/hf_eval/split_kernel_invariants_hu.py:176",
+        "hf_repo/src/hf_eval/split_kernel_invariants_hu.py:201"
+      ]
+    },
+    {
+      "point": "Do not invent an energy-gradient Piola correction",
+      "meaning": "The source is the declared weak residual. It does not include the extra J-variation material force that would follow from differentiating a proposed scalar0.5*kr*exp(-5J)*|Hu|² energy. Adding such a P term would change the model rather than recover the current total surface force.",
+      "evidence": [
+        "hf_repo/src/hf_eval/tmc_kernel.py:168",
+        "hf_repo/src/hf_eval/tmc_kernel.py:170",
+        "hf_repo/src/hf_eval/split_kernel_invariants_hu.py:178"
+      ]
+    },
+    {
+      "point": "Q1 mixed Hessian is a strong warning against an ordinary Hu pressure field",
+      "meaning": "On these reference rectangles Hxx=Hyy=0 and Hxy=Hyx=[+1,-1,+1,-1]/(hx*hy). Thus each displacement component regularization nodal force has the same alternating corner pattern, with bothxy andyx contractions retained. It annihilates affine virtual fields on a whole cell. Exact discrete Hu bookkeeping can use this pattern, but continuous boundary force recovery additionally needs a declared hyperstress reconstruction, side terms, interelement jumps and corners.",
+      "evidence": [
+        "hf_repo/src/hf_eval/tmc_kernel.py:50",
+        "hf_repo/src/hf_eval/tmc_kernel.py:62",
+        "hf_repo/src/hf_eval/compensated_invariants.py:458"
+      ]
+    },
+    {
+      "point": "CurrentC0 broken element Hessian does not supply a unique continuum traction reconstruction",
+      "meaning": "A convenient elementwise mean-coefficient hyperstress reproduces the saved nodal Hu action, with mixed-derivative corner terms on an axis-aligned rectangle. A spatially reconstructed coefficient could instead distribute terms among edges, jumps and volume contributions. These may agree on the Q1 virtual-work basis while giving different pointwise surface plots. The reconstruction choice must be explicit; it is not evidence for a unique total contact pressure.",
+      "evidence": [
+        "hf_repo/src/hf_eval/tmc_kernel.py:62",
+        "hf_repo/src/hf_eval/split_kernel_invariants_hu.py:176"
+      ]
+    }
+  ],
+  "minimal_source_preparation_recommendation": {
+    "scope": "One compact stdlib saved-table function and thin caller. Consume existing nodes.csv and closed task/body/edge metadata; preserve all raw signed component values. No NumPy/model/NPZ or new nodal observer needed for the nearest ledger.",
+    "suggested_function": "summarize_saved_workpiece_node_ledger(nodes_csv, body_metadata, *, selected_states=None)",
+    "reuse": "Use existing oldgroup labels, coordinates, task centre/side/symmetryline and recorded physical/cut topology. Reuse existing saved nodal summaries for comparison instead of constructing mechanical data.",
+    "mutually_exclusive_groups": [
+      {
+        "name": "bottom_side_interior",
+        "original_group": "physical_only",
+        "meaning": "bottom-face nodes except either physical-physical corner"
+      },
+      {
+        "name": "left_side_interior",
+        "original_group": "physical_only",
+        "meaning": "left-face nodes except bottomcorner and physical/cut intersection"
+      },
+      {
+        "name": "right_side_interior",
+        "original_group": "physical_only",
+        "meaning": "right-face nodes except bottomcorner and physical/cut intersection"
+      },
+      {
+        "name": "physical_corner",
+        "original_group": "physical_only",
+        "meaning": "junction of two physical faces, kept once and never assigned half to eachface"
+      },
+      {
+        "name": "physical_and_cut",
+        "original_group": "physical_and_cut",
+        "meaning": "physical face/symmetrycut intersection, kept once with both roles explicit"
+      },
+      {
+        "name": "cut_interior",
+        "original_group": "cut_only",
+        "meaning": "artificial symmetrycut internalnodes, not a physical contactface"
+      },
+      {
+        "name": "body_interior",
+        "original_group": "interior",
+        "meaning": "allbody nodes notonphysical/cutboundaries"
+      }
+    ],
+    "additions": [
+      "For the current complete fixed square, refine physical_only into side-interior and physical corners using the recordedQ1 physical/cut edges and task geometry. Preserve the three other original groups exactly.",
+      "Retain totalFx/Fy, materialFx/Fy and regularizationFx/Fy for every node. When the later function runs, eachnode belongs to exactlyonecategory; category sums close to original whole-body/group summaries without contact thresholds or clipping.",
+      "Keep a row of physical corner and physical/cut intersection vectors in their own right; never redistribute thosevectors to incidentfaces.",
+      "Keep originalstate index/hash/leg/d and tinyunloadresiduals. Calloutputs nodal loads/resultants inN, not traction orpressure. Existing forces alreadyinclude thickness.",
+      "Use existing node coordinates and existing images for a later minimal annotatedload overlay and compact category curves when that concretepostprocessing is authorized; do not rewrite oldPNG/GIF."
+    ],
+    "outputs": "New small per-state category/total/material/Hu CSV/JSON ledger and linkable explanation. No new physical pressure or force-kernel qualification.",
+    "stage_after_ledger": "Only if needed, prepare an exterior-materialPiola trace diagnostic using the sourcePhysics andSBP notes below. Reading storedP arrays for that later observer is a separate scope, not required for the nearestCSVledger.",
+    "avoid": "No new P or Hu constitutiveevaluation, NPZ reads, fullHP audits, solver, facepressure interpolation, corner splitting or recreated viewer."
+  },
+  "material_surface_probe_and_remainder": {
+    "sign_and_units": "Use t_material=P_exterior N_body,outward. Compressive scalar probe may be named -N_body·t_material, with sign preserved. Integrating on a reference edge uses thickness*ds_ref, givingN. It remains material-only and uses storedroundedP without a new stressHP claim.",
+    "available_samples": "Current nine Lobatto stress samples include the edge traces; use the original edge point ordering and declared three-point rule. Do not describe it as independent high-order nonlinear boundary integration or quadrature convergence.",
+    "why_P_surface_need_not_equal_body_weak_reaction": "Discrete stress divergence, interelement trace jumps, endpoint allocation and the difference between physical edge weights and frozen volume-compatible weights can contribute. The global/HP weak-force check does not make these vanish.",
+    "existing_local_algebra_worth_reusing": {
+      "path": "hf_repo/scripts/contact_c2_sbp.py",
+      "scope": "Its material-only summation-by-parts decomposes the elementwise biquadratic interpolant of nine suppliedP samples into external edge, internal jump and minus projecteddiv terms, plus an explicit physicalweight correction. It has no constitutive/solver/fileIO.",
+      "evidence": [
+        "hf_repo/scripts/contact_c2_sbp.py:1",
+        "hf_repo/scripts/contact_c2_sbp.py:42",
+        "hf_repo/scripts/contact_c2_sbp.py:139",
+        "hf_repo/scripts/contact_c2_sbp.py:149"
+      ],
+      "minimal_take": "Borrow the shape/edge/orientation/weight-compatible identity for a small interface diagnostic if the material probe shows a meaningful mismatch. Do not transfer its precision1e-45 gate, old planar fixture, top-node classification or HP reconstructed source to this new saved-native task.",
+      "separate_legacy_entry_to_avoid": "contact_c2_fields.py imports DecimalSplitQ1Reference and evaluates point_response; it is not the desired no-new-constitutive saved-array observer."
+    },
+    "Hu_boundary_scope": "Only after the saved weak-load ledger is clear should a separate explicit total-boundary reconstruction be proposed. It must close material+Hu against the known generalized body load while retaining physical faces, artificial symmetry cut, corners and any interelement/divergence remainder. A single additionalPiola tensor or scalar pressure is not supplied by the current code."
+  },
+  "symmetry_corners_and_effective_grip": [
+    "The y40 cut is an artificial half-domain boundary, not a physical contact surface. Keep its nodal group and physical/cut endpoints explicit. The existing fullbody mirror relation is F_full=(2Fx,0), whereas2|Fy| is a two-sided magnitude sum; they answer different questions.",
+    "Do not simply double all half-body moments: reflect force and lever arm about the common full-body centre, so upper/lower moment parity is treated consistently. The existing nodal moment is already about(71,40) in this saved report.",
+    "A physical-physical corner has two incident normals and cannot have one unique normal pressure. Preserve its resultant/corner term instead of arbitrary half-splitting. A physical/cut intersection similarly has two roles.",
+    "The current body is fixed in both components and no free-body/friction law is solved. NonzeroFy, smallunsigneddistance and mirrorednormalmagnitude demonstrate load transmission in this constrained experiment; stable grasp of a released body, tangential slip and frictionalholding need later physical task definitions."
+  ],
+  "reasonable_incremental_numerical_experiments_proposed_not_run": [
+    {
+      "order": 1,
+      "experiment": "Prepare and statically review the tiny CSV/JSON ledger on recorded fixed-square topology; include a small hand-labeled side/corner/cut example only if needed to catch classification mistakes",
+      "purpose": "Verify newcategory mutualexclusion/sign/units and retain original6 forcecolumns. This is newpostprocessor behavior, not another mechanics test."
+    },
+    {
+      "order": 2,
+      "experiment": "Later apply to existing saved fine origin,loading0.95(maxHu),loading1.2(peakstroke),unload0; add same-design coarsepeak if theoldCSV is suitable",
+      "purpose": "Check side/corner/cut distribution and compare against originalsummaries. No force/tangent/HP/model/NPZ/solve needed. A diagnostic subset doesnot grant newfullpath or pressurequalification."
+    },
+    {
+      "order": 3,
+      "experiment": "If classification is coherent, process existingall24 table states and show compactcategory total/material/Hu curves with corner/intersection markers on existinggeometry",
+      "purpose": "Provide functionalvisible progress using cachednumbers. Newledger math/rendering are laterauthorizedactions, notperformed in this report."
+    },
+    {
+      "order": 4,
+      "experiment": "Only afterledger interpretation, consider an exteriormaterialP faceprobe and a manufacturedconstantP rectangle tochecknormal/sign/area/thickness; ifHu recoveryisneeded, use a separately specifiedmixedHessian corner test",
+      "purpose": "Do notbundlethis into nearestCSVledger. Materialtrace/Hu surface terms require their own source preparation and qualification; no immediateproductionrerun."
+    },
+    {
+      "order": 5,
+      "experiment": "Choose one futurephysical/mesh/regularizationexperiment fromactualobservedforcecategory sensitivity",
+      "purpose": "Onlythendecide whetherpressure reconstruction orfree-bodygrasp isnext. No currentcard changesgamma/alpha, startsfullcycle orclaimsspatialconvergence."
+    }
+  ],
+  "next_order": "Complete actualM-LINK1 association/delivery, then prepare/review a conciseCSV/JSON-only mutuallyexclusive nodalloadledger using existingnode table. Do not compute thatledger in this planning step. Follow its actual results before deciding a newmaterial/Hu totalboundaryforce orfree-bodygrip task.",
+  "qualification_boundaries": {
+    "existing_total_weak_body_load_reused": true,
+    "new_pressure_qualification": false,
+    "new_Hu_surface_force_qualification": false,
+    "new_stress_HP": false,
+    "new_mesh_convergence": false,
+    "effective_clamp": false,
+    "HF5": false,
+    "execution_permission_granted": false
+  },
+  "source_and_closed_JSON_SHA256": {
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/workpiece_nodal.py": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9",
+    "hf_repo/src/hf_eval/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+    "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/scripts/audit_native_workpiece_cycle.py": "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938",
+    "hf_repo/scripts/contact_c2_sbp.py": "fd85bf4c6ba19f4365198f5b3cbca9ab1247344c585a6d8e74ab53dff687fc21",
+    "hf_repo/scripts/contact_c2_fields.py": "dd5789924e0757242b981359638880eb0f2929a2d4e2a89b023b0489cba711df",
+    "functional_views/native_nested_cycle_20261009/complete_001/RESULTS.md": "8bb0e286e52412b855b111d66d7c05d42b77190a8e7deed181e503af03e88f2f",
+    "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/013/nodal.json": "9c14b57649a330b8db8a2b2ad9f82f62596ea5922d7d4bd9781a17e87aa4ec5c",
+    "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/013/derived.json": "6778b3cab4600079d7421619b0f52a764fed30b823361e16bbfb971dc5da4e32",
+    "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/nodes.csv": "f91e3d596617e9619c2213beba3941430da8e6e4aff05af4645e378915473bc2"
+  },
+  "actions": {
+    "local_source_and_closed_ordinary_JSON_only": true,
+    "network_calls": 0,
+    "PDF_reads": 0,
+    "HF_imports": 0,
+    "NPZ_decodes": 0,
+    "F_T_HP_model_solve_observer_render_calls": 0,
+    "numerical_experiments_executed": 0,
+    "formal_repo_changes": 0,
+    "new_execution_cards": 0,
+    "only_external_report_written": "D:\\hf-native-workpiece-api-author-20261009\\MLINK1_execution_review_001\\physical_next_scope.json"
+  },
+  "scope_refinement": {
+    "earlier_unarchived_planning_report_sha256": "ea7372c87be724fbf208f59e4aff0a12221a47ca67172fafa6a1827a9aba4b72",
+    "reason": "Root points to existing closed nodes.csv with all signed total/material/Hu forces. Nearest source step is therefore CSV/JSON-only mutually exclusive nodal ledger, before any materialPiola probe. No ledger or physics was computed in this review."
+  },
+  "available_nearest_input": {
+    "path": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/nodes.csv",
+    "header": "index,original_target_index,leg,d_mm,state_sha256,node_id,x_mm,y_mm,group,total_Fx_N,total_Fy_N,material_Fx_N,material_Fy_N,regularization_Fx_N,regularization_Fy_N",
+    "raw_sha256": "f91e3d596617e9619c2213beba3941430da8e6e4aff05af4645e378915473bc2",
+    "closed_existing_data": "One table already contains index/originalindex/leg/d/stateSHA/node_id/coordinates/oldgroup and total/material/regularizationFx,Fy. The nearest ledger can use stdlibCSV/JSON; no NPZ, constitutive/kernel/model/observer rerun is necessary. Header only inspected here, no new rows grouped or summed."
+  }
+}

@@ -1,0 +1,165 @@
+"""Root-only M-LINK1 final documentation writer; do not run before peer PASS.
+
+Writes only new RESULTS.md and three current prefixes, preserving each complete
+old front document as exact bytes inside details. No API or scientific imports.
+"""
+import argparse
+from datetime import datetime,timezone
+import hashlib
+import json
+import os
+from pathlib import Path
+
+ROOT = Path("D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC")
+STAGE = ROOT/"lf_data_preparation/native_interface_001/nested_link_001"
+AUTHOR = Path(__file__).parent
+sha = lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
+read = lambda path:json.loads(path.read_text(encoding="utf-8"))
+relative = lambda path:path.relative_to(ROOT).as_posix()
+PEER_SHA = "15ceacda5cbc2e88c4f07e96fc91eaea3e8e3d2b225a6e0dea1080ab5f86dd87"
+SCOPE_SHA = "73d008a3d1a7b9c016edc55ed886e60af369ee480fd507354473f9b9536329bc"
+FROZEN = {
+    "lf_data_preparation/native_interface_001/nested_link_001/README.md":"4839cee1ba9fca05ea455ec527a9f4a549a16e874c0ebbcbb6fc2a3f46f8615e",
+    "docs/CURRENT_STATUS.md":"4e98e2ef75294f13ed1350a566cbe73eea52104d0177f648023ca0c75aea681a",
+    "docs/RESUME_DEVELOPMENT.md":"25b20a7c3c706414eef508ac0c75d4aadaaf0b487a8068a748983c61705ffbd1",
+    "lf_data_preparation/native_interface_001/nested_link_001/protocol.json":"d5b918a5c6a7a11dac4c574c8b03cb7ac99aa30db7df5ae6cdb242314e0a6872",
+    "lf_data_preparation/native_interface_001/nested_link_001/run_001/execution_receipt.json":"066cdc266a85eb830b4a118974930435470cd1f625c62e5ecf41c010a274c613",
+    "lf_data_preparation/native_interface_001/nested_link_001/run_001/linked_response.json":"1fd03489c87888a5faca29ef0bade76eb3e143038bc4cb68bab7e733f0635ba4",
+    "lf_data_preparation/native_interface_001/nested_link_001/run_001/delivery_index.json":"65302885c08ec944184f6364d230935272156fc6d42be76bbe5650d21acff48a",
+    "lf_data_preparation/native_interface_001/nested_link_001/link_launch.json":"22f2d4ae06b1be008b40598860d2be7b78ceb937c30feb258ec31c3a9fd42a5e",
+}
+
+def link(label,target,document):
+    return "["+label+"]("+Path(os.path.relpath(target,document.parent)).as_posix()+")"
+
+def preserve_history(path,prefix):
+    old = path.read_bytes()
+    start = (prefix.rstrip()+"\n\n<details>\n<summary>本次更新前完整原文（历史状态不代表当前）</summary>\n\n").encode("utf-8")
+    new = start+old+b"\n\n</details>\n"
+    path.write_bytes(new)
+    assert path.read_bytes()[len(start):len(start)+len(old)] == old
+    return dict(path=relative(path),old_sha256=hashlib.sha256(old).hexdigest(),old_bytes=len(old),
+        history_start_byte=len(start),history_end_byte_exclusive=len(start)+len(old),
+        new_sha256=sha(path),new_bytes=len(new),whole_old_document_preserved_byte_exact=True)
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--peer-report",type=Path,required=True)
+    parser.add_argument("--peer-sha",required=True)
+    args = parser.parse_args()
+    peer_file = args.peer_report.resolve()
+    if args.peer_sha != PEER_SHA or sha(peer_file) != PEER_SHA:
+        raise ValueError("Root-supplied exact independent terminal report SHA differs")
+    peer = read(peer_file)
+    if peer["schema_version"] != "M-LINK1-independent-terminal-review-1.0" or peer["status"] != "pass_terminal_review" or peer["execution_status"] != "pass":
+        raise ValueError("Independent M-LINK1 terminal PASS required before final documentation")
+    if peer["stage"] != relative(STAGE) or peer["protocol_sha256"] != FROZEN[relative(STAGE/"protocol.json")]:
+        raise ValueError("Peer report does not bind this exact stage/protocol")
+    scope_file = AUTHOR/"physical_next_scope.json"
+    if sha(scope_file) != SCOPE_SHA or read(scope_file)["status"] != "read_only_source_research_and_recommendation_no_execution_card":
+        raise ValueError("Closed next-function planning source differs")
+    for name,pin in FROZEN.items():
+        if sha(ROOT/name) != pin:
+            raise ValueError("Closed document input or complete history changed: "+name)
+    if (STAGE/"RESULTS.md").exists():
+        raise ValueError("Final result exists; no repeated history wrapping")
+    helper,launch = read(STAGE/"run_001/execution_receipt.json"),read(STAGE/"link_launch.json")
+    response,index = read(STAGE/"run_001/linked_response.json"),read(STAGE/"run_001/delivery_index.json")
+    if helper["status"] != "pass" or launch["status"] != "pass" or launch["exit_code"] != 0 or launch["stop_reason"] is not None:
+        raise ValueError("Closed unique execution did not pass")
+    peak,end = response["maximum_loading_stroke"],response["requested_endpoint_response"]
+    reference = response["independent_reference"]
+    images = {Path(item["path"]).name:ROOT/item["path"] for item in index["images"]}
+    resources = (f"helper {helper['elapsed_seconds']:.10f} s／outer {launch['elapsed_seconds']:.10f} s，"
+        f"采样自身 RSS {helper['sampled_peak_RSS_bytes']} B／tree RSS {launch['peak_sampled_tree_RSS_bytes']} B")
+    result_doc = STAGE/"RESULTS.md"
+    image_text = "\n\n".join("!"+link(label,images[name],result_doc) for name,label in (
+        ("actual_states.gif","原24态实际×1变形与工件节点力箭头"),
+        ("comparison.png","原结构／钳尖与力曲线"),("distances_forces.png","原有限距离及力分量"),
+        ("peak_fields.png","原峰值J／Hu／固体应变诊断"),("mesh_response_comparison.png","原同设计粗细网格六量曲线")))
+    table_text = " · ".join(link(Path(item["path"]).name,ROOT/item["path"],result_doc) for item in index["tables"])
+    values = lambda state:(state["R_input_N"],state["q_out_mm"],state["workpiece"]["force_on_lower_body_N"]["total"][1],state["minimum_J"])
+    peak_values,end_values = values(peak),values(end)
+    rows = "\n".join(f"| {label} | {a:.10g} | {b:.10g} |" for label,a,b in zip(
+        ("下半模型输入反力R(N)","物理端口平均输出q_out(mm)","下半工件ON-body Fy(N)","保存积分点最低J"),peak_values,end_values))
+    results = f"""# M-LINK1：已有参考与图件的关联入口已通过
+
+2026-10-09，用户明确批准后唯一实际执行 PASS，exit0、stop_reason null；{resources}。35 份绑定保持。保存摘要开始／完成 1／1，response 写入 1 次、轻索引写入 1 次，新三份JSON共{peer['new_output_bytes']}B。独立终态审阅 PASS，{peer['checks_passed']}／{peer['checks_completed']}项为只读身份／来源／资源检查，并非新增科学试验；本阶段没有重试、修复重跑、延期或 force。
+
+[新增关联 response](run_001/linked_response.json) · [轻交付索引](run_001/delivery_index.json) · [实际 helper 收据](run_001/execution_receipt.json) · [实际 outer 收据](link_launch.json) · [独立终态审阅](author/terminal_review.json) · [冻结卡](M-LINK1_CARD.md) · [冻结协议](protocol.json)。独立终态报告原字节 SHA：`{args.peer_sha}`。
+
+## 整体目标、已有实现与这一步的理由
+
+整体目标是从普通 LF 几何输入独立完成 HF 有限变形／第三介质接触(TMC)前向评估，获得可核对的加载／卸载、反力、结构变形与工件受力，并能在另一目录或计算机恢复继续开发。当前已实现固定方形工件完整24态加载／卸载、13440单元／27378DOF细网格、总／材料／Hu有符号弱式力、M-REF2自身48／48HP独立参考及M-VIEW1保存态实际变形图。
+
+此前原生产 response 尚未关联随后生成的独立参考和图件。本步直接复用现有 `summarize_saved_native_result` 与 `write_native_response`，新增同身份 `linked_response.json` 和 `delivery_index.json`，让人工检查与恢复开发从一个入口到达已有证据。109行薄层不复制逐态数值核对，不新增科学测试、模型或绘图。
+
+现有API实际匹配同一result／model／task全部24态、已有48HP记录和12条参考Python来源SHA；reference={reference['status']}、full_path_reference_pass={reference['full_path_reference_pass']}，views={response['views']['status']}。关联仅核对保存元数据和原字节，不重新审计大型HP／NPZ档案。原生产 response 的 producer 三个flags仍false，reference／views not_provided保持原历史事实；新增response保留这些false flags，同时单独记录新的matched artifact。
+
+## 实际功能效果、资源与数值
+
+索引把原result／response、本次新增response、既有M-REF2 summary、原raw view和phase、4PNG／24帧GIF及四份表用repo-relative路径与SHA串联。raw view仍有3PNG＋GIF；第四粗细PNG来自原phase `comparison.image`。原result、response、raw view、phase及图件未复制或改写；换目录恢复后从仓库根解析这些相对路径即可。
+
+本次保存摘要API调用1次，写response1次，写索引1次。新增科学F／T／HP／模型／求解／JIT／LF／observer／render为0，依据冻结入口和stdlib保存元数据／来源／图件调用路径；没有动态hooks监控，不能笼统写“API0”。helper时间／RSS是最后checkpoint之后、成功收据构造和写入之前的快照；outer时间确认完整launcher终态。新增代码运行成本为上述0.2／0.39秒量级；linked response中原生产F开始443／完成386、T201／201及生产evaluation11428.1522s是M-CYCLE1历史，不是M-LINK1次数或耗时。
+
+物理任务仍为h0.5、84×40mm下半模型、固定方形中心(71,40)mm／边长18mm、E1MPa、ν0.3、厚度20mm，原平均输入0→1.2→0mm。下面是同一保存态的原物理数值，本次仅关联展示：
+
+| 量 | loading原13／1.2mm | unloading原23／0mm |
+|---|---:|---:|
+{rows}
+
+峰值下半工件Fy材料分量 {peak['workpiece']['force_on_lower_body_N']['material'][1]:.10g} N、Hu分量 {peak['workpiece']['force_on_lower_body_N']['regularization'][1]:.10g} N；两侧法向幅值和 {peak['workpiece']['two_sided_normal_magnitude_sum_N']:.10g} N，完整镜像净力Fx {peak['workpiece']['full_workpiece_net_force_N'][0]:.10g} N／Fy0是另一个物理量。ON-body力与holding反力相反号；卸载微小残量保留，没有人为清零。q_out为端口平均位移，不是间隙。响应中的node-window clearance仍为原栅格窗口诊断，不是表面距离或接触证明。
+
+## 原图件与表：直接人工检查
+
+以下均是原M-VIEW1图件，没有新渲染。红色箭头是工件节点弱式力显示；峰值场及两网格曲线保留各自诊断口径。
+
+{image_text}
+
+原四表：{table_text}。
+
+## 科学边界、未实现功能与下一步
+
+M-REF2仍只资格化此精确result／model／task的24接受机械态和原5节点PORT切线方向；完整CSC组装身份不等于所有切线列的独立HP验证。图件是保存态诊断及两网格敏感性，两个网格不证明网格／域收敛。本次关联不增加压力、有效夹持、全列切线、应力／能量HP或HF5资格。圆体自身任务、自由体／摩擦、正式标签／批量排名仍未完成。
+
+最近一步按[只读物理规划](author/physical_next_scope.json)准备一个简洁的stdlib CSV／JSON节点载荷账本，直接读取已有 `fixed_square/nodes.csv` 和关闭的工件／边界元数据。保留每节点原total Fx/Fy、material Fx/Fy、regularization(Hu) Fx/Fy六列，以及state SHA／原索引／leg／d；数值和微小卸载残量不裁剪，厚度已在原N单位中。将原physical_only细分为bottom／left／right侧内点和physical_corner；physical_and_cut交点、cut_only切面内点、body内部各自保留，形成七类互斥节点，每节点一次。物理角点与物理／切面交点的向量独立记录，不平均分配给相邻侧。
+
+来源准备与审阅后，未来可先观察缓存origin、loading0.95(maxHu)、loading1.2、unload0，并在旧表适用时加入粗网格peak；实际分类／符号／分量结果明确后再处理all24、对照已有整体及原分组弱式合力，展示类别曲线与原几何上的角点／交点。**本轮未分组或求和新账本，也未执行未来实验／绘图或授权未来卡。**这一步是原节点弱式载荷的可解释组织，不是压力、连续牵引或新增力核资格；不重做已通过的求解／HP／NPZ／观察器。
+
+外邻medium侧的材料P trace诊断留待账本实际结果解释后决定，**不纳入最近账本阶段**。固定工件是介质内运动学overlay，其内部保存F=I、P/Hu=0，不能采工件内部P来解释非零holding力；若以后做材料probe，需明确采用外邻trace且仍仅材料诊断。现有 `stress_first_piola` 只含材料P，不能把 `P·N`当作Hu模型总表面力或总压力；节点弱式力也不能直接除面积命名为压力。包含材料＋Hu、物理表面／对称切面／角点及余项的总边界力重建需再明确与当前离散弱式一致的定义；本阶段未实现它。
+
+当前可恢复链条：原M-CYCLE1完整求解 → M-VIEW1图件 → M-REF2独立参考 → M-LINK1同身份关联入口。来源、卡、协议和各阶段原历史证据保持；本次独立审阅检查是只读身份／输出核对，不是新增科学测试。
+"""
+    common = f"""# 当前接续：M-LINK1关联入口已通过（2026-10-09）
+
+整体目标仍是独立HF有限变形／TMC前向评估，提供可核对的反力、工件受力、加载／卸载变形及可恢复开发资料。用户明确批准后的唯一M-LINK1实际执行PASS闭卡：保存摘要1／1、response写1、索引写1，35绑定保持；{resources}，exit0／无stop。helper资源是收据构造／写入前快照，outer为完整launcher终态。独立终态审阅PASS；新增科学F/T/HP/求解/模型/渲染为0（固定调用路径依据、无动态hooks），新增保存摘要API为1。
+
+同一细网格24态与已有48HP参考、原3PNG＋GIF及原phase第四PNG／四表已关联到新增response与仓库相对路径轻索引。原生产response及false flags、raw view／phase和原图件保持历史字节。峰值R={peak_values[0]:.10g}N、q_out={peak_values[1]:.10g}mm、下半工件Fy={peak_values[2]:.10g}N；卸载R={end_values[0]:.10g}N。原生产F443／T201等记录是历史，不是本次API运行成本。
+
+最近仅准备已有nodes.csv的stdlib CSV／JSON互斥载荷账本：保留total/material/Hu Fx/Fy原六列，将physical_only细分bottom/left/right侧内点与physical_corner，另保留physical_and_cut交点、cut内点、body内部；每节点一次，角点／交点向量不分摊。先观察缓存选定态，再按实际结果推进all24分类曲线；本轮未分组／求和新账本或执行未来卡。外邻medium材料P trace诊断留待账本结果之后，不纳最近阶段。材料P·N不能当Hu总压力；含材料＋Hu、物理表面／对称切面／角点的总边界力仍需单独定义。压力／有效夹持、网格／域收敛、全列切线及HF5仍未完成。
+"""
+    history = []
+    result_doc.write_text(results,encoding="utf-8")
+    for path in (STAGE/"README.md",ROOT/"docs/CURRENT_STATUS.md",ROOT/"docs/RESUME_DEVELOPMENT.md"):
+        navigation = " · ".join((link("目标／实现／物理数值／原图与边界",result_doc,path),
+            link("新增关联response",STAGE/"run_001/linked_response.json",path),
+            link("轻交付索引",STAGE/"run_001/delivery_index.json",path),
+            link("下一物理功能只读规划",STAGE/"author/physical_next_scope.json",path),
+            link("原24态×1变形GIF",images["actual_states.gif"],path)))
+        history.append(preserve_history(path,common+"\n"+navigation+"\n"))
+    receipt = dict(schema_version="M-LINK1-final-documentation-byte-preservation-1.0",status="written_after_actual_terminal_peer_PASS",
+        created_utc=datetime.now(timezone.utc).isoformat(),writer_source_path=str(Path(__file__).resolve()),writer_source_sha256=sha(Path(__file__)),
+        peer_report_path=str(peer_file),peer_report_sha256=args.peer_sha,peer_status=peer["status"],frozen_documentation_inputs=FROZEN,
+        next_function_planning_source_path=str(scope_file),next_function_planning_source_sha256=SCOPE_SHA,
+        new_result=dict(path=relative(result_doc),sha256=sha(result_doc),bytes=result_doc.stat().st_size),history_preservation=history,
+        actual_execution=dict(helper_seconds=helper["elapsed_seconds"],outer_seconds=launch["elapsed_seconds"],calls=helper["calls"],bindings_unchanged=True),
+        writer_actions=dict(public_API_calls=0,HF_imports=0,NPZ_decodes=0,large_HP_archive_reads=0,scientific_computation_or_render=0,
+            old_card_protocol_worker_engine_result_response_view_phase_changes=0),
+        write_scope="New M-LINK1 RESULTS plus stageREADME/CURRENT/RESUME prefixes only; each whole prior front document byte-exact in details",
+        qualification_unchanged=True,next_physical_function_not_executed_or_authorized=True)
+    (AUTHOR/"documentation_receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    print(json.dumps(dict(status=receipt["status"],writer_source_sha256=receipt["writer_source_sha256"],
+        results_sha256=receipt["new_result"]["sha256"],history_documents=len(history)),indent=2),flush=True)
+
+if __name__ == "__main__":
+    main()
