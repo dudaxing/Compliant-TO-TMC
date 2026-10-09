@@ -1,3 +1,14 @@
+# M-PREP1同结构细网格：构模与显示已完成
+
+2026-10-09（Asia/Seoul），用户明确批准后唯一一次PASS，101/101检查，17绑定保持，窗口已关闭。[目标、实现、依据、效果和限制](RESULTS.md) · [实际未变形网格图](run_001/nested_geometry.png) · [真实模型](run_001/model/model.json) · [独立终态/图复核](author/terminal_review.json)。
+
+实际h0.5为13,440单元、13,689节点、27,378 DOF，fixed1548/free25830，body648单元/703节点/1406DOFs；原2mm端口为5节点，归一化线积分、物理边界与材料保持。helper16.7743秒/outer17.9396秒，tree采样RSS峰值187,662,336字节。
+
+本次仅一次派生几何、一次构模/保存及一次PNG，新增F/T/平衡/HP/JIT执行/LF均0。构模与未变形图已验证；细网格力学、压力/有效夹持和收敛未完成，原API资格标志不变。接下来准备同任务细网格完整24目标生产卡，按其自有保存状态安排参考和图；不借本卡剩余窗口。
+
+<details>
+<summary>执行前源码准备原记录（以下未执行表述仅对应当时）</summary>
+
 # 同设计细网格接口准备记录
 
 2026-10-09（Asia/Seoul）。状态：**源码、协议已准备，尚未数值执行**。没有派生几何、细网格模型、力学结果或新PNG。
@@ -22,3 +33,5 @@
 资源静审在执行前发现初稿缺少最终报告/哈希整理后的完成检查点，已补齐并更新候选协议身份。初稿[source_preparation_receipt](author/source_preparation_receipt.json)和[candidate_review](author/candidate_review.json)保留当时哈希；当前身份以[final_source_preparation](author/final_source_preparation.json)及最终两份静审为准。这是未授权草稿的静态修正，没有失败数值运行或重试。
 
 具体[协议](protocol.json)绑定17份源、卡和父输入；新180秒helper／240秒outer／采样8GiB窗口待明确批准。通过后展示真实未变形网格图并独立核对模型，再依据构模规模和既有h1成本准备细网格完整加载—卸载卡。其平衡、参考、保存观察和物理比较不在本卡内，两网格只报告敏感性。
+
+</details>

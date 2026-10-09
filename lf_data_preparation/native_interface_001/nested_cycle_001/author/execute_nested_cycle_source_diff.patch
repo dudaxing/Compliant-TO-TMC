@@ -1,0 +1,88 @@
+--- frozen_WAPI1_execute_workpiece_forward.py
++++ candidate_execute_nested_cycle.py
+@@ -1,4 +1,4 @@
+-"""Candidate W-API1: one existing CLI/batch/API call with cooperative observations only."""
++"""Candidate M-CYCLE1: one same-design nested CLI/batch/API cycle; no HP or views."""
+ from time import perf_counter
+ STARTED = perf_counter()
+ from pathlib import Path
+@@ -9,8 +9,8 @@
+ import sys
+ from math import fsum
+ 
+-STAGE = "lf_data_preparation/native_interface_001/workpiece_forward_001"
+-MANIFEST = "hf_repo/configs/native/fixed_square_cycle.json"
++STAGE = "lf_data_preparation/native_interface_001/nested_cycle_001"
++MANIFEST = STAGE + "/manifest.json"
+ CLI = "hf_repo/scripts/evaluate_native_batch.py"
+ CLI_SHA256 = "9dbdb761d2bad20f5d211b7262a0583515a0ad22b36c181988911ff544108dd8"
+ sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+@@ -32,17 +32,29 @@
+     assert {key: protocol["gates"][key] for key in ("production_residual", "global_force_balance", "fixed_displacement_mm")} == dict(production_residual="1e-9", global_force_balance="1e-6", fixed_displacement_mm="8e-11")
+     stage, run, limits = root / STAGE, root / STAGE / "run_001", protocol["phases"]["production"]
+     assert protocol_file.parent == stage and protocol["manifest_file"] == MANIFEST
+-    assert limits["helper_seconds"] == 4500 and limits["outer_seconds"] == 4560 and protocol["sampled_RSS_bytes"] == 8*1024**3
++    assert limits["helper_seconds"] == 15000 and limits["outer_seconds"] == 15060 and protocol["sampled_RSS_bytes"] == 8*1024**3
+     pins, manifest = protocol["bindings"], read(root / MANIFEST)
+     assert pins[CLI] == CLI_SHA256
+     assert all(sha(root / name) == pin for name, pin in pins.items())
+     assert len(manifest["cases"]) == 1 and manifest["cases"][0]["output"] == STAGE + "/run_001/fixed_square"
+     assert manifest["options"]["response_mode"] == "mechanical" and manifest["options"]["tangent_mode"] == "chunk256" and manifest["options"]["initial_guess"] == "port_projection"
++    prepared_model = read(root / protocol["prepared_model_file"])
++    prepared_task = read(root / protocol["prepared_task_file"])
++    production_task = read(root / manifest["cases"][0]["task"])
++    nonphysical = {"task_id", "purpose", "parameter_origin", "description"}
++    assert {k:v for k,v in production_task.items() if k not in nonphysical} == {k:v for k,v in prepared_task.items() if k not in nonphysical}
++    assert prepared_model["region_metadata"]["counts"] == protocol["expected_counts"]
++    assert prepared_model["arrays"]["sha256"] == protocol["expected_model_arrays_sha256"]
++    assert {k:prepared_model["source_geometry"][k] for k in protocol["expected_geometry"]} == protocol["expected_geometry"]
++    coarse_settings = read(root / "hf_repo/configs/native/fixed_square_cycle.json")["options"]["settings"]
++    settings = manifest["options"]["settings"]
++    assert settings["time_limit_seconds"] == 14400.0
++    assert {k:v for k,v in settings.items() if k != "time_limit_seconds"} == {k:v for k,v in coarse_settings.items() if k != "time_limit_seconds"}
+     assert not run.exists() and not (stage / "stop_requested.txt").exists()
+     run.mkdir()
+     receipt_file, progress = run / "execution_receipt.json", run / "accepted_progress.jsonl"
+     counts = dict(batch_calls=0, **{kind + suffix: 0 for kind in ("batch", "api", "model", "solve", "force", "tangent", "save", "summary") for suffix in ("_started", "_completed")})
+-    receipt = dict(schema_version="native-workpiece-api-forward-execution-1.0", status="running",
++    receipt = dict(schema_version="native-nested-cycle-api-forward-execution-1.0", status="running",
+         protocol_sha256=sha(protocol_file), counts=counts, accepted_states=0, HP_calls=0, JIT_calls=0,
+         cli_source_sha256=CLI_SHA256,
+         qualification_scope="New production transport only; no independent reference/view/contact/pressure/HF5 qualification")
+@@ -90,7 +102,14 @@
+ 
+         native_mean._assemble_mechanical_force = observed(native_mean._assemble_mechanical_force, "force")
+         native_mean._tangent_chunked = observed(native_mean._tangent_chunked, "tangent")
+-        native_mean.build_native_project = observed(native_mean.build_native_project, "model")
++        original_model = native_mean.build_native_project
++
++        def checked_model(*values, **options):
++            project = original_model(*values, **options)
++            assert project.region_metadata["counts"] == protocol["expected_counts"]
++            return project
++
++        native_mean.build_native_project = observed(checked_model, "model")
+         native_batch.evaluate_native = observed(native_batch.evaluate_native, "api")
+         native_evaluate.write_native_mean = observed(native_evaluate.write_native_mean, "save")
+         native_evaluate.summarize_saved_native_result = observed(native_evaluate.summarize_saved_native_result, "summary")
+@@ -149,6 +168,20 @@
+         task, response = read(root / manifest["cases"][0]["task"]), read(run / "fixed_square/response.json")
+         assert result["targets_mm"] == task["path"]["targets_mm"] and result["task_target_mm"] == task["input"]["target_mm"] and result["path_completed"] is True
+         assert result["settings"] == manifest["options"]["settings"] and result["response_mode"] == "mechanical" and result["tangent_execution"]["mode"] == "chunk256" and result["initial_guess"] == "port_projection"
++        model_file = run / "fixed_square/model/model.json"
++        model = read(model_file)
++        assert result["counts"] == model["region_metadata"]["counts"] == protocol["expected_counts"]
++        assert sha(model_file.with_name("model.npz")) == model["arrays"]["sha256"] == protocol["expected_model_arrays_sha256"]
++        for actual in (result["source_geometry"], model["source_geometry"]):
++            assert {k:actual[k] for k in protocol["expected_geometry"]} == protocol["expected_geometry"]
++        assert result["loading_peak_reached"] and result["unload_endpoint_reached"] and result["target_origin"] == 0.0
++        original_rows = [row for row in result["states"] if row["is_original_target"]]
++        targets = task["path"]["targets_mm"]
++        assert [row["original_target_index"] for row in original_rows] == list(range(len(targets)))
++        for index, row in enumerate(original_rows):
++            leg = "origin" if index == 0 else "loading" if targets[index] > targets[index-1] else "unloading"
++            assert row["d"] == row["original_target_displacement"] == targets[index] and row["target_origin"] == 0.0 and row["leg"] == leg
++        receipt.update(original_target_states=len(original_rows), additional_bisection_states=len(result["states"])-len(original_rows))
+         assert response["path"]["requested_targets_mm"] == task["path"]["targets_mm"] and all(value is False for value in response["producer_flags"].values())
+         assert response["independent_reference"]["status"] == response["views"]["status"] == "not_provided" and receipt["cached_production_gates"]["passed"]
+         for kind in ("force", "tangent"):

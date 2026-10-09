@@ -1,6 +1,16 @@
+2026-10-09 接续：M-PREP1已明确批准并一次PASS关闭，101/101构模检查，17绑定保持。实际同结构h0.5为13,440单元/13,689节点/27,378 DOF，fixed1548/free25830；helper16.7743 s/outer17.9396 s，tree RSS峰值187,662,336 B。[目标、实现、依据、效果和限制](../lf_data_preparation/native_interface_001/nested_mesh_preparation_001/RESULTS.md) · [未变形粗细网格/尖端图](../lf_data_preparation/native_interface_001/nested_mesh_preparation_001/run_001/nested_geometry.png) · [真实模型](../lf_data_preparation/native_interface_001/nested_mesh_preparation_001/run_001/model/model.json)。
+
+四掩码物理并集、边界、同工件/材料和连续端口保持，5节点线积分/Q1尺度/物理约束验证通过。新F/T/求解/HP/JIT执行/LF均0；该图只有未变形几何，构模通过不授予细网格平衡或接触资格。最近下一阶段是[M-CYCLE1同任务细网格完整24目标加载—卸载卡](../lf_data_preparation/native_interface_001/nested_cycle_001/M-CYCLE1_CARD.md)，保持原门和零起点；新资源具体批准后才运行，其自有参考和变形/力图依赖真实生产结果。
+
+<details>
+<summary>身份核对完成、M-PREP1源准备时的接续记录</summary>
+
 2026-10-09 接续：保存态身份核对已完成，24态/96对缓存、4对模型几何实际字节一致，37参考源及副本匹配；353文件/308,949,469字节，独立12对抽查通过。[完整依据与适用范围](../lf_data_preparation/native_interface_001/workpiece_identity_001/RESULTS.md)。历史同快照数学证据单独引用；原fresh-reference入口、API响应和资格标志保持，新独参仍not_provided，未重复48HP。
 
 最近下一阶段为[M-PREP1：同一结构的派生细网格构模与未变形显示](../lf_data_preparation/native_interface_001/nested_mesh_preparation_001/M-PREP1_CARD.md)。2×2细分候选及协议已写，尚未生成数组、构模或绘图；源审阅归档后待明确批准。预测h0.5为13,440单元/13,689节点/27,378 DOF，保持同域、工件、物理端口和材料。现有两份不同LF设计不能充当此网格对照。构模通过后再根据实际结果制定细网格平衡卡；两个网格只报告敏感性。
+
+
+</details>
 
 # 固定工件真实 API：24态完整路径与可视化已完成
 

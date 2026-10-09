@@ -1,0 +1,121 @@
+{
+  "schema_version": "hf-native-project-task-1.1",
+  "task_id": "EXPLORATORY_fixed_square_x71_side18_E1_gamma1em6_rightmargin4_1p2mm__HF_nested_h05__M_CYCLE1",
+  "case_family": "gripper",
+  "purpose": "same_design_nested_mesh_sensitivity_production",
+  "parameter_origin": "M-PREP1 verified exact 2x2 HF subdivision of the preserved h1 geometry; same physical task and no LF optimization.",
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain"
+  },
+  "input": {
+    "tag": "input",
+    "control": "average_displacement",
+    "target_mm": 1.2
+  },
+  "output": {
+    "tag": "output",
+    "spring_N_per_mm": 0.0
+  },
+  "constraints": [
+    {
+      "tag": "support",
+      "components": [
+        0,
+        1
+      ]
+    },
+    {
+      "tag": "symmetry",
+      "components": [
+        1
+      ]
+    }
+  ],
+  "support_selection": "solid_incident_nodes_only",
+  "input_auxiliary_spring_N_per_mm": 0.0,
+  "workpiece": {
+    "kind": "fixed_rigid",
+    "shape": "square",
+    "center_mm": [
+      71.0,
+      40.0
+    ],
+    "fixed_components": [
+      0,
+      1
+    ],
+    "side_mm": 18.0
+  },
+  "third_medium": {
+    "gamma": 1e-06
+  },
+  "qualification_criteria": {
+    "max_design_volume_fraction": null,
+    "min_feature_mm": null
+  },
+  "reference_state": "undeformed",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "regularization": {
+    "alpha": 1e-06,
+    "length_mm": 80.0
+  },
+  "background_symmetry": {
+    "points_mm": [
+      [
+        0.0,
+        40.0
+      ],
+      [
+        84.0,
+        40.0
+      ]
+    ],
+    "components": [
+      1
+    ]
+  },
+  "geometry": {
+    "geometry_id": "a8117291562fc32b9806a26f5bcf97441e06992f44e5e8c634f44c52e67e7fbe",
+    "descriptor_sha256": "b8b6b89c8de7693a44c458909fdd098307a9f7e59d6e5365877460137f514f84"
+  },
+  "analysis_grid": {
+    "policy": "native"
+  },
+  "description": "Fixed side18 square center(71,40), 84x40mm domain and right medium margin4mm; supplied HF-derived h0.5 grid. Same material, physical ports and original 24-target 0-1.2-0mm cycle. Fresh zero-start production requires its own saved-state reference and views.",
+  "path": {
+    "kind": "ordered_cycle",
+    "targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.65,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0,
+      1.05,
+      1.1,
+      1.15,
+      1.2,
+      1.15,
+      1.1,
+      1.0,
+      0.9,
+      0.8,
+      0.75,
+      0.65,
+      0.5,
+      0.25,
+      0.0
+    ]
+  }
+}
