@@ -1,0 +1,46 @@
+# M-LEDGER1 外部来源草案：四保存态的节点载荷账本与三图
+
+2026-10-10，**来源准备，尚未正式冻结、尚未授权执行、尚未执行算法或绘图。** main 基线 `909d7ba6a4bd3ba6bd11b97af830f4aeeef203c7`。目录中的 `input_scope_review.json` 是只读输入合同，不是执行许可。
+
+整体目标仍是独立 HF 有限变形／TMC 前向评估，能解释反力、工件载荷和实际变形。M-CYCLE1、M-VIEW1、M-REF2、M-LINK1 已有完整结果／参考／图件。本步直接整理已有节点载荷，回答材料／Hu 力来自哪一类工件节点；保留共享角点与对称切面，先看真实分类结果再决定后续物理定义。
+
+## 最小实现与固定输入
+
+新增 stdlib `saved_workpiece_loads.py`，公开函数 `summarize_saved_workpiece_node_ledger(nodes_csv, body_metadata, *, recorded_states, selected_states=(0,8,13,23))`。body_metadata 是已有 linked_response.physics，加上模型 JSON 的 `region_metadata.workpiece.nodes` 标准节点 ID；recorded_states 携带旧 case summary 身份与选定的旧 nodal.json。函数可在将来接收全部24记录，本次 caller 锁定四态：0 origin、8 loading0.95(maxHu)、13 loading1.2、23 unload0。
+
+严格当前固定 lower-half square：h0.5、84×40mm下半域、中心(71,40)mm／边长18mm，参考身体边界 x62／80、y31／40，703标准节点。CSV的x/y是固定身体参考坐标；不是变形钳尖坐标。本次不泛化到圆体、阶梯边界或自由／变形工件。
+
+读取原 `nodes.csv`，其首列是 `index`。匹配 index／original_target_index／leg／d／state SHA，不能只用d作为身份。旧summary完整24身份与原result对照是历史输入登记；**新账本只输出四态，不是全24新处理或资格**。每态节点集合匹配模型标准ID与旧nodal坐标；不读取任何NPZ或运行原观察器。
+
+## 分类、算术与资格
+
+每个节点仅一类：bottom／left／right侧内点、physical_corner、physical_and_cut交点、cut_interior、body_interior。旧 physical_and_cut／cut_only／interior优先保留，旧 physical_only才细分侧与物理角点。角点／交点向量独立，不平均分给相邻侧。
+
+新节点表原六个 total/material/regularization(Hu) Fx/Fy 字符串直接保留，包括 signed zero 与卸载微小残量。它们已是 medium/model ON-body 有符号弱式力，单位N且厚度20mm已包含；不重复乘厚度、不除面积、不裁剪。total独立保留，不强制逐节点total=material+Hu。
+
+分组用 `float`＋`math.fsum`。直接整体fsum须精确复现旧nodal整体与旧case summary的六分量。新七组合并回旧四组，比较旧组counts与六分量；沿用原观察器分区算术合同 `|error| ≤ 8·2^-52·fsum(abs(original_node_force))`，逐态／分量／方向，无1e-12N绝对地板，零L1界要求零差。它只检查本次新CSV分类／记账闭合，不重跑旧15HP门或授予新力核资格。
+
+本卡不实现外邻材料P probe、Hu总边界力重建、压力、有效夹持、全24账本、网格／域收敛或HF5。材料P·N不能当Hu模型总压力；未来外邻P诊断是否需要，等本次实际账本结果之后再决定。
+
+## 将来唯一输出与可视化
+
+拟新阶段 `lf_data_preparation/native_interface_001/nested_ledger_001`，只写其新 `run_001`，旧输入／图件不改：
+
+- `selected_nodes.csv`：四态原节点行及新增 ledger_category，原六力文本保留。
+- `category_loads.csv`、`ledger.json`：四态七类别counts、六分量、原四组回并及比较事实。
+- `positions.png`：固定工件参考位置与类别／角点／切面节点。
+- `component_bars.png`：loading1.2mm七类别有符号Fx/Fy total／material／Hu柱形。
+- `selected_state_categories.png`：四个缓存态的类别Fx/Fy分量曲线，连线仅阅读引导，不宣称完整加载／卸载曲线。
+- `execution_receipt.json`：唯一调用、三PNG写入、输入前后绑定、时间／采样RSS及终态。
+
+三图使用Matplotlib，仅在未来具体卡授权后渲染；不生成AI图、不重建原viewer或改原PNG/GIF。最小来源没有新增镜像科学测试，本轮没有CSV行分类／求和／绘图。
+
+## 资源与之后流程
+
+建议新卡一次 helper180秒／outer240秒／采样RSS8GiB，首错停止、无重试、修复重跑、延期或force。协作停止与采样RSS，非OS硬内存上限；输出目录必须不存在。复用原字节通用launcher。末checkpoint在绑定复查后、成功资源收据构造前，异常由原try写not_pass，outer另记录完整终态。
+
+根代理独立审阅实际源码与输入合同后，才提升正式来源、冻结卡／协议、发布恢复并请求具体资源授权。本草案不允许直接执行。拟正式启动命令（当前不可执行，cwd仓库根）：
+
+```powershell
+& 'D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Scripts/python.exe' -X utf8 -B lf_data_preparation/native_interface_001/nested_ledger_001/launch_ledger.py ledger --protocol lf_data_preparation/native_interface_001/nested_ledger_001/protocol.json
+```
