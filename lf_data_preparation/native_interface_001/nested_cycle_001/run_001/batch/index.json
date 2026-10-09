@@ -1,0 +1,723 @@
+{
+  "schema_version": "hf-native-batch-index-1.0",
+  "status": "success",
+  "manifest": {
+    "path": "lf_data_preparation/native_interface_001/nested_cycle_001/manifest.json",
+    "path_scope": "repo_relative",
+    "sha256": "d52a525dad7ec3744b5b41248464bef93e826221c33676b7a300fdba0a3ecf42"
+  },
+  "path_base": {
+    "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC",
+    "source": "explicit_repo"
+  },
+  "directory": {
+    "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/batch",
+    "path_scope": "repo_relative"
+  },
+  "options": {
+    "targets": null,
+    "settings": {
+      "tolerance": 1e-09,
+      "constraint_tolerance": 1e-10,
+      "displacement_scale_floor": 1e-06,
+      "force_scale_floor_factor": 1e-08,
+      "max_checks": 25,
+      "armijo_c": 0.0001,
+      "max_backtracks": 12,
+      "max_bisections": 4,
+      "minimum_increment": 0.00625,
+      "time_limit_seconds": 14400.0
+    },
+    "time_limit_seconds": 180.0,
+    "minimum_increment": null,
+    "response_mode": "mechanical",
+    "tangent_mode": "chunk256",
+    "initial_guess": "port_projection"
+  },
+  "stop_on_non_success": true,
+  "shared_task_contract": {
+    "schema_version": "hf-native-project-task-1.1",
+    "case_family": "gripper",
+    "purpose": "same_design_nested_mesh_sensitivity_production",
+    "parameter_origin": "M-PREP1 verified exact 2x2 HF subdivision of the preserved h1 geometry; same physical task and no LF optimization.",
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain"
+    },
+    "input": {
+      "tag": "input",
+      "control": "average_displacement",
+      "target_mm": 1.2
+    },
+    "output": {
+      "tag": "output",
+      "spring_N_per_mm": 0.0
+    },
+    "constraints": [
+      {
+        "tag": "support",
+        "components": [
+          0,
+          1
+        ]
+      },
+      {
+        "tag": "symmetry",
+        "components": [
+          1
+        ]
+      }
+    ],
+    "support_selection": "solid_incident_nodes_only",
+    "input_auxiliary_spring_N_per_mm": 0.0,
+    "workpiece": {
+      "kind": "fixed_rigid",
+      "shape": "square",
+      "center_mm": [
+        71.0,
+        40.0
+      ],
+      "fixed_components": [
+        0,
+        1
+      ],
+      "side_mm": 18.0
+    },
+    "third_medium": {
+      "gamma": 1e-06
+    },
+    "qualification_criteria": {
+      "max_design_volume_fraction": null,
+      "min_feature_mm": null
+    },
+    "reference_state": "undeformed",
+    "units": {
+      "length": "mm",
+      "force": "N",
+      "stress": "MPa",
+      "energy": "N mm"
+    },
+    "regularization": {
+      "alpha": 1e-06,
+      "length_mm": 80.0
+    },
+    "background_symmetry": {
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          84.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ]
+    },
+    "analysis_grid": {
+      "policy": "native"
+    },
+    "description": "Fixed side18 square center(71,40), 84x40mm domain and right medium margin4mm; supplied HF-derived h0.5 grid. Same material, physical ports and original 24-target 0-1.2-0mm cycle. Fresh zero-start production requires its own saved-state reference and views.",
+    "path": {
+      "kind": "ordered_cycle",
+      "targets_mm": [
+        0.0,
+        0.25,
+        0.5,
+        0.65,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95,
+        1.0,
+        1.05,
+        1.1,
+        1.15,
+        1.2,
+        1.15,
+        1.1,
+        1.0,
+        0.9,
+        0.8,
+        0.75,
+        0.65,
+        0.5,
+        0.25,
+        0.0
+      ]
+    }
+  },
+  "shared_task_contract_sha256": "c10c9a19a26d7858d3c684ab6a514c0f0758b4899116b0edcde676e0e98c69af",
+  "shared_geometry_declarations": {
+    "case_family": "gripper",
+    "thickness_mm": 20.0,
+    "model_extent": {
+      "kind": "lower_half",
+      "symmetry_axis": {
+        "normal": [
+          0.0,
+          1.0
+        ],
+        "offset_mm": 40.0
+      }
+    },
+    "region_tags": {
+      "support": {
+        "points_mm": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            8.0
+          ]
+        ],
+        "components": [
+          0,
+          1
+        ]
+      },
+      "symmetry": {
+        "points_mm": [
+          [
+            0.0,
+            40.0
+          ],
+          [
+            60.0,
+            40.0
+          ]
+        ],
+        "components": [
+          1
+        ]
+      },
+      "input": {
+        "points_mm": [
+          [
+            0.0,
+            38.0
+          ],
+          [
+            0.0,
+            40.0
+          ]
+        ],
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "averaging": "normalized_reference_arclength_trapezoid"
+      },
+      "output": {
+        "points_mm": [
+          [
+            80.0,
+            28.0
+          ],
+          [
+            80.0,
+            30.0
+          ]
+        ],
+        "direction": [
+          0.0,
+          1.0
+        ],
+        "averaging": "normalized_reference_arclength_trapezoid"
+      }
+    },
+    "grid": {
+      "origin_mm": [
+        0.0,
+        0.0
+      ],
+      "axes": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "extent_mm": [
+        84.0,
+        40.0
+      ]
+    }
+  },
+  "shared_geometry_declarations_sha256": "566319f8936ed5add895a7ff8fa39089dc9597ce3cba476077b2fffbe7f85bcc",
+  "preflight_scope": "Task and geometry JSON declarations only; no NPZ/model evaluation or mesh qualification",
+  "cases": [
+    {
+      "label": "fixed_square",
+      "status": "success",
+      "task_id": "EXPLORATORY_fixed_square_x71_side18_E1_gamma1em6_rightmargin4_1p2mm__HF_nested_h05__M_CYCLE1",
+      "geometry": {
+        "path": "lf_data_preparation/native_interface_001/nested_mesh_preparation_001/run_001/geometry/geometry.json",
+        "path_scope": "repo_relative",
+        "sha256": "574ed624b2df79fc4fce3cca6eaa05218d60edb77674bc48b37cf968a4c7e34b"
+      },
+      "task": {
+        "path": "lf_data_preparation/native_interface_001/nested_cycle_001/task.json",
+        "path_scope": "repo_relative",
+        "sha256": "26efc0aa96ffbfd847c3b274a4a1e453200e0669b33cd81c140e0dc8c1edc8dc"
+      },
+      "output": {
+        "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square",
+        "path_scope": "repo_relative"
+      },
+      "declared_paths": {
+        "geometry": "lf_data_preparation/native_interface_001/nested_mesh_preparation_001/run_001/geometry/geometry.json",
+        "task": "lf_data_preparation/native_interface_001/nested_cycle_001/task.json",
+        "output": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square"
+      },
+      "analysis_grid_declared": {
+        "shape_yx": [
+          80,
+          168
+        ],
+        "origin_mm": [
+          0.0,
+          0.0
+        ],
+        "cell_size_mm": [
+          0.5,
+          0.5
+        ],
+        "axes": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "extent_mm": [
+          84.0,
+          40.0
+        ],
+        "array_order": "C_yx_bottom_up",
+        "value_location": "cell"
+      },
+      "requested_targets_mm": [
+        0.0,
+        0.25,
+        0.5,
+        0.65,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95,
+        1.0,
+        1.05,
+        1.1,
+        1.15,
+        1.2,
+        1.15,
+        1.1,
+        1.0,
+        0.9,
+        0.8,
+        0.75,
+        0.65,
+        0.5,
+        0.25,
+        0.0
+      ],
+      "response": {
+        "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/response.json",
+        "path_scope": "repo_relative",
+        "sha256": "9e68476d42f516f92bd1e93946568ed04f5fd5ac0d685ef98136fa8521c1499a"
+      },
+      "reason": null,
+      "identity": {
+        "result": {
+          "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/result.json",
+          "path_scope": "repo_relative",
+          "sha256": "624ff6618e12670ea2bed9f84992a5001a7fd983fc7d2ade2415b8f1072ac5cf"
+        },
+        "model": {
+          "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/model/model.json",
+          "path_scope": "repo_relative",
+          "sha256": "668d3e6dff9c84dd4af5690a0029111451715ded25b4b3aa181059bf44a61f74"
+        },
+        "task_sha256": "2a467c33f9ca3101fb2fccd297773afdb53c9d28a2ce9b9a7271f952cfeb557e",
+        "geometry": {
+          "geometry_id": "a8117291562fc32b9806a26f5bcf97441e06992f44e5e8c634f44c52e67e7fbe",
+          "descriptor_sha256": "b8b6b89c8de7693a44c458909fdd098307a9f7e59d6e5365877460137f514f84",
+          "descriptor_file_sha256": "574ed624b2df79fc4fce3cca6eaa05218d60edb77674bc48b37cf968a4c7e34b",
+          "arrays_sha256": "4c61b434584f7e7f278227c52bc8250a0c555f686cad51ab01900d65b66b93d2",
+          "snapshot": {
+            "descriptor": "source_geometry/geometry.json",
+            "arrays": "source_geometry/geometry.npz"
+          }
+        },
+        "mechanics_source_sha256": {
+          "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+          "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+          "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+          "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+        },
+        "arrays_identity_scope": "Declared saved array SHA only; no NPZ was opened"
+      },
+      "options": {
+        "response_mode": {
+          "value": "mechanical",
+          "source": "result_metadata"
+        },
+        "tangent_mode": {
+          "value": "chunk256",
+          "source": "result_metadata"
+        },
+        "initial_guess": {
+          "value": "port_projection",
+          "source": "result_metadata"
+        }
+      },
+      "invocation": {
+        "geometry_file": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_mesh_preparation_001\\run_001\\geometry\\geometry.json",
+        "task_file": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_cycle_001\\task.json",
+        "output_directory": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_cycle_001\\run_001\\fixed_square",
+        "response_mode": "mechanical",
+        "tangent_mode": "chunk256",
+        "initial_guess": "port_projection",
+        "task_file_sha256": "26efc0aa96ffbfd847c3b274a4a1e453200e0669b33cd81c140e0dc8c1edc8dc",
+        "targets_mm": [
+          0.0,
+          0.25,
+          0.5,
+          0.65,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.15,
+          1.1,
+          1.0,
+          0.9,
+          0.8,
+          0.75,
+          0.65,
+          0.5,
+          0.25,
+          0.0
+        ],
+        "settings": {
+          "tolerance": 1e-09,
+          "constraint_tolerance": 1e-10,
+          "displacement_scale_floor": 1e-06,
+          "force_scale_floor_factor": 1e-08,
+          "max_checks": 25,
+          "armijo_c": 0.0001,
+          "max_backtracks": 12,
+          "max_bisections": 4,
+          "minimum_increment": 0.00625,
+          "time_limit_seconds": 14400.0
+        },
+        "time_scope": "Controller time limit; through-summary elapsed is separately reported"
+      },
+      "evaluation_elapsed_scope": "Through summary; excludes response write and CLI startup/stdout",
+      "qualification_scope": null,
+      "path": {
+        "kind": "ordered_cycle",
+        "requested_targets_mm": [
+          0.0,
+          0.25,
+          0.5,
+          0.65,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.15,
+          1.1,
+          1.0,
+          0.9,
+          0.8,
+          0.75,
+          0.65,
+          0.5,
+          0.25,
+          0.0
+        ],
+        "task_target_mm": 1.2,
+        "requested_endpoint_mm": 0.0,
+        "reached_displacement_mm": 0.0,
+        "accepted_states": 24,
+        "completed": true,
+        "task_target_executed": true
+      },
+      "target_response": {
+        "index": 13,
+        "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+        "d_mm": 1.2,
+        "leg": "loading",
+        "original_target_index": 13,
+        "is_original_target": true,
+        "R_input_N": 0.37870645239539324,
+        "q_in_mm": 1.2,
+        "q_out_mm": 1.0166993609101365,
+        "minimum_J": 2.339669248338757e-05,
+        "relative_residual": 4.024259357733904e-10,
+        "relative_global_force_balance": 1.929474479427137e-13,
+        "constraint_residual_mm": 0.0,
+        "max_abs_Hu_per_mm": 0.3614815860369214,
+        "workpiece": {
+          "force_on_lower_body_N": {
+            "total": [
+              -0.0008760157046173312,
+              0.12317940160165043
+            ],
+            "material": [
+              -0.000561226821740675,
+              0.12191255705872141
+            ],
+            "regularization": [
+              -0.0003147888828766561,
+              0.0012668445429290087
+            ]
+          },
+          "holding_reaction_on_model_N": [
+            0.0008760157046173312,
+            -0.12317940160165043
+          ],
+          "mirrored_upper_force_N": [
+            -0.0008760157046173312,
+            -0.12317940160165043
+          ],
+          "full_workpiece_net_force_N": [
+            -0.0017520314092346625,
+            0.0
+          ],
+          "two_sided_normal_magnitude_sum_N": 0.24635880320330086,
+          "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+          "node_window_clearance_mm": {
+            "bottom": 0.0011443626281568697,
+            "left": 2.344019026933367
+          },
+          "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+        }
+      },
+      "requested_endpoint_response": {
+        "index": 23,
+        "state_sha256": "65c4b80ffe62683a883ccdf0559d1c6f14a013b2dabfa1b4bb9bb2390c64b87f",
+        "d_mm": 0.0,
+        "leg": "unloading",
+        "original_target_index": 23,
+        "is_original_target": true,
+        "R_input_N": -2.74649812494227e-26,
+        "q_in_mm": 0.0,
+        "q_out_mm": -9.310010185974537e-25,
+        "minimum_J": 1.0,
+        "relative_residual": 5.113852416079345e-10,
+        "relative_global_force_balance": 1.1469923429471677e-11,
+        "constraint_residual_mm": 0.0,
+        "max_abs_Hu_per_mm": 1.220285147754039e-23,
+        "workpiece": {
+          "force_on_lower_body_N": {
+            "total": [
+              1.0692772104248615e-27,
+              -4.553785362498083e-27
+            ],
+            "material": [
+              1.1144090552150704e-28,
+              -2.9457611335764292e-28
+            ],
+            "regularization": [
+              9.578363049033545e-28,
+              -4.25920924914044e-27
+            ]
+          },
+          "holding_reaction_on_model_N": [
+            -1.0692772104248615e-27,
+            4.553785362498083e-27
+          ],
+          "mirrored_upper_force_N": [
+            1.0692772104248615e-27,
+            4.553785362498083e-27
+          ],
+          "full_workpiece_net_force_N": [
+            2.138554420849723e-27,
+            0.0
+          ],
+          "two_sided_normal_magnitude_sum_N": 9.107570724996166e-27,
+          "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+          "node_window_clearance_mm": {
+            "bottom": 1.0,
+            "left": 2.0
+          },
+          "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+        }
+      },
+      "maximum_loading_stroke": {
+        "index": 13,
+        "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+        "d_mm": 1.2,
+        "leg": "loading",
+        "original_target_index": 13,
+        "is_original_target": true,
+        "R_input_N": 0.37870645239539324,
+        "q_in_mm": 1.2,
+        "q_out_mm": 1.0166993609101365,
+        "minimum_J": 2.339669248338757e-05,
+        "relative_residual": 4.024259357733904e-10,
+        "relative_global_force_balance": 1.929474479427137e-13,
+        "constraint_residual_mm": 0.0,
+        "max_abs_Hu_per_mm": 0.3614815860369214,
+        "workpiece": {
+          "force_on_lower_body_N": {
+            "total": [
+              -0.0008760157046173312,
+              0.12317940160165043
+            ],
+            "material": [
+              -0.000561226821740675,
+              0.12191255705872141
+            ],
+            "regularization": [
+              -0.0003147888828766561,
+              0.0012668445429290087
+            ]
+          },
+          "holding_reaction_on_model_N": [
+            0.0008760157046173312,
+            -0.12317940160165043
+          ],
+          "mirrored_upper_force_N": [
+            -0.0008760157046173312,
+            -0.12317940160165043
+          ],
+          "full_workpiece_net_force_N": [
+            -0.0017520314092346625,
+            0.0
+          ],
+          "two_sided_normal_magnitude_sum_N": 0.24635880320330086,
+          "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+          "node_window_clearance_mm": {
+            "bottom": 0.0011443626281568697,
+            "left": 2.344019026933367
+          },
+          "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+        }
+      },
+      "last_accepted": {
+        "index": 23,
+        "state_sha256": "65c4b80ffe62683a883ccdf0559d1c6f14a013b2dabfa1b4bb9bb2390c64b87f",
+        "d_mm": 0.0,
+        "leg": "unloading",
+        "original_target_index": 23,
+        "is_original_target": true,
+        "R_input_N": -2.74649812494227e-26,
+        "q_in_mm": 0.0,
+        "q_out_mm": -9.310010185974537e-25,
+        "minimum_J": 1.0,
+        "relative_residual": 5.113852416079345e-10,
+        "relative_global_force_balance": 1.1469923429471677e-11,
+        "constraint_residual_mm": 0.0,
+        "max_abs_Hu_per_mm": 1.220285147754039e-23,
+        "workpiece": {
+          "force_on_lower_body_N": {
+            "total": [
+              1.0692772104248615e-27,
+              -4.553785362498083e-27
+            ],
+            "material": [
+              1.1144090552150704e-28,
+              -2.9457611335764292e-28
+            ],
+            "regularization": [
+              9.578363049033545e-28,
+              -4.25920924914044e-27
+            ]
+          },
+          "holding_reaction_on_model_N": [
+            -1.0692772104248615e-27,
+            4.553785362498083e-27
+          ],
+          "mirrored_upper_force_N": [
+            1.0692772104248615e-27,
+            4.553785362498083e-27
+          ],
+          "full_workpiece_net_force_N": [
+            2.138554420849723e-27,
+            0.0
+          ],
+          "two_sided_normal_magnitude_sum_N": 9.107570724996166e-27,
+          "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+          "node_window_clearance_mm": {
+            "bottom": 1.0,
+            "left": 2.0
+          },
+          "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+        }
+      },
+      "call_counts": {
+        "force_calls": 443,
+        "force_calls_completed": 386,
+        "tangent_calls": 201,
+        "tangent_calls_completed": 201,
+        "solver_invocations": 1,
+        "JIT_calls": 0,
+        "HP_calls": 0
+      },
+      "timing_seconds": {
+        "project_preparation": 0.08925810002256185,
+        "evaluation": 11428.152201900026
+      },
+      "evaluation_elapsed_seconds": 11457.863937599934,
+      "failure": null,
+      "producer_flags": {
+        "independent_HP_qualified": false,
+        "equilibrium_qualified": false,
+        "HF_qualified": false
+      },
+      "independent_reference": {
+        "status": "not_provided",
+        "accepted_reference_pass": false,
+        "full_path_reference_pass": false,
+        "report": null,
+        "reasons": [
+          "No independent reference supplied"
+        ],
+        "HP_all_columns_qualified": false,
+        "contact_qualified": false,
+        "clamp_qualified": false,
+        "pressure_qualified": false,
+        "HF5_qualified": false
+      },
+      "views": {
+        "status": "not_provided",
+        "manifest": null,
+        "links": [],
+        "reasons": []
+      }
+    }
+  ],
+  "failure_case": null,
+  "HF5_qualified": false,
+  "ranking_qualified": false,
+  "qualification_scope": "Batch transport only; each response retains its own independent reference, views and flags"
+}

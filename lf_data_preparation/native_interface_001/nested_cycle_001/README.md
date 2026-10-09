@@ -1,3 +1,12 @@
+# M-CYCLE1 已一次完成：同设计细网格24态完整循环
+
+2026-10-09。明确批准后唯一一次PASS闭卡，24原目标/24接受态、无二分态，加载1.20 mm并卸载回0。helper11461.54 s/outer11463.22 s，44绑定保持；保存模型NPZ与M-PREP1一致。原缓存门通过，独参/views仍未提供，producer flags仍false，新HP/观察/渲染0。
+
+[目标、工作、理由、实际效果及限制](RESULTS.md) · [真实response](run_001/fixed_square/response.json) · [全部保存态与诊断](run_001/fixed_square/result.json) · [独立终态审阅](author/terminal_review.json)。峰值R0.378706 N、下半工件Fy0.123179 N、两侧法向幅值和0.246359 N；同设计粗细网格只作敏感性比较。最近下一步优先准备[具体M-VIEW1保存态显示卡](../../../functional_views/native_nested_cycle_20261009/complete_001/M-VIEW1_CARD.md)；不重开本卡。
+
+<details>
+<summary>执行前来源、候选与静审记录（历史原文）</summary>
+
 # 同结构h0.5完整路径：来源与执行准备
 
 2026-10-09。状态：源码及普通JSON输入已准备，**未授权、未运行**。M-PREP1构模/未变形图已一次通过，新路径不借其资源窗口。
@@ -11,3 +20,6 @@
 [独立最终静审](author/final_cycle_static_review.json)通过：44实际文件绑定、已有API字段、物理任务、原门/观测块及资源合同一致，未发现执行前必须修正项。这是静态准备，不是细网格数值通过。
 
 申请一次controller14400／helper15000／outer15060秒、采样8 GiB；其依据和不确定性见卡。新阶段尚无结果、变形图、独立参考或资格。收到具体卡批准后才执行，生产结果再决定自有HP/观察最近一步；两网格只报告敏感性。
+
+
+</details>
