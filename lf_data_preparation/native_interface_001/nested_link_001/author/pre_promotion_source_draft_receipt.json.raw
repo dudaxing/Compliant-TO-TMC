@@ -1,0 +1,43 @@
+{
+  "schema_version": "M-LINK1-external-source-draft-preparation-1.0",
+  "status": "external_draft_not_formal_not_authorized_not_executed",
+  "formal_repo_writes": 0,
+  "public_API_calls": 0,
+  "HF_imports": 0,
+  "NPZ_decodes": 0,
+  "large_HP_gzip_decodes_or_hashes": 0,
+  "HP_F_T_solve_model_observer_render_costprobe_calls": 0,
+  "source_baseline_commit_bound": false,
+  "source_AST_parsed": true,
+  "reference_source_bindings": 12,
+  "actual_existing_metadata_bindings": 31,
+  "future_source_bindings": {
+    "lf_data_preparation/native_interface_001/nested_link_001/execute_nested_link.py": "f72c201623062241cfb3a4117f586719b28dc4cb805feb029d36e3fab885496b",
+    "lf_data_preparation/native_interface_001/nested_link_001/launch_link.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+    "lf_data_preparation/native_interface_001/nested_link_001/M-LINK1_CARD.md": "8c5bde0bba5d021a566c441956baf34fb27d3558facb74300fd779ce6b2dd350"
+  },
+  "protocol_draft_sha256": "d80852d8a832a7be8be172b04f120572c9d469b63d30a90e002a80e88c895271",
+  "worker_lines": 109,
+  "suggested_resources": {
+    "helper_seconds": 180,
+    "outer_seconds": 240,
+    "sampled_RSS_bytes": 8589934592
+  },
+  "pending": "Root confirms M-REF2 actual publication/restoration, promotes minimum sources, obtains independent static review and separate new-card execution authorization; no current execution authorized",
+  "pre_static_review_source_corrections": [
+    {
+      "evidence_file": "terminal_checkpoint_correction_001.json",
+      "sha256": "110fd64007f5a5f160de0bec22701605b1a046f451fafdc7611480535783591c",
+      "old_worker_snapshot": "pre_review_001_execute_nested_link.py.raw",
+      "change": "Final checkpoint moved immediately after run() inside try, before any pass receipt write; its time/RSS/stop exception enters existing except and writes not_pass receipt",
+      "corrected_source_only_no_worker_or_API_execution": true
+    },
+    {
+      "evidence_file": "terminal_checkpoint_correction_002.json",
+      "sha256": "64f9448616e027e0337e2cec0254944c8e8e5c9ef11f77fed0f841af7b0fb32a",
+      "old_worker_snapshot": "pre_review_002_execute_nested_link.py.raw",
+      "change": "Final checkpoint is now inside run(), immediately before successful receipt construction; run() remains invoked inside main() try, so time/RSS/stop exceptions reach the existing not_pass except; successful RSS and elapsed fields follow the final sample",
+      "corrected_source_only_no_worker_or_API_execution": true
+    }
+  ]
+}

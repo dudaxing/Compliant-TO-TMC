@@ -1,0 +1,18 @@
+--- pre_review_002/execute_nested_link.py
++++ corrected_external_002/execute_nested_link.py
+@@ -88,6 +88,7 @@
+     for name,pin in protocol["bindings"].items():
+         if sha(repo/name) != pin:
+             raise ValueError("Original bound artifact changed: "+name)
++    checkpoint()
+     return dict(schema_version="M-LINK1-saved-association-execution-1.0",status="pass",calls=calls,
+         protocol_sha256=sha(protocol_file),all_bindings_unchanged=True,outputs={path.name:sha(path) for path in (linked,output/"delivery_index.json")},
+         elapsed_seconds=perf_counter()-STARTED,sampled_peak_RSS_bytes=peak,
+@@ -97,7 +98,6 @@
+     output.mkdir(parents=True,exist_ok=False)
+     try:
+         receipt = run()
+-        checkpoint()
+     except BaseException as error:
+         write(output/"execution_receipt.json",dict(status="not_pass",error=repr(error),calls=calls,
+             elapsed_seconds=perf_counter()-STARTED,sampled_peak_RSS_bytes=peak))

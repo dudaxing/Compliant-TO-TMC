@@ -6,6 +6,8 @@ M-REF2细网格完整24保存态独立参考已通过，唯一窗口已关闭。
 
 原生产response与原view/phase保持历史字节。最近下一步准备复用已有保存结果摘要接口生成新增关联response／轻索引，匹配本次reference及既有24态图件，不重求解／HP／渲染；第四粗细PNG由既有phase关联。之后才定义包含材料与Hu、物理表面／对称切面／角点的总表面力；节点弱式力和仅材料P不能直接称压力。新后续尚未执行。
 
+[M-LINK1具体执行卡](../nested_link_001/M-LINK1_CARD.md)与[独立最终静审](../nested_link_001/author/final_static_review.json)已准备通过：109行薄层复用已有保存摘要API，35份原字节绑定；拟一次生成新增关联response／轻交付索引，引用同24态、已有48HP、原4PNG／24帧GIF及四份表。helper180／outer240秒、采样8 GiB；首错停止，无修复重跑、延期或force。新API调用拟为1，新力学／HP／渲染为0；原response和图件资格不改。本候选尚未授权或执行，M-REF2窗口已关闭，新范围与资源须单独批准。
+
 <details>
 <summary>M-REF2来源准备时README原文（历史状态不代表当前）</summary>
 

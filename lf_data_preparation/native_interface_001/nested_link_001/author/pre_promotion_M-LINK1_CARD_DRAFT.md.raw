@@ -1,0 +1,41 @@
+# M-LINK1 外部候选草案：同身份参考／图件关联摘要与轻交付索引
+
+**仅外部待审草案：未纳入正式仓库、未获本卡执行授权、未执行公共API。** M-REF2提交及独立恢复确认后，再决定正式来源准备。本草案不绑定尚未发布完成的Git提交，不更改冻结输入或物理任务。
+
+目标是让用户和另一台计算机可以从一份新增关联摘要／轻索引直接到达当前细网格完整24态的结果、新HP证据和已有图件，继续开发时无需重新计算或绘图。
+
+## 最小实现
+
+直接使用现有 `hf_eval.native_response.summarize_saved_native_result` 和 `write_native_response`。输入为同一M-CYCLE1 `result.json`／M-REF2完整 `summary.json`／M-VIEW1原 `view.json`；现有API完成全部24态、48HP bookkeeping、当前result／model／task身份和12条参考Python来源SHA匹配。薄层只要求最终reference和views均matched／full_path_reference_pass成立，不复制或镜像API逐态检查。
+
+新增输出只有：
+
+- `run_001/linked_response.json`：现有保存摘要API原schema；独立reference可matched、完整24路径pass，producer flags仍记录原false，不能回填原producer。
+- `run_001/delivery_index.json`：repo-relative路径／SHA关联上述新response、原result／response、当前reference、原raw view与phase、4PNG／24帧GIF及小型状态／粗细CSV/JSON表。
+- `run_001/execution_receipt.json`：一次摘要读取、一次response／index写入及资源／绑定事实。
+
+raw view本身提供3PNG＋GIF；第四粗细PNG属于已关闭 `phase_view.json` 的 `comparison.image`。索引只从该phase读取并核对原SHA，不复制、修改或补写原view／phase目录。索引所有文件路径相对仓库根，换目录恢复后仍可解析；原HP大型档案仅通过summary引用，不为生成索引解码、重算或扫描它们。
+
+## 固定输入与资格
+
+当前24态result／model／task、48新HP、12条参考源绑定和既有raw view／phase／图件原字节不变。原 `response.json` 的reference/views not_provided与producer false flags保持历史事实，新增response只表示本次同身份关联。
+
+独立解析切线仍只有原5节点PORT方向（固定lift、deltaR=0）；完整CSC组装身份不是所有切线列的HP资格。图件为保存态诊断和两网格敏感性；本卡不授予压力、有效夹持、网格／域收敛、HF5或新应力／能量资格。现有Piola P只含材料，节点弱式力含Hu，不能直接称作压力或总表面力；后续定义材料＋Hu、物理表面／对称切面／角点另行准备。
+
+## 一次资源建议与停止
+
+仅保存元数据／来源／图片原字节读取，建议helper180秒／outer240秒／采样8GiB。现有通用launcher保持原字节；一次新输出，首个错误关闭，无修复重跑、重试、延期或force。采用协作停止和采样RSS，非OS硬内存上限；没有成本探测。此资源建议未获授权。
+
+新增求解／模型／F／T／HP／JIT／LF／observer／render为0（纯保存摘要调用来源，不宣称动态hooks）；**新增保存摘要API调用为1**，不得笼统报告API0。无需镜像新增测试；验收使用既有API matched合同、来源／输入前后原SHA和轻索引所引用phase图件的原SHA。
+
+## 准备和启动安排
+
+外部草案提供最小worker、同字节launcher和协议builder。builder仅生成本外部目录的协议草稿，未来正式位置暂拟 `lf_data_preparation/native_interface_001/nested_link_001`。未来根代理完成M-REF2实际发布／恢复、来源审阅和正式来源冻结后，才能提出这张新具体卡。
+
+拟定正式启动命令（当前不可执行）：
+
+```powershell
+& 'D:/Coding/Diversity TO/Compliant-TO-TMC/.venv-handoff/Scripts/python.exe' -X utf8 -B lf_data_preparation/native_interface_001/nested_link_001/launch_link.py link --protocol lf_data_preparation/native_interface_001/nested_link_001/protocol.json
+```
+
+整体仍是独立HF有限变形／TMC前向评估，main开发；此候选促进已有数值与可视化证据的实际易用性，不增加重复科学计算。

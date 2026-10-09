@@ -1,0 +1,37 @@
+{
+  "schema_version": "M-LINK1-external-terminal-checkpoint-source-correction-1.0",
+  "status": "provisional_external_source_corrected_no_execution",
+  "created_utc": "2026-10-09T11:06:18.818211+00:00",
+  "actual_narrow_review_issue": "Correction001 catches the final checkpoint error, but successful elapsed/RSS fields were constructed earlier in run() and were not refreshed after that final sample",
+  "instruction": "Root requested the minimum move: final checkpoint after the final bound-input recheck loop and before run() returns its receipt; remove main() checkpoint, add no receipt.update or mirrored tests",
+  "original_worker_snapshot": {
+    "path": "pre_review_002_execute_nested_link.py.raw",
+    "sha256": "c46627416caabe69e5713fbfa1ce6a6ccc103ff2b3a4f020e7d4d3416b3a8883",
+    "bytes": 6181
+  },
+  "corrected_worker": {
+    "path": "execute_nested_link.py",
+    "sha256": "f72c201623062241cfb3a4117f586719b28dc4cb805feb029d36e3fab885496b",
+    "bytes": 6177
+  },
+  "minimal_diff": "--- pre_review_002/execute_nested_link.py\n+++ corrected_external_002/execute_nested_link.py\n@@ -88,6 +88,7 @@\n     for name,pin in protocol[\"bindings\"].items():\n         if sha(repo/name) != pin:\n             raise ValueError(\"Original bound artifact changed: \"+name)\n+    checkpoint()\n     return dict(schema_version=\"M-LINK1-saved-association-execution-1.0\",status=\"pass\",calls=calls,\n         protocol_sha256=sha(protocol_file),all_bindings_unchanged=True,outputs={path.name:sha(path) for path in (linked,output/\"delivery_index.json\")},\n         elapsed_seconds=perf_counter()-STARTED,sampled_peak_RSS_bytes=peak,\n@@ -97,7 +98,6 @@\n     output.mkdir(parents=True,exist_ok=False)\n     try:\n         receipt = run()\n-        checkpoint()\n     except BaseException as error:\n         write(output/\"execution_receipt.json\",dict(status=\"not_pass\",error=repr(error),calls=calls,\n             elapsed_seconds=perf_counter()-STARTED,sampled_peak_RSS_bytes=peak))\n",
+  "control_flow": "Final checkpoint is now inside run(), immediately before successful receipt construction; run() remains invoked inside main() try, so time/RSS/stop exceptions reach the existing not_pass except; successful RSS and elapsed fields follow the final sample",
+  "preserved_prior_evidence": [
+    "pre_review_001_execute_nested_link.py.raw",
+    "pre_review_001_protocol_draft.json.raw",
+    "pre_review_001_source_draft_receipt.json.raw",
+    "terminal_checkpoint_diff_001.txt",
+    "terminal_checkpoint_correction_001.json"
+  ],
+  "actions": {
+    "formal_repo_writes": 0,
+    "public_API_calls": 0,
+    "HF_imports": 0,
+    "NPZ_decodes": 0,
+    "HP_F_T_solver_observer_render_costprobe_calls": 0,
+    "worker_executions": 0,
+    "source_AST_parse": true,
+    "raw_snapshot_and_SHA": true
+  },
+  "source_protocol_status": "External provisional pins must be regenerated; not frozen or authorized"
+}

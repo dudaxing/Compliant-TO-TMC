@@ -1,0 +1,123 @@
+{
+  "schema_version": "M-LINK1-terminal-checkpoint-static-correction-review-1.0",
+  "status": "original_control_flow_issue_fixed_final_resource_snapshot_refresh_required",
+  "created_utc": "2026-10-09T11:05:57.266467+00:00",
+  "reviewer": "fine_reference_scope",
+  "scope": "Only external109-line worker terminal control-flow/source snapshots/diff/correction records. No formal promotion or science review repeated.",
+  "raw_sha256": {
+    "corrected_worker": "c46627416caabe69e5713fbfa1ce6a6ccc103ff2b3a4f020e7d4d3416b3a8883",
+    "original_worker_snapshot": "09f14757416680de12b8f76c7deb06007776defd6f5279eb7cc4d6f93d1bbbcf",
+    "correction_record": "110fd64007f5a5f160de0bec22701605b1a046f451fafdc7611480535783591c",
+    "source_diff": "554025e62f93ba0513c93ca1b91924ee11e3294c126998654bf6fff179222308",
+    "prior_preliminary_scope_review": "9dc32943ad5e9a34ffc2807084339ea8ed544f3bf6fcb4886fdce7c5ef06a3b2"
+  },
+  "control_flow_assessment": "Corrected line100 finalcheckpoint is within the same try as run(). If it fails, the existing handler writes not_pass and rethrows before line105 successreceipt write. The original contradictory pass receipt on that final failure is fixed.",
+  "resource_snapshot_assessment": {
+    "passdict_created_line": 91,
+    "elapsed_field_line": 93,
+    "peak_field_line": 93,
+    "last_in_run_sample_line": 87,
+    "final_sample_in_main_line": 100,
+    "timing": "Receipt elapsed is evaluated after outputs SHA computation during run return, but before the final main checkpoint. Receipt peak integer is from the previous in-run checkpoint before the final pins loop. Final checkpoint may sample a higher peak that is absent from the already-created successreceipt.",
+    "required": "If these remain declared execution/sample-resource facts, refresh them after the final checkpoint; documenting them as pre-final snapshots is possible but creates unnecessary ambiguity."
+  },
+  "smallest_suggested_correction": {
+    "file": "execute_nested_link.py",
+    "instruction": "Move main line100 checkpoint into run immediately after the final original-binding loop (after lines88-90) and before line91 return dict. Remove it from main.",
+    "why": "The call remains transitively inside the existing main try, so errors still write not_pass. Its sampled peak is then used by the freshly constructed receipt; elapsed is evaluated after final output SHA reads. Same109 lines, same number of checkpoints, no new receipt.update branch or wrapper test.",
+    "remaining_normal_boundary": "Pass receipt serialization/stdout and process exit follow this last sample. Actual terminal/outer receipt remains authoritative for exit0, no stop, elapsed/treeRSS. No claim of OS hard cap or continuous peak monitoring."
+  },
+  "not_performed": {
+    "source_edits": 0,
+    "formal_repo_edits": 0,
+    "API_calls": 0,
+    "HF_imports": 0,
+    "worker_executions": 0,
+    "NPZ_decodes": 0,
+    "HP_F_T_solve_model_observer_render_repro_costprobe_calls": 0
+  },
+  "formal_freeze_still_pending": "Draft protocol/pins must be regenerated after final source choice; source baseline, M-REF2 actual publication/restoration, exact formal static review and new-card authorization remain pending. This report grants no execution permission.",
+  "checks_completed": 12,
+  "checks_passed": 11,
+  "checks": [
+    {
+      "name": "corrected worker requested raw SHA",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "original snapshot SHA identity preserved",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "only one checkpoint moved four indentation bytes",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "final checkpoint within same main try before success write",
+      "pass": true,
+      "evidence": {
+        "run_call_line": 99,
+        "final_checkpoint_line": 100,
+        "success_receipt_write_line": 105
+      }
+    },
+    {
+      "name": "failure finalcheckpoint goes existing notpass handler and rethrows",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "no trailing final check after success receipt",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "run and resource checker AST unchanged",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "summary and response writer call count unchanged",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "passdict metadata constructed in run before final main checkpoint",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "last run sample still before final original pins loop",
+      "pass": true,
+      "evidence": {
+        "last_run_checkpoint": 87,
+        "binding_loop": 88,
+        "pass_dict": 91
+      }
+    },
+    {
+      "name": "success resource fields refreshed after final check",
+      "pass": false,
+      "evidence": {
+        "issue": "Final main checkpoint updates global peak and samples a later elapsed boundary. Already-created receipt retains earlier elapsed_seconds and copied peak integer. Current fields are run-return/pre-final-check snapshots, not the final accepted sampled resource snapshot."
+      }
+    },
+    {
+      "name": "old preliminary report immutable raw SHA",
+      "pass": true,
+      "evidence": null
+    }
+  ],
+  "failed_checks": [
+    {
+      "name": "success resource fields refreshed after final check",
+      "pass": false,
+      "evidence": {
+        "issue": "Final main checkpoint updates global peak and samples a later elapsed boundary. Already-created receipt retains earlier elapsed_seconds and copied peak integer. Current fields are run-return/pre-final-check snapshots, not the final accepted sampled resource snapshot."
+      }
+    }
+  ]
+}

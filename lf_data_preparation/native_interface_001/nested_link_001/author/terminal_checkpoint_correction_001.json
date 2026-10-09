@@ -1,0 +1,30 @@
+{
+  "schema_version": "M-LINK1-external-terminal-checkpoint-source-correction-1.0",
+  "status": "provisional_external_source_corrected_no_execution",
+  "created_utc": "2026-10-09T11:01:57.093721+00:00",
+  "actual_pre_static_review_issue": "Old109line draft wrote pass execution_receipt at104 then called final checkpoint at105 outside try; final resource/stop failure could leave pass helper receipt with outer not_pass",
+  "instruction": "Root requested minimum external correction, preserving pre-review source and issue evidence; no formal promotion before M-REF2 publication/restoration",
+  "original_worker_snapshot": {
+    "path": "pre_review_001_execute_nested_link.py.raw",
+    "sha256": "09f14757416680de12b8f76c7deb06007776defd6f5279eb7cc4d6f93d1bbbcf",
+    "bytes": 6177
+  },
+  "corrected_worker": {
+    "path": "execute_nested_link.py",
+    "sha256": "c46627416caabe69e5713fbfa1ce6a6ccc103ff2b3a4f020e7d4d3416b3a8883",
+    "bytes": 6181
+  },
+  "minimal_diff": "--- pre_review_001/execute_nested_link.py\n+++ corrected_external/execute_nested_link.py\n@@ -97,12 +97,12 @@\n     output.mkdir(parents=True,exist_ok=False)\n     try:\n         receipt = run()\n+        checkpoint()\n     except BaseException as error:\n         write(output/\"execution_receipt.json\",dict(status=\"not_pass\",error=repr(error),calls=calls,\n             elapsed_seconds=perf_counter()-STARTED,sampled_peak_RSS_bytes=peak))\n         raise\n     write(output/\"execution_receipt.json\",receipt)\n-    checkpoint()\n     print(json.dumps(dict(status=receipt[\"status\"],calls=calls)),flush=True)\n \n if __name__ == \"__main__\":\n",
+  "control_flow": "Final checkpoint moved immediately after run() inside try, before any pass receipt write; its time/RSS/stop exception enters existing except and writes not_pass receipt",
+  "actions": {
+    "formal_repo_writes": 0,
+    "public_API_calls": 0,
+    "HF_imports": 0,
+    "NPZ_decodes": 0,
+    "HP_F_T_solver_observer_render_costprobe_calls": 0,
+    "worker_executions": 0,
+    "source_AST_parse": true,
+    "raw_snapshot_and_SHA": true
+  },
+  "source_protocol_status": "External provisional pins must be regenerated; not frozen or authorized"
+}

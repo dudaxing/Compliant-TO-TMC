@@ -1,0 +1,16 @@
+--- pre_review_001/execute_nested_link.py
++++ corrected_external/execute_nested_link.py
+@@ -97,12 +97,12 @@
+     output.mkdir(parents=True,exist_ok=False)
+     try:
+         receipt = run()
++        checkpoint()
+     except BaseException as error:
+         write(output/"execution_receipt.json",dict(status="not_pass",error=repr(error),calls=calls,
+             elapsed_seconds=perf_counter()-STARTED,sampled_peak_RSS_bytes=peak))
+         raise
+     write(output/"execution_receipt.json",receipt)
+-    checkpoint()
+     print(json.dumps(dict(status=receipt["status"],calls=calls)),flush=True)
+ 
+ if __name__ == "__main__":

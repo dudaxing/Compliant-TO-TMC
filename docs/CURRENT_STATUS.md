@@ -10,6 +10,8 @@
 
 整体目标仍为独立HF有限变形／TMC前向评估，不含优化或LF运行；main继续开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。旧生产response中的reference/views not_provided及producer flags false保持原字节，本次参考单独归档。
 
+[M-LINK1具体执行卡](../lf_data_preparation/native_interface_001/nested_link_001/M-LINK1_CARD.md)与[独立最终静审](../lf_data_preparation/native_interface_001/nested_link_001/author/final_static_review.json)已准备通过：109行薄层复用已有保存摘要API，35份原字节绑定；拟一次生成新增关联response／轻交付索引，引用同24态、已有48HP、原4PNG／24帧GIF及四份表。helper180／outer240秒、采样8 GiB；首错停止，无修复重跑、延期或force。新API调用拟为1，新力学／HP／渲染为0；原response和图件资格不改。本候选尚未授权或执行，M-REF2窗口已关闭，新范围与资源须单独批准。
+
 <details>
 <summary>M-REF1闭卡与M-REF2来源准备时的接续原文（历史状态不代表当前）</summary>
 
