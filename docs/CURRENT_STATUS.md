@@ -1,3 +1,18 @@
+# 当前接续：M-REF2细网格完整24态独立参考已通过（2026-10-09）
+
+明确批准后的唯一新窗口PASS闭卡：48／48新HP80／120、24机械／24工件态、原15门、197绑定保持；helper2067.2045 s／outer2068.5295 s，采样自身RSS1390268416 B／tree1398767616 B。M-REF1历史失败未重跑。独立最大残差7.38799638e-10；全局总力归一化误差最大1.50051688e-15，声明PORT总切线action最大1.00623029e-16。全部13440单元／27378DOF已覆盖；完整CSC组装核对不赋予全部切线列的HP资格。
+
+[完整目标、实现、为何、效果与限制](../lf_data_preparation/native_interface_001/nested_reference_002/RESULTS.md) · [同身份新reference](../lf_data_preparation/native_interface_001/nested_reference_002/run_001/reference/summary.json) · [实际launch](../lf_data_preparation/native_interface_001/nested_reference_002/reference_launch.json) · [独立终态审阅](../lf_data_preparation/native_interface_001/nested_reference_002/author/terminal_review.json)。当前卡／协议prepared字段保持来源冻结历史，当前事实以上述actual回执为准。
+
+物理功能保持同设计h0.5完整0→1.2→0mm路径：峰值R0.378706N、下半工件Fy0.123179N、钳尖到底面0.00114436mm；卸载尖端回到(80,30)mm，微小残量保留。[既有24态真实变形及节点力](../functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/actual_states.gif) · [粗细六量曲线](../functional_views/native_nested_cycle_20261009/complete_001/run_001/view/mesh_response_comparison.png) · [图件物理解释](../functional_views/native_nested_cycle_20261009/complete_001/RESULTS.md)。新参考通过不把两个网格敏感性变成收敛结论，也不将节点弱式力称为压力。
+
+最近下一步准备复用已有`summarize_saved_native_result`生成新增关联response／轻交付索引，匹配同24态result／本次reference／原raw view，第四粗细PNG由原phase关联；原response及raw view/phase不改，无新求解／HP／渲染。此步尚未执行；之后才准备包含材料+Hu、物理表面／对称切面／角点的总表面力定义。现有P只含材料，不能单独作为Hu模型总表面力。压力／有效夹持、网格／域收敛、圆体自身任务、自由体摩擦、正式标签／排名和HF5整体仍未完成。
+
+整体目标仍为独立HF有限变形／TMC前向评估，不含优化或LF运行；main继续开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。旧生产response中的reference/views not_provided及producer flags false保持原字节，本次参考单独归档。
+
+<details>
+<summary>M-REF1闭卡与M-REF2来源准备时的接续原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-REF1路径失败已关闭，HP尚未开始（2026-10-09）
 
 用户明确批准后的唯一一次参考NOT_PASS：源码归档首个目录mkdir失败，HP0/0、机械/工件态0、原15数学门未开始。helper9.1415 s/outer11.3335 s，采样RSS111,505,408 B/tree116,588,544 B；187绑定保持，exit1、stop_reason null，无修复重跑/延期/force，窗口已关闭。
@@ -551,6 +566,9 @@ CPU原237条和科学30条事件完整；严格同步内原行157–235全部79�
 公开 v3 数值复读的外部来源例外仍严格限于原搬迁补充声明的两份 MATLAB 编号源码及其精确哈希，不能扩大。公开数值复读既不伪装完整来源复核，也不授予生产执行资格。
 
 每次后续工作记录：整体目标、拟做事项、实际改动、理由、实际计算/测试、效果、失败和局限、代码/输入/输出身份、资源成本及下一步。当前状态入口可更新；被来源清单绑定的历史报告和证据不得为消除表面矛盾而改字节。
+
+
+</details>
 
 
 </details>
