@@ -1,3 +1,16 @@
+# 当前接续：M-REF1路径失败已关闭，HP尚未开始（2026-10-09）
+
+用户明确批准后的唯一一次参考NOT_PASS：源码归档首个目录mkdir失败，HP0/0、机械/工件态0、原15数学门未开始。helper9.1415 s/outer11.3335 s，采样RSS111,505,408 B/tree116,588,544 B；187绑定保持，exit1、stop_reason null，无修复重跑/延期/force，窗口已关闭。
+
+[目标、实际效果、失败原因、成本与限制](../lf_data_preparation/native_interface_001/nested_reference_001/RESULTS.md) · [实际launch](../lf_data_preparation/native_interface_001/nested_reference_001/reference_launch.json) · [stdout](../lf_data_preparation/native_interface_001/nested_reference_001/reference_stdout.log) · [只读路径诊断](../lf_data_preparation/native_interface_001/nested_reference_001/author/path_diagnosis.json) · [独立终态审阅](../lf_data_preparation/native_interface_001/nested_reference_001/author/terminal_review.json)。深层归档目录261字符、目标文件286字符，机器LongPathsEnabled0；前次静审遗漏该路径配置。11依赖唯一basename可平铺至已存在sources目录，最长202字符；不改系统策略或冻结M-REF1源。最近仅准备M-REF2具体候选并静审，再单独批准新参考资源，不缩成子集、不改变物理/原门。
+
+既有M-CYCLE1完整24态和M-VIEW1的实际图件保持：[24态变形与工件节点力](../functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/actual_states.gif) · [同设计粗细曲线](../functional_views/native_nested_cycle_20261009/complete_001/run_001/view/mesh_response_comparison.png) · [图件和物理解释](../functional_views/native_nested_cycle_20261009/complete_001/RESULTS.md)。峰值R0.378706 N、下半工件Fy0.123179 N、钳尖到底面0.00114436 mm，卸载恢复初始坐标；两网格只是敏感性，原细网格独参仍未提供。HP/压力/有效夹持/网格域收敛/圆体自身任务/自由体摩擦/正式标签排名/HF5整体均未完成。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
+
+[M-REF2具体执行卡](../lf_data_preparation/native_interface_001/nested_reference_002/M-REF2_CARD.md)及[最终独立静审](../lf_data_preparation/native_interface_001/nested_reference_002/author/final_static_review.json)已准备通过；唯一功能修正为平铺11个唯一依赖文件，本机最长归档文件202／科学文件205字符。全24态／48HP、原15数学门、4500／4560 s及采样8 GiB保持。新卡未授权、未执行；M-REF1已关闭，不能续用剩余窗口。
+
+<details>
+<summary>M-VIEW1及更早接续记录（历史原文）</summary>
+
 # 当前接续：M-VIEW1细网格24态显示已通过（2026-10-09）
 
 明确批准后唯一一次PASS闭卡：24几何+24节点力、24帧GIF、4PNG、24原目标/14量粗细CSV/JSON。helper39.70 s/outer40.43 s，采样进程树峰值474,722,304 B（约453 MiB），96绑定保持；新求解/F/T/HP/JIT/LF0（纯保存态源码依据，非动态hook监测），无修复重跑/延期/force。
@@ -624,6 +637,9 @@ Pop-Location
 后续真实接触资格仍需围绕明确任务核查部分接触、释放/重入、模型与网格敏感性。负弱节点项不是已验证的负接触压力，材料名义应力也不是已经验证的真实接触压力；Aalpha 仅作诊断，TMC−Aalpha 不是纯接触误差。不要同时调整 alpha/gamma 追求净力吻合，也不能以三网格观察替代收敛证明。
 
 后续开发统一在 main，流程见 [DEVELOPMENT_WORKFLOW](DEVELOPMENT_WORKFLOW.md)。每次继续记录总体目标、要做与已做、理由、效果、局限、代码/输入/输出哈希和资源成本；保留失败和修正因果链。HF5、LF 优化、1800 例 HF 标签与最终排名仍未实施，不因本次仓库整合自动开始。
+
+
+</details>
 
 
 </details>

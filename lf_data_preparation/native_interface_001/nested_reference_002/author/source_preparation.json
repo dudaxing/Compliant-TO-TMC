@@ -1,0 +1,1682 @@
+{
+  "schema_version": "M-REF2-source-preparation-1.0",
+  "status": "source_prepared_not_authorized_not_executed",
+  "created_utc": "2026-10-09T09:26:11.284365+00:00",
+  "source_baseline_commit": "e372eca264b18e1e70fd6d3f153505ff257ed6ca",
+  "source_author": "/root/fine_reference_author",
+  "authorized": false,
+  "executed": false,
+  "actions": {
+    "source_and_ordinary_JSON_read": true,
+    "source_AST_parse": true,
+    "raw_SHA256": true,
+    "NPZ_decodes": 0,
+    "HF_imports": 0,
+    "HP_calls": 0,
+    "force_calls": 0,
+    "tangent_calls": 0,
+    "solves": 0,
+    "observers": 0,
+    "renders": 0,
+    "cost_probes": 0,
+    "filesystem_reproductions": 0,
+    "environment_policy_changes": 0
+  },
+  "exact_functional_change": "Replace newly created deep reference_sources/<repository-relative-path> archive by unique Path(name).name files in already base-created output/sources; retain original self.sources repository paths and SHA. All remaining worker differences are M-REF2 role strings and protocol1.1 naming.",
+  "worker_diff": "--- M-REF1/execute_nested_reference.py\n+++ M-REF2/execute_nested_reference.py\n@@ -1,4 +1,4 @@\n-\"\"\"M-REF1: fresh full-path Decimal reference of the saved h0.5 cycle.\n+\"\"\"M-REF2: fresh full-path Decimal reference of the saved h0.5 cycle.\n \n Only loading, provenance, resource accounting and reporting are new.\n B850 run_state and aa86 workpiece_checks are inherited without override.\n@@ -29,8 +29,8 @@\n WORKPIECE_PATH = \"hf_repo/scripts/audit_native_workpiece_cycle.py\"\n WORKPIECE_PIN = \"aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938\"\n sha_raw = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()\n-if CONTRACT[\"schema_version\"] != \"nested-saved-cycle-independent-reference-card-1.0\":\n-    raise ValueError(\"Wrong M-REF1 protocol\")\n+if CONTRACT[\"schema_version\"] != \"nested-saved-cycle-independent-reference-card-1.1\":\n+    raise ValueError(\"Wrong M-REF2 protocol\")\n for name, pin in CONTRACT[\"reference_sources\"].items():\n     if sha_raw(ROOT/name) != pin:\n         raise ValueError(\"Reference source changed before import: \"+name)\n@@ -51,9 +51,9 @@\n \n     def checkpoint(self):\n         self.peak = max(self.peak, self.process.memory_info().rss)\n-        require(perf_counter()-STARTED <= self.limit, \"M-REF1 helper time limit exceeded\")\n-        require(self.peak <= RSS_LIMIT, \"M-REF1 sampled RSS exceeds 8 GiB\")\n-        require(not (PROTOCOL_FILE.parent/\"stop_requested.txt\").exists(), \"M-REF1 stop requested\")\n+        require(perf_counter()-STARTED <= self.limit, \"M-REF2 helper time limit exceeded\")\n+        require(self.peak <= RSS_LIMIT, \"M-REF2 sampled RSS exceeds 8 GiB\")\n+        require(not (PROTOCOL_FILE.parent/\"stop_requested.txt\").exists(), \"M-REF2 stop requested\")\n \n     def lifecycle(self, status, error=None):\n         write(self.output/\"lifecycle.json\", dict(status=status, error=error,\n@@ -74,14 +74,14 @@\n             and contract[\"expected_accepted_states\"] == 24 and contract[\"expected_new_HP_calls\"] == 48\n             and contract[\"direction\"] == dict(definition=\"actual b_in/max(abs(b_in)), fixed components zero\",\n                 length=27378, multiplier_direction=0., expected_port_weights=[.125,.25,.25,.25,.125])\n-            and contract[\"gates\"] == GATES == WORKPIECE_GATES, \"M-REF1 fixed scope/resource/original gates differ\")\n+            and contract[\"gates\"] == GATES == WORKPIECE_GATES, \"M-REF2 fixed scope/resource/original gates differ\")\n         for name, pin in contract[\"bindings\"].items():\n             self.bind(self.repo/name, pin)\n-        sources = self.output/\"reference_sources\"\n-        sources.mkdir()\n+        sources = self.output/\"sources\"\n+        names = [Path(name).name for name in contract[\"reference_sources\"]]\n+        require(len(names) == len(set(names)), \"Reference capsule dependency basenames must be unique\")\n         for name, pin in contract[\"reference_sources\"].items():\n-            destination = sources/name\n-            destination.parent.mkdir(parents=True, exist_ok=True)\n+            destination = sources/Path(name).name\n             shutil.copyfile(self.repo/name, destination)\n             self.bind(destination, pin)\n             self.sources[name] = pin\n@@ -253,7 +253,7 @@\n \n \n def main():\n-    require(ARGS.time_limit == 4500., \"M-REF1 requires its explicit pre-frozen4500s helper window\")\n+    require(ARGS.time_limit == 4500., \"M-REF2 requires its explicit pre-frozen4500s helper window\")\n     audit = NestedCycleAudit(ARGS)\n     try:\n         audit.run()\n",
+  "AST_composition": {
+    "class_name": "NestedCycleAudit",
+    "bases": [
+      "CoreAudit",
+      "WorkpieceCycleAudit"
+    ],
+    "methods": [
+      "__init__",
+      "checkpoint",
+      "lifecycle",
+      "load",
+      "run"
+    ],
+    "B850_run_state_overridden": false,
+    "aa86_workpiece_checks_overridden": false,
+    "original15_GATES_unchanged": true,
+    "gates": {
+      "production_residual": "1e-9",
+      "independent_residual": "1e-8",
+      "force_evaluation": "1e-9",
+      "average_constraint": "1e-10",
+      "global_force_balance": "1e-6",
+      "fixed_displacement_mm": "8e-11",
+      "hp80_hp120": "1e-40",
+      "total_force": "1e-11",
+      "material_force": "1e-9",
+      "regularization_force": "1e-9",
+      "total_tangent": "1e-10",
+      "material_tangent": "1e-9",
+      "regularization_tangent": "1e-9",
+      "augmented_force_tangent": "1e-10",
+      "augmented_constraint_tangent": "1e-10"
+    }
+  },
+  "reference_sources": {
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_author/core_audit_mechanical.py": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+    "hf_repo/scripts/audit_native_workpiece_cycle.py": "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938",
+    "hf_repo/scripts/audit_native_mean.py": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678",
+    "hf_repo/scripts/audit_native_force.py": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+    "hf_repo/scripts/hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+    "hf_repo/scripts/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+    "hf_repo/scripts/run_split_average_demo.py": "e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb",
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/src/hf_eval/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0"
+  },
+  "selected_current_accepted_states": 24,
+  "selected_current_state_files": 120,
+  "expected_HP_calls": 48,
+  "inherited_original_bindings": 187,
+  "original187_bindings_unchanged": true,
+  "closed_prior_failure_bindings": {
+    "lf_data_preparation/native_interface_001/nested_reference_001/protocol.json": "37088e91e1f6d291706a530946a0fae58d4024c326587b626670849115a0d4f7",
+    "lf_data_preparation/native_interface_001/nested_reference_001/reference_launch.json": "9e568ea5ac22f27efcbceba32783801baa1a054c186b882b3ab90be28bfa2cb8",
+    "lf_data_preparation/native_interface_001/nested_reference_001/reference_stdout.log": "95c2adc744b56e88a3071766883dad98e4af3463e06d007adf949e31a94d547d",
+    "lf_data_preparation/native_interface_001/nested_reference_001/author/authorization_record.json": "c1878bfa3ee7235339529d5997ed6b4225e6e6cc312edaf025c49fe55b8001ca",
+    "lf_data_preparation/native_interface_001/nested_reference_001/run_001/reference/lifecycle.json": "51ec7f56dfaaf39cd5047fe3160a477da1d2f3205a239e75ad6b81160adae3c7",
+    "lf_data_preparation/native_interface_001/nested_reference_001/run_001/reference/summary.json": "b0555f5f13e36fdb064f3f68dbf106c6662f238a9f1bdbbd39d6889c68400cf4",
+    "lf_data_preparation/native_interface_001/nested_reference_001/author/path_diagnosis.json": "aed45da7dcb81be45f8f846dc2ec25e9e472c836e74aff9d007d833acba3a031"
+  },
+  "bindings": 197,
+  "directly_raw_hashed_NPZ_files": 100,
+  "all_prepared_bindings_actual_raw_SHA_match": true,
+  "protocol_sha256": "d848f1df061f27bec3356704069cfdd7cf20172676db75c1ad94003dd3741c0c",
+  "prepared_sources": {
+    "lf_data_preparation/native_interface_001/nested_reference_002/execute_nested_reference.py": "250ed6e6cffa51424fa847bd877a370ba2d5234aed06cdc22d37895dd0e9419a",
+    "lf_data_preparation/native_interface_001/nested_reference_002/launch_reference.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+    "lf_data_preparation/native_interface_001/nested_reference_002/M-REF2_CARD.md": "9cddc0baddef1d468c4e68666fc5d74f6b91dff43ceb0f27528f1b245c89313a"
+  },
+  "windows_output_path_inventory": {
+    "scope": "Static strings for the current local checkout only; not a filesystem execution or universal path-length promise for other machines",
+    "reference_dependency_capsule": [
+      {
+        "original_repo_path": "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_author/core_audit_mechanical.py",
+        "basename": "core_audit_mechanical.py",
+        "sha256": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+        "output_path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\sources\\core_audit_mechanical.py",
+        "directory_chars": 169,
+        "file_chars": 194
+      },
+      {
+        "original_repo_path": "hf_repo/scripts/audit_native_workpiece_cycle.py",
+        "basename": "audit_native_workpiece_cycle.py",
+        "sha256": "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938",
+        "output_path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\sources\\audit_native_workpiece_cycle.py",
+        "directory_chars": 169,
+        "file_chars": 201
+      },
+      {
+        "original_repo_path": "hf_repo/scripts/audit_native_mean.py",
+        "basename": "audit_native_mean.py",
+        "sha256": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678",
+        "output_path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\sources\\audit_native_mean.py",
+        "directory_chars": 169,
+        "file_chars": 190
+      },
+      {
+        "original_repo_path": "hf_repo/scripts/audit_native_force.py",
+        "basename": "audit_native_force.py",
+        "sha256": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+        "output_path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\sources\\audit_native_force.py",
+        "directory_chars": 169,
+        "file_chars": 191
+      },
+      {
+        "original_repo_path": "hf_repo/scripts/hf4_split_precision_reference.py",
+        "basename": "hf4_split_precision_reference.py",
+        "sha256": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+        "output_path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\sources\\hf4_split_precision_reference.py",
+        "directory_chars": 169,
+        "file_chars": 202
+      },
+      {
+        "original_repo_path": "hf_repo/scripts/hf2_precision_reference.py",
+        "basename": "hf2_precision_reference.py",
+        "sha256": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+        "output_path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\sources\\hf2_precision_reference.py",
+        "directory_chars": 169,
+        "file_chars": 196
+      },
+      {
+        "original_repo_path": "hf_repo/scripts/run_split_average_demo.py",
+        "basename": "run_split_average_demo.py",
+        "sha256": "e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb",
+        "output_path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\sources\\run_split_average_demo.py",
+        "directory_chars": 169,
+        "file_chars": 195
+      },
+      {
+        "original_repo_path": "hf_repo/src/hf_eval/__init__.py",
+        "basename": "__init__.py",
+        "sha256": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+        "output_path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\sources\\__init__.py",
+        "directory_chars": 169,
+        "file_chars": 181
+      },
+      {
+        "original_repo_path": "hf_repo/src/hf_eval/tangent_action.py",
+        "basename": "tangent_action.py",
+        "sha256": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+        "output_path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\sources\\tangent_action.py",
+        "directory_chars": 169,
+        "file_chars": 187
+      },
+      {
+        "original_repo_path": "hf_repo/src/hf_eval/compensated_invariants.py",
+        "basename": "compensated_invariants.py",
+        "sha256": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+        "output_path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\sources\\compensated_invariants.py",
+        "directory_chars": 169,
+        "file_chars": 195
+      },
+      {
+        "original_repo_path": "hf_repo/src/hf_eval/tmc_kernel.py",
+        "basename": "tmc_kernel.py",
+        "sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+        "output_path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\sources\\tmc_kernel.py",
+        "directory_chars": 169,
+        "file_chars": 183
+      }
+    ],
+    "scientific_output_paths": [
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\lifecycle.json",
+        "directory_chars": 161,
+        "file_chars": 176
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\summary.json",
+        "directory_chars": 161,
+        "file_chars": 174
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\protocol.json",
+        "directory_chars": 161,
+        "file_chars": 175
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_000\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_001\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_002\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_003\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_004\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_005\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_006\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_007\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_008\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_009\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_010\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_011\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_012\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_013\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_014\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_015\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_016\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_017\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_018\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_019\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_020\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_021\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_022\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\independent_total_matrix.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\reference_fixture.npz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\hp80_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 198
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\hp120_full_local.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\hp80_hp120_full_global.json.gz",
+        "directory_chars": 174,
+        "file_chars": 205
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\element_gates.json.gz",
+        "directory_chars": 174,
+        "file_chars": 196
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\global_differences.json.gz",
+        "directory_chars": 174,
+        "file_chars": 201
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\equation_hp80_hp120.json.gz",
+        "directory_chars": 174,
+        "file_chars": 202
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\actions.npz",
+        "directory_chars": 174,
+        "file_chars": 186
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\rounded_hp120_kinematics.npz",
+        "directory_chars": 174,
+        "file_chars": 203
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\summary.json",
+        "directory_chars": 174,
+        "file_chars": 187
+      },
+      {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\accepted_023\\workpiece_checks.json.gz",
+        "directory_chars": 174,
+        "file_chars": 199
+      }
+    ],
+    "unchanged_method_literal_files": [
+      "actions.npz",
+      "element_gates.json.gz",
+      "equation_hp80_hp120.json.gz",
+      "global_differences.json.gz",
+      "hp80_hp120_full_global.json.gz",
+      "independent_total_matrix.npz",
+      "reference_fixture.npz",
+      "rounded_hp120_kinematics.npz",
+      "summary.json",
+      "workpiece_checks.json.gz"
+    ],
+    "expanded_HP_precision_filename": "hp{precision}_full_local.json.gz for80/120",
+    "maximum_capsule_directory_chars": 169,
+    "maximum_capsule_file_chars": 202,
+    "maximum_scientific_directory_chars": 174,
+    "maximum_scientific_file_chars": 205,
+    "source_archive_guard": "11 current basenames unique; runtime require uniqueness is archive interface validation, not a mathematical GATE"
+  },
+  "resources": {
+    "helper_seconds": 4500,
+    "outer_seconds": 4560,
+    "sampled_RSS_bytes": 8589934592
+  },
+  "original_stage_files_unchanged": {
+    "lf_data_preparation/native_interface_001/nested_reference_001/protocol.json": true,
+    "lf_data_preparation/native_interface_001/nested_reference_001/reference_launch.json": true,
+    "lf_data_preparation/native_interface_001/nested_reference_001/reference_stdout.log": true,
+    "lf_data_preparation/native_interface_001/nested_reference_001/author/authorization_record.json": true,
+    "lf_data_preparation/native_interface_001/nested_reference_001/run_001/reference/lifecycle.json": true,
+    "lf_data_preparation/native_interface_001/nested_reference_001/run_001/reference/summary.json": true,
+    "lf_data_preparation/native_interface_001/nested_reference_001/author/path_diagnosis.json": true
+  },
+  "original_worker_card_launcher_SHA_unchanged": true,
+  "output_directory_does_not_exist": true,
+  "launch_receipt_does_not_exist": true
+}
