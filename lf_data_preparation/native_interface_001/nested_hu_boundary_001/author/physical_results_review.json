@@ -1,0 +1,1937 @@
+{
+  "schema_version": "hf-mbound1-saved-physical-results-review-1.0",
+  "status": "completed_actual_saved_result_interpretation_no_new_scientific_gate",
+  "date": "2026-10-11",
+  "reviewer": "/root/volume_math_review",
+  "method": "Read ordinary saved JSON and six CSV files, original state JSON and original ledger text; copy existing quantities, errors and bounds. Raw file SHA only. No NPZ decoding, candidate imports/calls, force/Hu/J reconstruction, integration, fsum, new ratios, scientific differences or plots.",
+  "source_baseline_commit": "eb68c00d50b28de89a475c18a0879be4a4482f68",
+  "actual_protocol_sha256": "f27d201b01efc5c49212a43536e928ba6ac88ba4346ac6949dccdfcac8d94e33",
+  "actual_source_bindings_copied": {
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "hf_repo/src/hf_eval/native_response.py": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af",
+    "hf_repo/src/hf_eval/saved_q1_hu_boundary.py": "976e9a83402e3b8d9f4fdffd7844e5ccf2e2b985e9aaa54b34248d7836a1726e",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+    "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/006/forces.npz": "ea458082303544b8ade344b1cff5f01bda57dbf72e411d8a7fa5218c84d037de",
+    "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/006/state.json": "c922e40b2963625f8532ab15383105cd3e2948aa408ecb252fecfe8cd24a3498",
+    "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/013/forces.npz": "fa5a22699f23eee2beb92a00b03d9eeba80ed3fc6113cc49876a9dd9880c271a",
+    "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/013/state.json": "dfde916cff9eef0b835a96b2a15c9513e90651db107fedd2fee75ae46f699427",
+    "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/model/model.json": "668d3e6dff9c84dd4af5690a0029111451715ded25b4b3aa181059bf44a61f74",
+    "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/result.json": "624ff6618e12670ea2bed9f84992a5001a7fd983fc7d2ade2415b8f1072ac5cf",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/M-BOUND1_CARD.md": "5fac7f2606189122e4136d8dd6d03abc50dbc932611025404457f88717c3b6b4",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/AUTHOR_SOURCE_NOTES.md": "e3e17303b3c33cb35a3230722c145ed21d667d95f189969dfc54c621bb55fa60",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/M_VOLUME1_publication_receipt.json": "a13d9a1fe41315657be3e6ae3a0d0e43996dbc115eedfd1a3fba1e20b82379cd",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/build_protocol_draft.py": "d15994c6d8a5ce3134cbd1a979f0b61ca1b8d1ea53cb8d1847e7d4f6a2651f4d",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/final_input_scope.json": "9aa967ec7c5f6b0b4cac82d339592ac21d460348637711c9cdfd78635c2fa8e9",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/finalize_input_scope.py": "c5612630aa79eeef3f6520526f643606f398f6c12f06320fd73b063b9717e214",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/input_scope.json": "34690d2cd92ffe31e6f257f56bdfca6fd7f1a31128951dfa5cae80a5886e4b18",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/inspect_boundary_inputs.py": "ad1f343722548d4c101dcdde4f60a2ecb700ac8105bfeb2e4bd17b84d0576d8d",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/paper_formula_check.json": "ce022f1cfb187a1d2baa9888af2a94873cf539d3f96a2d251eea304f5db84f24",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/physical_basis.json": "41e3e74269f21a5a115f8a8afcd9ef20ed913cc9b1ba957b92c605e81f5d700b",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/prepare_source.py": "16ea892a2c3d468a7fa12111466d6e3bb39d4b09f53222fedf7052be67b28789",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/protocol_draft.json": "e0e618805165598df5443a5bb08957c65fa69344e1c36f0d4b4e0f9d8beb6844",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/source_author_receipt.json": "a2d18f824fe12dfa283bbe82674aab95b1072b83a7afc0fe9db6e0eb23db06ad",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/static_physics_review.json": "0ad5f4fa1dc38a7e51e1d4d638b57e89dcbd0a44b1cd52efdf012ff468b90e90",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/write_paper_formula_check.py": "464ec3c9fe93245240b58ac4a63b5940b073a53982d762ea3d35201715efd52f",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/author/write_physical_basis.py": "635e867d2476448892a35fbe10d58ab4dc311cf28dec9d8a4b0527329ac7a6b2",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/execute_saved_hu_boundary.py": "dc7c96d40439102ba43aeed5dabe3d3cd1c638110ae2cf4cc6561faf21a66c9d",
+    "lf_data_preparation/native_interface_001/nested_hu_boundary_001/launch_boundary.py": "f3a96681afc474e42ae19875579d748237235dce90f21892b016b3b3af862477",
+    "lf_data_preparation/native_interface_001/nested_ledger_002/RESULTS.md": "4a653fd7042d2f82318b0c15d9955effb96560c4175148108427782750e5ca1e",
+    "lf_data_preparation/native_interface_001/nested_ledger_002/protocol.json": "6aa1262756ecc036778f8346f8538ba5f1efc4027800b1365eff91151082d977",
+    "lf_data_preparation/native_interface_001/nested_ledger_002/run_001/all_nodes.csv": "9469e205818b8f9ed4942ceead85eb2c5e1aca9645bda1f8cc42b23a65f880ce",
+    "lf_data_preparation/native_interface_001/nested_ledger_002/run_001/category_loads.csv": "f4c7d40aa73db4ecc5e587908898a9c66c75f701f26f150dc435966df9ebf5db",
+    "lf_data_preparation/native_interface_001/nested_ledger_002/run_001/execution_receipt.json": "e2aa1bdc551bc22cc2bb283af422f7494db95c1c2abab99b8cfe5305d67f98c6",
+    "lf_data_preparation/native_interface_001/nested_material_support_001/RESULTS.md": "fce02e25b7b86451b78860646a256bde84013c9f4b9b3f6c5ab33f8747b74980",
+    "lf_data_preparation/native_interface_001/nested_material_support_001/protocol.json": "42f4cab8a966b4f8f082b06da169b13e878420e067c0f0b3c9d629ea32fb0947",
+    "lf_data_preparation/native_interface_001/nested_material_support_001/run_001/cells.csv": "6338f7bb9d8c17948c005c61a745d3ab538c23d41f6e7f8e855f891ffeac248e",
+    "lf_data_preparation/native_interface_001/nested_material_support_001/run_001/execution_receipt.json": "4c4353f4372e2a8d359f26301532d85cba81db4483c22dfaac8384237a0279d4",
+    "lf_data_preparation/native_interface_001/nested_material_volume_001/NEXT_STEP_REVIEW.md": "a268cceeec56ee728249204a22079baf2912184eb33fa628ddd82e6db7b0a8f8",
+    "lf_data_preparation/native_interface_001/nested_material_volume_001/RESULTS.md": "3af1f3b63d60d2d929b77b3b3f1351014eb620e82ed20cbf4baed666327f43e9",
+    "lf_data_preparation/native_interface_001/nested_material_volume_001/protocol.json": "44b8ea0df17cfe17d2a36f2823a37e29a7163326f8254e8967518a6ba6c3a51b",
+    "lf_data_preparation/native_interface_001/nested_material_volume_001/run_001/execution_receipt.json": "6c66d9d31b95db91e870cb2becfd668f08a039f4f9eee1f1af4869e7ed4f143a"
+  },
+  "actual_input_and_report_sha256": {
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\protocol.json": "f27d201b01efc5c49212a43536e928ba6ac88ba4346ac6949dccdfcac8d94e33",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\M-BOUND1_CARD.md": "5fac7f2606189122e4136d8dd6d03abc50dbc932611025404457f88717c3b6b4",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\hu_boundary_launch.json": "e0627dc4fe7917949a88677bc7de89603957ced52e96d58c01d6d39a17815695",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\run_001\\execution_receipt.json": "e8f8aba9c056640628729099270d7508a19040f1e4e3a2f0eed628cdb41eefb5",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\run_001\\hu_boundary.json": "4c5834c3075b85c1b9a074252ccba3fa03f81345d6863f74008859a7e455e450",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_reference_002\\run_001\\reference\\summary.json": "84e619d07f4ddc822da93074e14e8af54052c98d6ce726897a83af9ad4b6ba11",
+    "D:\\hf-native-workpiece-api-author-20261009\\MBOUND1_execution_review_001\\terminal_execution_review.json": "a6e6ca44886913a031e50552ec4745709e6b11dbd5a181e389f288875c83fcd7",
+    "D:\\hf-native-workpiece-api-author-20261009\\MBOUND1_execution_review_001\\PHYSICAL_REVIEW_CHECKLIST.md": "77e517f7ed3bcd55687343e06b3b34117c005c552e31b5150eda3d4ed132ca11",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_ledger_002\\run_001\\all_nodes.csv": "9469e205818b8f9ed4942ceead85eb2c5e1aca9645bda1f8cc42b23a65f880ce",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_ledger_002\\run_001\\category_loads.csv": "f4c7d40aa73db4ecc5e587908898a9c66c75f701f26f150dc435966df9ebf5db",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\run_001\\cells.csv": "bac0b0f16eb3df0bb91a456f4dd70445e8a3ebcb47ed9a078a371d214fc28156",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\run_001\\groups.csv": "7240789d524d9323cbb3d9b8efaaf582f306dd980825fc12476267dba5000392",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\run_001\\whole.csv": "fb43413428d53e70b45e53b060772f57a540073cf996c67445bea38a7a9c79a0",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\run_001\\nodes.csv": "87095995f2b0dd0d6f437e534dec1b3ba3bea8c84a7a11666eef59dfb729d900",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\run_001\\selected_endpoints.csv": "dec4e482dd7f01b2482e2a7bb90d7bfbec0059f930c30c458008681187e9aec3",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\run_001\\node_categories.csv": "192765873ddcc102595a2eed8a584c6f34ac89265242ce6e8864069140b4e399",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_cycle_001\\run_001\\fixed_square\\accepted\\006\\state.json": "c922e40b2963625f8532ab15383105cd3e2948aa408ecb252fecfe8cd24a3498",
+    "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_cycle_001\\run_001\\fixed_square\\accepted\\013\\state.json": "dfde916cff9eef0b835a96b2a15c9513e90651db107fedd2fee75ae46f699427"
+  },
+  "actual_output_sha256": {
+    "cells.csv": "bac0b0f16eb3df0bb91a456f4dd70445e8a3ebcb47ed9a078a371d214fc28156",
+    "groups.csv": "7240789d524d9323cbb3d9b8efaaf582f306dd980825fc12476267dba5000392",
+    "hu_boundary.json": "4c5834c3075b85c1b9a074252ccba3fa03f81345d6863f74008859a7e455e450",
+    "Hu_owner_node_comparison.png": "f656fe47fb4e34af3995491c34329a8ea597430999b04e207a5d0ba2060fa3ff",
+    "nodes.csv": "87095995f2b0dd0d6f437e534dec1b3ba3bea8c84a7a11666eef59dfb729d900",
+    "node_categories.csv": "192765873ddcc102595a2eed8a584c6f34ac89265242ce6e8864069140b4e399",
+    "Q1_Hu_endpoint_actions.png": "9e8cbffae36dd8bbcf9f08863e13b0933f1264cbf8fe44d051f084149604ef9d",
+    "selected_endpoints.csv": "dec4e482dd7f01b2482e2a7bb90d7bfbec0059f930c30c458008681187e9aec3",
+    "whole.csv": "fb43413428d53e70b45e53b060772f57a540073cf996c67445bea38a7a9c79a0"
+  },
+  "output_sha256_from_original_helper_receipt_copied": {
+    "cells.csv": "bac0b0f16eb3df0bb91a456f4dd70445e8a3ebcb47ed9a078a371d214fc28156",
+    "groups.csv": "7240789d524d9323cbb3d9b8efaaf582f306dd980825fc12476267dba5000392",
+    "hu_boundary.json": "4c5834c3075b85c1b9a074252ccba3fa03f81345d6863f74008859a7e455e450",
+    "Hu_owner_node_comparison.png": "f656fe47fb4e34af3995491c34329a8ea597430999b04e207a5d0ba2060fa3ff",
+    "nodes.csv": "87095995f2b0dd0d6f437e534dec1b3ba3bea8c84a7a11666eef59dfb729d900",
+    "node_categories.csv": "192765873ddcc102595a2eed8a584c6f34ac89265242ce6e8864069140b4e399",
+    "Q1_Hu_endpoint_actions.png": "9e8cbffae36dd8bbcf9f08863e13b0933f1264cbf8fe44d051f084149604ef9d",
+    "selected_endpoints.csv": "dec4e482dd7f01b2482e2a7bb90d7bfbec0059f930c30c458008681187e9aec3",
+    "whole.csv": "fb43413428d53e70b45e53b060772f57a540073cf996c67445bea38a7a9c79a0"
+  },
+  "actual_helper_receipt_copied": {
+    "status": "pass",
+    "calls": {
+      "NPZ_read_started": 2,
+      "NPZ_read_completed": 2,
+      "selected_array_fields": 2,
+      "hu_boundary_started": 2,
+      "hu_boundary_completed": 2,
+      "PNG_writes": 2
+    },
+    "counts": {
+      "cells_total": 1444,
+      "group_rows_total": 10,
+      "whole_rows_total": 2,
+      "nodes_total": 1406,
+      "selected_endpoint_rows_total": 24,
+      "node_category_rows_total": 14
+    },
+    "protocol_sha256": "f27d201b01efc5c49212a43536e928ba6ac88ba4346ac6949dccdfcac8d94e33",
+    "all_bindings_unchanged": true,
+    "elapsed_seconds": 6.821014200002537,
+    "sampled_peak_RSS_bytes": 122286080,
+    "output_SHA256": {
+      "cells.csv": "bac0b0f16eb3df0bb91a456f4dd70445e8a3ebcb47ed9a078a371d214fc28156",
+      "groups.csv": "7240789d524d9323cbb3d9b8efaaf582f306dd980825fc12476267dba5000392",
+      "hu_boundary.json": "4c5834c3075b85c1b9a074252ccba3fa03f81345d6863f74008859a7e455e450",
+      "Hu_owner_node_comparison.png": "f656fe47fb4e34af3995491c34329a8ea597430999b04e207a5d0ba2060fa3ff",
+      "nodes.csv": "87095995f2b0dd0d6f437e534dec1b3ba3bea8c84a7a11666eef59dfb729d900",
+      "node_categories.csv": "192765873ddcc102595a2eed8a584c6f34ac89265242ce6e8864069140b4e399",
+      "Q1_Hu_endpoint_actions.png": "9e8cbffae36dd8bbcf9f08863e13b0933f1264cbf8fe44d051f084149604ef9d",
+      "selected_endpoints.csv": "dec4e482dd7f01b2482e2a7bb90d7bfbec0059f930c30c458008681187e9aec3",
+      "whole.csv": "fb43413428d53e70b45e53b060772f57a540073cf996c67445bea38a7a9c79a0"
+    },
+    "source_scope": "Two saved Hu fields, preserved support topology and original node/category strings; two ordinary APIs, original body-only C-order scatter, selected-local fsum and two reference PNGs. No Hu/J/P/kinematics reconstruction, old ledger call, new force-kernel/tangent/HP/equilibrium/energy-gradient call, pressure or effective-grip qualification",
+    "mechanical_hooks_monitored": false
+  },
+  "actual_outer_launch_record_copied": {
+    "phase": "hu_boundary",
+    "status": "pass",
+    "invocations": 1,
+    "protocol_sha256": "f27d201b01efc5c49212a43536e928ba6ac88ba4346ac6949dccdfcac8d94e33",
+    "outer_seconds": 240,
+    "sampled_RSS_limit_bytes": 8589934592,
+    "started_utc": "2026-10-11T09:01:57.689988+00:00",
+    "budget_mode": "Cooperative child limits and sampled tree RSS; no OS hard memory cap or force termination",
+    "exit_code": 0,
+    "elapsed_seconds": 7.165070099988952,
+    "peak_sampled_tree_RSS_bytes": 126521344,
+    "stop_reason": null,
+    "all_bindings_unchanged": true,
+    "completed_utc": "2026-10-11T09:02:04.856055+00:00"
+  },
+  "independent_terminal_review": {
+    "path": "D:\\hf-native-workpiece-api-author-20261009\\MBOUND1_execution_review_001\\terminal_execution_review.json",
+    "sha256": "a6e6ca44886913a031e50552ec4745709e6b11dbd5a181e389f288875c83fcd7",
+    "status_copied": "pass_actual_saved_execution_terminal_review",
+    "separation": "Existing record/protocol/resource review; this physical interpretation adds no new scientific gate."
+  },
+  "saved_total_counts": {
+    "cells_total": 1444,
+    "group_rows_total": 10,
+    "whole_rows_total": 2,
+    "nodes_total": 1406,
+    "selected_endpoint_rows_total": 24,
+    "node_category_rows_total": 14
+  },
+  "state_reviews": [
+    {
+      "identity": {
+        "index": 6,
+        "original_target_index": 6,
+        "leg": "loading",
+        "d_mm": 0.85,
+        "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd"
+      },
+      "actual_counts": {
+        "cells": 722,
+        "local_occurrences": 2738,
+        "groups": 5,
+        "whole": 1,
+        "nodes": 703,
+        "selected_endpoints": 12
+      },
+      "original_state_file": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_cycle_001\\run_001\\fixed_square\\accepted\\006\\state.json",
+      "original_state_file_sha256": "c922e40b2963625f8532ab15383105cd3e2948aa408ecb252fecfe8cd24a3498",
+      "original_workpiece_response_copied": {
+        "force_on_lower_body_N": {
+          "total": [
+            -0.0003661101623771459,
+            0.004636577550125938
+          ],
+          "material": [
+            -0.00010874115880239823,
+            0.0034790753630243565
+          ],
+          "regularization": [
+            -0.0002573690035747477,
+            0.001157502187101581
+          ]
+        },
+        "holding_reaction_on_model_N": [
+          0.0003661101623771459,
+          -0.004636577550125938
+        ],
+        "normal_force_on_lower_body_N": 0.004636577550125938,
+        "mirrored_upper_force_N": [
+          -0.0003661101623771459,
+          -0.004636577550125938
+        ],
+        "full_workpiece_net_force_N": [
+          -0.0007322203247542918,
+          0.0
+        ],
+        "two_sided_normal_magnitude_sum_N": 0.009273155100251876,
+        "fixed_holding_reaction_partition_N": {
+          "workpiece": [
+            0.0003661101623771459,
+            -0.004636577550125938
+          ],
+          "support": [
+            -0.16741689488894884,
+            -0.044237961650727194
+          ],
+          "entity_symmetry": [
+            0.0,
+            0.04866740960504982
+          ],
+          "background_symmetry": [
+            0.0,
+            0.0002071295957176629
+          ]
+        },
+        "overlapping_background_holding_reaction_N": [
+          0.0,
+          -5.357886547372164e-05
+        ],
+        "node_window_clearance_mm": {
+          "bottom": 0.019673965038897734,
+          "left": 2.3610245577841056
+        },
+        "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof",
+        "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+        "fixed_body_fields": {
+          "max_abs_F_minus_I": 0.0,
+          "max_abs_J_minus_1": 0.0,
+          "max_abs_Hu_per_mm": 0.0,
+          "max_abs_first_piola_MPa": 0.0,
+          "max_abs_local_force_N": 0.0
+        }
+      },
+      "saved_original_Hu_pattern": {
+        "support_cells_checked": 722,
+        "numeric_exact": true,
+        "byte_or_signed_zero_gate": false
+      },
+      "saved_original_body_scatter": {
+        "calls": 1,
+        "body_DOFs": 1406,
+        "numeric_exact": true,
+        "order": "Ascending original cell/local/component C order; internal bincount then negate; body DOFs only"
+      },
+      "saved_five_owner_groups": {
+        "body": {
+          "cell_count": 648,
+          "local_occurrence_count": 2592,
+          "force_on_body_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "bottom_owner": {
+          "cell_count": 36,
+          "local_occurrence_count": 72,
+          "force_on_body_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "left_owner": {
+          "cell_count": 18,
+          "local_occurrence_count": 36,
+          "force_on_body_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "right_owner": {
+          "cell_count": 18,
+          "local_occurrence_count": 36,
+          "force_on_body_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "corner_only": {
+          "cell_count": 2,
+          "local_occurrence_count": 2,
+          "force_on_body_N": [
+            -0.0002573690035747477,
+            0.0011575021871015807
+          ]
+        }
+      },
+      "saved_whole_and_existing_gates": {
+        "regrouped_local_Hu_on_body_N": [
+          -0.0002573690035747477,
+          0.0011575021871015807
+        ],
+        "original_node_Hu_on_body_N": [
+          -0.0002573690035747477,
+          0.001157502187101581
+        ],
+        "original_state_Hu_on_body_N": [
+          -0.0002573690035747477,
+          0.001157502187101581
+        ],
+        "corner_only_Hu_on_body_N": [
+          -0.0002573690035747477,
+          0.0011575021871015807
+        ],
+        "original_node_L1_comparison": {
+          "error_N": [
+            0.0,
+            0.0
+          ],
+          "roundoff_bound_N": [
+            1.9915285556634454e-18,
+            4.417896086562618e-17
+          ],
+          "passed": true,
+          "bound_source": "original node Hu forces; 8eps times L1, no floor"
+        },
+        "selected_local_L1_comparison": {
+          "error_N": [
+            0.0,
+            -2.168404344971009e-19
+          ],
+          "roundoff_bound_N": [
+            6.5995437956693426e-18,
+            4.589099702160601e-16
+          ],
+          "passed": true,
+          "bound_source": "selected original local Hu forces; 8eps times L1, no floor"
+        },
+        "descriptive_differences_N": {
+          "local_minus_original_state": [
+            0.0,
+            -2.168404344971009e-19
+          ],
+          "local_minus_corner_only": [
+            0.0,
+            0.0
+          ],
+          "regrouped_five_roles_minus_local": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "saved_corner_only_owner_cells": [
+        {
+          "cell_id": 10371,
+          "group": "corner_only",
+          "node_ids": [
+            10432,
+            10433,
+            10602,
+            10601
+          ],
+          "selected_local_indices": [
+            2
+          ],
+          "selected_body_node_ids": [
+            10602
+          ],
+          "selected_local_node_count": 1,
+          "original_local_internal_Hu_force_N": [
+            [
+              0.00047113895594445984,
+              -0.0001913554795606491
+            ],
+            [
+              -0.00047113895594445984,
+              0.0001913554795606491
+            ],
+            [
+              0.00047113895594445984,
+              -0.0001913554795606491
+            ],
+            [
+              -0.00047113895594445984,
+              0.0001913554795606491
+            ]
+          ],
+          "original_BL_internal_Hu_N": [
+            0.00047113895594445984,
+            -0.0001913554795606491
+          ],
+          "Q1_sign_pattern": [
+            1.0,
+            -1.0,
+            1.0,
+            -1.0
+          ],
+          "Q1_pattern_numeric_exact": true,
+          "force_on_body_N": [
+            -0.00047113895594445984,
+            0.0001913554795606491
+          ]
+        },
+        {
+          "cell_id": 10408,
+          "group": "corner_only",
+          "node_ids": [
+            10469,
+            10470,
+            10639,
+            10638
+          ],
+          "selected_local_indices": [
+            3
+          ],
+          "selected_body_node_ids": [
+            10638
+          ],
+          "selected_local_node_count": 1,
+          "original_local_internal_Hu_force_N": [
+            [
+              0.0002137699523697121,
+              0.0009661467075409316
+            ],
+            [
+              -0.0002137699523697121,
+              -0.0009661467075409316
+            ],
+            [
+              0.0002137699523697121,
+              0.0009661467075409316
+            ],
+            [
+              -0.0002137699523697121,
+              -0.0009661467075409316
+            ]
+          ],
+          "original_BL_internal_Hu_N": [
+            0.0002137699523697121,
+            0.0009661467075409316
+          ],
+          "Q1_sign_pattern": [
+            1.0,
+            -1.0,
+            1.0,
+            -1.0
+          ],
+          "Q1_pattern_numeric_exact": true,
+          "force_on_body_N": [
+            0.0002137699523697121,
+            0.0009661467075409316
+          ]
+        }
+      ],
+      "saved_displayed_bottom_owner_cell": {
+        "cell_id": 10407,
+        "group": "bottom_owner",
+        "node_ids": [
+          10468,
+          10469,
+          10638,
+          10637
+        ],
+        "selected_local_indices": [
+          2,
+          3
+        ],
+        "selected_body_node_ids": [
+          10638,
+          10637
+        ],
+        "selected_local_node_count": 2,
+        "original_local_internal_Hu_force_N": [
+          [
+            -0.00011604708201545969,
+            -0.012047321585135324
+          ],
+          [
+            0.00011604708201545969,
+            0.012047321585135324
+          ],
+          [
+            -0.00011604708201545969,
+            -0.012047321585135324
+          ],
+          [
+            0.00011604708201545969,
+            0.012047321585135324
+          ]
+        ],
+        "original_BL_internal_Hu_N": [
+          -0.00011604708201545969,
+          -0.012047321585135324
+        ],
+        "Q1_sign_pattern": [
+          1.0,
+          -1.0,
+          1.0,
+          -1.0
+        ],
+        "Q1_pattern_numeric_exact": true,
+        "force_on_body_N": [
+          0.0,
+          0.0
+        ]
+      },
+      "saved_displayed_endpoints": [
+        {
+          "cell_id": 10371,
+          "group": "corner_only",
+          "local_node_index": 0,
+          "local_node_name": "BL",
+          "node_id": 10432,
+          "coordinates_mm": [
+            61.5,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            0.00047113895594445984,
+            -0.0001913554795606491
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.00047113895594445984,
+            0.0001913554795606491
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10371,
+          "group": "corner_only",
+          "local_node_index": 1,
+          "local_node_name": "BR",
+          "node_id": 10433,
+          "coordinates_mm": [
+            62.0,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            -0.00047113895594445984,
+            0.0001913554795606491
+          ],
+          "negative_local_Hu_covector_N": [
+            0.00047113895594445984,
+            -0.0001913554795606491
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10371,
+          "group": "corner_only",
+          "local_node_index": 2,
+          "local_node_name": "TR",
+          "node_id": 10602,
+          "coordinates_mm": [
+            62.0,
+            31.0
+          ],
+          "selected_body_node": true,
+          "original_internal_Hu_force_N": [
+            0.00047113895594445984,
+            -0.0001913554795606491
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.00047113895594445984,
+            0.0001913554795606491
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10371,
+          "group": "corner_only",
+          "local_node_index": 3,
+          "local_node_name": "TL",
+          "node_id": 10601,
+          "coordinates_mm": [
+            61.5,
+            31.0
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            -0.00047113895594445984,
+            0.0001913554795606491
+          ],
+          "negative_local_Hu_covector_N": [
+            0.00047113895594445984,
+            -0.0001913554795606491
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10407,
+          "group": "bottom_owner",
+          "local_node_index": 0,
+          "local_node_name": "BL",
+          "node_id": 10468,
+          "coordinates_mm": [
+            79.5,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            -0.00011604708201545969,
+            -0.012047321585135324
+          ],
+          "negative_local_Hu_covector_N": [
+            0.00011604708201545969,
+            0.012047321585135324
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10407,
+          "group": "bottom_owner",
+          "local_node_index": 1,
+          "local_node_name": "BR",
+          "node_id": 10469,
+          "coordinates_mm": [
+            80.0,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            0.00011604708201545969,
+            0.012047321585135324
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.00011604708201545969,
+            -0.012047321585135324
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10407,
+          "group": "bottom_owner",
+          "local_node_index": 2,
+          "local_node_name": "TR",
+          "node_id": 10638,
+          "coordinates_mm": [
+            80.0,
+            31.0
+          ],
+          "selected_body_node": true,
+          "original_internal_Hu_force_N": [
+            -0.00011604708201545969,
+            -0.012047321585135324
+          ],
+          "negative_local_Hu_covector_N": [
+            0.00011604708201545969,
+            0.012047321585135324
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10407,
+          "group": "bottom_owner",
+          "local_node_index": 3,
+          "local_node_name": "TL",
+          "node_id": 10637,
+          "coordinates_mm": [
+            79.5,
+            31.0
+          ],
+          "selected_body_node": true,
+          "original_internal_Hu_force_N": [
+            0.00011604708201545969,
+            0.012047321585135324
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.00011604708201545969,
+            -0.012047321585135324
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10408,
+          "group": "corner_only",
+          "local_node_index": 0,
+          "local_node_name": "BL",
+          "node_id": 10469,
+          "coordinates_mm": [
+            80.0,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            0.0002137699523697121,
+            0.0009661467075409316
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.0002137699523697121,
+            -0.0009661467075409316
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10408,
+          "group": "corner_only",
+          "local_node_index": 1,
+          "local_node_name": "BR",
+          "node_id": 10470,
+          "coordinates_mm": [
+            80.5,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            -0.0002137699523697121,
+            -0.0009661467075409316
+          ],
+          "negative_local_Hu_covector_N": [
+            0.0002137699523697121,
+            0.0009661467075409316
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10408,
+          "group": "corner_only",
+          "local_node_index": 2,
+          "local_node_name": "TR",
+          "node_id": 10639,
+          "coordinates_mm": [
+            80.5,
+            31.0
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            0.0002137699523697121,
+            0.0009661467075409316
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.0002137699523697121,
+            -0.0009661467075409316
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10408,
+          "group": "corner_only",
+          "local_node_index": 3,
+          "local_node_name": "TL",
+          "node_id": 10638,
+          "coordinates_mm": [
+            80.0,
+            31.0
+          ],
+          "selected_body_node": true,
+          "original_internal_Hu_force_N": [
+            -0.0002137699523697121,
+            -0.0009661467075409316
+          ],
+          "negative_local_Hu_covector_N": [
+            0.0002137699523697121,
+            0.0009661467075409316
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        }
+      ],
+      "saved_node_examples_and_existing_local_gates": [
+        {
+          "original_node_record": {
+            "index": "6",
+            "original_target_index": "6",
+            "leg": "loading",
+            "d_mm": "0.85",
+            "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+            "node_id": "10602",
+            "x_mm": "62.0",
+            "y_mm": "31.0",
+            "group": "physical_only",
+            "total_Fx_N": "-0.0004528501794756218",
+            "total_Fy_N": "-5.608538715063245e-05",
+            "material_Fx_N": "-3.064625327287218e-06",
+            "material_Fy_N": "3.4359428882070853e-06",
+            "regularization_Fx_N": "-0.00044978555414833455",
+            "regularization_Fy_N": "-5.952133003883954e-05",
+            "ledger_category": "physical_corner"
+          },
+          "node_id": 10602,
+          "selected_local_occurrences": 4,
+          "regrouped_local_Hu_on_body_N": [
+            -0.00044978555414833455,
+            -5.952133003883954e-05
+          ],
+          "original_Hu_on_body_N": [
+            -0.00044978555414833455,
+            -5.952133003883954e-05
+          ],
+          "local_regrouping": {
+            "error_N": [
+              0.0,
+              0.0
+            ],
+            "roundoff_bound_N": [
+              8.748421680248432e-19,
+              7.934285175913323e-19
+            ],
+            "passed": true,
+            "bound_source": "selected original local Hu forces; 8eps times L1, no floor"
+          }
+        },
+        {
+          "original_node_record": {
+            "index": "6",
+            "original_target_index": "6",
+            "leg": "loading",
+            "d_mm": "0.85",
+            "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+            "node_id": "10637",
+            "x_mm": "79.5",
+            "y_mm": "31.0",
+            "group": "physical_only",
+            "total_Fx_N": "-0.00012784669627021985",
+            "total_Fy_N": "0.0009214384419145728",
+            "material_Fx_N": "-1.3214374267160608e-05",
+            "material_Fy_N": "0.0009614929762765082",
+            "regularization_Fx_N": "-0.00011463232200305925",
+            "regularization_Fy_N": "-4.005453436193608e-05",
+            "ledger_category": "bottom_side_interior"
+          },
+          "node_id": 10637,
+          "selected_local_occurrences": 4,
+          "regrouped_local_Hu_on_body_N": [
+            -0.00011463232200305925,
+            -4.005453436193608e-05
+          ],
+          "original_Hu_on_body_N": [
+            -0.00011463232200305925,
+            -4.005453436193608e-05
+          ],
+          "local_regrouping": {
+            "error_N": [
+              0.0,
+              0.0
+            ],
+            "roundoff_bound_N": [
+              2.0865414645474111e-19,
+              4.272953304235598e-17
+            ],
+            "passed": true,
+            "bound_source": "selected original local Hu forces; 8eps times L1, no floor"
+          }
+        },
+        {
+          "original_node_record": {
+            "index": "6",
+            "original_target_index": "6",
+            "leg": "loading",
+            "d_mm": "0.85",
+            "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+            "node_id": "10638",
+            "x_mm": "80.0",
+            "y_mm": "31.0",
+            "group": "physical_only",
+            "total_Fx_N": "0.00034712949148502504",
+            "total_Fy_N": "0.013605071928572675",
+            "material_Fx_N": "1.9390962673124585e-05",
+            "material_Fy_N": "0.000652853925630523",
+            "regularization_Fx_N": "0.0003277385288119004",
+            "regularization_Fy_N": "0.012952218002942151",
+            "ledger_category": "physical_corner"
+          },
+          "node_id": 10638,
+          "selected_local_occurrences": 4,
+          "regrouped_local_Hu_on_body_N": [
+            0.00032773852881190046,
+            0.012952218002942151
+          ],
+          "original_Hu_on_body_N": [
+            0.0003277385288119004,
+            0.012952218002942151
+          ],
+          "local_regrouping": {
+            "error_N": [
+              5.421010862427522e-20,
+              0.0
+            ],
+            "roundoff_bound_N": [
+              5.895649123716196e-19,
+              2.3225365777098188e-17
+            ],
+            "passed": true,
+            "bound_source": "selected original local Hu forces; 8eps times L1, no floor"
+          }
+        }
+      ],
+      "original_category_rows_copied_as_text": [
+        {
+          "index": "6",
+          "original_target_index": "6",
+          "leg": "loading",
+          "d_mm": "0.85",
+          "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+          "category": "bottom_side_interior",
+          "node_count": "35",
+          "total_Fx_N": "-0.00021680185623366673",
+          "total_Fy_N": "-0.008963348606777537",
+          "material_Fx_N": "-9.64475945685939e-05",
+          "material_Fy_N": "0.0028308820398277763",
+          "regularization_Fx_N": "-0.00012035426166507285",
+          "regularization_Fy_N": "-0.011794230646605314"
+        },
+        {
+          "index": "6",
+          "original_target_index": "6",
+          "leg": "loading",
+          "d_mm": "0.85",
+          "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+          "category": "left_side_interior",
+          "node_count": "17",
+          "total_Fx_N": "-4.856604569761435e-05",
+          "total_Fy_N": "-1.520335582633428e-06",
+          "material_Fx_N": "-3.186501704752603e-05",
+          "material_Fy_N": "2.699867144178187e-07",
+          "regularization_Fx_N": "-1.6701028650088325e-05",
+          "regularization_Fy_N": "-1.7903222970512458e-06"
+        },
+        {
+          "index": "6",
+          "original_target_index": "6",
+          "leg": "loading",
+          "d_mm": "0.85",
+          "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+          "category": "right_side_interior",
+          "node_count": "17",
+          "total_Fx_N": "6.178609557234939e-06",
+          "total_Fy_N": "-1.1189144096558013e-06",
+          "material_Fx_N": "4.145970418448961e-06",
+          "material_Fy_N": "-7.816889591985065e-06",
+          "regularization_Fx_N": "2.0326391387859785e-06",
+          "regularization_Fy_N": "6.697975182329264e-06"
+        },
+        {
+          "index": "6",
+          "original_target_index": "6",
+          "leg": "loading",
+          "d_mm": "0.85",
+          "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+          "category": "physical_corner",
+          "node_count": "2",
+          "total_Fx_N": "-0.00010572068799059674",
+          "total_Fy_N": "0.013548986541422043",
+          "material_Fx_N": "1.6326337345837367e-05",
+          "material_Fy_N": "0.00065628986851873",
+          "regularization_Fx_N": "-0.00012204702533643414",
+          "regularization_Fy_N": "0.012892696672903312"
+        },
+        {
+          "index": "6",
+          "original_target_index": "6",
+          "leg": "loading",
+          "d_mm": "0.85",
+          "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+          "category": "physical_and_cut",
+          "node_count": "2",
+          "total_Fx_N": "-1.200182012503041e-06",
+          "total_Fy_N": "5.357886547372164e-05",
+          "material_Fx_N": "-9.008549505646337e-07",
+          "material_Fy_N": "-5.496424445825705e-07",
+          "regularization_Fx_N": "-2.9932706193840716e-07",
+          "regularization_Fy_N": "5.412850791830421e-05"
+        },
+        {
+          "index": "6",
+          "original_target_index": "6",
+          "leg": "loading",
+          "d_mm": "0.85",
+          "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+          "category": "cut_interior",
+          "node_count": "35",
+          "total_Fx_N": "0.0",
+          "total_Fy_N": "0.0",
+          "material_Fx_N": "0.0",
+          "material_Fy_N": "0.0",
+          "regularization_Fx_N": "0.0",
+          "regularization_Fy_N": "0.0"
+        },
+        {
+          "index": "6",
+          "original_target_index": "6",
+          "leg": "loading",
+          "d_mm": "0.85",
+          "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+          "category": "body_interior",
+          "node_count": "595",
+          "total_Fx_N": "0.0",
+          "total_Fy_N": "0.0",
+          "material_Fx_N": "0.0",
+          "material_Fy_N": "0.0",
+          "regularization_Fx_N": "0.0",
+          "regularization_Fy_N": "0.0"
+        }
+      ],
+      "saved_state_qualification": "Saved support/vertex interpretation and original body scatter only; no Hu reconstruction, hyperstress recovery, force-kernel, tangent, HP, equilibrium, energy-gradient, pressure or effective-grip qualification"
+    },
+    {
+      "identity": {
+        "index": 13,
+        "original_target_index": 13,
+        "leg": "loading",
+        "d_mm": 1.2,
+        "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed"
+      },
+      "actual_counts": {
+        "cells": 722,
+        "local_occurrences": 2738,
+        "groups": 5,
+        "whole": 1,
+        "nodes": 703,
+        "selected_endpoints": 12
+      },
+      "original_state_file": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_cycle_001\\run_001\\fixed_square\\accepted\\013\\state.json",
+      "original_state_file_sha256": "dfde916cff9eef0b835a96b2a15c9513e90651db107fedd2fee75ae46f699427",
+      "original_workpiece_response_copied": {
+        "force_on_lower_body_N": {
+          "total": [
+            -0.0008760157046173312,
+            0.12317940160165043
+          ],
+          "material": [
+            -0.000561226821740675,
+            0.12191255705872141
+          ],
+          "regularization": [
+            -0.0003147888828766561,
+            0.0012668445429290087
+          ]
+        },
+        "holding_reaction_on_model_N": [
+          0.0008760157046173312,
+          -0.12317940160165043
+        ],
+        "normal_force_on_lower_body_N": 0.12317940160165043,
+        "mirrored_upper_force_N": [
+          -0.0008760157046173312,
+          -0.12317940160165043
+        ],
+        "full_workpiece_net_force_N": [
+          -0.0017520314092346625,
+          0.0
+        ],
+        "two_sided_normal_magnitude_sum_N": 0.24635880320330086,
+        "fixed_holding_reaction_partition_N": {
+          "workpiece": [
+            0.0008760157046173312,
+            -0.12317940160165043
+          ],
+          "support": [
+            -0.3795824681000102,
+            -0.10930579414172385
+          ],
+          "entity_symmetry": [
+            0.0,
+            0.2322239359142775
+          ],
+          "background_symmetry": [
+            0.0,
+            0.0002612598289689609
+          ]
+        },
+        "overlapping_background_holding_reaction_N": [
+          0.0,
+          -6.315283384176389e-05
+        ],
+        "node_window_clearance_mm": {
+          "bottom": 0.0011443626281568697,
+          "left": 2.344019026933367
+        },
+        "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof",
+        "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+        "fixed_body_fields": {
+          "max_abs_F_minus_I": 0.0,
+          "max_abs_J_minus_1": 0.0,
+          "max_abs_Hu_per_mm": 0.0,
+          "max_abs_first_piola_MPa": 0.0,
+          "max_abs_local_force_N": 0.0
+        }
+      },
+      "saved_original_Hu_pattern": {
+        "support_cells_checked": 722,
+        "numeric_exact": true,
+        "byte_or_signed_zero_gate": false
+      },
+      "saved_original_body_scatter": {
+        "calls": 1,
+        "body_DOFs": 1406,
+        "numeric_exact": true,
+        "order": "Ascending original cell/local/component C order; internal bincount then negate; body DOFs only"
+      },
+      "saved_five_owner_groups": {
+        "body": {
+          "cell_count": 648,
+          "local_occurrence_count": 2592,
+          "force_on_body_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "bottom_owner": {
+          "cell_count": 36,
+          "local_occurrence_count": 72,
+          "force_on_body_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "left_owner": {
+          "cell_count": 18,
+          "local_occurrence_count": 36,
+          "force_on_body_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "right_owner": {
+          "cell_count": 18,
+          "local_occurrence_count": 36,
+          "force_on_body_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "corner_only": {
+          "cell_count": 2,
+          "local_occurrence_count": 2,
+          "force_on_body_N": [
+            -0.00031478888287665577,
+            0.0012668445429290084
+          ]
+        }
+      },
+      "saved_whole_and_existing_gates": {
+        "regrouped_local_Hu_on_body_N": [
+          -0.00031478888287665577,
+          0.0012668445429290084
+        ],
+        "original_node_Hu_on_body_N": [
+          -0.0003147888828766561,
+          0.0012668445429290087
+        ],
+        "original_state_Hu_on_body_N": [
+          -0.0003147888828766561,
+          0.0012668445429290087
+        ],
+        "corner_only_Hu_on_body_N": [
+          -0.00031478888287665577,
+          0.0012668445429290084
+        ],
+        "original_node_L1_comparison": {
+          "error_N": [
+            0.0,
+            0.0
+          ],
+          "roundoff_bound_N": [
+            1.2282746840903447e-17,
+            4.6687353710502464e-17
+          ],
+          "passed": true,
+          "bound_source": "original node Hu forces; 8eps times L1, no floor"
+        },
+        "selected_local_L1_comparison": {
+          "error_N": [
+            3.2526065174565133e-19,
+            -2.168404344971009e-19
+          ],
+          "roundoff_bound_N": [
+            4.071226683146203e-17,
+            4.949846138931806e-16
+          ],
+          "passed": true,
+          "bound_source": "selected original local Hu forces; 8eps times L1, no floor"
+        },
+        "descriptive_differences_N": {
+          "local_minus_original_state": [
+            3.2526065174565133e-19,
+            -2.168404344971009e-19
+          ],
+          "local_minus_corner_only": [
+            0.0,
+            0.0
+          ],
+          "regrouped_five_roles_minus_local": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "saved_corner_only_owner_cells": [
+        {
+          "cell_id": 10371,
+          "group": "corner_only",
+          "node_ids": [
+            10432,
+            10433,
+            10602,
+            10601
+          ],
+          "selected_local_indices": [
+            2
+          ],
+          "selected_body_node_ids": [
+            10602
+          ],
+          "selected_local_node_count": 1,
+          "original_local_internal_Hu_force_N": [
+            [
+              0.0005515625215753164,
+              -0.0002938181575262232
+            ],
+            [
+              -0.0005515625215753164,
+              0.0002938181575262232
+            ],
+            [
+              0.0005515625215753164,
+              -0.0002938181575262232
+            ],
+            [
+              -0.0005515625215753164,
+              0.0002938181575262232
+            ]
+          ],
+          "original_BL_internal_Hu_N": [
+            0.0005515625215753164,
+            -0.0002938181575262232
+          ],
+          "Q1_sign_pattern": [
+            1.0,
+            -1.0,
+            1.0,
+            -1.0
+          ],
+          "Q1_pattern_numeric_exact": true,
+          "force_on_body_N": [
+            -0.0005515625215753164,
+            0.0002938181575262232
+          ]
+        },
+        {
+          "cell_id": 10408,
+          "group": "corner_only",
+          "node_ids": [
+            10469,
+            10470,
+            10639,
+            10638
+          ],
+          "selected_local_indices": [
+            3
+          ],
+          "selected_body_node_ids": [
+            10638
+          ],
+          "selected_local_node_count": 1,
+          "original_local_internal_Hu_force_N": [
+            [
+              0.0002367736386986606,
+              0.0009730263854027852
+            ],
+            [
+              -0.0002367736386986606,
+              -0.0009730263854027852
+            ],
+            [
+              0.0002367736386986606,
+              0.0009730263854027852
+            ],
+            [
+              -0.0002367736386986606,
+              -0.0009730263854027852
+            ]
+          ],
+          "original_BL_internal_Hu_N": [
+            0.0002367736386986606,
+            0.0009730263854027852
+          ],
+          "Q1_sign_pattern": [
+            1.0,
+            -1.0,
+            1.0,
+            -1.0
+          ],
+          "Q1_pattern_numeric_exact": true,
+          "force_on_body_N": [
+            0.0002367736386986606,
+            0.0009730263854027852
+          ]
+        }
+      ],
+      "saved_displayed_bottom_owner_cell": {
+        "cell_id": 10407,
+        "group": "bottom_owner",
+        "node_ids": [
+          10468,
+          10469,
+          10638,
+          10637
+        ],
+        "selected_local_indices": [
+          2,
+          3
+        ],
+        "selected_body_node_ids": [
+          10638,
+          10637
+        ],
+        "selected_local_node_count": 2,
+        "original_local_internal_Hu_force_N": [
+          [
+            -0.0030615373131990986,
+            -0.001690297419539681
+          ],
+          [
+            0.0030615373131990986,
+            0.001690297419539681
+          ],
+          [
+            -0.0030615373131990986,
+            -0.001690297419539681
+          ],
+          [
+            0.0030615373131990986,
+            0.001690297419539681
+          ]
+        ],
+        "original_BL_internal_Hu_N": [
+          -0.0030615373131990986,
+          -0.001690297419539681
+        ],
+        "Q1_sign_pattern": [
+          1.0,
+          -1.0,
+          1.0,
+          -1.0
+        ],
+        "Q1_pattern_numeric_exact": true,
+        "force_on_body_N": [
+          0.0,
+          0.0
+        ]
+      },
+      "saved_displayed_endpoints": [
+        {
+          "cell_id": 10371,
+          "group": "corner_only",
+          "local_node_index": 0,
+          "local_node_name": "BL",
+          "node_id": 10432,
+          "coordinates_mm": [
+            61.5,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            0.0005515625215753164,
+            -0.0002938181575262232
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.0005515625215753164,
+            0.0002938181575262232
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10371,
+          "group": "corner_only",
+          "local_node_index": 1,
+          "local_node_name": "BR",
+          "node_id": 10433,
+          "coordinates_mm": [
+            62.0,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            -0.0005515625215753164,
+            0.0002938181575262232
+          ],
+          "negative_local_Hu_covector_N": [
+            0.0005515625215753164,
+            -0.0002938181575262232
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10371,
+          "group": "corner_only",
+          "local_node_index": 2,
+          "local_node_name": "TR",
+          "node_id": 10602,
+          "coordinates_mm": [
+            62.0,
+            31.0
+          ],
+          "selected_body_node": true,
+          "original_internal_Hu_force_N": [
+            0.0005515625215753164,
+            -0.0002938181575262232
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.0005515625215753164,
+            0.0002938181575262232
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10371,
+          "group": "corner_only",
+          "local_node_index": 3,
+          "local_node_name": "TL",
+          "node_id": 10601,
+          "coordinates_mm": [
+            61.5,
+            31.0
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            -0.0005515625215753164,
+            0.0002938181575262232
+          ],
+          "negative_local_Hu_covector_N": [
+            0.0005515625215753164,
+            -0.0002938181575262232
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10407,
+          "group": "bottom_owner",
+          "local_node_index": 0,
+          "local_node_name": "BL",
+          "node_id": 10468,
+          "coordinates_mm": [
+            79.5,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            -0.0030615373131990986,
+            -0.001690297419539681
+          ],
+          "negative_local_Hu_covector_N": [
+            0.0030615373131990986,
+            0.001690297419539681
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10407,
+          "group": "bottom_owner",
+          "local_node_index": 1,
+          "local_node_name": "BR",
+          "node_id": 10469,
+          "coordinates_mm": [
+            80.0,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            0.0030615373131990986,
+            0.001690297419539681
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.0030615373131990986,
+            -0.001690297419539681
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10407,
+          "group": "bottom_owner",
+          "local_node_index": 2,
+          "local_node_name": "TR",
+          "node_id": 10638,
+          "coordinates_mm": [
+            80.0,
+            31.0
+          ],
+          "selected_body_node": true,
+          "original_internal_Hu_force_N": [
+            -0.0030615373131990986,
+            -0.001690297419539681
+          ],
+          "negative_local_Hu_covector_N": [
+            0.0030615373131990986,
+            0.001690297419539681
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10407,
+          "group": "bottom_owner",
+          "local_node_index": 3,
+          "local_node_name": "TL",
+          "node_id": 10637,
+          "coordinates_mm": [
+            79.5,
+            31.0
+          ],
+          "selected_body_node": true,
+          "original_internal_Hu_force_N": [
+            0.0030615373131990986,
+            0.001690297419539681
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.0030615373131990986,
+            -0.001690297419539681
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10408,
+          "group": "corner_only",
+          "local_node_index": 0,
+          "local_node_name": "BL",
+          "node_id": 10469,
+          "coordinates_mm": [
+            80.0,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            0.0002367736386986606,
+            0.0009730263854027852
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.0002367736386986606,
+            -0.0009730263854027852
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10408,
+          "group": "corner_only",
+          "local_node_index": 1,
+          "local_node_name": "BR",
+          "node_id": 10470,
+          "coordinates_mm": [
+            80.5,
+            30.5
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            -0.0002367736386986606,
+            -0.0009730263854027852
+          ],
+          "negative_local_Hu_covector_N": [
+            0.0002367736386986606,
+            0.0009730263854027852
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10408,
+          "group": "corner_only",
+          "local_node_index": 2,
+          "local_node_name": "TR",
+          "node_id": 10639,
+          "coordinates_mm": [
+            80.5,
+            31.0
+          ],
+          "selected_body_node": false,
+          "original_internal_Hu_force_N": [
+            0.0002367736386986606,
+            0.0009730263854027852
+          ],
+          "negative_local_Hu_covector_N": [
+            -0.0002367736386986606,
+            -0.0009730263854027852
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        },
+        {
+          "cell_id": 10408,
+          "group": "corner_only",
+          "local_node_index": 3,
+          "local_node_name": "TL",
+          "node_id": 10638,
+          "coordinates_mm": [
+            80.0,
+            31.0
+          ],
+          "selected_body_node": true,
+          "original_internal_Hu_force_N": [
+            -0.0002367736386986606,
+            -0.0009730263854027852
+          ],
+          "negative_local_Hu_covector_N": [
+            0.0002367736386986606,
+            0.0009730263854027852
+          ],
+          "covector_scope": "ON-body only if selected_body_node; otherwise negative local covector, not an applied physical load"
+        }
+      ],
+      "saved_node_examples_and_existing_local_gates": [
+        {
+          "original_node_record": {
+            "index": "13",
+            "original_target_index": "13",
+            "leg": "loading",
+            "d_mm": "1.2",
+            "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+            "node_id": "10602",
+            "x_mm": "62.0",
+            "y_mm": "31.0",
+            "group": "physical_only",
+            "total_Fx_N": "-0.00041436827031679887",
+            "total_Fy_N": "-9.100892986346916e-05",
+            "material_Fx_N": "-3.0388447026584573e-06",
+            "material_Fy_N": "4.444622112531923e-06",
+            "regularization_Fx_N": "-0.0004113294256141404",
+            "regularization_Fy_N": "-9.545355197600113e-05",
+            "ledger_category": "physical_corner"
+          },
+          "node_id": 10602,
+          "selected_local_occurrences": 4,
+          "regrouped_local_Hu_on_body_N": [
+            -0.0004113294256141404,
+            -9.545355197600113e-05
+          ],
+          "original_Hu_on_body_N": [
+            -0.0004113294256141404,
+            -9.545355197600113e-05
+          ],
+          "local_regrouping": {
+            "error_N": [
+              0.0,
+              0.0
+            ],
+            "roundoff_bound_N": [
+              1.228875876678068e-18,
+              1.2179075488666466e-18
+            ],
+            "passed": true,
+            "bound_source": "selected original local Hu forces; 8eps times L1, no floor"
+          }
+        },
+        {
+          "original_node_record": {
+            "index": "13",
+            "original_target_index": "13",
+            "leg": "loading",
+            "d_mm": "1.2",
+            "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+            "node_id": "10637",
+            "x_mm": "79.5",
+            "y_mm": "31.0",
+            "group": "physical_only",
+            "total_Fx_N": "-0.0011964647345225877",
+            "total_Fy_N": "0.05260681451014458",
+            "material_Fx_N": "-0.00028051882440972636",
+            "material_Fy_N": "0.04887118697584171",
+            "regularization_Fx_N": "-0.000915945910112861",
+            "regularization_Fy_N": "0.0037356275343028702",
+            "ledger_category": "bottom_side_interior"
+          },
+          "node_id": 10637,
+          "selected_local_occurrences": 4,
+          "regrouped_local_Hu_on_body_N": [
+            -0.000915945910112861,
+            0.0037356275343028702
+          ],
+          "original_Hu_on_body_N": [
+            -0.000915945910112861,
+            0.0037356275343028702
+          ],
+          "local_regrouping": {
+            "error_N": [
+              0.0,
+              0.0
+            ],
+            "roundoff_bound_N": [
+              9.249718708810904e-18,
+              1.2640950283650611e-17
+            ],
+            "passed": true,
+            "bound_source": "selected original local Hu forces; 8eps times L1, no floor"
+          }
+        },
+        {
+          "original_node_record": {
+            "index": "13",
+            "original_target_index": "13",
+            "leg": "loading",
+            "d_mm": "1.2",
+            "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+            "node_id": "10638",
+            "x_mm": "80.0",
+            "y_mm": "31.0",
+            "group": "physical_only",
+            "total_Fx_N": "0.003185345000874902",
+            "total_Fy_N": "0.06722898497035161",
+            "material_Fx_N": "-0.00010926762469352341",
+            "material_Fy_N": "0.06463699536344664",
+            "regularization_Fx_N": "0.003294612625568425",
+            "regularization_Fy_N": "0.0025919896069049662",
+            "ledger_category": "physical_corner"
+          },
+          "node_id": 10638,
+          "selected_local_occurrences": 4,
+          "regrouped_local_Hu_on_body_N": [
+            0.0032946126255684253,
+            0.002591989606904966
+          ],
+          "original_Hu_on_body_N": [
+            0.003294612625568425,
+            0.0025919896069049662
+          ],
+          "local_regrouping": {
+            "error_N": [
+              4.336808689942018e-19,
+              -4.336808689942018e-19
+            ],
+            "roundoff_bound_N": [
+              5.8655467651417814e-18,
+              4.857728447014094e-18
+            ],
+            "passed": true,
+            "bound_source": "selected original local Hu forces; 8eps times L1, no floor"
+          }
+        }
+      ],
+      "original_category_rows_copied_as_text": [
+        {
+          "index": "13",
+          "original_target_index": "13",
+          "leg": "loading",
+          "d_mm": "1.2",
+          "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+          "category": "bottom_side_interior",
+          "node_count": "35",
+          "total_Fx_N": "-0.003600809923200197",
+          "total_Fy_N": "0.05598073770422696",
+          "material_Fx_N": "-0.00041903788676177857",
+          "material_Fy_N": "0.05728049784882566",
+          "regularization_Fx_N": "-0.0031817720364384176",
+          "regularization_Fy_N": "-0.001299760144598709"
+        },
+        {
+          "index": "13",
+          "original_target_index": "13",
+          "leg": "loading",
+          "d_mm": "1.2",
+          "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+          "category": "left_side_interior",
+          "node_count": "17",
+          "total_Fx_N": "-5.16891794684633e-05",
+          "total_Fy_N": "-1.2760302211823507e-06",
+          "material_Fx_N": "-3.208366872730164e-05",
+          "material_Fy_N": "1.0165903965654342e-07",
+          "regularization_Fx_N": "-1.960551074116165e-05",
+          "regularization_Fy_N": "-1.377689260838894e-06"
+        },
+        {
+          "index": "13",
+          "original_target_index": "13",
+          "leg": "loading",
+          "d_mm": "1.2",
+          "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+          "category": "right_side_interior",
+          "node_count": "17",
+          "total_Fx_N": "6.757712215883769e-06",
+          "total_Fy_N": "-1.1889466852546999e-06",
+          "material_Fx_N": "3.1446027563655644e-06",
+          "material_Fy_N": "-8.929319858297814e-06",
+          "regularization_Fx_N": "3.613109459518204e-06",
+          "regularization_Fy_N": "7.740373173043089e-06"
+        },
+        {
+          "index": "13",
+          "original_target_index": "13",
+          "leg": "loading",
+          "d_mm": "1.2",
+          "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+          "category": "physical_corner",
+          "node_count": "2",
+          "total_Fx_N": "0.0027709767305581032",
+          "total_Fy_N": "0.06713797604048814",
+          "material_Fx_N": "-0.00011230646939618187",
+          "material_Fy_N": "0.06464143998555917",
+          "regularization_Fx_N": "0.0028832831999542844",
+          "regularization_Fy_N": "0.002496536054928965"
+        },
+        {
+          "index": "13",
+          "original_target_index": "13",
+          "leg": "loading",
+          "d_mm": "1.2",
+          "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+          "category": "physical_and_cut",
+          "node_count": "2",
+          "total_Fx_N": "-1.2510447226580135e-06",
+          "total_Fy_N": "6.315283384176389e-05",
+          "material_Fx_N": "-9.433996117784603e-07",
+          "material_Fy_N": "-5.53114844784463e-07",
+          "regularization_Fx_N": "-3.076451108795532e-07",
+          "regularization_Fy_N": "6.370594868654836e-05"
+        },
+        {
+          "index": "13",
+          "original_target_index": "13",
+          "leg": "loading",
+          "d_mm": "1.2",
+          "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+          "category": "cut_interior",
+          "node_count": "35",
+          "total_Fx_N": "0.0",
+          "total_Fy_N": "0.0",
+          "material_Fx_N": "0.0",
+          "material_Fy_N": "0.0",
+          "regularization_Fx_N": "0.0",
+          "regularization_Fy_N": "0.0"
+        },
+        {
+          "index": "13",
+          "original_target_index": "13",
+          "leg": "loading",
+          "d_mm": "1.2",
+          "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+          "category": "body_interior",
+          "node_count": "595",
+          "total_Fx_N": "0.0",
+          "total_Fy_N": "0.0",
+          "material_Fx_N": "0.0",
+          "material_Fy_N": "0.0",
+          "regularization_Fx_N": "0.0",
+          "regularization_Fy_N": "0.0"
+        }
+      ],
+      "saved_state_qualification": "Saved support/vertex interpretation and original body scatter only; no Hu reconstruction, hyperstress recovery, force-kernel, tangent, HP, equilibrium, energy-gradient, pressure or effective-grip qualification"
+    }
+  ],
+  "interpretation": {
+    "Q1_original_pattern": "Both saved states report exact numeric [+,-,+,-] internal Hu vertex patterns on 722 original support cells each. This is a statement about original eight force values, not byte/signed-zero equality and not a recalculation from Hu or J.",
+    "ON_body_sign_and_units": "ON-body is the negative original internal local covector at selected fixed-body vertices. Nonselected displayed negative covectors are not applied physical body loads. Values are signed N with original thickness already included.",
+    "side_pair_and_body": "All four body/bottom_owner/left_owner/right_owner group resultants are saved as [0,0] in both states. The Q1 pattern permits exact opposite selected adjacent endpoints and complete-four-vertex cancellation under common translation. This does not make the separate assembled node forces or physical side-node categories zero.",
+    "corner_only": "The two one-selected-vertex corner_only owner cells retain the saved whole local Hu action. Saved local-minus-corner_only and five-role-minus-local differences are [0,0] in both states. These are descriptive saved cross-projection differences, not new exact-physics gates. Corner-only owners are not synonymous with macroscopic physical-corner nodes.",
+    "visible_local_example": "Cell10407 has opposite selected TR/TL vectors in both states, including Fy +/-0.012047321585135324 N at loading0.85mm. Its zero cell resultant coexists with nonzero contributions at the assembled boundary nodes. No couple or face-pressure value is inferred or calculated.",
+    "partition_difference": "The five owner roles partition local occurrences. The seven original node categories partition assembled body nodes. Physical-corner category HuFy is saved as 0.012892696672903312 N at state6 and 0.002496536054928965 N at state13, whereas corner_only role HuFy is 0.0011575021871015807 and 0.0012668445429290084 N respectively. These are different projections, so they cannot be merged or compared as two implementations of the same category.",
+    "signed_material_Hu_total_effect": "State6 original bottom_side_interior totalFy=-0.008963348606777537 N, materialFy=+0.0028308820398277763 N, HuFy=-0.011794230646605314 N. The original physical_corner category has positive total/material/Hu Fy. These saved signs demonstrate local redistribution/cancellation; they do not establish negative pressure, penetration, solver failure or mesh instability.",
+    "original_scatter_evidence_limit": "Each state reports one preserved original C-order internal scatter then negate on 1406 body DOFs, or703 body nodes, numeric-exact against original Hu nodes. The two-state output has1406 node rows. This supports provenance/addition-order consistency of saved body forces, not a new full-force-kernel replay, independent physical validation or continuous boundary traction recovery.",
+    "two_L1_rules": "The old original-node whole error uses original node Hu L1. The new selected-local whole and per-node regroup errors use original selected local Hu L1. Both are saved8eps bounds with no absolute floor. Both state old whole errors are[0,0]; state6 new whole error[0,-2.168404344971009e-19] and state13[3.2526065174565133e-19,-2.168404344971009e-19] are already saved within their corresponding bounds. No bound was recalculated or widened.",
+    "energy_and_boundary_limit": "Original exp(-5J) scaling belongs to the implemented non-potential weak force, not a naive total Hu stored-energy gradient. Vertex covectors do not uniquely split into adjacent physical-face pressures. This result does not recover a canonical hyperstress, boundary trace, stress jump, continuous DivP, energy derivative or actual face flux."
+  },
+  "preserved_independent_reference": {
+    "status": "pass",
+    "accepted_states": 24,
+    "checks_completed": 1937265,
+    "HP_calls_started": 48,
+    "HP_calls_completed": 48,
+    "full_element_and_DOF_coverage": true,
+    "gates": {
+      "production_residual": "1e-9",
+      "independent_residual": "1e-8",
+      "force_evaluation": "1e-9",
+      "average_constraint": "1e-10",
+      "global_force_balance": "1e-6",
+      "fixed_displacement_mm": "8e-11",
+      "hp80_hp120": "1e-40",
+      "total_force": "1e-11",
+      "material_force": "1e-9",
+      "regularization_force": "1e-9",
+      "total_tangent": "1e-10",
+      "material_tangent": "1e-9",
+      "regularization_tangent": "1e-9",
+      "augmented_force_tangent": "1e-10",
+      "augmented_constraint_tangent": "1e-10"
+    },
+    "reference_scope": "All24 actual accepted/original saved states,13440 elements and27378 real DOFs; actual five-node PORT direction with deltaR=0; signed material/Hu body force and disjoint holding projections",
+    "qualification": "Accepted mechanical states of this exact h0.5 fixed-square cycle only. Original15 strict gates; no all-column, new separate Hu-error gate, stress-HP, pressure, effective-clamp, mesh/domain convergence or HF5 qualification",
+    "contact_qualified": false,
+    "clamp_qualified": false,
+    "pressure_qualified": false,
+    "HF5_qualified": false,
+    "analytic_HP_energy_scope": "Archived independent reference only; no candidate energy comparison or qualification",
+    "production_response_unchanged": true
+  },
+  "qualification": {
+    "added": "Two-state saved Q1 Hu vertex/owner explanation and body-scatter provenance with original pattern/nodal/L1 contracts.",
+    "preserved": "Existing exact h0.5 fixed-square24-state mechanical cycle and48 HP80/120 references of material/Hu body-force and disjoint holding projections; original15 strict gates and PORT-direction tangent scope unchanged.",
+    "not_added": [
+      "continuous total pressure",
+      "effective grip/contact qualification",
+      "free-body or friction qualification",
+      "mesh/domain/regularization physical stability",
+      "general/all-column tangent",
+      "all-shape validity",
+      "formalHF5 candidate ranking"
+    ]
+  },
+  "visualization": {
+    "images": {
+      "Q1_Hu_endpoint_actions.png": {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\run_001\\Q1_Hu_endpoint_actions.png",
+        "sha256": "9e8cbffae36dd8bbcf9f08863e13b0933f1264cbf8fe44d051f084149604ef9d"
+      },
+      "Hu_owner_node_comparison.png": {
+        "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_hu_boundary_001\\run_001\\Hu_owner_node_comparison.png",
+        "sha256": "f656fe47fb4e34af3995491c34329a8ea597430999b04e207a5d0ba2060fa3ff"
+      }
+    },
+    "pixel_inspection": "Root actually viewed both original PNGs and supplied observations to this reviewer. This reviewer does not claim independent pixel inspection.",
+    "root_supplied_observations": {
+      "endpoint_dimensions_pixels": [
+        2400,
+        1500
+      ],
+      "owner_dimensions_pixels": [
+        2400,
+        1800
+      ],
+      "scope": "All panels clearly mark reference coordinates, independent scales and signedN. Selected ON-body endpoints are distinct from other negative local covectors. These are reference support plots, not new deformation or pressure fields.",
+      "limitations": [
+        "Some endpoint arrows cross numeric annotation boxes; original pixels remain readable.",
+        "Near-zero owner bars are visually small; signed numbers and CSV preserve their values.",
+        "Independent panel scales prevent comparing arrow length or bar height across panels."
+      ],
+      "unchanged": "Original PNGs retained; no rerender or additional plot."
+    },
+    "existing_actual_24frame_deformation_GIF": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\functional_views\\native_nested_cycle_20261009\\complete_001\\run_001\\view\\fixed_square\\actual_states.gif",
+    "existing_actual_24frame_deformation_GIF_source_path_copied": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/actual_states.gif"
+  },
+  "nearest_function_route": {
+    "keep_and_reuse": "Existing total/material/Hu response API, half/mirror reporting, actual24-frame deformation and nodal-component GIF, original48 HP body-force references and the new two-state Hu interpretation.",
+    "meaningful_remaining_gap": "Task-consistent physical stability/usable-domain evidence for fixed-body response and candidate comparisons. Global Hu cancellation does not establish small local regularization influence; original node signs justify retaining signed total/material/Hu and local deformation/clearance diagnostics.",
+    "coarse_route_only": "First reconcile existing same-design h1/h0.5 and prior regularization experiments under one physical-task contract; choose one genuinely missing minimal mesh or regularization factor, not several simultaneous changes. Use already implemented response/view functions. This review sets no new h, parameter, path, HP count, gate, resource or execution card.",
+    "pressure_dependency": "Formal total-pressure or effective-grip reporting requires a compatible boundary/Hu definition and independent physical evidence; this should not block reuse of already reportable fixed-body weak loads.",
+    "avoid_repetition": "No need to redo full24-state ledgers, original Hu/DD reconstruction, duplicate viewer or repeated same body-force HP projections merely to restate this explained partition difference."
+  }
+}
