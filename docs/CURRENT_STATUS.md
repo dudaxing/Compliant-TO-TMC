@@ -1,3 +1,19 @@
+# 当前接续：M-AVIEW1 保存态显示已准备、未授权／未执行
+
+整体目标仍是独立HF有限变形／TMC前向评价，提供可检查的结构实际变形、输入反力与工件作用，供外部研究层比较。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git，HF不含优化、不调用dmftd。
+
+已发布M-ALPHA1真实NOT_PASS：14个原点／加载态至1.20mm接受并保存，原缓存门通过；首次卸载1.15mm因controller时间预算停止，新图及新HP均0。原结果、全部保存态、science0.5.0与资格保持。
+
+最近M-AVIEW1已准备但未授权／执行：只复用14接受态显示实际变形、signed total/material/Hu工件作用、有限面距离与分区场，同旧alpha14原目标对照。实际计划29NPZ／279字段、geometry/nodal各14次、9842节点行、6PNG／14帧GIF（含0.85与1.20两快照）；helper180／outer240秒、采样8GiB，首错停止，不新增F/T/HP或平衡，不补未接受卸载态。
+
+已有卸载日志／源码静查确认time_limit及durable/临时cache边界，公共Mean/API尚无已验证保存态下降续算入口。先获得14态可见效果，再设计明确的续算合同与局部验证；不重跑长加载、不扫新alpha或放门。完整力／全DOF未对称矩阵／平均输入／API／batch已有实现，压力、有效夹持、物理稳定性、其它形状完整验证、一般输入、正式标签／排名及HF5仍有缺口。
+
+
+[新显示卡](../functional_views/native_alpha_partial_20261011/complete_001/M-AVIEW1_CARD.md) · [准备结果](../functional_views/native_alpha_partial_20261011/complete_001/PREPARATION_RESULTS.md) · [原数值结果](../lf_data_preparation/native_interface_001/regularization_sensitivity_001/RESULTS.md)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-ALPHA1实际执行已闭卡：未通过
 
 独立HF有限变形／TMC评价仍面向结构实际变形、输入反力和可解释工件作用，逐步支持同任务候选比较及HF5。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；HF与LF优化断开。
@@ -872,5 +888,8 @@ CPU原237条和科学30条事件完整；严格同步内原行157–235全部79�
 </details>
 
 </details>
+
+</details>
+
 
 </details>

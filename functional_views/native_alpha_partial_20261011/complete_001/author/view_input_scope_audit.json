@@ -1,0 +1,2006 @@
+{
+  "schema_version": "M-AVIEW1-saved-input-scope-audit-1.0",
+  "status": "pass_saved_view_input_scope_source_audit_no_execution",
+  "created_utc": "2026-10-11T12:58:48.551484+00:00",
+  "source_baseline_commit": "9e2e37cce7f0441af042337d1c26c50ae660acc0",
+  "future_stage": "functional_views/native_alpha_partial_20261011/complete_001",
+  "card": "M-AVIEW1",
+  "planned_resources": {
+    "phase": "view",
+    "helper_seconds": 180,
+    "outer_seconds": 240,
+    "sampled_RSS_bytes": 8589934592,
+    "new_direct_human_approval_required": true
+  },
+  "pure_source_pins": {
+    "functional_views/right_margin4_20261007/complete_001/saved_right_margin_views.py": {
+      "path": "functional_views/right_margin4_20261007/complete_001/saved_right_margin_views.py",
+      "bytes": 21517,
+      "sha256": "761a9ffd1512233ce048be364c00a86882b69e2fb3e3fe81d7f79f74ad52b166"
+    },
+    "hf_repo/scripts/measure_native_workpiece_regions.py": {
+      "path": "hf_repo/scripts/measure_native_workpiece_regions.py",
+      "bytes": 15516,
+      "sha256": "56bba89522481e9cad03865ff762fc207baa571b0e9fcbe41ba1c0ffc7aed925"
+    },
+    "hf_repo/src/hf_eval/__init__.py": {
+      "path": "hf_repo/src/hf_eval/__init__.py",
+      "bytes": 393,
+      "sha256": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b"
+    },
+    "hf_repo/src/hf_eval/native_region_geometry.py": {
+      "path": "hf_repo/src/hf_eval/native_region_geometry.py",
+      "bytes": 16022,
+      "sha256": "0bc3fa706431de16761d3ffa89b37e56ef3f4782984362d14792b1f5dd26aa98"
+    },
+    "hf_repo/src/hf_eval/boundary_geometry.py": {
+      "path": "hf_repo/src/hf_eval/boundary_geometry.py",
+      "bytes": 10007,
+      "sha256": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31"
+    },
+    "hf_repo/src/hf_eval/workpiece_nodal.py": {
+      "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+      "bytes": 4423,
+      "sha256": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9"
+    }
+  },
+  "source_AST_imports": {
+    "functional_views/right_margin4_20261007/complete_001/saved_right_margin_views.py": [
+      {
+        "type": "ImportFrom",
+        "module": "time",
+        "level": 0,
+        "names": [
+          "perf_counter"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "pathlib",
+        "level": 0,
+        "names": [
+          "Path"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "hashlib",
+        "level": 0,
+        "names": [
+          "sha256"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "argparse",
+          "csv",
+          "json",
+          "sys"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "numpy"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "matplotlib"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "matplotlib.pyplot"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "matplotlib.collections",
+        "level": 0,
+        "names": [
+          "PolyCollection"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "PIL",
+        "level": 0,
+        "names": [
+          "Image"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "psutil"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "measure_native_workpiece_regions",
+        "level": 0,
+        "names": [
+          "descriptor_sha",
+          "pure_sources"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "hf_eval.native_region_geometry",
+        "level": 0,
+        "names": [
+          "measure_native_workpiece_regions"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "hf_eval.workpiece_nodal",
+        "level": 0,
+        "names": [
+          "observe_workpiece_nodal_forces"
+        ]
+      }
+    ],
+    "hf_repo/scripts/measure_native_workpiece_regions.py": [
+      {
+        "type": "ImportFrom",
+        "module": "__future__",
+        "level": 0,
+        "names": [
+          "annotations"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "argparse"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "ast"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "hashlib",
+        "level": 0,
+        "names": [
+          "sha256"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "json"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "pathlib",
+        "level": 0,
+        "names": [
+          "Path"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "sys"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "time",
+        "level": 0,
+        "names": [
+          "perf_counter"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "numpy"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "hf_eval.native_region_geometry",
+        "level": 0,
+        "names": [
+          "measure_native_workpiece_regions"
+        ]
+      }
+    ],
+    "hf_repo/src/hf_eval/__init__.py": [
+      {
+        "type": "ImportFrom",
+        "module": "evaluation",
+        "level": 1,
+        "names": [
+          "evaluate"
+        ]
+      }
+    ],
+    "hf_repo/src/hf_eval/native_region_geometry.py": [
+      {
+        "type": "ImportFrom",
+        "module": "__future__",
+        "level": 0,
+        "names": [
+          "annotations"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "numpy"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "boundary_geometry",
+        "level": 1,
+        "names": [
+          "boundary_distances",
+          "exposed_q1_edges"
+        ]
+      }
+    ],
+    "hf_repo/src/hf_eval/boundary_geometry.py": [
+      {
+        "type": "ImportFrom",
+        "module": "__future__",
+        "level": 0,
+        "names": [
+          "annotations"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "numpy"
+        ]
+      }
+    ],
+    "hf_repo/src/hf_eval/workpiece_nodal.py": [
+      {
+        "type": "ImportFrom",
+        "module": "__future__",
+        "level": 0,
+        "names": [
+          "annotations"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "math",
+        "level": 0,
+        "names": [
+          "fsum"
+        ]
+      },
+      {
+        "type": "Import",
+        "module": null,
+        "level": 0,
+        "names": [
+          "numpy"
+        ]
+      },
+      {
+        "type": "ImportFrom",
+        "module": "boundary_geometry",
+        "level": 1,
+        "names": [
+          "exposed_q1_edges"
+        ]
+      }
+    ]
+  },
+  "raw_viewer_hf_import_allowlist": [
+    "hf_eval",
+    "hf_eval.native_region_geometry",
+    "hf_eval.boundary_geometry",
+    "hf_eval.workpiece_nodal"
+  ],
+  "package_init_scope": "Version assignment and lazy legacy evaluate definition only; no call or import of .evaluation during this viewer.",
+  "raw_NPZ_plan": [
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/model/model.npz",
+      "bytes": 299340,
+      "sha256": "b8654f4e5b02e6e46eba73bc8bb17f533d6788c011f419011a3372fd25060fab",
+      "kind": "model",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/model/model.json:arrays",
+      "accepted_index": null,
+      "field_count": 27,
+      "field_names": [
+        "coordinates",
+        "connectivity",
+        "solid",
+        "lam",
+        "mu",
+        "gamma",
+        "edofs",
+        "fixed_dofs",
+        "free_dofs",
+        "solid_nodes",
+        "solid_dofs",
+        "b_in",
+        "b_out",
+        "grad",
+        "hessian",
+        "weights",
+        "points",
+        "kr",
+        "hx",
+        "hy",
+        "thickness",
+        "k_out",
+        "force_scale_per_length",
+        "workpiece_cells",
+        "workpiece_nodes",
+        "workpiece_dofs",
+        "workpiece_background_symmetry_overlap_dofs"
+      ],
+      "field_SHA256": {
+        "coordinates": "bb93ae06900416902c68b0bb942179cc0708a00fe692da047dff95e4a93cd9df",
+        "connectivity": "fa3967b837194a31dcf474fa876152f94bc4ebe7c689a747a450329af3bb0317",
+        "solid": "66a372417082c9df122c673e16a4cdfd143bba68624abed9a251aab908c2ff60",
+        "lam": "8c1d892710661cdbc03c51a06dbce4c374c5a658fd8acc7b4d9ffd59ad3b21ea",
+        "mu": "d6bd803f52d8ebfc855f9b68174136dd1314d2ce0c1b2ba256a65395954d0a4b",
+        "gamma": "de7b2de592cf125a4535c272c057638e689fc5c1a38983bf1887df93e4dc07e4",
+        "edofs": "34984af5bde934e0a0b75713c0a888295e55e1a7c07c2167bfbf590361fc3176",
+        "fixed_dofs": "d12aafebef9c3f240376a1758f318bf7a1bfbe42062eabd3fd7b21ea9cf9286e",
+        "free_dofs": "a628e6ec3501c8e2832780575b320d2cef36d39521df092d2dac603390689f8e",
+        "solid_nodes": "e7f3ac6fe350d85038a349958683379737c18f4a00124496000de992d4b03e7d",
+        "solid_dofs": "90aae8184b546034d389f44e0967cf7654c4d83e15e75ef053375a5ac4e06831",
+        "b_in": "d31f2395325d6c64eb6fea7ff0e0e7ad56150cf84b6fcf9a004f81b4dd71b862",
+        "b_out": "6ee3395388f07732c61545cc9c913fde8905c8f21d2988f2ce2647f1b1663467",
+        "grad": "ff646881a03a9303c4ccc8b51d6837c0758bfcb032eb3a60b4bbad803a356e3a",
+        "hessian": "3c8c8d80f43f09b522633b614c448d320bc2c4aa07f28fe5ea9fe13520747dda",
+        "weights": "09ecedf8018fab73cfe4d565a669a3211b2e69e937524fa1f853963e3dab69a2",
+        "points": "bbe5390364f8bb87d822c9ce2fea03b2523330f154c95827d4559b87f4ffeaa3",
+        "kr": "3cd1d772fa466d0dc2ff245fab4da85b4312af1777e07daef7c8fecbb769e047",
+        "hx": "4cfa5b42ca669328764e67cd9a34bb8f90b16ed7ca8d85e8443783d7ccce15ed",
+        "hy": "4cfa5b42ca669328764e67cd9a34bb8f90b16ed7ca8d85e8443783d7ccce15ed",
+        "thickness": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555",
+        "k_out": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+        "force_scale_per_length": "055e7dd5bc7591c950c5683cab13f99a935400b719798b39b6152f8c1bf71555",
+        "workpiece_cells": "a7541e039de21dcdc53e8b8a00dcab2147540e4c805b17e572768794cff63bfb",
+        "workpiece_nodes": "abfcfb247e267ecd3ba3a4f95f86e552c58793f27624064c9b214768e6418c4e",
+        "workpiece_dofs": "762df9e0abce79934ee321b5601bf2d3c4764a8c240ed7d6f08a9dc01398940c",
+        "workpiece_background_symmetry_overlap_dofs": "e71601d840d3d0790480d5d36608f56ed6d8cd2914486a13172fc61e2cb86d50"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/000/state.npz",
+      "bytes": 882,
+      "sha256": "c5d33e02be9f414a70e43de308f3f9fbd8695df1353d56c6e48d1757fbf41bb3",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/000/state.json:state",
+      "accepted_index": 0,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/000/forces.npz",
+      "bytes": 27036,
+      "sha256": "be74ddbde20aee3b40465c26c4bdbf0ec5a60a94f916c063620fa5d808ac8a3c",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/000/state.json:forces",
+      "accepted_index": 0,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "6909f7dfd08417d7aaf7879b4ae68617afbc4a20867ca43bf4cf3dfb1b4bfd81",
+        "element_material_force": "6909f7dfd08417d7aaf7879b4ae68617afbc4a20867ca43bf4cf3dfb1b4bfd81",
+        "element_regularization_force": "6909f7dfd08417d7aaf7879b4ae68617afbc4a20867ca43bf4cf3dfb1b4bfd81",
+        "global_total_force": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "global_material_force": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "global_regularization_force": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "J": "65704b32dd28c5723f547693cfb1806fdf5728f44bbdf5f271c070044757e9c0",
+        "Hu": "6909f7dfd08417d7aaf7879b4ae68617afbc4a20867ca43bf4cf3dfb1b4bfd81",
+        "F": "544349cac41c5b66d11ba319aba9f9f81f229fb148d1dc9ee293aa1a882db5a2",
+        "stress_first_piola": "f0a79c5e4179f999c2134e19ced2a1fe8d4cc421b7248366fc97faa56f02cbff",
+        "stress_second_piola": "f0a79c5e4179f999c2134e19ced2a1fe8d4cc421b7248366fc97faa56f02cbff",
+        "input_force": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "support_reaction": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "global_force_balance": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/001/state.npz",
+      "bytes": 197641,
+      "sha256": "a459769d85fcb4dfa54058f968116065785f91413c90f9763fbd1c78fc1f1c4a",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/001/state.json:state",
+      "accepted_index": 1,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "dfd4f50c9960ea24f8b0259c58aa115d163937c1c2a7f1eca4b72017c421b992"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/001/forces.npz",
+      "bytes": 10909253,
+      "sha256": "bf3d136dcd31129601f16bcd37f44276a15b52c792dccb59222dfbce4385f644",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/001/state.json:forces",
+      "accepted_index": 1,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "b39d7703122eb0ead8835759bccd25e2594f79ceb7a0220e21a08280fa1f3c29",
+        "element_material_force": "d164bd085e946973711fb442b290e3f298d07660bc20e4dde217dd4cf948ea09",
+        "element_regularization_force": "7fe19a41ae9761ef8ab703c947ac69d80b45ec7319562e47363a02277dcb5cb7",
+        "global_total_force": "b638afca01c7fcd889afdeac27b03728af52bd37304c8960313f2520069fb53e",
+        "global_material_force": "9c808a5629263782a6d582898b8a3facaaafedb56a4500296210e7122d83cbaf",
+        "global_regularization_force": "30b3981a7bc013e349f72f01f9c63e742089be01cd07f364b7dace21b01169c1",
+        "J": "f74e061cc6be180aa7482bfe4c165458c232f9e48c0b5310ded6a079c01e3cd4",
+        "Hu": "85602e2a4f5800fc78164eab9ae7c97d5f209412c981013ad4b3750efc564131",
+        "F": "696f475923681b847954931d385fcbd0f81e0c7c0d43da2290180eddf4a0bd35",
+        "stress_first_piola": "0b9ef78f2dcab109cbe167ca1455ef0ba69274a61dfe285e8ea7a7724e50e9a1",
+        "stress_second_piola": "5d46f63d6e892c24da917d037c6c46493f70f2828782fe0e33c22b6be04db2b7",
+        "input_force": "33b4be87f4370b704884ceca53ae5e6b7375350e7b14a244ba049bec0fed849f",
+        "support_reaction": "95f3814ff758309a59087da30759fa94963d07d884b3e3dbec821f526a92b67c",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "20ff07dba4db8433df338ff626f91e1143f1e1f7699dc4a9d26bfd59c5049590",
+        "global_force_balance": "0b911951327f459c70c6a7daa622b4f19db2f2a20e3a471f31857744f82ac5c7"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/002/state.npz",
+      "bytes": 197817,
+      "sha256": "d4b5abb3c43a7f07ac53a07cf9cd00d84f336a7c730f8061ca562fb715ea9f49",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/002/state.json:state",
+      "accepted_index": 2,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "b2ddb38077a1fd173e90946d52e171c2a6828728ad31f3b513c3ddc6f578a25a"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/002/forces.npz",
+      "bytes": 10920545,
+      "sha256": "fcfa774017f44f6d6cbfa6511647e3191ae1e23149368e7c0223016bbe65a34d",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/002/state.json:forces",
+      "accepted_index": 2,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "f47323815f4d9e873c8c5a2bf5cf38d943ad16bffbd09be97c0772951f9968d4",
+        "element_material_force": "56ae91ae21209b58dc714eb4cabafbdfce74bbb8c8432eb30b6be12c5b2badcc",
+        "element_regularization_force": "c9144e284736cfd9d40831666f4bdeaa4c64c9f24f5f327d16e4e996861e761d",
+        "global_total_force": "2790977b47019f5c30ec589192e24dda48c83f028bb662fe366b40251c5e861d",
+        "global_material_force": "1e5f2dd0570a66e82dbc621da1c28172d47b7455d77345ed27033170c60c2a24",
+        "global_regularization_force": "937c6069dcc551248c8084c861d7ea4d6d60cbff1e0cf3eca56928b4df78f818",
+        "J": "e6432f27508fc6141d6daedc052f1aebaa66262752d27e1ad94026caa56da1d0",
+        "Hu": "386778059fe26590e2f5d282595a09c97789430c47bd43ef6b0c656f4ee5bfef",
+        "F": "85d95582a71dca1216f7bde2e51d167555112c21b1c790b4733d4a4c4f0b3366",
+        "stress_first_piola": "2682ee076755d6d960e649399e592c683ce8022d8583475ae9c6d7531244b84a",
+        "stress_second_piola": "94e77e3b75186603502635143ffbf1c486c7680b83367be823defb978cb5a57e",
+        "input_force": "78c3e2a15e9eb5245152d2fc8057900137a2a1dede04f267528aaa520db92913",
+        "support_reaction": "5af4944236d803261a3f4440a7d3e72a9f001d907c6e086bcebfb2c397998299",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "c75a3bff6dd05613b82d2eeb1da0757271256fd9d291333919af469a0c9c0cc8",
+        "global_force_balance": "bbcc72e83ee1ad348f8b3eda24da0df51e3e01816d49a9c150ff3cfd3b376b6c"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/003/state.npz",
+      "bytes": 197773,
+      "sha256": "a01be49c54a1758273477212a13923b43fbe04fe2677f96fcabfbb1bdc804ceb",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/003/state.json:state",
+      "accepted_index": 3,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "02603f575dbe05b26bd2118a83793dddde34ca1f0f957d5b5801ea91bceeed10"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/003/forces.npz",
+      "bytes": 10925469,
+      "sha256": "1149347d40d0396b89c1909507f5f19d063d8034749ba0f4b603cbe7cfad0614",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/003/state.json:forces",
+      "accepted_index": 3,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "35491011b4c30fbcaee316fc2c281dca75fdf91c1c4a1318dc1e56a576d648cc",
+        "element_material_force": "49dce8ca2be9c8a3ceef588bba78ad09ee9fecf48c9f55ed37f8594b9e321fa7",
+        "element_regularization_force": "221e25c033d2e831a297a3a72661f14290a9d4476c9caf3814655bdd19f89828",
+        "global_total_force": "789d7acd872c78e53ff0d5f87924e7d768f64e15f0b89708987770da3a14e2e9",
+        "global_material_force": "d8864ee16a2277ebbcc25172214672de25b20321a0310f98b3f8f75865341074",
+        "global_regularization_force": "3c8eed29a285a99e5c6b3828a71c45cbf735c253ff634749a0c535141d0be181",
+        "J": "585014ea93fd1cdfc7159d395cfde1f9bd0fb50f9a2fa41e379c814b3bac8437",
+        "Hu": "260308900faecca127d229c9e2f3c62a14ad75484c9a3f944132cf6a39c56a1e",
+        "F": "f366e6c3cfc07a3b9486d7097b70b48cbf2b7cdbfe015c1acdf0cf8aa396e39b",
+        "stress_first_piola": "00a1656c2c38225e3c089cac9fd64e9e89aa36f80ef93e85d097e7c0842e9f7a",
+        "stress_second_piola": "c0300d7068eee8ee84125496b078d254c8eb35ea0718de5585f10bbf624ebefe",
+        "input_force": "295223d514b532ec6952f3086edd6d8f69a94cd9bb50610955d63a60c9f85711",
+        "support_reaction": "6286ff08caaf13d63490c17c11518483d1a792df85e1678476e7d0121bdcb348",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "9928625fe56ad1fbae06bbc22ae17b2fe9157fa8f155f79cdf9d84a8089935cd",
+        "global_force_balance": "4bd3127460d207eb1afeb021994e63fbff47291f88c40e5445e1f166aa87039d"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/004/state.npz",
+      "bytes": 197828,
+      "sha256": "db7efb51e9bab616da3cbe7dfa56cefc35d86f0a10c3f21831cecff81027acf4",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/004/state.json:state",
+      "accepted_index": 4,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "ed435b197c850e8b070566c03f44b2e091791cfd6d2ddd6c57ea42a597ebc331"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/004/forces.npz",
+      "bytes": 10927165,
+      "sha256": "998c6812dc083b8c100173413036e2a6dd92d4f96221a0c0ca5e1f0bda693ac6",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/004/state.json:forces",
+      "accepted_index": 4,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "ef8119db685e56ddbf5c57cda237350f37b322ea55d0efe37942c15c3a11ca4e",
+        "element_material_force": "68446e10168a2385f3a07f227c79f02146054da74ad1aff358912f1495eb5acc",
+        "element_regularization_force": "e663c238c502ab618f61e76ce883c40ef38b14a2ecdeff72edb5672cddb4cb6b",
+        "global_total_force": "aace2dd82b8a42e6c4d5d4b7dc6f468b1004b148b6fa5d0bb2fe18e147189f3b",
+        "global_material_force": "db1cbae3cf5d0ec6f2d154a5435ca1bf2057801aed08549321fd1f211e9550e9",
+        "global_regularization_force": "095ec5520b0a88aebcaf44ca61476852912f0e5a66889181c0e790580881eb72",
+        "J": "ccddf61274a42c090adaa2122b0ea23c07116daa39e9b00f6121b7b65ba1e2ff",
+        "Hu": "5f0055aa275fe340900241a45436ba379176b16f682684b074872d5086441a4b",
+        "F": "0d7070af02a4a2313751cb209d53dffc3af8917ea21d3d6b3c2073de5e236750",
+        "stress_first_piola": "4ade1275517e9bf15c0c6ff5b979f1aa52e30722c831dcdafcb694cc90df0632",
+        "stress_second_piola": "390a8fd8ac9d5b75dde3041db0df9ec150f74b531f10054a933a840b753c41d3",
+        "input_force": "106fadfb9d279097bb9ad017d90d03f7dfdd6aa9c42b5746a7292e50ad3d5933",
+        "support_reaction": "93b567ea36194d594a51163fc9613caa3ec7aee6b681132917bacfba99a5cef7",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "ffc1f5ceefd6288fae7e40b7f8534ece9ec7c9c397ed1a71c862137bd76073eb",
+        "global_force_balance": "c97f5e93af248c5fff2abd21cb36f8128c5a241f21510d008056b5d3e9c61b05"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/005/state.npz",
+      "bytes": 197954,
+      "sha256": "aff9cdc0fad1119a5ea7a58942a22369cfc17b79c1cb35538d260d46edb63a93",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/005/state.json:state",
+      "accepted_index": 5,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "c12cba6bce695a803eef5fb780248d4a3bd9e7e28ac0eb9910f0da5eeb0ca010"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/005/forces.npz",
+      "bytes": 10927546,
+      "sha256": "58dd20a4643e70facb4786d7c94d5ea8b8212f041e90d4e54e9017c3273407ca",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/005/state.json:forces",
+      "accepted_index": 5,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "da1508ef98d0860359ddcc935aac369990880972757fc5fea8feb18989880b02",
+        "element_material_force": "d5e9b3fc33f405d517dfab137b153169de0f769751cf211008682a1f349d0e8e",
+        "element_regularization_force": "499021b1963b4641bdef40d93b2fa0be5e1db8e1a7a775af6830be3219e687a4",
+        "global_total_force": "83301711ae838fd3d1b07713d5410c4bd3df9cb1fddafb3a0933f9c968b142cc",
+        "global_material_force": "f9e79daa9f40f0a9cfd502e2e4feaa17dae09840737cc3ef610559ad21217cfa",
+        "global_regularization_force": "b8985e6905bf93126c4a8cb42a72ca9df1416d95b88382606839a11c50ea3811",
+        "J": "1e8c50cf99ed45e3baea784d6449c0259fba124873f49046f2f5b5b8a9a279cf",
+        "Hu": "34c0003981de588aaf864fc48cbe50183a1b6fb050ddfa9cb3e0a296f112ec7c",
+        "F": "8597347db0260509b443c9d36323bc8a849f6376363f623ee27edf4201c9356d",
+        "stress_first_piola": "d9091e2e976ea9b887e53b77493a5978d13c656734063ac212aac309ea4511d4",
+        "stress_second_piola": "a02c5916b8c467720a74988c34be83561a3afca24b8f86c5fcaf32c2c9f28a12",
+        "input_force": "622eca9867a23072e8a2d17335eaac20c64cb80656ff733607599ff743d4255e",
+        "support_reaction": "17111628a427e9f8ceca7327de29e9b3be77a7c96af49cc76b5a4445cd1adf35",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "fbc4712c9c7e080bd22a1fc1cb06ec8e0c2004e68cf2f09e4779b6f14243811b",
+        "global_force_balance": "78a328c96e690a2643127f7e9646f2bd1e0552f88e6de158497b7ae2ff975f57"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/006/state.npz",
+      "bytes": 197956,
+      "sha256": "13ce1f3400cc3e7fa64c4d438003adf795dcc5f964ff0cd138468cad74a08587",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/006/state.json:state",
+      "accepted_index": 6,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "906ac4c89180200edcfa2f5e89aa9cb915591e4c5d18138633619e789ed4f52a"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/006/forces.npz",
+      "bytes": 10929180,
+      "sha256": "c8b4501f52cd92b3c497c4b59f10f845fb10ed707938f91555b5e67f3b6a3315",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/006/state.json:forces",
+      "accepted_index": 6,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "3242b9e3532768dbfc568dba49396ae6926ca80685bae05d888c2e3b0efc7501",
+        "element_material_force": "87b14aeb4518b8b08fe67f4c60737610abc97fdb25b5fd0f923512e560cde734",
+        "element_regularization_force": "1225d0949b2d6e146f7b63a93640bfb80fb6eb130a536a82ee8b05faeadbcd4d",
+        "global_total_force": "346f9dd7835925108927b92b0089286ded58ce5b3688c596552bd989673bc9b1",
+        "global_material_force": "f6eeb1435d6c12c675cb48fb3dbab278f15995fdf48e92c5a23716cc5a285787",
+        "global_regularization_force": "cb970eec205811886548916b9f0744933fd7f5ccade9789a8df193947586fb17",
+        "J": "db5694437d188ffa4ae2e184b0ad084fe2c3779e607f1ca43727e48f584c0f85",
+        "Hu": "5807cb9d1afd2b75a2492b32b86376f349e71dd38ef23710a4a1d09c27f31fad",
+        "F": "3cf4052bb3b8066872063e05f32a10e4a91711b4a803d817cda55707473795d4",
+        "stress_first_piola": "eac96b436124234aa00cc3754db5ac2f823272acf650afb0ff50467a91e7e15c",
+        "stress_second_piola": "5b97ba20bfa1c22cf506b7c7397febc21e7ceab14f7d102ee84fede3bd94c642",
+        "input_force": "6b031255621e999ad96f9b7791786b3d50efac174c7bc6ef27c4a3278fc5a85f",
+        "support_reaction": "28edd610a35bbb56260b99b12b5c56edf4b38e26e3c49ff573182fb9e68ca809",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "eb0f8b6d118f869150f963618b5e1861045b951f69434ad10459e412ef5ebac9",
+        "global_force_balance": "2794fd56c1bf976aba2f57924c151ab4b221044d1abb00100b13108be280cfb6"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/007/state.npz",
+      "bytes": 197947,
+      "sha256": "d974c30df712982bb7105ea64577d6d9df56c62bd03d2de1d0540c5d598ceccf",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/007/state.json:state",
+      "accepted_index": 7,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "d9c6d98e1d0612a7c1595150e5b7644aed3fe9ea59bc9e4b32346698e43da338"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/007/forces.npz",
+      "bytes": 10927823,
+      "sha256": "b1df3479dcdf068d77c60df7308de19dad4a5b7b5ae2f690a1ac3a374d960373",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/007/state.json:forces",
+      "accepted_index": 7,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "65400844d90ef4c85bcf5e702de91843e814477ae04dfdc9699e8534f5b2f9c5",
+        "element_material_force": "513c547ce05d7130930f367a169d2a2c65fe7f9aaa9f8c3ee1977c7411e28728",
+        "element_regularization_force": "ad9e4fee98216dbb28c87148694d2be0f199d967f006a6e07c1bd08922e9d8cd",
+        "global_total_force": "5f0f40defce9ddf5f495e7cb42d255e4024bb9eccb8426c695b616f45cf3254c",
+        "global_material_force": "88c439c1011e2f137850ce678b2a748e4b1ebd9b7f1c8dcca34fbd3d8df8f7a2",
+        "global_regularization_force": "a2649eda3c02e3da6adb68d7177c52df44cbcd602501f8912b80ac2c1da08db4",
+        "J": "395d98f200484be8789d5e596acc98a51340408a3e19060a0ebc12fc12f47491",
+        "Hu": "ef3c6663ed3a9b531b30e3874d41ac782e8c1de6084b059cd671a3609b66d6fa",
+        "F": "47781d1cef7b564b220972436ddc7f5811ad96811cf5c9c84e62362e73b29cc1",
+        "stress_first_piola": "1b0b808de2c45a2536d74a9d2ef13269688b87d9b3297ff348828a9cb6b84318",
+        "stress_second_piola": "fae3c0b38624f6f2a17c324b296fb00424738b058e975eb6f3285e54b82d5200",
+        "input_force": "7a6941420f37af0c643f579adc5489aafe504f12e150b819d676a0f834a53c91",
+        "support_reaction": "fa5c010e43709b0e92f315316346a1aca187bb84be47e4fb1d4c5101792e1d36",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "9dc12620baed00bc63bec100707bc9cd9891c42722c083e166f0829706a04326",
+        "global_force_balance": "69c9adafd2dbcd1ceea693e6d46dcec66c0c07136c1587a1c82fcd56b6b468f6"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/008/state.npz",
+      "bytes": 197898,
+      "sha256": "1e443969764b148285466921e3722408741567331a9a6d7913c41bee486418b9",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/008/state.json:state",
+      "accepted_index": 8,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "25038357683b844aed982764ebe41ddb22182d48f541711a68cc225d85849a69"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/008/forces.npz",
+      "bytes": 10926582,
+      "sha256": "2a06363671f443b5e3b1a16e40b69a518750bd5548537438f6888e5baa0782f5",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/008/state.json:forces",
+      "accepted_index": 8,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "19c1805584d503d1f913b9f67ec837b0873a50562856bcbd337d6c00df71ee99",
+        "element_material_force": "cc815b6a4728ca09335d90adb2b920d2e81cae858011ce5912135a5af67f08f3",
+        "element_regularization_force": "3be2cbaa96913b4032f720fe0a3825124ee3f12e7cc7cfe34ffdfabd82264a33",
+        "global_total_force": "6a14d6b33fecdffffd669b481227e9856d8ea1190ab1c3cac7028a90ad799b3b",
+        "global_material_force": "f46600c6be2b8257561d0d817c191fe142e8f5750f915517947f16ae84c20cdd",
+        "global_regularization_force": "0d93d93bb1ca881f209decc072295f7df740f262e5b9d774b72fb52c646b3609",
+        "J": "7c3a5a4e375ab1aa0ab2121b51fdf7e72aa485f9b25b7f34c110ddfc05c567bf",
+        "Hu": "364f811db89fcfba6370e094d96558c966ff7ca5411e5e05dc8f3ccaeed7cbca",
+        "F": "e97bd5b435c7bd8ea91488a6d6fd74e427e09ea749a89da45d34deab1e33dc85",
+        "stress_first_piola": "69bb9217f54ac03a8947272115b619ef437515b0f6d87c39b2a225c0ab760b70",
+        "stress_second_piola": "c5000ed7d18291075ea534817782c20a8dc676b1c54b15cddc84b6bc3e52c714",
+        "input_force": "2945776c93a2e9b338fb59be9e7c9aa2157ab252353e28f3fd14e22883c78b35",
+        "support_reaction": "c7ab9baec28b8c57322611552b642fcb5e4137d3593f5c67bf762cc9211774cc",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "8404c108a7d7a19026a52a60d5a6db3b674ccc5baebbb65c2481a01ca506d947",
+        "global_force_balance": "b7609ea379392c9ea37281c443ac28e8657b1d8f5801d9e2a38d080514154e6b"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/009/state.npz",
+      "bytes": 197986,
+      "sha256": "1e930db09b7a752fd0bc73eb680e6a888cd731db6e3ff4249c3f6d87dc310400",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/009/state.json:state",
+      "accepted_index": 9,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "07972c011b75ed87dc25eacfb642f736314467b4ef2b638905f6a11c4c32aac2"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/009/forces.npz",
+      "bytes": 10927410,
+      "sha256": "08588c2b894424ea0ad08314237fd46d620d49464658301e8d330cb39d50306f",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/009/state.json:forces",
+      "accepted_index": 9,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "dadb1ae823c02fe1486e343822319ce562b65dc9dcb7be7989d13394537832db",
+        "element_material_force": "429190132c579b559892ae0200c2c2af3654d1f9dba6c9bd745404e4ccd05c95",
+        "element_regularization_force": "d144ac61ffc98bef239543f9c6d7987ecd7c566a11d8981f1e3b14032bbace77",
+        "global_total_force": "1c980a81552c10465cf478f6d8bc90d7ec3c92cefc4472d01320585869a24a33",
+        "global_material_force": "25be6a7a4da2b753ccd331dfb86ba4bc1ce54eee7a66096eebd7461dd24ec28f",
+        "global_regularization_force": "149de3e1212bda4f88a94b83192daf9d1127607280af94fec7b9ffc141976815",
+        "J": "86d189881f1ce75916160ed1dbd9d4bc7ce470fb4d1224c87390a0701429a1d0",
+        "Hu": "bd8afbe9f6537ed0de385d693c24ef222879c1462111b8e7b89005e694e009f8",
+        "F": "bb89612db7bb3cd2a3e46be90aeb2e05db03e668f843752feb8fe34984f674a5",
+        "stress_first_piola": "e14ec9ff8d787fad08136b9fc049feecb4c279b401ce39eb45cfa11b0a61d0ec",
+        "stress_second_piola": "fcce86787941a9df6fc43a6da6ffddbf465bef200d38762c704b1d911b1c0fef",
+        "input_force": "b692396b3c4f04c440ba655d28e30c57798cc4f9d689ac1da932bd08f340ba64",
+        "support_reaction": "97d3bb61052ee0fddb4cf8e74b7e9deae951e2d203957108a1d872d8031da527",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "bb86c1c336c046ee4727eb668bdd238686c780834d43535fc880092867ef82ad",
+        "global_force_balance": "bba7042fa34e2a664afbace6a3f2a69dadfc07ba6ef70367664ea592aa705c3f"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/010/state.npz",
+      "bytes": 197948,
+      "sha256": "1626727705182c54391885580418f3bb0e9acbb4312e7ba38080b532c61f8375",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/010/state.json:state",
+      "accepted_index": 10,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "685debe900f05a5412dcbde812784987ae2a8a98500a813a2d16ab259fe63ab8"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/010/forces.npz",
+      "bytes": 10928502,
+      "sha256": "ec979c38f943f9b6b343d88464e81fd04c77278ef48238e5dc07e04e4f2a1baf",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/010/state.json:forces",
+      "accepted_index": 10,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "b45fb857b3f6b651532d00330ae50eee99008a6ce0cdc3c6ffea66e8e39414d3",
+        "element_material_force": "3a55b3d3483d96609d0d2ecab57483c98e1f11eff8c7652f438118249aa7fe6c",
+        "element_regularization_force": "32e145e6f1c8fa25dc66cf0ce9eb319796df1fbd8ed641ede6de9a3ac80831bb",
+        "global_total_force": "b354be8a2e7d691b1661c6970b32df522a838f97852f1e3eec582f560e1eb8f4",
+        "global_material_force": "ac5d8adfcdd447f9c9e09c2fc59144f9807de725b5ed722c184216534266ea7e",
+        "global_regularization_force": "ca7d54c30e99ed1a1945a00449ad1db5dd5ac444349b760105314e9b8b9f9866",
+        "J": "4306fcf788e45705bf9443eedec0e8f87311f6c8a96bd52db3843e05751fd337",
+        "Hu": "cc1e2086ea6a3b170246320c0a65d730f9c641ca76998bc363bcea2c98c9e14d",
+        "F": "59f2306b0d9c4c6ddfa70fd87aa71113e0a97cbf1fd8b7600c259a088b99eb3d",
+        "stress_first_piola": "3dc1b8e9f9f041f481a1d69d9d7ee725803ee3ac0cd8ad8587b3a72bd158ad76",
+        "stress_second_piola": "0573801c373e01d457ec30a011605c5bf54f42e0ce99e4374089e5d197f41b28",
+        "input_force": "4b6bc55ac9a2643307eb0d8772798636a9887badacbe7b56b142db172aad3f4b",
+        "support_reaction": "3e59e6fbe34467e9fce495b66848ea889660b9e76bc1239bd2bc57611d924493",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "a9f5463a33d200f103192012a701c9c484cd02810696e8871cde014b9d8dd6af",
+        "global_force_balance": "0358318c3b7bafdd63df1f59e33239e403ab60049428e3a9b20f6cab2f77a178"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/011/state.npz",
+      "bytes": 198000,
+      "sha256": "fc40fe2ed45d3eb7f13b13712ac2ef223fa6903975df90de995e564fadd8f1fa",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/011/state.json:state",
+      "accepted_index": 11,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "48f5c736f40031c0b2ef3c1e881c78419c9c207fe8ec0e8450ae246847baa85d"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/011/forces.npz",
+      "bytes": 10929404,
+      "sha256": "7fd5a207e910a298cff95a43167f66777be5a45b5c333761ddb813af0b8d1d53",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/011/state.json:forces",
+      "accepted_index": 11,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "de06464ca5cb482a744dc0497097ce03e81e84f3e9403a1d382b74bd54e135c3",
+        "element_material_force": "648673d7feb1a02f87a11172602faecfe28ab875ee5f1f04dc6ab905b81bfd05",
+        "element_regularization_force": "9f79993b99da06b8c0b89a27f7e597e4d77c615d1b1eb2d9c908b2380ffaa676",
+        "global_total_force": "548aa2321363696d46154bbd5274f36cc1c5ee1f900bb08705ca2dcebf4fba1c",
+        "global_material_force": "3ce6564e77a9b953d4e17b235e7e2e8479667d3d949e54940ed7cc63068ed336",
+        "global_regularization_force": "ad86452b6322dbc031d4a3ecd5389713e30315870eafab5ed8552a18cdb50d5d",
+        "J": "75faecf6a672bb9115d9e2a4a646b4cd2ff9e602b00ee932d37221a7d11f5e36",
+        "Hu": "2c2933c95e63cdb2791c9247101db17d21c389842e6721c8dda45ad0fcdaab9c",
+        "F": "b10bada3872234f66345cfe9003108c5be59ca61ed7de5c30965c157c516d63f",
+        "stress_first_piola": "82d06c9faf2c907de6af39149dd84e8cbff2c8f91acc4a221e75371729914adc",
+        "stress_second_piola": "72afca1e96b9aefad450dbd1a617613dbd5973216c0cf1876549dbb399825125",
+        "input_force": "e6bee24a76dd99ae777c08c2a21f38f6890c576e50281bcffb6ac6dc2f384bdc",
+        "support_reaction": "4b4196d0b03fff4bfc0d745fc3dd7cbecad7b44fd17b8bf6bbd7ad0a289c30e5",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "e932e2a2bc447d260e5a94e421f8e7a1789c824b75f80b23918275f887d1a4fd",
+        "global_force_balance": "9cf9baea0640e5a827db50d9efe5ee5efb48ee8a6e30572f91c2420009949b2f"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/012/state.npz",
+      "bytes": 197945,
+      "sha256": "8fbcb918d43e0dd7fce9a19f71560c25f9ed7bf76e1d8ca365553a74dd86e850",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/012/state.json:state",
+      "accepted_index": 12,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "6a187d06bf62656f2002e54b0b3ef0e014d6684307359fa7042197e0c2529c88"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/012/forces.npz",
+      "bytes": 10930846,
+      "sha256": "2c57855cc11e7cee36f2d67b89247c9e36900fb4bd5844e08e1c5a7ed2729a4d",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/012/state.json:forces",
+      "accepted_index": 12,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "36db3efe2aa57ca7b4850a07cbed501c010c258066c5a942573cc9b9eac3562a",
+        "element_material_force": "aaad3507c0174b18986b43046d0498128c3deb16dbc9bc2b44dac605dfd358be",
+        "element_regularization_force": "f6841893f1ac6f4ede2beafddfb52543164300aa17b1f5d223df609f76b5cd53",
+        "global_total_force": "0a28f23d1bdf973204a06c3f0c10b76233c1e85867a352a496a4590b8aecd629",
+        "global_material_force": "973ced58f00720204053c70c97770b73958bd3d2b1462ff809f1575d931158b0",
+        "global_regularization_force": "0d6f6cfda53994b4bf711ea764962fa8516e3f87e04a2928128cfbd92d532e52",
+        "J": "066922047648307ea2c28dd5c8b5bc62bade3f8823e1cfeb29abd4bc1acb5325",
+        "Hu": "86361b47895680b883cef7487955eccddcc312ad2257bd82e55f7c82b286c8fc",
+        "F": "1c9745504cf95bfe4834273a332500f884da6ad9e9e0ac212d1f36baa028eb3a",
+        "stress_first_piola": "ecebf2e1c53b1f49c4763aef88bf3e1d0beb243b4935fce8294c2a230485644b",
+        "stress_second_piola": "304787b3f25f4b0f1bf98c894afcc1943d9de645555ac4baf3b98d639f224183",
+        "input_force": "dd35cf587c023d23cfb8c081223d90e5f6339eb3e8059fc018906446d4fdcb9a",
+        "support_reaction": "4929b1383ce82a8b226dd32ab05220bcbacfd64f45bb3e2387e80fef4223d8d0",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "bf60490f208145ac60bf2603c564eb2b13d95e97d3b74c71205e0c8a5cefdad1",
+        "global_force_balance": "80ff94f9ba47f3f333d293389be325b2a9367dccac5ed7c323c20e5be40dd1cf"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/013/state.npz",
+      "bytes": 197953,
+      "sha256": "9503b0d3ad5a793280e35135a21766a2ca9fe1417b655d625e3789ddbf6e9c66",
+      "kind": "state",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/013/state.json:state",
+      "accepted_index": 13,
+      "field_count": 2,
+      "field_names": [
+        "lift",
+        "fluctuation"
+      ],
+      "field_SHA256": {
+        "lift": "d61bbf846d2711fabcdbf7a4496512c0b179df561cce3011de72b6cc7fee3e3a",
+        "fluctuation": "487048f98946e19fc11613f495d08ac287cae192f5f232e53d25ec670447ac04"
+      }
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/013/forces.npz",
+      "bytes": 10932223,
+      "sha256": "a4b0f1ffc97d09ee6c0d7c1d28649aa8308037553cbb199d805b898c82ef816e",
+      "kind": "forces",
+      "declaration_source": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/013/state.json:forces",
+      "accepted_index": 13,
+      "field_count": 16,
+      "field_names": [
+        "element_total_force",
+        "element_material_force",
+        "element_regularization_force",
+        "global_total_force",
+        "global_material_force",
+        "global_regularization_force",
+        "J",
+        "Hu",
+        "F",
+        "stress_first_piola",
+        "stress_second_piola",
+        "input_force",
+        "support_reaction",
+        "spring_force_on_structure",
+        "force_residual",
+        "global_force_balance"
+      ],
+      "field_SHA256": {
+        "element_total_force": "e445b357472cc49ba05198fa18655b696a9f88ed6f756d9a283e0788932c2e7b",
+        "element_material_force": "b351e6823d64d70437fb071926e6fe98e7a7657477fd7e6c859e38ed4b8c2a1b",
+        "element_regularization_force": "3be95f6c7d2a4f9d64b33d05c151b15bab289e7c748f6f6a014d4eec9624f5e2",
+        "global_total_force": "844e130639de6061a989a0149762a38b8084e6af68d36a4e65e20bd96b361ccb",
+        "global_material_force": "4a182a59f5b54b6116697c6b47cfaa8320777a713f874805684f279f7ed4aac3",
+        "global_regularization_force": "80f1d3d50a6f776fcfc1e3369c0ebe24fb0c434a21b30b29f221a8f7fddff595",
+        "J": "1e8e2bcfc2ef535ab4072c9be848bdf4a6545251970b6754a96118be43252a7b",
+        "Hu": "2f08184b612df698bc531e6ceba262e7b2fe627022a3ff5a7cfb6766154e495b",
+        "F": "462f8f0e50c29fbad03aa72c1acbd3911831187013ec7230bc0308eaae5578fa",
+        "stress_first_piola": "5272be52669f5cf8bff90fa280e75dbd2f543e905b69ce4aae75a7bdcf189930",
+        "stress_second_piola": "af5d1594fa53d81b67ff11600cda4fe54af3fb273f7ceebfbc91d2d1422e0365",
+        "input_force": "1ac37659b081b8e363091cee3d3d1a230f83b933b4e0f498b95fe909e0e426c7",
+        "support_reaction": "29288145ed9a790d93144d0ffd4cac00c1b8f5f6c84caa35a9779fbf2b764f1d",
+        "spring_force_on_structure": "28e9b5b981877a3b7803f12a92ea362b447cc8e6904c5c00c04a3605ce3aa6ea",
+        "force_residual": "ff8f9b71d85201bc7071066b8b1527954ed9704ec45dd7ba37cd7a7a8c69d568",
+        "global_force_balance": "7172564283ae1bf7e229e1f69da4bc6e5c485da9d5f02e8ee0185eb07641460c"
+      }
+    }
+  ],
+  "shared_field_schemas": {
+    "model": {
+      "coordinates": {
+        "dtype": "float64",
+        "shape": [
+          13689,
+          2
+        ]
+      },
+      "connectivity": {
+        "dtype": "int64",
+        "shape": [
+          13440,
+          4
+        ]
+      },
+      "solid": {
+        "dtype": "bool",
+        "shape": [
+          13440
+        ]
+      },
+      "lam": {
+        "dtype": "float64",
+        "shape": [
+          13440
+        ]
+      },
+      "mu": {
+        "dtype": "float64",
+        "shape": [
+          13440
+        ]
+      },
+      "gamma": {
+        "dtype": "float64",
+        "shape": [
+          13440
+        ]
+      },
+      "edofs": {
+        "dtype": "int64",
+        "shape": [
+          13440,
+          8
+        ]
+      },
+      "fixed_dofs": {
+        "dtype": "int64",
+        "shape": [
+          1548
+        ]
+      },
+      "free_dofs": {
+        "dtype": "int64",
+        "shape": [
+          25830
+        ]
+      },
+      "solid_nodes": {
+        "dtype": "int64",
+        "shape": [
+          4849
+        ]
+      },
+      "solid_dofs": {
+        "dtype": "int64",
+        "shape": [
+          9698
+        ]
+      },
+      "b_in": {
+        "dtype": "float64",
+        "shape": [
+          27378
+        ]
+      },
+      "b_out": {
+        "dtype": "float64",
+        "shape": [
+          27378
+        ]
+      },
+      "grad": {
+        "dtype": "float64",
+        "shape": [
+          9,
+          4,
+          2
+        ]
+      },
+      "hessian": {
+        "dtype": "float64",
+        "shape": [
+          4,
+          2,
+          2
+        ]
+      },
+      "weights": {
+        "dtype": "float64",
+        "shape": [
+          9
+        ]
+      },
+      "points": {
+        "dtype": "float64",
+        "shape": [
+          9,
+          2
+        ]
+      },
+      "kr": {
+        "dtype": "float64",
+        "shape": []
+      },
+      "hx": {
+        "dtype": "float64",
+        "shape": []
+      },
+      "hy": {
+        "dtype": "float64",
+        "shape": []
+      },
+      "thickness": {
+        "dtype": "float64",
+        "shape": []
+      },
+      "k_out": {
+        "dtype": "float64",
+        "shape": []
+      },
+      "force_scale_per_length": {
+        "dtype": "float64",
+        "shape": []
+      },
+      "workpiece_cells": {
+        "dtype": "int64",
+        "shape": [
+          648
+        ]
+      },
+      "workpiece_nodes": {
+        "dtype": "int64",
+        "shape": [
+          703
+        ]
+      },
+      "workpiece_dofs": {
+        "dtype": "int64",
+        "shape": [
+          1406
+        ]
+      },
+      "workpiece_background_symmetry_overlap_dofs": {
+        "dtype": "int64",
+        "shape": [
+          37
+        ]
+      }
+    },
+    "state": {
+      "lift": {
+        "dtype": "float64",
+        "shape": [
+          27378
+        ]
+      },
+      "fluctuation": {
+        "dtype": "float64",
+        "shape": [
+          27378
+        ]
+      }
+    },
+    "forces": {
+      "element_total_force": {
+        "dtype": "float64",
+        "shape": [
+          13440,
+          8
+        ]
+      },
+      "element_material_force": {
+        "dtype": "float64",
+        "shape": [
+          13440,
+          8
+        ]
+      },
+      "element_regularization_force": {
+        "dtype": "float64",
+        "shape": [
+          13440,
+          8
+        ]
+      },
+      "global_total_force": {
+        "dtype": "float64",
+        "shape": [
+          27378
+        ]
+      },
+      "global_material_force": {
+        "dtype": "float64",
+        "shape": [
+          27378
+        ]
+      },
+      "global_regularization_force": {
+        "dtype": "float64",
+        "shape": [
+          27378
+        ]
+      },
+      "J": {
+        "dtype": "float64",
+        "shape": [
+          13440,
+          9
+        ]
+      },
+      "Hu": {
+        "dtype": "float64",
+        "shape": [
+          13440,
+          2,
+          2,
+          2
+        ]
+      },
+      "F": {
+        "dtype": "float64",
+        "shape": [
+          13440,
+          9,
+          2,
+          2
+        ]
+      },
+      "stress_first_piola": {
+        "dtype": "float64",
+        "shape": [
+          13440,
+          9,
+          2,
+          2
+        ]
+      },
+      "stress_second_piola": {
+        "dtype": "float64",
+        "shape": [
+          13440,
+          9,
+          2,
+          2
+        ]
+      },
+      "input_force": {
+        "dtype": "float64",
+        "shape": [
+          27378
+        ]
+      },
+      "support_reaction": {
+        "dtype": "float64",
+        "shape": [
+          27378
+        ]
+      },
+      "spring_force_on_structure": {
+        "dtype": "float64",
+        "shape": [
+          27378
+        ]
+      },
+      "force_residual": {
+        "dtype": "float64",
+        "shape": [
+          27378
+        ]
+      },
+      "global_force_balance": {
+        "dtype": "float64",
+        "shape": [
+          2
+        ]
+      }
+    }
+  },
+  "exact_raw_loader_scope": {
+    "NPZ_files": 29,
+    "model_files": 1,
+    "state_files": 14,
+    "force_files": 14,
+    "decoded_field_instances_if_executed": 279,
+    "model_fields": 27,
+    "state_fields_per_archive": 2,
+    "force_fields_per_archive": 16,
+    "all_declared_fields_loaded": true,
+    "NPZ_bytes": 144941852,
+    "tangents_or_total_matrix_or_source_geometry_NPZ_files_decoded": 0,
+    "baseline_NPZ_files_decoded": 0
+  },
+  "used_array_subset": {
+    "model": [
+      "coordinates",
+      "connectivity",
+      "solid",
+      "fixed_dofs",
+      "workpiece_cells",
+      "workpiece_nodes",
+      "workpiece_dofs"
+    ],
+    "state": [
+      "lift",
+      "fluctuation"
+    ],
+    "forces": [
+      "global_total_force",
+      "global_material_force",
+      "global_regularization_force",
+      "support_reaction",
+      "F",
+      "J",
+      "Hu"
+    ],
+    "meaning": "Used fields are not the actual decode scope: archive() eagerly copies every saved z.files entry and checks all dtype/shape/raw-arraySHA declarations."
+  },
+  "ordinary_input_plan": [
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/result.json",
+      "bytes": 422043,
+      "sha256": "c8be41801bc6f5dff682d148b479d1ada16b38c637203c45abcacbbdc62526cb",
+      "role": "raw_viewer_result"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/model/model.json",
+      "bytes": 101383,
+      "sha256": "d083a0e4b12c2a8895894142b8ea4bf8b44b6369541ca82501488e6d23fbf8b9",
+      "role": "raw_viewer_model_descriptor"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/000/state.json",
+      "bytes": 9045,
+      "sha256": "6fb7e4120e9bf86f9e0ab49e2abaa7b0e37cc45d59e3f86830aca23471807ce8",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 0
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/001/state.json",
+      "bytes": 9549,
+      "sha256": "c8b01c15f3a9e3271410c2f113fafc5b4e6f1f7568306b852522a819248b3d97",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 1
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/002/state.json",
+      "bytes": 9542,
+      "sha256": "1cf5004af22d6f50ff0fc4499094ee10aa3ab4a4f2b7f0e5d225d48e2b1c57b2",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 2
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/003/state.json",
+      "bytes": 9577,
+      "sha256": "419bd19e6a22e67f29194eba7d081140728f1f8bd5562d71ca56ad811f2f4099",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 3
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/004/state.json",
+      "bytes": 9566,
+      "sha256": "d8a913dedd87f26b0fd625f5dd6be92ba5635001e6af2c311a14008d07da4737",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 4
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/005/state.json",
+      "bytes": 9549,
+      "sha256": "52832c36b6a9bb4910d6bebf5993b8e7ede358b430d6e3320f0f5a4b4d99d2ea",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 5
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/006/state.json",
+      "bytes": 9542,
+      "sha256": "8306b016400f6a1072818c033bb30fe1cc733e4b4284db6419586e4a5f40a910",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 6
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/007/state.json",
+      "bytes": 9538,
+      "sha256": "b9851c109857bdafe09a71d7db6882b233454faac2edc3e3b2d300695ae77dd7",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 7
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/008/state.json",
+      "bytes": 9551,
+      "sha256": "b5092c60d6ab467b5e59c1abc5c662798b26328c815ec15c8bddabe9426bcfd8",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 8
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/009/state.json",
+      "bytes": 9536,
+      "sha256": "2a689e58f9b2926d66c0aaf0c7dceff07c05d65ac8c9037ad75e5d9e8cd2c2e2",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 9
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/010/state.json",
+      "bytes": 9561,
+      "sha256": "41b90eb5ab886f174a5bbe33bcdcb6c75d651ec6bf1179ac642d257e6121cb5a",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 10
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/011/state.json",
+      "bytes": 9533,
+      "sha256": "5191009f51257f992222325d1c40ce45b909f6aa2f2cca217c36d764adfe42c0",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 11
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/012/state.json",
+      "bytes": 9583,
+      "sha256": "30eaf29857e291458201acdb14242d167c5f62d56bbe74fb957ecf14e22d74fe",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 12
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/013/state.json",
+      "bytes": 9529,
+      "sha256": "9eb90d9f9430917710f972fa4b4c2c590727811e686726d681c8fecccea9d77e",
+      "role": "raw_viewer_state_descriptor",
+      "accepted_index": 13
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/response.json",
+      "bytes": 11611,
+      "sha256": "42c404b9ee9234d40ea9aa84fe40b2f01e6286a49dbefa374fbe72e25c2e1419",
+      "role": "wrapper_original_production_flags"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/accepted_progress.jsonl",
+      "bytes": 4312,
+      "sha256": "6ed4f56496b9c67fdf996dd8248056a1e5cbb8ee15735119dad438c22f3cc828",
+      "role": "wrapper_accepted_identity"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/result.json",
+      "bytes": 645099,
+      "sha256": "624ff6618e12670ea2bed9f84992a5001a7fd983fc7d2ade2415b8f1072ac5cf",
+      "role": "wrapper_baseline_original_identity"
+    },
+    {
+      "path": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/summary.json",
+      "bytes": 32626,
+      "sha256": "c726358cc796c5f886a31c3c9e6d998a793715da85409fecfb706241cdc7254f",
+      "role": "wrapper_baseline_saved_summary"
+    },
+    {
+      "path": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/states.csv",
+      "bytes": 12912,
+      "sha256": "74c2173b2b04b3129ca88b0b0ab56213a927b2ac4509ad10575a2d5f14e54b6d",
+      "role": "wrapper_baseline_saved_CSV"
+    }
+  ],
+  "compatibility": {
+    "result_status": "failed",
+    "accepted_states": 14,
+    "loading_peak_reached": true,
+    "path_completed": false,
+    "unload_endpoint_reached": false,
+    "raw_viewer_partial_status_accepted_by_source": true,
+    "reference_argument": "Omit; no own newalpha HP and baseline reference cannot satisfy same-result SHA/count/state context.",
+    "workpiece_shape": "complete fixed lower-half square",
+    "workpiece_center_mm": [
+      71.0,
+      40.0
+    ],
+    "workpiece_side_mm": 18.0,
+    "workpiece_nodes_declared": 703,
+    "nodal_data_rows_if_all14_observed": 9842,
+    "additional_bisection_accepted_states": 0,
+    "common_original_loading_targets": [
+      {
+        "accepted_index": 0,
+        "original_target_index": 0,
+        "d_mm": 0.0,
+        "leg": "origin",
+        "alpha_state_sha256": "0db2650bbbf9a2cc54a17d57c6a609643c7a262bf45b22386be7d914fa673f73",
+        "baseline_state_sha256": "0db2650bbbf9a2cc54a17d57c6a609643c7a262bf45b22386be7d914fa673f73"
+      },
+      {
+        "accepted_index": 1,
+        "original_target_index": 1,
+        "d_mm": 0.25,
+        "leg": "loading",
+        "alpha_state_sha256": "36966b596f7923f67c47ca74a87b9d643dcdbd9a3f38b2facede58f658e56470",
+        "baseline_state_sha256": "8a4999b9be74c1be8f4809d3c6bc8e946efdcb11ae9bbcb52a629322abcd228c"
+      },
+      {
+        "accepted_index": 2,
+        "original_target_index": 2,
+        "d_mm": 0.5,
+        "leg": "loading",
+        "alpha_state_sha256": "2ec682b4c0f24a3a26e99b85dff5a01e1ebb758d7100ff805c8f8beec2185f1d",
+        "baseline_state_sha256": "81de5ba3f22a8b7fcde66db1198fc8348c38fb03d844fdec3043d2577a205bc2"
+      },
+      {
+        "accepted_index": 3,
+        "original_target_index": 3,
+        "d_mm": 0.65,
+        "leg": "loading",
+        "alpha_state_sha256": "2285d0e8c44d707e2db517111cd0189d9ea8c22f973b1b439cdaa8832ce43c62",
+        "baseline_state_sha256": "1abe48041bb086032e8daa8c84eac71483d32a679aafd7a554b298cf06bd2ee7"
+      },
+      {
+        "accepted_index": 4,
+        "original_target_index": 4,
+        "d_mm": 0.75,
+        "leg": "loading",
+        "alpha_state_sha256": "23c28d14e0bdad6cc6dc33145f4c934026d9638b37a30fabf2e13f7e61f11560",
+        "baseline_state_sha256": "ee105452294633efb107bd758e7606185cd7ec9d524256a168d07da7017a5760"
+      },
+      {
+        "accepted_index": 5,
+        "original_target_index": 5,
+        "d_mm": 0.8,
+        "leg": "loading",
+        "alpha_state_sha256": "46af62a327486584c72fa92b26711d76962694feb67305c27e13ddccb3f31c6d",
+        "baseline_state_sha256": "9c3b55d24d49253239606f80bacf8ef3c87c6aebb591d92da14a77bb69a69e33"
+      },
+      {
+        "accepted_index": 6,
+        "original_target_index": 6,
+        "d_mm": 0.85,
+        "leg": "loading",
+        "alpha_state_sha256": "7442838de6b41f5bc8c6316b1cc6033b197a596766cb10afa177e96aa081b1a6",
+        "baseline_state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd"
+      },
+      {
+        "accepted_index": 7,
+        "original_target_index": 7,
+        "d_mm": 0.9,
+        "leg": "loading",
+        "alpha_state_sha256": "8f73f0f7bd359275304770bb4f710b4ec07f1a479145faa4de9eabe95936a92d",
+        "baseline_state_sha256": "c44501d23c146dbacb258fc257ba582bacaa2df01d44710f184b04f54a991ce9"
+      },
+      {
+        "accepted_index": 8,
+        "original_target_index": 8,
+        "d_mm": 0.95,
+        "leg": "loading",
+        "alpha_state_sha256": "13519b96841fad574e4c8d744bbd214854c39cc8634d2cb0d7c65621bf86bb00",
+        "baseline_state_sha256": "635be4cc2141bdbae0c9ca567bf4fa366e973550530b0a0dab2044c2810780b1"
+      },
+      {
+        "accepted_index": 9,
+        "original_target_index": 9,
+        "d_mm": 1.0,
+        "leg": "loading",
+        "alpha_state_sha256": "6ec812b6ecd1076ee3052832eabb0d3ef1cd17401a046cb38140d97551b89c5b",
+        "baseline_state_sha256": "238d3b02310eb1d9043d9c2f6d562a606d2b4f425e341320f8eb4a561db48c78"
+      },
+      {
+        "accepted_index": 10,
+        "original_target_index": 10,
+        "d_mm": 1.05,
+        "leg": "loading",
+        "alpha_state_sha256": "ea66c94fdbd713787c197a411814b6c6bbf0937500611c7177ee2d8d5dcd2855",
+        "baseline_state_sha256": "60a2c9b3ddc286c3eb877e8f4af38ca511ee770aecbe2569d3da5ea0c35f2c43"
+      },
+      {
+        "accepted_index": 11,
+        "original_target_index": 11,
+        "d_mm": 1.1,
+        "leg": "loading",
+        "alpha_state_sha256": "06f217db1ffbbbd9db960ca7ada8100ee592e35379b4d3286c9a3c1c83a0184e",
+        "baseline_state_sha256": "67692d9a8b93563c7e2bb4902b7593a3a6243fcd51216730b9e6cb908c25bc00"
+      },
+      {
+        "accepted_index": 12,
+        "original_target_index": 12,
+        "d_mm": 1.15,
+        "leg": "loading",
+        "alpha_state_sha256": "d8aa7d363ac131ccb7bc7d63bd2feabb4d9ef9602d02489b3739e29b232b8ac5",
+        "baseline_state_sha256": "f23f8e24ef9ca0026dbdd5d757a370c2aa3d99c3ba939acd758e98b7fc4e519d"
+      },
+      {
+        "accepted_index": 13,
+        "original_target_index": 13,
+        "d_mm": 1.2,
+        "leg": "loading",
+        "alpha_state_sha256": "fa0054288cd7eca4140f8bf04a94b5f833278b1c6e39813beb57cae16d7e9bca",
+        "baseline_state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed"
+      }
+    ],
+    "array_dependent_unverified": [
+      "Every model array value/27 field integrity under decode",
+      "Unique exact saved reference point(80,30)",
+      "Both body lift and fluctuation zero",
+      "Strict convex positive selected solid/body Q1 quads",
+      "New geometry/nodal outputs and finite distance/partitioned field extrema"
+    ]
+  },
+  "raw_gates": [
+    "Bound ordinary/source/NPZ SHA and semantic result/model/state descriptors",
+    "27/2/16 complete archive field dtype/shape/rawSHA identity",
+    "Complete native Cartesian BL/BR/TR/TL fixed-square geometry and both body split arrays zero",
+    "Pure hf-module allowlist/origin before and after observations",
+    "Unique exact reference coordinate(80,30)",
+    "Per-state geometry_valid, nodal three-resultant exact cached equality, per-body-node holding equals opposite total weak vector",
+    "All14 accepted states observed; every accepted GIF frame retained",
+    "Original cooperative time/stop/sampled8GiB and unchanged bound bytes"
+  ],
+  "non_gates": [
+    "Raw or strict overlap/roundoff ambiguity is recorded, not automatically a view failure or contact acceptance.",
+    "Unsigned tip distances and first rays do not establish continuous pressure, contact, penetration or effective grip.",
+    "Raw viewer success does not change failed production path, qualification, saved cached gates or references."
+  ],
+  "metrics": {
+    "tip": "Unique reference(80,30) node, actual xy=coordinates+lift+fluctuation; unsigned finite bottom/left/right segment distance in mm.",
+    "rays": "Continuous finite bottom/left outward first-ray hit on physical mechanism edges excluding symmetry cut; null means no hit, not zero. Positive hit may be exit if origin inside solid.",
+    "region": "Cross-region convex Q1 cell-union interior overlap plus closed-region boundary intersections; symmetry cut included only for closed regions, not ray physical edges. Not mechanism self-overlap or certified set containment.",
+    "solid_min_J": "minimum saved integration-point J on original solid mask",
+    "medium_min_J": "minimum saved integration-point J on non-solid cells excluding fixed workpiece cells",
+    "medium_max_abs_Hu": "maximum absolute saved Hu component on that free-medium mask",
+    "strain": "Binary64 in-plane Green=(F^T F-I)/2 eigenvalues from saved F; not fresh HP and not full3D principal values",
+    "peak_field_plots": "Per-cell solid maximum in-plane Green principal, free-medium quadrature meanJ, free-medium Hu Frobenius norm; these differ from CSV minima/componentmax",
+    "body_forces": "Minus cached global internal weak forces at all body nodes; fsum resultants/moments, not new mechanics/assembly or face traction. Four disjoint node groups include cut/interior; no owner-face attribution.",
+    "mirror": "Visual reflection about y40 with arrows Fy flipped; no extra solved DOFs or pressure/grip inference",
+    "displacement_and_force_scale": "Actual deformation x1; common force glyph4mm at max nodal norm across all14/components is display scale, not displacement or pressure."
+  },
+  "raw_output_contract": {
+    "geometry_calls": 14,
+    "nodal_calls": 14,
+    "case_JSON_per_state": [
+      "geometry.json",
+      "nodal.json",
+      "derived.json"
+    ],
+    "nodes_CSV_data_rows": 9842,
+    "states_CSV_rows": 14,
+    "summary_JSON_rows": 14,
+    "PNGs": [
+      "comparison.png",
+      "distances_forces.png",
+      "peak_fields.png"
+    ],
+    "GIF": "alpha_half/actual_states.gif",
+    "GIF_frames": 14,
+    "manifest": "view.json",
+    "peak_and_last_accepted_index": 13,
+    "reference_available": false,
+    "new_F_T_model_solver_HP_calls": 0,
+    "mechanical_hooks_monitored": false
+  },
+  "wrapper_plan": {
+    "need_minimal_wrapper": true,
+    "old_compare": {
+      "path": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/compare_alpha_views.py",
+      "bytes": 9119,
+      "sha256": "bf029bf51d9f83a7a702d4f3148d524630d444db2130b3837e689680d92f2b84"
+    },
+    "old_compare_blockers": [
+      "matched_originals requires result and summary production success",
+      "Protocol15prefix demands missing unload14 and complete target array",
+      "Plot inserts assumed peak row13 for unload; current path has no accepted unload"
+    ],
+    "reuse": "Unchanged raw viewer in a fresh pure child; reuse the14metric tuple/matcher and sixpanel loading comparison with explicit failed14 support. Read old baseline CSV/summary/result only, no old observer.",
+    "expected_PNG_total": 6,
+    "expected_GIF_total": 1,
+    "comparison_PNG": "alpha_response_comparison.png",
+    "snapshot_PNGs": [
+      {
+        "name": "loading_085_forces.png",
+        "GIF_frame_index": 6,
+        "accepted_index": 6,
+        "original_target_index": 6,
+        "d_mm": 0.85,
+        "leg": "loading",
+        "alpha_state_sha256": "7442838de6b41f5bc8c6316b1cc6033b197a596766cb10afa177e96aa081b1a6",
+        "baseline_state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd"
+      },
+      {
+        "name": "loading_120_forces.png",
+        "GIF_frame_index": 13,
+        "accepted_index": 13,
+        "original_target_index": 13,
+        "d_mm": 1.2,
+        "leg": "loading",
+        "alpha_state_sha256": "fa0054288cd7eca4140f8bf04a94b5f833278b1c6e39813beb57cae16d7e9bca",
+        "baseline_state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed"
+      }
+    ],
+    "snapshots": "Only decode this execution new successful GIF after raw PASS, exact14 target/leg/stateSHA/derived context and n_frames14; copy its frame6/13 RGB pixels to PNG. No old image, new NPZ, observer or rerender.",
+    "budget": "Entire helper180 includes imports/binding/rawviewer/comparison/GIF extraction/hashing; pass only remaining time to raw viewer, no child extension. outer240 cooperative generic launcher and sampled8GiB.",
+    "source_validation_pending": true
+  },
+  "prior_cost_evidence": {
+    "raw_view": {
+      "path": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/view.json",
+      "bytes": 30598,
+      "sha256": "402a5533844ff1ace45e44b4fa72b1843426b0e111ce02e15b8238c878e91ae8"
+    },
+    "helper": {
+      "path": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/phase_view.json",
+      "bytes": 10177,
+      "sha256": "39675c9bebeecf8af91d4222559e464abed15cf37a7d51d5b1c4e0b137e32913"
+    },
+    "prior_saved_states": 24,
+    "raw_elapsed_seconds": 37.50952459999826,
+    "helper_elapsed_seconds": 39.69886699994095,
+    "helper_sampled_RSS_bytes": 474333184,
+    "meaning": "Actual old same-grid saved-view records only; no proportional runtime forecast or guarantee."
+  },
+  "actions": {
+    "source_AST_parses": 7,
+    "ordinary_descriptor_CSV_reads": true,
+    "NPZ_raw_byte_hashes": 29,
+    "NPZ_field_decodes": 0,
+    "viewer_observer_HF_imports": 0,
+    "new_scientific_sums_integrals_mechanics_or_plots": 0,
+    "formal_repository_writes": 0
+  },
+  "blocking_source_entry_issues": [],
+  "limits": "This is input/source metadata preparation, not new view/geometry/field observation or runtime PASS. Worker/protocol/card/resource enforcement need independent final static review and later real approval. Original M-ALPHA1 stays NOT_PASS; old24state/48HP belong only to baseline."
+}
