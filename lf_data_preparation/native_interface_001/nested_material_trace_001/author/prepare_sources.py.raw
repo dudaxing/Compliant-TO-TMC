@@ -1,0 +1,126 @@
+"""Prepare a reviewable saved-P candidate; never import or run its code."""
+from datetime import datetime, timezone
+from hashlib import sha256
+import ast
+import json
+import os
+from pathlib import Path
+import subprocess
+
+ROOT = Path('D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC')
+EXT = Path(__file__).parent
+BASE = '808e719945f3a378704deea7c492eaaee50a39cd'
+REL = 'lf_data_preparation/native_interface_001/nested_material_trace_001'
+STAGE = ROOT/REL
+MODULE = 'hf_repo/src/hf_eval/saved_material_trace.py'
+OLD_STAGE = 'lf_data_preparation/native_interface_001/nested_ledger_002'
+PREVIOUS_RECEIPT = Path('D:/hf-native-workpiece-api-author-20261009/MLEDGER2_execution_review_001/publication_receipt.json')
+FRONTS = ['docs/CURRENT_STATUS.md', 'docs/RESUME_DEVELOPMENT.md', OLD_STAGE+'/README.md']
+git = lambda *args: subprocess.check_output(['git', *args], cwd=ROOT)
+read = lambda path: json.loads(path.read_bytes())
+sha = lambda path: sha256(path.read_bytes()).hexdigest()
+write = lambda path, data: path.write_bytes((json.dumps(data, ensure_ascii=False, indent=2)+'\n').encode('utf-8'))
+
+assert not STAGE.exists() and not (ROOT/MODULE).exists() and not (EXT/'preparation_receipt.json').exists()
+assert git('rev-parse','HEAD').decode().strip() == BASE
+assert git('branch','--show-current').decode().strip() == 'main' and not git('status','--porcelain')
+assert git('remote','get-url','origin').decode().strip() == 'https://github.com/dudaxing/Compliant-TO-TMC.git'
+previous = read(PREVIOUS_RECEIPT)
+assert previous['status']=='published_and_incrementally_restored_pass' and previous['published_commit']==BASE
+assert previous['source_and_restore_clean'] and previous['M_LEDGER2_terminal']=='pass'
+inputs = read(EXT/'trace_input_scope.json')
+assert sha(EXT/'trace_input_scope.json')=='d4e9491192aef1dfd38aa6a2eab76a24b9b159e7b3beade052ffb08107bfb09e'
+assert sha(EXT/'trace_physical_basis.json')=='71863d58ea34ee0c4b371538b902dc28ae603c1a85d4e9325b21a75b7ce172cd'
+assert sha(EXT/'saved_material_trace.py')=='578a7be12236e7334ae4bd2a9ddd1b0a1c5363eecd64f9518bd631ff5a24b90b'
+assert sha(EXT/'execute_saved_material_trace.py')=='2daf58a9c1b5c23305bf07ce7fbe0d5e966f46234adc0f434ac24b6f9eac4f1c'
+assert read(EXT/'trace_static_physics_review.json')['status'].startswith('pass')
+for name in ['saved_material_trace.py','execute_saved_material_trace.py']:
+    ast.parse((EXT/name).read_text(encoding='utf-8'), filename=name)
+runtime = inputs['runtime_input_plan']['data_files']
+assert len(runtime)==14 and all(sha(ROOT/item['path'])==item['sha256'] for item in runtime)
+fronts = {name: git('show',BASE+':'+name) for name in FRONTS}
+assert all((ROOT/name).read_bytes()==raw for name,raw in fronts.items())
+
+STAGE.mkdir()
+(STAGE/'author').mkdir()
+copies = {ROOT/MODULE: EXT/'saved_material_trace.py', STAGE/'execute_saved_material_trace.py': EXT/'execute_saved_material_trace.py',
+    STAGE/'launch_trace.py': ROOT/OLD_STAGE/'launch_ledger.py', STAGE/'M-PTRACE1_CARD.md': EXT/'M-PTRACE1_CARD.md',
+    STAGE/'author/trace_input_scope.json': EXT/'trace_input_scope.json',
+    STAGE/'author/trace_physical_basis.json': EXT/'trace_physical_basis.json',
+    STAGE/'author/trace_static_physics_review.json': EXT/'trace_static_physics_review.json',
+    STAGE/'author/MLEDGER2_publication_receipt.json': PREVIOUS_RECEIPT,
+    STAGE/'author/prepare_sources.py.raw': Path(__file__)}
+for destination, source in copies.items():
+    with destination.open('xb') as stream: stream.write(source.read_bytes())
+case = 'lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square'
+view = 'functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square'
+model_file, result_file = case+'/model/model.json', case+'/result.json'
+summary = read(ROOT/view/'summary.json')
+selected = [{key: summary['rows'][index][key] for key in ('index','original_target_index','leg','d_mm','state_sha256')} for index in (6,13)]
+assert [(item['index'],item['original_target_index'],item['leg'],item['d_mm']) for item in selected]==[(6,6,'loading',.85),(13,13,'loading',1.2)]
+source_inputs = [MODULE, REL+'/execute_saved_material_trace.py', REL+'/launch_trace.py', REL+'/M-PTRACE1_CARD.md',
+    REL+'/author/trace_input_scope.json', REL+'/author/trace_physical_basis.json', REL+'/author/trace_static_physics_review.json',
+    REL+'/author/MLEDGER2_publication_receipt.json', 'hf_repo/src/hf_eval/__init__.py',
+    'hf_repo/src/hf_eval/native_map.py', 'hf_repo/src/hf_eval/native_project.py', 'hf_repo/src/hf_eval/native_mean.py',
+    'hf_repo/src/hf_eval/tmc_kernel.py', 'hf_repo/src/hf_eval/split_kernel_invariants_hu.py',
+    'hf_repo/src/hf_eval/workpiece_nodal.py',
+    'functional_views/native_api_workpiece_20261008/complete_001/saved_right_margin_views.py', OLD_STAGE+'/RESULTS.md']
+pins = {item['path']:item['sha256'] for item in runtime}
+pins.update({name:sha(ROOT/name) for name in source_inputs})
+protocol = dict(schema_version='saved-fixed-square-material-trace-card-1.0', prepared=True, authorized=False, executed=False,
+    baseline_main=BASE, card=REL+'/M-PTRACE1_CARD.md', model_file=model_file, result_file=result_file,
+    view_summary_file=view+'/summary.json', selected_states=selected,
+    state_files={str(i):case+f'/accepted/{i:03d}/state.json' for i in (6,13)},
+    geometry_files={str(i):view+f'/{i:03d}/geometry.json' for i in (6,13)},
+    nodal_files={str(i):view+f'/{i:03d}/nodal.json' for i in (6,13)},
+    output_directory=REL+'/run_001', sampled_RSS_bytes=8*1024**3,
+    phases=dict(trace=dict(helper_seconds=180, outer_seconds=240, argv=[REL+'/execute_saved_material_trace.py','--repo','.',
+        '--protocol',REL+'/protocol.json','--time-limit','180'])), bindings=pins,
+    selected_archive_plan=inputs['selected_archive_plan'],
+    expected_counts=dict(physical_edges_per_state=72,cut_edges_per_state=36,physical_mechanism_edges_per_state=992,
+        samples_total=432,edges_total=144,sides_total=6,whole_total=2),
+    expected_calls=dict(NPZ_read_started=5,NPZ_read_completed=5,selected_array_fields=12,trace_started=2,trace_completed=2,PNG_writes=2),
+    expected_output_files=['material_trace.json','samples.csv','edges.csv','sides.csv','whole_material_comparison.csv',
+        'actual_material_trace.png','nominal_material_profiles.png','execution_receipt.json'],
+    qualification_scope='Two saved material traces and interpretive line estimates only; existing mechanics qualification unchanged',
+    prepared_scope='AST and metadata/raw source identities only; no NPZ decode, candidate, PN/integral, plot, kernel or solver execution')
+write(STAGE/'protocol.json',protocol)
+
+common = '''# 当前接续：M-PTRACE1 两态保存外邻材料应力候选已准备，待批准（2026-10-11）
+
+整体目标仍是独立 HF 有限变形／TMC 前向评估，读取普通 LF 几何并提供可审查的反力、工件载荷和实际变形，供外部研究比较；main 开发，origin 保持 https://github.com/dudaxing/Compliant-TO-TMC.git。
+
+上一 M-LEDGER2 已唯一执行 PASS、推送 main 808e719 并完成同提交恢复核对，24 态完整账本／两图和原 24 帧变形均保留。局部 Hu 力抵消较强的原6／loading0.85 mm与材料净载主导的原13／loading1.2 mm，为最近新阶段提供实际依据。
+
+新公共 NumPy 入口已编码但未执行：追踪72条物理边的真实外邻 owner／相位，直接取保存 P 的边界三点，给有符号材料名义牵引与独立厚度线积分，和原整体材料弱力并列；不设相等科学门。候选薄执行器将读取5个既存NPZ的12字段，调用2次入口，生成432样本／144边／6侧／2整体表与2PNG实际变形／载荷图。N力已含厚度，P为MPa且未含厚度，线积分单乘原20mm；不复用体积分权重、不分摊角点弱力、不把P当Hu总压力。
+
+目前只有源码／AST／metadata与原文件字节审阅；未解码NPZ、取P数值、计算PN／线积分或绘图，资源窗口未开启。本卡一次helper180秒／outer240秒／采样8GiB、首错停止、无重试／修复重跑／延期／force，须人类批准后启动，不能续用已闭M2额度。
+
+原力核／切线／求解、HP、旧图与科学版本保持。总边界作用／压力、有效夹持、自由体／摩擦、收敛、正式标签排名与HF5仍未完成。下一步只运行这两个保存态，根据实际外邻迹与弱力关系继续推进功能。
+'''
+def links(document):
+    targets=[('本次具体卡',STAGE/'M-PTRACE1_CARD.md'),('冻结协议',STAGE/'protocol.json'),
+        ('公共读取与材料迹源码',ROOT/MODULE),('薄执行器',STAGE/'execute_saved_material_trace.py'),
+        ('静态输入核查',STAGE/'author/trace_input_scope.json'),('静态物理依据',STAGE/'author/trace_physical_basis.json'),
+        ('独立源码物理审阅',STAGE/'author/trace_static_physics_review.json'),('上一M2实际结果',ROOT/OLD_STAGE/'RESULTS.md'),
+        ('上一提交实际发布恢复收据',STAGE/'author/MLEDGER2_publication_receipt.json')]
+    return ' · '.join('['+label+']('+Path(os.path.relpath(target,document.parent)).as_posix()+')' for label,target in targets)
+(STAGE/'README.md').write_text(common+'\n'+links(STAGE/'README.md')+'\n\n批准后从仓库根唯一启动：\n\n```text\npython -X utf8 -B '+REL+'/launch_trace.py trace --protocol '+REL+'/protocol.json\n```\n',encoding='utf-8',newline='\n')
+history=[]
+for name,raw in fronts.items():
+    path=ROOT/name
+    prefix=(common+'\n'+links(path)+'\n\n<details>\n<summary>更新前完整原文（历史状态不代表当前）</summary>\n\n').encode('utf-8')
+    path.write_bytes(prefix+raw+b'\n\n</details>\n')
+    assert path.read_bytes()[len(prefix):len(prefix)+len(raw)]==raw
+    history.append(dict(path=name,old_sha256=sha256(raw).hexdigest(),old_bytes=len(raw),history_start_byte=len(prefix),
+        history_end_byte_exclusive=len(prefix)+len(raw),new_sha256=sha(path),whole_prior_body_byte_exact=True))
+receipt=dict(status='source_prepared_not_executed',created_utc=datetime.now(timezone.utc).isoformat(),baseline_main=BASE,
+    public_module_sha256=sha(ROOT/MODULE),worker_sha256=sha(STAGE/'execute_saved_material_trace.py'),
+    launcher_sha256=sha(STAGE/'launch_trace.py'),launcher_raw_bytes_exactly_reused=True,card_sha256=sha(STAGE/'M-PTRACE1_CARD.md'),
+    protocol_sha256=sha(STAGE/'protocol.json'),bindings=len(pins),runtime_data_files=len(runtime),
+    source_and_scope_files=len(source_inputs),front_history=history,copied_files=[dict(path=p.relative_to(ROOT).as_posix(),sha256=sha(p)) for p in copies],
+    preparation_actions=dict(AST_parse_only=2,NPZ_decodes=0,trace_API_calls=0,new_PN_or_line_integrals=0,plots=0,kernel_or_solver_calls=0),
+    authorized=False,executed=False,whole_HF5_complete=False)
+write(STAGE/'author/preparation_receipt.json',receipt)
+with (EXT/'preparation_receipt.json').open('x',encoding='utf-8',newline='\n') as stream:stream.write(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({k:v for k,v in receipt.items() if k not in ('front_history','copied_files')},ensure_ascii=False))

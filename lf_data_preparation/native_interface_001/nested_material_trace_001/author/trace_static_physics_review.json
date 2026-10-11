@@ -1,0 +1,113 @@
+{
+  "schema_version": "M-PTRACE1-static-physics-review-1.0",
+  "created_local_date": "2026-10-11",
+  "status": "pass_static_no_physics_blocker",
+  "scope": "Independent final source/card/basis static review only: text reads, ordinary SHA, AST parse of source text and this one report. No candidate import/execution, NPZ decoding, new classifier/API, force summation/integration, plot, HP, model construction or solver call.",
+  "reviewed_inputs": [
+    {
+      "path": "D:\\hf-native-workpiece-api-author-20261009\\MPTRACE1_source_prepare_001\\saved_material_trace.py",
+      "bytes": 7082,
+      "sha256": "578a7be12236e7334ae4bd2a9ddd1b0a1c5363eecd64f9518bd631ff5a24b90b"
+    },
+    {
+      "path": "D:\\hf-native-workpiece-api-author-20261009\\MPTRACE1_source_prepare_001\\execute_saved_material_trace.py",
+      "bytes": 17086,
+      "sha256": "2daf58a9c1b5c23305bf07ce7fbe0d5e966f46234adc0f434ac24b6f9eac4f1c"
+    },
+    {
+      "path": "D:\\hf-native-workpiece-api-author-20261009\\MPTRACE1_source_prepare_001\\M-PTRACE1_CARD.md",
+      "bytes": 7346,
+      "sha256": "e6d0841c8ea7daf048aea61ebad292a176a1938729d0cc109d49947ab9f68504"
+    },
+    {
+      "path": "D:\\hf-native-workpiece-api-author-20261009\\MPTRACE1_source_prepare_001\\trace_physical_basis.json",
+      "bytes": 28497,
+      "sha256": "71863d58ea34ee0c4b371538b902dc28ae603c1a85d4e9325b21a75b7ce172cd"
+    }
+  ],
+  "checks": [
+    {
+      "subject": "N/T/q mapping",
+      "source": "saved_material_trace.py:FACES/expected_points",
+      "finding": "Bottom N=(0,-1),T=(1,0),outside top eta=+1 indices[2,5,8]; left N=(-1,0),T=(0,1),outside right xi=+1 [6,7,8]; right N=(1,0),T=(0,1),outside left xi=-1 [0,1,2]. These match original xi-slow, eta-fast Simpson boundary-inclusive samples; no interior-Gauss assumption.",
+      "status": "pass_static"
+    },
+    {
+      "subject": "Owner/local-edge topology",
+      "source": "saved_material_trace.py:owners,inside/outside,FACES/local-face checks",
+      "finding": "Full saved connectivity defines cyclic BL/BR/TR/TL local faces. Each exposed physical body edge must have one body and one outside owning cell. Local face names and positive aligned outside rectangle are checked. Body face bounds give explicit N; sorted undirected node pairs are only identity. Actual phase is saved solid[outer_cell], not an overlay mask.",
+      "status": "pass_static"
+    },
+    {
+      "subject": "Physical/cut identity",
+      "source": "execute_saved_material_trace.py:185-190",
+      "finding": "New physical/cut pairs must equal existing nodal.json lists, with physical72/cut36 and source mechanism boundary count. Cut at y40 is separately recorded and excluded from P line integration; no fictitious cut exterior owner or mirror stress. Future actual owner/phase values remain unknown before NPZ decoding.",
+      "status": "pass_static"
+    },
+    {
+      "subject": "Material traction sign/endpoints",
+      "source": "saved_material_trace.py:PN,samples,material_line_estimate; card23-31",
+      "finding": "P_outer@N_body gives body-directed nominal material traction. Compression=-N dot PN and shear=T dot PN retain signs. T is positive sampling direction, not oriented closed contour. Shared endpoints retain each edge/owner value without smoothing/averaging; material P is not Hu total pressure and internal overlay zero P is not external load evidence.",
+      "status": "pass_static"
+    },
+    {
+      "subject": "Independent line weight/thickness",
+      "source": "saved_material_trace.py:line_weights; worker26/164-166/183",
+      "finding": "L*[1,4,1]/6 is independent reference mm line weight. Original model thickness scalar is decoded/verified20mm and used once, giving N from MPa. Original nine-point area-times-thickness weights are never read or reused; original saved weak N is not rescaled by thickness.",
+      "status": "pass_static"
+    },
+    {
+      "subject": "Original state and field scope",
+      "source": "execute_saved_material_trace.py:selected_arrays/run; card11/17",
+      "finding": "Only original states6 and13, with descriptor/result/view identity equality and model/task/archive binding. Five archive opens select model six fields, two saved material P fields and four display state fields, total12. Hash/dtype/shape checks are field/interface validity checks; no extra model loader, constitutive, force-kernel, tangent, HP or solver evaluation is introduced.",
+      "status": "pass_static"
+    },
+    {
+      "subject": "Weak versus line comparison",
+      "source": "worker191-193/whole_material_comparison.csv; card29",
+      "finding": "Same original descriptor material weak body force is copied and signed line-minus-weak difference computed as descriptive output. No equality/percent/nearzero/scientific gate. Card recognizes Q1 support, stress jumps, distinct volume/line quadrature and rounded P versus compensated weak contraction. No total/Hu-force equality is implied.",
+      "status": "pass_static"
+    },
+    {
+      "subject": "Actual saved display/shape",
+      "source": "worker194-198/204/render; card37",
+      "finding": "Original left-associated X+lift+fluct is reproduced, with finite display and fixed-body coordinates checked. Original geometry mechanism-edge IDs draw actual structure; body physical edges and dashed cut are separate. This is rounded scale-one display, not exact split mechanics or a new state. The selected fixed body reference/current sampling positions coincide.",
+      "status": "pass_static"
+    },
+    {
+      "subject": "Plot units/sign/profile/limits",
+      "source": "worker62-120/render; card35-37",
+      "finding": "Two planned PNGs use common signed compression MPa color scale and common row axes for signed compression/shear MPa. T convention is explicitly captioned, phase markers retain owner identity, each edge is drawn separately. Coincident endpoint markers may overlap and are acknowledged. Plot lines join retained three samples only; no intermediate stress samples are computed.",
+      "status": "pass_static"
+    },
+    {
+      "subject": "Final preparation corrections",
+      "source": "public1-7/worker210-215/card43",
+      "finding": "Public docstring distinguishes new PN/line-derived calculations from absent constitutive/force-kernel/equilibrium calls. Worker completes output SHA, performs final checkpoint, then captures elapsed/RSS. Card correctly calls this a pre-success-receipt snapshot and outer240s terminal envelope, helper180s/sampled8GiB; no OS-hard memory or dynamic hook-monitoring claim.",
+      "status": "pass_static"
+    },
+    {
+      "subject": "Scientific qualification boundary",
+      "source": "public return scope/qualification; worker215/card41-47",
+      "finding": "No all24 stress extension, total Hu boundary action, Cauchy/current-area pressure, qualified gripping/contact, mesh convergence, LF optimization or HF5 completion. Existing qualifications remain unchanged. Cardinality/identity/topology/finite/output checks validate this saved-array diagnostic only.",
+      "status": "pass_static"
+    },
+    {
+      "subject": "Preparation basis refinement",
+      "source": "trace_physical_basis.json/proposed_M_PTRACE1_scope versus card17/MODEL_FIELDS",
+      "finding": "Earlier basis outlines five model fields; final concrete source/card explicitly add original scalar thickness, resulting in six model fields/twelve total. This review accepts the transparent input-scope refinement and the same material/reference/thickness physical definition; basis is not silently presented as array-run evidence.",
+      "status": "pass_static"
+    }
+  ],
+  "substantive_findings": [],
+  "additional_minimum_revisions_required": [],
+  "remaining_limits": [
+    "Actual saved arrays, owner/phase values, PN, line estimates, weak differences and figure appearance remain unverified before a separately authorized single run.",
+    "Rounded saved material P line estimate is not Hu total traction, qualified pressure, Cauchy/current-area traction, effective gripping or proof of equality with discrete material weak loads.",
+    "Overlapping owner-specific endpoint markers are a known display limitation; plain tables remain the complete evidence.",
+    "Protocol construction/pins/launcher/source packing and publication/recovery are outside this physics static review and will be reviewed separately."
+  ],
+  "new_execution_authorized_by_this_review": false,
+  "new_execution_performed": false,
+  "overall_goal_complete": false
+}
