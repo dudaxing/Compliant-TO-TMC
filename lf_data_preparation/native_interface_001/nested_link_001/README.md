@@ -1,3 +1,18 @@
+# 当前接续：M-LEDGER1四保存态载荷账本及三图已通过（2026-10-11）
+
+整体目标仍是独立HF有限变形／TMC前向评估，得到可核对的反力、工件载荷和实际变形，供外部研究比较；继续main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。此前24态细网格循环、48次保存态HP及原动画／参考API关联已完成。用户明确批准后的唯一M-LEDGER1实际PASS闭卡：ledger1／1、三PNG、17绑定不变，helper 4.1037824000 s／outer 4.4357795000 s，采样自身 RSS 98844672 B／tree RSS 103079936 B，exit0／无stop，无修复重跑／延期／force。helper为收据构造前快照，outer为完整终态；独立保存态终审PASS、三图已实际查看。
+
+本次原0／8／13／23四态各703节点，共2812原节点行与28类别行，七类互斥，六力原文本、N单位／已含厚度、角点／切面交点及微小卸载量保持。直接whole对账和回并原四组8eps·L1闭合通过；未重跑HP／力核／模型／求解／原观察器，确实新增分类汇总与三图渲染。旧24身份登记不是全24新账本或资格，原生产flags与结果／参考／图件不改。
+
+峰值whole Fy=0.1231794016016504N，底边内点0.05598073770422696N、两角点0.06713797604048814N，右下角node10638保存Fy=0.06722898497035161N。加载0.95mm底边Hu Fy-0.004663838767376595N与角点0.005676849155230292N相互抵消；整体Hu净值会掩盖分区影响。节点弱载荷的角点归属不是单点真实接触压力。位置图仅固定参考节点，四态图连线只作引导；实际结构变形继续查看原24帧GIF。
+
+最近仅准备全24保存态账本／分支图，解释同d加载／卸载和Hu抵消，再按结果准备外邻材料P诊断。新范围尚未授权或执行，本次窗口已关闭。材料P·N不是Hu模型总压力；总边界力、压力／有效夹持、网格／域收敛、自由体／摩擦、全列切线、正式标签排名和HF5仍未完成。
+
+[目标／实现／理由／实际结果与限制](../nested_ledger_001/RESULTS.md) · [七类载荷CSV](../nested_ledger_001/run_001/category_loads.csv) · [账本JSON](../nested_ledger_001/run_001/ledger.json) · [实际outer收据](../nested_ledger_001/ledger_launch.json) · [独立终态审阅](../nested_ledger_001/author/terminal_review.json) · [物理解读及下一步依据](../nested_ledger_001/author/physical_next_scope.json) · [原24态实际变形GIF](../../../functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/actual_states.gif)
+
+<details>
+<summary>本次更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-LEDGER1 来源已冻结，待新授权（2026-10-10）
 
 整体目标是独立 HF 有限变形／TMC 前向评估：读取普通几何，得到可核对的反力、工件载荷及实际变形，供外部研究比较。开发继续在 main，origin 为 https://github.com/dudaxing/Compliant-TO-TMC.git。前次 M-LINK1 已实际发布并增量恢复到 `909d7ba6a4bd3ba6bd11b97af830f4aeeef203c7`；细网格完整24态、48次保存态独立参考及原图件保持。原生产资格没有改写。
@@ -38,5 +53,8 @@
 
 
 </details>
+
+</details>
+
 
 </details>

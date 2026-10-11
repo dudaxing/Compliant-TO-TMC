@@ -1,0 +1,36 @@
+"""Correct one result sentence about existing saved displacement pairs."""
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+from pathlib import Path
+
+ROOT = Path('D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC')
+STAGE = ROOT / 'lf_data_preparation/native_interface_001/nested_ledger_001'
+target = STAGE / 'RESULTS.md'
+receipt = STAGE / 'author/saved_pair_wording_correction.json'
+archive = STAGE / 'author/correct_saved_pair_wording.py.raw'
+before = target.read_bytes()
+assert sha256(before).hexdigest() == '6ada511e72d15b4151f8a0399d5cab10cfc4346d307785131fe52da4b481d60b'
+old = '加载0.95mm与卸载同位移的分区关系尚需全24账本回答。'.encode('utf-8')
+new = '加载／卸载共有位移的分区关系尚需全24账本回答；0.95mm只有加载保存态。'.encode('utf-8')
+assert before.count(old) == 1 and not receipt.exists() and not archive.exists()
+after = before.replace(old, new)
+source = Path(__file__).read_bytes()
+target.write_bytes(after)
+archive.write_bytes(source)
+record = dict(
+    status='pass_document_wording_corrected_only',
+    created_utc=datetime.now(timezone.utc).isoformat(),
+    reason='Original 24 saved states have loading 0.95 mm but no unloading 0.95 mm; compare only shared saved displacements.',
+    document='lf_data_preparation/native_interface_001/nested_ledger_001/RESULTS.md',
+    before_sha256=sha256(before).hexdigest(), after_sha256=sha256(after).hexdigest(),
+    replacement_before=old.decode('utf-8'), replacement_after=new.decode('utf-8'),
+    previous_documentation_receipt_preserved=True,
+    previous_documentation_receipt_sha256=sha256((STAGE/'author/final_documentation_receipt.json').read_bytes()).hexdigest(),
+    raw_writer_sha256=sha256(source).hexdigest(),
+    new_ledger_science_plot_or_interpolation_calls=0,
+    original_outputs_and_frozen_card_unchanged=True,
+)
+with receipt.open('x', encoding='utf-8', newline='\n') as stream:
+    stream.write(json.dumps(record, ensure_ascii=False, indent=2)+'\n')
+print(json.dumps(record, ensure_ascii=False))

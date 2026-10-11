@@ -1,0 +1,37 @@
+"""Record the human approval and unchanged prepared source before the unique launch."""
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+from pathlib import Path
+import subprocess
+
+ROOT = Path('D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC')
+STAGE = ROOT/'lf_data_preparation/native_interface_001/nested_ledger_001'
+PREVIOUS = Path('D:/hf-native-workpiece-api-author-20261009/MLEDGER1_source_prepare_001/publication_receipt.json')
+BASE = 'ce8d19426d75262f4974515d6ba33175abda15b3'
+git = lambda *args:subprocess.check_output(['git',*args],cwd=ROOT).decode('utf-8').strip()
+assert git('rev-parse','HEAD') == BASE and git('branch','--show-current') == 'main'
+assert git('remote','get-url','origin') == 'https://github.com/dudaxing/Compliant-TO-TMC.git'
+assert not git('status','--porcelain')
+assert not (STAGE/'run_001').exists() and not (STAGE/'ledger_launch.json').exists()
+assert not (STAGE/'author/authorization_record.json').exists()
+protocol = json.loads((STAGE/'protocol.json').read_bytes())
+assert sha256((STAGE/'protocol.json').read_bytes()).hexdigest() == '6ab0bd2afd370edce12d0e684a93efeabb9f78c979e8a8752748e31d52469052'
+assert len(protocol['bindings']) == 17
+assert all(sha256((ROOT/name).read_bytes()).hexdigest() == pin for name,pin in protocol['bindings'].items())
+published = json.loads(PREVIOUS.read_bytes())
+assert published['status'] == 'published_and_incrementally_restored_pass' and published['published_commit'] == BASE
+receipt = dict(status='human_execution_authorization_recorded',created_utc=datetime.now(timezone.utc).isoformat(),client_date='2026-10-11',client_timezone='Asia/Seoul',
+    direct_user_message='批准按 M-LEDGER1 卡执行',authorization_source='Direct human user message in this chat; no inferred permission from automatic goal continuation',
+    card='M-LEDGER1',prepared_commit=BASE,card_sha256=sha256((STAGE/'M-LEDGER1_CARD.md').read_bytes()).hexdigest(),
+    protocol_sha256=sha256((STAGE/'protocol.json').read_bytes()).hexdigest(),bindings_checked_before_launch=17,
+    selected_state_indices=[0,8,13,23],new_ledger_states=4,old_identity_registry_states=24,PNG_outputs=3,
+    helper_seconds=180,outer_seconds=240,sampled_RSS_limit_bytes=8589934592,
+    once_first_error_no_retry_repair_rerun_extension_force=True,execution_started=False,
+    preexecution_publication_receipt_sha256=sha256(PREVIOUS.read_bytes()).hexdigest(),
+    source_protocol_preparation_status_is_historical=True,original_source_and_qualifications_unchanged=True)
+with (STAGE/'author/authorization_record.json').open('x',encoding='utf-8',newline='\n') as stream:
+    stream.write(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n')
+(STAGE/'author/preexecution_publication_receipt.json').write_bytes(PREVIOUS.read_bytes())
+(STAGE/'author/record_authorization.py.raw').write_bytes(Path(__file__).read_bytes())
+print(json.dumps(receipt,ensure_ascii=False))
