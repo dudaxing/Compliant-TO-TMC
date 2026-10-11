@@ -1,0 +1,31 @@
+{
+  "schema_version": "M-PTRACE1-actual-visual-review-1.0",
+  "status": "pass_actual_images_inspected_with_limits",
+  "client_date_Asia_Seoul": "2026-10-11",
+  "reviewer": "root",
+  "method": "Both existing PNGs opened through view_image and their returned pixels inspected; no figure regeneration or image editing.",
+  "images": [
+    {
+      "path": "run_001/actual_material_trace.png",
+      "sha256": "f7bab53f80e538bac7597c2414c025b02f1cf60c467c681e442f472b2c155139",
+      "original_dimensions_px": [2100, 1350],
+      "inspection_dimensions_px": [1984, 1275],
+      "findings": "Two original loading identities are visible. Full actual lower-half mechanism boundaries and fixed-body details are shown with x/y in mm, a common signed material compression colorbar in MPa and an excluded symmetry cut. Compression coloration concentrates at the bottom-right at1.2mm. Titles, colorbar, external legend and endpoint caveat are readable. Body reference/current locations coincide because the body is fixed."
+    },
+    {
+      "path": "run_001/nominal_material_profiles.png",
+      "sha256": "6e70c6b9cd0b31d8c38252d6fe52cf6fa50dd247f66dbe0612777fe0e01f404f",
+      "original_dimensions_px": [2250, 1200],
+      "inspection_dimensions_px": [2048, 1092],
+      "findings": "Bottom/left/right columns and signed compression/shear rows are legible. Blue/orange saved states share each row's y scale. The bottom-right compression rise and tiny signed shear profiles are visible; zero baselines, phase marker legend and specified sampling tangent caveat are present. No cross-owner endpoint averaging or smoothing was introduced."
+    }
+  ],
+  "limits": [
+    "Coincident owner-specific endpoint markers can overlap; CSVs preserve all samples separately.",
+    "The common compression scale makes the much smaller signed side-face values look close to zero; their actual values and signs must be read from tables.",
+    "Only two saved states and material nominal traction are shown. These images do not qualify total Hu pressure, stable/effective grip, all-state stress analysis or mesh convergence.",
+    "Displayed coordinates are the original rounded left-associated X+lift+fluct expression, not a new equilibrium solve or a force-kernel state reconstruction."
+  ],
+  "new_NPZ_reads_or_trace_API_or_PN_integrals_or_plots_by_reviewer": 0,
+  "images_preserved": true
+}

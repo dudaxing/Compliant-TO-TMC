@@ -1,0 +1,80 @@
+"""Record the completed single saved-P run; no numerical or plotting work."""
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import subprocess
+
+ROOT = Path('D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC')
+EXT = Path(__file__).parent
+REL = 'lf_data_preparation/native_interface_001/nested_material_trace_001'
+BASE = 'd0704a7951f8bbf0bda967d05a07d820380a62e1'
+read = lambda p: json.loads(p.read_bytes())
+identity = lambda p: dict(bytes=p.stat().st_size, sha256=sha256(p.read_bytes()).hexdigest())
+assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT).decode().strip() == BASE
+assert not (ROOT/REL/'RESULTS.md').exists()
+protocol = read(ROOT/REL/'protocol.json')
+assert all(identity(ROOT/p)['sha256'] == pin for p,pin in protocol['bindings'].items())
+launch = read(ROOT/REL/'trace_launch.json')
+helper = read(ROOT/REL/'run_001/execution_receipt.json')
+assert launch['status'] == helper['status'] == 'pass' and launch['invocations'] == 1
+assert launch['exit_code'] == 0 and launch['stop_reason'] is None and launch['all_bindings_unchanged']
+assert helper['calls'] == protocol['expected_calls']
+assert read(ROOT/REL/'author/authorization.json')['authorized']
+for p in ('terminal_execution_review.json','visual_review.json'):
+    assert read(ROOT/REL/'author'/p)['status'].startswith('pass')
+physics = read(ROOT/REL/'author/physical_results_review.json')
+assert physics['status'] == 'Saved actual diagnostic results interpreted; no new scientific qualification'
+previous = Path('D:/hf-native-workpiece-api-author-20261009/MPTRACE1_source_prepare_001/publication_receipt.json')
+assert read(previous)['published_commit'] == BASE
+target = ROOT/REL/'author/M_PTRACE1_source_publication_receipt.json'
+with target.open('xb') as stream: stream.write(previous.read_bytes())
+draft = (EXT/'RESULTS_draft.md').read_bytes()
+draft_text = draft.decode('utf-8').replace('独立终态审阅和图件人工检查实况由主任务合并。', '独立终态审阅和实际图面核对已归档，详见文末。').replace('图件的人工观察实况由主任务补充后归档。', '图件的实际观察实况见文末。').replace('本草稿仅读取', '本结果记录仅读取')
+appendix = '''
+
+## 实际图面核对与接续
+
+root 已通过 view_image 读取并检查两张实际 PNG 的像素，没有重新生成图。实际变形图可见下半结构、固定工件与接触邻域，1.20 mm 态材料压缩颜色集中在底边右端；载荷图保留三侧的有符号压缩／剪量和两态共同轴尺度。标题、MPa 色标、图外图例和采样切向说明均可读。重合 owner 端点可能遮挡；共同压缩轴使微小侧面负值看似接近零，完整样本仍在 CSV，不能按图将其归零。
+
+本次两态各72外邻 owner均为原 third_medium；底边压缩为正，侧面保留微小负名义压缩。外邻材料迹和原完整工件节点弱力并列，不把 −0.09424957122266045 N 的峰值 Fy 差归为舍入噪声，也不用 Hu 补材料对材料的差。最近下一步优先定位原材料弱力的局部 Q1 支撑／体积积分与保存外邻面迹之间的关系，再规划总 Hu 边界作用与夹持功能；尚未批准或执行下一张卡。
+
+[直接人类批准](author/authorization.json) · [实际 helper 收据](run_001/execution_receipt.json) · [完整终态](trace_launch.json) · [终态独立审阅](author/terminal_execution_review.json) · [物理结果独立审阅](author/physical_results_review.json) · [实际图面核对](author/visual_review.json) · [原源码提交发布恢复](author/M_PTRACE1_source_publication_receipt.json)
+
+冻结 protocol/card 的 prepared／authorized／executed 是准备时历史字段，保持原字节以追溯来源；当前明确批准与实际一次执行分别由 authorization 和两终态收据证明。M-PTRACE1 资源窗口已关闭，实际 PASS 范围是两态保存读取／材料迹／线估计及显示，不升级原力核、切线、HP、总压力、有效夹持、收敛、正式标签或 HF5。
+'''
+with (ROOT/REL/'RESULTS.md').open('xb') as stream:
+    stream.write(draft_text.rstrip().encode('utf-8')+b'\n'+appendix.encode('utf-8'))
+
+summary = '''# 当前接续：M-PTRACE1 两态材料牵引与实际变形已通过（2026-10-11）
+
+整体目标仍是读取普通 LF 几何的独立 HF 有限变形／TMC 前向评估，为外部研究提供可解释的反力、工件载荷和真实变形；HF不优化、不调用dmftd，继续main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
+
+人类明确批准后，M-PTRACE1唯一运行实际PASS并闭卡：5个既存NPZ／12字段、2次材料迹入口、432样本／144边／6侧／2整体表和两PNG。31原字节绑定保持，outer2.2380354999913834秒／tree RSS118493184 B；helper1.9568402000004426秒／own RSS114257920 B为成功收据构造前快照。exit0、stopnull，无重试／修复重跑／延期／force。独立终态审阅通过，物理结果已独立解读，两张实际图已读取像素查看。
+
+两态各72物理外邻owner均为原third_medium；材料压缩主要在底边右端。0.85／1.20mm的最大名义压缩为0.00016737104079557997／0.0039494633933005825 MPa。整体材料线Fy为0.0029293605006823825／0.027662985836060965 N，原材料弱Fy为0.0034790753630243565／0.12191255705872141 N；保存差为−0.0005497148623419741／−0.09424957122266045 N，不强制相等，不按差判solver失效。
+
+原protocol的False字段是冻结准备历史；当前批准与一次实际终态另有收据。P·N是材料名义牵引，线权独立乘原20mm厚度一次，不是包含Hu的总压力或合格夹持力。固定工件、原平衡／HP／旧图／科学版本保持，未新增力核、切线、HP或平衡路径。
+
+最近下一步优先解释峰值材料weak与面trace差别，核对局部Q1支撑／体积积分关系；根据新证据再推进Hu总边界作用及夹持功能，不预先扩全路径。总压力、有效夹持、自由体／摩擦、网格收敛、正式标签排名与HF5仍未完成。下一张执行卡尚未批准／执行。
+
+'''
+links = [('本次结果',REL+'/RESULTS.md'),('实际变形与材料迹',REL+'/run_001/actual_material_trace.png'),('三侧材料牵引',REL+'/run_001/nominal_material_profiles.png'),('完整数值',REL+'/run_001/whole_material_comparison.csv'),('公共入口','hf_repo/src/hf_eval/saved_material_trace.py'),('冻结卡',REL+'/M-PTRACE1_CARD.md'),('当前批准',REL+'/author/authorization.json'),('终态审阅',REL+'/author/terminal_execution_review.json'),('物理结果审阅',REL+'/author/physical_results_review.json')]
+fronts = ['docs/CURRENT_STATUS.md','docs/RESUME_DEVELOPMENT.md',REL+'/README.md','lf_data_preparation/native_interface_001/nested_ledger_002/README.md']
+history = []
+for name in fronts:
+    path = ROOT/name
+    old = path.read_bytes()
+    assert old == subprocess.check_output(['git','show',BASE+':'+name],cwd=ROOT)
+    navigation = ' · '.join('['+label+']('+os.path.relpath(ROOT/target,path.parent).replace('\\','/')+')' for label,target in links)+'\n\n'
+    prefix = (summary+navigation+'<details>\n<summary>更新前完整原文（历史状态不代表当前）</summary>\n\n').encode('utf-8')
+    path.write_bytes(prefix+old+b'\n</details>\n')
+    history.append(dict(path=name,old_sha256=sha256(old).hexdigest(),old_bytes=len(old),history_start_byte=len(prefix),history_end_byte_exclusive=len(prefix)+len(old),new_sha256=sha256(path.read_bytes()).hexdigest(),whole_prior_body_byte_exact=True))
+receipt = dict(status='actual_execution_documentation_pass',recorded_utc=datetime.now(timezone.utc).isoformat(),base_source_commit=BASE,
+    front_history=history,results=identity(ROOT/REL/'RESULTS.md'),external_draft_sha256=sha256(draft).hexdigest(),actual_execution_closed=True,
+    documented_scientific_execution_only='The original unique approved worker run; no new NPZ decode/API/PN/integral/render in documentation',
+    preparation_history_preserved=True,whole_HF5_complete=False)
+with (ROOT/REL/'author/documentation_receipt.json').open('x',encoding='utf-8',newline='\n') as stream:
+    stream.write(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps(receipt,ensure_ascii=False))
