@@ -1,0 +1,90 @@
+"""Publish the closed full saved-state ledger by exact incremental identities."""
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+from pathlib import Path
+import re
+import subprocess
+
+ROOT=Path('D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC')
+EXT=Path('D:/hf-native-workpiece-api-author-20261009/MLEDGER2_execution_review_001')
+BASE='362a79dcf68d5822778bc36093c28a9960566139'
+M='handoff/repository_manifest.json'
+STAGE='lf_data_preparation/native_interface_001/nested_ledger_002'
+FRONTS={'docs/CURRENT_STATUS.md','docs/RESUME_DEVELOPMENT.md',STAGE+'/README.md','lf_data_preparation/native_interface_001/nested_ledger_001/README.md'}
+INHERITED=Path('D:/hf-native-workpiece-api-author-20261009/MLEDGER2_source_prepare_001/publication_receipt.json')
+OUT=EXT/'source_delivery_delta_verify.json'
+git=lambda *a:subprocess.check_output(['git',*a],cwd=ROOT)
+read=lambda p:json.loads(p.read_bytes())
+assert not OUT.exists()
+assert git('rev-parse','HEAD').decode().strip()==BASE
+assert git('branch','--show-current').decode().strip()=='main'
+assert git('remote','get-url','--push','origin').decode().strip()=='https://github.com/dudaxing/Compliant-TO-TMC.git'
+inherited=read(INHERITED)
+assert inherited['published_commit']==BASE and inherited['source_and_restore_clean']
+old_raw=git('show',BASE+':'+M)
+assert (ROOT/M).read_bytes()==old_raw
+assert sha256(old_raw).hexdigest()==inherited['manifest_sha256']=='0a83b8584c57b7fd4c9af428f3b68539b025ee7fd1e0615f7cbb122611e34c49'
+old=json.loads(old_raw)
+old_entries={e['path']:e for e in old['files']}
+assert len(old_entries)==18418 and sum(e['bytes'] for e in old_entries.values())==9267680739
+paths=[p.decode('utf-8') for p in git('ls-files','-z').split(b'\0') if p and p.decode('utf-8')!=M]
+changed={p.decode('utf-8') for p in git('diff','--cached','--name-only','-z',BASE).split(b'\0') if p}
+new=set(paths)-old_entries.keys()
+assert not (old_entries.keys()-set(paths))
+assert changed & old_entries.keys()==FRONTS and changed==FRONTS|new
+assert all(p.startswith(STAGE+'/') for p in new)
+assert not git('diff','--name-only')
+cache={}
+def identity(rel):
+    if rel not in cache:
+        path=ROOT/rel
+        cache[rel]=dict(path=rel,bytes=path.stat().st_size,sha256=sha256(path.read_bytes()).hexdigest())
+    return cache[rel]
+delta=[identity(p) for p in sorted(changed)]
+protocol_rel=STAGE+'/protocol.json'
+protocol=read(ROOT/protocol_rel)
+assert len(protocol['bindings'])==40
+assert all(identity(p)['sha256']==pin for p,pin in protocol['bindings'].items())
+launch=read(ROOT/STAGE/'ledger_launch.json')
+run=read(ROOT/STAGE/'run_001/execution_receipt.json')
+auth=read(ROOT/STAGE/'author/authorization_record.json')
+assert auth['direct_user_message']=='批准按 M-LEDGER2 卡执行' and auth['prepared_commit']==BASE
+assert launch['status']==run['status']=='pass' and launch['invocations']==1 and launch['exit_code']==0 and launch['stop_reason'] is None
+assert launch['all_bindings_unchanged'] and run['all_bindings_unchanged']
+assert run['calls']=={'ledger_started':1,'ledger_completed':1,'PNG_writes':2}
+assert run['selected_states']==list(range(24)) and run['shared_MLEDGER1_exact']
+assert run['paired_strokes']==10 and run['paired_category_rows']==70
+assert run['elapsed_seconds']<180 and launch['elapsed_seconds']<240
+assert run['sampled_peak_RSS_bytes']<8*1024**3 and launch['peak_sampled_tree_RSS_bytes']<8*1024**3
+assert run['protocol_sha256']==launch['protocol_sha256']==identity(protocol_rel)['sha256']
+assert len(run['output_SHA256'])==6 and all(identity(STAGE+'/run_001/'+name)['sha256']==pin for name,pin in run['output_SHA256'].items())
+peers={}
+for rel in [STAGE+'/author/terminal_review.json',STAGE+'/author/final_results_review.json']:
+    assert read(ROOT/rel)['status'].startswith('pass')
+    peers[rel]=identity(rel)['sha256']
+links=[]
+for rel in [STAGE+'/RESULTS.md',*sorted(FRONTS)]:
+    text=(ROOT/rel).read_text(encoding='utf-8').split('<details>',1)[0]
+    assert '\ufffd' not in text
+    for target in re.findall(r'\]\(([^)]+)\)',text):
+        if '://' in target or target.startswith('#'):continue
+        path=((ROOT/rel).parent/target.split('#')[0]).resolve()
+        path.relative_to(ROOT)
+        assert path.exists(),(rel,target)
+        links.append(dict(document=rel,target=target))
+manifest=dict(old)
+manifest.update(created_utc=datetime.now(timezone.utc).isoformat(),storage_stage='nested_full_saved_node_load_ledger_pass_002',previous_delivery_commit=BASE,
+    files=[identity(p) if p in changed else old_entries[p] for p in paths])
+raw=(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
+(ROOT/M).write_bytes(raw)
+delivery=dict(status='incremental_source_delivery_pass',created_utc=datetime.now(timezone.utc).isoformat(),previous_delivery_commit=BASE,
+    manifest_sha256=sha256(raw).hexdigest(),ordinary_manifest_files=len(paths),ordinary_manifest_bytes=sum(e['bytes'] for e in manifest['files']),
+    new_files=len(new),changed_old_files=len(FRONTS),new_or_changed_files_directly_hashed=len(delta),delta_bytes=sum(e['bytes'] for e in delta),
+    unchanged_manifest_entries_exactly_inherited=len(old_entries)-len(FRONTS),new_full_source_scan=False,inherited_restoration_receipt=str(INHERITED),
+    protocol_checks=[dict(protocol=protocol_rel,protocol_sha256=identity(protocol_rel)['sha256'],bindings_checked=40)],peer_reviews=peers,delta_files=delta,local_document_links_checked=len(links),
+    M_LEDGER2_authorized=True,M_LEDGER2_executed_once=True,M_LEDGER2_terminal='pass',ledger_calls=1,PNG_writes=2,
+    helper_seconds=run['elapsed_seconds'],outer_seconds=launch['elapsed_seconds'],selected_saved_states=24,paired_strokes=10,paired_category_rows=70,
+    new_ledger_calls_or_render_in_delivery_check=0,original_science_and_qualification_unchanged=True,whole_HF5_complete=False)
+with OUT.open('x',encoding='utf-8',newline='\n') as stream:stream.write(json.dumps(delivery,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({k:v for k,v in delivery.items() if k not in {'delta_files','peer_reviews'}},ensure_ascii=False))

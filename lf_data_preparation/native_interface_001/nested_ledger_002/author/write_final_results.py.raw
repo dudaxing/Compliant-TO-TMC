@@ -1,0 +1,189 @@
+"""Unique M-LEDGER2 documentation writer; root must review source before running.
+
+Saved scalar formatting only. No candidate API, classification, force sum,
+NPZ, HP, stress evaluation or rendering. Entire four old fronts stay byte-exact.
+"""
+from datetime import datetime, timezone
+import hashlib
+import json
+import os
+from pathlib import Path
+
+ROOT = Path("D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC")
+STAGE = ROOT / "lf_data_preparation/native_interface_001/nested_ledger_002"
+AUTHOR = Path(__file__).parent
+PEER_SHA = "b471e2cdf06706f9439ac9eee21cf63d1736038bccd27ae5520d51931a475396"
+SCOPE_SHA = "9e6affded84f07f5f03aa4e2dc5a4b868d138d7c7d3e4220b002f7d48a5ed63e"
+FRONTS = {
+    "lf_data_preparation/native_interface_001/nested_ledger_002/README.md": "0597ca9df670888f3139653cdec08ad2980eee30fcf3cea48963364a819924c3",
+    "docs/CURRENT_STATUS.md": "8d7dbf9b468d3d18282408130697c9e0fad71115ef88c60dd5ab49dd0d8962e7",
+    "docs/RESUME_DEVELOPMENT.md": "f95bc1c3178ca1a4b6f1c8e878ecc21abe13c09a3d1b531680983311e86af2c3",
+    "lf_data_preparation/native_interface_001/nested_ledger_001/README.md": "1b92e069e60d598e421dd84d4f2efaafb61792f8bed803243712cf6e684845cb",
+}
+INPUTS = {
+    "protocol.json": "6aa1262756ecc036778f8346f8538ba5f1efc4027800b1365eff91151082d977",
+    "run_001/execution_receipt.json": "e2aa1bdc551bc22cc2bb283af422f7494db95c1c2abab99b8cfe5305d67f98c6",
+    "run_001/ledger.json": "1655c422118d56dab7c0d32681387e634be1b4cb46419a6968e9499fe20aec0e",
+    "ledger_launch.json": "4611566004d1df087c1a0bd62d090d5e45c3eaa61e176e2ab6f6568721903295",
+    "author/authorization_record.json": "984fa7125fa2d28e455d554ccca62cd856c05b5dd5bc95a6b419f847da62fd6e",
+}
+sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+read = lambda path: json.loads(path.read_text(encoding="utf-8"))
+relative = lambda path: path.relative_to(ROOT).as_posix()
+number = lambda value: format(value, ".15g")
+
+def link(label, target, document):
+    return "[" + label + "](" + Path(os.path.relpath(target, document.parent)).as_posix() + ")"
+
+def write_new(path, raw):
+    with path.open("xb") as stream:
+        stream.write(raw)
+
+def preserve_history(path, prefix):
+    old = path.read_bytes()
+    start = (prefix.rstrip() + "\n\n<details>\n<summary>本次更新前完整原文（历史状态不代表当前）</summary>\n\n").encode("utf-8")
+    new = start + old + b"\n\n</details>\n"
+    path.write_bytes(new)
+    assert path.read_bytes()[len(start):len(start) + len(old)] == old
+    return dict(path=relative(path), old_sha256=hashlib.sha256(old).hexdigest(), old_bytes=len(old),
+        history_start_byte=len(start), history_end_byte_exclusive=len(start) + len(old),
+        new_sha256=sha(path), new_bytes=len(new), whole_old_document_preserved_byte_exact=True)
+
+def main():
+    peer_file, scope_file = STAGE / "author/terminal_review.json", AUTHOR / "physical_next_scope.json"
+    assert sha(peer_file) == PEER_SHA and sha(scope_file) == SCOPE_SHA
+    peer, scope = read(peer_file), read(scope_file)
+    assert peer["schema_version"] == "m-ledger2-independent-terminal-review-1.0" and peer["status"] == "pass"
+    for name, pin in FRONTS.items():
+        assert sha(ROOT / name) == pin, name
+    for name, pin in INPUTS.items():
+        assert sha(STAGE / name) == pin, name
+    result_doc, receipt_file = STAGE / "RESULTS.md", AUTHOR / "documentation_receipt.json"
+    copies = {STAGE / "author/physical_next_scope.json": scope_file, STAGE / "author/write_final_results.py.raw": Path(__file__)}
+    for path in (result_doc, receipt_file, STAGE / "author/final_documentation_receipt.json", *copies):
+        assert not path.exists(), "Unique documentation target already exists: " + str(path)
+    helper, launch, ledger = read(STAGE / "run_001/execution_receipt.json"), read(STAGE / "ledger_launch.json"), read(STAGE / "run_001/ledger.json")
+    assert helper["status"] == launch["status"] == "pass" and launch["exit_code"] == 0 and launch["stop_reason"] is None
+    states = ledger["states"]
+    resources = f"helper {helper['elapsed_seconds']:.10f} s／outer {launch['elapsed_seconds']:.10f} s，采样自身 RSS {helper['sampled_peak_RSS_bytes']} B／tree RSS {launch['peak_sampled_tree_RSS_bytes']} B"
+    vectors = lambda force: " | ".join(number(value) for part in ("total", "material", "regularization") for value in force[part])
+    whole_rows = "\n".join("| " + str(state["identity"]["index"]) + "／" + state["identity"]["leg"] + "／" + number(state["identity"]["d_mm"]) + " | " + vectors(state["whole"]["force_on_body_N"]) + " |" for state in states)
+    hu_rows = []
+    for case in scope["hu_key_cases"]:
+        identity, corner = case["identity"], case["right_bottom_node_saved_row"]
+        values = [value for name in ("bottom_side_interior", "physical_corner") for value in case[name]["force_on_body_N"]["regularization"]]
+        values += [float(corner["regularization_Fx_N"]), float(corner["regularization_Fy_N"])] + case["whole_saved_force_on_body_N"]["regularization"]
+        hu_rows.append("| " + str(identity["index"]) + "／" + identity["leg"] + "／" + number(identity["d_mm"]) + " | " + " | ".join(number(value) for value in values) + " |")
+    maxima_rows = "\n".join("| " + item["column"].replace("delta_unloading_minus_baseline_", "").replace("regularization", "Hu") + " | " + item["category"] + " | " + number(item["d_mm"]) + " | " + str(item["baseline"]["index"]) + "／" + item["baseline"]["leg"] + " → " + str(item["unloading"]["index"]) + "／unloading | " + number(item["signed_saved_delta_N"]) + " |" for item in scope["saved_delta_maxima"])
+    gif = ROOT / "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/actual_states.gif"
+    results = f"""# M-LEDGER2：全24保存态账本与加载／卸载分支已通过
+
+2026-10-11（Asia/Seoul），用户明确批准“批准按 M-LEDGER2 卡执行”后的唯一启动实际PASS：exit0、stop_reason null、ledger开始／完成1／1、PNG写入2；{resources}。40份绑定保持，无重试、修复重跑、延期或force。本窗口已经关闭。
+
+[全24账本JSON](run_001/ledger.json) · [原节点文本CSV](run_001/all_nodes.csv) · [七类六分量CSV](run_001/category_loads.csv) · [精确同d配对及六差CSV](run_001/paired_branch_differences.csv) · [helper收据](run_001/execution_receipt.json) · [outer收据](ledger_launch.json) · [stdout](ledger_stdout.log) · [直接授权记录](author/authorization_record.json) · [独立终态审阅](author/terminal_review.json) · [只读物理解读／下一步依据](author/physical_next_scope.json) · [原冻结卡](M-LEDGER2_CARD.md) · [原协议](protocol.json)。终态报告原字节SHA`{PEER_SHA}`，物理解读SHA`{SCOPE_SHA}`。原卡／协议的prepared和授权记录execution_started=false保留执行前历史；实际收据证明当前运行事实。
+
+## 整体目标、已有工作与这一步的理由
+
+整体目标是读取普通LF几何，独立完成HF有限变形／第三介质接触(TMC)前向评估，提供可核对的反力、工件载荷、实际变形和加载／卸载响应，供外部研究层比较，并能跨目录／机器恢复继续开发。HF不优化、不调用dmftd；继续main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
+
+此前已有h0.5细网格24接受态完整循环、M-VIEW1真实变形、M-REF2自身48次保存态HP参考和M-LINK1关联入口。M-LEDGER1四态账本显示底边负Hu与角点正Hu抵消，整体净值不足以解释局部载荷。本次复用原[公共stdlib函数](../../../hf_repo/src/hf_eval/saved_workpiece_loads.py)，由192行[薄caller](execute_full_saved_ledger.py)唯一调用selected_states=None，完成原0..23全24态保存表处理，并展示载荷抵消如何随原目标序列及卸载改变。
+
+原703身体节点每态完整，16872原节点行、168七类行。原身份／node ID／参考坐标及六力字符串保持，包括signed zero和卸载微小残量；七类互斥，角点与物理／切面交点独立，不分摊到相邻侧。原whole直接精确对账与旧四组8·2^-52·节点L1闭合通过，无绝对误差地板、不强制total=material+Hu。原0／8／13／23完整保存态对象与M-LEDGER1逐项一致，直接比较已算数据，未二次分类或求和。
+
+独立终态审阅核对保存身份、原文字／rawSHA、已存闭合记录与配对标量减法，PASS；没有重新分类、fsum、HP或绘图，不是新增独立科学试验。主Agent已实际查看两PNG，原图保持。公共模块原qualification字符串保留，其中no full24 qualification指力核科学资格；caller的processing_scope明确本次确已完成全24保存表处理，两者不能混淆。
+
+## 实际功能效果、资源与完整数值入口
+
+新增保存表分类／汇总1次、精确配对六分量标量差及两Matplotlib图。新增NPZ／F／T／HP／模型构造／平衡求解／原观察器为0，是冻结来源调用路径依据，未动态监控mechanical hooks。本卡没有重求解旧循环，未重画旧位置图／峰值图／GIF。helper时间／RSS是末checkpoint后、成功收据构造／写入前快照；outer为完整launcher终态。原180／240秒、采样8GiB额度保持；RSS采样不是OS硬限制，依赖和严格科学源码未改。
+
+物理任务保持84×40mm下半域、h0.5、固定方形中心(71,40)mm／边长18mm、身体x62..80／y31..40，E1MPa、ν0.3、厚度20mm，原平均输入0→1.2→0mm。以下是已存整体载荷，15位有效数字仅作紧凑显示；CSV／JSON保存完整精度和原节点文字。N单位的节点弱式力已经含原厚度，不再乘厚度。
+
+| 原索引／leg／d(mm) | total Fx(N) | total Fy(N) | material Fx(N) | material Fy(N) | Hu Fx(N) | Hu Fy(N) |
+|---|---:|---:|---:|---:|---:|---:|
+{whole_rows}
+
+原峰值输入反力R=0.37870645239539324N、平均输出q_out=1.0166993609101365mm；这是M-CYCLE1已有结果，本卡不重新计算。峰值工件下半Fy=0.12317940160165043N，不等于完整镜像净Fy；镜像净力为(2Fx,0)，两侧法向幅值和2|Fy|是另一个量。holding反力与ON-body力相反号，固定体结果不证明释放后稳定夹持。
+
+## Hu局部载荷与精确同位移差
+
+本次全路径账本把局部Hu Fy极值定位到原6／loading0.85mm，区别于原8／loading0.95mm的积分点Hu最大分量记录。节点弱式载荷和Hu场分量是不同量，极值态无需相同；不能把M-LEDGER1选0.95mm称为已取到分区载荷最大值。下面展示0.85／0.95／峰值1.2mm的保存分量。
+
+| 原索引／d(mm) | 底边Hu Fx(N) | 底边Hu Fy(N) | 两角点Hu Fx(N) | 两角点Hu Fy(N) | 右下角Hu Fx(N) | 右下角Hu Fy(N) | whole Hu Fx(N) | whole Hu Fy(N) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+{chr(10).join(hu_rows)}
+
+node10638(80,31)mm是physical_corner两角点类别的子集，不能与该类别相加，也不能与whole净值相加。底边与角点有符号抵消，whole净Hu不能替代局部说明。节点广义弱载荷包含基函数归属和Hu项，本表不证明真实连续压力集中在单个点，也不把角点向量除面积变成压力。
+
+精确同d有9个非零loading／unloading对，另有origin0／unloading0基线，共10对70类别行。baseline_leg=origin保持；没有unloading0.85／0.95／1.05／1.2记录，不插值或制造峰值卸载。下表是物理解读报告直接读取配对CSV得到的六列最大绝对差所在行，展示其**原有符号差**；只是保存标量选择，没有重分类、重新求差或力求和。差是unloading减baseline，类别向量不归给单独节点。
+
+| 分量 | 最大绝对差所在类别 | d(mm) | baseline → unloading原索引 | 原有符号差(N) |
+|---|---|---:|---|---:|
+{maxima_rows}
+
+全部差值保持原数量级与方向，不加显著性门、不清零、不做近零占比。保存样本基本沿已有路径回返的数值现象，不能自动解释为物理耗散、迟滞资格、唯一平衡支或网格收敛。
+
+## 两张实际新图与原结构变形
+
+第一图是七互斥类别的total／material／Hu × Fx／Fy六面板。origin+loading实线／点，实际unloading虚线／点；各支只连接原保存样本，峰值13保留loading身份，卸载从14开始。
+
+![全24保存态的七类加载与卸载分支](run_001/path_branches.png)
+
+第二图左列显示原24目标序列的Hu Fx／Fy（底边、两角点、右下角子集与whole净值），右列只显示10个精确配对的七类Hu差；全部六分量差在CSV，零位移明确为origin基线。**显示局限：左下Hu Fy面板图例遮住部分卸载底边蓝色曲线；原CSV／JSON完整，按本卡保持原图，不再渲染。**右列的微小刻度是原差值，没有归零。
+
+![原目标Hu抵消及精确同位移Hu差](run_001/hu_target_path.png)
+
+实际结构的×1变形和工件节点弱式力箭头继续查看{link('既有24帧GIF', gif, result_doc)}。本卡没有新增结构变形、应力场或平衡求解；旧结果／参考／图件／producer flags保持原历史字节。
+
+## 下一步与尚未完成的能力
+
+最近仅准备读取**原6／loading0.85mm和原13／loading1.2mm两态已保存的工件外邻单元材料P**，核对外邻归属、原solid／medium材料相位及采样位置并可视化，再审视与现有材料弱力的关系。两态分别代表强局部Hu抵消和峰值载荷；不新增本构／force调用。普通view JSON／CSV没有现成外邻P表，但原state.json声明forces.npz中的stress_first_piola为float64[13440,9,2,2]。本次只读声明及源码，未解码NPZ、复核其档案SHA或读取P数值，真正读数组属下一卡范围，尚未授权或执行。
+
+原tmc_kernel.py的9采样点是xi／eta∈{{-1,0,1}}，Simpson一维权1／4／1，含单元边界点，xi慢／eta快；不能称为内点Gauss或默认需要插值P。后续仍需按原points核对外邻边界三点索引、参考身体法向、所属边和单独线权重，不能把“材料P数组已保存”说成“外邻边界迹／线积分已准备完成”。具体来源、预算、采样定义与最小显示方案需另行冻结和独立审阅；当前只推荐，不增加物理资格。
+
+固定工件是运动学overlay，内部F=I、P／Hu=0，不能用内部P解释外传载荷。材料P本身不含厚度；未来参考边界P·N线积分需乘厚度20mm一次，使用线积分权重，不能把已含面积×厚度的体积分权重拿来作线权重。原节点N力已经含厚度，不能重复乘。材料P·N仍只解释材料分量，不是材料＋Hu总边界力或总压力；总边界力重建还需物理侧／切面／角点／离散余项的定义。
+
+原HP参考仍限精确模型／任务的24接受态及5节点PORT方向，不是全列切线或应力HP；两网格只是敏感性。总边界力、压力／有效夹持、自由体／摩擦、圆体任务、网格／域收敛、全列切线、正式HF5标签／批量排名仍未完成。本步扩展了可解释的保存态载荷功能，整体开发目标没有缩为账本整理。四当前入口完整旧正文及本次源码／报告原字节归档，供审查对照。
+"""
+    common = f"""# 当前接续：M-LEDGER2全24保存态载荷账本与分支图已通过（2026-10-11）
+
+整体目标仍是独立HF有限变形／TMC前向评估，为外部研究提供可核对的反力、工件载荷与真实变形；main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。用户明确批准后唯一M-LEDGER2实际PASS闭卡：ledger1／1、两PNG、40绑定保持，{resources}，exit0／无stop，无重试／修复重跑／延期／force。helper是成功收据构造前快照，outer为完整终态；独立保存态审阅PASS，两图已实际查看。
+
+全24原态0..23、16872原节点行／168类别行，703身体节点每态、六力原文本／符号／N单位及微小卸载量保持，七类互斥，角点／切面交点独立，原whole精确和四组8eps·L1闭合通过。与M1原0／8／13／23完整保存结果逐项一致；10精确同d对包括origin0初始基线、70类别差行，无插值或伪造卸载0.85／0.95／1.05／1.2。新增分类汇总／配对标量差及两图；没有新F／T／HP／求解／模型／NPZ／原观察器，科学资格不增加。
+
+实际局部Hu Fy载荷极值在原6／loading0.85mm，与原8／0.95mm积分点Hu最大分量是不同量。分区抵消保留，node10638为两角点类别子集，whole为净值，不能相加。共有d差值保留微小原数，不当作耗散／迟滞或收敛资格。Hu图左下图例遮部分卸载底边曲线的显示局限已记录，CSV完整且不rerender；原24帧实际结构变形继续可查看。
+
+最近只准备读取原6／0.85mm和13／1.2mm两态已保存的外邻单元材料P，核对外邻归属、相位／采样位置并显示，再审视材料弱力关系；不重新调用本构或force。原描述声明P数组已保存，当前未解码NPZ或读P数值；9点为含边界的Simpson采样，仍须核审外邻边界三点索引／法向／独立线权重，不能说边界迹已现成。新卡未授权或执行。原节点N力已含厚度，P单位MPa未含厚度，未来线积分单乘20mm一次，不能复用体积weights。材料P·N不是Hu总压力。总边界力、压力／有效夹持、自由体／摩擦、网格／域收敛、全列切线、正式标签排名与HF5仍未完成。
+"""
+    write_new(result_doc, results.encode("utf-8"))
+    history = []
+    for name in FRONTS:
+        path = ROOT / name
+        navigation = " · ".join(link(label, target, path) for label, target in (
+            ("目标／工作／理由／实际效果与限制", result_doc), ("全24七类六分量CSV", STAGE / "run_001/category_loads.csv"),
+            ("精确同d配对与六差CSV", STAGE / "run_001/paired_branch_differences.csv"), ("实际outer收据", STAGE / "ledger_launch.json"),
+            ("独立终态审阅", peer_file), ("物理解读及外邻P前置核查", STAGE / "author/physical_next_scope.json"), ("原24帧真实变形GIF", gif)))
+        history.append(preserve_history(path, common + "\n" + navigation + "\n"))
+    for destination, source in copies.items():
+        write_new(destination, source.read_bytes())
+    receipt = dict(schema_version="m-ledger2-final-documentation-byte-preservation-1.0", status="written_after_actual_terminal_PASS_and_root_source_review",
+        created_utc=datetime.now(timezone.utc).isoformat(), client_date="2026-10-11", client_timezone="Asia/Seoul",
+        writer_source_path=str(Path(__file__).resolve()), writer_source_sha256=sha(Path(__file__)),
+        peer_report_path=relative(peer_file), peer_report_sha256=PEER_SHA, peer_status=peer["status"],
+        physical_interpretation_source_path=str(scope_file), physical_interpretation_source_sha256=SCOPE_SHA,
+        frozen_documentation_inputs=INPUTS, history_preservation=history,
+        new_result=dict(path=relative(result_doc), sha256=sha(result_doc), bytes=result_doc.stat().st_size),
+        raw_archives=[dict(path=relative(path), sha256=sha(path), bytes=path.stat().st_size) for path in copies],
+        actual_execution=dict(calls=helper["calls"], helper_seconds=helper["elapsed_seconds"], outer_seconds=launch["elapsed_seconds"],
+            helper_sampled_RSS_bytes=helper["sampled_peak_RSS_bytes"], tree_sampled_RSS_bytes=launch["peak_sampled_tree_RSS_bytes"], bindings_unchanged=True),
+        writer_actions=dict(saved_scalar_formatting=True, already_selected_node_row_read_only=True, candidate_API_calls=0,
+            new_classification_or_force_summation=0, new_pair_subtraction_or_maximum_search=0, HF_imports=0, NPZ_HP_stress_or_mechanics_calls=0,
+            rendering_calls=0, old_frozen_sources_or_outputs_changes=0),
+        write_scope="New RESULTS and four current prefixes plus raw physical report/writer/final documentation receipt; complete four prior documents byte-exact in details",
+        qualification_unchanged=True, next_material_P_probe_not_executed_or_authorized=True)
+    raw = (json.dumps(receipt, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    write_new(receipt_file, raw)
+    write_new(STAGE / "author/final_documentation_receipt.json", raw)
+    print(json.dumps(dict(status=receipt["status"], writer_sha256=receipt["writer_source_sha256"], result_sha256=receipt["new_result"]["sha256"], history_documents=len(history)), indent=2), flush=True)
+
+if __name__ == "__main__":
+    main()
