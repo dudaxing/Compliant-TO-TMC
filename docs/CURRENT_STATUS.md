@@ -1,3 +1,20 @@
+# 当前接续：M-RESUME1保存峰值续算候选已准备，未授权／未执行
+
+整体目标仍为独立HF有限变形／TMC前向评价，读取普通几何，提供实际变形、输入反力及可解释工件作用供外部研究层比较。main开发、HF与LF优化断开，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；science0.5.0及原资格保持。
+
+M-AVIEW1已实际PASS闭卡、发布01b5078：alpha5e−7的14个接受加载态、6PNG／14帧GIF及两快照已生成。原M-ALPHA1仍NOT_PASS：1.20 mm加载峰值接受，首次下降1.15 mm因controller预算停止，父路径／卸载／完整任务标记保持false。
+
+最近完成隔离候选和源码静审：读父接受态013的split/R，保留原绝对目标[1.20,1.15]、target_origin0、新initial_parameter1.20；初始K=None，按原门validate-only复核峰值后才下降。原几何、物理任务、BC、设置（新clock除外）、NumPy力核／AD切线保持；候选与focused tests封存在新阶段，默认hf_repo暂不安装。
+
+本轮未执行测试／NPZ解码／F/T/HP／平衡或绘图。M-RESUME1待新直接授权：tests120／controller1800／viewer600／helper2700／outer2760秒、采样8GiB、唯一启动、首个终端非成功停止，无修复重跑、延期或force。成功时原纯viewer提供实际峰值→下降的3PNG／N帧GIF（N=2..9）；失败保存实际接受缓存、停止位置和typed响应，不画缺失状态。
+
+短段完成与原完整任务完成分开；不转移原48HP、不升级连续总压力／有效夹持／稳定性／HF5资格。先依据实际首次下降结果决定入口集成与后续，不重做长加载或扫新alpha。
+
+[执行卡](../lf_data_preparation/native_interface_001/saved_continuation_001/M-RESUME1_CARD.md) · [准备结果](../lf_data_preparation/native_interface_001/saved_continuation_001/PREPARATION_RESULTS.md) · [已有实际图件](../functional_views/native_alpha_partial_20261011/complete_001/RESULTS.md)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-AVIEW1 实际显示通过；原alpha卸载仍未完成
 
 独立HF有限变形／TMC前向评价继续面向实际结构变形、反力及可解释工件作用；HF与LF优化断开，main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git，science0.5.0与原资格保持。
@@ -911,5 +928,7 @@ CPU原237条和科学30条事件完整；严格同步内原行157–235全部79�
 
 </details>
 
+
+</details>
 
 </details>

@@ -1,0 +1,782 @@
+--- baseline/hf_repo/scripts/evaluate_native.py
++++ candidate/hf_repo/scripts/evaluate_native.py
+@@ -11,21 +11,24 @@
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--repo", type=Path, help="Base for relative input/output paths; otherwise cwd")
+-    parser.add_argument("--geometry", type=Path, required=True)
+-    parser.add_argument("--task", type=Path, required=True)
++    parser.add_argument("--geometry", type=Path, help="Required for zero start; otherwise saved source geometry")
++    parser.add_argument("--task", type=Path, help="Required for zero start; otherwise saved original task")
++    parser.add_argument("--saved-result", type=Path, help="Original saved result to continue")
++    parser.add_argument("--selected-state-index", type=int, help="Accepted row index; paired with --saved-result")
+     parser.add_argument("--output", type=Path, required=True, help="New evaluation directory")
+     parser.add_argument("--targets", type=float, nargs="+")
+     parser.add_argument("--time-limit", type=float, default=180., help="Controller limit, not total CLI wall time")
+     parser.add_argument("--minimum-increment", type=float)
+-    parser.add_argument("--response-mode", choices=("complete", "mechanical"), default="complete")
+-    parser.add_argument("--tangent-mode", choices=("full", "chunk256"), default="full")
+-    parser.add_argument("--initial-guess", choices=("tangent", "port_projection"), default="tangent")
++    parser.add_argument("--response-mode", choices=("complete", "mechanical"), help="Otherwise zero-start complete or saved parent option")
++    parser.add_argument("--tangent-mode", choices=("full", "chunk256"), help="Otherwise zero-start full or saved parent option")
++    parser.add_argument("--initial-guess", choices=("tangent", "port_projection"), help="Otherwise zero-start tangent or saved parent option")
+     args = parser.parse_args()
+     try:
+         response = evaluate_native(args.geometry, args.task, args.output, repo_root=args.repo,
+             targets=args.targets, time_limit_seconds=args.time_limit,
+             minimum_increment=args.minimum_increment, response_mode=args.response_mode,
+-            tangent_mode=args.tangent_mode, initial_guess=args.initial_guess)
++            tangent_mode=args.tangent_mode, initial_guess=args.initial_guess,
++            saved_result=args.saved_result,selected_state_index=args.selected_state_index)
+     except (OSError, ValueError, KeyError, TypeError) as error:
+         parser.exit(1, f"Native evaluation could not save its response: {error}\n")
+     print(json.dumps(response, indent=2, ensure_ascii=False, allow_nan=False))
+--- baseline/hf_repo/scripts/solve_native_mean.py
++++ candidate/hf_repo/scripts/solve_native_mean.py
+@@ -11,33 +11,49 @@
+ sys.path.insert(0, str(Path(__file__).resolve().parents[1]/"src"))
+ from hf_eval.displacement import DisplacementSettings
+ from hf_eval.native_mean import solve_native_mean, write_native_mean
++from hf_eval.native_resume import saved_resume_defaults
+ 
+ 
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument("--geometry", type=Path, required=True)
+-    parser.add_argument("--task", type=Path, required=True)
++    parser.add_argument("--geometry", type=Path, help="Required for zero start; otherwise saved source geometry")
++    parser.add_argument("--task", type=Path, help="Required for zero start; otherwise saved original task")
++    parser.add_argument("--saved-result", type=Path, help="Original saved result to continue")
++    parser.add_argument("--selected-state-index", type=int, help="Accepted row index; paired with --saved-result")
+     parser.add_argument("--output", type=Path, required=True, help="New result directory")
+     parser.add_argument("--targets", type=float, nargs="+", help="Explicit targets; must match a declared 1.1 path. Otherwise task path or [0, task target]")
+     parser.add_argument("--time-limit", type=float, default=180.)
+     parser.add_argument("--minimum-increment", type=float, help="Otherwise the first nonzero target / 16")
+-    parser.add_argument("--response-mode", choices=("complete", "mechanical"), default="complete",
++    parser.add_argument("--response-mode", choices=("complete", "mechanical"),
+                         help="Mechanical mode explicitly omits auxiliary material energy")
+-    parser.add_argument("--tangent-mode", choices=("full", "chunk256"), default="full",
++    parser.add_argument("--tangent-mode", choices=("full", "chunk256"),
+                         help="Optional element blocks retain the full-batch arithmetic selector")
+-    parser.add_argument("--initial-guess", choices=("tangent", "port_projection"), default="tangent",
++    parser.add_argument("--initial-guess", choices=("tangent", "port_projection"),
+                         help="Explicit Newton initialization; existing tangent default is retained")
+     args = parser.parse_args()
+     try:
+-        task = json.loads(args.task.read_text(encoding="utf-8"))
+-        targets = (task["path"]["targets_mm"] if "path" in task else [0., task["input"]["target_mm"]]) if args.targets is None else args.targets
++        if (args.saved_result is None) != (args.selected_state_index is None):
++            raise ValueError("--saved-result and --selected-state-index must be paired")
++        restored = None if args.saved_result is None else saved_resume_defaults(args.saved_result,args.selected_state_index,
++            time_limit_seconds=args.time_limit)
++        task = json.loads(args.task.read_text(encoding="utf-8")) if args.task is not None else (restored["task"] if restored is not None else None)
++        if task is None or (args.geometry is None and restored is None):
++            raise ValueError("Zero-start solve requires --geometry and --task")
++        targets = args.targets if args.targets is not None else (restored["targets"] if restored is not None else
++            task.get("path",{}).get("targets_mm",[0.,task["input"]["target_mm"]]))
+         if len(targets) < 2:
+             raise ValueError("At least zero and one nonzero target are required")
+-        increment = targets[1]/16 if args.minimum_increment is None else args.minimum_increment
+-        settings = DisplacementSettings(minimum_increment=increment, time_limit_seconds=args.time_limit)
++        if restored is not None:
++            if args.minimum_increment is not None:
++                raise ValueError("Saved continuation preserves the parent's minimum increment")
++            settings = restored["settings"]
++        else:
++            increment = targets[1]/16 if args.minimum_increment is None else args.minimum_increment
++            settings = DisplacementSettings(minimum_increment=increment, time_limit_seconds=args.time_limit)
+         result = solve_native_mean(args.geometry, task, targets, settings=settings,
+                                    response_mode=args.response_mode, tangent_mode=args.tangent_mode,
+-                                   initial_guess=args.initial_guess)
++                                   initial_guess=args.initial_guess,saved_result=args.saved_result,
++                                   selected_state_index=args.selected_state_index)
+         descriptor = write_native_mean(result, args.output)
+         elapsed = perf_counter()-STARTED
+         if elapsed > args.time_limit:
+--- baseline/hf_repo/src/hf_eval/native_evaluate.py
++++ candidate/hf_repo/src/hf_eval/native_evaluate.py
+@@ -10,6 +10,7 @@
+ from .displacement import DisplacementSettings
+ from .native_mean import solve_native_mean, write_native_mean
+ from .native_response import summarize_saved_native_result, write_native_response
++from .native_resume import native_options, saved_resume_defaults
+ 
+ 
+ def resolve_native_path(path, repo_root=None):
+@@ -20,38 +21,64 @@
+ 
+ def evaluate_native(geometry_path, task_path, output_directory, *, repo_root=None,
+                     targets=None, settings=None, time_limit_seconds=180.,
+-                    minimum_increment=None, response_mode="complete", tangent_mode="full",
+-                    initial_guess="tangent") -> dict:
++                    minimum_increment=None, response_mode=None, tangent_mode=None,
++                    initial_guess=None, saved_result=None, selected_state_index=None) -> dict:
+     """Call the existing solver once and save its accepted cache once.
+ 
+     Controller failures preserve accepted states. Input/solve/persistence/summary
+     exceptions retain their original class, code and reason in a failed response.
+     Existing output directories are never used for a new evaluation.
+     The controller's time limit covers its solve, not CLI imports or persistence.
++    In saved mode None inputs/options inherit the bound parent. All settings
++    except this call's time limit are preserved; targets are its exact suffix.
+     """
+     started = perf_counter()
+-    geometry = resolve_native_path(geometry_path, repo_root)
+-    task_file = resolve_native_path(task_path, repo_root)
++    geometry = resolve_native_path(geometry_path, repo_root) if geometry_path is not None else None
++    task_file = resolve_native_path(task_path, repo_root) if task_path is not None else None
++    saved_result = resolve_native_path(saved_result, repo_root) if saved_result is not None else None
+     output = resolve_native_path(output_directory, repo_root)
+     existed = output.exists()
+     stage, descriptor = "input", None
+-    invocation = dict(geometry_file=str(geometry), task_file=str(task_file),
++    invocation = dict(geometry_file=str(geometry) if geometry is not None else None,
++                      task_file=str(task_file) if task_file is not None else None,
+                       output_directory=str(output), response_mode=response_mode,
+                       tangent_mode=tangent_mode, initial_guess=initial_guess)
+     try:
+         if existed:
+             raise FileExistsError(f"Choose a new output directory: {output}")
+-        task_bytes = task_file.read_bytes()
+-        task = json.loads(task_bytes)
+-        invocation["task_file_sha256"] = sha256(task_bytes).hexdigest()
+-        requested = list(targets) if targets is not None else task.get("path", {}).get(
+-            "targets_mm", [0., task["input"]["target_mm"]])
++        if (saved_result is None) != (selected_state_index is None):
++            raise ValueError("saved_result and selected_state_index must be paired")
++        restored = None if saved_result is None else saved_resume_defaults(saved_result,selected_state_index,
++            time_limit_seconds=time_limit_seconds if settings is None else settings.time_limit_seconds)
++        if restored is not None:
++            geometry = restored["geometry_file"] if geometry is None else geometry
++            invocation.update(saved_result_file=str(saved_result),selected_state_index=selected_state_index,
++                              geometry_file=str(geometry))
++        if task_file is None:
++            if restored is None:
++                raise ValueError("Zero-start evaluation requires geometry and task files")
++            task = restored["task"]
++            invocation["task_source"] = "Bound parent model's original embedded task"
++        else:
++            task_bytes = task_file.read_bytes()
++            task = json.loads(task_bytes)
++            invocation["task_file_sha256"] = sha256(task_bytes).hexdigest()
++        response_mode,tangent_mode,initial_guess = native_options(response_mode,tangent_mode,initial_guess,
++            restored["options"] if restored is not None else ("complete","full","tangent"))
++        invocation.update(response_mode=response_mode,tangent_mode=tangent_mode,initial_guess=initial_guess)
++        requested = list(targets) if targets is not None else (restored["targets"] if restored is not None
++            else task.get("path", {}).get("targets_mm", [0., task["input"]["target_mm"]]))
+         if len(requested) < 2:
+             raise ValueError("At least origin and one displacement target are required")
+         if settings is None:
+-            increment = requested[1] / 16 if minimum_increment is None else minimum_increment
+-            settings = DisplacementSettings(minimum_increment=increment,
+-                                            time_limit_seconds=time_limit_seconds)
++            if restored is not None:
++                if minimum_increment is not None:
++                    raise ValueError("Saved continuation preserves the parent's minimum increment")
++                settings = restored["settings"]
++            else:
++                increment = requested[1] / 16 if minimum_increment is None else minimum_increment
++                settings = DisplacementSettings(minimum_increment=increment,
++                                                time_limit_seconds=time_limit_seconds)
+         elif minimum_increment is not None or time_limit_seconds != 180.:
+             raise ValueError("Pass settings or individual controller limits, not both")
+         invocation.update(targets_mm=requested, settings=asdict(settings),
+@@ -59,7 +86,8 @@
+         stage = "solve"
+         result = solve_native_mean(geometry, task, requested, settings=settings,
+                                    response_mode=response_mode, tangent_mode=tangent_mode,
+-                                   initial_guess=initial_guess)
++                                   initial_guess=initial_guess,saved_result=saved_result,
++                                   selected_state_index=selected_state_index)
+         stage = "persistence"
+         descriptor = write_native_mean(result, output)
+         stage = "summary"
+--- baseline/hf_repo/src/hf_eval/native_mean.py
++++ candidate/hf_repo/src/hf_eval/native_mean.py
+@@ -21,6 +21,7 @@
+ from .displacement import DisplacementSettings
+ from .native_force import _npz, _state_hash
+ from .native_project import build_native_project, write_native_project
++from .native_resume import native_options, read_native_resume, saved_resume_defaults
+ from .project import Project
+ from .split_displacement import solve_split_displacement_path
+ from .split_kernel_invariants_hu import (MECHANICAL_KERNEL_VERSION,
+@@ -111,10 +112,11 @@
+ 
+ 
+ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
+-                      settings: DisplacementSettings, on_accept=None,
+-                      response_mode="complete", tangent_mode="full",
+-                      initial_guess="tangent") -> NativeMeanResult:
+-    """Solve explicit mean targets from zero lift and the undeformed state.
++                      settings: DisplacementSettings | None = None, on_accept=None,
++                      response_mode=None, tangent_mode=None, initial_guess=None,
++                      saved_result=None, selected_state_index=None,
++                      time_limit_seconds=None) -> NativeMeanResult:
++    """Solve explicit mean targets, or revalidate and continue a saved suffix.
+ 
+     Settings are explicit. The CLI uses the original first-increment/16 rule;
+     the API passes the supplied settings to the existing controller unchanged.
+@@ -124,7 +126,31 @@
+     the force residual, cached tangent and controller are otherwise unchanged.
+     Optional chunk256 tangents retain the full-batch arithmetic selector.
+     The opt-in port_projection initial guess changes only Newton initialization.
++    Saved mode inherits parent inputs/options and settings; settings=None needs
++    an explicit new time_limit_seconds. Explicit settings may change only time.
++    A saved start uses fresh F/T, never its saved matrix. Parent task/path/status
++    remain historical; success here completes only the original-task suffix.
+     """
++    if (saved_result is None) != (selected_state_index is None):
++        raise TMCError("saved_result and selected_state_index must be paired", code="invalid_input")
++    if settings is not None and not isinstance(settings,DisplacementSettings):
++        raise TMCError("settings must be DisplacementSettings", code="invalid_settings")
++    resume_defaults = None
++    if saved_result is not None:
++        if settings is None and time_limit_seconds is None:
++            raise TMCError("Saved continuation requires a new explicit time limit", code="invalid_settings")
++        if settings is not None and time_limit_seconds is not None:
++            raise TMCError("Pass settings or time_limit_seconds, not both", code="invalid_settings")
++        resume_defaults = saved_resume_defaults(saved_result,selected_state_index,
++            time_limit_seconds=time_limit_seconds if settings is None else settings.time_limit_seconds)
++        geometry_file = resume_defaults["geometry_file"] if geometry_file is None else geometry_file
++        task_dict = resume_defaults["task"] if task_dict is None else task_dict
++        targets = resume_defaults["targets"] if targets is None else targets
++        settings = resume_defaults["settings"] if settings is None else settings
++    elif time_limit_seconds is not None:
++        raise TMCError("Zero-start solve keeps explicit settings", code="invalid_settings")
++    response_mode,tangent_mode,initial_guess = native_options(response_mode,tangent_mode,initial_guess,
++        resume_defaults["options"] if resume_defaults is not None else ("complete","full","tangent"))
+     if not isinstance(settings, DisplacementSettings):
+         raise TMCError("settings must be DisplacementSettings", code="invalid_settings")
+     if response_mode not in ("complete", "mechanical"):
+@@ -142,12 +168,14 @@
+     project = build_native_project(geometry_file, task_dict)
+     path_spec = project.task.get("path")
+     path_mode = "load_only" if path_spec is None else path_spec["kind"]
+-    if path_spec is not None and not np.array_equal(np.asarray(targets), path_spec["targets_mm"]):
++    if saved_result is None and path_spec is not None and not np.array_equal(np.asarray(targets), path_spec["targets_mm"]):
+         raise TMCError("Targets must match the explicitly declared task path", code="invalid_input")
++    anchor = None if saved_result is None else read_native_resume(saved_result,selected_state_index,
++        project,targets,settings,response_mode=response_mode,tangent_mode=tangent_mode,initial_guess=initial_guess)
+     prepared = perf_counter()
+     model = project.model
+     source_hashes = {"hf_repo/src/hf_eval/"+name: sha256(Path(__file__).with_name(name).read_bytes()).hexdigest()
+-                     for name in SOURCE_NAMES}
++                     for name in SOURCE_NAMES + (("native_resume.py",) if anchor is not None else ())}
+     counts = dict(force_calls=0, force_calls_completed=0, tangent_calls=0,
+                   tangent_calls_completed=0, solver_invocations=1, JIT_calls=0, HP_calls=0)
+     accepted, last_tangent = [], None
+@@ -194,6 +222,10 @@
+         for array in (*arrays.values(), *tangents.values()):
+             array.setflags(write=False)
+         record = _plain({key: value for key, value in measured.items() if not isinstance(value, np.ndarray)})
++        if anchor is not None:
++            record["child_original_target_index"] = record["original_target_index"]
++            record["original_target_index"] += anchor.original_index
++            record["continuation_anchor"] = bool(record["child_original_target_index"] == 0 and record["is_original_target"])
+         record.update(assembler_state_sha256=state_hash, assembler_force_call=force_call,
+                       assembler_tangent_call=tangent_call, max_abs_Hu_per_mm=float(np.abs(arrays["Hu"]).max()))
+         record.update(deepcopy(availability))
+@@ -209,7 +241,8 @@
+     path = solve_split_displacement_path(model, project.bin, project.bout, targets, project.k_out,
+         settings=settings, force_scale_per_length=project.material["force_scale_per_length"],
+         assembler=assemble, on_accept=capture, path_mode=path_mode,
+-        initial_guess=initial_guess)
++        initial_guess=initial_guess, **({} if anchor is None else dict(
++            initial_state=anchor.state,initial_R=anchor.R,initial_parameter=anchor.parameter)))
+     source = deepcopy(project.region_metadata["source_geometry"])
+     source["snapshot"] = {key: "model/"+value for key, value in source["snapshot"].items()}
+     metadata = dict(schema_version=SCHEMA_VERSION, scope="native_small_mean_driven_numerical_path",
+@@ -250,6 +283,16 @@
+         metadata["tangent_execution"] = deepcopy(tangent_execution)
+     if initial_guess != "tangent":
+         metadata["initial_guess"] = initial_guess
++    if anchor is not None:
++        first = accepted[0] if accepted else None
++        metadata["continuation"] = dict(deepcopy(anchor.metadata),
++            segment_completed=bool(path["target_reached"]),anchor_revalidated=first is not None,
++            full_original_path_completed=False,task_target_executed=False,
++            anchor_identity_preserved=bool(first is not None
++                and first.record["state_sha256"] == anchor.metadata["selected_state"]["state_sha256"]
++                and np.float64(first.record["R_input"]).tobytes() == np.float64(anchor.R).tobytes()))
++        metadata.update(scope="native_saved_mean_continuation_segment",task_target_executed=False,
++            full_original_path_completed=False,source_binding_scope="Entry/controller/assembler/force and saved-resume reader; stage receipt binds executed closure")
+     return NativeMeanResult(project, path, tuple(accepted), metadata)
+ 
+ 
+--- baseline/hf_repo/src/hf_eval/native_response.py
++++ candidate/hf_repo/src/hf_eval/native_response.py
+@@ -54,13 +54,17 @@
+                  'full_workpiece_net_force_N', 'two_sided_normal_magnitude_sum_N', 'force_scope',
+                  'node_window_clearance_mm', 'clearance_scope')
+         workpiece = {name: workpiece.get(name) for name in names}
+-    return dict(index=index, state_sha256=row['state_sha256'], d_mm=row['d'], leg=row.get('leg'),
++    answer = dict(index=index, state_sha256=row['state_sha256'], d_mm=row['d'], leg=row.get('leg'),
+         original_target_index=row.get('original_target_index'), is_original_target=row.get('is_original_target'),
+         R_input_N=row['R_input'], q_in_mm=row['q_in'], q_out_mm=row['q_out'],
+         minimum_J=row['minimum_J'], relative_residual=row['relative_residual'],
+         relative_global_force_balance=row['relative_global_force_balance'],
+         constraint_residual_mm=row['constraint_residual'], max_abs_Hu_per_mm=row.get('max_abs_Hu_per_mm'),
+         workpiece=workpiece)
++    if 'continuation_anchor' in row:
++        answer.update(child_original_target_index=row['child_original_target_index'],
++                      continuation_anchor=row['continuation_anchor'])
++    return answer
+ 
+ 
+ def _binding_matches(bindings, path, pin, repo):
+@@ -200,7 +204,7 @@
+     failure = result.get('failure')
+     if failure is not None:
+         failure = dict(phase='equilibrium', **failure)
+-    return dict(schema_version='hf-native-response-1.0', status=result['status'],
++    answer = dict(schema_version='hf-native-response-1.0', status=result['status'],
+         identity=dict(result=_artifact(result_path, result_pin, repo), model=_artifact(model_path, model_pin, repo),
+             task_sha256=result['task_sha256'], geometry=model['source_geometry'],
+             mechanics_source_sha256=result.get('mechanics_source_sha256', {}),
+@@ -222,6 +226,13 @@
+         call_counts=result['call_counts'], timing_seconds=result['timing_seconds'], failure=failure,
+         force_semantics='R is half-model actuator reaction; lower-body forces are signed weak-form resultants. Two-sided normal magnitude sum is not full-body net force. q_out is a weighted port displacement, not a surface gap.',
+         field_scope='J/Hu are saved global scalars, not separately observed solid/medium fields. Workpiece node-window clearance has its original raster scope, not finite surface distance.')
++    if 'continuation' in result:
++        answer['continuation'] = result['continuation']
++        answer['path'].update(scope='Saved-state original-task suffix only; parent full path remains historical',
++                              full_original_path_completed=False)
++        answer['independent_reference'].update(reference_scope='Child accepted suffix only',
++                                              full_original_path_reference_pass=False)
++    return answer
+ 
+ 
+ def write_native_response(response, output_file):
+--- baseline/hf_repo/src/hf_eval/native_resume.py
++++ candidate/hf_repo/src/hf_eval/native_resume.py
+@@ -0,0 +1,152 @@
++"""Read a saved original mean-path anchor; never read old forces or matrices."""
++from copy import deepcopy
++from dataclasses import asdict, dataclass
++from hashlib import sha256
++import json
++from pathlib import Path
++
++import numpy as np
++
++from .data import canonical_hash
++from .displacement import DisplacementSettings
++from .split_prescribed import state_hash
++from .split_state import SplitDisplacement
++from .tmc import TMCError
++
++
++@dataclass(frozen=True)
++class NativeResumeAnchor:
++    state: SplitDisplacement
++    R: float
++    parameter: float
++    original_index: int
++    metadata: dict
++
++
++def _read(path):
++    raw = path.read_bytes()
++    value = json.loads(raw)
++    if canonical_hash({k:v for k,v in value.items() if k != "descriptor_sha256"}) != value["descriptor_sha256"]:
++        raise TMCError("Saved continuation descriptor identity differs", code="invalid_saved_state")
++    return value,sha256(raw).hexdigest()
++
++
++def _child(directory,name):
++    path = (directory/name).resolve()
++    path.relative_to(directory)
++    return path
++
++
++def _selected(parent,index):
++    if type(index) is not int or not 0 <= index < len(parent["states"]):
++        raise TMCError("selected_state_index must identify an accepted saved state", code="invalid_saved_state")
++    return parent["states"][index]
++
++
++def saved_resume_defaults(saved_result,selected_state_index,*,time_limit_seconds):
++    """Read original inputs/options and restore settings under a new clock."""
++    result_file = Path(saved_result).resolve()
++    parent,_ = _read(result_file)
++    selected = _selected(parent,selected_state_index)
++    model_file = _child(result_file.parent,parent["model"]["descriptor_path"])
++    model,model_pin = _read(model_file)
++    if model_pin != parent["model"]["descriptor_file_sha256"]:
++        raise TMCError("Parent saved model identity differs", code="invalid_saved_state")
++    targets = parent["targets_mm"][selected["original_target_index"]:]
++    settings = DisplacementSettings(**(parent["settings"] | {"time_limit_seconds":time_limit_seconds}))
++    return dict(geometry_file=_child(model_file.parent,model["source_geometry"]["snapshot"]["descriptor"]),
++        task=deepcopy(model["task"]),targets=targets,settings=settings,
++        options=(parent.get("response_mode","complete"),parent.get("tangent_execution",{}).get("mode","full"),
++                 parent.get("initial_guess","tangent")))
++
++
++def native_options(response_mode,tangent_mode,initial_guess,defaults=("complete","full","tangent")):
++    """None keeps the zero-start defaults or the saved parent's actual options."""
++    return tuple(old if requested is None else requested
++                 for requested,old in zip((response_mode,tangent_mode,initial_guess),defaults))
++
++
++def read_native_resume(saved_result,selected_state_index,project,targets,settings,*,
++                       response_mode,tangent_mode,initial_guess):
++    """Bind one original nonzero anchor and the exact remaining task suffix.
++
++    Geometry construction already loaded the original four authority masks.
++    Here only one state NPZ's lift/fluctuation fields are decoded. Fresh F/T
++    validation belongs to the controller, which starts without a saved matrix.
++    """
++    result_file = Path(saved_result).resolve()
++    parent,parent_pin = _read(result_file)
++    selected = _selected(parent,selected_state_index)
++    model_file = _child(result_file.parent,parent["model"]["descriptor_path"])
++    model,model_pin = _read(model_file)
++    if (model_pin != parent["model"]["descriptor_file_sha256"]
++            or model["descriptor_sha256"] != parent["model"]["descriptor_sha256"]
++            or model["arrays"]["sha256"] != parent["model"]["arrays_sha256"]):
++        raise TMCError("Parent saved model identity differs", code="invalid_saved_state")
++    if parent.get("path_kind") != "ordered_cycle" or parent["target_origin"] != 0. or not parent["lift_origin_zero"] or not parent["lift_shape_zero"]:
++        raise TMCError("Resume requires the original zero-lift ordered task", code="invalid_saved_state")
++    if model["task"] != project.task or model["task_sha256"] != project.task_hash or parent["task_sha256"] != project.task_hash:
++        raise TMCError("Resume must retain the original physical task", code="invalid_saved_state")
++    original_targets = project.task["path"]["targets_mm"]
++    index,parameter = selected["original_target_index"],selected["d"]
++    if (parent["targets_mm"] != original_targets or not selected["is_original_target"]
++            or not 0 < index < len(original_targets)-1 or parameter <= 0
++            or parameter != selected["original_target_displacement"] or parameter != original_targets[index]
++            or selected["physical_mean_target_mm"] != parameter or list(targets) != original_targets[index:]):
++        raise TMCError("Resume targets must be the exact nonzero original-task suffix", code="invalid_saved_state")
++    actual_regions = deepcopy(project.region_metadata)
++    actual_source = actual_regions.pop("source_geometry")
++    if (model["grid"] != project.geometry.grid or parent["grid"] != project.geometry.grid
++            or model["material"] != project.material or model["region_metadata"] != actual_regions
++            or parent["counts"] != actual_regions["counts"]):
++        raise TMCError("Resume model/material/boundary metadata differs", code="invalid_saved_state")
++    source_keys = ("geometry_id","descriptor_sha256","descriptor_file_sha256","arrays_sha256")
++    if any(model["source_geometry"][k] != actual_source[k] or parent["source_geometry"][k] != actual_source[k] for k in source_keys):
++        raise TMCError("Resume source geometry identity differs", code="invalid_saved_state")
++    original_settings,current_settings = dict(parent["settings"]),asdict(settings)
++    original_settings.pop("time_limit_seconds"); current_settings.pop("time_limit_seconds")
++    options = (parent.get("response_mode","complete"),parent.get("tangent_execution",{}).get("mode","full"),parent.get("initial_guess","tangent"))
++    if original_settings != current_settings or options != (response_mode,tangent_mode,initial_guess):
++        raise TMCError("Resume preserves parent numerical settings/options except the new time limit", code="invalid_saved_state")
++    for name in ("split_numpy_tangent.py","split_kernel_invariants_hu.py"):
++        if parent["mechanics_source_sha256"]["hf_repo/src/hf_eval/"+name] != sha256(Path(__file__).with_name(name).read_bytes()).hexdigest():
++            raise TMCError("Resume force/tangent source differs from parent", code="invalid_saved_state")
++    state_file = _child(result_file.parent,selected["descriptor_path"])
++    descriptor,state_pin = _read(state_file)
++    expected = {k:v for k,v in selected.items() if k not in ("descriptor_path","descriptor_file_sha256")}
++    if state_pin != selected["descriptor_file_sha256"] or descriptor != expected:
++        raise TMCError("Parent selected-state record differs", code="invalid_saved_state")
++    state_npz = _child(result_file.parent,descriptor["state"]["path"])
++    declared = descriptor["state"]
++    if sha256(state_npz.read_bytes()).hexdigest() != declared["sha256"] or set(declared["fields"]) != {"lift","fluctuation"}:
++        raise TMCError("Parent selected split archive identity differs", code="invalid_saved_state")
++    arrays = {}
++    with np.load(state_npz,allow_pickle=False) as archive:
++        if set(archive.files) != {"lift","fluctuation"}:
++            raise TMCError("Saved resume reads exactly two split fields", code="invalid_saved_state")
++        for name in ("lift","fluctuation"):
++            array,info = archive[name],declared["fields"][name]
++            if array.dtype != np.dtype("float64") or array.shape != (project.model.ndof,) or info["dtype"] != array.dtype.name or info["shape"] != list(array.shape) or info["sha256"] != sha256(array.tobytes(order="C")).hexdigest():
++                raise TMCError("Saved split field identity differs", code="invalid_saved_state")
++            arrays[name] = array.copy()
++    state = SplitDisplacement(arrays["lift"],arrays["fluctuation"])
++    if state_hash(state) != descriptor["state_sha256"] or np.any(state.lift) or np.any(state.fluctuation[project.model.fixed_dofs]):
++        raise TMCError("Saved resume split/hash/fixed boundary differs", code="invalid_saved_state")
++    return NativeResumeAnchor(state,float(descriptor["R_input"]),float(parameter),index,dict(
++        schema_version="hf-native-saved-resume-1.0",
++        parent_result=dict(path=result_file.as_posix(),sha256=parent_pin),
++        parent_model=dict(path=model_file.as_posix(),sha256=model_pin),
++        selected_state=dict(accepted_index=selected_state_index,original_target_index=index,
++            path=state_file.as_posix(),descriptor_file_sha256=state_pin,state_sha256=descriptor["state_sha256"],
++            archive_sha256=declared["sha256"],R_input_N=descriptor["R_input"],d_mm=parameter,
++            q_in_mm=descriptor["q_in"],constraint_residual_mm=descriptor["constraint_residual"],parent_leg=descriptor["leg"]),
++        parent_status=parent["status"],parent_failure=deepcopy(parent["failure"]),
++        parent_path_completed=parent["path_completed"],parent_task_target_executed=parent["task_target_executed"],
++        parent_unload_endpoint_reached=parent["unload_endpoint_reached"],
++        parent_mechanics_source_sha256=deepcopy(parent["mechanics_source_sha256"]),
++        parent_producer_flags={key:parent.get(key) for key in ("independent_HP_qualified","equilibrium_qualified","HF_qualified")},
++        original_task_targets_mm=original_targets,requested_suffix_targets_mm=list(targets),
++        original_target_indices=list(range(index,len(original_targets))),initial_parameter=parameter,target_origin=0.,
++        state_transport="Original lift/fluctuation and signed R; no rounded display/rebase/translation",
++        fresh_anchor_required=True,saved_matrix_or_force_or_tangent_read=False,
++        full_original_path_executed_by_child=False,independent_HP_qualified=False,HF5_qualified=False))
+--- baseline/hf_repo/src/hf_eval/split_displacement.py
++++ candidate/hf_repo/src/hf_eval/split_displacement.py
+@@ -54,19 +54,23 @@
+ 
+ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
+                                  lift_origin=None, lift_shape=None, target_origin=0.,
+-                                 initial_state=None, initial_R=0., settings=None,
++                                 initial_state=None, initial_R=0., initial_parameter=0., settings=None,
+                                  force_scale_per_length, assembler=None, on_accept=None,
+                                  path_mode="load_only", initial_guess="tangent"):
+     """Solve fint(L,w)+k*b_out*q_out-b_in*R=0 and b_in·(L+w)=d0+s.
+ 
+-    Targets are nonnegative stage parameters s, starting at zero. ``load_only``
++    Targets are nonnegative stage parameters s. ``load_only`` starts at zero and
+     requires increasing targets; ``ordered_cycle`` follows the supplied order,
+     retaining state and tangent through loading and unloading. The actual
+     lift is stored binary64 origin+s*shape; the mean target is the exact sum
+     D(target_origin)+D(s). Both lift arrays default to zero. Physical fixed DOFs
+-    remain zero. A warm start must match the supplied origin bit for bit;
++    remain zero. A warm start must match the supplied lift at its initial
++    parameter bit for bit;
+     its multiplier and target offset are explicit. No rebase or display array
+     enters mechanics, measurements, feasibility or initialization.
++    A nonzero ``initial_parameter`` is only an ordered-cycle saved anchor;
++    targets start at that absolute s, and its first fresh F/T check must pass
++    the existing gates without Newton correction. No saved tangent is accepted.
+     ``port_projection`` starts displacement from the previous fluctuation plus
+     a distributed port adjustment; the real tangent prediction still seeds R.
+     """
+@@ -76,6 +80,7 @@
+     b_in, b_out, k_out = _inputs(model, b_in, b_out, k_out)
+     force_scale_per_length = _positive_scalar(force_scale_per_length, "force_scale_per_length")
+     target_origin = _positive_scalar(target_origin, "target_origin", allow_zero=True)
++    initial_parameter = _positive_scalar(initial_parameter, "initial_parameter", allow_zero=True)
+     initial_R = float(_vector([initial_R], 1, "initial_R")[0])
+     raw = np.asarray(targets)
+     if raw.ndim != 1 or not len(raw):
+@@ -85,11 +90,14 @@
+         raise TMCError("path_mode must be load_only or ordered_cycle", code="invalid_input")
+     if initial_guess not in ("tangent", "port_projection"):
+         raise TMCError("initial_guess must be tangent or port_projection", code="invalid_input")
++    if initial_parameter and (path_mode != "ordered_cycle" or initial_state is None):
++        raise TMCError("nonzero initial_parameter requires an ordered-cycle saved state", code="invalid_input")
+     if path_mode == "load_only" and (levels[0] != 0 or np.any(np.diff(levels) <= 0)):
+         raise TMCError("stage targets must start at zero and strictly increase", code="invalid_input")
+-    if path_mode == "ordered_cycle" and (levels[0] != 0 or np.any(levels < 0)
++    if path_mode == "ordered_cycle" and (levels[0] != initial_parameter or np.any(levels < 0)
+                                          or np.any(np.diff(levels) == 0)):
+-        raise TMCError("cycle targets must start at zero, be nonnegative and have no adjacent duplicates",
++        raise TMCError(("cycle targets must start at zero, be nonnegative and have no adjacent duplicates" if initial_parameter == 0
++                        else "cycle targets must start at initial_parameter, be nonnegative and have no adjacent duplicates"),
+                        code="invalid_input")
+     if path_mode == "ordered_cycle" and (not np.any(np.diff(levels) < 0)
+                                          or levels[-1] >= levels.max()):
+@@ -99,11 +107,13 @@
+     lift_shape = _vector(np.zeros(model.ndof) if lift_shape is None else lift_shape, model.ndof, "lift_shape")
+     if np.any(lift_origin[model.fixed_dofs]) or np.any(lift_shape[model.fixed_dofs]):
+         raise TMCError("average-control supports must remain at zero", code="constraint_conflict")
++    with np.errstate(over="ignore", invalid="ignore"):
++        anchor_lift = lift_origin.copy() if initial_parameter == 0 else lift_origin+initial_parameter*lift_shape
+     if initial_state is None:
+         initial = SplitDisplacement(lift_origin, np.zeros(model.ndof))
+     else:
+         if (not isinstance(initial_state, SplitDisplacement) or initial_state.ndof != model.ndof
+-                or not _bitwise_equal(initial_state.lift, lift_origin)
++                or not _bitwise_equal(initial_state.lift, anchor_lift)
+                 or np.any(initial_state.fluctuation[model.fixed_dofs])):
+             raise TMCError("warm state must preserve supplied lift and fixed zero fluctuation", code="constraint_conflict")
+         initial = initial_state.copy()
+@@ -111,7 +121,7 @@
+     if not callable(assembly) or (on_accept is not None and not callable(on_accept)):
+         raise TMCError("assembler and callback must be callable", code="invalid_input")
+     started = perf_counter()
+-    state_u, state_R, state_s, state_K = initial.copy(), initial_R, 0., None
++    state_u, state_R, state_s, state_K = initial.copy(), initial_R, initial_parameter, None
+     accepted, trials, failures, history, linear_solves = [], [], [], [], []
+     failure, maximum_depth = None, 0
+     b_free = b_in[model.free]
+@@ -254,6 +264,9 @@
+                 result = metrics(candidate, R, s, internal, fields)
+                 result["newton_checks"] = iteration
+                 return candidate, R, K, result
++            if initial_parameter and not accepted and old_s == s == initial_parameter:
++                raise TMCError("saved continuation anchor failed its fresh equilibrium check",
++                               code="initial_state_not_equilibrated")
+             if abs(measured["constraint_residual"]) > measured["constraint_bound"]:
+                 raise TMCError("split mean constraint failed", code="constraint_failure")
+             if iteration == settings.max_checks:
+@@ -335,7 +348,7 @@
+     try:
+         _check_support(model)
+         for index, s in enumerate(levels):
+-            leg = "origin" if index == 0 else "loading" if s > levels[index-1] else "unloading"
++            leg = ("resume_origin" if initial_parameter else "origin") if index == 0 else "loading" if s > levels[index-1] else "unloading"
+             advance(float(s), 0, float(s), index, leg)
+     except (KernelError, TMCError) as error:
+         failure = dict(code=getattr(error, "code", "numerical_failure"), reason=str(error))
+@@ -362,4 +375,6 @@
+                       unload_endpoint_reached=completed)
+     if initial_guess != "tangent":
+         result["initial_guess"] = initial_guess
++    if initial_parameter:
++        result["initial_parameter"] = initial_parameter
+     return result
+--- baseline/hf_repo/tests/test_saved_native_resume.py
++++ candidate/hf_repo/tests/test_saved_native_resume.py
+@@ -0,0 +1,170 @@
++"""Focused continuation tests: controller transport and one tiny public path.
++
++The linear controller fixture is not a TMC material validation. The 16-cell
++integration checks public persistence/options/parent semantics, not contact,
++pressure, a gripper, exhaustive tangent columns or physical HF qualification.
++"""
++from dataclasses import replace
++import json
++
++import numpy as np
++import pytest
++
++from hf_eval import native_mean
++from hf_eval.displacement import DisplacementSettings
++from hf_eval.native_evaluate import evaluate_native
++from hf_eval.split_displacement import solve_split_displacement_path
++from hf_eval.split_state import SplitDisplacement
++from hf_eval.tmc import TMCError
++from hf_eval.tmc_kernel import KernelError
++from test_native_force import small_native, forbid_legacy_or_compiled_work
++from test_native_mean_mechanical import PEAK, cycle_task
++from test_split_cycle import dense_port_solution
++from test_split_displacement import one_cell, physical, synthetic
++
++
++def linear_anchor():
++    model,port = one_cell()
++    matrix,assembler = synthetic(model)
++    shape = np.zeros(model.ndof)
++    shape[[2,6]] = [.5,.25]
++    cold = solve_split_displacement_path(model,port,port,[0.,.15625,.3125,.15625,0.],
++        lift_shape=shape,assembler=assembler,force_scale_per_length=20.,path_mode="ordered_cycle")
++    assert cold["status"] == "success"
++    row = cold["accepted_steps"][2]
++    state = SplitDisplacement(row["u_lift"],row["u_fluctuation"])
++    return model,port,matrix,assembler,shape,cold,row,state
++
++
++def test_absolute_anchor_fresh_tangent_and_linear_suffix():
++    model,port,matrix,assembler,shape,cold,anchor,state = linear_anchor()
++    seen = []
++
++    def record(actual_model,candidate,*,tangent=True):
++        seen.append((candidate.lift.tobytes(),candidate.fluctuation.tobytes(),tangent))
++        return assembler(actual_model,candidate,tangent=tangent)
++
++    warm = solve_split_displacement_path(model,port,port,[.3125,.15625,0.],
++        initial_state=state,initial_R=anchor["R_input"],initial_parameter=.3125,
++        lift_shape=shape,assembler=record,force_scale_per_length=20.,path_mode="ordered_cycle")
++    assert warm["status"] == "success" and warm["initial_parameter"] == .3125
++    assert seen[0] == (state.lift.tobytes(),state.fluctuation.tobytes(),True)
++    first = warm["accepted_steps"][0]
++    assert first["leg"] == "resume_origin" and first["newton_checks"] == 1
++    assert first["state_sha256"] == anchor["state_sha256"]
++    assert np.float64(first["R_input"]).tobytes() == np.float64(anchor["R_input"]).tobytes()
++    assert [row["original_target_index"] for row in warm["accepted_steps"]] == [0,1,2]
++    assert [row["stage_parameter"] for row in warm["linear_solve_diagnostics"]] == [.15625,0.]
++    for target,row in zip([.3125,.15625,0.],warm["accepted_steps"]):
++        expected,R = dense_port_solution(model,matrix,port,target)
++        np.testing.assert_allclose(physical(row),expected,rtol=1e-12,atol=1e-14)
++        assert row["R_input"] == pytest.approx(R,rel=1e-12,abs=1e-14)
++    # Explicit p0=0 follows the old zero-start arithmetic and result schema.
++    zero = solve_split_displacement_path(model,port,port,[0.,.15625,.3125,.15625,0.],
++        initial_parameter=0.,lift_shape=shape,assembler=assembler,force_scale_per_length=20.,path_mode="ordered_cycle")
++    assert "initial_parameter" not in zero
++    assert [(r["state_sha256"],r["R_input"],r["leg"]) for r in zero["accepted_steps"]] == [
++        (r["state_sha256"],r["R_input"],r["leg"]) for r in cold["accepted_steps"]]
++
++
++def test_non_equilibrated_anchor_stops_before_correction_or_commit():
++    model,port,_,assembler,shape,_,anchor,state = linear_anchor()
++    accepted = []
++    wrong_R = anchor["R_input"]+1.
++    result = solve_split_displacement_path(model,port,port,[.3125,0.],
++        initial_state=state,initial_R=wrong_R,initial_parameter=.3125,lift_shape=shape,
++        assembler=assembler,force_scale_per_length=20.,path_mode="ordered_cycle",on_accept=accepted.append)
++    assert result["failure"]["code"] == "initial_state_not_equilibrated"
++    assert not accepted and not result["accepted_steps"] and not result["linear_solve_diagnostics"]
++    assert not result["trials"] and result["timing_seconds"]["kernel_calls"] == 1
++    assert result["u_lift"].tobytes() == state.lift.tobytes()
++    assert result["u_fluctuation"].tobytes() == state.fluctuation.tobytes()
++    assert result["R_input"] == wrong_R and result["reached_displacement"] == .3125
++    assert result["failed_attempts"][0]["rollback_bitwise_equal"]
++
++
++def test_unaccepted_descending_attempt_rolls_back_revalidated_anchor():
++    model,port,_,assembler,shape,_,anchor,state = linear_anchor()
++
++    def reject_unloading(actual_model,candidate,*,tangent=True):
++        if not np.array_equal(candidate.lift,state.lift):
++            raise KernelError("Injected descending failure",code="invalid_J")
++        return assembler(actual_model,candidate,tangent=tangent)
++
++    result = solve_split_displacement_path(model,port,port,[.3125,0.],
++        initial_state=state,initial_R=anchor["R_input"],initial_parameter=.3125,lift_shape=shape,
++        assembler=reject_unloading,force_scale_per_length=20.,path_mode="ordered_cycle",
++        settings=DisplacementSettings(minimum_increment=.01,max_bisections=0))
++    assert result["failure"]["code"] == "invalid_J" and len(result["accepted_steps"]) == 1
++    assert result["failed_attempts"][-1]["rollback_bitwise_equal"]
++    assert result["u_lift"].tobytes() == state.lift.tobytes()
++    assert result["u_fluctuation"].tobytes() == state.fluctuation.tobytes()
++    assert np.float64(result["R_input"]).tobytes() == np.float64(anchor["R_input"]).tobytes()
++
++
++def test_nonzero_parameter_requires_finite_matching_ordered_saved_anchor():
++    model,port,_,assembler,shape,_,anchor,state = linear_anchor()
++    kwargs = dict(initial_state=state,initial_R=anchor["R_input"],lift_shape=shape,
++        assembler=assembler,force_scale_per_length=20.,path_mode="ordered_cycle")
++    for parameter,targets in ((float("nan"),[.3125,0.]),(float("inf"),[.3125,0.]),(.25,[.3125,0.])):
++        with pytest.raises(TMCError):
++            solve_split_displacement_path(model,port,port,targets,initial_parameter=parameter,**kwargs)
++    for changed in (dict(initial_state=None),dict(path_mode="load_only"),dict(lift_shape=np.zeros(model.ndof))):
++        with pytest.raises(TMCError):
++            solve_split_displacement_path(model,port,port,[.3125,0.],initial_parameter=.3125,**(kwargs|changed))
++
++
++def test_public_saved_partial_resume_inherits_options_and_preserves_parent(small_native,tmp_path,monkeypatch):
++    source,original = small_native
++    task = cycle_task(original)
++    settings = DisplacementSettings(minimum_increment=PEAK/16.,time_limit_seconds=30.)
++
++    def stop_after_peak(snapshot):
++        if snapshot.record["d"] == PEAK:
++            raise TMCError("Test stops after accepted peak",code="time_limit")
++
++    parent = native_mean.solve_native_mean(source,task,task["path"]["targets_mm"],settings=settings,
++        response_mode="mechanical",tangent_mode="chunk256",initial_guess="port_projection",on_accept=stop_after_peak)
++    assert parent.metadata["status"] == "failed" and parent.metadata["failure"]["code"] == "time_limit"
++    parent_file = native_mean.write_native_mean(parent,tmp_path/"parent")
++    before = {p.relative_to(parent_file.parent).as_posix():p.read_bytes() for p in parent_file.parent.rglob("*") if p.is_file()}
++    selected = next(i for i,row in enumerate(parent.accepted) if row.record["d"] == PEAK and row.record["is_original_target"])
++    with pytest.raises(TMCError,match="explicit time limit"):
++        native_mean.solve_native_mean(None,None,None,saved_result=parent_file,selected_state_index=selected)
++    with pytest.raises(TMCError,match="settings/options"):
++        native_mean.solve_native_mean(None,None,None,saved_result=parent_file,selected_state_index=selected,
++            settings=replace(settings,time_limit_seconds=35.),tangent_mode="full")
++    with pytest.raises(TMCError,match="exact nonzero original-task suffix"):
++        native_mean.solve_native_mean(None,None,[PEAK,PEAK/2.,0.],saved_result=parent_file,selected_state_index=selected,
++            settings=replace(settings,time_limit_seconds=35.))
++    original_solve,captured = native_mean.solve_native_mean,[]
++
++    def capture(*args,**kwargs):
++        result = original_solve(*args,**kwargs)
++        captured.append(result)
++        return result
++
++    monkeypatch.setattr("hf_eval.native_evaluate.solve_native_mean",capture)
++    response = evaluate_native(None,None,tmp_path/"child",saved_result=parent_file,selected_state_index=selected,
++        time_limit_seconds=35.)
++    child, = captured
++    assert response["status"] == "success" and response["path"]["completed"]
++    assert response["target_response"] is None and not response["path"]["task_target_executed"]
++    assert not response["path"]["full_original_path_completed"]
++    assert response["requested_endpoint_response"]["d_mm"] == 0.
++    assert {key:part["value"] for key,part in response["options"].items()} == dict(
++        response_mode="mechanical",tangent_mode="chunk256",initial_guess="port_projection")
++    assert child.metadata["settings"] == parent.metadata["settings"] | {"time_limit_seconds":35.}
++    assert child.metadata["continuation"]["anchor_revalidated"] and child.metadata["continuation"]["anchor_identity_preserved"]
++    assert child.metadata["continuation"]["parent_status"] == "failed"
++    assert not child.metadata["continuation"]["parent_path_completed"]
++    assert child.project.task == task and child.project.task_hash == parent.project.task_hash
++    originals = [row.record for row in child.accepted if row.record["is_original_target"]]
++    assert [(r["original_target_index"],r["child_original_target_index"],r["leg"]) for r in originals] == [(1,0,"resume_origin"),(2,1,"unloading")]
++    assert originals[0]["state_sha256"] == parent.accepted[selected].record["state_sha256"]
++    assert child.metadata["call_counts"]["solver_invocations"] == 1
++    assert child.metadata["save_force_calls"] == child.metadata["save_tangent_calls"] == 0
++    assert child.metadata["call_counts"]["HP_calls"] == child.metadata["call_counts"]["JIT_calls"] == 0
++    assert before == {p.relative_to(parent_file.parent).as_posix():p.read_bytes() for p in parent_file.parent.rglob("*") if p.is_file()}
++    saved = json.loads((tmp_path/"child"/"result.json").read_text(encoding="utf-8"))
++    assert saved["continuation"]["parent_result"]["sha256"] == response["continuation"]["parent_result"]["sha256"]
