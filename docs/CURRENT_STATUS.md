@@ -1,3 +1,18 @@
+# 当前接续：M-RESUME1实际PASS闭卡
+
+整体目标仍为独立HF有限变形／TMC前向评价，提供实际变形、反力与可解释工件作用供外部研究层比较；HF与LF优化断开，main及既定origin保持，science0.5.0与原资格保持。
+
+M-RESUME1经直接批准唯一启动已实际PASS；五项局部测试状态pass。新保存接受态2个，恢复原alpha5e−7峰值013并尝试原绝对1.20→1.15 mm下降；新segment状态success。原task／BC／材料／设置（新clock除外）和100 bindings保持。原M-ALPHA1 NOT_PASS、14加载态、未完成完整路径／卸载标记保持，不自动组合资格。
+
+实际原模型F 17/16、T 9/9；outer 619.0985891000018秒／exit0、tree采样峰795955200B、stopNone。无重试／延期／force／新HP；局部16单元测试与原模型计数分开，详细typed响应和缓存／图件见结果。
+
+默认hf_repo尚未安装保存态续算候选。完整力、组装、切线、Mean/API/batch、保存与显示已有实现；新段证据决定最近集成／排查步骤，不重做长加载或扫新alpha。连续压力、有效夹持、稳定性、移动工件／摩擦、其他形状完整验证、任意新LF几何／任务的可靠性资格、独立全切线验证及HF5仍未完成；旧48HP不转移。
+
+[实际结果与图件](../lf_data_preparation/native_interface_001/saved_continuation_001/RESULTS.md) · [下一步取舍](../lf_data_preparation/native_interface_001/saved_continuation_001/NEXT_STEP_REVIEW.md)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-RESUME1保存峰值续算候选已准备，未授权／未执行
 
 整体目标仍为独立HF有限变形／TMC前向评价，读取普通几何，提供实际变形、输入反力及可解释工件作用供外部研究层比较。main开发、HF与LF优化断开，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；science0.5.0及原资格保持。
@@ -928,6 +943,8 @@ CPU原237条和科学30条事件完整；严格同步内原行157–235全部79�
 
 </details>
 
+
+</details>
 
 </details>
 
