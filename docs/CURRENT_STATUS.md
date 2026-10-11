@@ -1,3 +1,23 @@
+# 当前接续：M-ALPHA1实际执行已闭卡：未通过
+
+独立HF有限变形／TMC评价仍面向结构实际变形、输入反力和可解释工件作用，逐步支持同任务候选比较及HF5。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git；HF与LF优化断开。
+
+M-ALPHA1经真实直接批准后唯一执行，现已NOT_PASS闭卡：原点／加载14目标至1.20 mm全部接受并保存，第一次卸载至1.15 mm触发controller time_limit。loading_peak_reached=true；path_completed、unload_endpoint_reached、task_target_executed均false。已保存14态的缓存原生产门passed，完整15目标合同仍未完成。原57 bindings保持，science0.5.0和原资格保持。
+
+只改alpha1e−6→5e−7，gamma1e−6、Lr80 mm、h0.5／84×40 mm下半域、原固定side18方体、E1 MPa／厚20 mm及原BC／平均端口保持。峰值R=0.37865427196005513 N，下半工件total／material／Hu Fy分别为0.12492121630032427／0.12405713468784063／0.0008640816124836284 N；它们是有符号弱力作用，双侧法向幅值和0.24984243260064853 N不是有效夹持力。新有限面距离和分区场指标尚未观察，原node-window／全模型J/Hu不能替代。
+
+force304启动／259完成，tangent126／126；batch／API／model／solve／save／summary各1次，缓存保存和摘要额外F/T0，HP／JIT0、view_child0。outer exit1／stopnull、elapsed9059.673925399999 s、sampled tree RSS1401597952 B；停止来自controller原时间预算。采样不是硬OS上限，不作同刻RSS比较，无重试、修复重跑、延期或force。
+
+本轮没有新alpha PNG／GIF／比较表，显示在首次终端非成功后未启动，旧窗口已结束。下一步先发布真实记录，然后准备复用14保存态做实际变形／三分量力显示，并静查既有卸载耗时／回滚记录；不重做加载或扫描新alpha。本正文不创建新卡或运行新观察。
+
+完整NumPy力、全DOF未对称矩阵、平均输入Mean、API／同任务batch和实际保存态显示已有实现；新alpha显示尚无产物。原24态48HP只属于原alpha，独立切线参考限PORT方向。fixed square/circle构造与circle staircase支持已有，但当前region/viewer固定square专用；rectangle任务、一般输入控制、全部切线列独立验证、连续总压力、可移动工件／摩擦、有效夹持、物理稳定性与正式HF5仍有缺口。metadata审阅／发布通过不会改变本轮execution NOT_PASS。
+
+
+[实际结果](../lf_data_preparation/native_interface_001/regularization_sensitivity_001/RESULTS.md) · [最近取舍](../lf_data_preparation/native_interface_001/regularization_sensitivity_001/NEXT_STEP_REVIEW.md) · [终态审阅](../lf_data_preparation/native_interface_001/regularization_sensitivity_001/author/execution_terminal_review.json)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-ALPHA1同任务alpha对照已准备、未批准／未执行
 
 2026-10-11。独立HF有限变形／TMC前向评价仍面向结构实际变形、输入反力与可解释工件作用，逐步支持同任务候选比较及HF5。main开发、origin保持 `https://github.com/dudaxing/Compliant-TO-TMC.git`，HF与LF优化断开。
@@ -834,6 +854,8 @@ CPU原237条和科学30条事件完整；严格同步内原行157–235全部79�
 
 </details>
 
+
+</details>
 
 </details>
 
