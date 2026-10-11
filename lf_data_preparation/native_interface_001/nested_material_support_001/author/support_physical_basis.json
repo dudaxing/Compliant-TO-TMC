@@ -1,0 +1,730 @@
+{
+  "schema_version": "M-SUPPORT1-static-physical-basis-1.0",
+  "stage": "M-SUPPORT1 source and mathematical preparation only",
+  "status": "prepared_readonly_not_authorized_not_numerically_executed",
+  "baseline_main": "96bfea73ebb538d413dd01b722fa1f3a6d43913d",
+  "formal_repository": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC",
+  "scope_limits": {
+    "read": [
+      "source text",
+      "ordinary JSON",
+      "existing CSV",
+      "raw hashes of those read files",
+      "integer ID/count and saved scalar identity checks"
+    ],
+    "NPZ_decodes": 0,
+    "candidate_imports_or_runs": 0,
+    "new_force_or_integration_or_kernel_or_HP_or_plot_or_solver_calls": 0,
+    "new_force_fsum": 0,
+    "formal_files_changed": 0,
+    "scientific_gates_added": 0,
+    "archive_declarations_not_redecoded": true
+  },
+  "purpose": "Locate the saved material weak-load support behind the existing material-line/weak discrepancy, first by body-node projection and exact assembly replay; this advances interpretation of a fixed-workpiece contact calculation without declaring contact pressure or complete HF qualification.",
+  "source_bindings": [
+    {
+      "path": "hf_repo/src/hf_eval/tmc.py",
+      "bytes": 19273,
+      "sha256": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+      "source_lines": [
+        64,
+        68,
+        86,
+        88
+      ],
+      "fact": "Aligned BL BR TR TL; interleaved element DOFs; thickness supplied to reference operators"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/split_displacement.py",
+      "bytes": 22142,
+      "sha256": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+      "source_lines": [
+        191,
+        194,
+        199,
+        200,
+        201
+      ],
+      "fact": "Material global force is bincount over saved rounded material_residual with C-order ravel"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_mean.py",
+      "bytes": 17824,
+      "sha256": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+      "source_lines": [
+        72,
+        79,
+        177,
+        180,
+        185,
+        187,
+        192
+      ],
+      "fact": "Body negative weak-force selection and same accepted snapshot persistence"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+      "bytes": 4423,
+      "sha256": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9",
+      "source_lines": [
+        15,
+        21,
+        25,
+        35,
+        49,
+        53,
+        59,
+        65
+      ],
+      "fact": "Minus saved global internal force is on-body vector; nodal weak load is not a surface traction"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/split_kernel_invariants_hu.py",
+      "bytes": 19752,
+      "sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+      "source_lines": [
+        169,
+        175,
+        201,
+        209,
+        350,
+        366
+      ],
+      "fact": "Compensated P-gradient-volume contraction rounded once into material_residual; total assembly is distinct"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/tmc_kernel.py",
+      "bytes": 12018,
+      "sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+      "source_lines": [
+        47,
+        52,
+        57,
+        65
+      ],
+      "fact": "Reference volume weights already include thickness"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/saved_workpiece_loads.py",
+      "bytes": 8150,
+      "sha256": "2359a89d4969b98c68baa8b932fb0001c426b898004cb579f76ff8bc727c5070",
+      "source_lines": [
+        36,
+        48,
+        58,
+        60
+      ],
+      "fact": "Prior nodal-category closure uses 8eps nodal L1, no absolute floor; retained unchanged"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/regions.py",
+      "bytes": 9756,
+      "sha256": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+      "source_lines": [
+        13,
+        25
+      ],
+      "fact": "Canonical Cartesian node/cell indexing"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_region_geometry.py",
+      "bytes": 16022,
+      "sha256": "0bc3fa706431de16761d3ffa89b37e56ef3f4782984362d14792b1f5dd26aa98",
+      "source_lines": [
+        224,
+        241
+      ],
+      "fact": "Complete fixed lower-half square and canonical native grid checks"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/saved_material_trace.py",
+      "bytes": 7082,
+      "sha256": "578a7be12236e7334ae4bd2a9ddd1b0a1c5363eecd64f9518bd631ff5a24b90b",
+      "source_lines": [
+        88,
+        99,
+        107,
+        108
+      ],
+      "fact": "Earlier P-only independent reference line estimate, thickness once"
+    }
+  ],
+  "ordinary_source_bindings": [
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/model/model.json",
+      "bytes": 101687,
+      "sha256": "668d3e6dff9c84dd4af5690a0029111451715ded25b4b3aa181059bf44a61f74"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/006/state.json",
+      "bytes": 9561,
+      "sha256": "c922e40b2963625f8532ab15383105cd3e2948aa408ecb252fecfe8cd24a3498"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/013/state.json",
+      "bytes": 9525,
+      "sha256": "dfde916cff9eef0b835a96b2a15c9513e90651db107fedd2fee75ae46f699427"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_material_trace_001/run_001/edges.csv",
+      "bytes": 30108,
+      "sha256": "95fdcb12f21159e8cb21367eec2a591718af4f707f6371a2e9b41496cb3a4e34"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_material_trace_001/run_001/whole_material_comparison.csv",
+      "bytes": 636,
+      "sha256": "7cb06d74189524053323b73756ab562332395a9e0eea8a792cdcec3fefe9041e"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_material_trace_001/run_001/material_trace.json",
+      "bytes": 508211,
+      "sha256": "d673dccbdf6be72867f10d7267bc777c7cfaf4d65a1d40d84ba1b6cc03f0e8b6"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_material_trace_001/run_001/execution_receipt.json",
+      "bytes": 1561,
+      "sha256": "949143a4eb38bb225b1409cc92dbcd90f76342a1daa265e06467b537af2f4b53"
+    },
+    {
+      "path": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/006/nodal.json",
+      "bytes": 198374,
+      "sha256": "e06ed0e886306756a50eb752291f5ba6681992840030dd5e5e7cb06cb5c99a62"
+    },
+    {
+      "path": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/013/nodal.json",
+      "bytes": 198371,
+      "sha256": "9c14b57649a330b8db8a2b2ad9f82f62596ea5922d7d4bd9781a17e87aa4ec5c"
+    }
+  ],
+  "accepted_state_bindings": [
+    {
+      "index": 6,
+      "original_target_index": 6,
+      "leg": "loading",
+      "d_mm": 0.85,
+      "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+      "state_metadata_file": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/006/state.json",
+      "force_archive_metadata_declaration": {
+        "path": "accepted/006/forces.npz",
+        "sha256": "ea458082303544b8ade344b1cff5f01bda57dbf72e411d8a7fa5218c84d037de"
+      },
+      "requested_force_fields": {
+        "element_material_force": {
+          "dtype": "float64",
+          "shape": [
+            13440,
+            8
+          ],
+          "sha256": "5d1b6042652fc05902f75a3aaba9864ed65ce660a54f59a56a4c94d916389bc6"
+        },
+        "global_material_force": {
+          "dtype": "float64",
+          "shape": [
+            27378
+          ],
+          "sha256": "f4f31eccc040f0ca7cb4b7fd297df7fb3033e668c73f74a56948d01eb9f9bdaf"
+        }
+      },
+      "saved_PTRACE_whole_row_verbatim": {
+        "index": "6",
+        "original_target_index": "6",
+        "leg": "loading",
+        "d_mm": "0.85",
+        "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd",
+        "material_line_Fx_N": "-8.694525462071682e-05",
+        "material_line_Fy_N": "0.0029293605006823825",
+        "saved_weak_material_body_Fx_N": "-0.00010874115880239823",
+        "saved_weak_material_body_Fy_N": "0.0034790753630243565",
+        "line_minus_saved_weak_Fx_N": "2.1795904181681408e-05",
+        "line_minus_saved_weak_Fy_N": "-0.0005497148623419741"
+      },
+      "saved_outer_owner_phase_counts": {
+        "third_medium": 72
+      }
+    },
+    {
+      "index": 13,
+      "original_target_index": 13,
+      "leg": "loading",
+      "d_mm": 1.2,
+      "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+      "state_metadata_file": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/013/state.json",
+      "force_archive_metadata_declaration": {
+        "path": "accepted/013/forces.npz",
+        "sha256": "fa5a22699f23eee2beb92a00b03d9eeba80ed3fc6113cc49876a9dd9880c271a"
+      },
+      "requested_force_fields": {
+        "element_material_force": {
+          "dtype": "float64",
+          "shape": [
+            13440,
+            8
+          ],
+          "sha256": "49a025bbbcb2fe4282e01887d8c56a5ef277e4d38a66db22bd9e18b8e69ed7d0"
+        },
+        "global_material_force": {
+          "dtype": "float64",
+          "shape": [
+            27378
+          ],
+          "sha256": "bfaf9e7dcc0a0200fcc56005f4e78e27803de3c3f1ae5cc9740c8fa99ffcb5fd"
+        }
+      },
+      "saved_PTRACE_whole_row_verbatim": {
+        "index": "13",
+        "original_target_index": "13",
+        "leg": "loading",
+        "d_mm": "1.2",
+        "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed",
+        "material_line_Fx_N": "-9.155164704868371e-05",
+        "material_line_Fy_N": "0.027662985836060965",
+        "saved_weak_material_body_Fx_N": "-0.000561226821740675",
+        "saved_weak_material_body_Fy_N": "0.12191255705872141",
+        "line_minus_saved_weak_Fx_N": "0.0004696751746919913",
+        "line_minus_saved_weak_Fy_N": "-0.09424957122266045"
+      },
+      "saved_outer_owner_phase_counts": {
+        "third_medium": 72
+      }
+    }
+  ],
+  "saved_nodal_identity_checks": [
+    {
+      "index": 6,
+      "node_count": 703,
+      "canonical_ids_exact": true,
+      "saved_nodal_material_resultant_N": [
+        -0.00010874115880239823,
+        0.0034790753630243565
+      ],
+      "PTRACE_saved_weak_columns_exact_to_original_nodal_summary": true
+    },
+    {
+      "index": 13,
+      "node_count": 703,
+      "canonical_ids_exact": true,
+      "saved_nodal_material_resultant_N": [
+        -0.000561226821740675,
+        0.12191255705872141
+      ],
+      "PTRACE_saved_weak_columns_exact_to_original_nodal_summary": true
+    }
+  ],
+  "input_recommendation": {
+    "archive_count": 3,
+    "decoded_field_count": 8,
+    "archives": [
+      {
+        "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/model/model.npz",
+        "sha256_declared_by_bound_model_json": "79dca7bcf3c840c5dc97b4fe937be3950728864eaf4b365ecd9ab8fa858d8278",
+        "fields": {
+          "coordinates": {
+            "dtype": "float64",
+            "shape": [
+              13689,
+              2
+            ],
+            "sha256": "bb93ae06900416902c68b0bb942179cc0708a00fe692da047dff95e4a93cd9df"
+          },
+          "connectivity": {
+            "dtype": "int64",
+            "shape": [
+              13440,
+              4
+            ],
+            "sha256": "fa3967b837194a31dcf474fa876152f94bc4ebe7c689a747a450329af3bb0317"
+          },
+          "edofs": {
+            "dtype": "int64",
+            "shape": [
+              13440,
+              8
+            ],
+            "sha256": "34984af5bde934e0a0b75713c0a888295e55e1a7c07c2167bfbf590361fc3176"
+          },
+          "workpiece_nodes": {
+            "dtype": "int64",
+            "shape": [
+              703
+            ],
+            "sha256": "abfcfb247e267ecd3ba3a4f95f86e552c58793f27624064c9b214768e6418c4e"
+          }
+        }
+      },
+      {
+        "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/006/forces.npz",
+        "sha256_declared_by_bound_state_json": "ea458082303544b8ade344b1cff5f01bda57dbf72e411d8a7fa5218c84d037de",
+        "fields": {
+          "element_material_force": {
+            "dtype": "float64",
+            "shape": [
+              13440,
+              8
+            ],
+            "sha256": "5d1b6042652fc05902f75a3aaba9864ed65ce660a54f59a56a4c94d916389bc6"
+          },
+          "global_material_force": {
+            "dtype": "float64",
+            "shape": [
+              27378
+            ],
+            "sha256": "f4f31eccc040f0ca7cb4b7fd297df7fb3033e668c73f74a56948d01eb9f9bdaf"
+          }
+        }
+      },
+      {
+        "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/013/forces.npz",
+        "sha256_declared_by_bound_state_json": "fa5a22699f23eee2beb92a00b03d9eeba80ed3fc6113cc49876a9dd9880c271a",
+        "fields": {
+          "element_material_force": {
+            "dtype": "float64",
+            "shape": [
+              13440,
+              8
+            ],
+            "sha256": "49a025bbbcb2fe4282e01887d8c56a5ef277e4d38a66db22bd9e18b8e69ed7d0"
+          },
+          "global_material_force": {
+            "dtype": "float64",
+            "shape": [
+              27378
+            ],
+            "sha256": "bfaf9e7dcc0a0200fcc56005f4e78e27803de3c3f1ae5cc9740c8fa99ffcb5fd"
+          }
+        }
+      }
+    ],
+    "plain_metadata_used_instead_of_additional_array_fields": {
+      "body_cell_ids": "model.json region_metadata.workpiece.cells (648 full IDs)",
+      "body_fixed_dof_ids": "model.json region_metadata.workpiece.dofs (1406 full IDs)",
+      "all_fixed_dof_ids": "model.json region_metadata.fixed_dofs",
+      "units_and_grid": "model.json units/grid/element_node_order/dof_order"
+    },
+    "coordinates_role": "Reference support location only; no state/lift/fluctuation arrays or new deformed geometry. Existing actual-deformation PNGs may be cited.",
+    "requested_force_shapes": {
+      "element_material_force": [
+        13440,
+        8
+      ],
+      "global_material_force": [
+        27378
+      ]
+    },
+    "not_needed": [
+      "P",
+      "Hu",
+      "element_total_force",
+      "element_regularization_force",
+      "state lift/fluctuation",
+      "grad",
+      "hessian",
+      "weights",
+      "lam",
+      "mu",
+      "thickness array",
+      "solid phase array",
+      "tangent"
+    ],
+    "units": "Saved element/global material force already N, including 20 mm thickness once through original volume weights; do not multiply thickness again.",
+    "runtime_identity_checks_to_freeze_in_next_card": [
+      "Requested decoded shapes/dtypes/field SHA and state/archive identity must match metadata",
+      "edofs must equal (2*connectivity[...,None]+[0,1]).reshape(ne,8)",
+      "703 workpiece_nodes exactly match bound full JSON IDs and unique selected body-cell nodes",
+      "JSON body DOFs are 2*body nodes+[0,1], included in bound fixed DOFs",
+      "Actual incident-support topology/counts match the complete canonical prediction below"
+    ]
+  },
+  "assembly_and_sign": {
+    "local_order": [
+      "BL_x",
+      "BL_y",
+      "BR_x",
+      "BR_y",
+      "TR_x",
+      "TR_y",
+      "TL_x",
+      "TL_y"
+    ],
+    "saved_element_definition": "E[e,2*a+c] = rounded compensated sum_q w[q] P[e,q,c,J] grad[q,a,J], with volume-area Jacobian and thickness included; E is saved material_residual, not a new contraction of saved rounded P.",
+    "global_definition": "G = np.bincount(edofs.ravel(order=C), weights=E.ravel(order=C), minlength=27378), exactly the original split_displacement.py:200 material path. split_kernel_invariants_hu.py:366 instead scatters total residual.",
+    "on_body_local_definition": "a[e,a,c] = -E[e,2*a+c] for local node connectivity[e,a] belonging to the 703 fixed body nodes; no other local node is selected.",
+    "on_body_saved_global_definition": "w[n,c] = -G[2*n+c], n in body nodes. This is body load, not the holding reaction on the model; the latter has opposite whole-vector sign.",
+    "whole_definition": "Saved weak whole component is math.fsum(-G[2*n+c] for all canonical body nodes n). Local support whole/group/node quantities use only selected a, without rerunning force evaluation.",
+    "scope": "Material component only, full lower-body node set including cut/interior nodes; single lower-half model, no unexplained doubling or full-assembly grip claim."
+  },
+  "static_topology_prediction": {
+    "evidence_kind": "Canonical integer indexing from bound source/model JSON plus matching already-saved edge owner rows; no NPZ decoded or new force classified.",
+    "grid": {
+      "ny": 80,
+      "nx": 168,
+      "hx_mm": 0.5,
+      "hy_mm": 0.5,
+      "node_formula": "n(r,c)=169*r+c",
+      "cell_formula": "e(r,c)=168*r+c"
+    },
+    "body_reference_box_mm": {
+      "x": [
+        62.0,
+        80.0
+      ],
+      "y": [
+        31.0,
+        40.0
+      ]
+    },
+    "body_cell_indices": {
+      "rows_inclusive": [
+        62,
+        79
+      ],
+      "columns_inclusive": [
+        124,
+        159
+      ],
+      "count": 648,
+      "complete_JSON_ID_match": true
+    },
+    "body_node_indices": {
+      "rows_inclusive": [
+        62,
+        80
+      ],
+      "columns_inclusive": [
+        124,
+        160
+      ],
+      "count": 703,
+      "dof_count": 1406,
+      "complete_JSON_ID_match": true
+    },
+    "incident_support_indices": {
+      "rows_inclusive": [
+        61,
+        79
+      ],
+      "columns_inclusive": [
+        123,
+        160
+      ],
+      "distinct_cell_count": 722
+    },
+    "exclusive_cell_support_groups": [
+      {
+        "name": "body",
+        "cell_count": 648,
+        "selected_local_nodes_per_cell": 4,
+        "selected_local_node_occurrences": 2592,
+        "selected_scalar_force_terms": 5184,
+        "definition": "Every body cell; keep its actual saved terms, even though fixed overlay predicts undeformed interior."
+      },
+      {
+        "name": "bottom_face_owner",
+        "cell_count": 36,
+        "owner_cell_ids": [
+          10372,
+          10373,
+          10374,
+          10375,
+          10376,
+          10377,
+          10378,
+          10379,
+          10380,
+          10381,
+          10382,
+          10383,
+          10384,
+          10385,
+          10386,
+          10387,
+          10388,
+          10389,
+          10390,
+          10391,
+          10392,
+          10393,
+          10394,
+          10395,
+          10396,
+          10397,
+          10398,
+          10399,
+          10400,
+          10401,
+          10402,
+          10403,
+          10404,
+          10405,
+          10406,
+          10407
+        ],
+        "selected_local_nodes": [
+          "TR",
+          "TL"
+        ],
+        "selected_local_node_occurrences": 72,
+        "selected_scalar_force_terms": 144,
+        "outer_phase_from_saved_PTRACE": "third_medium"
+      },
+      {
+        "name": "left_face_owner",
+        "cell_count": 18,
+        "owner_cell_ids": [
+          10539,
+          10707,
+          10875,
+          11043,
+          11211,
+          11379,
+          11547,
+          11715,
+          11883,
+          12051,
+          12219,
+          12387,
+          12555,
+          12723,
+          12891,
+          13059,
+          13227,
+          13395
+        ],
+        "selected_local_nodes": [
+          "BR",
+          "TR"
+        ],
+        "selected_local_node_occurrences": 36,
+        "selected_scalar_force_terms": 72,
+        "outer_phase_from_saved_PTRACE": "third_medium"
+      },
+      {
+        "name": "right_face_owner",
+        "cell_count": 18,
+        "owner_cell_ids": [
+          10576,
+          10744,
+          10912,
+          11080,
+          11248,
+          11416,
+          11584,
+          11752,
+          11920,
+          12088,
+          12256,
+          12424,
+          12592,
+          12760,
+          12928,
+          13096,
+          13264,
+          13432
+        ],
+        "selected_local_nodes": [
+          "BL",
+          "TL"
+        ],
+        "selected_local_node_occurrences": 36,
+        "selected_scalar_force_terms": 72,
+        "outer_phase_from_saved_PTRACE": "third_medium"
+      },
+      {
+        "name": "corner_only",
+        "cell_count": 2,
+        "owner_cell_ids": [
+          10371,
+          10408
+        ],
+        "selected_local_nodes": [
+          {
+            "cell_id": 10371,
+            "local_node": "TR",
+            "body_node_id": 10602,
+            "body_corner": "lower_left"
+          },
+          {
+            "cell_id": 10408,
+            "local_node": "TL",
+            "body_node_id": 10638,
+            "body_corner": "lower_right"
+          }
+        ],
+        "selected_local_node_occurrences": 2,
+        "selected_scalar_force_terms": 4,
+        "phase": "not established from the allowed ordinary metadata; do not infer phase from neighboring owner traces"
+      }
+    ],
+    "physical_faces": 72,
+    "cut_edges": 36,
+    "no_exterior_cut_owner": "Top y=40 is the domain boundary; no row-80 exterior cells or synthetic top support is added.",
+    "per_state_totals": {
+      "distinct_support_cells": 722,
+      "selected_local_node_occurrences": 2738,
+      "selected_scalar_force_terms": 5476,
+      "body_node_count": 703,
+      "body_DOF_count": 1406,
+      "max_incident_element_terms_per_body_DOF": 4,
+      "top_cut_node_incidence": {
+        "node_count": 37,
+        "terms_per_component": 2
+      },
+      "remaining_body_node_incidence": {
+        "node_count": 666,
+        "terms_per_component": 4
+      }
+    },
+    "two_state_totals": {
+      "support_cell_state_rows": 1444,
+      "selected_local_node_state_rows": 5476,
+      "selected_scalar_force_terms": 10952,
+      "body_node_state_rows": 1406,
+      "support_group_state_rows": 10,
+      "whole_state_rows": 2
+    },
+    "semantics": "These five classes partition cells supporting body-node weak loads. They are not the prior seven nodal categories and are not five physical surface-force partitions. All selected local terms must occur once; no endpoint averaging, corner omission, or cut-node omission."
+  },
+  "proposed_accounting_closure_rules": {
+    "not_yet_executed_or_authorized": true,
+    "original_order_replay": "Recompute only the saved-array scatter np.bincount(edofs.ravel(),weights=E.ravel(),minlength=27378), same C-order as original, and require value-exact equality to saved global_material_force. This is a source/assembly replay identity, not a new continuum-force or pressure gate. A mismatch is investigated as a saved-data/order/runtime accounting mismatch, not automatically a solver defect. Do not promise bitwise cross-implementation arithmetic independently of runtime; field SHA bindings still verify original input bits.",
+    "complete_support_partition": "All selected (cell,local node,component) terms appear exactly once in one of the five support classes. Replay covers full global vector; diagnostic projection selects only 1406 body DOFs. Outside-body local force terms do not enter body load.",
+    "node_and_whole_projection": "Use math.fsum over original selected signed local scalar terms. Compare per-node and whole/group recompositions to minus saved rounded global selection. Do not require exact equality after reordering.",
+    "roundoff_scale_definition": "For component c and any tested node/subset, A_c = math.fsum(abs(float(E[e,2*a+c])) for the exact selected local elemental terms). A_c is elemental-contribution L1 before within-node cancellation, not L1 of rounded nodal resultants.",
+    "suggested_new_projection_envelope": "B_c = 8 * 2**-52 * A_c, with no absolute floor. This is a proposed saved-element projection accounting envelope, explicitly distinct from unchanged old nodal closure.",
+    "mathematical_basis": "Let eps=2^-52, u=eps/2 and gamma4=4u/(1-4u). A body DOF receives at most four original float64 element terms, so naive sequential accumulation differs from its exact sum by at most gamma4 times local elemental L1. Allow up to one eps times the input L1 for each correctly/nearly correctly rounded math.fsum reduction. Up to three new fsum aggregation layers plus the saved-global whole fsum remain below (gamma4+4eps+O(eps^2))*A_c, less than 8eps*A_c. This statement assumes finite float64 values/sums, no overflow, and the verified max-four topology. Pure addition of representable subnormal operands whose exact sum is subnormal is exact; this proposal introduces no force-scale floor. More aggregation depth, duplicated terms or products are not covered and must not silently inherit the envelope.",
+    "critical_distinction": "A cancellation-heavy node can have almost zero saved nodal load while carrying large opposite element terms. Therefore the old 8eps*sum(abs(original node force)) is not a valid generic bound for element-to-node rearrangement. Retain it exclusively for the original M1/M2 nodal table recompositions; do not replace or relax that original gate.",
+    "zero_case": "If selected elemental L1 is zero, all selected terms are zero and exact zero projection closure is expected.",
+    "not_checked_as_equality": [
+      "PTRACE independent material line vs weak support",
+      "face-owner weak projection vs its PTRACE face line",
+      "total=material+Hu reconstruction",
+      "positive pressure/contact onset/mesh convergence/HP reference",
+      "overall HF qualification"
+    ]
+  },
+  "physical_comparison_and_limits": {
+    "existing_values": "The two saved material-only line vs weak differences copied in accepted_state_bindings motivate local support diagnosis, especially peak state 13 Fy difference -0.09424957122266045 N. No new numerical cause is claimed from this preparation.",
+    "same_owner_comparison": "Compare saved PTRACE bottom/left/right line vectors with matching cell-support group resultants. Keep body and the two corner-only support contributions explicit. Then distinguish diagonal support omitted by line traces from volume-basis vs boundary-trace differences within the same edge-owner cells.",
+    "discrete_basis": "An owner group sums -integral_K P grad(s) dV, where s is the sum of Q1 shape functions whose nodes lie on the body. The independent PTRACE line is integral_body_face P N_body t dS. Integration by parts contains additional outer-cell faces and material Div(P) terms, and P is sampled/contracted with different volume and boundary quadrature. Material alone need not satisfy Div(P)=0 because Hu contributes to the original equilibrium.",
+    "corner_basis": "A diagonal cell touches the body only at one node yet its Q1 shape gradient has support through that cell area. Its saved local weak load may therefore be nonzero without a finite-length physical body edge. Such a contribution is a finite-element weak-support term; it is not a measured point contact pressure.",
+    "fixed_overlay": "The body interior is fixed, with F=I and zero Hu expected; internal zero P cannot represent exterior load. Keep its actual saved element-force contribution in the ledger rather than omitting it by assumption.",
+    "can_answer": [
+      "Which saved cell-support classes carry each body-node/material weak resultant",
+      "Whether corner-only diagonals or edge-owner volumetric weak contributions explain a substantial part of the existing material line/weak discrepancy",
+      "Whether saved element-to-global projection and sign/ID bookkeeping close within explicit arithmetic rules"
+    ],
+    "cannot_answer": [
+      "Unique physical contact pressure or corrected total Hu-inclusive traction",
+      "Effective full-assembly gripping force or pressure-contact qualification",
+      "Cauchy stress/current area conversion",
+      "Interelement jump/divergence balance or independent constitutive reference without further scoped work",
+      "A numerical solver defect or physical convergence merely from a line/weak discrepancy"
+    ],
+    "scientific_goal_status": "Overall independent HF/contact interpretation and subsequent design capability remain incomplete; this is one incremental interpretation step using two already solved states."
+  },
+  "minimal_visualization_recommendation": {
+    "reference_support_map": "Plot existing reference coordinates/connectivity and the five support-cell classes, marking the two lower corners; no new deformation reconstruction. Cite existing actual material/deformation PNGs separately.",
+    "signed_support_bar": "For each of the two states show signed Fx/Fy per support class, saved weak whole, and saved PTRACE line; label N and material-only and retain negative contributions. Do not convert bars to pressure or use near-zero percentages.",
+    "new_scientific_gates": 0
+  },
+  "pending": "Public implementation/card/source static review and direct human authorization of any new array read/projection/plot remain next; none has been performed by this report."
+}
