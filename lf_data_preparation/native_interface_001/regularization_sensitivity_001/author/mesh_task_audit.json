@@ -1,0 +1,294 @@
+{
+  "schema_version": "same-physical-task-readonly-audit-1.0",
+  "status": "pass_metadata_and_inherited_provenance_same_physical_task",
+  "created_utc": "2026-10-11T09:30:03.782503+00:00",
+  "repository_root": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC",
+  "source_commit": "5af8b5eb3d6780065075b8a331b774d8dad57d67",
+  "scope": "Ordinary JSON/CSV/source inspection and raw byte identity only. No NPZ decode/import/API/scientific sums/new F/T/HP/model/solve/plot. This is an input comparability audit, not new mechanical or mesh qualification.",
+  "sources": {
+    "h1_model": "lf_data_preparation/native_interface_001/workpiece_forward_001/run_001/fixed_square/model/model.json",
+    "h1_result": "lf_data_preparation/native_interface_001/workpiece_forward_001/run_001/fixed_square/result.json",
+    "h1_geometry": "lf_data_preparation/native_interface_001/workpiece_forward_001/run_001/fixed_square/model/source_geometry/geometry.json",
+    "h05_model": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/model/model.json",
+    "h05_result": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/result.json",
+    "h05_geometry": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/model/source_geometry/geometry.json",
+    "h1_production_protocol": "lf_data_preparation/native_interface_001/workpiece_forward_001/production_protocol.json",
+    "h05_production_protocol": "lf_data_preparation/native_interface_001/nested_cycle_001/protocol.json",
+    "mesh_preparation_protocol": "lf_data_preparation/native_interface_001/nested_mesh_preparation_001/protocol.json",
+    "mesh_preparation_checks": "lf_data_preparation/native_interface_001/nested_mesh_preparation_001/run_001/checks.json",
+    "mesh_preparation_model": "lf_data_preparation/native_interface_001/nested_mesh_preparation_001/run_001/model/model.json",
+    "mesh_preparation_source": "lf_data_preparation/native_interface_001/nested_mesh_preparation_001/author/prepare_nested_model.py",
+    "geometry_refinement_source": "hf_repo/src/hf_eval/nested_geometry.py",
+    "native_project_source": "hf_repo/src/hf_eval/native_project.py",
+    "controller_source": "hf_repo/src/hf_eval/split_displacement.py",
+    "force_observation_source": "hf_repo/src/hf_eval/native_mean.py",
+    "nodal_observation_source": "hf_repo/src/hf_eval/workpiece_nodal.py",
+    "saved_view_source": "functional_views/native_api_workpiece_20261008/complete_001/saved_right_margin_views.py",
+    "comparison_source": "functional_views/native_nested_cycle_20261009/complete_001/execute_nested_views.py",
+    "comparison_protocol": "functional_views/native_nested_cycle_20261009/complete_001/protocol.json",
+    "comparison_results": "functional_views/native_nested_cycle_20261009/complete_001/RESULTS.md",
+    "comparison_json": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/mesh_comparison.json",
+    "comparison_csv": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/mesh_comparison.csv",
+    "h1_summary": "functional_views/native_api_workpiece_20261008/complete_001/run_001/view/fixed_square/summary.json",
+    "h1_csv": "functional_views/native_api_workpiece_20261008/complete_001/run_001/view/fixed_square/states.csv",
+    "h05_summary": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/summary.json",
+    "h05_csv": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/states.csv",
+    "fine_reference": "lf_data_preparation/native_interface_001/nested_reference_002/run_001/reference/summary.json",
+    "fine_linked_response": "lf_data_preparation/native_interface_001/nested_link_001/run_001/linked_response.json"
+  },
+  "checks_summary": {
+    "ordinary_record_checks": 179,
+    "all_passed": true,
+    "inherited_M_PREP1_checks": 101,
+    "inherited_checks_reexecuted": false,
+    "raw_archives_hashed_without_decode": [
+      "lf_data_preparation/native_interface_001/workpiece_forward_001/run_001/fixed_square/model/model.npz",
+      "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/model/model.npz",
+      "lf_data_preparation/native_interface_001/workpiece_forward_001/run_001/fixed_square/model/source_geometry/geometry.npz",
+      "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/model/source_geometry/geometry.npz"
+    ],
+    "all_28_original_mechanics_source_bindings_equal": true,
+    "comparison_metrics_count": 14,
+    "comparison_rows": 24,
+    "stored_difference_values_read_but_not_recomputed": true
+  },
+  "confirmed_same": {
+    "domain_mm": [
+      84,
+      40
+    ],
+    "symmetry": {
+      "kind": "lower_half",
+      "symmetry_axis": {
+        "normal": [
+          0.0,
+          1.0
+        ],
+        "offset_mm": 40.0
+      }
+    },
+    "geometry_rule": "parent[j,i] -> child[2*j+a,2*i+b], a,b in {0,1}",
+    "source_design": "gripper__sweep__kin_1e+01__kout_1e+00; same LF provenance and same right passive-medium extension to x84",
+    "four_binary_masks": "solid/design/passive_solid/passive_void repeated 2x2, exact stored M-PREP1 checks inherited; no smoothing/interpolation/threshold/cleanup",
+    "task_only_nonphysical_differences": [
+      "description",
+      "geometry",
+      "parameter_origin",
+      "purpose",
+      "task_id"
+    ],
+    "workpiece": {
+      "kind": "fixed_rigid",
+      "shape": "square",
+      "center_mm": [
+        71.0,
+        40.0
+      ],
+      "fixed_components": [
+        0,
+        1
+      ],
+      "side_mm": 18.0
+    },
+    "body_bounds_mm": [
+      [
+        62,
+        31
+      ],
+      [
+        80,
+        40
+      ]
+    ],
+    "initial_node_window_gaps_mm": {
+      "left": 2.0,
+      "bottom": 1.0
+    },
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain",
+      "lambda_s_MPa": 0.5769230769230769,
+      "mu_s_MPa": 0.3846153846153846,
+      "kappa_s_MPa": 0.8333333333333333,
+      "thickness_mm": 20.0,
+      "third_medium_gamma": 1e-06,
+      "alpha": 1e-06,
+      "regularization_length_mm": 80.0,
+      "kr_MPa_mm2": 0.008615384615384613,
+      "kr_material_factor_applied": false,
+      "force_scale_per_length": 20.0
+    },
+    "ports": {
+      "input": {
+        "points_mm": [
+          [
+            0.0,
+            38.0
+          ],
+          [
+            0.0,
+            40.0
+          ]
+        ],
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "averaging": "normalized_reference_arclength_trapezoid",
+        "h1_weights": [
+          0.25,
+          0.5,
+          0.25
+        ],
+        "h05_weights": [
+          0.125,
+          0.25,
+          0.25,
+          0.25,
+          0.125
+        ]
+      },
+      "output": {
+        "points_mm": [
+          [
+            80.0,
+            28.0
+          ],
+          [
+            80.0,
+            30.0
+          ]
+        ],
+        "direction": [
+          0.0,
+          1.0
+        ],
+        "averaging": "normalized_reference_arclength_trapezoid",
+        "h1_weights": [
+          0.25,
+          0.5,
+          0.25
+        ],
+        "h05_weights": [
+          0.125,
+          0.25,
+          0.25,
+          0.25,
+          0.125
+        ]
+      }
+    },
+    "support": "declared x0/y0..8 ux,uy; applied only attached solid nodes x0/y6..8 on both grids",
+    "entity_symmetry": "declared y40/x0..60 uy; solid-attached pieces x0..5 and53..60 on both grids",
+    "background_symmetry": "all y40/x0..84 domain nodes uy; task definition exclusively, LF source x(60,80] metadata is provenance",
+    "body_constraints": "fixed ux,uy on complete lower-half aligned square; kinematic overlay of original medium, no stiff-material reassignment; merged fixed DOFs accounted once",
+    "path_targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.65,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0,
+      1.05,
+      1.1,
+      1.15,
+      1.2,
+      1.15,
+      1.1,
+      1.0,
+      0.9,
+      0.8,
+      0.75,
+      0.65,
+      0.5,
+      0.25,
+      0.0
+    ],
+    "branches": "index0 origin,1..13 loading,14..23 unloading;24 original targets,0 bisection/failed attempts",
+    "solver_initialization": "fresh undeformed zero lift/shape; same port_projection initial guess, ordered path retains previous accepted state/tangent",
+    "solver_and_kernel": "28 original source bindings identical; NumPy mechanical split response and chunk256 tangent identical; only time resource window differs",
+    "force_conventions": {
+      "input": "actuator_on_model",
+      "workpiece": "medium/model on fixed lower-half body; negative holding reaction",
+      "extent": "lower_half modeled geometry; no automatic doubling",
+      "mirror": "upper [Fx,-Fy], full mirrored net[2Fx,0]; magnitude sum2|Fy| distinct from resultant; no automatic doubling"
+    }
+  },
+  "allowed_discretization_differences": {
+    "grid_h1": [
+      40,
+      84
+    ],
+    "grid_h05": [
+      80,
+      168
+    ],
+    "h_mm": [
+      1,
+      0.5
+    ],
+    "counts_h1": {
+      "cells": 3360,
+      "nodes": 3485,
+      "dofs": 6970,
+      "solid_cells": 1086,
+      "medium_cells": 2274,
+      "solid_incident_nodes": 1337,
+      "fixed_dofs": 452,
+      "free_dofs": 6518
+    },
+    "counts_h05": {
+      "cells": 13440,
+      "nodes": 13689,
+      "dofs": 27378,
+      "solid_cells": 4344,
+      "medium_cells": 9096,
+      "solid_incident_nodes": 4849,
+      "fixed_dofs": 1548,
+      "free_dofs": 25830
+    },
+    "body_counts_h1": {
+      "cells": 162,
+      "nodes": 190,
+      "dofs": 380
+    },
+    "body_counts_h05": {
+      "cells": 648,
+      "nodes": 703,
+      "dofs": 1406
+    },
+    "operators": "Inherited M-PREP1: grad x2, hessian x4, quadrature weights x1/4, points same; kr unchanged. Q1 piecewise approximation and integration samples change; no claim of invariant local force/owner IDs.",
+    "port": "3→5 reference segment nodes;normalized trapezoid weights as above, same physical average control; individual port nodes remain untied",
+    "identity": "derived geometry/task hashes, node/cell/DOF indices, field shapes/archive hashes differ as expected",
+    "time_limit_seconds": {
+      "h1": 4500,
+      "h05": 14400
+    },
+    "observations": "14 identically defined stored quantities at same original target index/leg. Existing values differ; stored fine-minus-coarse retained, no new difference/percentage computation."
+  },
+  "observation_definitions": {
+    "q_out_mm": "normalized reference-arclength weighted output displacement; not tip displacement",
+    "tip": "one reference node(80,30), h1 ID2630/h05 ID10300; unsigned shortest distance to finite square bottom/left/right segments; not contact proof/pressure or node-window clearance/ray-gap",
+    "weak_body_forces": "signed full lower-body nodal weak-force sums; material and Hu components, body-priority nonoverlap holding partition; nodal physical/cut/intersection groups are node sets, not owner-cell partitions/traction",
+    "solid_min_J": "minimum saved integration-point J over original solid cells",
+    "medium_min_J": "minimum saved integration-point J over original medium EXCLUDING fixed-body cells",
+    "medium_max_abs_Hu_per_mm": "maximum absolute saved Hu component over free medium excluding fixed-body cells; not Frobenius norm shown in field plot",
+    "field_plots": "cell-mean J and cell Hu Frobenius norm; solid in-plane Green principal strain; these are different statistic definitions from min-J/max-component CSV"
+  },
+  "qualification_and_unknowns": {
+    "coarse_current_cycle": "production/API+saved-view evidence; own independent reference not_provided in current response/view. Older producer HP cannot transfer.",
+    "fine_current_cycle": "M-REF2 own24 states/48HP passed and M-LINK1 matched; immutable original result flags remain false. This is saved-state mechanical reference only, not all-column or pressure/grip/HF5/convergence.",
+    "historical_comparison_reference": "M-VIEW1 comparison/summary reference_available=false predates M-REF2; do not overwrite history or present historical fine-reference absence as current absence.",
+    "mesh_convergence": "Two mesh responses establish sensitivity only. No asymptotic convergence/rate/bound, branch uniqueness, contact-onset/clamping/pressure qualification.",
+    "domain_and_parameters": "same fixed84x40/right4mm padding and same gamma/alpha/Lr; current mesh pair cannot establish domain-margin or parameter stability.",
+    "local_force_comparability": "fine selected owner cells and corner-only Hu findings do not supply an h1 owner reconstruction. Local owner IDs and nodal partitions are not interchangeable or continuous contact traction.",
+    "audit_evidence_limit": "current audit does not inspect archive field bytes; inherits raw-bound prior101 preparation checks. No numerical arrays re-decoded or checks reexecuted.",
+    "exploratory_qualification": "minimum-feature and volume-fraction thresholds still null/pending; fixed rigid square, no free/compliant body/friction extension."
+  },
+  "blocking_findings": []
+}

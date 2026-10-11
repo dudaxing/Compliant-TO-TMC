@@ -1,3 +1,22 @@
+# 当前接续：M-ALPHA1同任务alpha对照已准备、未批准／未执行
+
+2026-10-11。独立HF有限变形／TMC前向评价仍面向结构实际变形、输入反力与可解释工件作用，逐步支持同任务候选比较及HF5。main开发、origin保持 `https://github.com/dudaxing/Compliant-TO-TMC.git`，HF与LF优化断开。
+
+M-BOUND1已唯一实际PASS闭卡，完整力、切线、平均位移求解、CLI／API／batch、固定方体24态循环及显示、原细网格24态／48HP和关联功能已存在。本轮不重复这些计算或同类离散来源账本。
+
+已完成h1／h0.5同物理任务核查，复用原两网格曲线及17份准备来源绑定；四掩码／算子等原101项证据继承，本轮未重读NPZ。原峰值输入反力−7.0095%、工件Fy+3.1982%、局部最大Hu分量+73.0848%说明不同量敏感度不同，仅两网格不能认定收敛。旧gamma实验的网格与域不同，旧软化同时改多项，不能移作当前alpha对照。
+
+当前已准备M-ALPHA1：仅alpha1e−6→5e−7，gamma1e−6、Lr80mm、h0.5／84×40域、原固定side18方体、E1MPa／厚20mm、BC及2mm平均端口保持；零起点执行原15目标前缀到1.20mm再回撤一次至1.15mm。直接复用原batch/API、控制器、生产门、缓存和纯显示子进程，不重写力核或放宽batch同任务合同。
+
+候选一次controller9000秒／helper9600秒／outer9660秒、采样8GiB，显示子取min(600秒,helper剩余时间)。未来包括真实新变形GIF、原三PNG、新六量比较PNG及原15目标差值表。两值只作敏感性，不借原48HP给新态，不授予稳定／压力／有效夹持／HF5。失败记录实际状态，再根据结果决定下一步。
+
+当前仅完成普通审计、源码／AST、候选卡及独立静审；HF导入、模型、NPZ字段解码、F／T、求解、HP及新绘图均0。**M-ALPHA1未明确批准、未执行**，协议false为真实准备状态，没有authorization或run目录。M-BOUND1旧窗口不续用，新数值范围及资源待具体卡批准。科学版本0.5.0、原资格及完整历史记录保持；可移动体／摩擦、连续压力、有效夹持、物理稳定性、其它形状、一般输入／全列切线和正式HF5仍未完成。
+
+[本轮说明与既有可视化](../lf_data_preparation/native_interface_001/regularization_sensitivity_001/PREPARATION_RESULTS.md) · [具体卡](../lf_data_preparation/native_interface_001/regularization_sensitivity_001/M-ALPHA1_CARD.md) · [准备协议](../lf_data_preparation/native_interface_001/regularization_sensitivity_001/protocol.json) · [输入／合同静审](../lf_data_preparation/native_interface_001/regularization_sensitivity_001/author/input_scope_static_review.json) · [物理静审](../lf_data_preparation/native_interface_001/regularization_sensitivity_001/author/physics_static_review.json)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-BOUND1保存Q1 Hu顶点作用实际执行已闭卡
 
 2026-10-11。整体目标仍是读取普通 LF 几何的独立 HF 有限变形／TMC 前向评估，提供结构实际变形、输入反力和可解释的工件作用，逐步支持同任务候选比较及正式 HF5。HF 与 LF 优化断开，不调用 dmftd；后续只在 main 开发，origin 保持 https://github.com/dudaxing/Compliant-TO-TMC.git。
@@ -815,6 +834,8 @@ CPU原237条和科学30条事件完整；严格同步内原行157–235全部79�
 
 </details>
 
+
+</details>
 
 </details>
 
