@@ -1,0 +1,217 @@
+{
+  "schema_version": "MBOUND1-independent-static-physics-review-1.0",
+  "status": "pass_static_source_math_card_scope_no_blocking_issue",
+  "baseline_main": "0d83b18b2bb320f137b1c4c3295805dc7c15aa65",
+  "reviewer_role": "independent_volume_math_review",
+  "frozen_external_sources": {
+    "saved_q1_hu_boundary.py": "976e9a83402e3b8d9f4fdffd7844e5ccf2e2b985e9aaa54b34248d7836a1726e",
+    "execute_saved_hu_boundary.py": "dc7c96d40439102ba43aeed5dabe3d3cd1c638110ae2cf4cc6561faf21a66c9d",
+    "M-BOUND1_CARD.md": "5fac7f2606189122e4136d8dd6d03abc50dbc932611025404457f88717c3b6b4",
+    "protocol_draft.json": "e0e618805165598df5443a5bb08957c65fa69344e1c36f0d4b4e0f9d8beb6844",
+    "prepare_source.py": "16ea892a2c3d468a7fa12111466d6e3bb39d4b09f53222fedf7052be67b28789",
+    "inspect_boundary_inputs.py": "ad1f343722548d4c101dcdde4f60a2ecb700ac8105bfeb2e4bd17b84d0576d8d",
+    "finalize_input_scope.py": "c5612630aa79eeef3f6520526f643606f398f6c12f06320fd73b063b9717e214",
+    "write_physical_basis.py": "635e867d2476448892a35fbe10d58ab4dc311cf28dec9d8a4b0527329ac7a6b2",
+    "write_paper_formula_check.py": "464ec3c9fe93245240b58ac4a63b5940b073a53982d762ea3d35201715efd52f",
+    "check_paper_formulation.py": "bb29804c1fffafd467ebb33f882dfccb250cfb5ae5dd4a0c6eeb7808c0b00839",
+    "input_scope.json": "34690d2cd92ffe31e6f257f56bdfca6fd7f1a31128951dfa5cae80a5886e4b18",
+    "final_input_scope.json": "9aa967ec7c5f6b0b4cac82d339592ac21d460348637711c9cdfd78635c2fa8e9",
+    "physical_basis.json": "41e3e74269f21a5a115f8a8afcd9ef20ed913cc9b1ba957b92c605e81f5d700b",
+    "paper_formula_check.json": "ce022f1cfb187a1d2baa9888af2a94873cf539d3f96a2d251eea304f5db84f24",
+    "paper_formulation_extract.json": "76451ce7890bfd7f4f3b2b465ae3ff1878ddf0abd41ab76ed9c1a0a69af7745b",
+    "AUTHOR_SOURCE_NOTES.md": "e3e17303b3c33cb35a3230722c145ed21d667d95f189969dfc54c621bb55fa60",
+    "source_author_receipt.json": "a2d18f824fe12dfa283bbe82674aab95b1072b83a7afc0fe9db6e0eb23db06ad"
+  },
+  "AST_parse_without_candidate_import": {
+    "saved_q1_hu_boundary.py": {
+      "AST_parse": "pass_without_import",
+      "lines": 154,
+      "functions": [
+        "_vector",
+        "_closure",
+        "observe_saved_q1_hu_boundary"
+      ]
+    },
+    "execute_saved_hu_boundary.py": {
+      "AST_parse": "pass_without_import",
+      "lines": 271,
+      "functions": [
+        "checkpoint",
+        "write_json",
+        "selected_array",
+        "csv_identity",
+        "selected_csv",
+        "vector_fields",
+        "write_csv",
+        "tables",
+        "render",
+        "run",
+        "main"
+      ]
+    },
+    "prepare_source.py": {
+      "AST_parse": "pass_without_import",
+      "lines": 110,
+      "functions": [
+        "write"
+      ]
+    },
+    "inspect_boundary_inputs.py": {
+      "AST_parse": "pass_without_import",
+      "lines": 223,
+      "functions": [
+        "sha",
+        "identity",
+        "rows",
+        "record_identity",
+        "archive"
+      ]
+    },
+    "finalize_input_scope.py": {
+      "AST_parse": "pass_without_import",
+      "lines": 263,
+      "functions": [
+        "sha",
+        "binding",
+        "read",
+        "csv_records",
+        "record_identity",
+        "coordinate",
+        "connectivity"
+      ]
+    },
+    "write_physical_basis.py": {
+      "AST_parse": "pass_without_import",
+      "lines": 113,
+      "functions": []
+    },
+    "write_paper_formula_check.py": {
+      "AST_parse": "pass_without_import",
+      "lines": 36,
+      "functions": []
+    },
+    "check_paper_formulation.py": {
+      "AST_parse": "pass_without_import",
+      "lines": 23,
+      "functions": []
+    }
+  },
+  "joint_scope_checked": [
+    "corrected API",
+    "corrected worker",
+    "final M-BOUND1 card",
+    "protocol draft",
+    "source preparation builder",
+    "metadata input builders/reports",
+    "frozen symbolic source basis",
+    "primary-paper association",
+    "author notes/receipt"
+  ],
+  "pre_execution_blocker_resolved": {
+    "problem": "Initial API treated workpiece.fixed_dofs as an iterable list; actual original model JSON stores the count1406 there.",
+    "independent_actual_metadata_check": {
+      "file": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\nested_cycle_001\\run_001\\fixed_square\\model\\model.json",
+      "raw_sha256": "668d3e6dff9c84dd4af5690a0029111451715ded25b4b3aa181059bf44a61f74",
+      "workpiece_fixed_dofs_type": "integer",
+      "workpiece_fixed_dofs_value": 1406,
+      "region_metadata_fixed_dofs_type": "list",
+      "region_metadata_fixed_dofs_count": 1548
+    },
+    "resolution": "Corrected API explicitly takes global_fixed_dofs, separately checks the body count1406 and verifies body DOFs are a subset of the supplied original list. Worker passes metadata.region_metadata.fixed_dofs. The corrected byte hashes are frozen above.",
+    "scope_effect": "Pre-execution packaging correction only; no test run, field decode, scientific formula change or acceptance-rule relaxation."
+  },
+  "physics_findings": [
+    {
+      "finding": "Original Hu eight values remain authoritative",
+      "reason": "The candidate selects only saved element_regularization_force. It does not reconstruct rounded J/Hu, exp coefficient, DD low words, P, hyperstress or energy. Multiplication by exact signs is used only for a structural comparison with original four vertex vectors."
+    },
+    {
+      "finding": "Q1 sign-pattern gate has the correct tensor factor and node order",
+      "reason": "Actual rectangular operators have both XY and YX Hessian entries with BL/BR/TR/TL signs +,-,+,-. Hu is element constant. r_Hu=c_e H^T Hu therefore has that alternating vector pattern; no missing factor-one simplification or thickness multiplication is introduced. The numeric array_equal gate deliberately excludes signed-zero/byte equality."
+    },
+    {
+      "finding": "Side/corner explanation preserves weak-work meaning",
+      "reason": "An adjacent selected body-node pair has opposite original Hu vectors and zero resultant for common translation if its numeric pattern gate passes. A single corner_only vertex can retain action. Assembled edge-node vectors can remain through neighbouring owner endpoint differences. This is a discrete vertex action, not a unique continuous face pressure or proof that only macroscopic corners have node loads."
+    },
+    {
+      "finding": "Compact original scatter gate is justified",
+      "reason": "Support rows cover every cell incident to the closed body, ordered by original ascending cell ID. The API appends selected local/component entries in original C order, accumulates positive internal forces using float64 bincount, then negates. Deleting contributions to other DOFs does not alter the input addition sequence for any retained body DOF. Each compact result can therefore be compared numerically exactly with the original M2 node Hu text parsed back to binary64. The claim is body-only and does not claim full-domain replay."
+    },
+    {
+      "finding": "Original nodal and new local closure boundaries remain distinct",
+      "reason": "The API retains original node-fsum versus original-state whole with8eps*original-node Hu L1. Newly regrouped local force versus each original node, and local whole versus original-node whole, use8eps*corresponding original selected-local Hu L1. At most four original local terms feed a node; the additive rounding and final fsum rounding are controlled by that absolute sum. Propagating these node accumulation errors to the whole also uses original local L1. No absolute floor, percentage gate or state-force magnitude scaling is introduced."
+    },
+    {
+      "finding": "Cross-partition comparisons are descriptive",
+      "reason": "Five owner roles, corner-only resultants and original whole differences are retained without a new equality gate. Material/total original text is copied, never recomputed as Hu plus material. No new total=material+Hu gate, energy gradient, pressure or clamp test exists."
+    },
+    {
+      "finding": "Original energy-gradient prohibition has primary support",
+      "reason": "P26 supplied PDF page4 Eq6 explicitly places exp(-5detF) in the weak Hu term outside the stated energy density and describes a generally nonsymmetric tangent. The naive .5*c_e*||Hu||^2 derivative contains an additional term omitted by the original force. Page4 Eq5/7 gives Q1 Lu=0; page5 notes alpha-related physical error. This candidate preserves the original residual rather than treating those choices as implementation defects."
+    }
+  ],
+  "source_and_protocol_findings": {
+    "future_input_contract": "Exactly two original forces NPZ archives, one element_regularization_force field each;4 JSON and3 CSV runtime input files. Archive raw SHA and selected dtype/shape/C-order raw field SHA are checked before observations.",
+    "future_observation_contract": "Two original selected loading states6/13;722 support cells,703 nodes,2738 local occurrences per state; body648,bottom36,left18,right18,corner_only2; body-only1406 DOF scatter. Selected endpoint cells10371/10407/10408 give12 local vertex records per state.",
+    "future_outputs": {
+      "cells_total": 1444,
+      "group_rows_total": 10,
+      "whole_rows_total": 2,
+      "nodes_total": 1406,
+      "selected_endpoint_rows_total": 24,
+      "node_category_rows_total": 14
+    },
+    "future_calls": {
+      "NPZ_read_started": 2,
+      "NPZ_read_completed": 2,
+      "selected_array_fields": 2,
+      "hu_boundary_started": 2,
+      "hu_boundary_completed": 2,
+      "PNG_writes": 2
+    },
+    "future_output_files": [
+      "hu_boundary.json",
+      "cells.csv",
+      "groups.csv",
+      "whole.csv",
+      "nodes.csv",
+      "selected_endpoints.csv",
+      "node_categories.csv",
+      "Q1_Hu_endpoint_actions.png",
+      "Hu_owner_node_comparison.png",
+      "execution_receipt.json"
+    ],
+    "preserved_original_text": "nodes.csv keeps original node six-force strings and other original node fields; node_categories.csv copies14 original selected rows unchanged without reclassification or force summation.",
+    "preparation_builder": "prepare_source.py checks clean main/base/origin, previous closed publication, frozen review SHA, ordinary input source bindings and unexecuted draft before copying sources. It generates final protocol bindings, AST-parses source only, and preserves the complete old status-document bytes inside new history wrappers. It does not invoke candidates, decode fields or perform scientific arithmetic.",
+    "resource_semantics": "Card and draft agree helper180s,outer240s,sampled8GiB,once startup,first error stop,no repair/retry/extension/force. Existing launcher is reused byte-for-byte. This static review does not authorize/open that execution window.",
+    "qualification": "Two-state saved Q1 Hu support/vertex interpretation and original body scatter only. Existing solver/HP/M1/M2/SUPPORT/TRACE/VOLUME scope remains unchanged; no contact/pressure/effective-grip/HF5 or mesh/domain stability promotion."
+  },
+  "visualization_semantics": {
+    "endpoint_PNG": "Six panels of reference rectangles use original negative local covectors. Red selected vertices are ON-body; blue-grey other vertices are merely negative local covectors. Each independent arrow display scale and original signed N values are stated. No deformation, pressure, reconstructed Hu or new beta/moment is implied.",
+    "comparison_PNG": "Two states by Fx/Fy show five owner-role columns, two corner-only comparisons and original whole, then seven preserved node categories. These are different decompositions; title and separators say never add across partitions. Independent panel scales and signed values are explicit; zero side resultant does not imply zero edge-node Hu.",
+    "actual_deformation": "Existing actual_states.gif is linked/reused. The candidate does not recreate the existing whole-model three-component force/GIF function.",
+    "pixel_limit": "No new image exists or has been inspected in this static audit. Actual saved pixels require the later authorized run and separate inspection."
+  },
+  "blocking_findings": [],
+  "known_limits": [
+    "Static source/card consistency is not an observed runtime or numerical pass.",
+    "Original force sign pattern, compact scatter and local roundoff checks remain to be performed under the card.",
+    "Generalized vertex actions do not determine unique face pressure or effective grip.",
+    "Parameter/mesh/domain physical stability is still pending."
+  ],
+  "activities": {
+    "source_AST_and_ordinary_JSON_read": true,
+    "raw_SHA_binding": true,
+    "candidate_imports": 0,
+    "candidate_API_calls": 0,
+    "NPZ_decodes": 0,
+    "new_scientific_numerical_values": 0,
+    "new_fsum_calls": 0,
+    "new_integrals": 0,
+    "HP_calls": 0,
+    "new_plot_calls": 0,
+    "formal_repository_mutations": 0,
+    "execution_windows_opened": 0
+  },
+  "freeze_limit": "Only the actual source/card/draft bytes listed above are reviewed. Any subsequent candidate, gate, field or physics-scope change requires review of the changed bytes; this report is excluded from its own frozen dictionary."
+}

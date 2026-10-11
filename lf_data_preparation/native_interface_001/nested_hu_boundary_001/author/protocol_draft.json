@@ -1,0 +1,129 @@
+{
+  "schema_version": "saved-Q1-Hu-boundary-card-1.0",
+  "prepared": true,
+  "authorized": false,
+  "executed": false,
+  "baseline_main": "0d83b18b2bb320f137b1c4c3295805dc7c15aa65",
+  "card": "lf_data_preparation/native_interface_001/nested_hu_boundary_001/M-BOUND1_CARD.md",
+  "model_file": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/model/model.json",
+  "result_file": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/result.json",
+  "state_files": {
+    "6": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/006/state.json",
+    "13": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/013/state.json"
+  },
+  "material_support_cells_file": "lf_data_preparation/native_interface_001/nested_material_support_001/run_001/cells.csv",
+  "ledger_nodes_file": "lf_data_preparation/native_interface_001/nested_ledger_002/run_001/all_nodes.csv",
+  "ledger_categories_file": "lf_data_preparation/native_interface_001/nested_ledger_002/run_001/category_loads.csv",
+  "selected_states": [
+    {
+      "index": 6,
+      "original_target_index": 6,
+      "leg": "loading",
+      "d_mm": 0.85,
+      "state_sha256": "2d19d368d255e5966c880502f444386c2d56336e7201a017e849f3fcd7ae61dd"
+    },
+    {
+      "index": 13,
+      "original_target_index": 13,
+      "leg": "loading",
+      "d_mm": 1.2,
+      "state_sha256": "b9024263e887e0f0813c8ef64c6686f0b65899555bad19cf67a98f293958d7ed"
+    }
+  ],
+  "selected_endpoint_cell_ids": [
+    10371,
+    10407,
+    10408
+  ],
+  "actual_deformation_view": "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/actual_states.gif",
+  "output_directory": "lf_data_preparation/native_interface_001/nested_hu_boundary_001/run_001",
+  "sampled_RSS_bytes": 8589934592,
+  "phases": {
+    "hu_boundary": {
+      "helper_seconds": 180,
+      "outer_seconds": 240,
+      "argv": [
+        "lf_data_preparation/native_interface_001/nested_hu_boundary_001/execute_saved_hu_boundary.py",
+        "--repo",
+        ".",
+        "--protocol",
+        "lf_data_preparation/native_interface_001/nested_hu_boundary_001/protocol.json",
+        "--time-limit",
+        "180"
+      ]
+    }
+  },
+  "selected_archive_plan": [
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/006/forces.npz",
+      "path_base": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square",
+      "declared_archive_sha256": "ea458082303544b8ade344b1cff5f01bda57dbf72e411d8a7fa5218c84d037de",
+      "selected_fields": {
+        "element_regularization_force": {
+          "dtype": "float64",
+          "shape": [
+            13440,
+            8
+          ],
+          "sha256": "59f21931256899c4feb7b4e5d0a32e04bb51408e5066eb5211ad0027025b1cea"
+        }
+      },
+      "array_fields_decoded": false
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square/accepted/013/forces.npz",
+      "path_base": "lf_data_preparation/native_interface_001/nested_cycle_001/run_001/fixed_square",
+      "declared_archive_sha256": "fa5a22699f23eee2beb92a00b03d9eeba80ed3fc6113cc49876a9dd9880c271a",
+      "selected_fields": {
+        "element_regularization_force": {
+          "dtype": "float64",
+          "shape": [
+            13440,
+            8
+          ],
+          "sha256": "5d18e2bc0200ab998034775fdff6897997a989aac4a085b1058f98c2b1219475"
+        }
+      },
+      "array_fields_decoded": false
+    }
+  ],
+  "expected_counts": {
+    "cells_total": 1444,
+    "group_rows_total": 10,
+    "whole_rows_total": 2,
+    "nodes_total": 1406,
+    "selected_endpoint_rows_total": 24,
+    "node_category_rows_total": 14
+  },
+  "expected_calls": {
+    "NPZ_read_started": 2,
+    "NPZ_read_completed": 2,
+    "selected_array_fields": 2,
+    "hu_boundary_started": 2,
+    "hu_boundary_completed": 2,
+    "PNG_writes": 2
+  },
+  "expected_output_files": [
+    "hu_boundary.json",
+    "cells.csv",
+    "groups.csv",
+    "whole.csv",
+    "nodes.csv",
+    "selected_endpoints.csv",
+    "node_categories.csv",
+    "Q1_Hu_endpoint_actions.png",
+    "Hu_owner_node_comparison.png",
+    "execution_receipt.json"
+  ],
+  "observation_rules": {
+    "original_force": "Original selected element_regularization_force eight values remain authoritative; exact Q1 numeric sign pattern",
+    "body_scatter": "Only original 1406 body DOFs; ascending original cell/local/component order; internal bincount then negate; numeric array_equal with original nodes, not byte/signed-zero",
+    "old_whole": "Original node-Hu to state-Hu: 8eps times original node-Hu L1, no floor",
+    "new_regrouping": "Selected original local-Hu fsum to original node values and local whole to original-node whole: 8eps times corresponding selected original local-Hu L1, no floor",
+    "preserved_text": "Original six node force strings and complete seven-category rows are copied, not reclassified or recomputed",
+    "comparisons": "Five-role regrouping, two corner-only and original whole differences descriptive only; no equality or pressure gate",
+    "old_gates": "Original M1/M2/SUPPORT/TRACE/VOLUME/HP criteria and force qualification unchanged"
+  },
+  "qualification_scope": "Two saved-state Q1 Hu discrete vertex/support interpretation and original body scatter only; no force-kernel/tangent/HP/equilibrium, reconstructed Hu/J, continuous total pressure, energy gradient or effective-grip qualification",
+  "prepared_scope": "Source/AST/ordinary JSON CSV and raw byte SHA only; no candidate import, NPZ decode, new scientific fsum or render"
+}
