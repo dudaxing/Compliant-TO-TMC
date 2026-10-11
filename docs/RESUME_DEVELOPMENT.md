@@ -1,3 +1,18 @@
+# 当前接续：M-LEDGER2全24保存态账本来源已准备，待授权（2026-10-11）
+
+整体目标仍是独立HF有限变形／TMC前向评估，为外部研究提供可核对的反力、工件载荷和实际变形；在main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。M-LEDGER1四态账本实际PASS、三PNG、2812节点行，已推送并恢复核对c4e9f785；该窗口已关闭，原24态循环／48HP／真实变形及原科学资格不改。
+
+本次只准备新的全24保存态薄入口，复用公共读取函数原字节，锁定0..23顺序、16872原节点行／168类别行，六力原文本及微小卸载量保持、角点／切面交点独立、原whole精确与四组8eps·L1闭合合同不改。新caller尚未执行，不以AST／SHA静审代替运行通过。
+
+依据原0.95mm保存结果的底边负Hu与角点正Hu抵消，下一卡将输出两张图：七类六分量的加载／卸载分支，及原24目标顺序Hu与精确配对Hu差。共有d有9个非零加载／卸载对，另有origin0与unloading0初始基线对，共70类别差行；没有unloading0.85／0.95／1.05／1.2，不插值。右下角node10638是角点类别子集，不能相加。保存差值不能自动称为耗散或收敛。
+
+建议新窗口helper180秒／outer240秒／采样8GiB，唯一调用、两PNG，首错停止、无重试／修复重跑／延期／force。当前仅来源准备，尚未获本卡执行授权，尚无新24态账本或图件；不新增力核／HP／模型／平衡求解／NPZ或原观察器。节点弱式载荷不是接触压力，固定体力不证明有效夹持，HP仍限原模型／任务的原PORT方向。材料P诊断、总边界力、压力／有效夹持、自由体／摩擦、网格／域收敛、全列切线、正式标签排名及HF5仍待后续。
+
+[新执行卡与入口](../lf_data_preparation/native_interface_001/nested_ledger_002/M-LEDGER2_CARD.md) · [M-LEDGER1实际结果与三图](../lf_data_preparation/native_interface_001/nested_ledger_001/RESULTS.md)
+
+<details>
+<summary>本次更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-LEDGER1四保存态载荷账本及三图已通过（2026-10-11）
 
 整体目标仍是独立HF有限变形／TMC前向评估，得到可核对的反力、工件载荷和实际变形，供外部研究比较；继续main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。此前24态细网格循环、48次保存态HP及原动画／参考API关联已完成。用户明确批准后的唯一M-LEDGER1实际PASS闭卡：ledger1／1、三PNG、17绑定不变，helper 4.1037824000 s／outer 4.4357795000 s，采样自身 RSS 98844672 B／tree RSS 103079936 B，exit0／无stop，无修复重跑／延期／force。helper为收据构造前快照，outer为完整终态；独立保存态终审PASS、三图已实际查看。
@@ -721,5 +736,7 @@ Pop-Location
 
 </details>
 
+
+</details>
 
 </details>
