@@ -1,0 +1,184 @@
+{
+  "schema_version": "MINTEGRATE1-entry-compatibility-source-review-1.0",
+  "status": "revision_required_static_entry_compatibility_review_no_execution",
+  "created_utc": "2026-10-11T15:23:23.943760+00:00",
+  "base_commit": "d45f6ee92d8a0d6ca740772a1762abdc691489fa",
+  "authorized": false,
+  "executed": false,
+  "review_scope": "Source/AST and existing ordinary saved JSON only; not a scientific PASS or integrated runtime validation",
+  "decision": "Seven candidate files can retain their frozen bytes. native_evaluate.py needs the single input-type guard before formal integration; CLI wording improvements may be applied without changing mechanics. No broad reader/controller/response refactor is required.",
+  "candidate_files": [
+    {
+      "path": "hf_repo/scripts/evaluate_native.py",
+      "action": "replace existing source by frozen candidate bytes",
+      "default_sha256": "04201797fa227dc18302e75817f5fb4100723732a1a97ecd71343aa49b727d64",
+      "original_candidate_sha256": "8b9cd7f59bf6e814bd00eeef7d678f504ad799f7609637a3c87b4d3b54b780bf"
+    },
+    {
+      "path": "hf_repo/scripts/solve_native_mean.py",
+      "action": "replace existing source by frozen candidate bytes",
+      "default_sha256": "f780cc689a4e8bfac1dcd4805ca013406f377d5016f131767883a5c3896973bb",
+      "original_candidate_sha256": "70485d157565da6ec1f95684c11c84b046cc5607252a817e815f5106380f6d89"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_evaluate.py",
+      "action": "replace existing source after entry guard revision",
+      "default_sha256": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942",
+      "original_candidate_sha256": "2f6b3b7d2950bc01a2d395fab6cde7b7ca0ec282000fa6e4fb46a31f186a2293"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_mean.py",
+      "action": "replace existing source by frozen candidate bytes",
+      "default_sha256": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+      "original_candidate_sha256": "f16a492b6e2196ad2d6f89984f488182b970ddb6c8b5ec4daf92706265b631f5"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_response.py",
+      "action": "replace existing source by frozen candidate bytes",
+      "default_sha256": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af",
+      "original_candidate_sha256": "16339706b0e9077b726277500bff7d89747851a5ca2c030958984aba1f3d0c3e"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_resume.py",
+      "action": "add frozen candidate source",
+      "default_sha256": null,
+      "original_candidate_sha256": "497d79f6141ff205e7ef8c47685c537b7755b9ed3b452885b2e90686f77cf6fc"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/split_displacement.py",
+      "action": "replace existing source by frozen candidate bytes",
+      "default_sha256": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+      "original_candidate_sha256": "8c1af8e9bed602ce9a4262a60769c5ec95c27c8f92f85f5e706f755adfe415a3"
+    },
+    {
+      "path": "hf_repo/tests/test_saved_native_resume.py",
+      "action": "add frozen candidate source",
+      "default_sha256": null,
+      "original_candidate_sha256": "f11f83f17d8ad18e452703c947d3554cbf7a8eeb39b79c53551b71b51bd91b49"
+    }
+  ],
+  "checks": [
+    {
+      "topic": "zero-start defaults",
+      "conclusion": "Valid existing calls resolve the new None option sentinels to complete/full/tangent; explicit modes remain unchanged. Original settings are still required by direct solve_native_mean, while evaluate_native builds its same first-increment/16 settings.",
+      "source": "native_resume.py:63; native_mean.py:138-172; native_evaluate.py:66-86"
+    },
+    {
+      "topic": "zero-start mechanics and output",
+      "conclusion": "Non-resume branches preserve the old task-path equality, assembler selection, cached capture/persistence and summary behavior. initial_parameter=0 preserves original controller arithmetic and result fields; no force/tangent kernel source is changed.",
+      "source": "native_mean.py:160-296; split_displacement.py:54-381; native_response.py:166-235"
+    },
+    {
+      "topic": "saved physical identity",
+      "conclusion": "Parent/model/state canonical and raw descriptor identities, grid, material, boundary/port regions, geometry authority and two unchanged force/tangent source identities bind the original physical task before production F/T. Extra user geometry/task values must match the bound physical identities.",
+      "source": "native_resume.py:26-133"
+    },
+    {
+      "topic": "absolute suffix and clocks",
+      "conclusion": "Saved targets are the exact original full-task suffix from a nonzero original accepted state with a remaining target. Parent task is retained, not rewritten or shifted. Parent options and settings are inherited; only an explicit new clock is allowed. API/CLI default180 is a new call clock; direct saved solve with settings=None requires a clock explicitly.",
+      "source": "native_resume.py:46-112; native_mean.py:134-175; both native scripts"
+    },
+    {
+      "topic": "paths and migration",
+      "conclusion": "Parent model/state/source-geometry paths are resolved relative to the selected saved package and constrained to its directory. Equivalent copied packages retain content identities; historical absolute provenance fields do not control the relative package loading.",
+      "source": "native_resume.py:34-61,79-133"
+    },
+    {
+      "topic": "parent and child semantics",
+      "conclusion": "Child local indices are separate from original task indices; resume_origin is explicit. Segment success/endpoint remain separate from parent failure/full-task status and independent reference qualification. The actual published child and parent ordinary JSON preserve these distinctions.",
+      "source": "native_mean.py:225-295; native_response.py:64-66,187-234"
+    },
+    {
+      "topic": "errors and partial state",
+      "conclusion": "TMCError is a ValueError and the public API catches it with original stage/code/class/reason; controller failures persist accepted partial paths. The settings AttributeError finding below is the sole actionable entry error discovered in this review.",
+      "source": "tmc.py:19; native_mean.py:134-143; native_evaluate.py:95-105"
+    },
+    {
+      "topic": "CLI and API scope",
+      "conclusion": "The two native scripts wire saved_result/selected_state_index and inherited options to the native API. Legacy python -m hf_eval dispatch is unchanged; this overlay does not add continuation to that separate legacy interface or to native_batch.",
+      "source": "scripts/evaluate_native.py:12-32; scripts/solve_native_mean.py:19-61; default __main__.py/native_batch.py"
+    },
+    {
+      "topic": "historical reference compatibility",
+      "conclusion": "The unchanged strict _reference gate hashes the declared source_bindings in the current repo. Installing changed native_mean/controller sources therefore makes old references bound to original source bytes report mismatch; production status and stored old evidence remain unchanged. Preserve this gate and old pins, and use a pure JSON negative source-mismatch test rather than expecting the old positive-reference test to pass against new sources.",
+      "source": "native_response.py:77-122"
+    }
+  ],
+  "findings": [
+    {
+      "id": "ENTRY-1",
+      "severity": "blocking_for_integration_until_minimal_revision",
+      "path": "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/src/hf_eval/native_evaluate.py",
+      "lines": [
+        51,
+        52,
+        95
+      ],
+      "trigger": "evaluate_native(...,saved_result=valid_path,selected_state_index=13,settings=dict_or_plain_object)",
+      "actual_source_behavior": "saved_resume_defaults receives settings.time_limit_seconds before any API isinstance guard. A dict/plain object raises AttributeError, which is outside the API except tuple, so the public call cannot persist its typed failure response. The native_mean type guard runs too late.",
+      "minimal_revision": "In the new integration overlay, inside the existing try after existing-output/pair checks and before saved_resume_defaults, require settings is None or isinstance(settings,DisplacementSettings). Otherwise raise the existing TMCError with code invalid_settings; import TMCError from the existing .tmc module. Do not modify the already closed M-RESUME1 candidate or scientific kernels.",
+      "future_negative_test": "Use ordinary API mocks: saved_resume_defaults and solve_native_mean must not be called. For dict and object inputs, assert response status error, failure stage input/code invalid_settings, and persisted response.json. No parent file read, model, NPZ, F/T or solver is needed. Source is proposed only; no test was written or run by this reviewer."
+    }
+  ],
+  "non_blocking_notes": [
+    {
+      "id": "ENTRY-DOC-1",
+      "severity": "non_blocking_help_text",
+      "path": "hf_repo/scripts/solve_native_mean.py",
+      "lines": [
+        24,
+        26,
+        45
+      ],
+      "recommendation": "Describe --targets as full zero-start task path or exact saved suffix; describe minimum increment as inherited in saved mode; replace the at-least-zero wording with selected origin/anchor plus one remaining target. These are small user-facing text refinements, not mechanical changes."
+    },
+    {
+      "id": "ENTRY-TEST-1",
+      "severity": "non_blocking_test_plan_observation",
+      "recommendation": "Pure mock native CLI flag/paired-argument wiring tests are useful alongside the invalid-settings API negative case. Existing five M-RESUME1 tests and its actual two-state solve are historical evidence, not a new integrated-core regression run."
+    }
+  ],
+  "reviewed_repository_SHA256": {
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/scripts/evaluate_native.py": "8b9cd7f59bf6e814bd00eeef7d678f504ad799f7609637a3c87b4d3b54b780bf",
+    "hf_repo/scripts/evaluate_native.py": "04201797fa227dc18302e75817f5fb4100723732a1a97ecd71343aa49b727d64",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/scripts/solve_native_mean.py": "70485d157565da6ec1f95684c11c84b046cc5607252a817e815f5106380f6d89",
+    "hf_repo/scripts/solve_native_mean.py": "f780cc689a4e8bfac1dcd4805ca013406f377d5016f131767883a5c3896973bb",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/src/hf_eval/native_evaluate.py": "2f6b3b7d2950bc01a2d395fab6cde7b7ca0ec282000fa6e4fb46a31f186a2293",
+    "hf_repo/src/hf_eval/native_evaluate.py": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/src/hf_eval/native_mean.py": "f16a492b6e2196ad2d6f89984f488182b970ddb6c8b5ec4daf92706265b631f5",
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/src/hf_eval/native_response.py": "16339706b0e9077b726277500bff7d89747851a5ca2c030958984aba1f3d0c3e",
+    "hf_repo/src/hf_eval/native_response.py": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/src/hf_eval/native_resume.py": "497d79f6141ff205e7ef8c47685c537b7755b9ed3b452885b2e90686f77cf6fc",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/src/hf_eval/split_displacement.py": "8c1af8e9bed602ce9a4262a60769c5ec95c27c8f92f85f5e706f755adfe415a3",
+    "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/tests/test_saved_native_resume.py": "f11f83f17d8ad18e452703c947d3554cbf7a8eeb39b79c53551b71b51bd91b49",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/native_batch.py": "fa765e02f18511045db1b0fd9b3f37da828985c0bc21dfdedb3185b6959b90ef",
+    "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "hf_repo/src/hf_eval/__main__.py": "45c4a88934fa2189f796a55f5a3a1430cc47e35b52f31f7ce728ab4a3acbd724",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/author/candidate_author_receipt.json": "57fbed15125067fc8192e31c481f44e03e800840ac410d8185a9dea34162b124",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/author/candidate_source.diff": "7424168e8829044b6943892f8db28c7322a1ada194c4b00aa42b19cccb131e3a",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/result.json": "b8767867620a9d88abedb676671ceda006191ed6cdbb9b96aa6cddc43d335259",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/response.json": "e4061c6e678f84737e5bcff67047bbffa8770c7abd7bd8252badad2d1b7a8896",
+    "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/result.json": "c8be41801bc6f5dff682d148b479d1ada16b38c637203c45abcacbbdc62526cb"
+  },
+  "limitations": [
+    "Saved mode is limited to an original zero-lift ordered task, a nonzero original accepted point with a remaining exact suffix, and matching physical/settings/source identities. It is not arbitrary warm start, rebase or continuation-child chaining.",
+    "The reader binds the two force/tangent source files it declares; the prior execution stage additionally bound the entire executed closure. This source review does not invent a universal future producer/source compatibility contract.",
+    "No current candidate import, pytest, NPZ byte read or decode, F/T, solver, observer, HP, visualization or formal source edit occurred. Integration and its newly authorized finite regression checks remain later work."
+  ],
+  "reviewer_actions": {
+    "HF_or_candidate_import": 0,
+    "pytest": 0,
+    "NPZ_byte_read_or_decode": 0,
+    "force_tangent_solver_observer_HP": 0,
+    "new_scientific_values": 0,
+    "render": 0,
+    "formal_repository_mutation": 0,
+    "external_reports_written": 2
+  }
+}

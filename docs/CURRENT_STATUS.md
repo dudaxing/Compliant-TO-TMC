@@ -1,3 +1,20 @@
+# 当前接续：M-INTEGRATE1默认续算集成候选已准备，未安装／未执行
+
+整体目标仍是独立HF有限变形／TMC前向评价，提供实际变形、反力和可解释工件作用供外部研究层；HF不做LF优化、不调用dmftd，main和既定origin保持，science0.5.0及原资格保持。
+
+M-RESUME1已实际PASS闭卡并发布d45f6ee：原alpha5e−7保存峰值013复核及首次1.20→1.15下降通过，新2接受端点、3PNG／2态GIF保留。R从0.37865427196005513降至0.3470376815403639 N；下半工件total Fy从0.12492121630032427降至0.10671287553103108 N。原M-ALPHA1 NOT_PASS／未完成完整路径不改，两端点不代表连续卸载曲线，新alpha无HP。
+
+最近已完成续算默认集成源码审阅与候选：修复saved API非法settings泄漏AttributeError、修正文案，新增6轻量入口／来源迁移测试，与19既有实例共25。未来安装11份（6旧改、5新），原6份已快照，所有默认runtime来源绑定。正式hf_repo仍未安装。本轮未collect／测试／NPZ解码／新model/F/T/HP／平衡／绘图。
+
+源身份影响已明确：right2/right4旧参考的mean/split pins与新安装不同，当前reader重总结将严格source mismatch；旧result/reference/qualified响应原字节和旧HP保持。M-REF2 sources无交集。不改pins或放宽资格门。
+
+M-INTEGRATE1待新直接批准：一次tests180／helper300／outer360秒、采样8GiB，11安装＋25精确测试；真实测试仅16单元50DOF。首错停、保实际安装／测试partial，无重试／修复重跑／延期／force或自动回滚，不重做原夹持路径、新HP或图。入口集成是最近功能步骤；连续总压力、有效夹持、稳定性、一般LF输入与HF5仍未完成。
+
+[准备与取舍](../lf_data_preparation/native_interface_001/saved_integration_001/PREPARATION_RESULTS.md) · [最近执行卡](../lf_data_preparation/native_interface_001/saved_integration_001/M-INTEGRATE1_CARD.md) · [原实际变形与作用](../lf_data_preparation/native_interface_001/saved_continuation_001/RESULTS.md)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-RESUME1实际PASS闭卡
 
 整体目标仍为独立HF有限变形／TMC前向评价，提供实际变形、反力与可解释工件作用供外部研究层比较；HF与LF优化断开，main及既定origin保持，science0.5.0与原资格保持。
@@ -943,6 +960,8 @@ CPU原237条和科学30条事件完整；严格同步内原行157–235全部79�
 
 </details>
 
+
+</details>
 
 </details>
 

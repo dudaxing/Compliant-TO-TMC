@@ -1,0 +1,192 @@
+{
+  "status": "pass_static_controller_default_compatibility_and_minimal_integration_review_no_new_execution",
+  "created_utc": "2026-10-11T15:21:40.918911+00:00",
+  "base_commit": "d45f6ee92d8a0d6ca740772a1762abdc691489fa",
+  "candidate_origin": "Published M-RESUME1 isolated package and actual execution; production default core remains old",
+  "authorized_new_science": false,
+  "executed_new_science": false,
+  "formal_core_mutated_by_reviewer": false,
+  "reviewed_repository_SHA256": {
+    "hf_repo/src/hf_eval/split_displacement.py": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/src/hf_eval/split_displacement.py": "8c1af8e9bed602ce9a4262a60769c5ec95c27c8f92f85f5e706f755adfe415a3",
+    "hf_repo/src/hf_eval/native_mean.py": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/src/hf_eval/native_mean.py": "f16a492b6e2196ad2d6f89984f488182b970ddb6c8b5ec4daf92706265b631f5",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/src/hf_eval/native_resume.py": "497d79f6141ff205e7ef8c47685c537b7755b9ed3b452885b2e90686f77cf6fc",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/tests/test_saved_native_resume.py": "f11f83f17d8ad18e452703c947d3554cbf7a8eeb39b79c53551b71b51bd91b49",
+    "hf_repo/tests/test_split_displacement.py": "d23874955178ab29d0c9683045145a79a155bd816f2e121129dde6ccffdb036e",
+    "hf_repo/tests/test_split_cycle.py": "dd3b4efb409fb427b8d95b8fb2c8ca532fa1e99f679b19e1f1ddec0c955b8ff0",
+    "hf_repo/tests/test_native_mean.py": "3771e1afbe4a95cb711e9235d91fe2da96ddbee5f33858c523898e8fea99b728",
+    "hf_repo/tests/test_native_mean_mechanical.py": "a468ca933963bc9de7050073fbb7086f51ed6086be2a62aec30cb59113ea40d8",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/focused_test_receipt.json": "5b0defc5f3a008707d4fac22d6903c60e2fe5394ea1af88f16a82d4918eb8769",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/production_launch.json": "0facfa8e6b7f958bf63bd4efdbdea253b16e60f6db2a83a1db353a7758395b6d",
+    "lf_data_preparation/native_interface_001/nested_reference_002/protocol.json": "d848f1df061f27bec3356704069cfdd7cf20172676db75c1ad94003dd3741c0c"
+  },
+  "AST_unchanged_function_evidence": {
+    "split_displacement._dot": true,
+    "split_displacement.split_average_measurement": true,
+    "controller.clock": true,
+    "controller.evaluate": true,
+    "controller.split_state": true,
+    "controller.impose": true,
+    "controller.feasible": true,
+    "controller.measure": true,
+    "controller.metrics": true,
+    "controller.step": true,
+    "controller.advance": true,
+    "controller.newton_after_removing_single_nonzero_anchor_guard": true,
+    "native_mean._plain": true,
+    "native_mean._workpiece_observations": true,
+    "native_mean.write_native_mean": true,
+    "native_mean.assemble": true,
+    "native_mean.capture_after_removing_saved_index_annotation": true
+  },
+  "zero_default_branches": [
+    {
+      "source": "candidate/hf_repo/src/hf_eval/split_displacement.py:77",
+      "judgment": "Default p0=0 adds only finite scalar input validation. Old settings, load_only start0, ordered_cycle start0/unload/end-before-peak constraints, supports, lift/shape and callbacks remain."
+    },
+    {
+      "source": "candidate/hf_repo/src/hf_eval/split_displacement.py:110",
+      "judgment": "At p0=0, expected warm lift is lift_origin.copy(), preserving the old bitwise comparison including signed zero. Cold state, fluctuation, R, state_s=0 and K=None match the prior branch; no display or algebra rebase is introduced."
+    },
+    {
+      "source": "candidate/hf_repo/src/hf_eval/split_displacement.py:238",
+      "judgment": "Initial p0=0 leaves the nonzero strict-anchor guard inactive. Existing parameter-zero warm state still follows normal Newton/corrector semantics, including wrong-R checking and arbitrary nonzero lift_origin/target_origin cases; it is not accidentally changed to validate-only."
+    },
+    {
+      "source": "candidate/hf_repo/src/hf_eval/split_displacement.py:350",
+      "judgment": "p0=0 still emits origin/loading/unloading and no initial_parameter result key. Advance/line-search/bisection/cache commitment AST are unchanged. Timings and provenance bytes are not promised equal after integration."
+    },
+    {
+      "source": "candidate/hf_repo/src/hf_eval/native_mean.py:134",
+      "judgment": "Without saved_result, valid old explicit settings remain required, None options resolve complete/full/tangent, declared task target equality is retained, no anchor reader/defaults run, and source_hashes retain the four old key labels."
+    },
+    {
+      "source": "candidate/hf_repo/src/hf_eval/native_mean.py:183",
+      "judgment": "Force/tangent selector, three-component assembly, full unsymmetrized CSC cache, state-hash capture, data copies/read-only arrays, workpiece observations and cached writer AST remain; saved-index annotations and continuation metadata are inactive for zero-start."
+    }
+  ],
+  "explicit_interface_changes_not_numerical_regressions": [
+    "native_mean settings keyword is now optional syntactically to enable restoration. A missing zero-start setting is rejected by TMCError invalid_settings rather than Python missing-keyword TypeError.",
+    "Explicit None options now request defaults, whereas old native_mean rejected None modes; omitted options still resolve to the same old complete/full/tangent values.",
+    "Source-file SHA fields and saved result descriptor hashes necessarily change for new runs after installation. This is correct new provenance; do not promise byte-identical whole result JSON or rewrite historical identities."
+  ],
+  "mathematical_and_cache_contract": {
+    "residual": "r = fint + kout*bout*qout - bin*R, with qout from compensated split measurement.",
+    "augmented_system": "[[Kff+kout*bout_f*bout_f^T, -bin_f], [bin_f^T,0]] [dw,dR] = [rhs_force,rhs_mean]; general sparse LU, no symmetry enforcement.",
+    "predictor": "rhs_force = -(K*DeltaL+kout*bout*Deltaqout)_free; rhs_mean is negative compensated current split mean minus target_origin and absolute s. port_projection substitutes only displacement seed, while predictor dR remains applied with its original sign.",
+    "corrector": "rhs_force=-r_free, rhs_mean=-constraint residual; R is signed actuator_on_model multiplier and is neither clipped nor inverted on descent.",
+    "saved_anchor": "Nonzero p0 requires ordered_cycle, mandatory saved state and first target=p0. Expected lift uses original binary64 impose expression. Initial K=None; fresh F/T must pass original residual/mean/J gates, or initial_state_not_equilibrated occurs before correction/commit. The one guard is the only AST change within Newton.",
+    "rollback": "Original advance preserves state arrays/R/s/committed-K on unaccepted Newton attempts. Capture holds independent immutable arrays/tangent/matrix copies matched by state hash. Later trial last_tangent does not overwrite prior durable accepted snapshot. Post-accept callbacks/time can already have committed observations.",
+    "reader": "Exact full original task/suffix, geometry/model/grid/material/BC/counts and saved settings/options except time; selected original accepted nonzero row and split archive identities. It reuses no old force/tangent/CSC and checks the two unchanged mechanics-kernel source SHA before fresh evaluation.",
+    "source_limits": "Public reader deliberately supports original zero-lift ordered-cycle parents only, original target rows with at least one remaining target, exact full-task suffix. It does not support another continuation child, arbitrary target extension, an inserted bisection anchor, load_only saved resume, load control or movable-body contact."
+  },
+  "existing_evidence_scope": {
+    "M_RESUME1_actual_outer_status": "pass",
+    "five_focused_actual_test_receipt_status": "pass",
+    "distinction": "Those published runs validate the isolated package and one actual1.20→1.15 fixed-square segment. They do not replace validation of the installed default package/import/CLI or all old controller cases. No new test was run here.",
+    "M_REF2_reference_source_closure_intersection_with_changed_production_paths": [],
+    "reference_note": "Actual M-REF2 reference_sources do not include these seven installed paths; its archived11-source HP reference capsule can retain historical status if those unchanged files remain. Older production protocol pins still describe their old executed sources and must remain unchanged, not be relabeled as current source equality."
+  },
+  "minimal_integration_recommendation": [
+    "Install the exact reviewed seven production files as one coherent change: six existing entry/controller/response/CLI files plus native_resume.py. Add the exact focused test. Do not independently reimplement a new controller or partially install native_mean without its reader/API/response/CLI companions.",
+    "Leave force/tangent kernels, native_project, displacement/KKT, data and split-state arithmetic unchanged. Retain archived candidate, baseline snapshots, actual results/cards/protocol/source provenance and qualified reference records.",
+    "Document opt-in saved mode, parent/child scope, exact original suffix, explicit new time and reader limitations. Keep no-argument/ordinary zero-start branch the default and retain current producer/HP/pressure/stability/HF5 flags.",
+    "Prepare a small bounded installed-package regression selection using existing meaningful controller/NativeMean/public tests, then run only under separately specified test authorization/resource scope. No long full loading or another13440-cell solve is required merely to copy the already validated source."
+  ],
+  "real_risks_to_verify_in_later_tests": [
+    {
+      "risk": "Default p0=0 controller compatibility, especially affine nonzero origin/shape, signed zero and target_origin",
+      "existing_tests": [
+        "test_nonzero_lift_predictor_does_not_advance_the_physical_mean_twice",
+        "test_split_weighted_mean_retains_product_error_and_hidden_fluctuation",
+        "test_warm_start_is_independently_checked_and_failure_preserves_two_arrays_and_R",
+        "test_default_loading_contract_is_unchanged_and_cycle_bounds_are_explicit"
+      ]
+    },
+    {
+      "risk": "No accidental symmetrization/port/R sign change and ordinary bounded trials/rollback",
+      "existing_tests": [
+        "test_nonsymmetric_kkt_and_rank_one_output_spring_match_dense_equations",
+        "test_average_port_keeps_unequal_node_motion_and_actuator_sign",
+        "test_descending_failure_bisects_and_retains_original_unloading_leg",
+        "test_nonlinear_armijo_and_bounded_trial_rejection_keep_last_accepted_state"
+      ]
+    },
+    {
+      "risk": "Installed package imports, default complete and explicit mechanical/full/chunk256 paths, caching and partial persistence",
+      "existing_tests": [
+        "test_task_mean_control_builds_once_and_leaves_individual_port_nodes_free",
+        "test_accepted_state_force_and_full_tangent_package_roundtrips",
+        "test_mechanical_cycle_omits_energy_and_saves_cached_full_dof_data",
+        "test_mechanical_partial_path_preserves_failure_and_cached_origin",
+        "test_invalid_tangent_mode_is_rejected_before_building"
+      ]
+    },
+    {
+      "risk": "Installed public saved-entry option inheritance and exact parent preservation/strict anchor failure/rollback",
+      "existing_tests": [
+        "tests/test_saved_native_resume.py::test_absolute_anchor_fresh_tangent_and_linear_suffix",
+        "tests/test_saved_native_resume.py::test_non_equilibrated_anchor_stops_before_correction_or_commit",
+        "tests/test_saved_native_resume.py::test_unaccepted_descending_attempt_rolls_back_revalidated_anchor",
+        "tests/test_saved_native_resume.py::test_nonzero_parameter_requires_finite_matching_ordered_saved_anchor",
+        "tests/test_saved_native_resume.py::test_public_saved_partial_resume_inherits_options_and_preserves_parent"
+      ],
+      "caution": "Dynamic collection must use installed default source, not unintentionally import old overlay. Fifth test is real16-cell NumPy/TMC and its F/T must be acknowledged, distinct from original13440-cell path counts."
+    },
+    {
+      "risk": "CLI parser/default and relative saved-input handling",
+      "existing_tests_scope": "The prior card exercised API, not candidate CLI process. Source addition does not prove CLI runtime behavior; any future selected CLI test belongs explicitly in its test card, without an unsolicited new large solve."
+    }
+  ],
+  "test_source_inventory": {
+    "lf_data_preparation/native_interface_001/saved_continuation_001/candidate/hf_repo/tests/test_saved_native_resume.py": [
+      "test_absolute_anchor_fresh_tangent_and_linear_suffix",
+      "test_non_equilibrated_anchor_stops_before_correction_or_commit",
+      "test_unaccepted_descending_attempt_rolls_back_revalidated_anchor",
+      "test_nonzero_parameter_requires_finite_matching_ordered_saved_anchor",
+      "test_public_saved_partial_resume_inherits_options_and_preserves_parent"
+    ],
+    "hf_repo/tests/test_split_displacement.py": [
+      "test_average_port_keeps_unequal_node_motion_and_actuator_sign",
+      "test_nonsymmetric_kkt_and_rank_one_output_spring_match_dense_equations",
+      "test_nonzero_lift_predictor_does_not_advance_the_physical_mean_twice",
+      "test_split_weighted_mean_retains_product_error_and_hidden_fluctuation",
+      "test_warm_start_is_independently_checked_and_failure_preserves_two_arrays_and_R",
+      "test_nonfinite_component_force_cannot_enter_an_accepted_record",
+      "test_nonlinear_armijo_and_bounded_trial_rejection_keep_last_accepted_state",
+      "test_actual_numpy_q1_port_path_matches_homogeneous_axial_stretch"
+    ],
+    "hf_repo/tests/test_split_cycle.py": [
+      "test_ordered_cycle_keeps_mean_port_state_and_repeated_target_identity",
+      "test_descending_failure_bisects_and_retains_original_unloading_leg",
+      "test_default_loading_contract_is_unchanged_and_cycle_bounds_are_explicit"
+    ],
+    "hf_repo/tests/test_native_mean.py": [
+      "test_task_mean_control_builds_once_and_leaves_individual_port_nodes_free",
+      "test_accepted_state_force_and_full_tangent_package_roundtrips"
+    ],
+    "hf_repo/tests/test_native_mean_mechanical.py": [
+      "test_mechanical_cycle_omits_energy_and_saves_cached_full_dof_data",
+      "test_mechanical_partial_path_preserves_failure_and_cached_origin",
+      "test_invalid_tangent_mode_is_rejected_before_building"
+    ]
+  },
+  "blockers_to_source_integration_preparation": [],
+  "not_a_completion_claim": "Default core installation and installed regression are not performed here. No all-column HP, generic-input, pressure, effective clamp, mesh/parameter stability, full unload or HF5 claim.",
+  "actions": {
+    "candidate_or_HF_import": 0,
+    "NPZ_read_or_decode": 0,
+    "tests": 0,
+    "force_tangent_HP_solver": 0,
+    "new_scientific_values": 0,
+    "plots": 0,
+    "formal_write": 0,
+    "Git_mutations": 0
+  }
+}

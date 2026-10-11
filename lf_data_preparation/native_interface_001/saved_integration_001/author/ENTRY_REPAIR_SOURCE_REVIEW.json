@@ -1,0 +1,65 @@
+{
+  "schema_version": "MINTEGRATE1-entry-repair-source-review-1.0",
+  "status": "pass_static_minimal_entry_repair_and_mock_test_source_not_executed",
+  "created_utc": "2026-10-11T15:32:04.388612+00:00",
+  "authorized": false,
+  "executed": false,
+  "old_entry_finding": "ENTRY-1 AttributeError before typed response",
+  "resolution": "Type guard is statically before saved_resume_defaults; existing TMCError/ValueError contract catches invalid_settings.",
+  "reviewed_external_SHA256": {
+    "candidate/hf_repo/src/hf_eval/native_evaluate.py": "e60e03139c1434238864ff38c3686183ed648af5afea4b7d31b26f1708430ca1",
+    "candidate/hf_repo/scripts/evaluate_native.py": "2759e6903543a3c5d2426b27ea7fdec2cbb287627815d48ec4cc6ca6475afd00",
+    "candidate/hf_repo/scripts/solve_native_mean.py": "e988923cb2df80dd1488b496ab85e081f396948562cb54a49c3636943cfe7218",
+    "candidate/hf_repo/tests/test_native_evaluate_settings.py": "a93cbabe9265e20305d0c806b63aa3bc1ca9532cdeac858a30a3cb6aa1bf5e0f",
+    "candidate/hf_repo/src/hf_eval/native_mean.py": "f16a492b6e2196ad2d6f89984f488182b970ddb6c8b5ec4daf92706265b631f5",
+    "candidate/hf_repo/src/hf_eval/native_response.py": "16339706b0e9077b726277500bff7d89747851a5ca2c030958984aba1f3d0c3e",
+    "candidate/hf_repo/src/hf_eval/native_resume.py": "497d79f6141ff205e7ef8c47685c537b7755b9ed3b452885b2e90686f77cf6fc",
+    "candidate/hf_repo/src/hf_eval/split_displacement.py": "8c1af8e9bed602ce9a4262a60769c5ec95c27c8f92f85f5e706f755adfe415a3",
+    "candidate/hf_repo/tests/test_saved_native_resume.py": "f11f83f17d8ad18e452703c947d3554cbf7a8eeb39b79c53551b71b51bd91b49"
+  },
+  "original_candidate_SHA256": {
+    "src/hf_eval/native_evaluate.py": "2f6b3b7d2950bc01a2d395fab6cde7b7ca0ec282000fa6e4fb46a31f186a2293",
+    "scripts/evaluate_native.py": "8b9cd7f59bf6e814bd00eeef7d678f504ad799f7609637a3c87b4d3b54b780bf",
+    "scripts/solve_native_mean.py": "70485d157565da6ec1f95684c11c84b046cc5607252a817e815f5106380f6d89"
+  },
+  "changed_files": [
+    "src/hf_eval/native_evaluate.py",
+    "scripts/evaluate_native.py",
+    "scripts/solve_native_mean.py",
+    "tests/test_native_evaluate_settings.py"
+  ],
+  "unchanged_frozen_files": [
+    "src/hf_eval/native_mean.py",
+    "src/hf_eval/native_response.py",
+    "src/hf_eval/native_resume.py",
+    "src/hf_eval/split_displacement.py",
+    "tests/test_saved_native_resume.py"
+  ],
+  "test_nodeids": [
+    "tests/test_native_evaluate_settings.py::test_saved_invalid_settings_returns_typed_input_error_without_parent_or_mechanics[dict]",
+    "tests/test_native_evaluate_settings.py::test_saved_invalid_settings_returns_typed_input_error_without_parent_or_mechanics[object]"
+  ],
+  "test_instances": 2,
+  "CLI_scope": "Help and one existing error string only; argument wiring/defaults/return behavior unchanged",
+  "documentation_sha256": "3074766a69707a7a2be8a06ee550ea41862693e09062a7d10c3bf6299f3dbc6c",
+  "checks": [
+    "All nine owned/reused candidate files parsed as AST without import.",
+    "Typed settings guard precedes the first saved defaults access inside the original try.",
+    "Five remaining original candidates are byte-identical to closed M-RESUME1 sources.",
+    "Both negative instances forbid defaults/build/solve and use no parent file or NPZ.",
+    "Original closed candidate and formal repository sources were not edited."
+  ],
+  "findings": [],
+  "limits": [
+    "Test source was inspected only, not collected or run. Future complete selector freezing is owned by input_scope.",
+    "Only invalid settings rejection and CLI text changed; scientific correctness and integrated runtime compatibility require later authorized checks."
+  ],
+  "actions": {
+    "HF_import": 0,
+    "collect": 0,
+    "pytest": 0,
+    "NPZ_byte_read_or_decode": 0,
+    "model_force_tangent_solver_observer_HP_render": 0,
+    "formal_repository_mutation": 0
+  }
+}
