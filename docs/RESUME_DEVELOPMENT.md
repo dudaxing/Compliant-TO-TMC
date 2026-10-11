@@ -1,3 +1,20 @@
+# 当前接续：M-AVIEW1 实际显示通过；原alpha卸载仍未完成
+
+独立HF有限变形／TMC前向评价继续面向实际结构变形、反力及可解释工件作用；HF与LF优化断开，main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git，science0.5.0与原资格保持。
+
+M-AVIEW1按直接批准唯一执行PASS、已闭卡：原alpha5e−7的14个接受origin/loading态，一例中geometry/nodal各14次、9842节点行、29NPZ/279字段，14共同目标及196已算差值，6PNG/14帧GIF和0.85/1.20两快照均已实际生成。outer39.6406280999945秒/exit0、tree采样峰363720704B、stopnull、77原bindings不变；F/T/HP/构模/平衡/JIT/LF新增0，无重试或force。实际像素及独立记录核查通过，不是新物理资格。
+
+峰值1.20 mm：R0.37865427196005513 N，下半工件total/material/Hu Fy=0.12492121630032427/0.12405713468784063/0.0008640816124836284 N，有限tip-bottom距离0.0009696602064828141 mm，medium minJ2.3283009562457014e−5。减半alpha后的峰R近原值、material/Hu分量变化，0.85附近局部压缩更敏感。仅两值敏感性；双侧幅值和不是有效夹持，几何距离不是压力/穿透资格，新alpha没有HP。
+
+原M-ALPHA1仍NOT_PASS：14加载态至1.20接受保存、第一次卸载1.15在controller时间预算处停止。原result/保存态不改，path/unload/tasktarget均false。公共Mean/API尚无保存态下降续算入口；最近先准备明确初始mean/split/R/cache、下降目标及回滚/来源合同，再有界局部验证，不重跑长加载或扫描新alpha。
+
+已有完整力、全DOF未对称矩阵/组装、Mean/API/batch/缓存/保存/读取/实际显示。连续总压力、移动工件/摩擦、有效夹持、物理稳定性、其它形状完整验证、一般输入、全部切线列独立验证及正式HF5仍未完成。原24态48HP与PORT方向资格不转给新alpha。阶段README/卡/protocol中的false为历史准备记录，实际记录在RESULTS和授权/launch中。
+
+[实际结果与图件](../functional_views/native_alpha_partial_20261011/complete_001/RESULTS.md) · [下一步取舍](../functional_views/native_alpha_partial_20261011/complete_001/NEXT_STEP_REVIEW.md) · [原数值结果](../lf_data_preparation/native_interface_001/regularization_sensitivity_001/RESULTS.md)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-AVIEW1 保存态显示已准备、未授权／未执行
 
 整体目标仍是独立HF有限变形／TMC前向评价，提供可检查的结构实际变形、输入反力与工件作用，供外部研究层比较。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git，HF不含优化、不调用dmftd。
@@ -974,6 +991,9 @@ Pop-Location
 </details>
 
 </details>
+
+</details>
+
 
 </details>
 
