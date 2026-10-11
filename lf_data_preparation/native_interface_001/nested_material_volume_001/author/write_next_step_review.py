@@ -1,0 +1,48 @@
+"""Record source-based functional continuation; no new execution card or science."""
+from pathlib import Path
+from hashlib import sha256
+import json
+
+ROOT = Path('D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC')
+EXT = Path(__file__).resolve().parent
+STAGE = ROOT/'lf_data_preparation/native_interface_001/nested_material_volume_001'
+audit = EXT/'existing_workpiece_function_audit.json'
+assert audit.exists() and json.loads(audit.read_bytes())
+for name in ('existing_workpiece_function_audit.json','write_existing_workpiece_function_audit.py','write_next_step_review.py'):
+    target = STAGE/'author'/name
+    assert not target.exists()
+    target.write_bytes((EXT/name).read_bytes())
+text = '''# M-VOLUME1 后的功能取舍与接续判断
+
+2026-10-11。依据本卡[实际结果](RESULTS.md)与[现有功能独立核查](author/existing_workpiece_function_audit.json)；本文件仅记接续判断，不是新的执行卡或数值授权。
+
+## 整体目标与已可用功能
+
+整体目标是从普通 LF 几何独立求出 HF 有限变形／TMC 响应，让用户能观察结构变形、力如何作用以及工件受力，并最终得到有明确物理含义和适用范围的夹持评价。main 是唯一后续开发主干，origin 为 https://github.com/dudaxing/Compliant-TO-TMC.git。保持 HF 与 LF 优化断开。
+
+| 已有能力 | 当前真实实现与证据 | 后续取舍 |
+| --- | --- | --- |
+| 固定工件 total/material/Hu 总作用 | [native_mean](../../../hf_repo/src/hf_eval/native_mean.py) 与 [公共响应](../../../hf_repo/src/hf_eval/native_response.py)已报告作用于下半工件的力、保持反力、镜像力、完整净力及双侧法向幅值和 | 复用接口；不要重新实现总载荷摘要 |
+| 原24态独立参考 | [M-REF2结果](../nested_reference_002/RESULTS.md)覆盖24保存态、48次HP80/120，并包含材料/Hu工件力及不重叠保持投影；切线方向仍是原PORT方向 | 保留已有参考资格；不要把工件力投影当作完全未核过的量 |
+| 实际变形与节点力显示 | [既存viewer](../../../functional_views/native_api_workpiece_20261008/complete_001/saved_right_margin_views.py)与[细网格视图](../../../functional_views/native_nested_cycle_20261009/complete_001/execute_nested_views.py)已叠加total/material/Hu节点力箭头与镜像，产出[24态实际GIF](../../../functional_views/native_nested_cycle_20261009/complete_001/run_001/view/fixed_square/actual_states.gif) | 复用显示；不把同等两态箭头图当成新功能 |
+| 全路径节点载荷账本 | [M-LEDGER2](../nested_ledger_002/RESULTS.md)已有全24态三component、七类账本与同输入加载/卸载配对 | 不继续扩大同类账本来代替物理功能推进 |
+| 局部材料体积／上缘差解释 | 本卡四case保存弱力与九点观察接近，三层贡献说明上缘迹为何不等于体积弱式；只核同九项重组新门 | 当前无局部证据要求重开DD核；结论保持四case范围 |
+
+## 真正剩余的物理缺口
+
+原节点弱载荷、材料上缘迹和连续边界压力是不同作用量。P@N仅是材料迹；Hu的高阶、边／角点及离散作用不能用一个标量直接补到P@N上。本卡没有取得真实连续应力的DivP、其它面通量或总Hu边界分解，也不提供总压力资格。
+
+固定工件的总广义作用与保持反力已经能计算，并已有独立参考；这不自动成为可移动工件的有效夹持能力。镜像完整净Fy的抵消与双侧法向幅值和也不能混称。自由工件、摩擦、物理参数及网格稳定性、正式HF5标签／排名仍是未完成范围。
+
+## 最近应做什么以及为什么
+
+下一次方案应直接服务于“如何解释并可靠报告工件总作用”，复用现有响应和实际变形图。先根据原Q1弱式及Hu项明确要报告的总边界／广义作用合同，区分已有固定体反力与尚未成立的压力密度；同时核清独立能量／虚功证据是否确有缺口及是否适用于原实现。若规划新的独立核验，应证明它提供已有24态力参考之外的证据，不能只换一个方向重复现有投影。
+
+随后依据这个明确的物理合同选择最小计算或功能增量，逐步推进可用工件载荷及物理稳定性，保留真实变形和有符号力显示。局部查看器优化可以在用户检查确实需要时实施，但不应替代尚缺的总边界解释、网格／参数稳定性或有效夹持判断。
+
+这里不预先决定新HP次数、读取数组、求解路径、绘图或资源预算。具体新增范围与验收门应在完成候选及独立审阅后形成下一卡，再申请所需新授权；M-VOLUME1已经闭卡，剩余资源不续用。既存代码、原数据、原验收门和既有参考资格保持。
+'''
+target = STAGE/'NEXT_STEP_REVIEW.md'
+assert not target.exists()
+target.write_bytes(text.encode('utf-8'))
+print(json.dumps(dict(status='ordinary_function_continuation_recorded',audit_sha256=sha256(audit.read_bytes()).hexdigest(),new_scientific_runs=0),ensure_ascii=False))

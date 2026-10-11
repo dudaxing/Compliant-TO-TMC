@@ -1,0 +1,348 @@
+{
+  "schema_version": "existing-public-workpiece-function-readonly-audit-1.1",
+  "status": "completed_readonly_existing_function_audit_no_new_execution_plan",
+  "baseline_main": "7ea78ce19ba066dfce8a03892395d5604707dda6",
+  "reviewer_role": "independent_volume_math_review",
+  "purpose": "Preserve and reuse existing actual workpiece force/reference/view capabilities; identify the remaining physical definition and qualification gaps after M-VOLUME1 without duplicating functionality.",
+  "actual_source_and_saved_evidence_SHA": {
+    "hf_repo/src/hf_eval/native_evaluate.py": {
+      "bytes": 4500,
+      "sha256": "bd6c2e858bfa8d7e4202ecd670275d952759197def94eada99bfb353a80bc942"
+    },
+    "hf_repo/src/hf_eval/native_mean.py": {
+      "bytes": 17824,
+      "sha256": "379856e9b3fc226928361a09d4028c60af7aeabf74b19024d227f806cf351998"
+    },
+    "hf_repo/src/hf_eval/split_displacement.py": {
+      "bytes": 22142,
+      "sha256": "6738ace4b617b0103b6d266d9b62b68343cc6d053c52246b6ca0344f72e9dc6e"
+    },
+    "hf_repo/src/hf_eval/native_response.py": {
+      "bytes": 14704,
+      "sha256": "f373d40cf9a09494e141b03c79c089a16e23cb1e69b4c3cc8b87792d994469af"
+    },
+    "hf_repo/src/hf_eval/workpiece_nodal.py": {
+      "bytes": 4423,
+      "sha256": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9"
+    },
+    "hf_repo/src/hf_eval/saved_workpiece_loads.py": {
+      "bytes": 8150,
+      "sha256": "2359a89d4969b98c68baa8b932fb0001c426b898004cb579f76ff8bc727c5070"
+    },
+    "hf_repo/src/hf_eval/native_region_geometry.py": {
+      "bytes": 16022,
+      "sha256": "0bc3fa706431de16761d3ffa89b37e56ef3f4782984362d14792b1f5dd26aa98"
+    },
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": {
+      "bytes": 19752,
+      "sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+    },
+    "functional_views/native_api_workpiece_20261008/complete_001/saved_right_margin_views.py": {
+      "bytes": 21517,
+      "sha256": "761a9ffd1512233ce048be364c00a86882b69e2fb3e3fe81d7f79f74ad52b166"
+    },
+    "functional_views/native_nested_cycle_20261009/complete_001/execute_nested_views.py": {
+      "bytes": 12706,
+      "sha256": "49c6f086bd6867bad1f67892cba051f4c804c07e6c240403008f922d09ac70a9"
+    },
+    "lf_data_preparation/native_interface_001/nested_reference_002/execute_nested_reference.py": {
+      "bytes": 20159,
+      "sha256": "250ed6e6cffa51424fa847bd877a370ba2d5234aed06cdc22d37895dd0e9419a"
+    },
+    "lf_data_preparation/native_interface_001/nested_reference_002/run_001/reference/sources/core_audit_mechanical.py": {
+      "bytes": 39310,
+      "sha256": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5"
+    },
+    "lf_data_preparation/native_interface_001/nested_reference_002/run_001/reference/sources/audit_native_workpiece_cycle.py": {
+      "bytes": 27630,
+      "sha256": "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938"
+    },
+    "lf_data_preparation/native_interface_001/nested_link_001/run_001/linked_response.json": {
+      "bytes": 15696,
+      "sha256": "1fd03489c87888a5faca29ef0bade76eb3e143038bc4cb68bab7e733f0635ba4"
+    },
+    "lf_data_preparation/native_interface_001/nested_reference_002/run_001/reference/summary.json": {
+      "bytes": 531799,
+      "sha256": "84e619d07f4ddc822da93074e14e8af54052c98d6ce726897a83af9ad4b6ba11"
+    },
+    "lf_data_preparation/native_interface_001/nested_ledger_002/run_001/execution_receipt.json": {
+      "bytes": 1499,
+      "sha256": "e2aa1bdc551bc22cc2bb283af422f7494db95c1c2abab99b8cfe5305d67f98c6"
+    },
+    "functional_views/native_nested_cycle_20261009/complete_001/run_001/view/view.json": {
+      "bytes": 30598,
+      "sha256": "402a5533844ff1ace45e44b4fa72b1843426b0e111ce02e15b8238c878e91ae8"
+    }
+  },
+  "existing_capabilities": [
+    {
+      "function": "Native forward entry and saved response",
+      "sources": [
+        "hf_repo/src/hf_eval/native_evaluate.py",
+        "hf_repo/src/hf_eval/native_mean.py",
+        "hf_repo/src/hf_eval/split_displacement.py",
+        "hf_repo/src/hf_eval/native_response.py"
+      ],
+      "implemented": "evaluate_native already performs the existing native mean path, persists original accepted states and produces compact target/peak/endpoint/last response. The saved public reader associates the matching reference and views without NPZ or a new solve."
+    },
+    {
+      "function": "Original total/material/Hu fixed-body loads",
+      "sources": [
+        "hf_repo/src/hf_eval/native_mean.py",
+        "hf_repo/src/hf_eval/split_displacement.py"
+      ],
+      "implemented": "Original signed ON-body weak nodal force is minus the original assembled internal weak force on fixed workpiece DOFs. Original global total/material/regularization(Hu) components, opposite holding reaction, and disjoint fixed-DOF partitions are already computed and saved; thickness is already included in N.",
+      "limit": "These are discrete generalized weak forces. They do not supply a continuous pressure density or allocate corner action to incident faces."
+    },
+    {
+      "function": "Half model and mirror reporting",
+      "sources": [
+        "hf_repo/src/hf_eval/native_mean.py",
+        "hf_repo/src/hf_eval/native_response.py"
+      ],
+      "implemented": "Public total lower-half [Fx,Fy], mirrored upper [Fx,-Fy], full mirrored net [2Fx,0] and two-sided normal magnitude 2*abs(Fy) already exist.",
+      "limit": "The normal magnitude is an available report under the existing weak-force convention. It remains distinct from certified effective grip and from full-body net force; mirror reporting does not solve a second half."
+    },
+    {
+      "function": "Nodal loads, moments and complete saved ledger",
+      "sources": [
+        "hf_repo/src/hf_eval/workpiece_nodal.py",
+        "hf_repo/src/hf_eval/saved_workpiece_loads.py"
+      ],
+      "implemented": "The public observer already emits original total/material/Hu body-node vectors, group resultants and moments; physical/cut/intersection/interior groups keep each node once. M-LEDGER2 already reads all24 saved states and refines seven exclusive categories using original six force strings and original closure.",
+      "actual_saved_receipt": {
+        "status": "pass",
+        "selected_states": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "calls": {
+          "ledger_started": 1,
+          "ledger_completed": 1,
+          "PNG_writes": 2
+        },
+        "shared_MLEDGER1_exact": true,
+        "paired_strokes": 10,
+        "paired_category_rows": 70,
+        "all_bindings_unchanged": true
+      }
+    },
+    {
+      "function": "Actual deformation with three force components",
+      "sources": [
+        "functional_views/native_api_workpiece_20261008/complete_001/saved_right_margin_views.py",
+        "functional_views/native_nested_cycle_20261009/complete_001/execute_nested_views.py"
+      ],
+      "implemented": "The existing24-frame actual_states.gif already overlays original total/material/Hu force-vector panels on actual deformed mechanism/body geometry, with all body nodes and a common display scale. Geometry and Fy are reflected for the visual upper half.",
+      "actual_saved_manifest": {
+        "status": "pass",
+        "common_nodal_force_scale": {
+          "max_force_N": 0.06730440433521688,
+          "display_length_mm": 4,
+          "all_body_nodes": true,
+          "components": [
+            "total",
+            "material",
+            "regularization"
+          ]
+        },
+        "mirroring": "Visualization only about native symmetry; lower-body resultants stay half-model quantities; reflected arrows flip Fy, no doubled solved DOFs",
+        "contact_pressure_clamping_qualified": false
+      },
+      "limit": "The display is an existing weak nodal force view, not pressure recovery. A new generic two-state three-component deformation overlay would duplicate it."
+    },
+    {
+      "function": "Actual region and material diagnostics",
+      "sources": [
+        "hf_repo/src/hf_eval/native_region_geometry.py"
+      ],
+      "implemented": "Actual deformed-region overlap/intersection and finite-face hit diagnostics already exist. Material-only owner P trace, original material support and M-VOLUME1 selected depth contractions add local observations.",
+      "limit": "Node-window clearances and region diagnostics explicitly are not certified contact or penetration measures. Material P traces omit Hu and do not qualify total pressure."
+    },
+    {
+      "function": "Independent saved force reference",
+      "sources": [
+        "lf_data_preparation/native_interface_001/nested_reference_002/execute_nested_reference.py",
+        "lf_data_preparation/native_interface_001/nested_reference_002/run_001/reference/sources/core_audit_mechanical.py",
+        "lf_data_preparation/native_interface_001/nested_reference_002/run_001/reference/sources/audit_native_workpiece_cycle.py"
+      ],
+      "implemented": "M-REF2 already independently evaluates all24 original saved mechanical states at HP80/120 over all13440 elements and27378 real DOFs. Its original strict gates include signed total/material/Hu body force projections and disjoint holding projections.",
+      "directional_tangent_scope": "The directional tangent check uses the actual five-node PORT direction, with fixed DOFs zero and deltaR=0. That tangent check is not a workpiece rigid-translation direction test; it does not negate the already checked full-force/body projection reference.",
+      "energy_scope": "Independent analytic HP energy is archived without candidate energy comparison or energy qualification. An untested energy identity must not be presented as an existing gate, or presumed to be a required energy gradient identity for the current Hu weak residual."
+    }
+  ],
+  "actual_public_response_evidence": {
+    "status": "success",
+    "path": {
+      "kind": "ordered_cycle",
+      "requested_targets_mm": [
+        0.0,
+        0.25,
+        0.5,
+        0.65,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95,
+        1.0,
+        1.05,
+        1.1,
+        1.15,
+        1.2,
+        1.15,
+        1.1,
+        1.0,
+        0.9,
+        0.8,
+        0.75,
+        0.65,
+        0.5,
+        0.25,
+        0.0
+      ],
+      "task_target_mm": 1.2,
+      "requested_endpoint_mm": 0.0,
+      "reached_displacement_mm": 0.0,
+      "accepted_states": 24,
+      "completed": true,
+      "task_target_executed": true
+    },
+    "producer_flags": {
+      "independent_HP_qualified": false,
+      "equilibrium_qualified": false,
+      "HF_qualified": false
+    },
+    "force_semantics": "R is half-model actuator reaction; lower-body forces are signed weak-form resultants. Two-sided normal magnitude sum is not full-body net force. q_out is a weighted port displacement, not a surface gap.",
+    "target_workpiece": {
+      "force_on_lower_body_N": {
+        "total": [
+          -0.0008760157046173312,
+          0.12317940160165043
+        ],
+        "material": [
+          -0.000561226821740675,
+          0.12191255705872141
+        ],
+        "regularization": [
+          -0.0003147888828766561,
+          0.0012668445429290087
+        ]
+      },
+      "holding_reaction_on_model_N": [
+        0.0008760157046173312,
+        -0.12317940160165043
+      ],
+      "mirrored_upper_force_N": [
+        -0.0008760157046173312,
+        -0.12317940160165043
+      ],
+      "full_workpiece_net_force_N": [
+        -0.0017520314092346625,
+        0.0
+      ],
+      "two_sided_normal_magnitude_sum_N": 0.24635880320330086,
+      "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+      "node_window_clearance_mm": {
+        "bottom": 0.0011443626281568697,
+        "left": 2.344019026933367
+      },
+      "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+    },
+    "matched_reference": {
+      "status": "matched",
+      "accepted_reference_pass": true,
+      "full_path_reference_pass": true,
+      "report": {
+        "path": "lf_data_preparation/native_interface_001/nested_reference_002/run_001/reference/summary.json",
+        "path_scope": "repo_relative",
+        "sha256": "84e619d07f4ddc822da93074e14e8af54052c98d6ce726897a83af9ad4b6ba11"
+      },
+      "reasons": [],
+      "HP_all_columns_qualified": false,
+      "contact_qualified": false,
+      "clamp_qualified": false,
+      "pressure_qualified": false,
+      "HF5_qualified": false,
+      "reported_status": "pass",
+      "qualification_scope": "Accepted mechanical states of this exact h0.5 fixed-square cycle only. Original15 strict gates; no all-column, new separate Hu-error gate, stress-HP, pressure, effective-clamp, mesh/domain convergence or HF5 qualification",
+      "accepted_states": 24,
+      "HP_calls_completed": 48,
+      "reported_scope_flags": {
+        "full_element_and_DOF_coverage": true,
+        "HP_matrix_columns_exhaustively_checked": false,
+        "contact_qualified": false,
+        "clamp_qualified": false,
+        "pressure_qualified": false
+      },
+      "source_bindings_verified": true,
+      "verification_scope": "Matched saved JSON identities/all accepted states/2N bookkeeping and declared source bytes; no HP/NPZ archive re-audit"
+    },
+    "original_reference_scope": "All24 actual accepted/original saved states,13440 elements and27378 real DOFs; actual five-node PORT direction with deltaR=0; signed material/Hu body force and disjoint holding projections",
+    "original_reference_qualification": "Accepted mechanical states of this exact h0.5 fixed-square cycle only. Original15 strict gates; no all-column, new separate Hu-error gate, stress-HP, pressure, effective-clamp, mesh/domain convergence or HF5 qualification",
+    "original_qualified_flags": {
+      "contact_qualified": false,
+      "clamp_qualified": false,
+      "pressure_qualified": false,
+      "HF5_qualified": false
+    },
+    "reference_energy_scope_fields": {
+      "analytic_HP_energy_scope": "Archived independent reference only; no candidate energy comparison or qualification"
+    }
+  },
+  "remaining_physical_function_gap": {
+    "nearest_actual_gap": "A justified total interface-action/pressure interpretation including the original Hu weak term, with explicit boundary/corner meaning and physical contact/grip qualification. A total/material/Hu workpiece resultant API and its independent force reference already exist.",
+    "existing_reusable_primitives": "Retain original response, original same-state body total/material/Hu vectors, holding partitions, mirror convention, existing independent force references and existing actual-state viewer. State their present discrete generalized-load meaning clearly while developing any stronger pressure or effective-grip claim.",
+    "Hu_boundary_dependency": "The original Hu residual contracts higher displacement gradients with a state-dependent quadrature scale. Adding a scalar Hu contribution to P@N would not by itself define a total ordinary pressure. Recovering face/derivative/corner actions requires a consistent discrete boundary/virtual-work definition.",
+    "corner_dependency": "Original nodal corner action and owner-specific material P samples do not uniquely determine pressure on each incident face; a recovery choice needs an explicit definition and validation.",
+    "qualification_dependency": "Pressure/contact/effective grip and mesh/domain physical stability remain excluded from original mechanical reference qualification. Existing geometry diagnostics and one fixed-square h0.5 cycle cannot silently become those stronger claims.",
+    "coarse_route": "First retain and document the already independently checked fixed-body total weak action as a discrete generalized load including Hu, then resolve the total boundary interpretation and choose the minimum physical qualification study required by the intended report. Reuse existing visible response/views; no automatic repeat of the24-state ledger, body-force HP reference or DD reconstruction.",
+    "virtual_work_or_energy_caution": "A new rigid-body virtual-work interpretation, if selected, must address a specific unverified boundary meaning. Simple projection of already HP-checked full force is not a new missing force implementation. The PORT tangent scope and archived energy limitation alone do not establish a solver defect or justify a duplicate HP campaign.",
+    "planning_limit": "Future route basis only. M-VOLUME1 closure is current work; no execution card, new calculation or authorization is created by this audit."
+  },
+  "do_not_repeat": [
+    "total/material/Hu workpiece force API",
+    "holding reaction and disjoint partitions",
+    "half/mirror/full-net/normal-magnitude report",
+    "matched saved response/reference/view link",
+    "all24 saved nodal ledger",
+    "generic three-component force/deformation overlays",
+    "independent body-force projection already covered by the actual HP reference"
+  ],
+  "activities": {
+    "source_and_existing_JSON_only": true,
+    "raw_source_evidence_SHA": true,
+    "NPZ_decodes": 0,
+    "public_API_calls": 0,
+    "new_HP_calls": 0,
+    "new_scientific_numerical_values": 0,
+    "new_integrals": 0,
+    "new_fsum_calls": 0,
+    "new_plot_calls": 0,
+    "repository_mutations": 0,
+    "new_execution_cards": 0
+  },
+  "audit_limit": "Read-only source/saved-record audit; no existing capability is rerun or requalified, and no contact/pressure/clamp/HF5 flag is changed."
+}

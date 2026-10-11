@@ -1,3 +1,20 @@
+# 当前接续：M-VOLUME1九点材料体积诊断已通过（2026-10-11）
+
+整体目标仍是读取普通 LF 几何的独立 HF 有限变形／TMC 前向评估，提供可解释的反力、工件载荷和实际变形；HF不优化、不调用dmftd，main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
+
+M-VOLUME1已在直接人类批准后唯一实际PASS并闭卡：原loading6／0.85mm、13／1.20mm的10406／10407两个单元，3个既存NPZ／9字段、2次公共入口，36九点采样／12深度／4单元对照行及两PNG。31冻结绑定保持，outer2.5381053000019165秒／tree RSS132591616 B；helper2.2876966999901924秒／own RSS128356352 B是成功收据构造前快照。exit0、stopnull、一次启动，无重试／修复重跑／延期／force；本卡窗口结束。独立终态核对通过，主任务实际查看两张原2100×2400像素，物理解读已归档。
+
+四case的Fy保存W−九点观察V全为保存0；Fx只在6/10406和13/10407出现−1.6940658945086007e−21／+2.710505431213761e−20 N。峰值10406与10407的W=V Fy分别+.037219775006120934／+.08022435531475952 N，旧上缘T分别+.004917548552353244／+.01938390857410906 N。W−T差分别+.03230222645376769／+.060840446740650464 N，V并未消去体积／上缘差；现有局部证据不支持立即重开DD核追究舍入分离。
+
+0.85mm中层Q较大，1.20mm下层Q较大。三个Q是同批九项的可加体积贡献；Qtop不是整上缘T。唯一新增8eps×同九项L1重组门四case均通过，无地板；跨表达差只描述，原保存DD力、旧迹和原门保持。两图各panel独立尺度，只能按标签／CSV跨panel比较绝对量；图为参考采样及材料贡献，实际结构变形仍见原图／24帧GIF。protocol及card的False是准备历史，实际授权和终态另有独立记录。
+
+下一功能选择先核当前公共API已有total/material/Hu工件载荷、半模及镜像报告合同，避免重做已有功能；再根据本次局部体积／上缘证据推进尚缺的总作用量物理解释和可用输出。这里仅记粗路线，不拟定或授权新数值卡。不扩展同类全24态账本，不把P@N加一个Hu数认定为总压力。总Hu边界作用／压力、有效夹持、自由体／摩擦、网格收敛、正式标签排名与HF5仍未完成；本卡不增加力核／切线／HP／平衡路径或压力／夹持资格。
+
+[新九点实际结果](../nested_material_volume_001/RESULTS.md) · [九点P图](../nested_material_volume_001/run_001/nine_point_material_P.png) · [分层贡献图](../nested_material_volume_001/run_001/material_depth_volume_comparison.png) · [本阶段原实际结果](RESULTS.md) · [原实际变形](../nested_material_trace_001/run_001/actual_material_trace.png)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-VOLUME1 九点材料体积候选待批准（2026-10-11）
 
 整体目标仍是独立 HF 有限变形／TMC 前向评估，读取普通 LF 几何，为外部研究提供反力、工件载荷和实际变形。HF不优化、不调用dmftd；main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
@@ -51,6 +68,8 @@ M-PTRACE1 已唯一实际通过并闭卡，结果发布／恢复于 main 96bfea7
 ```text
 python -X utf8 -B lf_data_preparation/native_interface_001/nested_material_support_001/launch_support.py support --protocol lf_data_preparation/native_interface_001/nested_material_support_001/protocol.json
 ```
+
+</details>
 
 </details>
 
