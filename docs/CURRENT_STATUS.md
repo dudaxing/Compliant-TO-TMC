@@ -1,3 +1,20 @@
+# 当前接续：M-VOLUME1 九点材料体积候选待批准（2026-10-11）
+
+整体目标仍是独立 HF 有限变形／TMC 前向评估，读取普通 LF 几何，为外部研究提供反力、工件载荷和实际变形。HF不优化、不调用dmftd；main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
+
+M-SUPPORT1已唯一实际PASS闭卡并发布／恢复于main1671e2d。峰值bottom-owner弱Fy与旧bottom线差+0.09415598535141824 N，大差主要来自同一owner的体积与面迹表达；corner_only不能解释该量级。最近新候选M-VOLUME1聚焦原6/0.85mm和13/1.20mm的10406／10407两个单元。
+
+新入口读取3个既存NPZ／9字段，对九点保存P／原grad和含厚度weights做材料体积重构，并按η三层显示；保留原DD收缩后的保存元素力及旧上缘迹。保存P已舍入，重构不是原DD重播；两者差单独报告，不设相等门。只对同一批九点观察项的行重组使用8eps·L1无地板新代数门，原门保持。
+
+当前仅编码、AST、普通元数据和字节静审；尚未导入候选、解码NPZ、积分／fsum或绘图。新卡拟一次helper180秒／outer240秒／采样8GiB、首错停止、无重试／修复重跑／延期／force，待人类批准。预期36九点行／12深度行／4单元对照行及两PNG；新图显示参考单元采样和有符号材料贡献，实际变形复用原图。未证明差值连续物理原因。
+
+总Hu边界作用／压力、有效夹持、自由体／摩擦、网格收敛及正式HF5标签排名仍未完成。最近只执行该小范围观察，按实际结果再决定原收缩核查或Hu边界功能，不预先扩展全24态或新平衡路径。
+
+[具体卡](../lf_data_preparation/native_interface_001/nested_material_volume_001/M-VOLUME1_CARD.md) · [说明](../lf_data_preparation/native_interface_001/nested_material_volume_001/README.md) · [冻结协议](../lf_data_preparation/native_interface_001/nested_material_volume_001/protocol.json)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-SUPPORT1两态材料支撑诊断已通过（2026-10-11）
 
 整体目标仍是读取普通 LF 几何的独立 HF 有限变形／TMC 前向评估，输出可解释的反力、工件载荷与实际变形；HF不优化、不调用dmftd，继续main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
@@ -741,6 +758,8 @@ CPU原237条和科学30条事件完整；严格同步内原行157–235全部79�
 
 </details>
 
+
+</details>
 
 </details>
 

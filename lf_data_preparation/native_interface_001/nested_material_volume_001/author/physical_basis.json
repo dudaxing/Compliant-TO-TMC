@@ -1,0 +1,96 @@
+{
+  "schema_version": "saved-material-volume-static-physical-basis-1.0",
+  "status": "prepared_static_mathematical_basis_no_new_scientific_execution",
+  "author_role": "independent_volume_math_review",
+  "repository": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC",
+  "baseline_main": "1671e2d01db3f96718d76ca985199bf3fc65873f",
+  "scope": "Original loading states 6 / 0.85 mm and 13 / 1.20 mm, bottom-owner cells 10406 and 10407 only. Inspect saved rounded first Piola samples and original saved material local force; no force-kernel reconstruction, no constitutive update, no tangent, HP, solver, pressure or effective-grip qualification.",
+  "evidence_read": [
+    {"path": "hf_repo/src/hf_eval/tmc_kernel.py", "lines": "47-66", "fact": "Native nodes BL, BR, TR, TL. Physical reference gradients, nine-point tensor Simpson, xi slow and eta fast. Weights include hx*hy*thickness/36."},
+    {"path": "hf_repo/src/hf_eval/split_kernel_invariants_hu.py", "lines": "174-184, 201-215", "fact": "Material force is contracted from the high/low P pair through gradient and weighted quadrature DD operations; output material_residual and stress_first_piola are each rounded separately only at the output boundary."},
+    {"path": "hf_repo/src/hf_eval/compensated_invariants.py", "lines": "125-127, 171-180, 372-395", "fact": "dd_value is hi+lo; dd_mul retains four high/low products with executable arithmetic support checks; dd_sum uses fixed-order high/low addition."},
+    {"path": "hf_repo/src/hf_eval/native_mean.py", "lines": "176-203", "fact": "Accepted snapshots preserve matching cached tangent-state fields. stress_first_piola and element_material_force are distinct exported observations; no saved stress pair is exposed in the accepted force arrays."},
+    {"path": "hf_repo/src/hf_eval/saved_material_trace.py", "lines": "14-18, 25-29, 90-108", "fact": "Body bottom uses outside-owner top samples q2/q5/q8 and body-outward normal (0,-1). Material line estimate is a separate reference Simpson edge estimate times thickness once."},
+    {"path": "hf_repo/src/hf_eval/saved_material_support.py", "lines": "96-124", "fact": "Original ON-body local force is minus saved internal material force. fsum selects only workpiece-node occurrences. Owner grouping names basis support, not pressure surfaces."},
+    {"path": "lf_data_preparation/native_interface_001/nested_material_support_001/RESULTS.md", "fact": "Actual M-SUPPORT1 has localized the peak material weak-versus-line difference to bottom-owner support. No local nine-point cause was yet qualified."},
+    {"path": "lf_data_preparation/native_interface_001/nested_material_support_001/run_001/cells.csv", "fact": "Each selected cell selects local TR=2 and TL=3, matching original bottom-owner records."},
+    {"path": "lf_data_preparation/native_interface_001/nested_material_trace_001/run_001/material_trace.json", "fact": "The four state/cell records preserve owner connectivity, phase, top three P matrices, reference samples and original material line estimate."}
+  ],
+  "selected_owner_identity": [
+    {"cell_id": 10406, "native_node_ids_BL_BR_TR_TL": [10467, 10468, 10637, 10636], "selected_local_indices": [2, 3], "selected_body_node_ids_TR_TL": [10637, 10636], "body_cell_id": 10574, "outside_face": "top", "body_face": "bottom", "reference_top_endpoints_mm": [[79.0, 31.0], [79.5, 31.0]], "phase_source": "original trace says third_medium; no new solid field read needed"},
+    {"cell_id": 10407, "native_node_ids_BL_BR_TR_TL": [10468, 10469, 10638, 10637], "selected_local_indices": [2, 3], "selected_body_node_ids_TR_TL": [10638, 10637], "body_cell_id": 10575, "outside_face": "top", "body_face": "bottom", "reference_top_endpoints_mm": [[79.5, 31.0], [80.0, 31.0]], "phase_source": "original trace says third_medium; no new solid field read needed"}
+  ],
+  "existing_values_copied_not_recomputed": [
+    {"index": 6, "cell_id": 10406, "saved_selected_material_on_body_N": [-7.700529398174155e-06, 0.0005424729467091343], "old_top_material_line_on_body_N": [-1.5901648620005987e-06, 0.00047243194122519885]},
+    {"index": 6, "cell_id": 10407, "saved_selected_material_on_body_N": [-1.5719641123269165e-05, 0.001323795449585901], "old_top_material_line_on_body_N": [-1.589798383234296e-06, 0.0010176156584012655]},
+    {"index": 13, "cell_id": 10406, "saved_selected_material_on_body_N": [-0.00027418896548745656, 0.037219775006120934], "old_top_material_line_on_body_N": [-1.6779232225395858e-06, 0.004917548552353244]},
+    {"index": 13, "cell_id": 10407, "saved_selected_material_on_body_N": [-0.00016599468624573286, 0.08022435531475952], "old_top_material_line_on_body_N": [-1.663139545792432e-06, 0.01938390857410906]}
+  ],
+  "fixed_geometry_convention": {
+    "reference_cell": "Aligned native rectangle, hx=hy=0.5 mm, thickness=20 mm, positively oriented BL/BR/TR/TL.",
+    "point_order": [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 0], [0, 1], [1, -1], [1, 0], [1, 1]],
+    "eta_rows": {"bottom_minus_1": [0, 3, 6], "middle_0": [1, 4, 7], "top_plus_1": [2, 5, 8]},
+    "Simpson_axis_weights": [1, 4, 1],
+    "stress_indexing": "P[i,J]: spatial force component i=x/y, physical reference derivative column J=X/Y. Use saved P[:,Y] only for the selected-node SUM; P[:,X] would be necessary for reconstructing the two individual node forces, which is outside this minimal task.",
+    "units": "P MPa=N/mm^2; gradient 1/mm; original volume weights mm^3 including thickness; resulting force N; all force signs ON body.",
+    "thickness_rule": "Direct volume uses saved weights with thickness already included. Geometric row line amount includes thickness exactly once. Never multiply saved element force by thickness again."
+  },
+  "algebraic_identity_in_real_arithmetic": {
+    "selected_basis": "chi=N_TR+N_TL=(1+eta)/2",
+    "gradient": "grad_X chi=(0,1/hy)",
+    "original_exact_form": "W_i = -(r_TR,i + r_TL,i), where r_a,i is the ORIGINAL compensated material volume force before its separate final binary64 observation. Saved W is fsum of the two already rounded original local observations, not a new full-precision reconstruction.",
+    "rounded_P_direct_volume": "V_i = -sum_q w_q P_exported[i,Y](q)/hy; this is a diagnostic based on separately rounded exported P, not the original DD weak contraction.",
+    "geometric_row_amount": "C_eta,i = -t*hx/6 * sum_xi a_xi P_exported[i,Y](xi,eta), with a=(1,4,1).",
+    "geometric_volume": "V_geometry,i = (C_minus,i + 4*C_zero,i + C_plus,i)/6",
+    "geometric_top_line": "T_geometry,i = C_plus,i; the old saved trace T_i is retained independently and exactly copied.",
+    "geometric_gap": "D_geometry,i = (C_minus,i + 4*C_zero,i - 5*C_plus,i)/6 = V_geometry,i - T_geometry,i in real arithmetic.",
+    "interpretation": "The weighted three-layer amount and the top-layer amount are different discrete functionals. The identity exposes the eta sampling and basis-gradient mechanism without differentiating P or inventing an interpolation. It does not prove which constitutive or continuum mechanism created the saved P variation."
+  },
+  "minimal_computational_observer_after_separate_authorization": {
+    "direct_terms": "After exact native-gradient check, calculate q_term_i(q) = -w_q * P_exported[i,Y](q) * (grad_TR,Y(q)+grad_TL,Y(q)). The X derivative sum is exact zero and is checked rather than used to infer individual nodal forces.",
+    "same_term_row_regrouping": "Q_eta,i = fsum of the SAME three computed q_term values at fixed eta. V_direct,i = fsum of the same nine computed q_term values. V_regrouped,i = fsum(Q_minus,i,Q_zero,i,Q_plus,i).",
+    "geometric_rows_separate": "C_eta, V_geometry and D_geometry are separately constructed descriptive observations from the saved normal-column samples and stated fixed geometry. Coefficient rounding differs from the actual saved volume-weight construction; do not equate their bytes.",
+    "retained_original_data": "Retain all eight saved element_material_force values for each selected state/cell, preserve original TR/TL values and fsum(-r_TR,-r_TL) exactly against the corresponding old M-SUPPORT1 cell vector. Do not reconstruct all eight node forces from a single P column.",
+    "trace_identity": "Exact identity/owner/node/top-point association and exact top P-column values versus the old material-trace JSON. Original old top material line values copied exactly, with no new line replay.",
+    "descriptive_comparisons": ["saved selected weak W minus V_direct", "V_geometry minus V_direct", "C_plus minus old saved top T", "V_direct minus old saved T", "D_geometry minus (V_geometry minus C_plus)", "saved W minus old saved T", "D_geometry minus (V_direct minus old saved T)"],
+    "no_new_continuum_derivative": "No DivP, no stress differentiation/interpolation, no neighboring-element jump integration, no F/J/Hu reconstruction."
+  },
+  "gates_and_limits": {
+    "inherited": "Preserve all original M-SUPPORT1 node/whole force rules and source bytes. Do not reuse its 8eps local-force L1 gate to test separately rounded P reconstruction.",
+    "new_identity_gates": "Original state identity, owner node ordering, selected indices, native nine points/grad/weights/thickness geometry, exact old top saved P-column and saved selected force association.",
+    "new_only_arithmetic_gate": "abs(V_regrouped - V_direct) <= 8*eps*fsum(abs(q_term_i(q)) for q in 0..8), eps=2^-52, per component, no absolute floor. Both sides reuse identical computed q terms; at most three fsum groups and a single nine-term fsum. The bound is an ordinary regrouping check, not a force accuracy or physics gate.",
+    "arithmetic_gate_reason": "The same rounded finite q terms are the sole inputs. Summing the nine terms directly versus in three three-term groups gives only summation regrouping error. An 8eps input L1 allowance exceeds the few binary64 sum-rounding errors even under cancellation. Any finite check failure stops rather than raising the bound or adding a floor.",
+    "no_16_or_32eps_cross_formula_gate": "Not needed. Cross-formula coefficient rounding and unknown unexported P low words would require additional arithmetic support assumptions; adding such gates would distract from the function. All independently constructed geometric-row/direct/DD comparisons remain descriptive signed errors.",
+    "critical_no_gate": "Never require V_direct == W or volume == line, nor derive a percent-error acceptance criterion, nor classify near-zero values by an added physical threshold.",
+    "qualification": "Only saved material sampling and discrete-function interpretation. No new material-kernel or continuous weak/strong equilibrium qualification, Hu-inclusive boundary traction, pressure or effective gripping force."
+  },
+  "minimum_reads_after_authorization": {
+    "ordinary_metadata": "Existing model/state/result identity, old support selected cell/local records, old trace selected edge/point records; do not expand to all 24 states.",
+    "NPZ_array_fields": "Two existing forces archives: stress_first_piola and element_material_force. One existing model archive: minimal native gradient/weights/points and any geometry scalars/coordinates/connectivity needed to check the actual aligned rectangle; freeze exact selected fields in the root scope report/card. No state lift/fluctuation, F, J, Hu, tangent, global-force or solid arrays needed for this minimal observation.",
+    "scientific_selection": "Four state/cell combinations, 36 nine-point samples, 72 normal-column force-component values. Archive decoding may load each selected complete stored field once, but calculation/output is confined to these four cells."
+  },
+  "needed_outputs_and_visualization": {
+    "tables": "One raw selected-cell/sample table preserving both signed P_iY components, q/xi/eta, native gradient sum, saved weight and direct q term; one eta-row table of Q_eta and C_eta; one four-cell comparison table preserving selected original W, original T, V_direct/V_geometry/D_geometry and all descriptive signed errors. Preserve the eight original local force components and selected node IDs in JSON.",
+    "figure_1": "Show each selected cell's three eta layers with the three xi samples and signed saved P_iY components, exactly as labeled. Native xi/eta coordinates distinguish bottom/middle/top; their physical reference coordinates remain in the original selected-cell geometry and sample table. Use an independent signed scale in each panel, print the signed values, and explicitly disclose that scales differ; do not label all layers pressure or deformed traction.",
+    "figure_2": "Per state/cell, compare Q_minus/Q_zero/Q_plus as the additive rounded-P volume partition, V_direct, original saved W and old saved top T. Make only the three Q bars a partition; comparison bars are not summands. Fx/Fy scales must be separately readable and provide numeric labels/table where small values vanish on common scales.",
+    "actual_structure": "Link the existing actual M-PTRACE1 structure/deformation image; do not reconstruct new deformation from unapproved lift/fluctuation fields."
+  },
+  "continuous_relation_only_as_context": {
+    "formula": "For a sufficiently regular true element stress, W - T_top = -t*integral_left_and_right(chi*P*n) + t*integral_cell(chi*Div_X P), since chi=0 on bottom and chi=1 on top.",
+    "restriction": "This integration-by-parts context requires an actual continuum stress field and derivatives; nine saved point values do not supply them. The proposed observation computes neither term, so no claim that DivP, side flux, stress jumps or quadrature error alone caused the difference is allowed."
+  },
+  "decision_after_actual_results": [
+    "If rounded-P V is numerically close to original saved W, the three eta-row partition can quantify which saved rows supply the weak-versus-top difference; report the actual signed residual, not a new scientific PASS.",
+    "If V versus W is materially different, stop causal attribution at the observed split and plan a new, separately reviewed contraction-source diagnostic; do not silently reconstruct P pairs or run the force kernel.",
+    "Even agreement cannot establish continuous contact pressure, net physical grasp, mesh convergence or total Hu-inclusive boundary action; these remain later functions."
+  ],
+  "author_activity": {
+    "source_and_ordinary_JSON_CSV_read": true,
+    "NPZ_decoded": false,
+    "candidate_imported_or_called": false,
+    "new_scientific_numerical_values_computed": false,
+    "new_plot_rendered": false,
+    "repository_mutated": false,
+    "prior_values_are_copied_observations": true
+  }
+}

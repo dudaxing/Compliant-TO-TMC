@@ -1,0 +1,169 @@
+{
+  "schema_version": "saved-material-volume-independent-static-physics-review-1.0",
+  "status": "pass_static_source_math_output_scope_no_blocking_issue",
+  "baseline_main": "1671e2d01db3f96718d76ca985199bf3fc65873f",
+  "reviewer_role": "independent_volume_math_review",
+  "review_scope": "Final ordinary Python source, card, updated mathematical basis, original source meanings and old ordinary JSON/CSV records; no candidate import or execution.",
+  "actual_sources": {
+    "saved_material_volume.py": {
+      "bytes": 9907,
+      "sha256": "d2632878e721f4d57822358f453d77befb2bfd8e504554be899b68709095407c",
+      "lines": 134,
+      "ast_syntax_ok": true,
+      "definitions": [
+        "_vector_sum",
+        "observe_saved_bottom_owner_material_volume"
+      ],
+      "imports": [
+        "from __future__ import annotations",
+        "from math import fsum",
+        "import numpy as np"
+      ]
+    },
+    "execute_saved_material_volume.py": {
+      "bytes": 16079,
+      "sha256": "a1f2a70180c74d81bdb136060aeb0fb9567106604ba2fda68c7ffa19cdc1c259",
+      "lines": 255,
+      "ast_syntax_ok": true,
+      "definitions": [
+        "checkpoint",
+        "write_json",
+        "selected_arrays",
+        "vector_fields",
+        "csv_identity",
+        "read_support_cells",
+        "tables",
+        "render",
+        "run",
+        "main"
+      ],
+      "imports": [
+        "from time import perf_counter",
+        "import argparse",
+        "import csv",
+        "import hashlib",
+        "import json",
+        "from pathlib import Path",
+        "import sys",
+        "import numpy as np",
+        "import psutil",
+        "import matplotlib",
+        "import matplotlib.pyplot as plt",
+        "from matplotlib.colors import Normalize",
+        "from hf_eval.saved_material_volume import observe_saved_bottom_owner_material_volume"
+      ]
+    },
+    "M-VOLUME1_CARD.md": {
+      "bytes": 8359,
+      "sha256": "84bcbbe879d2d0536803a03dfbed43d7d5565a8e02da3a07aa6261235570caf8",
+      "lines": 51
+    },
+    "physical_basis.json": {
+      "bytes": 14628,
+      "sha256": "6d46242d32727f6dd8e61ead687dd349350d6e692026c936fe711c25b5d05baa",
+      "lines": 96
+    }
+  },
+  "findings": [
+    {
+      "id": "basis_and_reference_gradient",
+      "status": "pass_static",
+      "api_line": 62,
+      "evidence": "Original BL/BR/TR/TL points, h=.5 positive aligned rectangle, saved operator formulas and gchi exact (0,1/hy) are checked. The selected local nodes are exactly TR/TL on original body node IDs.",
+      "implication": "Selecting their sum eliminates the reference-X derivative. Computed scientific contraction needs only P_iY; no reconstruction of individual node force from a single P column is claimed."
+    },
+    {
+      "id": "material_sign_and_thickness",
+      "status": "pass_static",
+      "api_line": 87,
+      "evidence": "q=-saved_volume_weight*saved_P_iY*gchiY is negative internal material weak contraction, hence ON body. Saved volume weights already contain original thickness20; geometric C rows multiply t once, while original local force is not rescaled.",
+      "implication": "Force components remain signed N, stress is MPa, all coordinates/gradients are physical reference values."
+    },
+    {
+      "id": "original_DD_force_separate",
+      "status": "pass_static",
+      "api_line": 83,
+      "evidence": "All eight original saved local material force components are preserved. W=-fsum(original TR,TL) is exactly numerically associated with M-SUPPORT1 selected cell force. Rounded exported P is independently contracted and reported; no P hi/lo reconstruction or force-kernel import exists.",
+      "original_source": "split_kernel_invariants_hu.py keeps P pairs through grad/weights DD operations and rounds material_residual and stress_first_piola separately. native_mean.py captures both separately.",
+      "implication": "Neither W equality with V nor pressure, Hu-inclusive traction, original contraction replay or new kernel accuracy is claimed."
+    },
+    {
+      "id": "saved_top_trace_identity",
+      "status": "pass_static",
+      "api_line": 75,
+      "evidence": "Original q2/q5/q8 top points, full P and PN matrices, coordinates, owner connectivity, body pair, outward normal and saved selected-node support are checked against old frozen records. T is copied from original edge material_line_estimate_on_body_N.",
+      "implication": "No old observer call or direct replay of its t*(line_weights@PN) expression is added. C_plus is nevertheless a NEW separately constructed geometry-row comparison, so it must not be described as zero new row/line-related computation."
+    },
+    {
+      "id": "eta_layer_algebra",
+      "status": "pass_static",
+      "api_line": 95,
+      "evidence": "Rows are q=[depth,depth+3,depth+6], matching xi-slow/eta-fast. C_eta=-t*hx/6*fsum([1,4,1]*P_iY); V_geometry=fsum(C-,4C0,C+)/6; D_geometry=fsum(C-,4C0,-5C+)/6.",
+      "implication": "The real-arithmetic tensor Simpson identity is correct. Individual floating coefficient construction may differ from saved volume weights; cross-formula differences are descriptive, with no equality gate."
+    },
+    {
+      "id": "only_new_algebra_gate",
+      "status": "pass_static",
+      "api_line": 105,
+      "evidence": "V direct and Q_eta regrouping reuse the same nine previously computed q terms. abs(regrouped-direct) <=8*2^-52*fsum(abs(q terms)) per component, no floor, is the only new numerical error gate.",
+      "implication": "Input L1 is the original new q-term list, not nodal force L1 or an independently constructed C list. This checks summation regrouping only, preserving original M1/M2/SUPPORT/TRACE/HP rules."
+    },
+    {
+      "id": "seven_signed_differences",
+      "status": "pass_static",
+      "api_line": 122,
+      "evidence": "Seven descriptions are W-V; Vgeo-V; Ctop-T; V-T; Dgeo-(Vgeo-Ctop); W-T; Dgeo-(V-T). Every sign and source agrees between final API/card and updated basis.",
+      "implication": "No percent-error gate, near-zero rule, 16/32eps cross-formula tolerance or silent acceptance definition is introduced."
+    },
+    {
+      "id": "bounded_input_and_counts",
+      "status": "pass_static",
+      "worker_line": 26,
+      "evidence": "Worker selects five model fields and two force fields in each of two old force archives: three NPZ reads/nine fields, two API calls, four state/cell combinations. It checks indices6/13, cells10406/10407, fixed-square task/model/source associations and each raw selected field descriptor before the API.",
+      "implication": "Scientific result rows are confined to36 samples/12 depths/4 cells. Array reads/finite validation use the stored complete declared fields; no lift/fluctuation/F/J/Hu/global/tangent arrays or all24-state analysis is added."
+    },
+    {
+      "id": "outputs_and_figures",
+      "status": "pass_static",
+      "worker_line": 129,
+      "evidence": "JSON preserves original eight local force components; three CSVs retain actual signed values and IDs. First PNG displays saved signed P_iY on native xi/eta points with independent panel scales and numeric labels. Second PNG gives three additive Q bars plus separate V/W/T comparisons, with an explicit add-only-Q instruction and independent signed scales.",
+      "implication": "These are reference sampling/material contributions, not actual deformation or pressure. Original M-PTRACE1 structure/GIF are linked separately. Static review does not establish actual rendered readability; root must inspect pixels after the authorized run."
+    },
+    {
+      "id": "no_continuous_causal_upgrade",
+      "status": "pass_static",
+      "evidence": "Card and basis limit the inference to sampling/functional differences. No P derivatives, DivP, interpolation, side-face or jump integration are implemented. Side boundary point values do exist in the saved nine-point field but no side-flux estimate is in this card.",
+      "implication": "The observer cannot prove a continuous strong-form cause, solver bug, material pressure, effective-grip value, full HF5 completion or mesh convergence."
+    },
+    {
+      "id": "future_execution_scope",
+      "status": "pass_static",
+      "worker_line": 235,
+      "evidence": "Six primary outputs must have exactly the protocol's expected filenames before output hashing; a separate success receipt makes seven files. Started/completed read/API/PNG counters are checked. Worker records a pre-receipt helper cost snapshot after final checkpoint and says mechanical_hooks_monitored=false; card gives one180s helper/240s outer/8GiB sampled window, first error stop, no retry/repair/rerun/extension/force.",
+      "implication": "This is a source/card review only. No live resource, array identity, numerical gate or plot PASS is inferred from static code, and no new execution is authorized by this report."
+    }
+  ],
+  "blocking_issues": [],
+  "review_limits": [
+    "Source-only interpretation; array/identity/counter/output gates have not run.",
+    "No original compensated force replay or force accuracy qualification.",
+    "No actual PNG exists under this card yet; source plotting semantics checked but pixels not observed.",
+    "Rounded-P versus original DD force residual remains descriptive even if later tiny.",
+    "Full source preparation/protocol byte binding and publication/restoration are root/terminal-review responsibilities, outside this physical review."
+  ],
+  "activities": {
+    "candidate_imports": 0,
+    "candidate_calls": 0,
+    "NPZ_decodes": 0,
+    "new_integrals": 0,
+    "new_fsum_scientific_calls": 0,
+    "force_kernel_calls": 0,
+    "tangent_calls": 0,
+    "HP_calls": 0,
+    "equilibrium_calls": 0,
+    "plot_calls": 0,
+    "repository_mutations": 0,
+    "ordinary_source_AST_SHA_and_JSON_CSV_review": true
+  },
+  "ready_for": "Root source preparation/final static delivery checks, publication/restoration then explicit human execution authorization."
+}
