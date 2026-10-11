@@ -1,0 +1,35 @@
+{
+  "status": "pass_actual_images_inspected_with_limits",
+  "reviewer": "root",
+  "actual_method": "Both actual saved PNGs opened with view_image and pixels inspected; no figure rerender, edit or new NPZ read.",
+  "source_commit": "fa872739247a2a5d96043b1c05d28e9f08a77b88",
+  "images": [
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_material_support_001/run_001/reference_support_map.png",
+      "sha256": "232583b2008617e8648b2236040faf9544c6faf58ab9809bdccf2ac373b70cc1",
+      "original_dimensions": [2100, 1350],
+      "observations": [
+        "Reference coordinates and fixed-body edges/cut are clearly labelled; this is not a new deformed state.",
+        "Each component uses one signed N color scale for both states; strongest positive Fy and negative Fx are near the right end of bottom-owner support in state13.",
+        "Magenta diamonds mark centers of the two corner-only support cells, not averaged corner pressures; phase not read is explicit.",
+        "Axes, units, two state identities, external color bars and bottom legend are readable."
+      ]
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/nested_material_support_001/run_001/material_support_comparison.png",
+      "sha256": "39edcd9d9fe1d9f84236dae0856d8c45225466d495f6890107a352470dec8256",
+      "original_dimensions": [2100, 1350],
+      "observations": [
+        "Signed Fx/Fy bars retain negative values; component rows use shared axes across states.",
+        "Only five support bars partition material weak contributions. Separate saved line and saved global weak bars are marked comparisons and explicitly must not be added.",
+        "Peak bottom-owner Fy visually tracks saved weak, while saved P line is much smaller; this supports the recorded location diagnosis, not a pressure or solver correctness verdict.",
+        "Titles, N units, support labels, rotated category text and bottom explanatory text are readable."
+      ]
+    }
+  ],
+  "limitations": [
+    "Shared component scales make small side/corner and state6 Fy values appear almost zero; use exact CSV/JSON values, not pixel height, to assess them.",
+    "These new views show reference basis-support positions and already saved material-force projections. Existing M-PTRACE1 actual-deformation PNG and original24-frame GIF remain separate.",
+    "No new Hu-inclusive pressure, effective grip or mechanics qualification follows from the visual check."
+  ]
+}

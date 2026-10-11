@@ -1,3 +1,20 @@
+# 当前接续：M-SUPPORT1两态材料支撑诊断已通过（2026-10-11）
+
+整体目标仍是读取普通 LF 几何的独立 HF 有限变形／TMC 前向评估，输出可解释的反力、工件载荷与实际变形；HF不优化、不调用dmftd，继续main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。
+
+人类明确批准后，M-SUPPORT1唯一实际运行PASS并闭卡：3个既存NPZ／8字段，2个入口／2次原C-order材料global组装精确数值重播，5476局部出现／1444单元／1406节点／10组／2整体行及两PNG。36原绑定保持，outer2.116422799997963秒／tree RSS129019904 B；helper1.9246779000095557秒／own RSS113950720 B为成功收据构造前快照。exit0、stopnull，无重试／修复重跑／延期／force。独立终态审阅通过，两图实际像素已看；物理报告是解释，不是新增科学验收门。
+
+原6/loading0.85mm与13/loading1.20mm的底边owner材料弱Fy为+0.0033910508870495064／+0.12182859983276352 N，对应旧底边材料line为+0.0029375878559500844／+0.02767261448134528 N；support−side-line为+0.00045346303109942195／+0.09415598535141824 N。峰值corner_only合Fy仅+0.00009348741040979886 N，body组保存贡献为0；大差主要定位于同一底边owner的体积弱式与面迹表达，不能归因两个对角支撑单元或用Hu补平材料差。右角节点10638材料Fy+.06463699536344664 N主要来自底边owner10407的局部TR项，不能当右面压力。
+
+原global精确重播与节点身份／材料向量对账通过；整体新局部重组在0.85mm的Fy误差4.336808689942018e−19 N，小于6.236745013039355e−18 N局部L1界，峰值误差为0。原M1/M2节点L1门保留。protocol的False字段是冻结准备历史；当前批准、一次实际终态和结果另有记录。新图是参考支撑位置／有符号材料贡献，原实际变形与24帧GIF继续用于对照。共同尺度会隐藏很小的条／色差，应看CSV精确值。
+
+最近下一步聚焦峰值底边末端10406／10407等单元的九点保存材料P／原体积弱收缩与上缘迹局部对照，解释已定位差值的离散来源；这只是依据实际结果的粗路线，未新增卡或授权新读取／计算。总Hu边界作用／压力、有效夹持、自由体／摩擦、网格收敛、正式标签排名与HF5仍未完成。本卡不产生新力核／切线／HP／平衡路径资格。
+
+[本次完整结果](../lf_data_preparation/native_interface_001/nested_material_support_001/RESULTS.md) · [支撑位置图](../lf_data_preparation/native_interface_001/nested_material_support_001/run_001/reference_support_map.png) · [有符号贡献图](../lf_data_preparation/native_interface_001/nested_material_support_001/run_001/material_support_comparison.png) · [精确分组表](../lf_data_preparation/native_interface_001/nested_material_support_001/run_001/groups.csv) · [当前批准](../lf_data_preparation/native_interface_001/nested_material_support_001/author/authorization.json) · [终态审阅](../lf_data_preparation/native_interface_001/nested_material_support_001/author/terminal_execution_review.json) · [物理解读](../lf_data_preparation/native_interface_001/nested_material_support_001/author/physical_results_review.json)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-SUPPORT1 两态保存材料支撑候选待批准（2026-10-11）
 
 整体目标仍是读取普通 LF 几何，在独立 HF 有限变形／TMC 前向任务下给出可解释的反力、工件载荷和实际变形。HF不优化、不调用dmftd；main开发，origin保持 https://github.com/dudaxing/Compliant-TO-TMC.git。
@@ -810,6 +827,8 @@ Pop-Location
 
 </details>
 
+
+</details>
 
 </details>
 
