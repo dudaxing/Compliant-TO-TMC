@@ -1,3 +1,19 @@
+# 当前更新：M-ALINK1实际关联通过（2026-10-12，Asia/Seoul）
+
+本次直接批准的唯一API关联已终端exit0／PASS，窗口关闭。alpha=5e−7的原1.20／1.15 mm两个保存态已在新linked_response和轻索引关联同态4次既有HP参考、原3PNG／两帧GIF；摘要开始／完成、响应写入、索引写入各1，30份原绑定保持。默认API／力核／切线／门／物理任务原字节保持。
+
+资源：helper记录0.8400699000048917秒，child完整终端wall1.0407080000150017秒，outer1.448175400000764秒；helper采样23388160B、tree采样41127936B，满足180／240秒和8GiB。无新NPZ／科学gzip／CSV读取、F／T／HP／平衡求解／测试／绘图，无重试、修复重跑、延期或force。
+
+原输入R：0.37865427196005513→0.3470376815403639N；下半工件total Fy：0.12492121630032427→0.10671287553103108N。均为原保存响应。子段reference／views matched，full_path_reference_pass只覆盖两态child；full_original_path_reference_pass=false。父M-ALPHA1仍time_limit／NOT_PASS，原完整15目标未一次完成，原producer三flags false，不升级压力／有效夹持／稳定性／全列HP或HF5。
+
+整体目标仍为普通LF几何上的独立HF有限变形／TMC前向评价。已实现NumPy完整力、切线／组装、均值输入平衡与缓存、固定方形工件作用、保存态续算默认入口、两态独立参考和本次可恢复关联。连续材料＋Hu表面总压力、有效夹持、完整原路径参考、稳定性、一般LF输入与更多物理任务仍未完成。
+
+最近转回现有父子路径与材料／Hu作用的可读物理解释，依据实际缺口再准备最小功能卡；本文件不授新增计算。完整记录：[实际结果](../lf_data_preparation/native_interface_001/alpha_link_001/RESULTS.md)、[响应](../lf_data_preparation/native_interface_001/alpha_link_001/run_001/linked_response.json)、[轻索引](../lf_data_preparation/native_interface_001/alpha_link_001/run_001/light_index.json)、[后续取舍](../lf_data_preparation/native_interface_001/alpha_link_001/NEXT_STEP_REVIEW.md)。
+
+原准备protocol和卡的authorized/executed=false保留历史事实；实际授权与运行另存。以下保留之前所有记录，旧main1e63964及84c67e4的准备／执行说明不覆盖；实际发布和异地恢复proof保存到外部记录，推送后生成。
+
+---
+
 # 当前接续：M-ALINK1两态API关联候选已准备，未执行
 
 整体目标仍为独立HF有限变形／TMC前向评价，读取普通LF几何，在明确任务下给出实际变形、反力及可解释工件作用供外部研究层比较；HF不优化、不调用dmftd，MPM暂不实现，main、既定origin、science0.5.0保持。
