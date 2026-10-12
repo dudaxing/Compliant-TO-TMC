@@ -1,3 +1,15 @@
+# 当前状态：M-EXTEND1包装首错，NOT_PASS闭卡（2026-10-12）
+
+直接批准main563febe后唯一launcher已终端exit1，outer2.2685677999979816秒/child2.094814799987944秒，tree采样29724672B。复制胶囊第67份源码时FileNotFoundError：目标全路径262字符、父目录存在、LongPathsEnabled=0，强支持Windows普通路径限制。已复制66普通源码文件，全部24阶段计数0；测试、真实卸载、HF/F/T/HP、接受态、图与六默认安装均未发生。窗口关闭，无重试/修复重跑/延期/force；默认六旧SHA及原133bindings保持。
+
+整体目标仍为普通LF几何上的独立HF有限变形/TMC前向评价，给外部研究层提供反力、位移、工件作用与实际图。现有完整力/切线/组装/均值平衡、固定工件作用、保存态与严格同任务续算保持。M-ALINK1已通过并关联新alpha5e−7原1.20/1.15两态、4HP和原图；最后有效R0.37865427196005513→0.3470376815403639N，下半固定工件total Fy0.12492121630032427→0.10671287553103108N。原M-ALPHA1仍NOT_PASS；本次没有新1.10结果，显式延伸候选未测试/未安装。
+
+下一步先改短且独占的capsule/testtmp布局，核复制/派生文件/CLI/import/缓存显示与恢复来源，然后形成新卡；不修改全局Windows设置或力学门，不重启闭卡。本次原2NPZ/5媒体仅在批准窗口做原字节身份hash，未解码；关闭后审阅/发布只普通记录和继承stat，未新科学。
+
+完整旧/新路径、连续压力/有效夹持、稳定性、一般LF与HF5仍未完成。完整记录：[实际结果及最后有效图](../lf_data_preparation/native_interface_001/saved_extension_001/RESULTS.md)、[后续取舍](../lf_data_preparation/native_interface_001/saved_extension_001/EXECUTION_NEXT_STEP_REVIEW.md)。以下所有准备与此前说明保留原字节；静审PASS不代称本次功能PASS。
+
+---
+
 # 当前接续：M-EXTEND1显式末态延伸已准备，未执行（2026-10-12）
 
 整体目标仍为普通LF几何上的独立HF有限变形/TMC前向评价，提供可恢复反力、位移和工件作用及实际变形图给外部研究层；HF不优化、不调用dmftd，MPM暂不实现。main、既定origin、science0.5.0保持。
