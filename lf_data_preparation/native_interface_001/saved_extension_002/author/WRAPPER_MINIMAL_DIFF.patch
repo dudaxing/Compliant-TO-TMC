@@ -1,0 +1,202 @@
+--- MEXTEND1/execute_extension.py
++++ MEXTEND2/execute_extension.py
+@@ -10,11 +10,12 @@
+ import os
+ import subprocess
+ import sys
+-
+-STAGE = 'lf_data_preparation/native_interface_001/saved_extension_001'
+-BASE = 'c4d81620fe7d1a9260cf0f7d27ab35970d463e46'
+-CARD = 'M-EXTEND1'
+-KINDS = ('focused_tests', 'api', 'defaults', 'model', 'reader', 'solve', 'force', 'tangent', 'save', 'summary', 'view_child', 'installation')
++from zipfile import ZipFile, ZIP_STORED
++
++STAGE = 'lf_data_preparation/native_interface_001/saved_extension_002'
++BASE = 'd7078c2e72ab6535794ff634cbb9b97325a472c6'
++CARD = 'M-EXTEND2'
++KINDS = ('focused_tests', 'api', 'defaults', 'model', 'reader', 'solve', 'force', 'tangent', 'save', 'summary', 'view_child', 'runtime_archive', 'installation')
+ MECHANICAL = ('force_started', 'force_completed', 'tangent_started', 'tangent_completed')
+ 
+ 
+@@ -69,7 +70,7 @@
+     assert all(sha(root / name) == pin for name,pin in pins.items())
+     assert all(sha(root / row['target']) == row['old_sha256'] and sha(root / row['candidate_source']) == row['new_sha256'] for row in transitions)
+     authorization, reply = read(stage / 'author/authorization.json'), read(stage / 'author/direct_human_reply.json')
+-    proof_file = stage / 'author/M_EXTEND1_source_publication_receipt.json'
++    proof_file = stage / 'author/M_EXTEND2_source_publication_receipt.json'
+     proof = read(proof_file)
+     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root, text=True).strip()
+     assert authorization['authorized'] is True and authorization['card'] == reply['card'] == CARD
+@@ -85,7 +86,11 @@
+     run.mkdir()
+     candidate, view = root / protocol['candidate_directory'], root / protocol['view_directory']
+     assert candidate == run / 'extended_alpha_half' and view == run / 'view'
+-    capsule, source = run / 'source_repo', run / 'source_repo/hf_repo'
++    runtime = Path(protocol['runtime_root']).resolve()
++    assert runtime == Path('D:/hf-extend2-runtime-20261012').resolve()
++    assert not runtime.is_relative_to(root) and not root.is_relative_to(runtime) and not runtime.exists()
++    capsule, source = runtime/'repo', runtime/'repo/hf_repo'
++    assert protocol['runtime_archive'] == (run/'runtime_capsule.zip').relative_to(root).as_posix()
+     counts = {kind+suffix:0 for kind in KINDS for suffix in ('_started', '_completed')}
+     receipt_file, progress = run / 'execution_receipt.json', run / 'accepted_progress.jsonl'
+     receipt = dict(schema_version='saved-native-explicit-extension-execution-1.0', status='running',
+@@ -98,7 +103,9 @@
+         archive_count_scope='Distinct frozen loader/archive-field contract; not dynamic np.load instrumentation',
+         installed_transitions=[], HP_calls=0, JIT_calls=0, mechanical_hooks_monitored=False,
+         mechanical_hook_scope='Production NativeMean aliases only; isolated test aliases separately accounted; no universal hook claim',
+-        qualification_scope='Explicit child extension and cached views only; no full old/new path, HP, pressure, clamp, stability or HF5 qualification')
++        qualification_scope='Explicit child extension and cached views only; no full old/new path, HP, pressure, clamp, stability or HF5 qualification',
++        external_runtime_root=str(runtime), capsule_root=str(capsule), test_tmp_root=str(runtime/'test_tmp'),
++        external_runtime_created=False, runtime_preserved=True, runtime_archive_cleanup_scope='One raw-byte evidence archive; no scientific decode or phase retry')
+     write(receipt_file, receipt)
+     error, peak = None, 0
+     try:
+@@ -159,8 +166,54 @@
+             if child_process.returncode != 0 or child_stop is not None: raise RuntimeError(name+'_terminal_non_success')
+             counts[name+'_completed'] += 1; checkpoint()
+ 
++        def archive_runtime(mode):
++            # This is raw evidence closure, never a numerical phase or a retry.
++            assert counts['runtime_archive_started']==0
++            checkpoint(); counts['runtime_archive_started']=1
++            archive = run/'runtime_capsule.zip'
++            record = dict(mode=mode,status='running',path=archive.relative_to(root).as_posix(),members=[])
++            receipt['runtime_archive']=record
++            try:
++                paths=sorted(path for path in runtime.rglob('*') if path.is_file())
++                members={path.relative_to(runtime).as_posix() for path in paths}
++                capsule_members={path.relative_to(capsule).as_posix() for path in capsule.rglob('*') if path.is_file()}
++                if mode=='success_before_installation': assert capsule_members==set(package)==set(protocol['source_package']['files'])
++                record['capsule_relative_source_SHA256']=dict(package)
++                record['capsule_source_files_present']=len(capsule_members)
++                assert not archive.resolve().is_relative_to(runtime)
++                with ZipFile(archive,'x',compression=ZIP_STORED) as output:
++                    for path in paths:
++                        checkpoint(); path.resolve().relative_to(runtime)
++                        name=path.relative_to(runtime).as_posix(); digest=sha256(); size=0
++                        with path.open('rb') as source_stream, output.open(name,'w') as target_stream:
++                            for block in iter(lambda:source_stream.read(1024*1024),b''):
++                                checkpoint(); target_stream.write(block); digest.update(block); size+=len(block)
++                        assert path.stat().st_size==size
++                        pin=digest.hexdigest()
++                        if name.startswith('repo/') and name[5:] in package: assert pin==package[name[5:]]
++                        record['members'].append(dict(path=name,bytes=size,sha256=pin))
++                with ZipFile(archive) as saved:
++                    assert set(saved.namelist())==members and len(saved.namelist())==len(members)
++                    for row in record['members']:
++                        checkpoint(); digest=sha256()
++                        with saved.open(row['path']) as stream:
++                            for block in iter(lambda:stream.read(1024*1024),b''):
++                                checkpoint(); digest.update(block)
++                        assert saved.getinfo(row['path']).file_size==row['bytes'] and digest.hexdigest()==row['sha256']
++                assert {path.relative_to(runtime).as_posix() for path in runtime.rglob('*') if path.is_file()}==members
++                assert all(sha(runtime/row['path'])==row['sha256'] for row in record['members'])
++                record.update(status='pass',sha256=sha(archive),exact_members=len(members),uncompressed_bytes=sum(row['bytes'] for row in record['members']))
++                write(run/'runtime_archive_manifest.json',record)
++                checkpoint(); counts['runtime_archive_completed']=1
++            except BaseException as exception:
++                record.update(status='not_pass',exception=dict(exception_class=type(exception).__name__,reason=str(exception)),partial_zip_exists=archive.exists())
++                raise
++
+         checkpoint()
+         package = {}
++        runtime.mkdir(); receipt['external_runtime_created']=True
++        write(receipt_file,receipt)
++        receipt['executed_source_package_SHA256']=package
+         modules = {'hf_repo/src/hf_eval/'+path.name for path in (root/'hf_repo/src/hf_eval').glob('*.py')}
+         files = protocol['source_package']['files']
+         assert {name for name in files if name.startswith('hf_repo/src/hf_eval/')} == modules
+@@ -172,9 +225,10 @@
+             assert spec['sha256'] == pins[spec['path']] == sha(root/spec['path'])
+             destination.parent.mkdir(parents=True, exist_ok=True)
+             with destination.open('xb') as output: output.write((root/spec['path']).read_bytes())
+-            assert sha(destination) == spec['sha256']; package[destination.relative_to(root).as_posix()] = spec['sha256']
++            assert sha(destination) == spec['sha256']; package[destination.relative_to(capsule).as_posix()] = spec['sha256']
+         receipt['executed_source_package_SHA256'] = package
+-        receipt['source_package_scope'] = 'Full frozen capsule repo layout, reviewed six-source overlay, tests and exact ordinary/media fixtures; no old arrays copied.'
++        receipt['source_package_scope'] = 'Capsule-relative 90file SHA manifest plus explicit ephemeral absolute origin; unchanged source/layout/fixtures, no old arrays copied.'
++        assert len(package)==90 and {path.relative_to(capsule).as_posix() for path in capsule.rglob('*') if path.is_file()}==set(package)
+         remaining = min(protocol['focused_tests_seconds'], limits['helper_seconds']-(perf_counter()-STARTED))
+         env = dict(os.environ, PYTHONDONTWRITEBYTECODE='1', PYTHONUTF8='1', MPLBACKEND='Agg',
+             HF_EXTENSION_ROOT=str(capsule), HF_EXTENSION_STAGE=str(stage), HF_EXTENSION_PROTOCOL=str(protocol_file),
+@@ -183,15 +237,15 @@
+             PYTHONPATH=os.pathsep.join((str(capsule),str(source/'src'),str(source/'tests'))))
+         argv = [sys.executable, '-B', '-m', 'pytest', '-q', '-x', '--rootdir='+str(capsule),
+             '-c', str(source/'pyproject.toml'), '-p', 'extension_focused_budget',
+-            '--basetemp='+str(run/'test_tmp'), '--junitxml='+str(run/'test_results.xml'),
+-            '-o', 'cache_dir='+str(run/'pytest_cache'), *protocol['focused_test_selectors']]
++            '--basetemp='+str(runtime/'test_tmp'), '--junitxml='+str(run/'test_results.xml'),
++            '-o', 'cache_dir='+str(runtime/'pytest_cache'), *protocol['focused_test_selectors']]
+         receipt['test_argv'] = argv
+         child(argv,capsule,'focused_tests',remaining,env)
+         tests = read(run/'focused_test_receipt.json')
+         assert tests['status'] == 'pass' and tests['collected_selectors'] == protocol['focused_test_selectors']
+         assert tests['passed_calls'] == 36 and len(tests['reports']) == 108 and all(row['outcome']=='passed' and not row['wasxfail'] for row in tests['reports'])
+         receipt['focused_test_receipt_sha256'] = sha(run/'focused_test_receipt.json')
+-        assert all(sha(root/name)==pin for name,pin in package.items())
++        assert all(sha(capsule/name)==pin for name,pin in package.items())
+         sys.path.insert(0,str(source/'src'))
+         from hf_eval import native_evaluate, native_mean
+         from hf_eval.data import canonical_hash
+@@ -322,7 +376,9 @@
+             production_selected_NPZ_files=2,production_selected_fields=6,source_pure_scope_separated=True,
+             parent_and_ancestor_records_rewritten=False,new_HP_pressure_clamp_stability_HF5_qualified=False)
+         checkpoint()
+-        assert all(sha(root/name)==pin for name,pin in pins.items()) and all(sha(root/name)==pin for name,pin in package.items())
++        assert all(sha(root/name)==pin for name,pin in pins.items()) and all(sha(capsule/name)==pin for name,pin in package.items())
++        archive_runtime('success_before_installation')
++        assert receipt['runtime_archive']['status']=='pass' and counts['runtime_archive_completed']==1
+         for row in transitions:
+             checkpoint(); target = root/row['target']; tested = capsule/row['target']
+             assert sha(target)==row['old_sha256'] and sha(tested)==sha(root/row['candidate_source'])==row['new_sha256']
+@@ -335,21 +391,27 @@
+     except BaseException as exception:
+         error=exception; receipt['exception']=dict(exception_class=type(exception).__name__,code=getattr(exception,'code',None),reason=str(exception))
+     finally:
++        if error is not None and receipt['external_runtime_created'] and counts['runtime_archive_started']==0:
++            if not (stage/'stop_requested.txt').exists() and perf_counter()-STARTED<=limits['helper_seconds']:
++                try: archive_runtime('failure_partial_cleanup')
++                except BaseException as exception:
++                    receipt['partial_archive_exception']=dict(exception_class=type(exception).__name__,reason=str(exception))
++            else: receipt['partial_archive_skipped']='Original stop/whole resource window closed; external runtime partial retained, no extension'
+         try:
+             receipt['outputs']={path.relative_to(root).as_posix():sha(path) for path in run.rglob('*') if path.is_file() and path!=receipt_file}
+             receipt['all_bindings_unchanged']=all(sha(root/name)==pin for name,pin in pins.items())
+             assert receipt['all_bindings_unchanged']
+             if 'executed_source_package_SHA256' in receipt:
+-                receipt['executed_source_package_unchanged']=all(sha(root/name)==pin for name,pin in package.items())
++                receipt['executed_source_package_unchanged']=all(sha(capsule/name)==pin for name,pin in package.items())
+                 assert receipt['executed_source_package_unchanged']
+             receipt['actual_default_SHA256']={row['target']:sha(root/row['target']) for row in transitions}
+             receipt['installation_complete']=all(receipt['actual_default_SHA256'][row['target']]==row['new_sha256'] for row in transitions)
+-            if error is None: assert receipt['installation_complete'] and counts['installation_completed']==6
++            if error is None: assert receipt['installation_complete'] and counts['installation_completed']==6 and counts['runtime_archive_completed']==1
+             if 'checkpoint' in locals(): checkpoint()
+         except BaseException as exception:
+             receipt['finalization_exception']=dict(exception_class=type(exception).__name__,reason=str(exception)); error=error or exception
+         receipt.update(status='pass' if error is None else 'not_pass',elapsed_seconds=perf_counter()-STARTED,
+-            peak_sampled_RSS_bytes=peak,elapsed_scope='Whole helper from earliest clock including bootstrap, copy, tests, API, persistence, views, installation, final hash; before receipt write')
++            peak_sampled_RSS_bytes=peak,elapsed_scope='Whole helper from earliest clock including bootstrap, copy, tests, API, persistence, views, runtime archival, installation, final hash; before receipt write')
+         write(receipt_file,receipt)
+         try:
+             if error is None: checkpoint()
+--- MEXTEND1/launch_extension.py
++++ MEXTEND2/launch_extension.py
+@@ -29,7 +29,7 @@
+     parser.add_argument('--protocol',type=Path,default=STAGE/'protocol.json')
+     args=parser.parse_args(); protocol_file=args.protocol.resolve()
+     protocol=json.loads(protocol_file.read_bytes()); row=protocol['phases'][args.phase]
+-    assert protocol['schema_version']=='saved-native-explicit-extension-card-1.0' and protocol['card']=='M-EXTEND1'
++    assert protocol['schema_version']=='saved-native-explicit-extension-card-1.0' and protocol['card']=='M-EXTEND2'
+     assert (row['helper_seconds'],row['outer_seconds'],protocol['sampled_RSS_bytes'])==(3000,3060,8*1024**3)
+     receipt_file=STAGE/(args.phase+'_launch.json'); assert not receipt_file.exists()
+     pins,transitions=protocol['bindings'],protocol['installation']
+@@ -84,7 +84,7 @@
+         receipt.update(status='not_pass',stop_reason=reason,elapsed_seconds=perf_counter()-STARTED); write(receipt_file,receipt)
+     print(json.dumps({key:receipt[key] for key in ('phase','status','exit_code','elapsed_seconds','peak_sampled_tree_RSS_bytes','stop_reason','all_bindings_unchanged','installation_complete')}),flush=True)
+     if launch_error is not None: raise launch_error
+-    if receipt['status']!='pass': raise RuntimeError('M-EXTEND1 closed non-success; no retry, repair, extension, force or rollback')
++    if receipt['status']!='pass': raise RuntimeError('M-EXTEND2 closed non-success; no retry, repair, extension, force or rollback')
+ 
+ 
+ if __name__=='__main__': main()
