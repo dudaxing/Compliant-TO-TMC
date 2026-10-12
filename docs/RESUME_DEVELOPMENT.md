@@ -1,3 +1,20 @@
+# 当前接续：M-AREF1两态独立参考实际PASS，窗口已关闭
+
+整体目标仍为独立HF有限变形／TMC前向评价，读取普通LF几何，在明确任务下给出实际变形、反力和可解释工件作用供外部研究层比较。HF不优化、不调用dmftd，MPM暂不实现；main、既定origin、science0.5.0保持。
+
+M-AREF1经本轮直接批准唯一session54727实际terminal exit0/PASS，outer193.35030270001153秒、helper191.6140807000047秒、树RSS采样峰1278435328B、stopNone；4HP开始/4完成、2机械/2工件态、161495运行检查，48bindings保持。全部13440单元27378DOF三力、原PORT方向作用、保存CSC组装身份/KKT及signed工件投影经原15门通过；原数学／分母／floor／11依赖与自身source保持。无重试/修复重跑/延期/force或新生产F/T、平衡、测试、API关联、绘图，窗口关闭。
+
+原任务13/14在raw参考summary保持，顶层只复制为child0/1并保原identity/leg/anchor。原alpha5e−7的M-ALPHA1 NOT_PASS／14加载态保持，M-RESUME1仅1.20→1.15 mm短段success；原result/response/缓存／图件不改，不拼接为原一次完整路径通过。新alpha现在仅这两个接受态有4次独立HP，旧48HP不移植。原R0.37865427196005513→0.3470376815403639 N、下半工件total Fy0.12492121630032427→0.10671287553103108 N；三PNG／两帧实际GIF原字节复用。
+
+默认保存态续算已由M-INTEGRATE1安装，有限25兼容测试PASS保持。本次不是全部切线列独立验证、连续压力／有效夹持或完整卸载曲线；机械aux能量仍not_evaluated。新参考尚未API关联，原producer flags保持。最近拟复用已有摘要reader关联同两态参考与原图，先冻结具体候选／范围／资源再直接批准，不能续用本卡余时。
+
+完整父子参考覆盖、连续总压力／有效夹持、一般LF几何可靠性、移动／摩擦与其他形状完整验证、网格／域／参数稳定性、全部切线列及HF5仍未完成。
+
+[实际结果与原图](../lf_data_preparation/native_interface_001/alpha_reference_001/RESULTS.md) · [最近取舍](../lf_data_preparation/native_interface_001/alpha_reference_001/NEXT_STEP_REVIEW.md) · [默认入口用法](NATIVE_EVALUATION_INTERFACE.md)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-AREF1两态独立参考已准备，未执行
 
 整体目标仍为独立HF有限变形／TMC前向评价：读取普通LF几何，在明确任务下给出实际变形、反力和可解释工件作用，供外部研究层比较；HF不优化、不调用dmftd，MPM暂不实现，main、既定origin、science0.5.0保持。
@@ -1080,6 +1097,8 @@ Pop-Location
 
 </details>
 
+
+</details>
 
 </details>
 
