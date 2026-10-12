@@ -1,0 +1,23 @@
+# M-AREF1 候选输入／协议静审
+
+结论：没有实际阻断。冻结候选、协议和launcher与45 seed inputs＋3 own bindings一致，共48pins；10份NPZ pin按旧实际receipt与已发布manifest继承，当前只核stat，没有NPZ原字节/hash/header/decode。所有可由普通JSON核的loader键与标量条件均存在并满足。科学数组门和HP结果尚未执行。
+
+候选SHA：`8dd5bbb544faec9044b50df254bd2a86f1efe100500044ad9a6b78ef9c8a322c`；协议SHA：`b373b2cedffff1f0b93ff6426645ab6507f2b7556e90c9068110ecf883b85673`；launcherSHA：`108188963779a5f799349d6d34295371d5a4acd081a397e61fe3de2e31482fd2`。
+
+真实生产receipt在saved_continuation_001/run_001/execution_receipt.json，launcher是production_launch.json，task是regularization_sensitivity_001/task.json。原force17 started/16 completed与tangent9/9保留；已正常拒绝一次trial不被误当数据不一致。child schema1.2、两态/目标、continuation、父time_limit NOT_PASS、完整原路径false、同model/task/grid/material/alpha5e-7/BC/body来源均与普通记录相同。
+
+未来只decode child model及两态state/forces/tangents/CSC：9distinct NPZ、75descriptorfields；aa86再开四个child state/force，geometry NPZ仅绑定原字节。CSC format/shape和optional_is_array probe单独说明。没有父NPZ或production API/model/F/T/solve调用。原B850 run_state与aa86检查没有override；原任务13/14执行保留零起点门、raw accepted013/014及index，顶层只deepcopy为child0/1，保留原index/descriptor/leg/continuation_anchor和路径。
+
+11来源dependency capsule按原唯一basename平铺，额外自有workercopy也有源码绑定；shape/force/tangent/HP15门原字节继承。39个实际拟生成reference路径由两原方法与new wrapper的路径字面量枚举，当前最长204字符：
+
+`D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\lf_data_preparation\native_interface_001\alpha_reference_001\run_001\reference\accepted_013\hp80_hp120_full_global.json.gz`
+
+此长度只适用于当前checkout和明确输出，不是已生成文件或Windows政策保证；未来另一根路径必须按其真实长度检查。
+
+准备工具只复制新stage并在两front前加当前接续，其old6c完整原bytes被预拼接各一次，start_byte2337，旧SHA已核且正式当前仍等于BASE。writer还未运行，所以不声称两front已更新。delivery只hash显式新stage＋两front，继承原manifest条目；10NPZ不重扫，新publication proof明确preparedTrue/authorizedFalse/executedFalse，运行须等真实直接批准。PREPARATION/card正确区分原短段成功、旧父NOT_PASS、未执行新HP与待批准状态。
+
+helper900/outer960、8GiB为一次协作窗口；无重试/修复/force，旧HP内部无checkpoint，须等其返回检查。终态需综合outer真实exit/elapsed/stop和helper/summary，不能把可能较早的pass快照单独当完成。
+
+本审阅使用普通工具读取源码／JSON并保存审阅报告；未执行候选／发布／科学入口工具，未导入HF或候选、未科学计算或绘图，不改正式仓库。没有全列HP、连续压力／有效夹持、父完整路径、稳定性或HF5新资格。
+
+JSON SHA256：`fb0262dfdd6bec94f2b64bf4ca4be8efd6440479776aba7f123d4f14542adbd6`。

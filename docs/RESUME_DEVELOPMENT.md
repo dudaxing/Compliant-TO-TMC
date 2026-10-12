@@ -1,3 +1,20 @@
+# 当前接续：M-AREF1两态独立参考已准备，未执行
+
+整体目标仍为独立HF有限变形／TMC前向评价：读取普通LF几何，在明确任务下给出实际变形、反力和可解释工件作用，供外部研究层比较；HF不优化、不调用dmftd，MPM暂不实现，main、既定origin、science0.5.0保持。
+
+默认保存态续算已由M-INTEGRATE1安装，25项有限兼容测试实际PASS闭卡并发布6c17633。新alpha5e−7仍是父M-ALPHA1 NOT_PASS／14加载态，加M-RESUME1原1.20→1.15 mm短段success；父子不拼为原一次完整路径通过。原两态R0.37865427196005513→0.3470376815403639 N，下半工件total Fy0.12492121630032427→0.10671287553103108 N；3PNG／2帧实际GIF保留，新alpha无HP。
+
+本轮完成三份只读源／普通JSON审阅及具体M-AREF1候选：旧第0态零初态假设不适合非零续算峰值，按真实原索引13／14继承原B850／aa86数学，raw科学summary保持，顶层明确映射child0／1。原15门、分母、floor、PORT方向与11依赖原字节保持。仅两个接受态4次新HP；完整13440单元27378DOF，三力／声明方向切线／CSC组装身份／KKT与原工件投影；不是独立全部切线列或压力／有效夹持资格。
+
+具体卡一次helper900／outer960秒、采样8GiB，首错停，无测试、重试、修复重跑、延期、force、新生产F／T、模型／平衡或图。旧参考只有24态总耗时，无逐态记录；窗口为保守规划。当前未获本卡直接批准，未importHF、未读取NPZ原字节／解码、未执行HP。10份NPZ的准备pin继承已发布清单／原实际回执，未来批准后核原字节。
+
+连续总压力／有效夹持、父子全路径参考关联、一般LF输入可靠性、移动／摩擦与其他形状完整验证、网格／域／参数稳定性、全部切线列及HF5仍未完成。独立两态结果产生后再决定最小下一步，不自动扩展范围。
+
+[具体卡](../lf_data_preparation/native_interface_001/alpha_reference_001/M-AREF1_CARD.md) · [准备结果与原实际变形](../lf_data_preparation/native_interface_001/alpha_reference_001/PREPARATION_RESULTS.md) · [默认入口用法](NATIVE_EVALUATION_INTERFACE.md)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-INTEGRATE1实际PASS，默认保存态续算已安装
 
 整体目标仍为独立HF有限变形／TMC前向评价，读取普通LF几何，在明确任务下提供实际变形、反力和可解释工件作用给外部研究层；HF不优化、不调用dmftd，MPM暂不实现，main与既定origin、science0.5.0保持。
@@ -1063,6 +1080,8 @@ Pop-Location
 
 </details>
 
+
+</details>
 
 </details>
 

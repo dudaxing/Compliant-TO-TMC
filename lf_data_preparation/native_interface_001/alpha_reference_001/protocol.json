@@ -1,0 +1,363 @@
+{
+  "reference_sources": {
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_author/core_audit_mechanical.py": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+    "hf_repo/scripts/audit_native_workpiece_cycle.py": "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938",
+    "hf_repo/scripts/audit_native_mean.py": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678",
+    "hf_repo/scripts/audit_native_force.py": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+    "hf_repo/scripts/hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+    "hf_repo/scripts/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+    "hf_repo/scripts/run_split_average_demo.py": "e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb",
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/src/hf_eval/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0"
+  },
+  "production_stage": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001",
+  "production_launch_file": "lf_data_preparation/native_interface_001/saved_continuation_001/production_launch.json",
+  "production_protocol_file": "lf_data_preparation/native_interface_001/saved_continuation_001/protocol.json",
+  "task_file": "lf_data_preparation/native_interface_001/regularization_sensitivity_001/task.json",
+  "reference_output": "lf_data_preparation/native_interface_001/alpha_reference_001/run_001/reference",
+  "expected_accepted_states": 2,
+  "expected_new_HP_calls": 4,
+  "targets_mm": [
+    1.2,
+    1.15
+  ],
+  "original_target_indices": [
+    13,
+    14
+  ],
+  "grid": {
+    "shape_yx": [
+      80,
+      168
+    ],
+    "origin_mm": [
+      0.0,
+      0.0
+    ],
+    "cell_size_mm": [
+      0.5,
+      0.5
+    ],
+    "axes": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "extent_mm": [
+      84.0,
+      40.0
+    ],
+    "array_order": "C_yx_bottom_up",
+    "value_location": "cell"
+  },
+  "expected_counts": {
+    "cells": 13440,
+    "nodes": 13689,
+    "dofs": 27378,
+    "solid_cells": 4344,
+    "medium_cells": 9096,
+    "solid_incident_nodes": 4849,
+    "fixed_dofs": 1548,
+    "free_dofs": 25830
+  },
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain",
+    "lambda_s_MPa": 0.5769230769230769,
+    "mu_s_MPa": 0.3846153846153846,
+    "kappa_s_MPa": 0.8333333333333333,
+    "thickness_mm": 20.0,
+    "third_medium_gamma": 1e-06,
+    "alpha": 5e-07,
+    "regularization_length_mm": 80.0,
+    "kr_MPa_mm2": 0.004307692307692307,
+    "kr_material_factor_applied": false,
+    "force_scale_per_length": 20.0
+  },
+  "workpiece": {
+    "kind": "fixed_rigid",
+    "shape": "square",
+    "center_mm": [
+      71.0,
+      40.0
+    ],
+    "fixed_components": [
+      0,
+      1
+    ],
+    "side_mm": 18.0
+  },
+  "production_settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 25,
+    "armijo_c": 0.0001,
+    "max_backtracks": 12,
+    "max_bisections": 4,
+    "minimum_increment": 0.00625,
+    "time_limit_seconds": 1800.0
+  },
+  "direction": {
+    "definition": "actual b_in/max(abs(b_in)), fixed components zero",
+    "length": 27378,
+    "multiplier_direction": 0.0,
+    "expected_port_weights": [
+      0.125,
+      0.25,
+      0.25,
+      0.25,
+      0.125
+    ]
+  },
+  "gates": {
+    "production_residual": "1e-9",
+    "independent_residual": "1e-8",
+    "force_evaluation": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11",
+    "hp80_hp120": "1e-40",
+    "total_force": "1e-11",
+    "material_force": "1e-9",
+    "regularization_force": "1e-9",
+    "total_tangent": "1e-10",
+    "material_tangent": "1e-9",
+    "regularization_tangent": "1e-9",
+    "augmented_force_tangent": "1e-10",
+    "augmented_constraint_tangent": "1e-10"
+  },
+  "phases": {
+    "reference": {
+      "helper_seconds": 900,
+      "outer_seconds": 960
+    }
+  },
+  "sampled_RSS_bytes": 8589934592,
+  "schema_version": "alpha-saved-segment-independent-reference-card-1.0",
+  "card": "M-AREF1",
+  "prepared": true,
+  "authorized": false,
+  "executed": false,
+  "prepared_utc": "2026-10-12T01:30:24.784880+00:00",
+  "source_baseline_commit": "6c17633c59315490b825fdcc289e49f58e27fcef",
+  "science_version": "0.5.0",
+  "production_result_dir": "resumed_alpha_half",
+  "original_targets_mm": [
+    0.0,
+    0.25,
+    0.5,
+    0.65,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95,
+    1.0,
+    1.05,
+    1.1,
+    1.15,
+    1.2,
+    1.15
+  ],
+  "bindings": {
+    "hf_repo/scripts/audit_native_force.py": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+    "hf_repo/scripts/audit_native_mean.py": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678",
+    "hf_repo/scripts/audit_native_workpiece_cycle.py": "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938",
+    "hf_repo/scripts/hf2_precision_reference.py": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+    "hf_repo/scripts/hf4_split_precision_reference.py": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+    "hf_repo/scripts/run_split_average_demo.py": "e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb",
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/native_mean.py": "f16a492b6e2196ad2d6f89984f488182b970ddb6c8b5ec4daf92706265b631f5",
+    "hf_repo/src/hf_eval/native_response.py": "16339706b0e9077b726277500bff7d89747851a5ca2c030958984aba1f3d0c3e",
+    "hf_repo/src/hf_eval/native_resume.py": "497d79f6141ff205e7ef8c47685c537b7755b9ed3b452885b2e90686f77cf6fc",
+    "hf_repo/src/hf_eval/split_displacement.py": "8c1af8e9bed602ce9a4262a60769c5ec95c27c8f92f85f5e706f755adfe415a3",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+    "hf_repo/src/hf_eval/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+    "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+    "lf_data_preparation/native_interface_001/alpha_reference_001/M-AREF1_CARD.md": "f1d0ceec721777fdb8427d911f863ade62d57624a1ad621cfd0278889d212a34",
+    "lf_data_preparation/native_interface_001/alpha_reference_001/execute_alpha_reference.py": "8dd5bbb544faec9044b50df254bd2a86f1efe100500044ad9a6b78ef9c8a322c",
+    "lf_data_preparation/native_interface_001/alpha_reference_001/launch_reference.py": "108188963779a5f799349d6d34295371d5a4acd081a397e61fe3de2e31482fd2",
+    "lf_data_preparation/native_interface_001/nested_reference_002/execute_nested_reference.py": "250ed6e6cffa51424fa847bd877a370ba2d5234aed06cdc22d37895dd0e9419a",
+    "lf_data_preparation/native_interface_001/nested_reference_002/protocol.json": "d848f1df061f27bec3356704069cfdd7cf20172676db75c1ad94003dd3741c0c",
+    "lf_data_preparation/native_interface_001/regularization_sensitivity_001/manifest.json": "04bba943c3cbc6068de663ef2567fa6e43c4ffc8ee27e5468ffc806cb837dd95",
+    "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/accepted/013/state.json": "9eb90d9f9430917710f972fa4b4c2c590727811e686726d681c8fecccea9d77e",
+    "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/model/model.json": "d083a0e4b12c2a8895894142b8ea4bf8b44b6369541ca82501488e6d23fbf8b9",
+    "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/result.json": "c8be41801bc6f5dff682d148b479d1ada16b38c637203c45abcacbbdc62526cb",
+    "lf_data_preparation/native_interface_001/regularization_sensitivity_001/task.json": "423b55f9c1e9e2be88aad4d358ec19ad85181bfa4573ad530a36bd20f16b2948",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/production_launch.json": "0facfa8e6b7f958bf63bd4efdbdea253b16e60f6db2a83a1db353a7758395b6d",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/protocol.json": "e06b3ca3ad070bb1e9a20cd84832deb4ae7cd3cf0bf280f3bc5de6b94dabb40f",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/execution_receipt.json": "903fbac794a4085b77aa60e114354a049d29787e1daad48032d184faac3612df",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/forces.npz": "a4b0f1ffc97d09ee6c0d7c1d28649aa8308037553cbb199d805b898c82ef816e",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/state.json": "5287a28bdaf825c109b93b032fc1f58c19e2b51d08d03cccbef06b48e38bd1b1",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/state.npz": "9503b0d3ad5a793280e35135a21766a2ca9fe1417b655d625e3789ddbf6e9c66",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/tangents.npz": "e3467e45c9a3800b5f05d90b963cdae2f400f074871f32f56fca14ff1a6c7483",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/total_matrix.npz": "fe2210b70d876a240d14a9c2d3183d839624353eedbb2ad38ae45f76ea84c44d",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/forces.npz": "e8f0e6f7d967c2f552b14ade02d8a7c85526e3d477faa53df3d1c9e6a1426e0d",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/state.json": "bf2f51d38fa472356b180737e1b7753338a4cd01d3573efee9aaadc7a81a6da0",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/state.npz": "43326f91e24f0d08f82faeb40761c8f0b354e3806fa669ac20103a52718b8009",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/tangents.npz": "60bb82055ee65ad129ad7430ac181e4cdbee0d9b8914e71e9644df5f39101f68",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/total_matrix.npz": "ebeba41e05950204c99e68512c767ced926f6b51cc3477013a14758c2a991d1c",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/model.json": "d083a0e4b12c2a8895894142b8ea4bf8b44b6369541ca82501488e6d23fbf8b9",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/model.npz": "b8654f4e5b02e6e46eba73bc8bb17f533d6788c011f419011a3372fd25060fab",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/source_geometry/geometry.json": "574ed624b2df79fc4fce3cca6eaa05218d60edb77674bc48b37cf968a4c7e34b",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/source_geometry/geometry.npz": "4c61b434584f7e7f278227c52bc8250a0c555f686cad51ab01900d65b66b93d2",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/response.json": "e4061c6e678f84737e5bcff67047bbffa8770c7abd7bd8252badad2d1b7a8896",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/result.json": "b8767867620a9d88abedb676671ceda006191ed6cdbb9b96aa6cddc43d335259",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/view/resumed_alpha_half/summary.json": "ac981465f8589f83bd3088ba7029e34dd29a11f6da318f9d0826a3a61309dec3",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/view/view.json": "ddf72a1080bc562a4d0e6fb4ffe0f08d44dc86503d066896f9647ed65afe7286",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_author/core_audit_mechanical.py": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5"
+  },
+  "inherited_NPZ_bindings": {
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/model.npz": {
+      "sha256": "b8654f4e5b02e6e46eba73bc8bb17f533d6788c011f419011a3372fd25060fab",
+      "pin_source_file": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/execution_receipt.json",
+      "pin_source_file_sha256": "903fbac794a4085b77aa60e114354a049d29787e1daad48032d184faac3612df",
+      "source_JSON_member": "outputs",
+      "source_JSON_key": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/model.npz",
+      "matching_existing_descriptor_sha256": "b8654f4e5b02e6e46eba73bc8bb17f533d6788c011f419011a3372fd25060fab",
+      "current_NPZ_read_or_hash": false,
+      "inheritance_only": true
+    },
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/state.npz": {
+      "sha256": "9503b0d3ad5a793280e35135a21766a2ca9fe1417b655d625e3789ddbf6e9c66",
+      "pin_source_file": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/execution_receipt.json",
+      "pin_source_file_sha256": "903fbac794a4085b77aa60e114354a049d29787e1daad48032d184faac3612df",
+      "source_JSON_member": "outputs",
+      "source_JSON_key": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/state.npz",
+      "matching_existing_descriptor_sha256": "9503b0d3ad5a793280e35135a21766a2ca9fe1417b655d625e3789ddbf6e9c66",
+      "current_NPZ_read_or_hash": false,
+      "inheritance_only": true
+    },
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/forces.npz": {
+      "sha256": "a4b0f1ffc97d09ee6c0d7c1d28649aa8308037553cbb199d805b898c82ef816e",
+      "pin_source_file": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/execution_receipt.json",
+      "pin_source_file_sha256": "903fbac794a4085b77aa60e114354a049d29787e1daad48032d184faac3612df",
+      "source_JSON_member": "outputs",
+      "source_JSON_key": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/forces.npz",
+      "matching_existing_descriptor_sha256": "a4b0f1ffc97d09ee6c0d7c1d28649aa8308037553cbb199d805b898c82ef816e",
+      "current_NPZ_read_or_hash": false,
+      "inheritance_only": true
+    },
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/tangents.npz": {
+      "sha256": "e3467e45c9a3800b5f05d90b963cdae2f400f074871f32f56fca14ff1a6c7483",
+      "pin_source_file": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/execution_receipt.json",
+      "pin_source_file_sha256": "903fbac794a4085b77aa60e114354a049d29787e1daad48032d184faac3612df",
+      "source_JSON_member": "outputs",
+      "source_JSON_key": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/tangents.npz",
+      "matching_existing_descriptor_sha256": "e3467e45c9a3800b5f05d90b963cdae2f400f074871f32f56fca14ff1a6c7483",
+      "current_NPZ_read_or_hash": false,
+      "inheritance_only": true
+    },
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/total_matrix.npz": {
+      "sha256": "fe2210b70d876a240d14a9c2d3183d839624353eedbb2ad38ae45f76ea84c44d",
+      "pin_source_file": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/execution_receipt.json",
+      "pin_source_file_sha256": "903fbac794a4085b77aa60e114354a049d29787e1daad48032d184faac3612df",
+      "source_JSON_member": "outputs",
+      "source_JSON_key": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/000/total_matrix.npz",
+      "matching_existing_descriptor_sha256": "fe2210b70d876a240d14a9c2d3183d839624353eedbb2ad38ae45f76ea84c44d",
+      "current_NPZ_read_or_hash": false,
+      "inheritance_only": true
+    },
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/state.npz": {
+      "sha256": "43326f91e24f0d08f82faeb40761c8f0b354e3806fa669ac20103a52718b8009",
+      "pin_source_file": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/execution_receipt.json",
+      "pin_source_file_sha256": "903fbac794a4085b77aa60e114354a049d29787e1daad48032d184faac3612df",
+      "source_JSON_member": "outputs",
+      "source_JSON_key": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/state.npz",
+      "matching_existing_descriptor_sha256": "43326f91e24f0d08f82faeb40761c8f0b354e3806fa669ac20103a52718b8009",
+      "current_NPZ_read_or_hash": false,
+      "inheritance_only": true
+    },
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/forces.npz": {
+      "sha256": "e8f0e6f7d967c2f552b14ade02d8a7c85526e3d477faa53df3d1c9e6a1426e0d",
+      "pin_source_file": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/execution_receipt.json",
+      "pin_source_file_sha256": "903fbac794a4085b77aa60e114354a049d29787e1daad48032d184faac3612df",
+      "source_JSON_member": "outputs",
+      "source_JSON_key": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/forces.npz",
+      "matching_existing_descriptor_sha256": "e8f0e6f7d967c2f552b14ade02d8a7c85526e3d477faa53df3d1c9e6a1426e0d",
+      "current_NPZ_read_or_hash": false,
+      "inheritance_only": true
+    },
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/tangents.npz": {
+      "sha256": "60bb82055ee65ad129ad7430ac181e4cdbee0d9b8914e71e9644df5f39101f68",
+      "pin_source_file": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/execution_receipt.json",
+      "pin_source_file_sha256": "903fbac794a4085b77aa60e114354a049d29787e1daad48032d184faac3612df",
+      "source_JSON_member": "outputs",
+      "source_JSON_key": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/tangents.npz",
+      "matching_existing_descriptor_sha256": "60bb82055ee65ad129ad7430ac181e4cdbee0d9b8914e71e9644df5f39101f68",
+      "current_NPZ_read_or_hash": false,
+      "inheritance_only": true
+    },
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/total_matrix.npz": {
+      "sha256": "ebeba41e05950204c99e68512c767ced926f6b51cc3477013a14758c2a991d1c",
+      "pin_source_file": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/execution_receipt.json",
+      "pin_source_file_sha256": "903fbac794a4085b77aa60e114354a049d29787e1daad48032d184faac3612df",
+      "source_JSON_member": "outputs",
+      "source_JSON_key": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/total_matrix.npz",
+      "matching_existing_descriptor_sha256": "ebeba41e05950204c99e68512c767ced926f6b51cc3477013a14758c2a991d1c",
+      "current_NPZ_read_or_hash": false,
+      "inheritance_only": true
+    },
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/source_geometry/geometry.npz": {
+      "sha256": "4c61b434584f7e7f278227c52bc8250a0c555f686cad51ab01900d65b66b93d2",
+      "pin_source_file": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/execution_receipt.json",
+      "pin_source_file_sha256": "903fbac794a4085b77aa60e114354a049d29787e1daad48032d184faac3612df",
+      "source_JSON_member": "outputs",
+      "source_JSON_key": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/source_geometry/geometry.npz",
+      "matching_existing_descriptor_sha256": "4c61b434584f7e7f278227c52bc8250a0c555f686cad51ab01900d65b66b93d2",
+      "current_NPZ_read_or_hash": false,
+      "inheritance_only": true
+    }
+  },
+  "array_read_scope": {
+    "distinct_decoded_NPZ": 9,
+    "distinct_descriptor_fields": 75,
+    "CSC_mandatory_container_extra_fields": 4,
+    "mandatory_decoded_fields_including_CSC_container_metadata": 79,
+    "CSC_optional_is_array_probe_per_matrix": true,
+    "provenance_raw_only_NPZ": 1,
+    "total_distinct_NPZ_inputs": 10,
+    "workpiece_checker_reopens_state_and_forces_NPZ": 4,
+    "distinct_array_loader_calls_model_plus_core_plus_body": 13,
+    "repeated_descriptor_field_decodes_due_to_body_checker": 36,
+    "descriptor_field_decode_occurrences_with_body_reopen": 111,
+    "explanation": "Counts distinguish unique declared inputs, repeated aa86 opens and SciPy sparse container metadata. No NPZ bytes or ZIP/header were read in this preparation."
+  },
+  "execution_indices": [
+    13,
+    14
+  ],
+  "top_summary_child_indices": [
+    0,
+    1
+  ],
+  "unchanged_mathematical_methods": [
+    "CoreAudit.run_state",
+    "WorkpieceCycleAudit.workpiece_checks"
+  ],
+  "scatter_precision": 3000,
+  "scatter_Inexact_trap": true,
+  "independent_reference_only": true,
+  "new_production_F_T_model_solver_tests_plots": 0,
+  "new_HP_calls": 4,
+  "no_retry_repair_rerun_extension_force": true,
+  "full_original_path_qualified": false,
+  "pressure_qualified": false,
+  "clamp_qualified": false,
+  "HF5_qualified": false,
+  "all_tangent_columns_qualified": false,
+  "preparation_NPZ_read_bytes_headers_hashes_decodes": 0,
+  "prerequisite": "New direct human approval tied to this published/restored protocol; M-INTEGRATE1 is closed"
+}
