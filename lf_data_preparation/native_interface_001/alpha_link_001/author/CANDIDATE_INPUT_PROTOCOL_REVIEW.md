@@ -1,0 +1,15 @@
+# M-ALINK1 候选输入／协议联合静审
+
+结论：PASS，无阻断；仅源码／普通JSON／stat审阅，未执行候选、发布工具、API、HF或科学。正式stage仍未创建。本报告不预先声称API matched或已产生关联响应。
+
+冻结helper `efa1d48c03d2f9757825a82fb6d6d6c5b374654ab8abbfb2e60e7f0c39bf499a`；protocol `6da47ef3a8236eb6b7687478d5c89b44242753cfd52044825742162a104cdde7`；launcher `85cd4925f981925a51a52fbc1711b389119ff3d189fd4fee1d08513a1bfcfa96`。30 bindings精确对应26现有文件＋3本卡文件＋1原M-AREF1实际发布proof，4media只继承manifest／原view pin并核stat。
+
+实际API读取5普通JSON，包装另外读取previous publication／原reference outer／helper3JSON。控制入口另读取新协议／真实批准／新发布proof；原response与父result只作raw pin及索引，不额外解析父状态产生机械路径。API导入2纯模块，12参考源码只核rawSHA；13distinct源码闭合，_views未来核原三PNG／一GIF原bytes，不decode／render。不存在NPZ／gzip／CSV／每态descriptor读取。
+
+当前普通JSON所有接口字段与条件满足，result/model/task规范身份及来源pin成立，selected original13／14和child0／1逐项state／target／leg／anchor对应。将来accepted_reference_pass/full_path_reference_pass=true只覆盖child两态suffix；full_original flags仍false，target_response=null、parent failed/time_limit和原producer flags保持，pressure／clamp／contact／全列HP／HF5false。原view绘制时reference_available=false保持。
+
+仅新linked_response／light_index／execution_receipt三个JSON，旧输入不回写。最早STARTED、原180／240秒8GiB窗口、首错/no retry／repair／extension／force、末receipt后checkpoint及outer完整终端复核相符；任何较早pass快照不能替代outer实际完成。
+
+Card／PREPARATION及两front待写前缀准确区分准备／未授权／未执行与原已完成科学证据；各完整BASE84c旧正文被预拼接一次，未实际写front。Publisher只hash新metadata delta＋两front，旧4media在source及restore均仅stat／原manifest继承，不读原图片字节，不全扫原仓库，生成prepared=true／authorized=false／executed=false的新卡发布proof，与运行bootstrap合同相容。
+
+JSON SHA256：`032fa12d8a88137a6c8f975cdc0e6a6833c161c6cf2faaf5f2842fab426cb7e0`。
