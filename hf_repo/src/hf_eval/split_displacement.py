@@ -54,19 +54,23 @@ def split_average_measurement(state, vector, *offsets):
 
 def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
                                  lift_origin=None, lift_shape=None, target_origin=0.,
-                                 initial_state=None, initial_R=0., settings=None,
+                                 initial_state=None, initial_R=0., initial_parameter=0., settings=None,
                                  force_scale_per_length, assembler=None, on_accept=None,
                                  path_mode="load_only", initial_guess="tangent"):
     """Solve fint(L,w)+k*b_out*q_out-b_in*R=0 and b_in·(L+w)=d0+s.
 
-    Targets are nonnegative stage parameters s, starting at zero. ``load_only``
+    Targets are nonnegative stage parameters s. ``load_only`` starts at zero and
     requires increasing targets; ``ordered_cycle`` follows the supplied order,
     retaining state and tangent through loading and unloading. The actual
     lift is stored binary64 origin+s*shape; the mean target is the exact sum
     D(target_origin)+D(s). Both lift arrays default to zero. Physical fixed DOFs
-    remain zero. A warm start must match the supplied origin bit for bit;
+    remain zero. A warm start must match the supplied lift at its initial
+    parameter bit for bit;
     its multiplier and target offset are explicit. No rebase or display array
     enters mechanics, measurements, feasibility or initialization.
+    A nonzero ``initial_parameter`` is only an ordered-cycle saved anchor;
+    targets start at that absolute s, and its first fresh F/T check must pass
+    the existing gates without Newton correction. No saved tangent is accepted.
     ``port_projection`` starts displacement from the previous fluctuation plus
     a distributed port adjustment; the real tangent prediction still seeds R.
     """
@@ -76,6 +80,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
     b_in, b_out, k_out = _inputs(model, b_in, b_out, k_out)
     force_scale_per_length = _positive_scalar(force_scale_per_length, "force_scale_per_length")
     target_origin = _positive_scalar(target_origin, "target_origin", allow_zero=True)
+    initial_parameter = _positive_scalar(initial_parameter, "initial_parameter", allow_zero=True)
     initial_R = float(_vector([initial_R], 1, "initial_R")[0])
     raw = np.asarray(targets)
     if raw.ndim != 1 or not len(raw):
@@ -85,11 +90,14 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
         raise TMCError("path_mode must be load_only or ordered_cycle", code="invalid_input")
     if initial_guess not in ("tangent", "port_projection"):
         raise TMCError("initial_guess must be tangent or port_projection", code="invalid_input")
+    if initial_parameter and (path_mode != "ordered_cycle" or initial_state is None):
+        raise TMCError("nonzero initial_parameter requires an ordered-cycle saved state", code="invalid_input")
     if path_mode == "load_only" and (levels[0] != 0 or np.any(np.diff(levels) <= 0)):
         raise TMCError("stage targets must start at zero and strictly increase", code="invalid_input")
-    if path_mode == "ordered_cycle" and (levels[0] != 0 or np.any(levels < 0)
+    if path_mode == "ordered_cycle" and (levels[0] != initial_parameter or np.any(levels < 0)
                                          or np.any(np.diff(levels) == 0)):
-        raise TMCError("cycle targets must start at zero, be nonnegative and have no adjacent duplicates",
+        raise TMCError(("cycle targets must start at zero, be nonnegative and have no adjacent duplicates" if initial_parameter == 0
+                        else "cycle targets must start at initial_parameter, be nonnegative and have no adjacent duplicates"),
                        code="invalid_input")
     if path_mode == "ordered_cycle" and (not np.any(np.diff(levels) < 0)
                                          or levels[-1] >= levels.max()):
@@ -99,11 +107,13 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
     lift_shape = _vector(np.zeros(model.ndof) if lift_shape is None else lift_shape, model.ndof, "lift_shape")
     if np.any(lift_origin[model.fixed_dofs]) or np.any(lift_shape[model.fixed_dofs]):
         raise TMCError("average-control supports must remain at zero", code="constraint_conflict")
+    with np.errstate(over="ignore", invalid="ignore"):
+        anchor_lift = lift_origin.copy() if initial_parameter == 0 else lift_origin+initial_parameter*lift_shape
     if initial_state is None:
         initial = SplitDisplacement(lift_origin, np.zeros(model.ndof))
     else:
         if (not isinstance(initial_state, SplitDisplacement) or initial_state.ndof != model.ndof
-                or not _bitwise_equal(initial_state.lift, lift_origin)
+                or not _bitwise_equal(initial_state.lift, anchor_lift)
                 or np.any(initial_state.fluctuation[model.fixed_dofs])):
             raise TMCError("warm state must preserve supplied lift and fixed zero fluctuation", code="constraint_conflict")
         initial = initial_state.copy()
@@ -111,7 +121,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
     if not callable(assembly) or (on_accept is not None and not callable(on_accept)):
         raise TMCError("assembler and callback must be callable", code="invalid_input")
     started = perf_counter()
-    state_u, state_R, state_s, state_K = initial.copy(), initial_R, 0., None
+    state_u, state_R, state_s, state_K = initial.copy(), initial_R, initial_parameter, None
     accepted, trials, failures, history, linear_solves = [], [], [], [], []
     failure, maximum_depth = None, 0
     b_free = b_in[model.free]
@@ -254,6 +264,9 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
                 result = metrics(candidate, R, s, internal, fields)
                 result["newton_checks"] = iteration
                 return candidate, R, K, result
+            if initial_parameter and not accepted and old_s == s == initial_parameter:
+                raise TMCError("saved continuation anchor failed its fresh equilibrium check",
+                               code="initial_state_not_equilibrated")
             if abs(measured["constraint_residual"]) > measured["constraint_bound"]:
                 raise TMCError("split mean constraint failed", code="constraint_failure")
             if iteration == settings.max_checks:
@@ -335,7 +348,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
     try:
         _check_support(model)
         for index, s in enumerate(levels):
-            leg = "origin" if index == 0 else "loading" if s > levels[index-1] else "unloading"
+            leg = ("resume_origin" if initial_parameter else "origin") if index == 0 else "loading" if s > levels[index-1] else "unloading"
             advance(float(s), 0, float(s), index, leg)
     except (KernelError, TMCError) as error:
         failure = dict(code=getattr(error, "code", "numerical_failure"), reason=str(error))
@@ -362,4 +375,6 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
                       unload_endpoint_reached=completed)
     if initial_guess != "tangent":
         result["initial_guess"] = initial_guess
+    if initial_parameter:
+        result["initial_parameter"] = initial_parameter
     return result

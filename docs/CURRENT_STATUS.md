@@ -1,3 +1,20 @@
+# 当前接续：M-INTEGRATE1实际PASS，默认保存态续算已安装
+
+整体目标仍为独立HF有限变形／TMC前向评价，读取普通LF几何，在明确任务下提供实际变形、反力和可解释工件作用给外部研究层；HF不优化、不调用dmftd，MPM暂不实现，main与既定origin、science0.5.0保持。
+
+2026-10-12（Asia/Seoul）直接批准后唯一安装11份（6旧改、5新）并执行25冻结测试，实际25passed／75阶段报告全passed／XML0失败错误跳过；outer9.125265299982857秒、exit0、tree采样184213504B、stopNone。默认Mean/API/CLI支持同原任务保存内部非零原目标接受态的绝对后缀续算；new clock外设置／选项保持，K=None必须复核锚点。非法settings返回typed invalid_settings。11安装／58运行身份／26实际默认HF导入／108不可变bindings核对通过，无重试／修复重跑／延期／force／自动回滚，卡已关闭。
+
+真实测试仅4个小模型实例、7条16单元50DOF建模记录，NativeMean aliases F33/33、T22/22；另6合成／15mock或普通记录。这个有限兼容PASS不等于全部项目测试或物理资格。旧MRESUME100与安装11路径零交集；旧候选、协议、结果保持，98非NPZ重核而2NPZ未新读。right4旧参考当前source strict mismatch的实际测试通过，原qualified响应不改；right2只读源核同两失配，MREF2来源仍匹配，旧HP数值不被改写。
+
+原alpha5e−7的M-ALPHA1仍14加载态／NOT_PASS，M-RESUME1的原1.20→1.15短段success保持，父与child不拼为原一次完整路径通过；新alpha无HP。原实际R0.37865427196005513→0.3470376815403639 N，下半工件total Fy0.12492121630032427→0.10671287553103108 N；3PNG与一份2帧GIF复用，无新夹持器路径／HP／绘图。
+
+最近取舍转向新alpha峰值／首次下降保存态的独立力参考：先只读核现有入口与成本，再形成具体卡，不重做长加载或掃alpha。父子明确关联、可解释接触／有效夹持、一般LF输入、稳定性和HF5仍未完成。默认API/CLI未来用法已记录；文档示例没有运行，也不是新运行许可。
+
+[实际结果与原图](../lf_data_preparation/native_interface_001/saved_integration_001/RESULTS.md) · [默认入口用法](../docs/NATIVE_EVALUATION_INTERFACE.md) · [最近取舍](../lf_data_preparation/native_interface_001/saved_integration_001/NEXT_STEP_REVIEW.md)
+
+<details>
+<summary>更新前完整原文（历史状态不代表当前）</summary>
+
 # 当前接续：M-INTEGRATE1默认续算集成候选已准备，未安装／未执行
 
 整体目标仍是独立HF有限变形／TMC前向评价，提供实际变形、反力和可解释工件作用供外部研究层；HF不做LF优化、不调用dmftd，main和既定origin保持，science0.5.0及原资格保持。
@@ -960,6 +977,8 @@ CPU原237条和科学30条事件完整；严格同步内原行157–235全部79�
 
 </details>
 
+
+</details>
 
 </details>
 

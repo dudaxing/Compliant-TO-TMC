@@ -1,0 +1,489 @@
+{
+  "schema_version": "hf-native-batch-index-1.0",
+  "status": "success",
+  "manifest": {
+    "path": "manifest.json",
+    "path_scope": "repo_relative",
+    "sha256": "f40d314d9e8709392e4827a15e6c7cf3001fa141efd4304830018ab426b80950"
+  },
+  "path_base": {
+    "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/saved_integration_001/run_001/test_tmp/test_ordered_once_transport_pr0/inputs",
+    "source": "explicit_repo"
+  },
+  "directory": {
+    "path": "batch",
+    "path_scope": "repo_relative"
+  },
+  "options": {
+    "targets": null,
+    "settings": null,
+    "time_limit_seconds": 180.0,
+    "minimum_increment": null,
+    "response_mode": "complete",
+    "tangent_mode": "full",
+    "initial_guess": "tangent"
+  },
+  "stop_on_non_success": true,
+  "shared_task_contract": {
+    "schema_version": "hf-native-project-task-1.1",
+    "case_family": "gripper",
+    "purpose": "mock_batch_transport_test",
+    "parameter_origin": "Explicit small-path TEST under the current development request; unchanged reviewed coarse native physics; H2/H3 unresolved",
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain"
+    },
+    "input": {
+      "tag": "input",
+      "control": "average_displacement",
+      "target_mm": 1.2
+    },
+    "output": {
+      "tag": "output",
+      "spring_N_per_mm": 0.0
+    },
+    "constraints": [
+      {
+        "tag": "support",
+        "components": [
+          0,
+          1
+        ]
+      },
+      {
+        "tag": "symmetry",
+        "components": [
+          1
+        ]
+      }
+    ],
+    "support_selection": "solid_incident_nodes_only",
+    "input_auxiliary_spring_N_per_mm": 0.0,
+    "workpiece": null,
+    "third_medium": {
+      "gamma": 1e-06
+    },
+    "qualification_criteria": {
+      "max_design_volume_fraction": null,
+      "min_feature_mm": null
+    },
+    "reference_state": "undeformed",
+    "units": {
+      "length": "mm",
+      "force": "N",
+      "stress": "MPa",
+      "energy": "N mm"
+    },
+    "regularization": {
+      "alpha": 1e-06,
+      "length_mm": 80.0
+    },
+    "background_symmetry": {
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ]
+    },
+    "analysis_grid": {
+      "policy": "native"
+    },
+    "description": "Mock transport only; no scientific qualification",
+    "path": {
+      "kind": "ordered_cycle",
+      "targets_mm": [
+        0.0,
+        0.5,
+        1.2,
+        0.0
+      ]
+    }
+  },
+  "shared_task_contract_sha256": "4788f283e08d5c374f9ea5e7d02608ca9d8c336c75a3517a17c682254c0da172",
+  "shared_geometry_declarations": {
+    "case_family": "gripper",
+    "thickness_mm": 20.0,
+    "model_extent": {
+      "kind": "lower_half",
+      "symmetry_axis": {
+        "normal": [
+          0.0,
+          1.0
+        ],
+        "offset_mm": 40.0
+      }
+    },
+    "region_tags": {
+      "support": {
+        "points_mm": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            8.0
+          ]
+        ],
+        "components": [
+          0,
+          1
+        ]
+      },
+      "symmetry": {
+        "points_mm": [
+          [
+            0.0,
+            40.0
+          ],
+          [
+            60.0,
+            40.0
+          ]
+        ],
+        "components": [
+          1
+        ]
+      },
+      "input": {
+        "points_mm": [
+          [
+            0.0,
+            38.0
+          ],
+          [
+            0.0,
+            40.0
+          ]
+        ],
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "averaging": "normalized_reference_arclength_trapezoid"
+      },
+      "output": {
+        "points_mm": [
+          [
+            80.0,
+            28.0
+          ],
+          [
+            80.0,
+            30.0
+          ]
+        ],
+        "direction": [
+          0.0,
+          1.0
+        ],
+        "averaging": "normalized_reference_arclength_trapezoid"
+      }
+    },
+    "grid": {
+      "origin_mm": [
+        0.0,
+        0.0
+      ],
+      "axes": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "extent_mm": [
+        80.0,
+        40.0
+      ]
+    }
+  },
+  "shared_geometry_declarations_sha256": "2cfb3b74b578d044437002dfdbf10c84793740d98d17a9efaf8f5d74b9be30c4",
+  "preflight_scope": "Task and geometry JSON declarations only; no NPZ/model evaluation or mesh qualification",
+  "cases": [
+    {
+      "label": "first",
+      "status": "success",
+      "task_id": "mock_first",
+      "geometry": {
+        "path": "geometry/first.json",
+        "path_scope": "repo_relative",
+        "sha256": "c7841780cb31900450be902c824fed83677e848391c47b9eb8f92bf311b747b1"
+      },
+      "task": {
+        "path": "tasks/first.json",
+        "path_scope": "repo_relative",
+        "sha256": "dc9da70e6c191e62202fcf9954bcb9af1bf5a7d3b769281f191fa7a7258c8896"
+      },
+      "output": {
+        "path": "runs/first",
+        "path_scope": "repo_relative"
+      },
+      "declared_paths": {
+        "geometry": "geometry/first.json",
+        "task": "tasks/first.json",
+        "output": "runs/first"
+      },
+      "analysis_grid_declared": {
+        "shape_yx": [
+          40,
+          80
+        ],
+        "origin_mm": [
+          0.0,
+          0.0
+        ],
+        "cell_size_mm": [
+          1.0,
+          1.0
+        ],
+        "axes": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "extent_mm": [
+          80.0,
+          40.0
+        ],
+        "array_order": "C_yx_bottom_up",
+        "value_location": "cell"
+      },
+      "requested_targets_mm": [
+        0.0,
+        0.5,
+        1.2,
+        0.0
+      ],
+      "response": {
+        "path": "runs/first/response.json",
+        "path_scope": "repo_relative",
+        "sha256": "32b4007a61cae6be8d7492f41efe1e87699986da03af103699329c9c3dde8a5b"
+      },
+      "reason": null,
+      "identity": {
+        "result": {
+          "path": "own/first/result.json",
+          "sha256": "first_result"
+        }
+      },
+      "options": null,
+      "invocation": null,
+      "evaluation_elapsed_scope": null,
+      "qualification_scope": null,
+      "path": {
+        "task_target_mm": 1.2,
+        "requested_endpoint_mm": 0.0,
+        "accepted_states": 4,
+        "completed": true,
+        "task_target_executed": true
+      },
+      "target_response": {
+        "index": 2,
+        "d_mm": 1.2,
+        "R_input_N": 0.2,
+        "workpiece": null,
+        "state_sha256": "first_peak"
+      },
+      "requested_endpoint_response": {
+        "index": 3,
+        "d_mm": 0.0,
+        "R_input_N": 0.0,
+        "workpiece": null,
+        "state_sha256": "first_return"
+      },
+      "maximum_loading_stroke": {
+        "index": 2,
+        "d_mm": 1.2,
+        "R_input_N": 0.2,
+        "workpiece": null,
+        "state_sha256": "first_peak"
+      },
+      "last_accepted": {
+        "index": 3,
+        "d_mm": 0.0,
+        "R_input_N": 0.0,
+        "workpiece": null,
+        "state_sha256": "first_return"
+      },
+      "call_counts": null,
+      "timing_seconds": null,
+      "evaluation_elapsed_seconds": null,
+      "failure": null,
+      "producer_flags": {
+        "independent_HP_qualified": false,
+        "equilibrium_qualified": false,
+        "HF_qualified": false
+      },
+      "independent_reference": {
+        "status": "matched",
+        "report": {
+          "path": "first_ref.json"
+        },
+        "accepted_reference_pass": true,
+        "full_path_reference_pass": true,
+        "HF5_qualified": false
+      },
+      "views": {
+        "status": "matched",
+        "links": [
+          {
+            "path": "first_own.gif"
+          }
+        ]
+      }
+    },
+    {
+      "label": "second",
+      "status": "success",
+      "task_id": "mock_second",
+      "geometry": {
+        "path": "geometry/second.json",
+        "path_scope": "repo_relative",
+        "sha256": "c7841780cb31900450be902c824fed83677e848391c47b9eb8f92bf311b747b1"
+      },
+      "task": {
+        "path": "tasks/second.json",
+        "path_scope": "repo_relative",
+        "sha256": "bd73e88f28ab085a98a7a591b68006733dc0e0d9d15e2fad4fae66a66d0201f0"
+      },
+      "output": {
+        "path": "runs/second",
+        "path_scope": "repo_relative"
+      },
+      "declared_paths": {
+        "geometry": "geometry/second.json",
+        "task": "tasks/second.json",
+        "output": "runs/second"
+      },
+      "analysis_grid_declared": {
+        "shape_yx": [
+          40,
+          80
+        ],
+        "origin_mm": [
+          0.0,
+          0.0
+        ],
+        "cell_size_mm": [
+          1.0,
+          1.0
+        ],
+        "axes": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "extent_mm": [
+          80.0,
+          40.0
+        ],
+        "array_order": "C_yx_bottom_up",
+        "value_location": "cell"
+      },
+      "requested_targets_mm": [
+        0.0,
+        0.5,
+        1.2,
+        0.0
+      ],
+      "response": {
+        "path": "runs/second/response.json",
+        "path_scope": "repo_relative",
+        "sha256": "e68fe5c1bd76732d982826fa3d90c7cf7af8c96a55ccfa5ba2daee74a6b5a0a3"
+      },
+      "reason": null,
+      "identity": {
+        "result": {
+          "path": "own/second/result.json",
+          "sha256": "second_result"
+        }
+      },
+      "options": null,
+      "invocation": null,
+      "evaluation_elapsed_scope": null,
+      "qualification_scope": null,
+      "path": {
+        "task_target_mm": 1.2,
+        "requested_endpoint_mm": 0.0,
+        "accepted_states": 4,
+        "completed": true,
+        "task_target_executed": true
+      },
+      "target_response": {
+        "index": 2,
+        "d_mm": 1.2,
+        "R_input_N": 0.2,
+        "workpiece": null,
+        "state_sha256": "second_peak"
+      },
+      "requested_endpoint_response": {
+        "index": 3,
+        "d_mm": 0.0,
+        "R_input_N": 0.0,
+        "workpiece": null,
+        "state_sha256": "second_return"
+      },
+      "maximum_loading_stroke": {
+        "index": 2,
+        "d_mm": 1.2,
+        "R_input_N": 0.2,
+        "workpiece": null,
+        "state_sha256": "second_peak"
+      },
+      "last_accepted": {
+        "index": 3,
+        "d_mm": 0.0,
+        "R_input_N": 0.0,
+        "workpiece": null,
+        "state_sha256": "second_return"
+      },
+      "call_counts": null,
+      "timing_seconds": null,
+      "evaluation_elapsed_seconds": null,
+      "failure": null,
+      "producer_flags": {
+        "independent_HP_qualified": false,
+        "equilibrium_qualified": false,
+        "HF_qualified": false
+      },
+      "independent_reference": {
+        "status": "not_provided",
+        "report": null,
+        "accepted_reference_pass": false,
+        "full_path_reference_pass": false,
+        "HF5_qualified": false
+      },
+      "views": {
+        "status": "not_provided",
+        "links": []
+      }
+    }
+  ],
+  "failure_case": null,
+  "HF5_qualified": false,
+  "ranking_qualified": false,
+  "qualification_scope": "Batch transport only; each response retains its own independent reference, views and flags"
+}

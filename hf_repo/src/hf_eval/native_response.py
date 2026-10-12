@@ -54,13 +54,17 @@ def _state(index, row):
                  'full_workpiece_net_force_N', 'two_sided_normal_magnitude_sum_N', 'force_scope',
                  'node_window_clearance_mm', 'clearance_scope')
         workpiece = {name: workpiece.get(name) for name in names}
-    return dict(index=index, state_sha256=row['state_sha256'], d_mm=row['d'], leg=row.get('leg'),
+    answer = dict(index=index, state_sha256=row['state_sha256'], d_mm=row['d'], leg=row.get('leg'),
         original_target_index=row.get('original_target_index'), is_original_target=row.get('is_original_target'),
         R_input_N=row['R_input'], q_in_mm=row['q_in'], q_out_mm=row['q_out'],
         minimum_J=row['minimum_J'], relative_residual=row['relative_residual'],
         relative_global_force_balance=row['relative_global_force_balance'],
         constraint_residual_mm=row['constraint_residual'], max_abs_Hu_per_mm=row.get('max_abs_Hu_per_mm'),
         workpiece=workpiece)
+    if 'continuation_anchor' in row:
+        answer.update(child_original_target_index=row['child_original_target_index'],
+                      continuation_anchor=row['continuation_anchor'])
+    return answer
 
 
 def _binding_matches(bindings, path, pin, repo):
@@ -200,7 +204,7 @@ def summarize_saved_native_result(result_file, *, repo_root=None, reference_file
     failure = result.get('failure')
     if failure is not None:
         failure = dict(phase='equilibrium', **failure)
-    return dict(schema_version='hf-native-response-1.0', status=result['status'],
+    answer = dict(schema_version='hf-native-response-1.0', status=result['status'],
         identity=dict(result=_artifact(result_path, result_pin, repo), model=_artifact(model_path, model_pin, repo),
             task_sha256=result['task_sha256'], geometry=model['source_geometry'],
             mechanics_source_sha256=result.get('mechanics_source_sha256', {}),
@@ -222,6 +226,13 @@ def summarize_saved_native_result(result_file, *, repo_root=None, reference_file
         call_counts=result['call_counts'], timing_seconds=result['timing_seconds'], failure=failure,
         force_semantics='R is half-model actuator reaction; lower-body forces are signed weak-form resultants. Two-sided normal magnitude sum is not full-body net force. q_out is a weighted port displacement, not a surface gap.',
         field_scope='J/Hu are saved global scalars, not separately observed solid/medium fields. Workpiece node-window clearance has its original raster scope, not finite surface distance.')
+    if 'continuation' in result:
+        answer['continuation'] = result['continuation']
+        answer['path'].update(scope='Saved-state original-task suffix only; parent full path remains historical',
+                              full_original_path_completed=False)
+        answer['independent_reference'].update(reference_scope='Child accepted suffix only',
+                                              full_original_path_reference_pass=False)
+    return answer
 
 
 def write_native_response(response, output_file):

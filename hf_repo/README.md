@@ -1,3 +1,22 @@
+# 默认保存态续算已安装：Mean／API／CLI
+
+M-INTEGRATE1 唯一执行成功：11 份候选已安装到默认 `hf_repo`，25 个精确 pytest 实例通过（pytest stdout：6.62 秒）。范围包含旧零起点、保存态合同、缓存保存、mechanical/chunk256、mock batch、CLI 接线、非法 settings 与旧参考来源迁移；真实力学测试仅临时 16 单元／50 DOF。该结果验证入口集成与有限兼容，没有重跑原夹持器或生成新 HP、变形图、压力／有效夹持／稳定性资格。
+
+保存态入口使用原任务内的非零接受目标，重新验证锚点后执行原绝对目标后缀。`selected_state_index` 是接受记录行序号；所选行须为原目标，并至少还有一个后续目标。父任务必须是原零 lift 的 `ordered_cycle`，原几何、材料、边界、数值设置和选项保持，只使用本次新的求解时限。省略 saved 模式选项会继承父值；普通零起点仍为 complete/full/tangent。锚点从新鲜 `K=None` 开始计算 F/T，不读取旧力、切线或矩阵。
+
+未来 CLI 用法示意（本页不执行，示例不构成新增运行许可；`<repo>` 与 `<HF Python>` 替换为本机路径，并选择全新输出目录）：
+
+```text
+<HF Python> <repo>/hf_repo/scripts/evaluate_native.py --repo <repo> --saved-result lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/result.json --selected-state-index 13 --targets 1.20 1.15 --output jobs/new_resume_demo --time-limit 180
+```
+
+子结果成功只表示后缀完成，原 M-ALPHA1 failed/time_limit 与原完整路径未完成标记不改；不承诺递归续算子结果或 batch 保存态入口。当前源码重总结旧 right2/right4 正参考会严格 source mismatch，旧 result/reference/qualified 响应和 HP 历史字节保持。功能集成不放宽来源或物理资格门。
+
+[完整用法与字段](../docs/NATIVE_EVALUATION_INTERFACE.md) · [本轮执行回执](../lf_data_preparation/native_interface_001/saved_integration_001/run_001/execution_receipt.json) · [25 项实际测试回执](../lf_data_preparation/native_interface_001/saved_integration_001/run_001/focused_test_receipt.json) · [原两端点实际变形与作用](../lf_data_preparation/native_interface_001/saved_continuation_001/RESULTS.md)。整体目标仍是独立 HF 有限变形／TMC 正向评价；任意新 LF 几何／任务的可靠性、连续接触压力、有效夹持、稳定性及 HF5 整体资格继续按证据推进。
+
+<details>
+<summary>更新前完整原文：历史状态与命令仅对应当时</summary>
+
 # 固定工件真实 API：24态完整路径与可视化已完成
 
 2026-10-08，W-API1完整加载—卸载已完成；明确批准的W-VIEW1唯一一次保存观察/绘图也成功闭卡，几何24/24、节点力24/24，3 PNG与全24帧GIF可人工检查。原力学源、输入/材料/端口/约束保持，W-VIEW1新增F/T/求解/HP均0；原窗口不续用。
@@ -324,5 +343,7 @@ for validation scope and evidence. The original HF-1 release ZIP remains unchang
 
 </details>
 
+
+</details>
 
 </details>

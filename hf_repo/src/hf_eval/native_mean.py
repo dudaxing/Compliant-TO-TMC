@@ -21,6 +21,7 @@ from .data import canonical_hash
 from .displacement import DisplacementSettings
 from .native_force import _npz, _state_hash
 from .native_project import build_native_project, write_native_project
+from .native_resume import native_options, read_native_resume, saved_resume_defaults
 from .project import Project
 from .split_displacement import solve_split_displacement_path
 from .split_kernel_invariants_hu import (MECHANICAL_KERNEL_VERSION,
@@ -111,10 +112,11 @@ def _workpiece_observations(project, state, arrays):
 
 
 def solve_native_mean(geometry_file, task_dict: dict, targets, *,
-                      settings: DisplacementSettings, on_accept=None,
-                      response_mode="complete", tangent_mode="full",
-                      initial_guess="tangent") -> NativeMeanResult:
-    """Solve explicit mean targets from zero lift and the undeformed state.
+                      settings: DisplacementSettings | None = None, on_accept=None,
+                      response_mode=None, tangent_mode=None, initial_guess=None,
+                      saved_result=None, selected_state_index=None,
+                      time_limit_seconds=None) -> NativeMeanResult:
+    """Solve explicit mean targets, or revalidate and continue a saved suffix.
 
     Settings are explicit. The CLI uses the original first-increment/16 rule;
     the API passes the supplied settings to the existing controller unchanged.
@@ -124,7 +126,31 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
     the force residual, cached tangent and controller are otherwise unchanged.
     Optional chunk256 tangents retain the full-batch arithmetic selector.
     The opt-in port_projection initial guess changes only Newton initialization.
+    Saved mode inherits parent inputs/options and settings; settings=None needs
+    an explicit new time_limit_seconds. Explicit settings may change only time.
+    A saved start uses fresh F/T, never its saved matrix. Parent task/path/status
+    remain historical; success here completes only the original-task suffix.
     """
+    if (saved_result is None) != (selected_state_index is None):
+        raise TMCError("saved_result and selected_state_index must be paired", code="invalid_input")
+    if settings is not None and not isinstance(settings,DisplacementSettings):
+        raise TMCError("settings must be DisplacementSettings", code="invalid_settings")
+    resume_defaults = None
+    if saved_result is not None:
+        if settings is None and time_limit_seconds is None:
+            raise TMCError("Saved continuation requires a new explicit time limit", code="invalid_settings")
+        if settings is not None and time_limit_seconds is not None:
+            raise TMCError("Pass settings or time_limit_seconds, not both", code="invalid_settings")
+        resume_defaults = saved_resume_defaults(saved_result,selected_state_index,
+            time_limit_seconds=time_limit_seconds if settings is None else settings.time_limit_seconds)
+        geometry_file = resume_defaults["geometry_file"] if geometry_file is None else geometry_file
+        task_dict = resume_defaults["task"] if task_dict is None else task_dict
+        targets = resume_defaults["targets"] if targets is None else targets
+        settings = resume_defaults["settings"] if settings is None else settings
+    elif time_limit_seconds is not None:
+        raise TMCError("Zero-start solve keeps explicit settings", code="invalid_settings")
+    response_mode,tangent_mode,initial_guess = native_options(response_mode,tangent_mode,initial_guess,
+        resume_defaults["options"] if resume_defaults is not None else ("complete","full","tangent"))
     if not isinstance(settings, DisplacementSettings):
         raise TMCError("settings must be DisplacementSettings", code="invalid_settings")
     if response_mode not in ("complete", "mechanical"):
@@ -142,12 +168,14 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
     project = build_native_project(geometry_file, task_dict)
     path_spec = project.task.get("path")
     path_mode = "load_only" if path_spec is None else path_spec["kind"]
-    if path_spec is not None and not np.array_equal(np.asarray(targets), path_spec["targets_mm"]):
+    if saved_result is None and path_spec is not None and not np.array_equal(np.asarray(targets), path_spec["targets_mm"]):
         raise TMCError("Targets must match the explicitly declared task path", code="invalid_input")
+    anchor = None if saved_result is None else read_native_resume(saved_result,selected_state_index,
+        project,targets,settings,response_mode=response_mode,tangent_mode=tangent_mode,initial_guess=initial_guess)
     prepared = perf_counter()
     model = project.model
     source_hashes = {"hf_repo/src/hf_eval/"+name: sha256(Path(__file__).with_name(name).read_bytes()).hexdigest()
-                     for name in SOURCE_NAMES}
+                     for name in SOURCE_NAMES + (("native_resume.py",) if anchor is not None else ())}
     counts = dict(force_calls=0, force_calls_completed=0, tangent_calls=0,
                   tangent_calls_completed=0, solver_invocations=1, JIT_calls=0, HP_calls=0)
     accepted, last_tangent = [], None
@@ -194,6 +222,10 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
         for array in (*arrays.values(), *tangents.values()):
             array.setflags(write=False)
         record = _plain({key: value for key, value in measured.items() if not isinstance(value, np.ndarray)})
+        if anchor is not None:
+            record["child_original_target_index"] = record["original_target_index"]
+            record["original_target_index"] += anchor.original_index
+            record["continuation_anchor"] = bool(record["child_original_target_index"] == 0 and record["is_original_target"])
         record.update(assembler_state_sha256=state_hash, assembler_force_call=force_call,
                       assembler_tangent_call=tangent_call, max_abs_Hu_per_mm=float(np.abs(arrays["Hu"]).max()))
         record.update(deepcopy(availability))
@@ -209,7 +241,8 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
     path = solve_split_displacement_path(model, project.bin, project.bout, targets, project.k_out,
         settings=settings, force_scale_per_length=project.material["force_scale_per_length"],
         assembler=assemble, on_accept=capture, path_mode=path_mode,
-        initial_guess=initial_guess)
+        initial_guess=initial_guess, **({} if anchor is None else dict(
+            initial_state=anchor.state,initial_R=anchor.R,initial_parameter=anchor.parameter)))
     source = deepcopy(project.region_metadata["source_geometry"])
     source["snapshot"] = {key: "model/"+value for key, value in source["snapshot"].items()}
     metadata = dict(schema_version=SCHEMA_VERSION, scope="native_small_mean_driven_numerical_path",
@@ -250,6 +283,16 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
         metadata["tangent_execution"] = deepcopy(tangent_execution)
     if initial_guess != "tangent":
         metadata["initial_guess"] = initial_guess
+    if anchor is not None:
+        first = accepted[0] if accepted else None
+        metadata["continuation"] = dict(deepcopy(anchor.metadata),
+            segment_completed=bool(path["target_reached"]),anchor_revalidated=first is not None,
+            full_original_path_completed=False,task_target_executed=False,
+            anchor_identity_preserved=bool(first is not None
+                and first.record["state_sha256"] == anchor.metadata["selected_state"]["state_sha256"]
+                and np.float64(first.record["R_input"]).tobytes() == np.float64(anchor.R).tobytes()))
+        metadata.update(scope="native_saved_mean_continuation_segment",task_target_executed=False,
+            full_original_path_completed=False,source_binding_scope="Entry/controller/assembler/force and saved-resume reader; stage receipt binds executed closure")
     return NativeMeanResult(project, path, tuple(accepted), metadata)
 
 
