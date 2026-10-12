@@ -232,6 +232,12 @@ def summarize_saved_native_result(result_file, *, repo_root=None, reference_file
                               full_original_path_completed=False)
         answer['independent_reference'].update(reference_scope='Child accepted suffix only',
                                               full_original_path_reference_pass=False)
+        if result['continuation'].get('continuation_mode') == 'explicit_task_extension':
+            answer['path'].update(scope='Explicit saved-terminal extended-task segment only',
+                                  full_extended_path_completed=False,
+                                  maximum_loading_stroke_scope='Segment maximum; not the source task loading peak')
+            answer['independent_reference'].update(reference_scope='Explicit extended-task child segment only',
+                                                  full_extended_path_reference_pass=False)
     return answer
 
 

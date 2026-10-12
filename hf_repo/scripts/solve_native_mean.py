@@ -19,6 +19,7 @@ def main():
     parser.add_argument("--geometry", type=Path, help="Required for zero start; otherwise saved source geometry")
     parser.add_argument("--task", type=Path, help="Required for zero start; otherwise saved original task")
     parser.add_argument("--saved-result", type=Path, help="Original saved result to continue")
+    parser.add_argument("--extend-path", action="store_true", help="Explicit --task appends targets after a completed saved terminal state")
     parser.add_argument("--selected-state-index", type=int, help="Accepted row index; paired with --saved-result")
     parser.add_argument("--output", type=Path, required=True, help="New result directory")
     parser.add_argument("--targets", type=float, nargs="+", help="Explicit full task path for zero start, or exact original-task suffix for saved continuation; otherwise inherited")
@@ -34,9 +35,13 @@ def main():
     try:
         if (args.saved_result is None) != (args.selected_state_index is None):
             raise ValueError("--saved-result and --selected-state-index must be paired")
+        if args.extend_path and (args.saved_result is None or args.task is None):
+            raise ValueError("--extend-path requires --saved-result and an explicit --task")
+        extension_task = json.loads(args.task.read_text(encoding="utf-8")) if args.extend_path else None
         restored = None if args.saved_result is None else saved_resume_defaults(args.saved_result,args.selected_state_index,
-            time_limit_seconds=args.time_limit)
-        task = json.loads(args.task.read_text(encoding="utf-8")) if args.task is not None else (restored["task"] if restored is not None else None)
+            time_limit_seconds=args.time_limit,
+            **({"extend_path":True,"extension_task":extension_task} if args.extend_path else {}))
+        task = extension_task if args.extend_path else (json.loads(args.task.read_text(encoding="utf-8")) if args.task is not None else (restored["task"] if restored is not None else None))
         if task is None or (args.geometry is None and restored is None):
             raise ValueError("Zero-start solve requires --geometry and --task")
         targets = args.targets if args.targets is not None else (restored["targets"] if restored is not None else
@@ -53,7 +58,8 @@ def main():
         result = solve_native_mean(args.geometry, task, targets, settings=settings,
                                    response_mode=args.response_mode, tangent_mode=args.tangent_mode,
                                    initial_guess=args.initial_guess,saved_result=args.saved_result,
-                                   selected_state_index=args.selected_state_index)
+                                   selected_state_index=args.selected_state_index,
+                                   **({"extend_path":True} if args.extend_path else {}))
         descriptor = write_native_mean(result, args.output)
         elapsed = perf_counter()-STARTED
         if elapsed > args.time_limit:

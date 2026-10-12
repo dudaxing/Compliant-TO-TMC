@@ -115,7 +115,7 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
                       settings: DisplacementSettings | None = None, on_accept=None,
                       response_mode=None, tangent_mode=None, initial_guess=None,
                       saved_result=None, selected_state_index=None,
-                      time_limit_seconds=None) -> NativeMeanResult:
+                      time_limit_seconds=None, extend_path=False) -> NativeMeanResult:
     """Solve explicit mean targets, or revalidate and continue a saved suffix.
 
     Settings are explicit. The CLI uses the original first-increment/16 rule;
@@ -130,7 +130,11 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
     an explicit new time_limit_seconds. Explicit settings may change only time.
     A saved start uses fresh F/T, never its saved matrix. Parent task/path/status
     remain historical; success here completes only the original-task suffix.
+    extend_path=True requires an explicit append-only task and a completed
+    terminal source segment; default strict same-task resume is unchanged.
     """
+    if type(extend_path) is not bool or (extend_path and (saved_result is None or task_dict is None)):
+        raise TMCError("extend_path requires a saved terminal state and explicit new task", code="invalid_input")
     if (saved_result is None) != (selected_state_index is None):
         raise TMCError("saved_result and selected_state_index must be paired", code="invalid_input")
     if settings is not None and not isinstance(settings,DisplacementSettings):
@@ -142,7 +146,8 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
         if settings is not None and time_limit_seconds is not None:
             raise TMCError("Pass settings or time_limit_seconds, not both", code="invalid_settings")
         resume_defaults = saved_resume_defaults(saved_result,selected_state_index,
-            time_limit_seconds=time_limit_seconds if settings is None else settings.time_limit_seconds)
+            time_limit_seconds=time_limit_seconds if settings is None else settings.time_limit_seconds,
+            **({"extend_path":True,"extension_task":task_dict} if extend_path else {}))
         geometry_file = resume_defaults["geometry_file"] if geometry_file is None else geometry_file
         task_dict = resume_defaults["task"] if task_dict is None else task_dict
         targets = resume_defaults["targets"] if targets is None else targets
@@ -171,7 +176,8 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
     if saved_result is None and path_spec is not None and not np.array_equal(np.asarray(targets), path_spec["targets_mm"]):
         raise TMCError("Targets must match the explicitly declared task path", code="invalid_input")
     anchor = None if saved_result is None else read_native_resume(saved_result,selected_state_index,
-        project,targets,settings,response_mode=response_mode,tangent_mode=tangent_mode,initial_guess=initial_guess)
+        project,targets,settings,response_mode=response_mode,tangent_mode=tangent_mode,initial_guess=initial_guess,
+        **({"extend_path":True} if extend_path else {}))
     prepared = perf_counter()
     model = project.model
     source_hashes = {"hf_repo/src/hf_eval/"+name: sha256(Path(__file__).with_name(name).read_bytes()).hexdigest()
@@ -293,6 +299,8 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
                 and np.float64(first.record["R_input"]).tobytes() == np.float64(anchor.R).tobytes()))
         metadata.update(scope="native_saved_mean_continuation_segment",task_target_executed=False,
             full_original_path_completed=False,source_binding_scope="Entry/controller/assembler/force and saved-resume reader; stage receipt binds executed closure")
+        if extend_path:
+            metadata.update(scope="native_saved_mean_explicit_task_extension_segment",full_extended_path_completed=False)
     return NativeMeanResult(project, path, tuple(accepted), metadata)
 
 

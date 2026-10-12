@@ -14,6 +14,7 @@ def main():
     parser.add_argument("--geometry", type=Path, help="Required for zero start; otherwise saved source geometry")
     parser.add_argument("--task", type=Path, help="Required for zero start; otherwise saved original task")
     parser.add_argument("--saved-result", type=Path, help="Original saved result to continue")
+    parser.add_argument("--extend-path", action="store_true", help="Explicit --task appends targets after a completed saved terminal state")
     parser.add_argument("--selected-state-index", type=int, help="Accepted row index; paired with --saved-result")
     parser.add_argument("--output", type=Path, required=True, help="New evaluation directory")
     parser.add_argument("--targets", type=float, nargs="+", help="Full task path for zero start, or exact original-task suffix for saved continuation; otherwise inherited")
@@ -28,7 +29,8 @@ def main():
             targets=args.targets, time_limit_seconds=args.time_limit,
             minimum_increment=args.minimum_increment, response_mode=args.response_mode,
             tangent_mode=args.tangent_mode, initial_guess=args.initial_guess,
-            saved_result=args.saved_result,selected_state_index=args.selected_state_index)
+            saved_result=args.saved_result,selected_state_index=args.selected_state_index,
+            **({"extend_path":True} if args.extend_path else {}))
     except (OSError, ValueError, KeyError, TypeError) as error:
         parser.exit(1, f"Native evaluation could not save its response: {error}\n")
     print(json.dumps(response, indent=2, ensure_ascii=False, allow_nan=False))

@@ -1,0 +1,17 @@
+# M-EXTEND2 普通封账saver源码说明
+
+当前只外部source/AST准备；未执行saver/publisher、未写formal。实际唯一launcher已由root报告闭卡success；本说明不替代独立终态核查。只有读取实际ordinary outer/helper核字段形态，没有读取binary/CSV/ZIP字节、数组/像素、科学计算或新图。
+
+`prepare_execution_delivery.py --repo ROOT --input closure_input.json`未来读取根代理的真实文稿与ordinary来源映射。payload字段：source_commit(BASE781f408cce5704817ebb67f2defcafc047af3820)、execution_status(pass/not_pass)、execution_closed(true)、results_file、next_file、front_file（绝对MD路径）、author_files（author下单层文件名→普通外部绝对文件路径）、terminal_review_name（必须位于author_files，实际报告status pass前缀/同execution_status/closed）。不自动编造RESULTS数值、NEXT、新卡或动作许可；不写core/default/旧card/protocol/README。
+
+saver只ordinary复制结果/下一步/前缀/author记录与实际authorize源码（如果root映射），同名现存文件必须原字节相同；两front原BASE正文连续按字节保各一次。所有author路径限制单层文件名，copy仅ordinary suffix；config或reserved final报告不可由author_files覆盖。真实ordinary completed outer决定终态，success必须actual helper pass，失败允许missing/running/malformed helper原样表述；actual26counts不借测试计数。binary身份/default实际/26counts在文稿写入前作metadata预检；新binary仅已闭helper.outputs SHA+stat，缺SHA报实缺口不补读。
+
+配置自动精确列newstage现存文件、两front、实际改变的0至6默认source、config与reserved final JSON/MD；不是整个repo新扫描。新binary/派生CSV来源与publisher原合同同；没有read/解压其数据。两front和six实际ordinary source可rawhash，publisher后续独立final审/config下再处理。新config无自身SHA字段，也不预hash未产生final报告。final报告固定author/execution_delivery_final_review.json与.md：先写不带JSONSHA的普通MD，随后JSON reviewed_repository_SHA256覆盖MD，仅JSON自身排除。二者最终manifest/delta各hash，不形成双向环。
+
+现行publisher仍原6da19d94全文16219B、原notes10e376与receiptb908保持。曾提出双self排除但根选择先MD后JSON即可；未用提案仅历史deliver_execution_proposed_pair_exclusion_not_used.py(d955eef3…)保存，当前代码恢复原字节，未执行提案或改变出版合同。saver不需要final_review_markdown_path新接口。原独立publisher静审继续有效，saver仍需math独立source审，root真实payload出现后才可普通执行。
+
+saverSHA256：`b8556e8bf84d860a12e637dbcc47af08442a93b846db04be2f49d7fac05d3966`。
+
+## 最小读取顺序收口
+
+独立source审指出front_file先读再核后缀；现仅把既有.md断言移到read_bytes之前，prefix非空断言保留。实际ROOT_FRONT.md不受影响，未新增门/资源/物理或执行动作。72d版源码及notes/receipt原字节保*_v1_pre_front_suffix_order历史；当前publisher仍原6da1。

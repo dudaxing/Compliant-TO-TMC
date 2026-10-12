@@ -23,7 +23,7 @@ def resolve_native_path(path, repo_root=None):
 def evaluate_native(geometry_path, task_path, output_directory, *, repo_root=None,
                     targets=None, settings=None, time_limit_seconds=180.,
                     minimum_increment=None, response_mode=None, tangent_mode=None,
-                    initial_guess=None, saved_result=None, selected_state_index=None) -> dict:
+                    initial_guess=None, saved_result=None, selected_state_index=None, extend_path=False) -> dict:
     """Call the existing solver once and save its accepted cache once.
 
     Controller failures preserve accepted states. Input/solve/persistence/summary
@@ -32,6 +32,8 @@ def evaluate_native(geometry_path, task_path, output_directory, *, repo_root=Non
     The controller's time limit covers its solve, not CLI imports or persistence.
     In saved mode None inputs/options inherit the bound parent. All settings
     except this call's time limit are preserved; targets are its exact suffix.
+    extend_path=True opts into an explicit append-only task from a completed
+    terminal segment; None task and zero-start extension are typed input errors.
     """
     started = perf_counter()
     geometry = resolve_native_path(geometry_path, repo_root) if geometry_path is not None else None
@@ -47,17 +49,28 @@ def evaluate_native(geometry_path, task_path, output_directory, *, repo_root=Non
     try:
         if existed:
             raise FileExistsError(f"Choose a new output directory: {output}")
+        if type(extend_path) is not bool or (extend_path and (saved_result is None or task_file is None)):
+            raise TMCError("extend_path requires a saved terminal state and explicit task file", code="invalid_input")
         if (saved_result is None) != (selected_state_index is None):
             raise ValueError("saved_result and selected_state_index must be paired")
         if settings is not None and not isinstance(settings, DisplacementSettings):
             raise TMCError("settings must be DisplacementSettings", code="invalid_settings")
+        extension_task = None
+        if extend_path:
+            task_bytes = task_file.read_bytes()
+            extension_task = json.loads(task_bytes)
+            invocation.update(extend_path=True,task_file_sha256=sha256(task_bytes).hexdigest(),
+                              task_source="Explicit append-only task")
         restored = None if saved_result is None else saved_resume_defaults(saved_result,selected_state_index,
-            time_limit_seconds=time_limit_seconds if settings is None else settings.time_limit_seconds)
+            time_limit_seconds=time_limit_seconds if settings is None else settings.time_limit_seconds,
+            **({"extend_path":True,"extension_task":extension_task} if extend_path else {}))
         if restored is not None:
             geometry = restored["geometry_file"] if geometry is None else geometry
             invocation.update(saved_result_file=str(saved_result),selected_state_index=selected_state_index,
                               geometry_file=str(geometry))
-        if task_file is None:
+        if extend_path:
+            task = extension_task
+        elif task_file is None:
             if restored is None:
                 raise ValueError("Zero-start evaluation requires geometry and task files")
             task = restored["task"]
@@ -90,7 +103,8 @@ def evaluate_native(geometry_path, task_path, output_directory, *, repo_root=Non
         result = solve_native_mean(geometry, task, requested, settings=settings,
                                    response_mode=response_mode, tangent_mode=tangent_mode,
                                    initial_guess=initial_guess,saved_result=saved_result,
-                                   selected_state_index=selected_state_index)
+                                   selected_state_index=selected_state_index,
+                                   **({"extend_path":True} if extend_path else {}))
         stage = "persistence"
         descriptor = write_native_mean(result, output)
         stage = "summary"
