@@ -1,0 +1,823 @@
+{
+  "schema_version": "saved-native-explicit-extension-card-1.0",
+  "card": "M-EXTEND1",
+  "prepared": true,
+  "authorized": false,
+  "executed": false,
+  "prepared_utc": "2026-10-12T13:48:33.758557+00:00",
+  "source_baseline_commit": "c4d81620fe7d1a9260cf0f7d27ab35970d463e46",
+  "science_version": "0.5.0",
+  "parent_result": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/result.json",
+  "parent_protocol": "lf_data_preparation/native_interface_001/saved_continuation_001/protocol.json",
+  "selected_state_index": 1,
+  "task_file": "lf_data_preparation/native_interface_001/saved_extension_001/proposed_task.json",
+  "task_sha256": "94671c3226afb193349324a91f15bd55923ba73e662e9ad76528c844000f74f6",
+  "targets_mm": [
+    1.15,
+    1.1
+  ],
+  "original_target_indices": [
+    14,
+    15
+  ],
+  "target_origin": 0.0,
+  "initial_parameter": 1.15,
+  "options": {
+    "response_mode": "mechanical",
+    "tangent_mode": "chunk256",
+    "initial_guess": "port_projection"
+  },
+  "settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 25,
+    "armijo_c": 0.0001,
+    "max_backtracks": 12,
+    "max_bisections": 4,
+    "minimum_increment": 0.00625,
+    "time_limit_seconds": 1800.0
+  },
+  "gates": {
+    "production_residual": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11"
+  },
+  "phases": {
+    "production": {
+      "helper_seconds": 3000,
+      "outer_seconds": 3060,
+      "argv": [
+        "lf_data_preparation/native_interface_001/saved_extension_001/execute_extension.py",
+        "--repo",
+        ".",
+        "--protocol",
+        "lf_data_preparation/native_interface_001/saved_extension_001/protocol.json"
+      ]
+    }
+  },
+  "focused_tests_seconds": 180,
+  "view_seconds": 600,
+  "sampled_RSS_bytes": 8589934592,
+  "focused_test_selectors": [
+    "hf_repo/tests/test_saved_native_resume.py::test_absolute_anchor_fresh_tangent_and_linear_suffix",
+    "hf_repo/tests/test_saved_native_resume.py::test_non_equilibrated_anchor_stops_before_correction_or_commit",
+    "hf_repo/tests/test_saved_native_resume.py::test_unaccepted_descending_attempt_rolls_back_revalidated_anchor",
+    "hf_repo/tests/test_saved_native_resume.py::test_nonzero_parameter_requires_finite_matching_ordered_saved_anchor",
+    "hf_repo/tests/test_saved_native_resume.py::test_public_saved_partial_resume_inherits_options_and_preserves_parent",
+    "hf_repo/tests/test_native_mean.py::test_task_mean_control_builds_once_and_leaves_individual_port_nodes_free",
+    "hf_repo/tests/test_native_mean.py::test_accepted_state_force_and_full_tangent_package_roundtrips",
+    "hf_repo/tests/test_native_mean_mechanical.py::test_mechanical_cycle_omits_energy_and_saves_cached_full_dof_data[chunk256]",
+    "hf_repo/tests/test_split_cycle.py::test_default_loading_contract_is_unchanged_and_cycle_bounds_are_explicit",
+    "hf_repo/tests/test_split_displacement.py::test_warm_start_is_independently_checked_and_failure_preserves_two_arrays_and_R",
+    "hf_repo/tests/test_native_batch.py::test_ordered_once_transport_preserves_options_target_endpoint_and_case_qualification[False]",
+    "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_evaluate_interface.py::test_once_forward_with_repo_paths_and_explicit_options[False]",
+    "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_evaluate_interface.py::test_failure_keeps_original_phase_code_class_and_stops_downstream[solve]",
+    "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_evaluate_interface.py::test_cli_from_unrelated_cwd_preserves_partial_status_and_paths[lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/result/result.json-tangent-0]",
+    "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_evaluate_interface.py::test_cli_from_unrelated_cwd_preserves_partial_status_and_paths[lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/run_001/result/result.json-port_projection-1]",
+    "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_saved_response.py::test_no_body_saved_response_has_null_workpiece_and_explicit_legacy_defaults",
+    "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_saved_response.py::test_real_failed_prefix_preserves_last_bisected_state_and_never_returns_target_success",
+    "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_saved_response.py::test_reference_cannot_borrow_other_or_incomplete_or_failed_qualification[other_result]",
+    "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_saved_response.py::test_real_saved_views_link_common_figures_and_only_the_matching_case_animation",
+    "hf_repo/tests/test_native_cli_compatibility.py::test_evaluate_cli_saved_flags_are_forwarded",
+    "hf_repo/tests/test_native_cli_compatibility.py::test_mean_cli_zero_start_keeps_defaults",
+    "hf_repo/tests/test_native_cli_compatibility.py::test_mean_cli_saved_flags_inherit_suffix_and_settings",
+    "hf_repo/tests/test_native_evaluate_settings.py::test_saved_invalid_settings_returns_typed_input_error_without_parent_or_mechanics[dict]",
+    "hf_repo/tests/test_native_evaluate_settings.py::test_saved_invalid_settings_returns_typed_input_error_without_parent_or_mechanics[object]",
+    "hf_repo/tests/test_native_reference_source_migration.py::test_old_positive_reference_becomes_source_mismatch_after_installation",
+    "hf_repo/tests/test_native_path_extension.py::test_completed_saved_child_extension_revalidates_original_split_and_preserves_sources",
+    "hf_repo/tests/test_native_path_extension.py::test_extension_rejects_changed_contract_before_arrays[changed_physics]",
+    "hf_repo/tests/test_native_path_extension.py::test_extension_rejects_changed_contract_before_arrays[nonprefix]",
+    "hf_repo/tests/test_native_path_extension.py::test_extension_rejects_changed_contract_before_arrays[nonterminal]",
+    "hf_repo/tests/test_native_path_extension.py::test_extension_rejects_changed_contract_before_arrays[child_mapping]",
+    "hf_repo/tests/test_native_path_extension.py::test_extension_rejects_changed_contract_before_arrays[task_stamp]",
+    "hf_repo/tests/test_native_path_extension.py::test_extension_api_mode_errors_are_typed_before_parent_or_mechanics[zero_start]",
+    "hf_repo/tests/test_native_path_extension.py::test_extension_api_mode_errors_are_typed_before_parent_or_mechanics[missing_task]",
+    "hf_repo/tests/test_native_path_extension.py::test_extension_api_mode_errors_are_typed_before_parent_or_mechanics[non_boolean]",
+    "hf_repo/tests/test_native_path_extension.py::test_extension_cli_flag_is_explicitly_forwarded[evaluate_native]",
+    "hf_repo/tests/test_native_path_extension.py::test_extension_cli_flag_is_explicitly_forwarded[solve_native_mean]"
+  ],
+  "source_package": {
+    "layout": "run_001/source_repo/<relative>",
+    "files": {
+      "hf_repo/src/hf_eval/__init__.py": {
+        "path": "hf_repo/src/hf_eval/__init__.py",
+        "sha256": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/__main__.py": {
+        "path": "hf_repo/src/hf_eval/__main__.py",
+        "sha256": "45c4a88934fa2189f796a55f5a3a1430cc47e35b52f31f7ce728ab4a3acbd724",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/analysis_domain.py": {
+        "path": "hf_repo/src/hf_eval/analysis_domain.py",
+        "sha256": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/boundary_geometry.py": {
+        "path": "hf_repo/src/hf_eval/boundary_geometry.py",
+        "sha256": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/compensated_invariants.py": {
+        "path": "hf_repo/src/hf_eval/compensated_invariants.py",
+        "sha256": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/compensated_kinematics.py": {
+        "path": "hf_repo/src/hf_eval/compensated_kinematics.py",
+        "sha256": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/contact_audit.py": {
+        "path": "hf_repo/src/hf_eval/contact_audit.py",
+        "sha256": "7b9fdfef2624c7745c6041b8103bcc86b5b59343f81f28ee789b0cdb1623c22b",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/contact_c1.py": {
+        "path": "hf_repo/src/hf_eval/contact_c1.py",
+        "sha256": "f9c2406d673df25a801fcba275399cb84e2928074b95ce3dafc54986d22fdcc1",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/contact_c1_activation.py": {
+        "path": "hf_repo/src/hf_eval/contact_c1_activation.py",
+        "sha256": "8a047bcbf9a8e591ce62af041f644ad13694f9364682c0cb5800a9b3be02cdb9",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/contact_c2.py": {
+        "path": "hf_repo/src/hf_eval/contact_c2.py",
+        "sha256": "272f5c8f9cffa84d21492ac7f136f3080eacb65eea6481aa7699c6b07b226f99",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/contact_reference_a0.py": {
+        "path": "hf_repo/src/hf_eval/contact_reference_a0.py",
+        "sha256": "4a1d5f8ad35f39128d90b1c15a07add46a423cce1b3b56a692e37caebec498dc",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/data.py": {
+        "path": "hf_repo/src/hf_eval/data.py",
+        "sha256": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/displacement.py": {
+        "path": "hf_repo/src/hf_eval/displacement.py",
+        "sha256": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/evaluation.py": {
+        "path": "hf_repo/src/hf_eval/evaluation.py",
+        "sha256": "dd7ccede098d47bab00f5e9a296139ca84710e286c64173edb8080d660da776f",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/lf_v2.py": {
+        "path": "hf_repo/src/hf_eval/lf_v2.py",
+        "sha256": "3ec75b97b2d6a069f56c9ecbc506d80339915949d84175843f2cca9cdceabb73",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/linear.py": {
+        "path": "hf_repo/src/hf_eval/linear.py",
+        "sha256": "5a976bafe1952124d9ac00dc6691c8ec4ce22d0a0fc371fdf41d42a28f823e81",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/native_batch.py": {
+        "path": "hf_repo/src/hf_eval/native_batch.py",
+        "sha256": "fa765e02f18511045db1b0fd9b3f37da828985c0bc21dfdedb3185b6959b90ef",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/native_evaluate.py": {
+        "path": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_evaluate.py",
+        "sha256": "44eed5f42b5e10d8677b24d2cfc70e1508e1837e346205abdf309d54bc8961ed",
+        "kind": "candidate_source"
+      },
+      "hf_repo/src/hf_eval/native_force.py": {
+        "path": "hf_repo/src/hf_eval/native_force.py",
+        "sha256": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/native_map.py": {
+        "path": "hf_repo/src/hf_eval/native_map.py",
+        "sha256": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/native_mean.py": {
+        "path": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_mean.py",
+        "sha256": "34aba7347790fafa7f03511a42aa9876649b8ce4f8c98b3efdb5a0e664288401",
+        "kind": "candidate_source"
+      },
+      "hf_repo/src/hf_eval/native_project.py": {
+        "path": "hf_repo/src/hf_eval/native_project.py",
+        "sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/native_region_geometry.py": {
+        "path": "hf_repo/src/hf_eval/native_region_geometry.py",
+        "sha256": "0bc3fa706431de16761d3ffa89b37e56ef3f4782984362d14792b1f5dd26aa98",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/native_response.py": {
+        "path": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_response.py",
+        "sha256": "53bee087509f780ec5a62dae5b39a067e5f0df38f6fd7cc47311766ab3e2f14b",
+        "kind": "candidate_source"
+      },
+      "hf_repo/src/hf_eval/native_resume.py": {
+        "path": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_resume.py",
+        "sha256": "2bd859980e8e7ff09b09db35b61e5c948b524e2fd6724189ca8957c0d3e37e65",
+        "kind": "candidate_source"
+      },
+      "hf_repo/src/hf_eval/native_tangent.py": {
+        "path": "hf_repo/src/hf_eval/native_tangent.py",
+        "sha256": "272508789cd801e3af7a97d862be47d58766ff4150db924717729b7eda6ddd08",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/nested_geometry.py": {
+        "path": "hf_repo/src/hf_eval/nested_geometry.py",
+        "sha256": "583edc4a496cee91f47f4b199716e736ac5efd639823cc637cb0b739de54b1eb",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/normal_contact.py": {
+        "path": "hf_repo/src/hf_eval/normal_contact.py",
+        "sha256": "1591d2a64ddd074ebe5b9e2e34ca9a6a99b4a0ee7d95a522a8dccc56939ece95",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/plotting.py": {
+        "path": "hf_repo/src/hf_eval/plotting.py",
+        "sha256": "d31200c726d579903698c20d77dae4e16d35f08eb38be395733bc947edc57b70",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/prescribed.py": {
+        "path": "hf_repo/src/hf_eval/prescribed.py",
+        "sha256": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/project.py": {
+        "path": "hf_repo/src/hf_eval/project.py",
+        "sha256": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/project_evaluation.py": {
+        "path": "hf_repo/src/hf_eval/project_evaluation.py",
+        "sha256": "4d3e4c617862bd93ce3f9af0881e02137590167584a1587244bab98e3e1d2d4b",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/regions.py": {
+        "path": "hf_repo/src/hf_eval/regions.py",
+        "sha256": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/saved_material_support.py": {
+        "path": "hf_repo/src/hf_eval/saved_material_support.py",
+        "sha256": "3bc3062ac75a111f7bdfa8bc8b6c2b6dab795002256e29ce1829ce80c01cbc12",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/saved_material_trace.py": {
+        "path": "hf_repo/src/hf_eval/saved_material_trace.py",
+        "sha256": "578a7be12236e7334ae4bd2a9ddd1b0a1c5363eecd64f9518bd631ff5a24b90b",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/saved_material_volume.py": {
+        "path": "hf_repo/src/hf_eval/saved_material_volume.py",
+        "sha256": "d2632878e721f4d57822358f453d77befb2bfd8e504554be899b68709095407c",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/saved_q1_hu_boundary.py": {
+        "path": "hf_repo/src/hf_eval/saved_q1_hu_boundary.py",
+        "sha256": "976e9a83402e3b8d9f4fdffd7844e5ccf2e2b985e9aaa54b34248d7836a1726e",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/saved_workpiece_loads.py": {
+        "path": "hf_repo/src/hf_eval/saved_workpiece_loads.py",
+        "sha256": "2359a89d4969b98c68baa8b932fb0001c426b898004cb579f76ff8bc727c5070",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/split_affine.py": {
+        "path": "hf_repo/src/hf_eval/split_affine.py",
+        "sha256": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/split_affine_compensated.py": {
+        "path": "hf_repo/src/hf_eval/split_affine_compensated.py",
+        "sha256": "d62465a1536a24173a4630de5cd24720bfa1524fe8198eb5c4e1dd542d106d61",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/split_displacement.py": {
+        "path": "hf_repo/src/hf_eval/split_displacement.py",
+        "sha256": "8c1af8e9bed602ce9a4262a60769c5ec95c27c8f92f85f5e706f755adfe415a3",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/split_kernel.py": {
+        "path": "hf_repo/src/hf_eval/split_kernel.py",
+        "sha256": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/split_kernel_compensated.py": {
+        "path": "hf_repo/src/hf_eval/split_kernel_compensated.py",
+        "sha256": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": {
+        "path": "hf_repo/src/hf_eval/split_kernel_invariants_hu.py",
+        "sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": {
+        "path": "hf_repo/src/hf_eval/split_numpy_tangent.py",
+        "sha256": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/split_prescribed.py": {
+        "path": "hf_repo/src/hf_eval/split_prescribed.py",
+        "sha256": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/split_state.py": {
+        "path": "hf_repo/src/hf_eval/split_state.py",
+        "sha256": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/tangent_action.py": {
+        "path": "hf_repo/src/hf_eval/tangent_action.py",
+        "sha256": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/tmc.py": {
+        "path": "hf_repo/src/hf_eval/tmc.py",
+        "sha256": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/tmc_benchmark.py": {
+        "path": "hf_repo/src/hf_eval/tmc_benchmark.py",
+        "sha256": "b8c7ba9e30800a94fb2c2270b80afbd73a5eb88469eaed3eee4c8cedc22700db",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/tmc_kernel.py": {
+        "path": "hf_repo/src/hf_eval/tmc_kernel.py",
+        "sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/src/hf_eval/workpiece_nodal.py": {
+        "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+        "sha256": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9",
+        "kind": "unchanged_runtime_source"
+      },
+      "hf_repo/scripts/evaluate_native.py": {
+        "path": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/scripts/evaluate_native.py",
+        "sha256": "b905638bb3bd9c0a413963deaf6de43840c8842dd00b9e0d9588c6d8f7996209",
+        "kind": "candidate_source"
+      },
+      "hf_repo/scripts/solve_native_mean.py": {
+        "path": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/scripts/solve_native_mean.py",
+        "sha256": "088f2d21862b65fae5708eb5c33a55607fab706bd33989a8e2ee2fe6e27417b3",
+        "kind": "candidate_source"
+      },
+      "hf_repo/tests/test_native_path_extension.py": {
+        "path": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/tests/test_native_path_extension.py",
+        "sha256": "9efbde8e38bd5c32d8e510db001b0ffc9c6c25143f27097fd98c3dd139f4bc6b",
+        "kind": "candidate_source"
+      },
+      "hf_repo/pyproject.toml": {
+        "path": "hf_repo/pyproject.toml",
+        "sha256": "da0a39cc0df1f6d6c8b476fca407b23fdd4b3db7d5adc436dc494aba54824662",
+        "kind": "focused_test_or_config_source"
+      },
+      "hf_repo/tests/test_native_batch.py": {
+        "path": "hf_repo/tests/test_native_batch.py",
+        "sha256": "78a94bb87904322d8d0c170ca92678f9232a406941cffc07c22b365786ac57e0",
+        "kind": "focused_test_or_config_source"
+      },
+      "hf_repo/tests/test_native_cli_compatibility.py": {
+        "path": "hf_repo/tests/test_native_cli_compatibility.py",
+        "sha256": "e1caa9b71ec3bec5e33ac732f46d4edcd69e3c18b9b9cc59da8c0b667fcb7a04",
+        "kind": "focused_test_or_config_source"
+      },
+      "hf_repo/tests/test_native_evaluate_settings.py": {
+        "path": "hf_repo/tests/test_native_evaluate_settings.py",
+        "sha256": "a93cbabe9265e20305d0c806b63aa3bc1ca9532cdeac858a30a3cb6aa1bf5e0f",
+        "kind": "focused_test_or_config_source"
+      },
+      "hf_repo/tests/test_native_force.py": {
+        "path": "hf_repo/tests/test_native_force.py",
+        "sha256": "862a40aa3e13d10bdb02cad52ba9098e0ddbc0fd9ad9958def226de90284254d",
+        "kind": "focused_test_or_config_source"
+      },
+      "hf_repo/tests/test_native_mean.py": {
+        "path": "hf_repo/tests/test_native_mean.py",
+        "sha256": "3771e1afbe4a95cb711e9235d91fe2da96ddbee5f33858c523898e8fea99b728",
+        "kind": "focused_test_or_config_source"
+      },
+      "hf_repo/tests/test_native_mean_mechanical.py": {
+        "path": "hf_repo/tests/test_native_mean_mechanical.py",
+        "sha256": "a468ca933963bc9de7050073fbb7086f51ed6086be2a62aec30cb59113ea40d8",
+        "kind": "focused_test_or_config_source"
+      },
+      "hf_repo/tests/test_native_reference_source_migration.py": {
+        "path": "hf_repo/tests/test_native_reference_source_migration.py",
+        "sha256": "018e8e900ba79b297252b6b4a839dc783cc6eaf79d87e2420ea8daadde29ff06",
+        "kind": "focused_test_or_config_source"
+      },
+      "hf_repo/tests/test_saved_native_resume.py": {
+        "path": "hf_repo/tests/test_saved_native_resume.py",
+        "sha256": "f11f83f17d8ad18e452703c947d3554cbf7a8eeb39b79c53551b71b51bd91b49",
+        "kind": "focused_test_or_config_source"
+      },
+      "hf_repo/tests/test_split_cycle.py": {
+        "path": "hf_repo/tests/test_split_cycle.py",
+        "sha256": "dd3b4efb409fb427b8d95b8fb2c8ca532fa1e99f679b19e1f1ddec0c955b8ff0",
+        "kind": "focused_test_or_config_source"
+      },
+      "hf_repo/tests/test_split_displacement.py": {
+        "path": "hf_repo/tests/test_split_displacement.py",
+        "sha256": "d23874955178ab29d0c9683045145a79a155bd816f2e121129dde6ccffdb036e",
+        "kind": "focused_test_or_config_source"
+      },
+      "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_evaluate_interface.py": {
+        "path": "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_evaluate_interface.py",
+        "sha256": "717ee7469d51871a797d6268a26ed4e0da1dadd5257f02ae652cc14191e070b2",
+        "kind": "focused_test_or_config_source"
+      },
+      "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_saved_response.py": {
+        "path": "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_saved_response.py",
+        "sha256": "72aa9b4b6e7819683f0ef1d575748d09311ffc731b72dd25f0ce2979487e76c5",
+        "kind": "focused_test_or_config_source"
+      },
+      "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/result/result.json": {
+        "path": "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/result/result.json",
+        "sha256": "e3ee572c2181a94134c99acab6bedf5f3736d6b665b03926e1507ed52bed090b",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/result/model/model.json": {
+        "path": "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/result/model/model.json",
+        "sha256": "07d90e7d4ceca6d82f62f043f4c4728b5909dc35dc7df81058b2b24a1fc6b8cf",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/result/result.json": {
+        "path": "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/result/result.json",
+        "sha256": "b49955f7e56cd714b35283c0834757ebefc947d3ca25a4f505ed44e8947db7b6",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/result/model/model.json": {
+        "path": "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/result/model/model.json",
+        "sha256": "00469390bd7091d1629f8c92277a7f8cfaf8f5047567ee64f36aaf4eed1433a1",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "lf_data_preparation/native_fine_task_025_001/result/result.json": {
+        "path": "lf_data_preparation/native_fine_task_025_001/result/result.json",
+        "sha256": "9945ccb37d03b960949104a834b817606651bf00a615d110d41e2ad33e39b8cc",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "lf_data_preparation/native_fine_task_025_001/result/model/model.json": {
+        "path": "lf_data_preparation/native_fine_task_025_001/result/model/model.json",
+        "sha256": "17cc42d4f915c9aa136d1739b8299f039e57fd1ec1589649900320fc35366141",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/run_001/result/result.json": {
+        "path": "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/run_001/result/result.json",
+        "sha256": "a68c7c2dac03b35d2456daf7b66f032e2d6f489e7f975b673b71659f2ba6706e",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/run_001/result/model/model.json": {
+        "path": "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/run_001/result/model/model.json",
+        "sha256": "54d71ac50a88b26876bd7bb02a3be3e4bdd36142948874c9bd37ef455eef10c5",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/reference/summary.json": {
+        "path": "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/reference/summary.json",
+        "sha256": "b871ff4791b296ab21d5b44c631f63b4cb81d62be1fdfeb725659379d7a68fe9",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "functional_views/right_margin4_20261007/complete_001/view/view.json": {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/view.json",
+        "sha256": "786847757c16c9fb8e0c7b6c41c640c53e56523c54f32dcde733732d66dee5dc",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "functional_views/right_margin4_20261007/complete_001/view/right2col/summary.json": {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/right2col/summary.json",
+        "sha256": "9ceeecef57fe7f7108cf9f4053532299255f099e16ff59b6ba441b1bee4af8f4",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "functional_views/right_margin4_20261007/complete_001/view/right4col/summary.json": {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/right4col/summary.json",
+        "sha256": "9b1b69dc91a5341fb497c9d32139664ed8b45cf913a13ecc4b09bb0cff1a4792",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference/summary.json": {
+        "path": "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference/summary.json",
+        "sha256": "91c3ef2720e80547e13e1c84e9bfb09d132804f16d3ab819509310e2bbd080e7",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "functional_views/right_margin4_20261007/complete_001/view/comparison.png": {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/comparison.png",
+        "sha256": "f1284fd40eeb719389188dfdbb7fb27075bf776736cc2fe18055a2dde3883bfa",
+        "kind": "existing_media_raw_copy_only_after_approval",
+        "preparation_SHA_basis": "inherited MINTEGRATE1 fixture binding; stat only, no media bytes read"
+      },
+      "functional_views/right_margin4_20261007/complete_001/view/distances_forces.png": {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/distances_forces.png",
+        "sha256": "f71383e3737bc0f461383ab7cf8e8c0e7b04a7e3ce26c87045163320e4b0f19d",
+        "kind": "existing_media_raw_copy_only_after_approval",
+        "preparation_SHA_basis": "inherited MINTEGRATE1 fixture binding; stat only, no media bytes read"
+      },
+      "functional_views/right_margin4_20261007/complete_001/view/peak_fields.png": {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/peak_fields.png",
+        "sha256": "b5872b5bc453c7908de373a7bffe847bc7571313604ef61a79cf5485c127ca48",
+        "kind": "existing_media_raw_copy_only_after_approval",
+        "preparation_SHA_basis": "inherited MINTEGRATE1 fixture binding; stat only, no media bytes read"
+      },
+      "functional_views/right_margin4_20261007/complete_001/view/right2col/actual_states.gif": {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/right2col/actual_states.gif",
+        "sha256": "d8c63b5057bdf0dd93a73a091446c346ea76005c16e9f52fcfa9d70658562082",
+        "kind": "existing_media_raw_copy_only_after_approval",
+        "preparation_SHA_basis": "inherited MINTEGRATE1 fixture binding; stat only, no media bytes read"
+      },
+      "functional_views/right_margin4_20261007/complete_001/view/right4col/actual_states.gif": {
+        "path": "functional_views/right_margin4_20261007/complete_001/view/right4col/actual_states.gif",
+        "sha256": "274bcd3c37ea3bc3139d9e829ecc29cc06fce8666e3e4106d36b0b433788979d",
+        "kind": "existing_media_raw_copy_only_after_approval",
+        "preparation_SHA_basis": "inherited MINTEGRATE1 fixture binding; stat only, no media bytes read"
+      },
+      "lf_data_preparation/native_interface_001/api_validation_001/run_001/saved_right4col_response.json": {
+        "path": "lf_data_preparation/native_interface_001/api_validation_001/run_001/saved_right4col_response.json",
+        "sha256": "6762f15477b4aacc00167e5526a20189992deac046954c2888fc6b86219a3fab",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json": {
+        "path": "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json",
+        "sha256": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "lf_data_preparation/native_mean_001/task.json": {
+        "path": "lf_data_preparation/native_mean_001/task.json",
+        "sha256": "3ea87ca08334981a5947b10cc0bf06d355f6ee4cd46a9402ae2d686dc0d160e3",
+        "kind": "ordinary_JSON_fixture"
+      },
+      "extension_focused_budget.py": {
+        "path": "lf_data_preparation/native_interface_001/saved_extension_001/extension_focused_budget.py",
+        "sha256": "7f5b83e3e24c1e6a1101e121dfc6c04dcd66d603bcf81d9a1112e0361acb57f2",
+        "kind": "focused_plugin_source"
+      }
+    }
+  },
+  "installation": [
+    {
+      "target": "hf_repo/scripts/evaluate_native.py",
+      "old_sha256": "2759e6903543a3c5d2426b27ea7fdec2cbb287627815d48ec4cc6ca6475afd00",
+      "new_sha256": "b905638bb3bd9c0a413963deaf6de43840c8842dd00b9e0d9588c6d8f7996209",
+      "candidate_source": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/scripts/evaluate_native.py"
+    },
+    {
+      "target": "hf_repo/scripts/solve_native_mean.py",
+      "old_sha256": "e988923cb2df80dd1488b496ab85e081f396948562cb54a49c3636943cfe7218",
+      "new_sha256": "088f2d21862b65fae5708eb5c33a55607fab706bd33989a8e2ee2fe6e27417b3",
+      "candidate_source": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/scripts/solve_native_mean.py"
+    },
+    {
+      "target": "hf_repo/src/hf_eval/native_evaluate.py",
+      "old_sha256": "e60e03139c1434238864ff38c3686183ed648af5afea4b7d31b26f1708430ca1",
+      "new_sha256": "44eed5f42b5e10d8677b24d2cfc70e1508e1837e346205abdf309d54bc8961ed",
+      "candidate_source": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_evaluate.py"
+    },
+    {
+      "target": "hf_repo/src/hf_eval/native_mean.py",
+      "old_sha256": "f16a492b6e2196ad2d6f89984f488182b970ddb6c8b5ec4daf92706265b631f5",
+      "new_sha256": "34aba7347790fafa7f03511a42aa9876649b8ce4f8c98b3efdb5a0e664288401",
+      "candidate_source": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_mean.py"
+    },
+    {
+      "target": "hf_repo/src/hf_eval/native_response.py",
+      "old_sha256": "16339706b0e9077b726277500bff7d89747851a5ca2c030958984aba1f3d0c3e",
+      "new_sha256": "53bee087509f780ec5a62dae5b39a067e5f0df38f6fd7cc47311766ab3e2f14b",
+      "candidate_source": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_response.py"
+    },
+    {
+      "target": "hf_repo/src/hf_eval/native_resume.py",
+      "old_sha256": "497d79f6141ff205e7ef8c47685c537b7755b9ed3b452885b2e90686f77cf6fc",
+      "new_sha256": "2bd859980e8e7ff09b09db35b61e5c948b524e2fd6724189ca8957c0d3e37e65",
+      "candidate_source": "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_resume.py"
+    }
+  ],
+  "candidate_directory": "lf_data_preparation/native_interface_001/saved_extension_001/run_001/extended_alpha_half",
+  "view_directory": "lf_data_preparation/native_interface_001/saved_extension_001/run_001/view",
+  "viewer_source": "functional_views/right_margin4_20261007/complete_001/saved_right_margin_views.py",
+  "pure_view_bindings": {
+    "functional_views/right_margin4_20261007/complete_001/saved_right_margin_views.py": "761a9ffd1512233ce048be364c00a86882b69e2fb3e3fe81d7f79f74ad52b166",
+    "hf_repo/scripts/measure_native_workpiece_regions.py": "56bba89522481e9cad03865ff762fc207baa571b0e9fcbe41ba1c0ffc7aed925",
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/src/hf_eval/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+    "hf_repo/src/hf_eval/native_region_geometry.py": "0bc3fa706431de16761d3ffa89b37e56ef3f4782984362d14792b1f5dd26aa98",
+    "hf_repo/src/hf_eval/workpiece_nodal.py": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9"
+  },
+  "bindings": {
+    "functional_views/right_margin4_20261007/complete_001/saved_right_margin_views.py": "761a9ffd1512233ce048be364c00a86882b69e2fb3e3fe81d7f79f74ad52b166",
+    "functional_views/right_margin4_20261007/complete_001/view/comparison.png": "f1284fd40eeb719389188dfdbb7fb27075bf776736cc2fe18055a2dde3883bfa",
+    "functional_views/right_margin4_20261007/complete_001/view/distances_forces.png": "f71383e3737bc0f461383ab7cf8e8c0e7b04a7e3ce26c87045163320e4b0f19d",
+    "functional_views/right_margin4_20261007/complete_001/view/peak_fields.png": "b5872b5bc453c7908de373a7bffe847bc7571313604ef61a79cf5485c127ca48",
+    "functional_views/right_margin4_20261007/complete_001/view/right2col/actual_states.gif": "d8c63b5057bdf0dd93a73a091446c346ea76005c16e9f52fcfa9d70658562082",
+    "functional_views/right_margin4_20261007/complete_001/view/right2col/summary.json": "9ceeecef57fe7f7108cf9f4053532299255f099e16ff59b6ba441b1bee4af8f4",
+    "functional_views/right_margin4_20261007/complete_001/view/right4col/actual_states.gif": "274bcd3c37ea3bc3139d9e829ecc29cc06fce8666e3e4106d36b0b433788979d",
+    "functional_views/right_margin4_20261007/complete_001/view/right4col/summary.json": "9b1b69dc91a5341fb497c9d32139664ed8b45cf913a13ecc4b09bb0cff1a4792",
+    "functional_views/right_margin4_20261007/complete_001/view/view.json": "786847757c16c9fb8e0c7b6c41c640c53e56523c54f32dcde733732d66dee5dc",
+    "hf_repo/pyproject.toml": "da0a39cc0df1f6d6c8b476fca407b23fdd4b3db7d5adc436dc494aba54824662",
+    "hf_repo/scripts/measure_native_workpiece_regions.py": "56bba89522481e9cad03865ff762fc207baa571b0e9fcbe41ba1c0ffc7aed925",
+    "hf_repo/src/hf_eval/__init__.py": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+    "hf_repo/src/hf_eval/__main__.py": "45c4a88934fa2189f796a55f5a3a1430cc47e35b52f31f7ce728ab4a3acbd724",
+    "hf_repo/src/hf_eval/analysis_domain.py": "f0929fb8949ca3155b32badf8eabe4b6a563a2541a220a6616c96efc26f179e6",
+    "hf_repo/src/hf_eval/boundary_geometry.py": "b22a9efe9bb29cdf94746f694a721df42bd0f867ba8c2252915e072b6a73fb31",
+    "hf_repo/src/hf_eval/compensated_invariants.py": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+    "hf_repo/src/hf_eval/compensated_kinematics.py": "2d709396e3c3e90485ef83b35e81fa363286207fa9795cd7804bb949deac0c36",
+    "hf_repo/src/hf_eval/contact_audit.py": "7b9fdfef2624c7745c6041b8103bcc86b5b59343f81f28ee789b0cdb1623c22b",
+    "hf_repo/src/hf_eval/contact_c1.py": "f9c2406d673df25a801fcba275399cb84e2928074b95ce3dafc54986d22fdcc1",
+    "hf_repo/src/hf_eval/contact_c1_activation.py": "8a047bcbf9a8e591ce62af041f644ad13694f9364682c0cb5800a9b3be02cdb9",
+    "hf_repo/src/hf_eval/contact_c2.py": "272f5c8f9cffa84d21492ac7f136f3080eacb65eea6481aa7699c6b07b226f99",
+    "hf_repo/src/hf_eval/contact_reference_a0.py": "4a1d5f8ad35f39128d90b1c15a07add46a423cce1b3b56a692e37caebec498dc",
+    "hf_repo/src/hf_eval/data.py": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "hf_repo/src/hf_eval/evaluation.py": "dd7ccede098d47bab00f5e9a296139ca84710e286c64173edb8080d660da776f",
+    "hf_repo/src/hf_eval/lf_v2.py": "3ec75b97b2d6a069f56c9ecbc506d80339915949d84175843f2cca9cdceabb73",
+    "hf_repo/src/hf_eval/linear.py": "5a976bafe1952124d9ac00dc6691c8ec4ce22d0a0fc371fdf41d42a28f823e81",
+    "hf_repo/src/hf_eval/native_batch.py": "fa765e02f18511045db1b0fd9b3f37da828985c0bc21dfdedb3185b6959b90ef",
+    "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+    "hf_repo/src/hf_eval/native_map.py": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/native_region_geometry.py": "0bc3fa706431de16761d3ffa89b37e56ef3f4782984362d14792b1f5dd26aa98",
+    "hf_repo/src/hf_eval/native_tangent.py": "272508789cd801e3af7a97d862be47d58766ff4150db924717729b7eda6ddd08",
+    "hf_repo/src/hf_eval/nested_geometry.py": "583edc4a496cee91f47f4b199716e736ac5efd639823cc637cb0b739de54b1eb",
+    "hf_repo/src/hf_eval/normal_contact.py": "1591d2a64ddd074ebe5b9e2e34ca9a6a99b4a0ee7d95a522a8dccc56939ece95",
+    "hf_repo/src/hf_eval/plotting.py": "d31200c726d579903698c20d77dae4e16d35f08eb38be395733bc947edc57b70",
+    "hf_repo/src/hf_eval/prescribed.py": "d39d80cbb765c75d5ae0aa7d0619b9093d89f8b83b384459af3243848b7fc0a7",
+    "hf_repo/src/hf_eval/project.py": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+    "hf_repo/src/hf_eval/project_evaluation.py": "4d3e4c617862bd93ce3f9af0881e02137590167584a1587244bab98e3e1d2d4b",
+    "hf_repo/src/hf_eval/regions.py": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+    "hf_repo/src/hf_eval/saved_material_support.py": "3bc3062ac75a111f7bdfa8bc8b6c2b6dab795002256e29ce1829ce80c01cbc12",
+    "hf_repo/src/hf_eval/saved_material_trace.py": "578a7be12236e7334ae4bd2a9ddd1b0a1c5363eecd64f9518bd631ff5a24b90b",
+    "hf_repo/src/hf_eval/saved_material_volume.py": "d2632878e721f4d57822358f453d77befb2bfd8e504554be899b68709095407c",
+    "hf_repo/src/hf_eval/saved_q1_hu_boundary.py": "976e9a83402e3b8d9f4fdffd7844e5ccf2e2b985e9aaa54b34248d7836a1726e",
+    "hf_repo/src/hf_eval/saved_workpiece_loads.py": "2359a89d4969b98c68baa8b932fb0001c426b898004cb579f76ff8bc727c5070",
+    "hf_repo/src/hf_eval/split_affine.py": "cefbf2679143d9f76eabe910f0602d075757b4c22e4d82cf419b417ca71336ba",
+    "hf_repo/src/hf_eval/split_affine_compensated.py": "d62465a1536a24173a4630de5cd24720bfa1524fe8198eb5c4e1dd542d106d61",
+    "hf_repo/src/hf_eval/split_displacement.py": "8c1af8e9bed602ce9a4262a60769c5ec95c27c8f92f85f5e706f755adfe415a3",
+    "hf_repo/src/hf_eval/split_kernel.py": "c8eab7260a3862bd26fa7a3f67be819e5dd6e43971ec61407e52660a74763127",
+    "hf_repo/src/hf_eval/split_kernel_compensated.py": "480129222206f9a16ef986829c1524582879f33f2dd2afd858f102c0bb3e707c",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+    "hf_repo/src/hf_eval/split_prescribed.py": "e9884a0d600e29d66c6f065063f0ad4713f0abd0551e63b4e980eb288b32efb9",
+    "hf_repo/src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+    "hf_repo/src/hf_eval/tangent_action.py": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+    "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+    "hf_repo/src/hf_eval/tmc_benchmark.py": "b8c7ba9e30800a94fb2c2270b80afbd73a5eb88469eaed3eee4c8cedc22700db",
+    "hf_repo/src/hf_eval/tmc_kernel.py": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+    "hf_repo/src/hf_eval/workpiece_nodal.py": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9",
+    "hf_repo/tests/test_native_batch.py": "78a94bb87904322d8d0c170ca92678f9232a406941cffc07c22b365786ac57e0",
+    "hf_repo/tests/test_native_cli_compatibility.py": "e1caa9b71ec3bec5e33ac732f46d4edcd69e3c18b9b9cc59da8c0b667fcb7a04",
+    "hf_repo/tests/test_native_evaluate_settings.py": "a93cbabe9265e20305d0c806b63aa3bc1ca9532cdeac858a30a3cb6aa1bf5e0f",
+    "hf_repo/tests/test_native_force.py": "862a40aa3e13d10bdb02cad52ba9098e0ddbc0fd9ad9958def226de90284254d",
+    "hf_repo/tests/test_native_mean.py": "3771e1afbe4a95cb711e9235d91fe2da96ddbee5f33858c523898e8fea99b728",
+    "hf_repo/tests/test_native_mean_mechanical.py": "a468ca933963bc9de7050073fbb7086f51ed6086be2a62aec30cb59113ea40d8",
+    "hf_repo/tests/test_native_reference_source_migration.py": "018e8e900ba79b297252b6b4a839dc783cc6eaf79d87e2420ea8daadde29ff06",
+    "hf_repo/tests/test_saved_native_resume.py": "f11f83f17d8ad18e452703c947d3554cbf7a8eeb39b79c53551b71b51bd91b49",
+    "hf_repo/tests/test_split_cycle.py": "dd3b4efb409fb427b8d95b8fb2c8ca532fa1e99f679b19e1f1ddec0c955b8ff0",
+    "hf_repo/tests/test_split_displacement.py": "d23874955178ab29d0c9683045145a79a155bd816f2e121129dde6ccffdb036e",
+    "lf_data_preparation/native_fine_task_025_001/result/model/model.json": "17cc42d4f915c9aa136d1739b8299f039e57fd1ec1589649900320fc35366141",
+    "lf_data_preparation/native_fine_task_025_001/result/result.json": "9945ccb37d03b960949104a834b817606651bf00a615d110d41e2ad33e39b8cc",
+    "lf_data_preparation/native_interface_001/api_validation_001/run_001/saved_right4col_response.json": "6762f15477b4aacc00167e5526a20189992deac046954c2888fc6b86219a3fab",
+    "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_evaluate_interface.py": "717ee7469d51871a797d6268a26ed4e0da1dadd5257f02ae652cc14191e070b2",
+    "lf_data_preparation/native_interface_001/api_validation_001/tests/test_native_saved_response.py": "72aa9b4b6e7819683f0ef1d575748d09311ffc731b72dd25f0ce2979487e76c5",
+    "lf_data_preparation/native_interface_001/regularization_sensitivity_001/run_001/alpha_half/result.json": "c8be41801bc6f5dff682d148b479d1ada16b38c637203c45abcacbbdc62526cb",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/protocol.json": "e06b3ca3ad070bb1e9a20cd84832deb4ae7cd3cf0bf280f3bc5de6b94dabb40f",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/state.json": "bf2f51d38fa472356b180737e1b7753338a4cd01d3573efee9aaadc7a81a6da0",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/state.npz": "43326f91e24f0d08f82faeb40761c8f0b354e3806fa669ac20103a52718b8009",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/model.json": "d083a0e4b12c2a8895894142b8ea4bf8b44b6369541ca82501488e6d23fbf8b9",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/source_geometry/geometry.json": "574ed624b2df79fc4fce3cca6eaa05218d60edb77674bc48b37cf968a4c7e34b",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/source_geometry/geometry.npz": "4c61b434584f7e7f278227c52bc8250a0c555f686cad51ab01900d65b66b93d2",
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/result.json": "b8767867620a9d88abedb676671ceda006191ed6cdbb9b96aa6cddc43d335259",
+    "lf_data_preparation/native_interface_001/saved_extension_001/M-EXTEND1_CARD.md": "0b086d72412fcdcac8b7abd37a97e108b8985da0df124238571566dae6303495",
+    "lf_data_preparation/native_interface_001/saved_extension_001/NEXT_STEP_REVIEW.md": "bfa9332346e4a8967bb1b618a5f8a2c70dedb282b3cb4ca113b1d2ea0c99e7dc",
+    "lf_data_preparation/native_interface_001/saved_extension_001/PREPARATION_RESULTS.md": "8f194f3b8ada85a0cc2704d6b79c38bfd46d6b7d948815154afcfe9ef50ba243",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/EXECUTION_WRAPPER_SOURCE_NOTES.md": "d3fdb9ef6cf88e2ef7475d32c8bb7e27d0d5887514c87ea37c66f63aa677952e",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/EXECUTION_WRAPPER_SOURCE_NOTES_v1.md": "db61513443200488ece111a473c62a1a44d4075122fe8c5b1e8fb08e802a2e50",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/IMPLEMENTATION_REUSE_DECISION.md": "59d6716c1e43765f6b607dad8ce1c44c1541fbc364728b4118bb1f9511161e22",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/SOURCE_AUTHOR_NOTES.md": "d322513fac39d635c04e776990fd3e81a9024a2f92076dc87a7402b2ec3c319e",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/SOURCE_AUTHOR_NOTES_v1.md": "8dd8c1db926470c20a32faa0a9d913d16c3ab1178315df09af16b3f3a44d8c43",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/VIEWER_SCOPE_COMPATIBILITY_REVIEW.md": "acb3960b1749faf8ace627266ff7b650ffc071684e5baa20f965fd75b6aa0146",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/candidate_author_receipt.json": "2a274b5123c250c0c3e9cecd2f89fc9a759479bb080b1e8a021dd1518bcab843",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/candidate_author_receipt_v1.json": "eb6863b97a0aa8483e5e2e661216e15a7369dcd023c319ed563d1a1076158356",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/candidate_math_scope_review.json": "20bd910f39ce145f70a638a7fc4631b1ecc0b463043c835e9b57e4becad5e5ca",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/candidate_math_scope_review.md": "6160ccd32b29707fa9699c3cb95f165cd07999f2af2147662ed950c2050dee79",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/execution_wrapper_contract.json": "3975e06bf94b114eca6e64beb37e89b6bae8806129caeb2a1367f5ebc14bdadd",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/execution_wrapper_contract.md": "195351eebeb9b1f1a193a1cd4ba17a677b4ab45c3efb7f54e25d66a253c70df6",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/execution_wrapper_contract_v2_pre_media_scope.json": "37c51c3812d212179be4f5e1e552f1d3f86b688fec853e25af13b56a438e7cdd",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/execution_wrapper_contract_v2_pre_media_scope.md": "16526e02b109072a8c473275e697ef7b1713919b68d3c76bf4a1f6efc2e2fbd6",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/path_input_review.json": "09b5247a8fd94e8133a800edbd705710115cdeec736f5d75aed949ef095eefeb",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/path_input_review.md": "b2aff0daaf8a06aedaae6767698b04ade419588c57585bf88a33a9d6a6a8f2f4",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/physical_gap_review.json": "0904e7f856689c01e7b20ead8966f359ac009ccedd24f5c485f8ce882becb700",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/physical_gap_review.md": "a724628bc0f8805685b746018cd400eddbe00555d2b874b0adccf8fe89b1877e",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/previous_publication_receipt.json": "a4330fe7f5195c48ca343ce1bb7fe77fa2bb6243084b662a061687d43d376f13",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/proposed_task_receipt.json": "a4c309fdfc87bd99bf0a76dc9e23554af0ba12fa81650ac9bb259d73b8a1efb0",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/proposed_task_receipt_v2.json": "0f6d058d9b6024797613d71f1e1eb50dd97698120687e4ec15576cb6dae30f3b",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/viewer_scope_compatibility_review.json": "30c224365d8679161952b8056acc30a75f4cc33198107a1bfd31b853fc40b1ff",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/wrapper_author_receipt.json": "7fc77d1bef5f8abc6f1348588b5e5ac6544f3b83808e27c8bbf2c4901ba3b5ee",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/wrapper_author_receipt_v1.json": "4c44ad9af3b00bab87e0fdb655a98355374571404a33e663b8545014b8c26f3e",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/wrapper_source_freeze_history.json": "2abdb713d818d32b43142e93aebd281668c806b41c5ef3c70d8e46e6d401c9a0",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/wrapper_source_plan.json": "e3775ce774467833237806350edc745e6a7302f38f21853f7995b4dbf785fa2b",
+    "lf_data_preparation/native_interface_001/saved_extension_001/author/wrapper_source_plan_v1.json": "3d363832b6fcd1c274cf11e91d794ad2de812e5c2569f7098dd3ce149b1a47cf",
+    "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/scripts/evaluate_native.py": "b905638bb3bd9c0a413963deaf6de43840c8842dd00b9e0d9588c6d8f7996209",
+    "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/scripts/solve_native_mean.py": "088f2d21862b65fae5708eb5c33a55607fab706bd33989a8e2ee2fe6e27417b3",
+    "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_evaluate.py": "44eed5f42b5e10d8677b24d2cfc70e1508e1837e346205abdf309d54bc8961ed",
+    "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_mean.py": "34aba7347790fafa7f03511a42aa9876649b8ce4f8c98b3efdb5a0e664288401",
+    "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_response.py": "53bee087509f780ec5a62dae5b39a067e5f0df38f6fd7cc47311766ab3e2f14b",
+    "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/src/hf_eval/native_resume.py": "2bd859980e8e7ff09b09db35b61e5c948b524e2fd6724189ca8957c0d3e37e65",
+    "lf_data_preparation/native_interface_001/saved_extension_001/candidate/hf_repo/tests/test_native_path_extension.py": "9efbde8e38bd5c32d8e510db001b0ffc9c6c25143f27097fd98c3dd139f4bc6b",
+    "lf_data_preparation/native_interface_001/saved_extension_001/execute_extension.py": "4692176bb05b666ff9ec185f71112a89e5f735c85bf9ab3bdaa977984cbedc6f",
+    "lf_data_preparation/native_interface_001/saved_extension_001/extension_focused_budget.py": "7f5b83e3e24c1e6a1101e121dfc6c04dcd66d603bcf81d9a1112e0361acb57f2",
+    "lf_data_preparation/native_interface_001/saved_extension_001/launch_extension.py": "1e1455ee7d29a9aa2294696958c0096e2c33cb93c6be21ffe2110642297961cf",
+    "lf_data_preparation/native_interface_001/saved_extension_001/proposed_task.json": "1de66015b28d63759b66f5d82a64305cc53d54a6320e93e7274640b49830001b",
+    "lf_data_preparation/native_mean_001/task.json": "3ea87ca08334981a5947b10cc0bf06d355f6ee4cd46a9402ae2d686dc0d160e3",
+    "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/run_001/result/model/model.json": "54d71ac50a88b26876bd7bb02a3be3e4bdd36142948874c9bd37ef455eef10c5",
+    "lf_data_preparation/native_workpiece_001/enlarged_square_contact_001/run_001/result/result.json": "a68c7c2dac03b35d2456daf7b66f032e2d6f489e7f975b673b71659f2ba6706e",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference/summary.json": "91c3ef2720e80547e13e1c84e9bfb09d132804f16d3ab819509310e2bbd080e7",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/result/model/model.json": "00469390bd7091d1629f8c92277a7f8cfaf8f5047567ee64f36aaf4eed1433a1",
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/run_001/result/result.json": "b49955f7e56cd714b35283c0834757ebefc947d3ca25a4f505ed44e8947db7b6",
+    "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/reference/summary.json": "b871ff4791b296ab21d5b44c631f63b4cb81d62be1fdfeb725659379d7a68fe9",
+    "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/result/model/model.json": "07d90e7d4ceca6d82f62f043f4c4728b5909dc35dc7df81058b2b24a1fc6b8cf",
+    "lf_data_preparation/native_workpiece_001/right_margin_cycle_001/run_001/result/result.json": "e3ee572c2181a94134c99acab6bedf5f3736d6b665b03926e1507ed52bed090b",
+    "lf_data_preparation/v2_adapter_001/converted/gripper_canonical/geometry.json": "8d831fd3f1a034a3cd1948415c3f9758a2c6b94507973b7dc8c409266fec78e6"
+  },
+  "inherited_byte_input_identities": {
+    "functional_views/right_margin4_20261007/complete_001/view/comparison.png": {
+      "path": "functional_views/right_margin4_20261007/complete_001/view/comparison.png",
+      "bytes": 592541,
+      "sha256": "f1284fd40eeb719389188dfdbb7fb27075bf776736cc2fe18055a2dde3883bfa"
+    },
+    "functional_views/right_margin4_20261007/complete_001/view/distances_forces.png": {
+      "path": "functional_views/right_margin4_20261007/complete_001/view/distances_forces.png",
+      "bytes": 204307,
+      "sha256": "f71383e3737bc0f461383ab7cf8e8c0e7b04a7e3ce26c87045163320e4b0f19d"
+    },
+    "functional_views/right_margin4_20261007/complete_001/view/peak_fields.png": {
+      "path": "functional_views/right_margin4_20261007/complete_001/view/peak_fields.png",
+      "bytes": 491064,
+      "sha256": "b5872b5bc453c7908de373a7bffe847bc7571313604ef61a79cf5485c127ca48"
+    },
+    "functional_views/right_margin4_20261007/complete_001/view/right2col/actual_states.gif": {
+      "path": "functional_views/right_margin4_20261007/complete_001/view/right2col/actual_states.gif",
+      "bytes": 2929849,
+      "sha256": "d8c63b5057bdf0dd93a73a091446c346ea76005c16e9f52fcfa9d70658562082"
+    },
+    "functional_views/right_margin4_20261007/complete_001/view/right4col/actual_states.gif": {
+      "path": "functional_views/right_margin4_20261007/complete_001/view/right4col/actual_states.gif",
+      "bytes": 2928860,
+      "sha256": "274bcd3c37ea3bc3139d9e829ecc29cc06fce8666e3e4106d36b0b433788979d"
+    },
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/source_geometry/geometry.npz": {
+      "path": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/source_geometry/geometry.npz",
+      "bytes": 1411,
+      "sha256": "4c61b434584f7e7f278227c52bc8250a0c555f686cad51ab01900d65b66b93d2"
+    },
+    "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/state.npz": {
+      "path": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/state.npz",
+      "bytes": 197941,
+      "sha256": "43326f91e24f0d08f82faeb40761c8f0b354e3806fa669ac20103a52718b8009"
+    }
+  },
+  "real_archive_field_contract": [
+    {
+      "path": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/model/source_geometry/geometry.npz",
+      "sha256": "4c61b434584f7e7f278227c52bc8250a0c555f686cad51ab01900d65b66b93d2",
+      "fields": [
+        "solid",
+        "design",
+        "passive_solid",
+        "passive_void"
+      ],
+      "size_bytes": 1411,
+      "preparation_SHA_basis": "ordinary saved descriptor declaration inherited; stat only, no array bytes read"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/saved_continuation_001/run_001/resumed_alpha_half/accepted/001/state.npz",
+      "sha256": "43326f91e24f0d08f82faeb40761c8f0b354e3806fa669ac20103a52718b8009",
+      "fields": [
+        "lift",
+        "fluctuation"
+      ],
+      "size_bytes": 197941,
+      "preparation_SHA_basis": "ordinary saved descriptor declaration inherited; stat only, no array bytes read"
+    }
+  ],
+  "counts_scope": {
+    "api": 1,
+    "model": 1,
+    "reader": 1,
+    "solve": 1,
+    "save": 1,
+    "summary": 1,
+    "defaults_aliases": 2,
+    "force_tangent": "Actual started/completed counts match persisted original-controller bookkeeping, not guessed counts",
+    "accepted_N": "Actual N>=2, no N<=9; original bisection allowed"
+  },
+  "future_media_scope": "Five existing identity fixtures raw copy/hash only during approved tests; no pixel decode/render.",
+  "qualifications_unchanged": true,
+  "new_HP_calls": 0,
+  "no_retry_repair_rerun_extension_force_or_rollback": true,
+  "prerequisite": "New direct human M-EXTEND1 approval bound to current published/restored source and protocol; older card windows closed."
+}
