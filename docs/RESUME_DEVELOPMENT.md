@@ -1,3 +1,11 @@
+# 最新实际闭卡：M-UNLOAD2 PASS，1.05→零请求
+
+2026-10-13（Asia/Seoul）。唯一session96386已真实终止exit0，helper=pass，实际保存接受态N=9，独立审阅状态pass_actual_independent_terminal_review_plain_records_only。默认入口与原pure viewer用于保17 prefix追加旧尾8目标至零的本段（请求9态，实际N含原bisection）；原物理／门／settings/options保持，没有新HP、测试、候选复制、安装或外部重试。实际反力／工件作用／有限距离／变形及错误见[M-UNLOAD2结果](../lf_data_preparation/native_interface_001/saved_extension_004/RESULTS.md)。
+
+成功parent和failed/time_limit祖先、完整原／延伸路径及压力／有效夹持／完全释放／稳定性／全列／HF5缺口保持。闭卡余时不转为新许可，后续科学阶段另成具体卡并直接批准。以下完整216准备与历史记录保留原raw连续一次；历史未执行文字不代替顶部真实状态。
+
+---
+
 # 最新准备：M-UNLOAD2从成功1.05末态批量卸载至零
 
 保17任务前缀只append `[1,.9,.8,.75,.65,.5,.25,0]`，25完整task目标；请求suffix9目标，global16..24，真实N含原bisection。默认API及原pure viewer复用，不改核心、不重做测试、安装或HP。
