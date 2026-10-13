@@ -1,0 +1,13 @@
+# M-PREF1 闭卡增量发布工具
+
+publisher_execution.py 仅源码／AST准备；未执行发布、未改正式库、未进行科学或媒体读取。BASE为已真实发布source main ea5b55cc4f2ace87a78ed512d6bb14382e826a5d；manifest19987项／10330502684B继承，所有旧来源／力核／默认入口保持。
+
+接口：finalize／verify --repo／--restore；外部副本执行，正式author副本仅作为恢复源码。无需额外config／builder。allowed由actual新stage文件＋两front与Git精确差集核定；旧stage/source_protocol/card/PREP等不可修改。finalize只更新manifest与外部execution_delivery_delta_verify.json；root另行commit/push/ff-only恢复，verify后生成外部真实execution_publication_receipt.json。
+
+未来author/execution_documentation_receipt.json至少含source_baseline_commit、actual_execution_closed、actual_execution_status及front_history：path／old_sha256／new_sha256／history_start_byte／history_end_byte_exclusive。两份BASE旧正文完整连续一次，原source准备flags仍prepared true／authorized false／executed false。
+
+未来author/final_execution_review.md先落普通文本，不引用尚未生成JSON SHA；再写final_execution_review.json，status pass前缀、blocking_findings空、authorized/executed/execution_closed true、execution_status真实pass或not_pass、protocol_SHA256、reviewed_repository_SHA256覆盖所有普通delta（只排JSON自身，含MD）、declared_binary_identities。这两个文件唯一final预留路径。peer审核PASS表示元数据／交付审核，不能混淆实际科学终态。
+
+run_001/reference/execution_receipt.outputs的{sha256,bytes}科学记录转为{path,sha256,bytes}；new NPZ／gzip／PNG只true producer身份＋stat，ordinary记录可以hash。任何实际科学文件缺身份就明确阻断，不能闭窗后补hash／解码。55原bindings：45ordinary actualSHA、10oldNPZ继承manifest/stat；不全扫或重hash旧科学。成功要求单次outer／helper PASS、4HP／2机械／2工件／1图、原900／960秒／采样8GiB与完整window内seal；失败保持实际partial／not_pass，不能伪造成功，缺科学封存时不出版。
+
+新产物范围只两个selected child2/3、global18/19；full9/composed25/full-child/full-original/full-extended/全矩阵列／连续压力／有效夹持／稳定性／HF5仍false。读取普通summary是对已有记录的核查，不重算任何误差或数学门；plot_mechanical_hooks_monitored=false按纯源码依据陈述，不当动态监测。旧生产结果、源flags和深层failed/time_limit祖先全部继承。

@@ -1,3 +1,11 @@
+# 最新实际闭卡：M-PREF1 PASS，两卸载保存态参考
+
+2026-10-13（Asia/Seoul）。用户直接批准后的唯一session90472已真实终止exit0；实际outer=pass、helper=pass，HP开始／完成4／4、数学态2、工件态2、plot开始／完成1／1。只核原UNLOAD2 child2/3、global18/19、0.90/0.80；物理／源版本／十五门保持。原signed工件分量、反力、位移、有限距离、误差显示和真实QA见[M-PREF1结果](../lf_data_preparation/native_interface_001/unload_reference_001/RESULTS.md)。
+
+旧参考仍归原result/state；成功父链和failed/time_limit祖先保持，完整9态／25点路径、压力、有效夹持／完全释放、稳定性、全列与HF5不升级。本writer科学／媒体postread为0；出版另核真实推送／恢复receipt。下方保留源提交ea5b55c的完整原raw历史连续一次，历史未执行文字不取代顶部实际状态。
+
+---
+
 # 最新准备：卸载0.90／0.80 mm两态独立参考
 
 2026-10-13（Asia/Seoul）。M-PATH1已真实完成25目标统一读取、逐点索引和两曲线并推送main eb92b41；本轮准备M-PREF1，只核M-UNLOAD2原child2／3、global18／19。新四次HP80／120、一张两态参考误差图，原十五门及物理条件保持；helper900／outer960秒、采样8GiB。当前prepared=true、authorized=false、executed=false，未启动新计算。
