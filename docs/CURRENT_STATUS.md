@@ -1,3 +1,11 @@
+# 当前接续：统一25目标实际保存路径与显示
+
+2026-10-13（Asia/Seoul）。M-UNLOAD2实际PASS已main8e92a29发布／恢复，卸载至零已保存。根据用户“继续”，本轮先新增普通汇总函数、逐点索引及两曲线显示；普通输入审查已实证29行／4精确锚点／25显示点。候选正在源审，尚未运行汇总或绘图；新窗口helper180／outer240秒、采样8GiB明示，不沿用旧卡。
+
+首段failed/time_limit、后续源版本及原HP来源范围保持，composed显示不授一次完整求解或全路径参考资格。新HP、压力／有效夹持／稳定性／HF5均不增加。见[M-PATH1卡](../functional_views/native_alpha_composed_20261013/complete_001/M-PATH1_CARD.md)与[准备及取舍](../functional_views/native_alpha_composed_20261013/complete_001/PREPARATION_RESULTS.md)。下面保留8e92a29完整原历史连续一次。
+
+---
+
 # 最新实际闭卡：M-UNLOAD2 PASS，1.05→零请求
 
 2026-10-13（Asia/Seoul）。唯一session96386已真实终止exit0，helper=pass，实际保存接受态N=9，独立审阅状态pass_actual_independent_terminal_review_plain_records_only。默认入口与原pure viewer用于保17 prefix追加旧尾8目标至零的本段（请求9态，实际N含原bisection）；原物理／门／settings/options保持，没有新HP、测试、候选复制、安装或外部重试。实际反力／工件作用／有限距离／变形及错误见[M-UNLOAD2结果](../lf_data_preparation/native_interface_001/saved_extension_004/RESULTS.md)。
