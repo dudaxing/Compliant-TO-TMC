@@ -1,0 +1,11 @@
+# API / CLI author contract notes — author_self_review only
+
+This note covers the two candidates written by this author; it is not independent review or execution evidence. Frozen moduleSHAd37ab7ea11514771d1ba023f7eb663f032564027df35d57072f09ee825b49a25 and CLISHA468384ecf9f09edebc507acd2a249d0c5ed87f9b000cd574904ac7470f07ae29 identify the current source-only revision; root approved the width-type fix before protocolfreeze or any runtime.
+
+API signature is the root-specified prepare_native_lf_inputs with repo_root/width/expecteddescriptorSHA keyword options. The existing LF converter performs four-mask validation/copying, and optional existing right-domain derivation preserves the native parent subdomain. Only the task.geometry identity pair changes; task_id and physical/path/body/background fields remain equal. Three absolute input-format paths are returned; artifact and LF snapshot pointers in the saved manifest are case-relative.
+
+Template syntax validation is recorded; model/workpiece-placement/constraint compatibility is unqualified and unevaluated. None/zero width does not pad. Width accepts finite int/float orNone; bool, arbitraryReal, nonfinite and negative widths are rejected before converter decode; exact positive integer-column alignment uses the converter-validated native dx afterwards. A fractional-column rejection therefore retains actual converted partial artifacts. Existing output is refused; business failure preserves original error even if failure-manifest writing encounters OSError. No retry, cleanup or rollback.
+
+CLI calls the same API once. Future worker runpy invocation executes that CLI in the same process and must restore argv; it is not a subprocess CLI invocation or an already executed test. Source contract calls only original preparation/task validation primitives, with lazy dependencies that may import/register JAX; it does not claim no imports or independently qualified mechanics. This author's AST checks executed no candidate/HF/test/array/plot/model/force/tangent/solver/HP and wrote no formal file.
+
+Independent wrapper_cross_review will separately cover worker, launcher and publisher sources written by other agents. Its source map will not treat this author note or the two self-authored candidate modules as independent source-review evidence.
