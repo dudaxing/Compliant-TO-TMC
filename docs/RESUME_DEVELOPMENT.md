@@ -1,3 +1,11 @@
+# 最新实际闭卡：M-UNLOAD1 PASS，1.10→1.05请求
+
+2026-10-13（Asia/Seoul）。唯一session20354已真实终止exit0，helper=pass，实际保存接受态N=2，独立审阅状态pass_actual_independent_terminal_review_plain_records_only。默认入口与原pure viewer用于仅追加1.05的本段；原物理／门／settings/options保持，没有新HP、测试、候选复制、安装或外部重试。实际反力／工件作用／有限距离／变形及错误见[M-UNLOAD1结果](../lf_data_preparation/native_interface_001/saved_extension_003/RESULTS.md)。
+
+成功parent和failed/time_limit祖先、完整原／延伸路径及压力／有效夹持／完全释放／稳定性／全列／HF5缺口保持。闭卡余时不转为新许可，后续科学阶段另成具体卡并直接批准。以下完整3cf准备与历史记录保留原raw连续一次；历史未执行文字不代替顶部真实状态。
+
+---
+
 # 最新准备：M-UNLOAD1默认入口延伸1.10→1.05
 
 2026-10-13（Asia/Seoul）。M-EREF1实际PASS已main6f58d96交付／恢复，原1.10末态力及同一方向切线已独立核对。下一段仅追加1.05绝对目标，原16前缀／物理条件／原门／settings/options保持，默认API与原pure viewer复用；没有新测试、候选复制、安装或HP。
