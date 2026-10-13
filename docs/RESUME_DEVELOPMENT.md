@@ -1,3 +1,13 @@
+# 当前接续：M-EREF1新1.10 mm单态参考已准备，未执行（2026-10-13）
+
+用户要求先核新1.10 mm独立参考，再依据结果推进卸载并做好记录／可视化。当前M-EXTEND2已PASS并安装六默认入口；最近拟补child1／global15的HP80／120各一次、原15门及一张误差／原门图。原实际1.15→1.10变形GIF保持供对照，本次不重做生产求解或旧参考。
+
+新参考明确只一态；公开API全两态／4HP要求保持，单态report不授整段matched或完整路径／压力／有效夹持资格。helper900／outer960秒、采样8GiB、首错停、无修复重跑／重试／延期／force的新窗口仍需按阶段约定直接批准；原已闭卡时间不沿用。源准备未import科学、读取NPZ／gzip／媒体字节或运行HP／绘图。
+
+[M-EREF1具体卡](../lf_data_preparation/native_interface_001/extension_reference_001/M-EREF1_CARD.md) · [准备说明](../lf_data_preparation/native_interface_001/extension_reference_001/PREPARATION_RESULTS.md) · [最后实际结果及图](../lf_data_preparation/native_interface_001/saved_extension_002/RESULTS.md)。参考产出后再选择下一卸载目标；尚未开启新数值窗口。以下此前状态与开发记录保留原字节。
+
+---
+
 # 当前状态：M-EXTEND2成功，显式卸载延伸已安装（2026-10-13）
 
 直接批准main781f408／协议30b5e7f后，唯一执行PASS闭卡：36项兼容测试通过；从成功保存末态1.15 mm延伸至1.10 mm，两接受态；原viewer生成3PNG／两帧实际GIF；短runtime一次原字节ZIP封存通过；六份默认生产入口安装为已测试相同字节。outer961.3427620999864秒、stop=null、148冻结绑定保持，资源在原卡范围内，无重试、修复重跑、延期、force、新夹持器HP或自动回滚。

@@ -1,0 +1,407 @@
+--- old/execute_alpha_reference.py
++++ candidate/execute_extension_reference.py
+@@ -1,7 +1,7 @@
+-"""M-AREF1: independent HP reference of two saved alpha-half segment states.
++"""M-EREF1: independent HP reference of one newly saved1.10 endpoint.
+ 
+ B850 run_state and aa86 workpiece_checks are inherited unchanged. Only the
+-bound loader, resource window, provenance and child/original index metadata
++bound selected-state loader, protocol-authorized resource window, provenance and index metadata
+ are new. This helper neither evaluates production mechanics nor solves.
+ """
+ from time import perf_counter
+@@ -9,6 +9,7 @@
+ import argparse
+ from copy import deepcopy
+ import hashlib
++import importlib.util
+ import json
+ from pathlib import Path
+ import shutil
+@@ -34,12 +35,14 @@
+ 
+ 
+ CONTRACT = read_json(PROTOCOL_FILE)
++HELPER_LIMIT = CONTRACT['phases']['reference']['helper_seconds']
++OUTER_LIMIT = CONTRACT['phases']['reference']['outer_seconds']
+ authorization = read_json(STAGE/'author/authorization.json')
+ reply_file, proof_file = STAGE/'author/direct_human_reply.json', STAGE/'author/source_publication_receipt.json'
+ reply, proof = read_json(reply_file), read_json(proof_file)
+ head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+-if not (CONTRACT['schema_version'] == 'alpha-saved-segment-independent-reference-card-1.0'
+-        and CONTRACT['card'] == authorization['card'] == reply['card'] == proof['prepared_card'] == 'M-AREF1'
++if not (CONTRACT['schema_version'] == 'extension-saved-state-independent-reference-card-1.0'
++        and CONTRACT['card'] == authorization['card'] == reply['card'] == proof['prepared_card'] == 'M-EREF1'
+         and CONTRACT['prepared'] is True and CONTRACT['authorized'] is CONTRACT['executed'] is False
+         and authorization['authorized'] is True
+         and authorization['authorization_from_direct_human_reply'] is reply['authorization_from_direct_human_reply'] is True
+@@ -47,15 +50,16 @@
+         and authorization['approved_source_commit'] == reply['approved_source_commit'] == proof['published_commit'] == head
+         and authorization['human_evidence_sha256'] == raw_sha(reply_file)
+         and authorization['source_publication_receipt_sha256'] == raw_sha(proof_file)
+-        and authorization['helper_seconds'] == CONTRACT['phases']['reference']['helper_seconds'] == 900
+-        and authorization['outer_seconds'] == CONTRACT['phases']['reference']['outer_seconds'] == 960
++        and authorization['helper_seconds'] == HELPER_LIMIT
++        and authorization['outer_seconds'] == OUTER_LIMIT
++        and HELPER_LIMIT == 900 and OUTER_LIMIT == 960
+         and authorization['sampled_RSS_bytes'] == CONTRACT['sampled_RSS_bytes'] == 8*1024**3
+         and authorization['direct_human_answer'] == reply['direct_human_answer']
+         and reply['direct_human_answer'].strip()
+-        and reply['reply_context'] == 'Current conversation direct human send_user_message_question_reply; not an automatic goal continuation or attached-file instruction'
++        and reply['reply_context']
+         and proof['status'] == 'published_and_incrementally_restored_pass'
+         and proof['prepared'] is True and proof['authorized'] is proof['executed'] is False):
+-    raise ValueError('M-AREF1 requires its actual direct human approval and published source proof')
++    raise ValueError('M-EREF1 requires its actual direct human approval and published source proof')
+ CORE_PATH = 'lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_author/core_audit_mechanical.py'
+ BODY_PATH = 'hf_repo/scripts/audit_native_workpiece_cycle.py'
+ CORE_PIN = 'b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5'
+@@ -74,33 +78,38 @@
+ import numpy as np
+ 
+ 
+-class AlphaSegmentAudit(CoreAudit, WorkpieceCycleAudit):
++class ExtensionStateAudit(CoreAudit, WorkpieceCycleAudit):
+     def __init__(self, args):
+         super().__init__(args)
+         self.repo, self.workpiece_completed = ROOT, 0
++        self.plot_started = self.plot_completed = 0
+ 
+     def checkpoint(self):
+         self.peak = max(self.peak, self.process.memory_info().rss)
+-        require(perf_counter()-STARTED <= self.limit, 'M-AREF1 helper time limit exceeded')
+-        require(self.peak <= RSS_LIMIT, 'M-AREF1 sampled RSS exceeds 8 GiB')
+-        require(not (STAGE/'stop_requested.txt').exists(), 'M-AREF1 stop requested')
++        require(perf_counter()-STARTED <= self.limit, 'M-EREF1 helper time limit exceeded')
++        require(self.peak <= RSS_LIMIT, 'M-EREF1 sampled RSS exceeds 8 GiB')
++        require(not (STAGE/'stop_requested.txt').exists(), 'M-EREF1 stop requested')
+ 
+     def lifecycle(self, status, error=None):
+         write(self.output/'lifecycle.json', dict(status=status, error=error,
+             elapsed_seconds=perf_counter()-STARTED, HP_calls_started=self.hp_started, HP_calls_completed=self.hp_completed,
+             checks_completed=self.checks, accepted_mechanical_states_completed=len(self.rows),
+-            workpiece_states_completed=self.workpiece_completed, sampled_peak_RSS_bytes=self.peak,
++            workpiece_states_completed=self.workpiece_completed, plot_started=self.plot_started,
++            plot_completed=self.plot_completed, plot_mechanical_hooks_monitored=False,
++            plot_zero_mechanics_basis='Pinned pure source module; existing reference JSON only, no dynamic mechanics hooks',
++            sampled_peak_RSS_bytes=self.peak,
+             time_limit_seconds=self.limit, sampled_RSS_limit_bytes=RSS_LIMIT,
+             stop_policy='One approved window; first error stops, no repair, retry, extension, production evaluation or force'))
+ 
+     def load(self):
+         c = CONTRACT
+         self.check(self.stage == self.repo/c['production_stage'] and self.output == self.repo/c['reference_output']
+-            and self.limit == c['phases']['reference']['helper_seconds'] == 900.
+-            and c['phases']['reference']['outer_seconds'] == 960. and c['sampled_RSS_bytes'] == RSS_LIMIT
+-            and c['expected_accepted_states'] == 2 and c['expected_new_HP_calls'] == 4
+-            and c['targets_mm'] == [1.2,1.15] and c['original_target_indices'] == [13,14]
+-            and c['gates'] == GATES == BODY_GATES, 'M-AREF1 scope/resource/original gates differ')
++            and self.limit == HELPER_LIMIT > 0.
++            and c['phases']['reference']['outer_seconds'] == OUTER_LIMIT >= HELPER_LIMIT and c['sampled_RSS_bytes'] == RSS_LIMIT
++            and c['expected_accepted_states'] == 1 and c['expected_new_HP_calls'] == 2
++            and c['selected_child_accepted_index'] == 1 and c['targets_mm'] == [1.1]
++            and c['original_target_indices'] == [15] and c['production_targets_mm'] == [1.15,1.1]
++            and c['gates'] == GATES == BODY_GATES, 'M-EREF1 scope/resource/original gates differ')
+         self.bind(PROTOCOL_FILE)
+         for name, pin in c['bindings'].items():
+             self.bind(self.repo/name, pin)
+@@ -114,6 +123,13 @@
+         own_copy = self.output/'sources'/Path(own).name
+         shutil.copyfile(Path(__file__).resolve(), own_copy)
+         self.bind(own_copy,c['bindings'][own])
++        plot_source = self.repo/c['plot_source']
++        plot_pin = c['bindings'][c['plot_source']]
++        self.sources[c['plot_source']] = self.bind(plot_source,plot_pin)
++        plot_copy = self.output/'sources'/plot_source.name
++        shutil.copyfile(plot_source,plot_copy)
++        self.bind(plot_copy,plot_pin)
++        self.plot_source, self.plot_source_pin = plot_source, plot_pin
+         shutil.copyfile(PROTOCOL_FILE, self.output/'protocol.json')
+         receipt = read(self.stage/'execution_receipt.json')
+         launch = read(self.repo/c['production_launch_file'])
+@@ -121,9 +137,13 @@
+             and launch['exit_code'] == 0 and launch['stop_reason'] is None and launch['completed_utc']
+             and receipt['accepted_states'] == 2 and receipt['cached_production_gates']['passed'] is True
+             and receipt['counts']['api_started'] == receipt['counts']['api_completed'] == 1
+-            and receipt['requested_absolute_targets_mm'] == c['targets_mm']
+-            and receipt['parent_status'] == 'failed' and receipt['parent_full_path_completed'] is False
+-            and receipt['selected_state_index'] == 13 and receipt['HP_calls'] == receipt['JIT_calls'] == 0
++            and receipt['requested_absolute_targets_mm'] == c['production_targets_mm']
++            and receipt['parent_status'] == 'success' and receipt['parent_failure'] is None
++            and receipt['ancestor_continuation']['parent_status'] == 'failed'
++            and receipt['ancestor_continuation']['parent_failure']['code'] == 'time_limit'
++            and receipt['selected_state_index'] == 1
++            and receipt['installation_complete'] is launch['installation_complete'] is True
++            and len(receipt['installed_transitions']) == 6 and receipt['HP_calls'] == receipt['JIT_calls'] == 0
+             and launch['protocol_sha256'] == receipt['protocol_sha256'] == sha(self.repo/c['production_protocol_file']),
+             'Actual closed continuation producer records differ')
+         self.origin = self.stage/c['production_result_dir']
+@@ -132,7 +152,7 @@
+         verify_descriptor(result)
+         continuation = result['continuation']
+         self.check(result['schema_version'] == 'hf-native-mean-result-1.2' and result['status'] == 'success'
+-            and result['scope'] == 'native_saved_mean_continuation_segment' and result['targets_mm'] == c['targets_mm']
++            and result['scope'] == 'native_saved_mean_explicit_task_extension_segment' and result['targets_mm'] == c['production_targets_mm']
+             and result['accepted_states'] == 2 and result['target_origin'] == 0.
+             and result['lift_origin_zero'] is result['lift_shape_zero'] is True and result['path_kind'] == 'ordered_cycle'
+             and result['backend'] == 'numpy' and result['matrix_units'] == 'N/mm'
+@@ -140,15 +160,24 @@
+             and result['settings'] == c['production_settings'] and result['initial_guess'] == 'port_projection'
+             and result['tangent_execution'] == dict(mode='chunk256',element_block_size=256,global_selector_scope='full_batch')
+             and all(result[key] == value for key,value in MECHANICAL_AVAILABILITY.items())
+-            and result['failure'] is None and result['task_target_executed'] is result['full_original_path_completed'] is False
++            and result['failure'] is None and result['task_target_executed'] is result['full_original_path_completed'] is result['full_extended_path_completed'] is False
+             and all(result[key] is False for key in ('equilibrium_qualified','independent_HP_qualified','HF_qualified'))
+             and continuation['segment_completed'] is continuation['anchor_revalidated'] is continuation['anchor_identity_preserved'] is True
+-            and continuation['parent_status'] == 'failed' and continuation['parent_failure']['code'] == 'time_limit'
+-            and continuation['parent_path_completed'] is continuation['parent_task_target_executed'] is False
+-            and continuation['parent_unload_endpoint_reached'] is continuation['full_original_path_executed_by_child'] is False
++            and continuation['continuation_mode'] == 'explicit_task_extension'
++            and continuation['parent_status'] == 'success' and continuation['parent_failure'] is None
++            and continuation['parent_path_completed'] is continuation['parent_unload_endpoint_reached'] is True
++            and continuation['parent_task_target_executed'] is continuation['full_original_path_executed_by_child'] is False
++            and continuation['full_extended_path_executed_by_child'] is continuation['full_extended_path_completed'] is False
++            and continuation['parent_continuation']['parent_status'] == 'failed'
++            and continuation['parent_continuation']['parent_failure']['code'] == 'time_limit'
++            and continuation['appended_targets_mm'] == [1.1]
++            and continuation['source_task_targets_mm'] == c['source_task_targets_mm']
++            and continuation['source_task_sha256'] == c['source_task_sha256']
++            and continuation['extended_task_targets_mm'] == c['original_targets_mm']
++            and continuation['extended_task_sha256'] == c['task_sha256']
+             and continuation['original_task_targets_mm'] == c['original_targets_mm']
+-            and continuation['requested_suffix_targets_mm'] == c['targets_mm']
+-            and continuation['original_target_indices'] == c['original_target_indices']
++            and continuation['requested_suffix_targets_mm'] == c['production_targets_mm']
++            and continuation['original_target_indices'] == c['production_original_target_indices']
+             and response['identity']['result']['sha256'] == sha(self.result_file)
+             and response['continuation'] == continuation, 'Actual child/parent/absolute-suffix identity differs')
+         self.check(result['call_counts']['force_calls'] == receipt['counts']['force_started']
+@@ -157,6 +186,10 @@
+             and result['call_counts']['tangent_calls_completed'] == receipt['counts']['tangent_completed']
+             and result['save_force_calls'] == result['save_tangent_calls'] == 0,
+             'Original accepted cache/counters differ; normal rejected trials are not completion equality gates')
++        for name,pin in c['installed_producer_sources'].items():
++            self.check(receipt['actual_default_SHA256'][name] == launch['actual_default_SHA256'][name] == sha(self.repo/name) == pin, 'Installed tested producer source differs')
++        for name,pin in result['mechanics_source_sha256'].items():
++            self.check(sha(self.repo/name) == c['bindings'][name] == pin, 'Saved mechanics source differs from current installed source')
+         model_file, metadata_file = (self.origin/result['model'][key] for key in ('arrays_path','descriptor_path'))
+         model, metadata = npz(model_file), read(metadata_file)
+         verify_descriptor(metadata); verify_fields(model, metadata['arrays']['fields'])
+@@ -198,15 +231,21 @@
+             and model['b_in'][np.flatnonzero(model['b_in'])].tolist() == c['direction']['expected_port_weights']
+             and np.count_nonzero(direction[fixed]) == 0, 'Actual fixed-compatible PORT direction differs')
+         states = result['states']
+-        self.check([row['d'] for row in states] == c['targets_mm']
+-            and [row['original_target_index'] for row in states] == c['original_target_indices']
++        self.check([row['d'] for row in states] == c['production_targets_mm']
++            and [row['original_target_index'] for row in states] == c['production_original_target_indices']
+             and [row['child_original_target_index'] for row in states] == [0,1]
+             and [row['leg'] for row in states] == ['resume_origin','unloading']
+             and all(row['is_original_target'] and row['target_origin'] == 0. and row['physical_mean_target_mm'] == row['d'] for row in states)
+             and states[0]['continuation_anchor'] is True and states[1]['continuation_anchor'] is False
+             and states[0]['state_sha256'] == continuation['selected_state']['state_sha256']
+-            and states[0]['R_input'] == continuation['selected_state']['R_input_N'], 'Two original accepted child states differ')
+-        for file in [self.result_file, metadata_file, model_file]+[self.origin/row[key]['path'] for row in states for key in ('state','forces','tangents','matrix')]+[self.origin/row['descriptor_path'] for row in states]:
++            and states[0]['R_input'] == continuation['selected_state']['R_input_N'], 'Actual two-state producer identity differs')
++        self.selected_states = [states[c['selected_child_accepted_index']]]
++        self.check(self.selected_states[0]['d'] == c['targets_mm'][0]
++            and self.selected_states[0]['original_target_index'] == c['original_target_indices'][0]
++            and self.selected_states[0]['child_original_target_index'] == 1
++            and self.selected_states[0]['leg'] == 'unloading' and self.selected_states[0]['continuation_anchor'] is False,
++            'Only the newly accepted child001/global15 endpoint may be referenced')
++        for file in [self.result_file, metadata_file, model_file]+[self.origin/row[key]['path'] for row in self.selected_states for key in ('state','forces','tangents','matrix')]+[self.origin/row['descriptor_path'] for row in self.selected_states]:
+             name = file.relative_to(self.repo).as_posix()
+             self.check(receipt['outputs'][name] == c['bindings'][name] == self.bindings[file], 'Child saved input differs from actual output receipt')
+         self.model, self.edofs, self.direction = model, edofs, direction
+@@ -216,53 +255,70 @@
+         self.checkpoint()
+ 
+     def summary_rows(self):
+-        # Raw inherited reports stay indexed13/14. Only top-level metadata is copied.
+-        return [dict(deepcopy(record),index=index,child_accepted_index=index,
++        # Raw inherited report keeps global15. Top metadata records actual producer child1.
++        return [dict(deepcopy(record),index=CONTRACT['selected_child_accepted_index'],child_accepted_index=CONTRACT['selected_child_accepted_index'],
+             reference_execution_index=record['index'],original_target_index=row['original_target_index'],leg=row['leg'],
+             descriptor_file_sha256=row['descriptor_file_sha256'],child_original_target_index=row['child_original_target_index'],
+             continuation_anchor=row['continuation_anchor'])
+-            for index,(record,row) in enumerate(zip(self.rows,self.result['states']))]
++            for index,(record,row) in enumerate(zip(self.rows,self.selected_states))]
+ 
+     def run(self):
+         self.checkpoint(); self.load()
+         from hf4_split_precision_reference import DecimalSplitQ1Reference
+         self.reference_class = DecimalSplitQ1Reference
+-        for row in self.result['states']:
++        for row in self.selected_states:
+             index = row['original_target_index']
+             self.run_state(index,row)
+             self.workpiece_checks(index,row)
+             self.workpiece_completed += 1
+-        self.check(self.hp_started == self.hp_completed == 4 and len(self.rows) == self.workpiece_completed == 2,
+-            'Fresh complete two-state HP/body coverage differs')
++        self.check(self.hp_started == self.hp_completed == 2 and len(self.rows) == self.workpiece_completed == 1,
++            'Fresh selected endpoint HP/body coverage differs')
+         for path,pin in self.bindings.items():
+             self.check(sha(path) == pin, 'Bound source/input changed: '+str(path))
+         self.checkpoint()
++        self.plot_started = 1
++        spec = importlib.util.spec_from_file_location('saved_endpoint_reference_observation',self.plot_source)
++        plot = importlib.util.module_from_spec(spec)
++        spec.loader.exec_module(plot)
++        self.check(Path(plot.__file__).resolve() == self.plot_source.resolve()
++            and sha(self.plot_source) == self.plot_source_pin, 'Bound pure plot module origin differs')
++        observation = plot.render_reference_observation(self.output,self.selected_states[0],self.checkpoint)
++        self.plot_completed = 1
++        self.checkpoint()
++        self.check(observation['original_target_index'] == 15 and observation['accepted_child_index'] == 1
++            and observation['state_sha256'] == self.selected_states[0]['state_sha256'], 'Observation identity differs')
++        plot_outputs = {name:sha(self.output/name) for name in ('reference_observations.png','reference_observations.json')}
+         summary = dict(schema_version='native-workpiece-cycle-independent-audit-1.0',status='pass',
+-            alias='alpha_half_saved_suffix',case_family='gripper',accepted_states=2,states=self.summary_rows(),
++            alias='extension_alpha_half_saved_endpoint',case_family='gripper',accepted_states=1,states=self.summary_rows(),
+             audited_targets_mm=CONTRACT['targets_mm'],path_kind='ordered_cycle',workpiece=CONTRACT['workpiece'],
+             result_sha256=sha(self.result_file),checks_completed=self.checks,HP_calls_started=self.hp_started,HP_calls_completed=self.hp_completed,
+             gates=GATES,global_scatter_precision=3000,global_scatter_inexact_trap=True,
+             HP_matrix_columns_exhaustively_checked=False,full_element_and_DOF_coverage=True,
+-            reference_scope='All2 accepted saved child suffix states,13440 elements/27378 DOFs; original indices13/14, child indices0/1; actual PORT direction,deltaR=0; signed body/holding projections',
+-            qualification='Only these two saved alpha-half suffix states and declared direction. Original15 gates; no parent/full original path,all columns,stress/energy/pressure,effective clamp,stability or HF5 qualification',
+-            continuation=deepcopy(self.result['continuation']),full_original_path_reference_pass=False,
+-            full_original_path_completed=False,contact_qualified=False,clamp_qualified=False,pressure_qualified=False,HF5_qualified=False,
++            reference_scope='Only selected child001/global15/1.10 saved endpoint,13440 elements/27378 DOFs; actual PORT direction,deltaR=0; signed body/holding projections',
++            qualification='Only selected saved1.10 endpoint and declared direction. Original15 gates; no full two-state child/full original or extended path,all columns,stress/energy/pressure,effective clamp,stability or HF5 qualification',
++            continuation=deepcopy(self.result['continuation']),selected_child_accepted_index=1,
++            full_child_path_reference_pass=False,full_extended_path_reference_pass=False,full_original_path_reference_pass=False,
++            full_original_path_completed=False,full_extended_path_completed=False,contact_qualified=False,clamp_qualified=False,pressure_qualified=False,HF5_qualified=False,
+             **MECHANICAL_AVAILABILITY,analytic_HP_energy_scope='Archived independent analytic energy only; no candidate energy comparison',
+             private_run_state_source_sha256=CORE_PIN,inherited_workpiece_checker_sha256=BODY_PIN,
+             tangent_execution=self.result['tangent_execution'],direction=CONTRACT['direction'],
+             direction_array_sha256=hashlib.sha256(self.direction.tobytes()).hexdigest(),
+             source_bindings=self.sources,input_bindings={p.relative_to(self.repo).as_posix():pin for p,pin in self.bindings.items()},
++            observation_outputs=plot_outputs,plot_started=self.plot_started,plot_completed=self.plot_completed,
++            plot_module_origin=self.plot_source.relative_to(self.repo).as_posix(),plot_module_sha256=self.plot_source_pin,
++            plot_mechanical_hooks_monitored=False,
++            plot_zero_mechanics_basis='Pinned pure module reading only newaccepted015 summary; no dynamic hook monitoring',
+             independent_reference_contract_sha256=sha(PROTOCOL_FILE),production_response_unchanged=True,
+             candidate_force_calls=0,tangent_calls=0,solver_calls=0,model_constructions=0,JIT_calls=0,LF_calls=0,
+             elapsed_seconds=perf_counter()-STARTED,sampled_peak_RSS_bytes=self.peak,time_limit_seconds=self.limit,sampled_RSS_limit_bytes=RSS_LIMIT)
+         write(self.output/'summary.json',summary)
+         self.checkpoint(); self.lifecycle('pass'); self.checkpoint()
+-        print(dict(status='pass',accepted_states=2,HP_calls=self.hp_completed,checks_completed=self.checks),flush=True)
++        print(dict(status='pass',accepted_states=1,HP_calls=self.hp_completed,checks_completed=self.checks),flush=True)
+ 
+ 
+ def main():
+-    require(ARGS.time_limit == CONTRACT['phases']['reference']['helper_seconds'] == 900., 'M-AREF1 requires its explicit new900s window')
+-    audit = AlphaSegmentAudit(ARGS)
++    require(ARGS.time_limit == HELPER_LIMIT > 0., 'M-EREF1 requires its explicit protocol/authorization window')
++    audit = ExtensionStateAudit(ARGS)
+     try:
+         audit.run()
+     except BaseException as error:
+@@ -270,7 +326,9 @@
+         write(audit.output/'summary.json',dict(status='not_pass',error=repr(error),
+             states=audit.summary_rows() if hasattr(audit,'result') else [],accepted_states=len(audit.rows),
+             workpiece_states_completed=audit.workpiece_completed,HP_calls_started=audit.hp_started,HP_calls_completed=audit.hp_completed,
++            plot_started=audit.plot_started,plot_completed=audit.plot_completed,plot_mechanical_hooks_monitored=False,
+             checks_completed=audit.checks,elapsed_seconds=perf_counter()-STARTED,sampled_peak_RSS_bytes=audit.peak,
++            full_child_path_reference_pass=False,full_extended_path_reference_pass=False,
+             full_original_path_reference_pass=False,contact_qualified=False,clamp_qualified=False,pressure_qualified=False,HF5_qualified=False))
+         raise
+ 
+--- old/launch_reference.py
++++ candidate/launch_reference.py
+@@ -1,4 +1,4 @@
+-"""M-AREF1 one-shot saved-state reference launcher; run only after direct approval."""
++"""M-EREF1 one-shot saved-state reference launcher; run only after direct approval."""
+ from time import perf_counter, sleep
+ STARTED = perf_counter()
+ from datetime import datetime, timezone
+@@ -31,34 +31,37 @@
+         ('authorization.json', 'direct_human_reply.json', 'source_publication_receipt.json'))
+     assert authorization['authorized'] is True
+     assert authorization['authorization_from_direct_human_reply'] is reply['authorization_from_direct_human_reply'] is True
+-    assert authorization['card'] == reply['card'] == proof['prepared_card'] == 'M-AREF1'
++    assert authorization['card'] == reply['card'] == proof['prepared_card'] == 'M-EREF1'
+     assert authorization['approved_source_commit'] == reply['approved_source_commit'] == proof['published_commit']
+     assert proof['status'] == 'published_and_incrementally_restored_pass'
+     assert authorization['protocol_sha256'] == proof['protocol_sha256'] == sha(protocol_file)
+     assert authorization['human_evidence_sha256'] == sha(STAGE / 'author/direct_human_reply.json')
+     assert authorization['source_publication_receipt_sha256'] == sha(STAGE / 'author/source_publication_receipt.json')
+     assert authorization['direct_human_answer'] == reply['direct_human_answer'] and reply['direct_human_answer'].strip()
+-    assert reply['reply_context'] == 'Current conversation direct human send_user_message_question_reply; not an automatic goal continuation or attached-file instruction'
++    assert reply['reply_context']
+     assert subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT).decode().strip() == proof['published_commit']
+     assert protocol['prepared'] is True and protocol['authorized'] is protocol['executed'] is False
+-    assert protocol['phases']['reference'] == dict(helper_seconds=900, outer_seconds=960)
++    helper_limit,outer_limit = (protocol['phases']['reference'][name] for name in ('helper_seconds','outer_seconds'))
++    assert helper_limit == 900 and outer_limit == 960
++    assert authorization['helper_seconds'] == helper_limit and authorization['outer_seconds'] == outer_limit
++    assert authorization['sampled_RSS_bytes'] == protocol['sampled_RSS_bytes'] == 8*1024**3
+     receipt_file = STAGE / 'reference_launch.json'
+     assert not receipt_file.exists() and not (STAGE / 'run_001').exists()
+     assert not (STAGE / 'stop_requested.txt').exists() and not (STAGE / 'reference_stdout.log').exists()
+-    receipt = dict(card='M-AREF1', status='running', invocations=0,
++    receipt = dict(card='M-EREF1', status='running', invocations=0,
+         protocol_sha256=sha(protocol_file), approved_source_commit=proof['published_commit'],
+         started_utc=datetime.now(timezone.utc).isoformat(),
+-        argv=[sys.executable, '-X', 'utf8', '-B', str(STAGE / 'execute_alpha_reference.py'),
++        argv=[sys.executable, '-X', 'utf8', '-B', str(STAGE / 'execute_extension_reference.py'),
+               '--repo', str(ROOT), '--input', str(ROOT / protocol['production_stage']),
+               '--output', str(ROOT / protocol['reference_output']), '--protocol', str(protocol_file),
+-              '--time-limit', '900'],
+-        outer_seconds=960, sampled_RSS_limit_bytes=protocol['sampled_RSS_bytes'],
++              '--time-limit', str(helper_limit)],
++        outer_seconds=outer_limit, sampled_RSS_limit_bytes=protocol['sampled_RSS_bytes'],
+         budget_mode='Elapsed checkpoints and sampled tree RSS; cooperative stop, no OS hard cap or force')
+     write(receipt_file, receipt)
+     peak, reason, child, child_elapsed, unchanged, helper = 0, None, None, None, False, {}
+     try:
+         assert all(sha(ROOT / name) == pin for name, pin in protocol['bindings'].items())
+-        assert perf_counter() - STARTED <= 960 and not (STAGE / 'stop_requested.txt').exists()
++        assert perf_counter() - STARTED <= outer_limit and not (STAGE / 'stop_requested.txt').exists()
+         environment = dict(os.environ, PYTHONDONTWRITEBYTECODE='1', PYTHONUTF8='1', MPLBACKEND='Agg')
+         with (STAGE / 'reference_stdout.log').open('xb') as output:
+             receipt['invocations'] = 1
+@@ -73,8 +76,8 @@
+                         [process] + process.children(recursive=True) if member.is_running()))
+                 except psutil.NoSuchProcess:
+                     pass
+-                if reason is None and (perf_counter() - STARTED > 960 or peak > protocol['sampled_RSS_bytes']):
+-                    reason = 'outer_elapsed_limit' if perf_counter() - STARTED > 960 else 'sampled_RSS_limit'
++                if reason is None and (perf_counter() - STARTED > outer_limit or peak > protocol['sampled_RSS_bytes']):
++                    reason = 'outer_elapsed_limit' if perf_counter() - STARTED > outer_limit else 'sampled_RSS_limit'
+                     (STAGE / 'stop_requested.txt').write_text(reason, encoding='utf-8')
+                 sleep(.1)
+         child_elapsed = perf_counter() - child_started
+@@ -83,11 +86,12 @@
+         helper = read(helper_file) if helper_file.exists() else {}
+         summary_file = ROOT / protocol['reference_output'] / 'summary.json'
+         summary = read(summary_file) if summary_file.exists() else {}
+-        if reason is None and (child_elapsed > 900 or perf_counter() - STARTED > 960 or
++        if reason is None and (child_elapsed > helper_limit or perf_counter() - STARTED > outer_limit or
+                 (STAGE / 'stop_requested.txt').exists()):
+             reason = 'closed_resource_window_at_final_evidence'
+         passed = child.returncode == 0 and reason is None and unchanged and helper.get('status') == summary.get('status') == 'pass'
+-        assert not passed or (summary['accepted_states'] == 2 and summary['HP_calls_started'] == summary['HP_calls_completed'] == 4)
++        assert not passed or (summary['accepted_states'] == 1 and summary['HP_calls_started'] == summary['HP_calls_completed'] == 2
++            and summary['plot_started'] == summary['plot_completed'] == helper['plot_started'] == helper['plot_completed'] == 1)
+         receipt['status'] = 'pass' if passed else 'not_pass'
+     except BaseException as error:
+         receipt.update(status='not_pass', failure=dict(type=type(error).__name__, message=str(error)))
+@@ -104,14 +108,14 @@
+         all_bindings_unchanged=unchanged, helper_status=helper.get('status'),
+         completed_utc=datetime.now(timezone.utc).isoformat())
+     write(receipt_file, receipt)
+-    if perf_counter() - STARTED > 960 or (STAGE / 'stop_requested.txt').exists():
++    if perf_counter() - STARTED > outer_limit or (STAGE / 'stop_requested.txt').exists():
+         receipt.update(status='not_pass', elapsed_seconds=perf_counter() - STARTED,
+             stop_reason='closed_resource_window_at_receipt_write')
+         write(receipt_file, receipt)
+     print(json.dumps({key: receipt[key] for key in
+         ('status', 'invocations', 'exit_code', 'elapsed_seconds', 'peak_sampled_tree_RSS_bytes', 'stop_reason')}, ensure_ascii=False), flush=True)
+     if receipt['status'] != 'pass':
+-        raise RuntimeError('M-AREF1 closed non-success; no retry')
++        raise RuntimeError('M-EREF1 closed non-success; no retry')
+ 
+ 
+ if __name__ == '__main__':
