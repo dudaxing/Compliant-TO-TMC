@@ -1,0 +1,17 @@
+# M-UNLOAD1最小默认入口包装源码
+
+本目录当前仅新增两个可执行源码候选：`execute_unload.py`与`launch_unload.py`。另有本说明、协议键合同和作者收据；不复制hf_repo、candidate capsule、测试或旧媒体，不安装默认源。这里只做普通源码／JSON／stat读取、外部源码及说明写入和AST parse，未导入HF、collect／执行测试、调用API／模型／F／T／HP／求解／viewer／绘图，未写正式目录或创建运行目录。M-EREF1已实际出版并恢复main `6f58d96bb0d4b1369c680779a47341305a690618`，协议键合同已绑定其真实普通proof；随后新卡准备发布proof和直接批准仍待root真实绑定，不用placeholder冒充实际批准或数值PASS。
+
+helper复用已安装`hf_eval.native_evaluate.evaluate_native`：唯一调用`evaluate_native(None,new_task,new_output,repo_root=root,saved_result=latest_success_result,selected_state_index=1,extend_path=True,time_limit_seconds=1800)`。targets／settings／三options不显式传，由默认入口从原父记录继承。原16目标前缀仅append1.05，其余task字典、input.target_mm=1.2、geometry／材料／alpha／BC／端口均不变。实际子段1.10→1.05，original15／16，warm lift／fluctuation与signed R由原reader读取；旧force／tangent／matrix不读，K=None且fresh F/T起点验收由原split controller完成。
+
+alias计数和cache观察沿用已运行M-EXTEND2方法，去除focused tests／capsule／archive／安装四阶段：API／构模／reader／solve／save／summary各一次，两处` saved_resume_defaults`别名各一次，共2；机械力与chunk256切线按实际开始／完成计数，允许原invalid_J试探使二者不相等。对原接受缓存仅检查原正J、生产residual、原native constraint_bound、global balance、固定split补偿和；不增加力核、导数或新科学门。保存与summary前后机械别名计数须不变。收据明确这些是NativeMean已知别名范围，mechanical_hooks_monitored=false，不夸大为所有进程／库动态hook。实际N不设上限，保原bisection，成功原目标必须global15／16；祖先failed／time_limit、immediate parent success、原完整路径／新完整task未从零执行以及所有producer资格false保持。
+
+原pure viewer源码完全复用`functional_views/right_margin4_20261007/complete_001/saved_right_margin_views.py`；独立child在正式root/hf_repo导入原4纯模块，收到实际新result／model／所有state＋forces绑定、`--reference`不传，画3PNG和真实N帧GIF。helper不再读取GIF像素或重算观察，帧数依据原viewer成功时自己进行的n_frames验收；case只包含新实际子段，其PEAK是1.10，不能说成原加载峰1.20。viewer失败保成功生产与真实partial图／失败view.json分开，整卡NOT_PASS。
+
+两份源码的最早STARTED在普通导入前。固定新clock：controller1800、viewer最多600、helper2700、outer2760秒；采样树RSS8GiB。viewer拿min(600,remaining helper)，APIcontroller时限穿透原默认入口；helper前／后机械调用及accept callback的协作资源异常用TMCError(code=time_limit)，避免旧trial捕获转入bisection重试。outer从Popen前计实际helper墙钟，构造psutil.Process放进try，任何异常finally请求协作stop并等待实际child终止，无force／orphan；最后stop-file或超时必须NOT_PASS。视图子进程同样真实wait。
+
+正常原controller1800以内的typed失败通常仍有whole保存预算，唯一API原出口写真实result／response／accepted cache，然后STOP，不起viewer。若整个helper／外层stop在保存前到达，包装不能保证完整cache仍能写出；如实保留原API能写出的文件和真实failure phase／code，不伪造完整partial。原窗口仍开放时仅一次封存run实际文件的SHA／size；每文件完成后立即保留身份条目，超时／stop则保已记条目和已有文件，禁止闭窗补科学hash、重试或新归档。outer旧输入最终raw身份核也只在原outer窗内；窗口闭合时all_bindings_unchanged=null并保NOT_PASS，不用陈旧true冒充完整复核。
+
+未来protocol接口在`wrapper_input_contract.json`列明；不是已冻结执行协议。source_baseline_commit必须root实际M-EREF1交付提交，准备发布proof.previous_delivery_commit必须匹配它；proof.published_commit及人类approved_source_commit必须匹配新准备HEAD。准备proof的prepared=true／authorized=false／executed=false是历史，与实际新human reply分开验证；不硬编码批准原文字面。输入／source SHA和task canonical SHA由root正式准备冻结，runtime canonical_hash直接使用原hf_eval.data，不另写浮点身份算法。
+
+当前源码可交root和数学审阅人静审；后续发布／恢复及具体直接批准前不能启动。失败首错保留，不修改source／重试／修复重跑／延期／force／rollback／删除partial。两包装之外无新生产实现、测试定义、默认源改动或旧证据重写。

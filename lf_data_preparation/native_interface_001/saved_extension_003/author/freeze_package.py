@@ -1,0 +1,183 @@
+"""Freeze ordinary M-UNLOAD1 preparation; inherit closed NPZ identities by stat."""
+from pathlib import Path
+from hashlib import sha256
+from copy import deepcopy
+import json
+import math
+import subprocess
+
+ROOT = Path('D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC')
+HERE = Path(__file__).resolve().parent
+REL = 'lf_data_preparation/native_interface_001/saved_extension_003'
+BASE = '6f58d96bb0d4b1369c680779a47341305a690618'
+PARENT = 'lf_data_preparation/native_interface_001/saved_extension_002'
+REFERENCE = 'lf_data_preparation/native_interface_001/extension_reference_001'
+read = lambda path: json.loads(path.read_bytes())
+sha = lambda path: sha256(path.read_bytes()).hexdigest()
+
+
+def canonical(value):
+    if isinstance(value, dict): return {key:canonical(item) for key,item in value.items()}
+    if isinstance(value, list): return [canonical(item) for item in value]
+    if isinstance(value, float):
+        assert math.isfinite(value)
+        return (0.0 if value == 0.0 else value).hex()
+    return value
+
+
+def canonical_hash(value):
+    return sha256(json.dumps(canonical(value), sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode('utf-8')).hexdigest()
+
+
+def write(path, raw):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open('xb') as stream: stream.write(raw)
+
+
+def encoded(value):
+    return (json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False)+'\n').encode('utf-8')
+
+
+def main():
+    git = lambda *args: subprocess.check_output(['git', '-c', 'gc.auto=0', *args], cwd=ROOT)
+    assert git('rev-parse','HEAD').decode().strip() == BASE and not git('status','--porcelain')
+    assert not (ROOT/REL).exists() and not (HERE/'frozen_packet').exists()
+    manifest_raw = (ROOT/'handoff/repository_manifest.json').read_bytes()
+    manifest = json.loads(manifest_raw); entries = {row['path']:row for row in manifest['files']}
+    proof_raw = (HERE.parent/'MEREF1_execution_review_001/execution_publication_receipt.json').read_bytes()
+    proof = json.loads(proof_raw)
+    assert proof['status'] == 'published_and_incrementally_restored_pass' and proof['published_commit'] == BASE
+    assert proof['executed_card'] == 'M-EREF1' and proof['execution_status'] == 'pass' and proof['execution_closed'] is True
+    assert proof['manifest_sha256'] == sha256(manifest_raw).hexdigest() and len(entries) == proof['ordinary_manifest_files'] == 19690
+    parent_file = ROOT/PARENT/'run_001/extended_alpha_half/result.json'
+    result = read(parent_file); model_file = parent_file.parent/result['model']['descriptor_path']; model = read(model_file)
+    task = read(HERE/'proposed_task.json'); source_task = model['task']
+    restored = deepcopy(task); restored['path']['targets_mm'] = deepcopy(source_task['path']['targets_mm'])
+    assert restored == source_task and task['path']['targets_mm'] == source_task['path']['targets_mm']+[1.05]
+    assert len(source_task['path']['targets_mm']) == 16 and source_task['path']['targets_mm'][-1] == 1.1
+    assert canonical_hash(source_task) == result['task_sha256'] == '94671c3226afb193349324a91f15bd55923ba73e662e9ad76528c844000f74f6'
+    selected = result['states'][1]
+    assert result['status'] == 'success' and result['path_completed'] is True and selected['original_target_index'] == 15 and selected['d'] == 1.1
+    reference = read(ROOT/REFERENCE/'run_001/reference/summary.json')
+    assert reference['status'] == 'pass' and reference['accepted_states'] == 1 and reference['HP_calls_completed'] == 2
+    assert reference['states'][0]['index'] == 1 and reference['states'][0]['state_sha256'] == selected['state_sha256']
+    source_review = read(HERE/'source_candidate_review.json')
+    assert source_review['blocking_findings'] == [] and source_review['authorized'] is source_review['executed'] is False
+    assert all(sha(HERE/name) == pin for name,pin in source_review['candidate_source_SHA256'].items())
+    packet = HERE/'frozen_packet'
+    for name in ('execute_unload.py','launch_unload.py','proposed_task.json'):
+        write(packet/name, (HERE/name).read_bytes())
+    for name in ('SOURCE_AUTHOR_NOTES.md','source_author_receipt.json','wrapper_input_contract.json','source_candidate_review.json','source_candidate_review.md'):
+        write(packet/'author'/name, (HERE/name).read_bytes())
+    write(packet/'author/previous_execution_publication_receipt.json', proof_raw)
+    card = '''# M-UNLOAD1：默认入口从1.10延伸至1.05 mm
+
+2026-10-13（Asia/Seoul）。源码准备；尚未授权或运行。先前M-EREF1已实际PASS、闭卡、发布和恢复核对至main6f58d96。本卡只有一个最近阶段，取得新直接批准后单次启动。
+
+## 功能目标与依据
+
+整体目标仍是独立HF读取普通LF几何、输出非线性TMC正向反力、位移、固定工件作用、可恢复状态与实际变形，供外部研究层比较；不优化、不调用dmftd，MPM暂不实现。默认显式续算入口已安装并有36项兼容测试，1.15→1.10实际生产成功；新1.10点2HP及原十五门已通过，确认该点力／声明方向切线一致。
+
+现有保存生产：1.15→1.10 mm时，输入R从0.347037681540降至0.315886016700 N，工件Fy从0.106712875531降至0.088978471092 N，尖端底边间隙从0.001285047824增至0.001730504605 mm。下一步仅追加1.05，观察力下降、距离和变形；不把一致性通过当成连续压力、有效夹持或完整释放。
+
+## 唯一输入与原物理条件
+
+从saved_extension_002/run_001/extended_alpha_half/result.json的最新success末态accepted child001／global15／absolute input1.10、unloading、非anchor继续。state SHA为3dc492f8aef4751e643ddb1413a797ca39434d349bfed59844d46e4e730015ff。proposed_task仅在原完整16目标前缀后追加1.05，其他task字段逐字段保持，input.target_mm仍1.2；新子段[1.10,1.05]，global15／16。
+
+原h0.5 mm、84×40 mm域、13440单元／13689节点／27378DOF，固定1548、自由25830。E1MPa、ν0.3、plane strain、厚20mm、γ1e−6、α5e−7、Lr80mm；固定方形工件中心(71,40)、边18mm，五节点端口原权重，k_out=0。几何、材料、边界、原settings／mechanical／chunk256／port_projection全部继承，controller1800秒也与父段相同。
+
+生产默认loader为source geometry／selected split state两NPZ、六字段合同；不解码保存force／tangent／matrix作初始预测，initial_K=None。六份父NPZ还作为来源rawSHA绑定，在批准窗口核身份；准备期只继承闭producer／manifest及stat。不要把零解码预测写成完全未读旧科学字节，也不声称动态np.load计数。新纯viewer在实际N接受态上打开1+2N NPZ、27+18N descriptor字段，geometry／nodal各N次，无参考输入或力核重算。
+
+## 最小实现与原验收
+
+两份薄包装调用已安装evaluate_native一次，不复制候选、重跑36项测试、修改默认实现或安装。调用geometry=None、saved_result=真实父result、selected_state_index=1、extend_path=True、time_limit_seconds=1800；targets/settings/options省略并由原默认继承。原fresh F/T起点复核必须先过原平衡／均值门，不使用保存切线修正起点。
+
+只沿原控制器执行F/T、回溯和必要bisection。原门保持：production_residual1e−9、global_force_balance1e−6、fixed split sum8e−11mm；均值设定tolerance1e−10及原逐态native_constraint_bound规则保持，正J必须成立。从实际接受缓存核门，不新增F/T。正常invalid_J／Armijo拒绝试探和内部bisection允许，F/T开始可大于完成；它们不等于外部重跑。成功原目标global15／16、原anchor state与signed R身份必须保持，N为真实接受数，至少2，允许原bisection保存中间态。
+
+## 真实可视化与输出
+
+生产成功后原pure viewer调用一次，无reference，输出comparison.png、distances_forces.png、peak_fields.png与实际N帧actual_states.gif；segment PEAK是1.10起点，不冒充原1.20峰值。图显示实际结构变形、三分量节点作用、输入反力、工件Fy和间隙等原观察量。原viewer在批准窗口内核GIF帧数；闭卡后最多对三个新PNG各一次像素检查／展示，不再解码GIF或补绘。
+
+输出为run_001/unloaded_alpha_half的原model／accepted缓存、result／response／sources，run_001/accepted_progress.jsonl、execution_receipt.json、view_protocol及原view.json／图件；实际F/T、API／model／reader／solve／save／summary次数和原cache门记录。保存／摘要包装核零新增F/T；只监测已绑定NativeMean aliases，不声称所有力学hook动态监控。原窗口内一次输出SHA／stat封存，闭窗不补科学hash。
+
+## 完整新资源窗口与停止
+
+controller1800／viewer600／helper2700／outer2760秒（最多46分钟）、采样8GiB；这是新授权，不能续用已闭M-EREF1或M-EXTEND2余时。原M-EXTEND2该生产子段加测试及图实际outer961.34秒，仅供预算规划，不保证下一段耗时或成功。最早whole clock涵盖身份、import、构模、API、保存、viewer及封存；controller内部计时不覆盖API构模前段与保存，故另有whole边界。viewer只获min(600,原helper剩余秒)。采样RSS和协作stop不是OS硬上限，实际等待同一helper及viewer终态，迟到PASS不通过，无force。
+
+首个终端错误停止，无修复重跑、重试、延期、测试、HP、安装、回滚或删除。helper的运行资源stop使用原TMCError(code=time_limit)穿过trial捕获，不触发后续bisection。原controller1800内typed failure通常仍有whole窗口交原API保存真实partial；whole窗口或stop已关闭时不保证缺失缓存完整保存，不补造结果。viewer失败保留生产success及partial viewer，整卡NOT_PASS。仅原whole窗口仍开放时允许一次输出身份封存；关闭时保已有文件／日志和真实异常，不新启动复制、ZIP、绘图或科学hash。
+
+## 资格与后续
+
+原成功parent及祖先failed/time_limit、M-ALPHA1／M-EXTEND1 NOT_PASS保持。子段成功与unload_endpoint_reached仅指1.05的新请求；完整原／延伸任务、压力／有效夹持／完全释放、稳定性、全列切线、一般LF及HF5不升级。已有M-EREF1仅旧result的1.10点2HP，不能改绑成新两态result的完整4HP参考，也不放宽公开reader。
+
+成功后根据真实1.05反力、工件作用、距离与变形决定更低卸载目标及必要参考；只详细计划本段。失败先据真实证据排查，不在旧卡内静默修复重跑。代码：[helper](execute_unload.py)、[outer](launch_unload.py)、[任务](proposed_task.json)；前置：[M-EREF1实际结果](../extension_reference_001/RESULTS.md)、[父生产](../saved_extension_002/RESULTS.md)。
+'''
+    write(packet/'M-UNLOAD1_CARD.md', card.encode('utf-8'))
+    preparation = '''# M-UNLOAD1 源准备结果
+
+2026-10-13（Asia/Seoul）。准备完成但未执行；没有新HF/import、NPZ／科学gzip／CSV／媒体读写、测试、F/T、平衡、HP或图。原M-EREF1真实PASS已经main6f58d96交付／恢复，新1.10点total-force误差1.02259e−15、PORT total-action7.19048e−17，保持原门。父生产工件Fy约0.0889785N，尖端底间隙约0.0017305mm，是下一段的已保存物理起点。
+
+本步以功能推进为主：唯一追加1.05绝对目标，复用默认续算和原pure viewer，只写两个执行包装，不再建立测试／复制／安装链。原16路径前缀与全部其他物理task字段相同，原settings/options/controller1800继承；新增whole2700／outer2760及一次真实图件范围在[具体卡](M-UNLOAD1_CARD.md)明确。若同窗口异常，只留原API和viewer真实partial；resource-stop穿过trial捕获，闭窗不补科学hash。
+
+独立源码及最终protocol审阅分开记录，静审不能证明下一段数值成功。任务canonical、源码、源状态和前置点参考身份冻结；六父NPZ准备期只继承原闭producer／manifest及stat。已有点参考不拼为新全段参考。原失败、完整路径缺口、压力／有效夹持及HF5限制保持，批准后才单次运行。
+'''
+    write(packet/'PREPARATION_RESULTS.md', preparation.encode('utf-8'))
+    prefix = '''# 最新准备：M-UNLOAD1默认入口延伸1.10→1.05
+
+2026-10-13（Asia/Seoul）。M-EREF1实际PASS已main6f58d96交付／恢复，原1.10末态力及同一方向切线已独立核对。下一段仅追加1.05绝对目标，原16前缀／物理条件／原门／settings/options保持，默认API与原pure viewer复用；没有新测试、候选复制、安装或HP。
+
+两份薄包装及具体卡准备，尚未授权／运行。新controller1800／viewer600／helper2700／outer2760秒、采样8GiB，首错停、无重试／修复重跑／延期／force；原成功parent和失败祖先及完整路径／压力／有效夹持／HF5缺口保留。见[M-UNLOAD1卡](../lf_data_preparation/native_interface_001/saved_extension_003/M-UNLOAD1_CARD.md)、[准备说明](../lf_data_preparation/native_interface_001/saved_extension_003/PREPARATION_RESULTS.md)、[前置实际参考](../lf_data_preparation/native_interface_001/extension_reference_001/RESULTS.md)。
+
+---
+
+'''
+    write(packet/'author/front_prefix.md', prefix.encode('utf-8'))
+    parent_protocol = read(ROOT/PARENT/'protocol.json')
+    ordinary = {path.relative_to(ROOT).as_posix() for path in (ROOT/'hf_repo/src/hf_eval').rglob('*.py')}
+    ordinary.update(parent_protocol['pure_view_bindings'])
+    ordinary.update({'hf_repo/pyproject.toml', PARENT+'/protocol.json', PARENT+'/production_launch.json',
+        PARENT+'/run_001/execution_receipt.json', parent_file.relative_to(ROOT).as_posix(),
+        model_file.relative_to(ROOT).as_posix(), (model_file.parent/model['source_geometry']['snapshot']['descriptor']).relative_to(ROOT).as_posix(),
+        (parent_file.parent/selected['descriptor_path']).relative_to(ROOT).as_posix(),
+        REFERENCE+'/run_001/reference/summary.json',REFERENCE+'/run_001/reference/lifecycle.json',
+        REFERENCE+'/reference_launch.json',REFERENCE+'/author/independent_terminal_review.json'})
+    bindings = {}
+    for name in sorted(ordinary):
+        pin = sha(ROOT/name); assert pin == entries[name]['sha256']; bindings[name] = pin
+    inherited = {}
+    npzs = [model_file.parent/model['arrays']['path'],model_file.parent/model['source_geometry']['snapshot']['arrays']]
+    npzs += [parent_file.parent/selected[key]['path'] for key in ('state','forces','tangents','matrix')]
+    for path in npzs:
+        name = path.relative_to(ROOT).as_posix(); row = entries[name]
+        assert path.suffix == '.npz' and path.stat().st_size == row['bytes']
+        bindings[name] = row['sha256']; inherited[name] = dict(row, basis='Closed MEXTEND2 output identity + published inherited manifest; current stat only')
+    artifacts = {path.relative_to(packet).as_posix():sha(path) for path in packet.rglob('*') if path.is_file()}
+    bindings.update({REL+'/'+name:pin for name,pin in artifacts.items()})
+    protocol = dict(schema_version='saved-native-default-unload-card-1.0',card='M-UNLOAD1',source_baseline_commit=BASE,
+        prepared=True,authorized=False,executed=False,bindings=bindings,inherited_NPZ_bindings=inherited,
+        parent_result=parent_file.relative_to(ROOT).as_posix(),parent_protocol=PARENT+'/protocol.json',
+        task_file=REL+'/proposed_task.json',candidate_directory=REL+'/run_001/unloaded_alpha_half',view_directory=REL+'/run_001/view',
+        selected_state_index=1,selected_state_sha256=selected['state_sha256'],targets_mm=[1.1,1.05],original_target_indices=[15,16],
+        original_full_task_targets_mm=source_task['path']['targets_mm'],extended_full_task_targets_mm=task['path']['targets_mm'],
+        task_sha256=canonical_hash(task),source_task_sha256=result['task_sha256'],gates=parent_protocol['gates'],
+        settings=result['settings'],options=parent_protocol['options'],pure_view_bindings=parent_protocol['pure_view_bindings'],viewer_source=parent_protocol['viewer_source'],
+        controller_seconds=1800,view_seconds=600,sampled_RSS_bytes=8*1024**3,
+        phases=dict(production=dict(helper_seconds=2700,outer_seconds=2760,argv=[REL+'/execute_unload.py','--repo','.', '--protocol',REL+'/protocol.json'])),
+        expected_accepted_states_minimum=2,expected_original_targets_mm=[1.1,1.05],expected_API_calls=1,expected_fresh_anchor=True,
+        production_decoded_NPZ_files=2,production_descriptor_fields=6,initial_K=None,archive_count_measured_by_dynamic_hooks=False,
+        new_tests_candidate_copies_default_installations_HP=0,postrun_new_PNG_pixel_QA_maximum=3,new_GIF_postrun_decode=0,
+        input_reference_scope='Prior selected point from its actual old result; no matched new result full reference',
+        prior_point_reference_summary_sha256=sha(ROOT/REFERENCE/'run_001/reference/summary.json'),
+        previous_execution_publication_proof_sha256=sha256(proof_raw).hexdigest(),
+        full_original_path_completed=False,full_extended_path_completed=False,pressure_qualified=False,clamp_qualified=False,HF5_qualified=False)
+    write(packet/'protocol.json', encoded(protocol))
+    artifacts['protocol.json'] = sha(packet/'protocol.json')
+    write(HERE/'frozen_preparation_receipt.json', encoded(dict(status='frozen_ordinary_preparation_not_authorized_not_executed',
+        card='M-UNLOAD1',prepared=True,authorized=False,executed=False,source_baseline_commit=BASE,
+        protocol_sha256=artifacts['protocol.json'],artifact_SHA256=artifacts,bindings=len(bindings),
+        inherited_stat_only_NPZ=6,source_package_PY_bindings=len(list((ROOT/'hf_repo/src/hf_eval').rglob('*.py'))),
+        scientific_binary_byte_reads=0,HF_import_tests_science_or_plot=0,formal_writes=0)))
+    print(json.dumps(dict(status='ordinary_packet_frozen',protocol_sha256=artifacts['protocol.json'],bindings=len(bindings),packet_files=len(artifacts),formal_writes=0,science_execution=0)))
+
+
+if __name__ == '__main__': main()
