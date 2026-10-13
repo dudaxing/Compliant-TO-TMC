@@ -1,3 +1,10 @@
+# 最新准备：卸载0.90／0.80 mm两态独立参考
+
+2026-10-13（Asia/Seoul）。M-PATH1已真实完成25目标统一读取、逐点索引和两曲线并推送main eb92b41；本轮准备M-PREF1，只核M-UNLOAD2原child2／3、global18／19。新四次HP80／120、一张两态参考误差图，原十五门及物理条件保持；helper900／outer960秒、采样8GiB。当前prepared=true、authorized=false、executed=false，未启动新计算。
+
+具体目标、来源、验收门、资源及取舍见[M-PREF1卡](../lf_data_preparation/native_interface_001/unload_reference_001/M-PREF1_CARD.md)与[准备说明](../lf_data_preparation/native_interface_001/unload_reference_001/PREPARATION_RESULTS.md)。原失败历史、源版本和旧参考身份保持；两态参考不升级整条路径、连续压力、有效夹持／释放、稳定性、全列或HF5资格。下面保留eb92b41完整原历史连续一次。
+
+---
 # 最新实际功能：25目标保存路径统一读取与显示PASS
 
 2026-10-13（Asia/Seoul）。用户“继续”对应的一次普通JSON汇总／两曲线显示已真实exit0，源`937b2d9f69008adc876e9f2a2def30aa432e6f83`；22输入JSON、29原行、4精确锚点、25按实际顺序显示点，新增逐点索引／表及2PNG，旧5GIF只链接。source版本、原failed/time_limit及参考精确来源保持；composed显示不授单次全路径求解／参考或压力／有效夹持／稳定性／HF5资格。
