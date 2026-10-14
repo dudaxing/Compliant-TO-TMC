@@ -1,0 +1,11 @@
+# L-LINK1 正式源准备终态独立核对
+
+结论：pass_final_ordinary_preparation_source_only；无当前阻断。实际一次普通准备2e6bea／exit0得到30份stage文件，本次核对的是其已写字节，尚未执行卡、运行测试／API或安装默认源码。
+
+正式HEAD909f8acee95279e449e09961fd4fe68fed9d688f，protocol SHA5eea9a1b0737d7aed587c3bcfc15e5a3d19bd4903c44afb3b6f4b300a69753e4。60份不可变绑定中55普通源码／JSON／文档逐一核实际SHA，5媒体只核原producer关闭窗口seal、原20536项manifest、protocol及stat；没有读、hash、解码科学或媒体。
+
+三份独立peer source review的全部映射均依file_plan转换到真实正式源并核SHA；4份候选／runtime原已审阅字节相同。默认native_response仍53bee旧字节，并独立于未来安装后不变的bindings；候选只改_reference，之外原字节相等。16方法／23private_reference调用仍是计划，真实公共summary计划1次。180／240／tests60（测试含helper）及8GiB、先有限测试再真实关联再单源码安装合同保持；未运行任何候选、API、测试、模型／求解或HP。
+
+原生产25态completed=true与原13／16两态4HP参考same-result/model/state/target身份匹配，15原门陈述一致。部分参考将明确matched_partial／selected pass，原accepted/full-path字段不得由2／25升级；生产原flags、旧结果／视图不回写。两个909入口完整原raw连续恰好一次，偏移／SHA与实际准备收据一致。
+
+本次只补独立审阅JSON／MD两份；current_source_SHA256覆盖全部31份stage普通源（包括本MD），只排除JSON自身。全25独立参考、压力、有效夹持、释放、稳定性、all-columns和HF5仍未完成。后续发布、恢复与新直接批准需各自实际证据，本source pass不授资源执行。

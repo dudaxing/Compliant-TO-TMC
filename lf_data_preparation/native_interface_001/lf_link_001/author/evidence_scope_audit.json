@@ -1,0 +1,423 @@
+{
+  "schema_version": "lf-link-source-evidence-scope-audit-1.0",
+  "status": "source_only_pass_requires_new_candidate_for_partial_API_association",
+  "created_utc": "2026-10-15T00:29:45.886255+09:00",
+  "source_commit": "909f8acee95279e449e09961fd4fe68fed9d688f",
+  "scope": "Source-only ordinary records; no summary API, test, solver, HP, plot, science/media read/hash/decode, or formal write",
+  "source_result_sha256": "bfb711b5b948e188eb275f201f4a6dcca210687598a928d8772fa6359aa8888b",
+  "source_result_schema": "hf-native-mean-result-1.2",
+  "source_response_schema": "hf-native-response-1.0",
+  "source_reference_schema": "native-workpiece-cycle-independent-audit-1.0",
+  "production_geometry": {
+    "geometry_id": "ddc7a66a3ef45689e9b9a881155d5e5b4f71475615dcb33b5717a4353c60f91a",
+    "descriptor_sha256": "afa8d78e708fa94397e44208899cf70299874f5ec1a3efbcd6e1c5753fe13238",
+    "descriptor_file_sha256": "7822ba5baf98f03c65cb179d154972182411f9a51d5eae8166355e68c06e4c43",
+    "arrays_sha256": "21c37f408ce228e70d93ca0fcdd7cef028ed1ed64082b3cd6096c26f847897bb",
+    "snapshot": {
+      "descriptor": "model/source_geometry/geometry.json",
+      "arrays": "model/source_geometry/geometry.npz"
+    }
+  },
+  "production_task_sha256": "95ab4d283991a13315caeedab12afb3a84f052cd53d995cab7185433a3fc20d4",
+  "production_counts": {
+    "cells": 13440,
+    "nodes": 13689,
+    "dofs": 27378,
+    "solid_cells": 4358,
+    "medium_cells": 9082,
+    "solid_incident_nodes": 4881,
+    "fixed_dofs": 1546,
+    "free_dofs": 25832
+  },
+  "production_accepted_states": 25,
+  "production_path_completed": true,
+  "explicit_selected_accepted_indices": [
+    13,
+    16
+  ],
+  "reference_accepted_states": 2,
+  "HP_calls_completed": 4,
+  "states": [
+    {
+      "accepted_source_index": 13,
+      "original_target_index": 13,
+      "target_mm": 1.2,
+      "leg": "loading",
+      "state_sha256": "d23cdaee0a02e727726ef8789c902494f3f0ec09256fdeed74c0086cd3169e96",
+      "descriptor_file_sha256": "0c8031356572baad1aa78c0cd41438ee37ff8e24d21ee195d605e13e24eda9de",
+      "reference_status": "pass",
+      "HP_calls": 2,
+      "production_R_input_N": 0.24365768726879147,
+      "production_q_out_mm": 1.0075199349775577,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.0006742600875024061,
+          0.058511988483089014
+        ],
+        "material": [
+          -0.0004558545974952895,
+          0.057794579410338345
+        ],
+        "regularization": [
+          -0.00021840549000711666,
+          0.0007174090727506572
+        ]
+      }
+    },
+    {
+      "accepted_source_index": 16,
+      "original_target_index": 16,
+      "target_mm": 1.05,
+      "leg": "unloading",
+      "state_sha256": "29910bc07e26bd7d7e5f7bb113c58094c2cff27ea544a71b2c523e1078265e14",
+      "descriptor_file_sha256": "929c6d2506ff8f0b10d4b5d81b77da93eb01c71aff1d0f080c6688f06a70eb92",
+      "reference_status": "pass",
+      "HP_calls": 2,
+      "production_R_input_N": 0.1700172631705196,
+      "production_q_out_mm": 0.9918014910526953,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00023421537140910727,
+          0.007747408704194823
+        ],
+        "material": [
+          -0.00016610321752466461,
+          0.006938503841861044
+        ],
+        "regularization": [
+          -6.811215388444269E-05,
+          0.0008089048623337788
+        ]
+      }
+    }
+  ],
+  "original_gates": {
+    "production_residual": "1e-9",
+    "independent_residual": "1e-8",
+    "force_evaluation": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11",
+    "hp80_hp120": "1e-40",
+    "total_force": "1e-11",
+    "material_force": "1e-9",
+    "regularization_force": "1e-9",
+    "total_tangent": "1e-10",
+    "material_tangent": "1e-9",
+    "regularization_tangent": "1e-9",
+    "augmented_force_tangent": "1e-10",
+    "augmented_constraint_tangent": "1e-10"
+  },
+  "original_gate_count": 15,
+  "reference_full_element_and_DOF_coverage": true,
+  "reference_scope": "Only new LF accepted13/loading1.20 and16/unloading1.05,13440 elements/27378 DOFs; actual PORT direction,deltaR=0; signed body/holding projections",
+  "qualification": "Only these two selected source states and declared direction. Original15 gates; no full25 LF production path/all columns/stress-energy/pressure/effective clamp/stability/HF5 qualification",
+  "qualification_flags_to_preserve": {
+    "producer": {
+      "independent_HP_qualified": false,
+      "equilibrium_qualified": false,
+      "HF_qualified": false
+    },
+    "reference": {
+      "full_production_path_reference_pass": false,
+      "public_API_association_performed": false,
+      "full_original_path_reference_pass": false,
+      "contact_qualified": false,
+      "clamp_qualified": false,
+      "pressure_qualified": false,
+      "HF5_qualified": false,
+      "HP_matrix_columns_exhaustively_checked": false
+    },
+    "viewer_contact_pressure_clamping_qualified": false
+  },
+  "candidate_response_required": {
+    "status": "matched_partial",
+    "selected_reference_pass": true,
+    "selected_accepted_indices": [
+      13,
+      16
+    ],
+    "accepted_reference_pass": false,
+    "full_path_reference_pass": false,
+    "partial_matching_basis": "Explicit selected source indices with state/target identities and 2 fresh HP per selected state; result/model/source byte bindings unchanged",
+    "producer_flags_unchanged": true,
+    "full25_reference_qualification": false
+  },
+  "current_default_API_limitations": {
+    "source_path": "hf_repo/src/hf_eval/native_response.py",
+    "sha256": "53bee087509f780ec5a62dae5b39a067e5f0df38f6fd7cc47311766ab3e2f14b",
+    "all_accepted_states_only": true,
+    "requires_HP_calls_for_current_result": 50,
+    "state_matching_currently_enumerates_all_source_states": true,
+    "partial_reference_13_16_would_mismatch": true,
+    "existing_views_handler_will_read_and_hash_old_3PNG_and_GIF": true
+  },
+  "functional_summary_minimum_ordinary_inputs": {
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/lf_fine_forward/result.json": {
+      "sha256": "bfb711b5b948e188eb275f201f4a6dcca210687598a928d8772fa6359aa8888b",
+      "bytes": 621831
+    },
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/lf_fine_forward/model/model.json": {
+      "sha256": "642972acd677372911f462948bfb554add69dc2209f781e89b70186429d865c3",
+      "bytes": 101335
+    },
+    "lf_data_preparation/native_interface_001/lf_reference_001/run_001/reference/summary.json": {
+      "sha256": "09f48b378143fe0621fcf640aef35ac87936c0e794eeeba9ed62e926dbf57619",
+      "bytes": 64347
+    },
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/view/view.json": {
+      "sha256": "e2d087759a8826d995acae7434566519192129835a3d892016517562782c2f01",
+      "bytes": 29102
+    },
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/view/lf_fine_forward/summary.json": {
+      "sha256": "cc5be2980a69e11300f96a04cf6441c84c615afcb6848c2ae50aa9bffb6c07f3",
+      "bytes": 34050
+    }
+  },
+  "ordinary_evidence_read_and_verified": {
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/lf_fine_forward/result.json": {
+      "sha256": "bfb711b5b948e188eb275f201f4a6dcca210687598a928d8772fa6359aa8888b",
+      "bytes": 621831
+    },
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/lf_fine_forward/model/model.json": {
+      "sha256": "642972acd677372911f462948bfb554add69dc2209f781e89b70186429d865c3",
+      "bytes": 101335
+    },
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/lf_fine_forward/response.json": {
+      "sha256": "d727ac8dad1e36f3271cd08605a15e57e30e696765f63e85ed343f51a8939b15",
+      "bytes": 15141
+    },
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/view/view.json": {
+      "sha256": "e2d087759a8826d995acae7434566519192129835a3d892016517562782c2f01",
+      "bytes": 29102
+    },
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/view/lf_fine_forward/summary.json": {
+      "sha256": "cc5be2980a69e11300f96a04cf6441c84c615afcb6848c2ae50aa9bffb6c07f3",
+      "bytes": 34050
+    },
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/execution_receipt.json": {
+      "sha256": "d6b50f24303f2ca3e587ea1fb338d9023d94d6d397be4430cc463a42a7ccd5cd",
+      "bytes": 58073
+    },
+    "lf_data_preparation/native_interface_001/lf_reference_001/run_001/reference/summary.json": {
+      "sha256": "09f48b378143fe0621fcf640aef35ac87936c0e794eeeba9ed62e926dbf57619",
+      "bytes": 64347
+    },
+    "lf_data_preparation/native_interface_001/lf_reference_001/run_001/reference/execution_receipt.json": {
+      "sha256": "e21f003a328de62c76457ebea5a3b0deb209b5ec951c4021f2d78128342b521a",
+      "bytes": 10682
+    },
+    "lf_data_preparation/native_interface_001/lf_reference_001/run_001/reference/reference_observations.json": {
+      "sha256": "64ede2a9e890166e8238f1008401037f2dd84c6233422ac07d29e8bf1a8fbeeb",
+      "bytes": 8716
+    },
+    "handoff/repository_manifest.json": {
+      "sha256": "aaa13ff53e966d3b18296a0199a4e5fc889bfd238af48f551b85964a8cf1f6b3",
+      "bytes": 4667503
+    },
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/lf_fine_forward/accepted/013/state.json": {
+      "sha256": "0c8031356572baad1aa78c0cd41438ee37ff8e24d21ee195d605e13e24eda9de",
+      "bytes": 9555
+    },
+    "lf_data_preparation/native_interface_001/lf_reference_001/run_001/reference/accepted_013/summary.json": {
+      "sha256": "121129423d3964cde5c31f46ca323b1887713a72dc3e8fd0210e31eb450c1328",
+      "bytes": 19219
+    },
+    "lf_data_preparation/native_interface_001/lf_forward_001/run_001/lf_fine_forward/accepted/016/state.json": {
+      "sha256": "929c6d2506ff8f0b10d4b5d81b77da93eb01c71aff1d0f080c6688f06a70eb92",
+      "bytes": 9583
+    },
+    "lf_data_preparation/native_interface_001/lf_reference_001/run_001/reference/accepted_016/summary.json": {
+      "sha256": "e98d9d2dcc9f7194ef9db20aa9c9826fb01208f076048b8f15453680a217db89",
+      "bytes": 19228
+    },
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_author/core_audit_mechanical.py": {
+      "sha256": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+      "bytes": 39310
+    },
+    "hf_repo/scripts/audit_native_workpiece_cycle.py": {
+      "sha256": "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938",
+      "bytes": 27630
+    },
+    "hf_repo/scripts/audit_native_mean.py": {
+      "sha256": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678",
+      "bytes": 38496
+    },
+    "hf_repo/scripts/audit_native_force.py": {
+      "sha256": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+      "bytes": 32724
+    },
+    "hf_repo/scripts/hf4_split_precision_reference.py": {
+      "sha256": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+      "bytes": 21761
+    },
+    "hf_repo/scripts/hf2_precision_reference.py": {
+      "sha256": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+      "bytes": 13347
+    },
+    "hf_repo/scripts/run_split_average_demo.py": {
+      "sha256": "e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb",
+      "bytes": 33642
+    },
+    "hf_repo/src/hf_eval/__init__.py": {
+      "sha256": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+      "bytes": 393
+    },
+    "hf_repo/src/hf_eval/tangent_action.py": {
+      "sha256": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+      "bytes": 1274
+    },
+    "hf_repo/src/hf_eval/compensated_invariants.py": {
+      "sha256": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+      "bytes": 18055
+    },
+    "hf_repo/src/hf_eval/tmc_kernel.py": {
+      "sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+      "bytes": 12018
+    },
+    "lf_data_preparation/native_interface_001/lf_reference_001/execute_partial_reference.py": {
+      "sha256": "5b751dc80657390715004ea3ac142f2d908329b75a9365fb5cb7ac1477efe40f",
+      "bytes": 26607
+    },
+    "lf_data_preparation/native_interface_001/lf_reference_001/plot_partial_reference_observation.py": {
+      "sha256": "b4ca46708ed6d6d1c88ecb99163fd83d65253a79b43728427df12ea7403567ee",
+      "bytes": 5421
+    },
+    "hf_repo/src/hf_eval/native_response.py": {
+      "sha256": "53bee087509f780ec5a62dae5b39a067e5f0df38f6fd7cc47311766ab3e2f14b",
+      "bytes": 15958
+    },
+    "lf_data_preparation/native_interface_001/lf_reference_001/protocol.json": {
+      "sha256": "d6512016bc169183e6f857d0bab18185aa66e1aec3847ccbdb30a9450b9a2125",
+      "bytes": 30071
+    }
+  },
+  "declared_reference_source_bindings_verified": {
+    "lf_data_preparation/native_workpiece_001/right_margin4_cycle_001/reference_author/core_audit_mechanical.py": {
+      "sha256": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+      "bytes": 39310
+    },
+    "hf_repo/scripts/audit_native_workpiece_cycle.py": {
+      "sha256": "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938",
+      "bytes": 27630
+    },
+    "hf_repo/scripts/audit_native_mean.py": {
+      "sha256": "331eb1d5406b6d6538d838da823e214201b5ec26c8fac9f7f0bc77f23b8a1678",
+      "bytes": 38496
+    },
+    "hf_repo/scripts/audit_native_force.py": {
+      "sha256": "cd317914cba2e3ad2f5ec5bf5b857804c3406313ab6a433bd1d7b395872ee8bb",
+      "bytes": 32724
+    },
+    "hf_repo/scripts/hf4_split_precision_reference.py": {
+      "sha256": "308ff44131efebcaf779936779385cfad8fc0b57cb5fc015a3afc34d9adf06d2",
+      "bytes": 21761
+    },
+    "hf_repo/scripts/hf2_precision_reference.py": {
+      "sha256": "97a9eb5f7dfe20704a4fd53cadba740903a68a05ad046d80ee85bf4340a93d55",
+      "bytes": 13347
+    },
+    "hf_repo/scripts/run_split_average_demo.py": {
+      "sha256": "e949cece3fddfb03a51d4c2fdd6788f65dfbbf66df31e16e57c0b9c6bd8609cb",
+      "bytes": 33642
+    },
+    "hf_repo/src/hf_eval/__init__.py": {
+      "sha256": "112503f3077d6b8e2ba6f28c8895eb907065c2a5718084048af77893b05eb73b",
+      "bytes": 393
+    },
+    "hf_repo/src/hf_eval/tangent_action.py": {
+      "sha256": "b52f8b5ab279321f6e716885dd00dae946929c4b7c23d97d98d9bcd7f5b593fe",
+      "bytes": 1274
+    },
+    "hf_repo/src/hf_eval/compensated_invariants.py": {
+      "sha256": "8115e1032e45a3178f399a904cce9b9b0cc0c9297638cc5b7a035fbe29b57081",
+      "bytes": 18055
+    },
+    "hf_repo/src/hf_eval/tmc_kernel.py": {
+      "sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+      "bytes": 12018
+    },
+    "lf_data_preparation/native_interface_001/lf_reference_001/execute_partial_reference.py": {
+      "sha256": "5b751dc80657390715004ea3ac142f2d908329b75a9365fb5cb7ac1477efe40f",
+      "bytes": 26607
+    },
+    "lf_data_preparation/native_interface_001/lf_reference_001/plot_partial_reference_observation.py": {
+      "sha256": "b4ca46708ed6d6d1c88ecb99163fd83d65253a79b43728427df12ea7403567ee",
+      "bytes": 5421
+    }
+  },
+  "current_manifest": {
+    "sha256": "aaa13ff53e966d3b18296a0199a4e5fc889bfd238af48f551b85964a8cf1f6b3",
+    "bytes": 4667503,
+    "files": 20536,
+    "bytes_total": 11309928280,
+    "science_version": "0.5.0",
+    "science_baseline_commit": "b1334bb6a83ba9a0efab7bdba7bd39722146f024"
+  },
+  "five_existing_media_inherited_only_for_preparation": [
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_forward_001/run_001/view/comparison.png",
+      "sha256": "adea8cb1946ea04e51a90bbbb47d95d1e41ddeff06c06eac8104962484dc5249",
+      "bytes": 417261,
+      "identity_basis": "closed producer helper seal + current manifest identity + actual stat only",
+      "content_read_or_late_hash": false
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_forward_001/run_001/view/distances_forces.png",
+      "sha256": "1d381781c10e025493910529364c7538b7298491b0cb4cf53d6f3de5c561e4d8",
+      "bytes": 106915,
+      "identity_basis": "closed producer helper seal + current manifest identity + actual stat only",
+      "content_read_or_late_hash": false
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_forward_001/run_001/view/peak_fields.png",
+      "sha256": "3f8a8a866bfc4b63d310a1ddc7f45b9ca279f2bcda9b5953231592c6791bc285",
+      "bytes": 402805,
+      "identity_basis": "closed producer helper seal + current manifest identity + actual stat only",
+      "content_read_or_late_hash": false
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_forward_001/run_001/view/lf_fine_forward/actual_states.gif",
+      "sha256": "0784228345f3138a2b8ab35d43e57cbdee3fb9b45e2e03046205d6ce2a1b1fdd",
+      "bytes": 4123915,
+      "identity_basis": "closed producer helper seal + current manifest identity + actual stat only",
+      "content_read_or_late_hash": false
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_reference_001/run_001/reference/reference_observations.png",
+      "sha256": "198e9306be985149593f4b3baea3afd346be8562fc33e6f8ccb9fc78d89ce322",
+      "bytes": 123173,
+      "identity_basis": "closed producer helper seal + current manifest identity + actual stat only",
+      "content_read_or_late_hash": false
+    }
+  ],
+  "future_card_media_read_scope": "Within a newly approved helper window only: actual byte reads/hash of the exact old3PNG+25frameGIF+newreferencePNG; no decode, pixels, new plot or GIF replay",
+  "plot_observation_json": {
+    "sha256": "64ede2a9e890166e8238f1008401037f2dd84c6233422ac07d29e8bf1a8fbeeb",
+    "bytes": 8716,
+    "source_path": "lf_data_preparation/native_interface_001/lf_reference_001/run_001/reference/reference_observations.json",
+    "states": 2,
+    "display_items_per_state": 10,
+    "gate_count": 15
+  },
+  "minimal_following_stage": "Single native_response candidate support for explicit selected-state partial metadata matching; one summary, one new linked response, one light index. Existing 25-state path and prior outputs unchanged",
+  "required_scope_exclusions": [
+    "NPZ and scientific gzip reading/hash/decode",
+    "CSV read/hash",
+    "production F/T",
+    "HP",
+    "equilibrium or model construction",
+    "API installation until explicitly covered",
+    "new plotting or pixel checks",
+    "pressure/effective-clamp/release/stability/HF5 upgrades",
+    "LF optimization or MPM implementation"
+  ],
+  "formal_repository_modified": false,
+  "API_association_performed": false,
+  "tests_run": false,
+  "scientific_or_media_content_reads": 0,
+  "scientific_or_media_late_hashes": 0,
+  "original_gate_source_protocol_verified": true,
+  "original_gate_source_protocol": "lf_data_preparation/native_interface_001/lf_reference_001/protocol.json",
+  "reference_protocol_identity_matches_summary": true
+}
