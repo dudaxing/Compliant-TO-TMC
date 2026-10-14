@@ -75,7 +75,10 @@ def _binding_matches(bindings, path, pin, repo):
 
 
 def _reference(path, result_path, result_pin, model_path, model_pin, states, complete, repo):
+    n = len(states)
     answer = dict(status='not_provided', accepted_reference_pass=False, full_path_reference_pass=False,
+        selected_reference_pass=False, matched_state_indices=[], matched_state_count=0,
+        production_accepted_state_count=n, covers_all_accepted_states=False,
         report=None, reasons=['No independent reference supplied'], HP_all_columns_qualified=False,
         contact_qualified=False, clamp_qualified=False, pressure_qualified=False, HF5_qualified=False)
     if path is None:
@@ -87,21 +90,42 @@ def _reference(path, result_path, result_pin, model_path, model_pin, states, com
         reported_scope_flags={key: reference.get(key) for key in
             ('full_element_and_DOF_coverage', 'HP_matrix_columns_exhaustively_checked',
              'contact_qualified', 'clamp_qualified', 'pressure_qualified')})
-    n = len(states)
+    rows = reference.get('states', [])
+    rows_valid = isinstance(rows, list) and all(isinstance(row, dict) for row in rows)
+    m = len(rows) if rows_valid else 0
+    indices = [row.get('index') for row in rows] if rows_valid else []
+    indices_valid = (rows_valid and 0 < m <= n
+        and all(type(index) is int and 0 <= index < n for index in indices)
+        and len(set(indices)) == m)
+    bindings = reference.get('input_bindings', {})
     checks = {
         'Reference status is not pass': reference.get('status') == 'pass',
         'Reference result SHA differs': reference.get('result_sha256') == result_pin,
-        'Reference does not cover all accepted states': reference.get('accepted_states') == n and len(reference.get('states', [])) == n,
-        'Reference does not record fresh 2N HP': reference.get('HP_calls_started') == reference.get('HP_calls_completed') == 2*n and n > 0,
-        'Reference result/model input bindings differ': _binding_matches(reference.get('input_bindings', {}), result_path, result_pin, repo)
-            and _binding_matches(reference.get('input_bindings', {}), model_path, model_pin, repo),
-        'Reference state identities or 2HP records differ': all(check.get('index') == i and check.get('status') == 'pass'
-            and check.get('HP_calls') == 2 and check.get('state_sha256') == state['state_sha256']
-            and check.get('target_mm') == state['d']
-            for i, (state, check) in enumerate(zip(states, reference.get('states', [])))),
+        'Reference accepted-state count differs': type(reference.get('accepted_states')) is int
+            and reference.get('accepted_states') == m and 0 < m <= n,
+        'Reference does not record fresh 2M HP': type(reference.get('HP_calls_started')) is int
+            and type(reference.get('HP_calls_completed')) is int
+            and reference.get('HP_calls_started') == reference.get('HP_calls_completed') == 2*m and m > 0,
+        'Reference result/model input bindings differ': isinstance(bindings, dict)
+            and _binding_matches(bindings, result_path, result_pin, repo)
+            and _binding_matches(bindings, model_path, model_pin, repo),
+        'Reference selected indices are invalid or duplicate': indices_valid,
+        'Full reference state ordering differs': m < n or indices == list(range(n)),
+        'Reference state identities or 2HP records differ': indices_valid and all(
+            row.get('status') == 'pass' and type(row.get('HP_calls')) is int and row.get('HP_calls') == 2
+            and row.get('state_sha256') == states[index]['state_sha256']
+            and row.get('target_mm') == states[index]['d']
+            for index, row in zip(indices, rows)),
         'Full element/DOF coverage is not declared': reference.get('full_element_and_DOF_coverage') is True}
+    if 'selected_accepted_indices' in reference:
+        declared = reference['selected_accepted_indices']
+        checks['Declared selected indices differ'] = (isinstance(declared, list)
+            and all(type(index) is int for index in declared) and declared == indices)
+    if 'production_accepted_states' in reference:
+        checks['Declared production accepted-state count differs'] = (
+            type(reference['production_accepted_states']) is int and reference['production_accepted_states'] == n)
     sources = reference.get('source_bindings', {})
-    source_match = repo is not None and bool(sources)
+    source_match = repo is not None and isinstance(sources, dict) and bool(sources)
     if source_match:
         for name, expected in sources.items():
             source_file = _resolve(name, repo)
@@ -111,10 +135,14 @@ def _reference(path, result_path, result_pin, model_path, model_pin, states, com
     checks['Declared reference source bindings were not verified'] = source_match
     answer['reasons'] = [reason for reason, passed in checks.items() if not passed]
     passed = not answer['reasons']
-    answer.update(status='matched' if passed else 'mismatch', accepted_reference_pass=passed,
-        full_path_reference_pass=bool(passed and complete), source_bindings_verified=source_match,
+    covers_all = bool(passed and m == n)
+    answer.update(status=('matched' if covers_all else 'matched_partial') if passed else 'mismatch',
+        selected_reference_pass=passed, matched_state_indices=sorted(indices) if passed else [],
+        matched_state_count=m if passed else 0, covers_all_accepted_states=covers_all,
+        accepted_reference_pass=covers_all, full_path_reference_pass=bool(covers_all and complete),
+        source_bindings_verified=source_match,
         HP_all_columns_qualified=False,
-        verification_scope='Matched saved JSON identities/all accepted states/2N bookkeeping and declared source bytes; no HP/NPZ archive re-audit')
+        verification_scope='Matched selected saved JSON identities/2M bookkeeping and declared source bytes; coverage is explicit, no HP/NPZ archive re-audit')
     return answer
 
 

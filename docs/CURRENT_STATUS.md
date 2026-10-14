@@ -1,3 +1,14 @@
+# 2026-10-15：L-LINK1 实际 PASS，公共摘要已接入2／25参考
+
+直接人工批准后唯一执行已闭卡：16个元数据测试方法／23次私有匹配调用通过，真实公共摘要一次、response／轻索引各一次，单文件native_response.py已安装。新响应明确matched_partial、indices13／16、selected_reference_pass=true，accepted/full_path参考通过仍false；原25目标0→1.20→0 mm完成及原物理、结果与五媒体保持。本次无新求解、F／T、HP或绘图。
+
+[目标、实现、实际效果和限制](../lf_data_preparation/native_interface_001/lf_link_001/RESULTS.md) · [关联响应](../lf_data_preparation/native_interface_001/lf_link_001/run_001/linked_response.json) · [五媒体轻索引](../lf_data_preparation/native_interface_001/lf_link_001/run_001/light_index.json)。峰值原输入反力0.2436576873 N，下半工件弱式Fy=0.0585119885 N；它不是连续压力或已认证有效夹持力。outer1.9211秒／tree RSS35,913,728 B，实际封存67份普通输出，原额度内PASS。
+
+下一步优先由外部研究层消费紧凑响应和明确覆盖，再根据结果安排必要参考或跨几何比较；完整25态独参、压力／有效夹持／释放／稳定性、所有列、一般LF／HF5与MPM仍未完成。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。推送与恢复另核真实交付回执。
+
+下方完整保留4fd7055的原raw历史连续一次；旧“待批准／未执行”和旧API未关联说明仅表示历史阶段。
+
+---
 # 2026-10-15：L-LINK1候选准备，待新窗口批准
 
 L-REF1已实际通过两态4HP／原十五门，main909f8ac已推送并恢复；L-FWD1原完整25目标与3PNG／25帧GIF保持。发现摘要API只接受全n参考，尚不能识别真实2／25选定参考。本次准备仅修改native_response._reference的候选，保原全部态通过语义，新增matched_partial／选定态通过与明确覆盖，不在准备期修改默认或实际调用。
