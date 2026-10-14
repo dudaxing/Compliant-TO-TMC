@@ -1,0 +1,11 @@
+# L-REF1 实际源准备包最终审阅
+
+实际源包静审通过，无阻断。协议SHA d6512016bc169183e6f857d0bab18185aa66e1aec3847ccbdb30a9450b9a2125与preparation_receipt一致。40份既存普通源／卡／报告／协议／参考副本的实际artifact全部rawSHA核对；root确实已一次ordinary prepare exit0，本审没有运行任何HF、HP、solver/tests或plot。
+
+真实source accepted/original13 loading1.20与16 unloading1.05、固定1546/free25832、新geometry／task／25态producer保持。生产完整路径完成true与仅2态参考全25资格false分开，旧HP不迁移、不改reader／默认源码。原B850/aa86数学方法、11源／15GATES同原M-PREF1；PORT方向／CSC／KKT／body scope、900helper/960outer/8GiB及一次普通summary误差图如原独立候选审。
+
+准备writer遗漏11份平铺参考副本的普通包装问题已在源码实际修正，保留原writer与source_revision历史；正式reference_sources/十一现存副本逐字等于原来源SHA。publisher8eb与独立工具peer be27对应；继承该其他作者工具独立报告，不用publisher作者自证。
+
+所有ordinary bindings与源peer当前pin吻合。10份旧NPZ没有打开或header/hash/decode，只核已闭L-FWD1 helper原seal、BASE已发布manifest身份和当前stat。两front的BASE原raw连续且恰好一次，prefix和旧／新SHA与receipt吻合；当前delta只新stage加这两个front，旧default源没有变化。
+
+当前无本卡authorization/direct reply/run/launch。此report仅准备源审核，未有新HP直接批准；不宣称当前4HP／误差图或新source出版／恢复已经通过。后续仍须完成source出版恢复核对和具体人类批准才执行。两个关键点不能升级整条路径、全切线列、压力、有效夹持、释放、稳定性或HF5资格。
