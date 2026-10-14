@@ -1,3 +1,12 @@
+# 2026-10-14：L-PREP1 已实际通过，LF输入准备入口已安装
+
+一次真实执行完成两个默认入口安装、三个LF准备＋九反例和一张未变形图；原四掩码、原网格h及非geometry任务字段精确保留，两个夹持器只显式增加4mm passive_void右域。source main `004efde5b2b9952bc4a9e6c7e756b8a520f24cde`，actual outer21.4796938秒／treeRSS166240256B；原180／240秒、8GiB窗口已关闭。
+
+`hf_eval.lf_native_inputs.prepare_native_lf_inputs` 与 `hf_repo/scripts/prepare_native_lf_inputs.py` 已安装，返回几何／明确任务／case-relative manifest。LF快照恢复须携整个case。没有新构模、F／T、HP或平衡路径，不授机械、压力、有效夹持或HF5资格。整体目标仍是独立TMC前向评价供外部研究层消费，MPM尚未实现。
+
+[实际结果、图与下一步](../lf_data_preparation/native_interface_001/lf_input_preparation_001/RESULTS.md)。继续main与固定origin；下一步根据这三份真实准备包规划最小前向接线，保持既有结果、原失败及来源，不重复旧审计。
+
+---
 # 2026-10-14：L-PREP1 输入准备源候选，尚未执行
 
 整体目标仍是独立 HF 接收普通 LF 几何并完成 TMC 前向评价。M-PREF1 已实际完成两卸载态四 HP／原十五门和参考误差图，main 基线 `7e53ce4eb455b29fec2e789b6c166157728ebff8`。原失败历史、结果来源和资格保持。

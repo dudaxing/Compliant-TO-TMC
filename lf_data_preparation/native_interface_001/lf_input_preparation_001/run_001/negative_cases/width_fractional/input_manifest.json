@@ -1,0 +1,76 @@
+{
+  "schema_version": "hf-native-lf-inputs-1.0",
+  "status": "not_pass",
+  "phase": "padding",
+  "data_only": true,
+  "model_created": false,
+  "force_evaluated": false,
+  "tangent_evaluated": false,
+  "solver_executed": false,
+  "HP_evaluated": false,
+  "evaluation_executed": false,
+  "model_constructions": 0,
+  "force_calls": 0,
+  "tangent_calls": 0,
+  "solver_calls": 0,
+  "HP_calls": 0,
+  "mechanical_hooks_monitored": false,
+  "zero_mechanics_basis": "Original LF converter, optional geometry padding and native task validator only; no dynamic mechanics hooks",
+  "dependency_import_scope": "Existing preparation/task validation dependencies may import/register JAX; no claim of zero JAX imports",
+  "case_family": "gripper",
+  "LF_source_descriptor_file_sha256": "6daaf44e9f691fc1791881743765c27266ef658f60d58ca7fb3050d4a176c6e7",
+  "task_template": {
+    "file_sha256": "67d21a63898b2f31962f3e930bc2cb17e36b2813671dfa413c85c7834e6c9b63",
+    "task_id": "TEST_native_model_gripper_canonical",
+    "geometry_binding": {
+      "geometry_id": "d4e82cfd629e37f7d0c85aed672ab5df228314147cf5db59aeabb279cee5d91d",
+      "descriptor_sha256": "8c5c315e7328888a6ba16b28d5def1712e2ea5ddae21cfa97f99f06396e7977b"
+    }
+  },
+  "task_template_validated": true,
+  "geometry_task_model_consistency_evaluated": false,
+  "geometry_workpiece_compatibility_qualified": false,
+  "constraints_applied": false,
+  "material_assigned": false,
+  "task_policy": "All template fields preserved except geometry.geometry_id and geometry.descriptor_sha256",
+  "outputs": {
+    "native_geometry_file": "native_geometry/geometry.json"
+  },
+  "requested_right_medium_width_mm": 0.25,
+  "native_geometry": {
+    "geometry_id": "ordinary-mock",
+    "descriptor_sha256": "ordinary-mock",
+    "descriptor_file_sha256": "4cc6510471848d24d2245c939e415ddd6f6e49a99b146ee394d6896974ae9865",
+    "arrays_sha256": "not-read",
+    "grid": {
+      "cell_size_mm": [
+        1.0,
+        1.0
+      ],
+      "shape_yx": [
+        40,
+        80
+      ],
+      "extent_mm": [
+        80.0,
+        40.0
+      ]
+    },
+    "source_native_grid_preserved": true
+  },
+  "LF_source": {
+    "schema": "dmftd.hf_export.v2",
+    "design_id": "ordinary-mock",
+    "geometry_id": "ordinary-mock",
+    "descriptor_file_sha256": "6daaf44e9f691fc1791881743765c27266ef658f60d58ca7fb3050d4a176c6e7",
+    "array_file_sha256": "not-read",
+    "descriptor_path": "native_geometry/sources/design.json",
+    "array_path": "native_geometry/sources/design.npz"
+  },
+  "error": {
+    "exception_class": "ValueError",
+    "code": null,
+    "reason": "right_medium_width_mm must equal an integer number of native dx columns; no rounding"
+  },
+  "partial_artifacts_retained": true
+}

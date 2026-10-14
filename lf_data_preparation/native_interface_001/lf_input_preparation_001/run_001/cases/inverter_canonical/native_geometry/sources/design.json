@@ -1,0 +1,305 @@
+{
+  "arrays": {
+    "file": "design.npz",
+    "keys": {
+      "design_domain": "cells the LF optimizer controlled",
+      "passive_solid": "forced solid",
+      "passive_void": "forced void",
+      "solid": "bool ny x nx, 1 = mechanism solid"
+    },
+    "sha256": "cb28e2013a837083cc4a2b1f5bf45085e315c51db29e677eae72499815375b64"
+  },
+  "case": "inverter",
+  "design_id": "inverter__sweep__kin_1e+01__kout_1e-01",
+  "diagnostics": {
+    "analysis": {
+      "connected_4": true,
+      "connected_8": true,
+      "corner_only_hinges": false,
+      "design_volume_fraction_binary": 0.3525,
+      "fixed_nodes_attached": 7,
+      "island_elements_removed_by_load_path": 0,
+      "ports_attached_to_solid": {
+        "input": true,
+        "output": true
+      },
+      "restrained": true,
+      "solid_elements": 4512,
+      "thin_necks_1_element": false
+    },
+    "native": {
+      "connected_4": true,
+      "connected_8": true,
+      "corner_only_hinges": false,
+      "design_volume_fraction_binary": 0.3525,
+      "fixed_nodes_attached": 4,
+      "island_elements_removed_by_load_path": 0,
+      "ports_attached_to_solid": {
+        "input": true,
+        "output": true
+      },
+      "restrained": true,
+      "solid_elements": 1128,
+      "thin_necks_1_element": false
+    }
+  },
+  "elapsed_seconds": 0.5731820510000034,
+  "geometry_id": "c3f553a06cac90883fa9090f32d4f0ac560b261d496e441afee489e7ac4386da",
+  "geometry_id_rule": "content hash of (case, native mesh, domain, thickness, solid, passive_solid, passive_void) with the v1 header: identical for the same geometry in v1 and v2",
+  "grid": {
+    "analysis_mesh": [
+      160,
+      80
+    ],
+    "analysis_rule": "integer nested copy of native cells",
+    "axes": "+x right, +y up; array index [j, i] = [row from bottom, column from left]",
+    "cell_mm": [
+      1.0,
+      1.0
+    ],
+    "domain_mm": [
+      80.0,
+      40.0
+    ],
+    "model_extent": "lower half model; mirror plane y = 40 mm",
+    "native_mesh": [
+      80,
+      40
+    ],
+    "origin_mm": [
+      0.0,
+      0.0
+    ],
+    "thickness_mm": 20.0
+  },
+  "lf_reference": {
+    "ersatz_floor_free": {
+      "native": {
+        "comparison_profile": {
+          "C_in_mm_per_N": 0.2910447992141715,
+          "C_out_mm_per_N": 4.600403839756629,
+          "F_N": 1.0,
+          "R_SE": 0.2605180737691425,
+          "eps_hat": 0.8872253628724155,
+          "gain_qout_over_qin": 1.602181305839232,
+          "k_in_N_per_mm": 3.266266928859044,
+          "q_free_mm": 0.46630653646267833,
+          "q_in_mm": 0.2910447992141715,
+          "structural_input_stiffness_N_per_mm": 0.1696302343956373
+        },
+        "k_in_zero": {
+          "C_in_mm_per_N": 5.8951754889876105,
+          "C_out_mm_per_N": 18.98612290415568,
+          "F_N": 1.0,
+          "R_SE": 0.2605180737691666,
+          "eps_hat": 0.8872253628724438,
+          "gain_qout_over_qin": 1.6021813058393592,
+          "k_in_N_per_mm": 0.0,
+          "q_free_mm": 9.445139963098352,
+          "q_in_mm": 5.8951754889876105,
+          "structural_input_stiffness_N_per_mm": 0.16963023439557215
+        },
+        "k_ref_N_per_mm": 3.266266928859044,
+        "model": "measure_floor_free: Emin = 1e-12 * E_scale, floating nodes fixed, 2x2 Gauss, all elements assembled"
+      }
+    },
+    "exact_active_solid": {
+      "analysis": {
+        "E_MPa": 1.0,
+        "constraints": "case fixed dofs (support ux,uy; symmetry uy per policy) plus every dof of nodes not attached to a solid element",
+        "formulation": "plane_strain",
+        "free_dofs": 9880,
+        "free_residual_relative": 1.0689794757059384e-11,
+        "gain_qout_over_qin": 1.6220242815325683,
+        "input_stiffness_N_per_mm": 0.1507313975605655,
+        "loading": {
+          "F_N": 1.0,
+          "control": "force",
+          "k_in_N_per_mm": 0.0,
+          "k_out_N_per_mm": 0.0,
+          "through": "b_in (normalized trapezoid weights, reference direction)"
+        },
+        "model": "solid_elements_only_Q4_plane_strain_2x2_Gauss_no_floor",
+        "nu": 0.3,
+        "q_in_mm": 6.634317840768306,
+        "q_out_mm": 10.761024629130912,
+        "solid_elements": 4512,
+        "status": "ok",
+        "support_reaction_sum_N": [
+          -0.999999999987438,
+          -3.5150882204959544e-11
+        ],
+        "thickness_mm": 20.0
+      },
+      "native": {
+        "E_MPa": 1.0,
+        "constraints": "case fixed dofs (support ux,uy; symmetry uy per policy) plus every dof of nodes not attached to a solid element",
+        "formulation": "plane_strain",
+        "free_dofs": 2681,
+        "free_residual_relative": 3.0639706224056816e-12,
+        "gain_qout_over_qin": 1.6021813118487178,
+        "input_stiffness_N_per_mm": 0.16963023024508306,
+        "loading": {
+          "F_N": 1.0,
+          "control": "force",
+          "k_in_N_per_mm": 0.0,
+          "k_out_N_per_mm": 0.0,
+          "through": "b_in (normalized trapezoid weights, reference direction)"
+        },
+        "model": "solid_elements_only_Q4_plane_strain_2x2_Gauss_no_floor",
+        "nu": 0.3,
+        "q_in_mm": 5.895175633229951,
+        "q_out_mm": 9.44514022962696,
+        "solid_elements": 1128,
+        "status": "ok",
+        "support_reaction_sum_N": [
+          -0.9999999999983193,
+          -1.0544454198679887e-11
+        ],
+        "thickness_mm": 20.0
+      }
+    },
+    "task": {
+      "E_MPa": 1.0,
+      "formulation": "plane_strain",
+      "input": "force F = 1 N through the input port vector, k_in = 0",
+      "nu": 0.3,
+      "output": "free, k_out = 0",
+      "quantities": "gain = q_out/q_in (independent of the input control in the linear regime); input stiffness = F/q_in",
+      "support": "regions_mm.support, solid-attached nodes",
+      "symmetry": "regions_mm.symmetry_solid (+ symmetry_background for the gripper), uy = 0",
+      "thickness_mm": 20.0
+    }
+  },
+  "regions_mm": {
+    "input_port": {
+      "averaging": "normalized_reference_arclength_trapezoid",
+      "direction_reference": [
+        1.0,
+        0.0
+      ],
+      "id": "input",
+      "interval": "closed",
+      "kind": "segment_mm",
+      "native_weights_example": [
+        0.25,
+        0.5,
+        0.25
+      ],
+      "points": [
+        [
+          0.0,
+          38.0
+        ],
+        [
+          0.0,
+          40.0
+        ]
+      ],
+      "sign_convention": "q = b^T u > 0 along direction_reference"
+    },
+    "interval_convention": "closed segments include both end nodes; complement_on_line excludes start_exclusive_mm and includes end_inclusive_mm",
+    "output_meaning": "q_out > 0 = output moves along -x (inversion)",
+    "output_port": {
+      "averaging": "normalized_reference_arclength_trapezoid",
+      "direction_reference": [
+        -1.0,
+        0.0
+      ],
+      "id": "output",
+      "interval": "closed",
+      "kind": "segment_mm",
+      "native_weights_example": [
+        0.25,
+        0.5,
+        0.25
+      ],
+      "points": [
+        [
+          80.0,
+          38.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "sign_convention": "q = b^T u > 0 along direction_reference"
+    },
+    "support": {
+      "attachment": "solid_incident",
+      "attachment_semantics": "the LF references constrain only segment nodes attached to a solid element; third-medium consumers must choose 'solid_incident' or 'all_segment_nodes' explicitly (not the same policy under another name)",
+      "components": [
+        "ux",
+        "uy"
+      ],
+      "interval": "closed",
+      "kind": "segment_mm",
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          8.0
+        ]
+      ],
+      "semantics": "physical clamp on x = 0; a consumer constrains the nodes on this segment"
+    },
+    "symmetry_background": null,
+    "symmetry_solid": {
+      "components": [
+        "uy"
+      ],
+      "interval": "closed",
+      "kind": "segment_mm",
+      "points": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          80.0,
+          40.0
+        ]
+      ],
+      "semantics": "contract symmetry line of the half model (mirror plane)"
+    }
+  },
+  "schema": "dmftd.hf_export.v2",
+  "source": {
+    "geometry_file": "research/geometry_extraction_v1/candidates/inverter__sweep__kin_1e+01__kout_1e-01/geometry.npz",
+    "geometry_npz_sha256": "fa278e93a76601d8a9bd26fe70d8ef08a759d8f020c3c3b67569780947748d27",
+    "handoff_entry": {
+      "generation": {
+        "beta": 4.0,
+        "penal": 3.0,
+        "volume_fraction": 0.35
+      },
+      "id": "inverter__sweep__kin_1e+01__kout_1e-01",
+      "in_sets": [
+        "pool_v1__exclude_thin_necks"
+      ],
+      "initial_design": "uniform",
+      "k_hat_in": 10.0,
+      "k_hat_out": 0.1,
+      "mesh": [
+        80,
+        40
+      ],
+      "new_in_v2": false,
+      "q_free_floor_free_mm": 0.46630653646267833,
+      "source": "pool_v1",
+      "thin_necks": false
+    },
+    "note": "generation conditions are metadata only; the HF task is defined by the consumer",
+    "symmetry_policy": "contract_segment",
+    "v1_package": {
+      "design_json_sha256": "c0c3715394ba776bd6c8831e32ada1be88f5539ef8ce9ac01ef06ce6b1fed875",
+      "design_npz_sha256": "2f31a31b5c875fdfd56c3000d6242c4060eb2f7358c11d814e7bea24ccb6853b",
+      "geometry_id": "c3f553a06cac90883fa9090f32d4f0ac560b261d496e441afee489e7ac4386da",
+      "path": "research/hf_export_v1/inverter__sweep__kin_1e+01__kout_1e-01"
+    }
+  }
+}
