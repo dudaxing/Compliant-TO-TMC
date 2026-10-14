@@ -1,0 +1,11 @@
+# L-FWD1 授权记录工具源码审阅
+
+静审通过，无阻断。source、proof、实际publication terminal confirmation、human_context 的真实SHA与冻结值一致；当前HEAD为已发布恢复的e23a34b6fac803bab4be6bd35e980807291326c3，protocol为be3a9f90…。工具只读取普通JSON/Git元数据并exclusive保存记录，不启动runtime或触碰科学媒体。
+
+准确CLI须将 --preparation-confirmation 指向 root_publication_terminal_confirmation.json（SHA0552e9da…）；该真实publication确认具有published_commit/protocol_sha256和所有源发布终态。较早root_preparation_terminal_confirmation.json只记录普通prepare chunk765c1f、真实SHAc61e175…，不是此参数的输入。工具未来正式归档使用root_preparation_terminal_confirmation.json作为目标别名，其内容仍是上述publication确认原字节。本审按真实内容／SHA核对，不因名称猜测身份；未改工具源码或旧证据。
+
+真正直接用户回复由root收到：call_29dd1a840a714ae8923d5a841e71b701，原文“批准按 L-FWD1 卡执行”，与具体25目标／18000-19000-19060秒／8GiB上下文一致。source flags及authorization_from_direct_human_reply字段本身不是消息身份认证器；root必须先确认真实人类消息，自动goal与旧source确认均不提供授权。
+
+当前字段与冻结helper/launcher一致：reply保存原话／上下文，authorization保存reply与原human_context SHA、HEAD、protocol、proof和资源；无已有run/launch/授权且main clean才写。authorized_execution_source_commit只关联实际执行来源，不声称人类逐字批准commit。原source proof prepared=true/authorized=false/executed=false历史不改。
+
+本审只有ordinary/source/AST，未运行授权工具、launcher或HF，未生成正式授权对象，科学/媒体byte/hash/header/decode、构模/F/T/HP/求解/tests/plot均0。root后续可按已直接批准一次记录后唯一启动；如构模终态失败，原卡要求停止、不viewer或重试。

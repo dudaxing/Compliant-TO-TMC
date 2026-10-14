@@ -1,0 +1,15 @@
+# L-FWD1 真实终态后的普通文档保存器（source-only）
+
+作者只写外部源码并用stdlib AST解析，没有读取active run、科学数组/CSV/图片/GIF字节，没有HF/候选导入或实际工具/solver/plot运行、正式写入。未来必须root真正确认唯一launcher结束，独立terminal reviewer记录execution_status和closed及实际普通SHA后才能调用。
+
+CLI：--repo、--terminal-review、--terminal-review-md、--root-terminal-confirmation、--publication-tool-review；成功后--pixel-qa（status pass-prefix/actual_invocations3）；另--archive重复普通文件。root确认需actual_terminal_exit_code及launch_sha256或outer_sha256；helper存在需execution_receipt_sha256或helper_receipt_sha256。peer需status pass-prefix、blocking_findings[]、execution_closedtrue、execution_status真实、protocol_SHA256、outer_sha256、reviewed_repository_SHA256覆盖实际已存在result/response/model/view及summary/helper等。review的pass表示审查完成，不把not_pass科学执行变成pass。
+
+partial/result/model/view可缺失；helper若running允许保存已终止进程最后快照但不认live／终态计数，pass则严格closure/seal。模板gate身份不改，正文只复制实际原表值、弱式ON-body total/material/Hu Fy、全域J等与viewer有限距离字段；没有新积分/差值/比例。科学产物只读取helper已封存outputs元数据+stat；未封存path仅stat并明确publication必须resolve或stop，绝不latehash。
+
+写新RESULTS、普通author归档及execution_documentation_receipt，并把e23BASE两front原raw完整一次保留；不改原source卡/protocol/默认代码/结果。所有写入exclusive，source文件自己归档；source review尚待独立其他代理。source_preparation不预设真实数值或PASS/QA结果，不宣称commit/push/restore已经发生。
+
+本稿沿publisher40dff已约定schema，无单独config。实际publication receipt尚不存在，sourcecode只future ordinarywriter。
+
+作者源修订：独立peer指出的NOT_PASS截断普通JSON只保rawSHA/parseerror，不当成缺失观测；PASS仍严格。helper科学identity只取真正status pass/not_pass且last_phaseclosure的原outputs，running快照不转为seal。helper文件身份以原文件存在记录，malformed亦保原SHA；新增实际已封存GIF链接，不解码/绘图。这些只修改尚未运行文档writer，不改科学卡/runtime/protocol。原作者receipt52e600源digest及notes保v1历史，本次修后需同peer最终审。
+
+最后同failure格式收口：缺result时保存表数量为unknown/null，而不由空list合成0接受态；只已有result才按原记录行数复制N。helper_receipt_sha256已按原helper文件存在（非parse成功）保存原SHA。科学PASS/新数值门/运行范围均不改。
