@@ -1,3 +1,12 @@
+# 2026-10-15：L-COMP1实际PASS，两设计25组保存态对照已完成
+
+直接批准后唯一执行成功：3个元数据方法通过，一次CLI／比较，50条原状态与观测配成25组，26次候选JSON读取、两PNG、人工页和原窗口封存完成。outer11.7894秒、进程树峰113856512 B，原180／240秒、1GiB额度满足；无新HF／构模／F／T／HP／平衡求解或默认安装。
+
+[真实结果与解释](../lf_data_preparation/native_interface_001/lf_saved_comparison_001/RESULTS.md) · [完整人工检查页](../lf_data_preparation/native_interface_001/lf_saved_comparison_001/run_001/REVIEW.md) · [原值与25组身份JSON](../lf_data_preparation/native_interface_001/lf_saved_comparison_001/run_001/comparison.json)。峰值M／LF半模型R为0.378654272／0.243657687 N，下半工件弱式Fy为0.1249212163／0.05851198848 N；实体minJ约0.9734／0.9774，极小J主要来自自由介质。
+
+原M五段／failed历史、早期源码差异及各自参考出处保留；不升级全路径独参、压力、有效夹持、自由体稳定性或正式排名。下一步优先核第三个普通LF夹持器的来源／输入与未变形兼容性，再据实际情况安排有界路径。下方完整保留dddb318原raw准备历史；旧待授权／未执行仅指当时。发布与恢复另核真实回执。
+
+---
 # 2026-10-15：L-COMP1候选已准备，待新执行授权
 
 L-USE1后续的双设计保存态对照已写成小型研究层候选，25份普通JSON输入与源码已绑定；四Python AST及独立全源静审通过。三个纯元数据测试、真实比较和两PNG尚未运行，不能记为比较PASS。原HF默认、力学任务、数值门、科学结果与资格保持。

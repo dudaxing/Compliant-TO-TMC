@@ -1,3 +1,8 @@
+# 后续实际更新：L-COMP1已执行PASS
+
+2026-10-15，直接批准后完成3方法、一次25组对照和两张标量图；原窗口内封存。见[实际结果、可视化与下一步取舍](../lf_data_preparation/native_interface_001/lf_saved_comparison_001/RESULTS.md)。本阶段已关闭，无新力学或参考资格；下方完整保留dddb318准备与计划原文，旧“待授权／未运行”仅表示当时。
+
+---
 # 后续更新：L-COMP1候选已准备，尚未执行
 
 2026-10-15，新增小型对照示例、25普通JSON绑定、三个有限测试候选与两图函数；AST及独立源静审通过，测试／实际比较／绘图均未运行。[具体卡](../lf_data_preparation/native_interface_001/lf_saved_comparison_001/L-COMP1_CARD.md)和[准备报告](../lf_data_preparation/native_interface_001/lf_saved_comparison_001/PREPARATION_RESULTS.md)给出新180／240秒、1GiB窗口，待直接授权。下方完整保留5b84495计划原文，旧“尚未实现”仅描述计划阶段。
