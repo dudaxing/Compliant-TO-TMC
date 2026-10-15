@@ -1,3 +1,16 @@
+# 2026-10-15：第三个LF原25目标完整加载/卸载已实际PASS
+
+L-CYCLE1按直接用户请求从零完成0→1.20→0mm，25原目标/25接受态，原物理条件及门保持，默认HF源码不改。峰值输入R0.266484676N、下半工件法向弱式作用0.058810521N（材料0.057949540N＋Hu0.000860980N），镜像双侧法向幅值和0.117621041N，bottom有限面首射线0.002374315mm，25态均无几何交叠/舍入歧义。实体峰值minJ0.974696，自由介质minJ3.86453e-5；这是近接触承载响应。
+
+卸载回零R约1.68e-25N、q_out约-9.68e-25mm、工件Fy约-1.20e-27N，bottom/left射线恢复1/2mm。10对正同位移原目标标量近重合。179次Newton检查、186试探/32拒绝、0失败增量/二分；最大接受残差9.60874e-10仍在原1e-9门内。约199.1分钟/树采样峰1.94GB，219输出已原窗口封存。实际变形/反力/场3PNG、25帧GIF及收敛PNG/JSON完成，四PNG各检查一次。
+
+[目标、实现、原因、物理结果与限制](../lf_data_preparation/native_interface_001/lf_third_cycle_001/RESULTS.md) · [实际变形与反力](../lf_data_preparation/native_interface_001/lf_third_cycle_001/run_001/view/comparison.png) · [真实收敛图](../lf_data_preparation/native_interface_001/lf_third_cycle_001/run_001/convergence/convergence.png) · [25态动画](../lf_data_preparation/native_interface_001/lf_third_cycle_001/run_001/view/lf_third_cycle/actual_states.gif) · [结果驱动的下一步](../lf_data_preparation/native_interface_001/lf_third_cycle_001/NEXT_STEPS.md)。
+
+下一步优先选定峰值13与首卸14做独立HP80/120参考（新候选，尚未执行），随后复用现有消费者做三设计同定义对照。当前原API响应尚未关联新媒体/参考；全25态独参、连续压力、有效夹持、自由工件释放/稳定性及HF5整体仍未完成。保存模型与source_geometry随结果目录，可从其他工作目录按显式repo读取；先读新RESULTS，不原地重启已关闭执行包装。
+
+后续均在main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。下方完整保留080273b时代raw历史，旧“待执行/下一步”只指当时；发布/恢复以实际交付回执和Git HEAD为准。
+
+---
 # 2026-10-15：第三个LF独立0→0.25→0.50mm试算PASS
 
 L-PILOT1按直接用户请求唯一执行，三原目标/三接受态成功；0.5mm输入R0.085930828N、加权q_out0.481151214mm，bottom首射线间隔0.519139767mm，尚未达到夹持阶段。实体minJ0.987951803、自由介质minJ0.516400467。15次Newton检查、12试探全接受、0失败/二分；全部原门通过，约16.9分钟/树峰848691200B。实际变形/反力3PNG与3帧GIF、真实收敛PNG/JSON均完成。
