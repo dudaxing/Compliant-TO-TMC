@@ -1,3 +1,12 @@
+# 2026-10-15：第三个LF输入与未变形兼容性已通过
+
+L-THIRD1按当前直接请求唯一执行：41项检查通过，原四掩码无损；新wave结构4349实体单元，与前两例分别1631/1099个实体单元不同。h0.5mm、13440单元、27378DOF，支撑/端口/固定工件约束兼容，case和自带source的model已保存。约18.72秒、进程树采样峰198811648B；一张四面板未变形图及完整记录完成，无新F/T/HP/平衡求解，制造资格仍pending。
+
+[结果、目标、依据与限制](../lf_data_preparation/native_interface_001/lf_third_input_001/RESULTS.md) · [结构/工件/两设计差异图](../lf_data_preparation/native_interface_001/lf_third_input_001/run_001/undeformed_compatibility.png) · [结果驱动的下一步计划](../lf_data_preparation/native_interface_001/lf_third_input_001/NEXT_STEPS.md)。下一步建议独立0→0.25→0.50mm pilot；当前短加载任务不能直接续为完整循环，pilot良好后完整25目标需另从零。本轮仅准备与未变形检查，第三例实际变形、反力、独参及有效夹持尚未产生。
+
+后续均在main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。下方保留ace8e92时代原文；旧“下一步/待执行”仅描述当时。当前入口见上述结果，发布/恢复以实际回执为准。
+
+---
 # 默认保存态续算已安装：Mean／API／CLI
 
 M-INTEGRATE1 唯一执行成功：11 份候选已安装到默认 `hf_repo`，25 个精确 pytest 实例通过（pytest stdout：6.62 秒）。范围包含旧零起点、保存态合同、缓存保存、mechanical/chunk256、mock batch、CLI 接线、非法 settings 与旧参考来源迁移；真实力学测试仅临时 16 单元／50 DOF。该结果验证入口集成与有限兼容，没有重跑原夹持器或生成新 HP、变形图、压力／有效夹持／稳定性资格。
