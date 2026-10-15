@@ -1,3 +1,11 @@
+## 2026-10-16：普通LF来源清单批量准备完成（L-BPREP1 PASS）
+
+已安装批量LF输入准备API／CLI与六项有限测试；fine／wave各一次真实准备，通过掩码精确保持、原25目标共同任务、完整h0.5mm网格和现有batch纯元数据预检，生成未变形双设计图与状态表。三份新文件，旧HF源码／原科学门／旧结果保持；没有新构模、力学或HP，也未执行batch求解。
+
+[人工检查页](<../lf_data_preparation/native_interface_001/lf_batch_input_preparation_001/run_001/REVIEW.md>) · [输入状态表](<../lf_data_preparation/native_interface_001/lf_batch_input_preparation_001/run_001/index.json>) · [完整结果与使用接口](<../lf_data_preparation/native_interface_001/lf_batch_input_preparation_001/RESULTS.md>) · [下一步功能缺口](<../lf_data_preparation/native_interface_001/lf_batch_input_preparation_001/NEXT_STEPS.md>)
+
+本次只授输入准备与声明兼容，不授机械、压力、有效夹持、释放、稳定性、全路径独参或HF5资格。下一步先规划有限真实batch消费和预算，不重复两个完整循环；未来评价目录尚未创建。
+
 ## 2026-10-16：三设计同定义保存结果对照完成（L-TCOMP1 PASS）
 
 独立HF研究层已用10普通JSON形成75条原值/25组三方、两张反力/工件作用与有限距离/分区场图及检查页。前两设计历史字典完整继承，第三wave绑定原25态与13/14参考，默认HF源码和原结果不改，无新科学求解。
