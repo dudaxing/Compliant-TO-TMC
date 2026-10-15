@@ -1,3 +1,8 @@
+# 后续更新：L-COMP1候选已准备，尚未执行
+
+2026-10-15，新增小型对照示例、25普通JSON绑定、三个有限测试候选与两图函数；AST及独立源静审通过，测试／实际比较／绘图均未运行。[具体卡](../lf_data_preparation/native_interface_001/lf_saved_comparison_001/L-COMP1_CARD.md)和[准备报告](../lf_data_preparation/native_interface_001/lf_saved_comparison_001/PREPARATION_RESULTS.md)给出新180／240秒、1GiB窗口，待直接授权。下方完整保留5b84495计划原文，旧“尚未实现”仅描述计划阶段。
+
+---
 # L-USE1之后：优先实现已有两设计的保存态对照
 
 2026-10-15（Asia/Seoul）。依据main `27b53aaa666354a877bb04a9be4031a2f008c60c` 的实际结果及本轮普通JSON／源码只读核对。本文是下一步功能计划；L-COMP1尚未实现或执行，本轮未新增测试、力学计算、HP或绘图。

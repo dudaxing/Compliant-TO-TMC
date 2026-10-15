@@ -1,3 +1,12 @@
+# 2026-10-15：L-COMP1候选已准备，待新执行授权
+
+L-USE1后续的双设计保存态对照已写成小型研究层候选，25份普通JSON输入与源码已绑定；四Python AST及独立全源静审通过。三个纯元数据测试、真实比较和两PNG尚未运行，不能记为比较PASS。原HF默认、力学任务、数值门、科学结果与资格保持。
+
+[具体卡](../lf_data_preparation/native_interface_001/lf_saved_comparison_001/L-COMP1_CARD.md) · [目标、改动、来源、静审和限制](../lf_data_preparation/native_interface_001/lf_saved_comparison_001/PREPARATION_RESULTS.md)。拟一次helper180／outer240秒、采样1GiB，三方法通过后输出50原行／25对和两张标量图，链接已有变形；首错停，无重试或新HF／F／T／HP／求解。需新授权的原因是L-USE1窗口已关闭且不覆盖本次测试／关联／新图范围。
+
+下方完整保留5b84495原raw历史；旧“尚未实现”指当时，当前只是候选准备，未执行。提交／推送／恢复另核真实回执。
+
+---
 # 2026-10-15：L-USE1后续计划——复用已有两设计作保存态对照
 
 L-USE1已实际完成，main基线27b53aaa。下一步建议L-COMP1：复用历史M五段25点与新LF单次25态，在相同任务、h0.5网格下比较力、位移、同定义有限距离及分区J；两新标量PNG配合已有真实变形链接。历史M祖先failed/time_limit、早期源码差异和各自参考出处保留，不升格为同源码全路径或正式排名。
