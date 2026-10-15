@@ -332,8 +332,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
                       u_display=solved.u_display, state_representation=STATE_SCHEMA, state_sha256=state_hash(solved),
                       original_target_displacement=original, is_original_target=s == original,
                       bisection_depth=depth, elapsed_seconds=perf_counter()-started)
-        if path_mode == "ordered_cycle":
-            record.update(original_target_index=original_index, leg=leg)
+        record.update(original_target_index=original_index, leg=leg)
         accepted.append(record)
         if on_accept is not None:
             begin = perf_counter()

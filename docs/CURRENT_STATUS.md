@@ -1,3 +1,12 @@
+# 2026-10-15：第三个LF独立0→0.25→0.50mm试算PASS
+
+L-PILOT1按直接用户请求唯一执行，三原目标/三接受态成功；0.5mm输入R0.085930828N、加权q_out0.481151214mm，bottom首射线间隔0.519139767mm，尚未达到夹持阶段。实体minJ0.987951803、自由介质minJ0.516400467。15次Newton检查、12试探全接受、0失败/二分；全部原门通过，约16.9分钟/树峰848691200B。实际变形/反力3PNG与3帧GIF、真实收敛PNG/JSON均完成。
+
+[结果、改动、目标、原因与效果](../lf_data_preparation/native_interface_001/lf_third_pilot_001/RESULTS.md) · [实际变形与反力](../lf_data_preparation/native_interface_001/lf_third_pilot_001/run_001/view/comparison.png) · [收敛图](../lf_data_preparation/native_interface_001/lf_third_pilot_001/run_001/convergence/convergence.png) · [三态动画](../lf_data_preparation/native_interface_001/lf_third_pilot_001/run_001/view/lf_third_pilot/actual_states.gif) · [后续计算计划](../lf_data_preparation/native_interface_001/lf_third_pilot_001/NEXT_STEPS.md)。为复用现有显示器，仅补齐load_only两路径标签并运行三个既有单胞控制器回归方法，未改机械算法/力核/门或旧保存结果。
+
+下半工件弱式Fy0.000351243N不是有效夹持力。下一步建议原25目标0→1.20→0mm完整循环，从零开始；当前load_only末态不能直接转换续算。新完整路径/独参/压力/有效夹持/稳定性及HF5仍未完成。main开发，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。下方保留e010d20原raw历史；旧“待执行/下一步”仅描述当时，当前发布/恢复另核实际回执。
+
+---
 # 2026-10-15：第三个LF输入与未变形兼容性已通过
 
 L-THIRD1按当前直接请求唯一执行：41项检查通过，原四掩码无损；新wave结构4349实体单元，与前两例分别1631/1099个实体单元不同。h0.5mm、13440单元、27378DOF，支撑/端口/固定工件约束兼容，case和自带source的model已保存。约18.72秒、进程树采样峰198811648B；一张四面板未变形图及完整记录完成，无新F/T/HP/平衡求解，制造资格仍pending。

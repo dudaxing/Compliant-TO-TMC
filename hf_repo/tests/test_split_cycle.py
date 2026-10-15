@@ -122,5 +122,6 @@ def test_default_loading_contract_is_unchanged_and_cycle_bounds_are_explicit():
     result = solve_split_displacement_path(model, port, port, [0., .15625], **kwargs)
     assert result["status"] == "success"
     assert not {"path_mode", "path_completed", "loading_peak_reached", "unload_endpoint_reached"} & result.keys()
-    assert all("original_target_index" not in row and "leg" not in row
-               for row in result["accepted_steps"])
+    assert [row["original_target_index"] for row in result["accepted_steps"]] == [0, 1]
+    assert [row["leg"] for row in result["accepted_steps"]] == ["origin", "loading"]
+    assert all(row["is_original_target"] for row in result["accepted_steps"])
