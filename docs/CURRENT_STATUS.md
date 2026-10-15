@@ -1,3 +1,12 @@
+# 2026-10-15：L-USE1 PASS，外部消费25态数值表已完成
+
+已批准的唯一消费从仓库外cwd执行成功：纯标准库示例读取原index/关联响应/result三JSON各一次，输出25态表和含五份旧媒体链接的检查页；未调用HF摘要/API或求解，原实现/物理/数值门/科学结果不改。接受行和原目标编号分开保留，R_input映射为输入反力。全25生产态保持，匹配独参仍仅13/16两态，2/25不升级为全路径参考。
+
+[全25态人工检查页](../lf_data_preparation/native_interface_001/lf_saved_consumer_001/run_001/REVIEW.md) · [原浮点/向量JSON表](../lf_data_preparation/native_interface_001/lf_saved_consumer_001/run_001/states_table.json) · [目标、实现、实际效果、用法与限制](../lf_data_preparation/native_interface_001/lf_saved_consumer_001/RESULTS.md)。固定工件弱式合力不等于压力/有效夹持力；端口位移不是间隙。当前示例限此保存字段，未宣称任意机构或跨几何可比性。
+
+后续据全路径消费需要选择补其余保存态参考或共同任务下少量几何比较；完整25态参考、压力/有效夹持/释放/稳定性、全列、HF5整体及正式标签/排名仍未完成。继续main和固定origin；推送/恢复以真实交付回执为准。下方连续完整保留c9ca9a2原raw历史一次，旧“下一步/未完成”仅描述当时阶段。
+
+---
 # 2026-10-15：L-LINK1 实际 PASS，公共摘要已接入2／25参考
 
 直接人工批准后唯一执行已闭卡：16个元数据测试方法／23次私有匹配调用通过，真实公共摘要一次、response／轻索引各一次，单文件native_response.py已安装。新响应明确matched_partial、indices13／16、selected_reference_pass=true，accepted/full_path参考通过仍false；原25目标0→1.20→0 mm完成及原物理、结果与五媒体保持。本次无新求解、F／T、HP或绘图。
