@@ -1,0 +1,13 @@
+# L-TREF1 actual ordinary review
+
+**PASS; no blocking findings.** Unique execution c92479/session29713 ended cc46ab exit0. Outer/helper PASS, one invocation, stop=null;282.474833/280.456133 s and peak tree1282338816 B remain inside900/960 s and8 GiB. Four fresh HP calls(80/120 for each selected state), two mechanical/body checks and one plot completed;161495 original checks recorded.
+
+Selected source states remain13 loading1.20 and14 unloading1.15 with exact original state/descriptor identities. The15 original gates, Decimal3000 scatter/Inexact trap, full13440 elements/27378 DOFs, actual PORT deltaR0, force/action comparisons, saved CSC assembly and KKT/body checks are retained. Ordinary scalar/global/local-worst gate summaries are finite and pass their declared original limits. The ten plot entries per state exactly copy the new ordinary reference summaries, retaining zero markers.
+
+39 input bindings reconcile:29 ordinary hashes and10 NPZ identities inherited from the closed producer seal plus stat. All13 copied source files match.42 outputs total167633763 B:19 ordinary files independently match SHA256;23 nonordinary files(8NPZ,14gzip,1PNG) use original-window seals and stat only. No such payload was opened, decoded or rehashed by this reviewer.
+
+The original frozen mathematical run completed the full per-element/CSC/KKT/body checks; this ordinary observer does not independently recompute their archive arithmetic. Full saved total-matrix assembly identity does not mean HP verified every tangent column: independent derivative coverage remains one PORT direction. Only these two source states pass reference; full25 reference, stress/energy, pressure, effective grip, release/stability andHF5 remain unqualified. Original response is unchanged and unassociated. No new production F/T/model/solve/tests/API or plot was invoked by this observer.
+
+The sole PNG pixel inspection belongs to root. Final RESULTS/NEXT/six-front/closure/QA documents have passed the finite ordinary review. Only ACTUAL_REVIEW.md and actual_review.json are written here.
+
+Final documentation closure: all six original raw bodies exactly match baseline69d7ab7 and are retained once below new prefixes; new local links resolve by stat. Final text preserves2/25 selected coverage and one PORT direction, keeps independent1e-8 distinct from production1e-9, and does not infer production precision from HP80/120 agreement. Future API/consumer/media linkage and three-design comparison remain unexecuted plans. Closure/QA metadata agree with the actual run; root records one PNG inspection, no rerender. This step changed only these two review files and involved no science/test/API/plot or archive/media payload read.

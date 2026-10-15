@@ -1,3 +1,14 @@
+# 2026-10-15：第三LF峰值/首卸两态独立参考已PASS（2/25）
+
+L-TREF1按当前直接请求唯一执行，accepted/original13加载1.20mm、14首卸1.15mm，各新HP80/120一次，共4次。保原十五门/归一化、全13440单元/27378DOF、三力与PORT方向切线、CSC/KKT及工件合力检查；全部通过，默认源码/原生产结果不改。总力误差约1.17e-15/1.30e-15（原门1e-11），总PORT切线约6.21e-17/4.87e-17（原门1e-10）。首卸独立残差约9.61e-10通过原独参1e-8门，原生产1e-9门也保持通过。
+
+约4.71分钟、树采样峰1.282GB，161495项检查，42份输出已原窗口封存。双面板误差PNG/JSON完成，新PNG原分辨率检查一次，无新求解/生产F/T/测试/默认安装或旧媒体重绘。[目标、实施、原因、结果及限制](../lf_data_preparation/native_interface_001/lf_third_reference_001/RESULTS.md) · [两态误差图](../lf_data_preparation/native_interface_001/lf_third_reference_001/run_001/reference/reference_observations.png) · [保存参考摘要](../lf_data_preparation/native_interface_001/lf_third_reference_001/run_001/reference/summary.json) · [结果驱动的下一步](../lf_data_preparation/native_interface_001/lf_third_reference_001/NEXT_STEPS.md)。
+
+第三例完整25态生产路径已完成；本轮只增加两选定态和一个PORT方向的独参，不升级全25态/全部列/压力/有效夹持/自由体稳定性或HF5资格。下一步直接复用现有公共摘要/消费者关联第三例并生成25行消费表，再供三设计统一对照；这些后续操作尚未执行，原API响应仍未关联新参考/媒体。
+
+后续均在main，origin保持https://github.com/dudaxing/Compliant-TO-TMC.git。下方完整保留69d7ab7时代raw历史，旧“下一步/待执行”仅指当时；发布/恢复以实际回执及Git HEAD为准。
+
+---
 # 2026-10-15：第三个LF原25目标完整加载/卸载已实际PASS
 
 L-CYCLE1按直接用户请求从零完成0→1.20→0mm，25原目标/25接受态，原物理条件及门保持，默认HF源码不改。峰值输入R0.266484676N、下半工件法向弱式作用0.058810521N（材料0.057949540N＋Hu0.000860980N），镜像双侧法向幅值和0.117621041N，bottom有限面首射线0.002374315mm，25态均无几何交叠/舍入歧义。实体峰值minJ0.974696，自由介质minJ3.86453e-5；这是近接触承载响应。
