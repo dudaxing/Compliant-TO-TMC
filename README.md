@@ -1,3 +1,11 @@
+## 2026-10-15：第三LF25态接口关联与带图检查页完成（L-TUSE1 PASS）
+
+整体目标是独立HF返回普通LF几何的可恢复TMC响应与实际效果。第三wave完整0→1.20→0mm的25态、峰值13/首卸14既有参考及六份图像已通过现有公共摘要关联；25行原值表与内嵌图像检查页已生成，默认HF源码和全部原结果不改。
+
+仅13/14标记matched reference，返回matched_partial；全25态参考和原producer flags保持false，不升级压力/有效夹持/稳定性/HF5。没有新科学求解或重绘。下一步据此准备三设计75原值/25组三方同定义对照，保各例来源与参考覆盖。
+
+[带图人工检查页](<lf_data_preparation/native_interface_001/lf_third_delivery_001/run_001/consumer/REVIEW.md>) · [25行原值](<lf_data_preparation/native_interface_001/lf_third_delivery_001/run_001/consumer/states_table.json>) · [轻索引](<lf_data_preparation/native_interface_001/lf_third_delivery_001/run_001/light_index.json>) · [本轮完整记录](<lf_data_preparation/native_interface_001/lf_third_delivery_001/RESULTS.md>) · [三设计对照计划](<lf_data_preparation/native_interface_001/lf_third_delivery_001/THREE_DESIGN_PLAN.md>)
+
 # 2026-10-15：第三LF峰值/首卸两态独立参考已PASS（2/25）
 
 L-TREF1按当前直接请求唯一执行，accepted/original13加载1.20mm、14首卸1.15mm，各新HP80/120一次，共4次。保原十五门/归一化、全13440单元/27378DOF、三力与PORT方向切线、CSC/KKT及工件合力检查；全部通过，默认源码/原生产结果不改。总力误差约1.17e-15/1.30e-15（原门1e-11），总PORT切线约6.21e-17/4.87e-17（原门1e-10）。首卸独立残差约9.61e-10通过原独参1e-8门，原生产1e-9门也保持通过。

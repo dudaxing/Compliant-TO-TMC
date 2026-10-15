@@ -1,0 +1,988 @@
+{
+  "schema_version": "lf-saved-consumption-table-1.0",
+  "inputs": {
+    "index": {
+      "path": "lf_data_preparation/native_interface_001/lf_third_delivery_001/run_001/light_index.json",
+      "sha256": "5537833d7ebd6acbf05d829b678db1b4460dd312e94467c5f35b420d1d1ea61f"
+    },
+    "response": {
+      "path": "lf_data_preparation/native_interface_001/lf_third_delivery_001/run_001/linked_response.json",
+      "sha256": "6e420c83bac4dde2b3232b743964e176c874d977cd2c081bc0b71cc1f3f01f16"
+    },
+    "result": {
+      "path": "lf_data_preparation/native_interface_001/lf_third_cycle_001/run_001/lf_third_cycle/result.json",
+      "sha256": "07095457a3d1d4d7e9c398f9886384f06aaab2aebab13c52511ea6b62447b924"
+    }
+  },
+  "identity": {
+    "result": {
+      "path": "lf_data_preparation/native_interface_001/lf_third_cycle_001/run_001/lf_third_cycle/result.json",
+      "path_scope": "repo_relative",
+      "sha256": "07095457a3d1d4d7e9c398f9886384f06aaab2aebab13c52511ea6b62447b924"
+    },
+    "model": {
+      "path": "lf_data_preparation/native_interface_001/lf_third_cycle_001/run_001/lf_third_cycle/model/model.json",
+      "path_scope": "repo_relative",
+      "sha256": "d5444ecba9c5bd63033f235de6bd881bae5b7abd29ae534b98b910c522bd616f"
+    },
+    "task_sha256": "5c9941a569b69e9b4265eb3da73e7ba60deb991970033650ef56cb67a5b3749e",
+    "geometry": {
+      "geometry_id": "5e99dfa60343c1c2da0a921b8ddb7402319e2ad5157aa0135c89a83f1a2c3b4f",
+      "descriptor_sha256": "5152981791f9b8a174ec7bf051f5c28063567568946237fa1d4c7dc185edf03a",
+      "descriptor_file_sha256": "7d378856e8e1d726106febb8845d7000bca25d3f560cab7bd7459b316d43c205",
+      "arrays_sha256": "a936f25ea97350e7648053715efac3bfbf449f8463863f396d31e2d1b6f0cfae",
+      "snapshot": {
+        "descriptor": "source_geometry/geometry.json",
+        "arrays": "source_geometry/geometry.npz"
+      }
+    },
+    "mechanics_source_sha256": {
+      "hf_repo/src/hf_eval/native_mean.py": "34aba7347790fafa7f03511a42aa9876649b8ce4f8c98b3efdb5a0e664288401",
+      "hf_repo/src/hf_eval/split_displacement.py": "8cdc31e041e7753275e880d69ec3918d87a7f6e582951885d0af288f657e5237",
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+    },
+    "arrays_identity_scope": "Declared saved array SHA only; no NPZ was opened"
+  },
+  "physics": {
+    "grid": {
+      "shape_yx": [
+        80,
+        168
+      ],
+      "origin_mm": [
+        0.0,
+        0.0
+      ],
+      "cell_size_mm": [
+        0.5,
+        0.5
+      ],
+      "axes": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "extent_mm": [
+        84.0,
+        40.0
+      ],
+      "array_order": "C_yx_bottom_up",
+      "value_location": "cell"
+    },
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain",
+      "lambda_s_MPa": 0.5769230769230769,
+      "mu_s_MPa": 0.3846153846153846,
+      "kappa_s_MPa": 0.8333333333333333,
+      "thickness_mm": 20.0,
+      "third_medium_gamma": 1e-06,
+      "alpha": 5e-07,
+      "regularization_length_mm": 80.0,
+      "kr_MPa_mm2": 0.004307692307692307,
+      "kr_material_factor_applied": false,
+      "force_scale_per_length": 20.0
+    },
+    "model_extent": {
+      "kind": "lower_half",
+      "symmetry_axis": {
+        "normal": [
+          0.0,
+          1.0
+        ],
+        "offset_mm": 40.0
+      }
+    },
+    "counts": {
+      "cells": 13440,
+      "nodes": 13689,
+      "dofs": 27378,
+      "solid_cells": 4349,
+      "medium_cells": 9091,
+      "solid_incident_nodes": 4847,
+      "fixed_dofs": 1548,
+      "free_dofs": 25830
+    },
+    "workpiece": {
+      "kind": "fixed_rigid",
+      "shape": "square",
+      "center_mm": [
+        71.0,
+        40.0
+      ],
+      "fixed_components": [
+        0,
+        1
+      ],
+      "side_mm": 18.0
+    },
+    "input": {
+      "tag": "input",
+      "control": "average_displacement",
+      "target_mm": 1.2
+    },
+    "output": {
+      "tag": "output",
+      "spring_N_per_mm": 0.0
+    },
+    "constraints": [
+      {
+        "tag": "support",
+        "components": [
+          0,
+          1
+        ]
+      },
+      {
+        "tag": "symmetry",
+        "components": [
+          1
+        ]
+      }
+    ],
+    "background_symmetry": {
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          84.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ]
+    }
+  },
+  "options": {
+    "response_mode": {
+      "value": "mechanical",
+      "source": "result_metadata"
+    },
+    "tangent_mode": {
+      "value": "chunk256",
+      "source": "result_metadata"
+    },
+    "initial_guess": {
+      "value": "port_projection",
+      "source": "result_metadata"
+    }
+  },
+  "path": {
+    "kind": "ordered_cycle",
+    "requested_targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.65,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0,
+      1.05,
+      1.1,
+      1.15,
+      1.2,
+      1.15,
+      1.1,
+      1.05,
+      1.0,
+      0.9,
+      0.8,
+      0.75,
+      0.65,
+      0.5,
+      0.25,
+      0.0
+    ],
+    "task_target_mm": 1.2,
+    "requested_endpoint_mm": 0.0,
+    "reached_displacement_mm": 0.0,
+    "accepted_states": 25,
+    "completed": true,
+    "task_target_executed": true
+  },
+  "independent_reference": {
+    "status": "matched_partial",
+    "accepted_reference_pass": false,
+    "full_path_reference_pass": false,
+    "selected_reference_pass": true,
+    "matched_state_indices": [
+      13,
+      14
+    ],
+    "matched_state_count": 2,
+    "production_accepted_state_count": 25,
+    "covers_all_accepted_states": false,
+    "report": {
+      "path": "lf_data_preparation/native_interface_001/lf_third_reference_001/run_001/reference/summary.json",
+      "path_scope": "repo_relative",
+      "sha256": "be768cd11e22644a229f0fe3bc1d33e079b8dcfb53fe6bf879d1c9a2be1af0fa"
+    },
+    "reasons": [],
+    "HP_all_columns_qualified": false,
+    "contact_qualified": false,
+    "clamp_qualified": false,
+    "pressure_qualified": false,
+    "HF5_qualified": false,
+    "reported_status": "pass",
+    "qualification_scope": "Only these two selected source states and declared direction. Original15 gates; no full25 LF production path/all columns/stress-energy/pressure/effective clamp/stability/HF5 qualification",
+    "accepted_states": 2,
+    "HP_calls_completed": 4,
+    "reported_scope_flags": {
+      "full_element_and_DOF_coverage": true,
+      "HP_matrix_columns_exhaustively_checked": false,
+      "contact_qualified": false,
+      "clamp_qualified": false,
+      "pressure_qualified": false
+    },
+    "source_bindings_verified": true,
+    "verification_scope": "Matched selected saved JSON identities/2M bookkeeping and declared source bytes; coverage is explicit, no HP/NPZ archive re-audit"
+  },
+  "producer_flags": {
+    "independent_HP_qualified": false,
+    "equilibrium_qualified": false,
+    "HF_qualified": false
+  },
+  "force_semantics": "R is half-model actuator reaction; lower-body forces are signed weak-form resultants. Two-sided normal magnitude sum is not full-body net force. q_out is a weighted port displacement, not a surface gap.",
+  "field_scope": "J/Hu are saved global scalars, not separately observed solid/medium fields. Workpiece node-window clearance has its original raster scope, not finite surface distance.",
+  "existing_media": [
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_third_cycle_001/run_001/view/comparison.png",
+      "path_scope": "repo_relative",
+      "kind": "png",
+      "label": "真实变形、工件作用与加载卸载",
+      "sha256": "1dd4902770279789e65d3e89e2a93c96323943e945c64dac4d1c733ed555545e",
+      "bytes": 404724
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_third_cycle_001/run_001/view/distances_forces.png",
+      "path_scope": "repo_relative",
+      "kind": "png",
+      "label": "有限距离与有符号作用分解",
+      "sha256": "3a3c7e9965cd9b3b95ee801658ed39df5c78c879b67a6fbb43675da4afc386fe",
+      "bytes": 105045
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_third_cycle_001/run_001/view/peak_fields.png",
+      "path_scope": "repo_relative",
+      "kind": "png",
+      "label": "峰值实体应变与自由介质场",
+      "sha256": "683813ffbc742936dfdc86bcc3e6bd5e2723065971e09245b8f36114e5b6d7da",
+      "bytes": 402754
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_third_cycle_001/run_001/view/lf_third_cycle/actual_states.gif",
+      "path_scope": "repo_relative",
+      "kind": "gif",
+      "label": "25个真实保存态动画",
+      "sha256": "2aae982bacb809a21508b62705c4631f5eed54f310119b990e15b696b14e4116",
+      "bytes": 4092450
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_third_cycle_001/run_001/convergence/convergence.png",
+      "path_scope": "repo_relative",
+      "kind": "png",
+      "label": "原Newton与约束收敛",
+      "sha256": "35a1e79ae39657d878953782e097dba1e48df690dff99e657fb74aab48cd108e",
+      "bytes": 234474
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_third_reference_001/run_001/reference/reference_observations.png",
+      "path_scope": "repo_relative",
+      "kind": "png",
+      "label": "峰值与首卸两态独立参考误差",
+      "sha256": "b792c0af2d2fcadb234e0d7bb8b753e4a9f6a5cf794ffd6ff3e3b117811daba0",
+      "bytes": 124612
+    }
+  ],
+  "rows": [
+    {
+      "accepted_row_index": 0,
+      "original_target_index": 0,
+      "is_original_target": true,
+      "state_sha256": "0db2650bbbf9a2cc54a17d57c6a609643c7a262bf45b22386be7d914fa673f73",
+      "leg": "origin",
+      "d_mm": 0.0,
+      "R_input_N": 0.0,
+      "q_in_mm": 0.0,
+      "q_out_mm": 0.0,
+      "minimum_J": 1.0,
+      "force_on_lower_body_N": {
+        "total": [
+          0.0,
+          0.0
+        ],
+        "material": [
+          0.0,
+          0.0
+        ],
+        "regularization": [
+          0.0,
+          0.0
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 1,
+      "original_target_index": 1,
+      "is_original_target": true,
+      "state_sha256": "1991e8f449ac9d76456a42b89a7a8387ddad49c741f37316b912c9888e2ca7c3",
+      "leg": "loading",
+      "d_mm": 0.25,
+      "R_input_N": 0.04272814528256173,
+      "q_in_mm": 0.25,
+      "q_out_mm": 0.2402148970214889,
+      "minimum_J": 0.7589524594920315,
+      "force_on_lower_body_N": {
+        "total": [
+          -6.257744101562226e-05,
+          0.00013440496489672206
+        ],
+        "material": [
+          -1.8564933936390284e-05,
+          8.337085391649037e-05
+        ],
+        "regularization": [
+          -4.4012507079231975e-05,
+          5.103411098023172e-05
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 2,
+      "original_target_index": 2,
+      "is_original_target": true,
+      "state_sha256": "4079752fe0262d6a52d0dadd75c1c9a395ef00f7e8573650b3686f0748cd798c",
+      "leg": "loading",
+      "d_mm": 0.5,
+      "R_input_N": 0.08593082815865576,
+      "q_in_mm": 0.5,
+      "q_out_mm": 0.4811512138551336,
+      "minimum_J": 0.5164004668740174,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00013316252822384006,
+          0.0003512425565784398
+        ],
+        "material": [
+          -3.824696789580393e-05,
+          0.0002156916134184984
+        ],
+        "regularization": [
+          -9.491556032803614e-05,
+          0.00013555094315994133
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 3,
+      "original_target_index": 3,
+      "is_original_target": true,
+      "state_sha256": "8b9f9a11bec3e4ab98fb20a1099ca9fd3f2b558f83482b481dd6f6c9c1e8cedc",
+      "leg": "loading",
+      "d_mm": 0.65,
+      "R_input_N": 0.11218044426060478,
+      "q_in_mm": 0.65,
+      "q_out_mm": 0.625768470510243,
+      "minimum_J": 0.3704752939555011,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00017781611849251698,
+          0.0005779700432990574
+        ],
+        "material": [
+          -5.068820611059167e-05,
+          0.0003497035728343176
+        ],
+        "regularization": [
+          -0.0001271279123819253,
+          0.00022826647046473957
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 4,
+      "original_target_index": 4,
+      "is_original_target": true,
+      "state_sha256": "d4facb9d354d865350f8f95c44e5ead7019184298feb88ccf7eeb60537d3a306",
+      "leg": "loading",
+      "d_mm": 0.75,
+      "R_input_N": 0.12990279856407758,
+      "q_in_mm": 0.75,
+      "q_out_mm": 0.7219617854027418,
+      "minimum_J": 0.27341183253277584,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00020390278933460327,
+          0.0008257063714249866
+        ],
+        "material": [
+          -5.914938287871358e-05,
+          0.0004922332751654313
+        ],
+        "regularization": [
+          -0.00014475340645588969,
+          0.0003334730962595555
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 5,
+      "original_target_index": 5,
+      "is_original_target": true,
+      "state_sha256": "8dc07459d28e53fb7aaf479e02a38004ab36ea09aca61791627516c11236b4f5",
+      "leg": "loading",
+      "d_mm": 0.8,
+      "R_input_N": 0.13886484363840512,
+      "q_in_mm": 0.8,
+      "q_out_mm": 0.7698999549944815,
+      "minimum_J": 0.2250386835660439,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00021204834880553353,
+          0.0010043862476433276
+        ],
+        "material": [
+          -6.329118845696011e-05,
+          0.0005948577271366883
+        ],
+        "regularization": [
+          -0.00014875716034857343,
+          0.0004095285205066389
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 6,
+      "original_target_index": 6,
+      "is_original_target": true,
+      "state_sha256": "e0983d1f0df897162a1e98cea37701fb454f0dbb619bf4ca33da133236afe2f2",
+      "leg": "loading",
+      "d_mm": 0.85,
+      "R_input_N": 0.14792098424267536,
+      "q_in_mm": 0.85,
+      "q_out_mm": 0.8176611210464613,
+      "minimum_J": 0.17636406863932982,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00021231356212847257,
+          0.0012424445133867282
+        ],
+        "material": [
+          -6.718062795743866e-05,
+          0.0007349574095980182
+        ],
+        "regularization": [
+          -0.0001451329341710339,
+          0.0005074871037887095
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 7,
+      "original_target_index": 7,
+      "is_original_target": true,
+      "state_sha256": "324c9bcfea8c971e3b15379801f53d9edff765ddac4049220f2122bae9c327c1",
+      "leg": "loading",
+      "d_mm": 0.9,
+      "R_input_N": 0.1571047113946227,
+      "q_in_mm": 0.9,
+      "q_out_mm": 0.865158038749532,
+      "minimum_J": 0.12780201570372918,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00019829127875236553,
+          0.0015709815603657312
+        ],
+        "material": [
+          -7.05957715789927e-05,
+          0.0009410557264506167
+        ],
+        "regularization": [
+          -0.00012769550717337284,
+          0.0006299258339151145
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 8,
+      "original_target_index": 8,
+      "is_original_target": true,
+      "state_sha256": "26c09cb5fa98622210582f0f1b4255e50a6e733c4d2649c12e802bed4d2b9633",
+      "leg": "loading",
+      "d_mm": 0.95,
+      "R_input_N": 0.16648308122835806,
+      "q_in_mm": 0.95,
+      "q_out_mm": 0.9122165765648503,
+      "minimum_J": 0.07971812725867823,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00016238077796151376,
+          0.0020563019065919217
+        ],
+        "material": [
+          -7.371173888814614e-05,
+          0.0012838742965260313
+        ],
+        "regularization": [
+          -8.866903907336762e-05,
+          0.00077242761006589
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 9,
+      "original_target_index": 9,
+      "is_original_target": true,
+      "state_sha256": "f85303173872a70756cb167719a24744db90e20a20fd30e51581693e0a99253b",
+      "leg": "loading",
+      "d_mm": 1.0,
+      "R_input_N": 0.1763008288925095,
+      "q_in_mm": 1.0,
+      "q_out_mm": 0.9581962772237023,
+      "minimum_J": 0.033325851790410296,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00010417455738000295,
+          0.002949934325699023
+        ],
+        "material": [
+          -7.964355783894577e-05,
+          0.0020331154394703137
+        ],
+        "regularization": [
+          -2.453099954105723e-05,
+          0.0009168188862287091
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 10,
+      "original_target_index": 10,
+      "is_original_target": true,
+      "state_sha256": "67f172e194c3b34edea55cc365de086c4dd2ea3fb6abb179d42e0b1e75f92949",
+      "leg": "loading",
+      "d_mm": 1.05,
+      "R_input_N": 0.19023457741112035,
+      "q_in_mm": 1.05,
+      "q_out_mm": 0.9933410315903887,
+      "minimum_J": 0.0007069766256180619,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00013332125131562014,
+          0.008036759566887298
+        ],
+        "material": [
+          -0.00014637052782251657,
+          0.0070710649163481685
+        ],
+        "regularization": [
+          1.304927650689645e-05,
+          0.0009656946505391278
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 11,
+      "original_target_index": 11,
+      "is_original_target": true,
+      "state_sha256": "2f0336738c867330106f07571e7f5819f887df4d2879ef78297a81983719e1e7",
+      "leg": "loading",
+      "d_mm": 1.1,
+      "R_input_N": 0.21477519784469865,
+      "q_in_mm": 1.1,
+      "q_out_mm": 1.0003205771321657,
+      "minimum_J": 9.901882340130769e-05,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00034737317742282876,
+          0.024005829537646333
+        ],
+        "material": [
+          -0.0002732504773057439,
+          0.023151487345849237
+        ],
+        "regularization": [
+          -7.412270011708485e-05,
+          0.0008543421917970945
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 12,
+      "original_target_index": 12,
+      "is_original_target": true,
+      "state_sha256": "53cb232a1fb0a358907f674fd3cd707aceb4fd23088cb97250330312968d125a",
+      "leg": "loading",
+      "d_mm": 1.15,
+      "R_input_N": 0.2404275731752015,
+      "q_in_mm": 1.15,
+      "q_out_mm": 1.0045500747628051,
+      "minimum_J": 5.500712513801286e-05,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.000475388558397203,
+          0.04119372945917102
+        ],
+        "material": [
+          -0.00036723384992769865,
+          0.040354427711440134
+        ],
+        "regularization": [
+          -0.00010815470846950445,
+          0.0008393017477308931
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 13,
+      "original_target_index": 13,
+      "is_original_target": true,
+      "state_sha256": "63100f5293ddf36e5e7522b0636bdb211ea8f31179b7618fa5ba6a65e5d10b50",
+      "leg": "loading",
+      "d_mm": 1.2,
+      "R_input_N": 0.2664846758294701,
+      "q_in_mm": 1.2,
+      "q_out_mm": 1.0077649595471443,
+      "minimum_J": 3.864531151258951e-05,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.0005549964748876809,
+          0.058810520522957155
+        ],
+        "material": [
+          -0.00044567079809577144,
+          0.057949540313744045
+        ],
+        "regularization": [
+          -0.00010932567679190934,
+          0.0008609802092131098
+        ]
+      },
+      "has_matched_reference": true
+    },
+    {
+      "accepted_row_index": 14,
+      "original_target_index": 14,
+      "is_original_target": true,
+      "state_sha256": "b340a6f12532b850d6f395e5e4d920de8822bf39c2467d675e6d985666f42916",
+      "leg": "unloading",
+      "d_mm": 1.15,
+      "R_input_N": 0.24042757317518976,
+      "q_in_mm": 1.15,
+      "q_out_mm": 1.0045500747628426,
+      "minimum_J": 5.500712502098439e-05,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00047538855839727165,
+          0.04119372945916345
+        ],
+        "material": [
+          -0.00036723384992767957,
+          0.04035442771143315
+        ],
+        "regularization": [
+          -0.00010815470846959187,
+          0.0008393017477303093
+        ]
+      },
+      "has_matched_reference": true
+    },
+    {
+      "accepted_row_index": 15,
+      "original_target_index": 15,
+      "is_original_target": true,
+      "state_sha256": "24973917f552c799ccd33052636b7548abbb56d5b53fc1806afe0392b52211fa",
+      "leg": "unloading",
+      "d_mm": 1.1,
+      "R_input_N": 0.2147751978446992,
+      "q_in_mm": 1.1,
+      "q_out_mm": 1.0003205771321642,
+      "minimum_J": 9.901882340583559e-05,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00034737317742280393,
+          0.02400582953764013
+        ],
+        "material": [
+          -0.0002732504773056883,
+          0.02315148734584304
+        ],
+        "regularization": [
+          -7.412270011711557e-05,
+          0.0008543421917970841
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 16,
+      "original_target_index": 16,
+      "is_original_target": true,
+      "state_sha256": "61602e55478cae4177b71d0cea2a04a4678fc206aa5bfb9b086a067809ca656e",
+      "leg": "unloading",
+      "d_mm": 1.05,
+      "R_input_N": 0.19023457741112026,
+      "q_in_mm": 1.05,
+      "q_out_mm": 0.9933410315903888,
+      "minimum_J": 0.000706976625618065,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00013332125131561642,
+          0.008036759566887297
+        ],
+        "material": [
+          -0.00014637052782251635,
+          0.007071064916348159
+        ],
+        "regularization": [
+          1.304927650689998e-05,
+          0.0009656946505391372
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 17,
+      "original_target_index": 17,
+      "is_original_target": true,
+      "state_sha256": "24d66f446d8b533da8ae2c1231340d61973a767b70b160c451ebeb84530de5fb",
+      "leg": "unloading",
+      "d_mm": 1.0,
+      "R_input_N": 0.17630082887431,
+      "q_in_mm": 1.0,
+      "q_out_mm": 0.9581962772714595,
+      "minimum_J": 0.033325852014070914,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00010417455770869908,
+          0.00294993431393867
+        ],
+        "material": [
+          -7.964355772967277e-05,
+          0.002033115430324862
+        ],
+        "regularization": [
+          -2.4530999979026268e-05,
+          0.0009168188836138095
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 18,
+      "original_target_index": 18,
+      "is_original_target": true,
+      "state_sha256": "a4a4d68a58adff20641e7b43190de2331d704853244da41d200d67343e460624",
+      "leg": "unloading",
+      "d_mm": 0.9,
+      "R_input_N": 0.15710471139462273,
+      "q_in_mm": 0.9,
+      "q_out_mm": 0.8651580387495321,
+      "minimum_J": 0.127802015703729,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.0001982912787523705,
+          0.001570981560365738
+        ],
+        "material": [
+          -7.059577157899275e-05,
+          0.0009410557264506169
+        ],
+        "regularization": [
+          -0.00012769550717337772,
+          0.0006299258339151222
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 19,
+      "original_target_index": 19,
+      "is_original_target": true,
+      "state_sha256": "ed2ca10f2605c33cf853ead65cfa0ce48c69926e37babb2a4b4ebb5b17e5dbe6",
+      "leg": "unloading",
+      "d_mm": 0.8,
+      "R_input_N": 0.13886484363840518,
+      "q_in_mm": 0.8,
+      "q_out_mm": 0.7698999549944816,
+      "minimum_J": 0.22503868356604378,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.0002120483488055343,
+          0.001004386247643332
+        ],
+        "material": [
+          -6.32911884569601e-05,
+          0.0005948577271366886
+        ],
+        "regularization": [
+          -0.0001487571603485742,
+          0.00040952852050664304
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 20,
+      "original_target_index": 20,
+      "is_original_target": true,
+      "state_sha256": "f9d54c330f921182047c6ac74a89f45da9f233150045aacc895403c34ffa961a",
+      "leg": "unloading",
+      "d_mm": 0.75,
+      "R_input_N": 0.1299027985640777,
+      "q_in_mm": 0.75,
+      "q_out_mm": 0.7219617854027418,
+      "minimum_J": 0.27341183253277607,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00020390278933460286,
+          0.0008257063714249961
+        ],
+        "material": [
+          -5.914938287871356e-05,
+          0.000492233275165431
+        ],
+        "regularization": [
+          -0.00014475340645588933,
+          0.00033347309625956476
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 21,
+      "original_target_index": 21,
+      "is_original_target": true,
+      "state_sha256": "93f1c62861aa32f53423934c7d6165a54195db652bd8fabe2e5bb505239dd6e9",
+      "leg": "unloading",
+      "d_mm": 0.65,
+      "R_input_N": 0.11218044426060482,
+      "q_in_mm": 0.65,
+      "q_out_mm": 0.6257684705102429,
+      "minimum_J": 0.37047529395550105,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.0001778161184925167,
+          0.0005779700432990601
+        ],
+        "material": [
+          -5.0688206110591674e-05,
+          0.0003497035728343176
+        ],
+        "regularization": [
+          -0.00012712791238192502,
+          0.0002282664704647425
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 22,
+      "original_target_index": 22,
+      "is_original_target": true,
+      "state_sha256": "86d4fd21d005c70d47de555135bc3021b45624bcc7cc74bca5fe079ed27ef9c5",
+      "leg": "unloading",
+      "d_mm": 0.5,
+      "R_input_N": 0.0859308281586558,
+      "q_in_mm": 0.5,
+      "q_out_mm": 0.48115121385513365,
+      "minimum_J": 0.5164004668740174,
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00013316252822384,
+          0.00035124255657843924
+        ],
+        "material": [
+          -3.8246967895803944e-05,
+          0.0002156916134184984
+        ],
+        "regularization": [
+          -9.491556032803608e-05,
+          0.00013555094315994098
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 23,
+      "original_target_index": 23,
+      "is_original_target": true,
+      "state_sha256": "94f13588a6442a5e9ab38da2bdcd48b428254610cdeab112af90687be167bd88",
+      "leg": "unloading",
+      "d_mm": 0.25,
+      "R_input_N": 0.04272814528256176,
+      "q_in_mm": 0.25,
+      "q_out_mm": 0.2402148970214889,
+      "minimum_J": 0.7589524594920315,
+      "force_on_lower_body_N": {
+        "total": [
+          -6.257744101562218e-05,
+          0.0001344049648967221
+        ],
+        "material": [
+          -1.856493393639029e-05,
+          8.337085391649037e-05
+        ],
+        "regularization": [
+          -4.401250707923189e-05,
+          5.103411098023172e-05
+        ]
+      },
+      "has_matched_reference": false
+    },
+    {
+      "accepted_row_index": 24,
+      "original_target_index": 24,
+      "is_original_target": true,
+      "state_sha256": "589ef0e2f310ab892dce11eef9b5d96776f906fda76986c21c0a5ed32d755151",
+      "leg": "unloading",
+      "d_mm": 0.0,
+      "R_input_N": 1.6802106191990034e-25,
+      "q_in_mm": 0.0,
+      "q_out_mm": -9.681342790935825e-25,
+      "minimum_J": 1.0,
+      "force_on_lower_body_N": {
+        "total": [
+          3.562128632984888e-28,
+          -1.203542512243533e-27
+        ],
+        "material": [
+          8.539448084790921e-29,
+          -2.9486082083254414e-28
+        ],
+        "regularization": [
+          2.708183824505796e-28,
+          -9.086816914109889e-28
+        ]
+      },
+      "has_matched_reference": false
+    }
+  ],
+  "scope": "Saved JSON projection only; no new reference, mechanics, formal labels or ranking"
+}
