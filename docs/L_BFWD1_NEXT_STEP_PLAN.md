@@ -1,3 +1,5 @@
+> 2026-10-16 L-CPILOT1 **PASS**：固定圆形工件0→0.25→0.50 mm短加载；生产 success，保存态 3，helper／outer pass／pass。原资格及历史保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_pilot_001/RESULTS.md)。原历史说明保留如下。
+
 > 2026-10-16 L-CPREP1 **PASS**：圆形工件输入／未变形准备，25 / 25 检查；三目标加载未执行。先适配圆形保存态显示，后另卡短加载。见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_input_preparation_001/RESULTS.md)。原历史说明保留如下。
 
 # L-BFWD1之后：固定圆形工件的小步推进计划

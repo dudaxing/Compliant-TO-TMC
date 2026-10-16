@@ -1,0 +1,58 @@
+"""Record the result-driven next proposal using ordinary JSON/source facts only."""
+from hashlib import sha256
+import json
+from pathlib import Path
+ROOT=Path('D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC')
+STAGE=ROOT/'lf_data_preparation/native_interface_001/lf_circle_pilot_001'
+closure=json.loads((STAGE/'author/closure.json').read_bytes())
+assert closure['execution_status']=='pass'
+last=closure['last_saved_state']['view_observation']
+assert last['d_mm']==.5 and last['boundary_intersects'] is False and last['raw_overlap'] is False
+recommendation='先补齐显式load_only保存态延伸合同与有限小模型兼容验证，再从本次成功0.50 mm末态只推进0.75 mm；保留原物理其余条件、数值门和ordered_cycle合同。本轮仅提出方案，不启动后续窗口。'
+closure['next_step']=recommendation
+closure['next_plan_status']='proposal_only_not_executed_or_approved_as_new_resource_window'
+paths=['hf_repo/src/hf_eval/native_resume.py','hf_repo/src/hf_eval/split_displacement.py','hf_repo/src/hf_eval/native_mean.py','hf_repo/src/hf_eval/native_project.py']
+closure['next_plan_source_check']={name:sha256((ROOT/name).read_bytes()).hexdigest() for name in paths}
+text='''# L-CPILOT1结果驱动的下一步：单调加载保存态延伸
+
+2026-10-16。当前L-CPILOT1已PASS并关闭。本文件是具体后续方案，**没有执行新试算、测试、默认代码修改或新资源窗口**。
+
+## 当前物理结果与含义
+
+圆形wave夹持器从零完成0→0.25→0.50 mm，3态、15次Newton检查、12次线搜索全部接受，无失败增量或二分。controller约941.9秒，outer955.4秒；最坏相对残差1.3421e-12，原1e-9门保持。
+
+0.50 mm末态：输入R=0.08574820985 N，q_out=0.4816680041 mm；实体积分点minJ=0.98793848，自由介质minJ=0.67012135。最小实际Q1外缘无符号距离0.67188818 mm；右侧参考尖端至圆形阶梯边界3.81117122 mm。未观察到边界相交、跨区域单元内部重叠或roundoff不确定；完整包含关系和机构自重叠仍未测试。
+
+最近位置在圆形下部与夹持梁之间，右侧参考尖端并非当前最近点。当前r9/c(71,40)保持；不由此改写既定几何。下半工件总Fy=0.0002414252 N，其中材料约0.00005108736 N、Hu约0.0001903378 N。它是有符号弱式合力，尚不能当作已验证的接触压力或有效夹持力。实际图、三帧GIF及逐态原值见[人工页](run_001/REVIEW.md)。
+
+## 为什么先补功能
+
+已有非零保存态续算和显式延伸入口只覆盖ordered_cycle；本任务是load_only。不能直接把当前成功末态交给它，也不能把任务类型临时改成cycle。单次从零增加0.75 mm不需要接口开发，但会重复约942秒的已有平衡工作；后续逐段接近工件仍会遇到相同缺口。因此优先增加可复用的单调加载延伸能力，继续复用原力核、切线、平衡算法、保存格式与圆形viewer。
+
+源码核查发现四个相连合同（不是仅删除kind检查）：
+
+1. native_resume._extension_targets和read_native_resume目前限定ordered_cycle。load_only新分支必须保留全部旧目标前缀，仅追加严格递增目标，明确新input.target_mm等于新峰值；四个说明metadata字段如有调整必须列为显式允许集，其余物理定义逐值相等。原ordered_cycle分支保持原规则。
+2. native_project要求load_only严格递增且max(targets)==input.target_mm。因此追加目标同时改变的是明确声明的新加载峰值，不得声称任务完全不变。
+3. split_displacement目前要求load_only从零开始，并禁止非零initial_parameter。仅经过原保存态身份、材料/边界/设置/来源和新鲜平衡复核的锚点能开启延伸；普通零起点仍必须从零。
+4. native_mean目前统一把continuation的task_target_executed设为false。要区分新峰值到达、子段完成、原前缀继承与整条新路径资格；不伪造从零新执行或完整cycle。
+
+## 拟议实施与验证
+
+下一卡先完成上述最小入口改动、文档和有限小模型验证：零起点、首次与再次单调延伸、非法峰值/前缀/物理改变，以及一项原ordered_cycle兼容回归。测试用于验证新增功能和旧接口兼容，不重跑本次夹持器三态，也不另建力核、参考框架或额外账本。
+
+验证和静审通过后，只从本次成功末态0.50 mm复核并推进到0.75 mm。显式新完整任务前缀为[0,0.25,0.50,0.75] mm、峰值0.75 mm，其余r9/c(71,40)、材料、网格、支撑、端口、原非clock设置和数值门保持。实际子段包含锚点复核与新增目标，保全原二分接受态、父状态SHA/反力身份及来源，旧结果不改。
+
+配套复用本次圆形纯保存态显示与收敛投影，标明0.50 mm是来源锚点复核；生成实际N帧变形、反力/材料-Hu合力、外缘/尖端距离、分区场和收敛图。新子段通过不升级旧前缀独参或整条路径资格。
+
+拟议上限：有限测试180秒、controller1800秒、显示共享600秒、helper3000秒/outer3060秒、采样8GiB；详细候选读集、安装顺序和执行卡需在实现静审后固定。本文件不代替新卡授权。首个终端错误停止后续，无修复重跑、外部重试、延期或force。
+
+## 后续取舍
+
+0.75 mm后再看实际最近点、距离、实体/介质J、合力变化与收敛成本，决定下一加载目标；不预先承诺1.20 mm足够闭合，也不先扩为完整加载/卸载。不例行补HP；进入新的接近/接触响应区间后，再决定最有信息量的选定态独参。压力、有效夹持、卸载/自由释放、稳定性与HF5仍是后续功能和资格缺口。
+'''
+(STAGE/'NEXT_STEPS.md').write_text(text,encoding='utf-8',newline='\n')
+(STAGE/'author/closure.json').write_text(json.dumps(closure,ensure_ascii=False,indent=2,allow_nan=False)+'\n',encoding='utf-8',newline='\n')
+result=STAGE/'RESULTS.md'
+with result.open('a',encoding='utf-8',newline='\n') as stream:
+    stream.write('\n## 结果驱动的具体后续取舍\n\n'+recommendation+'\n\n当前最接近位置在圆形下部与夹持梁之间；右侧参考尖端并非最近点。接口限制涉及native_resume、split_displacement、native_mean与task峰值定义，不能只改一个kind条件。具体物理依据、最小实施、兼容验证及拟议预算见[下一步计划](NEXT_STEPS.md)。\n')
+print('Result-driven load-only continuation proposal recorded; no execution or default HF changes.')
