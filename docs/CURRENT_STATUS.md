@@ -1,3 +1,5 @@
+> 2026-10-16 L-CPREP1 **PASS**：圆形工件输入／未变形准备，25 / 25 检查；三目标加载未执行。先适配圆形保存态显示，后另卡短加载。见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_input_preparation_001/RESULTS.md)。原历史说明保留如下。
+
 ## 2026-10-16：两LF短加载批量消费实际闭卡（L-BFWD1 PASS）
 
 本轮复用已准备fine/wave几何与原batch，明确新load_only [0,.25,.50]任务、原物理/门；实际结果为gripper_native_fine success/3接受态/最后d=0.5mm；gripper_wave_fine success/3接受态/最后d=0.5mm。outer/helper/batch/display分别pass/pass/success/pass，唯一终端8e5296/session26587 exit0；helper=1743.728596699999秒／4500秒；outer=1744.4946827999993秒／4560秒；SUP2采样峰=1119481856B／8589934592B。
