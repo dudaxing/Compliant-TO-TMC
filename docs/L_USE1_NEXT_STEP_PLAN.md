@@ -1,3 +1,9 @@
+## 2026-10-16：L-BFWD1后的下一步已规划，尚未执行
+
+两LF短加载batch及其交付已通过，现有索引/状态表/人工页足够使用。下一项功能建议为L-CPREP1：仅wave一例固定圆形截面工件r9mm、圆心(71,40)mm，复用原网格/材料/边界，准备独立短任务并做静态构模兼容性及未变形图；不启动新F/T/HP或平衡求解。
+
+[具体范围、依据、验收、图示及条件式后续计划](L_BFWD1_NEXT_STEP_PLAN.md)。默认构模已支持circle，但主要方体viewer/有限面射线不能直接复用；真实阶梯边界与解析圆参考分别标注。准备通过后再按实际结果安排圆形pilot、近接触和卸载，不重跑两例旧完整循环，不例行新增HP或另造消费者框架。本条只记录计划，L-CPREP1及后续计算均尚未实施/执行；下方原文完整保留。
+
 ## 2026-10-16：两LF短加载批量消费实际闭卡（L-BFWD1 PASS）
 
 本轮复用已准备fine/wave几何与原batch，明确新load_only [0,.25,.50]任务、原物理/门；实际结果为gripper_native_fine success/3接受态/最后d=0.5mm；gripper_wave_fine success/3接受态/最后d=0.5mm。outer/helper/batch/display分别pass/pass/success/pass，唯一终端8e5296/session26587 exit0；helper=1743.728596699999秒／4500秒；outer=1744.4946827999993秒／4560秒；SUP2采样峰=1119481856B／8589934592B。
