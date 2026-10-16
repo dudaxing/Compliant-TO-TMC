@@ -132,6 +132,8 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
     remain historical; success here completes only the original-task suffix.
     extend_path=True requires an explicit append-only task and a completed
     terminal source segment; default strict same-task resume is unchanged.
+    Load-only extension also declares its new input peak, preserving all physics
+    and permitting only the four explanatory task metadata fields to differ.
     """
     if type(extend_path) is not bool or (extend_path and (saved_result is None or task_dict is None)):
         raise TMCError("extend_path requires a saved terminal state and explicit new task", code="invalid_input")
@@ -248,7 +250,8 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
         settings=settings, force_scale_per_length=project.material["force_scale_per_length"],
         assembler=assemble, on_accept=capture, path_mode=path_mode,
         initial_guess=initial_guess, **({} if anchor is None else dict(
-            initial_state=anchor.state,initial_R=anchor.R,initial_parameter=anchor.parameter)))
+            initial_state=anchor.state,initial_R=anchor.R,initial_parameter=anchor.parameter)),
+        **({"saved_load_only_anchor":True} if anchor is not None and extend_path and path_mode == "load_only" else {}))
     source = deepcopy(project.region_metadata["source_geometry"])
     source["snapshot"] = {key: "model/"+value for key, value in source["snapshot"].items()}
     metadata = dict(schema_version=SCHEMA_VERSION, scope="native_small_mean_driven_numerical_path",
@@ -301,6 +304,11 @@ def solve_native_mean(geometry_file, task_dict: dict, targets, *,
             full_original_path_completed=False,source_binding_scope="Entry/controller/assembler/force and saved-resume reader; stage receipt binds executed closure")
         if extend_path:
             metadata.update(scope="native_saved_mean_explicit_task_extension_segment",full_extended_path_completed=False)
+            if path_mode == "load_only":
+                segment = dict(new_peak_reached=bool(metadata["loading_peak_reached"]),
+                               extended_segment_completed=bool(path["target_reached"]))
+                metadata.update(segment)
+                metadata["continuation"].update(segment)
     return NativeMeanResult(project, path, tuple(accepted), metadata)
 
 

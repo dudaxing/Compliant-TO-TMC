@@ -1,0 +1,945 @@
+{
+  "schema_version": "hf-native-mean-result-1.2",
+  "scope": "native_saved_mean_explicit_task_extension_segment",
+  "status": "success",
+  "production_converged": true,
+  "target_reached": true,
+  "targets_mm": [
+    0.0005,
+    0.00075
+  ],
+  "task_target_mm": 0.00075,
+  "task_target_executed": false,
+  "reached_displacement": 0.00075,
+  "target_origin": 0.0,
+  "lift_origin_zero": true,
+  "lift_shape_zero": true,
+  "physical_displacement": "Exact D(lift)+D(fluctuation); no rounded display array in mechanics",
+  "source_geometry": {
+    "geometry_id": "4b7bac118969b353d53e1af217831ad01f3b532d9a961f858ffbc6f0112aa6ba",
+    "descriptor_sha256": "38ca552f2451e1708cdf4cecb1d30bbeb61c48af1836d70c1924762257755490",
+    "descriptor_file_sha256": "194e61861560e7caa9cbc90176308ca417cc93cd3a675fe854925e0f49453f9f",
+    "arrays_sha256": "3f098e36c8c419d4a19be601ce8a8fc2120ce2cc14fc762649c3b648dc7fbfd5",
+    "snapshot": {
+      "descriptor": "model/source_geometry/geometry.json",
+      "arrays": "model/source_geometry/geometry.npz"
+    }
+  },
+  "task_sha256": "fc626fcb1bea56ca0dccc03145665c4f52a94628deada3615df7fb5c37de1e35",
+  "grid": {
+    "shape_yx": [
+      4,
+      4
+    ],
+    "origin_mm": [
+      0.0,
+      0.0
+    ],
+    "cell_size_mm": [
+      0.5,
+      0.5
+    ],
+    "axes": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "extent_mm": [
+      2.0,
+      2.0
+    ],
+    "array_order": "C_yx_bottom_up",
+    "value_location": "cell"
+  },
+  "model_extent": {
+    "kind": "lower_half",
+    "symmetry_axis": {
+      "normal": [
+        0.0,
+        1.0
+      ],
+      "offset_mm": 2.0
+    }
+  },
+  "counts": {
+    "cells": 16,
+    "nodes": 25,
+    "dofs": 50,
+    "solid_cells": 15,
+    "medium_cells": 1,
+    "solid_incident_nodes": 25,
+    "fixed_dofs": 9,
+    "free_dofs": 41
+  },
+  "settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 25,
+    "armijo_c": 0.0001,
+    "max_backtracks": 12,
+    "max_bisections": 4,
+    "minimum_increment": 3.125e-05,
+    "time_limit_seconds": 30.0
+  },
+  "backend": "numpy",
+  "tangent_version": "p26_q1_split_numpy_shadow_jacobian_v5",
+  "force_scale_per_length": 2.0,
+  "k_out_N_per_mm": 0.0,
+  "matrix_units": "N/mm",
+  "matrix_semantics": "K_ij=df_i/dw_j with lift fixed; full DOFs; unsymmetrized",
+  "input_force_sign": "actuator_on_model",
+  "force_energy_extent": "lower_half modeled geometry; no automatic doubling",
+  "accepted_states": 2,
+  "mechanics_source_sha256": {
+    "hf_repo/src/hf_eval/native_mean.py": "76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4",
+    "hf_repo/src/hf_eval/split_displacement.py": "151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8",
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+    "hf_repo/src/hf_eval/native_resume.py": "e8162964487df510a608a980feb1a03b3ac36e97a55452fac9e342274cfee2d1"
+  },
+  "source_binding_scope": "Entry/controller/assembler/force and saved-resume reader; stage receipt binds executed closure",
+  "call_counts": {
+    "force_calls": 6,
+    "force_calls_completed": 6,
+    "tangent_calls": 4,
+    "tangent_calls_completed": 4,
+    "solver_invocations": 1,
+    "JIT_calls": 0,
+    "HP_calls": 0
+  },
+  "save_force_calls": 0,
+  "save_tangent_calls": 0,
+  "independent_HP_qualified": false,
+  "equilibrium_qualified": false,
+  "HF_qualified": false,
+  "qualification_scope": "Production stopping only; independent saved-state HP and task validation required",
+  "failure": null,
+  "path_diagnostics": {
+    "trials": [
+      {
+        "target_displacement": 0.00075,
+        "stage_parameter": 0.00075,
+        "newton_check": 1,
+        "factor": 1.0,
+        "fixed_residual_scale": 0.001474628528450803,
+        "base_phi": 0.3785788291712463,
+        "accepted": true,
+        "phi": 6.434868711182809e-08,
+        "minimum_J": 0.9997262562112488,
+        "mean_error_before_projection": -1.0842021724855044e-19,
+        "constraint_residual": 0.0,
+        "R_input": 0.00042584217633956345
+      },
+      {
+        "target_displacement": 0.00075,
+        "stage_parameter": 0.00075,
+        "newton_check": 2,
+        "factor": 1.0,
+        "fixed_residual_scale": 0.0002611506435422982,
+        "base_phi": 2.051742019963596e-06,
+        "accepted": true,
+        "phi": 5.074517086715329e-20,
+        "minimum_J": 0.9997265576722132,
+        "mean_error_before_projection": 0.0,
+        "constraint_residual": 0.0,
+        "R_input": 0.0004259333215026563
+      }
+    ],
+    "failed_attempts": [],
+    "newton_history": [
+      {
+        "d": 0.0005,
+        "R_input": 0.00028394341759967705,
+        "q_in": 0.0005,
+        "q_out": -0.00012857691960243902,
+        "constraint_residual": -1.3552527156068805e-20,
+        "constraint_bound": 5e-14,
+        "relative_residual": 4.783000621192142e-10,
+        "residual_scale": 0.00017387912229190167,
+        "newton_check": 1,
+        "minimum_J": 0.9998177012454781,
+        "state_sha256": "9f9e91af7e23c6a6af92638fd3a684954ed6db2d09db2543d87cda268db9006d"
+      },
+      {
+        "d": 0.00075,
+        "R_input": 0.00042592725679392265,
+        "q_in": 0.00075,
+        "q_out": -0.00012857691960243902,
+        "constraint_residual": 0.0,
+        "constraint_bound": 7.500000000000001e-14,
+        "relative_residual": 0.8701480669072895,
+        "residual_scale": 0.001474628528450803,
+        "newton_check": 1,
+        "minimum_J": 0.9991510359402348,
+        "state_sha256": "847021b58b6d5ecce67675ccf600625f42b4d27576d2acabe6be03bc18791e60"
+      },
+      {
+        "d": 0.00075,
+        "R_input": 0.00042584217633956345,
+        "q_in": 0.00075,
+        "q_out": -0.00019283503717497675,
+        "constraint_residual": 0.0,
+        "constraint_bound": 7.500000000000001e-14,
+        "relative_residual": 0.0020257058127791387,
+        "residual_scale": 0.0002611506435422982,
+        "newton_check": 2,
+        "minimum_J": 0.9997262562112488,
+        "state_sha256": "a3fd1a9ff856a0bc107dbd711d86aba95d9cf0643482376105f99320746d2b12"
+      },
+      {
+        "d": 0.00075,
+        "R_input": 0.0004259333215026563,
+        "q_in": 0.00075,
+        "q_out": -0.00019285589089153543,
+        "constraint_residual": 0.0,
+        "constraint_bound": 7.500000000000001e-14,
+        "relative_residual": 3.18967332795584e-10,
+        "residual_scale": 0.000260829825589201,
+        "newton_check": 3,
+        "minimum_J": 0.9997265576722132,
+        "state_sha256": "95798cec2dbdaea8c476b7e080b6d706670a2be44f6db4d37c403553c6c5cdf6"
+      }
+    ],
+    "linear_solve_diagnostics": [
+      {
+        "phase": "predictor",
+        "target_displacement": 0.00075,
+        "newton_check": null,
+        "force_block_residual_norm": 4.082609870241221e-19,
+        "relative_force_block_residual": 4.6955160801833606e-15,
+        "constraint_block_residual": -5.421010862427522e-20,
+        "normwise_backward_error": 1.9286199465497937e-17,
+        "matrix_norm": "Frobenius",
+        "vector_norm": "Euclidean",
+        "mixed_unit_backward_error_is_diagnostic_only": true,
+        "factorization": "general sparse LU",
+        "symmetrized": false,
+        "stage_parameter": 0.00075,
+        "displacement_mode": "port_projection",
+        "applied_dw": false,
+        "applied_dR": true,
+        "mean_error_before_projection": -5.421010862427522e-20,
+        "mean_error_after_projection": 0.0
+      },
+      {
+        "phase": "corrector",
+        "target_displacement": 0.00075,
+        "newton_check": 1,
+        "force_block_residual_norm": 4.535007110028572e-19,
+        "relative_force_block_residual": 3.534191363870933e-16,
+        "constraint_block_residual": -7.453889935837843e-20,
+        "normwise_backward_error": 2.3350623429619065e-17,
+        "matrix_norm": "Frobenius",
+        "vector_norm": "Euclidean",
+        "mixed_unit_backward_error_is_diagnostic_only": true,
+        "factorization": "general sparse LU",
+        "symmetrized": false,
+        "stage_parameter": 0.00075
+      },
+      {
+        "phase": "corrector",
+        "target_displacement": 0.00075,
+        "newton_check": 2,
+        "force_block_residual_norm": 2.43903251169743e-22,
+        "relative_force_block_residual": 4.610522169952106e-16,
+        "constraint_block_residual": -5.790264287871194e-23,
+        "normwise_backward_error": 3.0536359643503386e-17,
+        "matrix_norm": "Frobenius",
+        "vector_norm": "Euclidean",
+        "mixed_unit_backward_error_is_diagnostic_only": true,
+        "factorization": "general sparse LU",
+        "symmetrized": false,
+        "stage_parameter": 0.00075
+      }
+    ],
+    "maximum_bisection_depth": 0,
+    "timing_seconds": {
+      "kernel_calls": 6,
+      "successful_kernel_calls": 6,
+      "kernel_and_transfer": 0.41382539999176515,
+      "assembly": 0.0008361000000149943,
+      "sparse_solve": 0.0006300999957602471,
+      "callback": 0.00026729999808594584,
+      "all_assembly_attempts_wall": 0.41481999999814434,
+      "total": 0.4191380999982357
+    }
+  },
+  "timing_seconds": {
+    "project_preparation": 0.009459499997319654,
+    "evaluation": 0.4295473000020138
+  },
+  "path_kind": "load_only",
+  "path_completed": true,
+  "loading_peak_reached": true,
+  "unload_endpoint_reached": null,
+  "response_mode": "mechanical",
+  "response_contract": "split-numpy-mechanical-1.0",
+  "force_kernel_version": "p26_q1_split_mechanical_numpy_aux_omitted_candidate1",
+  "auxiliary_material_energy": {
+    "status": "not_evaluated",
+    "qualified": false,
+    "field_present": false
+  },
+  "tangent_execution": {
+    "mode": "chunk256",
+    "element_block_size": 256,
+    "global_selector_scope": "full_batch"
+  },
+  "initial_guess": "port_projection",
+  "continuation": {
+    "schema_version": "hf-native-saved-resume-1.0",
+    "parent_result": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_extension_001/run_001/t/1/p/result.json",
+      "sha256": "ae47c9430e886a7a0c416ea8011e614bc6b0fd9bbe78578366d179c355cb421d"
+    },
+    "parent_model": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_extension_001/run_001/t/1/p/model/model.json",
+      "sha256": "f92997bb578045e1bb14d222ca94b43c79058367713b6df5f39b7deadadef99c"
+    },
+    "selected_state": {
+      "accepted_index": 2,
+      "original_target_index": 2,
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_extension_001/run_001/t/1/p/accepted/002/state.json",
+      "descriptor_file_sha256": "6822bd72fc36470ac5c221bd79dd1fc4f30b6c8959a1e2a8faee193e4c11a10b",
+      "state_sha256": "9f9e91af7e23c6a6af92638fd3a684954ed6db2d09db2543d87cda268db9006d",
+      "archive_sha256": "400d24fccc6e8b4d307156a6a3c179e4db6b953d37f1c5b7a9d715baafe83990",
+      "R_input_N": 0.00028394341759967705,
+      "d_mm": 0.0005,
+      "q_in_mm": 0.0005,
+      "constraint_residual_mm": -1.3552527156068805e-20,
+      "parent_leg": "loading"
+    },
+    "parent_status": "success",
+    "parent_failure": null,
+    "parent_path_completed": true,
+    "parent_task_target_executed": true,
+    "parent_unload_endpoint_reached": null,
+    "parent_mechanics_source_sha256": {
+      "hf_repo/src/hf_eval/native_mean.py": "76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4",
+      "hf_repo/src/hf_eval/split_displacement.py": "151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8",
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+    },
+    "parent_producer_flags": {
+      "independent_HP_qualified": false,
+      "equilibrium_qualified": false,
+      "HF_qualified": false
+    },
+    "original_task_targets_mm": [
+      0.0,
+      0.00025,
+      0.0005,
+      0.00075
+    ],
+    "requested_suffix_targets_mm": [
+      0.0005,
+      0.00075
+    ],
+    "original_target_indices": [
+      2,
+      3
+    ],
+    "initial_parameter": 0.0005,
+    "target_origin": 0.0,
+    "state_transport": "Original lift/fluctuation and signed R; no rounded display/rebase/translation",
+    "fresh_anchor_required": true,
+    "saved_matrix_or_force_or_tangent_read": false,
+    "full_original_path_executed_by_child": false,
+    "independent_HP_qualified": false,
+    "HF5_qualified": false,
+    "continuation_mode": "explicit_task_extension",
+    "source_task_sha256": "1f95682a11038e88024371c92808c4cc1f735ed86bf28a2cfecd5343187b165b",
+    "source_task_targets_mm": [
+      0.0,
+      0.00025,
+      0.0005
+    ],
+    "extended_task_sha256": "fc626fcb1bea56ca0dccc03145665c4f52a94628deada3615df7fb5c37de1e35",
+    "extended_task_targets_mm": [
+      0.0,
+      0.00025,
+      0.0005,
+      0.00075
+    ],
+    "appended_targets_mm": [
+      0.00075
+    ],
+    "parent_continuation": null,
+    "full_extended_path_executed_by_child": false,
+    "full_extended_path_completed": false,
+    "segment_completed": true,
+    "anchor_revalidated": true,
+    "full_original_path_completed": false,
+    "task_target_executed": false,
+    "anchor_identity_preserved": true,
+    "new_peak_reached": true,
+    "extended_segment_completed": true
+  },
+  "full_original_path_completed": false,
+  "full_extended_path_completed": false,
+  "new_peak_reached": true,
+  "extended_segment_completed": true,
+  "model": {
+    "descriptor_path": "model/model.json",
+    "descriptor_file_sha256": "15f0e04b40907d8ad873b3060b741efaf8e5f3359f0277c7e5d24decd6de766d",
+    "descriptor_sha256": "4ae0210fe892c502d8624bae6825f15d52ab17bbadeadd945b3a0a683077c8ac",
+    "arrays_path": "model/model.npz",
+    "arrays_sha256": "61ed753ec49e481614c073006da93b85521b2ab4fe7e1b709d86848167f97b04"
+  },
+  "states": [
+    {
+      "d": 0.0005,
+      "physical_mean_target_mm": 0.0005,
+      "target_origin": 0.0,
+      "R_input": 0.00028394341759967705,
+      "q_in": 0.0005,
+      "q_out": -0.00012857691960243902,
+      "constraint_residual": -1.3552527156068805e-20,
+      "displacement_scale": 0.0005,
+      "constraint_bound": 5e-14,
+      "residual_scale": 0.00017387912229190167,
+      "force_scale_floor": 1.0000000000000001e-11,
+      "free_force_residual_norm": 8.316639499345102e-14,
+      "relative_residual": 4.783000621192142e-10,
+      "minimum_J": 0.9998177012454781,
+      "global_force_balance_scale": 0.00047367538221565096,
+      "relative_global_force_balance": 2.137224577338649e-11,
+      "output_spring_energy": 0.0,
+      "output_spring_generalized_force": 0.0,
+      "newton_checks": 1,
+      "state_representation": "split_displacement_v1",
+      "state_sha256": "9f9e91af7e23c6a6af92638fd3a684954ed6db2d09db2543d87cda268db9006d",
+      "original_target_displacement": 0.0005,
+      "is_original_target": true,
+      "bisection_depth": 0,
+      "elapsed_seconds": 0.0888042000005953,
+      "original_target_index": 2,
+      "leg": "resume_origin",
+      "child_original_target_index": 0,
+      "continuation_anchor": true,
+      "assembler_state_sha256": "9f9e91af7e23c6a6af92638fd3a684954ed6db2d09db2543d87cda268db9006d",
+      "assembler_force_call": 1,
+      "assembler_tangent_call": 1,
+      "max_abs_Hu_per_mm": 0.0003840536668958901,
+      "response_mode": "mechanical",
+      "response_contract": "split-numpy-mechanical-1.0",
+      "force_kernel_version": "p26_q1_split_mechanical_numpy_aux_omitted_candidate1",
+      "auxiliary_material_energy": {
+        "status": "not_evaluated",
+        "qualified": false,
+        "field_present": false
+      },
+      "tangent_execution": {
+        "mode": "chunk256",
+        "element_block_size": 256,
+        "global_selector_scope": "full_batch"
+      },
+      "state": {
+        "path": "accepted/000/state.npz",
+        "sha256": "400d24fccc6e8b4d307156a6a3c179e4db6b953d37f1c5b7a9d715baafe83990",
+        "fields": {
+          "lift": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "7a12e561363385e9dfeeab326368731c030ed4b374e7f5897ac819159d2884c5"
+          },
+          "fluctuation": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "2ee37b96902130ddec58b6b9a5845e00c3d36c46c2dd8ea9413338c3c4382f26"
+          }
+        }
+      },
+      "forces": {
+        "path": "accepted/000/forces.npz",
+        "sha256": "b4ec8992e3b168fb752e1dcaab50c40fe5eea357c1320954f522d67825d9aeb1",
+        "fields": {
+          "element_total_force": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8
+            ],
+            "sha256": "41d7144c070e582afd6a7764980ca2ee498a06f5357852196f3ce6eb8acdfe97"
+          },
+          "element_material_force": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8
+            ],
+            "sha256": "45be7decaebb82f88fc87a154c51783deeff2b06b4bff63072ac982ae3823080"
+          },
+          "element_regularization_force": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8
+            ],
+            "sha256": "2e658d2cd2194f6a4be5e543d6d80bebacbc540796c27aaba23fc30510c1364e"
+          },
+          "global_total_force": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "8b10d1cfbd4fd76b789c4c91784fddae8097e3f7cc5f2e925cc5714a3c81c1fa"
+          },
+          "global_material_force": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "ef1b3f4060780f59ea0c94951e83ccb55ced786d58731095238d9f7db1a12daf"
+          },
+          "global_regularization_force": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "fb3b2769001b746025b5fb8bb47dee0ad4472eeaaaedca87dbdf31816a3a1597"
+          },
+          "J": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              9
+            ],
+            "sha256": "4488f54ce764e764b9b591a622f3b2b90c93bfd06d23e016769eeb6eebcbfb68"
+          },
+          "Hu": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              2,
+              2,
+              2
+            ],
+            "sha256": "57f956746f65f79a2002e051be6e3e6aae386c071e5ca63cbea2f84243535525"
+          },
+          "F": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              9,
+              2,
+              2
+            ],
+            "sha256": "c26be3bc3f9c40034a68c2edf3b7bdbbf04522d81ec5c7a412430e5698834a1d"
+          },
+          "stress_first_piola": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              9,
+              2,
+              2
+            ],
+            "sha256": "52693d3fb4973cdfa8425d3fef9ee8b6aa77990815c225bbd13fba9ecb4af057"
+          },
+          "stress_second_piola": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              9,
+              2,
+              2
+            ],
+            "sha256": "b0a0172e776768f50bfc5333ecaeef898c2154c4b34a5bb8c5fce4add1dd24c3"
+          },
+          "input_force": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "053ae41b2a1f2ddff3fd95bd8dd042b7157a4071e32f66dfc4d9aabbc8a7683a"
+          },
+          "support_reaction": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "a2561ad37d87816fc1d0453af97101241d684fb010b0a1a60b78957a2e6e7ebd"
+          },
+          "spring_force_on_structure": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "7a12e561363385e9dfeeab326368731c030ed4b374e7f5897ac819159d2884c5"
+          },
+          "force_residual": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "38bf17ceb36fbed84bc7c77fb1b6886ea6ad97f9edc6aeb34e96e7ac7e51b128"
+          },
+          "global_force_balance": {
+            "dtype": "float64",
+            "shape": [
+              2
+            ],
+            "sha256": "c41dc8abb5cc531b0f60f301237ceec771698d8ac8212cdb717f8b77f9c6f5b5"
+          }
+        }
+      },
+      "tangents": {
+        "path": "accepted/000/tangents.npz",
+        "sha256": "acba29160ce56c4583da0db334fc243e68668fe2f4bbad4069fbdc929dafe483",
+        "fields": {
+          "total_tangent": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8,
+              8
+            ],
+            "sha256": "9829aaa48835207667c76341c1b70d4a3ef0ba30de2aba4af604aba8b18b4ba0"
+          },
+          "material_tangent": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8,
+              8
+            ],
+            "sha256": "2f53e54c370513eceed5ab679bb4a2dbe0df1b93fde5d857c66eb4e8c248e9ae"
+          },
+          "regularization_tangent": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8,
+              8
+            ],
+            "sha256": "3c1b7aa438869e423804819ac2f39dd41abe0d3567551337ba00581e29d69a1e"
+          }
+        }
+      },
+      "matrix": {
+        "path": "accepted/000/total_matrix.npz",
+        "sha256": "15e41c86904a5afdb60cda9c16a03ec5f1c03bdfcd51445051230ef35d61332d",
+        "format": "csc",
+        "shape": [
+          50,
+          50
+        ],
+        "nnz": 676,
+        "units": "N/mm",
+        "symmetrized": false,
+        "fields": {
+          "data": {
+            "dtype": "float64",
+            "shape": [
+              676
+            ],
+            "sha256": "323aeb180e1ca99437bc0c6f4dc81952f450ac10e8c21c58cf845cbbd510d7d4"
+          },
+          "indices": {
+            "dtype": "int32",
+            "shape": [
+              676
+            ],
+            "sha256": "ad1b90cb29755cfb9b077c6dd82d2122bdb300a62974fc58c97009b8790ea750"
+          },
+          "indptr": {
+            "dtype": "int32",
+            "shape": [
+              51
+            ],
+            "sha256": "a77dbc15c9e2bafe15be0089d3973980676a652416be8e4011a86d4a15a7f524"
+          }
+        }
+      },
+      "descriptor_sha256": "7ea57a5238073381333de93c5082507db76e8a8e5a2acd885adcfc122714bd1f",
+      "descriptor_path": "accepted/000/state.json",
+      "descriptor_file_sha256": "a230436f706d202df50f82030258e9a05cb54affd680ae4049af87aba07ec308"
+    },
+    {
+      "d": 0.00075,
+      "physical_mean_target_mm": 0.00075,
+      "target_origin": 0.0,
+      "R_input": 0.0004259333215026563,
+      "q_in": 0.00075,
+      "q_out": -0.00019285589089153543,
+      "constraint_residual": 0.0,
+      "displacement_scale": 0.00075,
+      "constraint_bound": 7.500000000000001e-14,
+      "residual_scale": 0.000260829825589201,
+      "force_scale_floor": 1.5e-11,
+      "free_force_residual_norm": 8.319619378172482e-14,
+      "relative_residual": 3.18967332795584e-10,
+      "minimum_J": 0.9997265576722132,
+      "global_force_balance_scale": 0.0007105281750412562,
+      "relative_global_force_balance": 1.4252071738519686e-11,
+      "output_spring_energy": 0.0,
+      "output_spring_generalized_force": 0.0,
+      "newton_checks": 3,
+      "state_representation": "split_displacement_v1",
+      "state_sha256": "95798cec2dbdaea8c476b7e080b6d706670a2be44f6db4d37c403553c6c5cdf6",
+      "original_target_displacement": 0.00075,
+      "is_original_target": true,
+      "bisection_depth": 0,
+      "elapsed_seconds": 0.4190156000040588,
+      "original_target_index": 3,
+      "leg": "loading",
+      "child_original_target_index": 1,
+      "continuation_anchor": false,
+      "assembler_state_sha256": "95798cec2dbdaea8c476b7e080b6d706670a2be44f6db4d37c403553c6c5cdf6",
+      "assembler_force_call": 6,
+      "assembler_tangent_call": 4,
+      "max_abs_Hu_per_mm": 0.0005761526705013111,
+      "response_mode": "mechanical",
+      "response_contract": "split-numpy-mechanical-1.0",
+      "force_kernel_version": "p26_q1_split_mechanical_numpy_aux_omitted_candidate1",
+      "auxiliary_material_energy": {
+        "status": "not_evaluated",
+        "qualified": false,
+        "field_present": false
+      },
+      "tangent_execution": {
+        "mode": "chunk256",
+        "element_block_size": 256,
+        "global_selector_scope": "full_batch"
+      },
+      "state": {
+        "path": "accepted/001/state.npz",
+        "sha256": "93c22e05acc565b817466d3f7b5b14ccc9c2543b49896e17b317d4aba5e276b6",
+        "fields": {
+          "lift": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "7a12e561363385e9dfeeab326368731c030ed4b374e7f5897ac819159d2884c5"
+          },
+          "fluctuation": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "86aea37e4d81c12dc1e053671d5a0d2481b7fb9c6992b51bbdce96fd05ef34f7"
+          }
+        }
+      },
+      "forces": {
+        "path": "accepted/001/forces.npz",
+        "sha256": "b43fe5ca240cb1bb64e8c6e5d25cff74e2f5efdbc23dce0263a83de29452838f",
+        "fields": {
+          "element_total_force": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8
+            ],
+            "sha256": "9c6330818d00e9614bafa7c54d23a3f5553ab6edce6bdb21af3615aedfdb40b7"
+          },
+          "element_material_force": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8
+            ],
+            "sha256": "f4ea47d3f5d82418636cbae18ea0c7ac09a30c0250484b184b828b04b2401f32"
+          },
+          "element_regularization_force": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8
+            ],
+            "sha256": "962ee6f86210acab60c01ff272e77b0c05aca794351a36de6a5a0d1ec549c215"
+          },
+          "global_total_force": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "622b1f6188cfd60eb28c5c193c18028c33e7218aa7f7b90ff018328052d5a9aa"
+          },
+          "global_material_force": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "3264384127f742d91307c542e0577361ec319a85e17b462b81ab8da7bd9a000b"
+          },
+          "global_regularization_force": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "1b5a3b20d5795e11a482b2814b5cf7542b626f76ed2f969fde29d00a71cc9c38"
+          },
+          "J": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              9
+            ],
+            "sha256": "900e0efd99f9443c9271782093c571284cf65f78c91a9ba77aa2c96c78ed61a9"
+          },
+          "Hu": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              2,
+              2,
+              2
+            ],
+            "sha256": "fa19dffb4f49610ba93d0ff73abca8992a0637cc2fd55101a0b632574ba6094b"
+          },
+          "F": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              9,
+              2,
+              2
+            ],
+            "sha256": "7e9c7b419ec73229696f262f8ed66c5f165bc7f06f05f79e474fbfd3af9cced9"
+          },
+          "stress_first_piola": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              9,
+              2,
+              2
+            ],
+            "sha256": "fa36153064e7d92bf1fdfcf302cf41536d38e9f8e6a1befd2c36e3b0e6882f9d"
+          },
+          "stress_second_piola": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              9,
+              2,
+              2
+            ],
+            "sha256": "4e6ccd113119799e71473d5386369b9a9d5487533ffd48680a5fb82c265cbe1e"
+          },
+          "input_force": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "48eac38764773b64c808e0284c601682498b1c8a222f866e3e4366de25d2c44e"
+          },
+          "support_reaction": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "595522c9509d598db39bf5630902074224a72aea2447b203869a224868ee2daa"
+          },
+          "spring_force_on_structure": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "7a12e561363385e9dfeeab326368731c030ed4b374e7f5897ac819159d2884c5"
+          },
+          "force_residual": {
+            "dtype": "float64",
+            "shape": [
+              50
+            ],
+            "sha256": "6071c64bfc02cd0f02b32065a1f934b168b9412a28d3ca1af9e2aa37762382a3"
+          },
+          "global_force_balance": {
+            "dtype": "float64",
+            "shape": [
+              2
+            ],
+            "sha256": "4b121555fe0229d93ae305055a8dfb3c674dd433be28fc745fa1cbb28743aa38"
+          }
+        }
+      },
+      "tangents": {
+        "path": "accepted/001/tangents.npz",
+        "sha256": "65f0368a8049b4bbd015f63f6840f98e712c747ec2b53e584d9c69c5813c329a",
+        "fields": {
+          "total_tangent": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8,
+              8
+            ],
+            "sha256": "6ae47f5161caf7b645347e208e045e7ed6d9ae51ef13a3fa4228a7043582e81e"
+          },
+          "material_tangent": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8,
+              8
+            ],
+            "sha256": "bad7c108c6cdb2761e30ffaea044b7de806e56591c7ee24339ac91e23164e774"
+          },
+          "regularization_tangent": {
+            "dtype": "float64",
+            "shape": [
+              16,
+              8,
+              8
+            ],
+            "sha256": "799713334dc9aed46207aee58b684e41dc9c2e8e9161dd995a028697c80d443d"
+          }
+        }
+      },
+      "matrix": {
+        "path": "accepted/001/total_matrix.npz",
+        "sha256": "bcface312a535e71a7f427abe45e9abd98ed3611174d5889ec5befdc6d8ec004",
+        "format": "csc",
+        "shape": [
+          50,
+          50
+        ],
+        "nnz": 676,
+        "units": "N/mm",
+        "symmetrized": false,
+        "fields": {
+          "data": {
+            "dtype": "float64",
+            "shape": [
+              676
+            ],
+            "sha256": "ab6c3b441df9bbf436d9fb85c1f59946b466eab91193d80e261db5a837099be4"
+          },
+          "indices": {
+            "dtype": "int32",
+            "shape": [
+              676
+            ],
+            "sha256": "ad1b90cb29755cfb9b077c6dd82d2122bdb300a62974fc58c97009b8790ea750"
+          },
+          "indptr": {
+            "dtype": "int32",
+            "shape": [
+              51
+            ],
+            "sha256": "a77dbc15c9e2bafe15be0089d3973980676a652416be8e4011a86d4a15a7f524"
+          }
+        }
+      },
+      "descriptor_sha256": "d4a44edbca3253cb46803742d8f193d89b17972668ba76b0d46e95091346b24d",
+      "descriptor_path": "accepted/001/state.json",
+      "descriptor_file_sha256": "840e3a77cce2696eba601340e7374e9f9901743da88fb3cc54c5be9986e9a2f6"
+    }
+  ],
+  "descriptor_sha256": "b3bd3eaca7c78bb46cfc911e8ce0114e25543cb27ae76474509f417aafc0963f"
+}

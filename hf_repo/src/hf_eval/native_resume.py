@@ -49,11 +49,27 @@ def _extension_targets(parent, selected_state_index, model, task):
     old_task = model["task"]
     old_targets = old_task["path"]["targets_mm"]
     if not isinstance(task, dict) or not isinstance(task.get("path"), dict):
-        raise TMCError("Path extension requires an explicit ordered task", code="invalid_task_extension")
+        raise TMCError("Path extension requires an explicit task", code="invalid_task_extension")
     new_targets = task["path"].get("targets_mm")
     unchanged = deepcopy(task)
     unchanged["path"]["targets_mm"] = deepcopy(old_targets)
-    if (old_task["path"]["kind"] != "ordered_cycle"
+    load_only = old_task["path"]["kind"] == "load_only"
+    if load_only:
+        if (parent.get("path_kind") != "load_only" or task["path"].get("kind") != "load_only"
+                or not isinstance(new_targets, list) or len(new_targets) <= len(old_targets)
+                or any(type(value) not in (int, float) or not np.isfinite(value) for value in new_targets)
+                or new_targets[0] != 0 or any(b <= a for a,b in zip(new_targets, new_targets[1:]))
+                or not isinstance(task.get("input"), dict)
+                or task["input"].get("target_mm") != new_targets[-1]
+                or old_task["input"]["target_mm"] != old_targets[-1]):
+            raise TMCError("Load-only extension must strictly increase to its explicit new peak", code="invalid_task_extension")
+        unchanged["input"]["target_mm"] = old_task["input"]["target_mm"]
+        for name in ("task_id", "purpose", "parameter_origin", "description"):
+            if name in old_task:
+                unchanged[name] = deepcopy(old_task[name])
+            else:
+                unchanged.pop(name, None)
+    if (old_task["path"]["kind"] not in ("ordered_cycle", "load_only")
             or not isinstance(new_targets, list) or len(new_targets) <= len(old_targets)
             or canonical_hash(new_targets[:len(old_targets)]) != canonical_hash(old_targets)
             or canonical_hash(unchanged) != canonical_hash(old_task)):
@@ -143,8 +159,11 @@ def read_native_resume(saved_result,selected_state_index,project,targets,setting
             or model["descriptor_sha256"] != parent["model"]["descriptor_sha256"]
             or model["arrays"]["sha256"] != parent["model"]["arrays_sha256"]):
         raise TMCError("Parent saved model identity differs", code="invalid_saved_state")
-    if parent.get("path_kind") != "ordered_cycle" or parent["target_origin"] != 0. or not parent["lift_origin_zero"] or not parent["lift_shape_zero"]:
-        raise TMCError("Resume requires the original zero-lift ordered task", code="invalid_saved_state")
+    saved_load_only = (extend_path and parent.get("path_kind") == "load_only"
+                       and model["task"]["path"]["kind"] == "load_only")
+    if ((parent.get("path_kind") != "ordered_cycle" and not saved_load_only)
+            or parent["target_origin"] != 0. or not parent["lift_origin_zero"] or not parent["lift_shape_zero"]):
+        raise TMCError("Resume requires a zero-lift ordered task or explicit load-only extension", code="invalid_saved_state")
     original_targets = project.task["path"]["targets_mm"]
     index,parameter = selected["original_target_index"],selected["d"]
     if extend_path:

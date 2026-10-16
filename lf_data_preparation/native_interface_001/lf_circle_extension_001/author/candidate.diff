@@ -1,0 +1,121 @@
+--- a/hf_repo/src/hf_eval/native_resume.py
++++ b/hf_repo/src/hf_eval/native_resume.py
+@@ -49,11 +49,27 @@
+     old_task = model["task"]
+     old_targets = old_task["path"]["targets_mm"]
+     if not isinstance(task, dict) or not isinstance(task.get("path"), dict):
+-        raise TMCError("Path extension requires an explicit ordered task", code="invalid_task_extension")
++        raise TMCError("Path extension requires an explicit task", code="invalid_task_extension")
+     new_targets = task["path"].get("targets_mm")
+     unchanged = deepcopy(task)
+     unchanged["path"]["targets_mm"] = deepcopy(old_targets)
+-    if (old_task["path"]["kind"] != "ordered_cycle"
++    load_only = old_task["path"]["kind"] == "load_only"
++    if load_only:
++        if (parent.get("path_kind") != "load_only" or task["path"].get("kind") != "load_only"
++                or not isinstance(new_targets, list) or len(new_targets) <= len(old_targets)
++                or any(type(value) not in (int, float) or not np.isfinite(value) for value in new_targets)
++                or new_targets[0] != 0 or any(b <= a for a,b in zip(new_targets, new_targets[1:]))
++                or not isinstance(task.get("input"), dict)
++                or task["input"].get("target_mm") != new_targets[-1]
++                or old_task["input"]["target_mm"] != old_targets[-1]):
++            raise TMCError("Load-only extension must strictly increase to its explicit new peak", code="invalid_task_extension")
++        unchanged["input"]["target_mm"] = old_task["input"]["target_mm"]
++        for name in ("task_id", "purpose", "parameter_origin", "description"):
++            if name in old_task:
++                unchanged[name] = deepcopy(old_task[name])
++            else:
++                unchanged.pop(name, None)
++    if (old_task["path"]["kind"] not in ("ordered_cycle", "load_only")
+             or not isinstance(new_targets, list) or len(new_targets) <= len(old_targets)
+             or canonical_hash(new_targets[:len(old_targets)]) != canonical_hash(old_targets)
+             or canonical_hash(unchanged) != canonical_hash(old_task)):
+@@ -143,8 +159,11 @@
+             or model["descriptor_sha256"] != parent["model"]["descriptor_sha256"]
+             or model["arrays"]["sha256"] != parent["model"]["arrays_sha256"]):
+         raise TMCError("Parent saved model identity differs", code="invalid_saved_state")
+-    if parent.get("path_kind") != "ordered_cycle" or parent["target_origin"] != 0. or not parent["lift_origin_zero"] or not parent["lift_shape_zero"]:
+-        raise TMCError("Resume requires the original zero-lift ordered task", code="invalid_saved_state")
++    saved_load_only = (extend_path and parent.get("path_kind") == "load_only"
++                       and model["task"]["path"]["kind"] == "load_only")
++    if ((parent.get("path_kind") != "ordered_cycle" and not saved_load_only)
++            or parent["target_origin"] != 0. or not parent["lift_origin_zero"] or not parent["lift_shape_zero"]):
++        raise TMCError("Resume requires a zero-lift ordered task or explicit load-only extension", code="invalid_saved_state")
+     original_targets = project.task["path"]["targets_mm"]
+     index,parameter = selected["original_target_index"],selected["d"]
+     if extend_path:
+--- a/hf_repo/src/hf_eval/split_displacement.py
++++ b/hf_repo/src/hf_eval/split_displacement.py
+@@ -56,7 +56,8 @@
+                                  lift_origin=None, lift_shape=None, target_origin=0.,
+                                  initial_state=None, initial_R=0., initial_parameter=0., settings=None,
+                                  force_scale_per_length, assembler=None, on_accept=None,
+-                                 path_mode="load_only", initial_guess="tangent"):
++                                 path_mode="load_only", initial_guess="tangent",
++                                 saved_load_only_anchor=False):
+     """Solve fint(L,w)+k*b_out*q_out-b_in*R=0 and b_in·(L+w)=d0+s.
+ 
+     Targets are nonnegative stage parameters s. ``load_only`` starts at zero and
+@@ -68,7 +69,8 @@
+     parameter bit for bit;
+     its multiplier and target offset are explicit. No rebase or display array
+     enters mechanics, measurements, feasibility or initialization.
+-    A nonzero ``initial_parameter`` is only an ordered-cycle saved anchor;
++    A nonzero ``initial_parameter`` is an ordered-cycle saved anchor, or an
++    explicitly validated load-only anchor with ``saved_load_only_anchor=True``;
+     targets start at that absolute s, and its first fresh F/T check must pass
+     the existing gates without Newton correction. No saved tangent is accepted.
+     ``port_projection`` starts displacement from the previous fluctuation plus
+@@ -90,10 +92,16 @@
+         raise TMCError("path_mode must be load_only or ordered_cycle", code="invalid_input")
+     if initial_guess not in ("tangent", "port_projection"):
+         raise TMCError("initial_guess must be tangent or port_projection", code="invalid_input")
+-    if initial_parameter and (path_mode != "ordered_cycle" or initial_state is None):
++    if type(saved_load_only_anchor) is not bool:
++        raise TMCError("saved_load_only_anchor must be boolean", code="invalid_input")
++    if saved_load_only_anchor and (path_mode != "load_only" or not initial_parameter or initial_state is None):
++        raise TMCError("saved_load_only_anchor requires a nonzero load-only saved state", code="invalid_input")
++    if initial_parameter and (initial_state is None or (path_mode != "ordered_cycle" and not saved_load_only_anchor)):
+         raise TMCError("nonzero initial_parameter requires an ordered-cycle saved state", code="invalid_input")
+-    if path_mode == "load_only" and (levels[0] != 0 or np.any(np.diff(levels) <= 0)):
+-        raise TMCError("stage targets must start at zero and strictly increase", code="invalid_input")
++    if path_mode == "load_only" and (levels[0] != (initial_parameter if saved_load_only_anchor else 0)
++                                      or np.any(np.diff(levels) <= 0)):
++        raise TMCError("stage targets must start at initial_parameter and strictly increase" if saved_load_only_anchor
++                       else "stage targets must start at zero and strictly increase", code="invalid_input")
+     if path_mode == "ordered_cycle" and (levels[0] != initial_parameter or np.any(levels < 0)
+                                          or np.any(np.diff(levels) == 0)):
+         raise TMCError(("cycle targets must start at zero, be nonnegative and have no adjacent duplicates" if initial_parameter == 0
+--- a/hf_repo/src/hf_eval/native_mean.py
++++ b/hf_repo/src/hf_eval/native_mean.py
+@@ -132,6 +132,8 @@
+     remain historical; success here completes only the original-task suffix.
+     extend_path=True requires an explicit append-only task and a completed
+     terminal source segment; default strict same-task resume is unchanged.
++    Load-only extension also declares its new input peak, preserving all physics
++    and permitting only the four explanatory task metadata fields to differ.
+     """
+     if type(extend_path) is not bool or (extend_path and (saved_result is None or task_dict is None)):
+         raise TMCError("extend_path requires a saved terminal state and explicit new task", code="invalid_input")
+@@ -248,7 +250,8 @@
+         settings=settings, force_scale_per_length=project.material["force_scale_per_length"],
+         assembler=assemble, on_accept=capture, path_mode=path_mode,
+         initial_guess=initial_guess, **({} if anchor is None else dict(
+-            initial_state=anchor.state,initial_R=anchor.R,initial_parameter=anchor.parameter)))
++            initial_state=anchor.state,initial_R=anchor.R,initial_parameter=anchor.parameter)),
++        **({"saved_load_only_anchor":True} if anchor is not None and extend_path and path_mode == "load_only" else {}))
+     source = deepcopy(project.region_metadata["source_geometry"])
+     source["snapshot"] = {key: "model/"+value for key, value in source["snapshot"].items()}
+     metadata = dict(schema_version=SCHEMA_VERSION, scope="native_small_mean_driven_numerical_path",
+@@ -301,6 +304,11 @@
+             full_original_path_completed=False,source_binding_scope="Entry/controller/assembler/force and saved-resume reader; stage receipt binds executed closure")
+         if extend_path:
+             metadata.update(scope="native_saved_mean_explicit_task_extension_segment",full_extended_path_completed=False)
++            if path_mode == "load_only":
++                segment = dict(new_peak_reached=bool(metadata["loading_peak_reached"]),
++                               extended_segment_completed=bool(path["target_reached"]))
++                metadata.update(segment)
++                metadata["continuation"].update(segment)
+     return NativeMeanResult(project, path, tuple(accepted), metadata)
+ 
+ 

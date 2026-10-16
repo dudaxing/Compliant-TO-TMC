@@ -56,7 +56,8 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
                                  lift_origin=None, lift_shape=None, target_origin=0.,
                                  initial_state=None, initial_R=0., initial_parameter=0., settings=None,
                                  force_scale_per_length, assembler=None, on_accept=None,
-                                 path_mode="load_only", initial_guess="tangent"):
+                                 path_mode="load_only", initial_guess="tangent",
+                                 saved_load_only_anchor=False):
     """Solve fint(L,w)+k*b_out*q_out-b_in*R=0 and b_in·(L+w)=d0+s.
 
     Targets are nonnegative stage parameters s. ``load_only`` starts at zero and
@@ -68,7 +69,8 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
     parameter bit for bit;
     its multiplier and target offset are explicit. No rebase or display array
     enters mechanics, measurements, feasibility or initialization.
-    A nonzero ``initial_parameter`` is only an ordered-cycle saved anchor;
+    A nonzero ``initial_parameter`` is an ordered-cycle saved anchor, or an
+    explicitly validated load-only anchor with ``saved_load_only_anchor=True``;
     targets start at that absolute s, and its first fresh F/T check must pass
     the existing gates without Newton correction. No saved tangent is accepted.
     ``port_projection`` starts displacement from the previous fluctuation plus
@@ -90,10 +92,16 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
         raise TMCError("path_mode must be load_only or ordered_cycle", code="invalid_input")
     if initial_guess not in ("tangent", "port_projection"):
         raise TMCError("initial_guess must be tangent or port_projection", code="invalid_input")
-    if initial_parameter and (path_mode != "ordered_cycle" or initial_state is None):
+    if type(saved_load_only_anchor) is not bool:
+        raise TMCError("saved_load_only_anchor must be boolean", code="invalid_input")
+    if saved_load_only_anchor and (path_mode != "load_only" or not initial_parameter or initial_state is None):
+        raise TMCError("saved_load_only_anchor requires a nonzero load-only saved state", code="invalid_input")
+    if initial_parameter and (initial_state is None or (path_mode != "ordered_cycle" and not saved_load_only_anchor)):
         raise TMCError("nonzero initial_parameter requires an ordered-cycle saved state", code="invalid_input")
-    if path_mode == "load_only" and (levels[0] != 0 or np.any(np.diff(levels) <= 0)):
-        raise TMCError("stage targets must start at zero and strictly increase", code="invalid_input")
+    if path_mode == "load_only" and (levels[0] != (initial_parameter if saved_load_only_anchor else 0)
+                                      or np.any(np.diff(levels) <= 0)):
+        raise TMCError("stage targets must start at initial_parameter and strictly increase" if saved_load_only_anchor
+                       else "stage targets must start at zero and strictly increase", code="invalid_input")
     if path_mode == "ordered_cycle" and (levels[0] != initial_parameter or np.any(levels < 0)
                                          or np.any(np.diff(levels) == 0)):
         raise TMCError(("cycle targets must start at zero, be nonnegative and have no adjacent duplicates" if initial_parameter == 0
