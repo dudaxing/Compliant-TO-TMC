@@ -1,0 +1,34 @@
+{
+  "schema_version": "hf-native-batch-manifest-1.0",
+  "cases": [
+    {
+      "label": "gripper_native_fine",
+      "geometry": "lf_data_preparation/native_interface_001/lf_batch_input_preparation_001/run_001/prepared/000/derived_geometry/geometry.json",
+      "task": "lf_data_preparation/native_interface_001/lf_batch_forward_001/tasks/000.json",
+      "output": "lf_data_preparation/native_interface_001/lf_batch_forward_001/run_001/cases/000"
+    },
+    {
+      "label": "gripper_wave_fine",
+      "geometry": "lf_data_preparation/native_interface_001/lf_batch_input_preparation_001/run_001/prepared/001/derived_geometry/geometry.json",
+      "task": "lf_data_preparation/native_interface_001/lf_batch_forward_001/tasks/001.json",
+      "output": "lf_data_preparation/native_interface_001/lf_batch_forward_001/run_001/cases/001"
+    }
+  ],
+  "options": {
+    "response_mode": "mechanical",
+    "tangent_mode": "chunk256",
+    "initial_guess": "port_projection",
+    "settings": {
+      "tolerance": 1e-09,
+      "constraint_tolerance": 1e-10,
+      "displacement_scale_floor": 1e-06,
+      "force_scale_floor_factor": 1e-08,
+      "max_checks": 25,
+      "armijo_c": 0.0001,
+      "max_backtracks": 12,
+      "max_bisections": 4,
+      "minimum_increment": 0.00625,
+      "time_limit_seconds": 1800.0
+    }
+  }
+}

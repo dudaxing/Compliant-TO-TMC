@@ -1,3 +1,11 @@
+## 2026-10-16：两LF短加载批量消费实际闭卡（L-BFWD1 PASS）
+
+本轮复用已准备fine/wave几何与原batch，明确新load_only [0,.25,.50]任务、原物理/门；实际结果为gripper_native_fine success/3接受态/最后d=0.5mm；gripper_wave_fine success/3接受态/最后d=0.5mm。outer/helper/batch/display分别pass/pass/success/pass，唯一终端8e5296/session26587 exit0；helper=1743.728596699999秒／4500秒；outer=1744.4946827999993秒／4560秒；SUP2采样峰=1119481856B／8589934592B。
+
+[完整目标、实现、实际结果与限制](<lf_data_preparation/native_interface_001/lf_batch_forward_001/RESULTS.md>) · [原batch状态](<lf_data_preparation/native_interface_001/lf_batch_forward_001/run_001/batch/index.json>) · [实际人工页](<lf_data_preparation/native_interface_001/lf_batch_forward_001/run_001/REVIEW.md>) · [结果驱动的下一步](<lf_data_preparation/native_interface_001/lf_batch_forward_001/NEXT_STEPS.md>)
+
+没有默认HF安装、新测试或HP，原两份25目标任务及旧结果保持。短加载不授完整路径、压力、有效夹持、卸载/释放、稳定性、独参或HF5资格，整体目标仍未完成。下方完整保留ff448447时原文，历史“下一步/待执行”不覆盖本条；发布/恢复以实际main回执为准。
+
 ## 2026-10-16：普通LF来源清单批量准备完成（L-BPREP1 PASS）
 
 已安装批量LF输入准备API／CLI与六项有限测试；fine／wave各一次真实准备，通过掩码精确保持、原25目标共同任务、完整h0.5mm网格和现有batch纯元数据预检，生成未变形双设计图与状态表。三份新文件，旧HF源码／原科学门／旧结果保持；没有新构模、力学或HP，也未执行batch求解。

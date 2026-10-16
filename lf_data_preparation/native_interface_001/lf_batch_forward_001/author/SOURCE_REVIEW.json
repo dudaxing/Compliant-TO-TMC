@@ -1,0 +1,159 @@
+{
+  "schema_version": "L-BFWD1-independent-static-source-review-1.0",
+  "card": "L-BFWD1",
+  "status": "pass_static_source_review",
+  "recorded_utc": "2026-10-16T03:01:11.427352+00:00",
+  "baseline_commit": "ff448447a135d31314f7a0bd88e6ddd8ed449bfb",
+  "scope": "Finite final research-wrapper/source/AST and ordinary-JSON review under the approved card; no packaging, installation, candidate/HF/SUP2 import, metadata preflight, API, mechanics, tests, arrays/media or plotting performed.",
+  "source_files": {
+    "execute_batch.py": {
+      "sha256": "c986bfd9db3fbff2924d36f99a5cc27b8189e0773ece528b9589d13afa130f49",
+      "bytes": 16501,
+      "lines": 292
+    },
+    "display_batch.py": {
+      "sha256": "886d83f2f5f48bbae71b4fa63635638594ae05c4f01d21806819ee5a1cb86fa4",
+      "bytes": 17378,
+      "lines": 271
+    },
+    "example/plot_convergence.py": {
+      "sha256": "fa38c7788dc8ed500e491ac5a4efd400719c06f2f739006e37106024a04300f5",
+      "bytes": 10683,
+      "lines": 174
+    },
+    "launch_batch.py": {
+      "sha256": "a7e53091a4a8927642a2be4c62c0ca0ae504c41d0ff390dc724a13b0530692f8",
+      "bytes": 6352,
+      "lines": 109
+    },
+    "prepare_execution.py": {
+      "sha256": "8e175022286eaafaaad7f905fef39d5e1b1da20fa3e853603e211744d0fcc358",
+      "bytes": 6734,
+      "lines": 97
+    },
+    "L_BFWD1_CARD.md": {
+      "sha256": "da921dfced1db8ff9505be7bbf07e68ada93c114b3c17ad33ba16c7c5b6be4ed",
+      "bytes": 9330,
+      "lines": 50
+    },
+    "planning_record.json": {
+      "sha256": "a2b94b5c54f794f85a0bb0bd97e051cbaba2f9d460ea732a34719e758d5cdc84",
+      "bytes": 3751,
+      "lines": 98
+    },
+    "batch_manifest.proposed.json": {
+      "sha256": "0a740e4dc2646e0884f0f67b7683166f3931407cd0b8d9912f552b5ff3ece734",
+      "bytes": 1352,
+      "lines": 34
+    },
+    "task_000.proposed.json": {
+      "sha256": "e4dbca04bfaad2dad95c4da4ae1c0c9311ce669c3c63c40cf3113120202add0f",
+      "bytes": 2217,
+      "lines": 100
+    },
+    "task_001.proposed.json": {
+      "sha256": "a3bd591f0677b5a5cc5e1d8b2a60197f7f1d4108da004626235cd79c3e656be5",
+      "bytes": 2217,
+      "lines": 100
+    },
+    "VIEWS.json": {
+      "sha256": "b1839a0be13a38cd941b4daafe916cb7a6d6ee6805f02b030a58aae0c4ce8dde",
+      "bytes": 13023,
+      "lines": 418
+    }
+  },
+  "necessary_existing_source_sha256": {
+    "hf_repo/src/hf_eval/native_batch.py": "fa765e02f18511045db1b0fd9b3f37da828985c0bc21dfdedb3185b6959b90ef",
+    "hf_repo/src/hf_eval/native_evaluate.py": "44eed5f42b5e10d8677b24d2cfc70e1508e1837e346205abdf309d54bc8961ed",
+    "hf_repo/src/hf_eval/native_mean.py": "34aba7347790fafa7f03511a42aa9876649b8ce4f8c98b3efdb5a0e664288401",
+    "hf_repo/src/hf_eval/native_response.py": "346a97b30f675ccf063de1720002f936adf90011e69231edd89e776ba4e70eaa",
+    "hf_repo/scripts/windows_owned_process_sup2.py": "b5f149e1cd3d6d9b4ad392123e410b786606f120f2e078139b7bacc97f2d9499",
+    "functional_views/right_margin4_20261007/complete_001/saved_right_margin_views.py": "761a9ffd1512233ce048be364c00a86882b69e2fb3e3fe81d7f79f74ad52b166",
+    "lf_data_preparation/native_interface_001/lf_third_pilot_001/execute_pilot.py": "d91b14ad67f5e31ab735a540fc7f30084ac567af6c78371deb6a39f7b49da567",
+    "lf_data_preparation/native_interface_001/lf_third_cycle_001/plot_convergence.py": "559d01596d5a75ea6f61f38b76e2fca3029e2ca8969b7be4daea415127fe1bef"
+  },
+  "prior_card_review_sha256": "ebd797264f43c383659c67518b98767cfa47dce0a20f72b50d3a0f509485f7db",
+  "blocking_findings": [],
+  "verified_execution_path": [
+    "A single existing evaluate_native_batch call performs the two ordered zero-start cases. Default HF files are not installed or changed, no new tests/HP/warm start/resume/force option is added. Proposed tasks/manifest remain exact to the approved card and earlier finite review.",
+    "The helper checks common options, short task copies, all original parent25 metadata and output mapping before native batch. The API and solver aliases actually used are observed once; original arguments and return objects are forwarded. The previous on_accept callback is forwarded, and both aliases are restored in finally.",
+    "on_accept writes chronological scalar/stateSHA progress only. The observer stores scalar cached gates, actual settings and original call-count metadata per case, with no result/matrix object retained globally and no forced garbage collection. Snapshot J/fixed split fsum and all original gate expressions match the pilot AST exactly.",
+    "The original API persists result and response before the outer observed evaluate checks success-only cache gates. A failed/error original response is forwarded unchanged; success with false cache gates raises original TMCError/ValueError handling into batch, preserving original saved result/response bytes. The batch stops later cases and retains not_run states.",
+    "No display is reached unless batch/all case status and original cache gates pass. Actual accepted N may exceed three through existing bisection; all actual rows, repeated target identities and all archived states remain in the original result and viewer.",
+    "The clean viewer child uses the unchanged original source and six-file pure closure, receives both manifest-ordered cases at once, uses no reference argument, and retains three shared PNGs/two actual-N-frame GIFs. Parent display does not import production code into the viewer, decode media, read matrices or recompute F/T.",
+    "The labelled convergence observer is inverse-AST identical to its frozen source after undoing only module docstring, label/title keyword parameters/title assignment, schema/provenance metadata and returned label. All projection fields, raw history/trial/failed records, grouping, tolerances/units and zero-preserving symlog plotting remain unchanged.",
+    "Display consumes the actual native response/result/model/state descriptor schema, checks SHA linkage, original cached body-resultant identity through the original pure viewer, and binds actual archives. It writes a manifest-ordered original-value state table/manual page and optionally places old first-three-target JSON scalars alongside new values without ratios, new error gates, rankings or qualification transfer.",
+    "The inherited viewer alone performs saved-array geometry/nodal/Green-strain observations and actual media frame checks; zero-mechanics scope is from its pinned pure module origins, not universal dynamic mechanical hooks. Neither views nor wrappers upgrade raw producer flags or independent reference qualification.",
+    "The resource clock starts before heavy helper imports. Each original controller receives1800s. One shared display deadline is min(display start+600s, explicit remaining helper monotonic deadline), applies to viewer polling, both convergence callbacks, page/table and all display-product streamed SHA/size. Final full-run seal separately binds all production/source snapshots/tangents/CSC and displays under helper4500s.",
+    "Display seal includes complete view and convergence trees, view_protocol, table/page and viewer log; every1MiB read uses the shared check. This closes the author-stage budget-role gap without changing graphics, mechanics, gates or resource totals.",
+    "The real SUP2 run_owned signature accepts all launcher keywords. Passing requires its normal exit0, exact supervisor SHA, F-CPU-CLEAN1/CPU-CLEAN1 and same-instance cleanup_verified plus helper pass/complete seal. SUP2 itself retains original owned-Job termination and fixed five-second cleanup; the new wrapper adds no process fallback. Sampled supervisor+Job RSS8GiB is not an OS hard cap.",
+    "Packaging only stages ordinary source/task/protocol/auth records, asserts clean baseline/new stage, and records the two old geometry NPZ pins plus stat sizes without reading payload. The launcher hashes ordinary source bindings only; old geometry NPZ inputs belong solely to the future authorized helper window."
+  ],
+  "ast_proofs": {
+    "cache_gate_assignments_identical_to_pilot": [
+      "minimum_J",
+      "fixed",
+      "cached",
+      "gates",
+      "cached[passed]"
+    ],
+    "convergence_inverse_AST_equal": true,
+    "normalized_convergence_deltas": [
+      "module docstring",
+      "keyword-only label/title plus title default assignment",
+      "report schema/display_context provenance",
+      "suptitle parameter",
+      "returned label"
+    ],
+    "protocol_subscript_keys_present_in_packager_except_explicit_runtime_helper_deadline": true,
+    "launcher_run_owned_keywords_match_real_SUP2_signature": true,
+    "all_five_author_sources_AST_and_compile_source_only": true
+  },
+  "resolved_prelaunch_author_issues": [
+    {
+      "finding": "display used batch_manifest while packaged protocol declares manifest_file",
+      "resolution": "display now uses manifest_file; no protocol alias added"
+    },
+    {
+      "finding": "gates_source_protocol needed by helper was initially absent from package record",
+      "resolution": "packager now includes original pilot protocol role explicitly"
+    },
+    {
+      "finding": "new convergence/page/table output sealing initially occurred only under helper final seal, after leaving display deadline",
+      "resolution": "display now streams its complete output tree and page/log/protocol identities before return under the same shared600s/helper deadline"
+    }
+  ],
+  "limits_and_counts": {
+    "controller_seconds_each": 1800,
+    "shared_display_seconds": 600,
+    "helper_seconds": 4500,
+    "outer_seconds": 4560,
+    "sampled_RSS_bytes": 8589934592,
+    "default_source_changes": 0,
+    "new_tests": 0,
+    "new_HP_calls": 0,
+    "intended_batch_invocations": 1,
+    "intended_cases": 2,
+    "intended_new_PNGs": 5,
+    "intended_new_GIFs": 2,
+    "accepted_state_count": "Actual N per case, never hard-coded3",
+    "viewer_NPZ_readset_formula": "2+2*(N1+N2) distinct model/state/forces archives;54+18*(N1+N2) decoded fields. This is not the complete produced scientific file count.",
+    "read_count_scope": "Helper streamed binding passes, display cache JSON reads, and viewer archive cardinalities are explicitly scoped. The original viewer source performs pre-binding SHA, archive SHA, np.load and final binding SHA; no universal file-open hook is claimed. All new products are sealed independently."
+  },
+  "qualification_limits": [
+    "No executed pass is asserted by this review.",
+    "Short loading.5 is not the original25 cycle or unloading/release test.",
+    "q_out is not a gap; finite rays, tip distances and weak-form body force are separately labelled observations.",
+    "No new independent HP, contact pressure, effective clamp, release, stability, formal labels, ranking or HF5 qualification.",
+    "Historical costs and8GiB allowance are not guarantees."
+  ],
+  "remaining_prelaunch_check": "After ordinary packaging, perform one finite protocol/auth/source identity review against these exact final bytes; do not execute candidate/preflight or open geometry NPZ/media as part of that check.",
+  "review_operations": {
+    "candidate_HF_SUP2_imports": 0,
+    "metadata_preflight_API_model_F_T_HP_solver_calls": 0,
+    "tests_or_rendering": 0,
+    "NPZ_media_archive_payload_reads": 0,
+    "formal_repository_or_candidate_edits": 0,
+    "own_external_review_files_only": true
+  }
+}

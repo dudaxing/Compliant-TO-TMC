@@ -1,0 +1,13 @@
+# L-BFWD1 final source review
+
+Status: **pass_static_source_review**. No remaining blocking finding. This is source/AST/ordinary-JSON review, not an executed batch, cache gate, view or scientific PASS. Approved card da921dfced1db8ff9505be7bbf07e68ada93c114b3c17ad33ba16c7c5b6be4ed and proposed tasks/manifest are unchanged.
+
+One existing batch call uses the original evaluate/solve aliases, forwards original on_accept and returns, and restores both aliases in finally. Only scalar/SHA progress and original cache metadata are retained. J/fixed-fsum/gate assignment ASTs are exactly the old pilot expressions. Original non-success response reasons are forwarded unchanged; only a saved API success with false cache gates becomes a post-save batch error. Later cases and all displays stop. No default HF source, new test, extra F/T or independent HP path is introduced.
+
+The clean original viewer child receives both actual cases once, then two labelled convergence projections and a manual page/table follow. The convergence inverse AST is exact after undoing only labels/title/docstring/schema/provenance deltas. Actual N, source identities, all accepted rows, three shared PNGs and two actual-N GIFs remain dynamic; no old media is used. Production flags/reference qualifications remain unchanged. The14/162 example is only the viewer model/state/forces read set, not all produced arrays or file-read operations.
+
+All current protocol keys match the packager, including manifest_file/gates_source_protocol. The final display now seals its full products with streamed hashes inside the shared600s deadline as required; the separate helper full-run seal still includes all production archives. Limits remain1800s per controller,600s total display,4500s helper/4560s outer, sampled8GiB. The real SUP2 signature/return fields and original fixed5s owned-Job cleanup are compatible; no additional process-control fallback is added.
+
+Final source SHA: execute `c986bfd9db3fbff2924d36f99a5cc27b8189e0773ece528b9589d13afa130f49`; display `886d83f2f5f48bbae71b4fa63635638594ae05c4f01d21806819ee5a1cb86fa4`; convergence `fa38c7788dc8ed500e491ac5a4efd400719c06f2f739006e37106024a04300f5`; launch `a7e53091a4a8927642a2be4c62c0ca0ae504c41d0ff390dc724a13b0530692f8`; packaging `8e175022286eaafaaad7f905fef39d5e1b1da20fa3e853603e211744d0fcc358`.
+
+No candidate/HF/SUP2 import, metadata preflight, science, arrays/media, tests, rendering or formal-file write occurred. Root may next perform ordinary packaging, followed by the planned small protocol/auth identity check before the unique launch. Details and limitations are in SOURCE_REVIEW.json.

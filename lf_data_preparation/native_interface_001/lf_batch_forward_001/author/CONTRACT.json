@@ -1,0 +1,103 @@
+{
+  "card": "L-BFWD1",
+  "status": "read_only_contract_ready_for_scoped_preparation",
+  "blocking_source_findings": [],
+  "recorded_utc": "2026-10-16T00:49:43.431240+00:00",
+  "baseline_commit": "ff448447a135d31314f7a0bd88e6ddd8ed449bfb",
+  "scope": "Static API/contract planning only, not implementation, preflight, preparation, solve, test or new data comparison",
+  "existing_capability": "True sequential native batch already executed2026-10-07 with canonical h1/native-fine h0.5,0/.005/.010/.025,no body,complete/full/tangent; subsequent reference/view records exist. This stage tests new L-BPREP1 fine/wave prepared inputs with fixed-body task1.1 and current mechanical/chunk256/port_projection chain.",
+  "minimum_changes": {
+    "old25_tasks_and_prepared_geometry": "Preserve exact old bytes; new stage copies the two bound tasks and a new batch manifest.",
+    "physical_task_changes": {
+      "input.target_mm": 0.5,
+      "path": {
+        "kind": "load_only",
+        "targets_mm": [
+          0.0,
+          0.25,
+          0.5
+        ]
+      }
+    },
+    "explanatory_task_fields": [
+      "task_id",
+      "purpose",
+      "parameter_origin",
+      "description"
+    ],
+    "explanatory_rule": "Use common BFWD1 purpose/parameter_origin/description across both cases; task_id may differ. Batch contract excludes only task_id/geometry, so case-specific prose cannot differ.",
+    "preserve_geometry_binding": true,
+    "preserve_all_other_material_workpiece_boundary_grid_regularization_fields": true,
+    "new_batch_manifest": "Exactly schema_version/options/cases; each case exactly label,geometry,task,output. Geometry points to existing prepared/000,001 derived descriptors; tasks and all future outputs/index live in new stage.",
+    "solver_or_default_source_changes": 0
+  },
+  "shared_options": {
+    "response_mode": "mechanical",
+    "tangent_mode": "chunk256",
+    "initial_guess": "port_projection",
+    "settings_example_from_existing_pilot_not_new_authorization": {
+      "tolerance": 1e-09,
+      "constraint_tolerance": 1e-10,
+      "displacement_scale_floor": 1e-06,
+      "force_scale_floor_factor": 1e-08,
+      "max_checks": 25,
+      "armijo_c": 0.0001,
+      "max_backtracks": 12,
+      "max_bisections": 4,
+      "minimum_increment": 0.00625,
+      "time_limit_seconds": 1800.0
+    },
+    "targets": "Omit and use the new task.path, or exact same three values only.",
+    "settings_rule": "Full shared settings dict is reconstructed once as DisplacementSettings. Freeze old nine nonclock values,especially minimum_increment=.00625; choose new settings.time_limit_seconds explicitly. Omit top-level time_limit_seconds/minimum_increment when using settings; normalized top-level clock180 is ignored plumbing,not actual settings clock."
+  },
+  "expected_failure_transport": [
+    "Invalid manifest/task/preflight can fail before batch/index directory exists.",
+    "Controller numerical failure returns failed path and cached partial result; API persistence/summary yields failed response; batch stops and remaining cases stay not_run.",
+    "API catches OSError/ValueError/KeyError/TypeError into typed error response with stage/code/class/reason; TMCError is a ValueError.",
+    "Unexpected BaseException marks current case error, batch interrupted, remaining not_run, saves index in finally and propagates; no retry.",
+    "Success only if both API responses success; accepted states may exceed three due existing internal bisection, requested targets remain exactly three."
+  ],
+  "logging_and_force": {
+    "CLI": "Capture stdout/stderr; CLI prints full final index and exits0 only for index.status success. Existing index updates running/between cases but CLI does not stream Newton progress.",
+    "convergence": "Use actual saved result.path_diagnostics(newton_history,trials,failed_attempts,linear diagnostics) for plots; no fabricated progress or new force calculations.",
+    "force": "No force/--force API or CLI parameter. Unknown force options rejected; existing output dirs refused. This is separate from actual permitted mechanical force evaluations."
+  },
+  "budget_constraints": [
+    "Batch has no global resource manager. Each case receives its own full controller clock; imports/model preparation/persistence/summary/visualization/seal need separate total-stage headroom.",
+    "Explicit mechanical/chunk256/port_projection avoids default complete/full/tangent. Omitting settings also means API180sec and implicitminimum_increment=.25/16=.015625,not old probe .00625.",
+    "L-BPREP1 data-only180/240sec1GiB is closed and provides no new-solve authorization or memory guarantee. Two cases share one process and native_batch has no explicit per-case GC contract; freeze new total time/RSS in a new execution scope."
+  ],
+  "qualification": "No inherited old response/reference/HP/view qualifications; load_only .5 success does not complete original25 cycle, certify contact/pressure/effective clamp/release/stability or HF5.",
+  "references": {
+    "task_path": "hf_repo/src/hf_eval/native_project.py:40-46,67-94",
+    "batch_options": "hf_repo/src/hf_eval/native_batch.py:14-16,44-85,185-198",
+    "batch_contract": "hf_repo/src/hf_eval/native_batch.py:88-133",
+    "batch_failure": "hf_repo/src/hf_eval/native_batch.py:176-220",
+    "API_clock_and_failure": "hf_repo/src/hf_eval/native_evaluate.py:23-35,43-57,82-125",
+    "settings_defaults": "hf_repo/src/hf_eval/displacement.py:23-55",
+    "cache_history": "hf_repo/src/hf_eval/native_mean.py:247-282,307-344",
+    "controller_history": "hf_repo/src/hf_eval/split_displacement.py:325-368",
+    "CLI": "hf_repo/scripts/evaluate_native_batch.py:11-26",
+    "prior_true_batch": "lf_data_preparation/native_interface_001/batch_forward_001/RESULTS.md:18-35"
+  },
+  "reviewed_sha256": {
+    "hf_repo/src/hf_eval/native_project.py": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+    "hf_repo/src/hf_eval/native_evaluate.py": "44eed5f42b5e10d8677b24d2cfc70e1508e1837e346205abdf309d54bc8961ed",
+    "hf_repo/src/hf_eval/native_batch.py": "fa765e02f18511045db1b0fd9b3f37da828985c0bc21dfdedb3185b6959b90ef",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+    "hf_repo/src/hf_eval/native_mean.py": "34aba7347790fafa7f03511a42aa9876649b8ce4f8c98b3efdb5a0e664288401",
+    "hf_repo/src/hf_eval/split_displacement.py": "8cdc31e041e7753275e880d69ec3918d87a7f6e582951885d0af288f657e5237",
+    "hf_repo/src/hf_eval/tmc.py": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+    "hf_repo/scripts/evaluate_native_batch.py": "9dbdb761d2bad20f5d211b7262a0583515a0ad22b36c181988911ff544108dd8",
+    "lf_data_preparation/native_interface_001/lf_third_pilot_001/pilot_task.json": "1d667fda4dd12135c7624b5e01be35f24cfad4e87472cbd7683d3904bdf70a5b",
+    "lf_data_preparation/native_interface_001/lf_third_pilot_001/protocol.json": "252143749d847f847696ed4806af5e2ab3716978db10f0fa263abc32860b1244",
+    "lf_data_preparation/native_interface_001/batch_forward_001/RESULTS.md": "110bc29793393b47d138c5c32eb0fa4316ef6961150308a332d7349545c6808c"
+  },
+  "limits": {
+    "HF_or_candidate_imports": 0,
+    "API_preparation_preflight_solver_force_tangent_HP_calls": 0,
+    "NPZ_ZIP_media_or_scientific_archive_reads": 0,
+    "implementation_tests_or_plots": 0,
+    "formal_repository_writes": 0
+  }
+}
