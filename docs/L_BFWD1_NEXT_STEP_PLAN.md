@@ -1,3 +1,5 @@
+> 2026-10-17 L-CSTEP2 **PASS**：复用load_only保存态延伸，固定圆形工件1.00→1.15 mm；生产 success，保存态 2，helper／outer pass／pass。原资格及历史保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_step_002/RESULTS.md)。原历史说明保留如下。
+
 > 2026-10-17 L-CSTEP1 **PASS**：复用load_only保存态延伸，固定圆形工件0.75→1.00 mm；生产 success，保存态 2，helper／outer pass／pass。原资格及历史保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_step_001/RESULTS.md)。原历史说明保留如下。
 
 > 2026-10-16 L-CEXT1 **PASS**：load_only保存态延伸兼容验证与固定圆形工件0.50→0.75 mm；生产 success，保存态 2，helper／outer pass／pass。原资格及历史保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_extension_001/RESULTS.md)。原历史说明保留如下。
