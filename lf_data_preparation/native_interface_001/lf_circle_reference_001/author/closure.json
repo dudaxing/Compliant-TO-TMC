@@ -1,0 +1,603 @@
+{
+  "card": "L-CREF1",
+  "status": "pass_closed",
+  "execution_status": "pass",
+  "execution_closed": true,
+  "created_utc": "2026-10-17T04:45:33.061630+00:00",
+  "source_baseline_commit": "11a8b49ebef7d18fef17ffe6c9e365ce574de074",
+  "science_version": "0.5.0",
+  "science_baseline_commit": "b1334bb6a83ba9a0efab7bdba7bd39722146f024",
+  "protocol_sha256": "016f9d20b77426bf8f3ed2379e4c356fa0c5afc06cec25d4f2eaf0a98d034f28",
+  "outer_status": "pass",
+  "helper_status": "pass",
+  "summary_status": "pass",
+  "lifecycle_status": "pass",
+  "selected_child_accepted_index": 1,
+  "original_target_index": 5,
+  "target_mm": 1.15,
+  "selected_state_sha256": "3db267551ea6cb5817c2a1946a80363ecccb0329078d516e90e0106f27e709ef",
+  "HP_calls_started": 2,
+  "HP_calls_completed": 2,
+  "accepted_mechanical_states_completed": 1,
+  "workpiece_states_completed": 1,
+  "checks_completed": 80785,
+  "original_gates": {
+    "production_residual": "1e-9",
+    "independent_residual": "1e-8",
+    "force_evaluation": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11",
+    "hp80_hp120": "1e-40",
+    "total_force": "1e-11",
+    "material_force": "1e-9",
+    "regularization_force": "1e-9",
+    "total_tangent": "1e-10",
+    "material_tangent": "1e-9",
+    "regularization_tangent": "1e-9",
+    "augmented_force_tangent": "1e-10",
+    "augmented_constraint_tangent": "1e-10"
+  },
+  "plot_started": 1,
+  "plot_completed": 1,
+  "observation_entries": [
+    {
+      "label": "Global force / total",
+      "source_member": "force_checks.total",
+      "error": "1.45953394712996302772493440072373864016493020313711644892875194166659703111542001968277109517032048039606253343695982263E-15",
+      "limit": "1E-11",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -3.8357857993537574
+    },
+    {
+      "label": "Global force / material",
+      "source_member": "force_checks.material",
+      "error": "3.27486062005377820130877182768083167616112444185242656672467002869130601000350435875815396136884228519642877886375014827E-16",
+      "limit": "1E-9",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.484807179101099
+    },
+    {
+      "label": "Global force / Hu",
+      "source_member": "force_checks.regularization",
+      "error": "2.77124602479076397239969417577107933978457384268885744814476316747721455051551307970204881813624364575735715530547803307E-16",
+      "limit": "1E-9",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.557324916850003
+    },
+    {
+      "label": "PORT action / total",
+      "source_member": "tangent_checks.total",
+      "error": "6.63787146058688161891712425773040014357745109700311234043925813053532915437196738466443086580254283798453661521115371247E-17",
+      "limit": "1E-10",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.177971161764463
+    },
+    {
+      "label": "PORT action / material",
+      "source_member": "tangent_checks.material",
+      "error": "4.38527172262636376018745194542565500275930011055544957504493193613490388890364966782385438252488502385746462408872047768E-17",
+      "limit": "1E-9",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -7.3580034914698595
+    },
+    {
+      "label": "PORT action / Hu",
+      "source_member": "tangent_checks.regularization",
+      "error": "1.54415931640110042153399592357072218775875303694566655252913326412781553394736295774180119702124913776911513727222681646E-16",
+      "limit": "1E-9",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.811307893984447
+    },
+    {
+      "label": "Saved CSC / PORT action",
+      "source_member": "CSC_total_action_check",
+      "error": "8.19275409028040417275294993539911864461989381549939182421921896706287894138592397772790756570963301895418251819102625639E-17",
+      "limit": "1E-10",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.0865700805167835
+    },
+    {
+      "label": "KKT free-force action",
+      "source_member": "augmented_checks.force",
+      "error": "8.19549633752200102693375032869486714255445417248580286448593631370898021105524300388870092002664416274509382322992298881E-17",
+      "limit": "1E-10",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.086424739455344
+    },
+    {
+      "label": "HP120 equilibrium residual",
+      "source_member": "checks:hp120 relative_residual",
+      "error": "1.38383349221541077271600718170587427616296623907245922846428852005204792656823128916043618473980393666032793351138516791E-12",
+      "limit": "1e-8",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -3.858916162597737
+    },
+    {
+      "label": "HP80 / HP120 global total force",
+      "source_member": "force_checks.total.hp80_hp120_error",
+      "error": "1.22783255619717656584141320340909290168048167612356235743346731366787782467348158865726672530136226811193793183215839962E-76",
+      "limit": "1E-40",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -35.91086085540813
+    }
+  ],
+  "selected_reference_row": {
+    "index": 5,
+    "status": "pass",
+    "state_sha256": "3db267551ea6cb5817c2a1946a80363ecccb0329078d516e90e0106f27e709ef",
+    "target_mm": 1.15,
+    "elements_compared": 13440,
+    "global_DOFs_compared": 27378,
+    "local_force_entries_compared": 322560,
+    "local_tangent_entries_compared": 322560,
+    "full_matrix_entries_assembly_checked": 860160,
+    "HP_calls": 2,
+    "checks": [
+      {
+        "name": "hp80 relative_residual",
+        "normalized_error": "1.38383349221541077271600718170587427616296623907245922846428852005006977582979428909192473039913064478110993392983902202E-12",
+        "limit": "1e-8",
+        "pass_gate": true
+      },
+      {
+        "name": "hp80 relative_constraint",
+        "normalized_error": "2.41352831440251440471604833824371767787068840224852503252640083905650673814412421772746366940233331103399823410861395778E-17",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "hp80 relative_force_balance",
+        "normalized_error": "1.70590746141539625642830074812420326563658697295970053902192315520670250211227558040645856144196775434614009851021878181E-15",
+        "limit": "1e-6",
+        "pass_gate": true
+      },
+      {
+        "name": "hp80 fixed_error_mm",
+        "normalized_error": "0",
+        "limit": "8e-11",
+        "pass_gate": true
+      },
+      {
+        "name": "hp120 relative_residual",
+        "normalized_error": "1.38383349221541077271600718170587427616296623907245922846428852005204792656823128916043618473980393666032793351138516791E-12",
+        "limit": "1e-8",
+        "pass_gate": true
+      },
+      {
+        "name": "hp120 relative_constraint",
+        "normalized_error": "2.41352831440251440471604833824371767787068840224852503252640083905650673814412421772746366940233331103399823410861395778E-17",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "hp120 relative_force_balance",
+        "normalized_error": "1.70590746141539625642830074812420326563658697295970053902192315473829661743955416792632432561426615372826314782207534919E-15",
+        "limit": "1e-6",
+        "pass_gate": true
+      },
+      {
+        "name": "hp120 fixed_error_mm",
+        "normalized_error": "0",
+        "limit": "8e-11",
+        "pass_gate": true
+      },
+      {
+        "name": "saved production relative_residual",
+        "normalized_error": "1.38385457982299955885189566116796800339559141027292073355163289454550774326471163589289637958927637664118899837882352480E-12",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved production relative_constraint",
+        "normalized_error": "2.41352831440251440471604833824371767787068840224852503252640083905650673814412421772746366940233331103399823410861395778E-17",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "saved production relative_force_balance",
+        "normalized_error": "1.70787881313139994600385222162097751874046849163683453963752113335565128012735080260813006764004258409379990877008718056E-15",
+        "limit": "1e-6",
+        "pass_gate": true
+      },
+      {
+        "name": "reported production residual",
+        "normalized_error": "1.38385457982299936708784357681353277135134771658186991771799512207508087158203125E-12",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "reported residual reconstruction",
+        "normalized_error": "1.9176405208435443523204424369369105081583363777247042687168268038589289637958927637664118899837882352480E-28",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "reported balance reconstruction",
+        "normalized_error": "3.867601916097497609849729241937195840781687135155203859365470120016880913812350768625506764004258409379990877008718056E-17",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "reported force scale reconstruction",
+        "normalized_error": "2.28056617889325279281598724406869118426230615907589941688431514755190183551870992241440667619034142773479645715870497894E-18",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved input_force versus independent",
+        "normalized_error": "0E+63",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved spring_force_on_structure versus independent",
+        "normalized_error": "0E+48",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved support_reaction versus independent",
+        "normalized_error": "2.97670560904150122597201195332342878660633254581504047130587850298216879918520505804378290059086159002427969354595796071E-16",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved force_residual versus independent",
+        "normalized_error": "1.45953394712996302772493440072373864016493020313711644892875194003798094670164506002422608838831259407793754616647727855E-15",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved q_in",
+        "normalized_error": "2.41352831440251440471604833824371767787068840224852503252640083905650673814412421772746366940233331103399823410861395778E-17",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "saved q_out",
+        "normalized_error": "4.82705662880502880943209667648743535574137680449705006505280167811301347628824843545492733880466662206799646821722791555E-17",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "saved constraint_residual",
+        "normalized_error": "0E-19",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "saved balance reconstruction",
+        "normalized_error": "7.30499051256202018374700990789616113213264634589713865381551754885421964684304222445897340583244517397206076708970900568E-17",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved residual reconstruction",
+        "normalized_error": "0.00",
+        "limit": "1e-9",
+        "pass_gate": true
+      }
+    ],
+    "metrics": {
+      "production_relative_residual": "1.38385457982299955885189566116796800339559141027292073355163289454550774326471163589289637958927637664118899837882352480E-12",
+      "independent_relative_residual": "1.38383349221541077271600718170587427616296623907245922846428852005204792656823128916043618473980393666032793351138516791E-12",
+      "relative_constraint": "2.41352831440251440471604833824371767787068840224852503252640083905650673814412421772746366940233331103399823410861395778E-17",
+      "relative_force_balance": "1.70590746141539625642830074812420326563658697295970053902192315473829661743955416792632432561426615372826314782207534919E-15",
+      "minimum_J": "0.225154219579211381345578152492577762159687740525184543847681565451138716374424042498958442592993378639221191406250000000",
+      "fixed_displacement_mm": "0",
+      "q_in_mm": "1.1499999999999998834265824143585632555186748504638671875000000000000000",
+      "q_out_mm": "1.1116170945968741334830554023938020691275596618652343750000000000000000",
+      "R_input_N": "0.2002243354081354176354778928725863806903362274169921875",
+      "force_scale_N": "0.0936463579489691386821672601090259249845880617567400279079236904981631961057627395658747833803957903143190375764282181624",
+      "displacement_scale_mm": "1.149999999999999911182158029987476766109466552734375"
+    },
+    "force_checks": {
+      "total": {
+        "normalized_error": "1.45953394712996302772493440072373864016493020313711644892875194166659703111542001968277109517032048039606253343695982263E-15",
+        "hp80_hp120_error": "1.22783255619717656584141320340909290168048167612356235743346731366787782467348158865726672530136226811193793183215839962E-76",
+        "denominator": "0.0936463579489691386821672601090259249845880617567400279079236904981631961057627395658747833803957903143190375764282181624",
+        "limit": "1E-11",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "material": {
+        "normalized_error": "3.27486062005377820130877182768083167616112444185242656672467002869130601000350435875815396136884228519642877886375014827E-16",
+        "hp80_hp120_error": "2.56666107282627152043879646851407251616635599634594518498555067862363910569516940273854510304866150788997889732135851356E-77",
+        "denominator": "0.447965067513267602767812256462819110518864031229807317890971050870521899292711135052488342065768860048223000712006290174",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "regularization": {
+        "normalized_error": "2.77124602479076397239969417577107933978457384268885744814476316747721455051551307970204881813624364575735715530547803307E-16",
+        "hp80_hp120_error": "7.02107271241611185104340056785189873389388210727823362963769737170398879359466324701159153650951757640629587396814369718E-80",
+        "denominator": "0.00474444454304830390925914361685688443470884950155343345015027639211433893810252533925311471245103220020049178080791652610",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      }
+    },
+    "tangent_checks": {
+      "total": {
+        "normalized_error": "6.63787146058688161891712425773040014357745109700311234043925813053532915437196738466443086580254283798453661521115371247E-17",
+        "hp80_hp120_error": "2.04750060594725972678242625583920949675065067777317388994644020366626162943917126608239475927797614172184456679333565830E-80",
+        "denominator": "67.6798026646338389137598597087047596371081543962640280486837937604568975349870966802262943851582089148632252189473630026",
+        "limit": "1E-10",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "material": {
+        "normalized_error": "4.38527172262636376018745194542565500275930011055544957504493193613490388890364966782385438252488502385746462408872047768E-17",
+        "hp80_hp120_error": "1.98388419979114606122885714383581711967233042226729070426312663124089831825537669820038578459444960060520698340249190903E-80",
+        "denominator": "67.6769871409004809613824962782338275065007032835751938342447115247029777390051557539693989279297611967242068463165518326",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "regularization": {
+        "normalized_error": "1.54415931640110042153399592357072218775875303694566655252913326412781553394736295774180119702124913776911513727222681646E-16",
+        "hp80_hp120_error": "4.74802040859508348470366603691810587554507446566778738901461889561534065147423706130718029489263360790983362855402200117E-80",
+        "denominator": "0.00685421288784985647869474161984961687565066514695814703903517991210324274895116383983336809337610479753463634523699053829",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      }
+    },
+    "local_force_worst": [
+      {
+        "component": "total",
+        "element": 13325,
+        "normalized_error": "1.16249843833722132594497512207830323622558048593664089701045030471944275689056028168348634030466544484426323509200073774E-16",
+        "hp80_hp120_error": "1.48404078378474407193220560900750426295529650420852916464418121939819261861500221838120413950124411759265897555348062718E-79",
+        "denominator": "0.00000384416289744629090662042359784398340696065927879360839495105973635228089336268279451783876242717609479354266394096354833",
+        "limit": "1E-11",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "1.73127357554025068825066617848191467706176090951837903368349529125479482628598371750674217022364298985646721509804210605E-75"
+      },
+      {
+        "component": "material",
+        "element": 3629,
+        "normalized_error": "9.62287310830723496954540727188870197447509978725247256026762139964267862301450294509030839870812940264737341092730211398E-17",
+        "hp80_hp120_error": "8.59892866840860914178925718549628260912001374974572674897487311467978923123798872056230036067896373841125872928296563540E-77",
+        "denominator": "0.00445162441544879246666573286861268818583913503469663363081229417240438700510134628912995071117816799459629487682936413662",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "1.73140405643582480878760577427951566292156218194331683247395073171394347529700119377683981129956298058756356285298045793E-75"
+      },
+      {
+        "component": "regularization",
+        "element": 10393,
+        "normalized_error": "1.62890807229753737420482147270548916625736601521706032224571123874449208234626578401948331264523652653019758288507595873E-16",
+        "hp80_hp120_error": "7.09486912548736848714295769525289278613213012085956235015286007885088306286730491954719220105850205472766892533789890588E-81",
+        "denominator": "0.00506138496114535374044382644790035164158438113129432248102243276717106600288417687132833708927491830384549938502830062262",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "4.38238471902928363949414038329623061635995867043330941729775257985552786768681751749814124114951745275612583042841895336E-79"
+      }
+    ],
+    "local_tangent_worst": [
+      {
+        "component": "total",
+        "element": 13104,
+        "normalized_error": "5.98367991194059452886885711221248788516834348118472169022219743725761761707435698429503603364919887907867423491007899586E-17",
+        "hp80_hp120_error": "2.49799090540029932504204793229784342554492267233506735591896932931801174348993961099900244705312401166240480703997002709E-80",
+        "denominator": "29.4063474065638918379754567333635622433362072799085205987757357025586840247912525814964500343871263035060836778552510641",
+        "limit": "1E-10",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "4.36006267330705240607064639224525283494739360438909446093268296250728010584847620103635393898703473986749352433554789278E-80"
+      },
+      {
+        "component": "material",
+        "element": 13272,
+        "normalized_error": "8.46540534807733933611195340541875385671135849437441200503642411669434231757545246532975778848605629909854676380603052190E-17",
+        "hp80_hp120_error": "5.07955078848766251859923867268080116789852155542823114067860282631390239979377225663341713240904806123560111629624744183E-80",
+        "denominator": "22.4266269092635111596204145905103398042215781745652845393256446020179335252473801744583139240582986004168474291759276570",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "5.07955078848766251859923867268080116789852155542823114067860282631390239979377225663341713240904806123560111629624744183E-80"
+      },
+      {
+        "component": "regularization",
+        "element": 12936,
+        "normalized_error": "4.21414815015564231401190233346461460203299058653201789940259265103034903042703251799033394826568039052251081974603610237E-15",
+        "hp80_hp120_error": "2.38386818632074452413036059843593704837240904226159942106534107163155755658744958655493321230314395915378049830087144213E-80",
+        "denominator": "0.000208155610175039360672410475695146610997670983849715797043951981245666552062880337768748683160516753346034364770374992271",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "7.01332813227913935364322268036291327306775335020049329409144973817807826952469978460319020064895211128244775001906578081E-80"
+      }
+    ],
+    "CSC_total_action_check": {
+      "normalized_error": "8.19275409028040417275294993539911864461989381549939182421921896706287894138592397772790756570963301895418251819102625639E-17",
+      "hp80_hp120_error": "2.04750060594725972678242625583920949675065067777317388994644020366626162943917126608239475927797614172184456679333565830E-80",
+      "denominator": "67.6798026646338389137598597087047596371081543962640280486837937604568975349870966802262943851582089148632252189473630026",
+      "limit": "1E-10",
+      "reference_limit": "1E-40",
+      "pass_gate": true
+    },
+    "augmented_checks": {
+      "force": {
+        "normalized_error": "8.19549633752200102693375032869486714255445417248580286448593631370898021105524300388870092002664416274509382322992298881E-17",
+        "hp80_hp120_error": "2.04690303149099259776753281856621364116705732121323147543990503924031898554438538347661649652868950489659270518199141717E-80",
+        "denominator": "67.3824457430245933072064215540102013706561194413720276927727773664968481297279929177473609765741905051151380952616046530",
+        "limit": "1E-10",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "constraint": {
+        "normalized_error": "0",
+        "hp80_hp120_error": "0",
+        "denominator": "0.8750",
+        "limit": "1E-10",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      }
+    },
+    "references": [
+      {
+        "path": "accepted_005/hp80_full_local.json.gz",
+        "sha256": "77659d035a17421b3a7bb6d0e879dd3577cb080302694475c0773b2d5aedb2b9"
+      },
+      {
+        "path": "accepted_005/hp120_full_local.json.gz",
+        "sha256": "32fadb3268605207c360a994d60546623401816a055b82a5f0fa139b68d70ea1"
+      }
+    ],
+    "raw_fixture": {
+      "path": "accepted_005/reference_fixture.npz",
+      "sha256": "ad38908955c9431a3880d63e8677c70c614a6596c8d2be0ae1792fa045dd66b5"
+    },
+    "global_references": {
+      "path": "accepted_005/hp80_hp120_full_global.json.gz",
+      "sha256": "98385296a12598e48150b06290506baf36e985d02de4d3ef23d9c69e50a5a314"
+    },
+    "exact_element_gates": {
+      "path": "accepted_005/element_gates.json.gz",
+      "sha256": "7f64661be19620e36f5162012630658d975ef18ebfe0b36676366a299b9ffa45"
+    },
+    "global_differences": {
+      "path": "accepted_005/global_differences.json.gz",
+      "sha256": "0640543b55b4f1fcebe42ab7965af6710a4d37b1f573336cfc0deeecb4368be2"
+    },
+    "equations": {
+      "path": "accepted_005/equation_hp80_hp120.json.gz",
+      "sha256": "04eda421ec65be162e5eb92d99b5550104b30a5e7a70f8d2e6962af730e5d6a7"
+    },
+    "actions": {
+      "path": "accepted_005/actions.npz",
+      "sha256": "0200a6db7051b5714f421f3b660f5141991dd743698ae9675caa48c55f17603d"
+    },
+    "rounded_kinematics": {
+      "path": "accepted_005/rounded_hp120_kinematics.npz",
+      "sha256": "fc7965a80c0c5c1b1a2a8348002d334a786a54dec8d45658a8df76eadf7f48f0"
+    },
+    "independent_total_matrix": {
+      "path": "accepted_005/independent_total_matrix.npz",
+      "sha256": "e700006772f263f579d1e02b359bd5aeaa4f6f0280251745c6e3f1b61a7f6219"
+    },
+    "kinematic_diagnostics": {
+      "J": {
+        "exact_binary64_match": true,
+        "maximum_absolute_difference": 0.0
+      },
+      "F": {
+        "exact_binary64_match": true,
+        "maximum_absolute_difference": 0.0
+      },
+      "Hu": {
+        "exact_binary64_match": true,
+        "maximum_absolute_difference": 0.0
+      }
+    },
+    "workpiece_checks": {
+      "path": "accepted_005/workpiece_checks.json.gz",
+      "sha256": "38576b8680a2e47f59e03d203e2df242430ff3a99cbdf1838a5961496e58aae2"
+    },
+    "original_target_index": 5,
+    "leg": "loading"
+  },
+  "producer_record_unchanged": true,
+  "default_sources_unchanged": true,
+  "reference_qualification_scope": "Only selected circle1.15 saved peak and declared direction. Original15 gates; no full child/full original or extended path,all columns,stress/energy/pressure,effective clamp,stability or HF5 qualification",
+  "full_child_path_reference_pass": false,
+  "full_original_path_reference_pass": false,
+  "full_extended_path_reference_pass": false,
+  "pressure_qualified": false,
+  "clamp_qualified": false,
+  "contact_qualified": false,
+  "HF5_qualified": false,
+  "helper_elapsed_seconds": 122.89920949999942,
+  "outer_elapsed_seconds": 123.879265999989,
+  "helper_sampled_peak_RSS_bytes": 1274662912,
+  "outer_sampled_peak_tree_RSS_bytes": 1281785856,
+  "child_terminal_wall_seconds": 123.58312450000085,
+  "child_exit_code": 0,
+  "stop_reason": null,
+  "helper_error": null,
+  "outer_failure": null,
+  "cleanup_scope": "Actual cooperative child terminal and elapsed/RSS observations; no SUP2 or cleanup_verified contract",
+  "sealed_output_files": 30,
+  "sealed_output_bytes": 84875169,
+  "output_identity_seal": "complete_inside_original_helper_window",
+  "available_sealed_error_PNG": {
+    "sha256": "22b58c810af405fd46fb9379303f4d7cbea62d0048d079eadb315b043c6f6869",
+    "bytes": 89369
+  },
+  "actual_review_status": "pass_actual_finite_review",
+  "pixel_QA_status": "pass_pixel_inspection",
+  "pixel_QA_observations": [
+    "One new1500x870 PNG viewed once with view_image(original); no resize notice, no redraw or old-media inspection.",
+    "Title correctly identifies child1/global5/input1.15 mm. Ten labels and original error/limit annotations are legible; no clipping or overlap was observed.",
+    "All plotted log10(error/limit) values lie to the left of the zero gate. HP80/120 agreement is near -35.91; this visual statement is not an added gate.",
+    "Figure preserves original normalization and one PORT direction; it does not report pressure or grip qualification."
+  ],
+  "terminal": {
+    "tool_terminal_as_reported_by_parent": {
+      "terminal": "9bf311",
+      "session": 20547,
+      "exit_code": 0
+    },
+    "outer_seconds": 123.879265999989,
+    "helper_seconds": 122.89920949999942,
+    "sampled_tree_RSS_peak_bytes": 1281785856,
+    "stop_reason": null,
+    "cleanup_scope": "Cooperative terminal and sampled RSS only; no SUP2 cleanup_verified qualification."
+  },
+  "next_step": "建议下一阶段L-CSTEP3复用已安装load_only保存态延伸，从成功且已选定态独立参考通过的1.15 mm末态，仅追加1.25 mm绝对目标（增量0.10 mm）。保持r9/c(71,40)及其余物理、原数值设置和验收门，用实际变形、输入反力、材料/Hu/总工件力、边界/尖端距离、分区J及收敛继续观察更强压缩区间。当前minJ0.225154、最小无符号边距0.232258 mm，故比上次0.15 mm请求再缩小一步；该选择不新增门，也不预言接触或稳定性。本次不执行新加载，需另行明确新阶段授权。",
+  "read_scope": "Ordinary JSON/MD/source only; scientific NPZ/gzip/CSV/media use original producer seals plus stat, no payload read/hash/decode",
+  "qualification_scope": "One saved circle1.15 state and one PORT direction; no full path/all columns/stress/energy/new circle geometry/pressure/grip/release/stability/HF5",
+  "next_step_decision": {
+    "proposed_stage": "L-CSTEP3",
+    "status": "proposed_not_executed",
+    "source_result": "lf_data_preparation/native_interface_001/lf_circle_step_002/run_001/wave_circle_step/result.json",
+    "selected_accepted_index": 1,
+    "selected_global_target_index": 5,
+    "source_state_sha256": "3db267551ea6cb5817c2a1946a80363ecccb0329078d516e90e0106f27e709ef",
+    "selected_reference": "lf_data_preparation/native_interface_001/lf_circle_reference_001/run_001/reference/summary.json",
+    "anchor_mm": 1.15,
+    "target_mm": 1.25,
+    "increment_mm": 0.1,
+    "child_targets_mm": [
+      1.15,
+      1.25
+    ],
+    "complete_task_targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.15,
+      1.25
+    ],
+    "original_target_indices": [
+      5,
+      6
+    ],
+    "child_original_target_indices": [
+      0,
+      1
+    ],
+    "unchanged": "All physics and non-clock settings, including minimum_increment .00625/max_bisections4; original gates and installed mechanics sources.",
+    "proposed_resources": {
+      "controller_seconds": 1800,
+      "shared_display_seconds": 600,
+      "helper_seconds": 2700,
+      "outer_seconds": 2760,
+      "sampled_RSS_bytes": 8589934592
+    },
+    "fresh_anchor": "Original absolute lift/fluctuation and signed R; fresh F/T first check with exact state SHA/R identity. The reference archive is evidence, not the continuation input.",
+    "outputs": "Actual x1 deformation/mirror, signed R/qout and lower-body total/material/Hu forces, unsigned boundary/tip distances, partitioned fields, convergence and actual N accepted states.",
+    "stop_policy": "One invocation, first terminal error stops; original internal backtracking/bisection allowed, actual partial retained; no external retry/repair rerun/extension/force.",
+    "no_new_default_install_tests_HP": true,
+    "qualification": "Child segment only, no full original/extended path, pressure/effective grip/unloading/release/stability/HF5 transfer."
+  },
+  "next_step_recorded_utc": "2026-10-17T04:46:22.907506+00:00"
+}

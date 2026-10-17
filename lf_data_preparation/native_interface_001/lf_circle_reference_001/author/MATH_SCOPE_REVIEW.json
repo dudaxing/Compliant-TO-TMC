@@ -1,0 +1,56 @@
+{
+  "schema_version": "L-CREF1-mathematical-scope-static-review-1.0",
+  "status": "pass_static_math_scope_review",
+  "execution_pass": false,
+  "reviewed_utc": "2026-10-17T04:36:56.331492+00:00",
+  "blocking_findings": [],
+  "blockers": [],
+  "files": {
+    "execute_circle_reference.py": {
+      "sha256": "a59bd747668eb3dd81728a2d30b18aeff368fcf0cec633977bb8e721137feb2f",
+      "bytes": 29725
+    },
+    "protocol.proposed.json": {
+      "sha256": "016f9d20b77426bf8f3ed2379e4c356fa0c5afc06cec25d4f2eaf0a98d034f28",
+      "bytes": 14858
+    }
+  },
+  "scope": "Finite load/call-contract review only, complementing the other full-source review; no candidate/HF imports, tests, arrays/gzip/media opening or scientific calls.",
+  "checks": {
+    "inheritance": "CircleStateAudit(CoreAudit,WorkpieceCycleAudit); no override of B850.run_state,aa86.workpiece_checks,check/gate/scalar_gate/bind. Original physical formulas, local/global scales, 3000-digit exact scatter and 120-digit gate comparison remain inherited.",
+    "core_sha256": "b850308dd35a0c74a42a1900bfb643cb9731fcb8ab6cb8e65a3cc7b2f87412b5",
+    "workpiece_checker_sha256": "aa86bb162632f8c660ae0f547ad1ec16b9d655bcb99693b807381a6ddeafd938",
+    "original_fifteen_gates": {
+      "production_residual": "1e-9",
+      "independent_residual": "1e-8",
+      "force_evaluation": "1e-9",
+      "average_constraint": "1e-10",
+      "global_force_balance": "1e-6",
+      "fixed_displacement_mm": "8e-11",
+      "hp80_hp120": "1e-40",
+      "total_force": "1e-11",
+      "material_force": "1e-9",
+      "regularization_force": "1e-9",
+      "total_tangent": "1e-10",
+      "material_tangent": "1e-9",
+      "regularization_tangent": "1e-9",
+      "augmented_force_tangent": "1e-10",
+      "augmented_constraint_tangent": "1e-10"
+    },
+    "load_circle": "Independent load_only/result1.2/model1.1/27-field loader; circleoverlay lists and material/grid/fixed data compared with original L-CPREP1 ordinary model JSON and receipt. No new circle mask construction or geometry qualification.",
+    "actual_body": "510cells/565nodes/1130bodyDOF/37background overlap; merged1272fixed/26106free,13440elements/27378DOF. Metadata path region_metadata.workpiece; all three prior groups read from their dofs.",
+    "selected": "Exactly accepted1/global5/child1,d1.15 and actual state SHA3db26755...709ef; run_state called with original global5, never0. Anchor and old full-path flags retained.",
+    "direction": "Actual global b_in/maxabs with mergedfixed zero and deltaR=0,27,378-length PORT direction. Covers all elements/DOFs for this one vector, not all columns or every possible direction.",
+    "HP_call_contract": "One selected row -> inherited run_state once (HP80+HP120), workpiece_checks once. Require started=completed2 and one completed mechanical/body row before pure plot. No production F/T/model/solver calls.",
+    "body_projection": "Original negative weak holding force, material/Hu split and unique fixed partition retained; mirror(2Fx,0). Legacy global Fy and2absFy are explicitly not local circular normal pressure/clamp qualification.",
+    "bindings": "37 mixed ordinary/source/scientific SHA entries match actual ordinary bytes or original producer seal+stat; reference_sources11 separate unique dependency basenames. Producer output values correctly indexed as {sha256,bytes}, not compared as raw SHA strings.",
+    "NPZ_scope": "Five unique decoded archives: model27,state2,force16,tangent3,CSC3 descriptor arrays =51 fields. CSC additionally inspects format/shape and optional_is_array. aa86 rereads selected state2+forces16:18 repeated field appearances; source geometry NPZ raw identity only, not decoded. Unique archive count is not np.load-operation count.",
+    "sealing": "900s from pre-heavy-import STARTED through reference,pureplot,binding recheck and whole-output seal; checkpoints bracket each sealed file and final receipt. Outer960/8GiB independently applies. Incomplete/late seals become not_pass, do not create a success or authorize rehash retry.",
+    "qualification": "Selected1.15 state/PORT numerical reference only. No child/fullpath,independent mask,allcolumns,stress/energy,contact/pressure/clamp/release/stability/HF5 qualification; original production response unchanged."
+  },
+  "limits": [
+    "Static source readiness, not actual 2HP pass or runtime resource proof",
+    "No universal dynamic mechanical hooks claimed",
+    "No scientific payload member decoding or gzip verification performed now"
+  ]
+}
