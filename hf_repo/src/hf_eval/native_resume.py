@@ -55,7 +55,17 @@ def _extension_targets(parent, selected_state_index, model, task):
     unchanged["path"]["targets_mm"] = deepcopy(old_targets)
     load_only = old_task["path"]["kind"] == "load_only"
     if load_only:
-        if (parent.get("path_kind") != "load_only" or task["path"].get("kind") != "load_only"
+        if task["path"].get("kind") == "ordered_cycle":
+            if (parent.get("path_kind") != "load_only"
+                    or not isinstance(new_targets, list) or len(new_targets) != len(old_targets)+1
+                    or any(type(value) not in (int, float) or not np.isfinite(value) for value in new_targets)
+                    or not 0 <= new_targets[-1] < old_targets[-1]
+                    or not isinstance(task.get("input"), dict)
+                    or task["input"].get("target_mm") != old_task["input"]["target_mm"]
+                    or old_task["input"]["target_mm"] != old_targets[-1]):
+                raise TMCError("First unload must append one nonnegative target below the preserved loading peak", code="invalid_task_extension")
+            unchanged["path"]["kind"] = old_task["path"]["kind"]
+        elif (parent.get("path_kind") != "load_only" or task["path"].get("kind") != "load_only"
                 or not isinstance(new_targets, list) or len(new_targets) <= len(old_targets)
                 or any(type(value) not in (int, float) or not np.isfinite(value) for value in new_targets)
                 or new_targets[0] != 0 or any(b <= a for a,b in zip(new_targets, new_targets[1:]))
@@ -243,4 +253,8 @@ def read_native_resume(saved_result,selected_state_index,project,targets,setting
             extended_task_targets_mm=deepcopy(original_targets), appended_targets_mm=deepcopy(original_targets[len(source_targets):]),
             parent_continuation=deepcopy(parent.get("continuation")), full_extended_path_executed_by_child=False,
             full_extended_path_completed=False)
+        if model["task"]["path"]["kind"] == "load_only" and project.task["path"]["kind"] == "ordered_cycle":
+            metadata["task_transition"] = dict(source_path_kind="load_only",extended_path_kind="ordered_cycle",
+                first_unload=True,loading_peak_mm=model["task"]["input"]["target_mm"],
+                first_unload_target_mm=original_targets[-1])
     return NativeResumeAnchor(state,float(descriptor["R_input"]),float(parameter),index,metadata)

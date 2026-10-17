@@ -1,0 +1,50 @@
+{
+  "card": "L-CUNLOAD1",
+  "status": "pass_source_review",
+  "blocking_findings": [],
+  "reviewed_at_utc": "2026-10-17T14:18:57.228003+00:00",
+  "reviewed_file_sha256": {
+    "candidate/native_resume.py": "68e3122950766f9cecb48a02a0f52a6d5f2efbfc466432bccc2cd48c77e2b798",
+    "test_first_unload.py": "184d3c55b23cd4e5d8155b93d0b888f865d416167ae72523091282ffd60945ab",
+    "TEST_MATRIX.json": "f67309c898e2d10c02049b2b962c4b895e1159895681ff5e52c923d1834ca236",
+    "TEST_MATRIX.md": "8a9741c5eecd273d05a7f963ca01d12c3c076ff2dc840d8b666f0151d7d39f15",
+    "execute_unload.py": "77702d45b880ccd9e05c134b3c6542cedfbf2c314783b9cbb7ebc24307ec0655",
+    "plot_tiny.py": "9d841305c7fe7a5f11a7b8d6e0c14f79a4c0827eb727463ba6eb79165d101238",
+    "launch_unload.py": "dc9fb5ea14127dc39b8a6c5374e11a7531cbe78350f694f43b8b2404e1888bfc",
+    "prepare_package.py": "77a9c23513a7577c506327806879c277f6b94900396498f9cb822a415dad7da5",
+    "freeze.py": "fd171504727998acb736fd18dd0bdf55e259723ebc4825b976b77616353f7658",
+    "protocol.proposed.json": "07f2631b2933fc3d0a807b595a8ad02b58892d96690678975c1c2a74291c3f49",
+    "package_files.json": "1eedeb634a528405638602d20a1bfd00a761f25e3b67093911891df1ac288cc5",
+    "HUMAN_AUTHORIZATION.json": "aee535400ef034cc51f8f5d5673ee758c7f56dd1ed7fc2f1e1450d0123283b61",
+    "L-CUNLOAD1_CARD.md": "8c024907f8052257b9add472b7036b38c1a9fb6e69c7e898c1a58e850ba8fdd7"
+  },
+  "protocol_sha256": "07f2631b2933fc3d0a807b595a8ad02b58892d96690678975c1c2a74291c3f49",
+  "review_scope": "Finite static source/AST and ordinary protocol/SHA review only; prior source review reused and final correction/pins checked. No HF/candidate import, tests, installation, numerical call, plot or scientific/media payload read.",
+  "source_bindings": {
+    "baseline_verified": 78,
+    "final_verified": 78,
+    "only_production_change": "hf_repo/src/hf_eval/native_resume.py",
+    "candidate_installations": 1
+  },
+  "planned_validation": {
+    "methods": 8,
+    "real_tiny_FE_solves": 6,
+    "linear_controller_paths": 2,
+    "fixture_elements": 16,
+    "fixture_DOF": 50,
+    "HP_calls": 0,
+    "real_circle_in_scope": false
+  },
+  "resources": {
+    "tests_seconds": 120,
+    "tiny_controller_seconds": 30,
+    "plot_seconds": 30,
+    "helper_seconds": 180,
+    "outer_seconds": 240,
+    "sampled_RSS_bytes": 1073741824
+  },
+  "stop_contract": "Single invocation, failfast, cooperative stop and original SUP2 ownership/cleanup; retain actual installation and partial evidence, no retry/force/rollback. Scalar plot only after all finite tests pass.",
+  "pre_execution_correction": "Joint static review found two existing card gates omitted from the accepted-snapshot test loop. Before freeze/any execution, the author added relative_global_force_balance <= 1e-6 and actual fixed-DOF abs(math.fsum((lift,fluctuation))) <= 8e-11 mm. Final source/TEST_MATRIX/protocol pins agree; methods, solves, physical algorithm and tolerances were not changed.",
+  "qualification_limit": "A source-only review is not a test pass or numerical qualification. Planned tiny compatibility does not qualify actual circle unload, pressure, gripping, release, stability or full path.",
+  "executions_performed_by_reviewer": 0
+}

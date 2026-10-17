@@ -1,0 +1,188 @@
+"""Publish the closed L-CUNLOAD1 delta, preserving its actual pass or partial failure."""
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+from pathlib import Path
+import subprocess
+
+ROOT = Path('D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC')
+RESTORE = Path('D:/hf-restore-20260930')
+AUTHOR = Path(__file__).resolve().parent
+STAGE = 'lf_data_preparation/native_interface_001/lf_circle_first_unload_001'
+BASE = 'c78658322587499e901e654516aed62b45aa022d'
+MANIFEST = 'handoff/repository_manifest.json'
+FRONTS = ['README.md', 'hf_repo/README.md', 'docs/CURRENT_STATUS.md',
+          'docs/PHYSICAL_FUNCTION_PROGRESS.md', 'docs/RESUME_DEVELOPMENT.md',
+          'docs/L_USE1_NEXT_STEP_PLAN.md', 'docs/L_BFWD1_NEXT_STEP_PLAN.md']
+DEFAULTS = ['hf_repo/src/hf_eval/native_resume.py']
+REVIEW_JSON = STAGE + '/author/ACTUAL_REVIEW.json'
+LAUNCH_JSON = STAGE + '/unload_launch.json'
+SEALED_ONLY_SUFFIXES = {'.npz', '.png', '.gif', '.gz', '.csv', '.zip'}
+
+
+def git(root, *args):
+    return subprocess.check_output(['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', *args], cwd=root).decode('utf-8').strip()
+
+
+def read(name):
+    return json.loads((ROOT/name).read_bytes())
+
+
+def digest(raw):
+    return sha256(raw).hexdigest()
+
+
+def save(record):
+    (AUTHOR/'publication_receipt.json').write_text(
+        json.dumps(record, ensure_ascii=False, indent=2)+'\n', encoding='utf-8', newline='\n')
+
+
+def main():
+    record = dict(status='publication_started', previous_delivery_commit=BASE,
+                  created_utc=datetime.now(timezone.utc).isoformat())
+    phase = 'closed_records_and_baseline'
+    try:
+        assert git(ROOT, 'rev-parse', 'HEAD') == git(RESTORE, 'rev-parse', 'HEAD') == BASE
+        assert not git(RESTORE, 'status', '--porcelain')
+        assert git(ROOT, 'remote', 'get-url', '--push', 'origin') == 'https://github.com/dudaxing/Compliant-TO-TMC.git'
+        assert git(ROOT, 'branch', '--show-current') == 'main'
+        assert not git(ROOT, 'diff', '--cached', '--name-only')
+        untracked = subprocess.check_output(['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', 'ls-files', '--others', '--exclude-standard', '-z'], cwd=ROOT).decode('utf-8').split('\0')
+        assert all(not name or name.startswith(STAGE+'/') for name in untracked)
+        review = read(REVIEW_JSON)
+        assert review['status'].startswith('pass') and not review.get('blockers', review.get('blocking_findings', []))
+        helper_file = ROOT/STAGE/'run_001/execution_receipt.json'
+        receipt = read(STAGE+'/run_001/execution_receipt.json') if helper_file.is_file() else {}
+        launch = read(LAUNCH_JSON)
+        closure = read(STAGE+'/author/closure.json')
+        assert launch['card'] == closure['card'] == 'L-CUNLOAD1'
+        assert not receipt or receipt['card'] == 'L-CUNLOAD1'
+        assert not receipt or receipt['status'] in ('pass', 'not_pass')
+        assert launch['status'] in ('pass', 'not_pass') and launch['invocations'] == 1
+        assert launch.get('cleanup_verified') is True
+        assert closure['status'] not in ('running', 'preparing')
+        outcome = 'pass' if receipt.get('status') == launch['status'] == 'pass' else 'not_pass'
+        assert review.get('execution_status', outcome) == outcome
+        assert closure.get('execution_status', outcome) == outcome
+        assert receipt.get('output_identity_seal') in (None,
+            'complete_inside_original_helper_window', 'actual_partial_inside_original_helper_window',
+            'not_complete_before_resource_close', 'not_complete')
+        record.update(execution_outcome=outcome, helper_status=receipt.get('status'),
+                      outer_status=launch['status'], output_identity_seal=receipt.get('output_identity_seal'))
+        seals = receipt.get('outputs') or {}
+        changed = set(git(ROOT, 'diff', '--name-only').splitlines())
+        changed_defaults = sorted(changed & set(DEFAULTS))
+        assert changed == set(FRONTS) | set(changed_defaults)
+        if outcome == 'pass':
+            assert set(changed_defaults) == set(DEFAULTS)
+        actual_defaults = {row['path']:row for row in closure['actual_default_sources']}
+        assert set(actual_defaults) == set(DEFAULTS)
+        for name in DEFAULTS:
+            raw = (ROOT/name).read_bytes()
+            assert digest(raw) == actual_defaults[name]['actual_sha256']
+            assert (name in changed_defaults) == actual_defaults[name]['changed_from_baseline']
+        record.update(actual_changed_default_HF_files=changed_defaults,
+            default_installations_reported=receipt.get('default_installations'),
+            installed_transitions=receipt.get('installed_transitions'),
+            actual_default_sources=list(actual_defaults.values()))
+        history = read(STAGE+'/author/front_history.json')
+        assert history['source_baseline_commit'] == BASE
+        assert {row['path'] for row in history['files']} == set(FRONTS)
+        for row in history['files']:
+            old = subprocess.check_output(['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', 'show', BASE+':'+row['path']], cwd=ROOT)
+            current = (ROOT/row['path']).read_bytes()
+            assert len(old) == row['old_bytes'] and digest(old) == row['old_sha256']
+            assert current.endswith(old) and current.count(old) == 1
+
+        phase = 'incremental_identity_manifest'
+        old_raw = (ROOT/MANIFEST).read_bytes()
+        assert old_raw == subprocess.check_output(['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', 'show', BASE+':'+MANIFEST], cwd=ROOT)
+        manifest = json.loads(old_raw)
+        entries = {row['path']:row for row in manifest['files']}
+        inherited = len(manifest['files'])
+        assert len(entries) == inherited
+        assert manifest['schema_version'] == 'github-handoff-repository-1.0'
+        assert manifest['science_version'] == '0.5.0'
+        assert manifest['science_baseline_commit'] == 'b1334bb6a83ba9a0efab7bdba7bd39722146f024'
+        stage_files = sorted(path.relative_to(ROOT).as_posix()
+                             for path in (ROOT/STAGE).rglob('*') if path.is_file())
+        assert stage_files
+        names = sorted(FRONTS+changed_defaults+stage_files)
+        assert len(names) == len(set(names))
+        rows, sealed_payloads = [], []
+        for name in names:
+            path = ROOT/name
+            if path.suffix.lower() in SEALED_ONLY_SUFFIXES:
+                # Absence of a producer seal blocks publication; never invent/recompute a closed-window identity.
+                assert name in seals, 'No original-window seal for scientific/media file: '+name
+                seal = seals[name]
+                assert path.stat().st_size == seal['bytes'], name
+                row = dict(path=name, sha256=seal['sha256'], bytes=seal['bytes'])
+                sealed_payloads.append(dict(path=name,
+                    identity_basis='Original L-CUNLOAD1 helper-window seal plus publication stat only; no payload hash/decode'))
+            else:
+                raw = path.read_bytes()
+                row = dict(path=name, bytes=len(raw), sha256=digest(raw))
+                if name in seals:
+                    assert {key:row[key] for key in ('bytes', 'sha256')} == seals[name], name
+            rows.append(row)
+            entries[name] = row
+        assert MANIFEST not in entries
+        manifest.update(created_utc=datetime.now(timezone.utc).isoformat(),
+            storage_stage='l_cunload1_first_unload_tiny_compatibility_closed_001', previous_delivery_commit=BASE,
+            files=sorted(entries.values(), key=lambda row:row['path']))
+        (ROOT/MANIFEST).write_text(json.dumps(manifest, ensure_ascii=False, indent=2)+'\n',
+                                  encoding='utf-8', newline='\n')
+        raw = (ROOT/MANIFEST).read_bytes()
+        rows.append(dict(path=MANIFEST, bytes=len(raw), sha256=digest(raw)))
+        record.update(status='ready_to_stage', delta_files=rows, sealed_payload_identity_policy=sealed_payloads,
+            old_manifest_sha256=digest(old_raw), inherited_baseline_entries=inherited,
+            manifest_files=len(entries), manifest_total_bytes=sum(row['bytes'] for row in entries.values()),
+            default_HF_target_files=DEFAULTS,
+            inheritance_basis='Historical entries inherited; seven fronts, actual changed subset of the one authorized default reader source and the new stage updated. Successful execution requires the one candidate installation; partial installation preserves actual bytes without rollback. Original results and force/tangent kernels unchanged; no historical scientific payload reread by wrapper verification. Git transport/object I/O is outside this wrapper-read statement; automatic gc/maintenance disabled per command.')
+        save(record)
+
+        phase = 'stage_and_commit'
+        subprocess.run(['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', 'add', '-f', '--', *[row['path'] for row in rows]], cwd=ROOT, check=True)
+        assert set(git(ROOT, 'diff', '--cached', '--name-only').splitlines()) == {row['path'] for row in rows}
+        subprocess.run(['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', 'diff', '--cached', '--check'], cwd=ROOT, check=True)
+        subprocess.run(['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', 'commit', '-m', 'Add explicit first unload from saved load-only terminal state'], cwd=ROOT, check=True)
+        head = git(ROOT, 'rev-parse', 'HEAD')
+        record.update(status='committed', commit=head)
+        save(record)
+        phase = 'push_main'
+        subprocess.run(['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', 'push', 'origin', 'main'], cwd=ROOT, check=True)
+        remote = git(ROOT, 'ls-remote', 'origin', 'refs/heads/main').split()[0]
+        assert remote == head and not git(ROOT, 'status', '--porcelain')
+        record.update(status='pushed', remote_main=remote)
+        save(record)
+
+        phase = 'incremental_restore'
+        assert git(RESTORE, 'rev-parse', 'HEAD') == BASE and not git(RESTORE, 'status', '--porcelain')
+        subprocess.run(['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', 'fetch', 'origin'], cwd=RESTORE, check=True)
+        subprocess.run(['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', 'merge', '--ff-only', 'origin/main'], cwd=RESTORE, check=True)
+        assert git(RESTORE, 'rev-parse', 'HEAD') == head
+        for row in rows:
+            path = RESTORE/row['path']
+            assert path.stat().st_size == row['bytes'], row['path']
+            if path.suffix.lower() not in SEALED_ONLY_SUFFIXES:
+                assert digest(path.read_bytes()) == row['sha256'], row['path']
+        assert not git(RESTORE, 'status', '--porcelain')
+        record.update(status='published_and_incrementally_restored_pass', restore_head=head,
+            source_clean=True, restore_clean=True,
+            restore_verification='Delta ordinary source/JSON/MD/log SHA; scientific/media stat plus original helper-window seal. No science execution, payload rehash/decode or pixel reinspection.',
+            completed_utc=datetime.now(timezone.utc).isoformat())
+        save(record)
+        print(json.dumps({key:record[key] for key in ('status', 'execution_outcome', 'commit',
+            'remote_main', 'restore_head', 'manifest_files', 'manifest_total_bytes')}), flush=True)
+    except BaseException as error:
+        record.update(status='publication_stopped', failure_phase=phase,
+                      error=dict(exception_class=type(error).__name__, reason=str(error)),
+                      no_automatic_retry_rollback_or_force=True,
+                      stopped_utc=datetime.now(timezone.utc).isoformat())
+        save(record)
+        raise
+
+
+if __name__ == '__main__':
+    main()

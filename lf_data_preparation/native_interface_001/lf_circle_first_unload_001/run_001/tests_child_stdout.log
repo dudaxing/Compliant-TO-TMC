@@ -1,0 +1,23 @@
+test_01_nested_load_first_unload_and_cycle_continuation (__main__.FirstUnloadTests.test_01_nested_load_first_unload_and_cycle_continuation) ... ERROR
+
+======================================================================
+ERROR: test_01_nested_load_first_unload_and_cycle_continuation (__main__.FirstUnloadTests.test_01_nested_load_first_unload_and_cycle_continuation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\lf_data_preparation\native_interface_001\lf_circle_first_unload_001\test_first_unload.py", line 417, in test_01_nested_load_first_unload_and_cycle_continuation
+    parent, saved, _ = self.direct(source, task, "A0_load", "A", self.directory/"A0_load",
+                       ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        settings=settings, response_mode="mechanical", tangent_mode="chunk256", initial_guess="port_projection")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\lf_data_preparation\native_interface_001\lf_circle_first_unload_001\test_first_unload.py", line 310, in direct
+    value = native_mean.solve_native_mean(source, task, None, **options)
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\lf_data_preparation\native_interface_001\lf_circle_first_unload_001\test_first_unload.py", line 202, in solve
+    value = raw_solve(*args, **kwargs)
+  File "D:\Coding\Diversity TO\Compliant-Nonlinear-TMC-O\.github_handoff\Compliant-TO-TMC\hf_repo\src\hf_eval\native_mean.py", line 179, in solve_native_mean
+    raise TMCError("Targets must match the explicitly declared task path", code="invalid_input")
+hf_eval.tmc.TMCError: Targets must match the explicitly declared task path
+
+----------------------------------------------------------------------
+Ran 1 test in 0.053s
+
+FAILED (errors=1)
