@@ -1,3 +1,5 @@
+> 2026-10-17 L-CLOCAL1 **PASS**：圆形1.35 mm保存J/Hu空间定位；3NPZ/8字段，无新平衡或默认HF修改。原S4结果/资格保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_local_001/RESULTS.md)。原历史说明保留如下。
+
 > 2026-10-17 L-CSTEP4 **PASS**：复用load_only保存态延伸，固定圆形工件1.25→1.35 mm；生产 success，保存态 2，helper／outer pass／pass。新目标6检查/5线搜索全接受/0二分，最小边界距离0.096332 mm、free-medium minJ=0.086236；建议下一步先做保存态局部定位（未执行，见同目录NEXT_STEPS.md）。原资格及历史保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_step_004/RESULTS.md)。原历史说明保留如下。
 
 > 2026-10-17 L-CSTEP3 **PASS**：复用load_only保存态延伸，固定圆形工件1.15→1.25 mm；生产 success，保存态 2，helper／outer pass／pass。新目标6检查/5次线搜索全接受/0二分，最小边界距离0.163972 mm、free-medium minJ=0.155533；建议下一步1.25→1.35 mm（未执行，详见同目录NEXT_STEPS.md）。原资格及历史保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_step_003/RESULTS.md)。原历史说明保留如下。
