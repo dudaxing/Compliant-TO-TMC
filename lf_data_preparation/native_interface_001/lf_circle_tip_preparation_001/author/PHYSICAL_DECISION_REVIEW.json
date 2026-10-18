@@ -1,0 +1,272 @@
+{
+  "schema_version": "tip-preparation-physical-decision-review-1.0",
+  "card": "L-CTIPPREP1",
+  "status": "pass_undeformed_basis_for_proposed_short_pilot",
+  "execution_status": "pass",
+  "execution_status_scope": "Completed undeformed preparation only; no proposed pilot has been run or authorized by this review.",
+  "created_utc": "2026-10-18T13:32:06.144808+00:00",
+  "read_scope": "Ordinary layout/diagnostics/review/task/receipt and source bytes only; no NPZ/CSV/media opened, hashed or decoded; no new geometry, F/T/HP/solver/test/render calls.",
+  "ordinary_source_sha256": {
+    "run_001/layout.json": "8296dd07d20ce7fe267d9722d44ea4c4992b73b85d46bff10e7adf5c04a4bd19",
+    "run_001/diagnostics.json": "0fe305d363bd1f886b77a783ed42dcb892509abdfbfa4b2362fefbedf9c07f6e",
+    "run_001/execution_receipt.json": "dc47ebff2d3cf20dac6e5bd5586e24599ed7f3e4cc818fc2ffe1e81a2955cccc",
+    "run_001/REVIEW.md": "8f8ad085d82e3a9bf5ffbd1ead34c505293cc6ef5ad73131cd335ef062a3c0a3",
+    "run_001/task.json": "cb8315eafc13361f501431d23953a3a0a16d87895945222ac6bdc59c3cced704",
+    "layout_analysis.py": "b7a5f4b0fdcab865a99575d3d27fc511234bb38b35100dd753b9936e3dafcfab"
+  },
+  "preparation": {
+    "checks_passed": 72,
+    "checks_completed": 72,
+    "counts": {
+      "geometry_derivation_started": 1,
+      "geometry_derivation_completed": 1,
+      "model_build_started": 1,
+      "model_build_completed": 1,
+      "model_write_started": 1,
+      "model_write_completed": 1,
+      "layout_analysis_started": 1,
+      "layout_analysis_completed": 1,
+      "plot_calls_started": 1,
+      "plot_calls_completed": 1
+    },
+    "helper_elapsed_seconds": 6.359824799990747,
+    "mechanical_calls": {
+      "force_calls": 0,
+      "tangent_calls": 0,
+      "solver_calls": 0,
+      "HP_calls": 0,
+      "tests": 0,
+      "default_installations": 0
+    },
+    "model_counts": {
+      "cells": 14720,
+      "nodes": 14985,
+      "dofs": 29970,
+      "solid_cells": 4349,
+      "medium_cells": 10371,
+      "solid_incident_nodes": 4847,
+      "fixed_dofs": 1288,
+      "free_dofs": 28682
+    },
+    "grid": {
+      "shape_yx": [
+        80,
+        184
+      ],
+      "origin_mm": [
+        0.0,
+        0.0
+      ],
+      "cell_size_mm": [
+        0.5,
+        0.5
+      ],
+      "axes": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "extent_mm": [
+        92.0,
+        40.0
+      ],
+      "array_order": "C_yx_bottom_up",
+      "value_location": "cell"
+    },
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain"
+    },
+    "third_medium": {
+      "gamma": 1e-06
+    },
+    "regularization": {
+      "alpha": 5e-07,
+      "length_mm": 80.0
+    },
+    "background_symmetry": {
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          92.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ]
+    }
+  },
+  "geometric_findings": {
+    "baseline_reconstructed_on_same_new92_grid": {
+      "definition": {
+        "kind": "fixed_rigid",
+        "shape": "circle",
+        "center_mm": [
+          74.0,
+          40.0
+        ],
+        "radius_mm": 9.0,
+        "fixed_components": [
+          0,
+          1
+        ]
+      },
+      "nearest_unsigned_mm": 1.0,
+      "tip_unsigned_mm": 2.5,
+      "scope": "Body geometry on the same new92 resident grid; no old84 FE model or boundary response reconstructed"
+    },
+    "candidate": {
+      "definition": {
+        "kind": "fixed_rigid",
+        "shape": "circle",
+        "center_mm": [
+          80.0,
+          40.0
+        ],
+        "radius_mm": 9.0,
+        "fixed_components": [
+          0,
+          1
+        ]
+      },
+      "bounds": {
+        "lower": [
+          71.0,
+          31.0
+        ],
+        "upper": [
+          89.0,
+          40.0
+        ]
+      },
+      "nearest_unsigned_mm": 1.0,
+      "first_global_witness": {
+        "mechanism_edge_index": 821,
+        "workpiece_edge_index": 0,
+        "mechanism_nodes": [
+          11255,
+          11256
+        ],
+        "workpiece_nodes": [
+          11626,
+          11627
+        ],
+        "mechanism_point_mm": [
+          78.0,
+          30.0
+        ],
+        "workpiece_point_mm": [
+          78.0,
+          31.0
+        ]
+      },
+      "tip": {
+        "reference_node_id": 11260,
+        "reference_point_mm": [
+          80.0,
+          30.0
+        ],
+        "distance_mm": 1.0,
+        "point_mm": [
+          80.0,
+          31.0
+        ],
+        "workpiece_edge_index": 4,
+        "workpiece_nodes": [
+          11629,
+          11630
+        ],
+        "segment_parameter": 1.0,
+        "tied_workpiece_edge_indices": [
+          4,
+          5
+        ],
+        "scope": "Unsigned fixed reference tip to actual undeformed Q1 boundary; not contact"
+      },
+      "distance_relation": {
+        "tip_equals_global_minimum_exact": true,
+        "tip_minus_global_mm": 0.0,
+        "reported_global_mechanism_witness_is_tip": false,
+        "global_witness_scope": "Original public first nearest pair; positive-distance global ties are not exhaustively enumerated",
+        "tip_tie_scope": "All exactly tied body edges for the fixed reference tip projection are retained",
+        "interpretation": "Exact equality places the tip on the same minimum-distance level; not a unique closest point or first-contact prediction"
+      },
+      "right_medium": {
+        "actual_body_right_mm": 89.0,
+        "outer_right_mm": 92.0,
+        "width_mm": 3.0,
+        "column_ids": [
+          178,
+          179,
+          180,
+          181,
+          182,
+          183
+        ],
+        "row_count": 80,
+        "column_count": 6,
+        "cell_count": 480,
+        "all_nonbody_nonsolid_passive_void": true,
+        "continuous_to_outer_boundary": true,
+        "meaning": "Nonbody medium existence; body-shared nodes remain constrained. No boundary-insensitivity qualification"
+      },
+      "outer_boundary_nodes": 81,
+      "outer_ux_free": 81,
+      "outer_uy_free": 80,
+      "top_uy_fixed_nodes": [
+        14984
+      ]
+    },
+    "historical_margin": {
+      "old_center_mm": [
+        74.0,
+        40.0
+      ],
+      "old_domain_right_mm": 84.0,
+      "old_body_right_mm": 83.0,
+      "width_mm": 1.0,
+      "scope": "Previously saved undeformed x74/old84 geometric margin only; not new92 baseline strip or old boundary DOF reconstruction"
+    },
+    "limits": "Tip1mm==global1mm puts the designated tip at a shared shortest-distance level. The public global witness is atx78, tip witness atx80; global ties are not exhaustively enumerated. No unique/first-contact prediction, signed gap, complete containment or domain-width convergence is established."
+  },
+  "next_short_pilot": {
+    "recommendation": "Reasonable next separately authorized physical task: zero-start load_only [0,.25,.5]mm on the newly prepared x80/r9/right92 model, with original physics and production gates.",
+    "prepared_task_file": "lf_data_preparation/native_interface_001/lf_circle_tip_preparation_001/run_001/task.json",
+    "prepared_targets_mm": [
+      0.0,
+      0.25,
+      0.5
+    ],
+    "prepared_input_target_mm": 0.5,
+    "why": "Unlike the previous x74 placement, the specified far-right tip now shares the initial minimum-distance level. A short new zero-start path can measure whether it remains aligned during actual deformation; more undeformed relocation is not currently needed.",
+    "start_contract": "Pass explicit task targets to the current public API; do not transplant an old zero/load state from the differently indexed old domain. Preserve all actual accepted states including genuine internal bisections; stop on the first terminal failure without external retry.",
+    "minimum_observations": [
+      "Every actual accepted index: input displacement/reaction, output displacement, original cached residual/constraint/global-force/fixed-DOF gates and real Newton/line-search/bisection/failure counts.",
+      "Full finite Q1 boundary minimum and first witness, intersections/near-touch/cross-region overlap; same physical tip(80,30) actual position and unsigned projection with its edge ties. Report whether tip and global minimum remain equal or separate; no contact threshold.",
+      "Lower-body signed total/material/Hu weak force and their direction; not surface pressure or qualified gripping force.",
+      "Global solid/nonbody-medium minJ and Hu extrema with location; right480-cell J/Green/Hu extrema/ties plus actual reference/updated strip geometry and split displacement witnesses.",
+      "Original topuy and actual newx92 outer-node behavior; separate distant free-corner displacement from workpiece-near gap closure. Observe boundary response without claiming domain-insensitivity."
+    ],
+    "viewer_required_changes": {
+      "derive_from_new_metadata_and_reference_grid": true,
+      "tip_selection": "Unique exact reference coordinate(80,30), observed new ID11260 is informative only; never reuse old10300.",
+      "right_strip": "Reference x89..92, columns178..183 of184, six columns x80 rows=480; never reuse oldx83..84/columns166,167.",
+      "resident_readset": "Reuse newly saved model/state/force arrays once; J(ne,9), F(ne,9,2,2), Hu(ne,2,2,2), modelpoints already suffice. No old state/model arrays.",
+      "field_scope": "J uses nine-point Simpson sampling; Hu is per-element/component with representative centers; Green principal strain from saved F only.",
+      "display": "Actualx1 geometry, finite raster edges, analytic circle reference dashed; actualN animation and ordinary scalar curves. No pressure/contact/domain-width qualification."
+    },
+    "reference_policy": "No routine new HP is required merely by preparation success; old geometry HP does not transfer. Arrange independent reference only for a concrete later numerical question.",
+    "authorization_scope": "Recommendation only; a new science window must have its own explicit authorization/freeze and original stop policy."
+  },
+  "blocking_findings": []
+}

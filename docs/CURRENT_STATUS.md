@@ -1,3 +1,5 @@
+> 2026-10-18 L-CTIPPREP1 **PASS**：r9/(80,40)、右域84→92mm、Lr80输入与未变形检查72/72；无加载。见[tip对向及右介质记录](../lf_data_preparation/native_interface_001/lf_circle_tip_preparation_001/RESULTS.md)。原历史正文保留如下。
+
 > 2026-10-18 L-CRPILOT1 **PASS**：固定圆形工件0→0.25→0.50 mm短加载；生产 success，保存态 3，helper／outer pass／pass。原资格及历史保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_right_pilot_001/RESULTS.md)。原历史说明保留如下。
 
 > 2026-10-18 L-CRIGHT1 **PASS**：圆形工件r9从(71,40)右移至(74,40)mm，未变形检查53/53；已核实际84mm域、右侧1mm两列介质与原约束。无力学求解，短行程尚未执行。见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_right_preparation_001/RESULTS.md)。历史原文保留如下。
