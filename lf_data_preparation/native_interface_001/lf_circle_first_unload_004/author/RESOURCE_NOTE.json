@@ -1,0 +1,151 @@
+{
+  "schema_version": "hf-circle-next-return-resource-note-1.0",
+  "card": "L-CUNLOAD4",
+  "status": "actual_resource_note_recorded",
+  "execution_status": "pass",
+  "created_utc": "2026-10-18T05:12:29.925233+00:00",
+  "read_scope": "Existing ordinary helper/launch/result timing/environment and one resource snapshot only; no new telemetry, scientific payload/media reads, tests or numerical execution",
+  "configured_resources": {
+    "sampled_RSS_limit_bytes": 68719476736,
+    "sampled_RSS_limit_GiB": 64.0,
+    "cpu_thread_limit": 16,
+    "cpu_thread_environment": {
+      "OMP_NUM_THREADS": "16",
+      "OPENBLAS_NUM_THREADS": "16",
+      "MKL_NUM_THREADS": "16",
+      "NUMEXPR_NUM_THREADS": "16"
+    },
+    "viewer_internal_RSS_limit_bytes": 8589934592,
+    "meaning": "64GiB sampled-RSS permission is not a preallocation. Four per-library16-thread environment settings do not impose a total process-thread16 limit or guarantee16 active cores. No affinity or numerical-backend change."
+  },
+  "actual_resources": {
+    "outer_elapsed_seconds": 397.7018693999853,
+    "helper_elapsed_seconds": 394.2738134000101,
+    "peak_sampled_tree_RSS_bytes": 828624896,
+    "peak_sampled_tree_RSS_GiB": 0.7717170715332031,
+    "cleanup_verified": true,
+    "one_process_snapshot": {
+      "observed_utc": "2026-10-18T05:09:50.799825+00:00",
+      "root_elapsed_seconds": 368.5441360473633,
+      "worker": {
+        "pid": 63904,
+        "process_create_time": 1792299823.1558719,
+        "image": "python.exe",
+        "cpu_user_seconds": 267.328125,
+        "cpu_system_seconds": 93.234375,
+        "RSS_bytes": 459079680,
+        "threads": 33
+      },
+      "worker_age_seconds_at_snapshot": 367.6439530849457,
+      "worker_CPU_seconds_at_snapshot": 360.5625,
+      "worker_CPU_time_per_elapsed_core_equivalents": 0.9807382848935109,
+      "scope": "A cumulative CPU-time/elapsed ratio at one process snapshot, roughly one logical core; not instantaneous utilization, not the completed whole-run utilization or peak, and not GPU measurement."
+    },
+    "process_threads_meaning": "33 live process threads can include multiple libraries/pools and idle threads; this is not evidence of33 concurrently active cores or breach of an aggregate16-thread contract, which was not imposed.",
+    "root_redirector": {
+      "pid": 18932,
+      "process_create_time": 1792299822.2557158,
+      "image": "python.exe",
+      "cpu_user_seconds": 0.0,
+      "cpu_system_seconds": 0.140625,
+      "RSS_bytes": 5025792,
+      "threads": 3
+    },
+    "root_scope": "PID18932 is the Windows virtual-environment root/redirector; numerical work is PID63904. The low root CPU does not characterize numerical CPU work."
+  },
+  "producer_timing": {
+    "native_result_timing_seconds": {
+      "project_preparation": 0.07775820000097156,
+      "evaluation": 381.80931310000597
+    },
+    "original_path_timing_seconds": {
+      "kernel_calls": 12,
+      "successful_kernel_calls": 12,
+      "kernel_and_transfer": 380.2604477999557,
+      "assembly": 0.09068229998229071,
+      "sparse_solve": 1.1849927999719512,
+      "callback": 0.025971700000809506,
+      "all_assembly_attempts_wall": 380.35698760006926,
+      "total": 381.72848439999507
+    },
+    "scope": "Unmodified producer CPU timings. kernel_and_transfer is the existing field name, not evidence of GPU transfer. Categories are not all additive: all_assembly_attempts_wall includes kernel/assembly work."
+  },
+  "hardware_identity": {
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13980HX",
+    "physical_cores": 24,
+    "logical_processors": 32,
+    "total_physical_memory_bytes": 137095094272,
+    "identity_scope": "Inherited C3 read-only Win32 CIM identity on2026-10-18; dedicated GPU16GB is user-reported, not benchmarked"
+  },
+  "backend_and_comparison": {
+    "backend": "Existing CPU numerical implementation unchanged",
+    "GPU_backend_used": false,
+    "GPU_benchmark_performed": false,
+    "speedup_established": false,
+    "reason": "The saved1.35-to1.25 increment and previous first-return increment are different numerical workloads; no controlled same-workload timing comparison was performed."
+  },
+  "execution_counts": {
+    "production": {
+      "force_calls": 12,
+      "force_calls_completed": 12,
+      "tangent_calls": 7,
+      "tangent_calls_completed": 7,
+      "solver_invocations": 1,
+      "JIT_calls": 0,
+      "HP_calls": 0
+    },
+    "wrapper": {
+      "api_started": 1,
+      "solve_started": 1,
+      "solve_completed": 1,
+      "api_completed": 1,
+      "view_child_started": 1,
+      "view_child_completed": 1,
+      "convergence_plot_started": 1,
+      "convergence_plot_completed": 1
+    },
+    "new_tests": 0,
+    "default_installations": 0,
+    "HP_calls_by_wrapper": 0
+  },
+  "ordinary_evidence": [
+    {
+      "role": "helper",
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_first_unload_004/run_001/execution_receipt.json",
+      "bytes": 58220,
+      "sha256": "3b2760a299ceefc385c9a47c32b9bdfb90d930cc9aa25520791acb98f6133dd3"
+    },
+    {
+      "role": "launch",
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_first_unload_004/unload_launch.json",
+      "bytes": 10824,
+      "sha256": "10de42c5001c9d29870c5e189117f5a755cb2ce87fb63256371dc825c0fda819"
+    },
+    {
+      "role": "saved_result_ordinary_metadata",
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_first_unload_004/run_001/wave_circle_unload125/result.json",
+      "bytes": 107616,
+      "sha256": "a7cb54276df1a428d08c3cb7cec88dc6833def9c1ec90b88bad4ed9365af498d"
+    },
+    {
+      "role": "environment",
+      "path": "D:/hf-native-workpiece-api-author-20261018/L_CUNLOAD4_preparation_001/environment.json",
+      "bytes": 953,
+      "sha256": "2a94ca225c00f857c15ae0fcbee56c2fd45c16d5d7eb8fc562661371b9c0e53b"
+    },
+    {
+      "role": "single_resource_snapshot",
+      "path": "D:/hf-native-workpiece-api-author-20261018/L_CUNLOAD4_preparation_001/resource_observation.json",
+      "bytes": 1040,
+      "sha256": "12271942a4f1c9854d4d85f614d84e5cd6810a7a79034f5cb48a67bfa953775e"
+    }
+  ],
+  "note_actions": {
+    "new_telemetry": 0,
+    "HF_imports": 0,
+    "tests": 0,
+    "F_T_HP_or_equilibrium_calls": 0,
+    "scientific_or_media_payload_reads": 0,
+    "metadata_scripts_changed": 0
+  }
+}
