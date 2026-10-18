@@ -1,3 +1,5 @@
+> 2026-10-18 L-CUNLOAD5 **PASS**：固定圆形工件从保存1.25 mm请求完成到0的剩余输入回程；生产 `success`，实际保存态 `7`，原资格及历史保持。见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_first_unload_005/RESULTS.md)。原历史保留如下。
+
 > 2026-10-18 L-CUNLOAD4 **PASS**：固定圆形工件从保存1.35 mm继续回程至1.25 mm；生产 `success`，实际保存态 `2`，原资格及历史保持。见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_first_unload_004/RESULTS.md)。原历史保留如下。
 
 > 2026-10-18 L-CUNLOAD3 **PASS**：固定圆形工件从保存1.40 mm首次回程至1.35 mm；生产 `success`，实际保存态 `2`，原资格及历史保持。见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_first_unload_003/RESULTS.md)。原历史保留如下。
