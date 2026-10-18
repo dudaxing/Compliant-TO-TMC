@@ -1,0 +1,879 @@
+{
+  "schema_version": "tip-pilot-next-physical-decision-1.0",
+  "card": "L-CTIPPILOT1",
+  "status": "pass_ordinary_physical_decision_review",
+  "execution_status": "pass",
+  "next_step": "建议另行授权仅一个新目标：沿已安装load_only显式保存态延伸接口，从本次accepted2/global2的0.50mm续算到0.75mm；保留r9/(80,40)、right92、Lr80、原物理/门/设置，不回放加载前缀。新fulltask只追加0.75并提高input.target到0.75及必要说明身份；先fresh验证0.50锚SHA/R。资源拟controller1800/display600/helper2700/outer2760秒、64GiB、四库16、viewer内部8GiB；首个终端失败保partial并关闭，不外部重试。本建议不启动或授权新窗口，不预测未来距离/收敛。",
+  "interpretation_md": "## 独立物理/功能判断\n\n本次r9/(80,40)、right92、Lr80的从零[0,.25,.5]实际完成，新的短任务path_completed/loading_peak_reached/task_target_executed为true，只表示本次0→.5指令，不是完整循环、卸载或旧路径重执行。实际已实现：新域/布置进入现有公开非线性mechanical+chunk256流程，保存真实接受态并观察指定tip、全Q1边界、弱力和右480介质单元；不是单纯未变形布置通过。\n\n同tip/global unsigned距离三态为1、0.7598854694338719、0.5193940639875763mm。零态public firstpair在x78，tip投影在x80；后两态firstpair的机构见证就是tip：.5为(79.86088009934946,30.480605936012424)→(79.86088009934946,31)mm。目标tip实际进入最短距离层级并持续接近，回应了此前x74布置中tip落后横梁的问题。global正距离ties未穷举，不能宣称唯一最近/唯一首触；三态交叉、near-touch、raw/strict overlap和roundoff ambiguity均false，containment未测。距离仍为正，不授压力或接触资格。\n\n.5时R=0.08602790333542189N，q_out=0.480914454124498mm；solid minJ=0.9879538763129987，非body介质minJ=0.5165686928215502。下半工件Fy=0.00047828066183543393N，material=0.0001040097253926478N、Hu=0.0003742709364427861N。它们是有符号弱式合力，不是连续压力、局部法向承载或有效夹持，Hu极值位置也不能归因全部body HuFy。\n\n右480单元在.5的minJ=0.644133518565071，e11402/q2参考(89,31)、实际(89.05313643825475,31.011150397181808)mm；Green最小主值−0.30461585991290596为无量纲Green应变，不转换成工程压缩百分数。同单元Hu最大绝对分量0.005909855856949434/mm，代表中心参考(89.25,30.75)mm，分量[1,0,1]，有2个exact ties。该中心只是cellwise指标代表点。最大节点|u|=0.7147775822035364mm位于底右外角node184，实际(92.43489713973966,0.5672490369026598)mm；它不是tip间隙闭合。右介质参与压缩不证明域污染，3mm余量也不自动证明域宽充分或无边界影响。\n\n与旧x74/right84在同.5比较，tip2.0389747275151535→0.5193940639875763mm、整体nearest0.6038158762254856→0.5193940639875763mm；R0.08581310622787962→0.08602790333542189N，bodyFy0.00029683638167977717→0.00047828066183543393N。这是圆心和域边界同时变化的两例，不是单一位置效应或域宽收敛试验；不能将差异归因于其中一个因素。\n\n实际15次基点检查、12次trial全部接受、14次线性求解、0二分/failed_attempt；F27/27、T15/15、solver1、HP/JIT0。末态relative residual1.2689651419092905e-12、constraint6.938893903907228e-18/bound5e-11mm、relative global force balance5.361568321541662e-16，保原门。当前controller总1310.7252118000179s，其中kernel+transfer1305.1132949999883s；旧x74案例同15/12/14计数的总时1043.465763699991s。这里只报告不同窗口的实测成本，不把差异定性为性能基准或数值困难。\n\n未见必须先排查才可提出单步续算的具体字段失败：tip方向目标已实际对齐，原门和全部线搜索通过。可以提出仅.5→.75以继续检验tip与最近见证是否保持对向，避免直接追大行程。medium J和右区Green说明需持续看位置/场变化，但没有依据新增门或预报.75的间距、收敛和接触。未做独立HP、压力/有效夹持、自由释放、稳定性或域宽收敛；旧布局HP不转授本布局。\n",
+  "next_steps_md": "# L-CTIPPILOT1 后续建议：单目标延伸到.75（尚未执行）\n\n本卡实际PASS，3个保存接受态完成0/.25/.5；当前tip与全局距离同为0.5193940639875763mm，原门、全部trial通过。建议下一步另行批准**只增加一个加载目标.75mm**，而不是重做0→.5或直接大行程。\n\n- 复用已安装公开load_only延伸：parent为本卡`run_001/wave_circle_tip_pilot/result.json`，selected accepted index2/global2，d=.5，state SHA`c8f41107026000f09d395eb7a091ce6501b532b0a8d69210b22a94d55e8c8392`，R=0.08602790333542189N。新fulltask保完整prefix[0,.25,.5]并append.75，input.target=.75；r9/(80,40)/right92/Lr80及其它物理全部保持，只作必要说明身份变化。\n- 用现有显式extend_path=True接口；child请求[.5,.75]，预期global2/3、child0/1。先fresh锚验证SHA/R，不移植旧布局状态、不回放加载前缀。实际二分若增加接受态全部保留，不硬锁N=2；分段/全路径flags按原API实际语义保留，不把suffix执行叫全路径重执行。\n- 沿用mechanical/chunk256及原settings/门：residual1e-9、average constraint1e-10、global balance1e-6、fixed split8e-11mm，maxchecks25/backtracks12/bisections4/mininc.00625；不改gamma/alpha/Lr或引入新接触阈值。\n- 拟controller1800、共享显示600、helper2700/outer2760秒、采样64GiB、四库16，pure viewer内部8GiB保留。无新tests/HP/default修改；一次正式窗口，首终端错误停并保partial，无外部重试、修复重跑、延期或force。已测成本只支持计划窗口，不保证下个目标收敛。\n- 最少显示实际×1/实际N、同tip和全边界最近见证/交叉记录、R/q_out、material/Hu/total有符号弱力、全域minJ/Hu与右480单元J/Green/Hu位置及split位移、原收敛计数。保持x89..92参考strip和动态坐标tip查找；将底右外角位移与tip距离分开。\n\n本建议不是新执行授权或已冻结候选；本次没有启动.75。独立HP仅在具体后续数值不确定性需要时另定，不例行追加；尚无压力、有效夹持、完整卸载循环/自由释放、稳定性或域宽收敛资格。\n",
+  "created_utc": "2026-10-18T14:13:01.235461+00:00",
+  "review_scope": "Ordinary result/summary/derived/geometry/convergence/protocol and previous ordinary c74/right84 summary+convergence only. No NPZ/CSV/media opened or hashed, no plotting/new geometry/F/T/HP/solver/test.",
+  "tool_terminal_as_reported_by_parent": {
+    "terminal_id": "96f02a",
+    "session_id": 52162,
+    "exit_code": 0,
+    "session_closed": true
+  },
+  "ordinary_source_pins": {
+    "lf_data_preparation/native_interface_001/lf_circle_tip_pilot_001/protocol.json": {
+      "bytes": 14418,
+      "sha256": "abd2964dae5d847adaa3a2398355965bf3f47841cb59d5e9715ba9194faa93ab"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_pilot_001/run_001/wave_circle_tip_pilot/result.json": {
+      "bytes": 92961,
+      "sha256": "4fae0dc0cae0ec33145b80b47efe4ea5562bebe8cad61750fa9be5bfebc21720"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_pilot_001/run_001/view/wave_circle_tip_pilot/summary.json": {
+      "bytes": 39901,
+      "sha256": "ac69c5ffd96d362d89c97ccd566639bcc24937afc3932eb073206895b6c9f297"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_pilot_001/run_001/convergence/convergence.json": {
+      "bytes": 29843,
+      "sha256": "8905ae2972491cead495b4925dbec716dd68449943354c6affb2f770b112e88f"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_right_pilot_001/run_001/view/wave_circle_right_pilot/summary.json": {
+      "bytes": 29710,
+      "sha256": "8c6d8756890d343c9052452db62860bddb17fbc7ff52f310d70aafc0dc933999"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_right_pilot_001/run_001/convergence/convergence.json": {
+      "bytes": 29785,
+      "sha256": "ad7a6dfb788d4358b7fe756768490f3182fcd9cb09ddd2fcbc474ad5df69ac5c"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_pilot_001/run_001/view/wave_circle_tip_pilot/000/derived.json": {
+      "bytes": 5484,
+      "sha256": "fc6a7f877b53c22f8d0d550eed2022e571d5ef2b27f54f45ade8792a7fd6af4a"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_pilot_001/run_001/view/wave_circle_tip_pilot/000/geometry.json": {
+      "bytes": 54795,
+      "sha256": "c17b521564c9500ff5ccb44150cbe768266fcf7f61bb2be612fa978bc20877c0"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_pilot_001/run_001/view/wave_circle_tip_pilot/001/derived.json": {
+      "bytes": 6309,
+      "sha256": "5840a10e7bee4f1b46690432c4921df872124aaad601632533bcd2972a98992e"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_pilot_001/run_001/view/wave_circle_tip_pilot/001/geometry.json": {
+      "bytes": 54902,
+      "sha256": "46be9e883d4c5890bbfdd72cf091b85686f0f60bb949ac34ae4e646c2fd39820"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_pilot_001/run_001/view/wave_circle_tip_pilot/002/derived.json": {
+      "bytes": 6298,
+      "sha256": "4797737d171a6401107f38c180fae16592658f8a09c70940d03e640354146ff5"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_pilot_001/run_001/view/wave_circle_tip_pilot/002/geometry.json": {
+      "bytes": 54905,
+      "sha256": "4345b1ed9537bcd30ce0746846d7a3dcc89d6dd01b1754ad4f4ef53685f918e4"
+    }
+  },
+  "current_result": {
+    "status": "success",
+    "path_kind": "load_only",
+    "targets_mm": [
+      0.0,
+      0.25,
+      0.5
+    ],
+    "accepted_states": 3,
+    "reached_displacement": 0.5,
+    "task_target_mm": 0.5,
+    "path_completed": true,
+    "loading_peak_reached": true,
+    "task_target_executed": true,
+    "unload_endpoint_reached": null,
+    "call_counts": {
+      "force_calls": 27,
+      "force_calls_completed": 27,
+      "tangent_calls": 15,
+      "tangent_calls_completed": 15,
+      "solver_invocations": 1,
+      "JIT_calls": 0,
+      "HP_calls": 0
+    },
+    "timing_seconds": {
+      "project_preparation": 0.0548296999768354,
+      "evaluation": 1310.7852296999772
+    }
+  },
+  "current_rows": [
+    {
+      "index": 0,
+      "original_target_index": 0,
+      "leg": "origin",
+      "d_mm": 0.0,
+      "state_sha256": "950ee55405b86a22e9343997432d398600e1904b7f3046a72f8de53a72229fc9",
+      "R_input_N": 0.0,
+      "q_out_mm": 0.0,
+      "tip_node": 11260,
+      "tip_x_mm": 80.0,
+      "tip_y_mm": 30.0,
+      "tip_to_raster_boundary_mm": 1.0,
+      "tip_equals_global_minimum_exact": true,
+      "tip_minus_global_minimum_mm": 0.0,
+      "minimum_boundary_distance_mm": 1.0,
+      "boundary_intersects": false,
+      "boundary_roundoff_near_touch": false,
+      "raw_overlap": false,
+      "strict_overlap": false,
+      "roundoff_ambiguous": false,
+      "containment_tested": false,
+      "solid_min_J": 1.0,
+      "medium_min_J": 1.0,
+      "solid_Green_principal_min": 0.0,
+      "solid_Green_principal_max": 0.0,
+      "medium_max_abs_Hu_per_mm": 0.0,
+      "right_medium_min_J": 1.0,
+      "right_medium_max_J": 1.0,
+      "right_medium_max_abs_Hu_per_mm": 0.0,
+      "right_medium_Green_principal_min": 0.0,
+      "right_medium_Green_principal_max": 0.0,
+      "right_medium_max_nodal_displacement_mm": 0.0,
+      "total_body_Fx_N": 0.0,
+      "total_body_Fy_N": 0.0,
+      "material_body_Fx_N": 0.0,
+      "material_body_Fy_N": 0.0,
+      "regularization_body_Fx_N": 0.0,
+      "regularization_body_Fy_N": 0.0
+    },
+    {
+      "index": 1,
+      "original_target_index": 1,
+      "leg": "loading",
+      "d_mm": 0.25,
+      "state_sha256": "8ca6a4fb3463ad125e50a1315e68033ca1cede9158fc61476050888bee4a77e3",
+      "R_input_N": 0.042743534147102635,
+      "q_out_mm": 0.24018802342288847,
+      "tip_node": 11260,
+      "tip_x_mm": 79.93430823193623,
+      "tip_y_mm": 30.240114530566128,
+      "tip_to_raster_boundary_mm": 0.7598854694338719,
+      "tip_equals_global_minimum_exact": true,
+      "tip_minus_global_minimum_mm": 0.0,
+      "minimum_boundary_distance_mm": 0.7598854694338719,
+      "boundary_intersects": false,
+      "boundary_roundoff_near_touch": false,
+      "raw_overlap": false,
+      "strict_overlap": false,
+      "roundoff_ambiguous": false,
+      "containment_tested": false,
+      "solid_min_J": 0.9939667029510496,
+      "medium_min_J": 0.7591252661187656,
+      "solid_Green_principal_min": -0.006814746173286581,
+      "solid_Green_principal_max": 0.008937097896543459,
+      "medium_max_abs_Hu_per_mm": 0.016109379378075217,
+      "right_medium_min_J": 0.8663258675749972,
+      "right_medium_max_J": 1.0034422709744268,
+      "right_medium_max_abs_Hu_per_mm": 0.0046474808126793846,
+      "right_medium_Green_principal_min": -0.133855054293864,
+      "right_medium_Green_principal_max": 0.012485630057826953,
+      "right_medium_max_nodal_displacement_mm": 0.33795963271708657,
+      "total_body_Fx_N": -1.900371381149789e-05,
+      "total_body_Fy_N": 0.00014591711519481185,
+      "material_body_Fx_N": -2.3811938740884575e-06,
+      "material_body_Fy_N": 3.544208329600127e-05,
+      "regularization_body_Fx_N": -1.662251993740943e-05,
+      "regularization_body_Fy_N": 0.0001104750318988106
+    },
+    {
+      "index": 2,
+      "original_target_index": 2,
+      "leg": "loading",
+      "d_mm": 0.5,
+      "state_sha256": "c8f41107026000f09d395eb7a091ce6501b532b0a8d69210b22a94d55e8c8392",
+      "R_input_N": 0.08602790333542189,
+      "q_out_mm": 0.480914454124498,
+      "tip_node": 11260,
+      "tip_x_mm": 79.86088009934946,
+      "tip_y_mm": 30.480605936012424,
+      "tip_to_raster_boundary_mm": 0.5193940639875763,
+      "tip_equals_global_minimum_exact": true,
+      "tip_minus_global_minimum_mm": 0.0,
+      "minimum_boundary_distance_mm": 0.5193940639875763,
+      "boundary_intersects": false,
+      "boundary_roundoff_near_touch": false,
+      "raw_overlap": false,
+      "strict_overlap": false,
+      "roundoff_ambiguous": false,
+      "containment_tested": false,
+      "solid_min_J": 0.9879538763129987,
+      "medium_min_J": 0.5165686928215502,
+      "solid_Green_principal_min": -0.013527089011450588,
+      "solid_Green_principal_max": 0.017958174249141572,
+      "medium_max_abs_Hu_per_mm": 0.036830038296925716,
+      "right_medium_min_J": 0.644133518565071,
+      "right_medium_max_J": 1.0129824896884163,
+      "right_medium_max_abs_Hu_per_mm": 0.005909855856949434,
+      "right_medium_Green_principal_min": -0.30461585991290596,
+      "right_medium_Green_principal_max": 0.03124848704379727,
+      "right_medium_max_nodal_displacement_mm": 0.7147775822035364,
+      "total_body_Fx_N": -5.4617501322577725e-05,
+      "total_body_Fy_N": 0.00047828066183543393,
+      "material_body_Fx_N": -5.308362766779434e-06,
+      "material_body_Fy_N": 0.0001040097253926478,
+      "regularization_body_Fx_N": -4.930913855579829e-05,
+      "regularization_body_Fy_N": 0.0003742709364427861
+    }
+  ],
+  "observations": [
+    {
+      "index": 0,
+      "state_sha256": "950ee55405b86a22e9343997432d398600e1904b7f3046a72f8de53a72229fc9",
+      "tip_witness": {
+        "distance_mm": 1.0,
+        "point_mm": [
+          80.0,
+          31.0
+        ],
+        "workpiece_edge_index": 4,
+        "workpiece_nodes": [
+          11629,
+          11630
+        ],
+        "segment_parameter": 1.0,
+        "tied_workpiece_edge_indices": [
+          4,
+          5
+        ],
+        "tie_scope": "All exact body-edge ties for this tip; positive-distance global ties are not enumerated",
+        "scope": "Unsigned tip-to-actual-Q1-boundary distance; not contact or penetration"
+      },
+      "first_global_witness": {
+        "mechanism_edge_index": 821,
+        "workpiece_edge_index": 0,
+        "mechanism_nodes": [
+          11255,
+          11256
+        ],
+        "workpiece_nodes": [
+          11626,
+          11627
+        ],
+        "mechanism_point_mm": [
+          78.0,
+          30.0
+        ],
+        "workpiece_point_mm": [
+          78.0,
+          31.0
+        ]
+      },
+      "right_medium": {
+        "J_min": {
+          "value": 1.0,
+          "element_id": 178,
+          "simpson_index": 0,
+          "local_coordinates": [
+            -1.0,
+            -1.0
+          ],
+          "reference_position_mm": [
+            89.0,
+            0.0
+          ],
+          "actual_position_mm": [
+            89.0,
+            0.0
+          ],
+          "exact_tie_count": 4320,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "J_max": {
+          "value": 1.0,
+          "element_id": 178,
+          "simpson_index": 0,
+          "local_coordinates": [
+            -1.0,
+            -1.0
+          ],
+          "reference_position_mm": [
+            89.0,
+            0.0
+          ],
+          "actual_position_mm": [
+            89.0,
+            0.0
+          ],
+          "exact_tie_count": 4320,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "Hu": {
+          "max_abs_component_per_mm": 0.0,
+          "signed_component_per_mm": 0.0,
+          "element_id": 178,
+          "component_ijk": [
+            0,
+            0,
+            0
+          ],
+          "exact_tie_count": 3840,
+          "reference_cell_center_mm": [
+            89.25,
+            0.25
+          ],
+          "actual_cell_center_mm": [
+            89.25,
+            0.25
+          ],
+          "position_scope": "Hu is constant per element/component; Q1 center is a representative marker, not a sampling point",
+          "witness_rule": "First C-order exact tie; not a unique maximum claim"
+        },
+        "Green_principal_min": {
+          "value": 0.0,
+          "element_id": 178,
+          "simpson_index": 0,
+          "local_coordinates": [
+            -1.0,
+            -1.0
+          ],
+          "reference_position_mm": [
+            89.0,
+            0.0
+          ],
+          "actual_position_mm": [
+            89.0,
+            0.0
+          ],
+          "exact_tie_count": 4320,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "Green_principal_max": {
+          "value": 0.0,
+          "element_id": 178,
+          "simpson_index": 0,
+          "local_coordinates": [
+            -1.0,
+            -1.0
+          ],
+          "reference_position_mm": [
+            89.0,
+            0.0
+          ],
+          "actual_position_mm": [
+            89.0,
+            0.0
+          ],
+          "exact_tie_count": 4320,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "actual_node_bounds_mm": {
+          "lower": [
+            89.0,
+            0.0
+          ],
+          "upper": [
+            92.0,
+            40.0
+          ]
+        },
+        "displacement_mm": {
+          "component_min": [
+            0.0,
+            0.0
+          ],
+          "component_max": [
+            0.0,
+            0.0
+          ],
+          "maximum_node_norm": 0.0,
+          "maximum_node_id": 178,
+          "maximum_node_actual_position_mm": [
+            89.0,
+            0.0
+          ],
+          "scope": "Saved binary64 lift+fluctuation sum, independent of world-coordinate subtraction; no small-value clipping"
+        },
+        "outer_boundary_displacement_mm": {
+          "component_min": [
+            0.0,
+            0.0
+          ],
+          "component_max": [
+            0.0,
+            0.0
+          ],
+          "scope": "Saved binary64 lift+fluctuation sum; displayed actual coordinates can round sub-ulp displacements"
+        },
+        "units": {
+          "J": "dimensionless",
+          "Green_principal": "dimensionless",
+          "Hu": "1/mm",
+          "coordinates_and_displacement": "mm"
+        },
+        "scope": "Original saved binary64 J/Hu and in-plane Green strain from saved F; no fresh constitutive evaluation or pressure qualification"
+      }
+    },
+    {
+      "index": 1,
+      "state_sha256": "8ca6a4fb3463ad125e50a1315e68033ca1cede9158fc61476050888bee4a77e3",
+      "tip_witness": {
+        "distance_mm": 0.7598854694338719,
+        "point_mm": [
+          79.93430823193623,
+          31.0
+        ],
+        "workpiece_edge_index": 4,
+        "workpiece_nodes": [
+          11629,
+          11630
+        ],
+        "segment_parameter": 0.8686164638724563,
+        "tied_workpiece_edge_indices": [
+          4
+        ],
+        "tie_scope": "All exact body-edge ties for this tip; positive-distance global ties are not enumerated",
+        "scope": "Unsigned tip-to-actual-Q1-boundary distance; not contact or penetration"
+      },
+      "first_global_witness": {
+        "mechanism_edge_index": 774,
+        "workpiece_edge_index": 4,
+        "mechanism_nodes": [
+          11075,
+          11260
+        ],
+        "workpiece_nodes": [
+          11629,
+          11630
+        ],
+        "mechanism_point_mm": [
+          79.93430823193623,
+          30.240114530566128
+        ],
+        "workpiece_point_mm": [
+          79.93430823193623,
+          31.0
+        ]
+      },
+      "right_medium": {
+        "J_min": {
+          "value": 0.8663258675749972,
+          "element_id": 11218,
+          "simpson_index": 2,
+          "local_coordinates": [
+            -1.0,
+            1.0
+          ],
+          "reference_position_mm": [
+            89.0,
+            30.5
+          ],
+          "actual_position_mm": [
+            88.99498594262772,
+            30.58335881933385
+          ],
+          "exact_tie_count": 1,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "J_max": {
+          "value": 1.0034422709744268,
+          "element_id": 13610,
+          "simpson_index": 0,
+          "local_coordinates": [
+            -1.0,
+            -1.0
+          ],
+          "reference_position_mm": [
+            89.0,
+            36.5
+          ],
+          "actual_position_mm": [
+            89.000517324746,
+            36.500473794167505
+          ],
+          "exact_tie_count": 1,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "Hu": {
+          "max_abs_component_per_mm": 0.0046474808126793846,
+          "signed_component_per_mm": 0.0046474808126793846,
+          "element_id": 11402,
+          "component_ijk": [
+            1,
+            0,
+            1
+          ],
+          "exact_tie_count": 2,
+          "reference_cell_center_mm": [
+            89.25,
+            30.75
+          ],
+          "actual_cell_center_mm": [
+            89.2592022185082,
+            30.799370884304977
+          ],
+          "position_scope": "Hu is constant per element/component; Q1 center is a representative marker, not a sampling point",
+          "witness_rule": "First C-order exact tie; not a unique maximum claim"
+        },
+        "Green_principal_min": {
+          "value": -0.133855054293864,
+          "element_id": 11218,
+          "simpson_index": 2,
+          "local_coordinates": [
+            -1.0,
+            1.0
+          ],
+          "reference_position_mm": [
+            89.0,
+            30.5
+          ],
+          "actual_position_mm": [
+            88.99498594262772,
+            30.58335881933385
+          ],
+          "exact_tie_count": 1,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "Green_principal_max": {
+          "value": 0.012485630057826953,
+          "element_id": 11218,
+          "simpson_index": 8,
+          "local_coordinates": [
+            1.0,
+            1.0
+          ],
+          "reference_position_mm": [
+            89.5,
+            30.5
+          ],
+          "actual_position_mm": [
+            89.49833772173278,
+            30.584217632783332
+          ],
+          "exact_tie_count": 1,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "actual_node_bounds_mm": {
+          "lower": [
+            88.9675513296953,
+            0.24522870245355097
+          ],
+          "upper": [
+            92.21336766029843,
+            40.0
+          ]
+        },
+        "displacement_mm": {
+          "component_min": [
+            -0.03244867030470278,
+            0.0
+          ],
+          "component_max": [
+            0.2133676602984285,
+            0.26241271389087933
+          ],
+          "maximum_node_norm": 0.33795963271708657,
+          "maximum_node_id": 184,
+          "maximum_node_actual_position_mm": [
+            92.21336766029843,
+            0.2620895932406368
+          ],
+          "scope": "Saved binary64 lift+fluctuation sum, independent of world-coordinate subtraction; no small-value clipping"
+        },
+        "outer_boundary_displacement_mm": {
+          "component_min": [
+            -0.012356397502357789,
+            0.0
+          ],
+          "component_max": [
+            0.2133676602984285,
+            0.26241271389087933
+          ],
+          "scope": "Saved binary64 lift+fluctuation sum; displayed actual coordinates can round sub-ulp displacements"
+        },
+        "units": {
+          "J": "dimensionless",
+          "Green_principal": "dimensionless",
+          "Hu": "1/mm",
+          "coordinates_and_displacement": "mm"
+        },
+        "scope": "Original saved binary64 J/Hu and in-plane Green strain from saved F; no fresh constitutive evaluation or pressure qualification"
+      }
+    },
+    {
+      "index": 2,
+      "state_sha256": "c8f41107026000f09d395eb7a091ce6501b532b0a8d69210b22a94d55e8c8392",
+      "tip_witness": {
+        "distance_mm": 0.5193940639875763,
+        "point_mm": [
+          79.86088009934946,
+          31.0
+        ],
+        "workpiece_edge_index": 4,
+        "workpiece_nodes": [
+          11629,
+          11630
+        ],
+        "segment_parameter": 0.7217601986989166,
+        "tied_workpiece_edge_indices": [
+          4
+        ],
+        "tie_scope": "All exact body-edge ties for this tip; positive-distance global ties are not enumerated",
+        "scope": "Unsigned tip-to-actual-Q1-boundary distance; not contact or penetration"
+      },
+      "first_global_witness": {
+        "mechanism_edge_index": 774,
+        "workpiece_edge_index": 4,
+        "mechanism_nodes": [
+          11075,
+          11260
+        ],
+        "workpiece_nodes": [
+          11629,
+          11630
+        ],
+        "mechanism_point_mm": [
+          79.86088009934946,
+          30.480605936012424
+        ],
+        "workpiece_point_mm": [
+          79.86088009934946,
+          31.0
+        ]
+      },
+      "right_medium": {
+        "J_min": {
+          "value": 0.644133518565071,
+          "element_id": 11402,
+          "simpson_index": 2,
+          "local_coordinates": [
+            -1.0,
+            1.0
+          ],
+          "reference_position_mm": [
+            89.0,
+            31.0
+          ],
+          "actual_position_mm": [
+            89.05313643825475,
+            31.011150397181808
+          ],
+          "exact_tie_count": 1,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "J_max": {
+          "value": 1.0129824896884163,
+          "element_id": 11591,
+          "simpson_index": 6,
+          "local_coordinates": [
+            1.0,
+            -1.0
+          ],
+          "reference_position_mm": [
+            92.0,
+            31.0
+          ],
+          "actual_position_mm": [
+            92.10432336699212,
+            31.011369065010765
+          ],
+          "exact_tie_count": 1,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "Hu": {
+          "max_abs_component_per_mm": 0.005909855856949434,
+          "signed_component_per_mm": 0.005909855856949434,
+          "element_id": 11402,
+          "component_ijk": [
+            1,
+            0,
+            1
+          ],
+          "exact_tie_count": 2,
+          "reference_cell_center_mm": [
+            89.25,
+            30.75
+          ],
+          "actual_cell_center_mm": [
+            89.27533900802095,
+            30.85296174008021
+          ],
+          "position_scope": "Hu is constant per element/component; Q1 center is a representative marker, not a sampling point",
+          "witness_rule": "First C-order exact tie; not a unique maximum claim"
+        },
+        "Green_principal_min": {
+          "value": -0.30461585991290596,
+          "element_id": 11402,
+          "simpson_index": 2,
+          "local_coordinates": [
+            -1.0,
+            1.0
+          ],
+          "reference_position_mm": [
+            89.0,
+            31.0
+          ],
+          "actual_position_mm": [
+            89.05313643825475,
+            31.011150397181808
+          ],
+          "exact_tie_count": 1,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "Green_principal_max": {
+          "value": 0.03124848704379727,
+          "element_id": 11218,
+          "simpson_index": 8,
+          "local_coordinates": [
+            1.0,
+            1.0
+          ],
+          "reference_position_mm": [
+            89.5,
+            30.5
+          ],
+          "actual_position_mm": [
+            89.4976169814645,
+            30.694034350996493
+          ],
+          "exact_tie_count": 1,
+          "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+        },
+        "actual_node_bounds_mm": {
+          "lower": [
+            88.92367356658352,
+            0.5322437700573108
+          ],
+          "upper": [
+            92.43489713973966,
+            40.0
+          ]
+        },
+        "displacement_mm": {
+          "component_min": [
+            -0.07632643341648625,
+            0.0
+          ],
+          "component_max": [
+            0.4348971397396609,
+            0.567663084347593
+          ],
+          "maximum_node_norm": 0.7147775822035364,
+          "maximum_node_id": 184,
+          "maximum_node_actual_position_mm": [
+            92.43489713973966,
+            0.5672490369026598
+          ],
+          "scope": "Saved binary64 lift+fluctuation sum, independent of world-coordinate subtraction; no small-value clipping"
+        },
+        "outer_boundary_displacement_mm": {
+          "component_min": [
+            -0.024384463586318687,
+            0.0
+          ],
+          "component_max": [
+            0.4348971397396609,
+            0.567663084347593
+          ],
+          "scope": "Saved binary64 lift+fluctuation sum; displayed actual coordinates can round sub-ulp displacements"
+        },
+        "units": {
+          "J": "dimensionless",
+          "Green_principal": "dimensionless",
+          "Hu": "1/mm",
+          "coordinates_and_displacement": "mm"
+        },
+        "scope": "Original saved binary64 J/Hu and in-plane Green strain from saved F; no fresh constitutive evaluation or pressure qualification"
+      }
+    }
+  ],
+  "convergence_counts": {
+    "accepted_states": 3,
+    "newton_base_checks": 15,
+    "inferred_check_groups": 3,
+    "line_search_trials": 12,
+    "line_search_accepted": 12,
+    "line_search_rejected": 0,
+    "failed_attempts": 0,
+    "linear_solves": 14,
+    "maximum_bisection_depth": 0,
+    "zero_newton_residuals": 1
+  },
+  "controller_timing_seconds": {
+    "kernel_calls": 27,
+    "successful_kernel_calls": 27,
+    "kernel_and_transfer": 1305.1132949999883,
+    "assembly": 0.31705419995705597,
+    "sparse_solve": 4.707577699911781,
+    "callback": 0.05971030000364408,
+    "all_assembly_attempts_wall": 1305.4528918000578,
+    "total": 1310.7252118000179
+  },
+  "original_gates": {
+    "production_residual": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11"
+  },
+  "settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 25,
+    "armijo_c": 0.0001,
+    "max_backtracks": 12,
+    "max_bisections": 4,
+    "minimum_increment": 0.00625,
+    "time_limit_seconds": 1800.0
+  },
+  "options": {
+    "response_mode": "mechanical",
+    "tangent_mode": "chunk256",
+    "initial_guess": "port_projection"
+  },
+  "same_d_comparison": {
+    "scope": "Joint change c74/right84 to c80/right92, not a controlled single-factor or domain-convergence study. Different state identities retained.",
+    "d_mm": 0.5,
+    "previous_state_sha256": "1b93a37cc6d34a5c0c47effbc736f96f6d56ac16e3226c001eedd71dd31c3219",
+    "current_state_sha256": "c8f41107026000f09d395eb7a091ce6501b532b0a8d69210b22a94d55e8c8392",
+    "previous": {
+      "R_input_N": 0.08581310622787962,
+      "q_out_mm": 0.481511363651934,
+      "tip_to_raster_boundary_mm": 2.0389747275151535,
+      "minimum_boundary_distance_mm": 0.6038158762254856,
+      "total_body_Fy_N": 0.00029683638167977717,
+      "material_body_Fy_N": 6.846247002434987e-05,
+      "regularization_body_Fy_N": 0.0002283739116554273,
+      "solid_min_J": 0.9879413513845947,
+      "medium_min_J": 0.6024624040787303,
+      "right_medium_min_J": 0.6514854160327986,
+      "right_medium_max_abs_Hu_per_mm": 0.002464251253275762,
+      "right_medium_max_nodal_displacement_mm": 0.7367851593657934
+    },
+    "current": {
+      "R_input_N": 0.08602790333542189,
+      "q_out_mm": 0.480914454124498,
+      "tip_to_raster_boundary_mm": 0.5193940639875763,
+      "minimum_boundary_distance_mm": 0.5193940639875763,
+      "total_body_Fy_N": 0.00047828066183543393,
+      "material_body_Fy_N": 0.0001040097253926478,
+      "regularization_body_Fy_N": 0.0003742709364427861,
+      "solid_min_J": 0.9879538763129987,
+      "medium_min_J": 0.5165686928215502,
+      "right_medium_min_J": 0.644133518565071,
+      "right_medium_max_abs_Hu_per_mm": 0.005909855856949434,
+      "right_medium_max_nodal_displacement_mm": 0.7147775822035364
+    },
+    "previous_counts": {
+      "accepted_states": 3,
+      "newton_base_checks": 15,
+      "inferred_check_groups": 3,
+      "line_search_trials": 12,
+      "line_search_accepted": 12,
+      "line_search_rejected": 0,
+      "failed_attempts": 0,
+      "linear_solves": 14,
+      "maximum_bisection_depth": 0,
+      "zero_newton_residuals": 1
+    },
+    "previous_controller_timing_seconds": {
+      "kernel_calls": 27,
+      "successful_kernel_calls": 27,
+      "kernel_and_transfer": 1039.0185731000383,
+      "assembly": 0.23787629994330928,
+      "sparse_solve": 3.692608499986818,
+      "callback": 0.04835389996878803,
+      "all_assembly_attempts_wall": 1039.2716765000368,
+      "total": 1043.465763699991
+    }
+  },
+  "blocking_findings": [],
+  "authorization": "Recommendation only; no next-target execution is authorized by this ordinary review."
+}
