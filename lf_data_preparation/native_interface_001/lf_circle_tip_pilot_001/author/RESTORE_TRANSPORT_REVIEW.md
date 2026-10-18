@@ -1,0 +1,9 @@
+# L-CTIPPILOT1 恢复传输与归档有限审阅
+
+结论：**pass_restore_transport_review**，无阻断。原科学96f02a保持PASS/已闭，未新计算、测试、绘图或读取媒体数组。
+
+原origin对象下载因curl56/early EOF在incremental_restore停止；该失败回执原字节保留。取消定位检查按原记录未找到活跃目标，在OpenProcess前断言停止，0终止。随后实际恢复从本地已提交Git对象传至同机另一目录；ROOT与RESTORE现均为`d8120f3ec7a9d72ebb006da58f4fe81692c279de`且clean、origin URL保持。远端提交身份由原ls-remote记录独立确认，不把这称为远端对象成功下载或另一台机器恢复。
+
+本审阅对本次97delta有限核对：75份普通文件SHA在源与恢复目录吻合，22份科学/媒体仅stat；46个原封存输出63251881B继续继承producer seal。最终成功回执已把旧error/failure_phase移至previous_transport_failure，原失败仍单独留档，历史审阅未改。
+
+新archive_publication_local.py只新增八份普通记录/源码及manifest，先核干净HEAD，再正常commit/push与ls-remote；恢复采用显式本地Git引用fetch和ff-only，不改origin。暂存集合严格九文件，恢复仅普通元数据SHA，全部Git禁自动GC/maintenance。此处仅静审，没有运行最终归档，也不预言网络发布必成功。
