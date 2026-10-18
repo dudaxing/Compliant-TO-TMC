@@ -1,3 +1,5 @@
+> 2026-10-18 L-CUNLOAD2 **PASS**：复用既有reader进行有限首次卸载兼容验证，生产源码零修改／零安装，真实圆形回程尚未执行。见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_first_unload_002/RESULTS.md)。原历史保留如下。
+
 > 2026-10-17 L-CUNLOAD1 **NOT_PASS**：保存load_only末态首次转ordered_cycle卸载功能；只改一个reader，有限tiny兼容验证，真实圆形回程尚未执行。见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_first_unload_001/RESULTS.md)。原历史保留如下。
 
 > 2026-10-17 L-CSTEP5 **PASS**：复用load_only保存态延伸，固定圆形工件1.35→1.40 mm；生产 success，保存态 2，helper／outer pass／pass。原资格及历史保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_step_005/RESULTS.md)。原历史说明保留如下。

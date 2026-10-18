@@ -1,0 +1,109 @@
+{
+  "card": "L-CUNLOAD2",
+  "status": "pass_actual_finite_review",
+  "execution_status": "pass",
+  "blocking_findings": [],
+  "reviewed_utc": "2026-10-18T04:05:51.138363+00:00",
+  "protocol_sha256": "d5431f399b53a678aa3aed50e888fea4f0365b1bc9011b132a1bb02091d7be73",
+  "source_baseline_commit": "a8daffe767598e8329bc42c07d7f812afea33851",
+  "reviewed_ordinary_file_sha256": {
+    "protocol.json": "d5431f399b53a678aa3aed50e888fea4f0365b1bc9011b132a1bb02091d7be73",
+    "author/authorization.json": "3bc1a579999527e0072e5ed8d05665f31f12e0192a0a6415de7bf0632cfc3883",
+    "unload_launch.json": "2230447667d5bcd80b34a6dfcd1d6527d19e725bbe1becde977e2bc5382ea62e",
+    "run_001/execution_receipt.json": "debd9497dcb72b08b6590c379b32bbf596a7481af2b0e30d4f2e3849ce98fa8c",
+    "run_001/t/test_report.json": "eca4a06e3386e410852cf1761fcf6577e9d85bd53570e5a32fae48f0a2e5ab64",
+    "run_001/t/test_scalar_rows.json": "df605b399d24947083b5fcd7ef8e8f526ef3bab8a814f104292cab8b8c5a0d25",
+    "run_001/tiny_response.json": "05a84df3adb108b3adac2bdce375364d660ef00b6fc85c457f545672d6c52884",
+    "run_001/tests_child_stdout.log": "85609267e6aa4dc73ca3ed800d32de17f54181d118d4fbae128cc7647c086d25",
+    "run_001/t/01/A2_first_unload/response.json": "e857c74d082d874f244550a55a7f224b3fa13b5c431a1705851d4b7ed20f2097"
+  },
+  "actual_execution": {
+    "terminal": "b1a002 exit0, session83796 closed (provided by root; not polled/restarted)",
+    "invocations": 1,
+    "methods_passed": 8,
+    "negative_subcases": 25,
+    "native_entry_started": 6,
+    "native_entry_completed": 6,
+    "equilibrium_controller_started": 6,
+    "equilibrium_controller_completed": 6,
+    "linear_paths": 2,
+    "linear_assembler_calls": 4,
+    "rejected_preassembly_entries": 2,
+    "F_started": 48,
+    "F_completed": 48,
+    "T_started": 31,
+    "T_completed": 31,
+    "HP_reported": 0,
+    "JIT_reported": 0,
+    "forbidden_old_cache_reads": 0,
+    "accepted_states": 14,
+    "paths": 6,
+    "saved_anchors": 4,
+    "plots": 1,
+    "default_installations": 0,
+    "production_changes": 0
+  },
+  "timing": {
+    "test_report_shared_elapsed_seconds": 18.468914099998074,
+    "test_child_elapsed_seconds": 19.969673000014154,
+    "helper_elapsed_seconds": 26.585434000007808,
+    "outer_elapsed_seconds": 28.540933799988125,
+    "peak_sampled_tree_RSS_bytes": 194281472,
+    "cleanup_verified": true,
+    "stop_reason": null
+  },
+  "gate_scope": "All8 methods completed, including preserved per-accepted J>0, residual, constraint, global balance and actual fixed-split fsum assertions; first-anchor F/T/SHA/R/cache/save assertions and public-response/nested-source checks executed in the worker. Observer checked ordinary residual/constraint rows and continuation/public flags; no array-level gate or mechanical quantity was recomputed.",
+  "public_transition": {
+    "series": "A2_first_unload",
+    "source_path_kind": "load_only",
+    "extended_path_kind": "ordered_cycle",
+    "peak_mm": 0.00075,
+    "endpoint_mm": 0.0005,
+    "target_response": null,
+    "full_path_and_task_target_flags": false,
+    "other_saved_same_kind_paths_do_not_add_transition": true
+  },
+  "source_verification": {
+    "bound_ordinary_sources": 69,
+    "baseline_final_graphs_identical": true,
+    "all_current_source_pins_match": true,
+    "hf_repo_src_diff_vs_baseline": false,
+    "reader_sha256": "68e3122950766f9cecb48a02a0f52a6d5f2efbfc466432bccc2cd48c77e2b798"
+  },
+  "output_identity": {
+    "seal": "complete_inside_original_helper_window",
+    "files": 117,
+    "bytes": 1215121,
+    "all_run_files_except_receipt_covered": true,
+    "ordinary_files_SHA_and_stat_verified": 46,
+    "scientific_or_media_files_producer_seal_and_stat_only": 71,
+    "NPZ_files": 70,
+    "PNG_files": 1,
+    "payload_opened": false,
+    "payload_rehashed": false,
+    "payload_decoded": false,
+    "pixels_inspected": false
+  },
+  "qualification": "Pass validates finite tiny saved-first-unload compatibility with the existing installed reader. Original S1 NOT_PASS remains. No actual circle unload, new HP, full-prefix replay, pressure/effective gripping/release/stability/manufacturing/HF5 qualification.",
+  "closing_scripts_static_review": {
+    "close.py": "d9b3b74276330369e9a201fead670c6481cfef7ee9e115338013398f34cc3b3a",
+    "publish.py": "61294ea70bfe42b86692042b2af27fc6b207d094df1aa41381530104aab0c1d8",
+    "archive_publication.py": "0b6e774fe055e2416628006b5815efc4b34a69611d1527a56e6d911539df8734"
+  },
+  "reviewer_actions": {
+    "HF_imports": 0,
+    "tests_or_science_runs": 0,
+    "production_edits_or_installs": 0,
+    "payload_or_pixel_reads": 0,
+    "publication_runs": 0
+  },
+  "observer_notes": [
+    "One root ordinary-log lookup used an absent nested path; the actual log was subsequently read at run_001/tests_child_stdout.log. No mutation, candidate rerun or science resulted.",
+    "Source/dynamic test evidence is distinguished from this ordinary observer review; no claim of new whole-chain mechanical hooks."
+  ],
+  "tools": [
+    "53b6ba exit0 closing-script source difference",
+    "facc35 exit0 ordinary actual records/log",
+    "f2dcbc exit0 succinct counters/seals/stat/flags"
+  ]
+}

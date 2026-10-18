@@ -1,0 +1,339 @@
+{
+  "schema_version": "hf-first-unload-test-matrix-1.0",
+  "status": "author_static_only_not_executed",
+  "test_file": "test_first_unload.py",
+  "test_sha256": "e168381228ea097a614df618946a06ad90ea43660047150e47764e09bb0a960e",
+  "methods_expected": 8,
+  "negative_subcases_expected": 25,
+  "real_FE_solves_expected": 6,
+  "linear_controller_paths_expected": 2,
+  "HP_calls_expected": 0,
+  "JIT_calls_expected": 0,
+  "fixture": {
+    "elements": 16,
+    "DOF": 50,
+    "workpiece": null,
+    "PEAK_mm": 0.0005,
+    "source_geometry": "Established4x4/h.5/thickness2 native tiny fixture",
+    "options": {
+      "response_mode": "mechanical",
+      "tangent_mode": "chunk256",
+      "initial_guess": "port_projection"
+    },
+    "minimum_increment_mm": 3.125e-05
+  },
+  "windows": {
+    "tests_seconds": 120,
+    "per_tiny_controller_seconds": 30,
+    "plot_shared_seconds": 30,
+    "helper_seconds": 180,
+    "outer_seconds": 240,
+    "sampled_RSS_bytes": 1073741824
+  },
+  "methods": [
+    {
+      "method": "test_01_nested_load_first_unload_and_cycle_continuation",
+      "real_FE_solves": 4,
+      "linear_paths": 0,
+      "role": "Nested chain A: initial load, same-kind load append, public first unload, later same-kind cycle append",
+      "paths": [
+        {
+          "series": "A0_load",
+          "full": [
+            0,
+            0.00025,
+            0.0005
+          ],
+          "mode": "load_only"
+        },
+        {
+          "series": "A1_load_append",
+          "full": [
+            0,
+            0.00025,
+            0.0005,
+            0.00075
+          ],
+          "child": [
+            0.0005,
+            0.00075
+          ],
+          "global_original_indices": [
+            2,
+            3
+          ],
+          "mode": "load_only"
+        },
+        {
+          "series": "A2_first_unload",
+          "full": [
+            0,
+            0.00025,
+            0.0005,
+            0.00075,
+            0.0005
+          ],
+          "child": [
+            0.00075,
+            0.0005
+          ],
+          "global_original_indices": [
+            3,
+            4
+          ],
+          "mode": "ordered_cycle",
+          "public_evaluate_native": true
+        },
+        {
+          "series": "A3_cycle_append",
+          "full": [
+            0,
+            0.00025,
+            0.0005,
+            0.00075,
+            0.0005,
+            0.00025
+          ],
+          "child": [
+            0.0005,
+            0.00025
+          ],
+          "global_original_indices": [
+            4,
+            5
+          ],
+          "mode": "ordered_cycle"
+        }
+      ]
+    },
+    {
+      "method": "test_02_legacy_ordered_cycle_extension",
+      "real_FE_solves": 2,
+      "linear_paths": 0,
+      "role": "Independent legacy ordered-cycle chain B",
+      "paths": [
+        {
+          "series": "B0_old_cycle",
+          "full": [
+            0,
+            0.0005,
+            0.00025
+          ],
+          "mode": "ordered_cycle"
+        },
+        {
+          "series": "B1_old_cycle_append",
+          "full": [
+            0,
+            0.0005,
+            0.00025,
+            0.000125
+          ],
+          "child": [
+            0.00025,
+            0.000125
+          ],
+          "global_original_indices": [
+            2,
+            3
+          ],
+          "mode": "ordered_cycle"
+        }
+      ]
+    },
+    {
+      "method": "test_03_cross_kind_task_rejections",
+      "real_FE_solves": 0,
+      "linear_paths": 0,
+      "negative_cases": [
+        "prefix",
+        "material",
+        "peak",
+        "multiple",
+        "equal",
+        "increase",
+        "negative",
+        "nonfinite"
+      ],
+      "expected_code": "invalid_task_extension"
+    },
+    {
+      "method": "test_04_source_eligibility_rejections",
+      "real_FE_solves": 0,
+      "linear_paths": 0,
+      "negative_cases": [
+        "failed",
+        "incomplete",
+        "nonterminal",
+        "not_original"
+      ],
+      "expected_code": "invalid_task_extension"
+    },
+    {
+      "method": "test_05_nested_anchor_proof_rejections",
+      "real_FE_solves": 0,
+      "linear_paths": 0,
+      "negative_cases": [
+        "not_revalidated",
+        "not_identical",
+        "state",
+        "reaction",
+        "mapping",
+        "coverage"
+      ],
+      "expected_code": "invalid_saved_state",
+      "positive_fixture_control": "Valid synthetic nested suffix returns [.00075,.0005] before each ordinary mutation; no science evaluation"
+    },
+    {
+      "method": "test_06_explicit_public_entry_rejections",
+      "real_FE_solves": 0,
+      "linear_paths": 0,
+      "negative_cases": [
+        "without_extend_reader_metadata_guard",
+        "zero_start",
+        "missing_task",
+        "non_boolean"
+      ],
+      "expected_code": {
+        "without_extend_reader_metadata_guard": "invalid_saved_state",
+        "others": "invalid_input"
+      },
+      "boundary": "Absent extend uses real read_native_resume mode guard with only its two ordinary _read results mocked, no state decoding/model/solver. Three public evaluate_native input errors forbid parent/solver calls."
+    },
+    {
+      "method": "test_07_existing_mode_boundary_rejections",
+      "real_FE_solves": 0,
+      "linear_paths": 0,
+      "negative_cases": [
+        "same_kind_load_descending",
+        "cycle_saved_load_flag",
+        "nonboolean_saved_load_flag"
+      ],
+      "expected_code": {
+        "same_kind_load_descending": "invalid_task_extension",
+        "others": "invalid_input"
+      },
+      "rejected_lowlevel_entries": 2,
+      "assembler_calls": 0
+    },
+    {
+      "method": "test_08_linear_wrong_reaction_anchor",
+      "real_FE_solves": 0,
+      "linear_paths": 2,
+      "role": "Linear cold [0,.125,.25], then wrong-R ordered-cycle warm [.25,.125]",
+      "expected_warm_code": "initial_state_not_equilibrated",
+      "warm_fresh_kernel_calls": 1,
+      "warm_accepted": 0,
+      "warm_corrections": 0,
+      "warm_trials": 0
+    }
+  ],
+  "success_checks": [
+    "All8 finite methods complete without fail/error/skip; exactly6 native entries/returns and6 original native-controller starts/completions, plus2 separate evaluated linear paths. Preserve actual partial counts on failure.",
+    "Observed native F/T started/completed counters equal actual result metadata sums; rejected low-level entries and linear assembler calls are separate. No predicted exact F/T totals are asserted.",
+    "All6 real paths success, native16cells/50DOF, no workpiece; every original target in order and no extra accepted row dropped. Original J>0, residual tolerance, constraint bound and cached state identity gates.",
+    "Saved anchor first F sees exact original split bytes, fresh F/T ordinals1/1, newton_checks1, signed R and state SHA identical; only original split state decoded for continuation.",
+    "Global/local original indices, resume_origin/descending legs, inherited settings/options and nested parent_continuation validated. No task-kind transition metadata on same-kind operations.",
+    "Explicit first transition has exactly source_path_kind/extended_path_kind/first_unload/loading_peak_mm/first_unload_target_mm; input loading peak preserved. Public requested endpoint present, target_response None, full/tasktarget flags false.",
+    "Persisted state/16force/3tangent fields dtype/shape/rawbytes and CSC data/indices/indptr match cached arrays for all6 saves; save F/T0 and parent artifacts unchanged. Test identity hashes use only newly created tiny packages outside algorithm-read guards.",
+    "No old source force/tangent/matrix reads by continuation; old cache-read trap, independent_HP/equilibrium/HF producer flags false, HP/JIT0. No real circle data or history suite.",
+    "Every accepted snapshot also satisfies record.relative_global_force_balance<=1e-6 and each actual fixed-DOF split displacement fsum absolute<=8e-11mm; no extra evaluation or changed tolerance."
+  ],
+  "output_interface": {
+    "arguments": [
+      "--repo HF_REPO",
+      "--output NEW_SHORT_RUN/t",
+      "--stop-file STOP",
+      "--time-limit 120"
+    ],
+    "test_report": {
+      "keys": [
+        "methods_run",
+        "methods_expected",
+        "failures",
+        "errors",
+        "skipped",
+        "skips",
+        "successful",
+        "failfast",
+        "calls",
+        "metadata_call_totals",
+        "execution",
+        "elapsed_seconds",
+        "time_limit_seconds"
+      ],
+      "calls_required": [
+        "real_solver_invocations",
+        "real_force_calls",
+        "real_tangent_calls",
+        "HP_calls",
+        "JIT_calls",
+        "linear_controller_paths",
+        "native_entry_started",
+        "native_entry_completed",
+        "real_solver_completed"
+      ],
+      "partial": "Initially and after each method/subcase/returned real solve; final finally record actual counts and unknown success stays null while running. No forced8 on failure."
+    },
+    "test_scalar_rows": {
+      "schema_version": "hf-first-unload-test-scalars-1.0",
+      "keys": [
+        "rows",
+        "paths"
+      ],
+      "row_keys": [
+        "series",
+        "chain",
+        "source_role",
+        "index",
+        "accepted_index",
+        "d_mm",
+        "R_input_N",
+        "relative_residual",
+        "residual_tolerance",
+        "constraint_residual_mm",
+        "constraint_bound_mm",
+        "anchor_revalidation",
+        "anchor_identity_preserved",
+        "leg",
+        "original_target_index",
+        "child_original_target_index",
+        "is_original_target",
+        "state_sha256"
+      ]
+    },
+    "plot": "Root-owned plot uses only new ordinary scalar JSON for1 reaction/residual two-panel PNG; no NPZ or circle rendering"
+  },
+  "installation": "No default source installation or modification in L-CUNLOAD2. The existing installed native_resume68e312 candidate is retained; only these new external test/metadata files are authored.",
+  "static_checks": {
+    "AST_parse": true,
+    "compile_source_only": true,
+    "methods_count": 8,
+    "HF_imports_performed": false,
+    "tests_executed": false,
+    "scientific_calls": 0
+  },
+  "qualification": "Numerical saved-continuation compatibility on tiny no-workpiece fixture only. Not circle/contact/pressure/clamp/release/HP/full-path qualification. Real1.40->1.35 is a separate future card.",
+  "accepted_state_card_gates": {
+    "relative_global_force_balance_max": 1e-06,
+    "fixed_split_fsum_absolute_max_mm": 8e-11,
+    "fixed_split_definition": "For each actual fixed DOF: abs(math.fsum((float(lift[i]),float(fluctuation[i])))); maximum over fixed DOFs, empty maximum0."
+  },
+  "author_revision": "Independent L-CUNLOAD2 candidate derived from frozen001: correct zero-start direct targets; separate native entry/return from actual native controller boundary counters and add6-entry assertions/report scope. All8 methods,25negative cases,6real/2linear, original numerical/cache/identity gates and scalar interface remain unchanged.",
+  "source_basis": {
+    "stage": "lf_data_preparation/native_interface_001/lf_circle_first_unload_001",
+    "test_sha256": "184d3c55b23cd4e5d8155b93d0b888f865d416167ae72523091282ffd60945ab",
+    "test_bytes": 36761,
+    "old_stage_closed": true,
+    "prior_failure": "Native entry1/force0/tangent0/controller0: zero-start targets=None refused by native explicit-path input guard. Preserve original NOT_PASS and raw counter1; it described native entry, not an evaluated controller solve."
+  },
+  "card": "L-CUNLOAD2",
+  "count_contract": {
+    "native_entry_started": "Increment immediately before original native_mean.solve_native_mean call",
+    "native_entry_completed": "Increment only after that original API call returns",
+    "real_solver_invocations": "Increment immediately before original native_mean.solve_split_displacement_path call",
+    "real_solver_completed": "Increment only after that original controller call returns",
+    "synthetic_linear": "Independent imported controller binding; exactly2 evaluated linear paths, excluded from native real-controller counters",
+    "rejected_lowlevel": "Exactly2 invalid pre-assembly calls remain in rejected_lowlevel_entries, excluded from linear_controller_paths"
+  }
+}
