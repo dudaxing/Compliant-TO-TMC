@@ -1,3 +1,5 @@
+> 2026-10-18 L-CRPILOT1 **PASS**：固定圆形工件0→0.25→0.50 mm短加载；生产 success，保存态 3，helper／outer pass／pass。原资格及历史保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_right_pilot_001/RESULTS.md)。原历史说明保留如下。
+
 > 2026-10-18 L-CRIGHT1 **PASS**：圆形工件r9从(71,40)右移至(74,40)mm，未变形检查53/53；已核实际84mm域、右侧1mm两列介质与原约束。无力学求解，短行程尚未执行。见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_right_preparation_001/RESULTS.md)。历史原文保留如下。
 
 > 2026-10-18 L-CUNLOAD5 **PASS**：固定圆形工件从保存1.25 mm请求完成到0的剩余输入回程；生产 `success`，实际保存态 `7`，原资格及历史保持。见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_first_unload_005/RESULTS.md)。原历史保留如下。
