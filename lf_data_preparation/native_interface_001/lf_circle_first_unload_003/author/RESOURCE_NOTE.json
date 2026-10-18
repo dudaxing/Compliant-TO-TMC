@@ -1,0 +1,201 @@
+{
+  "schema_version": "hf-circle-first-return-resource-note-1.0",
+  "card": "L-CUNLOAD3",
+  "status": "actual_resource_note_recorded",
+  "created_utc": "2026-10-18T04:27:57.970737+00:00",
+  "execution_status": "pass",
+  "source_scope": "Existing ordinary helper/launcher/environment/point-observation records only; no new telemetry, test, science, payload or media access",
+  "configured_resources": {
+    "sampled_RSS_limit_bytes": 68719476736,
+    "sampled_RSS_limit_GiB": 64.0,
+    "cpu_thread_limit": 16,
+    "cpu_thread_environment": {
+      "OMP_NUM_THREADS": "16",
+      "OPENBLAS_NUM_THREADS": "16",
+      "MKL_NUM_THREADS": "16",
+      "NUMEXPR_NUM_THREADS": "16"
+    },
+    "cpu_limit_meaning": "Per-library environment caps configured before numerical imports, not a total process-thread limit or proof of 16 active cores; no CPU affinity or GPU/backend change",
+    "viewer_internal_RSS_limit_bytes": 8589934592,
+    "memory_meaning": "A permitted sampled-RSS upper bound, not a preallocation; unchanged viewer retains its stricter 8GiB internal gate"
+  },
+  "actual_resources": {
+    "outer_elapsed_seconds": 339.9929676000029,
+    "helper_elapsed_seconds": 338.41297929998836,
+    "peak_sampled_tree_RSS_bytes": 821305344,
+    "peak_sampled_tree_RSS_GiB": 0.7649002075195312,
+    "cleanup_verified": true,
+    "observed_numerical_process_threads": [
+      34,
+      31
+    ],
+    "process_thread_interpretation": "34 then31 are process-wide live thread counts, potentially including multiple libraries/pools and idle threads. The four caps are not an aggregate16-thread ceiling.",
+    "CPU_interval": {
+      "pid": 57172,
+      "process_create_time": 1792297230.98383,
+      "wall_seconds": 99.375592,
+      "CPU_seconds": 97.765625,
+      "logical_core_equivalents": 0.9837991707259465,
+      "scope": "This process and this interval only; roughly one logical core on average, not a whole-run utilization, CPU affinity or 16-core claim"
+    },
+    "redirector_sample": {
+      "pid": 63884,
+      "threads": 1,
+      "CPU_seconds": 0.109375,
+      "interpretation": "Windows virtual-environment root/redirector sample; not the numerical worker. Its low CPU must not be used to characterize compute process57172."
+    },
+    "all_original_point_observations": [
+      {
+        "created_utc": "2026-10-18T04:21:21.665479+00:00",
+        "pid": 63884,
+        "process_create_time": 1792297230.8215592,
+        "elapsed_since_helper_creation_seconds": 50.84393501281738,
+        "cpu_user_seconds": 0.0,
+        "cpu_system_seconds": 0.109375,
+        "RSS_bytes": 4902912,
+        "threads": 1,
+        "scope": "One read-only live helper-process sample, not a whole-run CPU utilization or peak measurement; no scientific payload opened"
+      },
+      {
+        "created_utc": "2026-10-18T04:21:48.174849+00:00",
+        "root_pid": 63884,
+        "elapsed_since_root_creation_seconds": 77.3533787727356,
+        "processes": [
+          {
+            "pid": 63884,
+            "process_create_time": 1792297230.8215592,
+            "image": "python.exe",
+            "cpu_user_seconds": 0.0,
+            "cpu_system_seconds": 0.109375,
+            "RSS_bytes": 4902912,
+            "threads": 1
+          },
+          {
+            "pid": 18400,
+            "process_create_time": 1792297230.8479323,
+            "image": "conhost.exe",
+            "cpu_user_seconds": 0.015625,
+            "cpu_system_seconds": 0.0,
+            "RSS_bytes": 8081408,
+            "threads": 2
+          },
+          {
+            "pid": 57172,
+            "process_create_time": 1792297230.98383,
+            "image": "python.exe",
+            "cpu_user_seconds": 55.125,
+            "cpu_system_seconds": 20.328125,
+            "RSS_bytes": 367513600,
+            "threads": 34
+          }
+        ],
+        "scope": "Live current root-and-descendants snapshot. Root63884 may be the Windows venv redirector; numerical child processes are listed separately. Point observation only, no scientific payload opened."
+      },
+      {
+        "created_utc": "2026-10-18T04:23:27.550441+00:00",
+        "pid": 57172,
+        "process_create_time": 1792297230.98383,
+        "cpu_user_seconds": 128.40625,
+        "cpu_system_seconds": 44.8125,
+        "RSS_bytes": 451457024,
+        "threads": 31,
+        "interval_seconds": 99.375592,
+        "interval_CPU_core_equivalents": 0.9837991707259465,
+        "scope": "Read-only numerical-process sample, same creation identity; interval CPU time / wall time is average logical-core equivalent for this process only, not whole-run or GPU measurement"
+      }
+    ]
+  },
+  "hardware_identity": {
+    "total_physical_memory_bytes": 137095094272,
+    "physical_memory_GiB": 127.67975616455078,
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13980HX",
+    "physical_cores": 24,
+    "logical_processors": 32,
+    "gpus": [
+      "NVIDIA RTX 5000 Ada Generation Laptop GPU",
+      "Intel(R) UHD Graphics"
+    ],
+    "scope": "Read-only Win32 CIM queries on2026-10-18; dedicated GPU16GB is user-reported, not benchmarked"
+  },
+  "backend_and_comparison": {
+    "backend": "Existing CPU numerical implementation unchanged",
+    "GPU_backend_used": false,
+    "GPU_benchmark_performed": false,
+    "speedup_established": false,
+    "reason": "No controlled same-workload comparison. This saved first-unload segment differs from prior loading workloads; observed runtime cannot establish speedup from the larger resource caps."
+  },
+  "execution_counts": {
+    "production": {
+      "force_calls": 10,
+      "force_calls_completed": 10,
+      "tangent_calls": 6,
+      "tangent_calls_completed": 6,
+      "solver_invocations": 1,
+      "JIT_calls": 0,
+      "HP_calls": 0
+    },
+    "wrapper": {
+      "api_started": 1,
+      "solve_started": 1,
+      "solve_completed": 1,
+      "api_completed": 1,
+      "view_child_started": 1,
+      "view_child_completed": 1,
+      "convergence_plot_started": 1,
+      "convergence_plot_completed": 1
+    },
+    "new_tests": 0,
+    "default_installations": 0,
+    "HP_calls_by_wrapper": 0
+  },
+  "ordinary_evidence": [
+    {
+      "role": "helper",
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_first_unload_003/run_001/execution_receipt.json",
+      "bytes": 52886,
+      "sha256": "1aa9e2c991042a43b1d1d9f9349ca1f44d0f1531ee8f860674e961f0d4516f16"
+    },
+    {
+      "role": "launch",
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_first_unload_003/unload_launch.json",
+      "bytes": 10822,
+      "sha256": "47ebc4251c0cf4b7cc0f8f7d46aa250317f6e67b7034c2453c30a8a77feb1622"
+    },
+    {
+      "role": "environment",
+      "path": "D:/hf-native-workpiece-api-author-20261018/L_CUNLOAD3_preparation_001/environment.json",
+      "bytes": 939,
+      "sha256": "e655d5126c91b70d093106be6197a24ffe61e9f82a1337ad38f03afb346cc9b3"
+    },
+    {
+      "role": "point_observations",
+      "path": "D:/hf-native-workpiece-api-author-20261018/L_CUNLOAD3_preparation_001/resource_observations.ndjson",
+      "bytes": 1765,
+      "sha256": "4fd3692f4cfeb4cb077c83aedd27a7aa96499afdb0c2c9ead67206fde3124ac1"
+    }
+  ],
+  "new_review_actions": {
+    "telemetry_samples": 0,
+    "HF_imports": 0,
+    "tests": 0,
+    "F_T_HP_or_equilibrium_calls": 0,
+    "scientific_or_media_payload_reads": 0,
+    "existing_metadata_scripts_changed": 0
+  },
+  "saved_controller_timing": {
+    "source": "lf_data_preparation/native_interface_001/lf_circle_first_unload_003/run_001/wave_circle_first_unload/result.json",
+    "path": "path_diagnostics.timing_seconds",
+    "values": {
+      "kernel_calls": 10,
+      "successful_kernel_calls": 10,
+      "kernel_and_transfer": 326.0479050000431,
+      "assembly": 0.08655030009686016,
+      "sparse_solve": 1.0714023000036832,
+      "callback": 0.027588500001002103,
+      "all_assembly_attempts_wall": 326.1401185999566,
+      "total": 327.37523120001424
+    },
+    "kernel_and_transfer_fraction_of_controller_total": 0.9959455509352196,
+    "scope": "Existing producer timing only, no new profiling/evaluation; aggregate kernel-and-transfer includes force/tangent work and does not isolate individual operations."
+  }
+}
