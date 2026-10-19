@@ -1,0 +1,354 @@
+{
+  "schema_version": "lf-ctiplocal1-result-driven-next-decision-1.0",
+  "card": "L-CTIPLOCAL1",
+  "execution_status": "pass",
+  "visual_QA_status": "not_pass_layout_overlap",
+  "stage_complete": false,
+  "next_card": "L-CTIPLOCAL2",
+  "next_step": "建议下一阶段L-CTIPLOCAL2先修复medium_locations图顶部标题重叠：只调整布局并在新目录生成一张介质定位PNG、普通渲染JSON及人工页；继承已通过tip图链接而不读取/重绘旧媒体。同两态、同5NPZ/12字段上限、零新F/T/HP/Newton，原物理与门保持。完成新图一次像素检查后，再决定是否推进1.04→1.05 mm；本轮未实施或执行下一阶段。",
+  "decision": "repair_known_medium_map_layout_before_further_loading",
+  "proposed_target_mm": null,
+  "deferred_possible_target_mm": 1.05,
+  "source": {
+    "localization": "lf_data_preparation/native_interface_001/lf_circle_tip_local_001/run_001/localization.json",
+    "accepted_indices": [
+      0,
+      1
+    ],
+    "global_indices": [
+      9,
+      10
+    ],
+    "targets_mm": [
+      1.03,
+      1.04
+    ],
+    "state_sha256": [
+      "9b3bce7ae5f2b25b0065fba05dac1f12d4764595b5a431cee876982363f7fc60",
+      "db691d50d019c76f9abc5555e19347c44dac2145c3bcf1de508c4cc994e59f7e"
+    ]
+  },
+  "proposed_payload_fields": {
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_008/run_001/wave_circle_tip_step8/model/model.npz": [
+      "coordinates",
+      "connectivity",
+      "solid",
+      "workpiece_cells"
+    ],
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_008/run_001/wave_circle_tip_step8/accepted/000/state.npz": [
+      "lift",
+      "fluctuation"
+    ],
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_008/run_001/wave_circle_tip_step8/accepted/000/forces.npz": [
+      "J",
+      "Hu"
+    ],
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_008/run_001/wave_circle_tip_step8/accepted/001/state.npz": [
+      "lift",
+      "fluctuation"
+    ],
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_008/run_001/wave_circle_tip_step8/accepted/001/forces.npz": [
+      "J",
+      "Hu"
+    ]
+  },
+  "proposed_payload_archives_max": 5,
+  "proposed_payload_fields_max": 12,
+  "proposed_outputs": [
+    "medium_locations.png",
+    "render.json",
+    "manual.html"
+  ],
+  "inherited_passed_tip_link": "lf_data_preparation/native_interface_001/lf_circle_tip_local_001/run_001/tip_closeup.png",
+  "proposed_new_PNGs": 1,
+  "old_media_reads": 0,
+  "proposed_resources": {
+    "helper_seconds": 180,
+    "outer_seconds": 240,
+    "sampled_RSS_bytes": 8589934592,
+    "per_library_thread_cap": 16
+  },
+  "proposed_mechanics_calls": {
+    "model": 0,
+    "force": 0,
+    "tangent": 0,
+    "HP": 0,
+    "Newton": 0,
+    "equilibrium": 0
+  },
+  "layout_cause": {
+    "interface": "Matplotlib ConstrainedLayoutEngine.set",
+    "rect_semantics": [
+      "left",
+      "bottom",
+      "width",
+      "height"
+    ],
+    "current_rect": [
+      0,
+      0.075,
+      1,
+      0.95
+    ],
+    "current_top": 1.025,
+    "proposed_rect": [
+      0,
+      0.075,
+      1,
+      0.85
+    ],
+    "proposed_top": 0.925,
+    "proposed_suptitle_y": 0.985,
+    "basis": "Read-only installed matplotlib/layout_engine.py rect documentation; actual root PNG inspection confirms title overlap"
+  },
+  "evidence": {
+    "states": [
+      {
+        "accepted_index": 0,
+        "global_index": 9,
+        "state_sha256": "9b3bce7ae5f2b25b0065fba05dac1f12d4764595b5a431cee876982363f7fc60",
+        "source_row": {
+          "index": 0,
+          "original_target_index": 9,
+          "leg": "resume_origin",
+          "d_mm": 1.03,
+          "state_sha256": "9b3bce7ae5f2b25b0065fba05dac1f12d4764595b5a431cee876982363f7fc60",
+          "R_input_N": 0.1856995754415686,
+          "q_out_mm": 0.9764698050071479,
+          "tip_node": 11260,
+          "tip_x_mm": 79.69054723501745,
+          "tip_y_mm": 30.974014091293654,
+          "tip_to_raster_boundary_mm": 0.025985908706346095,
+          "tip_equals_global_minimum_exact": true,
+          "tip_minus_global_minimum_mm": 0.0,
+          "minimum_boundary_distance_mm": 0.025985908706346095,
+          "boundary_intersects": false,
+          "boundary_roundoff_near_touch": false,
+          "raw_overlap": false,
+          "strict_overlap": false,
+          "roundoff_ambiguous": false,
+          "containment_tested": false,
+          "solid_min_J": 0.9756590064288826,
+          "medium_min_J": 0.014938189525383425,
+          "solid_Green_principal_min": -0.02698663836991647,
+          "solid_Green_principal_max": 0.03758720613771214,
+          "medium_max_abs_Hu_per_mm": 0.4398378162924799,
+          "right_medium_min_J": 0.19901412159349638,
+          "right_medium_max_J": 1.380291456711538,
+          "right_medium_max_abs_Hu_per_mm": 0.0688448907313699,
+          "right_medium_Green_principal_min": -0.4832705519034386,
+          "right_medium_Green_principal_max": 0.5529277654164209,
+          "right_medium_max_nodal_displacement_mm": 1.0666036522612292,
+          "total_body_Fx_N": -0.0002655468910727436,
+          "total_body_Fy_N": 0.007798735907497663,
+          "material_body_Fx_N": -1.4687837476076189e-05,
+          "material_body_Fy_N": 0.003674208671747427,
+          "regularization_body_Fx_N": -0.0002508590535966674,
+          "regularization_body_Fy_N": 0.004124527235750236
+        },
+        "tip_reference_position_mm": [
+          80.0,
+          30.0
+        ],
+        "tip_actual_position_mm": [
+          79.69054723501745,
+          30.974014091293654
+        ],
+        "tip_surface_witness": {
+          "distance_mm": 0.025985908706346095,
+          "point_mm": [
+            79.69054723501745,
+            31.0
+          ],
+          "workpiece_edge_index": 4,
+          "workpiece_nodes": [
+            11629,
+            11630
+          ],
+          "segment_parameter": 0.3810944700348955,
+          "tied_workpiece_edge_indices": [
+            4
+          ],
+          "tie_scope": "All exact body-edge ties for this tip; positive-distance global ties are not enumerated",
+          "scope": "Unsigned tip-to-actual-Q1-boundary distance; not contact or penetration"
+        },
+        "J_min": {
+          "value": 0.014938189525383425,
+          "element_id": 11199,
+          "simpson_index": 6,
+          "local_coordinates": [
+            1.0,
+            -1.0
+          ],
+          "reference_position_mm": [
+            80.0,
+            30.0
+          ],
+          "actual_position_mm": [
+            79.69054723501745,
+            30.974014091293654
+          ],
+          "exact_tie_count": 1,
+          "witness_rule": "First C-order exact tie over ascending element IDs, then saved Simpson order; not a uniqueness claim"
+        },
+        "Hu_max": {
+          "max_abs_component_per_mm": 0.4398378162924799,
+          "signed_component_per_mm": -0.4398378162924799,
+          "element_id": 11344,
+          "component_ijk": [
+            1,
+            0,
+            1
+          ],
+          "reference_cell_center_mm": [
+            60.25,
+            30.75
+          ],
+          "actual_cell_center_mm": [
+            59.983458603796926,
+            30.75088662010651
+          ],
+          "exact_tie_count": 2,
+          "witness_rule": "First C-order exact tie over ascending element IDs and Hu[i,j,k]; not a uniqueness claim",
+          "position_scope": "Hu is constant per element/component; Q1 center is a representative marker, not a unique extremum point or nine-point sample"
+        },
+        "exact_original_scalar_comparisons": {
+          "medium_min_J": true,
+          "medium_max_abs_Hu": true,
+          "actual_tip_coordinates": true,
+          "tip_distance_witness": true
+        }
+      },
+      {
+        "accepted_index": 1,
+        "global_index": 10,
+        "state_sha256": "db691d50d019c76f9abc5555e19347c44dac2145c3bcf1de508c4cc994e59f7e",
+        "source_row": {
+          "index": 1,
+          "original_target_index": 10,
+          "leg": "loading",
+          "d_mm": 1.04,
+          "state_sha256": "db691d50d019c76f9abc5555e19347c44dac2145c3bcf1de508c4cc994e59f7e",
+          "R_input_N": 0.18849743751609724,
+          "q_out_mm": 0.9834816595480069,
+          "tip_node": 11260,
+          "tip_x_mm": 79.6884963855901,
+          "tip_y_mm": 30.980869329953457,
+          "tip_to_raster_boundary_mm": 0.01913067004654323,
+          "tip_equals_global_minimum_exact": true,
+          "tip_minus_global_minimum_mm": 0.0,
+          "minimum_boundary_distance_mm": 0.01913067004654323,
+          "boundary_intersects": false,
+          "boundary_roundoff_near_touch": false,
+          "raw_overlap": false,
+          "strict_overlap": false,
+          "roundoff_ambiguous": false,
+          "containment_tested": false,
+          "solid_min_J": 0.9754825764272813,
+          "medium_min_J": 0.008284170402941726,
+          "solid_Green_principal_min": -0.027173964825141853,
+          "solid_Green_principal_max": 0.03799423843279946,
+          "medium_max_abs_Hu_per_mm": 0.4518028866161294,
+          "right_medium_min_J": 0.19568872186830083,
+          "right_medium_max_J": 1.4061770474238542,
+          "right_medium_max_abs_Hu_per_mm": 0.07697553677344571,
+          "right_medium_Green_principal_min": -0.4838220277818236,
+          "right_medium_Green_principal_max": 0.5976304463686121,
+          "right_medium_max_nodal_displacement_mm": 1.057265926156959,
+          "total_body_Fx_N": -0.00027253882144887475,
+          "total_body_Fy_N": 0.00885936998869095,
+          "material_body_Fx_N": -1.6523602516565192e-05,
+          "material_body_Fy_N": 0.004564338477098198,
+          "regularization_body_Fx_N": -0.00025601521893230957,
+          "regularization_body_Fy_N": 0.00429503151159275
+        },
+        "tip_reference_position_mm": [
+          80.0,
+          30.0
+        ],
+        "tip_actual_position_mm": [
+          79.6884963855901,
+          30.980869329953457
+        ],
+        "tip_surface_witness": {
+          "distance_mm": 0.01913067004654323,
+          "point_mm": [
+            79.6884963855901,
+            31.0
+          ],
+          "workpiece_edge_index": 4,
+          "workpiece_nodes": [
+            11629,
+            11630
+          ],
+          "segment_parameter": 0.37699277118019836,
+          "tied_workpiece_edge_indices": [
+            4
+          ],
+          "tie_scope": "All exact body-edge ties for this tip; positive-distance global ties are not enumerated",
+          "scope": "Unsigned tip-to-actual-Q1-boundary distance; not contact or penetration"
+        },
+        "J_min": {
+          "value": 0.008284170402941726,
+          "element_id": 11199,
+          "simpson_index": 6,
+          "local_coordinates": [
+            1.0,
+            -1.0
+          ],
+          "reference_position_mm": [
+            80.0,
+            30.0
+          ],
+          "actual_position_mm": [
+            79.6884963855901,
+            30.980869329953457
+          ],
+          "exact_tie_count": 1,
+          "witness_rule": "First C-order exact tie over ascending element IDs, then saved Simpson order; not a uniqueness claim"
+        },
+        "Hu_max": {
+          "max_abs_component_per_mm": 0.4518028866161294,
+          "signed_component_per_mm": -0.4518028866161294,
+          "element_id": 11344,
+          "component_ijk": [
+            1,
+            0,
+            1
+          ],
+          "reference_cell_center_mm": [
+            60.25,
+            30.75
+          ],
+          "actual_cell_center_mm": [
+            59.981891483801434,
+            30.74971921671674
+          ],
+          "exact_tie_count": 2,
+          "witness_rule": "First C-order exact tie over ascending element IDs and Hu[i,j,k]; not a uniqueness claim",
+          "position_scope": "Hu is constant per element/component; Q1 center is a representative marker, not a unique extremum point or nine-point sample"
+        },
+        "exact_original_scalar_comparisons": {
+          "medium_min_J": true,
+          "medium_max_abs_Hu": true,
+          "actual_tip_coordinates": true,
+          "tip_distance_witness": true
+        }
+      }
+    ],
+    "nonbody_medium": {
+      "cell_count": 9861,
+      "selection": "~solid, then workpiece_cells excluded; ascending original element IDs"
+    },
+    "exact_comparisons": 8,
+    "old_tip_visual_QA": "pass",
+    "old_medium_visual_QA": "not_pass_layout_overlap"
+  },
+  "new_gates": false,
+  "physical_conditions_unchanged": true,
+  "default_HF_source_changes": 0,
+  "new_science_executed_by_decision": 0,
+  "interpretation_md": "数值和空间观察已得到真实结果：两态原unsigned Q1尖端距离为25.986与19.131微米，近景采用共同等比例实际坐标，root检查tip_closeup通过。9861个全非工件介质单元中，minJ由0.0149381895254降至0.00828417040294；首个见证均为e11199/Simpson6、local[1,-1]、reference(80,30)，actual坐标严格等于该态tip。1.04 mm actual为[79.6884963855901, 30.980869329953457] mm，exact tie count=1。它表明所保存九点样本最小J位于该介质单元的尖端共享角点，不能单独认定首次接触、压力或有效夹持。\n\n全介质maxabsHu由0.439837816292增至0.451802886616/mm。首个C-order代表为e11344/component[1,0,1]，signed值-0.451802886616/mm、reference中心[60.25, 30.75]、actual中心[59.981891483801434, 30.74971921671674] mm，exact tie count=2。这个首个代表在尖端左侧约20 mm处，且不在右侧x89..92参考条带；仅有首个代表及并列总数，不能宣称全部并列只在同一单元/位置。Hu逐单元常值，中心仅为代表标记；Hu场峰值位置不等于正则弱力主要来源、压力或夹持力位置。\n\n输入R=0.188497437516 N；下半工件signed Fy total/material/Hu=0.00885936998869/0.0045643384771/0.00429503151159 N，沿用STEP8普通记录、未重新求力，镜像不翻倍。原物理、生产门、路径/参考/压力/有效夹持等资格保持。当前空间定位没有发现原标量对账矛盾（8/8精确），并非新增失败的力学证据。\n\n但medium_locations图的全局suptitle与上排J/Hu标题真实重叠，root已将此图QA记为NOT_PASS；唯一执行和数值对账PASS不覆盖该排版缺口，stage_complete=false。原图保留、未在关闭窗口后重绘。当前源码给ConstrainedLayoutEngine的rect=(0,.075,1,.95)，该接口实际含义为(left,bottom,width,height)，其上缘为1.025而非.95；本机layout_engine.py说明已只读核实。这是可用小型排版修订解决的功能缺口，不能默默将pixel结果改PASS。",
+  "next_steps_md": "# L-CTIPLOCAL1结果驱动的下一步\n\n**唯一执行及8项数值对账PASS；视觉QA为NOT_PASS，整阶段尚未完成。** 原图与历史保留。本轮仅准备后续计划，不在已关闭的LOCAL1窗口重绘。\n\n建议下一阶段L-CTIPLOCAL2先修复medium_locations图顶部标题重叠：只调整布局并在新目录生成一张介质定位PNG、普通渲染JSON及人工页；继承已通过tip图链接而不读取/重绘旧媒体。同两态、同5NPZ/12字段上限、零新F/T/HP/Newton，原物理与门保持。完成新图一次像素检查后，再决定是否推进1.04→1.05 mm；本轮未实施或执行下一阶段。\n\n1. 最小问题与修订：保持原地图数据、Q1/Simpson/Hu定义、全部9861非工件介质选择、两态共同坐标范围/色标/颜色、原定位与tie语义。仅修正constrained-layout的rect语义及全局标题位置；rect是(left,bottom,width,height)，当前(0,.075,1,.95)导致top=1.025。候选可用(0,.075,1,.85)使top=.925、suptitle显式y=.985，给上排panel标题保留空间；真实效果由新PNG检查，不以参数意图替代像素结果。不要改数值、图像原件、默认HF或依赖版本。\n2. 最小读取与源：只用原STEP8的两态accepted0/global9/d1.03、accepted1/global10/d1.04，及LOCAL1已封存localization.json/原ordinary descriptors/geometry JSON。新窗口至多一次读取相同5NPZ/12字段：model coordinates/connectivity/solid/workpiece_cells；各态lift/fluctuation和J/Hu。原producer seal及字段契约不变；不得额外读取F、应力、节点力、切线、矩阵、旧PNG/GIF/CSV或调用新力学入口。位置/原值继承已对账定位，不新增接触/压力定义。\n3. 输出：新目录一张medium_locations.png，render.json记录同两态/同源身份、读取计数、原定位来源和仅布局修改，manual.html展示新图并链接已通过的LOCAL1 tip_closeup和旧力/收敛图。通过tip图仅继承链接，不重开/重新解码/重绘。无第二张新PNG、无新GIF；对唯一新PNG最多一次像素检查。旧布局失败图与pixel记录保持。\n4. 拟预算和停止：helper180秒/outer240秒、采样8GiB、四库线程配置上限16，单次启动、首终端错误停止；仅原新窗口内保实际partial/封存。无修复重跑、外部重试、延期、force、回滚或删除。无新测试/构模/F/T/HP/Newton/平衡求解/默认安装。先完成可审查的最小候选与有限静审，取得新执行窗口明确授权后才读取数组/生成新图；含记录、普通main推送与异路径local Git恢复核对。\n5. 完成与再决策：分别报告execution、numerical comparison和visual QA；只有新medium图实际排版通过才能补足此视觉缺口，不改写LOCAL1历史。随后依据既有真实定位和原门决定是否准备单目标1.04→1.05 mm，不自动开始。若后来推进，仍保minimum_increment=.00625 mm；.01可首次尝试，但失败半步.005低于原限值时按原规则终端停止，不降限值或加重试。\n\n数值和空间观察已得到真实结果：两态原unsigned Q1尖端距离为25.986与19.131微米，近景采用共同等比例实际坐标，root检查tip_closeup通过。9861个全非工件介质单元中，minJ由0.0149381895254降至0.00828417040294；首个见证均为e11199/Simpson6、local[1,-1]、reference(80,30)，actual坐标严格等于该态tip。1.04 mm actual为[79.6884963855901, 30.980869329953457] mm，exact tie count=1。它表明所保存九点样本最小J位于该介质单元的尖端共享角点，不能单独认定首次接触、压力或有效夹持。\n\n全介质maxabsHu由0.439837816292增至0.451802886616/mm。首个C-order代表为e11344/component[1,0,1]，signed值-0.451802886616/mm、reference中心[60.25, 30.75]、actual中心[59.981891483801434, 30.74971921671674] mm，exact tie count=2。这个首个代表在尖端左侧约20 mm处，且不在右侧x89..92参考条带；仅有首个代表及并列总数，不能宣称全部并列只在同一单元/位置。Hu逐单元常值，中心仅为代表标记；Hu场峰值位置不等于正则弱力主要来源、压力或夹持力位置。\n\n输入R=0.188497437516 N；下半工件signed Fy total/material/Hu=0.00885936998869/0.0045643384771/0.00429503151159 N，沿用STEP8普通记录、未重新求力，镜像不翻倍。原物理、生产门、路径/参考/压力/有效夹持等资格保持。当前空间定位没有发现原标量对账矛盾（8/8精确），并非新增失败的力学证据。\n\n但medium_locations图的全局suptitle与上排J/Hu标题真实重叠，root已将此图QA记为NOT_PASS；唯一执行和数值对账PASS不覆盖该排版缺口，stage_complete=false。原图保留、未在关闭窗口后重绘。当前源码给ConstrainedLayoutEngine的rect=(0,.075,1,.95)，该接口实际含义为(left,bottom,width,height)，其上缘为1.025而非.95；本机layout_engine.py说明已只读核实。这是可用小型排版修订解决的功能缺口，不能默默将pixel结果改PASS。\n\nLOCAL2尚未实施或执行。原成果、视觉失败、生产物理/验收门及全部资格保持，不新增高精度参考、压力、有效夹持、释放/稳定性、网格/域宽收敛或HF5资格。\n",
+  "created_utc": "2026-10-19T02:59:31.505919+00:00"
+}

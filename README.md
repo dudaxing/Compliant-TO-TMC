@@ -1,3 +1,5 @@
+> 2026-10-19 L-CTIPLOCAL1 **执行PASS／图像QA未通过**：r9/(80,40)、right92/Lr80，两态1.03/1.04 mm保存数组局部观察；数值精确对账通过，定位图顶部标题重叠，原图保留、整阶段尚未完成；无新平衡求解，原资格及历史保持。见[实际记录](lf_data_preparation/native_interface_001/lf_circle_tip_local_001/RESULTS.md)。原历史说明保留如下。
+
 > 2026-10-19 L-CTIPSTEP8 **PASS**：固定圆形工件r9/(80,40)、right92/Lr80，从成功1.03 mm保存态延伸至1.04 mm；生产 success，保存态 2，helper/outer pass/pass。本次只执行后缀，完整前缀未重放；原资格与历史保持。见[实际记录](lf_data_preparation/native_interface_001/lf_circle_tip_step_008/RESULTS.md)。原历史说明保留如下。
 
 > 2026-10-19 L-CTIPSTEP7 **PASS**：固定圆形工件r9/(80,40)、right92/Lr80，从成功1.02 mm保存态延伸至1.03 mm；生产 success，保存态 2，helper/outer pass/pass。本次只执行后缀，完整前缀未重放；原资格与历史保持。见[实际记录](lf_data_preparation/native_interface_001/lf_circle_tip_step_007/RESULTS.md)。原历史说明保留如下。
