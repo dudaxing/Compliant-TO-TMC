@@ -1,0 +1,678 @@
+{
+  "card": "L-CTIPREF1",
+  "status": "closed",
+  "execution_status": "pass",
+  "execution_closed": true,
+  "visual_QA_status": "pass_root_visual_inspection",
+  "stage_complete": true,
+  "created_utc": "2026-10-19T05:28:17.217171+00:00",
+  "source_baseline_commit": "8cf86e81e414866a7d5cb110e006c7088f94eb97",
+  "science_version": "0.5.0",
+  "science_baseline_commit": "b1334bb6a83ba9a0efab7bdba7bd39722146f024",
+  "protocol_sha256": "8ca6c358df59077daa73000d09cdfa33bedf66f22b3951929234e7e124b1e135",
+  "outer_status": "pass",
+  "helper_status": "pass",
+  "summary_status": "pass",
+  "lifecycle_status": "pass",
+  "selected_child_accepted_index": 1,
+  "original_target_index": 12,
+  "target_mm": 1.06,
+  "selected_state_sha256": "dd9288140ae51ff3cfcc7f7f6d6811b2242a55054454002bd7c06ff88a4b6bc6",
+  "HP_calls_started": 2,
+  "HP_calls_completed": 2,
+  "accepted_mechanical_states_completed": 1,
+  "workpiece_states_completed": 1,
+  "checks_completed": 88465,
+  "original_gates": {
+    "production_residual": "1e-9",
+    "independent_residual": "1e-8",
+    "force_evaluation": "1e-9",
+    "average_constraint": "1e-10",
+    "global_force_balance": "1e-6",
+    "fixed_displacement_mm": "8e-11",
+    "hp80_hp120": "1e-40",
+    "total_force": "1e-11",
+    "material_force": "1e-9",
+    "regularization_force": "1e-9",
+    "total_tangent": "1e-10",
+    "material_tangent": "1e-9",
+    "regularization_tangent": "1e-9",
+    "augmented_force_tangent": "1e-10",
+    "augmented_constraint_tangent": "1e-10"
+  },
+  "plot_started": 1,
+  "plot_completed": 1,
+  "observation_entries": [
+    {
+      "label": "Global force / total",
+      "source_member": "force_checks.total",
+      "error": "1.35625252474124229211528394649994207089513767529432773829886027255613921348536426388652343949666783129724847198963535140E-15",
+      "limit": "1E-11",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -3.8676594403427544
+    },
+    {
+      "label": "Global force / material",
+      "source_member": "force_checks.material",
+      "error": "3.15054159497953273011724235961558450001419958655163991539283897237883257937198735567669599266472155107493226069690410784E-16",
+      "limit": "1E-9",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.50161478224443
+    },
+    {
+      "label": "Global force / Hu",
+      "source_member": "force_checks.regularization",
+      "error": "1.81304435640412592235299612493743369483718724883753353814964274566749131656968543581013443130481587261009146334041992202E-16",
+      "limit": "1E-9",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.741591570694396
+    },
+    {
+      "label": "PORT action / total",
+      "source_member": "tangent_checks.total",
+      "error": "5.91127497872940928975662462593970651886953521314369071631001479503761175025289889356900314750488255934672006701869789211E-17",
+      "limit": "1E-10",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.228318837814508
+    },
+    {
+      "label": "PORT action / material",
+      "source_member": "tangent_checks.material",
+      "error": "6.55955653147260710905799035917526949767460033505605623471051411949190496356093458856015989877021785778047259056275201919E-17",
+      "limit": "1E-9",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -7.183125520753085
+    },
+    {
+      "label": "PORT action / Hu",
+      "source_member": "tangent_checks.regularization",
+      "error": "2.06025147561837223257322369698130291875532785396549549854476854744545274514709245845687541199139596322832653017512997299E-16",
+      "limit": "1E-9",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.68607976613195
+    },
+    {
+      "label": "Saved CSC / PORT action",
+      "source_member": "CSC_total_action_check",
+      "error": "7.17052893968088513276447343563624627897229650559823007010997647303234251400494693429323585187325484355663076066905324807E-17",
+      "limit": "1E-10",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.144448807078102
+    },
+    {
+      "label": "KKT free-force action",
+      "source_member": "augmented_checks.force",
+      "error": "7.20153351399746993180947716038374886290569568017386110686339570194208638975302164828443148973190484173620865034671751155E-17",
+      "limit": "1E-10",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -6.1425750138808946
+    },
+    {
+      "label": "HP120 equilibrium residual",
+      "source_member": "checks:hp120 relative_residual",
+      "error": "1.20620888518680716261259232366099714518970488440528789737255211109632583433232100134132313220908579792034422054189721455E-12",
+      "limit": "1e-8",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -3.91857747674934
+    },
+    {
+      "label": "HP80 / HP120 global total force",
+      "source_member": "force_checks.total.hp80_hp120_error",
+      "error": "1.30678310325009250187159912311487783659682158175559374495499049547506458232851737603349303722959816339408664414711339979E-76",
+      "limit": "1E-40",
+      "pass_gate": true,
+      "display_log10_error_over_limit": -35.883796489602695
+    }
+  ],
+  "selected_reference_row": {
+    "index": 12,
+    "status": "pass",
+    "state_sha256": "dd9288140ae51ff3cfcc7f7f6d6811b2242a55054454002bd7c06ff88a4b6bc6",
+    "target_mm": 1.06,
+    "elements_compared": 14720,
+    "global_DOFs_compared": 29970,
+    "local_force_entries_compared": 353280,
+    "local_tangent_entries_compared": 353280,
+    "full_matrix_entries_assembly_checked": 942080,
+    "HP_calls": 2,
+    "checks": [
+      {
+        "name": "hp80 relative_residual",
+        "normalized_error": "1.20620888518680716261259232366099714518970488440528789737255211109576033451307952820170832060174237104120699940356456651E-12",
+        "limit": "1e-8",
+        "pass_gate": true
+      },
+      {
+        "name": "hp80 relative_constraint",
+        "normalized_error": "2.61845052977631246369811693796810942467213662716694361915612228082752249243070396070761657778694928695954172351702153188E-17",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "hp80 relative_force_balance",
+        "normalized_error": "3.33492338079855405375412651175127220273449013018494665041186462640442194726715717568986682654092145228184529428069447311E-15",
+        "limit": "1e-6",
+        "pass_gate": true
+      },
+      {
+        "name": "hp80 fixed_error_mm",
+        "normalized_error": "0",
+        "limit": "8e-11",
+        "pass_gate": true
+      },
+      {
+        "name": "hp120 relative_residual",
+        "normalized_error": "1.20620888518680716261259232366099714518970488440528789737255211109632583433232100134132313220908579792034422054189721455E-12",
+        "limit": "1e-8",
+        "pass_gate": true
+      },
+      {
+        "name": "hp120 relative_constraint",
+        "normalized_error": "2.61845052977631246369811693796810942467213662716694361915612228082752249243070396070761657778694928695954172351702153188E-17",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "hp120 relative_force_balance",
+        "normalized_error": "3.33492338079855405375412651175127220273449013018494665041186462496321598417898071905898327666364514474852936517634259922E-15",
+        "limit": "1e-6",
+        "pass_gate": true
+      },
+      {
+        "name": "hp120 fixed_error_mm",
+        "normalized_error": "0",
+        "limit": "8e-11",
+        "pass_gate": true
+      },
+      {
+        "name": "saved production relative_residual",
+        "normalized_error": "1.20622239488582342227431629575315163416662951386981016456511936820769409912025312324899305271035575439696830173729855241E-12",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved production relative_constraint",
+        "normalized_error": "2.61845052977631246369811693796810942467213662716694361915612228082752249243070396070761657778694928695954172351702153188E-17",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "saved production relative_force_balance",
+        "normalized_error": "3.30808357827563642982483712612711742620117644824581364629826086669768619803565696481870753961528963173609128783416947150E-15",
+        "limit": "1e-6",
+        "pass_gate": true
+      },
+      {
+        "name": "reported production residual",
+        "normalized_error": "1.20622239488582344120950088509001862555579387414894654284580610692501068115234375E-12",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "reported residual reconstruction",
+        "normalized_error": "1.893518458933686699138916436027913637828068673871731658203209062675100694728964424560303169826270144759E-29",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "reported balance reconstruction",
+        "normalized_error": "1.0594983495606601172242262993259337557004100702914555468528735431450832156318382028745753961528963173609128783416947150E-16",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "reported force scale reconstruction",
+        "normalized_error": "5.85990383910763020377939142939254794692813119714726907351448318367253447925679020274096158767461164361238029913785338950E-17",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved input_force versus independent",
+        "normalized_error": "0E+63",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved spring_force_on_structure versus independent",
+        "normalized_error": "0E+51",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved support_reaction versus independent",
+        "normalized_error": "2.75733910595950970597047037755461592752857682114960635053944008553305264311667701902916704083849434834010622336389800924E-16",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved force_residual versus independent",
+        "normalized_error": "1.35625252474124229211528394649994207089513767529432773829886027056609362219505924494771862381482142209657946030602958968E-15",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved q_in",
+        "normalized_error": "2.61845052977631246369811693796810942467213662716694361915612228082752249243070396070761657778694928695954172351702153188E-17",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "saved q_out",
+        "normalized_error": "2.61845052977631246369811693796810942467213662716694361915612228082752249243070396070761657778694928695954172351702153188E-17",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "saved constraint_residual",
+        "normalized_error": "0E-16",
+        "limit": "1e-10",
+        "pass_gate": true
+      },
+      {
+        "name": "saved balance reconstruction",
+        "normalized_error": "1.54504186733271026964785114025607834499998420463068605349267403124958197224312494109657258247409908310718188742273084592E-16",
+        "limit": "1e-9",
+        "pass_gate": true
+      },
+      {
+        "name": "saved residual reconstruction",
+        "normalized_error": "0E+2",
+        "limit": "1e-9",
+        "pass_gate": true
+      }
+    ],
+    "metrics": {
+      "production_relative_residual": "1.20622239488582342227431629575315163416662951386981016456511936820769409912025312324899305271035575439696830173729855241E-12",
+      "independent_relative_residual": "1.20620888518680716261259232366099714518970488440528789737255211109632583433232100134132313220908579792034422054189721455E-12",
+      "relative_constraint": "2.61845052977631246369811693796810942467213662716694361915612228082752249243070396070761657778694928695954172351702153188E-17",
+      "relative_force_balance": "3.33492338079855405375412651175127220273449013018494665041186462496321598417898071905898327666364514474852936517634259922E-15",
+      "minimum_J": "0.0009015839179744191599350492953291931092921172268560061177739245290296832280318994889967143535614013671875000",
+      "fixed_displacement_mm": "0",
+      "q_in_mm": "1.0600000000000000255351295663786004297435283660888671875000000000000",
+      "q_out_mm": "0.9932854064102130953184399686506367288529872894287109375000000000000",
+      "R_input_N": "0.1956818332420679207306335456451051868498325347900390625",
+      "force_scale_N": "0.0915217971009562538335464539311435301038897194154689524469757214357249008172576677406485808203735031055707871833490669418",
+      "displacement_scale_mm": "1.060000000000000053290705182007513940334320068359375"
+    },
+    "force_checks": {
+      "total": {
+        "normalized_error": "1.35625252474124229211528394649994207089513767529432773829886027255613921348536426388652343949666783129724847198963535140E-15",
+        "hp80_hp120_error": "1.30678310325009250187159912311487783659682158175559374495499049547506458232851737603349303722959816339408664414711339979E-76",
+        "denominator": "0.0915217971009562538335464539311435301038897194154689524469757214357249008172576677406485808203735031055707871833490669418",
+        "limit": "1E-11",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "material": {
+        "normalized_error": "3.15054159497953273011724235961558450001419958655163991539283897237883257937198735567669599266472155107493226069690410784E-16",
+        "hp80_hp120_error": "2.87599260477476407976405792006907113701341090341499571507672214007875590476366145893728887240405958899867139645492416466E-77",
+        "denominator": "0.415857974259461723031763240828387680748895587548789428650883221541622425327401111638872980333089342595460558546935151969",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "regularization": {
+        "normalized_error": "1.81304435640412592235299612493743369483718724883753353814964274566749131656968543581013443130481587261009146334041992202E-16",
+        "hp80_hp120_error": "7.57868620530693985182500618351026378543849654956943258229517562428544898594863130722546522209375088118704142894856055263E-80",
+        "denominator": "0.0163248317543352366097719425876208664445462871481494135959111659963735854984720741391342092904856703433289387162728890187",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      }
+    },
+    "tangent_checks": {
+      "total": {
+        "normalized_error": "5.91127497872940928975662462593970651886953521314369071631001479503761175025289889356900314750488255934672006701869789211E-17",
+        "hp80_hp120_error": "2.88863400708213153429735259546942100550592690019269544206704409327989949966109475661473733746697198478423108683513864353E-80",
+        "denominator": "67.6894822853405209170922934725099225433197223876795788421230474157527947766188107411727458145116202215221552502092473939",
+        "limit": "1E-10",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "material": {
+        "normalized_error": "6.55955653147260710905799035917526949767460033505605623471051411949190496356093458856015989877021785778047259056275201919E-17",
+        "hp80_hp120_error": "3.26253271950966525294448975009337852539143101848057356511100245032533477015709504329945709070344199991046956589107775871E-80",
+        "denominator": "67.6866719217870278003059968571781812564681996936037918852576980228487262484117497567922171642126084421757909471237210816",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "regularization": {
+        "normalized_error": "2.06025147561837223257322369698130291875532785396549549854476854744545274514709245845687541199139596322832653017512997299E-16",
+        "hp80_hp120_error": "6.48798302100458178514295002568227595241700223928116496772507277197266329171169026634328406679627455374347931398600587262E-80",
+        "denominator": "0.00683915051658748700043176405871115814272656095733440369734895922931768364667279426481044356673711688925853789778525700059",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      }
+    },
+    "local_force_worst": [
+      {
+        "component": "total",
+        "element": 10487,
+        "normalized_error": "1.12862112184577792750574492560584760937422536600261893424438624451336599365914647800965220913112120911866474656988142374E-16",
+        "hp80_hp120_error": "3.41435330929332280043547487432803005556306922391033979273313078156520524312100090812250295460602666686488439910007962493E-80",
+        "denominator": "0.0000363592242054920286794121693588905519715040839101784652008163301803771198751230157277354925431995510591173464648411243031",
+        "limit": "1E-11",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "1.84726654566923821927062797093595511030805664632617400799285653580800408902271892415402477309834919351751534610604891163E-75"
+      },
+      {
+        "component": "material",
+        "element": 11379,
+        "normalized_error": "1.06467774012754175043100578885912550138015012784488792425974394894297668196894916066991463428546698896024396497896712088E-16",
+        "hp80_hp120_error": "2.62871704900705562844865077439820288692194218353079334049686893146971660380332151537842362922536120561252862599495457680E-80",
+        "denominator": "0.000212501211087648382249495844491940255166760999120318223075732027760000356108658667791602658475065824599810154059735200132",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "1.84892218488268431849471098867757699200093361434977742767338832746571479837383142073295496215747983465807709682644688770E-75"
+      },
+      {
+        "component": "regularization",
+        "element": 9536,
+        "normalized_error": "1.53699674305036042037175997788947886314387906762206276386869676415455088107142877052696945963437257801926159386984042150E-16",
+        "hp80_hp120_error": "2.93519740179974971351470133408292704965296286175503249322220602824148553608473287080815790879282108930927753538563252419E-80",
+        "denominator": "6.21393023890277792362009763292122739705534057261056814567935660488674832068138702566619356897701952330264505968999307460E-8",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "3.41266485112158330400693864352691593807215768677303080672686676147687508598188676128823010246077894605657035919616750056E-79"
+      }
+    ],
+    "local_tangent_worst": [
+      {
+        "component": "total",
+        "element": 13984,
+        "normalized_error": "7.11977050375461722516939370511560014312416814222625232158247213877284074253731045903915328737906149111667034323151605237E-17",
+        "hp80_hp120_error": "2.38491698278195535315506976852392944375395342935009747260697423845156303719674019366687485764394953751567556183156739144E-80",
+        "denominator": "22.3145385597676248960723489095720205480063534289963302369721051333502313171883628362726447797865543513058683019451325872",
+        "limit": "1E-10",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "5.07088008040776285356556212112143688467770895017629896795003562198798699892350949620577847630818679897599522554804302353E-80"
+      },
+      {
+        "component": "material",
+        "element": 13984,
+        "normalized_error": "6.84265780674344107183369943687503774053836297520967229466444211529354840768647766240217012358878455871745032787346509675E-17",
+        "hp80_hp120_error": "2.28796500606215277963724789979826395442548145844337419324960211997785212834124364878657172385235342481078199404532615386E-80",
+        "denominator": "22.3139103712500000074456868189599825134226816208970571658397531564502498473563702616456481189682476734945843726973351620",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "5.10879612680550148972692102695780178240708022967093016706701191884243029757400981627025518306257158184023876608785660468E-80"
+      },
+      {
+        "component": "regularization",
+        "element": 14168,
+        "normalized_error": "2.73490929543554708885719064206851027141718895931473083566055248673619605538959985756572693959619042066157581054452713107E-15",
+        "hp80_hp120_error": "5.49164490590776579104907043151838925252118058072888599562390791286751034700855866801730818241008125247307378779315861581E-81",
+        "denominator": "0.000196019827248389658200014626029250970537294428602173367958778195800709173101898808734716788788338155167312981304309852921",
+        "limit": "1E-9",
+        "reference_limit": "1E-40",
+        "pass_gate": true,
+        "maximum_hp80_hp120_error": "7.24044288345878983395370225380920802401929509464370550196031672636481144620586897320438267859734222226634023184404349276E-80"
+      }
+    ],
+    "CSC_total_action_check": {
+      "normalized_error": "7.17052893968088513276447343563624627897229650559823007010997647303234251400494693429323585187325484355663076066905324807E-17",
+      "hp80_hp120_error": "2.88863400708213153429735259546942100550592690019269544206704409327989949966109475661473733746697198478423108683513864353E-80",
+      "denominator": "67.6894822853405209170922934725099225433197223876795788421230474157527947766188107411727458145116202215221552502092473939",
+      "limit": "1E-10",
+      "reference_limit": "1E-40",
+      "pass_gate": true
+    },
+    "augmented_checks": {
+      "force": {
+        "normalized_error": "7.20153351399746993180947716038374886290569568017386110686339570194208638975302164828443148973190484173620865034671751155E-17",
+        "hp80_hp120_error": "2.89588744685596576900808212321695277961078325772146244374354604098919994856504701930985413325965830598257063144667975384E-80",
+        "denominator": "67.3925241876771076030658101267949014712513851308366297540476215958420637906756161009490765762731708494489594152192453291",
+        "limit": "1E-10",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      },
+      "constraint": {
+        "normalized_error": "0",
+        "hp80_hp120_error": "0",
+        "denominator": "0.8750",
+        "limit": "1E-10",
+        "reference_limit": "1E-40",
+        "pass_gate": true
+      }
+    },
+    "references": [
+      {
+        "path": "accepted_012/hp80_full_local.json.gz",
+        "sha256": "5f0ed9ab490afe0543304c19008c3708173ee197910b575d790498db7cc41760"
+      },
+      {
+        "path": "accepted_012/hp120_full_local.json.gz",
+        "sha256": "e49ac4bdbba3e047d5fb8e6067353b071c5fc633761c7281f1f28ca52576d095"
+      }
+    ],
+    "raw_fixture": {
+      "path": "accepted_012/reference_fixture.npz",
+      "sha256": "c7a17ff7d2f5f628ebaed44444f2f90bfa96cb8365d2534130f97002ac2fb8d8"
+    },
+    "global_references": {
+      "path": "accepted_012/hp80_hp120_full_global.json.gz",
+      "sha256": "0a2c2a7fd4115cebbcd13f84a2e2ba87a41f672b6a0ccc6eddc5c8329b92df34"
+    },
+    "exact_element_gates": {
+      "path": "accepted_012/element_gates.json.gz",
+      "sha256": "2004d63939179f41e7fda0ece8f73935773493ac255e08b16aaa9fb3e7798e25"
+    },
+    "global_differences": {
+      "path": "accepted_012/global_differences.json.gz",
+      "sha256": "2f0c0fe39cbc6f6d537438b49485bd309f93bfccdacaadbeb978f15fb9c5683c"
+    },
+    "equations": {
+      "path": "accepted_012/equation_hp80_hp120.json.gz",
+      "sha256": "07b39ea6f8323c8fc0dfa70d89920fe798c4c9e1f424fa6e01ed1e8ab4e3fc34"
+    },
+    "actions": {
+      "path": "accepted_012/actions.npz",
+      "sha256": "62e95850063db554a778d04e5be3c74b68aab4dfe1111c9843abcc76f418348e"
+    },
+    "rounded_kinematics": {
+      "path": "accepted_012/rounded_hp120_kinematics.npz",
+      "sha256": "2166166f7db0a7302e3775853d175548f5ba920466cd6bde7f7b7fea804fd22c"
+    },
+    "independent_total_matrix": {
+      "path": "accepted_012/independent_total_matrix.npz",
+      "sha256": "61e1d2d976b6efb9fd7a47709e52fbf894f4150070d0070f361434babe0e2223"
+    },
+    "kinematic_diagnostics": {
+      "J": {
+        "exact_binary64_match": true,
+        "maximum_absolute_difference": 0.0
+      },
+      "F": {
+        "exact_binary64_match": true,
+        "maximum_absolute_difference": 0.0
+      },
+      "Hu": {
+        "exact_binary64_match": true,
+        "maximum_absolute_difference": 0.0
+      }
+    },
+    "workpiece_checks": {
+      "path": "accepted_012/workpiece_checks.json.gz",
+      "sha256": "c30f26165b6e56cb4223b7545f7566edba589b80d08e76538fe913668a7b4780"
+    },
+    "original_target_index": 12,
+    "leg": "loading"
+  },
+  "producer_record_unchanged": true,
+  "default_sources_unchanged": true,
+  "reference_qualification_scope": "Only selected tip-facing circle1.06 saved endpoint and declared direction. Original15 gates; no full child/full original or extended path,all columns,stress/energy/pressure,effective clamp,stability or HF5 qualification",
+  "full_child_path_reference_pass": false,
+  "full_original_path_reference_pass": false,
+  "full_extended_path_reference_pass": false,
+  "pressure_qualified": false,
+  "clamp_qualified": false,
+  "contact_qualified": false,
+  "HF5_qualified": false,
+  "helper_elapsed_seconds": 106.68545789999916,
+  "outer_elapsed_seconds": 107.40420010000526,
+  "helper_sampled_peak_RSS_bytes": 1380761600,
+  "outer_sampled_peak_tree_RSS_bytes": 1391460352,
+  "child_terminal_wall_seconds": 107.10406909999438,
+  "child_exit_code": 0,
+  "stop_reason": null,
+  "ordinary_bindings_unchanged": true,
+  "helper_error": null,
+  "outer_failure": null,
+  "cleanup_scope": "Actual cooperative child terminal and elapsed/RSS observations; no SUP2 or cleanup_verified contract",
+  "sealed_output_files": 30,
+  "sealed_output_bytes": 93316426,
+  "output_identity_seal": "complete_inside_original_helper_window",
+  "available_sealed_error_PNG": {
+    "sha256": "69cf7bcbdda4cc4c890a7cb559317d4f9cd8eed2bb1d20bdc95bb9ac555a3d59",
+    "bytes": 89656
+  },
+  "actual_review_status": "pass_record_audit",
+  "pixel_QA": {
+    "card": "L-CTIPREF1",
+    "status": "pass_root_visual_inspection",
+    "inspections": 1,
+    "media": [
+      {
+        "path": "lf_data_preparation/native_interface_001/lf_circle_tip_reference_001/run_001/reference/reference_observations.png",
+        "inspections": 1
+      }
+    ],
+    "observations": {
+      "reference_observations.png": "Root inspected once at original resolution after unique terminal: all10 raw normalized error/limit markers and numeric annotations readable, child1/global12/input1.06 identity correct; all markers left of original gate at0, HP80/120 log ratio near-35.88 retained without clipping/floor. Row labels, xaxis, title and scope footer separated. Figure explicitly one PORT direction, no fullpath/pressure/grip qualification."
+    },
+    "image_regenerations": 0,
+    "old_media_opened": 0,
+    "GIF_decodes": 0,
+    "inspection_scope": "One actual original-resolution view_image of the one new PNG after terminal. This ordinary record does not read/hash/decode scientific/media payloads; original producer seal inherited."
+  },
+  "next_decision": {
+    "schema_version": "lf-ctipref1-result-driven-next-decision-1.0",
+    "card": "L-CTIPREF1",
+    "execution_status": "pass",
+    "visual_QA_status": "pass_root_visual_inspection",
+    "next_card": "L-CTIPUNLOAD1",
+    "next_step": "建议下一阶段 L-CTIPUNLOAD1：复用已安装的load_only→ordered_cycle保存态延伸入口，从STEP10真实1.06 mm峰值仅回撤到1.05 mm，保持input峰值1.06及完整前缀、原物理/设置/门，观察实际回程变形、力、尖端距离和收敛；以普通标量表对照旧加载1.05，避免凭位移符号认定恢复。研究viewer只修显示选态和相应标题，使新末态可人工检查。该新物理目标需新明确授权；当前未实施或执行，不自动加载1.07或新增HP。",
+    "decision": "first_small_unload_after_current_peak_reference",
+    "execution_authorization_status": "pending_new_execution_authorization",
+    "source": {
+      "result": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/result.json",
+      "accepted_index": 1,
+      "original_target_index": 12,
+      "child_original_target_index": 1,
+      "d_mm": 1.06,
+      "state_sha256": "dd9288140ae51ff3cfcc7f7f6d6811b2242a55054454002bd7c06ff88a4b6bc6",
+      "R_input_N": 0.19568183324206792
+    },
+    "proposed_path_kind": "ordered_cycle",
+    "proposed_input_peak_mm": 1.06,
+    "proposed_full_task_targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      0.9,
+      0.95,
+      0.98,
+      1.0,
+      1.02,
+      1.03,
+      1.04,
+      1.05,
+      1.06,
+      1.05
+    ],
+    "proposed_child_targets_mm": [
+      1.06,
+      1.05
+    ],
+    "proposed_global_target_indices": [
+      12,
+      13
+    ],
+    "proposed_resources": {
+      "controller_seconds": 1800,
+      "shared_display_seconds": 600,
+      "helper_seconds": 2700,
+      "outer_seconds": 2760,
+      "sampled_RSS_bytes": 68719476736,
+      "per_library_thread_cap": 16,
+      "viewer_internal_RSS_bytes": 8589934592
+    },
+    "minimum_increment_mm": 0.00625,
+    "bisection_implication": "Direct -.01 allowed; failed physical half -.005 is below original .00625 and stops. Original internal line-search/bisection semantics unchanged.",
+    "proposed_viewer_changes": {
+      "scope": "Research display selection and matching titles only; comparison anchor vs LAST, field/right-medium LAST. Keep original numerical definitions, decode scope and actual history.",
+      "reason": "Original anchor+peak comparison would duplicate peak anchor in first unload.",
+      "PNGs": 5,
+      "GIFs": 1,
+      "frames": "Actual accepted N",
+      "default_HF_changes": 0
+    },
+    "descriptive_same_input_comparison": {
+      "prior_source": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/view/wave_circle_tip_step10/summary.json",
+      "prior_row": {
+        "index": 0,
+        "original_target_index": 11,
+        "leg": "resume_origin",
+        "d_mm": 1.05,
+        "state_sha256": "0cef15db4eb7d5537ce1047b1a8625013ab131edcaa3a88c15a7dfacbdf9bbe8",
+        "R_input_N": 0.1917119776052685,
+        "q_out_mm": 0.9893918140696001,
+        "tip_node": 11260,
+        "tip_x_mm": 79.687143550996,
+        "tip_y_mm": 30.986565355120025,
+        "tip_to_raster_boundary_mm": 0.013434644879975366,
+        "tip_equals_global_minimum_exact": true,
+        "tip_minus_global_minimum_mm": 0.0,
+        "minimum_boundary_distance_mm": 0.013434644879975366,
+        "boundary_intersects": false,
+        "boundary_roundoff_near_touch": false,
+        "raw_overlap": false,
+        "strict_overlap": false,
+        "roundoff_ambiguous": false,
+        "containment_tested": false,
+        "solid_min_J": 0.9753318497649357,
+        "medium_min_J": 0.0032268105740065082,
+        "solid_Green_principal_min": -0.027331796999438537,
+        "solid_Green_principal_max": 0.03841718367167843,
+        "medium_max_abs_Hu_per_mm": 0.46195690592022765,
+        "right_medium_min_J": 0.19270007749393256,
+        "right_medium_max_J": 1.4275997141749524,
+        "right_medium_max_abs_Hu_per_mm": 0.08409066184842073,
+        "right_medium_Green_principal_min": -0.48427558295210527,
+        "right_medium_Green_principal_max": 0.6354410964502949,
+        "right_medium_max_nodal_displacement_mm": 1.0507256158949554,
+        "total_body_Fx_N": -0.00028786695721812243,
+        "total_body_Fy_N": 0.010344906240341959,
+        "material_body_Fx_N": -2.155147612374835e-05,
+        "material_body_Fy_N": 0.005895873236077016,
+        "regularization_body_Fx_N": -0.0002663154810943741,
+        "regularization_body_Fy_N": 0.004449033004264943
+      },
+      "prior_global_index": 11,
+      "new_global_index": 13,
+      "target_mm": 1.05,
+      "read_scope": "Existing ordinary scalar JSON only, records/table only; no extra science or figure",
+      "new_gate": false,
+      "equality_required": false
+    },
+    "new_gates": false,
+    "physical_conditions_unchanged": true,
+    "new_tests": 0,
+    "new_HP_calls": 0,
+    "default_HF_source_changes": 0,
+    "new_science_executed_by_decision": 0,
+    "interpretation_md": "当前最新强压缩保存态已通过HP80/120原十五门：总力误差约1.3563e-15、PORT总切线5.9113e-17、HP120平衡残差1.2062e-12，误差均明显低于对应原门。局部见证确认minJ位于tip，介质仍被高度压缩，但没有发现这一个状态/声明方向需要修力核的数值矛盾。继续压向1.07会增加点附近压缩；先做小回程可直接检验已实现路径转换和实际响应恢复，丰富当前布置的功能证据。它不预言反力/距离单调、可逆性、滞回或自由释放。\n\n当前1.06 mm的tip实际(79.68711006356523,30.990112475289735) mm，unsigned Q1最近距离9.887525微米；minJ=0.0009015839179744192。Hu首代表在内侧e11344，signedcomponent=-0.4682404604988441/mm、exactties2，Q1中心仅代表标记。下半工件Fy=0.01259251473277105 N，由material0.008033412258785861与Hu0.004559102473985187 N构成；这些是全局轴弱式合力，不是圆周压力或合格夹持力。\n\n本次88465为原实际检查总数，不是十五类门，也不是新审计层。30输出93316426B及原科研gzip均在唯一窗口封存；工件分支完成1态且整体PASS，普通summary只保其gz路径/SHA，没有闭窗重开或声称独立读取具体body误差。1.06态的选定参考不转授未来卸载态或完整路径。",
+    "next_steps_md": "# L-CTIPREF1结果驱动的下一步：L-CTIPUNLOAD1\n\n本轮唯一参考执行PASS、原15门PASS、一个误差PNG各一次实际QA PASS。2HP/1力学态/1工件分支/1绘图完成；可以按实际证据闭卡。\n\n建议下一阶段 L-CTIPUNLOAD1：复用已安装的load_only→ordered_cycle保存态延伸入口，从STEP10真实1.06 mm峰值仅回撤到1.05 mm，保持input峰值1.06及完整前缀、原物理/设置/门，观察实际回程变形、力、尖端距离和收敛；以普通标量表对照旧加载1.05，避免凭位移符号认定恢复。研究viewer只修显示选态和相应标题，使新末态可人工检查。该新物理目标需新明确授权；当前未实施或执行，不自动加载1.07或新增HP。\n\n当前最新强压缩保存态已通过HP80/120原十五门：总力误差约1.3563e-15、PORT总切线5.9113e-17、HP120平衡残差1.2062e-12，误差均明显低于对应原门。局部见证确认minJ位于tip，介质仍被高度压缩，但没有发现这一个状态/声明方向需要修力核的数值矛盾。继续压向1.07会增加点附近压缩；先做小回程可直接检验已实现路径转换和实际响应恢复，丰富当前布置的功能证据。它不预言反力/距离单调、可逆性、滞回或自由释放。\n\n1. **精确科学起点。** 使用STEP10 `run_001/wave_circle_tip_step10/result.json` accepted1/global12/child1/loading1.06 mm，逻辑SHA `dd9288140ae51ff3cfcc7f7f6d6811b2242a55054454002bd7c06ff88a4b6bc6`、signedR=0.19568183324206792 N。不能用本参考summary或LOCAL显示JSON代替saved_result，也不移植旧力/切线/CSC。完整嵌套parent_continuation与原成功/失败/资格保留。\n2. **最小任务转换与API。** 新独立task只将path.kind从load_only改ordered_cycle，原完整前缀精确保留并append一个1.05：`[0,.25,.5,.75,.90,.95,.98,1.00,1.02,1.03,1.04,1.05,1.06,1.05]` mm。input.target_mm仍为加载峰值1.06，不改为回撤终点；其余仅task_id/purpose/parameter_origin/description四说明身份变化。使用已安装`evaluate_native(None,new_task,new_output,saved_result=STEP10_result,selected_state_index=1,extend_path=True,time_limit_seconds=1800)`，fresh F/T重验1.06锚的平衡/SHA/signedR，再执行实际child[1.06,1.05]、global12/13、child-original0/1、resume_origin/unloading。不重演原加载前缀、不去重旧global11的加载1.05。保原五键task_transition（source/extended kind、first_unload、loading_peak、first_unload_target）；不要求new_peak_reached为true，不改原完整路径资格。\n3. **原物理、数值和停止。** r9/c(80,40) mm、right92/Lr80、全部原材料/网格/固定工件/边界/端口保持；mechanical/chunk256/port_projection及全部非clock设置、residual1e-9/native mean bound/globalbalance1e-6/fixedsplit8e-11/J>0门保持，仅新clock复位。minimum_increment=.00625 mm；直接-.01首次尝试允许，若失败后物理半步-.005低于原限值，按原规则终端停止，不降低限值。内部线搜索backtracking与目标bisection概念区分，不以本次HP通过保证回程收敛。\n4. **有限读集与资源。** 包装准备只用原producer seal/stat及普通描述。新唯一helper运行前向时仅读取原source_geometry.npz四mask及选定state.npz的lift/fluctuation；旧force/tangent/matrix/HP科学gzip/媒体不作输入。一次controller1800秒、viewer/收敛/表页共享600秒、helper2700/outer2760秒（最多46分钟），采样64GiB、四库线程上限16，原viewer内部8GiB子限保留。先完成研究包装及有限静审，再唯一启动；首终端错误停止后续科学/显示、保真实partial，仅原新窗口内封存。无外部重试、修复重跑、延期、force、默认HF修改/安装、测试、新HP、API关联、回滚或删除。\n5. **让实际卸载可见的最小显示适配。** 当前STEP10 viewer的comparison选择anchor+peak_index；首回程中peak仍anchor，会把anchor画两次。只在研究viewer调整显示选态和相应标题/图例：comparison显示fresh anchor与实际LAST accepted卸载态；field/right-medium静态图显示实际LAST accepted态并明确末态/全域条带范围，保原peak元数据语义和逐态历史。对应选态、色域与见证一致，原数值读取/公式、力定义、几何/距离、场和gates不变；不是承诺viewer字节不改。成功后共原5PNG（comparison、距离/力、保存场、right-medium、convergence）及实际N帧chronological GIF、状态表/人工页。显示实际×1变形、signed material/Hu/total Fx/Fy、R/q_out、tip/full-Q1距离及几何标志、J/Hu和完整480-cell右条带、原Newton/trial/二分。N依真实接受态，不预填F/T/检查数。每张新PNG最多一次实际检查，不解码旧媒体/GIF或闭窗修图重跑；无额外定位图或第六张图。\n6. **同输入的功能对照与再决策。** 仅读旧STEP10普通summary的global11/loading1.05一行，在记录/表中与新global13/unloading1.05比较R、q_out、body signed total/material/Hu Fx/Fy、tip/full-Q1距离、solid/medium minJ/Hu；不读旧数组/媒体，不增科学调用或图。旧加载R=0.1917119776052685 N、q_out=0.9893918140696001 mm、bodyFy=0.010344906240341959 N、tip距离0.013434644879975366 mm、medium minJ=0.0032268105740065082。保两行的loading/unloading/global身份，不要求state或标量相等、不设恢复/单调/滞回新门。根据真实回程结果再决定更低目标或诊断，不自动续算。\n\n固定工件上的输入回撤不是自由工件释放；正unsigned Q1距离不是signed gap/连续接触证明，弱式力不是压力或合格夹持力。本参考仅授1.06保存态与一个PORT方向的独立数值范围，不授未来卸载态、完整两态/路径、全列切线、连续压力、有效夹持、稳定性、网格/域宽或HF5资格。\n\n记录总体目标、原因、实际完成内容、效果及限制，分别保执行/视觉QA/阶段完成；main普通提交推送和同机异目录local Git恢复核对，origin不变。当前参考窗口已关闭；L-CTIPUNLOAD1仅为具体待授权方案，尚未实施/执行。新授权后按上述范围有限静审，再唯一启动。\n",
+    "created_utc": "2026-10-19T05:28:01.691676+00:00"
+  },
+  "read_scope": "Ordinary JSON/MD/source only; scientific NPZ/gzip/CSV/media use original producer seals plus stat, no payload read/hash/decode",
+  "qualification_scope": "Only selected saved circle1.06/global12 state and one PORT direction; no full path/all columns/stress/energy/pressure/grip/release/stability/mesh-domain/HF5"
+}
