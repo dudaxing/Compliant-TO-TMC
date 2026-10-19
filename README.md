@@ -1,3 +1,5 @@
+> 2026-10-19 L-CTIPUNLOAD2 **执行PASS**／图像QA pass_root_visual_inspection／阶段完成True：固定圆形工件r9/(80,40)、right92/Lr80，从成功卸载1.05 mm保存态继续卸载至1.00 mm；生产 success，保存态 2，helper/outer pass/pass。本次只执行后缀，完整前缀未重放；原资格与历史保持。见[实际记录](lf_data_preparation/native_interface_001/lf_circle_tip_unload_002/RESULTS.md)。原历史说明保留如下。
+
 > 2026-10-19 L-CTIPUNLOAD1 **执行PASS**／图像QA pass_root_visual_inspection／阶段完成True：固定圆形工件r9/(80,40)、right92/Lr80，从成功1.06 mm保存态首次卸载至1.05 mm；生产 success，保存态 2，helper/outer pass/pass。本次只执行后缀，完整前缀未重放；原资格与历史保持。见[实际记录](lf_data_preparation/native_interface_001/lf_circle_tip_unload_001/RESULTS.md)。原历史说明保留如下。
 
 > 2026-10-19 L-CTIPREF1 **执行PASS／图像QA pass_root_visual_inspection**：当前r9/(80,40)、right92/Lr80布置的accepted1/global12/1.06 mm保存态参考；HP启动/完成 2/2，阶段完成True。保原生产历史及资格；见[实际记录](lf_data_preparation/native_interface_001/lf_circle_tip_reference_001/RESULTS.md)。原历史说明保留如下。
