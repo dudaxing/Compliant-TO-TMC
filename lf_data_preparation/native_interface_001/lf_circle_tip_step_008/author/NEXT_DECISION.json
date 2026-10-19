@@ -1,0 +1,262 @@
+{
+  "schema_version": "lf-ctipstep8-result-driven-next-decision-1.0",
+  "card": "L-CTIPSTEP8",
+  "execution_status": "pass",
+  "next_card": "L-CTIPLOCAL1",
+  "next_step": "建议下一阶段L-CTIPLOCAL1优先完成1.03/1.04 mm两保存态的实际等比例尖端近景，以及全非工件介质minJ/maxabsHu的空间定位；只观察既有保存数组，不新增平衡求解。输出两张PNG、普通定位JSON和人工检查页；先让人工看清约19微米的实际Q1距离、介质极值和右侧关系，再决定是否推进1.05 mm。本轮仅记录计划，尚未实现或执行。",
+  "decision": "saved_state_local_visibility_and_medium_extreme_locations_before_further_loading",
+  "proposed_target_mm": null,
+  "deferred_possible_target_mm": 1.05,
+  "proposed_child_targets_mm": null,
+  "source": {
+    "result": "lf_data_preparation/native_interface_001/lf_circle_tip_step_008/run_001/wave_circle_tip_step8/result.json",
+    "accepted_indices": [
+      0,
+      1
+    ],
+    "original_target_indices": [
+      9,
+      10
+    ],
+    "targets_mm": [
+      1.03,
+      1.04
+    ],
+    "state_sha256": [
+      "9b3bce7ae5f2b25b0065fba05dac1f12d4764595b5a431cee876982363f7fc60",
+      "db691d50d019c76f9abc5555e19347c44dac2145c3bcf1de508c4cc994e59f7e"
+    ]
+  },
+  "proposed_payload_fields": {
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_008/run_001/wave_circle_tip_step8/model/model.npz": [
+      "coordinates",
+      "connectivity",
+      "solid",
+      "workpiece_cells"
+    ],
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_008/run_001/wave_circle_tip_step8/accepted/000/state.npz": [
+      "lift",
+      "fluctuation"
+    ],
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_008/run_001/wave_circle_tip_step8/accepted/000/forces.npz": [
+      "J",
+      "Hu"
+    ],
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_008/run_001/wave_circle_tip_step8/accepted/001/state.npz": [
+      "lift",
+      "fluctuation"
+    ],
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_008/run_001/wave_circle_tip_step8/accepted/001/forces.npz": [
+      "J",
+      "Hu"
+    ]
+  },
+  "proposed_payload_archives": 5,
+  "proposed_payload_fields_count": 12,
+  "proposed_outputs": [
+    "tip_closeup.png",
+    "medium_locations.png",
+    "locations.json",
+    "REVIEW.md"
+  ],
+  "evidence": {
+    "previous": {
+      "index": 0,
+      "original_target_index": 9,
+      "leg": "resume_origin",
+      "d_mm": 1.03,
+      "state_sha256": "9b3bce7ae5f2b25b0065fba05dac1f12d4764595b5a431cee876982363f7fc60",
+      "R_input_N": 0.1856995754415686,
+      "q_out_mm": 0.9764698050071479,
+      "tip_node": 11260,
+      "tip_x_mm": 79.69054723501745,
+      "tip_y_mm": 30.974014091293654,
+      "tip_to_raster_boundary_mm": 0.025985908706346095,
+      "tip_equals_global_minimum_exact": true,
+      "tip_minus_global_minimum_mm": 0.0,
+      "minimum_boundary_distance_mm": 0.025985908706346095,
+      "boundary_intersects": false,
+      "boundary_roundoff_near_touch": false,
+      "raw_overlap": false,
+      "strict_overlap": false,
+      "roundoff_ambiguous": false,
+      "containment_tested": false,
+      "solid_min_J": 0.9756590064288826,
+      "medium_min_J": 0.014938189525383425,
+      "solid_Green_principal_min": -0.02698663836991647,
+      "solid_Green_principal_max": 0.03758720613771214,
+      "medium_max_abs_Hu_per_mm": 0.4398378162924799,
+      "right_medium_min_J": 0.19901412159349638,
+      "right_medium_max_J": 1.380291456711538,
+      "right_medium_max_abs_Hu_per_mm": 0.0688448907313699,
+      "right_medium_Green_principal_min": -0.4832705519034386,
+      "right_medium_Green_principal_max": 0.5529277654164209,
+      "right_medium_max_nodal_displacement_mm": 1.0666036522612292,
+      "total_body_Fx_N": -0.0002655468910727436,
+      "total_body_Fy_N": 0.007798735907497663,
+      "material_body_Fx_N": -1.4687837476076189e-05,
+      "material_body_Fy_N": 0.003674208671747427,
+      "regularization_body_Fx_N": -0.0002508590535966674,
+      "regularization_body_Fy_N": 0.004124527235750236
+    },
+    "current": {
+      "index": 1,
+      "original_target_index": 10,
+      "leg": "loading",
+      "d_mm": 1.04,
+      "state_sha256": "db691d50d019c76f9abc5555e19347c44dac2145c3bcf1de508c4cc994e59f7e",
+      "R_input_N": 0.18849743751609724,
+      "q_out_mm": 0.9834816595480069,
+      "tip_node": 11260,
+      "tip_x_mm": 79.6884963855901,
+      "tip_y_mm": 30.980869329953457,
+      "tip_to_raster_boundary_mm": 0.01913067004654323,
+      "tip_equals_global_minimum_exact": true,
+      "tip_minus_global_minimum_mm": 0.0,
+      "minimum_boundary_distance_mm": 0.01913067004654323,
+      "boundary_intersects": false,
+      "boundary_roundoff_near_touch": false,
+      "raw_overlap": false,
+      "strict_overlap": false,
+      "roundoff_ambiguous": false,
+      "containment_tested": false,
+      "solid_min_J": 0.9754825764272813,
+      "medium_min_J": 0.008284170402941726,
+      "solid_Green_principal_min": -0.027173964825141853,
+      "solid_Green_principal_max": 0.03799423843279946,
+      "medium_max_abs_Hu_per_mm": 0.4518028866161294,
+      "right_medium_min_J": 0.19568872186830083,
+      "right_medium_max_J": 1.4061770474238542,
+      "right_medium_max_abs_Hu_per_mm": 0.07697553677344571,
+      "right_medium_Green_principal_min": -0.4838220277818236,
+      "right_medium_Green_principal_max": 0.5976304463686121,
+      "right_medium_max_nodal_displacement_mm": 1.057265926156959,
+      "total_body_Fx_N": -0.00027253882144887475,
+      "total_body_Fy_N": 0.00885936998869095,
+      "material_body_Fx_N": -1.6523602516565192e-05,
+      "material_body_Fy_N": 0.004564338477098198,
+      "regularization_body_Fx_N": -0.00025601521893230957,
+      "regularization_body_Fy_N": 0.00429503151159275
+    },
+    "convergence_counts": {
+      "accepted_states": 2,
+      "newton_base_checks": 6,
+      "inferred_check_groups": 2,
+      "line_search_trials": 4,
+      "line_search_accepted": 4,
+      "line_search_rejected": 0,
+      "failed_attempts": 0,
+      "linear_solves": 5,
+      "maximum_bisection_depth": 0,
+      "zero_newton_residuals": 0
+    },
+    "right_J_min_witness": {
+      "value": 0.19568872186830083,
+      "element_id": 11218,
+      "simpson_index": 2,
+      "local_coordinates": [
+        -1.0,
+        1.0
+      ],
+      "reference_position_mm": [
+        89.0,
+        30.5
+      ],
+      "actual_position_mm": [
+        89.01458789502229,
+        30.433465027899604
+      ],
+      "exact_tie_count": 1,
+      "witness_rule": "First C-order exact tie; the tie count is retained, not a uniqueness claim"
+    },
+    "right_Hu_witness": {
+      "max_abs_component_per_mm": 0.07697553677344571,
+      "signed_component_per_mm": 0.07697553677344571,
+      "element_id": 11591,
+      "component_ijk": [
+        1,
+        0,
+        1
+      ],
+      "exact_tie_count": 2,
+      "reference_cell_center_mm": [
+        91.75,
+        31.25
+      ],
+      "actual_cell_center_mm": [
+        91.98775562401411,
+        30.43098146520621
+      ],
+      "position_scope": "Hu is constant per element/component; Q1 center is a representative marker, not a sampling point",
+      "witness_rule": "First C-order exact tie; not a unique maximum claim"
+    },
+    "right_previous_displacement": {
+      "component_min": [
+        -0.13522054530134175,
+        -0.9154316234921835
+      ],
+      "component_max": [
+        0.6532608269950831,
+        0.8543646606388955
+      ],
+      "maximum_node_norm": 1.0666036522612292,
+      "maximum_node_id": 178,
+      "maximum_node_actual_position_mm": [
+        89.65326082699508,
+        0.8431450900827763
+      ],
+      "scope": "Saved binary64 lift+fluctuation sum, independent of world-coordinate subtraction; no small-value clipping"
+    },
+    "right_current_displacement": {
+      "component_min": [
+        -0.13597189311260324,
+        -0.9562700004878798
+      ],
+      "component_max": [
+        0.6489004578937042,
+        0.8463838735051402
+      ],
+      "maximum_node_norm": 1.057265926156959,
+      "maximum_node_id": 178,
+      "maximum_node_actual_position_mm": [
+        89.6489004578937,
+        0.8347091914899903
+      ],
+      "scope": "Saved binary64 lift+fluctuation sum, independent of world-coordinate subtraction; no small-value clipping"
+    },
+    "signed_Hu_fraction_of_total_body_Fy": 0.48480100922248304,
+    "right_Hu_ratio": 1.118100936114508,
+    "medium_J_ratio": 0.5545632145625822,
+    "full_medium_extreme_positions_available_in_existing_plain_records": false,
+    "existing_tip_zoom_extent_mm": {
+      "x": [
+        67.0,
+        93.0
+      ],
+      "y": [
+        25.0,
+        41.0
+      ]
+    }
+  },
+  "proposed_resources": {
+    "helper_seconds": 180,
+    "outer_seconds": 240,
+    "sampled_RSS_bytes": 8589934592,
+    "per_library_thread_cap": 16
+  },
+  "proposed_mechanics_calls": {
+    "model_build": 0,
+    "force": 0,
+    "tangent": 0,
+    "independent_HP": 0,
+    "equilibrium_solve": 0
+  },
+  "new_gates": false,
+  "physical_conditions_unchanged": true,
+  "default_HF_source_changes": 0,
+  "new_science_executed_by_decision": 0,
+  "interpretation_md": "1.03→1.04 mm时，tip实际坐标由(79.690547235,30.974014091)变为(79.688496386,30.980869330) mm，tip及完整Q1共同最近距离由0.025985909降至0.019130670 mm（约19.131微米）。两态相交、near-touch与跨区重叠标志均false，containment未测试；这仍是unsigned Q1几何观察，不是连续圆面有符号gap或唯一首次接触证明。q_out=0.983481660 mm是端口位移而非gap。输入R=0.188497438 N；下半工件全局竖向弱力total Fy=0.008859369989 N，其中material=0.004564338477、Hu=0.004295031512 N，Hu占有符号total Fy约48.48%。镜像显示不将数值加倍，这些量不授连续压力或有效夹持资格。\n\n实体minJ=0.975482576，全非工件介质minJ=0.008284170（较上态下降44.54%）、medium maxabsHu=0.451802887/mm；原9点Simpson含角点，不改称Gauss点或新增corner-J门。原门通过，目标5次Newton检查、4次线搜索全接受、无失败/二分，不能仅因J较小另判失败或例行插入HP。全介质minJ/maxHu仅有标量，既有derived/summary没有其元素及坐标；不得假定它们位于tip或右条带。\n\n右侧固定480cells全条带minJ=0.195688722，见证e11218/Simpson2、local[-1.0, 1.0]，reference[89.0, 30.5]、actual[89.01458789502229, 30.433465027899604] mm；maxabsHu=0.076975537/mm（上态1.118倍），见证e11591/component[1, 0, 1]、Q1代表中心actual[91.98775562401411, 30.43098146520621] mm。Hu逐单元常值，代表中心不是额外九点采样。right最大节点位移逐态核实仍在node178/reference[89.0, 0.0]，actual[89.6489004578937, 0.8347091914899903] mm，norm由1.066603652降至1.057265926 mm；这不是tip gap、外界角点或更安全/卸载证据。单域宽场变化不证明边界污染或域宽充分。",
+  "next_steps_md": "# L-CTIPSTEP8结果驱动的下一步\n\n本轮PASS：从fresh锚1.03 mm成功延伸至1.04 mm，实际2态、6次Newton检查（锚1+目标5）、4次线搜索全接受、0失败/拒绝/二分；F10/T6、solver1、HP0。原物理、非clock设置、验收门及完整嵌套前缀保持。\n\n建议下一阶段L-CTIPLOCAL1优先完成1.03/1.04 mm两保存态的实际等比例尖端近景，以及全非工件介质minJ/maxabsHu的空间定位；只观察既有保存数组，不新增平衡求解。输出两张PNG、普通定位JSON和人工检查页；先让人工看清约19微米的实际Q1距离、介质极值和右侧关系，再决定是否推进1.05 mm。本轮仅记录计划，尚未实现或执行。\n\n选择保存态局部显示的理由是当前宽幅tip图约26×16 mm视野已难肉眼区分19微米距离，且全介质minJ/maxHu缺少位置见证；现有物理记录与原验收门没有矛盾。局部观察用于补足可人工审查的实际效果与空间解释，不建立新的审计链或门，不把小J直接判作失败，也不例行插入HP。1.05 mm延伸暂不作为下个详细阶段，不在本卡内运行。\n\n1. 来源与范围：仅本卡`run_001/wave_circle_tip_step8/result.json`两态，accepted0/global9/d1.03 SHA`9b3bce7ae5f2b25b0065fba05dac1f12d4764595b5a431cee876982363f7fc60`与accepted1/global10/d1.04 SHA`db691d50d019c76f9abc5555e19347c44dac2145c3bcf1de508c4cc994e59f7e`。绑定原model、state/forces descriptors及既有summary/derived的普通JSON和原producer seal；只在获批的新窗口中hash/decode下面5个既存NPZ中的12字段，不续用已关闭STEP8窗口。\n2. 最小读取：一个model.npz仅coordinates/connectivity/solid/workpiece_cells四字段；两态各state.npz的lift/fluctuation两字段与forces.npz的J/Hu两字段，共5NPZ/12字段。字段名/形状已据真实普通descriptor核对：coordinates[14985,2]、connectivity[14720,4]、solid[14720]、workpiece_cells[510]、split各[29970]、J[14720,9]、Hu[14720,2,2,2]；节点顺序BL/BR/TR/TL、tensor_product_9_point_Simpson。不得为显示读入旧F、应力、节点力、切线、矩阵或其它未列数组。\n3. 最小实现：研究层局部observer复用原binary64 split实际坐标和Q1/Simpson位置映射定义，不改默认HF。非工件介质掩码严格为~solid并排除workpiece_cells。从原J九点/原Hu组件定位全介质极值，保首个C-order精确并列及tie count、原reference/actual坐标、元素/采样或component索引；与既有两态标量精确对账，差异保留并停止，不调整门/阈值/裁剪数据。Hu代表中心注明逐单元常值，不声称唯一极值。tip参考(80,30)唯一节点及既有tip_surface_witness作为身份/显示依据，最近点及Q1边保持。\n4. 可视化：tip_closeup.png以两态共同等比例实际坐标/一致视野显示尖端、真实Q1工件边、最近点与距离，标mm坐标及微米距离、比例尺，实际×1，不人工放大缝隙或改画解析圆；medium_locations.png给全域位置索引及局部J/Hu图、tip/工件/右界和全介质极值见证，明确九点值与cellwise Hu及裁剪/全域统计范围。普通定位JSON保原值/身份/位置及两态反力分量，人工页关联既有反力/收敛图；不重绘这些既有图，不新增GIF。最多对两个新PNG各一次像素检查，不读取旧媒体。\n5. 拟资源与停止：helper180秒/outer240秒，采样8GiB，四库线程配置上限16；只一次启动、首错停止，原窗口内保实际partial/封存，无修复重跑、外部重试、延期、force、回滚或删除。无新测试、构模、F/T/HP/Newton/平衡求解、默认HF改动或安装。保持r9/(80,40)、right92/Lr80及其余物理/非clock设置/原门；不增加资格。先完成最小包装及有限静审，获明确授权后才读取数组/生成新图；含结果记录、普通main推送及异路径local Git恢复核对。\n6. 后续决定：按新近景和定位的实际结果，再选择继续加载或有针对性的机制诊断；原门不变，无自动1.05 mm延伸。局部显示不证明接触压力、有效夹持、自由释放、稳定性、网格/域宽收敛或HF5资格。\n\n1.03→1.04 mm时，tip实际坐标由(79.690547235,30.974014091)变为(79.688496386,30.980869330) mm，tip及完整Q1共同最近距离由0.025985909降至0.019130670 mm（约19.131微米）。两态相交、near-touch与跨区重叠标志均false，containment未测试；这仍是unsigned Q1几何观察，不是连续圆面有符号gap或唯一首次接触证明。q_out=0.983481660 mm是端口位移而非gap。输入R=0.188497438 N；下半工件全局竖向弱力total Fy=0.008859369989 N，其中material=0.004564338477、Hu=0.004295031512 N，Hu占有符号total Fy约48.48%。镜像显示不将数值加倍，这些量不授连续压力或有效夹持资格。\n\n实体minJ=0.975482576，全非工件介质minJ=0.008284170（较上态下降44.54%）、medium maxabsHu=0.451802887/mm；原9点Simpson含角点，不改称Gauss点或新增corner-J门。原门通过，目标5次Newton检查、4次线搜索全接受、无失败/二分，不能仅因J较小另判失败或例行插入HP。全介质minJ/maxHu仅有标量，既有derived/summary没有其元素及坐标；不得假定它们位于tip或右条带。\n\n右侧固定480cells全条带minJ=0.195688722，见证e11218/Simpson2、local[-1.0, 1.0]，reference[89.0, 30.5]、actual[89.01458789502229, 30.433465027899604] mm；maxabsHu=0.076975537/mm（上态1.118倍），见证e11591/component[1, 0, 1]、Q1代表中心actual[91.98775562401411, 30.43098146520621] mm。Hu逐单元常值，代表中心不是额外九点采样。right最大节点位移逐态核实仍在node178/reference[89.0, 0.0]，actual[89.6489004578937, 0.8347091914899903] mm，norm由1.066603652降至1.057265926 mm；这不是tip gap、外界角点或更安全/卸载证据。单域宽场变化不证明边界污染或域宽充分。\n\n本轮资格与成功/失败历史保留；L-CTIPLOCAL1尚未实现、读取或执行，STEP8唯一窗口已关闭。\n",
+  "created_utc": "2026-10-19T02:43:17.003041+00:00"
+}
