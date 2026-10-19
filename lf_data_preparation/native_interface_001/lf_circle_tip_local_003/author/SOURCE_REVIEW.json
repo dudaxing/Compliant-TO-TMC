@@ -1,0 +1,135 @@
+{
+  "schema_version": "lf-ctiplocal3-independent-source-review-1.0",
+  "card": "L-CTIPLOCAL3",
+  "status": "pass_static_review",
+  "blocking_findings": [],
+  "execution_blockers": [],
+  "reviewer": "/root/tip7_review",
+  "reviewed_author_sha256": {
+    "execute_local.py": "41d2e9ef0cc5be3f74f5a2c282bee5e7ec8a5e053f54228ca30f89805611a850",
+    "observe_local.py": "e2bf71c2ea1273e8fa1e050def0727b49222a74e094341af08dfdedf0d2905d5",
+    "launch_local.py": "6a1e53016829276df8d6650694c675d42ea3ad445a43ea4057d66365305de0bb",
+    "prepare_local.py": "889022f1174cda0f454490d14b878c9ec7f49b7f0b7e213d20d47a644ecd634f",
+    "protocol.json": "f1c7ff61f66b2215cb97f1057fdb137c7ef2c2b9b46b397ca67ae8b3a0f54416",
+    "authorization.json": "d12a1fd7fdaa1014e1baf0216352f3be610ef84b202e9076532096aa6159b1ab",
+    "L-CTIPLOCAL3_CARD.md": "fb4dfbf2a1f8815de1cc4d30cb2b0e6b41be6b4b8dce1d900ee0823e12854616"
+  },
+  "reviewed_support_sha256": {
+    "close_local.py": "1db80cb5575a3d1fff3ed44571e8025d8fd3a3c4b439836cf83ef7fa62fc2c14",
+    "publish_local.py": "189085a6039bf66187c4957f3d3263cf9b657ec95a9c36761c72396e43f142c7",
+    "archive_publication.py": "9a0d87ca63df21b9dba38f5c393fe85ca42b4dd5ec3184de74d0f4fcf7aede65"
+  },
+  "protocol_sha256": "f1c7ff61f66b2215cb97f1057fdb137c7ef2c2b9b46b397ca67ae8b3a0f54416",
+  "source_baseline_commit": "6e77bf0e874c939fee23158f57a2f87d662f8aaa",
+  "ordinary_input_count": 12,
+  "producer_payload_seals_stat_verified": [
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/model/model.npz",
+      "sha256": "1649d4522f9de25556f45f9721ebb466741b51b479882124ad4183ed5561aa89",
+      "bytes": 324454
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/accepted/000/state.npz",
+      "sha256": "a20c8615413735b00feea79870fccbae8ef202c92e7ceda9ee19a56dd7a66d40",
+      "bytes": 219748
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/accepted/000/forces.npz",
+      "sha256": "e70584d5c6a51793c0744e1e2437a713b57ddb2439b6605ef728a657e2d65e9a",
+      "bytes": 12155105
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/accepted/001/state.npz",
+      "sha256": "dc19d066a22034662c58f2307da8158faabc553d98838f5139567f6d9453626f",
+      "bytes": 219750
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/accepted/001/forces.npz",
+      "sha256": "89a3f8a6146b0553b94e0872793d2ca18e4dc33a07ed425e4d226663f26e8a8d",
+      "bytes": 12155327
+    }
+  ],
+  "selected_states_verified": [
+    {
+      "accepted_index": 0,
+      "global_index": 11,
+      "d_mm": 1.05,
+      "state_sha256": "0cef15db4eb7d5537ce1047b1a8625013ab131edcaa3a88c15a7dfacbdf9bbe8"
+    },
+    {
+      "accepted_index": 1,
+      "global_index": 12,
+      "d_mm": 1.06,
+      "state_sha256": "dd9288140ae51ff3cfcc7f7f6d6811b2242a55054454002bd7c06ff88a4b6bc6"
+    }
+  ],
+  "formal_copies_verified": [
+    "execute_local.py",
+    "observe_local.py",
+    "launch_local.py",
+    "author\\prepare_local.py",
+    "author\\close_local.py"
+  ],
+  "checks": [
+    {
+      "name": "Explicit approval and exact protocol",
+      "status": "pass",
+      "detail": "Current human LOCAL3 answer, baseline6e77bf0 and protocol f1c7ff61 agree. Preparation/root verified clean baseline; formal sources present, run absent. No reviewer execution or Git."
+    },
+    {
+      "name": "Finite source closure and unchanged math",
+      "status": "pass",
+      "detail": "Seven Python sources/supports full-diff, AST and whitespace checked; four runtime bindings include unchanged SUP2. Observer differs from LOCAL1 only card/state prose and LOCAL2 exact .85/y.985 layout fix; formal copies agree where installed."
+    },
+    {
+      "name": "Twelve ordinary inputs and true identities",
+      "status": "pass",
+      "detail": "All12 ordinary hashes verified. STEP10 scientific accepted0/global11/d1.05 and1/global12/d1.06 agree across result/state/summary/derived row; geometry identity is its bound ordinary file, with original boundary keys and existing tip witness."
+    },
+    {
+      "name": "Five payload seals and twelve fields",
+      "status": "pass",
+      "detail": "Exactly5 existing NPZ producer seals/stat checked without payload read/hash: four model fields plus lift/fluctuation/J/Hu perstate. Selected lazy decode once perarchive only in new helper."
+    },
+    {
+      "name": "Original Q1/Simpson coordinates",
+      "status": "pass",
+      "detail": "Original BL/BR/TR/TL, xi-slow eta-fast nine-point Simpson including corners and left-associative reference+lift+fluctuation retained. No new distance search or operator."
+    },
+    {
+      "name": "Full nonbody mask and exact ties",
+      "status": "pass",
+      "detail": "Full ascending ~solid excludes workpiece cells; first C-order exact J minimum/Hu maxabs retain signedijk and tie counts. Hu center is representative, not uniqueness proof."
+    },
+    {
+      "name": "Useful actual two-state views",
+      "status": "pass",
+      "detail": "Shared equal physical axes and actual Q1 closeup plus full-medium extrema/local fields. Original8 exact comparisons and field definitions/ruler retained; inherited repaired spacing, two new PNG only."
+    },
+    {
+      "name": "Zero mechanics and unchanged physics",
+      "status": "pass",
+      "detail": "Observer only stdlib/NumPy/Matplotlib; no F/T/model/HP/Newton/tests/GIF. Task/settings/gates exactly STEP10; no old F/stress/force/tangent/matrix/media/CSV read or qualification upgrade."
+    },
+    {
+      "name": "Unique bounded window and actual QA",
+      "status": "pass",
+      "detail": "180/240s,8GiB,four16-thread caps. First error retained before partialseal in original window; no retry/repair/extension/force/rollback/delete. Two newPNG once each; numerical/visual/stage statuses separated."
+    },
+    {
+      "name": "Finite closure and normal publication",
+      "status": "pass",
+      "detail": "Three support sources preserve seven rawfront histories/23644 manifest entries; partial links truthful. Ordinary hashes separate from payloadseal/stat; normal main push/local Git different-path restore only."
+    }
+  ],
+  "checks_passed": 10,
+  "candidate_execution": false,
+  "formal_stage_written_by_preparation": true,
+  "git_commands_run": 0,
+  "scientific_payloads_read_or_hashed": 0,
+  "media_opened": 0,
+  "tests_run": 0,
+  "review_only_schema_note": "Read-only review probes corrected two packaging assumptions: external publication helpers are installed later; derived state identity is under row, while geometry is bound by its whole ordinary-file hash. Final checks follow actual producer schemas; no source/runtime/result change or scientific rerun.",
+  "qualification_scope": "Saved1.05/1.06 localization only; no next1.07, HP, pressure/effectivegrip, unload/release/stability, mesh/domain convergence or HF5 qualification.",
+  "completed_utc": "2026-10-19T05:01:04.308200+00:00"
+}
