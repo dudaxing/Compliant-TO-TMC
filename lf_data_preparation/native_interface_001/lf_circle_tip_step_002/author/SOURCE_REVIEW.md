@@ -1,0 +1,16 @@
+# L-CTIPSTEP2 independent static review
+
+**PASS**: 10 finite checks, no blocking finding. All ten final author files byte-bound in SOURCE_REVIEW.json. Final protocol SHA256 `364dcd5904ba4e83a573bb2c1e6359c20cffb2350a3fee97e47141d88696c208`. Base `2ab5e503ce6220ceeeba4b413d36e39399b1dd4b`.
+
+- **Final files, direct authorization and clean baseline**: Ten final author files byte-bound; six Python files AST parsed without execution; whitespace clean; final protocol/auth identity, explicit .75 to .90 request and clean main baseline agree.
+- **Unchanged default closure and saved observers**: 59 source pins checked from ordinary bytes; default HF source and viewer/convergence algorithms exactly inherit reviewed STEP1 bytes. Five pure-view source pins agree.
+- **Exact append-only task and invariant physics**: Only .90 input peak, appended .90 target and four descriptive fields change; all geometry/material/boundary/port fields remain exact. Full task[0,.25,.5,.75,.9] and child suffix[.75,.9] distinguished.
+- **Legitimate nested parent segment**: The source is a successful previous child suffix, not a zero-start task. Its false full-path flags are retained; embedded complete prefix, original global2/3 indices and previous fresh anchor identity agree with installed native_resume extension contract.
+- **Exact selected anchor and restricted old inputs**: Accepted1/global3 semantic SHA and signed R exact; two old NPZ payloads use original producer seal plus stat only, seven ordinary JSON hashes verified. No old scientific/media payload read or hash in this review.
+- **Original settings, gates and resources**: Mechanical/chunk256/port_projection, nonclock settings and all original gates exact;1800/600/2700/2760s,64GiB, four pre-import16-thread caps and original pure-view8GiB limit retained.
+- **Fresh anchor, nested provenance and one new suffix**: Public installed saved extension called once; original split state restored, fresh F1/T1 and SHA/R exact checked. Whole parent continuation retained; child original global3/4 indices and local0/1 verified. No old force/tangent/matrix read or prefix replay.
+- **Actual N and suffix semantics**: Original internal bisections may increase actual accepted N; every state/chronology retained. New peak and segment success required; full-task and qualification flags remain false, target_responseNone.
+- **Single owned launch, pure display and stop policy**: Pinned existing SUP2 launcher opens ordinary source only before helper; first error stops following science/display and retains actual partial. No tests,HP,default installation,external retries or force fallback. Four viewerPNG+convergencePNG and actualN-frame GIF with in-window frame check retained.
+- **Physical interpretation retained**: Coordinate-selected tip(80,30), reference480cell right strip, unsigned Q1 witnesses/ties, J/F-Green/Hu/split displacement and lower-body signed material/Hu/total weak resultants. Mirroring is visual only; no pressure/effective grip, release/stability/domain-width/HF5 or independent-reference promotion.
+
+No candidate execution, tests, scientific payload read/hash or media open occurred. Exact reviewed bytes may be frozen and the already authorized unique run may proceed. This establishes source and ordinary-metadata compatibility, not runtime equilibrium or high-precision/contact qualification.
