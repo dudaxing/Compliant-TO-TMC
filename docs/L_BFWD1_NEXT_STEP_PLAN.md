@@ -1,3 +1,5 @@
+> 2026-10-19 L-CTIPSTEP1 **PASS**：固定圆形工件r9/(80,40)、right92/Lr80，从成功0.50 mm保存态延伸至0.75 mm；生产 success，保存态 2，helper/outer pass/pass。本次只执行后缀，完整前缀未重放；原资格与历史保持。见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_tip_step_001/RESULTS.md)。原历史说明保留如下。
+
 > 2026-10-18 L-CTIPPILOT1 **PASS**：固定圆形工件0→0.25→0.50 mm短加载；生产 success，保存态 3，helper／outer pass／pass。原资格及历史保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_tip_pilot_001/RESULTS.md)。原历史说明保留如下。
 
 > 2026-10-18 L-CTIPPREP1 **PASS**：r9/(80,40)、右域84→92mm、Lr80输入与未变形检查72/72；无加载。见[tip对向及右介质记录](../lf_data_preparation/native_interface_001/lf_circle_tip_preparation_001/RESULTS.md)。原历史正文保留如下。
