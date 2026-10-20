@@ -1,0 +1,53 @@
+{
+  "card": "L-CTIPALPHA1",
+  "status": "pass_actual_result_driven_next_decision",
+  "execution_status": "pass",
+  "reviewer": "path_review",
+  "created_utc": "2026-10-20T11:10:39.146968+00:00",
+  "report_client_local_date": "2026-10-20",
+  "report_timezone": "Asia/Seoul",
+  "next_card": "L-CTIPAREF1",
+  "next_step": "建议 L-CTIPAREF1：仅核新alpha=2.5e-7、1.06 mm真正峰值accepted12/global12保存态，HP80/120各一次，保原15项严格门、14720单元/29970DOF及原PORT方向切线/CSC/KKT/工件合力核对；通过后生成1张误差PNG/JSON。helper900/outer960秒、采样8GiB、四库16cap；先薄包装和有限静审，另获明确批准后唯一运行。本轮不继续加载、降低alpha或重算平衡。",
+  "interpretation_md": "本次alpha减半后原13目标从零全部收敛。1.06 mm下输入R为0.19522304147728387 N（原0.19568183324206792 N），下半固定工件总Fy为0.012372524610902783 N（原0.01259251473277105 N）；但材料Fy从0.008033412258785861增加为0.009318152027217278 N，Hu Fy从0.004559102473985187降为0.0030543725836855054 N，净力接近不能替代分量或alpha独立性判断。unsigned tip/Q1边界距离由0.009887524710265438变为0.008227522522737729 mm；全介质minJ由0.0009015839179744192降为0.00046587891715793817，而右条带minJ升高、右条带最大节点位移增大。现在已有真实参数响应和完整可视化，下一步先核新峰值的独立数值可信度，不进一步压缩或降低alpha，不把原参数HP参考套给新参数。",
+  "next_steps_md": "# 下一步建议：L-CTIPAREF1（待新的明确授权）\n\n2026-10-20（Asia/Seoul）。本页只规划新保存态独立参考，不启动新数组读取、HP、平衡或绘图。\n\nL-CTIPALPHA1已从零完成alpha=2.5e−7的原13个加载目标0→1.06 mm，保原生产门。峰值净工件Fy由0.01259251473277105 N变为0.012372524610902783 N，但material由0.008033412258785861增为0.009318152027217278 N，Hu由0.004559102473985187降为0.0030543725836855054 N；全介质minJ从0.0009015839179744192降为0.00046587891715793817。净反力接近不能证明alpha独立，更不能代替新参数的独立参考。\n\n1. **固定唯一新峰值。** 只选择ALPHA1 accepted12/global12、raw leg=loading、d=1.06 mm，状态SHA `e71c06973b7dc7aff7e5ee4a801b595cb3f054e907cc6e1ad52188e858500a68`；来源为`lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/accepted/012/state.json`。准备时固定真实新model/result/state/forces/切线描述、来源和归档依赖，不扩大到其他12态或旧alpha状态，不从汇总曲线重构力学状态。\n2. **物理与严格门保持。** alpha=2.5e−7、r9 mm、圆心(80,40) mm、right92 mm、Lr80 mm及其余原物理条件保持。复用现有独立保存态参考流程，仅对新alpha来源作必要薄包装，保原15项严格验收条件，不放宽容差、合并不同定义的误差或更改原生产门。完整14720单元/29970DOF，HP80和HP120各一次，共2次新独立参考；保原三力分量、同一PORT方向切线、CSC组装身份、KKT与工件合力核对。PORT方向参考不能宣称全矩阵所有列均已HP验证。\n3. **输出最小独立误差入口。** 保原参考原值/误差/门/实际调用及来源，全部通过后一次从新普通参考摘要生成1张误差PNG及JSON，保零、小值与精确门定义；新PNG最多一次人工像素检查。已生成的六张结构/参数图与动画只链接，不重新打开、解码或重绘旧媒体。数值、图像QA及阶段完成分别记录。\n4. **资源与停止。** 建议helper900秒/outer960秒（最多16分钟）、采样8GiB、四库线程上限16；先完成固定依赖归档、薄包装和有限独立源码静审，再另获明确批准后唯一启动。首个终端错误停止后续参考/绘图，保真实partial；无外部重试、修复重跑、延期、force、新生产F/T、平衡求解、测试、默认HF修改、API关联、安装、删除或回滚。只在原窗口封存实际产物，后续继承原seal与stat。\n\n完整记录目标、为什么核新参数、固定保存态、原门、实际误差、调用数与资源、图像检查和后续结论，普通main推送并作同机异目录local Git objects恢复核对。旧alpha的原HP通过仅保其原范围，不迁移给本态；即使本次通过，也只授新alpha这一态的选定参考，不授全部13态/卸载/完整循环、alpha收敛、压力、有效夹持、自由释放、稳定性、网格/域宽或HF5资格。两种alpha路径组织不同，不能以分段基线和零起点新路径的总CPU宣称纯alpha性能变化。根据实际参考结果再决定是否进行下一物理或功能实验。\n",
+  "reason": "New-alpha peak passed original production gates but has no independent HP. Net force similarity coexists with changed material/Hu components and stronger minimum-J compression; verify this selected new state before further loading or coefficient reduction.",
+  "planned_scope": {
+    "selected_state": {
+      "source_stage": "lf_circle_tip_alpha_001",
+      "accepted_index": 12,
+      "original_target_index": 12,
+      "d_mm": 1.06,
+      "raw_leg": "loading",
+      "state_sha256": "e71c06973b7dc7aff7e5ee4a801b595cb3f054e907cc6e1ad52188e858500a68"
+    },
+    "alpha": 2.5e-07,
+    "cells": 14720,
+    "dofs": 29970,
+    "HP_decimal_precisions": [
+      80,
+      120
+    ],
+    "new_HP_calls": 2,
+    "strict_original_gates": 15,
+    "PORT_tangent_direction": "Same original PORT direction only; not all-column HP qualification",
+    "helper_seconds": 900,
+    "outer_seconds": 960,
+    "sampled_RSS_bytes": 8589934592,
+    "cpu_thread_limit": 16,
+    "new_PNGs": 1,
+    "new_production_F_T": 0,
+    "new_equilibrium_solves": 0,
+    "new_tests": 0,
+    "default_HF_changes": 0,
+    "API_associations": 0,
+    "old_media_policy": "Link only; no content open/decode/rehash/rerender"
+  },
+  "new_authorization_required": true,
+  "next_scope_started": false,
+  "qualification_limits": [
+    "Selected new-alpha1.06 state only if original15 gates pass",
+    "No transfer of old-alpha HP or qualification of all13 states/full cycle",
+    "No pressure/effective grip/release/stability/alpha convergence/mesh-domain/HF5 upgrade"
+  ],
+  "blockers": []
+}
