@@ -1,0 +1,22 @@
+# L-CTIPAUNLOAD1 候选有限独立静审（未授权、未执行）
+
+2026-10-20（Asia/Seoul）；源码结论：**10/10 PASS，无源码阻断**。本结论不授权冻结、求解、绘图或发布。
+
+协议SHA：`ad4c1525a0f410ade75c57349b21d5bbe5c1d7617a438763083b93d53cdbecd1`；taskSHA：`e5fcb2e1484ef67b26501a642d4f72c460e1a77c317a5abee12e54028adc7abd`。authorization.proposed.json仍为false，formal stage未建。
+
+- **candidate_authorization_boundary：** PASS static only: protocol/auth/preparation identities match,pendingFalse direct approval and formal stage absent. Freeze/launcher/helper require separate true explicit authorization before any output/science. Review does not grant execution; mutable authorization excluded from source hashes so later real approval can refresh it without changing scientific protocol.
+- **fresh_parent_and_append_only_task：** PASS: ALPHA1 freshzero13-target success/selected12/global12/loading1.06 SHAe71c… and signedR0.19522304147728387 are pinned. Only task.path.kind load_only→ordered_cycle plus append1.05 differ; complete13-target prefix,inputpeak1.06,allphysics and four metadata remain exact. API permits this transition; metadata retention is this card policy,not a claim that API globally forbids changes.
+- **saved_resume_restore_and_fresh_FT：** PASS source inspection: installed reader accepts fresh terminal source,restores only lift/fluctuation and signedR,fresh_anchor_required true,never reads old force/tangent/matrix. Original controller starts fresh F/T,one-check anchor/stateSHA/bitwiseR required; child executes[1.06,1.05] without prefix replay.
+- **unchanged_settings_gates_and_step_stop：** PASS: onlyclock1800 changes; original residual1e-9/native mean bound/globalbalance1e-6/fixed8e-11/J>0 and allNewton/Armijo/backtrack/bisection settings kept. Originalminimum_increment.00625 with existing1-1e-12 comparison means failed-.01 half-.005 is too small and stops; no relaxed step policy.
+- **finite_input_and_source_footprint：** PASS:59ordinary source pins/10inputs verified; exactly two scientific inputs,parent source geometry and selectedstate NPZ,use originalproducerseals/stat without reviewer read/hash. Originalforce/tangent/matrix/HPgzip/media excluded. No default/source installation,APIassociation,newtests/HP or extra old-array reads.
+- **first_unload_metadata_and_flags：** PASS: parent_continuationNone/parent_task_target_executedTrue; child task_transition firstunload,anchor resume_origin/global12 and newunloading/global13,actualN retained. Fulloriginal/extendedpath flags stayfalse despite suffixpass; no load_only extension new_peak flag carried into orderedcycle. Parentpeak HP remains its selected scope.
+- **true_LAST_display_and_convergence：** PASS full diffs: circle viewer changes only5identity strings against existingUNLOAD3LAST source; formulas,masks,readfootprint,layout and actualLAST1.05 staticfield/rightmedium views unchanged. FourPNG+actualN GIF plusoneconvergencePNG; convergence onlytitle/doc changes,complete rawhistories retained,original8GiB viewerlimit preserved.
+- **same_alpha_same_input_descriptive_values：** PASS: new-alphaALPHA1 ordinarysummaryrow11/global11/loading1.05 SHA0f260…4385e pinned,not oldalphaSTEP10resume_origin. Thirteen scalar raw values and signedunload-minus-load differences only; exactsourceleg/SHA/index,no d-dedup/interpolation/equality/reversibility/pressure/recovery orenergygate.
+- **single_future_window_and_partial_preservation：** PASS static configuration:controller1800/displayshared600/helper2700/outer2760sec,64GiBfourcaps16,originalSUP2same-instance cleanup; earliestterminalerror halts later science/display,actualpartial maysealonlyinside originalwindow. No externalretry/repair/force/extension. Currentwindow has not started.
+- **closure_and_release_record_compatibility：** PASS: finalclosee03f7ce uses actual top-levelresource keys,not absentphases. Closure distinguishes savedstates vs callbackprogress,execution vs fiveoncePNGQA vs stagecomplete; finalizer links/old7frontsuffixes and normalmain fixedorigin manifest24276/localobjectff-only restore compatible. Publish/close code is reviewed future support,not authorization to execute or publish now.
+
+根在准备期发现close引用不存在的protocol.phases；最终close已改为既有顶层资源字段投影并重新静审封条，科学protocol未改，也没有运行/修复重跑。
+
+4份runtime+task/card/protocol的封条与7份support封条分别见JSON。可变授权文件不哈希进科学封条；未来必须由真实新批准刷新单独授权，并通过freeze/launch原有true授权校验。现在禁止启动。
+
+本审阅只读普通源码/JSON和原producer seal/stat，没有执行候选、测试、冻结、Git或读取NPZ/科学gzip/CSV/媒体payload。新卸载态与父峰值参考分开，原物理、历史、API旗标及全部未完成资格保持。

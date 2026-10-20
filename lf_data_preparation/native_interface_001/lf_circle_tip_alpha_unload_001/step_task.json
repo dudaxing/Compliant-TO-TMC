@@ -1,0 +1,111 @@
+{
+  "schema_version": "hf-native-project-task-1.1",
+  "task_id": "EXPLORATORY_wave_fixed_circle_r9_c80_domain92_Lr80_h05_alpha25em8_load106__L_CTIPALPHA1",
+  "case_family": "gripper",
+  "purpose": "tip_facing_circle_alpha_sensitivity_zero_start_loading",
+  "parameter_origin": "L-CTIPALPHA1 explicit user approval: only physical change alpha5e-7 to2.5e-7; zero-start original13 load_only targets through1.06mm; geometry, all other physics and original production gates unchanged.",
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain"
+  },
+  "input": {
+    "tag": "input",
+    "control": "average_displacement",
+    "target_mm": 1.06
+  },
+  "output": {
+    "tag": "output",
+    "spring_N_per_mm": 0.0
+  },
+  "constraints": [
+    {
+      "tag": "support",
+      "components": [
+        0,
+        1
+      ]
+    },
+    {
+      "tag": "symmetry",
+      "components": [
+        1
+      ]
+    }
+  ],
+  "support_selection": "solid_incident_nodes_only",
+  "input_auxiliary_spring_N_per_mm": 0.0,
+  "workpiece": {
+    "kind": "fixed_rigid",
+    "shape": "circle",
+    "center_mm": [
+      80.0,
+      40.0
+    ],
+    "radius_mm": 9.0,
+    "fixed_components": [
+      0,
+      1
+    ]
+  },
+  "third_medium": {
+    "gamma": 1e-06
+  },
+  "qualification_criteria": {
+    "max_design_volume_fraction": null,
+    "min_feature_mm": null
+  },
+  "reference_state": "undeformed",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "energy": "N mm"
+  },
+  "regularization": {
+    "alpha": 2.5e-07,
+    "length_mm": 80.0
+  },
+  "background_symmetry": {
+    "points_mm": [
+      [
+        0.0,
+        40.0
+      ],
+      [
+        92.0,
+        40.0
+      ]
+    ],
+    "components": [
+      1
+    ]
+  },
+  "geometry": {
+    "geometry_id": "7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4",
+    "descriptor_sha256": "d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6"
+  },
+  "analysis_grid": {
+    "policy": "native"
+  },
+  "description": "Single-parameter exploratory alpha sensitivity. Fresh zero-start loading, no old-alpha state/force/tangent transplant; compare same-input original13 origin/loading observations without claiming alpha independence or grip qualification.",
+  "path": {
+    "kind": "ordered_cycle",
+    "targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      0.9,
+      0.95,
+      0.98,
+      1.0,
+      1.02,
+      1.03,
+      1.04,
+      1.05,
+      1.06,
+      1.05
+    ]
+  }
+}

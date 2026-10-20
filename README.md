@@ -1,3 +1,5 @@
+> 2026-10-20 L-CTIPAUNLOAD1 **执行PASS**／五图QA pass_root_visual_inspection_with_visibility_limits／阶段完成True：新α2.5e-7从已验证父峰值1.06 mm首次卸载至1.05 mm；生产 success，保存态 2。父13目标未重放，旧父HP不授卸载态，所有资格和历史保持；见[实际记录](<lf_data_preparation/native_interface_001/lf_circle_tip_alpha_unload_001/RESULTS.md>)。原历史说明保留如下。
+
 > 2026-10-20 L-CTIPAREF1 **执行PASS／图像QA pass_root_visual_inspection**：新α=2.5e-7、r9/(80,40)、right92/Lr80布置的accepted12/global12/1.06 mm单峰保存态参考；HP启动/完成 2/2，阶段完成True。生产13态只核1态，不扩展至完整路径或全矩阵所有列；旧α参考不迁移，保原历史及资格；见[实际记录](lf_data_preparation/native_interface_001/lf_circle_tip_alpha_reference_001/RESULTS.md)。原历史说明保留如下。
 
 > 2026-10-20 L-CTIPALPHA1 **执行PASS**／图像QA pass_with_visibility_limits／六图QA完成True／阶段完成True：仅α由5e-7减至2.5e-7，从零请求原13个加载目标至1.06 mm；生产 success、实际保存态 13，保留partial及原内部历史，同定义差量只描述；旧α的HP不继承，不以分段基线总CPU作纯α性能判断。见[实际记录](<lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/RESULTS.md>)。原历史说明保留如下。
