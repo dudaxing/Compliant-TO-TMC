@@ -1,3 +1,5 @@
+> 2026-10-21 L-CTIPAUNLOAD3 **执行PASS**／五图QA pass_root_visual_inspection_with_visibility_limits／阶段完成True：新α2.5e-7从成功卸载1.00 mm按五个新请求目标回程至零；生产 success，保存态 6。原15目标前缀未重放，五组65原标量差只描述且origin原leg保留；到零仅输入回程完成，旧峰值HP不授卸载态，资格及历史保持；见[实际记录](<lf_data_preparation/native_interface_001/lf_circle_tip_alpha_unload_003/RESULTS.md>)。原历史说明保留如下。
+
 > 2026-10-20 L-CTIPAUNLOAD2 **执行PASS**／五图QA pass_root_visual_inspection_with_visibility_limits／阶段完成True：新α2.5e-7从已验证卸载1.05 mm仅继续至1.00 mm；生产 success，保存态 2。原14目标前缀未重放，不访任务峰值1.06，旧峰值HP不授卸载态，所有资格和历史保持；见[实际记录](<lf_data_preparation/native_interface_001/lf_circle_tip_alpha_unload_002/RESULTS.md>)。原历史说明保留如下。
 
 > 2026-10-20 L-CTIPAUNLOAD1 **执行PASS**／五图QA pass_root_visual_inspection_with_visibility_limits／阶段完成True：新α2.5e-7从已验证父峰值1.06 mm首次卸载至1.05 mm；生产 success，保存态 2。父13目标未重放，旧父HP不授卸载态，所有资格和历史保持；见[实际记录](<lf_data_preparation/native_interface_001/lf_circle_tip_alpha_unload_001/RESULTS.md>)。原历史说明保留如下。
