@@ -1,0 +1,48 @@
+{
+  "card": "L-CTIPPATH1",
+  "status": "pass_actual_result_driven_next_decision",
+  "execution_status": "pass",
+  "reviewer": "path_review",
+  "created_utc": "2026-10-20T08:18:42.435638+00:00",
+  "report_client_local_date": "2026-10-20",
+  "report_timezone": "Asia/Seoul",
+  "next_card": "L-CTIPFORCE1",
+  "next_step": "建议 L-CTIPFORCE1：只观察既有1.06 mm峰值工件节点弱力与保持反力的空间来源，复用至多3份既有普通JSON生成2张力分解图及节点/分组记录；先固定实际字段和SHA、完成有限静审，再另行申请唯一180/240秒窗口。本轮不启动新范围。",
+  "interpretation_md": "实际汇总显示七个同输入样本的加载/卸载标量接近，最大|ΔR|为4.15167344947065e-11 N、最大|Δq_out|为1.0827316820893884e-10 mm；这只是已有样本的描述性比较。1.06 mm时下半工件总Fy=0.01259251473277105 N，材料0.008033412258785861 N、Hu0.004559102473985187 N，Hu约占有符号总Fy的36.2%。同态unsigned tip/Q1边界距离0.009887524710265438 mm、介质minJ=0.0009015839179744192。现有功能缺口是解释工件所受弱式力的空间来源及保持方向，因此应先显示峰值节点力，保留全部原定义；暂不继续压向更小J，也不为新增证据例行HP。",
+  "next_steps_md": "# 下一步建议：L-CTIPFORCE1（待新的明确授权）\n\n2026-10-20（Asia/Seoul）。本页只规划下一功能，不启动新读取、计算或绘图。\n\n已有14段结果已关联为20个请求目标，保留33份来源接受行和13个重复锚。加载与卸载七组同输入标量接近，但不由此授予无滞回、完整路径参考或自由释放资格。峰值1.06 mm时下半工件总Fy为0.01259251473277105 N，材料为0.008033412258785861 N，Hu为0.004559102473985187 N；Hu约为有符号总Fy的36.2%。unsigned tip/Q1边界距离为0.009887524710265438 mm，介质minJ为0.0009015839179744192。下一步直接解释这份作用力的来源，暂不继续加载或例行增加HP。\n\n1. **先固定最小普通输入合同。** 针对STEP10 accepted1/global12的原1.06 mm保存态（SHA `dd9288140ae51ff3cfcc7f7f6d6811b2242a55054454002bd7c06ff88a4b6bc6`），准备时先依现有viewer源码确认并固定`001/nodal.json`、`001/derived.json`、`001/geometry.json`至多三份既有普通JSON的实际路径、SHA和字段。前两份用于节点力与状态身份，第三份仅提供真实尖端/最近边界点位置参照；若字段不足，先记录缺项、重新明确范围，不猜字段或自动转读NPZ、科学gzip/CSV。当前卡不预读这三份新数据。原STEP10实际变形GIF仅按既有seal核大小并链接。\n2. **保留物理意义，展示原节点贡献。** 显示全部固定下半工件节点的原坐标、total/material/Hu有符号ON-body向量与x/y分量，原定义是ON-body = −全局内部力，holding方向相反。工件本体位移原为零，故其参考坐标也是当前实际坐标；图只画该真实工件、尖端及最近点参照，不能用这三份JSON伪造完整夹持器变形坐标。原完整实际结构仍通过既有GIF查看。\n3. **不删改原mask或冒充压力。** closed/physical/cut/interior等节点mask与原分组定义保持，全部节点均保留；重叠组明确标注，不能把重叠分组简单相加当作总力。优先复用既有summary合力/分组原值，新增汇总仅作描述，保原值和差量；不新增求和容差或科学门。节点弱力不是压力或连续面牵引，也不把径向投影改名为法向压力，不作镜像倍增、零裁剪或有效夹持资格升级。\n4. **输出少量可检查结果。** 生成节点/原mask与分组表、状态与来源JSON、一页人工入口和两张PNG：一张以同一明确显示比例画total/material/Hu工件节点力向量及保持方向；另一张画原节点有符号分量与原分组贡献，说明节点序号、坐标mm、力N及箭头比例。保零值、小负值和抵消项；两张新图各最多一次人工像素检查。不重绘或拼接旧结构动画。\n5. **边界和记录。** 计划helper180秒/outer240秒、采样1GiB、四库线程上限16；完成薄包装与有限静审后，另经明确授权再唯一启动。首错停止，保真实部分结果；无外部重试、修复重跑、延期、force、删除或回滚，无新科学数组读取、构模、F/T、HP、平衡、测试、默认HF修改或API关联。包含目的、字段合同、实际数值、图像QA、限制、后续判断、普通main推送及同机异目录local Git objects恢复核对。\n\n该阶段只让已有峰值作用力可定位、可解释，不更改原物理任务/验收门，也不授压力、有效夹持、释放、稳定性、完整路径独立参考、网格/域宽或HF5资格。根据实际节点贡献分布，再决定是否需要正则化/边界影响研究、正式力指标或下一物理工况；不预先承诺数值结论。\n",
+  "reason": "Current functionality can display the segmented response; the immediate physical-use gap is interpreting spatial source and holding direction of the saved peak lower-half workpiece weak resultant. Peak medium is already strongly compressed, so more loading or routine HP does not directly answer this question.",
+  "planned_scope": {
+    "selected_state": {
+      "segment": "STEP10",
+      "accepted_index": 1,
+      "original_target_index": 12,
+      "d_mm": 1.06,
+      "state_sha256": "dd9288140ae51ff3cfcc7f7f6d6811b2242a55054454002bd7c06ff88a4b6bc6"
+    },
+    "proposed_ordinary_inputs": [
+      "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/view/wave_circle_tip_step10/001/nodal.json",
+      "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/view/wave_circle_tip_step10/001/derived.json",
+      "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/view/wave_circle_tip_step10/001/geometry.json"
+    ],
+    "input_contract_status": "Source feasibility only; future preparation must pin actual files/fields/SHA before execution; not read by this card",
+    "ordinary_JSON_maximum": 3,
+    "new_PNGs": 2,
+    "helper_seconds": 180,
+    "outer_seconds": 240,
+    "sampled_RSS_bytes": 1073741824,
+    "cpu_thread_limit": 16,
+    "new_scientific_payload_reads": 0,
+    "new_mechanics_calls": 0,
+    "new_tests": 0,
+    "old_media_policy": "stat and link only; no open/decode/copy/hash",
+    "default_HF_changes": 0
+  },
+  "scope_boundaries": [
+    "Original node force and masks retained, including cut/interior; overlapping groups not summed as disjoint partition.",
+    "No pressure/continuous traction/qualified gripping force claim; no mirror doubling.",
+    "Three proposed JSONs do not contain complete deformed gripper coordinates; do not invent a new complete-structure deformation picture."
+  ],
+  "new_authorization_required": true,
+  "next_scope_started": false,
+  "blockers": []
+}
