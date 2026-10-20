@@ -1,0 +1,670 @@
+{
+  "schema_version": "hf-native-response-1.0",
+  "status": "success",
+  "identity": {
+    "result": {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_unload_002/run_001/wave_circle_tip_alpha_unload2/result.json",
+      "path_scope": "repo_relative",
+      "sha256": "763e22e87ba81476e47be4cca52a54650f99d2b6202186447b9badc78e4be5a1"
+    },
+    "model": {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_unload_002/run_001/wave_circle_tip_alpha_unload2/model/model.json",
+      "path_scope": "repo_relative",
+      "sha256": "ff51f30a02adbbee2c0ab4aabb68fd9050cabcf9a6ced45800e03cc892b6b894"
+    },
+    "task_sha256": "b52952d326546391e57c4c0702b3ff49038735744d9621e2c430bd0393c937f8",
+    "geometry": {
+      "geometry_id": "7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4",
+      "descriptor_sha256": "d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6",
+      "descriptor_file_sha256": "9630f76972ffecbd60fa42eefb44da0c97c395db7baacaaede33cdabbbc9cf6a",
+      "arrays_sha256": "188a0d2271e1ae81e4ed96428f93561cc6021e967bb1aa8f324730c027d08b3c",
+      "snapshot": {
+        "descriptor": "source_geometry/geometry.json",
+        "arrays": "source_geometry/geometry.npz"
+      }
+    },
+    "mechanics_source_sha256": {
+      "hf_repo/src/hf_eval/native_mean.py": "76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4",
+      "hf_repo/src/hf_eval/split_displacement.py": "151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8",
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+      "hf_repo/src/hf_eval/native_resume.py": "68e3122950766f9cecb48a02a0f52a6d5f2efbfc466432bccc2cd48c77e2b798"
+    },
+    "arrays_identity_scope": "Declared saved array SHA only; no NPZ was opened"
+  },
+  "physics": {
+    "grid": {
+      "shape_yx": [
+        80,
+        184
+      ],
+      "origin_mm": [
+        0.0,
+        0.0
+      ],
+      "cell_size_mm": [
+        0.5,
+        0.5
+      ],
+      "axes": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "extent_mm": [
+        92.0,
+        40.0
+      ],
+      "array_order": "C_yx_bottom_up",
+      "value_location": "cell"
+    },
+    "material": {
+      "E_MPa": 1.0,
+      "nu": 0.3,
+      "formulation": "plane_strain",
+      "lambda_s_MPa": 0.5769230769230769,
+      "mu_s_MPa": 0.3846153846153846,
+      "kappa_s_MPa": 0.8333333333333333,
+      "thickness_mm": 20.0,
+      "third_medium_gamma": 1e-06,
+      "alpha": 2.5e-07,
+      "regularization_length_mm": 80.0,
+      "kr_MPa_mm2": 0.0021538461538461533,
+      "kr_material_factor_applied": false,
+      "force_scale_per_length": 20.0
+    },
+    "model_extent": {
+      "kind": "lower_half",
+      "symmetry_axis": {
+        "normal": [
+          0.0,
+          1.0
+        ],
+        "offset_mm": 40.0
+      }
+    },
+    "counts": {
+      "cells": 14720,
+      "nodes": 14985,
+      "dofs": 29970,
+      "solid_cells": 4349,
+      "medium_cells": 10371,
+      "solid_incident_nodes": 4847,
+      "fixed_dofs": 1288,
+      "free_dofs": 28682
+    },
+    "workpiece": {
+      "kind": "fixed_rigid",
+      "shape": "circle",
+      "center_mm": [
+        80.0,
+        40.0
+      ],
+      "radius_mm": 9.0,
+      "fixed_components": [
+        0,
+        1
+      ]
+    },
+    "input": {
+      "tag": "input",
+      "control": "average_displacement",
+      "target_mm": 1.06
+    },
+    "output": {
+      "tag": "output",
+      "spring_N_per_mm": 0.0
+    },
+    "constraints": [
+      {
+        "tag": "support",
+        "components": [
+          0,
+          1
+        ]
+      },
+      {
+        "tag": "symmetry",
+        "components": [
+          1
+        ]
+      }
+    ],
+    "background_symmetry": {
+      "points_mm": [
+        [
+          0.0,
+          40.0
+        ],
+        [
+          92.0,
+          40.0
+        ]
+      ],
+      "components": [
+        1
+      ]
+    }
+  },
+  "path": {
+    "kind": "ordered_cycle",
+    "requested_targets_mm": [
+      1.05,
+      1.0
+    ],
+    "task_target_mm": 1.06,
+    "requested_endpoint_mm": 1.0,
+    "reached_displacement_mm": 1.0,
+    "accepted_states": 2,
+    "completed": true,
+    "task_target_executed": false,
+    "scope": "Explicit saved-terminal extended-task segment only",
+    "full_original_path_completed": false,
+    "full_extended_path_completed": false,
+    "maximum_loading_stroke_scope": "Segment maximum; not the source task loading peak"
+  },
+  "options": {
+    "response_mode": {
+      "value": "mechanical",
+      "source": "result_metadata"
+    },
+    "tangent_mode": {
+      "value": "chunk256",
+      "source": "result_metadata"
+    },
+    "initial_guess": {
+      "value": "port_projection",
+      "source": "result_metadata"
+    }
+  },
+  "target_response": null,
+  "requested_endpoint_response": {
+    "index": 1,
+    "state_sha256": "0a7602917a1c49bc0950b67b604beedefc1fb8acad4c831e2fcbc46e388ea37d",
+    "d_mm": 1.0,
+    "leg": "unloading",
+    "original_target_index": 14,
+    "is_original_target": true,
+    "R_input_N": 0.17707577676004574,
+    "q_in_mm": 1.0,
+    "q_out_mm": 0.9562482374146859,
+    "minimum_J": 0.03400285281143686,
+    "relative_residual": 2.326985416283692e-12,
+    "relative_global_force_balance": 1.1256844705087863e-13,
+    "constraint_residual_mm": -1.3877787807814457e-17,
+    "max_abs_Hu_per_mm": 0.26490798148014116,
+    "workpiece": {
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00013020603155367824,
+          0.004616547361084258
+        ],
+        "material": [
+          -1.0902818474842109e-05,
+          0.002141239074742164
+        ],
+        "regularization": [
+          -0.00011930321307883612,
+          0.0024753082863420953
+        ]
+      },
+      "holding_reaction_on_model_N": [
+        0.00013020603155367824,
+        -0.004616547361084258
+      ],
+      "mirrored_upper_force_N": [
+        -0.00013020603155367824,
+        -0.004616547361084258
+      ],
+      "full_workpiece_net_force_N": [
+        -0.0002604120631073565,
+        0.0
+      ],
+      "two_sided_normal_magnitude_sum_N": 0.009233094722168517,
+      "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+      "node_window_clearance_mm": {
+        "bottom": 0.0454478148895312,
+        "left": 11.293774509347841
+      },
+      "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+    },
+    "child_original_target_index": 1,
+    "continuation_anchor": false
+  },
+  "maximum_loading_stroke": {
+    "index": 0,
+    "state_sha256": "e21cdc845dc3721bc32d9275f889f53e9b1560dcd7ca126a28ea8efa2254e2ee",
+    "d_mm": 1.05,
+    "leg": "resume_origin",
+    "original_target_index": 13,
+    "is_original_target": true,
+    "R_input_N": 0.19075825359298318,
+    "q_in_mm": 1.05,
+    "q_out_mm": 0.9921056957636342,
+    "minimum_J": 0.0012518161249492532,
+    "relative_residual": 3.863291644968067e-10,
+    "relative_global_force_balance": 4.3523775792780164e-14,
+    "constraint_residual_mm": 2.7755575615628914e-17,
+    "max_abs_Hu_per_mm": 0.30936747071244913,
+    "workpiece": {
+      "force_on_lower_body_N": {
+        "total": [
+          -0.000183520439403093,
+          0.009628058927231453
+        ],
+        "material": [
+          -3.408546150011013e-05,
+          0.006620004745329734
+        ],
+        "regularization": [
+          -0.00014943497790298284,
+          0.003008054181901719
+        ]
+      },
+      "holding_reaction_on_model_N": [
+        0.000183520439403093,
+        -0.009628058927231453
+      ],
+      "mirrored_upper_force_N": [
+        -0.000183520439403093,
+        -0.009628058927231453
+      ],
+      "full_workpiece_net_force_N": [
+        -0.000367040878806186,
+        0.0
+      ],
+      "two_sided_normal_magnitude_sum_N": 0.019256117854462906,
+      "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+      "node_window_clearance_mm": {
+        "bottom": 0.010336706005979579,
+        "left": 11.305166696716213
+      },
+      "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+    },
+    "child_original_target_index": 0,
+    "continuation_anchor": true
+  },
+  "last_accepted": {
+    "index": 1,
+    "state_sha256": "0a7602917a1c49bc0950b67b604beedefc1fb8acad4c831e2fcbc46e388ea37d",
+    "d_mm": 1.0,
+    "leg": "unloading",
+    "original_target_index": 14,
+    "is_original_target": true,
+    "R_input_N": 0.17707577676004574,
+    "q_in_mm": 1.0,
+    "q_out_mm": 0.9562482374146859,
+    "minimum_J": 0.03400285281143686,
+    "relative_residual": 2.326985416283692e-12,
+    "relative_global_force_balance": 1.1256844705087863e-13,
+    "constraint_residual_mm": -1.3877787807814457e-17,
+    "max_abs_Hu_per_mm": 0.26490798148014116,
+    "workpiece": {
+      "force_on_lower_body_N": {
+        "total": [
+          -0.00013020603155367824,
+          0.004616547361084258
+        ],
+        "material": [
+          -1.0902818474842109e-05,
+          0.002141239074742164
+        ],
+        "regularization": [
+          -0.00011930321307883612,
+          0.0024753082863420953
+        ]
+      },
+      "holding_reaction_on_model_N": [
+        0.00013020603155367824,
+        -0.004616547361084258
+      ],
+      "mirrored_upper_force_N": [
+        -0.00013020603155367824,
+        -0.004616547361084258
+      ],
+      "full_workpiece_net_force_N": [
+        -0.0002604120631073565,
+        0.0
+      ],
+      "two_sided_normal_magnitude_sum_N": 0.009233094722168517,
+      "force_scope": "Negative fixed-body weak-form holding reaction; material/Hu components, no pressure or threshold clipping",
+      "node_window_clearance_mm": {
+        "bottom": 0.0454478148895312,
+        "left": 11.293774509347841
+      },
+      "clearance_scope": "Source node-window bounds; raster geometry diagnostic, not surface distance or contact proof"
+    },
+    "child_original_target_index": 1,
+    "continuation_anchor": false
+  },
+  "producer_flags": {
+    "independent_HP_qualified": false,
+    "equilibrium_qualified": false,
+    "HF_qualified": false
+  },
+  "independent_reference": {
+    "status": "not_provided",
+    "accepted_reference_pass": false,
+    "full_path_reference_pass": false,
+    "selected_reference_pass": false,
+    "matched_state_indices": [],
+    "matched_state_count": 0,
+    "production_accepted_state_count": 2,
+    "covers_all_accepted_states": false,
+    "report": null,
+    "reasons": [
+      "No independent reference supplied"
+    ],
+    "HP_all_columns_qualified": false,
+    "contact_qualified": false,
+    "clamp_qualified": false,
+    "pressure_qualified": false,
+    "HF5_qualified": false,
+    "reference_scope": "Explicit extended-task child segment only",
+    "full_original_path_reference_pass": false,
+    "full_extended_path_reference_pass": false
+  },
+  "views": {
+    "status": "not_provided",
+    "manifest": null,
+    "links": [],
+    "reasons": []
+  },
+  "call_counts": {
+    "force_calls": 12,
+    "force_calls_completed": 12,
+    "tangent_calls": 7,
+    "tangent_calls_completed": 7,
+    "solver_invocations": 1,
+    "JIT_calls": 0,
+    "HP_calls": 0
+  },
+  "timing_seconds": {
+    "project_preparation": 0.07458450002013706,
+    "evaluation": 702.4795901000034
+  },
+  "failure": null,
+  "force_semantics": "R is half-model actuator reaction; lower-body forces are signed weak-form resultants. Two-sided normal magnitude sum is not full-body net force. q_out is a weighted port displacement, not a surface gap.",
+  "field_scope": "J/Hu are saved global scalars, not separately observed solid/medium fields. Workpiece node-window clearance has its original raster scope, not finite surface distance.",
+  "continuation": {
+    "schema_version": "hf-native-saved-resume-1.0",
+    "parent_result": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_tip_alpha_unload_001/run_001/wave_circle_tip_alpha_unload1/result.json",
+      "sha256": "9c9327db273c432d59689414ba9a079b00cf93fd2faf1c4a16be549aac7b9c86"
+    },
+    "parent_model": {
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_tip_alpha_unload_001/run_001/wave_circle_tip_alpha_unload1/model/model.json",
+      "sha256": "f3194214a5f4baf0cd00bb7403e75e7978a897eff7c09794fb168364914b26fd"
+    },
+    "selected_state": {
+      "accepted_index": 1,
+      "original_target_index": 13,
+      "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_tip_alpha_unload_001/run_001/wave_circle_tip_alpha_unload1/accepted/001/state.json",
+      "descriptor_file_sha256": "ecd2f7adfd1cb288b4dc6c88be68336aaa8b7191bea48ac3899451ac45da6f37",
+      "state_sha256": "e21cdc845dc3721bc32d9275f889f53e9b1560dcd7ca126a28ea8efa2254e2ee",
+      "archive_sha256": "810776a4de119d20db6d8cf3b837d9cb96ef09a7f06f18d59a443804c495a2d6",
+      "R_input_N": 0.19075825359298318,
+      "d_mm": 1.05,
+      "q_in_mm": 1.05,
+      "constraint_residual_mm": 2.7755575615628914e-17,
+      "parent_leg": "unloading"
+    },
+    "parent_status": "success",
+    "parent_failure": null,
+    "parent_path_completed": true,
+    "parent_task_target_executed": false,
+    "parent_unload_endpoint_reached": true,
+    "parent_mechanics_source_sha256": {
+      "hf_repo/src/hf_eval/native_mean.py": "76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4",
+      "hf_repo/src/hf_eval/split_displacement.py": "151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8",
+      "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+      "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+      "hf_repo/src/hf_eval/native_resume.py": "68e3122950766f9cecb48a02a0f52a6d5f2efbfc466432bccc2cd48c77e2b798"
+    },
+    "parent_producer_flags": {
+      "independent_HP_qualified": false,
+      "equilibrium_qualified": false,
+      "HF_qualified": false
+    },
+    "original_task_targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      0.9,
+      0.95,
+      0.98,
+      1.0,
+      1.02,
+      1.03,
+      1.04,
+      1.05,
+      1.06,
+      1.05,
+      1.0
+    ],
+    "requested_suffix_targets_mm": [
+      1.05,
+      1.0
+    ],
+    "original_target_indices": [
+      13,
+      14
+    ],
+    "initial_parameter": 1.05,
+    "target_origin": 0.0,
+    "state_transport": "Original lift/fluctuation and signed R; no rounded display/rebase/translation",
+    "fresh_anchor_required": true,
+    "saved_matrix_or_force_or_tangent_read": false,
+    "full_original_path_executed_by_child": false,
+    "independent_HP_qualified": false,
+    "HF5_qualified": false,
+    "continuation_mode": "explicit_task_extension",
+    "source_task_sha256": "796e363c0c82a1769c2f4d5ae313739675435f364e2e918bfc627b1687fbdb27",
+    "source_task_targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      0.9,
+      0.95,
+      0.98,
+      1.0,
+      1.02,
+      1.03,
+      1.04,
+      1.05,
+      1.06,
+      1.05
+    ],
+    "extended_task_sha256": "b52952d326546391e57c4c0702b3ff49038735744d9621e2c430bd0393c937f8",
+    "extended_task_targets_mm": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      0.9,
+      0.95,
+      0.98,
+      1.0,
+      1.02,
+      1.03,
+      1.04,
+      1.05,
+      1.06,
+      1.05,
+      1.0
+    ],
+    "appended_targets_mm": [
+      1.0
+    ],
+    "parent_continuation": {
+      "schema_version": "hf-native-saved-resume-1.0",
+      "parent_result": {
+        "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/result.json",
+        "sha256": "9e083bb057de9ea9b2b52694b3cc474a877ecbfcc3785d26fa50f55566e320ec"
+      },
+      "parent_model": {
+        "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/model.json",
+        "sha256": "7f56cf78700c85145cce33a5972f73ac48e05923f16c27e69f7f118e6d239e0b"
+      },
+      "selected_state": {
+        "accepted_index": 12,
+        "original_target_index": 12,
+        "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/accepted/012/state.json",
+        "descriptor_file_sha256": "c06fc6d2e3400832ca967ad5bffd546feb960c818a4e388cda3af9ec5e2a00ae",
+        "state_sha256": "e71c06973b7dc7aff7e5ee4a801b595cb3f054e907cc6e1ad52188e858500a68",
+        "archive_sha256": "b106fd6f3a2c3d1b3ddab90ec024f437bda5fc343925b77932631d8aa9c04fdc",
+        "R_input_N": 0.19522304147728387,
+        "d_mm": 1.06,
+        "q_in_mm": 1.06,
+        "constraint_residual_mm": 2.7755575615628914e-17,
+        "parent_leg": "loading"
+      },
+      "parent_status": "success",
+      "parent_failure": null,
+      "parent_path_completed": true,
+      "parent_task_target_executed": true,
+      "parent_unload_endpoint_reached": null,
+      "parent_mechanics_source_sha256": {
+        "hf_repo/src/hf_eval/native_mean.py": "76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4",
+        "hf_repo/src/hf_eval/split_displacement.py": "151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8",
+        "hf_repo/src/hf_eval/split_numpy_tangent.py": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+        "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+      },
+      "parent_producer_flags": {
+        "independent_HP_qualified": false,
+        "equilibrium_qualified": false,
+        "HF_qualified": false
+      },
+      "original_task_targets_mm": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        0.9,
+        0.95,
+        0.98,
+        1.0,
+        1.02,
+        1.03,
+        1.04,
+        1.05,
+        1.06,
+        1.05
+      ],
+      "requested_suffix_targets_mm": [
+        1.06,
+        1.05
+      ],
+      "original_target_indices": [
+        12,
+        13
+      ],
+      "initial_parameter": 1.06,
+      "target_origin": 0.0,
+      "state_transport": "Original lift/fluctuation and signed R; no rounded display/rebase/translation",
+      "fresh_anchor_required": true,
+      "saved_matrix_or_force_or_tangent_read": false,
+      "full_original_path_executed_by_child": false,
+      "independent_HP_qualified": false,
+      "HF5_qualified": false,
+      "continuation_mode": "explicit_task_extension",
+      "source_task_sha256": "eeae1926ade1e4b64bc788b79f31a47a4030f09a4d98a03520e82732b6ffdcb7",
+      "source_task_targets_mm": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        0.9,
+        0.95,
+        0.98,
+        1.0,
+        1.02,
+        1.03,
+        1.04,
+        1.05,
+        1.06
+      ],
+      "extended_task_sha256": "796e363c0c82a1769c2f4d5ae313739675435f364e2e918bfc627b1687fbdb27",
+      "extended_task_targets_mm": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        0.9,
+        0.95,
+        0.98,
+        1.0,
+        1.02,
+        1.03,
+        1.04,
+        1.05,
+        1.06,
+        1.05
+      ],
+      "appended_targets_mm": [
+        1.05
+      ],
+      "parent_continuation": null,
+      "full_extended_path_executed_by_child": false,
+      "full_extended_path_completed": false,
+      "task_transition": {
+        "source_path_kind": "load_only",
+        "extended_path_kind": "ordered_cycle",
+        "first_unload": true,
+        "loading_peak_mm": 1.06,
+        "first_unload_target_mm": 1.05
+      },
+      "segment_completed": true,
+      "anchor_revalidated": true,
+      "full_original_path_completed": false,
+      "task_target_executed": false,
+      "anchor_identity_preserved": true
+    },
+    "full_extended_path_executed_by_child": false,
+    "full_extended_path_completed": false,
+    "segment_completed": true,
+    "anchor_revalidated": true,
+    "full_original_path_completed": false,
+    "task_target_executed": false,
+    "anchor_identity_preserved": true
+  },
+  "invocation": {
+    "geometry_file": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\lf_circle_tip_alpha_unload_001\\run_001\\wave_circle_tip_alpha_unload1\\model\\source_geometry\\geometry.json",
+    "task_file": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\lf_circle_tip_alpha_unload_002\\step_task.json",
+    "output_directory": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\lf_circle_tip_alpha_unload_002\\run_001\\wave_circle_tip_alpha_unload2",
+    "response_mode": "mechanical",
+    "tangent_mode": "chunk256",
+    "initial_guess": "port_projection",
+    "extend_path": true,
+    "task_file_sha256": "59eeded94a1b1905a36aa1e09ff399cbab212f3440fe0399d33a756326be80f8",
+    "task_source": "Explicit append-only task",
+    "saved_result_file": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\lf_data_preparation\\native_interface_001\\lf_circle_tip_alpha_unload_001\\run_001\\wave_circle_tip_alpha_unload1\\result.json",
+    "selected_state_index": 1,
+    "targets_mm": [
+      1.05,
+      1.0
+    ],
+    "settings": {
+      "tolerance": 1e-09,
+      "constraint_tolerance": 1e-10,
+      "displacement_scale_floor": 1e-06,
+      "force_scale_floor_factor": 1e-08,
+      "max_checks": 25,
+      "armijo_c": 0.0001,
+      "max_backtracks": 12,
+      "max_bisections": 4,
+      "minimum_increment": 0.00625,
+      "time_limit_seconds": 1800.0
+    },
+    "time_scope": "Controller time limit; through-summary elapsed is separately reported"
+  },
+  "evaluation_elapsed_seconds": 707.1461404000001,
+  "evaluation_elapsed_scope": "Through summary; excludes response write and CLI startup/stdout"
+}

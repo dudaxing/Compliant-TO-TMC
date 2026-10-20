@@ -1,0 +1,102 @@
+{
+  "card": "L-CTIPAUNLOAD2",
+  "status": "pass_finite_source_review_authorized_not_executed",
+  "execution_status": "authorized_not_executed",
+  "execution_authorized": true,
+  "execution_started": false,
+  "created_utc": "2026-10-20T13:05:52.759598+00:00",
+  "report_client_local_date": "2026-10-20",
+  "report_timezone": "Asia/Seoul",
+  "source_baseline_commit": "c8c3b1c69f36d8a93bfefbad3439c8dd33dbf755",
+  "protocol_sha256": "c9c84cf73e7e9b79b54540fa2895e498a1a6f9540773bd259b7e38f7a861c8f7",
+  "task_sha256": "59eeded94a1b1905a36aa1e09ff399cbab212f3440fe0399d33a756326be80f8",
+  "reviewed_author_sha256": {
+    "execute_step.py": "7ca914acd54ede7cc741fa85e3a5024245227951512f59555ae23fbc28f7d825",
+    "launch_step.py": "f49da27fc25199c7dd12c4808643d7039f721d449665a84274954f4a689f05d5",
+    "circle_saved_views.py": "d1f5a8c4907ff7c9509f72e56c1b8f1dcbcdc001fa0b603da2ed8830ba27a3ae",
+    "plot_convergence.py": "8d0cd04b0f7b8fbbdb70369534613f746fa4f701a81809b0b67456c3c8543ec2",
+    "step_task.json": "59eeded94a1b1905a36aa1e09ff399cbab212f3440fe0399d33a756326be80f8",
+    "L-CTIPAUNLOAD2_CARD.md": "9557c4d5f16d6207c86b0d3a258707fe6d517072a9fc29bd16c6ee837201d3dc",
+    "protocol.proposed.json": "c9c84cf73e7e9b79b54540fa2895e498a1a6f9540773bd259b7e38f7a861c8f7"
+  },
+  "reviewed_support_sha256": {
+    "assemble_step.py": "bd1aa8ab9466cbc33c4d30e217e3c17e435ca224c8b0c36f437269b25861d3f0",
+    "freeze_step.py": "576552887a391b64ea669f878e03104c60f342ba6ed6ad4814becdb2505354c9",
+    "monitor_step.py": "570d708f67484b216f6ce7f71bec7c5a559caef312cb6ab9f5a005f689709953",
+    "close_step.py": "194cd1f4db5fd2806b4663338da5264e694703815bff23bc48e2ff28c2b52798",
+    "publish_step.py": "c897fd84c2fea0129ee08a4966d55f780cbed6c0b3e143e0fb2c73f80474e7db",
+    "archive_publication.py": "e3e46885d86590f0abbe4cc0226b3c4b75e33b523deb8650ab0850670ca1218c",
+    "finalize_records.py": "039c0276ed70732a0720e4048bd786682be93e965e3dae44700ebf02a09a5958"
+  },
+  "checks": [
+    {
+      "id": "explicit_approval_and_frozen_source_identity",
+      "status": "pass",
+      "evidence": "PASS：本次用户直接批准已独立记录，auth true与最终协议SHA一致；14份候选/支持源码封条列下，科学尚未启动。普通准备只作元数据/封条/stat，不将静审等同真实运行。"
+    },
+    {
+      "id": "same_kind_append_only_task_and_physics",
+      "status": "pass",
+      "evidence": "PASS：原ordered_cycle完整14目标只追加1.00，实际请求[1.05,1.00]，input峰1.06、四metadata和其他全部task字段精确保持。α2.5e-7/r9/c(80,40)/right92/Lr80、网格、材料、边界、端口均不变；默认同kind合同要求其余整个task一致。"
+    },
+    {
+      "id": "true_parent_selected_state_and_ancestry",
+      "status": "pass",
+      "evidence": "PASS：AUNLOAD1 success2/末accepted1/global13/unloading1.05/SHAe21cdc…e2ee/signedR.19075825359298318符合终端source合同。父原峰selected12来自ALPHA1 freshzero13，父parent_continuation为None；新child parent_continuation保原dict及first-unload历史，本层不新增task_transition。"
+    },
+    {
+      "id": "saved_restore_fresh_anchor_and_original_gates",
+      "status": "pass",
+      "evidence": "PASS：默认read_native_resume只恢复所选lift/fluctuation与signedR，fresh F/T重新核SHA/bitwiseR及锚1次检查，不读取旧力/切线/矩阵。原非clock设置、residual1e-9/native约束/globalbalance1e-6/fixed8e-11/J>0保持，允许原minimum_increment.00625与内部回溯/二分，不改验收门。"
+    },
+    {
+      "id": "bounded_source_input_and_payload_footprint",
+      "status": "pass",
+      "evidence": "PASS：59普通source/10input pins一致；2旧NPZ仅继承原producer SHA/大小并stat，确为父source geometry四mask和selected state两split字段。其余8input普通JSON可核；无旧model/force/tangent/matrix/HPgzip/CSV/媒体输入，无默认HF修改或安装。"
+    },
+    {
+      "id": "actual_LAST_view_and_complete_convergence_contract",
+      "status": "pass",
+      "evidence": "PASS：viewer对AUNLOAD1仅两处identity string，convergence仅docstring；数值公式、布局、mask、decoder保持。成功后4PNG+实际N帧GIF和1收敛PNG，实际LAST1.00用于静态末态图，peak_index仅本段最大锚；1+2N归档/27+18N字段，全原收敛历史保留。"
+    },
+    {
+      "id": "same_alpha_original_loading_comparison",
+      "status": "pass",
+      "evidence": "PASS：ALPHA1普通summary row7/global7/raw loading1.00/SHA77d9…1840/R.17707577676018202与未来global14卸载配对，原13标量逐项保原值及卸载−加载；不用旧α续算锚、不插值/去重，不新增相等/可逆/恢复/能量/单调门。"
+    },
+    {
+      "id": "single_window_resource_and_partial_stop",
+      "status": "pass",
+      "evidence": "PASS：controller1800/display共享600/helper2700/outer2760秒，采样64GiB、四库上限16及原viewer8GiB；原SUP2同实例清理与唯一启动门保持。首终端错停后续科学/显示，仅原窗口仍开放可封真实partial；无外部retry/repair/force/延期/新HP/测试/回滚/删除。"
+    },
+    {
+      "id": "segment_flags_and_qualification_semantics",
+      "status": "pass",
+      "evidence": "PASS源码合同：成功target_reached/path_completed/unload_endpoint_reached指本suffix完成可true；本段不访任务峰1.06，loading_peak_reached应false，task_target/full原与新路径false。本段maximum_loading_stroke1.05非原峰，父峰值HP不迁移为新卸载态参考；不授压力/有效夹持/释放/稳定性/α独立/网格域收敛/HF5。"
+    },
+    {
+      "id": "closure_freeze_publication_and_record_truth",
+      "status": "pass",
+      "evidence": "PASS：close使用顶层7资源键，无phases/expected_task_transition依赖；实际review/NEXT/五次QA与partial合同兼容。fixedorigin/main、manifest24348、七旧front原后缀、同机异目录localGit恢复/普通发布回执原保。准备期仅修正“Byte-exact”措辞为identity-only，assembler/protocol/auth/receipt同步最终SHA，无重组或科学重跑。"
+    }
+  ],
+  "blockers": [],
+  "blocking_findings": [],
+  "source_binding_count": 59,
+  "input_binding_count": 10,
+  "scientific_input_count": 2,
+  "scientific_input_verification": "Original producer SHA and byte seals plus stat only before the authorized helper; no payload open/hash/decode by reviewer",
+  "reviewed_default_contract_sources": [
+    "hf_repo/src/hf_eval/native_resume.py",
+    "hf_repo/src/hf_eval/native_evaluate.py",
+    "hf_repo/src/hf_eval/native_mean.py",
+    "hf_repo/src/hf_eval/native_response.py"
+  ],
+  "review_scope": "Finite source/diff/ordinaryJSON and original producer seals/stat only. Eleven Python files parsed as syntax without imports or execution. No NPZ/NPY/gzip/CSV/media reading/hash, science/candidate/test/freeze/Git invocation; no prewritten actual success.",
+  "preparation_metadata_correction": {
+    "field": "display_selection_scope",
+    "basis": "Whole viewer/convergence files have identity-only text differences; original numerical/layout/decoder algorithms unchanged. Corrected before source freeze, no mathematical/physical/resource change or candidate execution."
+  },
+  "authorization_scope": "Human approval predates this review and is limited to the concrete L-CTIPAUNLOAD2 card. This review permits root to continue the already-approved freeze/unique execution workflow; it does not claim any numerical or visual result.",
+  "original_parent_and_reference_scope_preserved": true
+}
