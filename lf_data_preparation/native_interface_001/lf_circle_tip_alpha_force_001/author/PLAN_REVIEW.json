@@ -1,0 +1,116 @@
+{
+  "card": "L-CTIPAFORCE1",
+  "status": "pass_finite_plan_review_pending_authorization",
+  "review_type": "plan_only_not_source_or_actual",
+  "execution_status": "not_authorized_not_implemented_not_executed",
+  "authorization_pending": true,
+  "execution_authorized": false,
+  "candidate_implemented": false,
+  "candidate_executed": false,
+  "execution_started": false,
+  "whole_card_approved": false,
+  "publication_authorized": false,
+  "reviewed_utc": "2026-10-21T02:14:01.620713+00:00",
+  "local_date": "2026-10-21",
+  "local_timezone": "Asia/Seoul",
+  "source_baseline_commit": "289450a8d27d915e1832beef9c75ca4fcc168232",
+  "proposed_plan_sha256": "3f6897d80cb8fa2fd0e4eb4660f905d5ee5111c5263b7d0220758a020d3315ce",
+  "reviewed_preparation_sha256": {
+    "L-CTIPAFORCE1_CARD.md": "252e0365d0ad009a884747bfe98789f112bd939e5926f02d21d218e5cb60817f",
+    "input_inventory.json": "d12e0c081a5d8dea8773fcd73f59cdc44b8aab53478f3362ab2c486248c4da2b",
+    "input_schema.json": "30269dd08e7dca67ab521a6b4be00f5e48f2d9f49cf2941f9ce26bebcaec9628",
+    "producer_provenance.json": "7b1ff23eb66df87efe17e6c6d5237959f7d356e9211ddcc388486f5515073a9d",
+    "FORCE1_SOURCE_CONTRACT.md": "b02d83873a55f9ae27050492960036cf3935ec789a9225c0b0c28492fb068da9",
+    "VISUAL_PLAN.md": "e4a1698bdf5ea9a973cde034da8359591f17f9e6f0c2bc451674e1fe61c1a24d",
+    "READ_ONLY_STATE.json": "cf9e4ccc0d6fd0c3118832af0e9e6f88ec9e345e02e3c0cfaf15fa0d996bc89b"
+  },
+  "checks": [
+    {
+      "id": "PLAN01",
+      "subject": "计划身份",
+      "status": "pass",
+      "evidence": "proposed_plan 保持未授权、未编码、未启动；本次仅外部计划审阅，不是源码或实际验收。"
+    },
+    {
+      "id": "PLAN02",
+      "subject": "固定读取域",
+      "status": "pass",
+      "evidence": "未来仅六份绑定普通 JSON（449948 B）及两份人工页 stat/link；禁止旧媒体、科学数组及额外历史读取。"
+    },
+    {
+      "id": "PLAN03",
+      "subject": "状态与配对",
+      "status": "pass",
+      "evidence": "旧 accepted1 与新 accepted12 均为 global12/loading/1.06 mm，按原 565 个全局节点 ID、坐标、掩码和边精确配对，失配停止。"
+    },
+    {
+      "id": "PLAN04",
+      "subject": "符号与几何",
+      "status": "pass",
+      "evidence": "ON-body 为原内力反号、holding 为 ON-body 反号；仅原 total holding 是已保存支撑反力，不从三 JSON 伪造完整机构或新积分矩。"
+    },
+    {
+      "id": "PLAN05",
+      "subject": "原规则与描述",
+      "status": "pass",
+      "evidence": "来源、身份、有限值、尺寸及原汇总对应采用既有严格规则；fsum、分解尾差和新旧差仅描述，不新增容差或物理验收门。"
+    },
+    {
+      "id": "PLAN06",
+      "subject": "有限计算与保留",
+      "status": "pass",
+      "evidence": "计划保留 1130 原节点行，形成 565 对/3390 节点标量差、4 组/24 组分量差与 6 整体分量差，并原样保留源对象及原矩。"
+    },
+    {
+      "id": "PLAN07",
+      "subject": "掩码语义",
+      "status": "pass",
+      "evidence": "四类互斥掩码计数 71/35/2/457；physical/cut 边节点集交 2 个节点，二者不得当作互斥组重复求总力。"
+    },
+    {
+      "id": "PLAN08",
+      "subject": "可视化",
+      "status": "pass",
+      "evidence": "六空间向量面板使用一套 mm/N 标尺且保全部节点，另有 3×2 分量图；两张新图各最多一次检查，数表保留小箭头及微距。"
+    },
+    {
+      "id": "PLAN09",
+      "subject": "资源与停止",
+      "status": "pass",
+      "evidence": "唯一 SUP2 启动限定 helper180/outer240 秒、采样 1 GiB、四库线程上限16，首终端错误保真实部分并停止，无重试、修复重跑或 force。"
+    },
+    {
+      "id": "PLAN10",
+      "subject": "整卡闭环与资格",
+      "status": "pass",
+      "evidence": "待整卡明确批准后覆盖实施、SOURCE、冻结、唯一执行、QA/ACTUAL、记录、main 发布与异路径恢复；不重复询问已批同范围，不授压力、有效夹持、α 独立或稳定性资格。"
+    }
+  ],
+  "check_count": 10,
+  "blockers": [],
+  "blocking_findings": [],
+  "authorization_requirement": "计划技术审阅无阻断；仍需用户对整卡明确批准，才可实施候选、源码静审、冻结、唯一执行及发布。本计划审阅不授执行权限。",
+  "nonblocking_notes": [
+    "共同尺度下密集小箭头、微米距离及小组柱可能难以逐项辨认；保原值表，执行后按卡每图至多一次 QA，不另增图或重绘。",
+    "实现后的有限 SOURCE 审阅及实际结果/像素审阅仍须完成；计划通过不等于代码或数值结果通过。"
+  ],
+  "preparation_correction": "原只读 query e131f3 对 producer outputs 键格式的假设已在 producer_provenance 中明确纠正；未执行科学候选或修改数据，不属于科学卡失败重跑。",
+  "reviewer_io": {
+    "read_scope": "八份外部准备文档（七份封条文件与 proposed_plan）；仅以准备 schema/来源合同核计划，不独立重算输入力。",
+    "six_input_JSON_bodies_read_by_reviewer": 0,
+    "scientific_payload_reads": 0,
+    "media_reads": 0,
+    "candidate_runs": 0,
+    "tests": 0,
+    "plotting": 0,
+    "force_sums_or_new_differences": 0,
+    "moment_integrations": 0,
+    "git_commands": 0,
+    "writes": [
+      "external AUTHOR/PLAN_REVIEW.json",
+      "external AUTHOR/PLAN_REVIEW.md"
+    ],
+    "formal_stage_writes": 0,
+    "git_and_clean_state_basis": "READ_ONLY_STATE.json 中根代理快照；本审阅未独立执行 Git。"
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "card": "L-CTIPAFORCE1",
+  "status": "pass_finite_source_review",
+  "execution_status": "authorized_not_executed",
+  "review_type": "finite_source_review_not_actual",
+  "reviewed_utc": "2026-10-21T02:24:05.644293+00:00",
+  "local_date": "2026-10-21",
+  "local_timezone": "Asia/Seoul",
+  "protocol_sha256": "f398ce9870df4a0de7870d29dcc3fa27dc5f3ec48431354e194c5dd07f148a9b",
+  "source_baseline_commit": "289450a8d27d915e1832beef9c75ca4fcc168232",
+  "reviewed_author_sha256": {
+    "execute_step.py": "efc35459480c716d27007f7b3fb92a29e46b498f202ecf0524826f89d5745582",
+    "launch_step.py": "551f5a4d7f7c6fd6f595e124b679398aa5ff7cdb549165e1fa7c12b4e3ed7785",
+    "force_views.py": "0e7e1c4a1737cb361ef3ab954b2302fcc6087a953ff5e6cc1f5fcb7f8934ed15",
+    "L-CTIPAFORCE1_APPROVED_CARD.md": "a2ba3559efe2136808e82a8f047bcf7074307111567419b861fc9f65b27a0cca",
+    "protocol.proposed.json": "f398ce9870df4a0de7870d29dcc3fa27dc5f3ec48431354e194c5dd07f148a9b",
+    "input_inventory.json": "d12e0c081a5d8dea8773fcd73f59cdc44b8aab53478f3362ab2c486248c4da2b",
+    "input_schema.json": "30269dd08e7dca67ab521a6b4be00f5e48f2d9f49cf2941f9ce26bebcaec9628"
+  },
+  "reviewed_support_sha256": {
+    "assemble_step.py": "9f07ce291c8659a9868307a644bb9aa9f2acc123344c5e386d03c27d264f1d83",
+    "freeze_step.py": "a1d7c315c790b22fba19223ef28dcd4ac4312bb74b82e78197c284085f2d208b",
+    "monitor_step.py": "d2a955d318c318c11e69e054a13885df698f047c4de78fa7489ea0715faf7370",
+    "close_step.py": "4d157a918cccece6341b09c6abb59276fb40f3f8876f772ee89bae5c2808cfa7",
+    "publish_step.py": "b937e3c331d4b70e98df5f06e9b0c4876df45d2d1366618bbfe789cf722b569c",
+    "archive_publication.py": "0fecd53cf7f13395aaebc93a5569be0f975c9bcecdbe868fc8059e2dedf22d77",
+    "finalize_records.py": "a8fb613d7b02dd9ea87eb922e61b4a774e77eacf8affe5366e312bda095b1b14"
+  },
+  "reviewed_definition_source_sha256": {
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/circle_saved_views.py": "73b84de22565ac89ce276fbf0a2fa6ef47c2dcd256c26f60495eb9c150c7c8b5",
+    "hf_repo/src/hf_eval/workpiece_nodal.py": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9",
+    "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/circle_saved_views.py": "79323ac066aeafd60f2764a8156d6fa9a9118aa9f2492748832d9e1bb0d9e150",
+    "lf_data_preparation/native_interface_001/lf_circle_tip_force_001/execute_step.py": "c102c374335754bfb99bbc18990dbac3eca587deeedfb2be4e38eebc50dd8a1b",
+    "lf_data_preparation/native_interface_001/lf_circle_tip_force_001/force_views.py": "5302844ccde6f23dae7f5bd8094291eee73dc4be43781e93097208c1b5a23a88",
+    "hf_repo/scripts/windows_owned_process_sup2.py": "b5f149e1cd3d6d9b4ad392123e410b786606f120f2e078139b7bacc97f2d9499"
+  },
+  "checks": [
+    {
+      "id": "SOURCE01",
+      "subject": "授权与历史",
+      "status": "pass",
+      "evidence": "当前单独授权为true且绑定最终协议；APPROVED_CARD以原卡全文作后缀，PLAN/preapproval的pending字节完整保留，不把准备历史改为早已批准。"
+    },
+    {
+      "id": "SOURCE02",
+      "subject": "来源与读取边界",
+      "status": "pass",
+      "evidence": "9个source绑定（3runtime+6定义）逐字节核SHA；schema/inventory/protocol固定6普通JSON共449948 B和2人工页stat/link，无额外task/history/HP或媒体读取。"
+    },
+    {
+      "id": "SOURCE03",
+      "subject": "选态与原合同",
+      "status": "pass",
+      "evidence": "源码核旧accepted1/新accepted12同global12/loading/1.06与各SHA，565唯一ID、有限坐标/向量、布尔mask计数、原summary六标量及两距离按原FORCE1规则对应。"
+    },
+    {
+      "id": "SOURCE04",
+      "subject": "精确兼容与原值",
+      "status": "pass",
+      "evidence": "两源ID/坐标/mask/边/矩原点逐项精确比较；不兼容写incomparable后停止，保完整源对象/37项row/原矩，不重排分类或新增积分。"
+    },
+    {
+      "id": "SOURCE05",
+      "subject": "允许的有限差量",
+      "status": "pass",
+      "evidence": "实现1130原行、565节点配对/3390差、4组/24差及整体6差；fsum重组尾差、分解尾差与holding+ONbody只写描述，无新容差或吸零门。"
+    },
+    {
+      "id": "SOURCE06",
+      "subject": "物理符号与分组",
+      "status": "pass",
+      "evidence": "ONbody沿原负内力定义，原total holding反号明确，材/Hu反号不冒充独立反力；四mask及physical/cut边集交2的不同语义保留，不径向转为压力。"
+    },
+    {
+      "id": "SOURCE07",
+      "subject": "两个显示模块",
+      "status": "pass",
+      "evidence": "六空间panel使用全部565节点、统一轴/aspect及共同maxnorm映2mm/minlength0；第二图3×2全节点分量/原组柱，顺序释放画布，仅画固定体和真实几何见证。"
+    },
+    {
+      "id": "SOURCE08",
+      "subject": "资源与唯一停止",
+      "status": "pass",
+      "evidence": "launcher真实授权与BASE、原SUP2身份核验后唯一启动；180/240秒、1GiB、四库16上限、同实例清理与首错partial规则保，无外部重试或force。"
+    },
+    {
+      "id": "SOURCE09",
+      "subject": "实际闭卡兼容",
+      "status": "pass",
+      "evidence": "close已按sources.paths而非不存在的path读取，兼容pass/partial/incomparable，执行/像素QA分别记录；ACTUAL/NEXT状态、seal/stat、日期与7旧front后缀合同一致。"
+    },
+    {
+      "id": "SOURCE10",
+      "subject": "发布恢复与限定",
+      "status": "pass",
+      "evidence": "finalizer/publish/archive保普通main增量、原封媒体stat及同机异目录localGit恢复/远端身份分离；无默认HF源码、科学/测试/API调用或资格升级，10py静态AST/空白通过。"
+    }
+  ],
+  "check_count": 10,
+  "blockers": [],
+  "blocking_findings": [],
+  "nonblocking_notes": [
+    "共同标尺下密集小箭头、微米距离及小组柱可能难辨；保原值并按卡各新图最多一次root检查，不补绘。",
+    "实现静审通过不代表实际数值或图像通过，须等唯一执行真实终端及ACTUAL/QA。"
+  ],
+  "execution_authorized": true,
+  "execution_started": false,
+  "reviewer_candidate_executions": 0,
+  "review_scope": {
+    "ordinary_source_AST_only": true,
+    "author_source_pins": 7,
+    "support_source_pins": 7,
+    "source_bindings": 9,
+    "prepared_input_JSONs": 6,
+    "input_bytes": 449948,
+    "old_manual_stat_links": 2,
+    "original_input_bodies_read_by_reviewer": 0,
+    "scientific_payload_reads": 0,
+    "media_reads": 0,
+    "scientific_calls": 0,
+    "new_force_sums_or_differences": 0,
+    "tests": 0,
+    "plots": 0,
+    "git_commands": 0,
+    "formal_writes": 0
+  },
+  "preparation_query_note": "审阅者一次只读schema显示查询误将list当mapping，抛AttributeError后按原list结构显示；未改数据、未执行候选/测试/科学，也不是科学重试。"
+}
