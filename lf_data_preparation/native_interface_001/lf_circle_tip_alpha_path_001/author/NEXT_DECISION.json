@@ -1,0 +1,105 @@
+{
+  "card": "L-CTIPAPATH1",
+  "status": "pass_finite_result_based_next_step_review",
+  "execution_status": "pass",
+  "created_utc": "2026-10-21T01:31:59.061512+00:00",
+  "report_client_local_date": "2026-10-21",
+  "report_timezone": "Asia/Seoul",
+  "source_scope": "Current APATH ordinary JSON/source/producer seals and existing NEXT contract only; no old-alpha actual output read for a cross-alpha calculation; no science arrays/CSV/gzip/media payload reads/hash/decode, new mechanics, tests or Git.",
+  "observed_execution": {
+    "outer_status": "pass",
+    "helper_status": "pass",
+    "outer_elapsed_seconds": 7.551732899999479,
+    "helper_elapsed_seconds": 5.856046500004595,
+    "peak_sampled_tree_RSS_bytes": 145199104,
+    "cleanup_verified": true,
+    "ordinary_JSON_reads": 9,
+    "old_GIF_stat_links": 4,
+    "sealed_output_files": 6,
+    "sealed_output_bytes": 1209762
+  },
+  "observed_counts": {
+    "raw_rows": 23,
+    "timeline_rows": 20,
+    "merged_boundary_anchors": 3,
+    "same_input_pairs": 7,
+    "segments": 4,
+    "requested_targets": 20
+  },
+  "original_convergence_totals": {
+    "accepted_states": 23,
+    "newton_base_checks": 122,
+    "inferred_check_groups": 23,
+    "line_search_trials": 105,
+    "line_search_accepted": 99,
+    "line_search_rejected": 6,
+    "failed_attempts": 0,
+    "linear_solves": 118,
+    "maximum_bisection_depth": 0,
+    "zero_newton_residuals": 1
+  },
+  "observed_peak": {
+    "original_target_index": 12,
+    "d_mm": 1.06,
+    "R_input_N": 0.19522304147728387,
+    "total_body_Fy_N": 0.012372524610902783,
+    "material_body_Fy_N": 0.009318152027217278,
+    "regularization_body_Fy_N": 0.0030543725836855054,
+    "tip_to_raster_boundary_mm": 0.008227522522737729,
+    "medium_min_J": 0.00046587891715793817
+  },
+  "observed_zero": {
+    "original_target_index": 19,
+    "raw_leg": "unloading",
+    "d_mm": 0.0,
+    "R_input_N": 1.0582095724475673e-25,
+    "q_out_mm": -8.72959788578482e-25,
+    "total_body_Fy_N": -1.412553000649979e-28,
+    "tip_to_raster_boundary_mm": 1.0,
+    "medium_min_J": 1.0
+  },
+  "same_input_105_original_differences": {
+    "R_input_N": {
+      "loading_value": 0.19075825359469525,
+      "unloading_value": 0.19075825359298318,
+      "unloading_minus_loading": -1.712074926274454e-12
+    },
+    "q_out_mm": {
+      "loading_value": 0.9921056957589891,
+      "unloading_value": 0.9921056957636342,
+      "unloading_minus_loading": 4.6450621127291924e-12
+    }
+  },
+  "visual_QA_status": "pass_root_visual_inspection_with_visibility_limits",
+  "next_step": "建议L-CTIPACOMP1：仅由旧PATH1与新APATH1两份普通统一JSON完成20原目标/40原值/同13指标260差量的跨alpha对照、两张标量图和人工页；先最小包装、静审及新明确授权，不新增科学计算。",
+  "proposed_next_card": "L-CTIPACOMP1",
+  "proposed_input_JSON_count": 2,
+  "proposed_inputs": [
+    "lf_data_preparation/native_interface_001/lf_circle_tip_path_001/run_001/unified_response.json",
+    "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_path_001/run_001/unified_response.json"
+  ],
+  "proposed_resource_limits": {
+    "helper_seconds": 180,
+    "outer_seconds": 240,
+    "sampled_RSS_bytes": 1073741824,
+    "cpu_thread_limit": 16
+  },
+  "proposed_new_original_target_pairs": 20,
+  "proposed_original_rows": 40,
+  "proposed_metrics_per_pair": 13,
+  "proposed_descriptive_differences": 260,
+  "proposed_new_PNGs": 2,
+  "next_authorization": false,
+  "next_start": false,
+  "next_stage_authorized": false,
+  "next_stage_started": false,
+  "interpretation_md": "本轮把alpha=2.5e-7的ALPHA1与AUNLOAD1–3四段原求解整理成20个统一原目标：23份原接受行、3个显示层合并锚，以及7组同输入/原13指标共91项差量。原37字段、leg、SHA、来源和fresh-anchor诊断均保留；不是一次新的完整周期求解。\n\n原计数累计122次Newton检查、105次line-search试探（99接受/6拒绝）、118次线性求解、0 failed_attempts、最大二分深度0，不扣锚复核工作。本卡只读9份普通JSON、stat链接4份旧GIF，封存两图等6份新输出；没有新增科学计算。\n\n原峰值1.06 mm的R=0.19522304147728387 N，工件下半总Fy=0.012372524610902783 N（material 0.009318152027217278，Hu 0.0030543725836855054 N），unsigned尖端/Q1距离0.008227522522737729 mm、介质minJ=0.00046587891715793817。原零输入R=1.0582095724475673e-25 N、q_out=-8.72959788578482e-25 mm、总Fy=-1.412553000649979e-28 N保留原符号；弱式合力、很小残量和正距离不授压力、有效夹持、可逆或释放资格。\n\n全7组中R/q_out最大绝对差量约为1.7121e-12 N/4.6451e-12 mm，均在1.05 mm，不能拿末五组约1e-16的结果代表全周期。两新PNG各一次原尺寸QA通过并保留可见性限制：全量程重合线、微小残量、8.2微米距离及4.658e-4正J不易肉眼精辨；原17位表和JSON更适于核查。质量图20个timeline与23个raw序号不同，显式科学刻度已避免offset/标题拥挤。\n\n当前功能已能连贯查看全周期实际标量与既有变形入口。最近下一步应对两种alpha的既存统一普通JSON作同定义对照，再据实际影响决定后续实验；无需继续加载或例行补齐HP，当前也不预判alpha敏感性或独立性。",
+  "next_steps_md": "# L-CTIPACOMP1 待批准的有限下一步\n\n依据本轮真实PASS提出以下新范围；**下一授权和启动均为false**，不能沿用已关闭窗口。\n\n当前记录入口：[人工页](run_001/REVIEW.md)、[统一响应](run_001/unified_response.json)、[同输入原值/差量](run_001/same_input_comparison.json)、[两图QA](author/pixel_QA.json)。完整原表和历史留在这些现成记录中。\n\n1. 先准备最小包装、固定普通schema/物理定义/来源合同并静审。仅计划读取旧`lf_circle_tip_path_001/run_001/unified_response.json`和新`lf_circle_tip_alpha_path_001/run_001/unified_response.json`两份普通JSON；两路径均位于`lf_data_preparation/native_interface_001/`。原task、37字段、timeline/raw诊断和来源已嵌入，不另开原summary、convergence、task、科学CSV/NPZ/gzip或媒体。\n2. 按原`convergence.original_target_index`、显示分支和原d精确匹配20个原目标，保40条原值、20组配对以及同原13指标共260个“新alpha减旧alpha”描述性差量。origin原leg保持origin；不只按d/SHA配对、不插值、不删除二分/锚诊断、不新增相等、归零、恢复率或耗散门。原37观察字段仍完整保留。\n3. 生成比较JSON、人工页及恰好2张新标量PNG。响应图对照R、q_out、三种工件Fy及unsigned尖端/Q1距离；质量图保留介质/右域J、Hu和原收敛观察的来源/序号。原同输入差、跨alpha差和原工作量分别标明。只stat已知原人工页/动画入口并链接；不打开、解码、复制、重哈希、抽帧或拼接旧媒体，不生成新变形动画。新两PNG各最多一次原尺寸QA，记录量程和重合线等限制。\n4. 拟helper180/outer240秒、采样1 GiB、四库线程上限16；配置不代表实测16核/GPU利用率。新范围取得明确授权后唯一运行；首个终端错误停止并保真实partial，无外部重试、修复重跑、延期、force、删除或回滚。无新增构模/F/T/HP/平衡求解/测试、默认HF改动或API关联。\n5. 做好结果、QA、来源和后续判断记录，普通main推送、远端main核对、同机异目录local-Git fetch/ff-only恢复和回执归档；不称异机科学复算。\n\n旧alpha=5e-7来自14段，新alpha=2.5e-7来自4段，来源时钟、计数和锚核验不同；不能把总CPU/计数差当纯alpha性能。两初始零态即使同SHA，也不跨alpha去重或转移HP。AREF1仍只覆盖新alpha原加载1.06/global12单态及原PORT方向，不授卸载或全路径参考。\n\n跨alpha比较尚未读取或执行。先据实际同定义差量决定是否需要物理改进或有限新实验；定义不兼容则记录不可比项，不静默归一化。不继续加载、不例行补齐HP，不升级压力、有效夹持、自由释放、稳定性、alpha独立性、网格/域宽收敛、完整路径独立参考或HF5资格。到零仍只代表输入回程完成。\n",
+  "qualification_scope": "No new solve/HP/reference inheritance, alpha-independence, pressure, effective grip, free release, stability, mesh/domain convergence or HF5; source original qualifications remain unchanged.",
+  "visual_QA_record": "author/pixel_QA.json",
+  "existing_details": {
+    "manual": "run_001/REVIEW.md",
+    "unified_response": "run_001/unified_response.json",
+    "same_input": "run_001/same_input_comparison.json"
+  }
+}
