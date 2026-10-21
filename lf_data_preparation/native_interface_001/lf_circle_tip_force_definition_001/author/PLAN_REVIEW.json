@@ -1,0 +1,115 @@
+{
+  "card": "L-CTIPGDEF1",
+  "status": "pass_finite_plan_review_pending_authorization",
+  "review_type": "planonly",
+  "execution_status": "not_authorized_not_implemented",
+  "authorization_pending": true,
+  "implementation_authorized": false,
+  "publication_authorized": false,
+  "candidate_implemented": false,
+  "execution_authorized": false,
+  "execution_started": false,
+  "whole_card_approved": false,
+  "scientific_runtime_authorized": false,
+  "reviewed_utc": "2026-10-21T05:40:24.493867+00:00",
+  "local_date": "2026-10-21",
+  "local_timezone": "Asia/Seoul",
+  "source_baseline_commit": "cf75229c0ca5bec3fd30cdbffd65ab1cb83c08e1",
+  "proposed_plan_sha256": "209c74823723dbfe26d437257e00459080347da5ae0c0a9a6c0a66068b8e6fd2",
+  "reviewed_preparation_sha256": {
+    "L-CTIPGDEF1_CARD.md": "47222adbdc8d6b8e90cbcfcbafd5d90d2a36f094a7de18c976393bb06cfd75d8",
+    "FORCE_DEFINITION_DRAFT.md": "5469c2ed045cd99630ef084a80011912a9fa1a7305a57f6aec0f186b68d482db",
+    "UNITS_SOURCE_AUDIT.md": "72fa595f37b9387e0f1fa933036277895965cbb2afbbafda549146d32bfe5b43",
+    "UNITS_SOURCE_AUDIT.json": "6a3548d8708a139057189f07457c2811705ca4975bbfe2cf422ffdfa7d78a9c4",
+    "FORCE_FIELD_MAP.md": "300e2f2dfced515099a6d3621e8d045d959195e57fbc2f9bdf6401c91e60e43b",
+    "FORCE_FIELD_MAP.json": "a804f321625ca24f9eb2b3104652b09c241c3ca93c4407d4ed05ee323ea8bffc",
+    "READ_ONLY_STATE.json": "addc01c786df7055fac947c5b13ca2495d5cec13e8ea3736b3af8d7d6fe5d400"
+  },
+  "checks": [
+    {
+      "id": "PLAN01",
+      "subject": "文档卡身份",
+      "status": "pass",
+      "evidence": "当前仅七份准备资料与计划，未授权整合/发布；拟新增一份规则文档、5处旧front入口及小stage记录，不新增reader或实现。"
+    },
+    {
+      "id": "PLAN02",
+      "subject": "厚度直接证据",
+      "status": "pass",
+      "evidence": "UNITS审计分别列两α各model与geometry共4份元数据的20mm，且两geometry SHA一致；厚度权威在geometry，task不重复填写不构成缺失。"
+    },
+    {
+      "id": "PLAN03",
+      "subject": "当前积分与N单位",
+      "status": "pass",
+      "evidence": "源码引文沿native_project→operators.weights→当前NumPy材料/Hu积分→散布/节点观察，每积分项厚度一次；草案明确原N不能再乘20或无说明称N/mm。"
+    },
+    {
+      "id": "PLAN04",
+      "subject": "对象方向与Fy名称",
+      "status": "pass",
+      "evidence": "ON-body为原internal弱力反号，操作量取全部下半固定工件的有符号全局Fy；normal_force既有名称解释为Fy而非圆边局部法向压力，不改历史字段。"
+    },
+    {
+      "id": "PLAN05",
+      "subject": "分量与holding范围",
+      "status": "pass",
+      "evidence": "total/material/regularization分别解释，Hu不静默删除；当前rich nodal只暴露total holding，不否认producer支反力数组，代数反号不当独立测量。"
+    },
+    {
+      "id": "PLAN06",
+      "subject": "镜像仅引用定义",
+      "status": "pass",
+      "evidence": "producer的上半(Fx,−Fy)、全体(2Fx,0)与2abs(Fy)定义分开，当前comparison无可用selector已明确，不为文档补算镜像量或称夹持资格。"
+    },
+    {
+      "id": "PLAN07",
+      "subject": "字段与角色精确",
+      "status": "pass",
+      "evidence": "within键loading_value/unloading_value/unloading_minus_loading与cross键baseline_value/new_value/new_minus_baseline分清，原accepted/global/leg/SHA、零态origin及单位保持。"
+    },
+    {
+      "id": "PLAN08",
+      "subject": "节点与物理边界",
+      "status": "pass",
+      "evidence": "四mask分区71/35/2/457与physical/cut边交2分清，原全节点合力不删交点/小项，不按任意节点面积转压力，不用距离/力阈值新增接触门。"
+    },
+    {
+      "id": "PLAN09",
+      "subject": "零数值资源与旧图",
+      "status": "pass",
+      "evidence": "本卡0数值helper/controller/viewer、API、F/T/HP/平衡/测试/图及科学预算；只链接既有AREPORT导航，无媒体正文或像素读取，不复用闭卡窗口。"
+    },
+    {
+      "id": "PLAN10",
+      "subject": "交付与停止",
+      "status": "pass",
+      "evidence": "明确批准后做有限文档/来源/链接核对、保5旧front后缀、普通main发布与异目录localGit恢复；身份/语义冲突或发布失败停止，原实现/结果/门/资格不变。"
+    }
+  ],
+  "check_count": 10,
+  "blockers": [],
+  "blocking_findings": [],
+  "authorization_requirement": "计划技术无阻断；正式文档整合与普通发布仍待用户明确整卡批准，本审阅不授实施/推送或任何数值执行。",
+  "nonblocking_notes": [
+    "正式规则应继续标明20mm限于当前两α的真实来源，不推广至其他模型/实物；单位明确不等于承载能力验证。",
+    "native镜像/normal字段只有源码定义而当前rich不提供selector，保持“解释但不补算”；原薄索引不含节点值。"
+  ],
+  "evidence_scope": "Independent finite consistency review of pinned preparation documents and their quoted source/metadata evidence; no new force validation or re-audit of saved scientific payloads.",
+  "reviewer_io": {
+    "preparation_documents_read": 8,
+    "original_model_or_geometry_bodies_read": 0,
+    "original_comparison_bodies_read": 0,
+    "scientific_payload_reads": 0,
+    "media_reads": 0,
+    "API_calls": 0,
+    "force_arithmetic_or_mirror_calculation": 0,
+    "new_metrics": 0,
+    "candidate_runs": 0,
+    "tests": 0,
+    "plots": 0,
+    "git_commands": 0,
+    "formal_writes": 0
+  },
+  "repository_state_basis": "READ_ONLY_STATE root-agent snapshot; reviewer did not run Git independently."
+}

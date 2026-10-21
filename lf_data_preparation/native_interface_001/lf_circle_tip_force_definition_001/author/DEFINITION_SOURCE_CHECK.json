@@ -1,0 +1,201 @@
+{
+  "card": "L-CTIPGDEF1",
+  "status": "pass_finite_definition_source_check",
+  "review_type": "ordinary_definition_source_identity_and_metadata_check",
+  "current_whole_card_approval_confirmed_by_root": true,
+  "implementation_and_publication_authorized": true,
+  "scientific_runtime_authorized": false,
+  "reviewed_utc": "2026-10-21T07:25:21.608946+00:00",
+  "local_date": "2026-10-21",
+  "local_timezone": "Asia/Seoul",
+  "source_baseline_commit": "cf75229c0ca5bec3fd30cdbffd65ab1cb83c08e1",
+  "proposed_plan_sha256": "209c74823723dbfe26d437257e00459080347da5ae0c0a9a6c0a66068b8e6fd2",
+  "reviewed_preparation_sha256": {
+    "L-CTIPGDEF1_CARD.md": "47222adbdc8d6b8e90cbcfcbafd5d90d2a36f094a7de18c976393bb06cfd75d8",
+    "FORCE_DEFINITION_DRAFT.md": "5469c2ed045cd99630ef084a80011912a9fa1a7305a57f6aec0f186b68d482db",
+    "UNITS_SOURCE_AUDIT.md": "72fa595f37b9387e0f1fa933036277895965cbb2afbbafda549146d32bfe5b43",
+    "UNITS_SOURCE_AUDIT.json": "6a3548d8708a139057189f07457c2811705ca4975bbfe2cf422ffdfa7d78a9c4",
+    "FORCE_FIELD_MAP.md": "300e2f2dfced515099a6d3621e8d045d959195e57fbc2f9bdf6401c91e60e43b",
+    "FORCE_FIELD_MAP.json": "a804f321625ca24f9eb2b3104652b09c241c3ca93c4407d4ed05ee323ea8bffc",
+    "READ_ONLY_STATE.json": "addc01c786df7055fac947c5b13ca2495d5cec13e8ea3736b3af8d7d6fe5d400"
+  },
+  "checks": [
+    {
+      "id": "DEF01",
+      "subject": "准备身份未改",
+      "status": "pass",
+      "evidence": "plan与PLAN_REVIEW七准备封条精确保持；当前整卡明确批准由root确认，原pending状态仍作历史，当前未据此改旧记录。"
+    },
+    {
+      "id": "DEF02",
+      "subject": "当前源码身份",
+      "status": "pass",
+      "evidence": "UNITS列12源码与FIELD三源码去重13份的bytes/SHA吻合，UNITS逐条源码行引文与当前字节一致，未import或执行源码。"
+    },
+    {
+      "id": "DEF03",
+      "subject": "四份厚度元数据",
+      "status": "pass",
+      "evidence": "两α各model/geometry共4份bytes/SHA及行引文匹配，各自geometry绑定/厚度20mm/plane-strain与N单位/下半域对应，task省略厚度不影响geometry权威。"
+    },
+    {
+      "id": "DEF04",
+      "subject": "已含厚度与符号",
+      "status": "pass",
+      "evidence": "当前引文native→weights→NumPy材料/Hu各积分一次厚度，散布与nodal反号无额外厚度；现有N不再乘20，ON-body与total holding含义沿原实现。"
+    },
+    {
+      "id": "DEF05",
+      "subject": "FIELD原来源与峰身份",
+      "status": "pass",
+      "evidence": "三FIELD源码、轻report及其两比较JSON身份SHA匹配；oldaccepted1/new12同global12/loading1.06和各SHA保，未打开原节点/周期数组或额外历史文件。"
+    },
+    {
+      "id": "DEF06",
+      "subject": "字段可用性",
+      "status": "pass",
+      "evidence": "原within/cross不同键集合与两比较实际元数据对应；mirror/normal仅producer定义而无richselector，holding当前nodal仅total范围和节点mask说明不变。"
+    },
+    {
+      "id": "DEF07",
+      "subject": "零重算与资格",
+      "status": "pass",
+      "evidence": "仅普通hash/原metadata核对，不算力、fsum、差量、镜像或指标，不调用API/F/T/HP/平衡/测试/绘图；不新增物理门或资格。"
+    },
+    {
+      "id": "DEF08",
+      "subject": "整合边界",
+      "status": "pass",
+      "evidence": "当前批准只涵规则文档、5front入口/小stage与普通main/异目录恢复；本审阅只写外部两记录，无正式stage或Git操作，不启动科学资源。"
+    }
+  ],
+  "check_count": 8,
+  "blockers": [],
+  "blocking_findings": [],
+  "observed_source_and_metadata": {
+    "hf_repo/src/hf_eval/data.py": {
+      "kind": "source",
+      "bytes": 16477,
+      "sha256": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812"
+    },
+    "hf_repo/src/hf_eval/native_map.py": {
+      "kind": "source",
+      "bytes": 7794,
+      "sha256": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28"
+    },
+    "hf_repo/src/hf_eval/native_project.py": {
+      "kind": "source",
+      "bytes": 23187,
+      "sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc"
+    },
+    "hf_repo/src/hf_eval/tmc.py": {
+      "kind": "source",
+      "bytes": 19273,
+      "sha256": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025"
+    },
+    "hf_repo/src/hf_eval/tmc_kernel.py": {
+      "kind": "source",
+      "bytes": 12018,
+      "sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0"
+    },
+    "hf_repo/src/hf_eval/split_kernel_invariants_hu.py": {
+      "kind": "source",
+      "bytes": 19752,
+      "sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a"
+    },
+    "hf_repo/src/hf_eval/native_force.py": {
+      "kind": "source",
+      "bytes": 6667,
+      "sha256": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d"
+    },
+    "hf_repo/src/hf_eval/native_mean.py": {
+      "kind": "source",
+      "bytes": 22777,
+      "sha256": "76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4"
+    },
+    "hf_repo/src/hf_eval/split_numpy_tangent.py": {
+      "kind": "source",
+      "bytes": 10495,
+      "sha256": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f"
+    },
+    "hf_repo/src/hf_eval/split_displacement.py": {
+      "kind": "source",
+      "bytes": 24156,
+      "sha256": "151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8"
+    },
+    "hf_repo/src/hf_eval/project.py": {
+      "kind": "source",
+      "bytes": 15171,
+      "sha256": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd"
+    },
+    "hf_repo/src/hf_eval/workpiece_nodal.py": {
+      "kind": "source",
+      "bytes": 4423,
+      "sha256": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/saved_study_report.py": {
+      "kind": "source",
+      "bytes": 17044,
+      "sha256": "6537e31abd56a1c6749fa3ba2969f4a1af930ed080cd2af81e7125d7f8764ad3"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/model.json": {
+      "kind": "ordinary_model_or_geometry",
+      "bytes": 89774,
+      "sha256": "7f56cf78700c85145cce33a5972f73ac48e05923f16c27e69f7f118e6d239e0b"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/source_geometry/geometry.json": {
+      "kind": "ordinary_model_or_geometry",
+      "bytes": 25085,
+      "sha256": "9630f76972ffecbd60fa42eefb44da0c97c395db7baacaaede33cdabbbc9cf6a"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/model/model.json": {
+      "kind": "ordinary_model_or_geometry",
+      "bytes": 89709,
+      "sha256": "37b249eef1b01d37b83c58e13793c68d1215fd3e624f8159023e597af8dfea45"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/model/source_geometry/geometry.json": {
+      "kind": "ordinary_model_or_geometry",
+      "bytes": 25085,
+      "sha256": "9630f76972ffecbd60fa42eefb44da0c97c395db7baacaaede33cdabbbc9cf6a"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/run_001/report.json": {
+      "kind": "ordinary_light_report",
+      "bytes": 22172,
+      "sha256": "718bfc5a8cd7b85f163ae4e7dc18c47f2d8f7c881465a138a3b8e9f1ddc497c6"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_comparison_001/run_001/comparison.json": {
+      "kind": "ordinary_comparison_identity",
+      "bytes": 1250650,
+      "sha256": "9305ad852326a81bd452c7ed935007028b9d188f9dad646c5dafa732938ef670"
+    },
+    "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_force_001/run_001/comparison.json": {
+      "kind": "ordinary_comparison_identity",
+      "bytes": 1968363,
+      "sha256": "1f0aa85d2d9bdf1a63fb3e5685a7f58fbf89d340de8d9748f09c9c6371705d05"
+    }
+  },
+  "read_domain_counts": {
+    "unique_source_files": 13,
+    "unique_model_geometry_JSONs": 4,
+    "unique_light_report_JSONs": 1,
+    "unique_comparison_identity_JSONs": 2,
+    "total_unique_repository_ordinary_files": 20,
+    "note": "Counts are unique repository files, not a one-read runtime claim. A preliminary ordinary metadata field-shape read preceded final SHA/line checks; no source/API/candidate was executed."
+  },
+  "scope_counters": {
+    "scientific_payload_reads": 0,
+    "media_reads": 0,
+    "force_or_mirror_calculations": 0,
+    "new_metrics": 0,
+    "API_calls": 0,
+    "candidate_or_scientific_execution": 0,
+    "tests": 0,
+    "plots": 0,
+    "Git_commands": 0,
+    "formal_writes": 0
+  },
+  "limitations": [
+    "当前两α模型厚度20mm已各自直接核实，结论不推广至所有模型或真实试件。",
+    "来源/元数据一致不等于新力学验收，固定工件弱力不授压力、有效夹持、释放、稳定性或全路径参考资格。"
+  ]
+}

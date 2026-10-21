@@ -1,0 +1,971 @@
+{
+  "schema_version": "lf-grip-definition-units-source-audit-1.0",
+  "card": "L-CTIPGDEF1",
+  "status": "read_only_preparation_source_and_metadata_evidence",
+  "created_utc": "2026-10-21T05:29:08.313786+00:00",
+  "parent_reported_main": "cf75229c0ca5bec3fd30cdbffd65ab1cb83c08e1",
+  "conclusion": {
+    "thickness_mm": 20.0,
+    "thickness20_is_explicitly_evidenced": true,
+    "source": "Both current comparison-source models and their own copied geometry snapshots explicitly declare20mm",
+    "model_SHA_matches_parent_declared": true,
+    "geometry_file_SHA_matches_model_binding": true,
+    "task_geometry_binding_matches_metadata": true,
+    "task_omits_thickness_because_geometry_is_authority": true,
+    "thickness_multiplications_per_material_force_term": 1,
+    "thickness_multiplications_per_Hu_force_term": 1,
+    "additional_force_entry_or_scatter_or_nodal_thickness_multiplier_observed": false,
+    "modeled_extent": "lower_half",
+    "automatic_mirror_doubling": false,
+    "force_values_are": "N for the declared20mm thickness and modeled lower half; not N/mm or unit-thickness force",
+    "current_both_alpha_thickness20_evidenced": true,
+    "baseline_geometry_file_SHA_matches_model_binding": true,
+    "baseline_task_geometry_binding_matches_metadata": true,
+    "baseline_and_new_geometry_snapshot_file_SHA_identical": true,
+    "per_alpha_thickness_mm": {
+      "baseline": 20.0,
+      "new": 20.0
+    }
+  },
+  "units": {
+    "length": "mm",
+    "stress": "MPa = N/mm^2",
+    "energy": "N mm",
+    "force": "N",
+    "tangent": "N/mm",
+    "lambda_mu": "N/mm^2",
+    "kr": "MPa mm^2 = N",
+    "grad_N": "1/mm",
+    "Hessian_N": "1/mm^2",
+    "Hu": "1/mm",
+    "quadrature_weights": "mm^3",
+    "material_force_dimension": "(N/mm^2)*(1/mm)*(mm^3) = N",
+    "Hu_force_dimension": "N*(mm^3)*(1/mm)*(1/mm^2) = N",
+    "material_energy_dimension": "(N/mm^2)*(mm^3) = N mm",
+    "force_scale_per_length_dimension": "E*thickness = N/mm; used only in force residual floor after multiplication by displacement scale"
+  },
+  "metadata": [
+    {
+      "role": "current_new_alpha_model",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/model.json",
+      "bytes": 89774,
+      "sha256": "7f56cf78700c85145cce33a5972f73ac48e05923f16c27e69f7f118e6d239e0b",
+      "evidence": [
+        {
+          "line": 61,
+          "text": "    \"units\": {"
+        },
+        {
+          "line": 133,
+          "text": "    \"cell_size_mm\": ["
+        },
+        {
+          "line": 154,
+          "text": "  \"model_extent\": {"
+        },
+        {
+          "line": 164,
+          "text": "  \"units\": {"
+        },
+        {
+          "line": 187,
+          "text": "    \"thickness_mm\": 20.0,"
+        },
+        {
+          "line": 191,
+          "text": "    \"kr_MPa_mm2\": 0.0021538461538461533,"
+        },
+        {
+          "line": 193,
+          "text": "    \"force_scale_per_length\": 20.0"
+        }
+      ],
+      "selected": {
+        "schema_version": "hf-native-project-model-1.1",
+        "units": {
+          "length": "mm",
+          "force": "N",
+          "stress": "MPa",
+          "energy": "N mm"
+        },
+        "grid": {
+          "shape_yx": [
+            80,
+            184
+          ],
+          "origin_mm": [
+            0.0,
+            0.0
+          ],
+          "cell_size_mm": [
+            0.5,
+            0.5
+          ],
+          "axes": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "extent_mm": [
+            92.0,
+            40.0
+          ],
+          "array_order": "C_yx_bottom_up",
+          "value_location": "cell"
+        },
+        "model_extent": {
+          "kind": "lower_half",
+          "symmetry_axis": {
+            "normal": [
+              0.0,
+              1.0
+            ],
+            "offset_mm": 40.0
+          }
+        },
+        "material": {
+          "E_MPa": 1.0,
+          "nu": 0.3,
+          "formulation": "plane_strain",
+          "lambda_s_MPa": 0.5769230769230769,
+          "mu_s_MPa": 0.3846153846153846,
+          "kappa_s_MPa": 0.8333333333333333,
+          "thickness_mm": 20.0,
+          "third_medium_gamma": 1e-06,
+          "alpha": 2.5e-07,
+          "regularization_length_mm": 80.0,
+          "kr_MPa_mm2": 0.0021538461538461533,
+          "kr_material_factor_applied": false,
+          "force_scale_per_length": 20.0
+        },
+        "workpiece": {
+          "kind": "fixed_rigid",
+          "shape": "circle",
+          "center_mm": [
+            80.0,
+            40.0
+          ],
+          "radius_mm": 9.0,
+          "fixed_components": [
+            0,
+            1
+          ]
+        },
+        "regularization": {
+          "alpha": 2.5e-07,
+          "length_mm": 80.0
+        },
+        "task_geometry_binding": {
+          "geometry_id": "7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4",
+          "descriptor_sha256": "d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6"
+        },
+        "task_material": {
+          "E_MPa": 1.0,
+          "nu": 0.3,
+          "formulation": "plane_strain"
+        },
+        "source_geometry": {
+          "geometry_id": "7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4",
+          "descriptor_sha256": "d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6",
+          "descriptor_file_sha256": "9630f76972ffecbd60fa42eefb44da0c97c395db7baacaaede33cdabbbc9cf6a",
+          "arrays_sha256": "188a0d2271e1ae81e4ed96428f93561cc6021e967bb1aa8f324730c027d08b3c",
+          "snapshot": {
+            "descriptor": "source_geometry/geometry.json",
+            "arrays": "source_geometry/geometry.npz"
+          }
+        }
+      }
+    },
+    {
+      "role": "current_new_alpha_geometry_snapshot",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/source_geometry/geometry.json",
+      "bytes": 25085,
+      "sha256": "9630f76972ffecbd60fa42eefb44da0c97c395db7baacaaede33cdabbbc9cf6a",
+      "evidence": [
+        {
+          "line": 34,
+          "text": "  \"thickness_mm\": 20.0,"
+        }
+      ],
+      "selected": {
+        "schema_version": "hf-geometry-1.0",
+        "geometry_id": "7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4",
+        "descriptor_sha256": "d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6",
+        "thickness_mm": 20.0,
+        "grid": {
+          "shape_yx": [
+            80,
+            184
+          ],
+          "origin_mm": [
+            0.0,
+            0.0
+          ],
+          "cell_size_mm": [
+            0.5,
+            0.5
+          ],
+          "axes": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "extent_mm": [
+            92.0,
+            40.0
+          ],
+          "array_order": "C_yx_bottom_up",
+          "value_location": "cell"
+        },
+        "model_extent": {
+          "kind": "lower_half",
+          "symmetry_axis": {
+            "normal": [
+              0.0,
+              1.0
+            ],
+            "offset_mm": 40.0
+          }
+        }
+      }
+    },
+    {
+      "role": "current_baseline_alpha_model",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/model/model.json",
+      "bytes": 89709,
+      "sha256": "37b249eef1b01d37b83c58e13793c68d1215fd3e624f8159023e597af8dfea45",
+      "evidence": [
+        {
+          "line": 61,
+          "text": "    \"units\": {"
+        },
+        {
+          "line": 154,
+          "text": "  \"model_extent\": {"
+        },
+        {
+          "line": 164,
+          "text": "  \"units\": {"
+        },
+        {
+          "line": 187,
+          "text": "    \"thickness_mm\": 20.0,"
+        },
+        {
+          "line": 191,
+          "text": "    \"kr_MPa_mm2\": 0.004307692307692307,"
+        },
+        {
+          "line": 193,
+          "text": "    \"force_scale_per_length\": 20.0"
+        }
+      ],
+      "selected": {
+        "schema_version": "hf-native-project-model-1.1",
+        "units": {
+          "length": "mm",
+          "force": "N",
+          "stress": "MPa",
+          "energy": "N mm"
+        },
+        "grid": {
+          "shape_yx": [
+            80,
+            184
+          ],
+          "origin_mm": [
+            0.0,
+            0.0
+          ],
+          "cell_size_mm": [
+            0.5,
+            0.5
+          ],
+          "axes": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "extent_mm": [
+            92.0,
+            40.0
+          ],
+          "array_order": "C_yx_bottom_up",
+          "value_location": "cell"
+        },
+        "model_extent": {
+          "kind": "lower_half",
+          "symmetry_axis": {
+            "normal": [
+              0.0,
+              1.0
+            ],
+            "offset_mm": 40.0
+          }
+        },
+        "material": {
+          "E_MPa": 1.0,
+          "nu": 0.3,
+          "formulation": "plane_strain",
+          "lambda_s_MPa": 0.5769230769230769,
+          "mu_s_MPa": 0.3846153846153846,
+          "kappa_s_MPa": 0.8333333333333333,
+          "thickness_mm": 20.0,
+          "third_medium_gamma": 1e-06,
+          "alpha": 5e-07,
+          "regularization_length_mm": 80.0,
+          "kr_MPa_mm2": 0.004307692307692307,
+          "kr_material_factor_applied": false,
+          "force_scale_per_length": 20.0
+        },
+        "workpiece": {
+          "kind": "fixed_rigid",
+          "shape": "circle",
+          "center_mm": [
+            80.0,
+            40.0
+          ],
+          "radius_mm": 9.0,
+          "fixed_components": [
+            0,
+            1
+          ]
+        },
+        "regularization": {
+          "alpha": 5e-07,
+          "length_mm": 80.0
+        },
+        "task_geometry_binding": {
+          "geometry_id": "7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4",
+          "descriptor_sha256": "d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6"
+        },
+        "task_material": {
+          "E_MPa": 1.0,
+          "nu": 0.3,
+          "formulation": "plane_strain"
+        },
+        "source_geometry": {
+          "geometry_id": "7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4",
+          "descriptor_sha256": "d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6",
+          "descriptor_file_sha256": "9630f76972ffecbd60fa42eefb44da0c97c395db7baacaaede33cdabbbc9cf6a",
+          "arrays_sha256": "188a0d2271e1ae81e4ed96428f93561cc6021e967bb1aa8f324730c027d08b3c",
+          "snapshot": {
+            "descriptor": "source_geometry/geometry.json",
+            "arrays": "source_geometry/geometry.npz"
+          }
+        }
+      }
+    },
+    {
+      "role": "current_baseline_alpha_geometry_snapshot",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/model/source_geometry/geometry.json",
+      "bytes": 25085,
+      "sha256": "9630f76972ffecbd60fa42eefb44da0c97c395db7baacaaede33cdabbbc9cf6a",
+      "evidence": [
+        {
+          "line": 34,
+          "text": "  \"thickness_mm\": 20.0,"
+        }
+      ],
+      "selected": {
+        "schema_version": "hf-geometry-1.0",
+        "geometry_id": "7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4",
+        "descriptor_sha256": "d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6",
+        "thickness_mm": 20.0,
+        "grid": {
+          "shape_yx": [
+            80,
+            184
+          ],
+          "origin_mm": [
+            0.0,
+            0.0
+          ],
+          "cell_size_mm": [
+            0.5,
+            0.5
+          ],
+          "axes": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "extent_mm": [
+            92.0,
+            40.0
+          ],
+          "array_order": "C_yx_bottom_up",
+          "value_location": "cell"
+        },
+        "model_extent": {
+          "kind": "lower_half",
+          "symmetry_axis": {
+            "normal": [
+              0.0,
+              1.0
+            ],
+            "offset_mm": 40.0
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "hf_repo/src/hf_eval/data.py",
+      "bytes": 16477,
+      "sha256": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+      "purpose": "Geometry length unit is mm; positive thickness_mm required and bound into geometry authority header.",
+      "evidence": [
+        {
+          "line": 100,
+          "text": "    if result.get(\"length_unit\", \"mm\") != \"mm\":"
+        },
+        {
+          "line": 128,
+          "text": "    result[\"thickness_mm\"] = _number(result.get(\"thickness_mm\"), \"thickness_mm\", positive=True)"
+        },
+        {
+          "line": 218,
+          "text": "        \"thickness_mm\": metadata[\"thickness_mm\"],"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_map.py",
+      "bytes": 7794,
+      "sha256": "ab4ed8c769cfa15d67e0378de1d0c7e7226eb553a216c7fa9b79b0817084fc28",
+      "purpose": "Production builder obtains the Geometry through load_geometry; this audit never invokes it.",
+      "evidence": [
+        {
+          "line": 59,
+          "text": "def prepare_native_geometry(geometry_file) -> NativeGeometryMap:"
+        },
+        {
+          "line": 65,
+          "text": "    geometry = load_geometry(descriptor)"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_project.py",
+      "bytes": 23187,
+      "sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+      "purpose": "Explicit geometry thickness enters model; material constants/kr do not already contain thickness; unit/extent/material declarations persisted.",
+      "evidence": [
+        {
+          "line": 50,
+          "text": "    _require(task[\"units\"] == UNITS, \"Project units must be mm, N, MPa and N mm\")"
+        },
+        {
+          "line": 189,
+          "text": "def build_native_project(geometry_file, task_dict: dict) -> Project:"
+        },
+        {
+          "line": 198,
+          "text": "    mapping = prepare_native_geometry(geometry_file)"
+        },
+        {
+          "line": 200,
+          "text": "    _require(task[\"geometry\"] == dict(geometry_id=geometry.geometry_id,"
+        },
+        {
+          "line": 246,
+          "text": "    lam = E * nu / ((1 + nu) * (1 - 2 * nu))"
+        },
+        {
+          "line": 247,
+          "text": "    mu = E / (2 * (1 + nu))"
+        },
+        {
+          "line": 249,
+          "text": "    kr = alpha * length**2 * (kappa + 4 * mu / 3)"
+        },
+        {
+          "line": 251,
+          "text": "    thickness = geometry.metadata[\"thickness_mm\"]"
+        },
+        {
+          "line": 252,
+          "text": "    model = TMCModel(arrays[\"coordinates_mm\"], arrays[\"connectivity\"], lam * factors,"
+        },
+        {
+          "line": 253,
+          "text": "                     mu * factors, kr, hx, hy, thickness, solid, fixed)"
+        },
+        {
+          "line": 270,
+          "text": "        force_energy_extent=geometry.metadata[\"model_extent\"][\"kind\"]+\" modeled geometry; no automatic doubling\")"
+        },
+        {
+          "line": 278,
+          "text": "        kappa_s_MPa=kappa, thickness_mm=thickness, third_medium_gamma=medium, alpha=alpha,"
+        },
+        {
+          "line": 280,
+          "text": "        force_scale_per_length=E * thickness)"
+        },
+        {
+          "line": 302,
+          "text": "                   dict(kr=model.kr, hx=model.hx, hy=model.hy, thickness=model.thickness, k_out=project.k_out,"
+        },
+        {
+          "line": 316,
+          "text": "        model_extent=deepcopy(project.geometry.metadata[\"model_extent\"]), units=deepcopy(UNITS),"
+        },
+        {
+          "line": 319,
+          "text": "        material=deepcopy(project.material), region_metadata=regions, qualification=deepcopy(project.qualification),"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/tmc.py",
+      "bytes": 19273,
+      "sha256": "b2a1d4d449886667821e805cddeaf7bab3073d2d7a6cc1baeddfed05f407f025",
+      "purpose": "Generic thickness default1 exists, but current native path passes explicit geometry thickness; operators receive it.",
+      "evidence": [
+        {
+          "line": 46,
+          "text": "    thickness: float = 1.0"
+        },
+        {
+          "line": 59,
+          "text": "        for name in (\"hx\", \"hy\", \"thickness\", \"kr\"):"
+        },
+        {
+          "line": 88,
+          "text": "        self.ops = operators(self.hx, self.hy, self.thickness)"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/tmc_kernel.py",
+      "bytes": 12018,
+      "sha256": "dba45df22b36e2bf03bec4589d35ab6a37d151bf0c7d89b01fe6763964dfefd0",
+      "purpose": "Only quadrature weights carry thickness as hx*hy*thickness/36; reference grad/Hessian are geometric.",
+      "evidence": [
+        {
+          "line": 47,
+          "text": "def operators(hx, hy, thickness=1.0):"
+        },
+        {
+          "line": 51,
+          "text": "    hessian[a,J,K] includes both xy and yx. Weights already include reference"
+        },
+        {
+          "line": 52,
+          "text": "    area Jacobian and thickness; sum(weights) = hx*hy*thickness."
+        },
+        {
+          "line": 60,
+          "text": "    grad[:, :, 0] = np.column_stack((eta-1, 1-eta, 1+eta, -1-eta)) / (2*hx)"
+        },
+        {
+          "line": 61,
+          "text": "    grad[:, :, 1] = np.column_stack((xi-1, -1-xi, 1+xi, 1-xi)) / (2*hy)"
+        },
+        {
+          "line": 63,
+          "text": "    hessian[:, 0, 1] = np.array([1., -1., 1., -1.]) / (hx*hy)"
+        },
+        {
+          "line": 65,
+          "text": "    weights = np.outer([1., 4., 1.], [1., 4., 1.]).ravel() * (hx*hy*thickness/36)"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/split_kernel_invariants_hu.py",
+      "bytes": 19752,
+      "sha256": "d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a",
+      "purpose": "Current NumPy complete/mechanical response integrates material and Hu each with the same already thickness-inclusive weights, then scatters without another thickness factor.",
+      "evidence": [
+        {
+          "line": 169,
+          "text": "    # Keep product residuals in the quadrature and gradient contractions."
+        },
+        {
+          "line": 170,
+          "text": "    stress_grad = mul(_index(P, (..., None, slice(None), slice(None))),"
+        },
+        {
+          "line": 173,
+          "text": "    weighted_material = mul(ci.dd_from(weights[:, None, None], xp), element_material)"
+        },
+        {
+          "line": 175,
+          "text": "    material_pair = _reshape(ci.dd_sum(weighted_material, -3, xp), force_shape)"
+        },
+        {
+          "line": 176,
+          "text": "    action_pair = _reshape(ci.hessian_action_pair(Hu, hessian, xp), force_shape)"
+        },
+        {
+          "line": 178,
+          "text": "    scale = mul(ci.dd_from(kr, xp), ci.dd_sum(mul(ci.dd_from(weights, xp), exponential), -1, xp))"
+        },
+        {
+          "line": 179,
+          "text": "    regularization_pair = mul(_index(scale, (..., None)), action_pair)"
+        },
+        {
+          "line": 180,
+          "text": "    residual_pair = add(material_pair, regularization_pair)"
+        },
+        {
+          "line": 289,
+          "text": "        _, checked = _response(lift, fluctuation, reference[\"grad\"], reference[\"hessian\"],"
+        },
+        {
+          "line": 290,
+          "text": "                               reference[\"weights\"], lam_values, mu_values, float(kr_value), np,"
+        },
+        {
+          "line": 315,
+          "text": "def batch_response_split_numpy(lift_e, fluctuation_e, ops, lam, mu, kr):"
+        },
+        {
+          "line": 323,
+          "text": "    _, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr)"
+        },
+        {
+          "line": 327,
+          "text": "def batch_response_split_mechanical_numpy(lift_e, fluctuation_e, ops, lam, mu, kr):"
+        },
+        {
+          "line": 334,
+          "text": "    _, result = _numpy_response(lift_e, fluctuation_e, ops, lam, mu, kr,"
+        },
+        {
+          "line": 350,
+          "text": "def _assemble_split(model, state, *, tangent, numpy=False, mechanical=False):"
+        },
+        {
+          "line": 358,
+          "text": "    args = (state.lift[model.edofs], state.fluctuation[model.edofs],"
+        },
+        {
+          "line": 363,
+          "text": "        fields = batch_response_split_numpy(*args) if numpy else batch_response_split(*args, tangent=tangent)"
+        },
+        {
+          "line": 366,
+          "text": "    internal = np.bincount(model.edofs.ravel(), weights=fields[\"residual\"].ravel(), minlength=model.ndof)"
+        },
+        {
+          "line": 378,
+          "text": "def assemble_split_numpy(model, state):"
+        },
+        {
+          "line": 380,
+          "text": "    return _assemble_split(model, state, tangent=False, numpy=True)"
+        },
+        {
+          "line": 383,
+          "text": "def assemble_split_mechanical_numpy(model, state):"
+        },
+        {
+          "line": 389,
+          "text": "    return _assemble_split(model, state, tangent=False, numpy=True, mechanical=True)"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_force.py",
+      "bytes": 6667,
+      "sha256": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+      "purpose": "Supplied-state NumPy public force entry builds native project, calls assemble_split_numpy and scatters fields with no thickness multiplier.",
+      "evidence": [
+        {
+          "line": 19,
+          "text": "from .native_project import build_native_project, write_native_project"
+        },
+        {
+          "line": 21,
+          "text": "from .split_kernel_invariants_hu import KERNEL_VERSION, assemble_split_numpy"
+        },
+        {
+          "line": 46,
+          "text": "def evaluate_native_force(geometry_file, task_dict: dict, state: SplitDisplacement) -> NativeForceResult:"
+        },
+        {
+          "line": 56,
+          "text": "    project = build_native_project(geometry_file, task_dict)"
+        },
+        {
+          "line": 58,
+          "text": "    _, total, fields = assemble_split_numpy(project.model, state)"
+        },
+        {
+          "line": 62,
+          "text": "    material = np.bincount(indices, weights=fields[\"material_residual\"].ravel(), minlength=model.ndof)"
+        },
+        {
+          "line": 63,
+          "text": "    regularization = np.bincount(indices, weights=fields[\"regularization_residual\"].ravel(), minlength=model.ndof)"
+        },
+        {
+          "line": 67,
+          "text": "    arrays = dict(element_total_force=fields[\"residual\"], element_material_force=fields[\"material_residual\"],"
+        },
+        {
+          "line": 68,
+          "text": "        element_regularization_force=fields[\"regularization_residual\"], global_total_force=total,"
+        },
+        {
+          "line": 69,
+          "text": "        global_material_force=material, global_regularization_force=regularization,"
+        },
+        {
+          "line": 87,
+          "text": "            max_abs_global_total_force_N=float(np.abs(total).max()),"
+        },
+        {
+          "line": 88,
+          "text": "            sum_material_energy_N_mm=float(fields[\"material_energy\"].sum())),"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_mean.py",
+      "bytes": 22777,
+      "sha256": "76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4",
+      "purpose": "Current equilibrium dispatcher uses NumPy complete/mechanical aliases, retains force arrays and declares N/mm tangent; imports from native_force are persistence/hash helpers.",
+      "evidence": [
+        {
+          "line": 23,
+          "text": "from .native_project import build_native_project, write_native_project"
+        },
+        {
+          "line": 27,
+          "text": "from .split_kernel_invariants_hu import (MECHANICAL_KERNEL_VERSION,"
+        },
+        {
+          "line": 29,
+          "text": "from .split_numpy_tangent import (TANGENT_VERSION, _assemble_force, _assemble_tangent,"
+        },
+        {
+          "line": 159,
+          "text": "    response_mode,tangent_mode,initial_guess = native_options(response_mode,tangent_mode,initial_guess,"
+        },
+        {
+          "line": 167,
+          "text": "    force_assembler = _assemble_force if response_mode == \"complete\" else _assemble_mechanical_force"
+        },
+        {
+          "line": 194,
+          "text": "        _, internal, fields = force_assembler(actual_model, state)"
+        },
+        {
+          "line": 202,
+          "text": "                tensors = tangent_function(fields, actual_model.ops, actual_model.lam, actual_model.mu, actual_model.kr)"
+        },
+        {
+          "line": 221,
+          "text": "        arrays = dict(element_total_force=fields[\"residual\"], element_material_force=fields[\"material_residual\"],"
+        },
+        {
+          "line": 222,
+          "text": "            element_regularization_force=fields[\"regularization_residual\"], global_total_force=internal,"
+        },
+        {
+          "line": 223,
+          "text": "            global_material_force=measured[\"material_internal_force\"],"
+        },
+        {
+          "line": 224,
+          "text": "            global_regularization_force=measured[\"regularization_internal_force\"],"
+        },
+        {
+          "line": 249,
+          "text": "    path = solve_split_displacement_path(model, project.bin, project.bout, targets, project.k_out,"
+        },
+        {
+          "line": 250,
+          "text": "        settings=settings, force_scale_per_length=project.material[\"force_scale_per_length\"],"
+        },
+        {
+          "line": 266,
+          "text": "        force_scale_per_length=project.material[\"force_scale_per_length\"], k_out_N_per_mm=project.k_out,"
+        },
+        {
+          "line": 267,
+          "text": "        matrix_units=\"N/mm\", matrix_semantics=\"K_ij=df_i/dw_j with lift fixed; full DOFs; unsymmetrized\","
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/split_numpy_tangent.py",
+      "bytes": 10495,
+      "sha256": "547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f",
+      "purpose": "Complete force alias is assemble_split_numpy, not generic TMC JAX batch_response.",
+      "evidence": [
+        {
+          "line": 15,
+          "text": "from .split_kernel_invariants_hu import (_divide_by_J, _scaled_mul, _small_product_branch, batch_response_split_numpy,"
+        },
+        {
+          "line": 16,
+          "text": "                                        assemble_split_numpy as _assemble_force)"
+        },
+        {
+          "line": 41,
+          "text": "    grad, hessian, weights = (reference[name] for name in (\"grad\", \"hessian\", \"weights\"))"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/split_displacement.py",
+      "bytes": 24156,
+      "sha256": "151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8",
+      "purpose": "E*t is a residual normalization floor scale, not a second multiplier of physical force. Support/material/Hu forces retain assembled N.",
+      "evidence": [
+        {
+          "line": 189,
+          "text": "    def measure(state, R, s, internal):"
+        },
+        {
+          "line": 192,
+          "text": "        actuator, spring = b_in*R, k_out*b_out*q_out"
+        },
+        {
+          "line": 193,
+          "text": "        residual = internal+spring-actuator"
+        },
+        {
+          "line": 194,
+          "text": "        dscale = max(abs(target_origin+s), settings.displacement_scale_floor)"
+        },
+        {
+          "line": 195,
+          "text": "        floor = settings.force_scale_floor_factor*force_scale_per_length*dscale"
+        },
+        {
+          "line": 197,
+          "text": "        scale = max(*norms, floor)"
+        },
+        {
+          "line": 202,
+          "text": "                    R_input=R, q_in=q_in, q_out=q_out, constraint_residual=error,"
+        },
+        {
+          "line": 206,
+          "text": "                    relative_residual=float(np.linalg.norm(residual[model.free]))/scale,"
+        },
+        {
+          "line": 211,
+          "text": "        support = np.zeros(model.ndof)"
+        },
+        {
+          "line": 212,
+          "text": "        support[model.fixed_dofs] = measured[\"force_residual\"][model.fixed_dofs]"
+        },
+        {
+          "line": 217,
+          "text": "        measured.update(support_reaction=support, internal_force=internal.copy(),"
+        },
+        {
+          "line": 218,
+          "text": "                        material_internal_force=np.bincount(model.edofs.ravel(), weights=fields[\"material_residual\"].ravel(), minlength=model.ndof),"
+        },
+        {
+          "line": 219,
+          "text": "                        regularization_internal_force=np.bincount(model.edofs.ravel(), weights=fields[\"regularization_residual\"].ravel(), minlength=model.ndof),"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/project.py",
+      "bytes": 15171,
+      "sha256": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+      "purpose": "UNITS declares mm, N, MPa, N mm.",
+      "evidence": [
+        {
+          "line": 25,
+          "text": "UNITS = {\"length\": \"mm\", \"force\": \"N\", \"stress\": \"MPa\", \"energy\": \"N mm\"}"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+      "bytes": 4423,
+      "sha256": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9",
+      "purpose": "Nodal observer changes sign/selects/sums N and forms original N mm moments; no thickness factor or mirror doubling.",
+      "evidence": [
+        {
+          "line": 1,
+          "text": "\"\"\"Saved fixed-body nodal weak forces, in N; not face traction or pressure.\"\"\""
+        },
+        {
+          "line": 17,
+          "text": "    Body force is minus the internal weak force; holding reaction is opposite."
+        },
+        {
+          "line": 53,
+          "text": "        forces[component] = -saved.reshape(-1, 2)[nodes].copy()"
+        },
+        {
+          "line": 60,
+          "text": "        vectors = {name: [fsum(float(v) for v in values[selected, axis])"
+        },
+        {
+          "line": 62,
+          "text": "        moments = {name: fsum(float(x)*float(fy)-float(y)*float(fx)"
+        },
+        {
+          "line": 65,
+          "text": "        return dict(force_on_body_N=vectors, moment_about_origin_Nmm=moments)"
+        },
+        {
+          "line": 70,
+          "text": "    summary = dict(force_on_lower_body_N=complete[\"force_on_body_N\"],"
+        },
+        {
+          "line": 71,
+          "text": "                   moment_about_origin_Nmm=complete[\"moment_about_origin_Nmm\"],"
+        },
+        {
+          "line": 72,
+          "text": "                   holding_reaction_on_model_N=[fsum(float(v) for v in holding[dofs[axis::2]])"
+        }
+      ]
+    }
+  ],
+  "scope": {
+    "HF_import_or_execution": 0,
+    "new_force_or_tangent_or_equilibrium": 0,
+    "new_tests_or_plots": 0,
+    "scientific_NPZ_CSV_gzip_or_media_reads": 0,
+    "Git_operations": 0,
+    "implementation_changes": 0,
+    "evidence_kind": "Current source trace and four ordinary metadata JSONs (two comparison-source model/geometry pairs) only; no saved array inspection, numerical rescale or fresh solver validation"
+  },
+  "limits": [
+    "The generic TMCModel/structured_model default thickness1 is not the current explicitly passed20mm native model.",
+    "Do not multiply the existing N values by20 again. A future per-thickness normalization would have units N/mm and is not performed here.",
+    "Current source/math and model/geometry metadata are evidenced; this is not a whole-history or saved NPZ byte/force re-audit.",
+    "Plane strain with declared thickness20mm does not prove hardware thickness or contact/clamping/pressure qualification."
+  ],
+  "supplemented_utc": "2026-10-21T05:30:55.263374+00:00"
+}

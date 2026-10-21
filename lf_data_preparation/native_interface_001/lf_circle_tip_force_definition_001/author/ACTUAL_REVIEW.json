@@ -1,0 +1,281 @@
+{
+  "card": "L-CTIPGDEF1",
+  "status": "pass_finite_actual_document_review",
+  "integration_status": "pass",
+  "review_type": "finite_actual_document_integration_review",
+  "execution_status": "not_applicable_no_runtime",
+  "blockers": [],
+  "blocking_findings": [],
+  "reviewed_utc": "2026-10-21T07:31:50.491615+00:00",
+  "local_date": "2026-10-21",
+  "local_timezone": "Asia/Seoul",
+  "source_baseline_commit": "cf75229c0ca5bec3fd30cdbffd65ab1cb83c08e1",
+  "proposed_plan_sha256": "209c74823723dbfe26d437257e00459080347da5ae0c0a9a6c0a66068b8e6fd2",
+  "primary_document": {
+    "path": "docs/WORKPIECE_FORCE_DEFINITION.md",
+    "bytes": 11837,
+    "sha256": "8a3ffbb984a14e81ea45f746eb479d1358ebb9957a16f6ae29e4af6e7f89a8ec"
+  },
+  "checks": [
+    {
+      "id": "DOC01",
+      "subject": "真实整合与授权",
+      "status": "pass",
+      "evidence": "主规则11837 B及SHA匹配integration receipt；当前直接授权为整合/发布true，数值运行false；原PLAN/preapproval/pending封条保持历史。"
+    },
+    {
+      "id": "DOC02",
+      "subject": "厚度与量纲",
+      "status": "pass",
+      "evidence": "正式规则与已复核UNITS一致：两源各20mm并在当前NumPy weights入一次，原N不再乘厚度，不由task未重复填写推断厚度未知。"
+    },
+    {
+      "id": "DOC03",
+      "subject": "单侧量与三力",
+      "status": "pass",
+      "evidence": "ON-body负internal、全节点有符号Fy及Fx、total/material/Hu与原total holding范围正确；局部normal/压力及独立分量反力未被冒称。"
+    },
+    {
+      "id": "DOC04",
+      "subject": "镜像与节点",
+      "status": "pass",
+      "evidence": "mirror/full-net/幅值和仅解释producer，明示rich无selector且不补算；四mask和边交点、原矩参考点及旧accepted/global角色保持。"
+    },
+    {
+      "id": "DOC05",
+      "subject": "真实字段用法",
+      "status": "pass",
+      "evidence": "完整selector及within/cross不同原键对应FIELD MAP，origin零态、原source/SHA/37字段关联与单位区分清楚，不新增差量、指标或资格。"
+    },
+    {
+      "id": "DOC06",
+      "subject": "23条规则链接",
+      "status": "pass",
+      "evidence": "主规则23个相对链接目标存在，所有#L引用在对应普通源码/metadata有效行内，已知来源SHA保持；未读媒体或跟随旧人工页。"
+    },
+    {
+      "id": "DOC07",
+      "subject": "五入口后缀",
+      "status": "pass",
+      "evidence": "5个front新增前缀格式与定义链接有效，旧字节后缀hash/长度/仅一次保留；5条RESULTS链接为本次审阅后root将写的明确计划文件，待最终文档核查。"
+    },
+    {
+      "id": "DOC08",
+      "subject": "仅文档与后续交付",
+      "status": "pass",
+      "evidence": "receipt和root只读diff证据表明0默认/reader实现改动、运行/API/测试/图及资格升级；本审阅无Git/科学，发布与恢复尚未开始，不预写其通过。"
+    }
+  ],
+  "check_count": 8,
+  "checked_primary_links": [
+    {
+      "href": "../lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/run_001/REVIEW.md",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/run_001/REVIEW.md"
+    },
+    {
+      "href": "../lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/saved_study_report.py#L54",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/saved_study_report.py",
+      "line": 54,
+      "line_text": "def load_saved_study_report(cycle_report_file, peak_node_report_file, *, repo_root, bindings, assets):"
+    },
+    {
+      "href": "../lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/model/model.json#L187",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/wave_circle_tip_step10/model/model.json",
+      "line": 187,
+      "line_text": "    \"thickness_mm\": 20.0,"
+    },
+    {
+      "href": "../lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/model.json#L187",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/model.json",
+      "line": 187,
+      "line_text": "    \"thickness_mm\": 20.0,"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/native_project.py#L251",
+      "path": "hf_repo/src/hf_eval/native_project.py",
+      "line": 251,
+      "line_text": "    thickness = geometry.metadata[\"thickness_mm\"]"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/tmc.py#L88",
+      "path": "hf_repo/src/hf_eval/tmc.py",
+      "line": 88,
+      "line_text": "        self.ops = operators(self.hx, self.hy, self.thickness)"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/tmc_kernel.py#L65",
+      "path": "hf_repo/src/hf_eval/tmc_kernel.py",
+      "line": 65,
+      "line_text": "    weights = np.outer([1., 4., 1.], [1., 4., 1.]).ravel() * (hx*hy*thickness/36)"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/split_kernel_invariants_hu.py#L173",
+      "path": "hf_repo/src/hf_eval/split_kernel_invariants_hu.py",
+      "line": 173,
+      "line_text": "    weighted_material = mul(ci.dd_from(weights[:, None, None], xp), element_material)"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/split_kernel_invariants_hu.py#L178",
+      "path": "hf_repo/src/hf_eval/split_kernel_invariants_hu.py",
+      "line": 178,
+      "line_text": "    scale = mul(ci.dd_from(kr, xp), ci.dd_sum(mul(ci.dd_from(weights, xp), exponential), -1, xp))"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/native_force.py#L58",
+      "path": "hf_repo/src/hf_eval/native_force.py",
+      "line": 58,
+      "line_text": "    _, total, fields = assemble_split_numpy(project.model, state)"
+    },
+    {
+      "href": "../lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/author/UNITS_SOURCE_AUDIT.md",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/author/UNITS_SOURCE_AUDIT.md"
+    },
+    {
+      "href": "../lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/author/UNITS_SOURCE_AUDIT.json",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/author/UNITS_SOURCE_AUDIT.json"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/workpiece_nodal.py#L53",
+      "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+      "line": 53,
+      "line_text": "        forces[component] = -saved.reshape(-1, 2)[nodes].copy()"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/native_mean.py#L100",
+      "path": "hf_repo/src/hf_eval/native_mean.py",
+      "line": 100,
+      "line_text": "        normal_force_on_lower_body_N=fy, mirrored_upper_force_N=[fx, -fy],"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/workpiece_nodal.py#L70",
+      "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+      "line": 70,
+      "line_text": "    summary = dict(force_on_lower_body_N=complete[\"force_on_body_N\"],"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/native_mean.py#L100",
+      "path": "hf_repo/src/hf_eval/native_mean.py",
+      "line": 100,
+      "line_text": "        normal_force_on_lower_body_N=fy, mirrored_upper_force_N=[fx, -fy],"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/workpiece_nodal.py#L36",
+      "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+      "line": 36,
+      "line_text": "    closed = exposed_q1_edges(conn, cells, xy)"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/workpiece_nodal.py#L44",
+      "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+      "line": 44,
+      "line_text": "    origin = (positions.mean(axis=0) if moment_origin_mm is None"
+    },
+    {
+      "href": "../hf_repo/src/hf_eval/workpiece_nodal.py#L62",
+      "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+      "line": 62,
+      "line_text": "        moments = {name: fsum(float(x)*float(fy)-float(y)*float(fx)"
+    },
+    {
+      "href": "../lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/saved_study_report.py#L144",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/saved_study_report.py",
+      "line": 144,
+      "line_text": "    return dict(cycles=cycles,scalar_comparison=scalar,peak_node_comparison=node,report=report)"
+    },
+    {
+      "href": "../lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/saved_study_report.py#L103",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/saved_study_report.py",
+      "line": 103,
+      "line_text": "        _need(all(field in row and field in state and _identical(row[field],state[field]) for field in ORIGINAL_FIELDS), 'Original37 peak observations differ: '+name)"
+    },
+    {
+      "href": "../lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/author/FORCE_FIELD_MAP.md",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/author/FORCE_FIELD_MAP.md"
+    },
+    {
+      "href": "../lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/author/FORCE_FIELD_MAP.json",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/author/FORCE_FIELD_MAP.json"
+    }
+  ],
+  "checked_primary_link_count": 23,
+  "front_suffix_checks": [
+    {
+      "path": "README.md",
+      "old_sha256": "678ce826ec6125583ff8aa3b9aa1b8fd389bc2d0bb2dcd603460f78fe269423a",
+      "raw_suffix_preserved_once": true
+    },
+    {
+      "path": "hf_repo/README.md",
+      "old_sha256": "0b4f69aba02cb76ac4c94a2efd59a817c08018167dee9d2b9716b67c21d1bd32",
+      "raw_suffix_preserved_once": true
+    },
+    {
+      "path": "docs/CURRENT_STATUS.md",
+      "old_sha256": "fa87264b79d187b993235c012221b6b858de2823834794f0b8e370a0ab08a1ac",
+      "raw_suffix_preserved_once": true
+    },
+    {
+      "path": "docs/PHYSICAL_FUNCTION_PROGRESS.md",
+      "old_sha256": "a12ddfc737b85683e85f462aca2d7777a52d912c16c3c8df5d7fe11a18058ca6",
+      "raw_suffix_preserved_once": true
+    },
+    {
+      "path": "docs/RESUME_DEVELOPMENT.md",
+      "old_sha256": "918761fb6a79c4f96a968ea2c2e2d620a1d90f5f2720dfb6749172e0c91bb6b8",
+      "raw_suffix_preserved_once": true
+    }
+  ],
+  "declared_post_review_result_links": [
+    {
+      "front": "README.md",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/RESULTS.md",
+      "scope": "Declared root post-review result record, not a missing primary-definition source"
+    },
+    {
+      "front": "hf_repo/README.md",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/RESULTS.md",
+      "scope": "Declared root post-review result record, not a missing primary-definition source"
+    },
+    {
+      "front": "docs/CURRENT_STATUS.md",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/RESULTS.md",
+      "scope": "Declared root post-review result record, not a missing primary-definition source"
+    },
+    {
+      "front": "docs/PHYSICAL_FUNCTION_PROGRESS.md",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/RESULTS.md",
+      "scope": "Declared root post-review result record, not a missing primary-definition source"
+    },
+    {
+      "front": "docs/RESUME_DEVELOPMENT.md",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/RESULTS.md",
+      "scope": "Declared root post-review result record, not a missing primary-definition source"
+    }
+  ],
+  "post_review_result_links_require_root_final_check": true,
+  "source_check_record": {
+    "path": "author/DEFINITION_SOURCE_CHECK.json",
+    "sha256": "9cdd0179e5a4bf4f121478e302a99cb1da181fd7fbea2fb64b7ae2b8a00c260d"
+  },
+  "publication_status": "not_started_at_document_review",
+  "publication_and_restore_pass_claimed": false,
+  "root_repository_diff_evidence": "Root explicitly reported hf_repo/src diff empty and zero new implementation code; reviewer did not run Git.",
+  "scope": {
+    "primary_document_reads": 1,
+    "primary_links": 23,
+    "front_files": 5,
+    "control_and_preparation_reads": "Fixed current stage controls, approved history and pinned evidence only",
+    "scientific_payload_reads": 0,
+    "media_reads": 0,
+    "new_API_calls": 0,
+    "candidate_or_scientific_execution": 0,
+    "force_or_mirror_calculation": 0,
+    "new_metrics": 0,
+    "tests": 0,
+    "plots": 0,
+    "Git_commands": 0,
+    "formal_writes": 0
+  },
+  "scientific_acceptance": false,
+  "qualification_upgrades": false
+}

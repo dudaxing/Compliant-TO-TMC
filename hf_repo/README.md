@@ -1,3 +1,5 @@
+> 2026-10-21 L-CTIPGDEF1：已按用户批准整合[单侧工件作用力规则](../docs/WORKPIECE_FORCE_DEFINITION.md)，明确当前两α的20 mm厚度已含于N力值、有符号Fy、material/Hu、holding、镜像与现有字段用法；来源及实际核查见[本轮记录](../lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/RESULTS.md)。原实现、数值与资格保持，历史说明保留如下。
+
 > 2026-10-21 L-CTIPAREPORT1 **执行PASS**／阶段完成True：新增研究层保存报告函数/CLI和轻索引，关联现成两alpha周期、260标量差、565对3390节点差及12既有图页；无新PNG或科学验收，原对象/资格保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/RESULTS.md)。原历史说明保留如下。
 
 > 2026-10-21 L-CTIPAFORCE1 **执行PASS**／图像QA pass_root_visual_inspection_with_visibility_limits／阶段完成True：完成两种alpha同1.06峰节点弱力空间对照，实际计数 {'sources': 2, 'node_raw_rows': 1130, 'matched_node_pairs': 565, 'descriptive_node_differences': 3390, 'mask_group_original_rows': 8, 'mask_group_matched_pairs': 4, 'mask_group_component_differences': 24, 'whole_resultant_component_differences': 6}；两张新力图和原值/差量可审查。无新科学求解或资格升级；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_tip_alpha_force_001/RESULTS.md)。原历史说明保留如下。
