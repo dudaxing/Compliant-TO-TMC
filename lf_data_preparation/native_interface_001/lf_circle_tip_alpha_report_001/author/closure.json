@@ -1,0 +1,704 @@
+{
+  "card": "L-CTIPAREPORT1",
+  "status": "pass_closed",
+  "execution_status": "pass",
+  "execution_closed": true,
+  "created_utc": "2026-10-21T05:21:26.042396+00:00",
+  "report_client_local_date": "2026-10-21",
+  "report_timezone": "Asia/Seoul",
+  "source_baseline_commit": "035eaef93324d2bdb4767e5b6c0b5850e51cd766",
+  "science_version": "0.5.0",
+  "science_baseline_commit": "b1334bb6a83ba9a0efab7bdba7bd39722146f024",
+  "protocol_sha256": "d000f698503f70455ee9bbb8c3142a30ed2b6317e543c3b03f4a37583d4dd8b4",
+  "outer_status": "pass",
+  "helper_status": "pass",
+  "authorization_record": "author/authorization.json",
+  "preparation_pending_flags_are_historical": true,
+  "stage_complete": true,
+  "report_record": "run_001/report.json",
+  "report_status": "linked_existing_saved_reports",
+  "input_identity": {
+    "scalar_comparison": {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_comparison_001/run_001/comparison.json",
+      "bytes": 1250650,
+      "sha256": "9305ad852326a81bd452c7ed935007028b9d188f9dad646c5dafa732938ef670",
+      "schema_version": "lf-circle-tip-cross-alpha-comparison-1.0",
+      "object_path": "scalar_comparison"
+    },
+    "peak_node_comparison": {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_force_001/run_001/comparison.json",
+      "bytes": 1968363,
+      "sha256": "1f0aa85d2d9bdf1a63fb3e5685a7f58fbf89d340de8d9748f09c9c6371705d05",
+      "schema_version": "lf-circle-tip-cross-alpha-node-force-1.0",
+      "object_path": "peak_node_comparison"
+    }
+  },
+  "cycles": {
+    "baseline": {
+      "alpha": 5e-07,
+      "label": "alpha=5e-07 / 14 source segments",
+      "schema_version": "lf-circle-tip-ordinary-path-1.0",
+      "declared_source": {
+        "path": "lf_data_preparation/native_interface_001/lf_circle_tip_path_001/run_001/unified_response.json",
+        "sha256": "be22da4200153bf17c4ac5a1e0082da5d75f3b9412f658444c9c72a5077a7e1f",
+        "bytes": 568279
+      },
+      "counts": {
+        "raw_rows": 33,
+        "timeline_rows": 20,
+        "merged_boundary_anchors": 13,
+        "same_input_pairs": 7,
+        "segments": 14,
+        "requested_targets": 20
+      },
+      "original_task": {
+        "schema_version": "hf-native-project-task-1.1",
+        "task_id": "EXPLORATORY_wave_fixed_circle_r9_c80_domain92_Lr80_h05_alpha5em7_unload106_105__L_CTIPUNLOAD1",
+        "case_family": "gripper",
+        "purpose": "tip_facing_circle_LF_saved_first_unload",
+        "parameter_origin": "L-CTIPUNLOAD1 explicit user approval: retain the complete loading prefix through 1.06 mm, change only path kind to ordered_cycle and append first unload1.05 mm; input peak1.06 and all original physics/settings/gates unchanged.",
+        "material": {
+          "E_MPa": 1.0,
+          "nu": 0.3,
+          "formulation": "plane_strain"
+        },
+        "input": {
+          "tag": "input",
+          "control": "average_displacement",
+          "target_mm": 1.06
+        },
+        "output": {
+          "tag": "output",
+          "spring_N_per_mm": 0.0
+        },
+        "constraints": [
+          {
+            "tag": "support",
+            "components": [
+              0,
+              1
+            ]
+          },
+          {
+            "tag": "symmetry",
+            "components": [
+              1
+            ]
+          }
+        ],
+        "support_selection": "solid_incident_nodes_only",
+        "input_auxiliary_spring_N_per_mm": 0.0,
+        "workpiece": {
+          "kind": "fixed_rigid",
+          "shape": "circle",
+          "center_mm": [
+            80.0,
+            40.0
+          ],
+          "radius_mm": 9.0,
+          "fixed_components": [
+            0,
+            1
+          ]
+        },
+        "third_medium": {
+          "gamma": 1e-06
+        },
+        "qualification_criteria": {
+          "max_design_volume_fraction": null,
+          "min_feature_mm": null
+        },
+        "reference_state": "undeformed",
+        "units": {
+          "length": "mm",
+          "force": "N",
+          "stress": "MPa",
+          "energy": "N mm"
+        },
+        "regularization": {
+          "alpha": 5e-07,
+          "length_mm": 80.0
+        },
+        "background_symmetry": {
+          "points_mm": [
+            [
+              0.0,
+              40.0
+            ],
+            [
+              92.0,
+              40.0
+            ]
+          ],
+          "components": [
+            1
+          ]
+        },
+        "geometry": {
+          "geometry_id": "7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4",
+          "descriptor_sha256": "d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6"
+        },
+        "analysis_grid": {
+          "policy": "native"
+        },
+        "description": "Freshly revalidate true1.06 mm peak, then unload to1.05 using the installed API. Observe actual LAST state and descriptively compare prior revalidated loading1.05 scalars without new equality gates.",
+        "path": {
+          "kind": "ordered_cycle",
+          "targets_mm": [
+            0.0,
+            0.25,
+            0.5,
+            0.75,
+            0.9,
+            0.95,
+            0.98,
+            1.0,
+            1.02,
+            1.03,
+            1.04,
+            1.05,
+            1.06,
+            1.05,
+            1.0,
+            0.9,
+            0.75,
+            0.5,
+            0.25,
+            0.0
+          ]
+        }
+      },
+      "object_path": "cycles.baseline",
+      "source_identity_scope": "Copied embedded cycle declaration only; original cycle file not reopened",
+      "qualification": {
+        "new_scientific_calls": 0,
+        "new_reference_pass": false,
+        "full_path_reference_pass": false,
+        "pressure_qualified": false,
+        "effective_grip_qualified": false,
+        "release_qualified": false,
+        "stability_qualified": false,
+        "HF5_qualified": false
+      }
+    },
+    "new": {
+      "alpha": 2.5e-07,
+      "label": "alpha=2.5e-07 / 4 source segments",
+      "schema_version": "lf-circle-tip-ordinary-path-1.0",
+      "declared_source": {
+        "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_path_001/run_001/unified_response.json",
+        "sha256": "43abe4824c52b6a6d0847b5dd2aa9df5582997039b4f2e9d499beeebcd7369f2",
+        "bytes": 265573
+      },
+      "counts": {
+        "raw_rows": 23,
+        "timeline_rows": 20,
+        "merged_boundary_anchors": 3,
+        "same_input_pairs": 7,
+        "segments": 4,
+        "requested_targets": 20
+      },
+      "original_task": {
+        "schema_version": "hf-native-project-task-1.1",
+        "task_id": "EXPLORATORY_wave_fixed_circle_r9_c80_domain92_Lr80_h05_alpha25em8_load106__L_CTIPALPHA1",
+        "case_family": "gripper",
+        "purpose": "tip_facing_circle_alpha_sensitivity_zero_start_loading",
+        "parameter_origin": "L-CTIPALPHA1 explicit user approval: only physical change alpha5e-7 to2.5e-7; zero-start original13 load_only targets through1.06mm; geometry, all other physics and original production gates unchanged.",
+        "material": {
+          "E_MPa": 1.0,
+          "nu": 0.3,
+          "formulation": "plane_strain"
+        },
+        "input": {
+          "tag": "input",
+          "control": "average_displacement",
+          "target_mm": 1.06
+        },
+        "output": {
+          "tag": "output",
+          "spring_N_per_mm": 0.0
+        },
+        "constraints": [
+          {
+            "tag": "support",
+            "components": [
+              0,
+              1
+            ]
+          },
+          {
+            "tag": "symmetry",
+            "components": [
+              1
+            ]
+          }
+        ],
+        "support_selection": "solid_incident_nodes_only",
+        "input_auxiliary_spring_N_per_mm": 0.0,
+        "workpiece": {
+          "kind": "fixed_rigid",
+          "shape": "circle",
+          "center_mm": [
+            80.0,
+            40.0
+          ],
+          "radius_mm": 9.0,
+          "fixed_components": [
+            0,
+            1
+          ]
+        },
+        "third_medium": {
+          "gamma": 1e-06
+        },
+        "qualification_criteria": {
+          "max_design_volume_fraction": null,
+          "min_feature_mm": null
+        },
+        "reference_state": "undeformed",
+        "units": {
+          "length": "mm",
+          "force": "N",
+          "stress": "MPa",
+          "energy": "N mm"
+        },
+        "regularization": {
+          "alpha": 2.5e-07,
+          "length_mm": 80.0
+        },
+        "background_symmetry": {
+          "points_mm": [
+            [
+              0.0,
+              40.0
+            ],
+            [
+              92.0,
+              40.0
+            ]
+          ],
+          "components": [
+            1
+          ]
+        },
+        "geometry": {
+          "geometry_id": "7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4",
+          "descriptor_sha256": "d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6"
+        },
+        "analysis_grid": {
+          "policy": "native"
+        },
+        "description": "Single-parameter exploratory alpha sensitivity. Fresh zero-start loading, no old-alpha state/force/tangent transplant; compare same-input original13 origin/loading observations without claiming alpha independence or grip qualification.",
+        "path": {
+          "kind": "ordered_cycle",
+          "targets_mm": [
+            0.0,
+            0.25,
+            0.5,
+            0.75,
+            0.9,
+            0.95,
+            0.98,
+            1.0,
+            1.02,
+            1.03,
+            1.04,
+            1.05,
+            1.06,
+            1.05,
+            1.0,
+            0.9,
+            0.75,
+            0.5,
+            0.25,
+            0.0
+          ]
+        }
+      },
+      "object_path": "cycles.new",
+      "source_identity_scope": "Copied embedded cycle declaration only; original cycle file not reopened",
+      "qualification": {
+        "new_scientific_calls": 0,
+        "new_reference_pass": false,
+        "full_path_reference_pass": false,
+        "pressure_qualified": false,
+        "effective_grip_qualified": false,
+        "release_qualified": false,
+        "stability_qualified": false,
+        "HF5_qualified": false
+      }
+    }
+  },
+  "scalar_comparison": {
+    "counts": {
+      "sources": 2,
+      "baseline_original_targets": 20,
+      "new_original_targets": 20,
+      "raw_values": 40,
+      "matched_pairs": 20,
+      "metric_fields": 13,
+      "descriptive_differences": 260
+    },
+    "metric_fields": [
+      "R_input_N",
+      "q_out_mm",
+      "total_body_Fx_N",
+      "total_body_Fy_N",
+      "material_body_Fx_N",
+      "material_body_Fy_N",
+      "regularization_body_Fx_N",
+      "regularization_body_Fy_N",
+      "tip_to_raster_boundary_mm",
+      "minimum_boundary_distance_mm",
+      "solid_min_J",
+      "medium_min_J",
+      "medium_max_abs_Hu_per_mm"
+    ],
+    "compatibility": {
+      "comparable": true,
+      "allowed_differing_paths": [
+        "description",
+        "parameter_origin",
+        "purpose",
+        "regularization.alpha",
+        "task_id"
+      ],
+      "observed_task_differences": [
+        {
+          "path": "description",
+          "baseline_value": "Freshly revalidate true1.06 mm peak, then unload to1.05 using the installed API. Observe actual LAST state and descriptively compare prior revalidated loading1.05 scalars without new equality gates.",
+          "new_value": "Single-parameter exploratory alpha sensitivity. Fresh zero-start loading, no old-alpha state/force/tangent transplant; compare same-input original13 origin/loading observations without claiming alpha independence or grip qualification."
+        },
+        {
+          "path": "parameter_origin",
+          "baseline_value": "L-CTIPUNLOAD1 explicit user approval: retain the complete loading prefix through 1.06 mm, change only path kind to ordered_cycle and append first unload1.05 mm; input peak1.06 and all original physics/settings/gates unchanged.",
+          "new_value": "L-CTIPALPHA1 explicit user approval: only physical change alpha5e-7 to2.5e-7; zero-start original13 load_only targets through1.06mm; geometry, all other physics and original production gates unchanged."
+        },
+        {
+          "path": "purpose",
+          "baseline_value": "tip_facing_circle_LF_saved_first_unload",
+          "new_value": "tip_facing_circle_alpha_sensitivity_zero_start_loading"
+        },
+        {
+          "path": "regularization.alpha",
+          "baseline_value": 5e-07,
+          "new_value": 2.5e-07
+        },
+        {
+          "path": "task_id",
+          "baseline_value": "EXPLORATORY_wave_fixed_circle_r9_c80_domain92_Lr80_h05_alpha5em7_unload106_105__L_CTIPUNLOAD1",
+          "new_value": "EXPLORATORY_wave_fixed_circle_r9_c80_domain92_Lr80_h05_alpha25em8_load106__L_CTIPALPHA1"
+        }
+      ],
+      "unexpected_task_differences": [],
+      "alpha_contract_matches": true,
+      "rule": "Every task field except alpha and four descriptive metadata fields must remain exact; original tasks are preserved, never normalized."
+    },
+    "difference_convention": "Original new_minus_baseline retained without recalculation",
+    "object_path": "scalar_comparison"
+  },
+  "peak_node_comparison": {
+    "counts": {
+      "sources": 2,
+      "node_raw_rows": 1130,
+      "matched_node_pairs": 565,
+      "descriptive_node_differences": 3390,
+      "mask_group_original_rows": 8,
+      "mask_group_matched_pairs": 4,
+      "mask_group_component_differences": 24,
+      "whole_resultant_component_differences": 6
+    },
+    "compatibility": {
+      "comparable": true,
+      "exact_fields": {
+        "node_ids": true,
+        "coordinates_mm": true,
+        "masks": true,
+        "edges": true,
+        "moment_origin_mm": true
+      },
+      "rule": "Use exact original global IDs/fixed coordinates/masks/edges and moment origin; mismatch stops without renumbering or reclassification."
+    },
+    "mask_counts": {
+      "baseline": {
+        "physical_only": 71,
+        "cut_only": 35,
+        "physical_and_cut": 2,
+        "interior": 457
+      },
+      "new": {
+        "physical_only": 71,
+        "cut_only": 35,
+        "physical_and_cut": 2,
+        "interior": 457
+      }
+    },
+    "object_path": "peak_node_comparison",
+    "whole_resultants_object_path": "peak_node_comparison.whole_resultant_comparison",
+    "groups_object_path": "peak_node_comparison.group_pairs",
+    "original_summary_object_paths": {
+      "baseline": "peak_node_comparison.sources.baseline.original.nodal.summary",
+      "new": "peak_node_comparison.sources.new.original.nodal.summary"
+    },
+    "holding_and_moments_scope": "Original total holding/moments remain in each original summary; no component reaction or new moment integral inferred"
+  },
+  "peak_links": {
+    "baseline": {
+      "alpha": 5e-07,
+      "accepted_index": 1,
+      "original_target_index": 12,
+      "display_branch": "loading",
+      "raw_leg": "loading",
+      "d_mm": 1.06,
+      "state_sha256": "dd9288140ae51ff3cfcc7f7f6d6811b2242a55054454002bd7c06ff88a4b6bc6",
+      "original37_field_identity_matches": true,
+      "scalar_row_object_path": "scalar_comparison.raw_values[12].row",
+      "node_state_object_path": "peak_node_comparison.sources.baseline.state",
+      "scalar_source_path": "lf_data_preparation/native_interface_001/lf_circle_tip_path_001/run_001/unified_response.json",
+      "nodal_source_paths": {
+        "nodal": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/view/wave_circle_tip_step10/001/nodal.json",
+        "derived": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/view/wave_circle_tip_step10/001/derived.json",
+        "geometry": "lf_data_preparation/native_interface_001/lf_circle_tip_step_010/run_001/view/wave_circle_tip_step10/001/geometry.json"
+      }
+    },
+    "new": {
+      "alpha": 2.5e-07,
+      "accepted_index": 12,
+      "original_target_index": 12,
+      "display_branch": "loading",
+      "raw_leg": "loading",
+      "d_mm": 1.06,
+      "state_sha256": "e71c06973b7dc7aff7e5ee4a801b595cb3f054e907cc6e1ad52188e858500a68",
+      "original37_field_identity_matches": true,
+      "scalar_row_object_path": "scalar_comparison.raw_values[32].row",
+      "node_state_object_path": "peak_node_comparison.sources.new.state",
+      "scalar_source_path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_path_001/run_001/unified_response.json",
+      "nodal_source_paths": {
+        "nodal": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/view/wave_circle_tip_alpha1/012/nodal.json",
+        "derived": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/view/wave_circle_tip_alpha1/012/derived.json",
+        "geometry": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/view/wave_circle_tip_alpha1/012/geometry.json"
+      }
+    }
+  },
+  "original_qualification": {
+    "scalar_comparison": {
+      "new_scientific_calls": 0,
+      "new_reference_pass": false,
+      "full_path_reference_pass": false,
+      "pressure_qualified": false,
+      "effective_grip_qualified": false,
+      "release_qualified": false,
+      "stability_qualified": false,
+      "HF5_qualified": false
+    },
+    "peak_node_comparison": {
+      "new_scientific_calls": 0,
+      "new_reference_pass": false,
+      "full_path_reference_pass": false,
+      "pressure_qualified": false,
+      "effective_grip_qualified": false,
+      "release_qualified": false,
+      "stability_qualified": false,
+      "alpha_independence_qualified": false,
+      "HF5_qualified": false
+    },
+    "cycles": {
+      "baseline": {
+        "new_scientific_calls": 0,
+        "new_reference_pass": false,
+        "full_path_reference_pass": false,
+        "pressure_qualified": false,
+        "effective_grip_qualified": false,
+        "release_qualified": false,
+        "stability_qualified": false,
+        "HF5_qualified": false
+      },
+      "new": {
+        "new_scientific_calls": 0,
+        "new_reference_pass": false,
+        "full_path_reference_pass": false,
+        "pressure_qualified": false,
+        "effective_grip_qualified": false,
+        "release_qualified": false,
+        "stability_qualified": false,
+        "HF5_qualified": false
+      }
+    }
+  },
+  "existing_artifacts": [
+    {
+      "role": "baseline_cycle",
+      "kind": "manual",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_path_001/run_001/REVIEW.md",
+      "bytes": 34424,
+      "identity_scope": "stat_only_bytes"
+    },
+    {
+      "role": "baseline_cycle",
+      "kind": "PNG",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_path_001/run_001/response.png",
+      "bytes": 286982,
+      "identity_scope": "stat_only_bytes"
+    },
+    {
+      "role": "baseline_cycle",
+      "kind": "PNG",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_path_001/run_001/quality.png",
+      "bytes": 310485,
+      "identity_scope": "stat_only_bytes"
+    },
+    {
+      "role": "new_cycle",
+      "kind": "manual",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_path_001/run_001/REVIEW.md",
+      "bytes": 22763,
+      "identity_scope": "stat_only_bytes"
+    },
+    {
+      "role": "new_cycle",
+      "kind": "PNG",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_path_001/run_001/response.png",
+      "bytes": 286124,
+      "identity_scope": "stat_only_bytes"
+    },
+    {
+      "role": "new_cycle",
+      "kind": "PNG",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_path_001/run_001/quality.png",
+      "bytes": 312590,
+      "identity_scope": "stat_only_bytes"
+    },
+    {
+      "role": "scalar_comparison",
+      "kind": "manual",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_comparison_001/run_001/REVIEW.md",
+      "bytes": 36867,
+      "identity_scope": "stat_only_bytes"
+    },
+    {
+      "role": "scalar_comparison",
+      "kind": "PNG",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_comparison_001/run_001/response.png",
+      "bytes": 319897,
+      "identity_scope": "stat_only_bytes"
+    },
+    {
+      "role": "scalar_comparison",
+      "kind": "PNG",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_comparison_001/run_001/quality.png",
+      "bytes": 424862,
+      "identity_scope": "stat_only_bytes"
+    },
+    {
+      "role": "peak_node_comparison",
+      "kind": "manual",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_force_001/run_001/REVIEW.md",
+      "bytes": 10410,
+      "identity_scope": "stat_only_bytes"
+    },
+    {
+      "role": "peak_node_comparison",
+      "kind": "PNG",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_force_001/run_001/force_vectors.png",
+      "bytes": 313737,
+      "identity_scope": "stat_only_bytes"
+    },
+    {
+      "role": "peak_node_comparison",
+      "kind": "PNG",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_force_001/run_001/force_components.png",
+      "bytes": 309498,
+      "identity_scope": "stat_only_bytes"
+    }
+  ],
+  "business_io": {
+    "function_calls": 1,
+    "ordinary_JSON_reads": 2,
+    "asset_stat_count": 12,
+    "old_manual_stat_count": 4,
+    "old_PNG_stat_count": 8,
+    "old_media_content_reads": 0,
+    "old_GIF_stat_count": 0
+  },
+  "returned_keys": [
+    "cycles",
+    "scalar_comparison",
+    "peak_node_comparison",
+    "report"
+  ],
+  "returned_object_aliases": {
+    "cycles_baseline_is_original": true,
+    "cycles_new_is_original": true
+  },
+  "new_PNGs": 0,
+  "new_media_QA": 0,
+  "visual_QA_status": "not_applicable_no_new_images",
+  "actual_review_status": "pass_finite_actual_review",
+  "helper_phase": "single_saved_report_CLI",
+  "helper_error": null,
+  "outer_error": null,
+  "outer_stop_reason": null,
+  "resource_limits": {
+    "helper_seconds": 180,
+    "outer_seconds": 240,
+    "sampled_RSS_bytes": 1073741824,
+    "cpu_thread_limit": 16,
+    "cpu_thread_environment": {
+      "OMP_NUM_THREADS": "16",
+      "OPENBLAS_NUM_THREADS": "16",
+      "MKL_NUM_THREADS": "16",
+      "NUMEXPR_NUM_THREADS": "16"
+    }
+  },
+  "helper_elapsed_seconds": 0.3286781999922823,
+  "outer_elapsed_seconds": 1.879633600008674,
+  "peak_sampled_tree_RSS_bytes": 69120000,
+  "cleanup_verified": true,
+  "sealed_output_files": 2,
+  "sealed_output_bytes": 27465,
+  "output_identity_seal": "complete_inside_original_helper_window",
+  "new_equilibrium_solves": 0,
+  "new_production_force_calls": 0,
+  "new_production_tangent_calls": 0,
+  "new_HP_calls": 0,
+  "new_tests": 0,
+  "default_installations": 0,
+  "next_decision": {
+    "card": "L-CTIPAREPORT1",
+    "status": "pass_finite_result_based_next_step_review",
+    "execution_status": "pass",
+    "created_utc": "2026-10-21T05:21:01.146027+00:00",
+    "local_date": "2026-10-21",
+    "local_timezone": "Asia/Seoul",
+    "blockers": [],
+    "blocking_findings": [],
+    "next_step": "先明确“下半固定工件单侧有符号作用力”的操作定义、原积分厚度/单位、镜像与material/Hu含义，并在现有研究层入口给出直接字段用法；不新增reader层，不自动求解或HP。",
+    "interpretation_md": "本卡已把独立HF既有结果交给一个可导入函数/CLI：两α周期、标量差与峰节点弱力均可访问，读取功能缺口已补齐。接下来影响物理使用的是报告量的定义及资格边界，而非再套一层摘要。现有全局Fy是固定下半工件上的有符号弱作用量，total包含material与Hu；这些分量各自变化，不能只看total接近就称α独立。它尚不是面压力，也不能仅由固定工件作用力证明能承受外载或释放。",
+    "next_steps_md": "# L-CTIPAREPORT1 结果后的下一步\n\n本卡实际PASS：一次函数调用、两份普通JSON读取、12项stat、两条cycle原对象别名通过；轻report与人工页共27465 B，无新科学或图像。该阶段补齐研究层结果使用入口，整体开发尚未完成。\n\n建议下一步只推进“单侧力操作定义与研究用法”（暂名L-CTIPGDEF1）。不再增加reader或报告套层，不例行新增HP、降α或继续加载。\n\n1. 先核现有积分源码、材料单位与任务中的平面应变/厚度约定，明确当前N单位对应的模型厚度。原task未单独声明厚度，不能现在擅定1 mm、乘实物厚度或把模型量直接当实物容量；若证据不足，明确标未指定。\n2. 以既有下半固定工件全局有符号Fy作为候选操作量，保留Fx及原source/leg/d/SHA。应称“下半工件单侧竖直作用力/模型弱力”，不改叫局部法向压力；不吸附为正、不取绝对值替代原负号。\n3. total/material/Hu分别解释。原total holding是相反方向的已保存支撑反力，material/Hu反号只是代数分量，不能当作独立测量。原四类节点mask与物理/切面边集合分别保，不删小项。\n4. 说明镜像：在对称任务下，上下侧Fy方向相反；完整装配的全局合力与单侧作用量不是同一个量。若以后使用“两侧法向合量/幅值和”，必须另作明确定义，不能静默把2×单侧Fy称为总合力。现在不计算新指标。\n5. 在现有入口说明直接使用cycles[key].timeline_rows、scalar_comparison原字段和peak_node_comparison原summary的路径；沿用现有函数，不新建loader/重算差量。用原图页呈现变形、力方向和Hu来源，原密集小箭头/微距可见性限制保留，不重绘。\n\n完成条件是单位/厚度、对象、方向、符号、单侧/镜像、total与分量、数据字段及解释范围都有可对照源码的定义。它仅建立可重复的报告规则，不授有效夹持、压力、释放、稳定性、α独立或全路径参考资格。\n\n之后若要回答“能否真正夹住并承受外载/释放”，应先明确允许的工件运动、外载及成功标准，再单独制定最小物理验证任务。当前固定工件和输入回到零不能替代此验证；不在本卡自动启动新求解、HP、网格/参数实验或测试。\n\n下一步尚未获新执行授权、未编码、未启动。本建议来自当前实际功能与缺口；这里只准备物理定义方案，后续新范围在具体化并明确批准后进行，原结果和门不改变。\n",
+    "next_candidate_card": "L-CTIPGDEF1",
+    "next_execution_authorized": false,
+    "next_execution_started": false,
+    "next_candidate_implemented": false,
+    "current_function_progress": [
+      "独立HF输入、非线性F/T与平衡、保存态续算已实现",
+      "两α加载卸载及选定峰独立参考已有证据，范围各自保留",
+      "完整周期/参数差/峰节点弱力可经现有stdlib函数/CLI消费"
+    ],
+    "current_missing_physical_qualifications": [
+      "尚无已验证的实物有效夹持或承载容量",
+      "尚无可作局部压力/连续面牵引的报告定义",
+      "尚无自由工件释放或稳定性资格",
+      "未获得α独立、网格/域收敛及完整路径独立参考资格"
+    ],
+    "next_scope": "准备并核对原单位/厚度与单侧作用量定义、镜像与material/Hu解释和现有字段用法；不新增reader、自动求解/HP或新指标。",
+    "no_new_execution_or_data": true,
+    "scientific_calls": 0,
+    "tests": 0,
+    "plots": 0,
+    "API_calls": 0,
+    "git_commands": 0
+  },
+  "next_step": "先明确“下半固定工件单侧有符号作用力”的操作定义、原积分厚度/单位、镜像与material/Hu含义，并在现有研究层入口给出直接字段用法；不新增reader层，不自动求解或HP。",
+  "qualification_scope": "Saved research-report association only, not scientific acceptance or labels; all original qualification remains separate; no new pressure/effective grip/release/stability/alpha-independence, mesh/domain convergence, full-path reference or HF5 upgrade",
+  "closure_read_scope": "Current new ordinary report/control/source/docs and original helper seals/stat only; no original comparison re-read/API invocation or science/media/full-history reads; Git object I/O is separate"
+}
