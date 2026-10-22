@@ -173,3 +173,7 @@ author/EXECUTION_RESULT.json和原终态result／监督／seal为本轮当前事
 ## 交付核对
 
 [独立实际审阅](author/ACTUAL_DELIVERY_REVIEW.md)12/12通过；[有限交付身份与链接核对](DELIVERY_CHECK.json)分别记录源码保持、原字节封存与新文档链接。审阅中的RESULTS／NEXT哈希为其审阅时快照，后续本节及发布回执属于文档补充，不改原科学结果。没有新测试、NPZ解码或图像重开。
+
+## 发布与恢复
+
+功能与实际证据提交`c1f4360a0e324588cdc8cc1119d0f0882f7ff612`已普通推送并核远端main，`D:/hf-restore-20260930`已普通fetch／ff-only恢复到同提交。两工作树当时干净，77份本轮变化文件字节一致；详见[实际回执](PUBLICATION_RESTORE_RECEIPT.json)。这是同机异目录核对，没有异机数值复算。归档回执的后续提交也将普通推送并恢复核对。
