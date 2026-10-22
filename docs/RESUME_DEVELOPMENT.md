@@ -1,3 +1,5 @@
+> 2026-10-22 当前恢复入口：[L-CTIPMOVE1实际结果](../lf_data_preparation/native_interface_001/lf_circle_tip_move_001/RESULTS.md)与[新probe API](GUIDED_WORKPIECE_PROBE.md)。15项一次验证及一图完成，已同字节安装两份源码，测试源码和186成员执行ZIP已入本阶段。下一步按[NEXT_STEPS](../lf_data_preparation/native_interface_001/lf_circle_tip_move_001/NEXT_STEPS.md)准备真实r9 q0→.025探针；已关闭窗口不可重跑，新的物理路径／资源须另确认。原历史说明如下。
+
 > 2026-10-22 恢复入口：先读[最小承载任务规格](WORKPIECE_LOAD_TASK_SPEC.md)与[L-CTIPLOADSPEC1记录](../lf_data_preparation/native_interface_001/lf_circle_tip_load_spec_001/RESULTS.md)。下一阶段[L-CTIPMOVE1范围](../lf_data_preparation/native_interface_001/lf_circle_tip_load_spec_001/NEXT_IMPLEMENTATION_CARD.md)仅准备opt-in移动工件能力和小模型验证；候选源码、fixture、唯一命令／次数及执行窗口尚未冻结／启动，不能直接运行真实探针或沿用旧固定工件resume。
 
 > 2026-10-21 L-CTIPGDEF1：已按用户批准整合[单侧工件作用力规则](WORKPIECE_FORCE_DEFINITION.md)，明确当前两α的20 mm厚度已含于N力值、有符号Fy、material/Hu、holding、镜像与现有字段用法；来源及实际核查见[本轮记录](../lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/RESULTS.md)。原实现、数值与资格保持，历史说明保留如下。

@@ -1,0 +1,99 @@
+{
+  "schema_version": "move1-static-controller-review-1.0",
+  "reviewer": "move_probe_impl (not controller author)",
+  "date": "2026-10-22 Asia/Seoul",
+  "status": "pass",
+  "checks": [
+    {
+      "id": "C1",
+      "name": "default offsets arithmetic",
+      "status": "pass",
+      "evidence": "Default _dot receives separate -target_origin and -s; same rounded mean_target only where original used sum."
+    },
+    {
+      "id": "C2",
+      "name": "opt-in isolation",
+      "status": "pass",
+      "evidence": "prescribed_body=None retains default fixed lift guard and prior signatures/options; body scope is explicit."
+    },
+    {
+      "id": "C3",
+      "name": "rigid prescribed map",
+      "status": "pass",
+      "evidence": "Body xy remain model.fixed_dofs; body x shape is exactly one; body y and all other zero supports stay zero."
+    },
+    {
+      "id": "C4",
+      "name": "DOF conflict contract",
+      "status": "pass",
+      "evidence": "Exact union is C; body port components rejected; zero/body overlap only declared background body-uy."
+    },
+    {
+      "id": "C5",
+      "name": "independent q and held mean",
+      "status": "pass",
+      "evidence": "Projection, measure, predictor RHS, force floor and constraint bound all use held mean in probe branch."
+    },
+    {
+      "id": "C6",
+      "name": "fresh q0 ordering",
+      "status": "pass",
+      "evidence": "q=old_s=0 bypasses predictor/feasible; evaluates fresh F/T and measures original split/R before a corrector."
+    },
+    {
+      "id": "C7",
+      "name": "wrong q0 no correction",
+      "status": "pass",
+      "evidence": "fresh_anchor_required forces failure immediately when force or mean gates fail, before linear solve."
+    },
+    {
+      "id": "C8",
+      "name": "any typed anchor terminal",
+      "status": "pass",
+      "evidence": "advance catches KernelError/TMCError and blocks bisection for first probe anchor regardless of failure code."
+    },
+    {
+      "id": "C9",
+      "name": "non-symmetric solver retained",
+      "status": "pass",
+      "evidence": "Original tangent force predictor, bordered KKT and general sparse LU are unchanged; no symmetrization."
+    },
+    {
+      "id": "C10",
+      "name": "state and rollback retained",
+      "status": "pass",
+      "evidence": "Original copies/rollback byte checks remain; opt-in accepted row declares body q and input mean separately."
+    },
+    {
+      "id": "C11",
+      "name": "legacy scope retained",
+      "status": "pass",
+      "evidence": "No force kernel, tangent, resume or fixed native entry source edits are needed by this controller diff."
+    },
+    {
+      "id": "C12",
+      "name": "interpretation",
+      "status": "pass",
+      "evidence": "Stage d in raw history is q; accepted probe fields and viewer must label q and input mean distinctly; no bearing/release qualification."
+    }
+  ],
+  "files": {
+    "split_displacement.py": {
+      "path": "D:/hmv1_001/candidate/hf_repo/src/hf_eval/split_displacement.py",
+      "bytes": 27062,
+      "sha256": "65e5cb15a54b53978abb744ee7e99928cadfffefb9afb71fdc6dcfcd139e295e"
+    },
+    "native_probe.py": {
+      "path": "D:/hmv1_001/candidate/hf_repo/src/hf_eval/native_probe.py",
+      "bytes": 19317,
+      "sha256": "93667361fcb8168d800833a849d411a669b576b11c565cdbfc534bd3457ae8b3"
+    }
+  },
+  "method": "Read complete candidate controller and no-index diff against formal main; no HF imports or execution",
+  "numerical_tests_executed": false,
+  "F_T_or_HP_calls": 0,
+  "blockers": [],
+  "nonblocking_notes": [
+    "Raw newton_history.d is stage q; raw q_in is actual input mean. The pure viewer must label these quantities explicitly."
+  ]
+}

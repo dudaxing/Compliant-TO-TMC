@@ -1,3 +1,5 @@
+> 2026-10-22 更新：L-CTIPMOVE1已实现显式导向+x探针并通过有限小模型验证，详见[API](GUIDED_WORKPIECE_PROBE.md)及[实际结果](../lf_data_preparation/native_interface_001/lf_circle_tip_move_001/RESULTS.md)。**真实r9 q0→.025路径尚未运行，承载／释放资格仍未授予。** 下文为LOADSPEC1时点的原规格，保留当时“尚未实现”叙述作为历史，不表示当前接口状态。
+
 # 最小承载验证前置规格：导向刚体牵引探针
 
 2026-10-22，L-CTIPLOADSPEC1。规格与接口核查，**尚未实现或执行新物理任务**。参照 main `8d589b65ab2e4efe8ca01b95034ed329fca81171`。本规格区分近期可验证的接口功能与最终要回答的承载问题。

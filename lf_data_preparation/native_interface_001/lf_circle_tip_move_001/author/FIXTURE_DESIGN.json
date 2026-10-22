@@ -1,0 +1,263 @@
+{
+  "schema": "hf-static-moving-workpiece-fixture-design-1.0",
+  "prepared_utc": "2026-10-22T05:58:31.8062268Z",
+  "source_head": "1e5e9cf76480254a6a288f27fb10bc884acb4c38",
+  "status": "static_design_only_not_executed",
+  "runtime_invocations": 0,
+  "numerical_qualification": false,
+  "grid": {
+    "shape_yx": [
+      4,
+      4
+    ],
+    "cell_size_mm": [
+      0.5,
+      0.5
+    ],
+    "extent_mm": [
+      2,
+      2
+    ],
+    "node_rule": "n(i,j)=5*j+i",
+    "cell_rule": "c(i,j)=4*j+i",
+    "dof_rule": "ux=2*n;uy=2*n+1",
+    "elements": 16,
+    "nodes": 25,
+    "dofs": 50
+  },
+  "solid_cells": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    12
+  ],
+  "passive_void_cells": [
+    9,
+    10,
+    11,
+    13,
+    14,
+    15
+  ],
+  "design_cells": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    12
+  ],
+  "passive_solid_cells": [],
+  "material": {
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain",
+    "thickness_mm": 2.0,
+    "gamma": 1E-06,
+    "alpha": 0.0001,
+    "regularization_length_mm": 2.0,
+    "scope": "tiny functional fixture only; not real r9 physical task"
+  },
+  "body": {
+    "legacy_kind": "fixed_rigid",
+    "shape": "circle",
+    "center_mm": [
+      1.25,
+      2.0
+    ],
+    "radius_mm": 0.375,
+    "cell_ids": [
+      14
+    ],
+    "connectivity_q1": [
+      17,
+      18,
+      23,
+      22
+    ],
+    "nodes": [
+      17,
+      18,
+      22,
+      23
+    ],
+    "ux_dofs": [
+      34,
+      36,
+      44,
+      46
+    ],
+    "uy_dofs": [
+      35,
+      37,
+      45,
+      47
+    ],
+    "all_dofs": [
+      34,
+      35,
+      36,
+      37,
+      44,
+      45,
+      46,
+      47
+    ],
+    "background_overlap_dofs": [
+      45,
+      47
+    ],
+    "candidate_new_kinematics": "all body ux=q and all uy=0; common q imposed through explicit lift, not average"
+  },
+  "support": {
+    "nodes": [
+      0,
+      5
+    ],
+    "dofs": [
+      0,
+      1,
+      10,
+      11
+    ]
+  },
+  "input": {
+    "nodes": [
+      10,
+      15,
+      20
+    ],
+    "ux_dofs": [
+      20,
+      30,
+      40
+    ],
+    "weights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "hold_mm": 0.0005,
+    "individual_nodes_tied": false
+  },
+  "output": {
+    "nodes": [
+      4,
+      9
+    ],
+    "uy_dofs": [
+      9,
+      19
+    ],
+    "weights": [
+      0.5,
+      0.5
+    ],
+    "spring_N_per_mm": 0.0,
+    "change_reason": "old output node19 lacks solid incidence in new void window"
+  },
+  "entity_symmetry": {
+    "selected_nodes": [
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "attached_nodes": [
+      20,
+      21
+    ],
+    "dofs": [
+      41,
+      43
+    ]
+  },
+  "background_symmetry": {
+    "nodes": [
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "dofs": [
+      41,
+      43,
+      45,
+      47,
+      49
+    ]
+  },
+  "merged_prescribed_dofs": [
+    0,
+    1,
+    10,
+    11,
+    34,
+    35,
+    36,
+    37,
+    41,
+    43,
+    44,
+    45,
+    46,
+    47,
+    49
+  ],
+  "prescribed_dof_count": 15,
+  "free_dof_count": 35,
+  "candidate_kkt_dimension": 36,
+  "candidate_q_path_mm": [
+    0.0,
+    0.00025,
+    0.0005
+  ],
+  "candidate_path_scope": "suggestion for future root card; no execution authorization",
+  "direct_old_fixture_reuse": false,
+  "old_shared_fixture_must_remain_unchanged": true,
+  "rigid_mode_assessment": "two fully fixed distinct support nodes remove global rigid translations/rotation geometrically; prescribed common body ux/zero uy removes body motions. Does not establish actual Jacobian rank or convergence.",
+  "sources": [
+    {
+      "path": "hf_repo/tests/test_native_force.py",
+      "sha256": "862a40aa3e13d10bdb02cad52ba9098e0ddbc0fd9ad9958def226de90284254d",
+      "bytes": 8471
+    },
+    {
+      "path": "hf_repo/src/hf_eval/regions.py",
+      "sha256": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568",
+      "bytes": 9756
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_project.py",
+      "sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+      "bytes": 23187
+    },
+    {
+      "path": "hf_repo/src/hf_eval/data.py",
+      "sha256": "ac922927c343172760a032c3b16c16f265e75cf0e8c50e091b23b155aaa69812",
+      "bytes": 16477
+    },
+    {
+      "path": "hf_repo/tests/test_native_mean_mechanical.py",
+      "sha256": "a468ca933963bc9de7050073fbb7086f51ed6086be2a62aec30cb59113ea40d8",
+      "bytes": 10170
+    },
+    {
+      "path": "hf_repo/tests/test_native_mean.py",
+      "sha256": "3771e1afbe4a95cb711e9235d91fe2da96ddbee5f33858c523898e8fea99b728",
+      "bytes": 7470
+    }
+  ]
+}

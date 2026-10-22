@@ -1,0 +1,74 @@
+{
+  "stage": "L-CTIPMOVE1",
+  "kind": "read_only_controller_change_design",
+  "created_utc": "2026-10-22 05:56:43 UTC",
+  "base_commit": "1e5e9cf76480254a6a288f27fb10bc884acb4c38",
+  "implementation_performed": false,
+  "test_or_scientific_execution_performed": false,
+  "scientific_arrays_or_old_csv_or_media_read": false,
+  "decision": "Narrow opt-in extension of existing split controller plus one new thin native_probe module; no copied controller, no second mean constraint, no force/tangent changes.",
+  "minimum_files": {
+    "existing_implementation_changed": ["hf_repo/src/hf_eval/split_displacement.py"],
+    "new_implementation_proposed": ["hf_repo/src/hf_eval/native_probe.py"],
+    "new_test_proposed": ["hf_repo/tests/test_native_guided_probe.py"],
+    "unchanged": ["hf_repo/src/hf_eval/native_mean.py", "hf_repo/src/hf_eval/native_evaluate.py", "hf_repo/src/hf_eval/native_resume.py", "hf_repo/src/hf_eval/split_state.py", "hf_repo/src/hf_eval/displacement.py"]
+  },
+  "opt_in_contract": {
+    "name_provisional": "prescribed_body",
+    "default": null,
+    "body_x_and_y_stay_prescribed": true,
+    "mean_target": "d_hold constant, independent of q",
+    "body_lift": "origin zero; shape exactly 1 at original body-x DOFs and zero elsewhere",
+    "initial_parameter": 0,
+    "path_mode": "load_only",
+    "initial_state_and_signed_R_required": true,
+    "fresh_anchor_required_even_at_q0": true,
+    "old_fixed_zero_lift_guard_preserved_outside_explicit_body_x": true,
+    "no_default_init_or_CLI_installation": true
+  },
+  "mean_target_computation_sites": [
+    {"line":179,"purpose":"feasible before compensated mean error"},
+    {"line":182,"purpose":"feasible after compensated mean error"},
+    {"line":183,"purpose":"constraint bound"},
+    {"line":194,"purpose":"displacement scale and force floor"},
+    {"line":198,"purpose":"measure compensated mean error"},
+    {"line":201,"purpose":"accepted physical mean target"},
+    {"line":238,"purpose":"linear solve mean target diagnostic"},
+    {"line":254,"purpose":"predictor mean RHS"},
+    {"line":292,"purpose":"backtracking physical mean target diagnostic"},
+    {"line":365,"purpose":"final physical mean target metadata"}
+  ],
+  "calculation_site_count": 10,
+  "old_compensated_offsets": ["-target_origin", "-s"],
+  "probe_compensated_offsets": ["-d_hold"],
+  "stage_semantics_sites_requiring_probe_alias_or_isolation": [201,268,330,341,358,364,380],
+  "q0_anchor_issue": {
+    "current_guard_line": 275,
+    "current_issue": "initial_parameter truthiness skips fresh-anchor no-Newton guard when migrated nonzero physical state has q0=0",
+    "remedy": "Independent fresh-anchor contract; probe requires initial_state/R and checks original split state with fresh F/T before projection or correction",
+    "failure_code": "initial_state_not_equilibrated",
+    "all_typed_anchor_failure_no_bisection": true,
+    "new_q0_state_and_R_identity_required": true,
+    "old_saved_matrix_not_read": true
+  },
+  "saved_file_admission": {
+    "in_next_minimal_implementation_scope": true,
+    "not_replaceable_by_in_memory_only_test": true,
+    "ordinary_parent_identities_required": ["result", "selected descriptor", "task", "model", "geometry", "material", "boundary", "source hashes"],
+    "only_scientific_state_fields": ["lift", "fluctuation"],
+    "state_field_checks": ["archive SHA", "field names", "float64", "full DOF shape", "field SHA", "state hash", "fixed zero fluctuation", "zero original lift"],
+    "multiplier": "Original signed R from bound selected descriptor",
+    "no_parent_force_matrix_tangent_as_validation": true,
+    "old_resume_strict_contract_unchanged": true,
+    "new_controller_sha_recorded_separately_from_parent": true,
+    "small_model_actual_file_API_required": true,
+    "real_circle_saved_arrays_outside_this_card": true
+  },
+  "source_pins": [
+    {"path":"hf_repo/src/hf_eval/split_displacement.py","bytes":24156,"sha256":"151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8"},
+    {"path":"hf_repo/src/hf_eval/native_mean.py","bytes":22777,"sha256":"76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4"},
+    {"path":"hf_repo/src/hf_eval/native_resume.py","bytes":18014,"sha256":"68e3122950766f9cecb48a02a0f52a6d5f2efbfc466432bccc2cd48c77e2b798"},
+    {"path":"hf_repo/src/hf_eval/split_state.py","bytes":2544,"sha256":"457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e"},
+    {"path":"hf_repo/src/hf_eval/displacement.py","bytes":26838,"sha256":"fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386"}
+  ]
+}

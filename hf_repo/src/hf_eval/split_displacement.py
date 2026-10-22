@@ -57,7 +57,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
                                  initial_state=None, initial_R=0., initial_parameter=0., settings=None,
                                  force_scale_per_length, assembler=None, on_accept=None,
                                  path_mode="load_only", initial_guess="tangent",
-                                 saved_load_only_anchor=False):
+                                 saved_load_only_anchor=False, prescribed_body=None):
     """Solve fint(L,w)+k*b_out*q_out-b_in*R=0 and b_in·(L+w)=d0+s.
 
     Targets are nonnegative stage parameters s. ``load_only`` starts at zero and
@@ -75,6 +75,10 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
     the existing gates without Newton correction. No saved tangent is accepted.
     ``port_projection`` starts displacement from the previous fluctuation plus
     a distributed port adjustment; the real tangent prediction still seeds R.
+    ``prescribed_body`` explicitly opts into a guided rigid-x probe: targets
+    are body q, while the input mean remains d_hold. Its nodes retain zero
+    fluctuation; only their x lift moves. A supplied q=0 anchor must pass its
+    first fresh F/T check without projection or Newton correction.
     """
     settings = DisplacementSettings() if settings is None else settings
     if not isinstance(settings, DisplacementSettings):
@@ -113,8 +117,47 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
                        code="invalid_input")
     lift_origin = _vector(np.zeros(model.ndof) if lift_origin is None else lift_origin, model.ndof, "lift_origin")
     lift_shape = _vector(np.zeros(model.ndof) if lift_shape is None else lift_shape, model.ndof, "lift_shape")
-    if np.any(lift_origin[model.fixed_dofs]) or np.any(lift_shape[model.fixed_dofs]):
+    probe = prescribed_body is not None
+    if probe:
+        if (not isinstance(prescribed_body, dict)
+                or set(prescribed_body) != {"nodes", "d_hold", "zero_dofs", "background_dofs"}):
+            raise TMCError("invalid prescribed body contract", code="constraint_conflict")
+
+        def indices(value, limit):
+            raw = np.asarray(value)
+            if (raw.ndim != 1 or (raw.size and raw.dtype.kind not in "iu")
+                    or np.any(raw < 0) or np.any(raw >= limit)
+                    or len(np.unique(raw)) != len(raw)):
+                raise TMCError("invalid prescribed body indices", code="constraint_conflict")
+            return raw.astype(np.int64)
+
+        nodes = indices(prescribed_body["nodes"], model.ndof//2)
+        zero = indices(prescribed_body["zero_dofs"], model.ndof)
+        background = indices(prescribed_body["background_dofs"], model.ndof)
+        body_x, body_y = 2*nodes, 2*nodes+1
+        body_dofs = np.union1d(body_x, body_y)
+        held_mean = _positive_scalar(prescribed_body["d_hold"], "d_hold")
+        expected_shape = np.zeros(model.ndof)
+        expected_shape[body_x] = 1.
+        overlap = np.intersect1d(zero, body_dofs)
+        if (not len(nodes) or path_mode != "load_only" or initial_parameter != 0
+                or target_origin != 0 or saved_load_only_anchor or initial_state is None or k_out != 0
+                or not np.array_equal(np.union1d(zero, body_dofs), model.fixed_dofs)
+                or not np.all(np.isin(background, zero)) or np.any(background % 2 != 1)
+                or not np.all(np.isin(overlap, np.intersect1d(body_y, background)))
+                or np.any(b_in[body_dofs]) or np.any(b_out[body_dofs])
+                or np.any(lift_origin) or not np.array_equal(lift_shape, expected_shape)):
+            raise TMCError("guided body conflicts with the fixed model or probe path", code="constraint_conflict")
+    elif np.any(lift_origin[model.fixed_dofs]) or np.any(lift_shape[model.fixed_dofs]):
         raise TMCError("average-control supports must remain at zero", code="constraint_conflict")
+
+    def mean_offsets(s):
+        return (-held_mean,) if probe else (-target_origin, -s)
+
+    def mean_target(s):
+        return held_mean if probe else target_origin+s
+
+    fresh_anchor_required = probe or bool(initial_parameter)
     with np.errstate(over="ignore", invalid="ignore"):
         anchor_lift = lift_origin.copy() if initial_parameter == 0 else lift_origin+initial_parameter*lift_shape
     if initial_state is None:
@@ -176,11 +219,11 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
 
     def feasible(state, s):
         w = state.fluctuation.copy()
-        before = _dot((state.lift, w), b_in, -target_origin, -s)
+        before = _dot((state.lift, w), b_in, *mean_offsets(s))
         w[pivot] -= before/b_in[pivot]
         result = split_state(state.lift, w)
-        after = _dot((result.lift, result.fluctuation), b_in, -target_origin, -s)
-        bound = settings.constraint_tolerance*max(abs(target_origin+s), settings.displacement_scale_floor)
+        after = _dot((result.lift, result.fluctuation), b_in, *mean_offsets(s))
+        bound = settings.constraint_tolerance*max(abs(mean_target(s)), settings.displacement_scale_floor)
         if abs(after) > bound:
             raise TMCError("split average feasibility failed", code="constraint_failure",
                            details=dict(constraint_residual=after, constraint_bound=bound))
@@ -191,14 +234,14 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
         q_out = _dot((state.lift, state.fluctuation), b_out)
         actuator, spring = b_in*R, k_out*b_out*q_out
         residual = internal+spring-actuator
-        dscale = max(abs(target_origin+s), settings.displacement_scale_floor)
+        dscale = max(abs(mean_target(s)), settings.displacement_scale_floor)
         floor = settings.force_scale_floor_factor*force_scale_per_length*dscale
         norms = [float(np.linalg.norm(v[model.free])) for v in (internal, actuator, spring)]
         scale = max(*norms, floor)
-        error = _dot((state.lift, state.fluctuation), b_in, -target_origin, -s)
+        error = _dot((state.lift, state.fluctuation), b_in, *mean_offsets(s))
         if not np.isfinite(residual).all() or not np.isfinite(scale) or scale <= 0 or not np.isfinite(R):
             raise TMCError("split average forces are nonfinite", code="nonfinite")
-        return dict(d=s, physical_mean_target_mm=target_origin+s, target_origin=target_origin,
+        return dict(d=s, physical_mean_target_mm=mean_target(s), target_origin=target_origin,
                     R_input=R, q_in=q_in, q_out=q_out, constraint_residual=error,
                     displacement_scale=dscale, constraint_bound=settings.constraint_tolerance*dscale,
                     residual_scale=scale, force_scale_floor=floor,
@@ -235,7 +278,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
         begin = perf_counter()
         try:
             dw, dR, row = _linear_solve(augmented, rhs_force, rhs_mean, free, b_free,
-                                      phase=phase, target=target_origin+s, newton_check=iteration)
+                                      phase=phase, target=mean_target(s), newton_check=iteration)
         finally:
             times["sparse_solve"] += perf_counter()-begin
         row.update(factorization="general sparse LU", symmetrized=False, stage_parameter=s)
@@ -251,7 +294,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
             delta_L = candidate.lift-start.lift
             delta_q_out = _dot((candidate.lift, -start.lift), b_out)
             force_rhs = -(K@delta_L+k_out*b_out*delta_q_out)[model.free]
-            mean_rhs = -_dot((candidate.lift, candidate.fluctuation), b_in, -target_origin, -s)
+            mean_rhs = -_dot((candidate.lift, candidate.fluctuation), b_in, *mean_offsets(s))
             dw, dR, row = step(K, force_rhs, mean_rhs, "predictor", s)
             w = start.fluctuation.copy()
             if initial_guess == "port_projection":
@@ -272,7 +315,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
                 result = metrics(candidate, R, s, internal, fields)
                 result["newton_checks"] = iteration
                 return candidate, R, K, result
-            if initial_parameter and not accepted and old_s == s == initial_parameter:
+            if fresh_anchor_required and not accepted and old_s == s == initial_parameter:
                 raise TMCError("saved continuation anchor failed its fresh equilibrium check",
                                code="initial_state_not_equilibrated")
             if abs(measured["constraint_residual"]) > measured["constraint_bound"]:
@@ -289,7 +332,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
                 w = candidate.fluctuation.copy()
                 w[model.free] += factor*dw
                 trial_R = R+factor*dR
-                record = dict(target_displacement=target_origin+s, stage_parameter=s, newton_check=iteration,
+                record = dict(target_displacement=mean_target(s), stage_parameter=s, newton_check=iteration,
                               factor=factor, fixed_residual_scale=scale, base_phi=phi, accepted=False)
                 try:
                     trial, before, after = feasible(impose(w, s), s)
@@ -329,7 +372,8 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
             code = getattr(error, "code", "numerical_failure")
             failures.append(dict(from_displacement=before_s, attempted_displacement=s, from_R_input=before_R,
                                  depth=depth, code=code, reason=str(error), rollback_bitwise_equal=True))
-            if (code in ("time_limit", "constraint_failure") or depth >= settings.max_bisections
+            if ((probe and not accepted and before_s == s == initial_parameter)
+                    or code in ("time_limit", "constraint_failure") or depth >= settings.max_bisections
                     or abs(s-before_s)/2 < settings.minimum_increment*(1-1e-12)):
                 raise
             advance(before_s+(s-before_s)/2, depth+1, original, original_index, leg)
@@ -341,6 +385,9 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
                       original_target_displacement=original, is_original_target=s == original,
                       bisection_depth=depth, elapsed_seconds=perf_counter()-started)
         record.update(original_target_index=original_index, leg=leg)
+        if probe:
+            record.update(body_q_mm=s, input_mean_mm=record["q_in"],
+                          probe_anchor=not accepted)
         accepted.append(record)
         if on_accept is not None:
             begin = perf_counter()
@@ -362,7 +409,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
     times["total"] = perf_counter()-started
     result = dict(status="success" if failure is None else "failed", target_reached=failure is None,
                 target_displacement=float(levels[-1]), reached_displacement=state_s,
-                target_origin=target_origin, physical_mean_target_mm=target_origin+float(levels[-1]),
+                target_origin=target_origin, physical_mean_target_mm=mean_target(float(levels[-1])),
                 u_lift=state_u.lift.copy(), u_fluctuation=state_u.fluctuation.copy(), u_display=state_u.u_display,
                 R_input=state_R, state_representation=STATE_SCHEMA, state_sha256=state_hash(state_u),
                 target_metrics=deepcopy(accepted[-1]) if failure is None else None,
@@ -384,4 +431,7 @@ def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,
         result["initial_guess"] = initial_guess
     if initial_parameter:
         result["initial_parameter"] = initial_parameter
+    if probe:
+        result.update(body_q_targets_mm=levels.tolist(), reached_body_q_mm=state_s,
+                      input_hold_mm=held_mean, scope="guided rigid-x prescribed probe; no bearing/release qualification")
     return result
