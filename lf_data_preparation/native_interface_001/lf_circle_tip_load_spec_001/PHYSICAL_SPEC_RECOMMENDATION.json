@@ -1,0 +1,175 @@
+{
+  "document_type": "read_only_physical_spec_recommendation",
+  "stage": "L-CTIPLOADSPEC1_preparation_only",
+  "created_utc": "2026-10-21T08:02:43.754013+00:00",
+  "reported_formal_main": "8d589b65ab2e4efe8ca01b95034ed329fca81171",
+  "candidate_parameters_are_approved_physics": false,
+  "new_execution_authorized": false,
+  "candidate_code_created": false,
+  "API_calls": 0,
+  "new_force_or_difference_or_integral_calculations": 0,
+  "tests": 0,
+  "new_figures": 0,
+  "media_reads": 0,
+  "Git_commands": 0,
+  "existing_reference_only": {
+    "radius_mm": 9.0,
+    "center_mm": [
+      80.0,
+      40.0
+    ],
+    "right_reference_domain_mm": 92.0,
+    "regularization_length_mm": 80.0,
+    "thickness_mm": 20.0,
+    "cell_size_mm": [
+      0.5,
+      0.5
+    ],
+    "domain_kind": "lower_half",
+    "symmetry_y_mm": 40.0,
+    "E_MPa": 1.0,
+    "nu": 0.3,
+    "formulation": "plane_strain",
+    "gamma": 1e-06,
+    "archived_new_model_alpha": 2.5e-07,
+    "actuator_input_peak_mm": 1.06,
+    "selected_body_cells": 510,
+    "incident_body_nodes": 565,
+    "existing_fixed_body_dofs": 1130
+  },
+  "boundary_status": {
+    "analytic_right_margin_mm": 3.0,
+    "meaning": "Nominal analytic-circle/reference-domain margin supplied by the current layout, not safe stroke.",
+    "actual_staircase_xmax_mm": null,
+    "actual_staircase_xmax_status": "Not bound by a scalar metadata field in these descriptor reads; never substitute analytic centre+radius.",
+    "source_cell_rule": "Native cell centre inside closed analytic circle; boundary is native staircase, not fitted analytic circle.",
+    "right_edge_boundary_condition": "x=92 is a finite computational extent, not an automatic rigid wall. Known background symmetry fixes uy on y=40 across x0..92; do not infer an x-clamp from extent.",
+    "pending_before_nonzero_probe": [
+      "Bind original selected body staircase xmax from an allowed geometry source with index/coordinate provenance.",
+      "Fix right-edge/medium BC and a stated buffer; inspect actual deformed geometry/J in any later solve.",
+      "Do not treat a nominal3mm buffer as approved travel or assume it remains3mm after deformation."
+    ]
+  },
+  "control_options": [
+    {
+      "kind": "force_controlled_guided_rigid_x",
+      "body_unknown": "One common q_x for both mirrored halves, with rigid ties; uy=0 and theta_z=0 constrained.",
+      "input": "Specified full-assembly external +x generalized load P_full, not the existing actuator R.",
+      "symbolic_half_equilibrium": "F_on_x_half(q_x; d_in=1.06)+P_full/2=0",
+      "additional_implementation_need": "A genuine rigid q unknown and its external-load equilibrium, not simply unfixing original medium nodes or reusing single-actuator mean KKT.",
+      "post_detachment_issue": "Ideal detached free x motion under nonzero external load has no static equilibrium; finite-gamma medium may instead provide artificial support. Neither nonconvergence nor background-supported convergence proves release/retention.",
+      "recommendation": "Later, after a displacement probe and explicit physical capacity/stability criteria."
+    },
+    {
+      "kind": "prescribed_guided_rigid_x_probe",
+      "body_kinematics": "u_x(i)=q_x for every original workpiece node; u_y(i)=0, theta_z=0; same original node/cell cohort, no re-rasterization.",
+      "input": "Prescribe q_x while holding the existing gripper input at d_in=1.06 mm.",
+      "output": "Required generalized probe drive reaction Q_drive_half=-F_on_x_half when no independent body force is applied; separately retain material/Hu signed ON-body components.",
+      "advantages": "Controls the otherwise free rigid coordinate; a force-versus-prescribed-displacement response stays interpretable without claiming a detached force-controlled equilibrium.",
+      "limitations": "It is a guided kinematic probe, not free workpiece bearing, failure-load certification or release.",
+      "recommendation": "Nearest minimum implementation/validation target, after this specification is agreed."
+    }
+  ],
+  "candidate_minimum_task": {
+    "status": "candidate_not_approved_physics",
+    "geometry_material_and_gamma": "Use existing archived geometry/material as reference, no silent domain/gamma/alpha tuning.",
+    "alpha_candidate": 2.5e-07,
+    "gripper_input_held_mm": 1.06,
+    "workpiece_coordinate": "prescribed common rigid +x q; y translation and rotation remain constrained",
+    "q_path_candidate_mm": [
+      0.0,
+      0.025
+    ],
+    "q_path_status": "Illustrative first nonzero probe only, contingent on the unresolved actual staircase/boundary buffer and explicit later approval; not an approved resource/physical task.",
+    "baseline": "q=0 must be explicitly revalidated for the new kinematic/control contract. Existing fixed-rigid peak is only a possible initial guess, not an authorized default resume or inherited qualification.",
+    "reporting": "Keep absolute signed reaction at q=0 and q>0; do not subtract preload to force an artificial zero. Record actual body pose, actuator R separately, half-model ON-body components and probe drive reaction.",
+    "functional_acceptance_to_specify": "Rigid ties/pose and input hold are satisfied, original equilibrium/J/constraint gates hold, generalized reaction/load signs and half/full work convention are consistent. This would validate the probe capability, not effective grip.",
+    "not_targets": [
+      "A bearing capacity or maximum load ranking",
+      "A friction coefficient/Coulomb model",
+      "Free translation in y or body rotation/tipping",
+      "A free-release trajectory or dynamic settling",
+      "Automatic alpha/gamma/domain adjustment",
+      "New HP/full-path reference qualification"
+    ]
+  },
+  "half_to_full_convention": {
+    "q_full": "q_half=q_upper=q_full; never double displacement.",
+    "prescribed_probe_reaction": "Q_drive_full=2*Q_drive_half for the same symmetric common q; already-thickness-scaled N.",
+    "force_control_load": "P_half=P_full/2, and2*F_on_x_half+P_full=0.",
+    "vertical_resultant": "Mirrored Fy cancels in full net; do not interpret this as zero opposed interaction, nor use2absFy as a certified pullout capacity.",
+    "qualification": "These are symbolic symmetry/work conventions for a proposed task; no new mirrored force values were computed."
+  },
+  "medium_and_observer_limits": [
+    "Because gamma>0 multiplies medium Lamé/shear coefficients, the third medium can transmit residual shear; this is not a new Coulomb friction law and its Lamé mu is not a friction coefficient.",
+    "The current workpiece is a fixed kinematic overlay on original medium cells. Unlocking nodes alone creates a soft deformable medium region, not a moving rigid body.",
+    "Current saved nodal coordinates equal actual coordinates only under the old zero-lift/fluctuation body contract; a new translated-body observer must use actual pose and state its moment origin.",
+    "With an independent applied body load, the old fixed/no-body-load holding=-ONbody identity cannot be copied blindly; the complete force balance includes external load and any remaining constraint reactions."
+  ],
+  "evidence": {
+    "source": {
+      "path": "hf_repo/src/hf_eval/native_project.py",
+      "bytes": 23187,
+      "sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+      "line_ranges": {
+        "fixed_rigid_only": [
+          95,
+          107
+        ],
+        "workpiece_half_domain_and_staircase": [
+          142,
+          183
+        ],
+        "nonzero_medium_stiffness": [
+          244,
+          253
+        ],
+        "workpiece_is_kinematic_overlay": [
+          270,
+          279
+        ]
+      }
+    },
+    "ordinary_metadata": [
+      {
+        "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/model.json",
+        "bytes": 89774,
+        "sha256": "7f56cf78700c85145cce33a5972f73ac48e05923f16c27e69f7f118e6d239e0b",
+        "selectors": [
+          "task.workpiece",
+          "task.input.target_mm",
+          "task.background_symmetry",
+          "material",
+          "grid",
+          "model_extent",
+          "region_metadata.workpiece.cell_selection",
+          "region_metadata.workpiece.boundary_representation",
+          "region_metadata.workpiece.kinematics",
+          "region_metadata.workpiece.material_role"
+        ]
+      },
+      {
+        "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/source_geometry/geometry.json",
+        "bytes": 25085,
+        "sha256": "9630f76972ffecbd60fa42eefb44da0c97c395db7baacaaede33cdabbbc9cf6a",
+        "selectors": [
+          "grid",
+          "thickness_mm",
+          "model_extent"
+        ]
+      },
+      {
+        "path": "docs/WORKPIECE_FORCE_DEFINITION.md",
+        "bytes": 11837,
+        "sha256": "8a3ffbb984a14e81ea45f746eb479d1358ebb9957a16f6ae29e4af6e7f89a8ec",
+        "sections": [
+          "当前对象、单位与厚度",
+          "有符号的下半工件作用量",
+          "三分量与holding",
+          "对称镜像、节点分组与原矩"
+        ]
+      }
+    ]
+  },
+  "read_scope": "Formal GDEF rule/NEXT, two current ordinary model/source-geometry descriptors and selected native_project.py source. No NPZ/force arrays, old media, original full result history, API, tests, plotting, Git or formal repository writes."
+}

@@ -1,3 +1,5 @@
+> 2026-10-22 恢复入口：先读[最小承载任务规格](WORKPIECE_LOAD_TASK_SPEC.md)与[L-CTIPLOADSPEC1记录](../lf_data_preparation/native_interface_001/lf_circle_tip_load_spec_001/RESULTS.md)。下一阶段[L-CTIPMOVE1范围](../lf_data_preparation/native_interface_001/lf_circle_tip_load_spec_001/NEXT_IMPLEMENTATION_CARD.md)仅准备opt-in移动工件能力和小模型验证；候选源码、fixture、唯一命令／次数及执行窗口尚未冻结／启动，不能直接运行真实探针或沿用旧固定工件resume。
+
 > 2026-10-21 L-CTIPGDEF1：已按用户批准整合[单侧工件作用力规则](WORKPIECE_FORCE_DEFINITION.md)，明确当前两α的20 mm厚度已含于N力值、有符号Fy、material/Hu、holding、镜像与现有字段用法；来源及实际核查见[本轮记录](../lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/RESULTS.md)。原实现、数值与资格保持，历史说明保留如下。
 
 > 2026-10-21 L-CTIPAREPORT1 **执行PASS**／阶段完成True：新增研究层保存报告函数/CLI和轻索引，关联现成两alpha周期、260标量差、565对3390节点差及12既有图页；无新PNG或科学验收，原对象/资格保持；见[实际记录](../lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/RESULTS.md)。原历史说明保留如下。

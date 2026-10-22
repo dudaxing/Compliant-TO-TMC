@@ -1,0 +1,136 @@
+{
+  "document_type": "read_only_geometry_and_physics_recheck",
+  "stage": "L-CTIPLOADSPEC1_preparation_only",
+  "created_utc": "2026-10-22T05:41:34.624822+00:00",
+  "reference_main": "8d589b65ab2e4efe8ca01b95034ed329fca81171",
+  "candidate_parameters_are_approved_physics": false,
+  "execution_authorized_by_this_record": false,
+  "scientific_function_calls": 0,
+  "science_array_or_media_reads": 0,
+  "new_F_T_HP_equilibrium_calls": 0,
+  "tests": 0,
+  "repository_writes": 0,
+  "plain_metadata_checks": "five finite identity/selector assertions; not scientific runtime tests",
+  "bbox": {
+    "actual_saved_scalar_xmax_mm": null,
+    "observed_bbox_status": "No explicit workpiece bounding-box/xmax scalar in the inspected model or geometry descriptors.",
+    "conservative_reference_upper_bound_mm": 89.25,
+    "proof": "Selected cell centre C is inside radius9 circle centred at x80, hence Cx<=89. Q1 incident corners differ by hx/2=.25 in x, hence every selected incident node Xx<=89.25. This bound is proved from source rules and descriptor grid, not measured from NPZ or a newly reconstructed cell cohort.",
+    "sources": [
+      "native_project.py:142-162",
+      "regions.py:13-25",
+      "model.json:grid and task.workpiece"
+    ],
+    "candidate_q_mm": 0.025,
+    "translated_reference_upper_bound_mm": 89.275,
+    "reference_plane_x92_clearance_lower_bound_mm": 2.725,
+    "limitations": [
+      "Reference-coordinate containment only.",
+      "No bound on deformed right-edge coordinates, medium clearance, J, or reaction sensitivity.",
+      "Actual saved staircase xmax not observed; no 3mm nominal margin treated as approved travel."
+    ]
+  },
+  "right_boundary": {
+    "reference_plane_x_mm": 92.0,
+    "explicit_vertical_edge_displacement_clamp": false,
+    "right_upper_endpoint_uy": "Zero uy via y=40 background symmetry on [0,92].",
+    "right_upper_endpoint_ux": "No x-clamp from background symmetry.",
+    "other_right_edge_dofs": "No separate right-edge fixed set is created by native_project; support at x0 and workpiece below x89.25 are disjoint from x92.",
+    "explicit_right_external_traction": "Not declared by the inspected native task schema.",
+    "variational_boundary_warning": "No imposed wall does not mean an infinite medium or simply P*n=0: the original full material plus Hu weak residual and its natural boundary effects remain."
+  },
+  "recommendation": {
+    "kind": "guided_rigid_x_displacement_probe",
+    "gripper_input_held_mm": 1.06,
+    "q_candidate_mm": [
+      0.0,
+      0.025
+    ],
+    "body_motion": "All original body incident nodes ux=q, uy=0; theta_z=0; no re-rasterization and no independent unlocked body-node displacements.",
+    "q_candidate_status": "Proposed first tiny nonzero target, not executed and not a newly authorized real solve.",
+    "load_control": "Prescribe q; infer required drive reaction. Do not prescribe axial external force simultaneously.",
+    "other_actuator": "The gripper mean-displacement actuator remains a separate reaction at fixed input1.06.",
+    "force_control_later": "Unknown common rigid q and specified half external load; require generalized equilibrium and separate displacement/capacity interpretation."
+  },
+  "force_convention": {
+    "units": "N with t20mm already integrated; do not multiply by20 again",
+    "half_on_body": "F_on_x_half = -sum_B(f_internal_x_total)",
+    "half_required_drive": "Q_drive_half = sum_B(f_internal_x_total) = -F_on_x_half, only when no independent axial body load is applied",
+    "half_to_full": "Same common q in both halves. Q_drive_full=2*Q_drive_half. Given P_full, apply P_half=P_full/2 exactly once.",
+    "guide": "Constrained uy and rotation can produce guide forces/moments. Report them; symmetry cancellation is not proof of unconstrained bearing.",
+    "sign": "Positive Q_drive is the +x drive required to resist an opposite -x model force. Negative values must remain signed and are not clamped.",
+    "decomposition": "Retain total/material/Hu as model weak-force components, not pressure or Coulomb friction."
+  },
+  "classification": [
+    {
+      "status": "SPEC_READY",
+      "meaning": "Geometry/source rules and prospective control convention are coherent; no new mechanics has run."
+    },
+    {
+      "status": "FUNCTIONAL_PROBE_COMPLETE",
+      "prospective_conditions": [
+        "New q0 admission and q025 both accepted under explicitly approved controller contract.",
+        "All body-node rigid ties, uy0 and rotation0 hold; gripper mean input stays1.06.",
+        "Original applicable force/J/constraint/cleanup gates and new generalized reaction bookkeeping pass without relaxing thresholds.",
+        "Actual pose, reaction decomposition, guide reactions, right-medium response, and convergence are recorded."
+      ],
+      "implies": "Only the prescribed guided probe works at these targets."
+    },
+    {
+      "status": "CONDITIONED_RESISTANCE_OBSERVED",
+      "prospective_conditions": [
+        "FUNCTIONAL_PROBE_COMPLETE",
+        "Measured signed Q_drive_half>0 at the stated nonzero q."
+      ],
+      "implies": "A +x actuator is required in this constrained finite-domain model at this displacement; no capacity bound or friction law follows."
+    },
+    {
+      "status": "NO_POSITIVE_RESISTANCE_AT_TESTED_Q",
+      "prospective_conditions": [
+        "FUNCTIONAL_PROBE_COMPLETE",
+        "Measured signed Q_drive_half<=0 at the stated nonzero q."
+      ],
+      "implies": "No positive +x drive resistance at this selected q under this task; not a release trajectory or general grasp failure."
+    },
+    {
+      "status": "PARTIAL_OR_NUMERICAL_NOT_PASS",
+      "prospective_conditions": [
+        "Typed admission/equilibrium/constraint/J/resource/cleanup error or incomplete target."
+      ],
+      "implies": "Keep actual partial states and reason; do not label physical detachment, zero capacity, or instability."
+    }
+  ],
+  "additional_limits": [
+    "No unguided free-bearing or release result.",
+    "Finite gamma and Hu couple right medium to reaction; preserve decomposition.",
+    "No friction coefficient, stability, domain/alpha independence, or full moving-path HP qualification.",
+    "A force-controlled load capacity still requires separately specified load, admissible motion, guide status, and physical success threshold."
+  ],
+  "evidence": [
+    {
+      "path": "hf_repo/src/hf_eval/native_project.py",
+      "bytes": 23187,
+      "sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/regions.py",
+      "bytes": 9756,
+      "sha256": "38d5a08b7c91a0212b28e5856046f3126543eb8d090bb5c30fe072839411d568"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/model.json",
+      "bytes": 89774,
+      "sha256": "7f56cf78700c85145cce33a5972f73ac48e05923f16c27e69f7f118e6d239e0b"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/source_geometry/geometry.json",
+      "bytes": 25085,
+      "sha256": "9630f76972ffecbd60fa42eefb44da0c97c395db7baacaaede33cdabbbc9cf6a"
+    },
+    {
+      "path": "docs/WORKPIECE_FORCE_DEFINITION.md",
+      "bytes": 11837,
+      "sha256": "8a3ffbb984a14e81ea45f746eb479d1358ebb9957a16f6ae29e4af6e7f89a8ec"
+    }
+  ]
+}

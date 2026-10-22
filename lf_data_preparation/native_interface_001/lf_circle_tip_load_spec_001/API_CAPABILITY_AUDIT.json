@@ -1,0 +1,1359 @@
+{
+  "schema_version": "lf-native-loadspec-api-capability-audit-1.0",
+  "card": "L-CTIPLOADSPEC1",
+  "status": "read_only_capability_preparation_no_implementation",
+  "created_utc": "2026-10-21T07:58:48.782622+00:00",
+  "parent_reported_main": "8d589b65ab2e4efe8ca01b95034ed329fca81171",
+  "source_scope": "Native public evaluator, task/model builder, strict restart and the current one-mean controller plus its fixed-body observer only; no other projects or full history scanned.",
+  "sources": [
+    {
+      "path": "hf_repo/src/hf_eval/native_evaluate.py",
+      "bytes": 7867,
+      "sha256": "44eed5f42b5e10d8677b24d2cfc70e1508e1837e346205abdf309d54bc8961ed",
+      "purpose": "Actual public native evaluator; scalar actuator target path, strict saved-result options, one native solve and persistence/summary.",
+      "evidence": [
+        {
+          "line": 23,
+          "text": "def evaluate_native(geometry_path, task_path, output_directory, *, repo_root=None,"
+        },
+        {
+          "line": 24,
+          "text": "                    targets=None, settings=None, time_limit_seconds=180.,"
+        },
+        {
+          "line": 25,
+          "text": "                    minimum_increment=None, response_mode=None, tangent_mode=None,"
+        },
+        {
+          "line": 26,
+          "text": "                    initial_guess=None, saved_result=None, selected_state_index=None, extend_path=False) -> dict:"
+        },
+        {
+          "line": 33,
+          "text": "    In saved mode None inputs/options inherit the bound parent. All settings"
+        },
+        {
+          "line": 35,
+          "text": "    extend_path=True opts into an explicit append-only task from a completed"
+        },
+        {
+          "line": 52,
+          "text": "        if type(extend_path) is not bool or (extend_path and (saved_result is None or task_file is None)):"
+        },
+        {
+          "line": 54,
+          "text": "        if (saved_result is None) != (selected_state_index is None):"
+        },
+        {
+          "line": 64,
+          "text": "        restored = None if saved_result is None else saved_resume_defaults(saved_result,selected_state_index,"
+        },
+        {
+          "line": 85,
+          "text": "        requested = list(targets) if targets is not None else (restored[\"targets\"] if restored is not None"
+        },
+        {
+          "line": 103,
+          "text": "        result = solve_native_mean(geometry, task, requested, settings=settings,"
+        },
+        {
+          "line": 104,
+          "text": "                                   response_mode=response_mode, tangent_mode=tangent_mode,"
+        },
+        {
+          "line": 105,
+          "text": "                                   initial_guess=initial_guess,saved_result=saved_result,"
+        },
+        {
+          "line": 106,
+          "text": "                                   selected_state_index=selected_state_index,"
+        },
+        {
+          "line": 107,
+          "text": "                                   **({\"extend_path\":True} if extend_path else {}))"
+        },
+        {
+          "line": 109,
+          "text": "        descriptor = write_native_mean(result, output)"
+        },
+        {
+          "line": 111,
+          "text": "        response = summarize_saved_native_result(descriptor, repo_root=repo_root)"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_project.py",
+      "bytes": 23187,
+      "sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc",
+      "purpose": "Task schema only permits fixed_rigid workpiece with both components fixed. Native passive-void body is an undeformed kinematic overlay; constraints, reference cells, symmetry and original ports are explicit.",
+      "evidence": [
+        {
+          "line": 34,
+          "text": "    required = {"
+        },
+        {
+          "line": 35,
+          "text": "        \"schema_version\", \"task_id\", \"case_family\", \"units\", \"geometry\", \"analysis_grid\","
+        },
+        {
+          "line": 36,
+          "text": "        \"material\", \"third_medium\", \"regularization\", \"input\", \"output\", \"constraints\","
+        },
+        {
+          "line": 37,
+          "text": "        \"support_selection\", \"background_symmetry\", \"input_auxiliary_spring_N_per_mm\","
+        },
+        {
+          "line": 38,
+          "text": "        \"workpiece\", \"reference_state\", \"qualification_criteria\","
+        },
+        {
+          "line": 43,
+          "text": "    _object(task_dict, \"task\", required, {\"purpose\", \"parameter_origin\", \"description\"})"
+        },
+        {
+          "line": 67,
+          "text": "    inlet = _object(task[\"input\"], \"input\", {\"tag\", \"control\", \"target_mm\"})"
+        },
+        {
+          "line": 68,
+          "text": "    _require(inlet[\"tag\"] == \"input\" and inlet[\"control\"] == \"average_displacement\","
+        },
+        {
+          "line": 72,
+          "text": "        path = _object(task[\"path\"], \"path\", {\"kind\", \"targets_mm\"})"
+        },
+        {
+          "line": 78,
+          "text": "        _require(levels[0] == 0 and np.all(levels >= 0) and np.all(np.diff(levels) != 0)"
+        },
+        {
+          "line": 85,
+          "text": "    outlet = _object(task[\"output\"], \"output\", {\"tag\", \"spring_N_per_mm\"})"
+        },
+        {
+          "line": 89,
+          "text": "    _require(kout == auxiliary == 0, \"Native preparation supports free output and no input auxiliary spring\")"
+        },
+        {
+          "line": 94,
+          "text": "        _require(task[\"reference_state\"] == \"undeformed\", \"Native preparation requires an undeformed reference\")"
+        },
+        {
+          "line": 97,
+          "text": "            _require(isinstance(body, dict) and body.get(\"kind\") == \"fixed_rigid\""
+        },
+        {
+          "line": 98,
+          "text": "                     and body.get(\"shape\") in (\"square\", \"circle\"), \"workpiece must be fixed_rigid square or circle\")"
+        },
+        {
+          "line": 100,
+          "text": "            _object(body, \"workpiece\", {\"kind\", \"shape\", \"center_mm\", size_name, \"fixed_components\"})"
+        },
+        {
+          "line": 106,
+          "text": "            _require(body[\"fixed_components\"] == [0, 1]"
+        },
+        {
+          "line": 107,
+          "text": "                     and all(type(c) is int for c in body[\"fixed_components\"]), \"fixed_rigid workpiece requires fixed_components [0,1]\")"
+        },
+        {
+          "line": 150,
+          "text": "    _require(extent[\"kind\"] == \"lower_half\" and extent[\"symmetry_axis\"] == {\"normal\": [0., 1.], \"offset_mm\": top}"
+        },
+        {
+          "line": 151,
+          "text": "             and centre[1] == top, \"Workpiece centre must lie on the native upper y-symmetry line\", code=\"invalid_geometry\")"
+        },
+        {
+          "line": 154,
+          "text": "    _require(background is not None and all(point[1] == top for point in background[\"points_mm\"]),"
+        },
+        {
+          "line": 155,
+          "text": "             \"Workpiece requires an explicit background y-symmetry segment on the native top\", code=\"invalid_geometry\")"
+        },
+        {
+          "line": 160,
+          "text": "    _require(len(cells) > 0 and np.all(arrays[\"passive_void\"].ravel()[cells]),"
+        },
+        {
+          "line": 161,
+          "text": "             \"Every workpiece cell must belong to source passive_void\", code=\"invalid_geometry\")"
+        },
+        {
+          "line": 162,
+          "text": "    nodes = np.unique(conn[cells])"
+        },
+        {
+          "line": 163,
+          "text": "    _require(not np.any(arrays[\"solid_incident\"][nodes]), \"Workpiece shares nodes with the original mechanism\", code=\"constraint_conflict\")"
+        },
+        {
+          "line": 164,
+          "text": "    _require(not any(np.intersect1d(nodes, arrays[name+\"_nodes\"]).size for name in (\"support\", \"input\", \"output\")),"
+        },
+        {
+          "line": 165,
+          "text": "             \"Workpiece shares original support or port nodes\", code=\"constraint_conflict\")"
+        },
+        {
+          "line": 167,
+          "text": "    _require(np.all(np.isin(top_nodes, background_nodes)), \"Background y-symmetry must cover all workpiece top nodes\", code=\"constraint_conflict\")"
+        },
+        {
+          "line": 168,
+          "text": "    dofs = _dofs(nodes, [0, 1])"
+        },
+        {
+          "line": 178,
+          "text": "    return dict(definition=deepcopy(body), cells=cells.tolist(), nodes=nodes.tolist(), dofs=dofs.tolist(),"
+        },
+        {
+          "line": 180,
+          "text": "        cell_selection=\"native cell centre inside closed analytic shape; only original lower-half cells\","
+        },
+        {
+          "line": 181,
+          "text": "        boundary_representation=\"native cell staircase; analytic circle is not a fitted boundary\","
+        },
+        {
+          "line": 184,
+          "text": "        kinematics=\"fixed rigid constraint overlay, all incident ux/uy remain undeformed\","
+        },
+        {
+          "line": 185,
+          "text": "        material_role=\"Original arrays unchanged; fixed cell nodes imply interior F=I and Hu=0 without material evaluation\","
+        },
+        {
+          "line": 228,
+          "text": "    if task[\"workpiece\"] is not None:"
+        },
+        {
+          "line": 229,
+          "text": "        regions[\"workpiece\"] = _workpiece_region(geometry, arrays, task[\"workpiece\"], background, background_nodes)"
+        },
+        {
+          "line": 230,
+          "text": "        groups[\"workpiece\"] = np.asarray(regions[\"workpiece\"][\"dofs\"], dtype=np.int64)"
+        },
+        {
+          "line": 231,
+          "text": "    fixed = np.unique(np.concatenate(list(groups.values())))"
+        },
+        {
+          "line": 233,
+          "text": "    for name, direction in ((\"input\", [1.0, 0.0]),"
+        },
+        {
+          "line": 234,
+          "text": "                            (\"output\", [-1.0, 0.0] if task[\"case_family\"] == \"inverter\" else [0.0, 1.0])):"
+        },
+        {
+          "line": 239,
+          "text": "        _require(not np.any(vector[fixed]), f\"The {name} direction intersects a fixed displacement DOF\", code=\"constraint_conflict\")"
+        },
+        {
+          "line": 244,
+          "text": "    solid = geometry.solid.ravel(order=\"C\").astype(bool)"
+        },
+        {
+          "line": 245,
+          "text": "    factors = np.where(solid, 1.0, medium)"
+        },
+        {
+          "line": 251,
+          "text": "    thickness = geometry.metadata[\"thickness_mm\"]"
+        },
+        {
+          "line": 252,
+          "text": "    model = TMCModel(arrays[\"coordinates_mm\"], arrays[\"connectivity\"], lam * factors,"
+        },
+        {
+          "line": 253,
+          "text": "                     mu * factors, kr, hx, hy, thickness, solid, fixed)"
+        },
+        {
+          "line": 274,
+          "text": "            workpiece_constraint_overlay=task[\"workpiece\"] is not None,"
+        },
+        {
+          "line": 275,
+          "text": "            source_geometry_masks_preserved=True, source_material_arrays_preserved=True,"
+        },
+        {
+          "line": 276,
+          "text": "            material_phase_classification=\"original mechanism solid and original medium; workpiece is a kinematic overlay\")"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/project.py",
+      "bytes": 15171,
+      "sha256": "593c7c8ad8ce8da45306d29f87d0aa6ac080d4f551a251e505060db5f6dacabd",
+      "purpose": "Project has input/output vectors, no existing independent body control/load vector; strict object helper rejects unsupported keys.",
+      "evidence": [
+        {
+          "line": 38,
+          "text": "class Project:"
+        },
+        {
+          "line": 41,
+          "text": "    bin: np.ndarray"
+        },
+        {
+          "line": 42,
+          "text": "    bout: np.ndarray"
+        },
+        {
+          "line": 43,
+          "text": "    task: dict"
+        },
+        {
+          "line": 50,
+          "text": "    material: dict"
+        },
+        {
+          "line": 51,
+          "text": "    k_out: float"
+        },
+        {
+          "line": 72,
+          "text": "def _object(value, name, required, optional=()):"
+        },
+        {
+          "line": 73,
+          "text": "    _require(isinstance(value, dict), f\"{name} must be an object\")"
+        },
+        {
+          "line": 74,
+          "text": "    _require(set(required) <= value.keys() and not (value.keys() - set(required) - set(optional)),"
+        },
+        {
+          "line": 75,
+          "text": "             f\"{name} has missing or unsupported fields\")"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_mean.py",
+      "bytes": 22777,
+      "sha256": "76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4",
+      "purpose": "Native path builds task then controller; existing NumPy mechanics/cache can be reused later, while restart and controller semantics remain unchanged.",
+      "evidence": [
+        {
+          "line": 114,
+          "text": "def solve_native_mean(geometry_file, task_dict: dict, targets, *,"
+        },
+        {
+          "line": 115,
+          "text": "                      settings: DisplacementSettings | None = None, on_accept=None,"
+        },
+        {
+          "line": 116,
+          "text": "                      response_mode=None, tangent_mode=None, initial_guess=None,"
+        },
+        {
+          "line": 117,
+          "text": "                      saved_result=None, selected_state_index=None,"
+        },
+        {
+          "line": 118,
+          "text": "                      time_limit_seconds=None, extend_path=False) -> NativeMeanResult:"
+        },
+        {
+          "line": 129,
+          "text": "    Saved mode inherits parent inputs/options and settings; settings=None needs"
+        },
+        {
+          "line": 130,
+          "text": "    an explicit new time_limit_seconds. Explicit settings may change only time."
+        },
+        {
+          "line": 131,
+          "text": "    A saved start uses fresh F/T, never its saved matrix. Parent task/path/status"
+        },
+        {
+          "line": 133,
+          "text": "    extend_path=True requires an explicit append-only task and a completed"
+        },
+        {
+          "line": 135,
+          "text": "    Load-only extension also declares its new input peak, preserving all physics"
+        },
+        {
+          "line": 175,
+          "text": "    project = build_native_project(geometry_file, task_dict)"
+        },
+        {
+          "line": 180,
+          "text": "    anchor = None if saved_result is None else read_native_resume(saved_result,selected_state_index,"
+        },
+        {
+          "line": 191,
+          "text": "    def assemble(actual_model, state, *, tangent=True):"
+        },
+        {
+          "line": 194,
+          "text": "        _, internal, fields = force_assembler(actual_model, state)"
+        },
+        {
+          "line": 202,
+          "text": "                tensors = tangent_function(fields, actual_model.ops, actual_model.lam, actual_model.mu, actual_model.kr)"
+        },
+        {
+          "line": 209,
+          "text": "            last_tangent = (_state_hash(state), matrix, internal, fields,"
+        },
+        {
+          "line": 211,
+          "text": "        return matrix, internal, fields"
+        },
+        {
+          "line": 249,
+          "text": "    path = solve_split_displacement_path(model, project.bin, project.bout, targets, project.k_out,"
+        },
+        {
+          "line": 250,
+          "text": "        settings=settings, force_scale_per_length=project.material[\"force_scale_per_length\"],"
+        },
+        {
+          "line": 251,
+          "text": "        assembler=assemble, on_accept=capture, path_mode=path_mode,"
+        },
+        {
+          "line": 252,
+          "text": "        initial_guess=initial_guess, **({} if anchor is None else dict("
+        },
+        {
+          "line": 253,
+          "text": "            initial_state=anchor.state,initial_R=anchor.R,initial_parameter=anchor.parameter)),"
+        },
+        {
+          "line": 254,
+          "text": "        **({\"saved_load_only_anchor\":True} if anchor is not None and extend_path and path_mode == \"load_only\" else {}))"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/displacement.py",
+      "bytes": 26838,
+      "sha256": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+      "purpose": "Single mean-control bordered KKT and one scalar multiplier; output is a spring/measurement vector, not a second independently controlled body coordinate.",
+      "evidence": [
+        {
+          "line": 79,
+          "text": "def _inputs(model, b_in, b_out, k_out):"
+        },
+        {
+          "line": 82,
+          "text": "    b_in = _vector(b_in, model.ndof, \"b_in\")"
+        },
+        {
+          "line": 83,
+          "text": "    b_out = _vector(b_out, model.ndof, \"b_out\")"
+        },
+        {
+          "line": 84,
+          "text": "    k_out = _positive_scalar(k_out, \"k_out\", allow_zero=True)"
+        },
+        {
+          "line": 85,
+          "text": "    if not np.any(b_in[model.free]):"
+        },
+        {
+          "line": 89,
+          "text": "    # Port weights and reference directions belong to the geometry/task adapter."
+        },
+        {
+          "line": 94,
+          "text": "def _check_support(model):"
+        },
+        {
+          "line": 101,
+          "text": "    if len(model.fixed_dofs) < 3 or np.linalg.matrix_rank(rigid[model.fixed_dofs]) < 3:"
+        },
+        {
+          "line": 105,
+          "text": "def _kkt(K, model, b_in, b_out, k_out):"
+        },
+        {
+          "line": 106,
+          "text": "    output = sparse.csc_matrix(b_out[:, None])"
+        },
+        {
+          "line": 107,
+          "text": "    total = (K + k_out * (output @ output.T)).tocsc()"
+        },
+        {
+          "line": 109,
+          "text": "    free_matrix = total[model.free][:, model.free].tocsc()"
+        },
+        {
+          "line": 110,
+          "text": "    column = sparse.csc_matrix(b_in[model.free, None])"
+        },
+        {
+          "line": 111,
+          "text": "    augmented = sparse.bmat([[free_matrix, -column], [column.T, None]], format=\"csc\")"
+        },
+        {
+          "line": 114,
+          "text": "    return total, free_matrix, augmented"
+        },
+        {
+          "line": 117,
+          "text": "def _linear_solve(augmented, rhs_force, rhs_mean, free_matrix, b_free, *, phase,"
+        },
+        {
+          "line": 119,
+          "text": "    rhs = np.r_[rhs_force, rhs_mean]"
+        },
+        {
+          "line": 126,
+          "text": "    displacement, multiplier = solution[:-1], float(solution[-1])"
+        },
+        {
+          "line": 127,
+          "text": "    force_error = free_matrix @ displacement - b_free * multiplier - rhs_force"
+        },
+        {
+          "line": 128,
+          "text": "    mean_error = float(b_free @ displacement - rhs_mean)"
+        },
+        {
+          "line": 144,
+          "text": "    return displacement, multiplier, diagnostic"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/split_displacement.py",
+      "bytes": 24156,
+      "sha256": "151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8",
+      "purpose": "One nonnegative scalar stage parameter and input mean constraint; fixed DOFs must have zero lift/fluctuation, residual contains internal/spring/input only, one R_input solve.",
+      "evidence": [
+        {
+          "line": 55,
+          "text": "def solve_split_displacement_path(model, b_in, b_out, targets, k_out=0., *,"
+        },
+        {
+          "line": 56,
+          "text": "                                 lift_origin=None, lift_shape=None, target_origin=0.,"
+        },
+        {
+          "line": 57,
+          "text": "                                 initial_state=None, initial_R=0., initial_parameter=0., settings=None,"
+        },
+        {
+          "line": 58,
+          "text": "                                 force_scale_per_length, assembler=None, on_accept=None,"
+        },
+        {
+          "line": 59,
+          "text": "                                 path_mode=\"load_only\", initial_guess=\"tangent\","
+        },
+        {
+          "line": 60,
+          "text": "                                 saved_load_only_anchor=False):"
+        },
+        {
+          "line": 61,
+          "text": "    \"\"\"Solve fint(L,w)+k*b_out*q_out-b_in*R=0 and b_in·(L+w)=d0+s."
+        },
+        {
+          "line": 63,
+          "text": "    Targets are nonnegative stage parameters s. ``load_only`` starts at zero and"
+        },
+        {
+          "line": 67,
+          "text": "    D(target_origin)+D(s). Both lift arrays default to zero. Physical fixed DOFs"
+        },
+        {
+          "line": 68,
+          "text": "    remain zero. A warm start must match the supplied lift at its initial"
+        },
+        {
+          "line": 74,
+          "text": "    targets start at that absolute s, and its first fresh F/T check must pass"
+        },
+        {
+          "line": 75,
+          "text": "    the existing gates without Newton correction. No saved tangent is accepted."
+        },
+        {
+          "line": 82,
+          "text": "    b_in, b_out, k_out = _inputs(model, b_in, b_out, k_out)"
+        },
+        {
+          "line": 87,
+          "text": "    raw = np.asarray(targets)"
+        },
+        {
+          "line": 88,
+          "text": "    if raw.ndim != 1 or not len(raw):"
+        },
+        {
+          "line": 90,
+          "text": "    levels = _vector(targets, len(raw), \"targets\")"
+        },
+        {
+          "line": 105,
+          "text": "    if path_mode == \"ordered_cycle\" and (levels[0] != initial_parameter or np.any(levels < 0)"
+        },
+        {
+          "line": 106,
+          "text": "                                         or np.any(np.diff(levels) == 0)):"
+        },
+        {
+          "line": 114,
+          "text": "    lift_origin = _vector(np.zeros(model.ndof) if lift_origin is None else lift_origin, model.ndof, \"lift_origin\")"
+        },
+        {
+          "line": 115,
+          "text": "    lift_shape = _vector(np.zeros(model.ndof) if lift_shape is None else lift_shape, model.ndof, \"lift_shape\")"
+        },
+        {
+          "line": 116,
+          "text": "    if np.any(lift_origin[model.fixed_dofs]) or np.any(lift_shape[model.fixed_dofs]):"
+        },
+        {
+          "line": 117,
+          "text": "        raise TMCError(\"average-control supports must remain at zero\", code=\"constraint_conflict\")"
+        },
+        {
+          "line": 123,
+          "text": "        if (not isinstance(initial_state, SplitDisplacement) or initial_state.ndof != model.ndof"
+        },
+        {
+          "line": 124,
+          "text": "                or not _bitwise_equal(initial_state.lift, anchor_lift)"
+        },
+        {
+          "line": 125,
+          "text": "                or np.any(initial_state.fluctuation[model.fixed_dofs])):"
+        },
+        {
+          "line": 126,
+          "text": "            raise TMCError(\"warm state must preserve supplied lift and fixed zero fluctuation\", code=\"constraint_conflict\")"
+        },
+        {
+          "line": 135,
+          "text": "    b_free = b_in[model.free]"
+        },
+        {
+          "line": 140,
+          "text": "    pivot = model.free[int(np.argmax(np.abs(b_free)))]"
+        },
+        {
+          "line": 189,
+          "text": "    def measure(state, R, s, internal):"
+        },
+        {
+          "line": 190,
+          "text": "        q_in = _dot((state.lift, state.fluctuation), b_in)"
+        },
+        {
+          "line": 191,
+          "text": "        q_out = _dot((state.lift, state.fluctuation), b_out)"
+        },
+        {
+          "line": 192,
+          "text": "        actuator, spring = b_in*R, k_out*b_out*q_out"
+        },
+        {
+          "line": 193,
+          "text": "        residual = internal+spring-actuator"
+        },
+        {
+          "line": 198,
+          "text": "        error = _dot((state.lift, state.fluctuation), b_in, -target_origin, -s)"
+        },
+        {
+          "line": 201,
+          "text": "        return dict(d=s, physical_mean_target_mm=target_origin+s, target_origin=target_origin,"
+        },
+        {
+          "line": 202,
+          "text": "                    R_input=R, q_in=q_in, q_out=q_out, constraint_residual=error,"
+        },
+        {
+          "line": 207,
+          "text": "                    input_force=actuator, spring_force_on_structure=-spring, force_residual=residual)"
+        },
+        {
+          "line": 211,
+          "text": "        support = np.zeros(model.ndof)"
+        },
+        {
+          "line": 212,
+          "text": "        support[model.fixed_dofs] = measured[\"force_residual\"][model.fixed_dofs]"
+        },
+        {
+          "line": 217,
+          "text": "        measured.update(support_reaction=support, internal_force=internal.copy(),"
+        },
+        {
+          "line": 218,
+          "text": "                        material_internal_force=np.bincount(model.edofs.ravel(), weights=fields[\"material_residual\"].ravel(), minlength=model.ndof),"
+        },
+        {
+          "line": 219,
+          "text": "                        regularization_internal_force=np.bincount(model.edofs.ravel(), weights=fields[\"regularization_residual\"].ravel(), minlength=model.ndof),"
+        },
+        {
+          "line": 232,
+          "text": "    def step(K, rhs_force, rhs_mean, phase, s, iteration=None):"
+        },
+        {
+          "line": 234,
+          "text": "        _, free, augmented = _kkt(K, model, b_in, b_out, k_out)"
+        },
+        {
+          "line": 237,
+          "text": "            dw, dR, row = _linear_solve(augmented, rhs_force, rhs_mean, free, b_free,"
+        },
+        {
+          "line": 238,
+          "text": "                                      phase=phase, target=target_origin+s, newton_check=iteration)"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_resume.py",
+      "bytes": 18014,
+      "sha256": "68e3122950766f9cecb48a02a0f52a6d5f2efbfc466432bccc2cd48c77e2b798",
+      "purpose": "Restart/append extension is bound to original physics/model/material/boundary/source/settings and saved state. Clock/path exceptions are limited; no saved matrix and no physics migration.",
+      "evidence": [
+        {
+          "line": 46,
+          "text": "def _extension_targets(parent, selected_state_index, model, task):"
+        },
+        {
+          "line": 47,
+          "text": "    \"\"\"Validate append-only task identity and a completed terminal source segment.\"\"\""
+        },
+        {
+          "line": 54,
+          "text": "    unchanged = deepcopy(task)"
+        },
+        {
+          "line": 55,
+          "text": "    unchanged[\"path\"][\"targets_mm\"] = deepcopy(old_targets)"
+        },
+        {
+          "line": 67,
+          "text": "            unchanged[\"path\"][\"kind\"] = old_task[\"path\"][\"kind\"]"
+        },
+        {
+          "line": 76,
+          "text": "        unchanged[\"input\"][\"target_mm\"] = old_task[\"input\"][\"target_mm\"]"
+        },
+        {
+          "line": 77,
+          "text": "        for name in (\"task_id\", \"purpose\", \"parameter_origin\", \"description\"):"
+        },
+        {
+          "line": 82,
+          "text": "    if (old_task[\"path\"][\"kind\"] not in (\"ordered_cycle\", \"load_only\")"
+        },
+        {
+          "line": 83,
+          "text": "            or not isinstance(new_targets, list) or len(new_targets) <= len(old_targets)"
+        },
+        {
+          "line": 84,
+          "text": "            or canonical_hash(new_targets[:len(old_targets)]) != canonical_hash(old_targets)"
+        },
+        {
+          "line": 85,
+          "text": "            or canonical_hash(unchanged) != canonical_hash(old_task)):"
+        },
+        {
+          "line": 86,
+          "text": "        raise TMCError(\"Extension may only append targets to the complete original task\", code=\"invalid_task_extension\")"
+        },
+        {
+          "line": 126,
+          "text": "def saved_resume_defaults(saved_result,selected_state_index,*,time_limit_seconds,"
+        },
+        {
+          "line": 138,
+          "text": "    targets = (_extension_targets(parent, selected_state_index, model, extension_task) if extend_path"
+        },
+        {
+          "line": 140,
+          "text": "    settings = DisplacementSettings(**(parent[\"settings\"] | {\"time_limit_seconds\":time_limit_seconds}))"
+        },
+        {
+          "line": 141,
+          "text": "    return dict(geometry_file=_child(model_file.parent,model[\"source_geometry\"][\"snapshot\"][\"descriptor\"]),"
+        },
+        {
+          "line": 142,
+          "text": "        task=deepcopy(model[\"task\"]),targets=targets,settings=settings,"
+        },
+        {
+          "line": 153,
+          "text": "def read_native_resume(saved_result,selected_state_index,project,targets,settings,*,"
+        },
+        {
+          "line": 155,
+          "text": "    \"\"\"Bind one original nonzero anchor and the exact remaining task suffix."
+        },
+        {
+          "line": 158,
+          "text": "    Here only one state NPZ's lift/fluctuation fields are decoded. Fresh F/T"
+        },
+        {
+          "line": 159,
+          "text": "    validation belongs to the controller, which starts without a saved matrix."
+        },
+        {
+          "line": 168,
+          "text": "    if (model_pin != parent[\"model\"][\"descriptor_file_sha256\"]"
+        },
+        {
+          "line": 169,
+          "text": "            or model[\"descriptor_sha256\"] != parent[\"model\"][\"descriptor_sha256\"]"
+        },
+        {
+          "line": 170,
+          "text": "            or model[\"arrays\"][\"sha256\"] != parent[\"model\"][\"arrays_sha256\"]):"
+        },
+        {
+          "line": 174,
+          "text": "    if ((parent.get(\"path_kind\") != \"ordered_cycle\" and not saved_load_only)"
+        },
+        {
+          "line": 175,
+          "text": "            or parent[\"target_origin\"] != 0. or not parent[\"lift_origin_zero\"] or not parent[\"lift_shape_zero\"]):"
+        },
+        {
+          "line": 176,
+          "text": "        raise TMCError(\"Resume requires a zero-lift ordered task or explicit load-only extension\", code=\"invalid_saved_state\")"
+        },
+        {
+          "line": 179,
+          "text": "    if extend_path:"
+        },
+        {
+          "line": 180,
+          "text": "        if list(targets) != _extension_targets(parent, selected_state_index, model, project.task):"
+        },
+        {
+          "line": 183,
+          "text": "        if model[\"task\"] != project.task or model[\"task_sha256\"] != project.task_hash or parent[\"task_sha256\"] != project.task_hash:"
+        },
+        {
+          "line": 184,
+          "text": "            raise TMCError(\"Resume must retain the original physical task\", code=\"invalid_saved_state\")"
+        },
+        {
+          "line": 190,
+          "text": "    actual_regions = deepcopy(project.region_metadata)"
+        },
+        {
+          "line": 191,
+          "text": "    actual_source = actual_regions.pop(\"source_geometry\")"
+        },
+        {
+          "line": 192,
+          "text": "    expected_regions = deepcopy(model[\"region_metadata\"])"
+        },
+        {
+          "line": 193,
+          "text": "    if extend_path:"
+        },
+        {
+          "line": 194,
+          "text": "        expected_regions[\"effective_boundary\"][\"task_sha256\"] = project.task_hash"
+        },
+        {
+          "line": 195,
+          "text": "    if (model[\"grid\"] != project.geometry.grid or parent[\"grid\"] != project.geometry.grid"
+        },
+        {
+          "line": 196,
+          "text": "            or model[\"material\"] != project.material or expected_regions != actual_regions"
+        },
+        {
+          "line": 197,
+          "text": "            or parent[\"counts\"] != actual_regions[\"counts\"]):"
+        },
+        {
+          "line": 198,
+          "text": "        raise TMCError(\"Resume model/material/boundary metadata differs\", code=\"invalid_saved_state\")"
+        },
+        {
+          "line": 199,
+          "text": "    source_keys = (\"geometry_id\",\"descriptor_sha256\",\"descriptor_file_sha256\",\"arrays_sha256\")"
+        },
+        {
+          "line": 200,
+          "text": "    if any(model[\"source_geometry\"][k] != actual_source[k] or parent[\"source_geometry\"][k] != actual_source[k] for k in source_keys):"
+        },
+        {
+          "line": 201,
+          "text": "        raise TMCError(\"Resume source geometry identity differs\", code=\"invalid_saved_state\")"
+        },
+        {
+          "line": 202,
+          "text": "    original_settings,current_settings = dict(parent[\"settings\"]),asdict(settings)"
+        },
+        {
+          "line": 203,
+          "text": "    original_settings.pop(\"time_limit_seconds\"); current_settings.pop(\"time_limit_seconds\")"
+        },
+        {
+          "line": 204,
+          "text": "    options = (parent.get(\"response_mode\",\"complete\"),parent.get(\"tangent_execution\",{}).get(\"mode\",\"full\"),parent.get(\"initial_guess\",\"tangent\"))"
+        },
+        {
+          "line": 205,
+          "text": "    if original_settings != current_settings or options != (response_mode,tangent_mode,initial_guess):"
+        },
+        {
+          "line": 206,
+          "text": "        raise TMCError(\"Resume preserves parent numerical settings/options except the new time limit\", code=\"invalid_saved_state\")"
+        },
+        {
+          "line": 207,
+          "text": "    for name in (\"split_numpy_tangent.py\",\"split_kernel_invariants_hu.py\"):"
+        },
+        {
+          "line": 208,
+          "text": "        if parent[\"mechanics_source_sha256\"][\"hf_repo/src/hf_eval/\"+name] != sha256(Path(__file__).with_name(name).read_bytes()).hexdigest():"
+        },
+        {
+          "line": 209,
+          "text": "            raise TMCError(\"Resume force/tangent source differs from parent\", code=\"invalid_saved_state\")"
+        },
+        {
+          "line": 229,
+          "text": "    if state_hash(state) != descriptor[\"state_sha256\"] or np.any(state.lift) or np.any(state.fluctuation[project.model.fixed_dofs]):"
+        },
+        {
+          "line": 230,
+          "text": "        raise TMCError(\"Saved resume split/hash/fixed boundary differs\", code=\"invalid_saved_state\")"
+        },
+        {
+          "line": 246,
+          "text": "        state_transport=\"Original lift/fluctuation and signed R; no rounded display/rebase/translation\","
+        },
+        {
+          "line": 247,
+          "text": "        fresh_anchor_required=True,saved_matrix_or_force_or_tangent_read=False,"
+        },
+        {
+          "line": 248,
+          "text": "        full_original_path_executed_by_child=False,independent_HP_qualified=False,HF5_qualified=False)"
+        },
+        {
+          "line": 251,
+          "text": "        metadata.update(continuation_mode=\"explicit_task_extension\", source_task_sha256=model[\"task_sha256\"],"
+        },
+        {
+          "line": 252,
+          "text": "            source_task_targets_mm=deepcopy(source_targets), extended_task_sha256=project.task_hash,"
+        },
+        {
+          "line": 253,
+          "text": "            extended_task_targets_mm=deepcopy(original_targets), appended_targets_mm=deepcopy(original_targets[len(source_targets):]),"
+        },
+        {
+          "line": 254,
+          "text": "            parent_continuation=deepcopy(parent.get(\"continuation\")), full_extended_path_executed_by_child=False,"
+        },
+        {
+          "line": 255,
+          "text": "            full_extended_path_completed=False)"
+        }
+      ]
+    },
+    {
+      "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+      "bytes": 4423,
+      "sha256": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9",
+      "purpose": "Current nodal observer requires all body DOFs fixed and uses reference positions, saved weak forces and holding; moving-body observation needs a distinct actual-coordinate/constraint contract.",
+      "evidence": [
+        {
+          "line": 13,
+          "text": "def observe_workpiece_nodal_forces(model, force_arrays, *, symmetry_y_mm,"
+        },
+        {
+          "line": 15,
+          "text": "    \"\"\"Select all fixed body nodes from saved global forces without assembly."
+        },
+        {
+          "line": 17,
+          "text": "    Body force is minus the internal weak force; holding reaction is opposite."
+        },
+        {
+          "line": 19,
+          "text": "    A nodal vector is not attributable to either incident face. The moment is a"
+        },
+        {
+          "line": 20,
+          "text": "    derived nodal sum, about the supplied point or the body-node mean by default."
+        },
+        {
+          "line": 21,
+          "text": "    Neither vectors nor moments reconstruct a continuous contact traction."
+        },
+        {
+          "line": 23,
+          "text": "    xy = np.asarray(model[\"coordinates\"], dtype=float)"
+        },
+        {
+          "line": 32,
+          "text": "    dofs = (2*nodes[:, None]+np.arange(2)).ravel()"
+        },
+        {
+          "line": 33,
+          "text": "    if (not np.array_equal(np.sort(dofs), np.sort(model[\"workpiece_dofs\"]))"
+        },
+        {
+          "line": 34,
+          "text": "            or not np.all(np.isin(dofs, model[\"fixed_dofs\"]))):"
+        },
+        {
+          "line": 35,
+          "text": "        raise ValueError(\"Both components of every workpiece node must be fixed\")"
+        },
+        {
+          "line": 36,
+          "text": "    closed = exposed_q1_edges(conn, cells, xy)"
+        },
+        {
+          "line": 41,
+          "text": "    masks = dict(physical_only=on_physical & ~on_cut, cut_only=on_cut & ~on_physical,"
+        },
+        {
+          "line": 42,
+          "text": "                 physical_and_cut=on_physical & on_cut, interior=~(on_physical | on_cut))"
+        },
+        {
+          "line": 43,
+          "text": "    positions = xy[nodes].copy()"
+        },
+        {
+          "line": 44,
+          "text": "    origin = (positions.mean(axis=0) if moment_origin_mm is None"
+        },
+        {
+          "line": 53,
+          "text": "        forces[component] = -saved.reshape(-1, 2)[nodes].copy()"
+        },
+        {
+          "line": 54,
+          "text": "    holding = np.asarray(force_arrays[\"support_reaction\"])"
+        },
+        {
+          "line": 60,
+          "text": "        vectors = {name: [fsum(float(v) for v in values[selected, axis])"
+        },
+        {
+          "line": 62,
+          "text": "        moments = {name: fsum(float(x)*float(fy)-float(y)*float(fx)"
+        },
+        {
+          "line": 65,
+          "text": "        return dict(force_on_body_N=vectors, moment_about_origin_Nmm=moments)"
+        },
+        {
+          "line": 70,
+          "text": "    summary = dict(force_on_lower_body_N=complete[\"force_on_body_N\"],"
+        },
+        {
+          "line": 71,
+          "text": "                   moment_about_origin_Nmm=complete[\"moment_about_origin_Nmm\"],"
+        },
+        {
+          "line": 72,
+          "text": "                   holding_reaction_on_model_N=[fsum(float(v) for v in holding[dofs[axis::2]])"
+        },
+        {
+          "line": 73,
+          "text": "                                                for axis in (0, 1)], groups=groups)"
+        },
+        {
+          "line": 74,
+          "text": "    return dict(node_ids=nodes.copy(), coordinates_mm=positions, masks=masks,"
+        },
+        {
+          "line": 75,
+          "text": "                edges=dict(closed=closed, physical=physical, cut=cut),"
+        },
+        {
+          "line": 76,
+          "text": "                forces_on_body_N=forces, moment_origin_mm=origin.copy(), summary=summary)"
+        }
+      ]
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "public_native_entry",
+      "state": "implemented",
+      "detail": "evaluate_native in native_evaluate.py; explicit geometry/task/output and scalar input target path, not native_api.py.",
+      "evidence": [
+        {
+          "path": "hf_repo/src/hf_eval/native_evaluate.py",
+          "lines": [
+            23,
+            26,
+            103
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fixed_reference_body",
+      "state": "implemented",
+      "detail": "fixed_rigid square/circle, body node ux/uy fixed to zero; center on upper y-symmetry, reference passive_void cells, original staircase boundary. This is fixed-body overlay, not an existing generalized rigid-body coordinate.",
+      "evidence": [
+        {
+          "path": "hf_repo/src/hf_eval/native_project.py",
+          "lines": [
+            97,
+            106,
+            150,
+            160,
+            168,
+            184,
+            231
+          ]
+        }
+      ]
+    },
+    {
+      "id": "one_actuator_mean_control",
+      "state": "implemented",
+      "detail": "One b_in mean displacement and scalar R_input reaction; output b_out measures q_out and generic spring. Native schema currently requires zero output/auxiliary spring.",
+      "evidence": [
+        {
+          "path": "hf_repo/src/hf_eval/displacement.py",
+          "lines": [
+            105,
+            111,
+            126
+          ]
+        },
+        {
+          "path": "hf_repo/src/hf_eval/split_displacement.py",
+          "lines": [
+            61,
+            192,
+            198
+          ]
+        },
+        {
+          "path": "hf_repo/src/hf_eval/native_project.py",
+          "lines": [
+            85,
+            89
+          ]
+        }
+      ]
+    },
+    {
+      "id": "same_physics_restart",
+      "state": "implemented",
+      "detail": "Same-task suffix or explicit append-only targets, selected anchor fresh F/T; saved matrices not restored; only authorized path/metadata exceptions and new clock.",
+      "evidence": [
+        {
+          "path": "hf_repo/src/hf_eval/native_resume.py",
+          "lines": [
+            82,
+            85,
+            183,
+            195,
+            205,
+            247
+          ]
+        }
+      ]
+    },
+    {
+      "id": "weak_force_reporting",
+      "state": "implemented",
+      "detail": "Original fixed-body weak forces/holding/masks/moments and study reader are available; reporting does not actuate a body, apply an external load or qualify grip.",
+      "evidence": [
+        {
+          "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+          "lines": [
+            13,
+            17,
+            34,
+            53,
+            70,
+            72
+          ]
+        }
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "id": "rigid_body_motion",
+      "current_gap": "No body generalized q/rotation or tied rigid kinematics in the current native task/Project. Unlocking565 body nodes leaves source medium material and allows deformation; kind renaming is rejected, or misleading if validation alone is relaxed.",
+      "minimum_needed": "An explicitly versioned, opt-in guided rigid-body kinematic map/ties for every selected body node, chosen free/held rigid modes and actual coordinates; retain source medium/kernel semantics without claiming high-E elasticity is rigid.",
+      "evidence": [
+        {
+          "path": "hf_repo/src/hf_eval/native_project.py",
+          "lines": [
+            97,
+            106,
+            168,
+            184,
+            185,
+            245,
+            276
+          ]
+        },
+        {
+          "path": "hf_repo/src/hf_eval/project.py",
+          "lines": [
+            41,
+            42,
+            74
+          ]
+        }
+      ]
+    },
+    {
+      "id": "two_controls",
+      "current_gap": "Holding input d while independently changing body-q is not represented by one targets_mm vector, one b_in row and one scalar multiplier. Repeated d targets are forbidden; b_out is not an independently imposed mean constraint.",
+      "minimum_needed": "An explicit two-control schedule and constrained/reduced equations: input mean held plus rigid body-q prescribed. A two-mean formulation needs two independent constraint columns/rows and reactions; a prescribed body-lift formulation still needs new moving-body constraints/reaction recovery and zero-support distinctions. Either requires deliberate source changes, not JSON alone.",
+      "evidence": [
+        {
+          "path": "hf_repo/src/hf_eval/native_project.py",
+          "lines": [
+            78
+          ]
+        },
+        {
+          "path": "hf_repo/src/hf_eval/displacement.py",
+          "lines": [
+            111,
+            126
+          ]
+        },
+        {
+          "path": "hf_repo/src/hf_eval/split_displacement.py",
+          "lines": [
+            55,
+            61,
+            88,
+            105,
+            116,
+            198
+          ]
+        }
+      ]
+    },
+    {
+      "id": "external_body_load",
+      "current_gap": "No native task field/public argument or controller residual term for an independent workpiece external load. Input R_input is a solved actuator reaction; cached body holding is support reaction, not an applied body load.",
+      "minimum_needed": "If force control is selected, define guided-body generalized load/vector, sign, force units and half/full convention, add it to balance and work-conjugate reaction reporting. Prescribed-q resisting reaction and force-controlled free response are separate experiments.",
+      "evidence": [
+        {
+          "path": "hf_repo/src/hf_eval/native_evaluate.py",
+          "lines": [
+            23,
+            26
+          ]
+        },
+        {
+          "path": "hf_repo/src/hf_eval/native_project.py",
+          "lines": [
+            34,
+            43,
+            85,
+            89
+          ]
+        },
+        {
+          "path": "hf_repo/src/hf_eval/split_displacement.py",
+          "lines": [
+            189,
+            192,
+            193,
+            212
+          ]
+        }
+      ]
+    },
+    {
+      "id": "changed_physics_restart",
+      "current_gap": "Existing read_native_resume forbids changed task/material/boundary/geometry and source/options changes. extend_path only appends the same original physical task; fixed body peak cannot directly seed a released/moving-body task through that API.",
+      "minimum_needed": "Use a newly defined physical task. If later approved to transport an old state, specify a separate migration/initial-guess contract, rigid-map projection/admissibility and fresh new-task equilibrium/reactions; retain ancestry without inheriting old task qualification or matrices.",
+      "evidence": [
+        {
+          "path": "hf_repo/src/hf_eval/native_resume.py",
+          "lines": [
+            85,
+            183,
+            195,
+            196,
+            200,
+            205,
+            208,
+            229,
+            247,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "moving_body_observations",
+      "current_gap": "Current observer checks every body DOF is fixed and reports model reference coordinates. Existing fixed-body views/report qualifiers cannot silently become moving-body/load-capacity results.",
+      "minimum_needed": "Separate actual body position/control reaction/external-balance metadata and matching save/read/visualization schema; preserve old fixed_rigid reader and data. This is needed before any actual motion plot or new functional conclusion.",
+      "evidence": [
+        {
+          "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+          "lines": [
+            32,
+            34,
+            35,
+            43,
+            53,
+            70
+          ]
+        }
+      ]
+    }
+  ],
+  "candidate_minimal_extension": {
+    "status": "specification_option_only_not_implemented_or_authorized_to_run",
+    "physical_question": "At a held gripper input, obtain a guided rigid-body horizontal extraction displacement/reaction response before any free-load or release claim.",
+    "body_kinematics": "If+x is chosen: all original body nodes share ux=q_body and uy=0, rotation fixed. An average alone does not impose rigidity.",
+    "controls": "Independent actuator mean d and guided body-q; explicit loading/holding/extraction order, separate input/body reactions. Numeric endpoints/physical success criteria must be fixed in the task specification, not chosen by this audit.",
+    "symmetry": "Guided horizontal translation with uy/rotation fixed can preserve current y-mirror only if loads/constraints are mirrored consistently. Vertical translation or general rotation does not preserve this half-body task; incompatible load needs a full model choice.",
+    "constitutive_reuse": "Existing NumPy force/tangent and20mm units may be reused only after compatible rigid-map/reduced assembly is implemented and checked; no friction law is introduced by unlocking or adding load.",
+    "restart": "Current fixed-body saved states are references only under existing public API. New physics requires new task/start contract; any future state transport needs a separate reviewed implementation and fresh new-task equilibrium.",
+    "first_code_dependency": "A separately approved minimal kinematic/control implementation and bounded small-model verification after physical specification; neither is started here.",
+    "force_control_dependency": "Nonzero external force on a contact-free free body need not admit static equilibrium. Solver failure/zero mode is not release; force control/free motion needs its own physical and stopping definition."
+  },
+  "exclusions": {
+    "HF_import_or_API_execution": 0,
+    "scientific_NPZ_CSV_gzip_or_media_reads": 0,
+    "new_solver_or_force_or_tangent_evaluations": 0,
+    "new_tests": 0,
+    "new_plots": 0,
+    "new_implementation": 0,
+    "Git_operations": 0,
+    "formal_repository_writes": 0
+  },
+  "limits": [
+    "Capability statements concern this traced native call path, not a claim that every unrelated repository tool was searched.",
+    "No changed JSON label unlocks true rigidity or an independent external-load control.",
+    "No old fixed-boundary task/status/SHA was modified or reused as new-physics acceptance.",
+    "Existing load_saved_study_report remains a read-only report function, not a solver or actuator."
+  ]
+}

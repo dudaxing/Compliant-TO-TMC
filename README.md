@@ -1,3 +1,5 @@
+> 2026-10-22：已完成[最小承载任务规格与接口核查](docs/WORKPIECE_LOAD_TASK_SPEC.md)，近期建议为机构输入保持1.06 mm、工件沿+x刚体位移控制的小探针；先做最小能力与小模型验证。见[本轮记录](lf_data_preparation/native_interface_001/lf_circle_tip_load_spec_001/RESULTS.md)。当前仅规格完成，尚无可动工件新求解或承载资格。
+
 > 2026-10-21 L-CTIPGDEF1：已按用户批准整合[单侧工件作用力规则](docs/WORKPIECE_FORCE_DEFINITION.md)，明确当前两α的20 mm厚度已含于N力值、有符号Fy、material/Hu、holding、镜像与现有字段用法；来源及实际核查见[本轮记录](lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/RESULTS.md)。原实现、数值与资格保持，历史说明保留如下。
 
 > 2026-10-21 L-CTIPAREPORT1 **执行PASS**／阶段完成True：新增研究层保存报告函数/CLI和轻索引，关联现成两alpha周期、260标量差、565对3390节点差及12既有图页；无新PNG或科学验收，原对象/资格保持；见[实际记录](lf_data_preparation/native_interface_001/lf_circle_tip_alpha_report_001/RESULTS.md)。原历史说明保留如下。

@@ -1,0 +1,87 @@
+{
+  "document_type": "proposal_not_native_task_input",
+  "stage": "L-CTIPLOADSPEC1",
+  "created_utc": "2026-10-22T05:45:19.037921+00:00",
+  "baseline_commit": "8d589b65ab2e4efe8ca01b95034ed329fca81171",
+  "new_physics_implemented": false,
+  "new_physics_executed": false,
+  "recommended_mode": "prescribed_guided_rigid_x_probe",
+  "proposal": {
+    "mechanism_mean_held_mm": 1.06,
+    "body_q_targets_mm": [
+      0,
+      0.025
+    ],
+    "body_ux": "same q for every original body node",
+    "body_uy_mm": 0,
+    "body_rotation_rad": 0,
+    "alpha": 2.5e-07,
+    "gamma": 1e-06,
+    "radius_mm": 9,
+    "reference_center_mm": [
+      80,
+      40
+    ],
+    "reference_domain_right_mm": 92,
+    "regularization_length_mm": 80,
+    "thickness_already_in_force_N_mm": 20,
+    "independent_known_body_load": false
+  },
+  "geometry_bound": {
+    "type": "source_rule_conservative_not_saved_bbox",
+    "reference_node_x_upper_mm": 89.25,
+    "candidate_end_x_upper_mm": 89.275,
+    "reference_margin_lower_mm": 2.725,
+    "deformed_margin_guaranteed": false,
+    "actual_bbox_binding_required_before_real_probe": true
+  },
+  "control": {
+    "unknowns": "non-body free fluctuations plus input multiplier",
+    "prescribed_body_elimination": true,
+    "second_mean_constraint_required": false,
+    "input_held_independently_of_q": true,
+    "force_control_implemented": false,
+    "q0_new_task_admission_required": true,
+    "old_default_resume_accepts_new_physics": false
+  },
+  "half_full": {
+    "force_unit": "N already includes20mm thickness",
+    "q_full": "q_half",
+    "Q_full": "2*Q_half",
+    "known_load_half": "P_full/2",
+    "probe_half_drive": "sum body internal x = -ONbody_x",
+    "motion_force_sign_retained": true,
+    "reaction_partitions": [
+      "body_ux_drive",
+      "body_uy_guide",
+      "other_fixed_supports"
+    ],
+    "overlaps_counted_once": true
+  },
+  "success_classes": {
+    "specification": "concrete physical and API specification reviewed",
+    "probe_numerical": "old valid controller gates plus explicit wrapper/zero-support/prescribed-body checks",
+    "probe_physical": "descriptive signed response; positive force not effective-grip PASS",
+    "force_control_capacity": "not yet defined/implemented",
+    "release_and_stability": "not granted"
+  },
+  "schematic": {
+    "path": "task_schematic.png",
+    "kind": "conceptual illustration",
+    "computed_deformation": false,
+    "scale": "not to scale",
+    "caption": "body shape is conceptual; motion/force arrows are not numerical results"
+  },
+  "scientific_calls_this_stage": 0,
+  "new_numerical_tests_this_stage": 0,
+  "next_stage": {
+    "id": "L-CTIPMOVE1",
+    "scope": "minimum implementation and bounded small-model validation only",
+    "real_circle_solve_included": false,
+    "candidate_helper_seconds": 300,
+    "candidate_outer_seconds": 360,
+    "candidate_memory_GiB": 8,
+    "candidate_thread_cap": 16,
+    "execution_window_started": false
+  }
+}

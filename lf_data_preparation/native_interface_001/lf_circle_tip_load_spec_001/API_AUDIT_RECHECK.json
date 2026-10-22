@@ -1,0 +1,233 @@
+{
+  "schema_version": "L-CTIPLOADSPEC1-api-audit-recheck-1.0",
+  "created_utc": "2026-10-22T05:40:59.591716+00:00",
+  "reported_root_head": "8d589b65ab2e4efe8ca01b95034ed329fca81171",
+  "status": "accurate_with_gate_layer_clarification",
+  "sources": [
+    {
+      "path": "hf_repo/src/hf_eval/native_evaluate.py",
+      "bytes": 7867,
+      "sha256": "44eed5f42b5e10d8677b24d2cfc70e1508e1837e346205abdf309d54bc8961ed"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_mean.py",
+      "bytes": 22777,
+      "sha256": "76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_project.py",
+      "bytes": 23187,
+      "sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_resume.py",
+      "bytes": 18014,
+      "sha256": "68e3122950766f9cecb48a02a0f52a6d5f2efbfc466432bccc2cd48c77e2b798"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/displacement.py",
+      "bytes": 26838,
+      "sha256": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/split_displacement.py",
+      "bytes": 24156,
+      "sha256": "151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/workpiece_nodal.py",
+      "bytes": 4423,
+      "sha256": "697e056fee1bddf4a611f2fc6e83de10747d923627b5f2d28c34eaf9a1d33ae9"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/protocol.json",
+      "bytes": 20001,
+      "sha256": "20ed8779922c7feede228c64363127f21adc7aefeefa262eadf658ffe4d81a96"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/execute_step.py",
+      "bytes": 29900,
+      "sha256": "317f05fd896555ac6719cf85be813984d82c6897108726308497377e6fe346a0"
+    }
+  ],
+  "checks": [
+    {
+      "id": "public_entry",
+      "status": "confirmed",
+      "source": "hf_repo/src/hf_eval/native_evaluate.py",
+      "lines": [
+        23,
+        26,
+        103,
+        107
+      ],
+      "finding": "No independent body-q or body-load argument; the public API dispatches the original mean controller."
+    },
+    {
+      "id": "fixed_overlay",
+      "status": "confirmed",
+      "source": "hf_repo/src/hf_eval/native_project.py",
+      "lines": [
+        97,
+        107,
+        168,
+        184,
+        185,
+        228,
+        231,
+        253,
+        280
+      ],
+      "finding": "fixed_rigid only, body ux/uy added to fixed union, unchanged phase arrays and thickness-integrated N."
+    },
+    {
+      "id": "one_control_parameter",
+      "status": "confirmed",
+      "source": "hf_repo/src/hf_eval/split_displacement.py",
+      "lines": [
+        55,
+        75,
+        116,
+        117,
+        177,
+        203,
+        236,
+        249
+      ],
+      "finding": "The same s drives affine lift and mean target d0+s. Moving body q with fixed mechanism mean is not provided by these options."
+    },
+    {
+      "id": "single_kkt",
+      "status": "confirmed",
+      "source": "hf_repo/src/hf_eval/displacement.py",
+      "lines": [
+        105,
+        114,
+        126,
+        127
+      ],
+      "finding": "One mean column and one actuator multiplier; full unsymmetrized residual Jacobian with sparse LU."
+    },
+    {
+      "id": "strict_resume",
+      "status": "confirmed",
+      "source": "hf_repo/src/hf_eval/native_resume.py",
+      "lines": [
+        82,
+        86,
+        183,
+        209,
+        229,
+        230
+      ],
+      "finding": "Old fixed-body state cannot be silently resumed under new physics; a separately declared bridge needs old source pins and fresh q=0 feasibility/equilibrium validation."
+    },
+    {
+      "id": "gate_layers",
+      "status": "clarification_required_in_final_spec",
+      "source": "hf_repo/src/hf_eval/split_displacement.py",
+      "lines": [
+        150,
+        160,
+        189,
+        207,
+        270,
+        273
+      ],
+      "finding": "Production Newton acceptance applies finite fields, J>0, free force relative residual<=tolerance and mean constraint<=its scaled bound. Global balance and prescribed displacement thresholds are wrapper gates."
+    },
+    {
+      "id": "wrapper_gates",
+      "status": "confirmed",
+      "source": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/execute_step.py",
+      "lines": [
+        217,
+        227
+      ],
+      "finding": "Cached wrapper rejects J<=0, residual>1e-9, mean-bound violation, global balance>1e-6, or max compensated fixed displacement>8e-11 mm. These are not all native_evaluate built-in failure gates."
+    },
+    {
+      "id": "original_settings",
+      "status": "confirmed",
+      "source": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/protocol.json",
+      "lines": [
+        29,
+        51
+      ],
+      "finding": "Original real task: tolerance1e-9, constraint_tolerance1e-10, displacement floor1e-6 mm, force floor factor1e-8, maxchecks25/backtracks12/bisections4, minimum_increment0.00625 mm; options mechanical/chunk256/port_projection."
+    }
+  ],
+  "minimal_implementation": {
+    "kind": "opt_in_guided_rigid_prescribed_x",
+    "control": "body q prescribed independently; mechanism d_hold=1.06 mm fixed",
+    "unknowns": "non-body free fluctuations plus existing input actuator multiplier",
+    "excluded": [
+      "generic force control",
+      "second mean KKT",
+      "free rigid motion",
+      "friction",
+      "default fixed task weakening",
+      "scientific execution in this review"
+    ]
+  },
+  "proposed_new_checks": [
+    {
+      "id": "legacy_unchanged",
+      "check": "Default fixed_rigid construction, parser rejection, old zero-fixed guard and strict resume retain old behavior; new mode is explicit and cannot enter via old extend_path."
+    },
+    {
+      "id": "disjoint_sets",
+      "check": "Fix body membership once from the reference overlay; no support/port/body conflict, body-y/background-y overlap deduplicated. Distinguish all prescribed DOFs from zero-only DOFs."
+    },
+    {
+      "id": "rigidity",
+      "check": "Every body ux uses identical stored q lift and zero fluctuation; every body uy remains zero. Check each compensated physical ux-q and uy, not just a nodal average; maximum error<=8e-11 mm. Do not release individual body nodes."
+    },
+    {
+      "id": "zero_support",
+      "check": "Every original zero support/entity/background component remains compensated physical zero<=8e-11 mm; do not apply the old zero target to moving body ux."
+    },
+    {
+      "id": "input_hold",
+      "check": "Compensated b_in dot(lift+w)-d_hold <=1e-10*max(abs(d_hold),1e-6 mm) at every accepted q. q never replaces or increments d_hold."
+    },
+    {
+      "id": "free_equilibrium",
+      "check": "Non-body free residual r=fint-b_in*R (k_out=0) normalized exactly as original, using d_hold in the force floor, <=1e-9; all J>0 and all recorded fields finite. Individual constrained body force need not vanish."
+    },
+    {
+      "id": "reaction_sign",
+      "check": "A_half_x=sum body r_x is actuator-on-body generalized force; model-on-body Fx=-sum body fint_x. With no other body external load they cancel. No nodal averaging or extra thickness factor."
+    },
+    {
+      "id": "accounting",
+      "check": "Whole-domain force balance uses zero-support/guide/body-actuator/input exactly once and remains <=1e-6 under the original balance scale. Preserve total/material/Hu summaries and signed half-body reports; guide reaction is not free-body load support."
+    },
+    {
+      "id": "anchor",
+      "check": "Explicit new-task q=0 start admits only pinned old split components and multiplier as a candidate; preserves body/source IDs and settings; independently checks body/mean constraints, performs fresh F/T, and passes gates before q advances. No old tangent or inherited qualification. Admission absent => do not pretend ordinary saved resume works."
+    },
+    {
+      "id": "jacobian",
+      "check": "For prescribed q eliminate body correction DOFs; predictor includes -(K deltaL)_free and constant-input constraint correction. The force tangent stays nonsymmetric. Small-model finite directional residual comparison should inspect the actual residual Jacobian, not an energy Hessian."
+    },
+    {
+      "id": "failure_state",
+      "check": "Any terminal error retains accepted q states and reason; timeout/zero mode/nonconvergence never classified release or capacity limit."
+    },
+    {
+      "id": "positions",
+      "check": "Observer stores reference and actual x=X+q, y=Y for body and actual split deformation for mechanism/medium; no remasking/rebuilding the body by moved center; old fixed-only observer cannot be silently reused."
+    }
+  ],
+  "read_scope_deviation": {
+    "description": "One overbroad recursive rg scanned alpha/STEP10 text subtrees and emitted at least one existing nodes.csv row plus ordinary JSON/jsonl. CSV files may have been scanned beyond the emitted match; exact number/bytes unknown. This is a read-only scope deviation, not numerical processing.",
+    "scientific_npz_gzip_payload_reads": 0,
+    "old_media_body_reads": 0,
+    "numerical_calls": 0,
+    "hf_imports": 0,
+    "tests": 0,
+    "git_mutations": 0
+  },
+  "implementation_executed": false
+}

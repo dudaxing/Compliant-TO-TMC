@@ -1,0 +1,166 @@
+{
+  "document_type": "independent_specification_review",
+  "stage": "L-CTIPLOADSPEC1",
+  "created_utc": "2026-10-22T05:45:55.476082+00:00",
+  "reviewer": "/root/loadspec_independent_review",
+  "status": "specification_review_pass_execution_pending",
+  "reported_formal_main": "8d589b65ab2e4efe8ca01b95034ed329fca81171",
+  "reviewed_candidates": [
+    {
+      "path": "PHYSICAL_TASK_SPEC.md",
+      "bytes": 11543,
+      "sha256": "216ae09a4a3e4c2d07b6a47273b747ac27d9d1f2f08e7d5287303cfa59be8f86"
+    },
+    {
+      "path": "NEXT_IMPLEMENTATION_CARD.md",
+      "bytes": 4866,
+      "sha256": "50dcee88fbc05901bbf2c11f889885f8443c4842ae2a3c42f696326a8f4ba21e"
+    }
+  ],
+  "checks": [
+    {
+      "id": "R01",
+      "title": "运动与控制",
+      "status": "pass",
+      "conclusion": "全部原工件节点 ux=q、uy=0 与 theta=0 是同一导向刚体平移；机构仅平均输入保持1.06，不锁死各输入节点。",
+      "evidence": "PHYSICAL_TASK_SPEC.md 目标与本次选择/刚体、域与状态的合同"
+    },
+    {
+      "id": "R02",
+      "title": "消元与独立路径",
+      "status": "pass",
+      "conclusion": "给定 body q 消元后仍为一条输入平均约束；Newton 的单边框KKT及 predictor [-(K deltaL)_F,-b_in^T deltaL] 符号正确，不把 q 增量加到 d_hold。",
+      "evidence": "split_displacement.py:61-69,116-117,177-207,232-238; displacement.py:105-126"
+    },
+    {
+      "id": "R03",
+      "title": "刚体成员与边界",
+      "status": "pass",
+      "conclusion": "成员冻结，不通过解锁原介质节点或重新mask替代刚体；body/port及不相容支撑冲突拒绝。原y对称与+x运动相容。",
+      "evidence": "native_project.py:142-186; PHYSICAL_TASK_SPEC.md 刚体、域与状态的合同"
+    },
+    {
+      "id": "R04",
+      "title": "作用力与驱动符号",
+      "status": "pass",
+      "conclusion": "ON-body=-sum_B fint，prescribed probe drive=+sum_B fint；负Q是制动而非数值失败。保q0预载及signed增量，不abs或截零。",
+      "evidence": "docs/WORKPIECE_FORCE_DEFINITION.md:24-42; PHYSICAL_TASK_SPEC.md 半模型、单位和符号"
+    },
+    {
+      "id": "R05",
+      "title": "半模型虚功口径",
+      "status": "pass",
+      "conclusion": "同一q在两半相同，完整轴向力为2倍半模型；完整外载进入半模型时除2。t20已计入N，不另乘厚度，不把2|Fy|当轴向承载。",
+      "evidence": "docs/WORKPIECE_FORCE_DEFINITION.md:11-20,44-61; PHYSICAL_TASK_SPEC.md 半模型、单位和符号"
+    },
+    {
+      "id": "R06",
+      "title": "反力账本",
+      "status": "pass",
+      "conclusion": "body ux、body uy及其余固定DOF互斥，body uy/背景对称交集只计一次；不将原全support向量与body drive再次相加。",
+      "evidence": "split_displacement.py:209-224; PHYSICAL_TASK_SPEC.md 半模型、单位和符号"
+    },
+    {
+      "id": "R07",
+      "title": "新任务状态准入",
+      "status": "pass",
+      "conclusion": "旧固定峰只作显式新任务初猜。q0须fresh F/T及平衡核验，不自动Newton修复、不改普通resume物理合同、不迁移旧矩阵或旧HP资格。",
+      "evidence": "API_CAPABILITY_AUDIT.md 保存态restart边界; PHYSICAL_TASK_SPEC.md 刚体、域与状态的合同"
+    },
+    {
+      "id": "R08",
+      "title": "门层级与移动约束",
+      "status": "pass",
+      "conclusion": "分清controller残差/mean/J、研究wrapper global/fixed以及独立HP15门；body改核ux-q而非强制ux=0。归一化仍基于d_hold，真实minstep=.00625来源明确。",
+      "evidence": "split_displacement.py:148-164,189-207,268-279; execute_step.py:217-227; alpha protocol.json settings/gates"
+    },
+    {
+      "id": "R09",
+      "title": "实际坐标与矩",
+      "status": "pass",
+      "conclusion": "新记录必须使用实际body X+q，保split两数组；新矩若提供，以实际中心(80+q,40)定义且不覆盖旧矩。示意图不冒充数值变形。",
+      "evidence": "PHYSICAL_TASK_SPEC.md 半模型、单位和符号/数学与最小实现边界/输出与后续顺序"
+    },
+    {
+      "id": "R10",
+      "title": "有限域解释",
+      "status": "pass",
+      "conclusion": "89.25节点上界由单元中心入圆及半单元宽推得，89.275与2.725只是参考几何保守界；未冒称实际bbox或变形间距，真实前仍须绑定bbox和DOF。右域界不是新增刚墙。",
+      "evidence": "native_project.py:147-158; PHYSICAL_TASK_SPEC.md 刚体、域与状态的合同"
+    },
+    {
+      "id": "R11",
+      "title": "成功与失败含义",
+      "status": "pass",
+      "conclusion": "规格完成、功能通过、真实probe数值完成与承载/释放资格分离。0.025是驱动范围；Q>0、非收敛、零模、低J均未被当有效夹持或释放。",
+      "evidence": "PHYSICAL_TASK_SPEC.md 成功条件与失败含义"
+    },
+    {
+      "id": "R12",
+      "title": "后续最小范围",
+      "status": "pass",
+      "conclusion": "NEXT卡仅安排opt-in候选、小模型六类行为与一图；不包括真实probe、HP、force-control、通用MPC或默认入口替换。fixture/唯一命令/次数/源码及资源需实施前冻结并静审。",
+      "evidence": "NEXT_IMPLEMENTATION_CARD.md 全文"
+    }
+  ],
+  "blocking_findings": [],
+  "resolved_during_review": [
+    {
+      "finding": "Q-q图注中的绝对值可误读为abs(Q)。",
+      "resolution": "最终规格改为有符号原值和有符号增量，并保留负Q制动解释。"
+    },
+    {
+      "finding": "新矩需要明确实际位置和原点。",
+      "resolution": "最终规格定义为实际刚体中心(80+q,40)，并禁止覆盖/平移旧报告原矩。"
+    }
+  ],
+  "pending_before_implementation": [
+    "冻结最小候选文件、精确差异、小模型fixture、唯一命令、求解/测试数量和新资源窗口；完成有限源码静审。",
+    "候选实现及六类小模型行为尚未运行，不能记为数值PASS。",
+    "真实probe前仍需绑定实际staircase bbox/节点单元/边界DOF与原峰来源，另定真实资源和包装。"
+  ],
+  "source_identities": [
+    {
+      "path": "docs/WORKPIECE_FORCE_DEFINITION.md",
+      "bytes": 11837,
+      "sha256": "8a3ffbb984a14e81ea45f746eb479d1358ebb9957a16f6ae29e4af6e7f89a8ec"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/split_displacement.py",
+      "bytes": 24156,
+      "sha256": "151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_project.py",
+      "bytes": 23187,
+      "sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/displacement.py",
+      "bytes": 26838,
+      "sha256": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/execute_step.py",
+      "bytes": 29900,
+      "sha256": "317f05fd896555ac6719cf85be813984d82c6897108726308497377e6fe346a0"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/protocol.json",
+      "bytes": 20001,
+      "sha256": "20ed8779922c7feede228c64363127f21adc7aefeefa262eadf658ffe4d81a96"
+    }
+  ],
+  "scope": {
+    "HF_import_or_calls": 0,
+    "new_force_tangent_or_equilibrium": 0,
+    "HP": 0,
+    "tests": 0,
+    "NPZ_CSV_gzip_payload_reads": 0,
+    "media_reads": 0,
+    "Git_mutations": 0,
+    "formal_repository_writes": 0,
+    "scope_note": "本审阅独立读取两候选MD、既有审计/建议、选定源码和普通protocol JSON。未审阅PNG像素；示意图检查由root另记。其他审计员范围偏差不由本审阅零计数覆盖。",
+    "command_note": "一次rg字面glob路径无效退出1，随后改用精确文件；无代码或数据影响。"
+  }
+}
