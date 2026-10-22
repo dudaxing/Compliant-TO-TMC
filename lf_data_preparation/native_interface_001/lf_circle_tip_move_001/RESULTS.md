@@ -54,3 +54,7 @@ Q三态均为负，表示此受导向的小测试件在当前保持状态需要�
 ## 实际交付复核
 
 [交付审阅](author/ACTUAL_DELIVERY_REVIEW.md)与[12项依据](author/ACTUAL_DELIVERY_REVIEW.json)全部通过、无阻断。核对实际普通JSON、源码与证据身份，未重做数值计算或重开PNG。审阅者参与测试编写，报告明确不将其称为独立测试设计认证。有限交付身份核对见[DELIVERY_CHECK.json](DELIVERY_CHECK.json)；发布和恢复状态随后按实际提交另记。
+
+## 发布与异目录恢复
+
+功能与证据提交`de58abec17ba7eec2bbc003c0da60a3cc4592b11`已普通推送到origin/main，远端main身份已核对；`D:/hf-restore-20260930`从原基线普通fetch／fast-forward恢复到同提交。两工作树当时干净，全部45份本轮变化文件逐字节一致，清单路径与Git索引一致。见[实际发布／恢复回执](PUBLICATION_RESTORE_RECEIPT.json)。这是同机异目录检查，没有另机环境或数值复算；归档本回执的后续普通提交也将推送并在同一恢复目录快进核对。
