@@ -1,3 +1,5 @@
+> 2026-10-22 L-CTIPPROBE1 **真实探针数值PASS**：input mean保持1.06 mm，工件q=0→.025 mm，经原内部二分共3接受态；3PNG／3帧实际动画及[结果与证据](lf_data_preparation/native_interface_001/lf_circle_tip_probe_001/RESULTS.md)已记录。生产源码保持；轴向Hu分量较大，尚不授纯接触／承载／释放资格。近期先准备同定义低输入对照。下方较早阶段状态保留为历史时点。
+
 > 2026-10-22 L-CTIPMOVE1 **功能与小模型验证PASS**：新增[导向工件探针API](docs/GUIDED_WORKPIECE_PROBE.md)，机构输入保持、工件q独立推进；15项通过及[实际变形／反力／收敛图与记录](lf_data_preparation/native_interface_001/lf_circle_tip_move_001/RESULTS.md)。两份已测源码已安装，默认固定工件入口保持；真实r9探针和承载／释放资格尚未完成。
 
 > 2026-10-22：已完成[最小承载任务规格与接口核查](docs/WORKPIECE_LOAD_TASK_SPEC.md)，近期建议为机构输入保持1.06 mm、工件沿+x刚体位移控制的小探针；先做最小能力与小模型验证。见[本轮记录](lf_data_preparation/native_interface_001/lf_circle_tip_load_spec_001/RESULTS.md)。当前仅规格完成，尚无可动工件新求解或承载资格。

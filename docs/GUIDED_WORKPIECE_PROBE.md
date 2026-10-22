@@ -1,3 +1,5 @@
+> 2026-10-22 L-CTIPPROBE1 **真实探针数值PASS**：input mean保持1.06 mm，工件q=0→.025 mm，经原内部二分共3接受态；3PNG／3帧实际动画及[结果与证据](../lf_data_preparation/native_interface_001/lf_circle_tip_probe_001/RESULTS.md)已记录。生产源码保持；轴向Hu分量较大，尚不授纯接触／承载／释放资格。近期先准备同定义低输入对照。下方较早阶段状态保留为历史时点。
+
 # 导向刚体工件探针：显式API
 
 2026-10-22。L-CTIPMOVE1已完成受限小模型验证并安装。入口为`hf_eval.native_probe.evaluate_native_guided_probe`；原默认固定工件入口保持。实际范围与数值见[阶段记录](../lf_data_preparation/native_interface_001/lf_circle_tip_move_001/RESULTS.md)。

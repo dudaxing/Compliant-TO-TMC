@@ -1,3 +1,5 @@
+> 2026-10-22 L-CTIPPROBE1 **真实探针数值PASS**：input mean保持1.06 mm，工件q=0→.025 mm，经原内部二分共3接受态；3PNG／3帧实际动画及[结果与证据](../lf_data_preparation/native_interface_001/lf_circle_tip_probe_001/RESULTS.md)已记录。生产源码保持；轴向Hu分量较大，尚不授纯接触／承载／释放资格。近期先准备同定义低输入对照。下方较早阶段状态保留为历史时点。
+
 > 2026-10-22：显式新入口 `hf_eval.native_probe.evaluate_native_guided_probe` 已经L-CTIPMOVE1小模型15项验证并安装；从完整固定loading峰严格准入，保持input mean并规定工件刚体+x位移。见[API字段和限制](../docs/GUIDED_WORKPIECE_PROBE.md)、[数值／图像／执行记录](../lf_data_preparation/native_interface_001/lf_circle_tip_move_001/RESULTS.md)。旧 `evaluate_native`／resume和默认CLI保持；此为导向位移探针，不是force-control承载。
 
 > 2026-10-21 L-CTIPGDEF1：已按用户批准整合[单侧工件作用力规则](../docs/WORKPIECE_FORCE_DEFINITION.md)，明确当前两α的20 mm厚度已含于N力值、有符号Fy、material/Hu、holding、镜像与现有字段用法；来源及实际核查见[本轮记录](../lf_data_preparation/native_interface_001/lf_circle_tip_force_definition_001/RESULTS.md)。原实现、数值与资格保持，历史说明保留如下。
