@@ -1,0 +1,70 @@
+{
+  "schema": "hf-ctiplow1-physical-interpretation-1",
+  "stage": "L-CTIPLOW1",
+  "analyst": "/root/low_runner",
+  "date": "2026-10-23",
+  "method": "Existing ordinary result JSON and existing API/source/spec inspection; scalar arithmetic only",
+  "sources": ["D:/hlo1_001/run_001/view/comparison.json", "D:/hlo1_001/run_001/view/state_table.json"],
+  "new_F_T_HP_equilibrium_tests_NPZ_media_or_plot_calls": 0,
+  "ROOT_or_BASE_writes": 0,
+  "exact_common_q_mm": [0.0, 0.025],
+  "high_unmatched_q_mm": [0.0125],
+  "low_unmatched_q_mm": [],
+  "at_q_0025": {
+    "low": {"held_input_mm": 0.5, "Q_total_half_N": 0.000043272306948756724, "Q_material_half_N": 0.000005934019104253956, "Q_Hu_half_N": 0.00003733828784450277, "ON_body_Fy_half_N": 0.00037114495632095733, "tip_body_mm": 0.5190421063444752, "min_J": 0.5154001178738712, "max_abs_Hu_per_mm": 0.028067346000868798, "right480_min_J": 0.7302431734902084, "right480_max_abs_Hu_per_mm": 0.011649532189515907},
+    "high": {"held_input_mm": 1.06, "Q_total_half_N": 0.0002561572865437846, "Q_material_half_N": 0.00007023681740568895, "Q_Hu_half_N": 0.00018592046913809562, "ON_body_Fy_half_N": 0.012505048670471336, "tip_body_mm": 0.008668243426743771, "min_J": 0.0004166085295994876, "max_abs_Hu_per_mm": 0.318173383204207, "right480_min_J": 0.25285362927613125, "right480_max_abs_Hu_per_mm": 0.06078058611117054}
+  },
+  "increments_half_N": {
+    "low": {"total": 0.000006408095612176505, "material": 0.000001062563979235435, "Hu": 0.0000053455316329410835},
+    "high": {"total": 0.000016177191476489698, "material": 0.000003319987895457089, "Hu": 0.000012857203581032582},
+    "low_minus_high": {"total": -0.000009769095864313193, "material": -0.000002257423916221654, "Hu": -0.000007511671948091498}
+  },
+  "descriptive_ratios": {
+    "high_to_low_Q_end": 5.919658659454586,
+    "high_to_low_Fy_end": 33.69316612686841,
+    "low_Qend_over_high": 0.16892865915551558,
+    "high_Q_Hu_fraction": 0.7258058970199018,
+    "low_Q_Hu_fraction": 0.8628679744003238,
+    "high_increment_Hu_fraction": 0.7947735303571049,
+    "low_increment_Hu_fraction": 0.8341841252779744,
+    "high_minus_low_increment_Hu_fraction": 0.7689219199426496,
+    "high_minus_low_raw_Hu_fraction": 0.6979458183298862,
+    "low_Q_change_percent_from_own_q0": 17.382972210279664,
+    "high_Q_change_percent_from_own_q0": 6.741055532940476,
+    "high_Fy_material_fraction": 0.7573882147464243,
+    "low_Fy_Hu_fraction": 0.7238410589911396
+  },
+  "right_boundary_low": {
+    "body_motion_mm": 0.025,
+    "initial_gap_mm": 3.0176236849145965,
+    "final_gap_mm": 3.0171168265335098,
+    "initial_nearest_right_x_mm": 92.0176236849146,
+    "final_nearest_right_x_mm": 92.04211682653352,
+    "right_boundary_motion_mm_from_gap_arithmetic": 0.02449314161891314,
+    "interpretation": "Actual right boundary is free and follows nearly the body displacement; not a fixed wall or a domain-independence result"
+  },
+  "supported_conclusions": [
+    "The complete new zero-start short parent to fresh identity-matched q0 to held-input guided displacement probe to exact-same-q comparison chain works",
+    "Higher held input changes vertical and axial total/material/Hu response and strongly compresses the medium near the tip",
+    "Finite-separation low-input states still carry signed preload and incremental guided force",
+    "Raw and incremental high/low differences retain substantial Hu; subtraction does not isolate pure contact"
+  ],
+  "not_supported": ["pure contact pressure", "friction", "specified-load bearing", "free-body force or moment equilibrium", "release", "stability or uniqueness", "alpha or domain independence", "new independent HP qualification"],
+  "one_next_step": {
+    "recommendation": "Prepare a minimal opt-in guided +x force-control implementation and finite small-model verification; do not run it under LOW1",
+    "functional_gap": "Current API prescribes q and outputs Q; it has no external P argument or unknown-q generalized equilibrium branch",
+    "retain": "Held mechanism mean, body uy=0 and theta=0, original rigid members, unchanged force kernel and unsymmetrized tangent",
+    "new_unknowns": ["nonbody free fluctuation", "rigid body q", "input multiplier R"],
+    "new_generalized_equation": "sum_B f_int,x - P_half = 0; body-x virtual-displacement column contains ones, not normalized node averaging",
+    "fresh_start_requirement": "P0_half = saved signed Q(q0); releasing body-x at P=0 is not the original nonzero-preload q0 equilibrium",
+    "future_verification": "Use P1_half = prior displacement-controlled Q(q=.025) and solve q as an unknown; recovering the endpoint must be verified, not prescribed or promised",
+    "full_symmetric_axial_conversion": "P_full=2*P_half; q is unchanged",
+    "candidate_loads_not_run": [
+      {"held_input_mm": 0.5, "P0_half_N": 0.00003686421133658022, "P1_half_N": 0.000043272306948756724, "increment_half_N": 0.000006408095612176505, "P0_full_N": 0.00007372842267316044, "P1_full_N": 0.00008654461389751345},
+      {"held_input_mm": 1.06, "P0_half_N": 0.0002399800950672949, "P1_half_N": 0.0002561572865437846, "increment_half_N": 0.000016177191476489698, "P0_full_N": 0.0004799601901345898, "P1_full_N": 0.0005123145730875692}
+    ],
+    "scope_boundary": "Only specification/minimal implementation preparation next; any implementation/tests/real force-controlled case need its own concrete reviewed card and authorization",
+    "resource_scale_suggestion_only": "Original 16-cell/50-DOF small models, minute-scale, 8GiB; no new window opened",
+    "qualification_limit": "Even successful force control is guided total-medium equilibrium including Hu, not pure-contact bearing certification"
+  }
+}
