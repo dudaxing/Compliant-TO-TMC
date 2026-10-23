@@ -1,0 +1,132 @@
+{
+  "schema": "L-CTIPFRESUME1-controller-independent-static-review-1.0",
+  "status": "PASS",
+  "checks": [
+    {
+      "id": "C01",
+      "name": "scope_imports_settings",
+      "status": "PASS",
+      "evidence": "Only controller source read; import AST and GuidedForceSettings class identical to installed baseline."
+    },
+    {
+      "id": "C02",
+      "name": "new_scalar_q_validation",
+      "status": "PASS",
+      "evidence": "initial_q uses unchanged _vector([value],1): shape1, kind i/u/f, noncomplex finite. Bool/string/list/nonfinite reject invalid_input before assembly."
+    },
+    {
+      "id": "C03",
+      "name": "root_force_scalar_validation",
+      "status": "PASS",
+      "evidence": "None preserves original segment anchor; explicit finite real scalar separately retained as P_scale_anchor."
+    },
+    {
+      "id": "C04",
+      "name": "split_structure",
+      "status": "PASS",
+      "evidence": "Existing SplitDisplacement/ndof checked, body-x lift equals absolute initial_q, all other lift zero, original fixed fluctuation zero; conflict raises before assembly."
+    },
+    {
+      "id": "C05",
+      "name": "default_compatibility",
+      "status": "PASS",
+      "evidence": "Optional q default0/root scale None reduce to original q0 and P_anchor. Public old entry signature/admission unchanged."
+    },
+    {
+      "id": "C06",
+      "name": "absolute_q_initial_and_impose",
+      "status": "PASS",
+      "evidence": "state_q initialized initial_q; unchanged impose overwrites body-x lift=q rather than accumulating or shifting q origin."
+    },
+    {
+      "id": "C07",
+      "name": "root_SP",
+      "status": "PASS",
+      "evidence": "Only intended measure scale changes from segment P_anchor to P_scale_anchor; g remains fsum(sum body x,-P), mean/free scales and tolerance unchanged."
+    },
+    {
+      "id": "C08",
+      "name": "fresh_no_repair",
+      "status": "PASS",
+      "evidence": "newton AST identical: first P==oldP and KNone causes fresh tangent check directly, no predictor; failed original gate produces initial_state_not_equilibrated, no projection/correction."
+    },
+    {
+      "id": "C09",
+      "name": "nonsymmetric_KKT",
+      "status": "PASS",
+      "evidence": "step AST identical: independent Kfc/Kcf/Kcc body sums, unaveraged generalized row, unsymmetrized sparse solve retained."
+    },
+    {
+      "id": "C10",
+      "name": "Newton_Armijo",
+      "status": "PASS",
+      "evidence": "newton AST identical: original base/trial residual scales, Armijo factors, feasibility and typed failures unchanged."
+    },
+    {
+      "id": "C11",
+      "name": "rollback_bisection",
+      "status": "PASS",
+      "evidence": "advance AST identical: both split arrays/R/q/P/K rollback, original maxdepth/minimumN/terminal conditions unchanged."
+    },
+    {
+      "id": "C12",
+      "name": "finite_J_timing",
+      "status": "PASS",
+      "evidence": "clock/evaluate AST identical: original finite fields, J>0, attempts/completions and time checks unchanged."
+    },
+    {
+      "id": "C13",
+      "name": "metadata_segment_root",
+      "status": "PASS",
+      "evidence": "measure and top return add explicit initial absolute q, segment anchor/root scale and separate increments; original anchor_force_half_N remains segment first P."
+    },
+    {
+      "id": "C14",
+      "name": "shared_API_alignment",
+      "status": "PASS",
+      "evidence": "Static API uses common _run_guided_force with initial_body_q_mm, force_scale_anchor_half_N; fresh checks q/P/R binary64 and state hash/checks1; 1.1 maps local to global index, explicit root/source/segment/selected keys match frozen INTERFACE_SPEC. No API execution."
+    }
+  ],
+  "source": {
+    "path": "D:/hfrs1_001/candidate/hf_repo/src/hf_eval/split_guided_force.py",
+    "bytes": 24444,
+    "sha256": "8e902a20e7131733678b5b99aaa9bc5d046323ef151dd73f0681f18198e5dc1f"
+  },
+  "baseline": {
+    "path": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC/hf_repo/src/hf_eval/split_guided_force.py",
+    "sha256": "975d1e1797403c2cddbda2ee04c8ef0e3d5e07d038bdb48473e4ff6e60fcf0c6"
+  },
+  "unchanged_nested_function_AST": [
+    "indices",
+    "clock",
+    "evaluate",
+    "impose",
+    "mean_error",
+    "feasible",
+    "metrics",
+    "step",
+    "newton",
+    "advance"
+  ],
+  "unchanged_class_AST": "GuidedForceSettings",
+  "imports_AST_identical": true,
+  "API_alignment_read": [
+    {
+      "path": "D:/hfrs1_001/candidate/hf_repo/src/hf_eval/native_guided_force.py",
+      "sha256": "3995cc0afc04907bfa650f1d01af3c93288a3c5fa17243b6536c530dd9fa4daf"
+    },
+    {
+      "path": "D:/hfrs1_001/candidate/hf_repo/src/hf_eval/native_guided_force_resume.py",
+      "sha256": "8455e3aad3de2fed517033f3a715c1a69dd0b41f5c0476a96138290817b230b7"
+    }
+  ],
+  "not_review_of_own_test_file": true,
+  "dynamic_HF_imports": 0,
+  "dynamic_tests": 0,
+  "scientific_payload_reads": 0,
+  "HP_calls": 0,
+  "limitations": [
+    "Static contract/AST review only; actual functionality and numerical gates require the single approved bounded run.",
+    "No claim of formal r9 continuation, HP, stability or capacity qualification."
+  ]
+}

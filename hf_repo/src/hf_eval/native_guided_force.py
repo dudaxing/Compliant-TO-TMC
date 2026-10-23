@@ -58,6 +58,15 @@ def evaluate_native_guided_force(saved_result, selected_state_index,
             raise
         raise TMCError("Force-control source admission failed: "+str(error), code="invalid_saved_state") from error
 
+    return _run_guided_force(project, initial, initial_R, settings, options, source,
+        targets, output, force_settings=force_settings, on_accept=on_accept)
+
+
+def _run_guided_force(project, initial, initial_R, settings, options, source,
+                      targets, output, *, force_settings, on_accept=None,
+                      initial_body_q_mm=0., force_scale_anchor_half_N=None,
+                      continuation=None):
+    """One cached mechanics/persistence path for fixed starts and explicit resumes."""
     model = project.model
     nodes = np.asarray(project.region_metadata["workpiece"]["nodes"], dtype=int)
     bx, by = 2*nodes, 2*nodes+1
@@ -107,6 +116,8 @@ def evaluate_native_guided_force(saved_result, selected_state_index,
         q, P = float(measured["body_q_mm"]), float(measured["P_target_half_N"])
         if not accepted and (_state_hash(state) != _state_hash(initial)
                 or np.float64(measured["R_input"]).tobytes() != np.float64(initial_R).tobytes()
+                or np.float64(q).tobytes() != np.float64(initial_body_q_mm).tobytes()
+                or np.float64(P).tobytes() != np.float64(targets[0]).tobytes()
                 or measured["newton_checks"] != 1):
             raise TMCError("Force-control fresh anchor identity changed", code="initial_state_not_equilibrated")
         displacement = state.lift+state.fluctuation
@@ -164,6 +175,10 @@ def evaluate_native_guided_force(saved_result, selected_state_index,
             bisection_depth=measured["bisection_depth"], positions_mm=positions.tolist(),
             body_nodes=nodes.tolist(), zero_dofs=zero.tolist(), state_sha256=_state_hash(state),
             fresh_anchor=not accepted)
+        if continuation is not None:
+            record["segment_original_target_index"] = record["original_target_index"]
+            record["original_target_index"] += continuation["global_original_target_offset"]
+            record["load_increment_from_root_half_N"] = P-float(force_scale_anchor_half_N)
         directory = output/"accepted"/f"{len(accepted):03d}"
         directory.mkdir(parents=True)
         for name, cached in (("state", {key: arrays.pop(key) for key in ("lift", "fluctuation")}), ("fields", arrays)):
@@ -178,6 +193,8 @@ def evaluate_native_guided_force(saved_result, selected_state_index,
     path = solve_split_guided_force_path(model, project.bin, project.bout, targets, project.k_out,
         initial_state=initial, initial_R=initial_R, settings=settings, force_settings=force_settings,
         force_scale_per_length=project.material["force_scale_per_length"], body_contract=contract,
+        initial_body_q_mm=initial_body_q_mm,
+        force_scale_anchor_half_N=force_scale_anchor_half_N,
         assembler=assemble, on_accept=capture)
     mechanics = {"hf_repo/src/hf_eval/"+name: sha256(Path(__file__).with_name(name).read_bytes()).hexdigest()
         for name in ("native_guided_force.py", "split_guided_force.py", "native_probe.py",
@@ -215,6 +232,27 @@ def evaluate_native_guided_force(saved_result, selected_state_index,
         independent_HP_qualified=False, effective_grasp_qualified=False, release_qualified=False, HF_qualified=False,
         scope="Guided generalized total-force equilibrium; not free-body load capacity or contact pressure",
         timing_seconds=dict(evaluation=perf_counter()-started), result_file=(output/"result.json").as_posix())
+    if continuation is not None:
+        first = accepted[0] if accepted else None
+        continuation = deepcopy(continuation)
+        continuation.update(anchor_revalidated=first is not None,
+            anchor_identity_preserved=first is not None,
+            segment_completed=path["status"] == "success")
+        result["schema_version"] = "hf-native-guided-force-1.1"
+        result["continuation"] = continuation
+        result["force_task"].update(
+            body_load_targets_half_N=continuation["full_extended_body_load_targets_half_N"],
+            anchor_target_half_N=float(force_scale_anchor_half_N),
+            force_scale_anchor_half_N=float(force_scale_anchor_half_N),
+            segment_anchor_half_N=float(targets[0]),
+            load_increment_from_anchor_definition="P minus this segment anchor; q remains absolute")
+        result["path_summary"].update(
+            requested_segment_targets_half_N=targets.tolist(),
+            global_original_target_offset=continuation["global_original_target_offset"],
+            full_extended_path_executed_by_child=False)
+        name = "native_guided_force_resume.py"
+        result["mechanics_source_sha256"]["hf_repo/src/hf_eval/"+name] = sha256(
+            Path(__file__).with_name(name).read_bytes()).hexdigest()
     result = _plain(result)
     result["descriptor_sha256"] = canonical_hash(result)
     (output/"result.json").write_text(json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False)+"\n", encoding="utf-8")

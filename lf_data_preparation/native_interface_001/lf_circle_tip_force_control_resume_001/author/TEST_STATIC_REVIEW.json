@@ -1,0 +1,167 @@
+{
+  "stage": "L-CTIPFRESUME1",
+  "status": "PASS_STATIC_ONLY",
+  "reviewer": "resume_controller independent of test owner",
+  "file": {
+    "path": "D:\\hfrs1_001\\test_force_resume.py",
+    "bytes": 45204,
+    "sha256": "015913e8d29acda7f8f4f3bcc6667987c69934aace0ecbc539fc86e9ea4c8ba0"
+  },
+  "test_method_count": 12,
+  "real_path_limit": 7,
+  "finite_call_limit": 37,
+  "checks": [
+    {
+      "id": "T01",
+      "status": "PASS",
+      "finding": "唯一12个非参数化方法，源码序V01..V12；无pytest.mark.parametrize",
+      "evidence": "Source AST test definitions and no parameterize marker"
+    },
+    {
+      "id": "T02",
+      "status": "PASS",
+      "finding": "共享session夹具：6条实际路径；V08另1条受控partial，合计7",
+      "evidence": "real_paths creates fixed/reference/direct/prefix/child/grandchild once, V08 real_path(finite_call,...) once"
+    },
+    {
+      "id": "T03",
+      "status": "PASS",
+      "finding": "有限调用37项按计划循环计数，V08在两轴各计一次",
+      "evidence": "4+6+1+1+1+6+5+8+5 =37; counters capped and final exact equality"
+    },
+    {
+      "id": "T04",
+      "status": "PASS",
+      "finding": "最多16单元50DOF真实夹具，原cell14/body nodes和35 free保持",
+      "evidence": "real fixture asserts (16,50,35), cells[14], nodes[17,18,22,23]"
+    },
+    {
+      "id": "T05",
+      "status": "PASS",
+      "finding": "真实路径均60秒原controller；无正式r9/旧科学缓存读取",
+      "evidence": "Each real API time_limit_seconds60; generated new geometry/fixed tree source only"
+    },
+    {
+      "id": "T06",
+      "status": "PASS",
+      "finding": "独立dense oracle非对称Kfc/Kcf、绝对正/负q和多段重启",
+      "evidence": "V01 independent np.block solve checks actual full displacement,q,R, generalized sum not mean"
+    },
+    {
+      "id": "T07",
+      "status": "PASS",
+      "finding": "fresh无修复与坏R/mean/P/非有限q/q-lift失配",
+      "evidence": "V02 patches _linear_solve forbidden; one F/T check and original bytes, no trials/linear diagnostics"
+    },
+    {
+      "id": "T08",
+      "status": "PASS",
+      "finding": "nonzero split/q/P/R失败回滚保持",
+      "evidence": "V03 invalid_J after fresh and maxdepth0; bitwise state and scalar checks"
+    },
+    {
+      "id": "T09",
+      "status": "PASS",
+      "finding": "direct/prefix/child/grandchild同P与给q参考交叉门",
+      "evidence": "V04 four split math.fsum physical max <=1e-8mm; q<=1e-8; Rmax(1e-12,1e-7absref)"
+    },
+    {
+      "id": "T10",
+      "status": "PASS",
+      "finding": "两次1.1准入、保存态二次续载、固定树显式迁移与默认解析",
+      "evidence": "V05 source/fresh bit identity, global/segment indices, nonclock inheritance and tree bytes unchanged"
+    },
+    {
+      "id": "T11",
+      "status": "PASS",
+      "finding": "负P递增使用rootP0且段/根增量分开",
+      "evidence": "V06 every accepted SP max(absP,absrootP0,Ffloor), exact bound and two increments"
+    },
+    {
+      "id": "T12",
+      "status": "PASS",
+      "finding": "旧默认入口/q0与非optin body lift拒绝保持",
+      "evidence": "V07 reuses prefix success and one prohibited default displacement call"
+    },
+    {
+      "id": "T13",
+      "status": "PASS",
+      "finding": "计划第2T constraint_failure partial保持非零锚点/父树",
+      "evidence": "V08 exactly2 T attempts, one accepted fresh, failure/rollback and original force gates"
+    },
+    {
+      "id": "T14",
+      "status": "PASS",
+      "finding": "6身份+5来源语义+8扩展+5clock/output反例在F/T前typed拒绝",
+      "evidence": "V09..V12 prohibit all native force/tangent assembly functions; exact errors/no output/no source mutation"
+    },
+    {
+      "id": "T15",
+      "status": "PASS",
+      "finding": "缓存所有原门、字段/归档身份与false资格；saveF/T/HP为0",
+      "evidence": "assert_real_gates finite fields,J/global/rigid/mean/free/body residual and original total/material/Hu force definitions"
+    },
+    {
+      "id": "T16",
+      "status": "PASS",
+      "finding": "summary/env/安装字节接线一致",
+      "evidence": "FRESUME_ARTIFACT_DIR for artifacts/register; summary all12, counts/paths/rows/histories; V12 pins three exact source modules"
+    }
+  ],
+  "limitations": [
+    "Source/AST review only; no pytest import or collection, no real paths executed by reviewer",
+    "Runtime numerical outcomes remain unproven until unique approved execution",
+    "Static code does not prove actual counters, cleanup, artifacts or eligibility at runtime"
+  ],
+  "scientific_calls": 0,
+  "imports_HF": 0,
+  "prior_reviewed_file": {
+    "path": "D:\\hfrs1_001\\test_force_resume.py",
+    "bytes": 41737,
+    "sha256": "cd81bde1b0df548f3bf79821927e164bbeb25c5e446c9b32da771ab07ff4d2c1"
+  },
+  "delta_review": {
+    "status": "PASS_STATIC_ONLY",
+    "from_sha256": "cd81bde1b0df548f3bf79821927e164bbeb25c5e446c9b32da771ab07ff4d2c1",
+    "to_sha256": "015913e8d29acda7f8f4f3bcc6667987c69934aace0ecbc539fc86e9ea4c8ba0",
+    "checks": [
+      {
+        "id": "D01",
+        "status": "PASS",
+        "finding": "12方法与核心数值断言保持；共享6路径+V08第7路径，有限调用各循环仍4+6+1+1+1+6+5+8+5=37",
+        "evidence": "AST names V01..V12 and manual current source call/loop review"
+      },
+      {
+        "id": "D02",
+        "status": "PASS",
+        "finding": "audit hook仅过滤open/本RUN/.npz，记录path/mode/flags/read/write/phase；无HF/NumPy调用、无改写/重试",
+        "evidence": "observe_npz_open AST calls are path/os/dict/list observation only; sys.addaudithook registers once"
+      },
+      {
+        "id": "D03",
+        "status": "PASS",
+        "finding": "读取事件不冒充字段decode：包含raw哈希/copy/validation opens，分read/write与unique路径，明确hook不测fieldaccess",
+        "evidence": "observation_summary sets field_access_count_not_measured_by_audit_hook=True and source control-flow basis"
+      },
+      {
+        "id": "D04",
+        "status": "PASS",
+        "finding": "原state_arrays实现改私有名但校验与decode逻辑保持；包装仅计调用和每次2个声明字段，已标source-inferred",
+        "evidence": "_state_arrays_impl keeps archive hash/two fields/dtype/shape/SHA/copy; state_arrays only observer/context wrapper"
+      },
+      {
+        "id": "D05",
+        "status": "PASS",
+        "finding": "copy_new_tree仅计源文件/NPZ数量与字节后调用原shutil.copytree一次，不造新平衡路径",
+        "evidence": "1 explicit fixed relocation plus copied_result in V09 6 variants and V10 5 variants =12 raw-copy attempts; 6/5 category split is source-loop attribution, shared runtime kind is source_rejection_copy"
+      },
+      {
+        "id": "D06",
+        "status": "PASS",
+        "finding": "额外payload_observation写入summary，原schema/counts/rows/histories及artifact环境不变",
+        "evidence": "FRESUME_ARTIFACT_DIR exact; new observation_summary data only, no change to frozen 12/7/37 limits or science assertions"
+      }
+    ],
+    "copy_count_interpretation": "Expected 12 generated-tree raw copy calls: 1 relocation+6 identity rejection+5 source semantic rejection. Runtime observer captures each copy attempt; source/semantic 6/5 attribution is from fixed method loops, not separate dynamic kinds. No extra real paths."
+  }
+}

@@ -2,7 +2,7 @@
 
 The reduced unknowns are the original free fluctuation, one body coordinate q,
 and the input multiplier R.  The actual nonsymmetric tangent is retained.  A
-saved q=0 anchor is freshly checked, never projected or repaired.
+saved absolute-q anchor is freshly checked, never projected or repaired.
 """
 from __future__ import annotations
 
@@ -48,14 +48,16 @@ class GuidedForceSettings:
 def solve_split_guided_force_path(model, b_in, b_out, body_load_targets_half_N,
                                   k_out=0., *, initial_state, initial_R, settings,
                                   force_settings, force_scale_per_length,
-                                  body_contract, assembler=None, on_accept=None):
+                                  body_contract, initial_body_q_mm=0.,
+                                  force_scale_anchor_half_N=None,
+                                  assembler=None, on_accept=None):
     """Hold the input mean, apply absolute half-model P, and solve unknown q.
 
     All original body ux equal q, uy remain zero, and body fluctuation remains
     zero.  The c vector has ones, not averaged weights: its residual is
-    sum(body internal x force)-P.  This first interface supports strictly
-    increasing absolute loads from a fresh saved anchor, not unloading or
-    continuation of an earlier force-controlled path.  Full-model load is 2P;
+    sum(body internal x force)-P.  Loads strictly increase from a freshly
+    checked saved anchor.  q is absolute; a supplied root force-scale anchor
+    remains independent of the current segment's first P.  Full-model load is 2P;
     thickness is already included by the original mechanical assembler.
     """
     if not isinstance(settings, DisplacementSettings):
@@ -65,6 +67,7 @@ def solve_split_guided_force_path(model, b_in, b_out, body_load_targets_half_N,
     b_in, b_out, k_out = _inputs(model, b_in, b_out, k_out)
     force_scale_per_length = _positive_scalar(force_scale_per_length, "force_scale_per_length")
     initial_R = float(_vector([initial_R], 1, "initial_R")[0])
+    initial_q = float(_vector([initial_body_q_mm], 1, "initial_body_q_mm")[0])
     raw = np.asarray(body_load_targets_half_N)
     if raw.ndim != 1 or len(raw) < 2:
         raise TMCError("body loads must contain at least two absolute half-N targets",
@@ -72,6 +75,9 @@ def solve_split_guided_force_path(model, b_in, b_out, body_load_targets_half_N,
     levels = _vector(body_load_targets_half_N, len(raw), "body_load_targets_half_N")
     if np.any(np.diff(levels) <= 0):
         raise TMCError("absolute half-N targets must strictly increase", code="invalid_input")
+    P_anchor = float(levels[0])
+    P_scale_anchor = (P_anchor if force_scale_anchor_half_N is None else
+        float(_vector([force_scale_anchor_half_N], 1, "force_scale_anchor_half_N")[0]))
     if (not isinstance(body_contract, dict)
             or set(body_contract) != {"nodes", "d_hold", "zero_dofs", "background_dofs"}):
         raise TMCError("invalid guided body contract", code="constraint_conflict")
@@ -99,8 +105,10 @@ def solve_split_guided_force_path(model, b_in, b_out, body_load_targets_half_N,
         raise TMCError("guided force control conflicts with body, supports or ports",
                        code="constraint_conflict")
     if (not isinstance(initial_state, SplitDisplacement) or initial_state.ndof != model.ndof
-            or np.any(initial_state.lift) or np.any(initial_state.fluctuation[model.fixed_dofs])):
-        raise TMCError("force anchor must preserve the fixed-parent q=0 split state",
+            or np.any(initial_state.lift[body_x] != initial_q)
+            or np.any(initial_state.lift[np.setdiff1d(np.arange(model.ndof), body_x)])
+            or np.any(initial_state.fluctuation[model.fixed_dofs])):
+        raise TMCError("force anchor must preserve its absolute-q split state and fixed zeros",
                        code="constraint_conflict")
     initial = initial_state.copy()
     assembly = assemble_split if assembler is None else assembler
@@ -113,9 +121,8 @@ def solve_split_guided_force_path(model, b_in, b_out, body_load_targets_half_N,
     dscale = max(abs(d_hold), settings.displacement_scale_floor)
     force_floor = settings.force_scale_floor_factor*force_scale_per_length*dscale
     mean_bound = settings.constraint_tolerance*dscale
-    P_anchor = float(levels[0])
     started = perf_counter()
-    state_u, state_R, state_P, state_q, state_K = initial.copy(), initial_R, P_anchor, 0., None
+    state_u, state_R, state_P, state_q, state_K = initial.copy(), initial_R, P_anchor, initial_q, None
     accepted, trials, failures, history, linear_solves = [], [], [], [], []
     failure, maximum_depth = None, 0
     times = dict(kernel_calls=0, successful_kernel_calls=0, kernel_and_transfer=0.,
@@ -178,7 +185,7 @@ def solve_split_guided_force_path(model, b_in, b_out, body_load_targets_half_N,
                     force_floor)
         generalized = fsum(float(internal[dof]) for dof in body_x)
         g = fsum((generalized, -P))
-        pscale = max(abs(P), abs(P_anchor), force_floor)
+        pscale = max(abs(P), abs(P_scale_anchor), force_floor)
         if (not np.isfinite(residual).all() or not np.isfinite(R)
                 or not np.isfinite(scale) or scale <= 0
                 or not np.isfinite(g) or not np.isfinite(pscale) or pscale <= 0):
@@ -186,6 +193,10 @@ def solve_split_guided_force_path(model, b_in, b_out, body_load_targets_half_N,
         residual_norm = float(np.linalg.norm(residual[free]))
         return dict(d=d_hold, physical_mean_target_mm=d_hold, target_origin=0.,
                     input_mean_mm=q_in, body_q_mm=q, P_target_half_N=P,
+                    segment_anchor_half_N=P_anchor,
+                    force_scale_anchor_half_N=P_scale_anchor,
+                    load_increment_from_anchor_half_N=P-P_anchor,
+                    load_increment_from_root_half_N=P-P_scale_anchor,
                     generalized_body_internal_force_half_N=generalized,
                     generalized_force_residual_half_N=g,
                     generalized_force_scale_half_N=pscale,
@@ -403,5 +414,7 @@ def solve_split_guided_force_path(model, b_in, b_out, body_load_targets_half_N,
         initial_u_fluctuation=initial.fluctuation.copy(), initial_R=initial_R,
         b_in=b_in.copy(), b_out=b_out.copy(), k_out=k_out,
         force_scale_per_length=force_scale_per_length, anchor_force_half_N=P_anchor,
+        initial_body_q_mm=initial_q, segment_anchor_half_N=P_anchor,
+        force_scale_anchor_half_N=P_scale_anchor,
         input_force_sign="actuator_on_model", body_force_sign="external_dead_load_on_body_plus_x",
         body_q_is_unknown=True, scope="Guided rigid-x total-force numerical path; no bearing qualification")

@@ -1,0 +1,103 @@
+{
+  "stage": "L-CTIPFRESUME1",
+  "status": "candidate_implemented_static_only",
+  "owned_file": "D:\\hfrs1_001\\candidate\\hf_repo\\src\\hf_eval\\split_guided_force.py",
+  "baseline": {
+    "path": "D:\\Coding\\Diversity TO\\Compliant-Nonlinear-TMC-O\\.github_handoff\\Compliant-TO-TMC\\hf_repo\\src\\hf_eval\\split_guided_force.py",
+    "bytes": 23556,
+    "sha256": "975d1e1797403c2cddbda2ee04c8ef0e3d5e07d038bdb48473e4ff6e60fcf0c6"
+  },
+  "candidate": {
+    "bytes": 24444,
+    "sha256": "8e902a20e7131733678b5b99aaa9bc5d046323ef151dd73f0681f18198e5dc1f"
+  },
+  "signature_new_keywords": {
+    "initial_body_q_mm": 0.0,
+    "force_scale_anchor_half_N": null
+  },
+  "checks": [
+    {
+      "name": "candidate parses without importing HF",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged nested function indices",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged nested function clock",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged nested function evaluate",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged nested function impose",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged nested function mean_error",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged nested function feasible",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged nested function metrics",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged nested function step",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged nested function newton",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged nested function advance",
+      "status": "PASS"
+    },
+    {
+      "name": "body contract validation unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "root residual scale independent of segment",
+      "status": "PASS"
+    },
+    {
+      "name": "absolute initial q retained",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit finite real scalar validation",
+      "status": "PASS"
+    },
+    {
+      "name": "fresh path not projected or repaired",
+      "status": "PASS"
+    },
+    {
+      "name": "impose assigns rather than adds",
+      "status": "PASS"
+    },
+    {
+      "name": "default anchor q zero",
+      "status": "PASS"
+    }
+  ],
+  "scientific_execution": {
+    "HF_imports": 0,
+    "tests": 0,
+    "F": 0,
+    "T": 0,
+    "HP": 0,
+    "equilibrium_paths": 0
+  },
+  "production_modified": false,
+  "requires_independent_static_review": true,
+  "unified_diff": "--- production/split_guided_force.py\n+++ candidate/split_guided_force.py\n@@ -2,7 +2,7 @@\n \n The reduced unknowns are the original free fluctuation, one body coordinate q,\n and the input multiplier R.  The actual nonsymmetric tangent is retained.  A\n-saved q=0 anchor is freshly checked, never projected or repaired.\n+saved absolute-q anchor is freshly checked, never projected or repaired.\n \"\"\"\n from __future__ import annotations\n \n@@ -48,14 +48,16 @@\n def solve_split_guided_force_path(model, b_in, b_out, body_load_targets_half_N,\n                                   k_out=0., *, initial_state, initial_R, settings,\n                                   force_settings, force_scale_per_length,\n-                                  body_contract, assembler=None, on_accept=None):\n+                                  body_contract, initial_body_q_mm=0.,\n+                                  force_scale_anchor_half_N=None,\n+                                  assembler=None, on_accept=None):\n     \"\"\"Hold the input mean, apply absolute half-model P, and solve unknown q.\n \n     All original body ux equal q, uy remain zero, and body fluctuation remains\n     zero.  The c vector has ones, not averaged weights: its residual is\n-    sum(body internal x force)-P.  This first interface supports strictly\n-    increasing absolute loads from a fresh saved anchor, not unloading or\n-    continuation of an earlier force-controlled path.  Full-model load is 2P;\n+    sum(body internal x force)-P.  Loads strictly increase from a freshly\n+    checked saved anchor.  q is absolute; a supplied root force-scale anchor\n+    remains independent of the current segment's first P.  Full-model load is 2P;\n     thickness is already included by the original mechanical assembler.\n     \"\"\"\n     if not isinstance(settings, DisplacementSettings):\n@@ -65,6 +67,7 @@\n     b_in, b_out, k_out = _inputs(model, b_in, b_out, k_out)\n     force_scale_per_length = _positive_scalar(force_scale_per_length, \"force_scale_per_length\")\n     initial_R = float(_vector([initial_R], 1, \"initial_R\")[0])\n+    initial_q = float(_vector([initial_body_q_mm], 1, \"initial_body_q_mm\")[0])\n     raw = np.asarray(body_load_targets_half_N)\n     if raw.ndim != 1 or len(raw) < 2:\n         raise TMCError(\"body loads must contain at least two absolute half-N targets\",\n@@ -72,6 +75,9 @@\n     levels = _vector(body_load_targets_half_N, len(raw), \"body_load_targets_half_N\")\n     if np.any(np.diff(levels) <= 0):\n         raise TMCError(\"absolute half-N targets must strictly increase\", code=\"invalid_input\")\n+    P_anchor = float(levels[0])\n+    P_scale_anchor = (P_anchor if force_scale_anchor_half_N is None else\n+        float(_vector([force_scale_anchor_half_N], 1, \"force_scale_anchor_half_N\")[0]))\n     if (not isinstance(body_contract, dict)\n             or set(body_contract) != {\"nodes\", \"d_hold\", \"zero_dofs\", \"background_dofs\"}):\n         raise TMCError(\"invalid guided body contract\", code=\"constraint_conflict\")\n@@ -99,8 +105,10 @@\n         raise TMCError(\"guided force control conflicts with body, supports or ports\",\n                        code=\"constraint_conflict\")\n     if (not isinstance(initial_state, SplitDisplacement) or initial_state.ndof != model.ndof\n-            or np.any(initial_state.lift) or np.any(initial_state.fluctuation[model.fixed_dofs])):\n-        raise TMCError(\"force anchor must preserve the fixed-parent q=0 split state\",\n+            or np.any(initial_state.lift[body_x] != initial_q)\n+            or np.any(initial_state.lift[np.setdiff1d(np.arange(model.ndof), body_x)])\n+            or np.any(initial_state.fluctuation[model.fixed_dofs])):\n+        raise TMCError(\"force anchor must preserve its absolute-q split state and fixed zeros\",\n                        code=\"constraint_conflict\")\n     initial = initial_state.copy()\n     assembly = assemble_split if assembler is None else assembler\n@@ -113,9 +121,8 @@\n     dscale = max(abs(d_hold), settings.displacement_scale_floor)\n     force_floor = settings.force_scale_floor_factor*force_scale_per_length*dscale\n     mean_bound = settings.constraint_tolerance*dscale\n-    P_anchor = float(levels[0])\n     started = perf_counter()\n-    state_u, state_R, state_P, state_q, state_K = initial.copy(), initial_R, P_anchor, 0., None\n+    state_u, state_R, state_P, state_q, state_K = initial.copy(), initial_R, P_anchor, initial_q, None\n     accepted, trials, failures, history, linear_solves = [], [], [], [], []\n     failure, maximum_depth = None, 0\n     times = dict(kernel_calls=0, successful_kernel_calls=0, kernel_and_transfer=0.,\n@@ -178,7 +185,7 @@\n                     force_floor)\n         generalized = fsum(float(internal[dof]) for dof in body_x)\n         g = fsum((generalized, -P))\n-        pscale = max(abs(P), abs(P_anchor), force_floor)\n+        pscale = max(abs(P), abs(P_scale_anchor), force_floor)\n         if (not np.isfinite(residual).all() or not np.isfinite(R)\n                 or not np.isfinite(scale) or scale <= 0\n                 or not np.isfinite(g) or not np.isfinite(pscale) or pscale <= 0):\n@@ -186,6 +193,10 @@\n         residual_norm = float(np.linalg.norm(residual[free]))\n         return dict(d=d_hold, physical_mean_target_mm=d_hold, target_origin=0.,\n                     input_mean_mm=q_in, body_q_mm=q, P_target_half_N=P,\n+                    segment_anchor_half_N=P_anchor,\n+                    force_scale_anchor_half_N=P_scale_anchor,\n+                    load_increment_from_anchor_half_N=P-P_anchor,\n+                    load_increment_from_root_half_N=P-P_scale_anchor,\n                     generalized_body_internal_force_half_N=generalized,\n                     generalized_force_residual_half_N=g,\n                     generalized_force_scale_half_N=pscale,\n@@ -403,5 +414,7 @@\n         initial_u_fluctuation=initial.fluctuation.copy(), initial_R=initial_R,\n         b_in=b_in.copy(), b_out=b_out.copy(), k_out=k_out,\n         force_scale_per_length=force_scale_per_length, anchor_force_half_N=P_anchor,\n+        initial_body_q_mm=initial_q, segment_anchor_half_N=P_anchor,\n+        force_scale_anchor_half_N=P_scale_anchor,\n         input_force_sign=\"actuator_on_model\", body_force_sign=\"external_dead_load_on_body_plus_x\",\n         body_q_is_unknown=True, scope=\"Guided rigid-x total-force numerical path; no bearing qualification\")\n"
+}
