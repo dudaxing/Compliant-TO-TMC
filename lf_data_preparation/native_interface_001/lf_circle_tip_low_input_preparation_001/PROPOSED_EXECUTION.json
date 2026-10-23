@@ -1,0 +1,126 @@
+{
+  "stage": "L-CTIPLOW1",
+  "status": "prepared_not_authorized_or_run",
+  "prepared_from_commit": "dc4a8ec9263f6df7b3cf21957e0a3cd39b75ceee",
+  "repo_relative_paths": true,
+  "geometry_file": "lf_data_preparation/native_interface_001/lf_circle_tip_preparation_001/run_001/model/source_geometry/geometry.json",
+  "parent_task_file": "lf_data_preparation/native_interface_001/lf_circle_tip_low_input_preparation_001/parent_task.json",
+  "parent": {
+    "api": "hf_eval.native_evaluate.evaluate_native",
+    "zero_start": true,
+    "targets_mm": [
+      0.0,
+      0.25,
+      0.5
+    ],
+    "saved_result": null,
+    "selected_state_index": null,
+    "extend_path": false,
+    "settings": {
+      "tolerance": 1e-09,
+      "constraint_tolerance": 1e-10,
+      "displacement_scale_floor": 1e-06,
+      "force_scale_floor_factor": 1e-08,
+      "max_checks": 25,
+      "armijo_c": 0.0001,
+      "max_backtracks": 12,
+      "max_bisections": 4,
+      "minimum_increment": 0.00625,
+      "time_limit_seconds": 3600.0
+    },
+    "options": {
+      "response_mode": "mechanical",
+      "tangent_mode": "chunk256",
+      "initial_guess": "port_projection"
+    },
+    "settings_call_contract": "Pass DisplacementSettings(**settings) only; omit API time_limit_seconds and minimum_increment arguments. Explicit modes; do not use zero-start defaults.",
+    "output": "run_001/parent_fixed",
+    "readiness": "success/path_completed/target_reached/loading_peak_reached true; exact original target coverage; last accepted original target .50; original numerical gates all accepted states"
+  },
+  "probe": {
+    "api": "hf_eval.native_probe.evaluate_native_guided_probe",
+    "saved_result": "run_001/parent_fixed/result.json",
+    "selected_state_index": "len(successful_parent.states)-1, not hard-coded 2",
+    "body_q_targets_mm": [
+      0.0,
+      0.025
+    ],
+    "held_input_mean_mm": 0.5,
+    "time_limit_seconds": 3600.0,
+    "output": "run_001/probe_low",
+    "settings_inheritance": "All new parent nonclock settings and modes; only probe clock is explicit.",
+    "fresh_q0": "Original parent split lift/fluctuation and signed R; fresh F/T, checks=1 and identity unchanged; no repair/projection.",
+    "motion": "Original body membership; all body ux=q, uy=0 and rotation=0. Original supports/symmetry retained. No remask."
+  },
+  "inherited_grid_expectation": {
+    "cells": 14720,
+    "nodes": 14985,
+    "dofs": 29970,
+    "body_cells": 510,
+    "body_nodes": 565,
+    "note": "Inherited metadata expectations, not a newly built or array-validated low-input model."
+  },
+  "original_gates": {
+    "relative_free_residual": 1e-09,
+    "mean_constraint": "Original scale-dependent constraint_bound; tolerance 1e-10",
+    "positive_J": true,
+    "relative_global_force_balance": 1e-06,
+    "prescribed_displacement_mm": 8e-11
+  },
+  "comparison": {
+    "high_table": "lf_data_preparation/native_interface_001/lf_circle_tip_probe_001/run_001/view/state_table.json",
+    "exact_common_q_mm": [
+      0.0,
+      0.025
+    ],
+    "preserve_extra_actual_states": true,
+    "interpolation": false,
+    "signed_scalars": [
+      "Q total/material/Hu",
+      "each condition Q(q)-Q(0)",
+      "difference of those increments",
+      "R_input_N",
+      "ON-body Fy and guide ledger",
+      "input_mean_mm",
+      "tip to physical raster body boundary",
+      "body to actual free right boundary",
+      "global/nonbody-medium minJ/max|Hu|",
+      "same right480 reference cells J/Hu",
+      "all convergence histories"
+    ],
+    "exclusions": "No high/low force difference is automatically pure contact/friction/capacity; no zero-preload subtraction replacing raw values."
+  },
+  "proposed_resources": {
+    "parent_controller_seconds": 3600,
+    "probe_controller_seconds": 3600,
+    "shared_viewer_seconds": 900,
+    "helper_seconds": 9000,
+    "outer_seconds": 9060,
+    "sampled_memory_GiB": 64,
+    "per_library_thread_limit": 16,
+    "viewer_memory_GiB": 8,
+    "thread_libraries": [
+      "OMP",
+      "OPENBLAS",
+      "MKL",
+      "NUMEXPR"
+    ],
+    "GPU": false
+  },
+  "execution_policy": "Future implementation/freeze/static review before unique launch. Sequential separately supervised parent, probe and viewer processes. Each API once. First terminal error stops downstream science/display; retain partial. Original internal backtracking/bisection allowed; no external retry, repair rerun, extension, force, HP, tests, default installation or automatic rollback.",
+  "display_plan": {
+    "new_PNGs": 4,
+    "new_GIFs": 1,
+    "PNGs": [
+      "Actual x1 low probe geometry and tip at q0/terminal",
+      "Signed low forces, held input and all low/parent convergence diagnostics",
+      "Low right480 and all nonbody-medium J/Hu witnesses",
+      "High/low same-q original force/components/increments and geometry-medium scalars"
+    ],
+    "GIF": "All actual accepted low probe states, actual frame count; no interpolation or old media opening.",
+    "array_reads": "New low probe fields J/Hu only, at most 17 archives/34 fields; positions/model from new ordinary JSON. Original high state_table only; no old high NPZ or image pixels.",
+    "note": "Four plots are a planned display budget, not generated evidence. Parent reference and terminal geometry can use new probe reference coordinates and its identity-matched q0 positions; this does not promise all parent intermediate deformations. Figure details freeze with the thin wrapper."
+  },
+  "qualification": "Numerical guided displacement response only; no independent HP, pressure, effective grasp, bearing, release, stability, alpha/domain independence or HF5.",
+  "prerequisite": "This preparation is complete only after independent finite review. Future wrapper sources/observer bindings and precise launch command must be frozen and statically reviewed under a new approved execution card. This file is not an executable launcher."
+}

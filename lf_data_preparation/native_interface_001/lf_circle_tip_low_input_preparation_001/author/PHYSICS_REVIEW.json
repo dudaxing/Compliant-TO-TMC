@@ -1,0 +1,228 @@
+{
+  "schema_version": "hf-ctiplowprep1-physics-review-1",
+  "date_local": "2026-10-23 Asia/Seoul",
+  "status": "PASS_FOR_PREPARATION_ONLY",
+  "reviewer": "/root/low_probe_physics_review",
+  "new_numerical_execution": false,
+  "scientific_array_or_media_read": false,
+  "source_files": [
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_probe_001/RESULTS.md",
+      "bytes": 12090,
+      "sha256": "0f00e49e6505eb1448c8bdb2a8c7ac5d2e6d62db67f813738512450312bbccfe"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_probe_001/NEXT_STEPS.md",
+      "bytes": 2622,
+      "sha256": "e78ce9e248b638c02f8509253c74d7cf98ff0704975edfd994bf014eb892eb0d"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_probe_001/run_001/view/state_table.json",
+      "bytes": 37489,
+      "sha256": "9960a2e38684c3512cad79258a988430758b07b0bd95b8a339b7031cc37d53c6"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_probe_001/run_001/science/result.json",
+      "bytes": 5864469,
+      "sha256": "91ab9a1ddf66382963052fbaed4fcfe61670fed4f6611af027b1d61a9466aadc"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/alpha_task.json",
+      "bytes": 2464,
+      "sha256": "c9e51eae8f77d383a1fe94ad92725306e2de2510bb5d8dced85a9e98ba1f46f6"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/result.json",
+      "bytes": 289415,
+      "sha256": "9e083bb057de9ea9b2b52694b3cc474a877ecbfcc3785d26fa50f55566e320ec"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/state_table.json",
+      "bytes": 22404,
+      "sha256": "0b0d46a4923af536c85c616577650a758267f8f470098b44711e599ff67d1f48"
+    }
+  ],
+  "checks": [
+    {
+      "id": "scope",
+      "status": "PASS",
+      "finding": "本次仅普通JSON/文本审阅和新文档；没有新构模/F/T/HP/求解/测试/NPZ/媒体读取。"
+    },
+    {
+      "id": "independent_parent",
+      "status": "PASS",
+      "finding": "新显式load_only父任务从零执行[0,.25,.50]，.50为新任务合法末峰；原13态中间.50不得改写成已完成父。"
+    },
+    {
+      "id": "physical_control",
+      "status": "PASS",
+      "finding": "机构平均input=.50；body全部ux=q、uy=0、转角0；q仅[0,.025]；其余物理、拓扑和非clock设置不变。"
+    },
+    {
+      "id": "gates",
+      "status": "PASS",
+      "finding": "保留原残差、平均约束、J>0、global balance、body/zero处方及内部回退/二分规则，不增force阈值或无接触门。"
+    },
+    {
+      "id": "force_sign",
+      "status": "PASS",
+      "finding": "Q_half=Σbody f_int,x=−ON-body Fx；total/material/Hu分别保留有符号原值。"
+    },
+    {
+      "id": "half_model",
+      "status": "PASS",
+      "finding": "力已含20mm厚度；完整对称轴向仅2Q，q不倍增；下半Fy不能当完整netFy。"
+    },
+    {
+      "id": "preload",
+      "status": "PASS",
+      "finding": "各条件保留q0预载；ΔQ相对各自q0；配对差是控制条件差，不是纯接触力。"
+    },
+    {
+      "id": "matching",
+      "status": "PASS",
+      "finding": "只精确匹配共同实际q，至少0/.025；高输入额外.0125不插值填配，低输入额外态也保留。"
+    },
+    {
+      "id": "geometry",
+      "status": "PASS",
+      "finding": "距离采用同reference物理边界并排除y40对称切边，实际自由右界位置，不能以92−body_maxx代替实际距离。"
+    },
+    {
+      "id": "medium",
+      "status": "PASS",
+      "finding": "全非body9861格与右侧固定reference480格保持；九点J及Q1常量Hu定位规则不变。"
+    },
+    {
+      "id": "limits",
+      "status": "PASS",
+      "finding": "低输入未执行、不预授无接触；不把正Q、差值或收敛授承载/压力/自由工件/释放/稳定性。"
+    },
+    {
+      "id": "resources",
+      "status": "PASS",
+      "finding": "预算只由旧时间提出候选，需后续完整包装/静审/执行卡冻结；当前不能执行。"
+    }
+  ],
+  "comparison_fields": {
+    "identity": [
+      "accepted_index",
+      "body_q_mm",
+      "state_sha256",
+      "is_original_target",
+      "original_target_index",
+      "bisection_depth"
+    ],
+    "force": [
+      "Q_drive_half_N",
+      "force_on_body_N.total[0:2]",
+      "force_on_body_N.material[0:2]",
+      "force_on_body_N.regularization[0:2]",
+      "R_input_N",
+      "ledger.body_x_drive_N",
+      "ledger.body_y_guide_N",
+      "ledger.zero_support_N",
+      "ledger.input_actuator_N",
+      "ledger.global_force_balance_N"
+    ],
+    "increment": [
+      "Q(q)-Q(0)",
+      "Q_material(q)-Q_material(0)",
+      "Q_Hu(q)-Q_Hu(0)",
+      "R_input(q)-R_input(0)",
+      "F_y_total/material/Hu(q)-F_y_total/material/Hu(0)"
+    ],
+    "geometry": [
+      "input_mean_mm",
+      "max_abs_prescribed_error_mm",
+      "tip_node",
+      "tip_position_mm",
+      "tip_to_body_boundary_mm",
+      "tip_nearest_body_point_mm",
+      "mechanism_to_body_boundary",
+      "body_to_right_boundary",
+      "body_actual_bbox_mm",
+      "right_boundary_actual_bbox_mm",
+      "strict_containment_counts",
+      "geometric_overlap_observed"
+    ],
+    "medium": [
+      "minimum_J",
+      "max_abs_Hu_per_mm",
+      "medium.cells",
+      "medium.minimum_J",
+      "medium.minimum_J_cell",
+      "medium.minimum_J_sample",
+      "medium.minimum_J_reference_point",
+      "medium.minimum_J_actual_point_mm",
+      "medium.maximum_abs_Hu_per_mm",
+      "medium.maximum_Hu_cell",
+      "medium.maximum_Hu_actual_cell_centroid_mm",
+      "right_medium.cells",
+      "right_medium.minimum_J",
+      "right_medium.minimum_J_cell",
+      "right_medium.maximum_abs_Hu_per_mm",
+      "right_medium.maximum_Hu_cell"
+    ],
+    "convergence": [
+      "relative_residual",
+      "constraint_residual",
+      "constraint_bound",
+      "relative_global_force_balance",
+      "newton_checks",
+      "newton_history",
+      "trials",
+      "failed_attempts",
+      "linear_solve_diagnostics",
+      "call_counts"
+    ]
+  },
+  "pairing": {
+    "exact_q_only": true,
+    "required_requested_q_mm": [
+      0.0,
+      0.025
+    ],
+    "high_existing_extra_q_mm": [
+      0.0125
+    ],
+    "interpolate": false,
+    "subtract_own_q0": true,
+    "cross_condition_difference_is_pure_contact_force": false
+  },
+  "existing_evidence": {
+    "alpha_parent_elapsed_to_0_5_s": 1623.7689664000063,
+    "alpha_full_parent_evaluation_s": 6557.12000570001,
+    "high_probe_evaluation_s": 1159.9891835000017,
+    "high_probe_outer_elapsed_s": 1186.2599043999799,
+    "old_loading_0_5_tip_gap_mm": 0.5190339177997849,
+    "old_loading_0_5_minimum_medium_J": 0.5159209042630142,
+    "old_loading_0_5_Hu_max_per_mm": 0.02802167414492851,
+    "old_loading_0_5_record_only_selection_clue": true
+  },
+  "candidate_resource_recommendation_not_authorization": {
+    "parent_controller_s": 3600,
+    "probe_controller_s": 3600,
+    "pure_display_shared_s": 900,
+    "helper_s": 9000,
+    "outer_s": 9060,
+    "sampled_memory_GiB": 64,
+    "library_threads_each": 16,
+    "viewer_internal_GiB": 8,
+    "basis": "Prior from-zero parent reached .50 in1623.769s; prior real high-input probe scientific elapsed1159.989s, total outer1186.260s. New lower-input nonlinear cost unknown. Parent/probe3600 each, shared display900 and900 ordinary-summary/seal/supervision/cleanup reserved. Sequential independent child processes; success required before next stage. Candidate proposal only, no automatic retry or extension."
+  },
+  "success_layers": {
+    "preparation": "Explicit new task/diff, ordinary source identities, parent→probe admission plan, fixed force/observation definitions, schematic, frozen proposed resource/stop protocol, no scientific execution.",
+    "parent_future": "New zero-origin load_only [0,.25,.50] completed under unchanged production gates with genuine terminal .50 peak descriptor.",
+    "probe_future": "Use that successful parent; fresh q0 preserves original split/R identity and passes without correction, then all requested q reached under original gates with held input.",
+    "delivery_future": "Truthful partial/call/supervision records; exact-q force/component/geometry/medium/convergence comparison and actual deformation media; normal cleanup independent of numerical success."
+  },
+  "limits": [
+    "No low-input scientific result yet",
+    "No no-contact control prequalification",
+    "No superposition/contact-force isolation from high-minus-low",
+    "No new independent HP",
+    "No pressure/traction conversion",
+    "No free-body/y/rotation/force-control/release/stability qualification"
+  ]
+}

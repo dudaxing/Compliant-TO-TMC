@@ -1,3 +1,5 @@
+> 2026-10-23 L-CTIPLOWPREP1 **低输入对照准备完成，尚未试算**：新固定工件父任务从零[0,.25,.50] mm，成功末峰后保持机构均值.50，仅推进工件q=[0,.025] mm；[任务、接口核查与控制示意](../lf_data_preparation/native_interface_001/lf_circle_tip_low_input_preparation_001/PREPARATION.md)已记录。其余物理和原门保持，生产源码未改；候选L-CTIPLOW1待新授权实施与执行。下方为较早阶段历史状态。
+
 > 2026-10-22 L-CTIPPROBE1 **真实探针数值PASS**：input mean保持1.06 mm，工件q=0→.025 mm，经原内部二分共3接受态；3PNG／3帧实际动画及[结果与证据](../lf_data_preparation/native_interface_001/lf_circle_tip_probe_001/RESULTS.md)已记录。生产源码保持；轴向Hu分量较大，尚不授纯接触／承载／释放资格。近期先准备同定义低输入对照。下方较早阶段状态保留为历史时点。
 
 # 导向刚体工件探针：显式API

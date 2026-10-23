@@ -1,3 +1,5 @@
+> 2026-10-23 L-CTIPLOWPREP1 **低输入对照准备完成，尚未试算**：新固定工件父任务从零[0,.25,.50] mm，成功末峰后保持机构均值.50，仅推进工件q=[0,.025] mm；[任务、接口核查与控制示意](../lf_data_preparation/native_interface_001/lf_circle_tip_low_input_preparation_001/PREPARATION.md)已记录。其余物理和原门保持，生产源码未改；候选L-CTIPLOW1待新授权实施与执行。下方为较早阶段历史状态。
+
 > 2026-10-22 L-CTIPPROBE1 **真实探针数值PASS**：input mean保持1.06 mm，工件q=0→.025 mm，经原内部二分共3接受态；3PNG／3帧实际动画及[结果与证据](../lf_data_preparation/native_interface_001/lf_circle_tip_probe_001/RESULTS.md)已记录。生产源码保持；轴向Hu分量较大，尚不授纯接触／承载／释放资格。近期先准备同定义低输入对照。下方较早阶段状态保留为历史时点。
 
 > 2026-10-22 当前恢复入口：[L-CTIPMOVE1实际结果](../lf_data_preparation/native_interface_001/lf_circle_tip_move_001/RESULTS.md)与[新probe API](GUIDED_WORKPIECE_PROBE.md)。15项一次验证及一图完成，已同字节安装两份源码，测试源码和186成员执行ZIP已入本阶段。下一步按[NEXT_STEPS](../lf_data_preparation/native_interface_001/lf_circle_tip_move_001/NEXT_STEPS.md)准备真实r9 q0→.025探针；已关闭窗口不可重跑，新的物理路径／资源须另确认。原历史说明如下。

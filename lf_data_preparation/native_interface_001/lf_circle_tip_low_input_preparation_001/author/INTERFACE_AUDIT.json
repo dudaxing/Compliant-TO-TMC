@@ -1,0 +1,157 @@
+{
+  "schema_version": "hf-ctiplowprep1-interface-audit-1",
+  "created_utc": "2026-10-23T04:55:34.663323+00:00",
+  "baseline_commit": "dc4a8ec9263f6df7b3cf21957e0a3cd39b75ceee",
+  "status": "pass_preparation_only",
+  "production_source_change_required": false,
+  "scientific_imports_or_execution": false,
+  "scientific_npz_or_media_read": false,
+  "numerical_qualification_claimed": false,
+  "checks": [
+    {
+      "id": "fresh_parent",
+      "status": "pass",
+      "source_lines": "native_evaluate.py:23-26,48-59,66-87; native_mean.py:175-182",
+      "finding": "Fresh evaluate_native with explicit geometry and new task; saved_result=None, selected_state_index=None, extend_path=False. No old state transport."
+    },
+    {
+      "id": "parent_task",
+      "status": "pass",
+      "source_lines": "native_project.py:67-81; native_mean.py:175-179",
+      "finding": "input.target_mm=0.50, path.kind=load_only, path.targets_mm=[0.0,0.25,0.50]; supplied targets must equal the explicit path."
+    },
+    {
+      "id": "settings_defaults",
+      "status": "pass_with_explicit_requirement",
+      "source_lines": "native_evaluate.py:82-99; displacement.py:23-34",
+      "finding": "Zero-start defaults do not inherit. Explicit settings copy non-clock values including minimum_increment=0.00625; explicit modes mechanical/chunk256/port_projection."
+    },
+    {
+      "id": "settings_call_contract",
+      "status": "pass_with_explicit_requirement",
+      "source_lines": "native_evaluate.py:89-101",
+      "finding": "If passing settings, place new controller clock inside settings and omit minimum_increment and time_limit_seconds keyword (its default sentinel remains180)."
+    },
+    {
+      "id": "complete_parent_gate",
+      "status": "pass",
+      "source_lines": "native_probe.py:61-79; native_mean.py:278-285",
+      "finding": "Require completed fixed load-only parent: status success, path_completed/target_reached/loading_peak_reached true; final selected accepted state is its original peak and exact original target list covered."
+    },
+    {
+      "id": "dynamic_final_index",
+      "status": "pass",
+      "source_lines": "native_probe.py:67-76; split_displacement.py:363-386",
+      "finding": "Select len(parent.states)-1 after success, not hardcoded2. Bisection may add accepted states; preserve all."
+    },
+    {
+      "id": "identity_admission",
+      "status": "pass",
+      "source_lines": "native_probe.py:44-57,77-95,102-131",
+      "finding": "Model/task/source/mechanics/state descriptors and archives bound; exact lift/fluctuation and signed input R transported. No descriptor rehash/truncate/fake parent."
+    },
+    {
+      "id": "probe_path",
+      "status": "pass",
+      "source_lines": "native_probe.py:142-178,270-281",
+      "finding": "Probe body targets=[0.0,0.025], held input derives from admitted task target0.50. New output outside frozen parent, absent before call."
+    },
+    {
+      "id": "probe_settings_inherit",
+      "status": "pass",
+      "source_lines": "native_probe.py:96-101,284",
+      "finding": "Probe inherits all parent non-clock settings and three execution modes; only probe time_limit_seconds is replaced by its explicit new card clock."
+    },
+    {
+      "id": "hold_and_motion",
+      "status": "pass",
+      "source_lines": "split_displacement.py:134-158; native_probe.py:171-183,279-281",
+      "finding": "All original body nodes ux=q, uy=0, rotation0. Mechanism weighted input mean held0.50, not individual port node displacements. Original body reference membership preserved."
+    },
+    {
+      "id": "production_gates",
+      "status": "pass",
+      "source_lines": "split_displacement.py:226-249,289-324,363-380; native_probe.py:213-227",
+      "finding": "Original free residual/mean gate, fresh q0 state/R bit identity and one Newton check, prescribed error<=8e-11, positiveJ, global balance<=1e-6, original backtracking/bisection and terminal stop retained."
+    },
+    {
+      "id": "scope_and_comparison",
+      "status": "pass_with_qualification_limits",
+      "source_lines": "native_probe.py:277-289; native_response.py:255-256",
+      "finding": "Same force definition, half model including thickness. Q=-F_body,total,x, not contact pressure/capacity; no new HP. Compare exact shared actual q only; high-only0.0125 remains unmatched if absent below."
+    }
+  ],
+  "required_nonclock_settings": {
+    "tolerance": 1e-09,
+    "constraint_tolerance": 1e-10,
+    "displacement_scale_floor": 1e-06,
+    "force_scale_floor_factor": 1e-08,
+    "max_checks": 25,
+    "armijo_c": 0.0001,
+    "max_backtracks": 12,
+    "max_bisections": 4,
+    "minimum_increment": 0.00625
+  },
+  "required_execution_modes": {
+    "response_mode": "mechanical",
+    "tangent_mode": "chunk256",
+    "initial_guess": "port_projection"
+  },
+  "parent_targets_mm": [
+    0.0,
+    0.25,
+    0.5
+  ],
+  "probe_body_q_targets_mm": [
+    0.0,
+    0.025
+  ],
+  "held_input_mean_mm": 0.5,
+  "source_pins": [
+    {
+      "path": "hf_repo/src/hf_eval/native_evaluate.py",
+      "bytes": 7867,
+      "sha256": "44eed5f42b5e10d8677b24d2cfc70e1508e1837e346205abdf309d54bc8961ed"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_probe.py",
+      "bytes": 19317,
+      "sha256": "93667361fcb8168d800833a849d411a669b576b11c565cdbfc534bd3457ae8b3"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_project.py",
+      "bytes": 23187,
+      "sha256": "4f1b4f772938bb870e8784fac881bad9a16f004fabf3b6e91ea9d2701c7601bc"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_mean.py",
+      "bytes": 22777,
+      "sha256": "76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/split_displacement.py",
+      "bytes": 27062,
+      "sha256": "65e5cb15a54b53978abb744ee7e99928cadfffefb9afb71fdc6dcfcd139e295e"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/displacement.py",
+      "bytes": 26838,
+      "sha256": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386"
+    },
+    {
+      "path": "hf_repo/src/hf_eval/native_response.py",
+      "bytes": 17718,
+      "sha256": "346a97b30f675ccf063de1720002f936adf90011e69231edd89e776ba4e70eaa"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/model/model.json",
+      "bytes": 89774,
+      "sha256": "7f56cf78700c85145cce33a5972f73ac48e05923f16c27e69f7f118e6d239e0b"
+    },
+    {
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_alpha_001/run_001/wave_circle_tip_alpha1/result.json",
+      "bytes": 289415,
+      "sha256": "9e083bb057de9ea9b2b52694b3cc474a877ecbfcc3785d26fa50f55566e320ec"
+    }
+  ]
+}
