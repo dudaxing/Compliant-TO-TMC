@@ -1,3 +1,5 @@
+> 2026-10-23 L-CTIPFLOADPREP1 **导向轴向力控规格／接口／小模型方案准备完成，尚未实现或试算**：明确非零P0预载、已含厚度的半模型N、未知刚体q、独立工件合力门和外载账本；保持原正式物理及55份生产源码。[准备总览与控制示意](../lf_data_preparation/native_interface_001/lf_circle_tip_force_control_preparation_001/PREPARATION.md)、[候选实施卡](../lf_data_preparation/native_interface_001/lf_circle_tip_force_control_preparation_001/L-CTIPFLOAD1_CARD.md)已记录；下一阶段拟两个新生产模块／17项有限检查，仍待批准、候选冻结和静审，不含真实r9力控。下方较早状态保留为历史时点。
+
 > 2026-10-23 L-CTIPLOW1 **父加载／低输入探针原数值门均PASS**：从零完成固定工件输入0→0.25→0.50 mm（3态），随后保持均值0.50 mm，工件q=0→0.025 mm（2态）；四张新PNG／两帧实际动画已检查，五层监督正常退出且同实例清理通过。末态半模型驱动力4.32723e−5 N，Hu占86.29%，尖端间距约0.519 mm；同q高输入驱动力约5.92倍，不能据此认定纯接触抗拔或承载能力。生产源码未改；[实际结果与图页](../lf_data_preparation/native_interface_001/lf_circle_tip_low_probe_001/RESULTS.md)、[下一步：准备导向+x力控及小模型验证](../lf_data_preparation/native_interface_001/lf_circle_tip_low_probe_001/NEXT_STEPS.md)。本轮窗口已关闭，下一步尚未实现／执行。下方较早状态与待授权叙述保留为历史时点。
 
 > 2026-10-23 L-CTIPLOWPREP1 **低输入对照准备完成，尚未试算**：新固定工件父任务从零[0,.25,.50] mm，成功末峰后保持机构均值.50，仅推进工件q=[0,.025] mm；[任务、接口核查与控制示意](../lf_data_preparation/native_interface_001/lf_circle_tip_low_input_preparation_001/PREPARATION.md)已记录。其余物理和原门保持，生产源码未改；候选L-CTIPLOW1待新授权实施与执行。下方为较早阶段历史状态。
