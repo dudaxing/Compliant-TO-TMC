@@ -1,0 +1,539 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>L-CTIPFHIGH1 · 高输入导向力控</title>
+<style>body{font:16px/1.7 system-ui,sans-serif;max-width:1320px;margin:32px auto;padding:0 24px;color:#182b3b;background:#f5f7fa}h1{line-height:1.3}a{color:#075d94}header,section,figure{margin:20px 0;padding:24px;background:white;border:1px solid #d5dee8;border-radius:10px}img{display:block;max-width:100%;height:auto}.scroll{overflow-x:auto}table{border-collapse:collapse;min-width:100%;white-space:nowrap}th,td{border-bottom:1px solid #ddd;padding:8px;text-align:left}figcaption,.note{color:#465b6d}.missing{color:#76502c}pre{white-space:pre-wrap;overflow-wrap:anywhere}code{overflow-wrap:anywhere}</style>
+<header><p>2026-10-23 · 已批准唯一执行 · PASS／科学窗口已关闭</p><h1>机构平均输入1.06 mm：给定P，独立求未知工件q</h1><p>α=2.5e−7／r9 mm／圆心(80,40) mm／right92 mm／Lr80 mm；14720单元／29970DOF，生产57份源码保持。下表只显示闭卡记录中的实际接受态，包括内部N二分态。</p>
+<p>数值路径：success；工程比较：pass；renderer：rendered_pending_root_visual_check；root QA：pass。</p><div class="scroll"><table><tr><th>accepted</th><th>角色</th><th>P_half / N</th><th>未知q / mm</th><th>R_input / N</th><th>ON-body total Fx / N</th><th>material Fx / N</th><th>Hu Fx / N</th><th>min J</th><th>max |Hu| / mm⁻¹</th><th>base checks</th></tr><tr><td>0</td><td>原请求</td><td>0.0002399800950672949</td><td>0.0</td><td>0.19522304147728387</td><td>-0.0002399800950672949</td><td>-6.691682951023186e-05</td><td>-0.00017306326555706304</td><td>0.00046587891715793817</td><td>0.31108200242696615</td><td>1</td></tr><tr><td>1</td><td>原请求</td><td>0.0002561572865437846</td><td>0.025000000126731543</td><td>0.19536542042269825</td><td>-0.0002561572865437885</td><td>-7.023681733969096e-05</td><td>-0.0001859204692040975</td><td>0.00041660852936145333</td><td>0.3181733832407684</td><td>4</td></tr></table></div>
+<p class="note">P是已含t20的半模型有符号总外载；完整对称轴向外载2P，q不倍增。P0为原父态的非零预载，新核必须fresh一次原样通过；参考q=.025不是力控输入。R是保持机构平均输入的独立反力。total含material与Hu，ON-body和P反号，不认定为压力或纯接触承载能力。</p>
+<p class="note">高输入旧位移参考有q=[0,.0125,.025]三接受态：只以原请求accepted[0,2]配对，.0125为历史内部二分态。旧首次直接大步invalid_J与低J／较强Hu困难完整保留，不假配新N内部态。实际数值与工程状态见原记录，不因媒体存在就升级资格。</p><nav><a href="RESULTS.md">完整目标／过程／结果</a> · <a href="USAGE.md">接口与能力边界</a> · <a href="result_summary.json">闭卡轻摘要</a> · <a href="RECOVERY.md">恢复</a> · <a href="NEXT_STEPS.md">下一步</a> · <a href="../lf_circle_tip_force_control_high_preparation_001/PREPARATION.md">高输入准备</a> · <a href="../lf_circle_tip_force_control_high_preparation_001/COMPARISON_GATES.json">冻结比较门</a> · <a href="comparison.json">实际比较</a> · <a href="execution/root_qa.json">实际root QA</a> · <a href="execution/execution_evidence.zip">原窗口归档字节（状态见seal）</a> · <a href="execution/EVIDENCE_MANIFEST.json">原包成员身份</a> · <a href="execution/seal_receipt.json">原封存回执</a></nav><details><summary>实际工程误差与冻结门</summary><pre>{
+  &quot;q_abs_error_mm&quot;: 1.2673154192732738e-10,
+  &quot;q_bound_mm&quot;: 1e-06,
+  &quot;physical_displacement_max_error_mm&quot;: 2.9214952679268436e-10,
+  &quot;physical_displacement_bound_mm&quot;: 1e-06,
+  &quot;physical_max_error_dof&quot;: 23309,
+  &quot;physical_max_error_signed_mm&quot;: -2.9214952679268436e-10,
+  &quot;compared_DOF_count&quot;: 29970,
+  &quot;physical_difference_algorithm&quot;: &quot;math.fsum([new_lift,new_fluctuation,-old_lift,-old_fluctuation]) per DOF&quot;,
+  &quot;R_abs_error_N&quot;: 8.242850846329475e-13,
+  &quot;R_bound_N&quot;: 1.9536542042187397e-08,
+  &quot;q_pass&quot;: true,
+  &quot;state_pass&quot;: true,
+  &quot;R_pass&quot;: true
+}</pre></details><details><summary>原参考历史普通元数据</summary><pre>{
+  &quot;result_path&quot;: &quot;D:/hpr1_001/run_001/science/result.json&quot;,
+  &quot;result_file_sha256&quot;: &quot;91ab9a1ddf66382963052fbaed4fcfe61670fed4f6611af027b1d61a9466aadc&quot;,
+  &quot;probe_task&quot;: {
+    &quot;held_input_mean_mm&quot;: 1.06,
+    &quot;body_q_targets_mm&quot;: [
+      0.0,
+      0.025
+    ],
+    &quot;movement&quot;: &quot;prescribed rigid +x translation; uy=0 and rotation=0&quot;,
+    &quot;units&quot;: &quot;mm, N; modeled half including thickness&quot;,
+    &quot;body_membership&quot;: &quot;Original reference cells/nodes retained; no moving remask&quot;,
+    &quot;fixed_parent_task_preserved&quot;: true
+  },
+  &quot;source&quot;: {
+    &quot;parent_result&quot;: {
+      &quot;path&quot;: &quot;D:/hpr1_001/parent_001/result.json&quot;,
+      &quot;sha256&quot;: &quot;9e083bb057de9ea9b2b52694b3cc474a877ecbfcc3785d26fa50f55566e320ec&quot;
+    },
+    &quot;parent_model&quot;: {
+      &quot;path&quot;: &quot;D:/hpr1_001/parent_001/model/model.json&quot;,
+      &quot;sha256&quot;: &quot;7f56cf78700c85145cce33a5972f73ac48e05923f16c27e69f7f118e6d239e0b&quot;
+    },
+    &quot;parent_task&quot;: {
+      &quot;schema_version&quot;: &quot;hf-native-project-task-1.1&quot;,
+      &quot;task_id&quot;: &quot;EXPLORATORY_wave_fixed_circle_r9_c80_domain92_Lr80_h05_alpha25em8_load106__L_CTIPALPHA1&quot;,
+      &quot;case_family&quot;: &quot;gripper&quot;,
+      &quot;purpose&quot;: &quot;tip_facing_circle_alpha_sensitivity_zero_start_loading&quot;,
+      &quot;parameter_origin&quot;: &quot;L-CTIPALPHA1 explicit user approval: only physical change alpha5e-7 to2.5e-7; zero-start original13 load_only targets through1.06mm; geometry, all other physics and original production gates unchanged.&quot;,
+      &quot;material&quot;: {
+        &quot;E_MPa&quot;: 1.0,
+        &quot;nu&quot;: 0.3,
+        &quot;formulation&quot;: &quot;plane_strain&quot;
+      },
+      &quot;input&quot;: {
+        &quot;tag&quot;: &quot;input&quot;,
+        &quot;control&quot;: &quot;average_displacement&quot;,
+        &quot;target_mm&quot;: 1.06
+      },
+      &quot;output&quot;: {
+        &quot;tag&quot;: &quot;output&quot;,
+        &quot;spring_N_per_mm&quot;: 0.0
+      },
+      &quot;constraints&quot;: [
+        {
+          &quot;tag&quot;: &quot;support&quot;,
+          &quot;components&quot;: [
+            0,
+            1
+          ]
+        },
+        {
+          &quot;tag&quot;: &quot;symmetry&quot;,
+          &quot;components&quot;: [
+            1
+          ]
+        }
+      ],
+      &quot;support_selection&quot;: &quot;solid_incident_nodes_only&quot;,
+      &quot;input_auxiliary_spring_N_per_mm&quot;: 0.0,
+      &quot;workpiece&quot;: {
+        &quot;kind&quot;: &quot;fixed_rigid&quot;,
+        &quot;shape&quot;: &quot;circle&quot;,
+        &quot;center_mm&quot;: [
+          80.0,
+          40.0
+        ],
+        &quot;radius_mm&quot;: 9.0,
+        &quot;fixed_components&quot;: [
+          0,
+          1
+        ]
+      },
+      &quot;third_medium&quot;: {
+        &quot;gamma&quot;: 1e-06
+      },
+      &quot;qualification_criteria&quot;: {
+        &quot;max_design_volume_fraction&quot;: null,
+        &quot;min_feature_mm&quot;: null
+      },
+      &quot;reference_state&quot;: &quot;undeformed&quot;,
+      &quot;units&quot;: {
+        &quot;length&quot;: &quot;mm&quot;,
+        &quot;force&quot;: &quot;N&quot;,
+        &quot;stress&quot;: &quot;MPa&quot;,
+        &quot;energy&quot;: &quot;N mm&quot;
+      },
+      &quot;regularization&quot;: {
+        &quot;alpha&quot;: 2.5e-07,
+        &quot;length_mm&quot;: 80.0
+      },
+      &quot;background_symmetry&quot;: {
+        &quot;points_mm&quot;: [
+          [
+            0.0,
+            40.0
+          ],
+          [
+            92.0,
+            40.0
+          ]
+        ],
+        &quot;components&quot;: [
+          1
+        ]
+      },
+      &quot;geometry&quot;: {
+        &quot;geometry_id&quot;: &quot;7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4&quot;,
+        &quot;descriptor_sha256&quot;: &quot;d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6&quot;
+      },
+      &quot;analysis_grid&quot;: {
+        &quot;policy&quot;: &quot;native&quot;
+      },
+      &quot;description&quot;: &quot;Single-parameter exploratory alpha sensitivity. Fresh zero-start loading, no old-alpha state/force/tangent transplant; compare same-input original13 origin/loading observations without claiming alpha independence or grip qualification.&quot;,
+      &quot;path&quot;: {
+        &quot;kind&quot;: &quot;load_only&quot;,
+        &quot;targets_mm&quot;: [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          0.9,
+          0.95,
+          0.98,
+          1.0,
+          1.02,
+          1.03,
+          1.04,
+          1.05,
+          1.06
+        ]
+      }
+    },
+    &quot;parent_task_sha256&quot;: &quot;eeae1926ade1e4b64bc788b79f31a47a4030f09a4d98a03520e82732b6ffdcb7&quot;,
+    &quot;source_geometry&quot;: {
+      &quot;geometry_id&quot;: &quot;7f80838922ae552fefb03f0b86ce221c29c641be7c1564a30e7ec8016873d7d4&quot;,
+      &quot;descriptor_sha256&quot;: &quot;d74292ca5a3e9f05dcc067f0f2e451f963f394cd69bb54068ac3552487f5f5a6&quot;,
+      &quot;descriptor_file_sha256&quot;: &quot;9630f76972ffecbd60fa42eefb44da0c97c395db7baacaaede33cdabbbc9cf6a&quot;,
+      &quot;arrays_sha256&quot;: &quot;188a0d2271e1ae81e4ed96428f93561cc6021e967bb1aa8f324730c027d08b3c&quot;,
+      &quot;snapshot&quot;: {
+        &quot;descriptor&quot;: &quot;source_geometry/geometry.json&quot;,
+        &quot;arrays&quot;: &quot;source_geometry/geometry.npz&quot;
+      }
+    },
+    &quot;selected_state&quot;: {
+      &quot;accepted_index&quot;: 12,
+      &quot;path&quot;: &quot;D:/hpr1_001/parent_001/accepted/012/state.json&quot;,
+      &quot;descriptor_file_sha256&quot;: &quot;c06fc6d2e3400832ca967ad5bffd546feb960c818a4e388cda3af9ec5e2a00ae&quot;,
+      &quot;state_sha256&quot;: &quot;e71c06973b7dc7aff7e5ee4a801b595cb3f054e907cc6e1ad52188e858500a68&quot;,
+      &quot;archive_sha256&quot;: &quot;b106fd6f3a2c3d1b3ddab90ec024f437bda5fc343925b77932631d8aa9c04fdc&quot;,
+      &quot;R_input_N&quot;: 0.19522304147728387,
+      &quot;input_mean_mm&quot;: 1.06
+    },
+    &quot;parent_mechanics_source_sha256&quot;: {
+      &quot;hf_repo/src/hf_eval/native_mean.py&quot;: &quot;76fd9917fe378865f3f359838958e58505afb9ae2e7c7ec257773a76178fd6e4&quot;,
+      &quot;hf_repo/src/hf_eval/split_displacement.py&quot;: &quot;151cc130f0a75e3b2f201b393541107ccf2feaa3de365db72d1987568dae1bb8&quot;,
+      &quot;hf_repo/src/hf_eval/split_numpy_tangent.py&quot;: &quot;547143b14c8626f7420b8d5778cb11d4d5680be1a590428d8d46f01b3549857f&quot;,
+      &quot;hf_repo/src/hf_eval/split_kernel_invariants_hu.py&quot;: &quot;d5f7d20a6ec0c92847d67f8782f4dcc89772fc4ea62797626b0beae7effabd9a&quot;
+    },
+    &quot;parent_status&quot;: &quot;success&quot;,
+    &quot;parent_qualification_preserved&quot;: true,
+    &quot;state_transport&quot;: &quot;Original lift/fluctuation and signed R; no rebase or rounded display&quot;,
+    &quot;saved_matrix_or_force_or_tangent_read&quot;: false,
+    &quot;fresh_anchor_required&quot;: true
+  },
+  &quot;original_request_count&quot;: 2,
+  &quot;actual_accepted_count&quot;: 3,
+  &quot;requested_reference_indices&quot;: [
+    0,
+    2
+  ],
+  &quot;requested_reference_q_mm&quot;: [
+    0.0,
+    0.025
+  ],
+  &quot;all_accepted_rows&quot;: [
+    {
+      &quot;body_q_mm&quot;: 0.0,
+      &quot;Q_drive_half_N&quot;: 0.0002399800950672949,
+      &quot;R_input_N&quot;: 0.19522304147728387,
+      &quot;minimum_J&quot;: 0.00046587891715793817,
+      &quot;relative_residual&quot;: 1.1974846636341916e-12,
+      &quot;constraint_residual&quot;: 2.7755575615628914e-17,
+      &quot;constraint_bound&quot;: 1.0600000000000001e-10,
+      &quot;relative_global_force_balance&quot;: 1.1366505653106908e-16,
+      &quot;newton_checks&quot;: 1,
+      &quot;is_original_target&quot;: true,
+      &quot;original_target_index&quot;: 0,
+      &quot;bisection_depth&quot;: 0,
+      &quot;state_sha256&quot;: &quot;e71c06973b7dc7aff7e5ee4a801b595cb3f054e907cc6e1ad52188e858500a68&quot;,
+      &quot;force_on_body_N&quot;: {
+        &quot;total&quot;: [
+          -0.0002399800950672949,
+          0.012372524610902783
+        ],
+        &quot;material&quot;: [
+          -6.691682951023186e-05,
+          0.009318152027217278
+        ],
+        &quot;regularization&quot;: [
+          -0.00017306326555706304,
+          0.0030543725836855054
+        ]
+      },
+      &quot;ledger&quot;: {
+        &quot;body_x_drive_N&quot;: [
+          0.0002399800950672949,
+          0.0
+        ],
+        &quot;body_y_guide_N&quot;: [
+          0.0,
+          -0.012372524610902783
+        ],
+        &quot;zero_support_N&quot;: [
+          -0.19546302157235113,
+          0.012372524610902843
+        ],
+        &quot;merged_prescribed_N&quot;: [
+          -0.19522304147728384,
+          6.190884402142876e-17
+        ],
+        &quot;input_actuator_N&quot;: [
+          0.19522304147728387,
+          0.0
+        ],
+        &quot;output_spring_N&quot;: [
+          0.0,
+          0.0
+        ],
+        &quot;global_force_balance_N&quot;: [
+          3.2446827889327453e-17,
+          4.6225976063456187e-17
+        ]
+      },
+      &quot;state&quot;: {
+        &quot;path&quot;: &quot;accepted/000/state.npz&quot;,
+        &quot;sha256&quot;: &quot;b106fd6f3a2c3d1b3ddab90ec024f437bda5fc343925b77932631d8aa9c04fdc&quot;,
+        &quot;fields&quot;: {
+          &quot;lift&quot;: {
+            &quot;dtype&quot;: &quot;float64&quot;,
+            &quot;shape&quot;: [
+              29970
+            ],
+            &quot;sha256&quot;: &quot;eeb81b0f07826f6921c7f5144555139eaf7edf6a61e1f05d3f1df0275574c13e&quot;
+          },
+          &quot;fluctuation&quot;: {
+            &quot;dtype&quot;: &quot;float64&quot;,
+            &quot;shape&quot;: [
+              29970
+            ],
+            &quot;sha256&quot;: &quot;c4be230b3edde4c4a30910a920f913621624548880bef2144493d6cd133f2914&quot;
+          }
+        }
+      }
+    },
+    {
+      &quot;body_q_mm&quot;: 0.0125,
+      &quot;Q_drive_half_N&quot;: 0.00024805986935598885,
+      &quot;R_input_N&quot;: 0.19529451734426592,
+      &quot;minimum_J&quot;: 0.00043961981824698745,
+      &quot;relative_residual&quot;: 1.633253277706521e-11,
+      &quot;constraint_residual&quot;: 0.0,
+      &quot;constraint_bound&quot;: 1.0600000000000001e-10,
+      &quot;relative_global_force_balance&quot;: 1.998446900117207e-12,
+      &quot;newton_checks&quot;: 7,
+      &quot;is_original_target&quot;: false,
+      &quot;original_target_index&quot;: 1,
+      &quot;bisection_depth&quot;: 1,
+      &quot;state_sha256&quot;: &quot;65c47507f2a5812471f523e07a1d37946f1bbf4a4d1f9998af649fed246d428c&quot;,
+      &quot;force_on_body_N&quot;: {
+        &quot;total&quot;: [
+          -0.00024805986935598885,
+          0.012439112734173054
+        ],
+        &quot;material&quot;: [
+          -6.863113756193123e-05,
+          0.00939500228102461
+        ],
+        &quot;regularization&quot;: [
+          -0.00017942873179405765,
+          0.0030441104531484463
+        ]
+      },
+      &quot;ledger&quot;: {
+        &quot;body_x_drive_N&quot;: [
+          0.00024805986935598885,
+          0.0
+        ],
+        &quot;body_y_guide_N&quot;: [
+          0.0,
+          -0.012439112734173054
+        ],
+        &quot;zero_support_N&quot;: [
+          -0.19554257721360552,
+          0.01243911273318014
+        ],
+        &quot;merged_prescribed_N&quot;: [
+          -0.19529451734424952,
+          -9.92913757966258e-13
+        ],
+        &quot;input_actuator_N&quot;: [
+          0.19529451734426592,
+          0.0
+        ],
+        &quot;output_spring_N&quot;: [
+          0.0,
+          0.0
+        ],
+        &quot;global_force_balance_N&quot;: [
+          1.6408890919645928e-14,
+          -9.929281314800982e-13
+        ]
+      },
+      &quot;state&quot;: {
+        &quot;path&quot;: &quot;accepted/001/state.npz&quot;,
+        &quot;sha256&quot;: &quot;89dd78523236898fed8a941d637058b547ce13e81a040a5ff01af93b05405210&quot;,
+        &quot;fields&quot;: {
+          &quot;lift&quot;: {
+            &quot;dtype&quot;: &quot;float64&quot;,
+            &quot;shape&quot;: [
+              29970
+            ],
+            &quot;sha256&quot;: &quot;4112e42d9c961095f62c28ea8be3961fbead0f5e0dd118452b0218f74a309b16&quot;
+          },
+          &quot;fluctuation&quot;: {
+            &quot;dtype&quot;: &quot;float64&quot;,
+            &quot;shape&quot;: [
+              29970
+            ],
+            &quot;sha256&quot;: &quot;ef902e32add0daf9c2a512cee8658f1ba412d15fd374ac5c9ff5ede1ac3ebabc&quot;
+          }
+        }
+      }
+    },
+    {
+      &quot;body_q_mm&quot;: 0.025,
+      &quot;Q_drive_half_N&quot;: 0.0002561572865437846,
+      &quot;R_input_N&quot;: 0.19536542042187396,
+      &quot;minimum_J&quot;: 0.0004166085295994876,
+      &quot;relative_residual&quot;: 8.840774882078524e-11,
+      &quot;constraint_residual&quot;: 0.0,
+      &quot;constraint_bound&quot;: 1.0600000000000001e-10,
+      &quot;relative_global_force_balance&quot;: 1.069265165608372e-11,
+      &quot;newton_checks&quot;: 7,
+      &quot;is_original_target&quot;: true,
+      &quot;original_target_index&quot;: 1,
+      &quot;bisection_depth&quot;: 1,
+      &quot;state_sha256&quot;: &quot;c51bbbec3164ee07f9d1ce32abf4d7590134b3bebced77262b8565b4f84c981d&quot;,
+      &quot;force_on_body_N&quot;: {
+        &quot;total&quot;: [
+          -0.0002561572865437846,
+          0.012505048670471336
+        ],
+        &quot;material&quot;: [
+          -7.023681740568895e-05,
+          0.009471176487845432
+        ],
+        &quot;regularization&quot;: [
+          -0.00018592046913809562,
+          0.003033872182625907
+        ]
+      },
+      &quot;ledger&quot;: {
+        &quot;body_x_drive_N&quot;: [
+          0.0002561572865437846,
+          0.0
+        ],
+        &quot;body_y_guide_N&quot;: [
+          0.0,
+          -0.012505048670471336
+        ],
+        &quot;zero_support_N&quot;: [
+          -0.195621577708331,
+          0.012505048665158253
+        ],
+        &quot;merged_prescribed_N&quot;: [
+          -0.1953654204217872,
+          -5.3130836271422406e-12
+        ],
+        &quot;input_actuator_N&quot;: [
+          0.19536542042187396,
+          0.0
+        ],
+        &quot;output_spring_N&quot;: [
+          0.0,
+          0.0
+        ],
+        &quot;global_force_balance_N&quot;: [
+          8.672286908176092e-14,
+          -5.313155749138963e-12
+        ]
+      },
+      &quot;state&quot;: {
+        &quot;path&quot;: &quot;accepted/002/state.npz&quot;,
+        &quot;sha256&quot;: &quot;fea649e5664633096db0b2d4a1f377ace6a73af517167438abfd9b9c426cd6e2&quot;,
+        &quot;fields&quot;: {
+          &quot;lift&quot;: {
+            &quot;dtype&quot;: &quot;float64&quot;,
+            &quot;shape&quot;: [
+              29970
+            ],
+            &quot;sha256&quot;: &quot;db0ef5d49fa64c2018e4cfdf13b43d7213b444440edddcb1798ab533e465099e&quot;
+          },
+          &quot;fluctuation&quot;: {
+            &quot;dtype&quot;: &quot;float64&quot;,
+            &quot;shape&quot;: [
+              29970
+            ],
+            &quot;sha256&quot;: &quot;7625e0f36e26149380bcdbafa7e1c1e9c3e9d958fa363b15ea9b4facbe3aa991&quot;
+          }
+        }
+      }
+    }
+  ],
+  &quot;failed_attempts&quot;: [
+    {
+      &quot;from_displacement&quot;: 0.0,
+      &quot;attempted_displacement&quot;: 0.025,
+      &quot;from_R_input&quot;: 0.19522304147728387,
+      &quot;depth&quot;: 0,
+      &quot;code&quot;: &quot;invalid_J&quot;,
+      &quot;reason&quot;: &quot;NumPy total J must be positive&quot;,
+      &quot;rollback_bitwise_equal&quot;: true
+    }
+  ],
+  &quot;newton_history_count&quot;: 15,
+  &quot;line_search_trial_count&quot;: 12,
+  &quot;call_counts&quot;: {
+    &quot;force_calls&quot;: 28,
+    &quot;force_calls_completed&quot;: 27,
+    &quot;tangent_calls&quot;: 15,
+    &quot;tangent_calls_completed&quot;: 15,
+    &quot;solver_invocations&quot;: 1,
+    &quot;HP_calls&quot;: 0,
+    &quot;save_force_calls&quot;: 0,
+    &quot;save_tangent_calls&quot;: 0
+  },
+  &quot;historical_validation&quot;: {
+    &quot;status&quot;: &quot;pass&quot;,
+    &quot;accepted_states&quot;: 3,
+    &quot;body_q_original_targets_mm&quot;: [
+      0.0,
+      0.025
+    ],
+    &quot;q0_identity_preserved&quot;: true,
+    &quot;gates&quot;: &quot;original residual/mean/J/global-balance/prescribed gates&quot;,
+    &quot;call_counts&quot;: {
+      &quot;force_calls&quot;: 28,
+      &quot;force_calls_completed&quot;: 27,
+      &quot;tangent_calls&quot;: 15,
+      &quot;tangent_calls_completed&quot;: 15,
+      &quot;solver_invocations&quot;: 1,
+      &quot;HP_calls&quot;: 0,
+      &quot;save_force_calls&quot;: 0,
+      &quot;save_tangent_calls&quot;: 0
+    },
+    &quot;new_archive_byte_identities&quot;: [
+      {
+        &quot;path&quot;: &quot;D:\\hpr1_001\\run_001\\science\\accepted\\000\\state.npz&quot;,
+        &quot;bytes&quot;: 219724,
+        &quot;sha256&quot;: &quot;b106fd6f3a2c3d1b3ddab90ec024f437bda5fc343925b77932631d8aa9c04fdc&quot;,
+        &quot;kind&quot;: &quot;state&quot;,
+        &quot;body_q_mm&quot;: 0.0,
+        &quot;decoded_by_wrapper&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;D:\\hpr1_001\\run_001\\science\\accepted\\000\\fields.npz&quot;,
+        &quot;bytes&quot;: 5326671,
+        &quot;sha256&quot;: &quot;4bea3358d7865b2f55bb33de7aba4b41c9d59566e7859984abb216b278604dc9&quot;,
+        &quot;kind&quot;: &quot;fields&quot;,
+        &quot;body_q_mm&quot;: 0.0,
+        &quot;decoded_by_wrapper&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;D:\\hpr1_001\\run_001\\science\\accepted\\001\\state.npz&quot;,
+        &quot;bytes&quot;: 219911,
+        &quot;sha256&quot;: &quot;89dd78523236898fed8a941d637058b547ce13e81a040a5ff01af93b05405210&quot;,
+        &quot;kind&quot;: &quot;state&quot;,
+        &quot;body_q_mm&quot;: 0.0125,
+        &quot;decoded_by_wrapper&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;D:\\hpr1_001\\run_001\\science\\accepted\\001\\fields.npz&quot;,
+        &quot;bytes&quot;: 5326470,
+        &quot;sha256&quot;: &quot;b890b7d990da8625d1b032a898d9cdb9eef16bce87c2cf7f6dc0ee0cb32dc49f&quot;,
+        &quot;kind&quot;: &quot;fields&quot;,
+        &quot;body_q_mm&quot;: 0.0125,
+        &quot;decoded_by_wrapper&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;D:\\hpr1_001\\run_001\\science\\accepted\\002\\state.npz&quot;,
+        &quot;bytes&quot;: 219874,
+        &quot;sha256&quot;: &quot;fea649e5664633096db0b2d4a1f377ace6a73af517167438abfd9b9c426cd6e2&quot;,
+        &quot;kind&quot;: &quot;state&quot;,
+        &quot;body_q_mm&quot;: 0.025,
+        &quot;decoded_by_wrapper&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;D:\\hpr1_001\\run_001\\science\\accepted\\002\\fields.npz&quot;,
+        &quot;bytes&quot;: 5326986,
+        &quot;sha256&quot;: &quot;44241bae82a59de1438de37b7b26cc08bf21569aed38ee6ae123a19581fe9e04&quot;,
+        &quot;kind&quot;: &quot;fields&quot;,
+        &quot;body_q_mm&quot;: 0.025,
+        &quot;decoded_by_wrapper&quot;: false
+      }
+    ],
+    &quot;max_relative_residual&quot;: 8.840774882078524e-11,
+    &quot;min_J&quot;: 0.0004166085295994876,
+    &quot;max_prescribed_error_mm&quot;: 0.0,
+    &quot;max_relative_global_force_balance&quot;: 1.069265165608372e-11,
+    &quot;scientific_array_fields_decoded_by_wrapper&quot;: 0
+  },
+  &quot;do_not_drop_internal_q0125_or_invalidJ_attempt&quot;: true
+}</pre></details></header><figure><h2>实际×1全机构与工件几何</h2><a href="view/01_actual_geometry.png"><img loading="lazy" src="view/01_actual_geometry.png" alt="实际×1全机构与工件几何"></a><figcaption>机构平均输入保持1.06 mm；只给P，刚体q由力控独立求解，无变形倍率放大。</figcaption></figure>
+<figure><h2>P–q与工程误差</h2><a href="view/02_P_q_cross_check.png"><img loading="lazy" src="view/02_P_q_cross_check.png" alt="P–q与工程误差"></a><figcaption>旧参考仅accepted[0,2]两个原请求配对；旧q=.0125只作HISTORY ONLY，不插值配对新N二分态。</figcaption></figure>
+<figure><h2>有符号力分量、输入R与外载账本</h2><a href="view/03_force_components_and_R.png"><img loading="lazy" src="view/03_force_components_and_R.png" alt="有符号力分量、输入R与外载账本"></a><figcaption>ON-body与施加P反号；total包含material和Hu，机构R与P分别报告，旧body-x处方反力不重复入账。</figcaption></figure>
+<figure><h2>尖端坐标近景、右介质与全域响应</h2><a href="view/04_tip_right_geometry_global_J_Hu.png"><img loading="lazy" src="view/04_tip_right_geometry_global_J_Hu.png" alt="尖端坐标近景、右介质与全域响应"></a><figcaption>同图坐标放大inset仍为实际×1变形；距离到原工件栅格物理边段并排除对称切口；J/Hu仅已保存全域标量。</figcaption></figure>
+<figure><h2>全实际Newton、trial与数值门</h2><a href="view/05_convergence_and_gates.png"><img loading="lazy" src="view/05_convergence_and_gates.png" alt="全实际Newton、trial与数值门"></a><figcaption>保留所有真实接受态和内部尝试；双残差、mean、global和rigid分别显示，旧invalid_J历史单独保留。</figcaption></figure>
+<section><h2>实际接受态动画</h2><img loading="lazy" src="view/actual_force_states.gif" alt="全部实际接受态的×1变形动画"><p>帧数依原writer成功grab_frame记录；无插值、不代表物理时间。交付仅复制已有原字节，不解码GIF数帧。</p></section>
+<section><h2>记录口径与功能限制</h2><p>媒体为本轮窗口内已生成的原字节；本页不渲染新图、调用HF、读科学数组或重开图像做像素检查。缺失产物明确标为未生成，实际QA以原回执为准，renderer的pending状态是QA前的历史原值。</p><p>当前force接口支持从固定工件父态开始的严格递增绝对P；不支持force保存态续算／力卸载、自由工件、摩擦或压力。即使本次通过，也只支持这两载荷的导向TMC总弱力平衡交叉，不授承载极限、纯接触抗拔、释放、稳定性或全路径HP／HF5资格。</p><p>准备包位于相邻high_preparation目录；本交付不重复旧父／参考科学payload或旧5.8MB参考result。原窗口归档是否完整以实际seal回执为准；DELIVERY_MANIFEST由单独发布阶段生成，发布不另行重封科学证据。</p></section></html>
