@@ -73,3 +73,7 @@ flowchart LR
 本轮没有产生新数值候选或可启动runner；候选卡授权范围包括后续包装、冻结静审及一次执行，不能把当前准备脚本当力学启动命令。后续窗口未获批准，尚未启动。所有旧结果及独立参考、压力、有效夹持、承载、释放、稳定性、参数／域独立性、HF5资格保持。
 
 准备事实与来源见[PREPARATION_RESULT.json](PREPARATION_RESULT.json)、[SOURCE_BINDINGS.json](SOURCE_BINDINGS.json)。最终静态交付核对见[PREPARATION_REVIEW.json](author/PREPARATION_REVIEW.json)。
+
+## 发布与恢复
+
+准备文档与任务提交`0a204f18d162fa60f3bb2d58ffb1a801252d08a4`已普通推送并核远端main，`D:/hf-restore-20260930`已普通fetch／ff-only恢复到同提交。两工作树当时干净，27份本轮变化文件字节一致；详见[实际回执](PUBLICATION_RESTORE_RECEIPT.json)。这是同机异目录核对，没有异机数值复算。归档回执的后续提交也将普通推送并恢复核对。
