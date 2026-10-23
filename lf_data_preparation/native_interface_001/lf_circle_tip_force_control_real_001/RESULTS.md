@@ -82,3 +82,7 @@ API实际只读3条旧NPZ路径、5次open事件；opaque model只核整档身�
 现有固定／probe／force三种接口和本次原调用见[USAGE](USAGE.md)。force结果为独立schema，尚不支持其保存态续算／卸载或旧native_response自动关联。恢复所需资料、父依赖和路径迁移限制见[RECOVERY](RECOVERY.md)，逐文件发布身份见[DELIVERY_MANIFEST](DELIVERY_MANIFEST.json)。预启动false计数和旧路径原封保留，当前PASS以实际回执为准。
 
 下一步先[准备高输入1.06 mm的同定义两载荷交叉](NEXT_STEPS.md)，优先检查功能能否进入已有较强夹持工况。它的旧probe曾直接大步invalid_J后内部二分，终点minJ约4.17e−4；不能以这次低输入311秒外推保证，也不能现在追加计算。当前只完成本卡，不把项目整体目标标成完成。
+
+## 发布与恢复
+
+正式r9力控结果与原始证据提交`77cced6b42fd29e7fafbcbcecd0c84d76d486cbe`已普通推送并核远端main，`D:/hf-restore-20260930`已普通fetch／ff-only恢复到同提交。两工作树当时干净，77份本轮变化文件逐字节一致，仓库清单与Git索引集合相同；详见[实际回执](PUBLICATION_RESTORE_RECEIPT.json)。这是同机异目录核对，没有异机数值复算。归档回执的后续提交也将普通推送并恢复核对。
