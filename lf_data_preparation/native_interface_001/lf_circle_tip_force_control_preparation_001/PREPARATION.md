@@ -49,3 +49,7 @@ flowchart LR
 4. [L-CTIPFLOAD1候选实施卡](L-CTIPFLOAD1_CARD.md)：下一步只实现并验证小模型，不包含真实r9试算；**尚未批准／编写实现候选／冻结runner或启动**。
 
 独立意见见[数学审阅](author/MATH_REVIEW.md)、[接口审阅](author/API_REVIEW.md)，取舍见[审阅决策](author/REVIEW_DECISIONS.md)。本轮事实见[准备结果](PREPARATION_RESULT.json)及[最终静态核对](author/PREPARATION_REVIEW.json)。原55份生产源码、全部原数值及资格保持。承载极限、纯接触压力、释放、稳定性和HF5均未因此升级。
+
+## 发布与恢复
+
+力控规格、接口与有限验证方案准备提交`c37c7a7eb5e517585eff1a141a18cf220b25ca26`已普通推送并核远端main，`D:/hf-restore-20260930`已普通fetch／ff-only恢复到同提交。两工作树当时干净，33份本轮变化文件字节一致；详见[实际回执](PUBLICATION_RESTORE_RECEIPT.json)。这是同机异目录核对，没有异机数值复算，本轮也没有新力控实现或科学计算。归档回执的后续提交也将普通推送并恢复核对。
