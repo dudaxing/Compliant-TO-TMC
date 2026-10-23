@@ -48,4 +48,4 @@ ON-body x为负的body内力之和；没有另加工件外载时，Q_drive_half�
 
 保存使用接受态缓存，不重新F/T。身份错误在新F/T之前以invalid_saved_state拒绝；数值终端失败保存已接受partial。timeout／非收敛／零模不标释放。所有新机械资格标记保持false；原选定态HP不转移为可动路径参考。
 
-当前支持单个导向刚体+x、常量正input mean、从q0向正方向推进；未实现probe的保存态延伸、力控制、自由y／转动、摩擦或动力学。小模型通过不证明真实工件可行或域／α独立。近期研究安排沿用[任务规格](WORKPIECE_LOAD_TASK_SPEC.md)。
+当前支持单个导向刚体+x、常量正input mean、从q0向正方向推进；未实现probe的保存态延伸、自由y／转动、摩擦或动力学。另已新增独立导向轴向力控API，见[力控实现与小模型验证](../lf_data_preparation/native_interface_001/lf_circle_tip_force_control_001/RESULTS.md)；它不改变本位移probe的控制语义。小模型通过不证明真实工件可行或域／α独立。近期研究安排沿用[任务规格](WORKPIECE_LOAD_TASK_SPEC.md)。
