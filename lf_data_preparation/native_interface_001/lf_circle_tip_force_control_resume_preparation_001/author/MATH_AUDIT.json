@@ -1,0 +1,100 @@
+{
+  "schema_version": "hf-force-resume-math-preparation-audit-1.0",
+  "date": "2026-10-23",
+  "baseline_commit": "7ebcbf747a85e9c8bbe547bcd6e4fe600f76c12c",
+  "status": "static_review_complete_preparation_only",
+  "production_root": "D:/Coding/Diversity TO/Compliant-Nonlinear-TMC-O/.github_handoff/Compliant-TO-TMC",
+  "actions": {
+    "source_text_read": true,
+    "source_raw_sha256": true,
+    "production_module_import": false,
+    "production_write": false,
+    "NPZ_decode": false,
+    "F_calls": 0,
+    "T_calls": 0,
+    "HP_calls": 0,
+    "tests_run": 0,
+    "equilibrium_solves": 0,
+    "media_open": false
+  },
+  "source_sha256": {
+    "hf_repo/src/hf_eval/native_guided_force.py": "48342b5eb735c98dfd27ddfd15e398feb03ab2d1bc7d32b258c8489b2d22d322",
+    "hf_repo/src/hf_eval/split_guided_force.py": "975d1e1797403c2cddbda2ee04c8ef0e3d5e07d038bdb48473e4ff6e60fcf0c6",
+    "hf_repo/src/hf_eval/native_probe.py": "93667361fcb8168d800833a849d411a669b576b11c565cdbfc534bd3457ae8b3",
+    "hf_repo/src/hf_eval/native_resume.py": "68e3122950766f9cecb48a02a0f52a6d5f2efbfc466432bccc2cd48c77e2b798",
+    "hf_repo/src/hf_eval/split_state.py": "457e78f7f9dfa55566800915637af3b2e5ea38db969d7da98c8294efad69538e",
+    "hf_repo/src/hf_eval/split_displacement.py": "65e5cb15a54b53978abb744ee7e99928cadfffefb9afb71fdc6dcfcd139e295e",
+    "hf_repo/src/hf_eval/native_force.py": "9806b675fb33962115b0921d8a5a44ca467677d6968ad44a16d5a29151c2e93d",
+    "hf_repo/src/hf_eval/displacement.py": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386"
+  },
+  "blocking_current_contracts": [
+    {"file": "hf_repo/src/hf_eval/native_guided_force.py", "line": 54, "finding": "Existing entry delegates to fixed-parent native_probe._admit"},
+    {"file": "hf_repo/src/hf_eval/native_probe.py", "line": 61, "finding": "Admission requires completed fixed-rigid load_only original peak"},
+    {"file": "hf_repo/src/hf_eval/native_probe.py", "line": 125, "finding": "Admission rejects nonzero lift"},
+    {"file": "hf_repo/src/hf_eval/split_guided_force.py", "line": 101, "finding": "Controller rejects nonzero lift"},
+    {"file": "hf_repo/src/hf_eval/split_guided_force.py", "line": 118, "finding": "Controller hardcodes initial body q to zero"},
+    {"file": "hf_repo/src/hf_eval/native_resume.py", "line": 229, "finding": "Saved displacement resume also rejects nonzero lift and has a different path schema"}
+  ],
+  "minimal_source_change_proposal": {
+    "modified": ["hf_repo/src/hf_eval/split_guided_force.py", "hf_repo/src/hf_eval/native_guided_force.py"],
+    "new": ["hf_repo/src/hf_eval/native_guided_force_resume.py"],
+    "default_existing_entry_unchanged": true,
+    "new_public_entry_separate": true,
+    "kernel_tangent_changes": false
+  },
+  "inheritance": {
+    "body_q": "Original absolute signed q_s from parent selected last original accepted state, not zero or a segment displacement",
+    "P_segment_anchor": "Original absolute selected parent P_s, equal to the first child suffix target (index 0), not to a zero-valued load",
+    "P_root_scale_anchor": "Original root force-task P0, independent of segment anchor",
+    "R": "Original signed binary64 input multiplier",
+    "split": "Original binary64 lift and fluctuation copied without recombination/rebase",
+    "lift_body_x_contains_q": true,
+    "candidate_lift_rule": "Copy original lift, overwrite body_x with absolute q; never add absolute q to already-translated lift",
+    "fresh_rule": "Original split hash and R/q bits; one new F/T base check; no impose, projection, predictor or corrector repair",
+    "nonclock_settings": "Inherit all DisplacementSettings and GuidedForceSettings including N_min and max_bisections",
+    "physics": "Preserve original reference geometry, material, ports, supports, d_hold and body mask"
+  },
+  "scale_contract": {
+    "force_floor": "force_scale_floor_factor * force_scale_per_length * max(abs(d_hold), displacement_scale_floor)",
+    "generalized_scale": "max(abs(P), abs(root_P0), force_floor)",
+    "fresh_branch_anchor": "segment_P_s, not root_P0",
+    "signed_example_for_future_limited_check": "Root -10, segment -2, next +1: root absolute scale remains 10 rather than resetting to 2",
+    "existing_positive_increasing_path_observation": "For P >= positive P_s, root and segment choices happen to give same max, which does not justify changing the contract"
+  },
+  "reduced_mechanics": {
+    "unknowns": ["original_free_fluctuation", "absolute_body_q_mm", "signed_input_R_N"],
+    "body_generalized_force": "Sum of all original body x internal nodal forces, not an average",
+    "body_residual": "sum_body_internal_x - P_absolute_half_N",
+    "half_model_load_includes_thickness": true,
+    "full_symmetric_axial_load": "2 * P_half, q unchanged",
+    "nonsymmetric_couplings_preserved_independently": true,
+    "body_x_prescribed_drive_counted": false,
+    "body_y_background_overlap_counted_once": true
+  },
+  "minimal_read_closure_proposal": {
+    "ordinary_sources": ["Immediate force result and canonical identity", "Root fixed result/model/geometry descriptors", "Original task and source provenance", "Full parent force target prefix"],
+    "NPZ_decodes_in_future_implementation": ["Original geometry masks required by project builder", "Selected force-state lift and fluctuation"],
+    "old_root_q0_state_decode_needed": false,
+    "old_fields_force_tangent_matrix_decode_needed": false,
+    "current_kernel_SHA_hard_gate": ["split_numpy_tangent.py", "split_kernel_invariants_hu.py"],
+    "producer_source_handling": "Preserve producer hashes; explicitly reviewed old/new schema compatibility; do not require modified old controller/entry hashes to equal current versions; record new resume producer hash"
+  },
+  "future_limited_validation_needs": [
+    "Unchanged q=0 default path",
+    "One genuine small-model full path versus split nonzero-q saved continuation",
+    "Fresh exact state/R/q/P inheritance and no double lift",
+    "Second continuation segment retains root scale and prefix lineage",
+    "Fresh invalid anchor stops without repair",
+    "Metadata-only rejection cases before mechanics",
+    "Signed root scale example and inherited N_min/rollback logic"
+  ],
+  "open_items": [
+    "Final public entry and result schema field names",
+    "Portable explicit source closure mapping for historical absolute source paths",
+    "Small-model fixture, target loads, comparison gates, finite check count and resource window",
+    "Separate later formal r9 next load and resource authorization"
+  ],
+  "qualification_change": false,
+  "implementation_performed": false,
+  "numerical_validation_performed": false
+}

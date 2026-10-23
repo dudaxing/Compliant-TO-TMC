@@ -1,0 +1,110 @@
+{
+  "stage": "L-CTIPFRESUME1_candidate",
+  "status": "not_approved_not_implemented_not_executed",
+  "production_modified": [
+    "hf_repo/src/hf_eval/split_guided_force.py",
+    "hf_repo/src/hf_eval/native_guided_force.py"
+  ],
+  "production_new": [
+    "hf_repo/src/hf_eval/native_guided_force_resume.py"
+  ],
+  "production_installs": 3,
+  "other_existing_production_files_unchanged": 55,
+  "new_test_files": 1,
+  "public_entry": "hf_eval.native_guided_force_resume.extend_native_guided_force",
+  "positional_arguments": [
+    "saved_force_result",
+    "full_extended_body_load_targets_half_N",
+    "output_directory"
+  ],
+  "keyword_arguments": {
+    "fixed_parent_result": null,
+    "time_limit_seconds": 60.0,
+    "on_accept": null
+  },
+  "source_schemas": [
+    "hf-native-guided-force-1.0",
+    "hf-native-guided-force-1.1"
+  ],
+  "result_schema": "hf-native-guided-force-1.1",
+  "root_scale": "max(abs(P),abs(root_P0),Ffloor)",
+  "segment_anchor": "Immediate successful force-parent last original P; exact fresh state/q/P/R",
+  "state_rule": "lift[body_x] already equals absolute q; overwrite for candidates, never add twice",
+  "source_path_rule": "Optional current fixed-parent path must match original raw/canonical pin; derive relative model/geometry; selected force split relative to immediate force result",
+  "scientific_closure_future_per_API": {
+    "opaque_model_hash_paths": 1,
+    "geometry_NPZ_decoded_masks": 4,
+    "force_state_NPZ_decoded_fields": 2,
+    "NPZ_paths": 3,
+    "ancestor_split_force_tangent_matrix_reads": 0
+  },
+  "small_model": {
+    "elements": 16,
+    "nodes": 25,
+    "field_DOF": 50,
+    "free_DOF": 35,
+    "mixed_shape": [
+      37,
+      37
+    ],
+    "mean_peak_mm": 0.0005,
+    "reference_q_mm": [
+      0.0,
+      0.000125,
+      0.00025,
+      0.0005
+    ],
+    "force_targets": "New probe-derived finite negative strictly-increasing P0,P1,P2,P3; never supplied q answers",
+    "minimum_force_increment_half_N": "min(diff(new four P))/16, inherited unchanged by every force segment"
+  },
+  "tests": {
+    "methods": 12,
+    "real_paths_max": 7,
+    "finite_algebra_injection_rejection_calls_max": 37,
+    "method_ids": [
+      "V01",
+      "V02",
+      "V03",
+      "V04",
+      "V05",
+      "V06",
+      "V07",
+      "V08",
+      "V09",
+      "V10",
+      "V11",
+      "V12"
+    ],
+    "per_real_controller_seconds": 60
+  },
+  "comparison_gates": {
+    "q_abs_mm": 1e-08,
+    "all_DOF_four_split_fsum_abs_mm": 1e-08,
+    "R_abs_N": "max(1e-12,1e-7*abs(reference_R))",
+    "fresh": "binary identity and checks1"
+  },
+  "resources": {
+    "tests_total_seconds": 480,
+    "tests_process_seconds": 465,
+    "tests_cleanup_seconds": 15,
+    "display_and_QA_seconds": 60,
+    "display_process_seconds": 35,
+    "display_cleanup_seconds": 10,
+    "QA_deadline_from_display_start_seconds": 55,
+    "other_shared_seconds": 120,
+    "helper_seconds": 660,
+    "outer_seconds": 720,
+    "sampled_RSS_GiB": 8,
+    "four_library_thread_cap": 16
+  },
+  "outputs": {
+    "PNG": 1,
+    "PNG_inspections_max": 1,
+    "GIF": 0,
+    "new_HP": 0,
+    "real_r9_paths": 0
+  },
+  "stop": "First unexpected terminal error; no external retry, repair rerun, extension, force, deletion or automatic rollback",
+  "original_physics_and_gates_preserved": true,
+  "qualification_upgrade": false
+}

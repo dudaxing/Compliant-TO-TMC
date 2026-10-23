@@ -1,0 +1,442 @@
+{
+  "schema_version": "L-CTIPFRESUMEPREP1-validation-design-audit-1.0",
+  "date_local": "2026-10-23",
+  "status": "preparation_read_only_audit_completed_future_plan_not_executed",
+  "scope": {
+    "production_modified": false,
+    "numerical_launched": false,
+    "test_collected": false,
+    "test_run": false,
+    "NPZ_opened": false,
+    "ZIP_opened": false,
+    "media_opened": false,
+    "HP_calls": 0,
+    "force_calls": 0,
+    "tangent_calls": 0
+  },
+  "sources": [
+    {
+      "key": "force_fixture",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_force_control_001/tests/test_native_guided_force.py",
+      "bytes": 34807,
+      "sha256": "23b9b1a84edbf48beb9c2641957a094b977cb6901058d9336e89c675c62191f5",
+      "line_spans": [
+        [
+          34,
+          35
+        ],
+        [
+          100,
+          145
+        ],
+        [
+          162,
+          251
+        ],
+        [
+          284,
+          377
+        ],
+        [
+          445,
+          606
+        ]
+      ]
+    },
+    {
+      "key": "prior_FLOAD1_result",
+      "path": "lf_data_preparation/native_interface_001/lf_circle_tip_force_control_001/RESULTS.md",
+      "bytes": 8232,
+      "sha256": "a9fde2e94249d77981946c10fd69703053036e6f993fedd3b77933a6eb7665b7",
+      "line_spans": [
+        [
+          19,
+          45
+        ],
+        [
+          61,
+          61
+        ]
+      ]
+    },
+    {
+      "key": "force_controller",
+      "path": "hf_repo/src/hf_eval/split_guided_force.py",
+      "bytes": 23556,
+      "sha256": "975d1e1797403c2cddbda2ee04c8ef0e3d5e07d038bdb48473e4ff6e60fcf0c6",
+      "line_spans": [
+        [
+          48,
+          59
+        ],
+        [
+          101,
+          118
+        ],
+        [
+          172,
+          197
+        ],
+        [
+          228,
+          258
+        ],
+        [
+          275,
+          301
+        ],
+        [
+          344,
+          405
+        ]
+      ]
+    },
+    {
+      "key": "force_api",
+      "path": "hf_repo/src/hf_eval/native_guided_force.py",
+      "bytes": 14733,
+      "sha256": "48342b5eb735c98dfd27ddfd15e398feb03ab2d1bc7d32b258c8489b2d22d322",
+      "line_spans": [
+        [
+          28,
+          74
+        ],
+        [
+          103,
+          117
+        ],
+        [
+          145,
+          220
+        ]
+      ]
+    },
+    {
+      "key": "fixed_parent_admission",
+      "path": "hf_repo/src/hf_eval/native_probe.py",
+      "bytes": 19317,
+      "sha256": "93667361fcb8168d800833a849d411a669b576b11c565cdbfc534bd3457ae8b3",
+      "line_spans": [
+        [
+          44,
+          139
+        ]
+      ]
+    },
+    {
+      "key": "saved_displacement_tests",
+      "path": "hf_repo/tests/test_saved_native_resume.py",
+      "bytes": 10545,
+      "sha256": "f11f83f17d8ad18e452703c947d3554cbf7a8eeb39b79c53551b71b51bd91b49",
+      "line_spans": [
+        [
+          39,
+          114
+        ],
+        [
+          117,
+          170
+        ]
+      ]
+    },
+    {
+      "key": "probe_tests",
+      "path": "hf_repo/tests/test_native_guided_probe.py",
+      "bytes": 23236,
+      "sha256": "ac73743de964286e035aed3c19a8905d5a9949a65716e9e56e3ed4b3328377e5",
+      "line_spans": [
+        [
+          197,
+          219
+        ],
+        [
+          269,
+          346
+        ],
+        [
+          349,
+          421
+        ]
+      ]
+    },
+    {
+      "key": "saved_displacement_admission",
+      "path": "hf_repo/src/hf_eval/native_resume.py",
+      "bytes": 18014,
+      "sha256": "68e3122950766f9cecb48a02a0f52a6d5f2efbfc466432bccc2cd48c77e2b798",
+      "line_spans": [
+        [
+          172,
+          176
+        ],
+        [
+          202,
+          230
+        ]
+      ]
+    },
+    {
+      "key": "original_settings",
+      "path": "hf_repo/src/hf_eval/displacement.py",
+      "bytes": 26838,
+      "sha256": "fbae379e37f0816edcdebd765bcae73a525c8709c2cb8f798146e497c9a4a386",
+      "line_spans": [
+        [
+          24,
+          34
+        ]
+      ]
+    }
+  ],
+  "critical_finding": {
+    "root_scale_anchor": "retain original root P0 for generalized-force SP across all child segments",
+    "segment_anchor": "retained source terminal P1 or P2, used as local stepping origin only",
+    "SP_formula": "max(abs(current_P),abs(root_P0),original_force_floor)",
+    "reason": "existing real fixture has nonzero negative absolute loads increasing toward zero; resetting scale to segment start would change the original gate"
+  },
+  "future_only": true,
+  "fixture": {
+    "cells": 16,
+    "nodes": 25,
+    "DOF": 50,
+    "original_free_DOF": 35,
+    "reduced_unknowns": 37,
+    "shape_yx": [
+      4,
+      4
+    ],
+    "domain_mm": [
+      2,
+      2
+    ],
+    "cell_mm": [
+      0.5,
+      0.5
+    ],
+    "thickness_mm": 2,
+    "E_MPa": 1,
+    "nu": 0.3,
+    "alpha": 0.0001,
+    "gamma": 1e-06,
+    "Lr_mm": 2,
+    "held_mean_mm": 0.0005,
+    "workpiece_cells": [
+      14
+    ],
+    "workpiece_nodes": [
+      17,
+      18,
+      22,
+      23
+    ],
+    "background_overlap_DOF": [
+      45,
+      47
+    ],
+    "body_membership": "original_reference_not_remasked"
+  },
+  "load_generation": {
+    "q_reference_mm": [
+      0.0,
+      0.000125,
+      0.00025,
+      0.0005
+    ],
+    "P_numbers": "generate once from future reference; do not substitute historical loads",
+    "required": [
+      "finite",
+      "P0_nonzero",
+      "strictly_increasing",
+      "negative_signed_values_retained"
+    ],
+    "common_Nmin": "min(diff([P0,P1,P2,P3]))/16",
+    "original_minimum_increment_mm": 3.125e-05,
+    "no_target_search_or_adjustment": true
+  },
+  "future_real_paths": [
+    {
+      "id": "S1",
+      "purpose": "fixed_parent_mean",
+      "declared_targets": [
+        0.0,
+        0.0005
+      ],
+      "controller_seconds_max": 60
+    },
+    {
+      "id": "S2",
+      "purpose": "prescribed_q_reference",
+      "declared_targets": [
+        0.0,
+        0.000125,
+        0.00025,
+        0.0005
+      ],
+      "controller_seconds_max": 60
+    },
+    {
+      "id": "S3",
+      "purpose": "old_API_force_direct",
+      "declared_targets": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "controller_seconds_max": 60
+    },
+    {
+      "id": "S4",
+      "purpose": "old_API_force_prefix",
+      "declared_targets": [
+        "P0",
+        "P1"
+      ],
+      "controller_seconds_max": 60
+    },
+    {
+      "id": "S5",
+      "purpose": "new_API_child_append_P2",
+      "declared_targets": [
+        "P0",
+        "P1",
+        "P2"
+      ],
+      "controller_seconds_max": 60
+    },
+    {
+      "id": "S6",
+      "purpose": "new_API_grandchild_append_P3",
+      "declared_targets": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "controller_seconds_max": 60
+    },
+    {
+      "id": "S7",
+      "purpose": "new_API_controlled_partial_from_S4",
+      "declared_targets": [
+        "P0",
+        "P1",
+        "P2"
+      ],
+      "controller_seconds_max": 60
+    }
+  ],
+  "future_test_methods": [
+    {
+      "id": "V01",
+      "purpose": "independent_nonsymmetric_dense_oracle_and_three_segment_transport",
+      "bounded_algebra_injected_or_rejected_calls_max": 4
+    },
+    {
+      "id": "V02",
+      "purpose": "nonzero_fresh_anchor_identity_equilibrium_and_structural_rejections",
+      "bounded_algebra_injected_or_rejected_calls_max": 6
+    },
+    {
+      "id": "V03",
+      "purpose": "nonzero_anchor_rollback_on_controlled_invalid_J",
+      "bounded_algebra_injected_or_rejected_calls_max": 1
+    },
+    {
+      "id": "V04",
+      "purpose": "real_direct_prefix_child_grandchild_and_displacement_reference_comparison",
+      "bounded_algebra_injected_or_rejected_calls_max": 0
+    },
+    {
+      "id": "V05",
+      "purpose": "two_public_resume_anchor_and_inheritance_identity",
+      "bounded_algebra_injected_or_rejected_calls_max": 0
+    },
+    {
+      "id": "V06",
+      "purpose": "original_root_P0_generalized_force_scale_no_segment_rebase",
+      "bounded_algebra_injected_or_rejected_calls_max": 0
+    },
+    {
+      "id": "V07",
+      "purpose": "old_fixed_parent_api_and_default_fixed_guard_compatibility",
+      "bounded_algebra_injected_or_rejected_calls_max": 1
+    },
+    {
+      "id": "V08",
+      "purpose": "controlled_real_second_tangent_failure_persists_nonzero_anchor",
+      "bounded_algebra_injected_or_rejected_calls_max": 1
+    },
+    {
+      "id": "V09",
+      "purpose": "six_source_identity_rejections_before_mechanics",
+      "bounded_algebra_injected_or_rejected_calls_max": 6
+    },
+    {
+      "id": "V10",
+      "purpose": "five_schema_status_and_terminal_coverage_rejections",
+      "bounded_algebra_injected_or_rejected_calls_max": 5
+    },
+    {
+      "id": "V11",
+      "purpose": "eight_complete_prefix_extension_rejections",
+      "bounded_algebra_injected_or_rejected_calls_max": 8
+    },
+    {
+      "id": "V12",
+      "purpose": "five_clock_output_rejections_and_no_q_settings_signature",
+      "bounded_algebra_injected_or_rejected_calls_max": 5
+    }
+  ],
+  "future_counts": {
+    "nonparametrized_methods": 12,
+    "real_paths_max": 7,
+    "algebra_injected_or_rejected_calls_max": 37,
+    "controlled_real_partial_counted_in_both_axes": 1,
+    "no_legacy_full_suite_rerun": true,
+    "no_scientific_calls_added_by_comparison_or_saving": true
+  },
+  "gates": {
+    "rho_F_max": 1e-09,
+    "rho_P_max": 1e-09,
+    "abs_g_bound": "1e-9*SP",
+    "mean_bound_formula": "1e-10*max(abs(d_hold),1e-6)",
+    "mean_bound_this_fixture_mm": 5e-14,
+    "minimum_J": "strictly_positive",
+    "all_relevant_fields": "finite",
+    "relative_global_balance_max": 1e-06,
+    "rigid_and_zero_bound_mm": 8e-11,
+    "q_and_full_physical_displacement_comparison_max_mm": 1e-08,
+    "input_R_comparison_bound_N": "max(1e-12,1e-7*abs(R_direct))",
+    "difference_assembly": "per_DOF math.fsum([lift_a,w_a,-lift_b,-w_b])"
+  },
+  "future_files_max": {
+    "production": 3,
+    "production_scope": "two existing guided-force modules and one new resume admission/API module; root specification selects names",
+    "test": 1,
+    "unchanged": [
+      "force/tangent kernels",
+      "material",
+      "native_resume default displacement interface",
+      "original fixed parent API defaults",
+      "formal r9 physics"
+    ]
+  },
+  "future_resource_candidate_only": {
+    "tests_seconds": 480,
+    "display_seconds": 60,
+    "helper_seconds": 660,
+    "outer_seconds": 720,
+    "memory_GiB": 8,
+    "four_library_thread_cap": 16,
+    "CPU": true,
+    "new_PNG": 1,
+    "pixel_checks_max": 1,
+    "no_external_retry": true,
+    "no_repair_rerun": true,
+    "no_extension": true,
+    "no_force": true,
+    "no_HP": true
+  },
+  "qualification": "No implementation or test PASS claim; formal r9 continuation requires separate future preparation and authorization"
+}
