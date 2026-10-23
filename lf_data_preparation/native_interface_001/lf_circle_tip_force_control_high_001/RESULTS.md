@@ -86,3 +86,7 @@ API实际监测3条旧NPZ路径、5次read-capable open事件，均在白名单�
 [USAGE](USAGE.md)已按闭窗实际记录更新功能状态与本次调用，完整结论以本页／result_summary为准。原卡pending标题、授权与冻结的numerical_launched=false、renderer pending均是原准备／执行时点，不覆盖当前实际PASS；actual授权与最终回执另存。
 
 [恢复说明](RECOVERY.md)列新原包、旧父依赖、普通源和路径迁移边界。下一步建议先[准备最小力控保存态续载功能](NEXT_STEPS.md)，让本次非零q/P成功末态可被下一次同定义载荷任务复用；不立即加新P、不重复完整父加载、不把本轮成功当作容量证明。
+
+## 发布与恢复
+
+高输入1.06 mm正式r9力控结果与原始证据提交`f8168842ba2423cf963e3458ea5bed1d47505117`已普通推送并核远端main，`D:/hf-restore-20260930`已普通fetch／ff-only恢复到同提交。两工作树当时干净，82份本轮变化文件逐字节一致，仓库清单与Git索引集合相同；详见[实际回执](PUBLICATION_RESTORE_RECEIPT.json)。这是同机异目录核对，没有异机数值复算。归档回执的后续提交也将普通推送并恢复核对。
