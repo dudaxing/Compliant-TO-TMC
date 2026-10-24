@@ -1,0 +1,124 @@
+{
+  "stage": "L-CTIPFSTEP1",
+  "status": "VIEWER_AUTHORED_AST_ONLY_NOT_EXECUTED",
+  "source": {
+    "path": "D:/hfst1_001/view_step1.py",
+    "bytes": 30449,
+    "sha256": "8c3ff9279732d964cc12ec062a318c49a51bd6082df09a65d5baa73a272e9cb8"
+  },
+  "reused_source": {
+    "path": "D:/hfh1_001/view_high1.py",
+    "bytes": 28963,
+    "sha256": "a0cb4d36e8e85b47bb7a3f91c571b12090d0d31af918f99acf92dc6ca174dee9"
+  },
+  "ordinary_JSON_inputs": [
+    "protocol.json",
+    "observer_binding.json",
+    "run_001/force/result.json",
+    "run_001/continuation_check.json"
+  ],
+  "expected_outputs": [
+    "01_actual_geometry.png",
+    "02_P_q_continuation.png",
+    "03_force_components_and_R.png",
+    "04_tip_right_geometry_global_J_Hu.png",
+    "05_convergence_and_gates.png",
+    "actual_force_states.gif",
+    "geometry_metrics.json",
+    "renderer_receipt.json"
+  ],
+  "schema_keys_required": {
+    "protocol": [
+      "loads_half_N",
+      "segment_loads_half_N",
+      "history.old_given_q_reference",
+      "history.immediate_force_parent.scalar_rows",
+      "source_selected.state_sha256"
+    ],
+    "observer": [
+      "immediate_force_parent_identity",
+      "held_input_mean_mm",
+      "body_nodes",
+      "body_cells",
+      "right_medium_cells",
+      "right_boundary_nodes",
+      "tip_node"
+    ],
+    "check": [
+      "status"
+    ]
+  },
+  "checks": [
+    {
+      "id": 1,
+      "status": "PASS",
+      "description": "AST parses; no viewer or pyplot execution by author"
+    },
+    {
+      "id": 2,
+      "status": "PASS",
+      "description": "Exactly four ordinary JSON read sites and no NPZ/HF import"
+    },
+    {
+      "id": 3,
+      "status": "PASS",
+      "description": "Resultsuccess/checkpass required before output directory creation"
+    },
+    {
+      "id": 4,
+      "status": "PASS",
+      "description": "Only fresh plus actual segment rows2..5; global originals1/2 and full3 prefix checked"
+    },
+    {
+      "id": 5,
+      "status": "PASS",
+      "description": "Original coordinate/phase/body/right480/tip/symmetry-cut membership and actualx1 geometry preserved"
+    },
+    {
+      "id": 6,
+      "status": "PASS",
+      "description": "02 shows real segment P-q plus completed HIGH1 scalar context; no new given-q/HP error"
+    },
+    {
+      "id": 7,
+      "status": "PASS",
+      "description": "RootP0/segmentP1 distinction and SP=P limitation explicit"
+    },
+    {
+      "id": 8,
+      "status": "PASS",
+      "description": "03 inputR context labeled old HIGH1 only; body force components and disjoint ledger unchanged"
+    },
+    {
+      "id": 9,
+      "status": "PASS",
+      "description": "All Newton bases/trials/invalid merit markers/original zero display floors preserved"
+    },
+    {
+      "id": 10,
+      "status": "PASS",
+      "description": "Old probe invalid_J/internal0125/history counts retained separately"
+    },
+    {
+      "id": 11,
+      "status": "PASS",
+      "description": "Animation only actual segment accepted rows; parent/probe context never animated"
+    },
+    {
+      "id": 12,
+      "status": "PASS",
+      "description": "MAX_SECONDS510, write-exclusive outputs and pending root QA retained"
+    }
+  ],
+  "actual_actions": {
+    "viewer_executions": 0,
+    "new_plots": 0,
+    "pixel_inspections": 0,
+    "HF_imports": 0,
+    "NPZ_reads": 0,
+    "new_F_T_HP_or_equilibrium_calls": 0,
+    "production_edits": 0
+  },
+  "source_assumption": "p.history embeds complete prepared HISTORY; observer immediate_force_parent_identity is direct parent; old fixed observer source identity remains historical. Checker handles source/fresh/gate validation.",
+  "note": "Thin adaptation of prior frozen real viewer, not a new graphics framework. Static source review only; root owns independent static review and unique future generation/PNG QA."
+}
