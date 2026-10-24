@@ -70,3 +70,7 @@ fresh须checks1，q/P/R bits、split字段SHA/state身份原样保持，不预�
 ## 准备结论
 
 [来源审阅](author/SOURCE_AUDIT.md)16项、[数学/资源审阅](author/MATH_RESOURCE_AUDIT.md)12项通过并保限定。当前58源保持；普通来源/stat不等于payload/fresh已通过。先按候选卡安排一个正式P2，再据真实q/R/J/Hu/收敛决定后续，不扩扫描。恢复见[RECOVERY](RECOVERY.md)，总览见[人工页](inspection.html)。
+
+## 发布与恢复
+
+正式r9非零q小载荷续载规格、父态/P2/原尺度/验收及资源核定与控制示意准备提交`cccf49353950ec68c5ce8ea3e174a36dea48e951`已普通推送并核远端main，`D:/hf-restore-20260930`已普通fetch／ff-only恢复到同提交。两工作树当时干净，36份本轮变化文件逐字节一致，仓库清单与Git索引集合相同；详见[实际回执](PUBLICATION_RESTORE_RECEIPT.json)。这是同机异目录的交付字节核对，没有异机环境验证或数值复算；本轮仅完成准备，58份生产源码保持；没有新增正式r9续载、测试或独立HP。归档回执的后续提交也将普通推送并恢复核对。
